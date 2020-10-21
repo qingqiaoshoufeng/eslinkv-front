@@ -1,12 +1,12 @@
 <template>
-	<div class="test-container">
+	<div class="preview-container">
 		<preview/>
 	</div>
 </template>
 <script>
 </script>
 <style lang="scss">
-	.test-container {
+	.preview-container {
 		height: 100%;
 	}
 </style>

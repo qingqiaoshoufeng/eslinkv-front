@@ -20,7 +20,7 @@ module.exports = {
 				target: 'http://ebp-pc.hw-qa.eslink.net.cn',
 				changeOrigin: true,
 				headers: {
-					Cookie: 'SESSION=c9eb216f-d70d-4012-a958-213aa8de70e0'
+					Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
 				},
 				pathRewrite: {
 					'^/api': '/'
@@ -80,8 +80,6 @@ module.exports = {
 		}))
 	},
 	chainWebpack: config => {
-		config.resolve.alias
-			.set("dvdp", path.join(__dirname, './node_modules/dvdp'))
 		if (isProduction) {
 			if (needReport) {
 				config
