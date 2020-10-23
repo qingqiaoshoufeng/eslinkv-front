@@ -16,13 +16,14 @@
 	import iconSelect from './icon-select.vue'
 	import dragDropPond from './drag-drop-pond'
 	import eChartsFunctionEdit from './echarts-function-edit'
-	import {Icon} from 'view-design'
+	import {Icon, Checkbox, RadioGroup, Radio, CheckboxGroup, Slider, DatePicker} from 'view-design'
 	import generateResultSet from '../../widgets/parts/lib/generate-result-set'
 
 	export default {
 		name: 'fields',
 		mixins: [arrayGroup, button, colorPicker, input, inputNumber, fieldControls],
 		components: {
+			Checkbox, RadioGroup, Radio, Icon, CheckboxGroup, Slider, DatePicker,
 			fSelect,
 			colorsPicker,
 			backgroundPicker,
@@ -30,7 +31,6 @@
 			ratioInput,
 			colorInput,
 			iconSelect,
-			Icon,
 			dragDropPond,
 			eChartsFunctionEdit
 		},

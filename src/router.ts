@@ -1,16 +1,16 @@
-// import Vue from 'vue'
-// import VueRouter from 'vue-router'
+import Vue from 'vue'
+import VueRouter from 'vue-router'
 
-const routes = []
+const routes: Array<any> = []
 const context = require.context('./pages', true, /\.(route.js)$/)
 
 context.keys().forEach(name => {
 	routes.push(context(name).default)
 })
 
-// Vue.use(VueRouter)
+Vue.use(VueRouter)
 
-const router = new VueRouter({
+const router: VueRouter = new VueRouter({
 	routes: [
 		...routes,
 	]

@@ -1,21 +1,21 @@
 <template>
-	<div class="import-widgets">
+	<div class="import-widgets pos-a fn-flex">
 		<div class="wrapper">
-			<header class="wrapper-header">
+			<header class="wrapper-header fn-flex">
 				导入小工具
-				<div class="close" title="关闭" @click="$emit('close')">×</div>
+				<div class="close pointer" title="关闭" @click="$emit('close')">×</div>
 			</header>
-			<Form ref="importForm" class="import-edit" :label-width="80">
+			<Form ref="importForm" class="import-edit fn-flex" :label-width="80">
 				<label
 					v-if="!widgets"
 					:data-name="originFile ? originFile.name || '请选择文件' : '请选择文件'"
 					for="originFile"
-					class="select-file style-file-input"
+					class="select-file style-file-input pos-r pointer text-center"
 				>
-					<input id="originFile" type="file" accept="application/json" @change="handleFile"/>
+					<input class="pos-a" id="originFile" type="file" accept="application/json" @change="handleFile"/>
 				</label>
-				<div v-if="widgets" class="widget-list">
-					<div class="widgets-confirm-header">
+				<div v-if="widgets" class="widget-list fn-flex">
+					<div class="widgets-confirm-header fn-flex">
 						<strong>请勾选要导入的小工具</strong>
 						<span class="count">{{ checkedNumber }} / {{ widgets.length }}</span>
 						<Checkbox :value="isAllChecked" :indeterminate="!isAllChecked && !isAllUnChecked"
@@ -24,7 +24,7 @@
 					</div>
 					<div class="scroller">
 						<div v-for="item in widgets" :key="item.id" :class="{ 'is-child-widget': item.combinationTo }"
-							 class="style-checkbox" @click="handleWidgetCheck(item)">
+							 class="style-checkbox pos-r pointer" @click="handleWidgetCheck(item)">
 							<Icon :color="widgetCheckedState[item.id] ? '#2d8cf0' : 'gray'"
 								  :type="`ios-checkbox${widgetCheckedState[item.id] ? '' : '-outline'}`" size="18"/>
 							<span class="id">{{ item.id }}</span>
@@ -34,7 +34,7 @@
 					</div>
 				</div>
 			</Form>
-			<footer class="wrapper-footer">
+			<footer class="wrapper-footer fn-flex">
 				<Button @click="$emit('close')">取消导入</Button>
 				<Button @click="handleReset">重置</Button>
 				<Button type="primary" @click="startImport" :disabled="!this.config" :loading="loading">执行导入</Button>
@@ -52,7 +52,7 @@
 	 *
 	 * todo 移动目录
 	 */
-	import widgetTypes from '../widgets/widget-type-list'
+	import widgetTypes from '../../views/core/widgets/widget-type-list'
 
 	export default {
 		name: 'import-widgets',
@@ -159,12 +159,10 @@
 
 <style lang="scss">
 	.import-widgets {
-		position: absolute;
 		top: 0;
 		left: 0;
 		right: 0;
 		bottom: 0;
-		display: flex;
 		justify-content: center;
 		align-items: center;
 		z-index: 999;
@@ -185,7 +183,6 @@
 		width: 100%;
 		height: calc(100% - 120px);
 		padding-right: 5px;
-		display: flex;
 		justify-content: center;
 		align-items: center;
 	}
@@ -194,28 +191,22 @@
 		font-size: 18px;
 		line-height: 2em;
 		font-weight: bold;
-		display: flex;
 		justify-content: space-between;
 		margin-bottom: 20px;
 
 		.close {
 			font-size: 2em;
-			cursor: pointer;
 			font-weight: normal;
 		}
 	}
 
 	.style-file-input {
-		position: relative;
 		overflow: hidden;
 		min-width: 100px;
 		padding: 10px 30px;
-		text-align: center;
 		border: 1px solid #dcdfe6;
-		cursor: pointer;
 
 		input {
-			position: absolute;
 			left: 0;
 			top: 0;
 			opacity: 0;
@@ -234,14 +225,10 @@
 	}
 
 	.style-checkbox {
-		position: relative;
 		border: 1px solid #dcdfe6;
-		display: flex;
 		align-items: center;
 		padding: 0 8px;
 		margin-bottom: 5px;
-		cursor: pointer;
-		-webkit-user-select: none;
 		user-select: none;
 		background-color: white;
 		z-index: 2;
@@ -290,7 +277,6 @@
 
 	.widgets-confirm-header {
 		border: 1px solid #dcdfe6;
-		display: flex;
 		justify-content: space-between;
 		align-items: center;
 		margin-bottom: 5px;
@@ -298,7 +284,6 @@
 	}
 
 	.wrapper-footer {
-		display: flex;
 		align-items: center;
 		justify-content: center;
 		height: 60px;
@@ -310,7 +295,6 @@
 	}
 
 	.widget-list {
-		display: flex;
 		flex-direction: column;
 		width: 100%;
 		height: 100%;

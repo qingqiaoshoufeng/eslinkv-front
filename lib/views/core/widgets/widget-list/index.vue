@@ -6,35 +6,35 @@
 				<TabPane v-if="tab.widgets.length" :key="tab.name" :label="tab.label" :name="tab.name">
 					<Collapse v-model="panelStatic[tab.name]" accordion simple
 							  @on-change="(keys) => handlePanelToggle(tab.name, keys[0])">
-						<template v-for="{ label, type, widgets } in tab.widgets">
-							<Panel :key="type" :name="type" :activeSet="setActiveMap(tab.name, type)">
-								{{ label }}
-								<template v-if="widgetListActiveMap[`${tab.name}-${format(type)}`]" slot="content">
-									<div v-for="(widget, index) in widgets" :key="widget.label"
-										 class="widget-item-wrapper">
-										<parts
-											:type="widget.type"
-											:config="widgetConfigMap[`${tab.name}-${format(type)}-${index}`].config"
-											draggable="true"
-											readonly
-											no-bind-params
-											@dragstart.native="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)"
-											@widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)"
-										/>
-									</div>
-								</template>
-							</Panel>
-						</template>
+						<Panel :key="type" :name="type" :activeSet="setActiveMap(tab.name, type)"
+							   v-for="{ label, type, widgets } in tab.widgets">
+							{{ label }}
+							<template v-if="widgetListActiveMap[`${tab.name}-${format(type)}`]" slot="content">
+								<div v-for="(widget, index) in widgets" :key="widget.label"
+									 class="widget-item-wrapper">
+									<parts
+										:type="widget.type"
+										:classification="tab.name"
+										:config="widgetConfigMap[`${tab.name}-${format(type)}-${index}`].config"
+										draggable="true"
+										readonly
+										no-bind-params
+										@dragstart.native="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)"
+										@widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)"
+									/>
+								</div>
+							</template>
+						</Panel>
 					</Collapse>
 				</TabPane>
 			</template>
 		</Tabs>
 		<div :class="{ active: panelFixed }" :title="!panelFixed ? '固定小工具栏' : '取消固定'" class="fixed-toggle"
-			 @click="panelFixed = !panelFixed"></div>
+			 @click="handleFix"></div>
 	</div>
 </template>
 <script>
-	import parts from '../parts'
+	import parts from '../parts/index'
 	import decoration from './decoration'
 	import dvChart from './dv-chart'
 	import eChart from './e-chart'
@@ -43,7 +43,6 @@
 	import {Collapse, TabPane, Tabs, Panel} from 'view-design'
 
 	export default {
-		name: 'widgets',
 		components: {
 			parts, Collapse, TabPane, Tabs, Panel
 		},
@@ -62,10 +61,14 @@
 				widgetListActiveMap: {},
 				widgetConfigMap: {},
 				widgetListToggleTimer: {},
-				panelStatic: {}
+				panelStatic: {} // 记录当前打开关闭状态
 			}
 		},
 		methods: {
+			handleFix() {
+				this.panelFixed = !this.panelFixed
+				this.$emit('panel-fixed')
+			},
 			setActiveMap(tab, panel = '') {
 				const key = tab + '-' + this.format(panel)
 				if (!this.widgetListActiveMap[key]) this.$set(this.widgetListActiveMap, key, false)
@@ -127,9 +130,10 @@
 					})
 				})
 			},
-			// 开始拖拽
+			/**
+			 * @description h5 原生拖拽事件
+			 */
 			dragstart(e, configKey, {type}) {
-				// console.info(widget)
 				const widgetConfig = this.widgetConfigMap[configKey]
 				if (!widgetConfig || !type) return
 				const {config} = widgetConfig
@@ -143,17 +147,10 @@
 		},
 		created() {
 			this.initWidgetConfigMap()
-			console.log('1111')
-			console.log(this.diy)
 			Object.keys(this.tabs).map(key => {
 				this.$set(this.panelStatic, key, [])
 			})
 		},
-		watch: {
-			panelFixed() {
-				this.$emit('panel-fixed')
-			}
-		}
 	}
 </script>
 

@@ -1,15 +1,20 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './App'
 import router from './router'
+import {Message, Modal} from 'view-design'
+import 'view-design/dist/styles/iview.css'
 import './scss/reset.scss'
 import './scss/index.scss'
-import dataV from '@jiaminghi/data-view'
-import ESVUIPlugin from 'esvcp-pc-ui'
 import './business-components'
+import directives from '../lib/directives'
 
-Vue.use(ESVUIPlugin)
-Vue.use(dataV)
+Vue.prototype.$Message = Message
+Vue.prototype.$Modal = Modal
 Vue.config.productionTip = false
+
+Object.keys(directives).forEach((key) => {
+	Vue.directive(key, directives[key])
+})
 new Vue({
 	router,
 	render: h => h(App)

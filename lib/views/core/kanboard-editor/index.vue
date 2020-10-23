@@ -219,7 +219,7 @@
 					class="ref-line h-line"
 				/>
 				<!--辅助线END-->
-				<div v-show="isWidgetProcessing" :style="widgetProcessingStyle" class="widget-processing">正在初始化配置…</div>
+				<!--				<div v-show="isWidgetProcessing" :style="widgetProcessingStyle" class="widget-processing">正在初始化配置…</div>-->
 			</section>
 		</ruler-canvas>
 		<!-- 右键菜单 -->
@@ -244,21 +244,14 @@
 				:style="configPanelStyle"
 				class="config-panel-wrapper"
 				@keyup.stop
-				@contextmenu="
-          (e) => {
-            e.preventDefault()
-            return false
-          }
-        "
+				@contextmenu="(e) => {e.preventDefault();return false}"
 			>
 				<config-panel
 					v-show="widgetSource && !configPanelValueFreshing"
 					ref="configPanel"
 					v-model="currentWidgetValue"
 					:source="widgetSource"
-					:style="{
-            pointerEvents: startPanelDrag ? 'none' : '',
-          }"
+					:style="{pointerEvents: startPanelDrag ? 'none' : ''}"
 					@config-database="handleDatabaseConfig"
 					@config-process-body="handleProcessConfig"
 				/>
@@ -328,7 +321,7 @@
 	import Vue from 'vue'
 	import vdr from 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable'
 	import 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable.css'
-	import parts from '../widgets/parts'
+	import parts from '../widgets/parts/index'
 	import hotKeys from '../../../components/hot-keys'
 
 	import rulerGuides from './mixins/ruler-guides'
@@ -343,11 +336,11 @@
 	import layoutGridMixin from './layout-grid/mixin'
 	import combination from './mixins/combination'
 	import positionSize from './mixins/position-size'
-	import layerOperation from './widget-layers/mixin'
+	import layerOperation from '../../../components/widget-layers/mixin'
 	import globalApi from './global-api/mixin'
 	import widgetShareData from './mixins/widget-share-data'
 	import crossFrameMessageParamBind from './mixins/cross-frame-message-param-bind'
-	import importWidgets from './mixins/import-widgets'
+	import importWidgets from '../../../components/widget-layers/import-widgets'
 
 	import databaseConfig from './data-warehouse/index.vue'
 	import jsEditorModal from './js-editor-modal.vue'
@@ -357,7 +350,7 @@
 	import sidebarTools from './sidebar-tools.vue'
 
 	import 'animate.css/animate.min.css'
-
+	import {Icon} from 'view-design'
 	// config-panel 与 fields 互相引用，须提前注册为 Vue 组件
 	Vue.component('config-panel', configPanel)
 	Vue.component('fields', fields)
@@ -373,6 +366,7 @@
 			rulerGuides, combination, importWidgets
 		],
 		components: {
+			Icon,
 			parts,
 			rulerCanvas,
 			configPanel,

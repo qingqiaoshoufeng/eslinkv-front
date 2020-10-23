@@ -53,7 +53,7 @@
 </template>
 <script>
 	import isJsonEqual from 'plain-object-is-equal'
-	import {Tabs, TabPane, Checkbox, Panel, Icon} from 'view-design'
+	import {Tabs, TabPane, Checkbox, Panel, Icon, Collapse} from 'view-design'
 
 	export default {
 		name: 'config-panel',
@@ -63,11 +63,11 @@
 			 * todo
 			 * 初始化 12次
 			 * 之后每次 执行 24次+
+			 * 因为递归循环
 			 */
-			console.log('-------', this.value)
 		},
 		components: {
-			TabPane, Checkbox, Panel, Icon, Tabs
+			TabPane, Checkbox, Panel, Icon, Tabs, Collapse
 		},
 		props: {
 			source: Object,

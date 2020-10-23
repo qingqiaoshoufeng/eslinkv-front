@@ -1,17 +1,12 @@
-<template>
-  <label class="hot-keys pos-r">
-    查看快捷键
-    <div class="hot-key-list pos-a">
-      <table>
-        <tr v-for="item in _hotKeys" :key="item.name">
-          <td class="name">{{ item.name }}</td>
-          <td class="key-code">
-            <code class="hot-key-item">{{ item.key }}</code>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </label>
+<template lang="pug">
+	label.hot-keys.pos-r
+		span 查看快捷键
+		.hot-key-list.pos-a
+			table
+				tr(v-for="item in _hotKeys" :key="item.name")
+					td.name {{ item.name }}
+					td.key-code
+						code.hot-key-item {{ item.key }}
 </template>
 <script>
   export default {

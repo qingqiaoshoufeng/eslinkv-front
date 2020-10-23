@@ -98,7 +98,7 @@
 <script>
 import materialManage from '../material-manage/index.vue'
 import layoutGrid from './layout-grid'
-import widgetLayers from './widget-layers/index.vue'
+import widgetLayers from '../../../components/widget-layers'
 import globalApiPanel from './global-api/index.vue'
 import scriptInjectPanel from './script-inject/index.vue'
 

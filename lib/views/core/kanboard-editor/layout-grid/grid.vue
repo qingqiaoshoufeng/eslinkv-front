@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import parts from '../../widgets/parts'
+import parts from '../../widgets/parts/index'
 import gridItem from "./grid.vue"
 import styleParser from '../../widgets/parts/lib/style-parser'
 export default {

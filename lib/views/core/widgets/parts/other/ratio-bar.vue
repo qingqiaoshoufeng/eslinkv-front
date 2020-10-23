@@ -146,11 +146,6 @@ export default {
       return option
     }
   },
-  mounted () {
-    setTimeout(() => {
-      this.$forceUpdate()
-    }, 700)
-  },
   created () {
     this.configSource = this.parseConfigSource(configParseMap, localConfigSource)
     this.configValue = this.parseConfigValue(configParseMap, localConfigValue)

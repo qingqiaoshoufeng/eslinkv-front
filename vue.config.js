@@ -64,9 +64,11 @@ module.exports = {
 				}
 			}
 		}
+		config.resolve.extensions = [".js", ".vue", ".json", ".ts", ".tsx"]
 		config.externals = [
 			{
 				'vue': 'Vue',
+				'vue-router': 'VueRouter',
 				'echarts': 'echarts'
 			}
 		]

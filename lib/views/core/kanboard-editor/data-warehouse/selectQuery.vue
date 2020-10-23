@@ -13,8 +13,8 @@
 	</div>
 </template>
 <script>
-	import selectSource from './selectSource';
-	import {RadioGroup} from 'view-design'
+	import selectSource from './selectSource'
+	import {RadioGroup,Radio} from 'view-design'
 
 	export default {
 		props: {
@@ -76,7 +76,7 @@
 				}
 			};
 		},
-		components: {selectSource, RadioGroup},
+		components: {selectSource, RadioGroup,Radio},
 		methods: {
 			// 获取查询项目列表
 			getProList() {

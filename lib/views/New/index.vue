@@ -14,9 +14,7 @@
 					@kanboard-edited="kanboardEdited = true"
 				/>
 			</transition>
-			<transition name="fade">
-				<load-mask v-if="screenshotCreating || querying">{{ querying ? '请求模板数据…' : '正在生成快照…' }}</load-mask>
-			</transition>
+			<load-mask :show="screenshotCreating || querying">{{ querying ? '请求模板数据…' : '正在生成快照…' }}</load-mask>
 		</div>
 		<d-footer>
 			<div slot="right">
@@ -44,6 +42,7 @@
 	import loadMask from '../../components/load-mask/index'
 	import dFooter from '../../components/d-footer/index'
 	import * as widgetBindManager from '../mixins/widget-bind-manage'
+	import {Button} from 'view-design'
 
 	export default {
 		name: 'New',
@@ -55,6 +54,7 @@
 			kanboardTemplate,
 			core,
 			loadMask,
+			Button,
 			'd-footer': dFooter
 		},
 		props: {

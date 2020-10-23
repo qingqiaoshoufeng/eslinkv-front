@@ -1,6 +1,6 @@
 <template>
-  <es-modal title="数仓参数配置" :show-modal="showModal" :height="height" :isDirectCloseModal="false" @on-cancel="exit" @on-visible-change="setVisibility">
-    <div slot="body" class="modal-body">
+  <Modal title="数仓参数配置" v-model="showModal" :height="height" :isDirectCloseModal="false" @on-cancel="exit" @on-visible-change="setVisibility">
+    <div class="modal-body">
       <Tabs v-if="isVisible" type="card" :animated="false" value="querySelect" @on-click="clickTabs" ref="tab">
         <TabPane label="选择查询" name="querySelect">
           <select-query ref="selectQuery" @getQueryCond="getQueryCond" :lastQuery="lastQuery"></select-query>
@@ -17,17 +17,19 @@
       <Button type="default" @click="exit">取消</Button>
       <Button type="primary" @click="ok">确定</Button>
     </div>
-  </es-modal>
+  </Modal>
 </template>
 <script>
 import selectQuery from './selectQuery';
 import singleQuery from './singleQuery';
 import customQuery from './customQuery';
+import {Modal} from 'view-design'
 export default {
   components: {
     selectQuery,
     singleQuery,
-    customQuery
+    customQuery,
+	  Modal
   },
   props: {
     // 弹窗状态

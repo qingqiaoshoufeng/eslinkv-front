@@ -1,15 +1,15 @@
 <template>
 	<div>
-		<es-modal
+		<Modal
 			title="数据加工函数配置"
-			:show-modal="showModal"
+			v-model="showModal"
 			:height="height"
 			:isDirectCloseModal="false"
 			@on-cancel="exit"
 			@on-visible-change="setVisibility"
 			@keyup.native.46.stop
 		>
-			<div slot="body" class="modal-body">
+			<div class="modal-body">
 				<div class="collect-template">
 					<i class="far fa-star" @click="collectHandle"></i>
 					<i class="far fa-file-alt" @click="getTemplate"></i>
@@ -20,10 +20,10 @@
 				<Button type="default" @click.native="exit">取消</Button>
 				<Button type="primary" @click.native="ok">确定</Button>
 			</div>
-		</es-modal>
-		<es-modal title="模板收藏" :show-modal="showCollectModal" height="80%" width="400" :isDirectCloseModal="false"
-				  @on-cancel="closeHandle">
-			<div slot="body">
+		</Modal>
+		<Modal title="模板收藏" v-model="showCollectModal" height="80%" width="400" :isDirectCloseModal="false"
+			   @on-cancel="closeHandle">
+			<div>
 				<div class="form-wrapper">
 					<div class="form-item">
 						<label class="form-label text-right">模板名称</label>
@@ -39,16 +39,16 @@
 				<Button type="default" @click="closeHandle">取消</Button>
 				<Button type="primary" @click="collectSave">确定</Button>
 			</div>
-		</es-modal>
-		<es-modal title="模板列表" :show-modal="showTemplateModal" height="80%" width="560" :isDirectCloseModal="false"
-				  @on-cancel="showTemplateModal = false">
-			<div slot="body" class="template-body">
+		</Modal>
+		<Modal title="模板列表" v-model="showTemplateModal" height="80%" width="560" :isDirectCloseModal="false"
+			   @on-cancel="showTemplateModal = false">
+			<div class="template-body">
 				<Tabs active-key="key1" size="small" @on-click="tabChange">
 					<Tab-pane label="收藏模板" key="key1">
-						<i-table stripe :columns="columns" :data="collectTemplate" :show-header="false"></i-table>
+						<Table stripe :columns="columns" :data="collectTemplate" :show-header="false"></Table>
 					</Tab-pane>
 					<Tab-pane label="内置模板" key="key2">
-						<i-table stripe :columns="columns" :data="builtInTemplate" :show-header="false"></i-table>
+						<Table stripe :columns="columns" :data="builtInTemplate" :show-header="false"></Table>
 					</Tab-pane>
 				</Tabs>
 			</div>
@@ -56,17 +56,18 @@
 				<Button type="default" @click="showTemplateModal = false">取消</Button>
 				<Button type="primary" @click="showTemplateModal = false">确定</Button>
 			</div>
-		</es-modal>
+		</Modal>
 	</div>
 </template>
 <script>
 	import builtInFuncTemplate from './function/index'
 	import jsEditor from '../../../components/js-editor.vue'
+	import {Modal, Button, Tabs, TabPane, Table, Input} from 'view-design'
 
 	export default {
 		name: 'js-editor-modal',
 		components: {
-			jsEditor
+			jsEditor, Modal, Button, Tabs, TabPane, Table, Input
 		},
 		props: {
 			// 弹窗状态

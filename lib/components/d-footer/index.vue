@@ -1,18 +1,13 @@
-<template>
-  <div class="d-footer fn-flex">
-    <div class="d-footer-left fn-flex">
-      <slot name="left"/>
-    </div>
-    <div class="d-footer-right fn-flex">
-        <span style="padding-right: 25px">
-          <a class="doc-link" href="http://zentao.eslink.cc/zentao/doc-browse-596-bymodule-2555-id_desc-doc.html"
-             target="_blank" rel="nofollow" title="使用文档">
-            使用文档 <i-icon type="md-help-circle"/>
-          </a>
-        </span>
-      <slot name="right"/>
-    </div>
-  </div>
+<template lang="pug">
+	.d-footer.fn-flex
+		.d-footer-left.fn-flex
+			slot(name="left")
+		.d-footer-right.fn-flex
+			span(style="padding-right: 25px")
+				a.doc-link(href="http://zentao.eslink.cc/zentao/doc-browse-596-bymodule-2555-id_desc-doc.html" target="_blank" rel="nofollow" title="使用文档")
+					span 使用文档
+					i-icon(type="md-help-circle")
+			slot(name="right")
 </template>
 <script>
   import {Icon} from 'view-design'

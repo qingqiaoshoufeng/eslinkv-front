@@ -6,6 +6,7 @@ const components = {
 	diyTest,
 	hTable,
 }
+
 const widgetsArray = [], widgetsObject = {}
 const component = require.context('./', true, /\.(component.js)$/)
 component.keys().forEach(async name => {

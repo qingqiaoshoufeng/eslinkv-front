@@ -1,0 +1,55 @@
+## 2020-10-23
+### 删除
+* esvcp-pc-ui
+### 修改
+* 修复比例尺和跑马灯，directives注入异常
+* 按需引入DataV
+* 图表组件模块render改为html
+* 图表组件模块改为按需引入
+* id改为uuid随机数
+
+## 2020-10-22
+
+### 修改
+* widget-layers分离
+* 注释关闭了导入小工具入口，右侧图层管理
+* 注释关闭了筛选，右侧图层管理
+* 注释了`正在初始化配置`的组件loading，因为这块如果关闭了动态，会比较丑
+* 修复 animation 支持不填，将取消动画
+* 修改 load-mask 模块，加入transition ，外部不用重复嵌套transition
+* updateConfig 函数每次组件初始化都会执行，且有setTimeout，组件销毁时容易内存泄漏，不需要执行setTimeout，执行的setTimeout页及时销毁
+
+### 删除
+* 自定义组件&比例尺组件 mounted延时700ms执行$forceUpdate函数
+* html2canvas 强制加的2000ms延迟，为了显示loading动画
+* 小工具初始化需要时间，此处进行延时逐个回填，强制加的20ms延迟去除
+* 小工具导入成功，强制加的500ms延迟去除
+
+### 新增
+* pug 应用 几个简单页面
+* ts 应用 几个简单页面
+
+## 发现异常
+* [ ] 布局格子异常
+* [ ] 比例尺和跑马灯，directives注入异常
+* [ ] 数字翻牌器，起初无动画
+* [ ] console错，strokeColor
+
+## 2020-10-21
+
+### 新增
+* 列表页面
+* dvdp放入lib文件夹
+* 新增部分注释
+* 新增ts支持
+
+### 修改
+* 业务组件按文件目录自动引入，形成分类模块
+* api新建文件，request.js
+* api按文件目录自动引入
+* hot-keys分离
+* right-menu分离
+* 自己写的日期format修改成date-fns/format
+
+### 删除
+* 移除 npm dvdp

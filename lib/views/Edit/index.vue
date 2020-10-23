@@ -3,12 +3,8 @@
 		<div class="main-container">
 			<core v-if="ready" ref="kanboardEditor" :class="{ screenshot: screenshotCreating }"
 				  @kanboard-edited="kanboardEdited = true"/>
-			<transition name="fade">
-				<load-mask v-if="screenshotCreating || querying">{{ querying ? '请求看板数据…' : '正在生成快照…' }}</load-mask>
-			</transition>
-			<transition name="fade">
-				<load-mask v-if="saving">正在保存数据…</load-mask>
-			</transition>
+			<load-mask :show="screenshotCreating || querying">{{ querying ? '请求看板数据…' : '正在生成快照…' }}</load-mask>
+			<load-mask :show="saving">正在保存数据…</load-mask>
 		</div>
 		<d-footer>
 			<span slot="left" class="d-footer-title">{{ kanboardName }}</span>

@@ -1,8 +1,6 @@
 <template>
 	<div ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen }" class="preview-wrapper">
-		<transition name="fade">
-			<load-mask v-if="querying">请求看板数据…</load-mask>
-		</transition>
+		<load-mask :show="querying">请求看板数据…</load-mask>
 		<kanban-preview ref="previewContainer" :style="`transform: scale(${scaleRatio}); overflow: hidden;`"/>
 		<div class="action-bar">
 			<div v-if="actualScaleRatio < 1" class="action fit-screen" @click="fitScreen = !fitScreen">{{ fitScreen ?

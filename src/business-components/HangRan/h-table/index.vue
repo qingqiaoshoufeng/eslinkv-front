@@ -144,12 +144,9 @@
 			show: true
 		},
 		api: true,
-		animation: false
 	})
 
 	export default {
-		name: 'test',
-		label: '比例条111',
 		mixins: [widgetMixin],
 		data() {
 			return {
@@ -182,9 +179,6 @@
 			}
 		},
 		mounted() {
-			setTimeout(() => {
-				this.$forceUpdate()
-			}, 700)
 		},
 		created() {
 			this.configSource = this.parseConfigSource(configParseMap, localConfigSource)
