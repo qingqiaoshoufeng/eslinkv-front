@@ -55,7 +55,6 @@
 	import widgetTypes from '../../views/core/widgets/widget-type-list'
 
 	export default {
-		name: 'import-widgets',
 		components: {},
 		data() {
 			return {

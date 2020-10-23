@@ -8,5 +8,6 @@
 <style lang="scss">
 	.home-container {
 		height: 100%;
+		overflow: hidden;
 	}
 </style>

@@ -69,16 +69,7 @@
 		ratioBar: () => import('./other/ratio-bar.vue'),
 	}
 
-
-	/**
-	 * @description
-	 *
-	 * component is xxx 按需引入模块
-	 *
-	 */
-
 	export default {
-		name: 'widgets',
 		inject: ['diyComponent'],
 		props: {
 			classification: {
@@ -109,23 +100,6 @@
 			}
 		},
 		computed: {
-			statusChildren() {
-				const h = this.$createElement
-				const children = []
-				this.querying && children.push(h('load-mask', {
-					props: {
-						text: '数据请求中…',
-						iconSize: 36
-					}
-				}))
-				this.queryFailed && children.push(h('load-mask', {
-					props: {
-						text: '数据加载失败！',
-						iconSize: 0
-					}
-				}))
-				return children
-			},
 			animation() {
 				return this.config.animation || {}
 			},

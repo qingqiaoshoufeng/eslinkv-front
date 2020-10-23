@@ -1,9 +1,7 @@
 const pkg = require('./package.json')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
-const needReport = false
-const path = require('path')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+const needReport = true
 
 module.exports = {
 	publicPath: isProduction ? `https://cdn.shenzhepei.com/VF/prod/${pkg.version}/` : `/`,
@@ -72,14 +70,6 @@ module.exports = {
 				'echarts': 'echarts'
 			}
 		]
-		config.plugins.push(new CopyWebpackPlugin({
-			patterns: [
-				{
-					from: path.resolve(__dirname, 'node_modules/esvcp-pc-ui/esvcp-pc-ui/assets'),
-					to: 'esvcp-pc-ui/assets'
-				}
-			]
-		}))
 	},
 	chainWebpack: config => {
 		if (isProduction) {

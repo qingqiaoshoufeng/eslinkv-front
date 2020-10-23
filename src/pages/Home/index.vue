@@ -59,8 +59,8 @@
 <style lang="scss">
 	.list-container {
 		height: 100%;
-		overflow-y: auto;
 		padding: 15px;
+		min-width: 930px;
 	}
 
 	.list-item-card-box {

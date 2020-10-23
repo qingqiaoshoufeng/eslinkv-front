@@ -75,7 +75,7 @@
 	.list-item-card {
 		width: calc((100% - 90px) / 4);
 		margin: 0 30px 25px 0;
-
+		min-width: 195px;
 		&:nth-child(4n) {
 			margin-right: 0;
 		}

@@ -69,13 +69,13 @@
 	</Modal>
 </template>
 <script>
-	import {Spin, Modal, Button,Page} from 'view-design'
+	import {Spin, Modal, Button, Page} from 'view-design'
 	import materialUpload from './material-upload'
 
 	export default {
 		name: 'material-manage-modal',
 		components: {
-			materialUpload, Spin, Modal, Button,Page
+			materialUpload, Spin, Modal, Button, Page
 		},
 		props: {
 			// 弹窗状态
@@ -161,23 +161,17 @@
 					pageSize: this.count,
 					pageNum: this.page
 				}).then(response => {
-					if (response.responseCode === '100000') {
-						const {list, total} = response.result
-						this.materials = list.map(item => {
-							if (item.src) return item
-							item.src = item.url
-							item.group = item.type.toString()
-							delete item.url
-							delete item.type
-							return item
-						})
-						this.totalMap[type.toString() || '-1'] = total
-						this.$refs.list.scrollTo({top: 0})
-					}
-					this.loading = false
-				}).catch(error => {
-					this.$Message.warning('素材列表获取失败！')
-					console.warn('素材获取失败：', error)
+					const {list, total} = response
+					this.materials = list.map(item => {
+						if (item.src) return item
+						item.src = item.url
+						item.group = item.type.toString()
+						delete item.url
+						delete item.type
+						return item
+					})
+					this.totalMap[type.toString() || '-1'] = total
+					this.$refs.list.scrollTo({top: 0})
 					this.loading = false
 				})
 			},
