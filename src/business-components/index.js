@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import dvdp from '../../lib'
 import diyTest from './Example/diy-test'
 import hTable from './HangRan/h-table'

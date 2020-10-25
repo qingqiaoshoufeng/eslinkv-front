@@ -9,41 +9,43 @@
 					i-icon(type="md-help-circle")
 			slot(name="right")
 </template>
-<script>
-  import {Icon} from 'view-design'
+<script lang="ts">
+	import {Vue, Component} from 'vue-property-decorator'
+	import {Icon} from 'view-design'
 
-  export default {
-    name: 'DFooter',
-    components: {
-      'i-icon': Icon
-    }
-  }
+	@Component({
+		components: {'i-icon': Icon}
+	})
+	class DFooter extends Vue {
+	}
+
+	export default DFooter
 </script>
 <style lang="scss">
-  .d-footer {
-    width: 100%;
-    height: 50px;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 15px;
+	.d-footer {
+		width: 100%;
+		height: 50px;
+		justify-content: space-between;
+		align-items: center;
+		padding: 0 15px;
 
-    /deep/ button {
-      margin-left: 10px;
-    }
+		/deep/ button {
+			margin-left: 10px;
+		}
 
-    .d-footer-left, .d-footer-right {
-      align-items: center;
+		.d-footer-left, .d-footer-right {
+			align-items: center;
 
-      .return {
-        margin-left: 0;
-      }
-    }
+			.return {
+				margin-left: 0;
+			}
+		}
 
-    .d-footer-left {
-      .d-footer-title {
-        font-size: 15px;
-        padding: 0 15px 0 0;
-      }
-    }
-  }
+		.d-footer-left {
+			.d-footer-title {
+				font-size: 15px;
+				padding: 0 15px 0 0;
+			}
+		}
+	}
 </style>
