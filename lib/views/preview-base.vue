@@ -1,5 +1,4 @@
 <template>
-	<!-- 操作区 -->
 	<div ref="canvas-wrapper" id="kanban" class="canvas-wrapper" :style="canvasStyle">
 		<load-mask :show="querying">请求看板数据…</load-mask>
 		<div :class="{ active: refilling }" class="refill-mask">
@@ -45,14 +44,12 @@
 	import parts from './core/widgets/parts/index'
 	import gridItem from './core/kanboard-editor/layout-grid/grid.vue'
 	import styleParser from './core/widgets/parts/lib/style-parser'
-
 	import widgetOperation from './core/kanboard-editor/mixins/widget-operation'
 	import refill from './core/kanboard-editor/mixins/refill'
 	import combination from './core/kanboard-editor/mixins/combination'
 	import globalApi from './core/kanboard-editor/global-api/mixin'
 	import widgetShareData from './core/kanboard-editor/mixins/widget-share-data'
 	import crossFrameMessageParamBind from './core/kanboard-editor/mixins/cross-frame-message-param-bind'
-
 	import * as widgetBindManager from './mixins/widget-bind-manage'
 	import loadMask from '../components/load-mask'
 	import 'animate.css/animate.min.css'
@@ -115,21 +112,14 @@
 						const currentLength = widgetsArray.length
 						if (currentLength) {
 							this.refillPercent = (length - currentLength) / length * 100 | 0
-							requestAnimationFrame(() => {
-								reDrawWidget(widgetsArray.shift())
-							})
+							reDrawWidget(widgetsArray.shift())
 						} else {
 							this.refillPercent = 100
-							setTimeout(() => {
-								this.refilling = false
-							}, 300)
+							this.refilling = false
 							resolve()
 						}
 					}
-					// todo 网状结构，如何可视化进度？
-					requestAnimationFrame(() => {
-						this.gridsAdded = grids || {}
-					})
+					this.gridsAdded = grids || {}
 					if (length) {
 						reDrawWidget(widgetsArray.shift())
 					} else {

@@ -14,7 +14,7 @@
 	import {Icon} from 'view-design'
 
 	@Component({
-		components: {'i-icon': Icon}
+		components: {'i-icon': Icon},
 	})
 	class DFooter extends Vue {
 	}

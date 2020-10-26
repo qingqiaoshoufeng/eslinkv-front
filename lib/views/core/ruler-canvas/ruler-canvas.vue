@@ -174,7 +174,7 @@ export default {
     },
     resetZoomAndMove () {
       this.resetContentZoom()
-      requestAnimationFrame(this.rehandleContentMove)
+      requestAnimationFrame(this.resetContentMove)
     }
   }
 }

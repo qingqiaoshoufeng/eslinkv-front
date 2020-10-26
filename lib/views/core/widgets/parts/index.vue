@@ -1,6 +1,7 @@
 <template>
 	<component :is="currentComponent"
 			   :class="animationClass"
+			   :id="config.widget && config.widget.id"
 			   :widget-ref="config.widget && config.widget.id"
 			   v-bind="{config,readonly,...$attrs}"
 			   @widget-config-update="data => $emit('widget-config-update', data)"
@@ -17,6 +18,7 @@
 </template>
 <script>
 	import {cssStyle2DomStyle} from '../../../../utils'
+	import {store} from '../../../../store'
 
 	let componentList = {
 		border: () => import('./decoration/border'),
@@ -70,7 +72,6 @@
 	}
 
 	export default {
-		inject: ['diyComponent'],
 		props: {
 			classification: {
 				type: String
@@ -90,16 +91,19 @@
 		},
 		data() {
 			return {
-				currentComponent: null,
 				querying: false,
 				queryFailed: false,
 				replayAnimation: false,
 				ready: false,
 				animationClass: null,
-				animationStyle: 'opacity: 0'
+				animationStyle: 'opacity: 0',
+				componentList
 			}
 		},
 		computed: {
+			currentComponent() {
+				return this.componentList[cssStyle2DomStyle(this.type)]
+			},
 			animation() {
 				return this.config.animation || {}
 			},
@@ -116,6 +120,7 @@
 				el.style.animationDelay = `${animation.delay}ms`
 			},
 			handleAnimationEnd() {
+				this.$debug('component', '动画结束')
 				this.replayAnimation = false
 			},
 			// type: 入场动画 or 出场动画
@@ -132,18 +137,19 @@
 				} else {
 					animationClass = animationSource.map(item => `animate__${item}`).join(' ')
 				}
-				setTimeout(() => {
-					this.animationClass = `animate__animated ${animationClass}`
-					this.animationStyle = `animation-duration: ${duration}ms; animation-delay: ${delay}ms`
-					setTimeout(() => {
-						this.removeAnimation()
-						this.handleAnimationEnd()
-					}, delay + duration + 16)
-				}, 0)
+				this.animationClass = `animate__animated ${animationClass}`
+				this.animationStyle = `animation-duration: ${duration}ms; animation-delay: ${delay}ms`
+				let timer = setTimeout(() => {
+					this.removeAnimation()
+					this.handleAnimationEnd()
+					clearTimeout(timer)
+				}, delay + duration + 16)
+				this.$debug('component', '动画开始')
 			},
 			removeAnimation() {
 				this.animationClass = null
 				this.animationStyle = null
+				this.$debug('component', '移除动画')
 			}
 		},
 		watch: {
@@ -164,13 +170,12 @@
 			}
 		},
 		mounted() {
-			if (this.diyComponent) {
-				for (let key in this.diyComponent.components) {
-					componentList[key] = this.diyComponent.components[key]
+			if (store.custom.components) {
+				for (let key in store.custom.components) {
+					this.$set(componentList, cssStyle2DomStyle(key), store.custom.components[key])
 				}
 			}
-			this.currentComponent = componentList[cssStyle2DomStyle(this.type)]
-
+			this.$debug('component', '加载当前组件')
 			this.$el.addEventListener('animationend', this.handleAnimationEnd)
 		},
 		beforeDestroy() {

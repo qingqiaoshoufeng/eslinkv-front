@@ -1,6 +1,5 @@
 <template>
 	<div ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen }" class="preview-wrapper">
-		<load-mask :show="querying">请求看板数据…</load-mask>
 		<kanban-preview ref="previewContainer" :style="`transform: scale(${scaleRatio}); overflow: hidden;`"/>
 		<div class="action-bar">
 			<div v-if="actualScaleRatio < 1" class="action fit-screen" @click="fitScreen = !fitScreen">{{ fitScreen ?
@@ -21,10 +20,9 @@
 			loadMask
 		},
 		provide() {
-			return {kanboard: this, diyComponent: this.diyComponent}
+			return {kanboard: this}
 		},
 		props: {
-			diyComponent: {},
 			kanboardId: {
 				type: [String, Number],
 				default: undefined

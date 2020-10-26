@@ -88,7 +88,7 @@
 				this.config = null
 				this.widgetCheckedState = {}
 			},
-			startImport(e) {
+			startImport() {
 				this.loading = true
 				const data = {...this.config.data}
 				const widgets = data.widgets.filter(widget => this.widgetCheckedState[widget.id])

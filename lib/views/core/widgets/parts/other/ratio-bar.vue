@@ -39,8 +39,7 @@ const localConfigValue = Object.freeze({
 })
 
 // 用于筛选预置配置项
-const configParseMap = Object.freeze({
-  widget: true,
+const configParseMap = {
   layout: {
     size: {
       '$width.height.unit': true
@@ -67,7 +66,7 @@ const configParseMap = Object.freeze({
   },
   api: true,
   animation: true
-})
+}
 
 export default {
   name: 'widget-ratio-bar',
@@ -135,9 +134,6 @@ export default {
         )
       ]
     )
-  },
-  methods: {
-    init () { }
   },
   computed: {
     mergedConfig () {

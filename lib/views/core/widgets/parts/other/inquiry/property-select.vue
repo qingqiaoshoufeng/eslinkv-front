@@ -29,9 +29,9 @@ const localConfigSource = Object.freeze({
         title: 'label1:value1,label2,value2'
       }),
       'value.index': [
-         getInput('value', '选中', { placeholder: '值' }), 
+         getInput('value', '选中', { placeholder: '值' }),
          getInput('index', '选中', { placeholder: '索引' })
-      ], 
+      ],
       valueType: getSelect('valueType', '数据类型', ['String', 'Number', 'Boolean']),
       inputable: getBooleanInput('inputable', '可输入'),
       hideIcon: getBooleanInput('hideIcon', '隐藏图标')
@@ -78,8 +78,7 @@ const localConfigValue = Object.freeze({
 })
 
 // 用于筛选预置配置项
-const configParseMap = Object.freeze({
-  widget: true,
+const configParseMap ={
   layout: {
     size: {
       '$width.height.unit': true
@@ -106,7 +105,7 @@ const configParseMap = Object.freeze({
   },
   api: true,
   animation: true
-})
+}
 
 export default {
   name: 'widget-property-select',
@@ -249,9 +248,6 @@ export default {
         )
       ]
     )
-  },
-  methods: {
-    init () { }
   },
   computed: {
     mergedConfig () {

@@ -87,8 +87,8 @@
 						snap-to-target="guide-line"
 						class-name="vdr-custom-style"
 						@refLineParams="getRefLineParams"
-						@activated="activated(item, widgetEditable(item) && !item.config.widget.innerEditing)"
-						@deactivated="deactivated(item)"
+						@activated="handleActivated(item, widgetEditable(item) && !item.config.widget.innerEditing)"
+						@deactivated="handleDeactivated(item)"
 						@dragging="dragging"
 						@resizing="resizing"
 						@dragstop="(left, top) => {
@@ -145,8 +145,8 @@
 										snap-to-target="guide-line"
 										class-name="vdr-custom-style"
 										@refLineParams="getInnerRefLineParams"
-										@activated="activated(child, item.config.widget.innerEditing || false)"
-										@deactivated="deactivated(child)"
+										@activated="handleActivated(child, item.config.widget.innerEditing || false)"
+										@deactivated="handleDeactivated(child)"
 										@dragging="dragging"
 										@resizing="resizing"
 										@dragstop="
@@ -240,6 +240,7 @@
 		<transition name="fade">
 			<div
 				ref="configPanelWrapper"
+				id="tools-menu"
 				v-show="showConfigPanel"
 				:style="configPanelStyle"
 				class="config-panel-wrapper"
@@ -315,7 +316,7 @@
 </template>
 <script>
 	import rightMenu from '../../../components/right-menu'
-	import rulerCanvas from '../ruler-canvas'
+	import rulerCanvas from '../ruler-canvas/ruler-canvas.vue'
 	import configPanel from '../config-panel'
 	import fields from '../config-panel/components/fields'
 	import Vue from 'vue'

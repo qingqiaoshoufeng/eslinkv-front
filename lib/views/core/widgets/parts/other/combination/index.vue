@@ -81,7 +81,6 @@ export default {
     }
   },
   methods: {
-    init () { },
     toggleInnerEdit () {
       if (this.config.widget.locked) return
       this.innerEditing = true

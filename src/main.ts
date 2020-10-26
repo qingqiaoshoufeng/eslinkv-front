@@ -6,8 +6,10 @@ import 'view-design/dist/styles/iview.css'
 import './scss/reset.scss'
 import './scss/index.scss'
 import './business-components'
+import {debug} from '../plugins'
 import directives from '../lib/directives'
 
+Vue.prototype.$debug = debug
 Vue.prototype.$Message = Message
 Vue.prototype.$Modal = Modal
 Vue.config.productionTip = false

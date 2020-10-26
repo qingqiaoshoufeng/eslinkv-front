@@ -1,11 +1,11 @@
 <script>
-	import {http} from '../../../../api/axios.js';
-	import {Icon} from 'view-design'
+	import {Icon, Upload, Button} from 'view-design'
 
 	export default {
 		name: 'upload-file',
 		components: {
-			Icon
+			Icon, Upload,
+			'i-button': Button
 		},
 		props: {
 			value: {

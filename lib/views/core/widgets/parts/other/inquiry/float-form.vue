@@ -138,8 +138,7 @@ const localConfigValue = Object.freeze({
 })
 
 // 用于筛选预置配置项
-const configParseMap = Object.freeze({
-  widget: true,
+const configParseMap ={
   layout: {
     size: {
       '$width.height.unit': true
@@ -167,7 +166,7 @@ const configParseMap = Object.freeze({
     }
   },
   animation: true
-})
+}
 
 export default {
   name: 'widget-float-form',
@@ -329,7 +328,6 @@ export default {
     )
   },
   methods: {
-    init () { },
     handleFloatFormDragEnd () {
       this.dragStart = false
       this.$el.style.transition = null

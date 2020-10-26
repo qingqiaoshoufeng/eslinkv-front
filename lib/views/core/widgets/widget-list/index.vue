@@ -41,14 +41,14 @@
 	import other from './other'
 	import _diy from './diy'
 	import {Collapse, TabPane, Tabs, Panel} from 'view-design'
+	import {store} from '../../../../store'
 
 	export default {
 		components: {
 			parts, Collapse, TabPane, Tabs, Panel
 		},
-		inject: ['diyComponent'],
 		data() {
-			const diy = _diy(this.diyComponent ? this.diyComponent.widgets : [])
+			const diy = _diy(store.custom.widgets)
 			return {
 				panelFixed: false,
 				tabs: {

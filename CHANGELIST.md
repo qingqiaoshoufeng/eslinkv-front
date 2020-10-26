@@ -1,3 +1,24 @@
+## 2020-10-26
+### 新增
+* 公共init方法
+### 修改
+* 添加typescript eslint
+* 修复左上角，点击D字母，还原画布的功能
+* widget-operation改为ts
+* parseConfigSource方法支持空参数
+* 初始化组件参数定义
+* 修复table报错i-button
+* 自定义组件优化自动加载
+* 使用vue observable API 优化注入自定义组件的函数
+### 删除
+* 删除没有作用的requestAnimationFrame
+* 删除空init方法
+## 发现异常
+* [ ] 过多的svg图片
+* [ ] 布局格子异常
+* [ ] 数字翻牌器，起初无动画
+* [ ] 之前已有问题，组件切换过快，会出现跳动，看板会来不及显示
+
 ## 2020-10-23
 ### 删除
 * esvcp-pc-ui

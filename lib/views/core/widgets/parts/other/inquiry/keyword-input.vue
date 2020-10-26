@@ -70,8 +70,7 @@
 	})
 
 	// 用于筛选预置配置项
-	const configParseMap = Object.freeze({
-		widget: true,
+	const configParseMap = {
 		layout: {
 			size: {
 				'$width.height.unit': true
@@ -102,7 +101,7 @@
 			}
 		},
 		animation: true
-	})
+	}
 
 	export default {
 		name: 'widget-keyword-input',
@@ -202,8 +201,6 @@
 			)
 		},
 		methods: {
-			init() {
-			},
 			parseOptions(options) {
 				return options.split(',').map(item => {
 					const [label, value] = item.split(':')

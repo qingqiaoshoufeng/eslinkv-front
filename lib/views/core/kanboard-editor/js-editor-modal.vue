@@ -107,7 +107,7 @@
 						width: 110,
 						render: (h, params) => {
 							return [
-								h('i-button', {
+								h('Button', {
 									attrs: {
 										size: 'small'
 									},
@@ -117,7 +117,7 @@
 										}
 									}
 								}, '使用'),
-								this.activeKey === 0 ? h('i-button', {
+								this.activeKey === 0 ? h('Button', {
 									attrs: {
 										size: 'small',
 										type: 'error'
