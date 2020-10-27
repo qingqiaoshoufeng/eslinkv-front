@@ -19,18 +19,17 @@
     <!-- 素材管理 -->
     <material-manage :showModal="showMaterialManage" @close="showMaterialManage = false" />
     <!-- 布局格子按钮 -->
-    <div
-      :class="{ active: showLayoutGrid }"
-      class="editor-action toggle-layout-grid"
-      title="布局格子"
-      @click="
-        hideSubPanels()
-        showLayoutGrid = !showLayoutGrid
-      "
-    >
-      <img :src="`./static/images/layout-grid.svg`" />
-    </div>
-    <!-- 布局格子 -->
+<!--    <div-->
+<!--      :class="{ active: showLayoutGrid }"-->
+<!--      class="editor-action toggle-layout-grid"-->
+<!--      title="布局格子"-->
+<!--      @click="-->
+<!--        hideSubPanels()-->
+<!--        showLayoutGrid = !showLayoutGrid-->
+<!--      "-->
+<!--    >-->
+<!--      <img :src="`./static/images/layout-grid.svg`" />-->
+<!--    </div>-->
     <transition name="layer-fade-right">
       <layout-grid v-show="showLayoutGrid"></layout-grid>
     </transition>

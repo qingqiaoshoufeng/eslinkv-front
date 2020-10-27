@@ -5,7 +5,7 @@ let components = {}
 const widgetsArray = [], widgetsObject = {}
 const conf = require.context('./', true, /\.(component.js)$/)
 const component = require.context('./', true, /\.(vue)$/)
-component.keys().forEach(async name => {
+component.keys().forEach(name => {
 	const title = name.split('/')[2]
 	components[title] = component(name).default
 })
@@ -24,5 +24,6 @@ for (let key in widgetsObject) {
 }
 mutations.setCustomComponents(components)
 mutations.setCustomWidgets(widgetsArray)
+Vue.component('new', dvdp.new)
 Vue.component('edit', dvdp.edit)
 Vue.component('preview', dvdp.preview)

@@ -94,7 +94,7 @@ export default {
       kanboard.info.name = name
       kanboard.info.remark = remark
       data.widgets = [...widgets.filter(widget => this.widgetCheckedState[widget.id])]
-      this.$api.addBoard({
+      this.$api.board.add({
         name,
         remark,
         attribute: JSON.stringify(data),

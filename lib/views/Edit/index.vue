@@ -13,18 +13,11 @@
 				<Button type="default" @click="preview">预览</Button>
 				<Button type="primary" @click="editBoard" :loading="loading">保存</Button>
 				<Button type="default" @click="publishBoard" :loading="loading">发布</Button>
-				<Button type="default" @click="saveAs" :loading="loading">另存为</Button>
-				<Button type="default" @click="exportKanboardData" :loading="loading">导出</Button>
 			</div>
 		</d-footer>
 		<transition name="preview-fade">
 			<div v-if="previewOpen" class="preview-wrapper">
-				<router-view
-					@close="
-            previewOpen = false
-            $router.back()
-          "
-				></router-view>
+				<router-view @close="previewBack"></router-view>
 			</div>
 		</transition>
 	</div>
@@ -34,28 +27,24 @@
 	import screenshot from '../mixins/screenshot'
 	import funcs from '../mixins/funcs'
 	import loadMask from '../../components/load-mask'
-	import downloadFile from '../../vendor/download-file'
 	import * as widgetBindManager from '../mixins/widget-bind-manage'
 	import Template from '../core/kanboard-editor/mixins/template'
 	import dFooter from '../../components/d-footer'
-	import {handleContentMoveEnd} from 'view-design'
+	import {Button} from 'view-design'
 
 	export default {
 		mixins: [screenshot, funcs],
 		provide() {
-			return {...widgetBindManager, kanboard: this,}
+			return {...widgetBindManager, kanboard: this}
 		},
 		components: {
 			Template,
+			Button,
 			core,
 			loadMask,
 			'd-footer': dFooter
 		},
 		props: {
-			kanboardId: {
-				type: [String, Number],
-				default: undefined
-			},
 			data: {
 				type: String,
 				default: null
@@ -73,25 +62,24 @@
 			};
 		},
 		methods: {
+			previewBack() {
+				this.previewOpen = false
+				this.$router.back()
+			},
 			submitKanboard(data) {
 				this.saving = true
+				const {params: {id}} = this.$route
 				data.createTime = this.createTime
-				// 数据类型：0:看板, 1:小工具模板, 2:参考线模板
-				data.type = 0
-				this.$api.editBoard({
-					...data,
-					id: this.kanboardId
-				}).then((res) => {
-					if (res.responseCode == 100000) {
-						this.kanboardEdited = false
-						this.$Message.success('修改成功')
-						this.loading = false
-						this.showAddBoard = false
-						this.getKanboardList()
-					}
+				data.type = 0 // 数据类型：0:看板, 1:小工具模板, 2:参考线模板
+				this.$api.board.update({...data, id}).then((res) => {
+					this.kanboardEdited = false
+					this.$Message.success('修改成功')
+					this.loading = false
+					this.showAddBoard = false
+					this.getKanboardList()
+					this.saving = false
 				}).catch(() => {
-					this.loading = false;
-				}).finally(() => {
+					this.loading = false
 					this.saving = false
 				})
 			},
@@ -115,281 +103,22 @@
 					cancelText: '跳过'
 				});
 			},
-			async submitSaveAs(data, createScreenshot) {
-				this.saving = true
-				if (createScreenshot) {
-					const snapshot = await this.capture({selector: '#kanban', type: 1}).catch(e => {
-						this.$Message.warning('快照创建失败！')
-						console.warn('快照创建失败', e)
-					})
-					if (snapshot) data.snapshot = snapshot
-				}
-				const attribute = JSON.parse(data.attribute)
-				attribute.kanboard.info.name = data.name
-				attribute.kanboard.info.remark = data.remark
-				data.attribute = JSON.stringify(attribute)
-				this.loading = true
-				this.$api.addBoard(data).then(res => {
-					if (res.responseCode == 100000) {
-						this.$Message.success('另存成功！')
-						this.loading = false
-					}
-				}).catch(() => {
-					this.loading = false
-				}).finally(() => {
-					this.saving = false
-				})
-			},
-			/**
-			 * @description 另存为模板
-			 *
-			 * todo render---> html
-			 *
-			 */
-			saveAs() {
-				const data = this.$refs.kanboardEditor.prepareKanboardData()
-				let createScreenshot = 1
-				this.$Modal.confirm({
-					title: '看板另存为',
-					render: (h) => {
-						return h(
-							'div',
-							{
-								class: 'form-wrapper'
-							},
-							[
-								h(
-									'div',
-									{
-										class: 'form-item'
-									},
-									[
-										h(
-											'label',
-											{
-												class: 'form-label text-right'
-											},
-											'另存类型'
-										),
-										h(
-											'RadioGroup',
-											{
-												props: {
-													value: 1,
-													autofocus: true
-												},
-												on: {
-													input: (val) => {
-														data.type = val
-													}
-												}
-											},
-											[
-												h('Radio', {props: {label: 0}}, [h('span', '新看板')]),
-												h('Radio', {props: {label: 1}}, [h('span', '小工具模板')]),
-												h('Radio', {props: {label: 2}}, [h('span', '布局模板')])
-											]
-										)
-									]
-								),
-								h(
-									'div',
-									{
-										class: 'form-item'
-									},
-									[
-										h(
-											'label',
-											{
-												class: 'form-label text-right'
-											},
-											'另存名称'
-										),
-										h(
-											'Input',
-											{
-												props: {
-													value: data.name
-												},
-												on: {
-													input: (val) => {
-														data.name = val
-													}
-												}
-											}
-										)
-									]
-								), h(
-								'div',
-								{
-									class: 'form-item'
-								},
-								[
-									h(
-										'label',
-										{
-											class: 'form-label text-right'
-										},
-										'创建快照'
-									),
-									h(
-										'RadioGroup',
-										{
-											props: {
-												value: createScreenshot
-											},
-											on: {
-												input: (val) => {
-													createScreenshot = val
-												}
-											}
-										},
-										[
-											h('Radio', {props: {label: 1}}, [h('span', '是')]),
-											h('Radio', {props: {label: 0}}, [h('span', '否')])
-										]
-									)
-								]
-							),
-								h(
-									'div',
-									{
-										class: 'form-item'
-									},
-									[
-										h(
-											'label',
-											{
-												class: 'form-label text-right'
-											},
-											'备注'
-										),
-										h(
-											'Input',
-											{
-												props: {
-													type: 'textarea',
-													rows: 3,
-													value: data.remark
-												},
-												on: {
-													input: (val) => {
-														data.remark = val
-													}
-												}
-											}
-										)
-									]
-								)
-							]
-						)
-					},
-					onOk: () => {
-						this.submitSaveAs(data, createScreenshot)
-					},
-					onCancel: () => {
-					},
-					okText: '确定',
-					cancelText: '取消'
-				})
-			},
 			queryKanboard() {
 				this.querying = true
-				const dataBoardId = this.kanboardId
-				this.$api.getKanboardConfig({dataBoardId}).then(res => {
-					if (res.responseCode == 100000) {
-						const {attribute, createTime, name} = res.result
-						this.kanboardName = name
-						document.title = `编辑 - ${name} - 数据看板`
-						this.createTime = createTime
-						const value = JSON.parse(attribute)
-						this.$refs.kanboardEditor.refillConfig(value).then(() => {
-						})
-					}
-				}).catch(error => {
-					console.info(error)
-				}).finally(() => {
+				this.ready = true
+				const {params: {id}} = this.$route
+				const dataBoardId = id
+				this.$api.board.detail({dataBoardId}).then(res => {
+					const {attribute, createTime, name} = res
+					this.kanboardName = name
+					document.title = `编辑 - ${name} - 数据看板`
+					this.createTime = createTime
+					const value = JSON.parse(attribute)
 					this.querying = false
+					this.$refs.kanboardEditor.refillConfig(value).then(() => {
+					})
 				})
 			},
-			/**
-			 * @description 导出看板配置、数据到文件
-			 *
-			 * todo render---> html
-			 *
-			 */
-			exportKanboardData() {
-				const data = this.$refs.kanboardEditor.prepareKanboardData()
-				let fileName = data.name
-				this.$Modal.confirm({
-					title: '看板导出',
-					render: (h) => {
-						return h(
-							'div',
-							{
-								class: 'form-wrapper'
-							},
-							[
-								h(
-									'p',
-									'导出功能用于看板数据备份、迁移。'
-								),
-								h(
-									'div',
-									{
-										class: 'form-item'
-									},
-									[
-										h(
-											'label',
-											{
-												class: 'form-label text-right'
-											},
-											'文件名称'
-										),
-										h(
-											'Input',
-											{
-												attrs: {
-													placeholder: '自定义导出文件名'
-												},
-												props: {
-													value: fileName
-												},
-												on: {
-													input: (val) => {
-														fileName = val
-													}
-												}
-											},
-											[
-												h(
-													'span',
-													{
-														slot: 'append'
-													},
-													'.json'
-												)
-											]
-										)
-									]
-								)
-							]
-						)
-					},
-					onOk: () => {
-						const config = {...data}
-						config.data = JSON.parse(config.attribute)
-						delete config.attribute
-						downloadFile(config, fileName, 'json')
-					},
-					onCancel: () => {
-					},
-					okText: '确定',
-					cancelText: '取消'
-				})
-			},
-			//
 			preview() {
 				this.previewOpen = true
 				const data = this.$refs.kanboardEditor.prepareKanboardData().attribute
@@ -397,17 +126,6 @@
 			}
 		},
 		watch: {
-			kanboardId: {
-				handler: function (value, oldValue) {
-					if (!value || value == oldValue) return
-					this.ready = false
-					setTimeout(() => {
-						this.ready = true
-					}, 10)
-					this.queryKanboard()
-				},
-				immediate: true
-			},
 			previewOpen(value) {
 				if (value) {
 					this.$nextTick(() => {
@@ -420,6 +138,7 @@
 		},
 		mounted() {
 			document.title = '编辑 - 数据看板'
+			this.queryKanboard()
 		}
 	}
 </script>

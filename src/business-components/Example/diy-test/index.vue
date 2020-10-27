@@ -1,6 +1,6 @@
 <template>
 	<div class="widget-part" :style="styles">
-		hello world
+		{{data}}
 	</div>
 </template>
 <script>
@@ -23,11 +23,9 @@
 				return {...this.config.config}
 			}
 		},
-		mounted() {
-		},
 		created() {
-			this.configSource = this.parseConfigSource()
-			this.configValue = this.parseConfigValue()
+			this.configSource = this.parseConfigSource({api: true})
+			this.configValue = this.parseConfigValue({api: true}, {api: {params: {test: 111}}})
 		}
 	}
 </script>

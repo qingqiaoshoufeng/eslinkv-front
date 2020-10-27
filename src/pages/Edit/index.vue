@@ -1,6 +1,6 @@
 <template>
 	<div class="home-container">
-		<new/>
+		<edit/>
 	</div>
 </template>
 <script>

@@ -2,8 +2,6 @@
 	<div class="list-container">
 		<div>
 			<Button type="primary" @click="handleNew">新建看板</Button>
-			<Button :style="{marginLeft:'10px'}" type="primary">编辑看板</Button>
-			<Button :style="{marginLeft:'10px'}" type="primary">删除看板</Button>
 		</div>
 		<ul class="fn-flex flex-row list-item-card-box">
 			<item-card v-for="item in list" v-bind="item" :key="item.id" @init="init"/>

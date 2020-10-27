@@ -1,5 +1,4 @@
 <template>
-  <!-- 看板设计 -->
   <div class="step kanboard-editer-box">
     <widgets v-if="kanboardReady" ref="widgets" :class="{ 'canvas-fullscreen': isFullscreen }" @panel-fixed="handleWidgetsPanelFixed" />
     <kanboard-editor ref="kanboardEditor" :template="template" @fullscreenchange="handleFullscreenChange" @kanboard-edited="$emit('kanboard-edited')" @kanboard-ready="kanboardReady = true" />
