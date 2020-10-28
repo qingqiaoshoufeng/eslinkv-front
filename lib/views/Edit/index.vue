@@ -33,6 +33,7 @@
 	import {Button} from 'view-design'
 
 	export default {
+		name: 'Edit',
 		mixins: [screenshot, funcs],
 		provide() {
 			return {...widgetBindManager, kanboard: this}

@@ -1,6 +1,6 @@
 <template>
 	<div class="widget-part" :style="styles">
-		<div :id="`widget-part-${time}`" style="height: 400px"></div>
+		<div :id="id" style="height: 400px"></div>
 	</div>
 </template>
 
@@ -54,24 +54,39 @@
 	export default {
 		data() {
 			return {
-				time: new Date() * 1
+				once: false
 			}
 		},
 		mixins: [widgetMixin],
 		computed: {
 			styles() {
 				const {layout} = this.config
-				return styleParser(layout, this.time)
+				return styleParser(layout)
 			},
 			mergedConfig() {
 				if (!this.config.config) return false
 				return {...this.config.config}
 			}
 		},
-		methods:{
-			init(){
-				const time = this.time
-				Highcharts.chart(`widget-part-${time}`, this.data)
+		watch: {
+			data: {
+				handler(val) {
+					if (this.id) {
+						const data = {...val}
+						this.$nextTick(() => {
+							Highcharts.chart(this.id, data)
+						})
+					}
+				},
+				deep: true,
+			},
+		},
+		mounted() {
+			if (this.id) {
+				this.$nextTick(() => {
+					const data = {...this.data}
+					Highcharts.chart(this.id, data)
+				})
 			}
 		},
 		created() {
