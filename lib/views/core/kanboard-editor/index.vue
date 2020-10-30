@@ -160,8 +160,11 @@
                     "
 										@contextmenu.native.prevent="item.config.widget.innerEditing && showRightMenu($event, child)"
 									>
-										<parts :ref="child.id" :type="child.type" :config="child.config"
-											   @widget-config-update="(data) => handleWidgetConfig(data, child)"/>
+										<parts
+											v-if="showParts(item,child)"
+											:ref="child.id" :type="child.type" :config="child.config"
+											@widget-config-update="(data) => handleWidgetConfig(data, child)"/>
+
 									</vdr>
 								</template>
 								<!-- 组合小工具内部辅助线 -->
@@ -315,6 +318,7 @@
 	</div>
 </template>
 <script>
+	import {store} from '../../../store'
 	import rightMenu from '../../../components/right-menu'
 	import rulerCanvas from '../ruler-canvas/ruler-canvas.vue'
 	import configPanel from '../config-panel'
@@ -385,7 +389,7 @@
 		data() {
 			return {
 				widgetsAdded: {},
-				hideEditTools: false
+				hideEditTools: false,
 			}
 		},
 		methods: {
@@ -462,6 +466,26 @@
 			}
 		},
 		computed: {
+			showParts() {
+				return (item, child) => {
+					if (item.config.config.children.show) {
+						if (item.config.config.children.show.length) {
+							if (item.config.config.children.show[store.scene.index]) {
+								if (item.config.config.children.show[store.scene.index].id) {
+									if (item.config.config.children.show[store.scene.index].id.indexOf(child.id) !== -1) {
+										return true
+									}
+									return false
+								}
+								return true
+							}
+							return true
+						}
+						return true
+					}
+					return true
+				}
+			},
 			isWidgetLocked() {
 				if (this.rightMenuGrid) return this.rightMenuGrid.config.widget.locked
 				const id = this.rightMenuBindWidgetId

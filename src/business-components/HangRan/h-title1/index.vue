@@ -1,8 +1,8 @@
 <template>
 	<div class="widget-part" :style="styles">
-		<div class="fn-flex flex-column h-hexagon">
-			<h2>{{data&&data.value}}</h2>
-			<p>{{data&&data.title}}</p>
+		<div class="fn-flex flex-row h-title-1">
+			<div class="h-title-1-icon"/>
+			<h2>{{data}}</h2>
 		</div>
 	</div>
 </template>
@@ -24,30 +24,27 @@
 		},
 		created() {
 			this.configSource = this.parseConfigSource({api: true})
-			this.configValue = this.parseConfigValue({api: true}, {api: {data: {title: '标题', value: 0}}})
+			this.configValue = this.parseConfigValue({api: true}, {api: {data: '标题'}})
 		}
 	}
 </script>
 <style lang="scss">
-	.h-hexagon {
-		background-image: url('/static/icons/h-hexagon-1.png');
-		background-size: 100%;
-		background-repeat: no-repeat;
-		height: 100%;
+	.h-title-1-icon {
+		background-image: url('/static/icons/h-title1-1.png');
+		height: 34px;
+		width: 34px;
+		margin-right: 9px;
+	}
+
+	.h-title-1 {
 		align-items: center;
-		justify-content: center;
+		padding-bottom: 8px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 
 		h2 {
-			font-weight: bold;
-			font-size: 40px;
+			font-weight: 600;
+			font-size: 24px;
 			color: #fff;
-			text-shadow: 0 0 6px #00DDFF;
-		}
-
-		p {
-			color: #fff;
-			font-size: 16px;
-			margin-top: 12.4px;
 		}
 	}
 

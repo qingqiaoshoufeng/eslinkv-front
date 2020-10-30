@@ -15,7 +15,7 @@
 					<template v-if="shouldBeShow(item)">
 						<template v-for="child in getItemChildren(item, 'widget')">
 							<parts
-								v-if="child.type"
+								v-if="showParts(item,child)"
 								:key="child.id"
 								:class="[
                   `group-item group-item-${child.id}`,
@@ -53,6 +53,7 @@
 	import * as widgetBindManager from './mixins/widget-bind-manage'
 	import loadMask from '../components/load-mask'
 	import 'animate.css/animate.min.css'
+	import {store} from '../store'
 
 	export default {
 		name: 'kanboard-editor',
@@ -131,6 +132,26 @@
 			}
 		},
 		computed: {
+			showParts() {
+				return (item, child) => {
+					if (item.config.config.children.show) {
+						if (item.config.config.children.show.length) {
+							if(item.config.config.children.show[store.scene.index]){
+								if (item.config.config.children.show[store.scene.index].id) {
+									if (item.config.config.children.show[store.scene.index].id.indexOf(child.id) !== -1) {
+										return true
+									}
+									return false
+								}
+								return true
+							}
+							return true
+						}
+						return true
+					}
+					return true
+				}
+			},
 			canvasStyle() {
 				return styleParser(this.canvasConfigValue, this.time)
 			}

@@ -1,10 +1,10 @@
 export default {
-	label: '完成度',
+	label: '自定义组件3',
 	config: {
 		layout: {
 			size: {
-				width: 480,
-				height: 60
+				width: 100,
+				height: 100
 			},
 			position: {
 				value: 'relative'

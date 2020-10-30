@@ -1,8 +1,8 @@
 <template>
 	<div class="widget-part" :style="styles">
-		<div class="fn-flex flex-row h-title">
-			<div class="h-title-icon"/>
-			<h2>{{data}}</h2>
+		<div class="fn-flex flex-column h-title-2">
+			<h2>{{data&&data.value}}</h2>
+			<p>{{data&&data.title}}</p>
 		</div>
 	</div>
 </template>
@@ -24,27 +24,32 @@
 		},
 		created() {
 			this.configSource = this.parseConfigSource({api: true})
-			this.configValue = this.parseConfigValue({api: true}, {api: {data: '标题'}})
+			this.configValue = this.parseConfigValue({api: true}, {api: {data: {title: '标题', value: 0}}})
 		}
 	}
 </script>
 <style lang="scss">
-	.h-title-icon {
-		background-image: url('/static/icons/d-title-1.png');
-		height: 34px;
-		width: 34px;
-		margin-right: 9px;
-	}
-
-	.h-title {
+	.h-title-2 {
+		background-image: url('/static/icons/h-title2-1.png');
+		background-size: 100%;
+		background-repeat: no-repeat;
+		height: 100%;
 		align-items: center;
-		padding-bottom: 8px;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+		justify-content: center;
 
 		h2 {
-			font-weight: 600;
-			font-size: 24px;
+			font-weight: bold;
+			font-size: 40px;
+			line-height: 40px;
 			color: #fff;
+			text-shadow: 0 0 6px #00DDFF;
+		}
+
+		p {
+			color: #fff;
+			font-size: 16px;
+			line-height: 16px;
+			margin-top: 12.4px;
 		}
 	}
 

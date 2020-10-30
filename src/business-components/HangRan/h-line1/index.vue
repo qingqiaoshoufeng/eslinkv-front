@@ -1,7 +1,7 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
-		<div class="h-column" :id="id"/>
-		<div class="pos-a h-column-title">{{data&&data.name}}</div>
+		<div class="h-line-1" :id="id"/>
+		<div class="pos-a h-line-1-title">{{data&&data.name}}</div>
 	</div>
 </template>
 
@@ -169,11 +169,11 @@
 	}
 </script>
 <style lang="scss">
-	.h-column {
+	.h-line-1 {
 		height: 100%;
 	}
 
-	.h-column-title {
+	.h-line-1-title {
 		font-size: 16px;
 		color: #fff;
 		line-height: 16px;

@@ -43,7 +43,7 @@
       @contextmenu.stop
     >
       <div v-if="ready" class="children-wrapper">
-        <slot></slot>
+        <slot/>
       </div>
       <div v-if="!childrenIds.length" class="no-item">{{ isSlideMode ? '将小工具拖入此处创建轮播' : '将小工具拖入此处进行组合' }}</div>
       <switcher-bar
