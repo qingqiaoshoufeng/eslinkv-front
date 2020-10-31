@@ -113,8 +113,8 @@
 		mounted() {
 		},
 		created() {
-			this.configSource = this.parseConfigSource({api: true})
-			this.configValue = this.parseConfigValue({api: true})
+			this.configSource = this.parseConfigSource()
+			this.configValue = this.parseConfigValueCustom()
 		}
 	}
 </script>

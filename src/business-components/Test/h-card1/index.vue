@@ -25,6 +25,28 @@
 <script>
 	import mixins from '../../mixins'
 
+	const localConfigValue = {
+		api: {
+			data: JSON.stringify({
+				title: '壁挂炉', value: [
+					{
+						title: '销售量',
+						value: 23456,
+						suffix: '件',
+					},
+					{
+						title: '金额',
+						value: 3456,
+						suffix: '万元',
+					},
+					{
+						title: '占比',
+						value: '13%',
+					},
+				]
+			})
+		}
+	}
 	export default {
 		mixins: [mixins],
 		data() {
@@ -33,31 +55,8 @@
 			}
 		},
 		created() {
-			this.configSource = this.parseConfigSource({api: true})
-			this.configValue = this.parseConfigValue({api: true},
-				{
-					api: {
-						data: {
-							title: '壁挂炉', value: [
-								{
-									title: '销售量',
-									value: 23456,
-									suffix: '件',
-								},
-								{
-									title: '金额',
-									value: 3456,
-									suffix: '万元',
-								},
-								{
-									title: '占比',
-									value: '13%',
-								},
-							]
-						}
-					}
-				}
-			)
+			this.configSource = this.parseConfigSource()
+			this.configValue = this.parseConfigValueCustom(localConfigValue)
 		}
 	}
 </script>

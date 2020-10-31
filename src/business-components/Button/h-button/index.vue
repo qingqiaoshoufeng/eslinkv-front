@@ -18,7 +18,7 @@
 		},
 		created() {
 			this.configSource = this.parseConfigSource()
-			this.configValue = this.parseConfigValue()
+			this.configValue = this.parseConfigValueCustom()
 		}
 	}
 </script>

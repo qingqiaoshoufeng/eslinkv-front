@@ -34,8 +34,8 @@
 			},
 		},
 		created() {
-			this.configSource = this.parseConfigSource({api: true})
-			this.configValue = this.parseConfigValue({api: true}, localConfigValue)
+			this.configSource = this.parseConfigSource()
+			this.configValue = this.parseConfigValueCustom(localConfigValue)
 		}
 	}
 </script>
