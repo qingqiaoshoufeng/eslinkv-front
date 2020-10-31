@@ -4,7 +4,7 @@ import dvdp, {mutations} from '../../lib'
 let components = {}
 const widgetsArray = [], widgetsObject = {}
 const conf = require.context('./', true, /\.(component.js)$/)
-const component = require.context('./', true, /\.(vue)$/)
+const component = require.context('./', true, /index\.(vue)$/)
 component.keys().forEach(name => {
 	const title = name.split('/')[2]
 	components[title] = component(name).default

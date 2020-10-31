@@ -42,8 +42,8 @@
 	</Card>
 </template>
 <script lang="ts">
-	import {Card, Tag, Modal, Message, Button} from 'view-design'
-	import EmptyImage from '../../components/empty-image'
+	import {Card, Tag, Button} from 'view-design'
+	import EmptyImage from '../../components/empty-image/index.vue'
 	import {Vue, Component, Prop} from 'vue-property-decorator'
 
 	@Component({
@@ -67,14 +67,14 @@
 		}
 
 		handlePublish() {
-			Modal.confirm({
+			this.$Modal.confirm({
 				title: '提示',
 				content: '确认发布此看板吗？',
 				loading: true,
 				onOk: () => {
 					this.$api.panel.publish({id: this.id}).then(() => {
-						Message.success('发布成功')
-						Modal.remove()
+						this.$Message.success('发布成功')
+						this.$Modal.remove()
 						this.$emit('init')
 					})
 				}

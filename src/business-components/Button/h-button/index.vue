@@ -6,23 +6,11 @@
 		</div>
 	</div>
 </template>
-
 <script>
-	import {styleParser, widgetMixin} from '../../../../lib'
 	import {mutations} from '../../../../lib/store'
-
+	import mixins from '../../mixins'
 	export default {
-		mixins: [widgetMixin],
-		computed: {
-			styles() {
-				const {layout} = this.config
-				return styleParser(layout)
-			},
-			mergedConfig() {
-				if (!this.config.config) return false
-				return {...this.config.config}
-			}
-		},
+		mixins: [mixins],
 		methods: {
 			handleClick(index) {
 				mutations.setSceneIndex(index)

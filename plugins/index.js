@@ -3,7 +3,10 @@ export function debug(type, msg) {
 		/**
 		 * @description
 		 *
+		 * 日志打印轨迹
+		 *
 		 * ruler 尺
+		 * component 组件
 		 */
 		// const key = ['ruler', 'component']
 		const key = []
