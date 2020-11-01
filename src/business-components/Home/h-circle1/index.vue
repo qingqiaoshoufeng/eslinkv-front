@@ -20,7 +20,8 @@
 <script>
 	import mixins from '../../mixins'
 
-	const localConfigValue = {
+	const config = {animation: true}
+	const value = {
 		api: {
 			data: JSON.stringify({
 				color: ['rgba(0, 62, 144, 0.8)', 'rgba(0, 145, 210, 0.8)', 'rgba(0, 233, 194, 0.8)'],
@@ -50,8 +51,8 @@
 			}
 		},
 		created() {
-			this.configSource = this.parseConfigSource()
-			this.configValue = this.parseConfigValueCustom(localConfigValue)
+			this.configSource = this.parseConfigSource(config)
+			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
 </script>

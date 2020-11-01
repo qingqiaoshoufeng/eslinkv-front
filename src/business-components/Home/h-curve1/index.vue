@@ -8,7 +8,8 @@
 	import mixins from '../../mixins'
 	import options from './options'
 
-	const localConfigValue = {
+	const config = {animation: true}
+	const value = {
 		api: {
 			data: JSON.stringify({
 				title: '用户', value: [['10', 4000], ['11', 6000], ['12', 5000], ['01', 6000],
@@ -41,8 +42,8 @@
 			}
 		},
 		created() {
-			this.configSource = this.parseConfigSource()
-			this.configValue = this.parseConfigValueCustom(localConfigValue)
+			this.configSource = this.parseConfigSource(config)
+			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
 </script>

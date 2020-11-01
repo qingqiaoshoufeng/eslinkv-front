@@ -60,6 +60,7 @@
 				<!-- 小工具清单 -->
 				<template v-for="item in ordinaryWidgets">
 					<vdr
+						v-if="showParts(item)"
 						:key="item.id"
 						:ref="`widget_${item.id}`"
 						:parent="true"
@@ -115,6 +116,7 @@
 							<template v-if="shouldBeShow(item)">
 								<template v-for="child in getItemChildren(item, 'widget')">
 									<vdr
+										v-if="showParts(child)"
 										:key="child.id"
 										:ref="`widget_${child.id}`"
 										:parent="true"
@@ -161,7 +163,6 @@
 										@contextmenu.native.prevent="item.config.widget.innerEditing && showRightMenu($event, child)"
 									>
 										<parts
-											v-if="showParts(item,child)"
 											:ref="child.id" :type="child.type" :config="child.config"
 											@widget-config-update="(data) => handleWidgetConfig(data, child)"/>
 
@@ -328,7 +329,6 @@
 	import 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable.css'
 	import parts from '../widgets/parts/index'
 	import hotKeys from '../../../components/hot-keys'
-
 	import rulerGuides from './mixins/ruler-guides'
 	import widgetOperation from './mixins/widget-operation'
 	import panelOperation from './mixins/panel-operation'
@@ -346,14 +346,10 @@
 	import widgetShareData from './mixins/widget-share-data'
 	import crossFrameMessageParamBind from './mixins/cross-frame-message-param-bind'
 	import importWidgets from '../../../components/widget-layers/import-widgets'
-
 	import databaseConfig from './data-warehouse/index.vue'
 	import jsEditorModal from './js-editor-modal.vue'
-
 	import gridItem from './layout-grid/grid.vue'
-
 	import sidebarTools from './sidebar-tools.vue'
-
 	import 'animate.css/animate.min.css'
 	import {Icon} from 'view-design'
 	// config-panel 与 fields 互相引用，须提前注册为 Vue 组件
@@ -467,23 +463,11 @@
 		},
 		computed: {
 			showParts() {
-				return (item, child) => {
-					if (item.config.config.children.show) {
-						if (item.config.config.children.show.length) {
-							if (item.config.config.children.show[store.scene.index]) {
-								if (item.config.config.children.show[store.scene.index].id) {
-									if (item.config.config.children.show[store.scene.index].id.indexOf(child.id) !== -1) {
-										return true
-									}
-									return false
-								}
-								return true
-							}
-							return true
-						}
+				return (item) => {
+					if (item.scene === store.scene.index) {
 						return true
 					}
-					return true
+					return false
 				}
 			},
 			isWidgetLocked() {

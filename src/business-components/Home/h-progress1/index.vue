@@ -15,7 +15,8 @@
 <script>
 	import mixins from '../../mixins'
 
-	const localConfigValue = {
+	const config = {animation: true}
+	const value = {
 		api: {
 			data: JSON.stringify({
 				title: '标题', subTitle: '副标题', value: 10
@@ -26,8 +27,8 @@
 	export default {
 		mixins: [mixins],
 		created() {
-			this.configSource = this.parseConfigSource()
-			this.configValue = this.parseConfigValueCustom(localConfigValue)
+			this.configSource = this.parseConfigSource(config)
+			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
 </script>

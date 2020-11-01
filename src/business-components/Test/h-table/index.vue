@@ -98,6 +98,7 @@
 <script>
 	import {styleParser, widgetMixin} from '../../../../lib'
 
+	const config = {animation: true}
 	export default {
 		mixins: [widgetMixin],
 		computed: {
@@ -113,8 +114,8 @@
 		mounted() {
 		},
 		created() {
-			this.configSource = this.parseConfigSource()
-			this.configValue = this.parseConfigValueCustom()
+			this.configSource = this.parseConfigSource(config)
+			this.configValue = this.parseConfigValue(config)
 		}
 	}
 </script>

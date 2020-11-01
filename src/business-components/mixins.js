@@ -11,6 +11,7 @@ export default {
 	mixins: [widgetMixin],
 	beforeDestroy() {
 		this.instance = null
+		clearInterval(this.animateTimer)
 		clearTimeout(this.animateTimer)
 		this.animateTimer = null
 		this.animateActiveIndex = -1

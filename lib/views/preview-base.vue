@@ -10,12 +10,12 @@
 		</div>
 		<template v-for="item in widgetsAdded">
 			<template v-if="!item.config.widget.combinationTo">
-				<parts :key="item.id" :type="item.type" :config="item.config"
+				<parts v-if="showParts(item)" :key="item.id" :type="item.type" :config="item.config"
 					   :style="item.config.widget.hide ? 'display: none' : ''" readonly>
 					<template v-if="shouldBeShow(item)">
 						<template v-for="child in getItemChildren(item, 'widget')">
 							<parts
-								v-if="showParts(item,child)"
+								v-if="showParts(child)"
 								:key="child.id"
 								:class="[
                   `group-item group-item-${child.id}`,
@@ -68,6 +68,7 @@
 		},
 		data() {
 			return {
+				store,
 				querying: true,
 				widgetsAdded: {},
 				gridsAdded: {},
@@ -78,11 +79,11 @@
 			}
 		},
 		methods: {
-			initWidgetConfig(id, type, config) {
+			initWidgetConfig(id, type, config, scene) {
 				this.$set(this.widgetsAdded, id, {
 					id,
 					type,
-					config
+					config, scene
 				})
 			},
 			sortWidgets: function (widgets) {
@@ -108,8 +109,8 @@
 					const widgetsArray = this.sortWidgets(Object.values(widgets))
 					const length = widgetsArray.length
 					// 小工具初始化需要时间，此处进行延时逐个回填
-					const reDrawWidget = ({id, type, value}) => {
-						this.initWidgetConfig(id, type, value)
+					const reDrawWidget = ({id, type, value, scene = 0}) => {
+						this.initWidgetConfig(id, type, value, scene)
 						const currentLength = widgetsArray.length
 						if (currentLength) {
 							this.refillPercent = (length - currentLength) / length * 100 | 0
@@ -133,23 +134,11 @@
 		},
 		computed: {
 			showParts() {
-				return (item, child) => {
-					if (item.config.config.children.show) {
-						if (item.config.config.children.show.length) {
-							if(item.config.config.children.show[store.scene.index]){
-								if (item.config.config.children.show[store.scene.index].id) {
-									if (item.config.config.children.show[store.scene.index].id.indexOf(child.id) !== -1) {
-										return true
-									}
-									return false
-								}
-								return true
-							}
-							return true
-						}
+				return (item) => {
+					if (item.scene === this.store.scene.index) {
 						return true
 					}
-					return true
+					return false
 				}
 			},
 			canvasStyle() {

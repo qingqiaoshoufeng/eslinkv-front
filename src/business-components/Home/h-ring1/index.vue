@@ -20,7 +20,8 @@
 	import mixins from '../../mixins'
 	import options from './options'
 
-	const localConfigValue = {
+	const config = {animation: true}
+	const value = {
 		api: {
 			data: JSON.stringify({
 				color: ['#00DDFF', 'rgba(1,253,210,.5)', 'rgba(36,104,206,.5)', 'rgba(228,53,53,.5)', 'rgba(252,155,93,.5)'],
@@ -68,30 +69,25 @@
 				options.color = data.color
 				this.instance && this.instance.setOption(options)
 			},
-			show() {
-				if (this.data) {
-					const data = this.data.value
-					const echarts = this.instance
-					clearTimeout(this.animateTimer)
-					this.animateTimer = setInterval(() => {
-						echarts.dispatchAction({
-							type: 'downplay',
-							seriesIndex: 0,
-							dataIndex: this.animateActiveIndex % data.length
-						})
-						if (this.animateActiveIndex >= data.length - 1) {
-							this.animateActiveIndex = 0
-						} else {
-							this.animateActiveIndex = this.animateActiveIndex + 1
-						}
-						echarts.dispatchAction({
-							type: 'highlight',
-							seriesIndex: 0,
-							dataIndex: this.animateActiveIndex % data.length
-						})
-					}, 1000)
-				}
-
+			show(data) {
+				clearInterval(this.animateTimer)
+				this.animateTimer = setInterval(() => {
+					this.instance.dispatchAction({
+						type: 'downplay',
+						seriesIndex: 0,
+						dataIndex: this.animateActiveIndex % data.value.length
+					})
+					if (this.animateActiveIndex >= data.value.length - 1) {
+						this.animateActiveIndex = 0
+					} else {
+						this.animateActiveIndex = this.animateActiveIndex + 1
+					}
+					this.instance.dispatchAction({
+						type: 'highlight',
+						seriesIndex: 0,
+						dataIndex: this.animateActiveIndex % data.value.length
+					})
+				}, 1000)
 			}
 		},
 		watch: {
@@ -102,7 +98,7 @@
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
 							this.setOption(data)
-							this.show()
+							this.show(data)
 						})
 					}
 				},
@@ -111,8 +107,8 @@
 			}
 		},
 		created() {
-			this.configSource = this.parseConfigSource()
-			this.configValue = this.parseConfigValueCustom(localConfigValue)
+			this.configSource = this.parseConfigSource(config)
+			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
 </script>

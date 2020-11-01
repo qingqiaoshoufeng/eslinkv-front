@@ -1,6 +1,7 @@
 import copy from 'fast-copy'
 import {uuid} from '../../../../utils'
 import {Vue, Component, Watch} from 'vue-property-decorator'
+import {store} from '../../../../store'
 
 @Component
 class Mixins extends Vue {
@@ -72,10 +73,11 @@ class Mixins extends Vue {
 		this.isWidgetProcessing = true
 	}
 
-	initWidgetConfig(id, type) {
+	initWidgetConfig(id, type, scene) {
 		this.$set(this.widgetsAdded, id, {
 			id,
-			type
+			type,
+			scene
 		})
 	}
 
@@ -103,7 +105,7 @@ class Mixins extends Vue {
 		this.sizeMap[id] = {w: width, h: height}
 		this.positionMap[id] = {x: left, y: top}
 		const value = {layout, widget, config, api}
-		this.initWidgetConfig(id, type)
+		this.initWidgetConfig(id, type, store.scene.index)
 		this.updateWidget(value)
 		this.currentWidgetType = type
 		this.$debug('component', '小工具放置到画布')
@@ -155,6 +157,7 @@ class Mixins extends Vue {
 			layout.position.left += 10
 			layout.position.top += 10
 		}
+		console.log(1)
 		this.$set(this.widgetsAdded, id, widget)
 		this.$set(this.zIndexMap, id, layout.zIndex)
 		const {width, height} = layout.size
@@ -261,6 +264,12 @@ class Mixins extends Vue {
 	@Watch('currentWidgetValue', {deep: true})
 	onCurrentWidgetValueChange(value) {
 		value && this.updateWidget(value)
+	}
+
+	mounted() {
+		window.widgetUnactived = () => {
+			this.activatedWidgetId = null
+		}
 	}
 }
 

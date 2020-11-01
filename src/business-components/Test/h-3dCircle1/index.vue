@@ -12,7 +12,8 @@
 
 	Highcharts3D(Highcharts)
 
-	const localConfigValue = {
+	const config = {animation: true}
+	const value = {
 		api: {
 			data: JSON.stringify({
 				value: [
@@ -58,8 +59,8 @@
 			},
 		},
 		created() {
-			this.configSource = this.parseConfigSource()
-			this.configValue = this.parseConfigValueCustom(localConfigValue)
+			this.configSource = this.parseConfigSource(config)
+			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
 </script>

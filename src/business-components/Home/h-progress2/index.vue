@@ -13,7 +13,8 @@
 <script>
 	import mixins from '../../mixins'
 
-	const localConfigValue = {
+	const config = {animation: true}
+	const value = {
 		api: {
 			data: JSON.stringify({
 				title: '标题', suffix: '%', value: 10, max: 100
@@ -34,8 +35,8 @@
 			},
 		},
 		created() {
-			this.configSource = this.parseConfigSource()
-			this.configValue = this.parseConfigValueCustom(localConfigValue)
+			this.configSource = this.parseConfigSource(config)
+			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
 </script>

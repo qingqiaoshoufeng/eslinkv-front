@@ -9,6 +9,7 @@
 <script>
 	import {mutations} from '../../../../lib/store'
 	import mixins from '../../mixins'
+
 	export default {
 		mixins: [mixins],
 		methods: {
@@ -18,12 +19,12 @@
 		},
 		created() {
 			this.configSource = this.parseConfigSource()
-			this.configValue = this.parseConfigValueCustom()
+			this.configValue = this.parseConfigValue()
 		}
 	}
 </script>
 <style lang="scss">
-	.h-button{
+	.h-button {
 		height: 100%;
 		color: #fff;
 	}

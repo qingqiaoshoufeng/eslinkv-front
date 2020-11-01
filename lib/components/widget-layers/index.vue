@@ -7,19 +7,17 @@
 			小工具清单
 			<!--			<div>-->
 			<!--				<Button size="small" type="default" class="import" @click="$emit('import-widgets')">导入小工具</Button>-->
-			<!--				<Select v-model="widgetType" size="small" clearable filterable class="filter" style="width: 200px"-->
-			<!--						placeholder="筛选">-->
-			<!--					<Option v-for="item in widgetsTypes" :value="item.type" :key="item.type">{{ item.label }}</Option>-->
-			<!--				</Select>-->
 			<!--			</div>-->
 		</header>
 		<div class="widget-list-wrapper pos-r">
 			<div class="widget-list pos-r" v-if="filteredWidgets.length">
-				<widget v-for="widget in filteredWidgets" :key="widget.id" v-bind="widget">
-					<template v-if="widget.isCombinationWidget">
-						<widget v-for="child in widget.children" :key="child.id" v-bind="child"/>
-					</template>
-				</widget>
+				<template v-for="widget in filteredWidgets"  >
+					<widget :key="widget.id" v-bind="widget" v-if="widget.scene===store.scene.index">
+						<template v-if="widget.isCombinationWidget">
+							<widget v-for="child in widget.children" :key="child.id" v-bind="child"/>
+						</template>
+					</widget>
+				</template>
 			</div>
 			<div v-else class="no-item text-center">空空如也</div>
 		</div>
@@ -29,7 +27,7 @@
 	import widget from './widget.vue'
 	import widgetsTypes from '../../views/core/widgets/widget-type-list'
 	import {Select, Option, Button, Icon} from 'view-design'
-
+	import {store} from '../../store'
 	export default {
 		components: {widget, Select, Option, Button, Icon},
 		props: {
@@ -42,6 +40,7 @@
 		},
 		data() {
 			return {
+				store,
 				widgetsTypes: Object.keys(widgetsTypes).map(type => {
 					return {
 						type,

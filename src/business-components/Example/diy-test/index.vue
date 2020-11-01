@@ -6,7 +6,8 @@
 <script>
 	import mixins from '../../mixins'
 
-	const localConfigValue = {
+	const config = {}
+	const value = {
 		api: {
 			data: JSON.stringify({title: 'hello world'})
 		}
@@ -14,8 +15,8 @@
 	export default {
 		mixins: [mixins],
 		created() {
-			this.configSource = this.parseConfigSource()
-			this.configValue = this.parseConfigValueCustom(localConfigValue)
+			this.configSource = this.parseConfigSource(config)
+			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
 </script>
