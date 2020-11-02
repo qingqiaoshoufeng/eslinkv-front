@@ -14,14 +14,15 @@
 	@Component
 	class hotKeys extends Vue {
 		hotKeys: Array<any> = [
-			{name: '插入水平参考线', key: 'Alt+H'},
-			{name: '插入垂直参考线', key: 'Alt+V'},
-			{name: '锁定标尺参考线', key: 'Alt+L'},
-			{name: '清除全部参考线', key: 'Alt+C'},
-			{name: '隐藏标尺参考线', key: 'Alt+R'},
-			{name: '缩放画布', key: 'Ctrl+滚轮'},
-			{name: '移动画布', key: 'Ctrl+左键'},
-			{name: '水平移动画布', key: 'Shift+滚轮'},
+			{name: '插入水平参考线', key: 'Alt + H'},
+			{name: '插入垂直参考线', key: 'Alt + V'},
+			{name: '锁定标尺参考线', key: 'Alt + L'},
+			{name: '清除全部参考线', key: 'Alt + C'},
+			{name: '隐藏标尺参考线', key: 'Alt + R'},
+			{name: '缩放画布', key: 'Ctrl + 滚轮'},
+			{name: '抓手', key: '空格 + 左键'},
+			{name: '移动画布', key: 'Shift + ←↑↓→'},
+			{name: '水平移动画布', key: 'Shift + 滚轮'},
 			{name: '垂直移动画布', key: '滚轮'},
 			{name: '删除选定小工具', key: 'Delete'},
 			{name: '画布全屏切换', key: 'F11'}

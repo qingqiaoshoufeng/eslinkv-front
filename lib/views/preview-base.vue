@@ -134,7 +134,9 @@
 		computed: {
 			showParts() {
 				return (item) => {
-					if (item.scene === this.store.scene.index) {
+					if (item.scene === 0) {
+						return true
+					}else if (item.scene === this.store.scene.index) {
 						return true
 					}
 					return false

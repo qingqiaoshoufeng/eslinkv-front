@@ -1,5 +1,5 @@
 <template>
-	<div class="h-project-1-step-7" :style="{left}">
+	<div class="h-project-1-step-7" :style="{left:`${left}%`}">
 		<div class="h-project-1-step-icon fn-flex">
 			<img :src="icon7" alt=""/>
 		</div>

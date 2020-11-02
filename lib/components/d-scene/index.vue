@@ -4,8 +4,14 @@
 			<img :src="`./static/images/layout-grid.svg`" title="场景切换" @click="clickHandle"/>
 		</div>
 		<div class="d-scene-modal pos-a" :class="[{active:sceneModal}]">
-			<header>场景切换<span>当前：场景{{store.scene.index+1}}</span></header>
+			<header>场景切换<span>当前：场景{{store.scene.index}}</span></header>
 			<ul>
+				<li @click="changeScene(0)"
+					class="pointer fn-flex pos-r flex-row"
+					:class="[{active:store.scene.index===0}]">
+					<span>主场景</span>
+					<p>ID：0</p>
+				</li>
 				<li v-for="(item,index) in store.scene.list"
 					class="pointer fn-flex pos-r flex-row"
 					:class="[{active:store.scene.index===item}]"

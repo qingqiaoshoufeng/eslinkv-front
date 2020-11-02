@@ -4,7 +4,7 @@
 			<ul class="h-project-1-icon pos-a fn-flex flex-row">
 				<li v-for="(item ,index) in icon" :key="index"/>
 			</ul>
-			<div class="h-project-1-ratio pos-a" :style="{width:ratio}"></div>
+			<div class="h-project-1-ratio pos-a" :style="{width:`${ratio}%`}"></div>
 		</div>
 		<step1 v-bind="data&&data.value"
 			   class="h-project-1-step-box pos-a h-project-1-step-box-bottom"/>
@@ -61,10 +61,10 @@
 	const value = {
 		api: {
 			data: JSON.stringify({
-				step: 6,
+				step: 3,
 				value: {
 					step1: {
-						time: new Date('2020-10-30 22:13') * 1
+						time: new Date('2020-10-30 22:20') * 1
 					},
 					step2: {
 						time: new Date('2020-10-30 22:21') * 1
@@ -98,19 +98,32 @@
 		data() {
 			return {
 				icon: new Int8Array(80),
-				ratioEnd: '93%'
+				ratioEnd: 93,
+				ratioCenter: 50,
+				ratioMin: 6,
 			}
 		},
 		computed: {
 			ratio() {
-				return `93%`
+				return 93
 			},
 			ratio2() {
 				if (this.data) {
 					if (this.data.step === 2) {
 						return this.ratioEnd
+					} else if (this.data.step === 3) {
+						return this.ratioCenter
+					} else {
+						const current = this.data.value.step2.time - this.data.value.step1.time
+						const total = this.data.value.step3.time - this.data.value.step1.time
+						let diff = current / total
+						if (current / total > 0.7) {
+							diff = 0.7
+						}
+						if (this.ratio3 * diff < this.ratioMin)
+							return this.ratioMin
+						return this.ratio3 * diff
 					}
-					return `10%`
 				}
 				return `0`
 			},
@@ -118,37 +131,81 @@
 				if (this.data) {
 					if (this.data.step === 3) {
 						return this.ratioEnd
+					} else if (this.data.step === 4) {
+						return this.ratioCenter
+					} else {
+						const current = this.data.value.step3.time - this.data.value.step1.time
+						const total = this.data.value.step4.time - this.data.value.step1.time
+						let diff = current / total
+						if (current / total > 0.7) {
+							diff = 0.7
+						}
+						if (this.ratio4 * diff < this.ratioMin * 2)
+							return this.ratioMin * 2
+						return this.ratio4 * diff
 					}
-					return `17%`
 				}
-				return `0`
+				return 0
 			},
 			ratio4() {
 				if (this.data) {
 					if (this.data.step === 4) {
 						return this.ratioEnd
+					} else if (this.data.step === 5) {
+						return this.ratioCenter
+					} else {
+						const current = this.data.value.step4.time - this.data.value.step1.time
+						const total = this.data.value.step5.time - this.data.value.step1.time
+						let diff = current / total
+						if (current / total > 0.7) {
+							diff = 0.7
+						}
+						if (this.ratio5 * diff < this.ratioMin * 3)
+							return this.ratioMin * 3
+						return this.ratio5 * diff
 					}
-					return `24%`
 				}
-				return `0`
+				return 0
 			},
 			ratio5() {
 				if (this.data) {
 					if (this.data.step === 5) {
 						return this.ratioEnd
+					} else if (this.data.step === 6) {
+						return this.ratioCenter
+					} else {
+						const current = this.data.value.step5.time - this.data.value.step1.time
+						const total = this.data.value.step6.time - this.data.value.step1.time
+						let diff = current / total
+						if (current / total > 0.7) {
+							diff = 0.7
+						}
+						if (this.ratio6 * diff < this.ratioMin * 4)
+							return this.ratioMin * 4
+						return this.ratio6 * diff
 					}
-					return `30%`
 				}
-				return `0`
+				return 0
 			},
 			ratio6() {
 				if (this.data) {
 					if (this.data.step === 6) {
 						return this.ratioEnd
+					} else if (this.data.step === 7) {
+						return this.ratioCenter
+					} else {
+						const current = this.data.value.step6.time - this.data.value.step1.time
+						const total = this.data.value.step8.time - this.data.value.step1.time
+						let diff = current / total
+						if (current / total > 0.7) {
+							diff = 0.7
+						}
+						if (diff < this.ratioMin * 5)
+							return this.ratioMin * 5
+						return diff
 					}
-					return `40%`
 				}
-				return `0`
+				return 0
 			},
 		},
 		created() {

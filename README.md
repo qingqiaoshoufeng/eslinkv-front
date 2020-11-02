@@ -16,3 +16,5 @@
 |方法名|参数|作用|
 | --- | --- | --- |
 |window.widgetUnactived|无|小工具取消选择，面板关闭|
+|window.insertVGuide|value:String|添加垂直参考线|
+|window.insertHGuide|value:String|添加水平参考线|
