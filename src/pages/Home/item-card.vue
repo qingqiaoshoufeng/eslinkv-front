@@ -8,7 +8,6 @@
 		</div>
 		<div>
 			<Button :type="status?'success':'warning'" size="small">{{statusStr}}</Button>
-			<!--需要考虑，公开链接有木有时效性-->
 			<Button v-if="status"
 					icon="ios-link"
 					:style="{marginLeft:'10px'}"
@@ -63,7 +62,7 @@
 		}
 
 		handleLink() {
-			window.open(this.shareUrl)
+			window.open(`${location.origin}${location.pathname}#/detail/${this.id}`)
 		}
 
 		handlePublish() {

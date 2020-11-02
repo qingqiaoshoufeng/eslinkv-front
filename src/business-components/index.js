@@ -23,7 +23,11 @@ for (let key in widgetsObject) {
 	widgetsArray.push(widgetsObject[key])
 }
 mutations.setCustomComponents(components)
-mutations.setCustomWidgets(widgetsArray)
+mutations.setCustomWidgets({
+	label: '杭然自定义',
+	widgets: widgetsArray
+})
 Vue.component('new', dvdp.new)
 Vue.component('edit', dvdp.edit)
+Vue.component('detail', dvdp.detail)
 Vue.component('preview', dvdp.preview)

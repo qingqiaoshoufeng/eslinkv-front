@@ -1,7 +1,7 @@
 <template>
 	<!-- 组件区 -->
 	<div :class="{ fixed: panelFixed }" class="widgets-panel">
-		<Tabs value="hangRan" :animated="false" type="card" @on-click="(name) => handlePanelToggle(name)">
+		<Tabs value="custom0" :animated="false" type="card" @on-click="(name) => handlePanelToggle(name)">
 			<template v-for="tab in tabs">
 				<TabPane v-if="tab.widgets.length" :key="tab.name" :label="tab.label" :name="tab.name">
 					<Collapse v-model="panelStatic[tab.name]" accordion simple
@@ -39,7 +39,6 @@
 	import dvChart from './dv-chart'
 	import eChart from './e-chart'
 	import other from './other'
-	import customHangRan from './hang-ran'
 	import {Collapse, TabPane, Tabs, Panel} from 'view-design'
 	import {store} from '../../../../store'
 
@@ -48,11 +47,15 @@
 			parts, Collapse, TabPane, Tabs, Panel
 		},
 		data() {
-			const hangRan = customHangRan(store.custom.widgets)
+			let custom = {}
+			store.custom.widgets.map(item => {
+				custom[item.name] = item
+			})
 			return {
+				store,
 				panelFixed: false,
 				tabs: {
-					hangRan,
+					...custom,
 					decoration,
 					dvChart,
 					eChart,

@@ -1,10 +1,8 @@
-const pkg = require('./package.json')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
-const needReport = true
+const needReport = false
 
 module.exports = {
-	publicPath: isProduction ? `https://cdn.shenzhepei.com/VF/prod/${pkg.version}/` : `/`,
 	assetsDir: 'static',
 	productionSourceMap: false,
 	lintOnSave: true,

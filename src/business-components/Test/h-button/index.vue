@@ -7,14 +7,13 @@
 	</div>
 </template>
 <script>
-	import {mutations} from '../../../../lib/store'
 	import mixins from '../../mixins'
 
 	export default {
 		mixins: [mixins],
 		methods: {
 			handleClick(index) {
-				mutations.setSceneIndex(index)
+				window.setSceneIndex(index)
 			}
 		},
 		created() {

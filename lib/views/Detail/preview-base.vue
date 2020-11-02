@@ -41,18 +41,18 @@
 	</div>
 </template>
 <script>
-	import parts from './core/widgets/parts/index'
-	import gridItem from './core/kanboard-editor/layout-grid/grid.vue'
-	import styleParser from './core/widgets/parts/lib/style-parser'
-	import widgetOperation from './core/kanboard-editor/mixins/widget-operation'
-	import refill from './core/kanboard-editor/mixins/refill'
-	import combination from './core/kanboard-editor/mixins/combination'
-	import globalApi from './core/kanboard-editor/global-api/mixin'
-	import widgetShareData from './core/kanboard-editor/mixins/widget-share-data'
-	import crossFrameMessageParamBind from './core/kanboard-editor/mixins/cross-frame-message-param-bind'
-	import * as widgetBindManager from './mixins/widget-bind-manage'
-	import loadMask from '../components/load-mask'
-	import {store} from '../store'
+	import parts from '../core/widgets/parts/index'
+	import gridItem from '../core/kanboard-editor/layout-grid/grid.vue'
+	import styleParser from '../core/widgets/parts/lib/style-parser'
+	import widgetOperation from '../core/kanboard-editor/mixins/widget-operation'
+	import refill from '../core/kanboard-editor/mixins/refill'
+	import combination from '../core/kanboard-editor/mixins/combination'
+	import globalApi from '../core/kanboard-editor/global-api/mixin'
+	import widgetShareData from '../core/kanboard-editor/mixins/widget-share-data'
+	import crossFrameMessageParamBind from '../core/kanboard-editor/mixins/cross-frame-message-param-bind'
+	import * as widgetBindManager from '../mixins/widget-bind-manage'
+	import loadMask from '../../components/load-mask'
+	import {store} from '../../store'
 
 	export default {
 		name: 'kanboard-editor',

@@ -28,9 +28,9 @@
 	import funcs from '../mixins/funcs'
 	import loadMask from '../../components/load-mask'
 	import * as widgetBindManager from '../mixins/widget-bind-manage'
-	import Template from '../core/kanboard-editor/mixins/template'
 	import dFooter from '../../components/d-footer'
 	import {Button} from 'view-design'
+	import {mutations} from '../../store'
 
 	export default {
 		name: 'Edit',
@@ -39,7 +39,6 @@
 			return {...widgetBindManager, kanboard: this}
 		},
 		components: {
-			Template,
 			Button,
 			core,
 			loadMask,
@@ -115,9 +114,11 @@
 					document.title = `编辑 - ${name} - 数据看板`
 					this.createTime = createTime
 					const value = JSON.parse(attribute)
+					if (value.scene) {
+						mutations.initScene(value.scene)
+					}
 					this.querying = false
-					this.$refs.kanboardEditor.refillConfig(value).then(() => {
-					})
+					this.$refs.kanboardEditor.refillConfig(value)
 				})
 			},
 			preview() {

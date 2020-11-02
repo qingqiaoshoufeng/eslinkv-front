@@ -7,20 +7,27 @@
 			<header>场景切换<span>当前：场景{{store.scene.index+1}}</span></header>
 			<ul>
 				<li v-for="(item,index) in store.scene.list"
-					class="pointer"
-					:class="[{active:store.scene.index===index}]"
-					@click="changeScene(index)"
-					:key="index">
-					场景{{index+1}}
+					class="pointer fn-flex pos-r flex-row"
+					:class="[{active:store.scene.index===item}]"
+					@click="changeScene(item)"
+					:key="item">
+					<span>场景{{index+1}}</span>
+					<p>ID：{{item}}</p>
+					<Icon class="destroy" type="ios-trash-outline" @click="e=>destroyScene(e,index)"/>
 				</li>
+				<li class="pointer create fn-flex" @click="createScene">+</li>
 			</ul>
 		</div>
 	</div>
 </template>
 <script>
 	import {store, mutations} from '../../store'
+	import {Icon} from 'view-design'
 
 	export default {
+		components: {
+			Icon
+		},
 		data() {
 			return {
 				store,
@@ -33,10 +40,23 @@
 			},
 			clickHandle() {
 				this.sceneModal = !this.sceneModal
+			},
+			createScene() {
+				mutations.createScene()
+			},
+			destroyScene(e, index) {
+				e.stopPropagation()
+				this.$Modal.confirm({
+					title: '提示',
+					content: '是否删除当前场景？',
+					onOk: () => {
+						if (store.scene.index === store.scene.list[index]) {
+							mutations.setSceneIndex(store.scene.list[0])
+						}
+						mutations.destroyScene(index)
+					}
+				})
 			}
-		},
-		mounted() {
-
 		}
 	}
 </script>
@@ -103,11 +123,41 @@
 			margin: 10px;
 			border: 1px solid #ddd;
 			transition: all .3s;
+			height: 40px;
+			align-items: center;
+			justify-content: center;
+
+			p {
+				margin-left: auto;
+			}
+
+			.destroy {
+				width: 0;
+				right: 10px;
+				font-size: 20px;
+				overflow: hidden;
+				transition: all .3s;
+				margin-left: 0;
+			}
 
 			&.active {
 				border-color: #00CBF4;
 				background-color: #00CBF4;
 				color: #fff;
+			}
+
+			&.create {
+				font-size: 20px;
+				border-style: dashed;
+			}
+
+			&:hover {
+				border-color: #00CBF4;
+
+				.destroy {
+					width: 20px;
+					margin-left: 10px;
+				}
 			}
 		}
 	}

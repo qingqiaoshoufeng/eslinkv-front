@@ -350,7 +350,6 @@
 	import jsEditorModal from './js-editor-modal.vue'
 	import gridItem from './layout-grid/grid.vue'
 	import sidebarTools from './sidebar-tools.vue'
-	import 'animate.css/animate.min.css'
 	import {Icon} from 'view-design'
 	// config-panel 与 fields 互相引用，须提前注册为 Vue 组件
 	Vue.component('config-panel', configPanel)
