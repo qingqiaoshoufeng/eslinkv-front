@@ -1,5 +1,4 @@
 export default {
-	label: '卡片',
 	config: {
 		layout: {
 			size: {

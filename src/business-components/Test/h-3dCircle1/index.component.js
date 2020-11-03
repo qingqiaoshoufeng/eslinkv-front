@@ -1,5 +1,4 @@
 export default {
-	label: '3d环1',
 	config: {
 		layout: {
 			size: {

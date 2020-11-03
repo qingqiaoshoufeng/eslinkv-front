@@ -267,7 +267,7 @@ class Mixins extends Vue {
 	}
 
 	mounted() {
-		window.widgetUnactived = () => {
+		window.GoldChart.widgetUnactived = () => {
 			this.activatedWidgetId = null
 		}
 	}

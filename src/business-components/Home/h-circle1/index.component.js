@@ -1,5 +1,4 @@
 export default {
-	label: '圆形图1',
 	config: {
 		layout: {
 			size: {
