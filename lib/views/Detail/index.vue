@@ -1,9 +1,10 @@
 <template>
 	<div ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen }" class="preview-wrapper">
-		<kanban-preview ref="previewContainer" :style="`transform: scale(${scaleRatio}); overflow: hidden;`"/>
+		<kanban-preview @mounted="updateKanboardSize" ref="previewContainer"
+						:style="`transform: scale(${scaleRatio}); overflow: hidden;`"/>
 		<div class="action-bar">
-			<div v-if="actualScaleRatio < 1" class="action fit-screen" @click="fitScreen = !fitScreen">{{ fitScreen ?
-				'原始大小' : '适应窗口' }}
+			<div v-if="actualScaleRatio < 1" class="action fit-screen" @click="fitScreen = !fitScreen">
+				{{ fitScreen ? '原始大小' : '适应窗口' }}
 			</div>
 		</div>
 	</div>
@@ -20,16 +21,6 @@
 		},
 		provide() {
 			return {kanboard: this}
-		},
-		props: {
-			kanboardId: {
-				type: [String, Number],
-				default: undefined
-			},
-			data: {
-				type: String,
-				default: null
-			}
 		},
 		data() {
 			return {
@@ -48,6 +39,17 @@
 			}
 		},
 		methods: {
+			updateKanboardSize(val) {
+				const arr = val.split(';')
+				const w = arr[0].replace(/width:(.*)px/, '$1')
+				const h = arr[1].replace(/height:(.*)px/, '$1')
+				this.kanboardSize.width = w
+				this.kanboardSize.height = h
+				const {clientWidth, clientHeight} = document.body
+				this.screenSize.width = clientWidth
+				this.screenSize.height = clientHeight
+				this.actualScaleRatio = Math.min(clientWidth / w, clientHeight / h)
+			},
 			queryKanboard() {
 				this.querying = true
 				const {params: {id}} = this.$route
@@ -63,26 +65,8 @@
 					this.ready = true
 				})
 			},
-			updateKanboardSize() {
-				const {width, height} = this.$refs.previewContainer.$el.getBoundingClientRect()
-				this.kanboardSize.width = width
-				this.kanboardSize.height = height
-				const {clientWidth, clientHeight} = document.body
-				this.screenSize.width = clientWidth
-				this.screenSize.height = clientHeight
-				this.actualScaleRatio = Math.min(clientWidth / width, clientHeight / height)
-			}
 		},
 		watch: {
-			data: {
-				handler: function (data) {
-					if (!data) return
-					this.$nextTick(() => {
-						this.refill(JSON.parse(data))
-					})
-				},
-				immediate: true
-			},
 			fitScreen(value) {
 				const wrapper = this.kanboardWrapper || (this.kanboardWrapper = this.$refs.kanboardWrapper)
 				if (value) {
@@ -102,7 +86,6 @@
 			}
 		},
 		mounted() {
-			this.updateKanboardSize()
 			this.queryKanboard()
 		}
 	}

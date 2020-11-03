@@ -1,5 +1,4 @@
 export default {
-	label: '工程进度',
 	config: {
 		layout: {
 			size: {

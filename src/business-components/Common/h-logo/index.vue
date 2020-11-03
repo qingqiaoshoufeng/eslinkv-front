@@ -70,7 +70,7 @@
 				&:before {
 					content: '';
 					width: 4px;
-					height: 4 px;
+					height: 4px;
 					position: absolute;
 					left: 50%;
 					margin-left: 98px;

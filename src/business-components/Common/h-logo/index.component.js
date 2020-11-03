@@ -1,5 +1,4 @@
 export default {
-	label: 'logo',
 	config: {
 		layout: {
 			size: {

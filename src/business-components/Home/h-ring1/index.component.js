@@ -1,5 +1,4 @@
 export default {
-	label: '圆环',
 	config: {
 		layout: {
 			size: {

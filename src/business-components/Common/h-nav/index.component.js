@@ -1,5 +1,4 @@
 export default {
-	label: 'nav',
 	config: {
 		layout: {
 			size: {
