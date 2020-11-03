@@ -1,5 +1,5 @@
 <template>
-	<div class="h-tabs" :style="styles">
+	<div class="h-tabs">
 		<div class="h-tabs__left-line"></div>
 		<div class="h-tabs__right-line"></div>
 		<div

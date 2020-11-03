@@ -1,5 +1,5 @@
 <template>
-	<div class="h-list" :style="styles">
+	<div class="h-list">
 		<h-list-item
 			v-for="(item, index) in (source && source.list || [])"
 			:key="index"

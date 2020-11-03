@@ -1,5 +1,5 @@
 <template>
-	<div :class="['h-list-item', { 'h-list-item--actived': selected }]" :style="styles">
+	<div :class="['h-list-item', { 'h-list-item--actived': selected }]">
 		<div class="h-list-item__notice">
 			<em :class="`h-list-item__notice__info-icon h-list-item__notice__info-icon--${item.status}`"></em>
 		</div>
