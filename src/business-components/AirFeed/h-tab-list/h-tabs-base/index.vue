@@ -9,7 +9,7 @@
 			]"
 			v-for="(tab, index) in (source && source.list || [])"
 			:key="tab && tab.name"
-			@click="() => tabClickEvt(index, tab)">
+			@click="() => tabClickEvt(index)">
 			{{tab.name}}
 		</div>
 	</div>
@@ -26,8 +26,9 @@
 			}
 		},
 		methods: {
-			tabClickEvt(index, tab = {}){
-				this.$emit('tabClickEvt', { index, tab })
+			tabClickEvt(index){
+				console.log(index);
+				this.$emit('tabIndexUpdate', index)
 			}
 		}
 	}

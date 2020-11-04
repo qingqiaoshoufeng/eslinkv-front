@@ -1,11 +1,12 @@
 <template>
-	<div class="h-tab-list" :style="styles">
+	<div v-if="!!data" class="h-tab-list" :style="styles">
 		<h-tabs-base
-			:source="tabSource"
-			@tabClickEvt="tabClickEvt" />
+			:source="data.tabSource"
+			@tabIndexUpdate="tabIndexUpdate" />
 		<h-list-base
 			:source="listSource"
-			@itemSelectedEvt="itemSelectedEvt" />
+			@listItemActivedUpdate="listItemActivedUpdate"
+			@searchValueUpdate="searchValueUpdate" />
 	</div>
 </template>
 <script>
@@ -24,9 +25,9 @@
 					],
 					actived: 0
 				},
-				listSource: {
-					list: [
-						[
+				listSource: [
+					{
+						list: [
 							{
 								status: 1,
 								alarmName: '新星小区燃气泄漏',
@@ -50,9 +51,13 @@
 								alarmLocation: '三墩镇三墩街100号',
 								time: '11-03  08:32:15',
 								statusDesc: '已处理',
-							},
+							}
 						],
-						[
+						actived: 1,
+						listName: 'HWarnListItem',
+					},
+					{
+						list: [
 							{
 								status: 1,
 								alarmName: '撒打算撒啊色情饿请问请问',
@@ -76,11 +81,14 @@
 								alarmLocation: '三墩镇三墩街100号',
 								time: '11-03  08:32:15',
 								statusDesc: '已处理',
-							},
-						]
-					],
-					selected: 0
-				},
+							}
+						],
+						listName: 'HLocationListItem',
+						actived: 0,
+						placeholder: 'hahahah',
+						searchValue: '1111'
+					}
+				],
 			})
 		}
 	};
@@ -90,52 +98,30 @@
 			HListBase
 		},
 		mixins: [mixins],
-		data(){
-			return {
-				listSource: {},
-				tabSource: {}
-			}
+		computed: {
+			tabActivedIndex(){
+				return this?.data?.tabSource?.actived ?? 0;
+			},
+			listSource(){
+				return this?.data?.listSource[this.tabActivedIndex] ?? {}
+			},
+
 		},
 		methods: {
-			initData(){
-				const data = this.data || {};
-				const tabSource = data.tabSource || {};
-				const listSource = data.listSource || {};
-				const list = listSource.list || [];
-				this.listSource = {
-					list: list[tabSource && tabSource.actived] || [],
-					selected: listSource && listSource.selected || 0
-				}
-				this.tabSource = tabSource;
+			tabIndexUpdate(index = 0){
+				this.data.tabSource.actived = index;
 			},
-			tabClickEvt(args){
-				const { index = '' } = args;
-				const data = this.data;
-				const listSource = data && data.listSource && data.listSource.list || [];
-				this.listSource = {
-					list: listSource[index] || [],
-					selected: ''
-				}
-				this.tabSource.actived = index;
+			searchValueUpdate(searchValue){
+				this.data.listSource[this.tabActivedIndex].searchValue = searchValue;
 			},
-			itemSelectedEvt(itemData = {}){
-				const { index = '' } = itemData;
-				this.listSource.selected = index;
+			listItemActivedUpdate(index = 0){
+				this.data.listSource[this.tabActivedIndex].actived = index;
 			},
 		},
 		created() {
 			this.configSource = this.parseConfigSource(config);
 			this.configValue = this.parseConfigValue(config, value);
 
-		},
-		watch: {
-			data: {
-				handler() {
-					this.initData();
-				},
-				deep: true,
-				immediate: true
-			}
 		},
 
 	}

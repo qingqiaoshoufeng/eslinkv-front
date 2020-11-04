@@ -1,30 +1,30 @@
 <template>
-	<div :class="['h-list-item', { 'h-list-item--actived': selected }]">
+	<div :class="['h-list-item', { 'h-list-item--actived': actived }]">
 		<div class="h-list-item__notice">
-			<em :class="`h-list-item__notice__info-icon h-list-item__notice__info-icon--${item.status}`"></em>
+			<em :class="`h-list-item__notice__info-icon h-list-item__notice__info-icon--${data.status}`"></em>
 		</div>
 		<div class="h-list-item__content">
 			<div class="h-list-item__content__alarm">
 				<div class="h-list-item__content__alarm__name">
-					{{item.alarmName}}
+					{{data.alarmName}}
 				</div>
 				<div class="h-list-item__content__alarm__type">
-					{{item.alarmNameType}}
+					{{data.alarmNameType}}
 				</div>
 			</div>
 			<div class="h-list-item__content__alarm__location">
-				{{item.alarmLocation}}
+				{{data.alarmLocation}}
 			</div>
 		</div>
 		<div class="h-list-item__status-desc">
 			<div class="h-list-item__status-desc__time">
-				{{item.time}}
+				{{data.time}}
 			</div>
 			<div :class="[
 				'h-list-item__status-desc__result',
-				`h-list-item__status-desc__result--${item.status}`
+				`h-list-item__status-desc__result--${data.status}`
 				]">
-				{{item.statusDesc}}
+				{{data.statusDesc}}
 			</div>
 		</div>
 	</div>
@@ -32,7 +32,7 @@
 <script>
 	export default {
 		props: {
-			item: {
+			data: {
 				type: Object,
 				default: () => ({
 					status: 1,
@@ -43,11 +43,17 @@
 					statusDesc: '',
 				})
 			},
-			selected: {
+			actived: {
 				type: Boolean,
 				default: false
 			}
-		}
+		},
+		computed: {
+
+		},
+		created() {
+
+		},
 
 	}
 </script>

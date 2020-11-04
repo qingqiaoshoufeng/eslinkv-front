@@ -31,21 +31,10 @@
 	}
 	export default {
 		mixins: [mixins],
-		props: {
-			source: {
-				type: Object,
-				default: () => ({})
-			}
-		},
 		methods: {
 			tabClickEvt(index, tab = {}){
 				this.data && (this.data.actived = index);
 				this.$emit('tabClickEvt', { index, tab })
-			}
-		},
-		data(){
-			return {
-
 			}
 		},
 		created() {
