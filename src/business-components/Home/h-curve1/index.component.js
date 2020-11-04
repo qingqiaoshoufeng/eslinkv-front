@@ -1,5 +1,4 @@
 export default {
-	label: '曲线图1',
 	config: {
 		layout: {
 			size: {

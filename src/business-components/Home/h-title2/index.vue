@@ -28,7 +28,7 @@
 </script>
 <style lang="scss">
 	.h-title-2 {
-		background-image: url('/static/icons/h-title2-1.png');
+		background-image: url('/static/icons/h-title2-1.svg');
 		background-size: 100%;
 		background-repeat: no-repeat;
 		height: 100%;

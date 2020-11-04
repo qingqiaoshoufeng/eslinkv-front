@@ -1,10 +1,10 @@
 export default {
-	label: '自定义组件3',
+	label: '图标按钮',
 	config: {
 		layout: {
 			size: {
-				width: 100,
-				height: 100
+				width: 112,
+				height: 32
 			},
 			position: {
 				value: 'relative'

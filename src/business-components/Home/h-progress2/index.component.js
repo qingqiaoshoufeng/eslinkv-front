@@ -1,5 +1,4 @@
 export default {
-	label: '完成度2',
 	config: {
 		layout: {
 			size: {

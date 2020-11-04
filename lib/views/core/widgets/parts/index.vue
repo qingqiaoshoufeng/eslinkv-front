@@ -143,7 +143,7 @@
 					this.removeAnimation()
 					this.handleAnimationEnd()
 					clearTimeout(timer)
-				}, delay + duration + 16)
+				}, delay + duration + 300)
 				this.$debug('component', '动画开始')
 			},
 			removeAnimation() {

@@ -1,7 +1,7 @@
+const path = require('path');
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
 const needReport = false
-
 module.exports = {
 	assetsDir: 'static',
 	productionSourceMap: false,
@@ -20,6 +20,13 @@ module.exports = {
 				},
 				pathRewrite: {
 					'^/api': '/'
+				}
+			},
+			'/data': {
+				target: 'http://127.0.0.1:7001',
+				changeOrigin: true,
+				pathRewrite: {
+					'^/data': '/'
 				}
 			}
 		}
@@ -70,6 +77,8 @@ module.exports = {
 		]
 	},
 	chainWebpack: config => {
+		config.resolve.alias
+			.set('@lib', path.resolve(__dirname, './lib'))
 		if (isProduction) {
 			if (needReport) {
 				config

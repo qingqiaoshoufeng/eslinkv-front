@@ -136,7 +136,7 @@
 				return (item) => {
 					if (item.scene === 0) {
 						return true
-					}else if (item.scene === this.store.scene.index) {
+					} else if (item.scene === this.store.scene.index) {
 						return true
 					}
 					return false
@@ -144,6 +144,13 @@
 			},
 			canvasStyle() {
 				return styleParser(this.canvasConfigValue, this.time)
+			}
+		},
+		watch: {
+			canvasStyle(val) {
+				if(val){
+					this.$emit('mounted',val)
+				}
 			}
 		}
 	}
