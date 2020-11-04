@@ -1,5 +1,5 @@
 <template>
-	<div v-if="!!source" class="h-list">
+	<div v-if="!!source" class="h-list-base">
 		<div
 			class="h-location-list-search"
 			v-if="source.listName === 'HLocationListItem'">
@@ -10,7 +10,6 @@
 				:placeholder="source.placeholder" />
 			<span class="h-location-list-search__icon"></span>
 		</div>
-
 
 		<component
 			:is="source.listName"
@@ -98,7 +97,12 @@
 			width: 40px;
 			height: 40px;
 			background: #0057A9;
+			background-image: url('/static/icons/search.svg') ;
+			background-size: 24px;
+			background-position: center;
+			background-repeat: no-repeat;
 			float: right;
+			cursor: pointer;
 			border-radius: 0 4px 4px 0;
 		}
 	}
