@@ -1,10 +1,10 @@
 export default {
-	label: '工程标题1',
+	label: '标题1',
 	config: {
 		layout: {
 			size: {
-				width: 180,
-				height: 32
+				width: 2000,
+				height: 838
 			},
 			position: {
 				value: 'relative'
