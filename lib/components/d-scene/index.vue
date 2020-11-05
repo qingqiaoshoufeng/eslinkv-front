@@ -17,7 +17,7 @@
 					:class="[{active:store.scene.index===item}]"
 					@click="changeScene(item)"
 					:key="item">
-					<span>场景{{index+1}}</span>
+					<input @input="e=>handleSceneName(item,e)" :value="store.scene.obj[item].name"/>
 					<p>ID：{{item}}</p>
 					<Icon class="destroy" type="ios-trash-outline" @click="e=>destroyScene(e,index)"/>
 				</li>
@@ -41,8 +41,13 @@
 			}
 		},
 		methods: {
+			handleSceneName(key, e) {
+				console.log(e.target.value)
+				mutations.setSceneName(key, e.target.value)
+			},
 			changeScene(index) {
 				mutations.setSceneIndex(index)
+				this.store.events.list.widgetUnActived()
 			},
 			clickHandle() {
 				this.sceneModal = !this.sceneModal
@@ -132,6 +137,10 @@
 			height: 40px;
 			align-items: center;
 			justify-content: center;
+
+			input {
+				border: none;
+			}
 
 			p {
 				margin-left: auto;
