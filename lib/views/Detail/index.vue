@@ -58,6 +58,7 @@
 				this.$api.board.detail({dataBoardId}).then(res => {
 					const value = JSON.parse(res.attribute)
 					this.refill(value)
+					mutations.initScene(value.scene)
 					mutations.listToObj(value)
 				})
 				this.querying = false
