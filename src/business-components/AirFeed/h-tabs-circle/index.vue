@@ -1,6 +1,6 @@
 <template>
 <div>
-	<h-cvs />
+	<h-cvs :source="data"/>
 </div>
 
 </template>
@@ -13,9 +13,46 @@
 	const value = {
 		api: {
 			data: JSONStringify([
-				{name: '低压管道', percent: 55, count: '1,233,234'},
-				{name: '中压管道', percent: 55, count: '1,233,234'},
-				{name: '高压管道', percent: 55, count: '1,233,234'},
+				{
+				name: '高压管道',
+				percent: 20,
+				count: '1,233,234',
+				circleStyle: '#FB592C',
+				markStyle: '',
+				countStyle: '',
+				unitStyle: '',
+				percentStyle: ''
+			},
+			{
+				name: '中压管道',
+				percent: 30,
+				count: '1,233,234',
+				circleStyle: '#18CEB9',
+				markStyle: '',
+				countStyle: '',
+				unitStyle: '',
+				percentStyle: ''
+			},
+			{
+				name: '低压管道',
+				percent: 50,
+				count: '1,233,234',
+				circleStyle: '#2C99FF',
+				markStyle: '',
+				countStyle: '',
+				unitStyle: '',
+				percentStyle: ''
+			},
+			{
+				name: '低压管道',
+				percent: 50,
+				count: '1,233,234',
+				circleStyle: '#2C99FF',
+				markStyle: '',
+				countStyle: '',
+				unitStyle: '',
+				percentStyle: ''
+			}
 			])
 		}
 	}
