@@ -49,20 +49,6 @@
 			}
 		},
 		methods: {
-			queryKanboard() {
-				this.querying = true
-				const dataBoardId = this.kanboardId
-				this.$api.getKanboardConfig({dataBoardId}).then(res => {
-					if (res.responseCode == 100000) {
-						const value = JSON.parse(res.result.attribute)
-						this.refill(value)
-					}
-				}).catch(error => {
-					console.info(error)
-				}).finally(() => {
-					this.querying = false
-				})
-			},
 			refill(value) {
 				this.$refs.previewContainer.refillConfig(value).then(() => {
 					this.ready = true
@@ -85,13 +71,6 @@
 					this.$nextTick(() => {
 						this.refill(JSON.parse(data))
 					})
-				},
-				immediate: true
-			},
-			kanboardId: {
-				handler: function (id) {
-					if (!id || this.data) return
-					this.queryKanboard()
 				},
 				immediate: true
 			},

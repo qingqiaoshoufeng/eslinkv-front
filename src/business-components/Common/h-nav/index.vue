@@ -30,7 +30,7 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import {store, mutations} from '../../../../lib/store'
+	import GoldChart, {store} from '../../../openApi'
 
 	export default {
 		data() {
@@ -41,7 +41,7 @@
 		mixins: [mixins],
 		methods: {
 			changeScene(index) {
-				mutations.setSceneIndex(index)
+				GoldChart.scene.setSceneIndex(index)
 			}
 		},
 		created() {

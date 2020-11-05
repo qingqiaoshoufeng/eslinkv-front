@@ -43,6 +43,7 @@
 		methods: {
 			changeScene(index) {
 				mutations.setSceneIndex(index)
+				this.store.events.list.widgetUnActived()
 			},
 			clickHandle() {
 				this.sceneModal = !this.sceneModal

@@ -13,6 +13,7 @@
 <script>
 	import kanbanPreview from './preview-base.vue'
 	import loadMask from '../../components/load-mask'
+	import {mutations} from '../../store'
 
 	export default {
 		components: {
@@ -57,6 +58,7 @@
 				this.$api.board.detail({dataBoardId}).then(res => {
 					const value = JSON.parse(res.attribute)
 					this.refill(value)
+					mutations.listToObj(value)
 				})
 				this.querying = false
 			},
