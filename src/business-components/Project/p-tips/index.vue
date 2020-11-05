@@ -2,10 +2,10 @@
 	<div class="widget-part" :style="styles">
 		<div class="tip-box1">
             <div class="left-icon1">
-                <img :src="`/static/images/project/tip-${data.img}.svg`" alt="" class="img">
-                <div class="tip-name" v-if="data.name">{{data.name}}</div>
+                <img :src="`/static/images/project/tip-${data&&data.img}.svg`" alt="" class="img">
+                <div class="tip-name" v-if="data&&data.name">{{data&&data.name}}</div>
             </div>
-            <div class="title-name" v-for="(index,item) in data.recommend" :key="index">
+            <div class="title-name" v-for="(index,item) in data&&data.recommend" :key="item.context">
                 <div class="recommend-item">
                     <div class="recommend-value">{{item.value}}</div>
                     <div class="recommend-desc">{{item.context}}</div>
