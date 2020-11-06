@@ -43,16 +43,7 @@
 				unitStyle: '',
 				percentStyle: ''
 			},
-			{
-				name: '低压管道',
-				percent: 50,
-				count: '1,233,234',
-				circleStyle: '#2C99FF',
-				markStyle: '',
-				countStyle: '',
-				unitStyle: '',
-				percentStyle: ''
-			}
+
 			])
 		}
 	}

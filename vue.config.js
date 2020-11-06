@@ -78,7 +78,7 @@ module.exports = {
 	},
 	chainWebpack: config => {
 		config.resolve.alias
-			.set('@lib', path.resolve(__dirname, './lib'))
+			.set('@lib', path.resolve(__dirname, './lib'));
 		if (isProduction) {
 			if (needReport) {
 				config
@@ -87,6 +87,8 @@ module.exports = {
 					.end()
 			}
 			config.plugins.delete('prefetch')
+		}else {
+			config.resolve.symlinks(true)
 		}
 	},
 }
