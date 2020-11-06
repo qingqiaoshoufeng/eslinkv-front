@@ -47,8 +47,8 @@
 	.h-tab {
 		li {
 			font-size: 20px;
-			width: 72px;
 			align-items: center;
+			padding: 0 16px;
 			justify-content: center;
 			height: 32px;
 			border: 1px solid #0057A9;

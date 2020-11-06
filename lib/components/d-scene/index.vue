@@ -113,7 +113,10 @@
 			right: 40px;
 			opacity: 1;
 		}
-
+		ul{
+			height: calc(100% - 42px);
+			overflow-y: auto;
+		}
 		header {
 			width: 100%;
 			height: 42px;
