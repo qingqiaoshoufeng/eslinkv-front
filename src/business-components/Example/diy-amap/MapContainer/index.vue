@@ -50,6 +50,7 @@ import {
 	PROJECTLEGEND,
 	SERVICELEGEND,
 } from '@/business-components/Example/diy-amap/config/index';
+import bus from '@/business-components/Example/diy-amap/utils/bus';
 
 export default {
 	name: 'MainMap',
@@ -86,13 +87,20 @@ export default {
 				legendMap: PROJECTLEGEND,
 			},
 		};
+		bus.$on('currentSceneChange', val => {
+			console.log(val,'val')
+			this.initPage(val);
+		});
+	},
+	beforeDestroy() {
+		bus.$off(['currentSceneChange']);
 	},
 	methods: {
 		mapInit() {
 			console.log('地图初始化完成！');
 			this.mapReady = true;
 			this.map = this.$refs.amap.$$getInstance();
-			this.initPage('service');
+			this.initPage('home');
 		},
 		initPage(val) {
 			let config = this._pageConfig[val];

@@ -486,9 +486,9 @@ export default {
 				zIndex: 999,
 			});
 			polyline.setMap(this.map);
-			let { northeast, southwest } = polyline.getBounds();
-			console.log(northeast, southwest);
-			this.setRouteFitMap(northeast, southwest);
+			// let { northeast, southwest } = polyline.getBounds();
+			// console.log(northeast, southwest);
+			// this.setRouteFitMap(northeast, southwest);
 			if (isComplete) {
 				return false;
 			}

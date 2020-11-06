@@ -10,6 +10,8 @@
 <script>
 import MapContainer from './MapContainer/index';
 import { initAMapApiLoader } from './lib';
+import bus from '@/business-components/Example/diy-amap/utils/bus';
+
 initAMapApiLoader({
 	// 高德key
 	plugin: [
@@ -31,6 +33,23 @@ export default {
 	name: 'HRMap',
 	components: {
 		MapContainer,
+	},
+	methods: {
+		handleSceneChange(e) {
+			let sceneIndexMap = {
+				nn16rowdl5r: 'service',
+				tbc8uqyrkze: 'home',
+			};
+			let { index } = e.detail;
+			let pageName = sceneIndexMap[index];
+			bus.$emit('currentSceneChange', pageName);
+		},
+	},
+	mounted() {
+		document.addEventListener('SceneIndex', this.handleSceneChange);
+	},
+	beforeDestroy() {
+		document.removeEventListener('SceneIndex', this.handleSceneChange);
 	},
 };
 </script>
