@@ -11,12 +11,20 @@
 			></video>
 			<div class="carout-canvas-box">
 				<div class="carout-canvas" :id="id" />
+				<div class="pointBox" :style="style">
+					<div class="radius"></div>
+					<div class="carout_point"></div>
+				</div>
+				<div class="pointBox" :style="style">
+					<div class="radius"></div>
+					<div class="carout_point"></div>
+				</div>
+				<div class="context">
+					<div class="value font-num">{{data&&data.value}}</div>
+					<div class="desc1">{{data&&data.desc1}}</div>
+					<div class="desc2">{{data&&data.desc2}}</div>
+				</div>
 			</div>
-		</div>
-
-		<div class="pointBox" :style="style">
-			<div class="radius"></div>
-			<div class="carout_point"></div>
 		</div>
 	</div>
 </template>
@@ -28,6 +36,10 @@ const value = {
 	api: {
 		data: JSON.stringify({
 			value: 96,
+			desc1: '抢修3分钟',
+            desc2: '出车率',
+            rgb1:[1,76,92],
+            color:'#002444'
 		}),
 	},
 };
@@ -49,6 +61,7 @@ export default {
 		setOption(data) {
 			console.log(options);
 			let newData = [];
+			let newData1 = [];
 			for (var i = 0; i < data.value / 4; i++) {
 				console.log(data.value);
 				let opcity = 1 - (i * 4) / data.value;
@@ -56,10 +69,17 @@ export default {
 					value: 4,
 					name: '直接访问',
 					itemStyle: {
-						borderWidth: 0,
-						borderColor: `rgba(1, 76, 92,${opcity})`,
 						borderRadius: 100,
-						color: `rgba(1, 76, 92,${opcity})`,
+                        color: `rgba(${data.rgb1[0]}, ${data.rgb1[1]}, ${data.rgb1[2]},${opcity})`,
+                        
+					},
+				});
+				newData1.push({
+					value: 4,
+					name: '直接访问',
+					itemStyle: {
+						borderColor: `rgba(${data.rgb1[0]}, ${data.rgb1[1]}, ${data.rgb1[2]},${opcity})`,
+						color: `#fff`,
 					},
 				});
 			}
@@ -68,27 +88,21 @@ export default {
 				name: '邮件营销',
 				itemStyle: {
 					//颜色渐变
-					color: '#01134C',
+					color: data.color,
+				},
+			});
+			newData1.push({
+				value: 100 - data.value,
+				name: '邮件营销',
+				itemStyle: {
+					//颜色渐变
+					color: data.color,
 				},
 			});
 			console.log(newData);
-			options.series[0].data = newData;
+			options.series[0].data = newData1;
+			options.series[1].data = newData;
 			this.instance && this.instance.setOption(options);
-		},
-		getEndPoint() {
-			console.log(this.data.value);
-			let val = this.data.value;
-			const angle = (180 * val) / 50 / 2;
-			const pointStart = [
-				0.5 - 0.5 * Math.cos(angle) * Math.sin(angle),
-				0.5 + 0.5 * Math.cos(angle) * Math.cos(angle),
-			];
-			// 渐变终点
-			const pointEnd = [
-				0.5 - 0.5 * Math.sin(angle),
-				0.5 + 0.5 * Math.cos(angle),
-			];
-			return pointEnd;
 		},
 	},
 	watch: {
@@ -122,9 +136,50 @@ export default {
 		width: 200px !important;
 		height: 200px !important;
 	}
+	.context {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+        justify-content: center;
+        color: #fff;
+        margin-top: 15px;
+		.value {
+			font-size: 40px;
+			font-weight: 700;
+			text-align: center;
+		}
+		.desc1 {
+			font-family: PingFang SC;
+			font-size: 16px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 20px;
+			letter-spacing: 0px;
+            text-align: center;
+            margin-top: 10px;
+            opacity: 0.75;
+		}
+		.desc2 {
+			font-family: PingFang SC;
+			font-size: 16px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 20px;
+			letter-spacing: 0px;
+            text-align: center;
+            opacity: 0.75;
+		}
+	}
 }
 .carout-canvas-box {
 	position: absolute !important;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	.carout-canvas {
 		margin-top: 2px;
 		width: 160px;
