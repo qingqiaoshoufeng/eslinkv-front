@@ -14,6 +14,7 @@
 									 class="widget-item-wrapper">
 									<parts
 										:type="widget.type"
+										:style="transform(widget)"
 										:classification="tab.name"
 										:config="widgetConfigMap[`${tab.name}-${format(type)}-${index}`].config"
 										draggable="true"
@@ -68,6 +69,15 @@
 			}
 		},
 		methods: {
+			transform(widget) {
+				if (widget.config.layout.size.width > 400 || widget.config.layout.size.height > 100) {
+					if (100 / widget.config.layout.size.height > 400 / widget.config.layout.size.width) {
+						return `transform: scale(${400 / widget.config.layout.size.width});`
+					}
+					return `transform: scale(${100 / widget.config.layout.size.height});`
+				}
+				return ''
+			},
 			handleFix() {
 				this.panelFixed = !this.panelFixed
 				this.$emit('panel-fixed')
@@ -170,6 +180,7 @@
 		align-items: center;
 		overflow: hidden;
 		background: rgba(0, 0, 0, 0.5);
+		max-height: 100px;
 
 		&:last-child {
 			margin-bottom: 0;

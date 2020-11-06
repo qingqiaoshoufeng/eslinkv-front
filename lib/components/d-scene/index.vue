@@ -42,7 +42,6 @@
 		},
 		methods: {
 			handleSceneName(key, e) {
-				console.log(e.target.value)
 				mutations.setSceneName(key, e.target.value)
 			},
 			changeScene(index) {
