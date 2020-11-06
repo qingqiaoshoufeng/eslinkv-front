@@ -22,7 +22,7 @@
 					{title: '首页', index: ['tbc8uqyrkze']},
 					{
 						title: '供气',
-						index: ['nn16rowdl5r', 'p2wovclspks', '8iyxp8u3gtu', 'phugmfxir4d', '9n1zur7e4l', 'j2nq2ycw0er']
+						index: ['nn16rowdl5r', 'p2wovclspks', '8iyxp8u3gtu', 'phugmfxir4d', '9n1zur7e4l', 'j2nq2ycw0er' ]
 					},
 					{title: '服务', index: ['g199smrdh4r']},
 					{title: '工程', index: ['6gouq223fze']},

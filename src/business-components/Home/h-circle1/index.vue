@@ -57,7 +57,6 @@
 	}
 </script>
 <style lang="scss">
-
 	.h-circle-1 {
 		width: 120px;
 		height: 120px;

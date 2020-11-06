@@ -393,10 +393,3 @@ export default {
   	},
 };
 </script>
-
-<style>
-#myCanvas {
-
-  background: gray;
-}
-</style>

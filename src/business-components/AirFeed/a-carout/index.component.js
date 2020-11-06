@@ -1,10 +1,10 @@
 export default {
-	label: 'tabs',
+	label: '出车率',
 	config: {
 		layout: {
 			size: {
-				width: 1464,
-				height: 56
+				width: 200,
+				height: 200
 			},
 			position: {
 				value: 'relative'

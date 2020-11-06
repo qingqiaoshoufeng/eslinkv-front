@@ -14,7 +14,6 @@
             data: JSON.stringify({
 				// title: '数量',
 				value: [
-                    // [ 'amount', 'product'],
                     [ 132, '132天'],
                     [ 201, '201天'],
                     [ 93,  '93天'],
