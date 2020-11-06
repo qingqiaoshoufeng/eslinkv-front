@@ -3,13 +3,13 @@
 		<div class="securitycheck-box">
 			<div class="left">
 				<div class="plan">
-					<img src="static/images/serves/securitycheck-plan.svg" alt />
-					<div class="desc">本月安检计划量</div>
+					<img :src="data&&data.planTip" alt />
+					<div class="desc">{{data&&data.planDesc}}</div>
 					<div class="value font-num">{{data&&data.planValue}}</div>
 				</div>
 				<div class="reality">
-					<img src="static/images/serves/securitycheck-reality.svg" alt />
-					<div class="desc">本月实际入户数</div>
+					<img :src="data&&data.realTip" alt />
+					<div class="desc">{{data&&data.realDesc}}</div>
 					<div class="value font-num">{{data&&data.realValue}}</div>
 				</div>
 			</div>
@@ -30,8 +30,12 @@ const config = { animation: true };
 const value = {
 	api: {
 		data: JSON.stringify({
-			planValue: 96,
-			realValue: 96,
+            planTip:'static/images/serves/securitycheck-plan.svg',
+            planValue: 96,
+            planDesc:'本月安检计划量',
+            realValue: 96,
+            realDesc:'本月实际入户数',
+            realTip:'static/images/serves/securitycheck-reality.svg',
 			percentage: 56,
 		}),
 	},
