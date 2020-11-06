@@ -1,10 +1,10 @@
 export default {
-	label: '工程标题1',
+	label: '出车率',
 	config: {
 		layout: {
 			size: {
-				width: 180,
-				height: 32
+				width: 480,
+				height: 246
 			},
 			position: {
 				value: 'relative'
