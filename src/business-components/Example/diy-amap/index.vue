@@ -39,8 +39,10 @@ export default {
 			let sceneIndexMap = {
 				nn16rowdl5r: 'service',
 				tbc8uqyrkze: 'home',
+				g199smrdh4r: 'project',
 			};
 			let { index } = e.detail;
+			console.log(index);
 			let pageName = sceneIndexMap[index];
 			bus.$emit('currentSceneChange', pageName);
 		},

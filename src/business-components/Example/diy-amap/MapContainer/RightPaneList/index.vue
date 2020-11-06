@@ -5,7 +5,7 @@
 		:speed="500"
 		:transition="true"
 		class="right-panel"
-		enter="animated fadeInRight"
+		enter="animate__animated  animate__animatedfadeInRight"
 	>
 		<PanelContainer
 			:activeItem="activeItem"
@@ -79,10 +79,6 @@ export default {
 	created() {
 		bus.$on('currentSceneChange', val => {
 			this.initPage(val);
-			this.ready = false;
-			this.$nextTick(() => {
-				this.ready = true;
-			});
 		});
 	},
 	methods: {
