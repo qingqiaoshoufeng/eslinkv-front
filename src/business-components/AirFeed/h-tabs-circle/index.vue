@@ -1,7 +1,7 @@
 <template>
-<div>
-	<h-cvs :source="data"/>
-</div>
+	<div class="widget-part" :style="styles">
+		<h-cvs :source="data"/>
+	</div>
 
 </template>
 

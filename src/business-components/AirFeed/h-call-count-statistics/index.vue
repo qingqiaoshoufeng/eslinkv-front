@@ -1,5 +1,5 @@
 <template>
-	<div class="h-call-count-statistics" :style="styles" >
+	<div class="h-call-count-statistics widget-part" :style="styles" >
 		<div
 			class="h-call-count-statistics__icon"
 			:style="{backgroundImage: `url(${data && data.icon || ''})` }">

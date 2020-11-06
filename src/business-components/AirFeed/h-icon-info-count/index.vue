@@ -1,5 +1,5 @@
 <template>
-	<div class="h-icon-info-count" :style="styles">
+	<div class="h-icon-info-count widget-part" :style="styles">
 		<div class="h-icon-info-count__icon" :style="`background-image: url(${data && data.icon})`"></div>
 		<div class="h-icon-info-count__text">{{ data && data.text }}</div>
 		<div class="h-icon-info-count__count font-num">{{ data && data.minutes }}</div>

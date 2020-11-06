@@ -1,5 +1,5 @@
 <template>
-	<div class="h-icon-info-desc" :style="styles">
+	<div class="h-icon-info-desc widget-part" :style="styles">
 		<div class="h-icon-info-desc__icon" :style="`background-image: url(${data && data.icon})`"></div>
 		<div class="h-icon-info-desc__text">{{ data && data.text }}</div>
 	</div>

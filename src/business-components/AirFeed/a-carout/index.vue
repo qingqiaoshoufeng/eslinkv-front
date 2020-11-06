@@ -71,7 +71,7 @@ export default {
 					itemStyle: {
 						borderRadius: 100,
                         color: `rgba(${data.rgb1[0]}, ${data.rgb1[1]}, ${data.rgb1[2]},${opcity})`,
-                        
+
 					},
 				});
 				newData1.push({

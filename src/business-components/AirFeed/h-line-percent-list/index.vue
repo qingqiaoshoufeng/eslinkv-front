@@ -1,5 +1,5 @@
 <template>
-	<div class="h-line-percent-list" :style="styles">
+	<div class="h-line-percent-list widget-part" :style="styles">
 		<h-line-percent-item
 			class="h-line-percent-list__item"
 			v-for="(item, index) in list"
