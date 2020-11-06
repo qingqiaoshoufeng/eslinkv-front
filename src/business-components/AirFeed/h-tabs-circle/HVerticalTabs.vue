@@ -100,8 +100,7 @@ export default {
 		},
 		timeWaitCount(){
 			if(this.waitIntervalId){
-				clearInterval(this.waitIntervalId);
-				this.waitIntervalId = null;
+				this.clearWaitInterval();
 			}
 			const { wait = 30000 } = this?.config || {};
 			let count = 0;
