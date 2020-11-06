@@ -1,7 +1,7 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<div class="h-ring-1" :id="id"/>
-		<ul class="h-ring-1-icon pos-a">
+		<ul class="h-ring-1-icon pos-a" :style="{backgroundImage:`url(${data&&data.img})`}">
 			<li class="pos-a" v-for="(item,index) in icon" :key="index" :style="{transform:`rotate(${3.6*index}deg)`}"/>
 		</ul>
 		<div class="pos-a h-ring-1-legend-box">
@@ -24,6 +24,7 @@
 	const value = {
 		api: {
 			data: JSON.stringify({
+				img: '/static/icons/h-ring1-1.svg',
 				color: ['#00DDFF', 'rgba(1,253,210,.5)', 'rgba(36,104,206,.5)', 'rgba(228,53,53,.5)', 'rgba(252,155,93,.5)'],
 				suffix: '%',
 				value: [
@@ -43,7 +44,7 @@
 		data() {
 			return {
 				icon: new Int8Array(100),
-				showSize: 5,
+				showSize: 4,
 			}
 		},
 		computed: {
@@ -118,7 +119,6 @@
 	}
 
 	.h-ring-1-icon {
-		background-image: url('/static/icons/h-ring1-1.svg');
 		background-size: 40px 49px;
 		background-repeat: no-repeat;
 		background-position: center;
@@ -143,7 +143,7 @@
 	.h-ring-1-legend-box {
 		right: 85px;
 		top: 49px;
-		max-height: 198px;
+		max-height: 168px;
 		overflow-y: hidden;
 	}
 

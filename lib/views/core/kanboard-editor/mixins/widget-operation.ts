@@ -1,7 +1,7 @@
 import copy from 'fast-copy'
 import {uuid} from '../../../../utils'
 import {Vue, Component, Watch} from 'vue-property-decorator'
-import {store} from '../../../../store'
+import {store, mutations} from '../../../../store'
 
 @Component
 class Mixins extends Vue {
@@ -157,7 +157,6 @@ class Mixins extends Vue {
 			layout.position.left += 10
 			layout.position.top += 10
 		}
-		console.log(1)
 		this.$set(this.widgetsAdded, id, widget)
 		this.$set(this.zIndexMap, id, layout.zIndex)
 		const {width, height} = layout.size
@@ -266,10 +265,15 @@ class Mixins extends Vue {
 		value && this.updateWidget(value)
 	}
 
+	widgetUnActived() {
+		this.activatedWidgetId = null
+	}
+
 	mounted() {
-		window.GoldChart.widgetUnactived = () => {
-			this.activatedWidgetId = null
-		}
+		/**
+		 * @description 事件收集
+		 */
+		mutations.setEvent({widgetUnActived: this.widgetUnActived})
 	}
 }
 
