@@ -52,7 +52,7 @@
 	import crossFrameMessageParamBind from '../core/kanboard-editor/mixins/cross-frame-message-param-bind'
 	import * as widgetBindManager from '../mixins/widget-bind-manage'
 	import loadMask from '../../components/load-mask'
-	import {store} from '../../store'
+	import {store, mutations} from '../../store'
 
 	export default {
 		name: 'kanboard-editor',
@@ -148,14 +148,24 @@
 		},
 		watch: {
 			canvasStyle(val) {
-				if(val){
-					this.$emit('mounted',val)
+				if (val) {
+					this.$emit('mounted', val)
 				}
 			}
+		},
+		mounted() {
+			mutations.setInstance('kanboard', this)
 		}
 	}
 </script>
 
+<style lang="scss">
+	.scene-temporary-wrapper {
+		.widget-part {
+			position: absolute !important;
+		}
+	}
+</style>
 <style lang="scss" scoped>
 	.refill-mask {
 		position: fixed;

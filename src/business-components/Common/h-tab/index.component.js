@@ -1,10 +1,9 @@
 export default {
-	label: 'tabs',
 	config: {
 		layout: {
 			size: {
-				width: 1464,
-				height: 56
+				width: 222,
+				height: 32
 			},
 			position: {
 				value: 'relative'

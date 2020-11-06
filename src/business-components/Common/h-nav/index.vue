@@ -1,37 +1,37 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<ul class="h-nav fn-flex flex-row">
-			<li class="pos-r pointer" :class="{active:store.scene.index==='tbc8uqyrkze'}"
-				@click="changeScene('tbc8uqyrkze')">
-				首页
-			</li>
-			<li class="pos-r pointer" :class="{active:store.scene.index==='nn16rowdl5r'}"
-				@click="changeScene('nn16rowdl5r')">
-				供气
-			</li>
-			<li class="pos-r pointer" :class="{active:store.scene.index==='g199smrdh4r'}"
-				@click="changeScene('g199smrdh4r')">
-				服务
-			</li>
-			<li class="pos-r pointer" :class="{active:store.scene.index==='6gouq223fze'}"
-				@click="changeScene('6gouq223fze')">
-				工程
-			</li>
-			<li class="pos-r pointer" :class="{active:store.scene.index==='o8tkm981qdh'}"
-				@click="changeScene('o8tkm981qdh')">
-				优家
-			</li>
-			<li class="pos-r pointer" :class="{active:store.scene.index==='vxoiljh5my9'}"
-				@click="changeScene('vxoiljh5my9')">
-				体验
+			<li class="pos-r pointer fn-flex"
+				v-for="item in data?data.value:[]"
+				:class="{active:item.index.indexOf(store.scene.index)!==-1}"
+				@click="changeScene(item.index[0])">
+				{{item.title}}
 			</li>
 		</ul>
 	</div>
 </template>
 <script>
 	import mixins from '../../mixins'
-	import {store, mutations} from '../../../../lib/store'
+	import GoldChart, {store} from '../../../openApi'
 
+	const config = {animation: true}
+	const value = {
+		api: {
+			data: JSON.stringify({
+				value: [
+					{title: '首页', index: ['tbc8uqyrkze']},
+					{
+						title: '供气',
+						index: ['nn16rowdl5r', 'p2wovclspks', '8iyxp8u3gtu', 'phugmfxir4d', '9n1zur7e4l', 'j2nq2ycw0er' ]
+					},
+					{title: '服务', index: ['g199smrdh4r']},
+					{title: '工程', index: ['6gouq223fze']},
+					{title: '优家', index: ['o8tkm981qdh']},
+					{title: '体验', index: ['vxoiljh5my9']},
+				]
+			})
+		}
+	}
 	export default {
 		data() {
 			return {
@@ -41,23 +41,26 @@
 		mixins: [mixins],
 		methods: {
 			changeScene(index) {
-				mutations.setSceneIndex(index)
+				GoldChart.scene.setSceneIndex(index)
 			}
 		},
 		created() {
-			this.configSource = this.parseConfigSource()
-			this.configValue = this.parseConfigValue()
+			this.configSource = this.parseConfigSource(config)
+			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
 </script>
 <style lang="scss">
 	.h-nav {
+		height: 100%;
+
 		li {
 			margin-right: 80px;
 			font-size: 32px;
 			line-height: 32px;
 			color: rgba(255, 255, 255, 0.75);
 			height: 50px;
+			justify-content: center;
 
 			&:last-child {
 				margin-right: 0;

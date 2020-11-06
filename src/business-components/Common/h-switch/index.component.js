@@ -1,10 +1,9 @@
 export default {
-	label: '列表',
 	config: {
 		layout: {
 			size: {
-				width: 480,
-				height: 806
+				width: 118,
+				height: 12
 			},
 			position: {
 				value: 'relative'
