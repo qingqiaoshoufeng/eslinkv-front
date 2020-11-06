@@ -1,9 +1,10 @@
 export default {
+	label: '业务受理表格',
 	config: {
 		layout: {
 			size: {
-				width: 400,
-				height: 180
+				width: 480,
+				height: 201
 			},
 			position: {
 				value: 'relative'
