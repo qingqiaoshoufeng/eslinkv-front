@@ -61,8 +61,6 @@
 	.h-circle-1 {
 		width: 120px;
 		height: 120px;
-		margin-top: 32px;
-		margin-left: 25px;
 
 		h2 {
 			width: 100%;

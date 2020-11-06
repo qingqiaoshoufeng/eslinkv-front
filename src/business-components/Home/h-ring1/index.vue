@@ -44,7 +44,7 @@
 		data() {
 			return {
 				icon: new Int8Array(100),
-				showSize: 5,
+				showSize: 4,
 			}
 		},
 		computed: {
@@ -143,7 +143,7 @@
 	.h-ring-1-legend-box {
 		right: 85px;
 		top: 49px;
-		max-height: 198px;
+		max-height: 168px;
 		overflow-y: hidden;
 	}
 

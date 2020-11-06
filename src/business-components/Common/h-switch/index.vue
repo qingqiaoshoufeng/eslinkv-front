@@ -1,10 +1,9 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
-		<ul class="h-tab fn-flex flex-row">
+		<ul class="h-switch fn-flex flex-row">
 			<li class="pos-r pointer fn-flex" v-for="item in data?data.value:[]"
-				:class="{active:item.index.indexOf(store.scene.index)!==-1}"
-				@click="changeScene(item.index[0])">
-				{{item.title}}
+				:class="{active:item .indexOf(store.scene.index)!==-1}"
+				@click="changeScene(item[0])">
 			</li>
 		</ul>
 	</div>
@@ -18,9 +17,8 @@
 		api: {
 			data: JSON.stringify({
 				value: [
-					{title: '场站', index: ['nn16rowdl5r', 'p2wovclspks']},
-					{title: '管网', index: ['8iyxp8u3gtu', 'phugmfxir4d']},
-					{title: '泛能', index: ['9n1zur7e4l', 'j2nq2ycw0er']}
+					['nn16rowdl5r'],
+					['p2wovclspks'],
 				]
 			})
 		}
@@ -44,21 +42,23 @@
 	}
 </script>
 <style lang="scss">
-	.h-tab {
+	.h-switch {
+		height: 100%;
+
 		li {
 			font-size: 20px;
-			width: 72px;
-			align-items: center;
-			justify-content: center;
-			height: 32px;
-			border: 1px solid #0057A9;
-			color: rgba(255, 255, 255, 0.75);
-			background: #001F6D;
+			width: 55px;
+			height: 12px;
+			background: rgba(255, 255, 255, 0.4);
+			margin-right: 8px;
+
+			&:last-child {
+				margin-right: 0;
+			}
 
 			&.active {
-				border: 1px solid #00DDFF;
-				color: #FEFFFF;
 				background: #0057A9;
+				border: 1px solid #00DDFF;
 			}
 		}
 	}
