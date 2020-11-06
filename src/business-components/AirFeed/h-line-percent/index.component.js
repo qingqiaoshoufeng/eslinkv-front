@@ -1,10 +1,10 @@
 export default {
-	label: '热线统计',
+	label: '业务受理表格',
 	config: {
 		layout: {
 			size: {
 				width: 480,
-				height: 160
+				height: 201
 			},
 			position: {
 				value: 'relative'

@@ -1,13 +1,15 @@
 <template>
 	<div class="h-call-count-statistics" :style="styles" >
-		<div class="h-call-count-statistics__telephone">
+		<div
+			class="h-call-count-statistics__icon"
+			:style="{backgroundImage: `url(${data && data.icon || ''})` }">
 		</div>
 		<div class="h-call-count-statistics__call-amount">
 			<div class="h-call-count-statistics__call-amount__count font-num">
 				{{ data && data.telAmount }}
 			</div>
 			<div class="h-call-count-statistics__call-amount__desc">
-				热线服务话务量(次)
+				{{data && data.centerTitle || ''}}
 			</div>
 		</div>
 		<div class="h-call-count-statistics__call-success-rate">
@@ -17,7 +19,7 @@
 					{{`${data && data.value}%`}}
 				</div>
 				<div class="h-call-count-statistics__call-success-rate__desc__font">
-					接通率
+					{{data && data.graphTitle || ''}}
 				</div>
 			</div>
 		</div>
@@ -33,7 +35,10 @@
 		api: {
 			data: JSONStringify({
 				telAmount: '9,999,9',
-				value: 90
+				value: 90,
+				icon: '/static/icons/telephone.svg',
+				centerTitle: '热线服务话务量(次)',
+				graphTitle: '接通率'
 			})
 		}
 	}
@@ -83,12 +88,11 @@
 	height: 160px;
 	display: flex;
 	background: linear-gradient(360deg, rgba(255, 255, 255, 0.1) -2.01%, rgba(255, 255, 255, 0) 100%);
-	&__telephone {
+	&__icon {
 		margin-left: 16px;
 		margin-top: 26px;
 		width: 110px;
 		height: 110px;
-		background-image: url('/static/icons/telephone.svg');
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: 100px;
