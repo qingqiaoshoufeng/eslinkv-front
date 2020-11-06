@@ -1,0 +1,43 @@
+.status {
+	position: relative;
+	&:after {
+		content: ' ';
+		position: absolute;
+		display: block;
+		left: -12px;
+		top: calc(50% - 4px);
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		background: #ff7217;
+	}
+	&.status-suc {
+		color: #00ddff;
+		&:after {
+			background: #00ddff;
+		}
+	}
+	&.status-err {
+		color: #ff7217;
+	}
+}
+
+.HYPE_document {
+	pointer-events: none;
+}
+.HYPE_scene {
+	pointer-events: none;
+	background: transparent !important;
+	position: static !important;
+}
+.amap-logo {
+	opacity: 0 !important;
+}
+
+body {
+	margin: auto;
+	background: #000;
+	overflow: hidden;
+	transform: scale(0.58679706601467, 0.7471014492753624);
+	transform-origin: left top;
+}
