@@ -1,12 +1,10 @@
 export default {
-	label: 'h-tabs-circle',
+	label: '图标按钮',
 	config: {
 		layout: {
 			size: {
-				// width: 950,
-				// height: 163
-				width: 719,
-				height: 163
+				width: 480,
+				height: 160
 			},
 			position: {
 				value: 'relative'
