@@ -5,7 +5,7 @@ export default {
 			size: {
 				// width: 950,
 				// height: 163
-				width: 719,
+				width: 10,
 				height: 163
 			},
 			position: {

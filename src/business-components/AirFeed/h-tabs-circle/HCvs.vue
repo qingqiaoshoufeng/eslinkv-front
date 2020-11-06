@@ -56,7 +56,27 @@ export default {
 					countStyle: '',
 					unitStyle: '',
 					percentStyle: ''
-				}
+				},
+				{
+					name: '低压管道',
+					percent: 50,
+					count: '1,233,234',
+					circleStyle: '#2C99FF',
+					markStyle: '',
+					countStyle: '',
+					unitStyle: '',
+					percentStyle: ''
+				},,
+				{
+					name: '低压管道',
+					percent: 50,
+					count: '1,233,234',
+					circleStyle: '#2C99FF',
+					markStyle: '',
+					countStyle: '',
+					unitStyle: '',
+					percentStyle: ''
+				},
 			])
 		}
   	},
@@ -108,7 +128,8 @@ export default {
 				const lineColor = item.circleStyle || '';
 				this.animateCircle(
 					circleX,
-					circleY, _r,
+					circleY,
+					_r,
 					startAngle,
 					endAngle,
 					direction,
@@ -143,7 +164,7 @@ export default {
 					// 开始x坐标
 					const startFontX = 169;
 					// 开始y坐标
-					const startFontY = 58;
+					const startFontY = 50;
 					// 默认字体白色
 					const fontColor = '#ffffff';
 					const fontStyle = item.fontStyle || '16px PingFang SC';
@@ -351,11 +372,11 @@ export default {
 			})
 		},
 		getTextWith(text, fontStyle) {
-			const canvas = document.createElement('canvas')
-			const context = canvas.getContext('2d')
-			context.font = fontStyle || '16px'
-			const dimension = context.measureText(text)
-			return dimension.width
+			const canvas = document.createElement('canvas');
+			const context = canvas.getContext('2d');
+			context.font = fontStyle || '16px';
+			const dimension = context.measureText(text);
+			return dimension.width;
 		},
 		getOffset(){
 			const initX = 719;
