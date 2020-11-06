@@ -1,10 +1,9 @@
 export default {
-	label: '业务受理表格',
+	label: '进度线',
 	config: {
 		layout: {
 			size: {
-				width: 480,
-				height: 201
+				width: 992
 			},
 			position: {
 				value: 'relative'

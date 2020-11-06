@@ -1,20 +1,21 @@
 <template>
-	<div class="h-line-percent" :style="styles">
-		<div class="h-line-percent__NO" :style="{background: data && data.NOBg}">{{data && data.NO}}</div>
+	<div class="h-line-percent">
+		<div class="h-line-percent__NO font-num" :style="{background: styles.NOBg}">{{value.NO}}</div>
 		<div class="h-line-percent__right">
 			<div class="h-line-percent__right__top">
 				<div class="h-line-percent__right__top__name">
-					{{data && data.name}}
+					{{value.name}}
 				</div>
 				<div class="h-line-percent__right__top__amount">
-					{{data && data.amount}}
+					{{value.amount}}
 				</div>
 			</div>
 			<div class="h-line-percent__right__bottom">
 				<div
 				class="h-line-percent__right__bottom__ruler"
 				:style="{
-					background: data && data.rulerBg,
+					background: `
+					linear-gradient(270deg, ${styles.startColor} 0%, ${styles.endColor} 100%)`,
 					width: rulerWidth
 				}">
 				</div>
@@ -23,47 +24,61 @@
 	</div>
 </template>
 <script>
-	import JSONStringify from '../../../../lib/vendor/JSONStringify';
-	import mixins from '../../mixins';
-	const config = {}
-	const value = {
-		api: {
-			data: JSONStringify({
-				NO: '01',
-				name: '开户',
-				amount: 4500,
-				NOBg: '#FF7217',
-				rulerBg: 'linear-gradient(270deg, #FF7217 0%, rgba(255, 114, 23, 0) 100%)'
-			})
-		}
-	}
-	export default {
-		mixins: [mixins],
-		methods: {
+// {
+//	value: {
+// 	  NO: '01',
+// 	  name: '开户',
+// 	  amount: 4500,
+//	},
+//	style: {
+// 	  NOBg: '#FF7217',
+// 	  startColor: '#FF7217',
+// 	  endColor: 'rgba(255, 114, 23, 0)'
+//  }
+//}
 
-		},
+	export default {
 		computed: {
 			rulerWidth(){
 				// 根据视觉稿来的
-				const rate =  388 / 4500;
-				return (this?.data?.amount * rate ?? 0 ) + 'px';
+				const safeWidth = 388;
+				const safeCountPerPx =  safeWidth / this?.maxAmout;
+				return this?.value?.amount * safeCountPerPx + 'px';
+			},
+			styles(){
+				return this?.item?.styles || {};
+			},
+			value(){
+				return this?.item?.value || {};
 			}
 		},
-		created() {
-			this.configSource = this.parseConfigSource(config);
-			this.configValue = this.parseConfigValue(config, value);
+		props: {
+			maxAmout: {
+				type: Number,
+				default: 4500
+			},
+			item: {
+				type: Object,
+				default: () => ({})
+			}
 		},
 	}
 </script>
 <style lang="scss">
 .h-line-percent {
 	display: flex;
+	width: 474px;
+	height: 28px;
 	&__NO {
 		display: flex;
 		width: 24px;
 		height: 28px;
 		justify-content: center;
 		align-items: center;
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 24px;
+		color: #FFFFFF;
 	}
 	&__right {
 		margin-left: 10px;

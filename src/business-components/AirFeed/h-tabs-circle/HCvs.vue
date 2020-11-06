@@ -80,7 +80,25 @@ export default {
 			])
 		}
   	},
-	mounted() {
+	watch: {
+		source: {
+			handler(val){
+				this.$nextTick(() => {
+					this.CTX = this.getCtx();
+					// 画主图
+					this.renderMain();
+					// 画图标示
+					this.renderMark();
+					// 画文字标识
+					this.renderDesc();
+				})
+			}
+		},
+		immediate: true,
+     	deep: true
+
+	},
+	mounted(){
 		this.CTX = this.getCtx();
 		// 画主图
 		this.renderMain();
@@ -307,12 +325,20 @@ export default {
 				height
 			}
 			const domCvs = this.$refs.CVS;
-			const dpr = window.devicePixelRatio || 1;
+			const ctx = domCvs.getContext('2d');
+			const backingStore =
+				ctx.backingStorePixelRatio ||
+				ctx.webkitBackingStorePixelRatio ||
+				ctx.mozBackingStorePixelRatio ||
+				ctx.msBackingStorePixelRatio ||
+				ctx.oBackingStorePixelRatio ||
+				ctx.backingStorePixelRatio ||
+				1;
+ 			const dpr = (window.devicePixelRatio || 1) / backingStore;
 			domCvs.style.width = `${width}px`;
 			domCvs.style.height = `${height}px`;
 			domCvs.width = 2 * width * dpr;
 			domCvs.height = 2 * height * dpr;
-			const ctx = domCvs.getContext('2d');
 			ctx.scale(2 * dpr, 2 * dpr);
 			return ctx;
 		},
