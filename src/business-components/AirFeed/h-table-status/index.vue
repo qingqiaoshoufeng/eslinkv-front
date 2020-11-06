@@ -1,5 +1,5 @@
 <template>
-	<div class="h-table-status" :style="styles">
+	<div class="h-table-status widget-part" :style="styles">
 		<ul class="h-table-status__title" >
 			<li>时间</li>
 			<li>渠道</li>

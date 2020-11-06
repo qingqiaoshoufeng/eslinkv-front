@@ -1,5 +1,5 @@
 <template>
-	<div class="h-hot-call-number" :style="styles">
+	<div class="h-hot-call-number widget-part" :style="styles">
 		<video
 			class="h-hot-call-number__bg"
 			src="/static/images/hot-call-number.webm"
