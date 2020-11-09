@@ -25,7 +25,7 @@ export default {
 
 	data() {
 		return {
-			actived: null,
+			actived: 0,
 			intervalId: null,
 			waitIntervalId: null
 		};
@@ -39,22 +39,17 @@ export default {
 				wait: 5000
 			})
 		},
+		defaultActived: {
+			type: Number,
+			default: 0
+		},
 		source: {
 			type: Array,
-			default: () => ([
-				{
-					name: '管网压力等级'
-				},
-				{
-					name: '管网材质'
-				},
-				{
-					name: '管网口径'
-				}
-			])
+			default: () => ([])
 		}
 	},
 	mounted(){
+		this.actived = this.defaultActived || 0;
 		this.beginInterval();
 	},
 	destroyed(){
@@ -83,7 +78,7 @@ export default {
 		},
 		changeActived(index){
 			this.actived = index;
-			this.$emit('activedChange', index);
+			this.$emit('actived-change', index);
 		},
 		clearInterval(){
 			clearInterval(this.intervalId);
@@ -125,6 +120,7 @@ export default {
 			background-color: rgba(0, 31, 109, 0.5);
 			box-sizing: border-box;
 			border-left: 4px solid rgba(0, 0, 0, 0);
+			cursor: pointer;
 			&--actived {
 				background-color: #0057A9;
 				border-left: 4px solid #00DDFF;
