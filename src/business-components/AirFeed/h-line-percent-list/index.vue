@@ -12,7 +12,7 @@
 	import JSONStringify from '../../../../lib/vendor/JSONStringify';
 	import mixins from '../../mixins';
 	import HLinePercentItem from './HLinePercentItem';
-	const config = {}
+	const config = {animation: true}
 	const value = {
 		api: {
 			data: JSONStringify({
