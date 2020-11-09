@@ -161,6 +161,7 @@
 
 <style lang="scss">
 	.scene-temporary-wrapper {
+
 		.widget-part {
 			position: absolute !important;
 		}
