@@ -9,7 +9,7 @@
 <script>
 	import JSONStringify from '../../../../lib/vendor/JSONStringify';
 	import mixins from '../../mixins';
-	const config = {}
+	const config = {animation: true}
 	const value = {
 		api: {
 			data: JSONStringify({

@@ -30,7 +30,7 @@
 	import mixins from '../../mixins';
 	import options from './options'
 
-	const config = {}
+	const config = {animation: true}
 	const value = {
 		api: {
 			data: JSONStringify({
