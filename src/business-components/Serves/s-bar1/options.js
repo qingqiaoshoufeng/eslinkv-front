@@ -63,6 +63,7 @@ export default {
     },{
 		type: 'line',
         yAxisIndex:1,
+        yAxisIndex:1,
         show: true,  
         axisTick: {
             show: false,
