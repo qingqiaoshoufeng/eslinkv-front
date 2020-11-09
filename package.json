@@ -35,6 +35,7 @@
     "vue-loader": "^14.2.1",
     "vue-property-decorator": "^9.0.2",
     "vue-router": "^3.4.3",
+    "vue-seamless-scroll": "^1.1.21",
     "xss": "^1.0.7"
   },
   "devDependencies": {
