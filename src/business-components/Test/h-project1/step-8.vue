@@ -57,6 +57,7 @@
 					font-size: 16px;
 					line-height: 16px;
 					color: #00DDFF;
+					margin-left: -12px;
 
 				}
 				&__words {
@@ -69,7 +70,7 @@
 					font-size: 16px;
 					line-height: 24px;
 					color: #FFFFFF;
-					margin-left: 112px;
+					margin-left: 100px;
 					word-break: break-all;
 					text-align: left;
 					margin-top: -4px;
