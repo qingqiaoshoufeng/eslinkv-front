@@ -44,7 +44,7 @@ export const GASSTATIONLIST = [
 	},
 ]
 //调压站
-export const SURGESTATIONLIST = [
+export const PRESSUREREGULATINGSTATIONLIST = [
 	{ name: '塘阜调压站', lng: 119.87500555372199, lat: 30.421734364490067 },
 	{ name: '良渚调压站', lng: 119.9355402686164, lat: 30.408456504597957 },
 	{ name: '万家塘调压站', lng: 120.0065359724499, lat: 30.40493670986392 },
@@ -137,28 +137,28 @@ export const INSPECTIONCAR = [
 ]
 //首页legend配置
 export const HOMELEGEND = {
-	GAOYAGUANXIAN: {
+	GAOYAGUANWANG: {
 		label: '高压管网',
 		icon: 'icongaoyaguanwang',
-		component: 'GasStationOverlay',
+		component: 'HighPressureLine',
 		isShow: true,
 	},
 	INSPECTIONCAR: {
 		label: '巡检车辆',
 		icon: 'icontulicheliang',
-		component: 'Overlay',
+		component: 'InspectionCar',
 		isShow: true,
 	},
 	GASSTATION: {
 		label: '门站',
 		icon: 'icontulimenzhan',
-		component: 'GasStationOverlay',
+		component: 'GasStation',
 		isShow: true,
 	},
 	SURGESTATION: {
 		label: '调压站',
 		icon: 'icontulitiaoyazhan',
-		component: 'Overlay',
+		component: 'PressureRegulatingStation',
 		isShow: true,
 	},
 }

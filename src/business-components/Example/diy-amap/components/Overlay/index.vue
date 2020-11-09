@@ -11,14 +11,19 @@ export default {
 	render: (h, { props, data, listeners }) => {
 		let { active, marker, visible = true } = props;
 		let { lat, lng, name, status, icon } = marker;
-		icon = icon.replace('tuli', '');
+		icon = icon ? icon.replace('tuli', '') : icon;
 		if (status === 1) {
 			icon += '-err';
 		}
 		return (
 			<AMapMarker visible={visible} position={[lng, lat]} vid={name}>
 				<div class={['sample', { active: active }]} on={listeners}>
-					<SvgIcon class="station-icon" icon-name={icon}></SvgIcon>
+					{icon && (
+						<SvgIcon
+							class="station-icon"
+							icon-name={icon}
+						></SvgIcon>
+					)}
 					<slot></slot>
 				</div>
 			</AMapMarker>

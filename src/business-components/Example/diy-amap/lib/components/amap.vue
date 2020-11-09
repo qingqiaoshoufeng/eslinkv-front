@@ -137,7 +137,10 @@ export default {
 	addEvents() {
 		this.$amapComponent.on('moveend', () => {
 			let centerLngLat = this.$amapComponent.getCenter();
-			this.center = [centerLngLat.getLng(), centerLngLat.getLat()];
+			this.mapConfig.center = [
+				centerLngLat.getLng(),
+				centerLngLat.getLat(),
+			];
 		});
 	},
 
@@ -235,7 +238,7 @@ export default {
 			});
 		},
 		$$getCenter() {
-			if (!this.$amap) return lngLatTo(this.center);
+			if (!this.$amap) return lngLatTo(this.mapConfig.center);
 			return lngLatTo(this.$amap.getCenter());
 		},
 	},

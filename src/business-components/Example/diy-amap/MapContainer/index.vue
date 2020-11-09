@@ -2,19 +2,12 @@
 	<div class="map-container">
 		<el-amap
 			vid="overviewMap"
-			:center="center"
-			:zoomEnable="true"
-			:doubleClickZoom="false"
-			:dragEnable="true"
-			:zoom="zoom"
-			viewMode="3D"
-			:pitch="10"
-			mapStyle="amap://styles/e0e1899c1695e012c70d0731a5cda43c"
 			ref="amap"
 			class="hr-map"
 			:events="{
 				init: mapInit,
 			}"
+			v-bind="mapConfig"
 		>
 			<!-- 不同场景渲染不同的组件 -->
 			<template v-if="mapReady">
@@ -37,12 +30,15 @@
 			@legend-click="handleLegendClick"
 			class="map-legend"
 		/>
+		<!-- 地图类型 -->
+		<MapTypeLegend />
 	</div>
 </template>
 
 <script>
 import { AMap } from '@/business-components/Example/diy-amap/lib';
 import MapLegend from './MapLegend/index';
+import MapTypeLegend from './MapTypeLegend/index';
 import RightPanelList from './RightPaneList/';
 import { HomeMap, ServiceMap, ProjectMap } from './MapPages/';
 import {
@@ -60,12 +56,21 @@ export default {
 		ServiceMap,
 		ProjectMap,
 		MapLegend,
+		MapTypeLegend,
 		RightPanelList,
 	},
 	data() {
 		return {
-			zoom: 11,
-			center: [120.061259, 30.273295],
+			mapConfig: {
+				center: [120.061259, 30.273295],
+				zoomEnable: true,
+				doubleClickZoom: false,
+				dragEnable: true,
+				zoom: 11,
+				viewMode: '3D',
+				pitch: 10,
+				mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
+			},
 			mapReady: false,
 			mapComponentName: 'homeMap',
 			legendMap: {},
@@ -88,7 +93,6 @@ export default {
 			},
 		};
 		bus.$on('currentSceneChange', val => {
-			console.log(val,'val')
 			this.initPage(val);
 		});
 	},
@@ -99,8 +103,12 @@ export default {
 		mapInit() {
 			console.log('地图初始化完成！');
 			this.mapReady = true;
-			this.map = this.$refs.amap.$$getInstance();
+			this.map = this.$refs.amap.$amap;
 			this.initPage('home');
+			setTimeout(() => {
+				window.suyan = this.map;
+				this.map.addControl(new window.AMap.MapType());
+			}, 2000);
 		},
 		initPage(val) {
 			let config = this._pageConfig[val];
@@ -112,7 +120,7 @@ export default {
 			Object.keys(this.legendMap).forEach(prop => {
 				this.legendMap[prop].isShow = true;
 			});
-			this.map.setZoom(this.zoom);
+			this.map.setZoom(this.mapConfig.zoom);
 		},
 		handleLegendClick(prop) {
 			let changedItem = this.legendMap[prop];

@@ -1,18 +1,36 @@
 <template>
-	<div class="legend-container">
+	<div
+		class="legend-container"
+		:style="{
+			height: isExpend ? heightAuto : '56px',
+			maxWidth: maxWidth + 'px',
+		}"
+	>
+		<div class="legend-content" ref="content">
+			<div
+				v-for="(legend, prop) in data"
+				:key="prop"
+				class="legend-item"
+				:class="{ 'in-active': !legend.isShow }"
+				@click="handleLegendClick(prop)"
+			>
+				<SvgIcon
+					v-if="legend.icon"
+					:icon-name="legend.icon"
+					class="legend-icon"
+				></SvgIcon>
+				<span class="legend-label">{{ legend.label }}</span>
+			</div>
+		</div>
 		<div
-			v-for="(legend, prop) in data"
-			:key="prop"
-			class="legend-item"
-			:class="{ 'in-active': !legend.isShow }"
-			@click="handleLegendClick(prop)"
+			v-if="isNeedExpend"
+			class="legend-mode"
+			:class="'legend-mode--' + (isExpend ? 'expend' : 'collapse')"
 		>
-			<SvgIcon
-				v-if="legend.icon"
-				:icon-name="legend.icon"
-				class="legend-icon"
-			></SvgIcon>
-			<span>{{ legend.label }}</span>
+			<div @click="handleExpendClick">
+				<span>{{ isExpend ? '收起' : '展开' }}</span>
+				<SvgIcon class="arrow" icon-name="iconarrowdown"></SvgIcon>
+			</div>
 		</div>
 	</div>
 </template>
@@ -28,6 +46,41 @@ export default {
 				return {};
 			},
 		},
+		maxWidth: {
+			type: Number,
+			default: 1124,
+		},
+	},
+	data() {
+		return {
+			isExpend: true,
+			isNeedExpend: true,
+			heightAuto: 'auto',
+		};
+	},
+	watch: {
+		data: {
+			handler(val) {
+				if (JSON.stringify(val) === '{}') {
+					return false;
+				}
+				this.$nextTick(() => {
+					//计算是否需要展开
+					let contentDom = this.$refs.content;
+					let contentHeight = contentDom.offsetHeight;
+					let contentWidth = contentDom.offsetWidth;
+					if (
+						contentHeight < 100 &&
+						contentWidth < this.maxWidth - 146
+					) {
+						this.isNeedExpend = false;
+					} else {
+						this.heightAuto = contentHeight + 'px';
+					}
+				});
+			},
+			immediate: true,
+		},
 	},
 	components: {
 		SvgIcon,
@@ -36,37 +89,63 @@ export default {
 		handleLegendClick(prop) {
 			this.$emit('legend-click', prop);
 		},
+		handleExpendClick() {
+			this.isExpend = !this.isExpend;
+		},
 	},
 };
 </script>
 
 <style lang="scss" scoped>
 .legend-container {
+	display: flex;
+	overflow: hidden;
+	transform: height linear 0.3s;
 	background: rgba(0, 0, 0, 0.8);
 	border: 1px solid #0065df;
 	box-sizing: border-box;
 	border-radius: 16px;
 	color: #fff;
-	display: flex;
 	padding: 0 40px;
 	line-height: 56px;
 	user-select: none;
 	font-size: 18px;
-	.legend-item {
-		cursor: pointer;
-		&:not(:last-child) {
-			margin-right: 16px;
+	.legend-content {
+		flex: 1;
+		display: flex;
+		flex-wrap: wrap;
+		.legend-item {
+			cursor: pointer;
+			&:not(:last-child) {
+				margin-right: 16px;
+			}
+			&:hover {
+				opacity: 0.8;
+			}
+			.legend-icon {
+				font-size: 24px;
+				margin-right: 8px;
+			}
+			.legend-label {
+				vertical-align: middle;
+			}
 		}
-		&:hover {
+		.in-active {
 			opacity: 0.8;
 		}
-		.legend-icon {
-			font-size: 24px;
-			margin-right: 8px;
-		}
 	}
-	.in-active {
-		opacity: 0.8;
+	.legend-mode {
+		color: #00ddff;
+		cursor: pointer;
+		display: flex;
+		align-items: flex-end;
+		line-height: 54px;
+		margin-left: 10px;
+		&--collapse {
+			.arrow {
+				transform: rotate(180deg);
+			}
+		}
 	}
 }
 </style>

@@ -2,23 +2,21 @@
 	<div>
 		<!-- marker -->
 		<template v-if="viewMode === 'main'">
-			<!-- 地图站点，应急站，巡检人员等 -->
+			<!-- 1.legend不控制显隐的覆盖物 -->
+			<!-- 区域 -->
+			<RegionBoundary />
+			<!-- 态势感知 -->
+
+			<!-- 2.legend控制显隐 -->
 			<template v-for="(config, legend) in legendMap">
-				<template v-for="(item, index) in overlayData[legend] || []">
-					<component
-						:key="legend + index"
-						:marker="{
-							...item,
-							icon: config.icon,
-						}"
-						:visible="config.isShow"
-						:is="config.component"
-						@click="handleMapOverlayClick(item, legend)"
-					/>
-				</template>
+				<component
+					:key="legend"
+					:visible="config.isShow"
+					:is="config.component"
+				/>
 			</template>
 			<!-- 态势感知 -->
-			<WarningOverlay
+			<Overlay
 				v-for="(item, index) in taskList || []"
 				:key="'WARN' + index"
 				:marker="item"
@@ -83,35 +81,46 @@
 	</div>
 </template>
 <script>
+//配置项
 import {
 	GASSTATIONLIST,
-	SURGESTATIONLIST,
+	PRESSUREREGULATINGSTATIONLIST,
 	INSPECTIONCAR,
 	HOMESITUATIONAWARENESSLIST,
 	OVERLAYINFOMAP,
 } from '@/business-components/Example/diy-amap/config/index';
+//lib组件
 import { AMapMarker } from '@/business-components/Example/diy-amap/lib';
+//组件
 import {
-	WarningOverlay,
-	GasStationOverlay,
 	Overlay,
 	PopContainer,
 	SvgIcon,
 } from '@/business-components/Example/diy-amap/components/index';
-//高压线
+//页面覆盖物组件
+import RegionBoundary from './components/RegionBoundary'; //行政区
+import HighPressureLine from './components/HighPressureLine'; //高压管网
+import InspectionCar from './components/InspectionCar'; //巡检车辆
+import PressureRegulatingStation from './components/PressureRegulatingStation'; //调压站
+import GasStation from './components/GasStation'; //门站
+//高压线数据
 import GaoYaLineJSON from '@/assets/amap/json/gaoya.json';
+
 let eventTypeIconMap = {
 	0: 'iconbaoguanshijian',
 	1: 'iconxieloushijian',
 };
 export default {
 	components: {
-		GasStationOverlay,
-		WarningOverlay,
 		Overlay,
 		PopContainer,
 		SvgIcon,
 		ElAmapMarker: AMapMarker,
+		RegionBoundary,
+		HighPressureLine,
+		InspectionCar,
+		PressureRegulatingStation,
+		GasStation,
 	},
 	props: {
 		legendMap: {
@@ -136,7 +145,7 @@ export default {
 			overlayTypeInfo: {},
 			overlayData: {
 				GASSTATION: GASSTATIONLIST,
-				SURGESTATION: SURGESTATIONLIST,
+				SURGESTATION: PRESSUREREGULATINGSTATIONLIST,
 				INSPECTIONCAR: INSPECTIONCAR,
 			},
 		};
@@ -146,7 +155,7 @@ export default {
 		this.GAOYAGUANXIAN = null;
 		this.map = this.$parent.$amap;
 		this.init();
-		this.map.on('zoomend', this.handleMapZoomChange);
+		// this.map.on('zoomend', this.handleMapZoomChange);
 	},
 	computed: {
 		taskList() {
@@ -165,8 +174,7 @@ export default {
 	},
 	methods: {
 		init() {
-			this.drawRegionBoundary(this.map);
-			this.drawLine(GaoYaLineJSON, 'GaoYaLine');
+			// this.drawLine(GaoYaLineJSON, 'GaoYaLine');
 			if (this.isMapUIComplete) {
 				this.drawPathNavigators();
 				return false;
@@ -226,50 +234,6 @@ export default {
 				}
 			);
 		},
-		//绘制行政区域
-		drawRegionBoundary(map) {
-			var district = new window.AMap.DistrictSearch({
-					extensions: 'all',
-					subdistrict: 0,
-					level: 'district',
-				}),
-				districts = [
-					'江干区',
-					'上城区',
-					'下城区',
-					'拱墅区',
-					'西湖区',
-					'滨江区',
-					'萧山区',
-					'余杭区',
-					'富阳区',
-					'临安区',
-					'桐庐县',
-					'淳安县',
-					'建德市',
-				];
-			this.regionPolyGonArr = [];
-			districts.forEach(area => {
-				district.search(area, (status, result) => {
-					var bounds = result.districtList[0].boundaries;
-					if (bounds) {
-						for (var i = 0, l = bounds.length; i < l; i++) {
-							let ploygon = new window.AMap.Polygon({
-								path: bounds[i],
-								map,
-								strokeWeight: 2,
-								fillOpacity: 0.8,
-								fillColor: '#002276',
-								strokeOpacity: '1',
-								strokeStyle: 'dashed',
-								strokeColor: '#509CE1',
-							});
-							this.regionPolyGonArr.push(ploygon);
-						}
-					}
-				});
-			});
-		},
 		//加载管线
 		drawLine(data, lineName) {
 			var line = new window.AMap.GeoJSON({
@@ -283,6 +247,7 @@ export default {
 				},
 			});
 			line.setMap(this.map);
+			map.add(geojson);
 			this[lineName] = line;
 		},
 		//绘制线路
@@ -531,7 +496,6 @@ export default {
 		},
 		handleViewDetail(data) {
 			let { timeInSeconds, id, taskId, overlayType } = data;
-			console.log(data, 'data');
 			if (overlayType === 'INSPECTIONCAR' && taskId) {
 				let task = this.taskList.find(task => {
 					return task.id === taskId;
@@ -563,7 +527,7 @@ export default {
 		},
 	},
 	beforeDestroy() {
-		this.map.off('zoomend', this.handleMapZoomChange);
+		// this.map.off('zoomend', this.handleMapZoomChange);
 		let { viewMode } = this;
 		if (viewMode === 'main') {
 			this.clearMainMap();

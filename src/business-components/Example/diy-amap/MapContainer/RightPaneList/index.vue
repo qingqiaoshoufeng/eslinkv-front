@@ -84,7 +84,6 @@ export default {
 	methods: {
 		//切换页面切换配置
 		initPage(pageName) {
-			this.ready = false;
 			let config = this.pageConfig[pageName];
 			if (!config) return false;
 			this.currentSceneName = pageName;
