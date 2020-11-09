@@ -4,7 +4,7 @@
 <style lang="scss">
 	.empty-image {
 		background-color: #ddd;
-		background-image: url('../../images/logo.png');
+		background-image: url('/static/images/logo.png');
 		background-size: 20% !important;
 		background-repeat: no-repeat;
 		background-position: center;

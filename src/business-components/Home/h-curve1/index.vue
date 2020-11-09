@@ -24,9 +24,20 @@
 			setOption(data) {
 				options.series[0].data = data.value
 				this.instance && this.instance.setOption(options)
+			},
+			init() {
+				// console.log('init')
 			}
 		},
 		watch: {
+			'configValue.api.params': {
+				handler(val) {
+					// 联动示例
+					// console.log('-', val)
+				},
+				deep: true,
+				immediate: true
+			},
 			data: {
 				handler(val) {
 					if (this.id) {

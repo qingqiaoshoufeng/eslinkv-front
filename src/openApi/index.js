@@ -13,7 +13,6 @@ const GoldChart = {
 export default GoldChart
 export {store, mutations}
 
-window.GoldChart = GoldChart
 // document.addEventListener('GoldChartReady', function (e) {
 // 	console.log(e.detail)
 // }, false)
