@@ -11,6 +11,10 @@
                      <div class="bgc2" :style="`backgroundColor:${data&&data.color2};}`"></div>
                     <div class="desc2">{{data&&data.desc2}}</div>
                 </div>
+                <div class="legend2">
+                     <div class="bgc3" :style="`backgroundColor:${data&&data.color3};}`"></div>
+                    <div class="desc3">{{data&&data.desc3}}</div>
+                </div>
 			</div>
 		</div>
 		<div class="h-line-1" :id="id" />
@@ -24,13 +28,15 @@ const config = { animation: true };
 const value = {
 	api: {
 		data: JSON.stringify({
-            color1:'#2C99FF',
-            color2:'#01FDD2',
-            desc1:'工商户',
-            desc2:'居民户',
-			title: '台',
+            color1:'#00DDFF',
+            color2:'#0057A9',
+            color3:'#01FDD2',
+            desc1:'绑定户数',
+            desc2:'抄表户数',
+            desc3:'自助抄表率',
+			title: '户',
 			yValue: [120, 200, 150, 80, 70, 110, 130],
-			yValue1: [120, 200, 150, 80, 70, 110, 130],
+			yValue1: [130, 400, 170, 100, 100, 110, 130],
 			xValue: ['5月', '6月', '7月', '8月', '9月', '10月', '11月'],
 		}),
 	},
@@ -39,9 +45,15 @@ export default {
 	mixins: [mixins],
 	methods: {
 		setOption(data) {
-			options.xAxis.data = data.xValue;
-			options.series[0].data = data.yValue;
-			options.series[1].data = data.yValue1;
+            let yValue2 = this.data.yValue.map((item,index) => this.data.yValue[index]/this.data.yValue1[index])
+			options.xAxis[0].data = data.xValue;
+			options.series[1].data = data.yValue;
+            options.series[0].data = data.yValue1;
+            options.series[2].data = yValue2;
+            console.log(yValue2)
+            options.series[0].itemStyle.normal.color = data.color2;
+            options.series[1].itemStyle.normal.color = data.color1;
+            options.series[2].itemStyle.normal.color = data.color3;
 			this.instance && this.instance.setOption(options);
 		},
 	},
@@ -95,18 +107,22 @@ export default {
 	.legend {
         display: flex;
         position: absolute;
-        left: 50%;
+        left: 60%;
+        width: 400px;
         transform: translate(-50%,0);
         .legend1,.legend2{
             display: flex;
             align-items: center;
             margin-left: 20px;
         }
-        .bgc1,.bgc2{
+        .bgc1,.bgc2,.bgc3{
             width: 16px;
             height: 8px;
         }
-        .desc1,.desc2{
+        .bgc3{
+            height: 2px;
+        }
+        .desc1,.desc2,.desc3{
             margin-left: 5px;
             font-family: PingFang SC;
             font-size: 16px;

@@ -25,26 +25,8 @@
 	export default {
 		mixins: [mixins],
 		methods: {
-			// setOption(data) {
-			// 	options.series[0].data = data.value
-			// 	this.instance && this.instance.setOption(options)
-			// }
+	
 		},
-		// watch: {
-		// 	data: {
-		// 		handler(val) {
-		// 			if (this.id) {
-		// 				const data = {...val}
-		// 				this.$nextTick(() => {
-		// 					this.instance = echarts.init(document.getElementById(this.id))
-		// 					this.setOption(data)
-		// 				})
-		// 			}
-		// 		},
-		// 		deep: true,
-		// 		immediate: true
-		// 	}
-		// },
 		created() {
 			this.configSource = this.parseConfigSource(config)
 			this.configValue = this.parseConfigValue(config, value)
