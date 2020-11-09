@@ -1,6 +1,11 @@
 <template>
-	<div class="widget-part" :style="styles">
-		<h-cvs :source="data"/>
+	<div class="widget-part h-tabs-circle" :style="styles">
+		<h-vertical-tabs
+			class="h-tabs-circle__tabs"
+			:source="tabSource"
+			:defaultActived="tabActived"
+			@actived-change="tabActivedChange"/>
+		<h-cvs class="h-tabs-circle__cvs" :source="data && data[tabActived]" />
 	</div>
 
 </template>
@@ -9,52 +14,130 @@
 	import JSONStringify from '../../../../lib/vendor/JSONStringify';
 	import mixins from '../../mixins';
 	import HCvs from './HCvs';
+	import HVerticalTabs from './HVerticalTabs';
 	const config = {animation: true}
 	const value = {
 		api: {
 			data: JSONStringify([
-				{
-				name: '高压管道',
-				percent: 20,
-				count: '1,233,234',
-				circleStyle: '#FB592C',
-				markStyle: '',
-				countStyle: '',
-				unitStyle: '',
-				percentStyle: ''
-			},
-			{
-				name: '中压管道',
-				percent: 30,
-				count: '1,233,234',
-				circleStyle: '#18CEB9',
-				markStyle: '',
-				countStyle: '',
-				unitStyle: '',
-				percentStyle: ''
-			},
-			{
-				name: '低压管道',
-				percent: 50,
-				count: '1,233,234',
-				circleStyle: '#2C99FF',
-				markStyle: '',
-				countStyle: '',
-				unitStyle: '',
-				percentStyle: ''
-			},
-
+				[
+					{
+						name: '高压管道',
+						percent: 20,
+						count: '1,233,234',
+						circleStyle: '#FB592C',
+						markStyle: '',
+						countStyle: '',
+						unitStyle: '',
+						percentStyle: ''
+					},
+					{
+						name: '中压管道',
+						percent: 30,
+						count: '1,233,234',
+						circleStyle: '#18CEB9',
+						markStyle: '',
+						countStyle: '',
+						unitStyle: '',
+						percentStyle: ''
+					},
+					{
+						name: '低压管道',
+						percent: 50,
+						count: '1,233,234',
+						circleStyle: '#2C99FF',
+						markStyle: '',
+						countStyle: '',
+						unitStyle: '',
+						percentStyle: ''
+					},
+				],
+				[
+					{
+						name: '这个',
+						percent: 50,
+						count: '1,233,234',
+						circleStyle: '#FB592C',
+						markStyle: '',
+						countStyle: '',
+						unitStyle: '',
+						percentStyle: ''
+					},
+					{
+						name: '哈哈哈',
+						percent: 80,
+						count: '1,233,234',
+						circleStyle: '#18CEB9',
+						markStyle: '',
+						countStyle: '',
+						unitStyle: '',
+						percentStyle: ''
+					},
+					{
+						name: '嘻嘻嘻',
+						percent: 40,
+						count: '1,233,234',
+						circleStyle: '#2C99FF',
+						markStyle: '',
+						countStyle: '',
+						unitStyle: '',
+						percentStyle: ''
+					},
+				],
+				[
+					{
+						name: '为为额',
+						percent: 20,
+						count: '1,233,234',
+						circleStyle: '#FB592C',
+						markStyle: '',
+						countStyle: '',
+						unitStyle: '',
+						percentStyle: ''
+					},
+					{
+						name: '为人很好',
+						percent: 60,
+						count: '1,233,234',
+						circleStyle: '#18CEB9',
+						markStyle: '',
+						countStyle: '',
+						unitStyle: '',
+						percentStyle: ''
+					},
+					{
+						name: '水电费是谁的',
+						percent: 10,
+						count: '1,233,234',
+						circleStyle: '#2C99FF',
+						markStyle: '',
+						countStyle: '',
+						unitStyle: '',
+						percentStyle: ''
+					},
+				]
 			])
 		}
 	}
 export default {
 	name: 'h-tabs-circle',
 	components: {
-		HCvs
+		HCvs,
+		HVerticalTabs
 	},
 	data() {
 		return {
-
+			tabSource: [
+				{
+					name: '管网压力等级'
+				},
+				{
+					name: '管网材质'
+				},
+				{
+					name: '管网口径'
+				}
+			],
+			tabActived: 2
 		};
 	},
 	mixins: [mixins],
@@ -63,18 +146,28 @@ export default {
 		this.configValue = this.parseConfigValue(config, value);
 	},
 	mounted(){
+
 	},
 	methods: {
+		tabActivedChange(tabActived){
+			this.tabActived = tabActived;
+		}
 	},
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-#circleCanvas{
-	width: 719px;
-	height: 163px;
-	border: 1px solid green;
-	background-color: #fff;
+<style lang="scss" scoped>
+.h-tabs-circle{
+	&__cvs {
+		position: absolute;
+		top: 31px;
+		left: 246px;
+	}
+	&__tabs {
+		position: absolute;
+		top: 48px;
+		left: 16px;
+	}
 }
 </style>

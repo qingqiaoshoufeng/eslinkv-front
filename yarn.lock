@@ -3002,6 +3002,11 @@ compression@^1.7.4:
     safe-buffer "5.1.2"
     vary "~1.1.2"
 
+comutils@^1.1.9:
+  version "1.1.19"
+  resolved "https://registry.npm.taobao.org/comutils/download/comutils-1.1.19.tgz#3e07f306abf48e83726511713a72b20565034443"
+  integrity sha1-PgfzBqv0joNyZRFxOnKyBWUDREM=
+
 concat-map@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
@@ -9962,6 +9967,13 @@ vue-router@^3.4.3:
   version "3.4.8"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.4.8.tgz#2c06261d35d8075893470352d42d70b6287b8194"
   integrity sha512-3BsR84AqarcmweXjItxw3jwQsiYNssYg090yi4rlzTnCJxmHtkyCvhNz9Z7qRSOkmiV485KkUCReTp5AjNY4wg==
+
+vue-seamless-scroll@^1.1.21:
+  version "1.1.21"
+  resolved "https://registry.npm.taobao.org/vue-seamless-scroll/download/vue-seamless-scroll-1.1.21.tgz#c30a3906780ae070be8280864178b0c123b14260"
+  integrity sha1-wwo5BngK4HC+goCGQXiwwSOxQmA=
+  dependencies:
+    comutils "^1.1.9"
 
 vue-style-loader@^4.0.1, vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   version "4.1.2"

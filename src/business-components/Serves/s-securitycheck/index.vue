@@ -43,8 +43,8 @@ const value = {
 export default {
 	mixins: [mixins],
 	created() {
-		this.configSource = this.parseConfigSource();
-		this.configValue = this.parseConfigValue({ animation: true }, value);
+		this.configSource = this.parseConfigSource(config);
+		this.configValue = this.parseConfigValue(config, value);
 	},
 	computed: {
 		style() {
@@ -57,21 +57,21 @@ export default {
 	methods: {
 		setOption(data) {
 			console.log(options);
-			let newData = []; 
+			let newData = [];
             let newData1 = [];
             let newData3 = [];
             let newData4 = [];
-            
+
 			for (var i = 0; i < data.percentage / 4; i++) {
 				console.log(data.percentage);
-				let opcity = 1 - (i * 4) / data.percentage;
+				let opcity = 1 - (i * 4) / data.percentage + 0.1;
 				newData = [
 					...newData,
 					{
 						value: 3.5,
 						name: '直接访问',
 						itemStyle: {
-							color: `rgba(1, 76, 92,${opcity})`,
+							color: `rgba(0, 221, 255,${opcity})`,
 						},
 					},
 					{
@@ -88,14 +88,14 @@ export default {
 						value: 3.5,
 						name: '直接访问',
 						itemStyle: {
-							
+
 							color: `#fff`,
 						},
 					},
 					{
 						value: 0.5,
 						name: '直接访问',
-						itemStyle: {		
+						itemStyle: {
 							color: `rgba(255, 255, 255,0)`,
 						},
 					},
@@ -107,7 +107,7 @@ export default {
 						name: '直接访问',
 						itemStyle: {
                             color: `#fff`,
-							
+
 						},
 					},
                 ];
@@ -117,7 +117,7 @@ export default {
 						value: 4,
 						name: '直接访问',
 						itemStyle: {
-							color: `rgba(1, 76, 92,${opcity})`,
+							color: `rgba(0, 221, 255,${opcity})`,
 						},
 					},
                 ];
@@ -251,12 +251,12 @@ export default {
 		.h-line-1 {
 			width: 158px;
             height: 158px;
-           
+
         }
          .context{
             height: 100px;
             width: 100px;
-            background-color: #ccc;
+            background-color: rgba(1, 1, 1, 0);
             position: absolute;
             top: 50%;
             left: 79px;
