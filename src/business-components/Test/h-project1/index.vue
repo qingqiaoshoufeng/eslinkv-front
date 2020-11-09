@@ -61,7 +61,7 @@
 	const value = {
 		api: {
 			data: JSON.stringify({
-				step: 3,
+				step: 8,
 				value: {
 					step1: {
 						time: new Date('2020-10-30 22:20') * 1
@@ -79,11 +79,14 @@
 						time: new Date('2020-10-30 23:13') * 1
 					},
 					step6: {
-						time: new Date('2020-10-30 23:21') * 1
+						time: new Date('2020-10-30 23:50') * 1
 					},
-					step7: {},
+					step7: {
+						time: new Date('2020-10-31 11:21') * 1
+
+					},
 					step8: {
-						time: new Date('2020-10-31 11:57') * 1
+						time: new Date('2020-10-31 12:57') * 1
 					}
 				}
 			})

@@ -105,7 +105,6 @@ export default {
         itemData.push(item.percent);
         _newData.push(itemData);
 	  });
-	  console.log(`_newData`,_newData);
       var chart = highcharts.chart(`left-bottom-right-top-echarts-${this.randomId}`, {
         chart: {
           type: "pie",
