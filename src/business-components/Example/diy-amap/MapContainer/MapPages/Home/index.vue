@@ -98,11 +98,11 @@ import {
 	SvgIcon,
 } from '@/business-components/Example/diy-amap/components/index';
 //页面覆盖物组件
-import RegionBoundary from './components/RegionBoundary'; //行政区
-import HighPressureLine from './components/HighPressureLine'; //高压管网
-import InspectionCar from './components/InspectionCar'; //巡检车辆
-import PressureRegulatingStation from './components/PressureRegulatingStation'; //调压站
-import GasStation from './components/GasStation'; //门站
+import RegionBoundary from './Components/RegionBoundary'; //行政区
+import HighPressureLine from './Components/HighPressureLine'; //高压管网
+import InspectionCar from './Components/InspectionCar'; //巡检车辆
+import PressureRegulatingStation from './Components/PressureRegulatingStation'; //调压站
+import GasStation from './Components/GasStation'; //门站
 //高压线数据
 import GaoYaLineJSON from '@/assets/amap/json/gaoya.json';
 
