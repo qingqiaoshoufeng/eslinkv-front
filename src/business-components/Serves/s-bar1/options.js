@@ -1,7 +1,7 @@
 export default {
     grid: {
         left: 35,
-        right: 0,
+        right: 30,
         top: 45,
         bottom: 40
     },
@@ -36,7 +36,24 @@ export default {
     },{
         type: 'value',
         splitLine:{
-            show: false
+            show: true
+        },
+        show: true,
+        axisTick: {
+            show: false,
+            textStyle: {
+                color: '#fff',
+            }
+        },
+        axisLabel: {
+            textStyle: {
+                show: true,
+                color: '#fff',
+            } 
+        },
+        interval: 25,
+        axisLine: {
+            show: true,
         }
     }],
     barGap: -0.8,
@@ -62,7 +79,6 @@ export default {
         },
     },{
 		type: 'line',
-        yAxisIndex:1,
         yAxisIndex:1,
         show: true,  
         axisTick: {

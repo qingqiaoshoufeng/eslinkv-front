@@ -1,5 +1,5 @@
 <template>
-	<div class="swiper-box">
+	<div class="swiper-box1">
 		<!-- 轮播视频部分 -->
 		<div class="swiper-Part" v-if="[7,8].includes(step)">
 			<!-- 视频区域 -->
@@ -143,7 +143,7 @@ export default {
 };
 </script>
 <style lang="scss">
-.swiper-box {
+.swiper-box1 {
 	width: 1000px;
 	height: 400px;
 	margin-top: 390px;
