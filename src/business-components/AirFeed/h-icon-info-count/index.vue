@@ -7,12 +7,12 @@
 	</div>
 </template>
 <script>
-	import JSONStringify from '../../../../lib/vendor/JSONStringify';
 	import mixins from '../../mixins';
+
 	const config = {animation: true}
 	const value = {
 		api: {
-			data: JSONStringify({
+			data: JSON.stringify({
 				icon: '/static/icons/phone-border.svg',
 				text: '累计通话时长:',
 				minutes: '680,230'
@@ -21,12 +21,8 @@
 	}
 	export default {
 		mixins: [mixins],
-		methods: {
-
-		},
-		computed: {
-
-		},
+		methods: {},
+		computed: {},
 		created() {
 			this.configSource = this.parseConfigSource(config);
 			this.configValue = this.parseConfigValue(config, value);
@@ -34,39 +30,41 @@
 	}
 </script>
 <style lang="scss">
-.h-icon-info-count {
-	display: flex;
-	align-items: center;
-	background: linear-gradient(90deg, #001F6D 0%, rgba(0, 31, 109, 0) 100%);
-	&__icon {
-		width: 32px;
-		height: 32px;
-		background-size: 32px;
-		background-repeat: no-repeat;
-		background-position: center;
-		margin-left: 16px;
+	.h-icon-info-count {
+		display: flex;
+		align-items: center;
+		background: linear-gradient(90deg, #001F6D 0%, rgba(0, 31, 109, 0) 100%);
+
+		&__icon {
+			width: 32px;
+			height: 32px;
+			background-size: 32px;
+			background-repeat: no-repeat;
+			background-position: center;
+			margin-left: 16px;
+		}
+
+		&__text {
+			font-size: 18px;
+			line-height: 24px;
+			color: #00DDFF;
+			margin-left: 8px;
+		}
+
+		&__count {
+			font-weight: bold;
+			font-size: 32px;
+			line-height: 32px;
+			color: #FFFFFF;
+			margin-left: 16px;
+		}
+
+		&__unit {
+			margin-left: 8px;
+			font-size: 18px;
+			line-height: 24px;
+			color: rgba(255, 255, 255, 0.75);
+		}
 	}
-	&__text{
-		font-family: PingFang SC;
-		font-size: 18px;
-		line-height: 24px;
-		color: #00DDFF;
-		margin-left: 8px;
-	}
-	&__count {
-		font-weight: bold;
-		font-size: 32px;
-		line-height: 32px;
-		color: #FFFFFF;
-		margin-left: 16px;
-	}
-	&__unit {
-		margin-left: 8px;
-		font-family: PingFang SC;
-		font-size: 18px;
-		line-height: 24px;
-		color: rgba(255, 255, 255, 0.75);
-	}
-}
 </style>
 

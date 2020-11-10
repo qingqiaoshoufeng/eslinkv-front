@@ -34,6 +34,7 @@
 				handler(val) {
 					// 联动示例
 					// console.log('-', val)
+					this.init()
 				},
 				deep: true,
 				immediate: true

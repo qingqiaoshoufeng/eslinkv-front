@@ -13,10 +13,12 @@ conf.keys().forEach(name => {
 	const type = name.split('/')[1]
 	const title = name.split('/')[2]
 	const obj = conf(name).default
-	if (widgetsObject[type]) {
-		widgetsObject[type].widgets.push({...obj, type: title, label: title})
-	} else {
-		widgetsObject[type] = {type, label: type, widgets: [{...obj, type: title, label: title}]}
+	if (obj) {
+		if (widgetsObject[type]) {
+			widgetsObject[type].widgets.push({...obj, type: title, label: title})
+		} else {
+			widgetsObject[type] = {type, label: type, widgets: [{...obj, type: title, label: title}]}
+		}
 	}
 })
 for (let key in widgetsObject) {
