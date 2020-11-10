@@ -1,56 +1,59 @@
 <template>
-	<div class="h-icon-info-desc widget-part" :style="styles">
+	<div class="h-icon-info-desc widget-part fn-flex pos-r" :style="styles">
+		<div class="pos-a h-icon-info-bg"></div>
 		<div class="h-icon-info-desc__icon" :style="`background-image: url(${data && data.icon})`"></div>
 		<div class="h-icon-info-desc__text">{{ data && data.text }}</div>
 	</div>
 </template>
 <script>
-	import JSONStringify from '../../../../lib/vendor/JSONStringify';
-	import mixins from '../../mixins';
+	import mixins from '../../mixins'
+
 	const config = {animation: true}
 	const value = {
 		api: {
-			data: JSONStringify({
-				icon: '/static/icons/book.svg',
+			data: JSON.stringify({
+				icon: '/static/icons/h-icon-info-desc-1.svg',
 				text: '热线服务业务受理分析(次)',
 			})
 		}
 	}
 	export default {
 		mixins: [mixins],
-		methods: {
-
-		},
-		computed: {
-
-		},
 		created() {
-			this.configSource = this.parseConfigSource(config);
-			this.configValue = this.parseConfigValue(config, value);
+			this.configSource = this.parseConfigSource(config)
+			this.configValue = this.parseConfigValue(config, value)
 		},
 	}
 </script>
 <style lang="scss">
-.h-icon-info-desc {
-	display: flex;
-	align-items: center;
-	background: linear-gradient(90deg, #001F6D 0%, rgba(0, 31, 109, 0) 100%);
-	&__icon {
-		width: 32px;
-		height: 32px;
-		background-color: #064F94;
-		background-size: 22px 24px;
-		background-repeat: no-repeat;
-		background-position: center;
-		margin-left: 6px;
+	.h-icon-info-desc {
+		align-items: center;
+
+		.h-icon-info-bg {
+			background: linear-gradient(90deg, rgba(0, 31, 109, 1) 0%, rgba(0, 31, 109, 0) 100%);
+			width: 100%;
+			height: 100%;
+			opacity: .2;
+			top: 0;
+			left: 0;
+		}
+
+		&__icon {
+			width: 32px;
+			height: 32px;
+			background-color: #064F94;
+			background-size: 22px 24px;
+			background-repeat: no-repeat;
+			background-position: center;
+			margin-left: 6px;
+		}
+
+		&__text {
+			font-size: 20px;
+			line-height: 24px;
+			color: #FEFFFF;
+			margin-left: 10px;
+		}
 	}
-	&__text{
-		font-family: PingFang SC;
-		font-size: 20px;
-		line-height: 24px;
-		color: #FEFFFF;
-		margin-left: 10px;
-	}
-}
 </style>
 

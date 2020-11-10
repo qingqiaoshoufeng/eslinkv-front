@@ -1,5 +1,5 @@
 <template>
-	<div class="h-call-count-statistics widget-part" :style="styles" >
+	<div class="h-call-count-statistics widget-part" :style="styles">
 		<div
 			class="h-call-count-statistics__icon"
 			:style="{backgroundImage: `url(${data && data.icon || ''})` }">
@@ -26,17 +26,16 @@
 	</div>
 </template>
 <script>
-	import JSONStringify from '../../../../lib/vendor/JSONStringify';
-	import mixins from '../../mixins';
+	import mixins from '../../mixins'
 	import options from './options'
 
 	const config = {animation: true}
 	const value = {
 		api: {
-			data: JSONStringify({
+			data: JSON.stringify({
 				telAmount: '9,999,9',
 				value: 90,
-				icon: '/static/icons/telephone.svg',
+				icon: '/static/icons/h-call-count-statistics-1.svg',
 				centerTitle: '热线服务话务量(次)',
 				graphTitle: '接通率'
 			})
@@ -44,18 +43,15 @@
 	}
 	export default {
 		mixins: [mixins],
-		computed: {
-		},
+		computed: {},
 		methods: {
 			setOption(data) {
 				options.series[0].data[0].value = data?.value;
 				options.series[0].data[1].value = 100 - data?.value;
 				options.series[1].data[0].value = data?.value;
 				options.series[1].data[1].value = 100 - data?.value;
-				console.log(options);
 				this.instance && this.instance.setOption(options)
 			},
-
 		},
 		watch: {
 			data: {
@@ -75,82 +71,86 @@
 			this.configSource = this.parseConfigSource(config);
 			this.configValue = this.parseConfigValue(config, value);
 		},
-		filters: {
-			numSplit(numStr) {
-				const str = String(numStr) || '';
-			}
-		}
 	}
 </script>
 <style lang="scss">
-.h-call-count-statistics {
-	width: 480px;
-	height: 160px;
-	display: flex;
-	background: linear-gradient(360deg, rgba(255, 255, 255, 0.1) -2.01%, rgba(255, 255, 255, 0) 100%);
-	&__icon {
-		margin-left: 16px;
-		margin-top: 26px;
-		width: 110px;
-		height: 110px;
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: 100px;
-	}
-	&__call-amount {
-		margin-left: 16px;
-		margin-top: 53px;
-		&__count {
-			font-weight: bold;
-			font-size: 32px;
-			line-height: 32px;
-			color: #FEFFFF;
-			text-align: left;
+	.h-call-count-statistics {
+		width: 480px;
+		height: 100%;
+		display: flex;
+		background: linear-gradient(360deg, rgba(255, 255, 255, 0.1) -2.01%, rgba(255, 255, 255, 0) 100%);
+
+		&__icon {
+			margin-left: 16px;
+			margin-top: 26px;
+			width: 110px;
+			height: 110px;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 100px;
 		}
-		&__desc {
-			font-family: PingFang SC;
-			font-size: 18px;
-			line-height: 24px;
-			color: rgba(255, 255, 255, 0.75);
-			margin-top: 8px;
-			text-align: left;
+
+		&__call-amount {
+			margin-left: 16px;
+			margin-top: 53px;
+
+			&__count {
+				font-weight: bold;
+				font-size: 32px;
+				line-height: 32px;
+				color: #FEFFFF;
+				text-align: left;
+			}
+
+			&__desc {
+				font-size: 18px;
+				line-height: 24px;
+				color: rgba(255, 255, 255, 0.75);
+				margin-top: 8px;
+				text-align: left;
+			}
 		}
-	}
-	&__call-success-rate {
+
+		&__call-success-rate {
 			position: relative;
 			width: 144px;
 			height: 144px;
 			margin-top: 8px;
 			margin-left: 22px;
-		&__graph {
-			width: 144px;
-			height: 144px;
-			background-image: url('/static/icons/ellipse-dashed.svg');
-			background-repeat: no-repeat;
-			background-size: 144px;
-			background-position: center;
-		}
-		&__desc{
-			position: absolute;
-			display: flex;
-			flex-direction: column;
-			top: 45px;
-			left: 43px;
-			&__rate {
-				font-weight: bold;
-				font-size: 32px;
-				line-height: 32px;
-				color: #FEFFFF;
+
+			&__graph {
+				width: 144px;
+				height: 144px;
+				background-image: url('/static/icons/ellipse-dashed.svg');
+				background-repeat: no-repeat;
+				background-size: 144px;
+				background-position: center;
 			}
-			&__font {
-				font-family: PingFang SC;
-				font-size: 18px;
-				line-height: 24px;
-				color: rgba(255, 255, 255, 0.75);
-				margin-top: 7px;
+
+			&__desc {
+				position: absolute;
+				display: flex;
+				flex-direction: column;
+				top: 45px;
+				left: 50%;
+				width: 100%;
+				transform: translateX(-50%);
+
+				&__rate {
+					font-weight: bold;
+					font-size: 32px;
+					line-height: 32px;
+					color: #FEFFFF;
+				}
+
+				&__font {
+					font-size: 18px;
+					line-height: 24px;
+					color: rgba(255, 255, 255, 0.75);
+					margin-top: 7px;
+				}
 			}
 		}
 	}
-}
 </style>
 
