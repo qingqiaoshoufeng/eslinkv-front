@@ -1,9 +1,10 @@
 export default {
+	label: '供气量分析',
 	config: {
 		layout: {
 			size: {
-				width: 1000,
-				height: 950
+				width: 480,
+				height: 208
 			},
 			position: {
 				value: 'relative'

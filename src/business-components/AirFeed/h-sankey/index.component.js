@@ -1,9 +1,10 @@
 export default {
+	label: '桑基图',
 	config: {
 		layout: {
 			size: {
-				width: 1000,
-				height: 950
+				width: 480,
+				height: 484
 			},
 			position: {
 				value: 'relative'
