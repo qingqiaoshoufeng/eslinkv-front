@@ -35,8 +35,8 @@ export default {
 	methods: {
 		handleSceneChange(e) {
 			let sceneIndexMap = {
-				nn16rowdl5r: 'service',
-				tbc8uqyrkze: 'home',
+				nn16rowdl5r: 'home',
+				tbc8uqyrkze: 'home', //供气
 				g199smrdh4r: 'project',
 			};
 			let { index } = e.detail;
@@ -47,7 +47,7 @@ export default {
 	mounted() {
 		document.addEventListener('SceneIndex', this.handleSceneChange);
 		//自动适应全屏
-		document.body.getElementsByClassName('fit-screen')[0].click();
+		// document.body.getElementsByClassName('fit-screen')[0].click();
 	},
 	beforeDestroy() {
 		document.removeEventListener('SceneIndex', this.handleSceneChange);

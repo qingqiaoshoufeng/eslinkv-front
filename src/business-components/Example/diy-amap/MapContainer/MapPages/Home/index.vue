@@ -25,26 +25,52 @@
 </template>
 <script>
 //页面覆盖物组件
-import RegionBoundary from './Components/RegionBoundary'; //行政区
-import HighPressureLine from './Components/HighPressureLine'; //高压管网
-import InspectionCar from './Components/InspectionCar'; //巡检车辆
-import PressureRegulatingStation from './Components/PressureRegulatingStation'; //调压站
-import GasStation from './Components/GasStation'; //门站
-import ListOverlay from './Components/ListOverlay'; //右侧列表对应覆盖物
-import OverlayDetail from './Components/OverlayDetail/index.vue'; //覆盖物详情
+import {
+	OverlayDetail,
+	ComprehensiveServiceStation,
+	DistributedEnergyResource,
+	EmergencyAirSourceStation,
+	GasStation,
+	HighPressureLine,
+	HighPressureLine_Process,
+	InspectionCar,
+	InspectionPerson,
+	LiquefiedGasStation,
+	ListOverlay,
+	LNGStation,
+	LowPressureLine,
+	NaturalGasStation,
+	PipeManageMentStation,
+	PressureRegulatingStation,
+	RegionBoundary,
+	UndergroundRepairStation,
+	MiddlePressureLine,
+} from './Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
 
 export default {
 	name: 'HomePage',
 	mixins: [pageMixin],
 	components: {
-		RegionBoundary,
-		HighPressureLine,
-		InspectionCar,
-		PressureRegulatingStation,
-		GasStation,
-		ListOverlay,
 		OverlayDetail,
+		ComprehensiveServiceStation,
+		DistributedEnergyResource,
+		EmergencyAirSourceStation,
+		GasStation,
+		HighPressureLine,
+		HighPressureLine_Process,
+		InspectionCar,
+		InspectionPerson,
+		LiquefiedGasStation,
+		ListOverlay,
+		LNGStation,
+		LowPressureLine,
+		NaturalGasStation,
+		PipeManageMentStation,
+		PressureRegulatingStation,
+		RegionBoundary,
+		UndergroundRepairStation,
+		MiddlePressureLine,
 	},
 	data() {
 		return {};
