@@ -30,7 +30,7 @@ export default {
 		this.instanceArr = []
 		let fun = findAmapRoot.bind(this)
 		this.$amap = fun()
-		this.init()
+		this.init && this.init()
 	},
 	beforeDestroy() {
 		this.instanceArr.forEach((instance) => {

@@ -5,7 +5,6 @@ export default {
 			size: {
 				width: 481,
 				height: 160,
-				// height: 247
 			},
 			position: {
 				value: 'relative'

@@ -1,5 +1,5 @@
 <template>
-	<div ref="canvas-wrapper" id="kanban" class="canvas-wrapper" :style="canvasStyle">
+	<div ref="canvas-wrapper" id="kanban" class="canvas-wrapper" :style="canvasStyle()">
 		<load-mask :show="querying">请求看板数据…</load-mask>
 		<div :class="{ active: refilling }" class="refill-mask">
 			<div class="mask-content">
@@ -18,11 +18,11 @@
 								v-if="showParts(child)"
 								:key="child.id"
 								:class="[
-                  `group-item group-item-${child.id}`,
-                  {
-                    'slide-hide': calcSlideHide(item.config, child.id)
-                  },
-                ]"
+								  `group-item group-item-${child.id}`,
+								  {
+									'slide-hide': calcSlideHide(item.config, child.id)
+								  },
+								]"
 								:type="child.type"
 								:config="child.config"
 								:style="child.config.widget.hide ? 'display: none' : ''"
@@ -33,16 +33,12 @@
 				</parts>
 			</template>
 		</template>
-		<template v-for="grid in gridsAdded">
-			<grid-item v-if="!grid.config.combinationTo" :key="grid.id" v-bind="grid" readonly/>
-		</template>
 		<api-executor v-for="api in apis" :key="api.variable" :api="api"
 					  @api-data-update="(data) => handleApiDataUpdate(api.variable, data)"/>
 	</div>
 </template>
 <script>
 	import parts from '../core/widgets/parts/index'
-	import gridItem from '../core/kanboard-editor/layout-grid/grid.vue'
 	import styleParser from '../core/widgets/parts/lib/style-parser'
 	import widgetOperation from '../core/kanboard-editor/mixins/widget-operation'
 	import refill from '../core/kanboard-editor/mixins/refill'
@@ -62,7 +58,6 @@
 		},
 		components: {
 			parts,
-			gridItem,
 			loadMask
 		},
 		data() {
@@ -70,7 +65,6 @@
 				store,
 				querying: true,
 				widgetsAdded: {},
-				gridsAdded: {},
 				refilling: false,
 				refillPercent: 0,
 				canvasConfigValue: {},
@@ -120,7 +114,6 @@
 							resolve()
 						}
 					}
-					this.gridsAdded = grids || {}
 					if (length) {
 						reDrawWidget(widgetsArray.shift())
 					} else {
@@ -129,29 +122,22 @@
 						resolve()
 					}
 				})
-			}
-		},
-		computed: {
-			showParts() {
-				return (item) => {
-					if (item.scene === 0) {
-						return true
-					} else if (item.scene === this.store.scene.index) {
-						return true
-					}
-					return false
-				}
 			},
 			canvasStyle() {
-				return styleParser(this.canvasConfigValue, this.time)
-			}
-		},
-		watch: {
-			canvasStyle(val) {
+				const val = styleParser(this.canvasConfigValue)
 				if (val) {
 					this.$emit('mounted', val)
 				}
-			}
+				return val
+			},
+			showParts(item) {
+				if (item.scene === 0) {
+					return true
+				} else if (item.scene === this.store.scene.index) {
+					return true
+				}
+				return false
+			},
 		},
 		mounted() {
 			mutations.setInstance('kanboard', this)
@@ -161,7 +147,6 @@
 
 <style lang="scss">
 	.scene-temporary-wrapper {
-
 		.widget-part {
 			position: absolute !important;
 		}

@@ -8,6 +8,7 @@
 				icon: 'iconmenzhan',
 			}"
 			:visible="visible"
+			@click="handleOverlayClick(item)"
 		/>
 	</div>
 </template>
@@ -33,6 +34,9 @@ export default {
 		},
 		getData() {
 			this.list = GASSTATIONLIST;
+		},
+		handleOverlayClick(marker) {
+			this.$emit('overlay-click', marker, 'GASSTATION');
 		},
 	},
 };

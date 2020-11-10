@@ -119,9 +119,6 @@ export default {
 			&:not(:last-child) {
 				margin-right: 16px;
 			}
-			&:hover {
-				opacity: 0.8;
-			}
 			.legend-icon {
 				font-size: 24px;
 				margin-right: 8px;
@@ -131,7 +128,7 @@ export default {
 			}
 		}
 		.in-active {
-			opacity: 0.8;
+			opacity: 0.5;
 		}
 	}
 	.legend-mode {

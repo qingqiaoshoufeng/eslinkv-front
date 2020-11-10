@@ -46,6 +46,8 @@ export default {
 	},
 	mounted() {
 		document.addEventListener('SceneIndex', this.handleSceneChange);
+		//自动适应全屏
+		document.body.getElementsByClassName('fit-screen')[0].click();
 	},
 	beforeDestroy() {
 		document.removeEventListener('SceneIndex', this.handleSceneChange);
@@ -90,10 +92,6 @@ export default {
 </style>
 
 <style lang="scss">
-.amap-marker {
-	pointer-events: auto;
-	z-index: 1200;
-}
 .amap-marker-content {
 	& > div {
 		& > div:not(.no-hover-effect):hover {
@@ -102,6 +100,6 @@ export default {
 	}
 }
 .amap-markers {
-	z-index: 1200 !important;
+	z-index: 1100 !important;
 }
 </style>

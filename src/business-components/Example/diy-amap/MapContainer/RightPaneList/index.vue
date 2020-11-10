@@ -54,20 +54,17 @@ export default {
 		return {
 			ready: false,
 			detailData: {},
-			list: HOMESITUATIONAWARENESSLIST,
+			list: [],
 			rightPaneComponentName: 'HomeList',
 			//配置不同页面  list 右侧列表
 			pageConfig: {
 				home: {
-					list: HOMESITUATIONAWARENESSLIST,
 					rightPaneComponentName: 'HomeList',
 				},
 				service: {
-					list: SERVICESITUATIONAWARENESSLIST,
 					rightPaneComponentName: 'ServiceList',
 				},
 				project: {
-					list: PROJECTSITUATIONAWARENESSLIST,
 					rightPaneComponentName: 'ProjectList',
 				},
 			},
@@ -90,6 +87,13 @@ export default {
 			Object.keys(config).forEach(prop => {
 				this[prop] = config[prop];
 			});
+			//请求数据
+			let listByPageMap = {
+				home: HOMESITUATIONAWARENESSLIST,
+				service: SERVICESITUATIONAWARENESSLIST,
+				project: PROJECTSITUATIONAWARENESSLIST,
+			};
+			this.list = listByPageMap[pageName];
 			this.$nextTick(() => {
 				this.ready = true;
 			});

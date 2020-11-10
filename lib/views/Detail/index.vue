@@ -12,13 +12,11 @@
 
 <script>
 	import kanbanPreview from './preview-base.vue'
-	import loadMask from '../../components/load-mask'
 	import {mutations} from '../../store'
 
 	export default {
 		components: {
 			kanbanPreview,
-			loadMask
 		},
 		provide() {
 			return {kanboard: this}
@@ -26,8 +24,7 @@
 		data() {
 			return {
 				ready: false,
-				fitScreen: false,
-				querying: false,
+				fitScreen: true,
 				kanboardSize: {
 					width: 1920,
 					height: 1080
@@ -52,7 +49,6 @@
 				this.actualScaleRatio = Math.min(clientWidth / w, clientHeight / h)
 			},
 			queryKanboard() {
-				this.querying = true
 				const {params: {id}} = this.$route
 				const dataBoardId = id
 				this.$api.board.detail({dataBoardId}).then(res => {
@@ -61,25 +57,12 @@
 					mutations.initScene(value.scene)
 					mutations.listToObj(value)
 				})
-				this.querying = false
 			},
 			refill(value) {
 				this.$refs.previewContainer.refillConfig(value).then(() => {
 					this.ready = true
 				})
 			},
-		},
-		watch: {
-			fitScreen(value) {
-				const wrapper = this.kanboardWrapper || (this.kanboardWrapper = this.$refs.kanboardWrapper)
-				if (value) {
-					const scrollOffsetX = this.kanboardSize.width - this.screenSize.width
-					const scrollOffsetY = this.kanboardSize.height - this.screenSize.height
-					wrapper.scrollTo({top: scrollOffsetY / 2, left: scrollOffsetX / 2})
-				} else {
-					wrapper.scrollTo({top: 0, left: 0})
-				}
-			}
 		},
 		computed: {
 			scaleRatio() {
@@ -121,7 +104,7 @@
 				outline: rgba(255, 255, 255, 0.2) 1px dotted;
 				flex-shrink: 0;
 				flex-grow: 0;
-				margin: auto;
+				/*margin: auto;*/
 			}
 		}
 
