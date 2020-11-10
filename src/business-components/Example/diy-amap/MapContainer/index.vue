@@ -106,7 +106,6 @@ export default {
 			this.map = this.$refs.amap.$amap;
 			this.initPage('home');
 			setTimeout(() => {
-				window.suyan = this.map;
 				this.map.addControl(new window.AMap.MapType());
 			}, 2000);
 		},

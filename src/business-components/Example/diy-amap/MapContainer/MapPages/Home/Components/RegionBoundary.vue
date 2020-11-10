@@ -65,7 +65,7 @@ export default {
 		return null;
 	},
 	beforeDestroy() {
-		this.map.off('zoomend', this.handleMapZoomChange);
+		this.$amap.off('zoomend', this.handleMapZoomChange);
 	},
 };
 </script>

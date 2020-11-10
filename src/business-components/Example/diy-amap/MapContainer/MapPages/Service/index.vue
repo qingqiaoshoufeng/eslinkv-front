@@ -45,7 +45,7 @@ export default {
 		};
 	},
 	beforeDestroy() {
-		this.map && this.map.clearMap();
+		this.$amap && this.$amap.clearMap();
 	},
 };
 </script>

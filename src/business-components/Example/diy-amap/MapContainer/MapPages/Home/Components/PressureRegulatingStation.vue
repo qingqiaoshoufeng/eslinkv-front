@@ -8,6 +8,7 @@
 				icon: 'icontiaoyazhan',
 			}"
 			:visible="visible"
+			@click="handleOverlayClick(item)"
 		/>
 	</div>
 </template>
@@ -33,6 +34,9 @@ export default {
 		},
 		getData() {
 			this.list = PRESSUREREGULATINGSTATIONLIST;
+		},
+		handleOverlayClick(marker) {
+			this.$emit('overlay-click', marker, 'PRESSUREREGULATINGSTATION');
 		},
 	},
 };
