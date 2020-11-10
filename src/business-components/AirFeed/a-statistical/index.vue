@@ -170,6 +170,7 @@
 					font-weight: 700;
 					color: #fff;
 					text-align: center;
+					line-height: 80px;
 				}
 			}
 		}

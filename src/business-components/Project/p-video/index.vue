@@ -6,7 +6,14 @@
                     :style="{backgroundImage:'url('+ data&&data.imgList[data.activeIndex].img +')'}">
                     {{data.imgList[data.activeIndex].img}}
 				</div>-->
-				<img class="video" :src="data&&data.imgList[data.activeIndex].img" alt />
+				<!-- <img class="video" :src="data&&data.imgList[data.activeIndex].img" alt /> -->
+				<video-player
+					class="video-player-box"
+					ref="videoPlayer"
+					:options="playerOptions"
+					:playsinline="true"
+					customEventName="customstatechangedeventname"
+				></video-player>
 			</div>
 			<div class="right">
 				<div class="swiper-box">
@@ -51,20 +58,55 @@ const value = {
 					img: '/static/images/project/04.jpg',
 				},
 			],
+			videoList: [
+                'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+                'http://www.17sucai.com/preview/501914/2017-08-04/%E9%A1%B5%E9%9D%A2/media/mov_bbb.mp4',
+				'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+                'http://vjs.zencdn.net/v/oceans.mp4'
+			],
 		}),
 	},
 };
 export default {
 	mixins: [mixins],
-	methods: {},
 	data() {
 		return {
 			galleryThumbs: null,
+			playerOptions: {
+				// videojs options
+				width: 1352,
+				height: 760,
+				muted: true,
+				language: 'en',
+				playbackRates: [0.7, 1.0, 1.5, 2.0],
+				autoplay: true,
+				sources: [
+					{
+						type: 'video/mp4',
+						src:
+							'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+					},
+				],
+			},
 		};
+	},
+	computed: {
+		getUserType() {
+            return videoList[data.activeIndex]
+        },
 	},
 	created() {
 		this.configSource = this.parseConfigSource(config);
 		this.configValue = this.parseConfigValue(config, value);
+	},
+	methods: {
+		showVideo(bol) {
+			let myPlayer = this.$refs.videoPlayer.player;
+			if (bol) {
+				myPlayer.src(this.getUserType); //根据userType的不同展示不同的视频地址
+				return false;
+			}
+		},
 	},
 	mounted() {
 		let _this = this;
@@ -82,8 +124,9 @@ export default {
 					this.activeIndex = 0;
 				},
 				slideChange: function () {
-                    // 处理兼容 重新创建组件 会导致activeIndex数量翻倍 这里取余
-                    _this.data.activeIndex = this.activeIndex %  _this.data.imgList.length;
+					// 处理兼容 重新创建组件 会导致activeIndex数量翻倍 这里取余
+					_this.data.activeIndex =this.activeIndex % _this.data.imgList.length;
+					_this.playerOptions.sources[0].src = _this.data.videoList[_this.data.activeIndex]
 				},
 			},
 			pagination: {
@@ -93,7 +136,7 @@ export default {
 					return '<span class="' + className + '"></span>';
 				},
 			},
-        });
+		});
 	},
 };
 </script>
@@ -104,8 +147,9 @@ export default {
 		height: 838px;
 		width: 1488px;
 		background-image: url('/static/images/project/video-bg.png');
-		.video {
+		.video-player-box {
 			margin-top: 40px;
+			margin-left: 65px;
 			width: 1352px;
 			height: 760px;
 			background-size: cover;
