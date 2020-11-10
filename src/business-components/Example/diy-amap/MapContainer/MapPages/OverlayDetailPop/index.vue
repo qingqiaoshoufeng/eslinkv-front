@@ -36,15 +36,13 @@
 <script>
 import {
 	GASSTATIONLIST,
-	SURGESTATIONLIST,
+	PRESSUREREGULATINGSTATIONLIST,
 	INSPECTIONCAR,
 	HOMESITUATIONAWARENESSLIST,
 	OVERLAYINFOMAP,
 } from '@/business-components/Example/diy-amap/config/index';
 import { AMapMarker } from '@/business-components/Example/diy-amap/lib';
 import {
-	WarningOverlay,
-	GasStationOverlay,
 	Overlay,
 	PopContainer,
 	SvgIcon,
@@ -57,8 +55,6 @@ let eventTypeIconMap = {
 };
 export default {
 	components: {
-		GasStationOverlay,
-		WarningOverlay,
 		Overlay,
 		PopContainer,
 		SvgIcon,
@@ -87,7 +83,7 @@ export default {
 			overlayTypeInfo: {},
 			overlayData: {
 				GASSTATION: GASSTATIONLIST,
-				SURGESTATION: SURGESTATIONLIST,
+				SURGESTATION: PRESSUREREGULATINGSTATIONLIST,
 				INSPECTIONCAR: INSPECTIONCAR,
 			},
 		};
@@ -255,7 +251,6 @@ export default {
 			});
 			polyline.setMap(this.map);
 			let { northeast, southwest } = polyline.getBounds();
-			console.log(northeast, southwest);
 			this.setRouteFitMap(northeast, southwest);
 			if (isComplete) {
 				return false;
@@ -299,7 +294,6 @@ export default {
 		},
 		handleViewDetail(data) {
 			let { timeInSeconds, id, taskId, overlayType } = data;
-			console.log(data, 'data');
 			if (overlayType === 'INSPECTIONCAR' && taskId) {
 				let task = this.taskList.find(task => {
 					return task.id === taskId;

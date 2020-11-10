@@ -1,3 +1,11 @@
+function findAmapRoot() {
+	if (this.$amap) return this.$amap
+	let parent = this.$parent
+	if (parent) {
+		let fun = findAmapRoot.bind(parent)
+		return fun()
+	}
+}
 export default {
 	props: {
 		visible: {
@@ -7,16 +15,27 @@ export default {
 	},
 	watch: {
 		visible(val) {
-			console.log(val, 'val')
 			if (val) {
-				this.instance.show()
+				this.instanceArr.forEach((instance) => {
+					instance.show()
+				})
 			} else {
-				this.instance.hide()
+				this.instanceArr.forEach((instance) => {
+					instance.hide()
+				})
 			}
 		},
 	},
+	created() {
+		this.instanceArr = []
+		let fun = findAmapRoot.bind(this)
+		this.$amap = fun()
+		this.init()
+	},
 	beforeDestroy() {
-		this.instance.setMap(null)
-		this.instance = null
+		this.instanceArr.forEach((instance) => {
+			this.$amap.remove(instance)
+		})
+		this.instanceArr = null
 	},
 }

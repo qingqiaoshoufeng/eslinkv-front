@@ -16,8 +16,6 @@ initAMapApiLoader({
 	// 高德key
 	plugin: [
 		'AMap.Scale',
-		'AMap.OverView',
-		'AMap.ToolBar',
 		'AMap.MapType',
 		'AMap.DistrictSearch',
 		'AMap.Driving',
@@ -42,7 +40,6 @@ export default {
 				g199smrdh4r: 'project',
 			};
 			let { index } = e.detail;
-			console.log(index);
 			let pageName = sceneIndexMap[index];
 			bus.$emit('currentSceneChange', pageName);
 		},

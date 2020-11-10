@@ -4,6 +4,15 @@ import { lazyAMapApiLoaderInstance } from '../services/injected-amap-api-instanc
 import CONSTANTS from '../utils/constant'
 import VueAMap from '../'
 
+function findAmapRoot() {
+	if (this.$amap) return this.$amap
+	let parent = this.$parent
+	if (parent) {
+		let fun = findAmapRoot.bind(parent)
+		return fun()
+	}
+}
+
 export default {
 	data() {
 		return {
@@ -18,8 +27,8 @@ export default {
 					this.__contextReady.call(this, this.convertProps())
 			})
 		}
-		this.$amap =
-			this.$amap || this.$parent.$amap || this.$parent.$parent.$amap
+		let fun = findAmapRoot.bind(this)
+		this.$amap = fun()
 		if (this.$amap) {
 			this.register()
 		} else {
