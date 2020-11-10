@@ -55,10 +55,8 @@ export default {
 	},
 	methods: {
 		setNumberTransform() {
-			const numberItems = this.$refs.numberItem; // 拿到数字的ref，计算元素数量
+            const numberItems = this.$refs.numberItem; 
 			const numberArr = this.data.value.toString().split('');
-			// const numberArr = this.orderNum.filter(item => !isNaN(item));
-			// 结合CSS 对数字字符进行滚动,显示订单数量
 			for (let index = 0; index < numberItems.length; index++) {
 				const elem = numberItems[index];
 				elem.style.transform = `translate(0, -${
@@ -158,6 +156,7 @@ export default {
 				font-weight: 700;
 				color: #fff;
 				text-align: center;
+                line-height: 80px;
 			}
 		}
 	}

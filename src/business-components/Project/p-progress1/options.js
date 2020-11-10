@@ -2,6 +2,7 @@ export default {
     series: {
         type: 'sankey',
         layout: 'none',
-        focusNodeAdjacency: 'allEdges'
+        focusNodeAdjacency: 'allEdges',
+        layoutIterations: 0,
     }
 }

@@ -8,7 +8,10 @@ import './scss/index.scss'
 import './business-components'
 import {debug} from '../plugins'
 import directives from '../lib/directives'
+import VueVideoPlayer from 'vue-video-player'
+import 'video.js/dist/video-js.css'
 
+Vue.use(VueVideoPlayer)
 Vue.prototype.$debug = debug
 Vue.prototype.$Message = Message
 Vue.prototype.$Modal = Modal

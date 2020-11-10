@@ -3,9 +3,9 @@
 		<div class="h-project-1-step-icon fn-flex">
 			<img :src="icon2" alt=""/>
 			<div class="h-project-1-step-2__vertical-line"></div>
-			<div class="h-project-1-step-2__horizontal-line">
+			<div class="h-project-1-step-2__horizontal-line" :class="{'position_left':step===2}">
 				<div  class="h-project-1-step-2__horizontal-line__person">
-					<span>客服部</span>
+					<span>客服部{{step}}</span>
 					<span>秦芳芳</span>
 				</div>
 			</div>
@@ -74,6 +74,9 @@
 			}
 
 		}
+        .position_left{
+            transform: translateX(-100%);
+        }
 	}
 	.h-project-1-step-icon {
 		position: relative;
