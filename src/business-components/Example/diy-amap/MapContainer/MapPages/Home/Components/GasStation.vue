@@ -32,8 +32,8 @@ export default {
 		init() {
 			this.getData();
 		},
-		getData() {
-			this.list = GASSTATIONLIST;
+		async getData() {
+			this.list = await this.$sysApi.map.home.gasStationList();
 		},
 		handleOverlayClick(marker) {
 			this.$emit('overlay-click', marker, 'GASSTATION');

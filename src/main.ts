@@ -1,15 +1,16 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import {Message, Modal} from 'view-design'
+import { Message, Modal } from 'view-design'
 import 'view-design/dist/styles/iview.css'
 import './scss/reset.scss'
 import './scss/index.scss'
 import './business-components'
-import {debug} from '../plugins'
+import { debug } from '../plugins'
 import directives from '../lib/directives'
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
+import './api/index.js'
 
 Vue.use(VueVideoPlayer)
 Vue.prototype.$debug = debug
@@ -22,5 +23,5 @@ Object.keys(directives).forEach((key) => {
 })
 new Vue({
 	router,
-	render: h => h(App)
-}).$mount("#app")
+	render: (h) => h(App),
+}).$mount('#app')
