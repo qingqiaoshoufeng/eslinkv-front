@@ -22,13 +22,12 @@ document.addEventListener('SceneIndex', function (e) {
 |scene.destroyScene|index：Number,String|根据索引删除一个场景|
 |scene.initScene|list：Array|初始化场景数量|
 
+## 实例 GoldChart.instance 
+|方法名|参数|作用|
+| --- | --- | --- |
+|instance.updateComponent|id：String,data:Any|更新组件|
+
 ## 其他 events.list 
 |方法名|参数|作用|
 | --- | --- | --- |
 |widgetUnactived|无|小工具取消选择，面板关闭|
-
-
-store.instance.$refs{this.api.config.bind[0].id}.update(value)
-
-
-store.instance.$refs.id.update(params)

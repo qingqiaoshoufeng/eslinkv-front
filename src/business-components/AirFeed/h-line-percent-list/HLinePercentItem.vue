@@ -3,66 +3,49 @@
 		<div class="h-line-percent__NO font-num" :style="{background: styles.NOBg}">{{value.NO}}</div>
 		<div class="h-line-percent__right">
 			<div class="h-line-percent__right__top">
-				<div class="h-line-percent__right__top__name">
-					{{value.name}}
-				</div>
-				<div class="h-line-percent__right__top__amount">
-					{{value.amount}}
-				</div>
+				<div class="h-line-percent__right__top__name">{{value.name}}</div>
+				<div class="h-line-percent__right__top__amount">{{value.amount}}</div>
 			</div>
 			<div class="h-line-percent__right__bottom">
 				<div
-				class="h-line-percent__right__bottom__ruler"
-				:style="{
-					background: `
-					linear-gradient(270deg, ${styles.startColor} 0%, ${styles.endColor} 100%)`,
+					class="h-line-percent__right__bottom__ruler"
+					:style="{
+					background: `linear-gradient(270deg, ${styles.startColor} 0%, ${styles.endColor} 100%)`,
 					width: rulerWidth
-				}">
-				</div>
+				}"
+				></div>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-// {
-//	value: {
-// 	  NO: '01',
-// 	  name: '开户',
-// 	  amount: 4500,
-//	},
-//	style: {
-// 	  NOBg: '#FF7217',
-// 	  startColor: '#FF7217',
-// 	  endColor: 'rgba(255, 114, 23, 0)'
-//  }
-//}
 
-	export default {
-		computed: {
-			rulerWidth(){
-				// 根据视觉稿来的
-				const safeWidth = 388;
-				const safeCountPerPx =  safeWidth / this?.maxAmout;
-				return this?.value?.amount * safeCountPerPx + 'px';
-			},
-			styles(){
-				return this?.item?.styles || {};
-			},
-			value(){
-				return this?.item?.value || {};
-			}
+export default {
+	computed: {
+		rulerWidth() {
+			// 根据视觉稿来的
+			const safeWidth = 388;
+			const safeCountPerPx = safeWidth / this?.maxAmout;
+			return this?.value?.amount * safeCountPerPx + 'px';
 		},
-		props: {
-			maxAmout: {
-				type: Number,
-				default: 4500
-			},
-			item: {
-				type: Object,
-				default: () => ({})
-			}
+		styles() {
+			return this?.item?.styles || {};
 		},
-	}
+		value() {
+			return this?.item?.value || {};
+		},
+	},
+	props: {
+		maxAmout: {
+			type: Number,
+			default: 4500,
+		},
+		item: {
+			type: Object,
+			default: () => ({}),
+		},
+    },
+};
 </script>
 <style lang="scss">
 .h-line-percent {
@@ -78,7 +61,7 @@
 		font-weight: bold;
 		font-size: 18px;
 		line-height: 24px;
-		color: #FFFFFF;
+		color: #ffffff;
 	}
 	&__right {
 		margin-left: 10px;
@@ -92,13 +75,13 @@
 				font-family: PingFang SC;
 				font-size: 16px;
 				line-height: 16px;
-				color: #FFFFFF;
+				color: #ffffff;
 			}
 			&__amount {
 				font-family: PingFang SC;
 				font-size: 16px;
 				line-height: 16px;
-				color: #FFFFFF;
+				color: #ffffff;
 			}
 		}
 		&__bottom {
@@ -113,7 +96,6 @@
 				height: 4px;
 			}
 		}
-
 	}
 }
 </style>

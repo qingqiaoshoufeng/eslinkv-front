@@ -31,14 +31,13 @@
 	</div>
 </template>
 <script>
-import JSONStringify from '../../../../lib/vendor/JSONStringify';
 import mixins from '../../mixins';
 import getOptions, {test} from './options'
 
 const config = {animation: true}
 const value = {
 	api: {
-		data: JSONStringify({
+		data: JSON.stringify({
 			data: test
 		})
 	}
