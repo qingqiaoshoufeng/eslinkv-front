@@ -48,7 +48,7 @@ export default {
 	created() {
 		this.configSource = this.parseConfigSource();
 		this.configValue = this.parseConfigValue({ animation: true }, value);
-    },
+	},
 	computed: {
 		style() {
 			let rotate = (this.data&&this.data.value / 100) * 360;

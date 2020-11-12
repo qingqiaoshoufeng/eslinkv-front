@@ -42,7 +42,7 @@ import MapTypeLegend from './MapTypeLegend/index';
 import RightPanelList from './RightPaneList/';
 import { HomeMap, ServiceMap, ProjectMap } from './MapPages/';
 import {
-	HOMELEGEND,
+	HOMELEGEND_STATION,
 	PROJECTLEGEND,
 	SERVICELEGEND,
 } from '@/business-components/Example/diy-amap/config/index';
@@ -81,7 +81,7 @@ export default {
 		this._pageConfig = {
 			home: {
 				mapComponentName: 'homeMap',
-				legendMap: HOMELEGEND,
+				legendMap: HOMELEGEND_STATION,
 			},
 			service: {
 				mapComponentName: 'serviceMap',

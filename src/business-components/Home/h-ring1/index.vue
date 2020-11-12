@@ -7,9 +7,11 @@
 		<div class="pos-a h-ring-1-legend-box">
 			<ul class="h-ring-1-legend" :style="legengdTransform">
 				<li class="fn-flex flex-row" v-for="(item,index) in data?data.value:[]" :key="index"
+					@click="activeHandler(index)"
 					:class="[{active:animateActiveIndex===index}]">
 					<i class="circle" :style="{color:data&&data.color[index%(data?data.color.length:0)]}"/>
-					<label>{{item.title}}</label>
+					<label class="ellipsis">{{item.title}}</label>
+					<a>{{item.des}}</a>
 					<span>{{item.value}}{{data&&data.suffix}}</span>
 				</li>
 			</ul>
@@ -28,13 +30,13 @@
 				color: ['#00DDFF', 'rgba(1,253,210,.5)', 'rgba(36,104,206,.5)', 'rgba(228,53,53,.5)', 'rgba(252,155,93,.5)'],
 				suffix: '%',
 				value: [
-					{value: 12.5, title: '南门站'},
-					{value: 12.5, title: '北门站'},
-					{value: 12.5, title: '下沙门站'},
-					{value: 12.5, title: '江东门站'},
-					{value: 12.5, title: '所前门站'},
-					{value: 12.5, title: '杭州东站'},
-					{value: 12.5, title: '杭州西站'},
+					{value: 12.5, des: '111', title: '南门站'},
+					{value: 12.5, des: '', title: '北门站'},
+					{value: 12.5, des: '', title: '下沙门站'},
+					{value: 12.5, des: '', title: '江东门站'},
+					{value: 12.5, des: '', title: '所前门站'},
+					{value: 12.5, des: '', title: '杭州东站'},
+					{value: 12.5, des: '', title: '杭州西站'},
 				]
 			})
 		}
@@ -65,6 +67,23 @@
 			}
 		},
 		methods: {
+			activeHandler(index) {
+				clearInterval(this.animateTimer)
+				this.instance.dispatchAction({
+					type: 'downplay',
+					seriesIndex: 0,
+					dataIndex: this.animateActiveIndex
+				})
+				this.animateActiveIndex = index
+				this.instance.dispatchAction({
+					type: 'highlight',
+					seriesIndex: 0,
+					dataIndex: index
+				})
+				setTimeout(()=>{
+					this.show(this.data)
+				},2000)
+			},
 			setOption(data) {
 				options.series[0].data = data.value
 				options.color = data.color
@@ -141,9 +160,9 @@
 	}
 
 	.h-ring-1-legend-box {
-		right: 85px;
+		right: 25px;
 		top: 49px;
-		max-height: 168px;
+		max-height: 176px;
 		overflow-y: hidden;
 	}
 
@@ -167,19 +186,25 @@
 			height: 12px;
 		}
 
-		label, span {
+		label, span, a {
 			color: #fff;
-			font-size: 16px;
-			line-height: 16px;
+			font-size: 18px;
+			line-height: 18px;
 		}
 
 		label {
 			margin-left: 4px;
-			margin-right: auto;
+			min-width: 100px;
+			max-width: 100px;
+			text-align: left;
+		}
+
+		a {
+			margin-right: 10px;
 		}
 
 		span {
-			margin-left: 20px;
+			margin-left: auto;
 		}
 	}
 </style>
