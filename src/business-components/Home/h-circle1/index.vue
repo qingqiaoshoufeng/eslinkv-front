@@ -50,6 +50,11 @@
 				return ''
 			}
 		},
+		methods: {
+			updateComponent(value) {
+				console.log(value)
+			}
+		},
 		created() {
 			this.configSource = this.parseConfigSource(config)
 			this.configValue = this.parseConfigValue(config, value)

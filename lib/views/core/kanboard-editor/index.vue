@@ -319,7 +319,7 @@
 	</div>
 </template>
 <script>
-	import {store} from '../../../store'
+	import {mutations, store} from '../../../store'
 	import rightMenu from '../../../components/right-menu'
 	import rulerCanvas from '../ruler-canvas/ruler-canvas.vue'
 	import configPanel from '../config-panel'
@@ -465,7 +465,7 @@
 				return (item) => {
 					if (item.scene === 0) {
 						return true
-					}else if (item.scene === store.scene.index) {
+					} else if (item.scene === store.scene.index) {
 						return true
 					}
 					return false
@@ -500,6 +500,9 @@
 				if (this.refilling) return
 				this.$emit('kanboard-edited')
 			}
+		},
+		mounted() {
+			mutations.setInstance('kanboard', this)
 		}
 	}
 </script>
