@@ -88,8 +88,10 @@ export default {
 </script>
 <style lang="scss">
 .circle1-box {
-    width: 275px;
-	height: 120px;			
+    margin-top: 10px !important;
+    width: 330px;
+	height: 120px;	
+    display: flex;		
 	.h-circle-1 {
 		width: 120px;
 		height: 120px;
@@ -98,7 +100,6 @@ export default {
 			width: 100%;
 			height: 100%;
 		}
-
 		h2,
 		h3,
 		h4 {
@@ -109,13 +110,13 @@ export default {
 	}
 
 	.h-circle-1-list {
-		margin-left: 16px;
+		margin-left: 32px;
 
 		h1 {
 			font-size: 20px;
 			line-height: 24px;
 			color: #00ddff;
-			margin-top: 44px;
+			margin-top: 15px;
 			margin-bottom: 8px;
 			margin-left: 16px;
 			font-weight: normal;

@@ -11,7 +11,7 @@
 				loop
 			></video>
             </div>
-			
+
 			<div class="context">
 				<div class="accident-value font-num">{{data&&data.value}}</div>
 				<div class="accident-desc">{{data&&data.desc}}</div>
