@@ -2,8 +2,8 @@
 	<div class="widget-part" :style="styles">
 		<div class="icon" :style="`background-image: url(${data && data.icon})`"></div>
 		<div class="detail">
-			<div class="number">{{ data.count }}</div>
-			<div class="info">{{ data.text }}</div>
+			<div class="number">{{ data && data.count }}</div>
+			<div class="info">{{ data && data.text }}</div>
 		</div>
 	</div>
 </template>
