@@ -26,3 +26,9 @@ document.addEventListener('SceneIndex', function (e) {
 |方法名|参数|作用|
 | --- | --- | --- |
 |widgetUnactived|无|小工具取消选择，面板关闭|
+
+
+store.instance.$refs{this.api.config.bind[0].id}.update(value)
+
+
+store.instance.$refs.id.update(params)
