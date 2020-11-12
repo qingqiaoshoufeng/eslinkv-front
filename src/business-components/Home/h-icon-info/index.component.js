@@ -1,10 +1,10 @@
 export default {
-	label: '事故统计',
+	label: '图标文案展示',
 	config: {
 		layout: {
 			size: {
-				width: 497,
-				height: 246
+				width: 145,
+				height: 222
 			},
 			position: {
 				value: 'relative'

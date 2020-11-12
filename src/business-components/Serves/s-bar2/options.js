@@ -56,7 +56,7 @@ export default {
             show: true,
         }
     }],
-    barGap: -0.8,
+    barGap: -1,
     series: [{
         type: 'bar',
         yAxisIndex:0,
@@ -69,7 +69,7 @@ export default {
         barWidth: 10,
     }, {
         type: 'bar',
-        barWidth: 6,
+        barWidth: 10,
         yAxisIndex:0,
         showBackground: true,
         itemStyle: {
@@ -77,34 +77,5 @@ export default {
                 color: '#2C99FF',
             }
         },
-    },{
-		type: 'line',
-        yAxisIndex:1,
-        show: true,  
-        axisTick: {
-            show: false,
-            textStyle: {
-                color: '#fff',
-            }
-        },
-        axisLabel: {
-            textStyle: {
-                color: '#fff',
-                show: false,
-            }
-        },
-        itemStyle:{
-            normal: {
-                color:'#yellow',
-                lineStyle:{
-                    width:2,
-                    type:'dotted'  //'dotted'虚线 'solid'实线
-                }
-            }
-        },
-        smooth: true,
-        axisLine: {
-            show: false,
-        }
     }]
 };
