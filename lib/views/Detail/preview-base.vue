@@ -11,12 +11,14 @@
 		<template v-for="item in widgetsAdded">
 			<template v-if="!item.config.widget.combinationTo">
 				<parts v-if="showParts(item)" :key="item.id" :type="item.type" :config="item.config"
+					   :ref="item.id"
 					   :style="item.config.widget.hide ? 'display: none' : ''" readonly>
 					<template v-if="shouldBeShow(item)">
 						<template v-for="child in getItemChildren(item, 'widget')">
 							<parts
 								v-if="showParts(child)"
 								:key="child.id"
+								:ref="child.id"
 								:class="[
 								  `group-item group-item-${child.id}`,
 								  {
