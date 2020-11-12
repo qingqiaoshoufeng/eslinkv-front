@@ -181,7 +181,7 @@ export default function (data) {
 			offset: 5
 		},
 			{
-				name: "m^3",
+				name: "m³",
 				type: "value",
 				splitLine: {
 					show: true,
