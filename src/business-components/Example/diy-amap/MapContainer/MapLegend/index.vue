@@ -6,20 +6,22 @@
 			maxWidth: maxWidth + 'px',
 		}"
 	>
-		<div class="legend-content" ref="content">
-			<div
-				v-for="(legend, prop) in data"
-				:key="prop"
-				class="legend-item"
-				:class="{ 'in-active': !legend.isShow }"
-				@click="handleLegendClick(prop)"
-			>
-				<SvgIcon
-					v-if="legend.icon"
-					:icon-name="legend.icon"
-					class="legend-icon"
-				></SvgIcon>
-				<span class="legend-label">{{ legend.label }}</span>
+		<div class="legend-content">
+			<div class="legend-list" ref="content">
+				<div
+					v-for="(legend, prop) in data"
+					:key="prop"
+					class="legend-item"
+					:class="{ 'in-active': !legend.isShow }"
+					@click="handleLegendClick(prop)"
+				>
+					<SvgIcon
+						v-if="legend.icon"
+						:icon-name="legend.icon"
+						class="legend-icon"
+					></SvgIcon>
+					<span class="legend-label">{{ legend.label }}</span>
+				</div>
 			</div>
 		</div>
 		<div
@@ -28,7 +30,7 @@
 			:class="'legend-mode--' + (isExpend ? 'expend' : 'collapse')"
 		>
 			<div @click="handleExpendClick">
-				<span>{{ isExpend ? '收起' : '展开' }}</span>
+				<span>{{ isExpend ? '收起' : '全部' }}</span>
 				<SvgIcon class="arrow" icon-name="iconarrowdown"></SvgIcon>
 			</div>
 		</div>
@@ -48,12 +50,12 @@ export default {
 		},
 		maxWidth: {
 			type: Number,
-			default: 1124,
+			default: 1260,
 		},
 	},
 	data() {
 		return {
-			isExpend: true,
+			isExpend: false,
 			isNeedExpend: true,
 			heightAuto: 'auto',
 		};
@@ -98,11 +100,10 @@ export default {
 
 <style lang="scss" scoped>
 .legend-container {
-	display: flex;
-	overflow: hidden;
-	transform: height linear 0.3s;
+	transition: height linear 0.3s;
 	background: rgba(0, 0, 0, 0.8);
 	border: 1px solid #0065df;
+	overflow: hidden;
 	box-sizing: border-box;
 	border-radius: 16px;
 	color: #fff;
@@ -110,25 +111,29 @@ export default {
 	line-height: 56px;
 	user-select: none;
 	font-size: 18px;
+	display: flex;
 	.legend-content {
 		flex: 1;
-		display: flex;
-		flex-wrap: wrap;
-		.legend-item {
-			cursor: pointer;
-			&:not(:last-child) {
-				margin-right: 16px;
+		.legend-list {
+			flex: 1;
+			display: flex;
+			flex-wrap: wrap;
+			.legend-item {
+				cursor: pointer;
+				&:not(:last-child) {
+					margin-right: 16px;
+				}
+				.legend-icon {
+					font-size: 24px;
+					margin-right: 8px;
+				}
+				.legend-label {
+					vertical-align: middle;
+				}
 			}
-			.legend-icon {
-				font-size: 24px;
-				margin-right: 8px;
+			.in-active {
+				opacity: 0.5;
 			}
-			.legend-label {
-				vertical-align: middle;
-			}
-		}
-		.in-active {
-			opacity: 0.5;
 		}
 	}
 	.legend-mode {

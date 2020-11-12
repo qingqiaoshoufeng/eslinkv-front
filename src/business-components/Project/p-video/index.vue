@@ -26,7 +26,7 @@
 								:style="{backgroundImage:'url('+item.img+')'}"
 							></div>
 						</div>
-						<div class="swiper-pagination"></div>
+						<div class="swiper-pagination1"></div>
 					</div>
 				</div>
 			</div>
@@ -130,7 +130,7 @@ export default {
 				},
 			},
 			pagination: {
-				el: '.swiper-pagination',
+				el: '.swiper-pagination1',
 				clickable: true,
 				renderBullet: function (index, className) {
 					return '<span class="' + className + '"></span>';
@@ -172,7 +172,7 @@ export default {
 					width: 341px;
 					background-size: cover;
 				}
-				.swiper-pagination {
+				.swiper-pagination1 {
 					display: flex;
 					background: #00217d;
 					height: 839px;

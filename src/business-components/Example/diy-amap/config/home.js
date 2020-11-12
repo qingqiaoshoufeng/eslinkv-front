@@ -135,33 +135,7 @@ export const INSPECTIONCAR = [
 		name: '钱运高',
 	},
 ]
-//首页legend配置
-export const HOMELEGEND = {
-	GAOYAGUANWANG: {
-		label: '高压管网',
-		icon: 'icongaoyaguanwang',
-		component: 'HighPressureLine',
-		isShow: true,
-	},
-	INSPECTIONCAR: {
-		label: '巡检车辆',
-		icon: 'icontulicheliang',
-		component: 'InspectionCar',
-		isShow: true,
-	},
-	GASSTATION: {
-		label: '门站',
-		icon: 'icontulimenzhan',
-		component: 'GasStation',
-		isShow: true,
-	},
-	SURGESTATION: {
-		label: '调压站',
-		icon: 'icontulitiaoyazhan',
-		component: 'PressureRegulatingStation',
-		isShow: true,
-	},
-}
+
 //首页报警列表
 export const HOMESITUATIONAWARENESSLIST = [
 	{
@@ -320,5 +294,158 @@ export const OVERLAYINFOMAP = {
 			},
 			errColor: '#FF7217',
 		},
+	},
+}
+
+//首页legend配置
+export const HOMELEGEND_STATION = {
+	HighPressureLine: {
+		label: '高压管网',
+		icon: 'icongaoyaguanwang',
+		component: 'HighPressureLine',
+		isShow: true,
+	},
+	HighPressureLine_Process: {
+		label: '高压管网(建设中)',
+		icon: 'icongaoyaguanwang',
+		component: 'HighPressureLine_Process',
+		isShow: true,
+	},
+	// MiddlePressureLine: {
+	// 	label: '中压管网',
+	// 	icon: 'icongaoyaguanwang',
+	// 	component: 'MiddlePressureLine',
+	// 	isShow: true,
+	// },
+	// LowPressureLine: {
+	// 	label: '低压管网',
+	// 	icon: 'icongaoyaguanwang',
+	// 	component: 'LowPressureLine',
+	// 	isShow: true,
+	// },
+	InspectionPerson: {
+		label: '巡检人员',
+		icon: 'iconcheliang',
+		component: 'InspectionPerson',
+		isShow: true,
+	},
+	InspectionCar: {
+		label: '巡检车辆',
+		icon: 'iconcheliang',
+		component: 'InspectionCar',
+		isShow: true,
+	},
+	GasStation: {
+		label: '门站',
+		icon: 'iconmenzhan',
+		component: 'GasStation',
+		isShow: true,
+	},
+	PressureRegulatingStation: {
+		label: '调压站',
+		icon: 'icontiaoyazhan',
+		component: 'PressureRegulatingStation',
+		isShow: true,
+	},
+	EmergencyAirSourceStation: {
+		label: '应急气源站',
+		icon: 'iconcheliang',
+		component: 'EmergencyAirSourceStation',
+		isShow: true,
+	},
+	// ComprehensiveServiceStation: {
+	// 	label: '综合服务站',
+	// 	icon: 'icontulizonghefuwuzhan',
+	// 	component: 'iconzonghefuwuzhan',
+	// 	isShow: true,
+	// },
+	// PipeManageMentStation: {
+	// 	label: '管网运行管理站',
+	// 	icon: 'iconiconpipemanagementstation',
+	// 	component: 'PipeManageMentStation',
+	// 	isShow: true,
+	// },
+	// UndergroundRepairStation: {
+	// 	label: '地下抢修点',
+	// 	icon: 'iconiconundergroundrepairstation',
+	// 	component: 'UndergroundRepairStation',
+	// 	isShow: true,
+	// },
+	// LNGStation: {
+	// 	label: 'LNG站',
+	// 	icon: 'iconiconlngstation',
+	// 	component: 'LNGStation',
+	// 	isShow: true,
+	// },
+	// LiquefiedGasStation: {
+	// 	label: '液化气站',
+	// 	icon: 'icontuliyehuaqi',
+	// 	component: 'LiquefiedGasStation',
+	// 	isShow: true,
+	// },
+	// NaturalGasStation: {
+	// 	label: '加气站',
+	// 	icon: 'icontulijiaqizhan',
+	// 	component: 'NaturalGasStation',
+	// 	isShow: true,
+	// },
+	// DistributedEnergyResource: {
+	// 	label: '分布式能源',
+	// 	icon: 'iconicondistributedenergyresource',
+	// 	component: 'DistributedEnergyResource',
+	// 	isShow: true,
+	// },
+}
+export const HOMELEGEND_PIPE = {
+	GAOYAGUANWANG: {
+		label: '高压管网',
+		icon: 'icongaoyaguanwang',
+		component: 'HighPressureLine',
+		isShow: true,
+	},
+	INSPECTIONCAR: {
+		label: '巡检车辆',
+		icon: 'iconcheliang',
+		component: 'InspectionCar',
+		isShow: true,
+	},
+	GASSTATION: {
+		label: '门站',
+		icon: 'iconmenzhan',
+		component: 'GasStation',
+		isShow: true,
+	},
+	SURGESTATION: {
+		label: '调压站',
+		icon: 'icontiaoyazhan',
+		component: 'PressureRegulatingStation',
+		isShow: true,
+	},
+}
+
+export const HOMELEGEND_UCAN = {
+	GAOYAGUANWANG: {
+		label: '高压管网',
+		icon: 'icongaoyaguanwang',
+		component: 'HighPressureLine',
+		isShow: true,
+	},
+	INSPECTIONCAR: {
+		label: '巡检车辆',
+		icon: 'iconcheliang',
+		component: 'InspectionCar',
+		isShow: true,
+	},
+	GASSTATION: {
+		label: '门站',
+		icon: 'iconmenzhan',
+		component: 'GasStation',
+		isShow: true,
+	},
+	SURGESTATION: {
+		label: '调压站',
+		icon: 'icontiaoyazhan',
+		component: 'PressureRegulatingStation',
+		isShow: true,
 	},
 }
