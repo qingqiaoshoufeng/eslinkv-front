@@ -1,8 +1,10 @@
+低压管网
 <script>
 import overlayMixin from '../../mixins/overlayMixin.js';
 //高压线数据
 import GaoYaLineJSON from '@/assets/amap/json/gaoya.json';
 export default {
+	name: 'LowPressureLine',
 	mixins: [overlayMixin],
 	props: {
 		strokeWeight: {

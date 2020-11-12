@@ -3,6 +3,7 @@ import overlayMixin from '../../mixins/overlayMixin.js';
 //高压线数据
 import GaoYaLineJSON from '@/assets/amap/json/gaoya.json';
 export default {
+	name: 'HighPressureLine_Process',
 	mixins: [overlayMixin],
 	props: {
 		strokeWeight: {

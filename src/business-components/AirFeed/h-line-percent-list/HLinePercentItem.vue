@@ -19,18 +19,6 @@
 	</div>
 </template>
 <script>
-// {
-//	value: {
-// 	  NO: '01',
-// 	  name: '开户',
-// 	  amount: 4500,
-//	},
-//	style: {
-// 	  NOBg: '#FF7217',
-// 	  startColor: '#FF7217',
-// 	  endColor: 'rgba(255, 114, 23, 0)'
-//  }
-//}
 
 export default {
 	computed: {

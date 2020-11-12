@@ -1,3 +1,4 @@
+地下抢修点
 <template>
 	<div>
 		<Overlay
@@ -18,7 +19,7 @@ import { Overlay } from '@/business-components/Example/diy-amap/components/index
 //配置项
 import { PRESSUREREGULATINGSTATIONLIST } from '@/business-components/Example/diy-amap/config/index';
 export default {
-	name: 'PressurereGulatingStation',
+	name: 'UndergroundRepairStation',
 	mixins: [overlayMixin],
 	components: {
 		Overlay,

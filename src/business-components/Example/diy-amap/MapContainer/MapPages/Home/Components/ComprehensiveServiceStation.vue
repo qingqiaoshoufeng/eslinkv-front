@@ -17,7 +17,7 @@ import { Overlay } from '@/business-components/Example/diy-amap/components/index
 //配置项
 import { INSPECTIONCAR } from '@/business-components/Example/diy-amap/config/index';
 export default {
-	name: 'InspectionCar',
+	name: 'ComprehensiveServiceStation',
 	mixins: [overlayMixin],
 	components: {
 		Overlay,
