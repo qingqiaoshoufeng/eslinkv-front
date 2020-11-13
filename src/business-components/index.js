@@ -26,7 +26,7 @@ for (let key in widgetsObject) {
 }
 mutations.setCustomComponents(components)
 mutations.setCustomWidgets({
-	label: '杭然自定义',
+	label: '杭然样式',
 	widgets: widgetsArray
 })
 Vue.component('new', dvdp.new)

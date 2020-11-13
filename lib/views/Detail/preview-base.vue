@@ -143,6 +143,7 @@
 		},
 		mounted() {
 			mutations.setInstance('kanboard', this)
+			mutations.setStatus('inPreview')
 		}
 	}
 </script>
