@@ -1,5 +1,19 @@
 <template>
-	<div class="h-call-count-statistics widget-part" :style="styles" >
+	<div class="h-call-count-statistics widget-part" :style="styles">
+		<div class="legend">
+			<div class="legend-item">
+				<div class="tanc"></div>
+				<div class="txt">供气量</div>
+			</div>
+			<div class="legend-item">
+				<div class="line-legend"></div>
+				<div class="txt">同比</div>
+			</div>
+			<div class="legend-item">
+				<div class="line-legend green"></div>
+				<div class="txt">环比</div>
+			</div>
+		</div>
 		<div class="chart" :id="id"></div>
 	</div>
 </template>
@@ -47,6 +61,41 @@
 	}
 </script>
 <style lang="scss" scoped>
+.widget-part {
+	position: relative;
+	.legend {
+		position: absolute;
+		left: 0;
+		top: 22px;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		font-size: 16px;
+		line-height: 16px;
+		color: #FFFFFF;
+		.legend-item {
+			display: flex;
+			align-items: center;
+			margin: 0 8px;
+		}
+		.tanc {
+			width: 16px;
+			height: 8px;
+			background: #00DDFF;
+		}
+		.line-legend {
+			width: 16px;
+			height: 2px;
+			background: #E5615B;
+			&.green {
+				background: #00FFCF;
+			}
+		}
+		.txt {
+			margin-left: 4px;
+		}
+	}
+}
 .chart {
 	width: 100%;
 	height: 100%;

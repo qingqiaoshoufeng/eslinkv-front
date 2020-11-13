@@ -1,141 +1,3 @@
-//门站列表
-export const GASSTATIONLIST = [
-	{
-		name: '北门站',
-		lng: 120.18642501099362,
-		lat: 30.470046909116537,
-		inlet: '川气',
-		inletDirection: 'up',
-	},
-	{
-		name: '余杭门站',
-		lng: 120.28858380722947,
-		lat: 30.41151339600778,
-		inlet: '西三线',
-		inletDirection: 'right',
-	},
-	{
-		name: '新城门站',
-		lng: 120.4752103089488,
-		lat: 30.231977016191646,
-		inlet: '西四线',
-		inletDirection: 'up',
-	},
-	{
-		name: '南门站',
-		lng: 120.40074356065831,
-		lat: 30.139390077574944,
-		inlet: '东海气进口LNG',
-		inletDirection: 'down',
-	},
-	{
-		name: '转塘门站',
-		lng: 120.06927091845188,
-		lat: 30.14028457634124,
-		inlet: '西二线',
-		inletDirection: 'right',
-	},
-	{
-		name: '临安门站',
-		lng: 119.75830469538138,
-		lat: 30.220678330820434,
-		inlet: '东海线',
-		inletDirection: 'down',
-	},
-]
-//调压站
-export const PRESSUREREGULATINGSTATIONLIST = [
-	{ name: '塘阜调压站', lng: 119.87500555372199, lat: 30.421734364490067 },
-	{ name: '良渚调压站', lng: 119.9355402686164, lat: 30.408456504597957 },
-	{ name: '万家塘调压站', lng: 120.0065359724499, lat: 30.40493670986392 },
-	{
-		name: '东西大道调压站',
-		lng: 120.07067529428843,
-		lat: 30.399499665730872,
-	},
-	{ name: '下渚湖调压站', lng: 120.05896126162732, lat: 30.539769302978257 },
-	{ name: '运河调压站', lng: 120.28488064023607, lat: 30.472573948618393 },
-	{ name: '长安调压站', lng: 120.45020152372219, lat: 30.43224823485572 },
-	{ name: '前进调压站', lng: 120.5592368080596, lat: 30.361144138648267 },
-	{ name: '瓜沥调压站', lng: 120.4542040835847, lat: 30.18386585067251 },
-	{ name: '闻堰调压站', lng: 120.17084998854999, lat: 30.126996518790975 },
-	{ name: '双浦调压站', lng: 120.11696021218967, lat: 30.113689730638455 },
-	{ name: '西山调压站', lng: 120.21689659583821, lat: 30.136139682030088 },
-	{ name: '闲林调压站', lng: 119.99187568289241, lat: 30.186698415823418 },
-	{ name: '富阳调压站', lng: 119.94255783969827, lat: 30.051313166595374 },
-	{ name: '龙溪调压站', lng: 119.9727774004809, lat: 30.140346453057344 },
-	{ name: '青山湖调压站', lng: 119.81804653023293, lat: 30.242891480461957 },
-]
-//巡检车辆
-export const INSPECTIONCAR = [
-	{
-		lng: 120.24810791015625,
-		lat: 30.377021939132376,
-		taskId: 3,
-		name: '刘永生',
-	},
-	{
-		lng: 120.28312683105469,
-		lat: 30.31065282347256,
-		taskId: 10,
-		name: '王仁兴',
-	},
-	{
-		lng: 120.26321411132812,
-		lat: 30.308305899054287,
-		taskId: 11,
-		name: '刘宝瑞',
-	},
-	{
-		lng: 120.14236450195312,
-		lat: 30.3507943609008,
-		taskId: 4,
-		name: '刘造时',
-	},
-	{
-		lng: 120.05172729492186,
-		lat: 30.359841397025537,
-		taskId: 2,
-		name: '刘长胜',
-	},
-	{
-		lng: 120.14442443847655,
-		lat: 30.354508890918233,
-		taskId: 1,
-		name: '王子久',
-	},
-	{
-		lng: 120.22270202636717,
-		lat: 30.26974231529823,
-		taskId: 7,
-		name: '孙应吉',
-	},
-	{
-		lng: 120.1519775390625,
-		lat: 30.149877316442065,
-		taskId: 8,
-		name: '李秉贵',
-	},
-	{
-		lng: 120.15901565551756,
-		lat: 30.114691218617647,
-		taskId: 9,
-		name: '赵华',
-	},
-	{
-		lng: 119.99714477539064,
-		lat: 30.283381047144303,
-		taskId: 5,
-		name: '赵德茂',
-	},
-	{
-		lng: 120.40037155151366,
-		lat: 30.257287905035877,
-		taskId: 6,
-		name: '钱运高',
-	},
-]
-
 //首页报警列表
 export const HOMESITUATIONAWARENESSLIST = [
 	{
@@ -355,7 +217,87 @@ export const HOMELEGEND_STATION = {
 	},
 	ComprehensiveServiceStation: {
 		label: '综合服务站',
+		icon: 'icontulizonghefuwuzhan',
+		component: 'ComprehensiveServiceStation',
+		isShow: false,
+	},
+	PipeManageMentStation: {
+		label: '管网运行管理站',
 		icon: 'icontuliguanwangyunhangguanlizhan',
+		component: 'PipeManageMentStation',
+		isShow: false,
+	},
+	UndergroundRepairStation: {
+		label: '地下抢修点',
+		icon: 'icontulidixiaqiangxiudian',
+		component: 'UndergroundRepairStation',
+		isShow: false,
+	},
+	LNGStation: {
+		label: 'LNG站',
+		icon: 'icontulilNG',
+		component: 'LNGStation',
+		isShow: false,
+	},
+	LiquefiedGasStation: {
+		label: '液化气站',
+		icon: 'icontuliyehuaqi',
+		component: 'LiquefiedGasStation',
+		isShow: false,
+	},
+	NaturalGasStation: {
+		label: '加气站',
+		icon: 'icontulijiaqizhan',
+		component: 'NaturalGasStation',
+		isShow: false,
+	},
+	DistributedEnergyResource: {
+		label: '分布式能源',
+		icon: 'icontulinengyuanzhan',
+		component: 'DistributedEnergyResource',
+		isShow: false,
+	},
+}
+export const HOMELEGEND_PIPE = {
+	HighPressureLine: {
+		label: '高压管网',
+		icon: 'icontuligaoyaguanwang',
+		component: 'HighPressureLine',
+		isShow: true,
+	},
+	HighPressureLine_Process: {
+		label: '高压管网(建设中)',
+		icon: 'icontulizhongyaguanwang-progress',
+		component: 'HighPressureLine_Process',
+		isShow: true,
+	},
+	MiddlePressureLine: {
+		label: '中压管网',
+		icon: 'icontulizhongyaguanwang',
+		component: 'MiddlePressureLine',
+		isShow: true,
+	},
+	LowPressureLine: {
+		label: '低压管网',
+		icon: 'icontulidiyaguanwang',
+		component: 'LowPressureLine',
+		isShow: true,
+	},
+	InspectionPerson: {
+		label: '巡检人员',
+		icon: 'icontulirenyuan',
+		component: 'InspectionPerson',
+		isShow: true,
+	},
+	InspectionCar: {
+		label: '巡检车辆',
+		icon: 'icontulicheliang',
+		component: 'InspectionCar',
+		isShow: true,
+	},
+	ComprehensiveServiceStation: {
+		label: '综合服务站',
+		icon: 'icontulizonghefuwuzhan',
 		component: 'ComprehensiveServiceStation',
 		isShow: true,
 	},
@@ -371,12 +313,50 @@ export const HOMELEGEND_STATION = {
 		component: 'UndergroundRepairStation',
 		isShow: true,
 	},
+	GasStation: {
+		label: '门站',
+		icon: 'icontulimenzhan',
+		component: 'GasStation',
+		isShow: false,
+	},
+	PressureRegulatingStation: {
+		label: '调压站',
+		icon: 'icontulitiaoyazhan',
+		component: 'PressureRegulatingStation',
+		isShow: false,
+	},
+	EmergencyAirSourceStation: {
+		label: '应急气源站',
+		icon: 'icontuliqiyuanzhan',
+		component: 'EmergencyAirSourceStation',
+		isShow: false,
+	},
 	LNGStation: {
 		label: 'LNG站',
 		icon: 'icontulilNG',
 		component: 'LNGStation',
-		isShow: true,
+		isShow: false,
 	},
+	LiquefiedGasStation: {
+		label: '液化气站',
+		icon: 'icontuliyehuaqi',
+		component: 'LiquefiedGasStation',
+		isShow: false,
+	},
+	NaturalGasStation: {
+		label: '加气站',
+		icon: 'icontulijiaqizhan',
+		component: 'NaturalGasStation',
+		isShow: false,
+	},
+	DistributedEnergyResource: {
+		label: '分布式能源',
+		icon: 'icontulinengyuanzhan',
+		component: 'DistributedEnergyResource',
+		isShow: false,
+	},
+}
+export const HOMELEGEND_UCAN = {
 	LiquefiedGasStation: {
 		label: '液化气站',
 		icon: 'icontuliyehuaqi',
@@ -395,57 +375,82 @@ export const HOMELEGEND_STATION = {
 		component: 'DistributedEnergyResource',
 		isShow: true,
 	},
-}
-export const HOMELEGEND_PIPE = {
-	GAOYAGUANWANG: {
+	HighPressureLine: {
 		label: '高压管网',
 		icon: 'icontuligaoyaguanwang',
 		component: 'HighPressureLine',
-		isShow: true,
+		isShow: false,
 	},
-	INSPECTIONCAR: {
+	HighPressureLine_Process: {
+		label: '高压管网(建设中)',
+		icon: 'icontulizhongyaguanwang-progress',
+		component: 'HighPressureLine_Process',
+		isShow: false,
+	},
+	MiddlePressureLine: {
+		label: '中压管网',
+		icon: 'icontulizhongyaguanwang',
+		component: 'MiddlePressureLine',
+		isShow: false,
+	},
+	LowPressureLine: {
+		label: '低压管网',
+		icon: 'icontulidiyaguanwang',
+		component: 'LowPressureLine',
+		isShow: false,
+	},
+	InspectionPerson: {
+		label: '巡检人员',
+		icon: 'icontulirenyuan',
+		component: 'InspectionPerson',
+		isShow: false,
+	},
+	InspectionCar: {
 		label: '巡检车辆',
 		icon: 'icontulicheliang',
 		component: 'InspectionCar',
-		isShow: true,
+		isShow: false,
 	},
-	GASSTATION: {
+	LNGStation: {
+		label: 'LNG站',
+		icon: 'icontulilNG',
+		component: 'LNGStation',
+		isShow: false,
+	},
+	GasStation: {
 		label: '门站',
 		icon: 'icontulimenzhan',
 		component: 'GasStation',
-		isShow: true,
+		isShow: false,
 	},
-	SURGESTATION: {
+	PressureRegulatingStation: {
 		label: '调压站',
 		icon: 'icontulitiaoyazhan',
 		component: 'PressureRegulatingStation',
-		isShow: true,
+		isShow: false,
 	},
-}
-
-export const HOMELEGEND_UCAN = {
-	GAOYAGUANWANG: {
-		label: '高压管网',
-		icon: 'icontuligaoyaguanwang',
-		component: 'HighPressureLine',
-		isShow: true,
+	EmergencyAirSourceStation: {
+		label: '应急气源站',
+		icon: 'icontuliqiyuanzhan',
+		component: 'EmergencyAirSourceStation',
+		isShow: false,
 	},
-	INSPECTIONCAR: {
-		label: '巡检车辆',
-		icon: 'icontulicheliang',
-		component: 'InspectionCar',
-		isShow: true,
+	ComprehensiveServiceStation: {
+		label: '综合服务站',
+		icon: 'icontulizonghefuwuzhan',
+		component: 'ComprehensiveServiceStation',
+		isShow: false,
 	},
-	GASSTATION: {
-		label: '门站',
-		icon: 'icontulimenzhan',
-		component: 'GasStation',
-		isShow: true,
+	PipeManageMentStation: {
+		label: '管网运行管理站',
+		icon: 'icontuliguanwangyunhangguanlizhan',
+		component: 'PipeManageMentStation',
+		isShow: false,
 	},
-	SURGESTATION: {
-		label: '调压站',
-		icon: 'icontulitiaoyazhan',
-		component: 'PressureRegulatingStation',
-		isShow: true,
+	UndergroundRepairStation: {
+		label: '地下抢修点',
+		icon: 'icontulidixiaqiangxiudian',
+		component: 'UndergroundRepairStation',
+		isShow: false,
 	},
 }

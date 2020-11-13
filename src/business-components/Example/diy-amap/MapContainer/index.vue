@@ -43,6 +43,8 @@ import RightPanelList from './RightPaneList/';
 import { HomeMap, ServiceMap, ProjectMap } from './MapPages/';
 import {
 	HOMELEGEND_STATION,
+	HOMELEGEND_PIPE,
+	HOMELEGEND_UCAN,
 	PROJECTLEGEND,
 	SERVICELEGEND,
 } from '@/business-components/Example/diy-amap/config/index';
@@ -79,9 +81,17 @@ export default {
 	},
 	created() {
 		this._pageConfig = {
-			home: {
+			'home-station': {
 				mapComponentName: 'homeMap',
 				legendMap: HOMELEGEND_STATION,
+			},
+			'home-pipe': {
+				mapComponentName: 'homeMap',
+				legendMap: HOMELEGEND_PIPE,
+			},
+			'home-ucan': {
+				mapComponentName: 'homeMap',
+				legendMap: HOMELEGEND_UCAN,
 			},
 			service: {
 				mapComponentName: 'serviceMap',
@@ -115,10 +125,8 @@ export default {
 			Object.keys(config).forEach(targetProp => {
 				this[targetProp] = config[targetProp];
 			});
-			//重置legend 均显示
-			Object.keys(this.legendMap).forEach(prop => {
-				this.legendMap[prop].isShow = true;
-			});
+			// //重置legend 均显示
+			this.legendMap = JSON.parse(JSON.stringify(this.legendMap));
 			this.map.setZoom(this.mapConfig.zoom);
 		},
 		handleLegendClick(prop) {

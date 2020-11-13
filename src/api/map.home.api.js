@@ -2,9 +2,189 @@ import request from './request'
 import qs from 'qs'
 
 //门站列表
-export function gasStationList(data) {
+export function getGasStationList(data) {
 	return request({
-		url: '/map/home/gasStationList',
+		url: '/map/home/getGasStationList',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+//地下抢修点
+export function getUndergroundRepairStationList(data) {
+	return request({
+		url: '/map/home/getUndergroundRepairStationList',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+//分布式能源
+export function getDistributedEnergyResourceList(data) {
+	return request({
+		url: '/map/home/getDistributedEnergyResourceList',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+//应急气源站
+export function getEmergencyAirSourceStationList(data) {
+	return request({
+		url: '/map/home/getEmergencyAirSourceStationList',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+//高压管线
+export function getHighPressureLine(data) {
+	return request({
+		url: '/map/home/getHighPressureLine',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+//高压管线在建中
+export function getHighPressureLineProcess(data) {
+	return request({
+		url: '/map/home/getHighPressureLineProcess',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+//低压线
+export function getLowPressureLine(data) {
+	return request({
+		url: '/map/home/getLowPressureLine',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+//中压线
+export function getMiddlePressureLine(data) {
+	return request({
+		url: '/map/home/getMiddlePressureLine',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+//巡检车辆
+export function getInspectionCarList(data) {
+	return request({
+		url: '/map/home/getInspectionCarList',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+//巡检人员
+export function getInspectionPersonList(data) {
+	return request({
+		url: '/map/home/getInspectionPersonList',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+//液压站
+export function getLiquefiedGasStationList(data) {
+	return request({
+		url: '/map/home/getLiquefiedGasStationList',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+//LNG站
+export function getLNGStationList(data) {
+	return request({
+		url: '/map/home/getLNGStationList',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+//调压站
+export function getPressureRegulatingStationList(data) {
+	return request({
+		url: '/map/home/getPressureRegulatingStationList',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+// 综合服务站
+export function getComprehensiveServiceStationList(data) {
+	return request({
+		url: '/map/home/getComprehensiveServiceStationList',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+// 管网运行管理站
+export function getPipeManageMentStationList(data) {
+	return request({
+		url: '/map/home/getPipeManageMentStationList',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+//加气站
+export function getNaturalGasStationList(data) {
+	return request({
+		url: '/map/home/getNaturalGasStationList',
 		method: 'get',
 		data: qs.stringify(data),
 		headers: {
