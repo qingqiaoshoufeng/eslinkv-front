@@ -7,27 +7,26 @@
 		class="right-panel"
 		enter="animate__animated  animate__animatedfadeInRight"
 	>
-		<PanelContainer
+		<!-- <PanelContainer
 			:activeItem="activeItem"
 			@change="handleClick"
 			:data="list"
 		>
-			<template slot-scope="{ item }">
-				<component :is="rightPaneComponentName" :data="item" />
-			</template>
-		</PanelContainer>
+			<template slot-scope="{ item }"> -->
+				<component :is="rightPaneComponentName" :data="list"  />
+			<!-- </template>
+		</PanelContainer> -->
 	</dashboard-panel>
 </template>
 
 <script>
 import { DashboardPanel } from '@/business-components/Example/diy-amap/components/';
 import PanelContainer from './PanelContainer';
-import HomeList from './HomeList';
+import HomeList from './Home/';
 import ProjectList from './ProjectList';
 import ServiceList from './ServiceList';
 //模拟数据
 import {
-	HOMESITUATIONAWARENESSLIST,
 	SERVICESITUATIONAWARENESSLIST,
 	PROJECTSITUATIONAWARENESSLIST,
 } from '@/business-components/Example/diy-amap/config/index';
@@ -89,7 +88,7 @@ export default {
 			});
 			//请求数据
 			let listByPageMap = {
-				home: HOMESITUATIONAWARENESSLIST,
+				home: [],
 				service: SERVICESITUATIONAWARENESSLIST,
 				project: PROJECTSITUATIONAWARENESSLIST,
 			};

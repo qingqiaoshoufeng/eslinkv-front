@@ -41,7 +41,6 @@ export default {
 				nn16rowdl5r: 'home-station', //供气-场站
 				g199smrdh4r: 'project',
 			};
-			console.log(e, 'e');
 			let { index } = e.detail;
 			let pageName = sceneIndexMap[index];
 			bus.$emit('currentSceneChange', pageName);

@@ -16,8 +16,8 @@
 					@click="handleLegendClick(prop)"
 				>
 					<SvgIcon
-						v-if="legend.icon"
-						:icon-name="legend.icon"
+						v-if="legend.legendIcon"
+						:icon-name="legend.legendIcon"
 						class="legend-icon"
 					></SvgIcon>
 					<span class="legend-label">{{ legend.label }}</span>
@@ -78,7 +78,8 @@ export default {
 						this.isNeedExpend = false;
 					} else {
 						this.heightAuto = contentHeight + 'px';
-					}
+                    }
+                    this.isExpend = false 
 				});
 			},
 			immediate: true,
