@@ -49,7 +49,7 @@ export default {
             textStyle: {
                 show: true,
                 color: '#fff',
-            } 
+            }
         },
         interval: 25,
         axisLine: {
@@ -68,6 +68,7 @@ export default {
         },
         barWidth: 10,
     }, {
+        name:'%',
         type: 'bar',
         barWidth: 10,
         yAxisIndex:0,
