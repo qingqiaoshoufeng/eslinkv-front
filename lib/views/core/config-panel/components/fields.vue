@@ -578,6 +578,10 @@
 					min-height: 30px;
 					padding: 5px;
 				}
+				/deep/ .selected {
+					background: #2d8cf0;
+					color: #fff;
+				}
 			}
 
 			.field-input-textarea {
