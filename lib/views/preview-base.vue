@@ -52,7 +52,7 @@
 	import crossFrameMessageParamBind from './core/kanboard-editor/mixins/cross-frame-message-param-bind'
 	import * as widgetBindManager from './mixins/widget-bind-manage'
 	import loadMask from '../components/load-mask'
-	import {store} from '../store'
+	import {mutations, store} from '../store'
 
 	export default {
 		name: 'kanboard-editor',
@@ -136,7 +136,7 @@
 				return (item) => {
 					if (item.scene === 0) {
 						return true
-					}else if (item.scene === this.store.scene.index) {
+					} else if (item.scene === this.store.scene.index) {
 						return true
 					}
 					return false
@@ -145,7 +145,7 @@
 			canvasStyle() {
 				return styleParser(this.canvasConfigValue, this.time)
 			}
-		}
+		},
 	}
 </script>
 

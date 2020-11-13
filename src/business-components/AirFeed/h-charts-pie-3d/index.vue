@@ -30,12 +30,11 @@ import lottie from "lottie-web";
 import pieBgBtnJson from "@/animationJson/yuan1.json";
 import pieTopBg from "@/animationJson/yuan2.json";
 highcharts3d(highcharts);
-import JSONStringify from '../../../../lib/vendor/JSONStringify';
 import mixins from '../../mixins';
 const config = {}
 const value = {
 	api: {
-		data: JSONStringify([
+		data: JSON.stringify([
 			{"typeName":"工业生产","percent":57.00},
 			{"typeName":"福利采暖","percent":3.00},
 			{"typeName":"商业大灶","percent":9.00},

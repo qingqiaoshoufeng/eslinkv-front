@@ -118,7 +118,7 @@
 		},
 	};
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 	.carout-bg {
 		width: 200px;
 		height: 200px;

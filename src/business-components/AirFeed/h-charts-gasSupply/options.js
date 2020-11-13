@@ -112,12 +112,6 @@ export default function (barData, lineData, dashLineData) {
 				"show": false
 			}
 		}],
-		legend: {
-			top: 20,
-			textStyle: {
-				color: '#fff'
-			}
-		},
 		"series": [{
 			"name": "供气量",
 			"type": "bar",
@@ -160,7 +154,7 @@ export default function (barData, lineData, dashLineData) {
 			lineStyle: {
 				width: 2,
 				color: '#E5615B',
-				type: 'dashed'
+				type: 'dotted'
 			},
 			"data": dashLineData
 		}, {

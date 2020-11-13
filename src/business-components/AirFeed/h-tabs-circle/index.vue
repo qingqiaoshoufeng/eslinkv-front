@@ -11,14 +11,13 @@
 </template>
 
 <script>
-	import JSONStringify from '../../../../lib/vendor/JSONStringify';
 	import mixins from '../../mixins';
 	import HCvs from './HCvs';
 	import HVerticalTabs from './HVerticalTabs';
 	const config = {animation: true}
 	const value = {
 		api: {
-			data: JSONStringify([
+			data: JSON.stringify([
 				[
 					{
 						name: '高压管道',

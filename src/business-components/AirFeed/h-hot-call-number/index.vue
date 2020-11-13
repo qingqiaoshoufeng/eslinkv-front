@@ -24,12 +24,11 @@
 	</div>
 </template>
 <script>
-	import JSONStringify from '../../../../lib/vendor/JSONStringify';
 	import mixins from '../../mixins';
 	const config = {animation: true}
 	const value = {
 		api: {
-			data: JSONStringify({
+			data: JSON.stringify({
 				onCall: 32,
 				onWait: 11
 			})
