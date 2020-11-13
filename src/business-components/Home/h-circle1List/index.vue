@@ -10,7 +10,7 @@
 					:activeIndex="activeIndex"
 					@click="selectTab(index)"
 				>{{item}}
-                <div class="arrow"></div>
+                <img src="/static/images/arrow.svg" v-if="index===activeIndex" />
                 </div>
 			</div>
 			<div class="right-circle">
@@ -142,6 +142,13 @@ export default {
 			font-size: 18px;
 			color: #fff;
 			border-left: 4px solid rgba(0, 31, 109, 0.5);
+            display: flex;
+            align-items: center;
+            img{
+                height: 20px;
+                width: 20px;
+                margin-left: 20px;
+            }
 		}
 		.list-item-active {
 			border-left: 4px solid #00ddff;
