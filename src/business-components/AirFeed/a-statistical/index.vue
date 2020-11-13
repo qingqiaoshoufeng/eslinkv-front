@@ -12,20 +12,15 @@
 					<div
 						v-for="(item, index) in statisticalVal"
 						:key="index"
-						:class="{
-							item: item !== ',',
-							'font-num': true,
-							comma: item === ',',
-						}"
+						class="font-num"
+						:class="{item: item !== ',',comma: item === ',',}"
 					>
 						<!-- 滚动盒子 -->
 						<div class="scroll-box" v-if="item !== ','">
 							<div
 								class="scroll-list"
 								ref="numberItem"
-								:style="{
-									transform: `translate(0, -${transform[index]}%)`,
-								}"
+								:style="{transform: `translate(0, -${transform[index]}%)`,}"
 							>
 								<div
 									class="scroll-item"
@@ -84,7 +79,7 @@ export default {
 	mixins: [mixins],
 	computed: {
 		statisticalVal() {
-			if (this.data) return this.data.value.toString().split('');
+			if (this.data) return this.data.value.toLocaleString().split('');
 			return [];
 		},
 		timeDesc() {
@@ -95,7 +90,7 @@ export default {
 	methods: {
 		setNumberTransform() {
 			if (this.data) {
-				const numberArr = this.data.value.toString().split('');
+				const numberArr = this.data.value.toLocaleString().split('');
 				this.transform = numberArr.map(item => item * 10);
 			}
 		},

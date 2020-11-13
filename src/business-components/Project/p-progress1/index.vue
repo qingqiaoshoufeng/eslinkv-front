@@ -1,7 +1,6 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<div class="h-curve-1" :id="id"/>
-		<!-- <div class="pos-a h-curve-1-title">{{data&&data.title}}</div> -->
 	</div>
 </template>
 <script>
@@ -86,7 +85,7 @@
                     source: 'b1',
                     target: 'a2',
                     value: 1
-                }, 
+                },
                 {
                     source: 'b',
                     target: 'b1',
