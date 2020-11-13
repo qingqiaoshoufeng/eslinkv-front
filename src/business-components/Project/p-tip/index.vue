@@ -1,25 +1,15 @@
 <template>
 	<div class="widget-part" :style="styles">
 		<div class="context-box">
-			<div class="context-iocn" v-if="computedData && data.isIocn">
-				<img
-					:src="`/static/images/project/tip-${
-						computedData && computedData.isIocn
-					}.svg`"
-				/>
+			<div class="context-iocn" v-if="data && data.isIocn">
+				<img :src="`${data && data.isIocn}`"/>
 			</div>
 			<div class="tip-context-box">
-				<div
-					class="context-value font-num"
-					:style="computedData && computedData.value.style"
-				>
-					<div>{{ computedData && computedData.value.context }}</div>
+				<div class="context-value font-num">
+					<div>{{ data && data.value }}</div>
 				</div>
-				<div
-					class="context-desc"
-					:style="computedData && computedData.desc.style"
-				>
-					<div>{{ computedData && computedData.desc.context }}</div>
+				<div class="context-desc">
+					<div>{{ data && data.desc }}</div>
 				</div>
 			</div>
 		</div>
@@ -32,31 +22,14 @@
 	const value = {
 		api: {
 			data: JSON.stringify({
-				isIocn: 'qizhong',
-				desc: {
-					context: '标题',
-				},
-				value: {
-					context: 24,
-				},
+				isIocn: '/static/images/project/tip-qizhong.svg',
+				desc:  '标题',
+				value:  24,
 			}),
 		},
 	};
 	export default {
 		mixins: [mixins],
-		computed: {
-			computedData() {
-				if (!this.data) return;
-				this.data.desc.style = {
-					fontSize: '20px',
-					textAlign: 'left',
-					height: '60%',
-					lineHeight: '40%',
-				};
-				this.data.value.style = {};
-				return this.data;
-			},
-		},
 		created() {
 			this.configSource = this.parseConfigSource();
 			this.configValue = this.parseConfigValue(config, value);
@@ -68,9 +41,14 @@
 		height: 100%;
 		width: 100%;
 		display: flex;
-		.context-desc{
 
+		.context-desc {
+			font-size: 20px;
+			text-align: left;
+			height: 60%;
+			line-height: 40%;
 		}
+
 		.context-value {
 			font-size: 20px;
 			text-align: left;
