@@ -1,40 +1,40 @@
 <template>
-	<div>
-		<Overlay
-			v-for="(item, index) in list || []"
-			:key="'InspectionCar' + index"
-			:marker="{
-				...item,
-				icon: 'iconcheliang',
-			}"
-			:visible="visible"
-		/>
-	</div>
+	<BaseOverlay
+		v-bind="{
+			visible,
+			...overlayProps,
+		}"
+		@click="
+			marker =>
+				$emit('overlay-click', marker, 'EmergencyAirSourceStation')
+		"
+	/>
 </template>
 <script>
-import overlayMixin from '../../mixins/overlayMixin.js';
-import { Overlay } from '@/business-components/Example/diy-amap/components/index';
-//配置项
-import { INSPECTIONCAR } from '@/business-components/Example/diy-amap/config/index';
+import BaseOverlay from './BaseOverlay';
 export default {
 	name: 'EmergencyAirSourceStation',
-	mixins: [overlayMixin],
 	components: {
-		Overlay,
+		BaseOverlay,
+	},
+	props: {
+		visible: {
+			type: Boolean,
+			default: true,
+		},
 	},
 	data() {
+		let apiFun = this.$sysApi.map.home.getEmergencyAirSourceStationList;
 		return {
-			list: [],
+			overlayProps: {
+				apiFun: apiFun,
+				overlayType: 'EmergencyAirSourceStation',
+				overlayIcon: 'iconqiyuanzhan',
+			},
 		};
-	},
-	methods: {
-		init() {
-			this.getData();
-		},
-		getData() {
-			this.list = INSPECTIONCAR;
-		},
 	},
 };
 </script>
+
+
 

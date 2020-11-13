@@ -1,45 +1,38 @@
 加气站
+<template>
+	<BaseOverlay
+		v-bind="{
+			visible,
+			...overlayProps,
+		}"
+		@click="marker => $emit('overlay-click', marker, 'NaturalGasStation')"
+	/>
+</template>
 <script>
-import overlayMixin from '../../mixins/overlayMixin.js';
-//高压线数据
-import GaoYaLineJSON from '@/assets/amap/json/gaoya.json';
+import BaseOverlay from './BaseOverlay';
 export default {
 	name: 'NaturalGasStation',
-	mixins: [overlayMixin],
+	components: {
+		BaseOverlay,
+	},
 	props: {
-		strokeWeight: {
-			type: Number,
-			default: 3,
-		},
-		strokeColor: {
-			type: String,
-			default: '#04F499',
+		visible: {
+			type: Boolean,
+			default: true,
 		},
 	},
-	methods: {
-		init() {
-			this.drawLine();
-		},
-		drawLine() {
-			let { strokeWeight, strokeColor } = this;
-			var geoJSON = new window.AMap.GeoJSON({
-				geoJSON: GaoYaLineJSON,
-				getPolyline: function(geojson, lnglats) {
-					return new AMap.Polyline({
-						path: lnglats,
-						zIndex: 200,
-						strokeWeight: strokeWeight,
-						strokeColor: strokeColor,
-					});
-				},
-			});
-			this.$amap.add(geoJSON);
-			this.instanceArr.push(geoJSON);
-		},
-	},
-	render() {
-		return null;
+	data() {
+		let apiFun = this.$sysApi.map.home.getNaturalGasStationList;
+		return {
+			overlayProps: {
+				apiFun: apiFun,
+				overlayType: 'NaturalGasStation',
+				overlayIcon: 'iconjiaqizhan',
+			},
+		};
 	},
 };
 </script>
+
+
 

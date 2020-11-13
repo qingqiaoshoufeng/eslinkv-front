@@ -33,18 +33,18 @@ import {
 	GasStation,
 	HighPressureLine,
 	HighPressureLine_Process,
+	MiddlePressureLine,
+	LowPressureLine,
 	InspectionCar,
 	InspectionPerson,
 	LiquefiedGasStation,
 	ListOverlay,
 	LNGStation,
-	LowPressureLine,
 	NaturalGasStation,
 	PipeManageMentStation,
 	PressureRegulatingStation,
 	RegionBoundary,
 	UndergroundRepairStation,
-	MiddlePressureLine,
 } from './Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
 
