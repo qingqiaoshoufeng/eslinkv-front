@@ -2,8 +2,8 @@
 	<div class="widget-part" :style="styles">
 		<div class="fn-flex flex-row h-progress-1">
 			<div class="fn-flex flex-column">
-				<h2>{{data&&data.title}}</h2>
-				<h3>{{data&&data.subTitle}}</h3>
+				<h2>{{config.config&&config.config.title}}</h2>
+				<h3>{{config.config&&config.config.subTitle}}</h3>
 			</div>
 			<p class="font-num">{{data&&data.value}}%</p>
 			<div class="pos-a h-progress-1-ratio">
@@ -14,20 +14,39 @@
 </template>
 <script>
 	import mixins from '../../mixins'
+	import {getInput} from "../../../../lib";
 
-	const config = {animation: true}
+	const configSource = {
+		config: {
+			fields: {
+				title: getInput('title', '标题'),
+				subTitle: getInput('subTitle', '副标题'),
+			}
+		}
+	}
+	const config = {
+		animation: true,
+		config: {
+			title: true,
+			subTitle: true,
+		}
+	}
 	const value = {
 		api: {
 			data: JSON.stringify({
-				title: '标题', subTitle: '副标题', value: 10
+				value: 10
 			})
+		},
+		config: {
+			title: '标题',
+			subTitle: '副标题',
 		}
 	}
 
 	export default {
 		mixins: [mixins],
 		created() {
-			this.configSource = this.parseConfigSource(config)
+			this.configSource = this.parseConfigSource(config, configSource)
 			this.configValue = this.parseConfigValue(config, value)
 		}
 	}

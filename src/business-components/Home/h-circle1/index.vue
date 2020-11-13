@@ -1,15 +1,15 @@
 <template>
 	<div class="widget-part fn-flex flex-row" :style="styles">
 		<div class="h-circle-1 pos-r">
-			<h2 class="circle pos-a" :style="{backgroundColor:data&&data.color[0]}"></h2>
-			<h3 class="circle pos-a" :style="{backgroundColor:data&&data.color[1],width:ratio1,height:ratio1}"></h3>
-			<h4 class="circle pos-a" :style="{backgroundColor:data&&data.color[2],width:ratio2,height:ratio2}"></h4>
+			<h2 class="circle pos-a" :style="{backgroundColor:color(0)}"></h2>
+			<h3 class="circle pos-a" :style="{backgroundColor:color(1),width:ratio1,height:ratio1}"></h3>
+			<h4 class="circle pos-a" :style="{backgroundColor:color(2),width:ratio2,height:ratio2}"></h4>
 		</div>
 		<div class="h-circle-1-list fn-flex flex-column">
-			<h1>{{data&&data.title}}</h1>
+			<h1>{{config.config&&config.config.title}}</h1>
 			<ul>
 				<li class="fn-flex flex-row" v-for="(item,index) in data?data.value:[]" :key="index">
-					<i class="circle" :style="{backgroundColor:data&&data.color[index]}"/>
+					<i class="circle" :style="{backgroundColor:color(index)}"/>
 					<label>{{item.title}}</label>
 					<span>{{item.value}}</span>
 				</li>
@@ -19,24 +19,49 @@
 </template>
 <script>
 	import mixins from '../../mixins'
+	import {getInput} from '../../../../lib'
 
-	const config = {animation: true}
+	const configSource = {
+		config: {
+			fields: {
+				title: getInput('background', '描述'),
+				color: getInput('color', '颜色'),
+			}
+		}
+	}
+	const config = {
+		animation: true,
+		config: {
+			color: true,
+			title: true,
+		},
+	}
 	const value = {
 		api: {
 			data: JSON.stringify({
-				color: ['rgba(0, 62, 144, 0.8)', 'rgba(0, 145, 210, 0.8)', 'rgba(0, 233, 194, 0.8)'],
-				title: '钢管（米）',
 				value: [
 					{title: '设计量：', value: 34452},
 					{title: '领用量：', value: 23445},
 					{title: '核销量：', value: 13345}
 				]
 			})
-		}
+		},
+		config: {
+			color: JSON.stringify(['rgba(0, 62, 144, 0.8)', 'rgba(0, 145, 210, 0.8)', 'rgba(0, 233, 194, 0.8)']),
+			title: '钢管（米）',
+		},
 	}
 	export default {
 		mixins: [mixins],
 		computed: {
+			color() {
+				return (index) => {
+					if (this.config.config) {
+						return JSON.parse(this.config.config.color)[index]
+					}
+					return ''
+				}
+			},
 			ratio1() {
 				if (this.data) {
 					return `${this.data.value[1].value / this.data.value[0].value * 100}%`
