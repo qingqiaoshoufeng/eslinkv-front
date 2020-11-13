@@ -192,3 +192,28 @@ export function getNaturalGasStationList(data) {
 		},
 	})
 }
+
+//态势感知
+export function getWarningList(data) {
+	return request({
+		url: '/map/home/getWarningList',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+
+//模糊匹配所有站点
+export function getAllTypeStationList(data) {
+	return request({
+		url: '/map/home/getAllTypeStationList',
+		method: 'get',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}

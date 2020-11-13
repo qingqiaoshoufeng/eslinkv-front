@@ -46,7 +46,8 @@ import {
 	HOMELEGEND_PIPE,
 	HOMELEGEND_UCAN,
 	PROJECTLEGEND,
-	SERVICELEGEND,
+    SERVICELEGEND,
+    HOMEOVERLAYCONFIGMAP,
 } from '@/business-components/Example/diy-amap/config/index';
 import bus from '@/business-components/Example/diy-amap/utils/bus';
 
@@ -74,35 +75,58 @@ export default {
 				mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
 			},
 			mapReady: false,
-			mapComponentName: 'homeMap',
-			legendMap: {},
-			activeItem: {},
+            mapComponentName: 'homeMap',
+            currentScene:'home-station',
+			legendConfig: {},
+            activeItem: {},
 		};
-	},
+    },
+    computed:{
+        legendMap(){
+            let {currentScene,legendConfig,_overlayConfigMap} = this
+            let pageName = currentScene.split('-')[0]
+            let pageOverlayConfig = _overlayConfigMap[pageName]
+            let obj = {}
+            Object.keys(legendConfig).map(legend=>{
+                let isShow = legendConfig[legend]
+                obj[legend] = {
+                    ...pageOverlayConfig[legend],
+                    isShow
+                }
+            })
+            return obj
+        }
+    },
 	created() {
+        this._overlayConfigMap = {
+            home:HOMEOVERLAYCONFIGMAP,
+            service:HOMEOVERLAYCONFIGMAP,
+            project:HOMEOVERLAYCONFIGMAP
+        }
 		this._pageConfig = {
 			'home-station': {
 				mapComponentName: 'homeMap',
-				legendMap: HOMELEGEND_STATION,
+				legendConfig: HOMELEGEND_STATION,
 			},
 			'home-pipe': {
 				mapComponentName: 'homeMap',
-				legendMap: HOMELEGEND_PIPE,
+				legendConfig: HOMELEGEND_PIPE,
 			},
 			'home-ucan': {
 				mapComponentName: 'homeMap',
-				legendMap: HOMELEGEND_UCAN,
+				legendConfig: HOMELEGEND_UCAN,
 			},
 			service: {
 				mapComponentName: 'serviceMap',
-				legendMap: SERVICELEGEND,
+				legendConfig: SERVICELEGEND,
 			},
 			project: {
 				mapComponentName: 'projectMap',
-				legendMap: PROJECTLEGEND,
+				legendConfig: PROJECTLEGEND,
 			},
-		};
+        };
 		bus.$on('currentSceneChange', val => {
+            this.currentScene = val
 			this.initPage(val);
 		});
 	},
@@ -125,8 +149,6 @@ export default {
 			Object.keys(config).forEach(targetProp => {
 				this[targetProp] = config[targetProp];
 			});
-			// //重置legend 均显示
-			this.legendMap = JSON.parse(JSON.stringify(this.legendMap));
 			this.map.setZoom(this.mapConfig.zoom);
 		},
 		handleLegendClick(prop) {

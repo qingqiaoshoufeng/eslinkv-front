@@ -16,7 +16,6 @@
 	</div>
 </template>
 <script>
-import { HOMESITUATIONAWARENESSLIST } from '@/business-components/Example/diy-amap/config/index';
 import { Overlay } from '@/business-components/Example/diy-amap/components/index';
 export default {
 	name: 'ListOverlay',
@@ -47,12 +46,12 @@ export default {
 		init() {
 			this.getData();
 		},
-		getData() {
+		async getData() {
 			let eventTypeIconMap = {
 				0: 'iconbaoguanshijian',
 				1: 'iconxieloushijian',
 			};
-			let list = HOMESITUATIONAWARENESSLIST;
+            let list =  await this.$sysApi.map.home.getWarningList()
 			//根据事件类型，判断图标，根据状态，显示图标颜色
 			this.list = list.map(item => {
 				let { status, eventType } = item;

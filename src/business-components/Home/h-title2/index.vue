@@ -2,26 +2,42 @@
 	<div class="widget-part" :style="styles">
 		<div class="fn-flex flex-column h-title-2">
 			<h2>{{data&&data.value}}</h2>
-			<p>{{data&&data.title}}</p>
+			<p>{{config.config&&config.config.title}}</p>
 		</div>
 	</div>
 </template>
 <script>
 	import mixins from '../../mixins'
+	import {getInput} from "../../../../lib";
 
-	const config = {animation: true}
+	const configSource = {
+		config: {
+			fields: {
+				title: getInput('title', '标题'),
+			}
+		}
+	}
+	const config = {
+		animation: true,
+		config: {
+			title: true,
+		}
+	}
 	const value = {
 		api: {
 			data: JSON.stringify({
-				title: '标题', value: 0
+				value: 0
 			})
+		},
+		config: {
+			title: '标题'
 		}
 	}
 
 	export default {
 		mixins: [mixins],
 		created() {
-			this.configSource = this.parseConfigSource(config)
+			this.configSource = this.parseConfigSource(config, configSource)
 			this.configValue = this.parseConfigValue(config, value)
 		}
 	}

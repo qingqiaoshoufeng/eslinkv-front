@@ -31,12 +31,12 @@
 <script>
 	import mixins from '../../mixins';
 	import options from './options';
-	import {getInput} from '../../../../lib'
+	import {getInput, getSelect} from '../../../../lib'
 
 	const configSource = {
 		config: {
 			fields: {
-				title: getInput('background', '背景图片'),
+				background: getSelect('background', '背景图片', ['/static/images/airfeed/carout01.webm', '/static/images/airfeed/carout02.webm']),
 				color: getInput('color', '颜色'),
 				desc1: getInput('desc1', '描述1'),
 				desc2: getInput('desc2', '描述2'),
@@ -48,7 +48,6 @@
 		config: {
 			background: true,
 			color: true,
-			title: true,
 			desc1: true,
 			desc2: true,
 		},

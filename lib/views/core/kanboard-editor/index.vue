@@ -503,6 +503,7 @@
 		},
 		mounted() {
 			mutations.setInstance('kanboard', this)
+			mutations.setStatus('inEdit')
 		}
 	}
 </script>

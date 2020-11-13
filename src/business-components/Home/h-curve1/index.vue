@@ -1,21 +1,37 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<div class="h-curve-1" :id="id"/>
-		<div class="pos-a h-curve-1-title">{{data&&data.title}}</div>
+		<div class="pos-a h-curve-1-title">{{config.config&&config.config.title}}</div>
 	</div>
 </template>
 <script>
 	import mixins from '../../mixins'
 	import options from './options'
+	import {getInput} from "../../../../lib";
 
-	const config = {animation: true}
+	const configSource = {
+		config: {
+			fields: {
+				title: getInput('title', '标题'),
+			}
+		}
+	}
+	const config = {
+		animation: true,
+		config: {
+			title: true,
+		},
+	}
 	const value = {
 		api: {
 			data: JSON.stringify({
-				title: '用户', value: [['10', 4000], ['11', 6000], ['12', 5000], ['01', 6000],
+				value: [['10', 4000], ['11', 6000], ['12', 5000], ['01', 6000],
 					['02', 7000], ['03', 6000], ['04', 4000], ['05', 3000],
 					['06', 3500], ['07', 3800], ['08', 4000], ['09', 5000]]
 			})
+		},
+		config: {
+			title: '用户'
 		}
 	}
 	export default {
@@ -25,20 +41,8 @@
 				options.series[0].data = data.value
 				this.instance && this.instance.setOption(options)
 			},
-			init() {
-				// console.log('init')
-			}
 		},
 		watch: {
-			'configValue.api.params': {
-				handler(val) {
-					// 联动示例
-					// console.log('-', val)
-					this.init()
-				},
-				deep: true,
-				immediate: true
-			},
 			data: {
 				handler(val) {
 					if (this.id) {
@@ -54,7 +58,7 @@
 			}
 		},
 		created() {
-			this.configSource = this.parseConfigSource(config)
+			this.configSource = this.parseConfigSource(config, configSource)
 			this.configValue = this.parseConfigValue(config, value)
 		}
 	}

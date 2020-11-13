@@ -1,20 +1,35 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<div class="h-line-1" :id="id"/>
-		<div class="pos-a h-line-1-title">{{data&&data.title}}</div>
+		<div class="pos-a h-line-1-title">{{config.config&&config.config.title}}</div>
 	</div>
 </template>
 <script>
 	import mixins from '../../mixins'
 	import options from './options'
+	import {getInput, getSelect} from "../../../../lib";
 
-	const config = {animation: true}
+	const configSource = {
+		config: {
+			fields: {
+				title: getInput('title', '文字'),
+			}
+		}
+	}
+	const config = {
+		animation: true,
+		config: {
+			title: true,
+		}
+	}
 	const value = {
 		api: {
 			data: JSON.stringify({
-				title: '数量',
 				value: [['2015', 250], ['2016', 350], ['2017', 150], ['2018', 280], ['2019', 250], ['2020', 250]]
 			})
+		},
+		config: {
+			title: '数量'
 		}
 	}
 	export default {
@@ -41,7 +56,7 @@
 			}
 		},
 		created() {
-			this.configSource = this.parseConfigSource(config)
+			this.configSource = this.parseConfigSource(config, configSource)
 			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
