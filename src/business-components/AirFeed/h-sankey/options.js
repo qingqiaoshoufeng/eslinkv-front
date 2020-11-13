@@ -13,55 +13,56 @@ export default {
 			color: '#ffffff',
 			fontSize: 18
 		},
-		data: [{
-			name: 'a',
-			value: 100,
-			itemStyle: {
-				color: '#00ff00'
-			}
-		}, {
-			name: 'a1',
-			value: 40
-		}, {
-			name: 'a2',
-			value: 30
-		}, {
-			name: 'a3',
-			value: 30
-		}, {
-			name: 'b',
-			value: 40
-		}, {
-			name: 'b1',
-			value: 20
-		}, {
-			name: 'b2',
-			value: 20
-		}, {
-			name: 'c',
-			value: 20
-		}, {
-			name: 'c1',
-			value: 8
-		}, {
-			name: 'c2',
-			value: 2
-		}, {
-			name: 'c3',
-			value: 2
-		}, {
-			name: 'c4',
-			value: 2
-		}, {
-			name: 'c5',
-			value: 2
-		}, {
-			name: 'c6',
-			value: 2
-		}, {
-			name: 'c7',
-			value: 2
-		}],
+		data: [
+			{
+				name: 'a',
+				value: 100,
+				itemStyle: {
+					color: '#00ff00'
+				}
+			}, {
+				name: 'a1',
+				value: 40
+			}, {
+				name: 'a2',
+				value: 30
+			}, {
+				name: 'a3',
+				value: 30
+			}, {
+				name: 'b',
+				value: 40
+			}, {
+				name: 'b1',
+				value: 20
+			}, {
+				name: 'b2',
+				value: 20
+			}, {
+				name: 'c',
+				value: 20
+			}, {
+				name: 'c1',
+				value: 8
+			}, {
+				name: 'c2',
+				value: 2
+			}, {
+				name: 'c3',
+				value: 2
+			}, {
+				name: 'c4',
+				value: 2
+			}, {
+				name: 'c5',
+				value: 2
+			}, {
+				name: 'c6',
+				value: 2
+			}, {
+				name: 'c7',
+				value: 2
+			}],
 		links: [{
 			source: 'a',
 			target: 'a1',

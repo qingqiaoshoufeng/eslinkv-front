@@ -12,13 +12,13 @@ const GoldChart = {
 		updateComponent: (id, data) => {
 			store.instance.kanboard.$refs[id][0].$refs.widgets.updateComponentFormOutSide(data)
 		}
-	}
+	},
 }
 
 export default GoldChart
 export {store, mutations}
 
-// window.GoldChart = GoldChart
+window.GoldChart = GoldChart
 
 // document.addEventListener('GoldChartReady', function (e) {
 // 	console.log(e.detail)

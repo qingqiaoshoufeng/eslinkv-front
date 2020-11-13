@@ -1,8 +1,8 @@
 <template>
 	<div class="widget-part" :style="styles">
 		<div class="fn-flex flex-row h-progress-2">
-			<h2>{{data&&data.title}}</h2>
-			<p class="font-num">{{data&&data.value}}{{data&&data.suffix}}</p>
+			<h2>{{config.config&&config.config.title}}</h2>
+			<p class="font-num">{{data&&data.value}}{{config.config&&config.config.suffix}}</p>
 		</div>
 		<div class="pos-r h-progress-2-ratio">
 			<i class="pos-a" :style="{width:`calc(${ratio} - 12px)`}"></i>
@@ -12,13 +12,33 @@
 </template>
 <script>
 	import mixins from '../../mixins'
+	import {getInput} from "../../../../lib";
 
-	const config = {animation: true}
+	const configSource = {
+		config: {
+			fields: {
+				title: getInput('title', '标题'),
+				suffix: getInput('suffix', '后缀'),
+			}
+		}
+	}
+	const config = {
+		animation: true,
+		config: {
+			title: true,
+			suffix: true,
+		}
+	}
 	const value = {
 		api: {
 			data: JSON.stringify({
-				title: '标题', suffix: '%', value: 10, max: 100
+				value: 10,
+				max: 100
 			})
+		},
+		config: {
+			title: '标题',
+			suffix: '%',
 		}
 	}
 	export default {
@@ -35,7 +55,7 @@
 			},
 		},
 		created() {
-			this.configSource = this.parseConfigSource(config)
+			this.configSource = this.parseConfigSource(config, configSource)
 			this.configValue = this.parseConfigValue(config, value)
 		}
 	}

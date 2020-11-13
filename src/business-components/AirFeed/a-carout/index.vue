@@ -2,7 +2,7 @@
 	<div class="widget-part" :style="styles">
 		<div class="carout-bg">
 			<video
-				:src="data&&data.background"
+				:src="config.config&&config.config.background"
 				controls="controls"
 				autoplay="autoplay"
 				muted="muted"
@@ -20,9 +20,9 @@
 					<div class="carout_point"></div>
 				</div>
 				<div class="context">
-					<div class="value font-num">{{data&&data.value}}</div>
-					<div class="desc1 text-center">{{data&&data.desc1}}</div>
-					<div class="desc2 text-center">{{data&&data.desc2}}</div>
+					<div class="value font-num">{{data&&data.value1}}</div>
+					<div class="desc1 text-center">{{desc1}}</div>
+					<div class="desc2 text-center">{{config.config&&config.config.desc2}}</div>
 				</div>
 			</div>
 		</div>
@@ -31,26 +31,54 @@
 <script>
 	import mixins from '../../mixins';
 	import options from './options';
+	import {getInput, getSelect} from '../../../../lib'
 
-	const config = {animation: true}
+	const configSource = {
+		config: {
+			fields: {
+				background: getSelect('background', '背景图片', ['/static/images/airfeed/carout01.webm', '/static/images/airfeed/carout02.webm']),
+				color: getInput('color', '颜色'),
+				desc1: getInput('desc1', '描述1'),
+				desc2: getInput('desc2', '描述2'),
+			}
+		}
+	}
+	const config = {
+		animation: true,
+		config: {
+			background: true,
+			color: true,
+			desc1: true,
+			desc2: true,
+		},
+	}
 	const value = {
 		api: {
 			data: JSON.stringify({
-				value: 96,
-				background: '/static/images/airfeed/carout01.webm',
-				desc1: '抢修3分钟',
-				desc2: '出车率',
-				color: [0, 255, 207]
+				value1: 96,
+				value2: 3,
 			}),
+		},
+		config: {
+			background: '/static/images/airfeed/carout01.webm',
+			color: JSON.stringify([0, 255, 207]),
+			desc1: '抢修{x}分钟',
+			desc2: '出车率',
 		},
 	};
 	export default {
 		mixins: [mixins],
 		created() {
-			this.configSource = this.parseConfigSource()
-			this.configValue = this.parseConfigValue({animation: true}, value)
+			this.configSource = this.parseConfigSource(config, configSource)
+			this.configValue = this.parseConfigValue(config, value)
 		},
 		computed: {
+			desc1() {
+				if (this.data) {
+					return this.config.config.desc1.replace('{x}', this.data.value2)
+				}
+				return ''
+			},
 			style() {
 				if (this.data) {
 					let rotate = ((this.data.value / 100) * 360) + 6
@@ -67,16 +95,16 @@
 			setOption(data) {
 				let newData = []
 				let newData1 = []
-				for (let i = data.value; i > 0; i--) {
-					let opacity = 1 - i / data.value
+				let color = JSON.parse(this.config.config.color)
+				for (let i = data.value1; i > 0; i--) {
+					let opacity = 1 - i / data.value1
 					if (opacity < 0)
 						opacity = 0.1
 					newData.push({
 						value: 1,
 						itemStyle: {
 							borderRadius: 100,
-							color: `rgba(${data.color[0]}, ${data.color[1]}, ${data.color[2]},${opacity})`,
-
+							color: `rgba(${color[0]}, ${color[1]}, ${color[2]},${opacity})`,
 						},
 					})
 				}
@@ -85,15 +113,14 @@
 						value: 1,
 						itemStyle: {
 							borderRadius: 100,
-							color: `rgba(${data.color[0]}, ${data.color[1]}, ${data.color[2]},0)`,
-
+							color: `rgba(${color[0]}, ${color[1]}, ${color[2]},0)`,
 						},
 					})
 				}
 				newData1.push({
 					value: 100,
 					itemStyle: {
-						color: `rgba(${data.color[0]}, ${data.color[1]}, ${data.color[2]},0.1)`,
+						color: `rgba(${color[0]}, ${color[1]}, ${color[2]},0.1)`,
 					},
 				});
 				options.series[0].data = newData1

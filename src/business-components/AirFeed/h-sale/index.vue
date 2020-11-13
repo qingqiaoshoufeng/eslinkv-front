@@ -1,33 +1,61 @@
 <template>
-	<div class="widget-part" :style="styles">
+	<div class="widget-part" :style="styles" v-if="data">
 		<div class="title">
 			<div class="title-txt">LNG宁波挂牌价(元/吨)</div>
-			<div class="num">298</div>
+			<div class="num">{{data.lngPrice}}</div>
 		</div>
 		<ul class="jars">
-			<li class="active">
+			<li
+				v-for="(k, i) in data.station"
+				:key="k.name"
+				:class="{active: currentIndex === i}"
+				@click="changeStation(i)"
+			>
 				<div class="jar">
 					<div class="jar-heart">
-						<div class="water"></div>
-						<div class="jar-num font-num">24%</div>
+						<div class="water" :style="{top: (100-k.percent) + '%'}"></div>
+						<div class="jar-num font-num">{{k.percent}}%</div>
 					</div>
 				</div>
-				<div class="li-num">324,324</div>
-				<div class="li-name">东部站<br>储气量(m3)</div>
+				<div class="li-num">{{k.value}}</div>
+				<div class="li-name">{{k.name}}<br>储气量(m3)</div>
+				<div class="active-dot" v-show="currentIndex === i">
+					<div class="dot"></div>
+				</div>
 			</li>
 		</ul>
+		<div class="split-line"></div>
 		<div class="view">
 			<div class="titles">
 				<div>销售量</div>
 				<div>进销存</div>
 			</div>
 			<div class="chart-wrap">
+				<div class="legend">
+					<div class="legend-item">
+						<div class="legend-color"></div>
+						<div class="legend-txt">进液量</div>
+					</div>
+					<div class="legend-item">
+						<div class="legend-color red"></div>
+						<div class="legend-txt">出液量</div>
+					</div>
+					<div class="legend-item">
+						<div class="legend-color green"></div>
+						<div class="legend-txt">气化量</div>
+					</div>
+					<div class="legend-item">
+						<div class="line-legend"></div>
+						<div class="legend-txt">销售量</div>
+					</div>
+				</div>
 				<div class="chart" :id="id"></div>
 				<div class="x-axis">
 					<div class="month" v-for="k in month" :key="k">{{k}}</div>
 				</div>
 			</div>
 		</div>
+		<div class="split-line"></div>
 	</div>
 </template>
 <script>
@@ -38,23 +66,71 @@ const config = {animation: true}
 const value = {
 	api: {
 		data: JSON.stringify({
-			data: test
+			lngPrice: 298,
+			station: [
+				{
+					name: '东部站',
+					percent: 24,
+					value: '324,324',
+					chart: test
+				},
+				{
+					name: '西部站',
+					percent: 66,
+					value: '324,324',
+					chart: test
+				},
+				{
+					name: '门下站',
+					percent: 11,
+					value: '324,324',
+					chart: test
+				},
+				{
+					name: '西林站',
+					percent: 5,
+					value: '324,324',
+					chart: test
+				},
+				{
+					name: '望元站',
+					percent: 52,
+					value: '324,324',
+					chart: test
+				}
+			]
 		})
 	}
 }
 export default {
 	mixins: [mixins],
+	data () {
+		return {
+			currentIndex: 0,
+			timer: null,
+			clickTimer: null,
+			isClick: false
+		}
+	},
 	computed: {
 		month () {
-			if (this.data && this.data.data) {
-				return this.data.data.map(v => v.name)
+			if (this.data && this.data.chart) {
+				return this.data.chart.map(v => v.name)
 			}
 			return []
 		}
 	},
 	methods: {
-		setOption(data) {
-			this.instance && this.instance.setOption(getOptions(this.data.data))
+		setOption() {
+			this.instance && this.instance.setOption(getOptions(this.data.station[this.currentIndex].chart))
+		},
+		changeStation (i) {
+			clearTimeout(this.clickTimer)
+			this.currentIndex = i
+			this.isClick = true
+			this.clickTimer = setTimeout(() => {
+				this.isClick = false
+			}, 4000)
 		}
 	},
 	watch: {
@@ -74,13 +150,27 @@ export default {
 	created() {
 		this.configSource = this.parseConfigSource(config);
 		this.configValue = this.parseConfigValue(config, value);
+	},
+	mounted() {
+		this.timer = setInterval(() => {
+			if (this.isClick) return
+			if (this.currentIndex === 4) {
+				this.currentIndex = 0
+			} else {
+				this.currentIndex++
+			}
+			this.setOption()
+		}, 2000)
+	},
+	beforeDestroy () {
+		this.timer && clearInterval(this.timer)
+		this.clickTimer && clearTimeout(this.clickTimer)
 	}
 }
 </script>
 <style lang="scss" scoped>
 .view {
 	width: 100%;
-	height: 100%;
 	display: flex;
 }
 .title {
@@ -108,6 +198,7 @@ export default {
 .jars {
 	display: flex;
 	justify-content: space-between;
+	margin-bottom: 22px;
 	li {
 		position: relative;
 		height: 230px;
@@ -182,12 +273,90 @@ export default {
 				height: 4px;
 			}
 		}
+
+		.active-dot {
+			position: absolute;
+			left: 0;
+			right: 0;
+			margin: auto;
+			bottom: -20px;
+			background: #00FFCF;
+			width: 2px;
+			height: 20px;
+			.dot {
+				position: absolute;
+				left: -3px;
+				bottom: -8px;
+				background: #00FFCF;
+				width: 8px;
+				height: 8px;
+			}
+		}
+	}
+}
+.split-line {
+	position: relative;
+	width: 100%;
+	height: 2px;
+	background: rgba(0, 221, 255, 0.5);
+	&:before {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 2px;
+		width: 40px;
+		background: #00DDFF;
+	}
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 2px;
+		width: 40px;
+		background: #00DDFF;
 	}
 }
 .chart-wrap {
 	width: 100%;
-	height: 100%;
+	height: 435px;
 	position: relative;
+	margin-top: 24px;
+	.legend {
+		position: absolute;
+		left: 0;
+		right: 0;
+		margin: auto;
+		top: 0;
+		display: flex;
+		justify-content: space-between;
+		width: 320px;
+		.legend-item {
+			display: flex;
+			align-items: center;
+			.legend-color {
+				width: 16px;
+				height: 8px;
+				background: #2194FF;
+				&.red{background: #E5615B;}
+				&.green{background: #00FFCF;}
+			}
+			.line-legend {
+				background: #00DDFF;
+				width: 16px;
+				height: 2px;
+			}
+			.legend-txt {
+				font-size: 16px;
+				line-height: 16px;
+				color: #FFFFFF;
+				margin-left: 4px;
+			}
+		}
+	}
 }
 .chart {
 	width: 100%;
