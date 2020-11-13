@@ -50,7 +50,7 @@
 					}
 				}
 				this.selectValue = addMonths(this.selectValue, index)
-				this.emitComponentUpdate(this.selectValue)
+				this.emitComponentUpdate({value: this.selectValue, label: this.now})
 			},
 		},
 		created() {
