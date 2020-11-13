@@ -33,17 +33,17 @@ export default {
         axisLine: {
             show: false,
         }
-    },{
-        name:'%',
+    }, {
+        name: '次',
         nameTextStyle: {
             color: '#fff',
             fontSize: 16,
             align: 'left',
             padding: [2, 6, 5, 8],
-            lineHeight:10
+            lineHeight: 10
         },
         type: 'value',
-        splitLine:{
+        splitLine: {
             show: true
         },
         show: true,
@@ -59,7 +59,7 @@ export default {
                 color: '#fff',
             }
         },
-        interval: 25,
+        interval: 50,
         axisLine: {
             show: true,
         }
@@ -67,27 +67,22 @@ export default {
     barGap: -0.8,
     series: [{
         type: 'bar',
-        yAxisIndex:0,
+        yAxisIndex: 0,
         showBackground: true,
         itemStyle: {
             normal: {
-                color: '#00FFCF',
+                color: new echarts.graphic.LinearGradient(
+                    0, 0, 0, 1,
+                    [
+                        { offset: 0, color: '#00DDFF' },
+                        { offset: 1, color: 'rgba(0, 221, 255, 0)' }
+                    ])
             }
         },
         barWidth: 10,
     }, {
-        type: 'bar',
-        barWidth: 6,
-        yAxisIndex:0,
-        showBackground: true,
-        itemStyle: {
-            normal: {
-                color: '#2C99FF',
-            }
-        },
-    },{
-		type: 'line',
-        yAxisIndex:1,
+        type: 'line',
+        yAxisIndex: 1,
         show: true,
         axisTick: {
             show: false,
@@ -101,12 +96,13 @@ export default {
                 show: false,
             }
         },
-        itemStyle:{
+        symbol: 'none',
+        itemStyle: {
             normal: {
-                color:'#yellow',
-                lineStyle:{
-                    width:2,
-                    type:'dotted'  //'dotted'虚线 'solid'实线
+                lineStyle: {
+                    width: 2,
+                    type: 'solid',  //'dotted'虚线 'solid'实线
+                    color: 'rgba(1,253,210,1)'
                 }
             }
         },

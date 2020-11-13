@@ -114,7 +114,6 @@ export default function (data) {
 			}
 
 		},
-		legend: {},
 		color: "#52EDC5",
 		xAxis: [{
 			type: "category",
