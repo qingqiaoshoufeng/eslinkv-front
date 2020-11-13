@@ -4,14 +4,18 @@
 			<div class="left-list">
 				<div
 					class="list-item"
-					:class="{'list-item-active':activeIndex === index}"
-					v-for="(item,index) in data&&data.list"
+					:class="{ 'list-item-active': activeIndex === index }"
+					v-for="(item, index) in data && data.list"
 					:key="index"
 					:activeIndex="activeIndex"
 					@click="selectTab(index)"
-				>{{item}}
-                <img src="/static/images/arrow.svg" v-if="index===activeIndex" />
-                </div>
+				>
+					{{ item }}
+					<img
+						src="/static/images/arrow.svg"
+						v-if="index === activeIndex"
+					/>
+				</div>
 			</div>
 			<div class="right-circle">
 				<circle1 :data="computedData" v-if="computedData" />
@@ -99,20 +103,25 @@ export default {
 		this.actived = this.defaultActived || 0;
 		this.beginInterval();
 	},
+	beforeDestroy() {
+		this.clearIntervalId();
+	},
 	methods: {
 		selectTab(index) {
-			clearInterval(this.intervalId);
-			this.intervalId = null;
+			this.clearIntervalId();
 			this.activeIndex = index;
 			setTimeout(this.beginInterval, this.data.timeoutTime);
 		},
 		beginInterval() {
-			if (!this.data) return;
-			if (this.intervalId) return;
+			if (!this.data || this.intervalId) return;
 			this.intervalId = setInterval(() => {
 				this.activeIndex = (this.activeIndex + 1) % 3;
 				console.log(this.activeIndex);
 			}, this.data.intervalTime);
+		},
+		clearIntervalId() {
+			clearInterval(this.intervalId);
+			this.intervalId = null;
 		},
 	},
 };
@@ -130,8 +139,8 @@ export default {
 		align-items: center;
 		justify-content: space-between;
 		.list-item {
-            text-align: left;
-            padding-left: 8px;
+			text-align: left;
+			padding-left: 8px;
 			height: 40px;
 			line-height: 40px;
 			width: 96px;
@@ -142,13 +151,13 @@ export default {
 			font-size: 18px;
 			color: #fff;
 			border-left: 4px solid rgba(0, 31, 109, 0.5);
-            display: flex;
-            align-items: center;
-            img{
-                height: 20px;
-                width: 20px;
-                margin-left: 20px;
-            }
+			display: flex;
+			align-items: center;
+			img {
+				height: 20px;
+				width: 20px;
+				margin-left: 20px;
+			}
 		}
 		.list-item-active {
 			border-left: 4px solid #00ddff;

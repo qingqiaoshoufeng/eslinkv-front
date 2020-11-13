@@ -77,7 +77,7 @@ export default {
 	},
 };
 </script>
-<style lang="scss">
+<style lang="scss" scope>
 .h-line-1 {
 	height: 100%;
 }

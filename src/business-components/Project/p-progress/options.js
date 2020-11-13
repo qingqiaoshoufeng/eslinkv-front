@@ -1,13 +1,13 @@
 export default {
     grid: {
-		top: 40,
-		left: 40,
-		bottom: 30,
-		right: 0
-	},
-    xAxis: {name: 'amount'},
-    yAxis: {type: 'category'},
-    
+        top: 40,
+        left: 40,
+        bottom: 30,
+        right: 0
+    },
+    xAxis: { name: 'amount' },
+    yAxis: { type: 'category' },
+
     series: [
         {
             type: 'bar',
@@ -23,8 +23,8 @@ export default {
                     color: new echarts.graphic.LinearGradient(
                         0, 0, 1, 1,
                         [
-                            {offset: 0, color: 'rgba(255,255,255,.6)'},
-                            {offset: 1, color: 'rgba(255,255,255,0)'}
+                            { offset: 0, color: 'rgba(0, 221, 255, 0.6)' },
+                            { offset: 1, color: 'rgba(0, 255, 207, 0.6)' }
                         ]
                     )
                 }

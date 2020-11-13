@@ -1,10 +1,10 @@
 export default {
     radar: {
-        grid:{
-            left:'5%',
-            top:'5%',
-            right:'5%',
-            bottom:'5%',
+        grid: {
+            left: '5%',
+            top: '5%',
+            right: '5%',
+            bottom: '5%',
         },
         backgroundColor: 'rgba(255,255,255,1)',
         name: {
@@ -23,16 +23,16 @@ export default {
         axisLine: {
             show: true,
             lineStyle: {
-                color: "rgba(14,122,195,0.2)",
-                width:2
+                color: "#0E7AC3",
+                width: 2
             }
         },
 
         splitLine: {
             show: true,
             lineStyle: {
-                color: "rgba(14,122,195,0.2)",
-                width:2
+                color: "#0E7AC3",
+                width: 2
             }
         },
     },
@@ -46,7 +46,7 @@ export default {
         },
         areaStyle: {
             normal: {
-                color: new echarts.graphic.LinearGradient(0, 0, 0.5, 0.6, [{
+                color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                     offset: 0,
                     color: 'rgba(0,221,255,0.6)'
                 }, {
@@ -55,6 +55,6 @@ export default {
                 }]),
             }
         },
-        data:[{value:[]}],
+        data: [{ value: [] }],
     }
 };
