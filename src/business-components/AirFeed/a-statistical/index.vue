@@ -2,8 +2,10 @@
 	<div class="widget-part pos-r" :style="styles">
 		<div class="statistical-box">
 			<div class="left fn-flex flex-column">
-				<div class="time">{{ data && data.time }}</div>
-				<div class="decs">{{ data && data.decs }}</div>
+				<div class="time">{{ timeDesc }}</div>
+				<div class="decs">
+					{{ config.config && config.config.desc }}
+				</div>
 			</div>
 			<div class="right">
 				<div class="value">
@@ -44,15 +46,32 @@
 </template>
 <script>
 import mixins from '../../mixins';
-
-const config = { animation: true };
+import { getInput } from '../../../../lib';
+const config = {
+	animation: true,
+	config: {
+		desc: true,
+		timeDesc: true,
+	},
+};
+const configSource = {
+	config: {
+		fields: {
+			desc: getInput('desc', '描述'),
+			timeDesc: getInput('timeDesc', '时间'),
+		},
+	},
+};
 const value = {
 	api: {
 		data: JSON.stringify({
-			time: '2020年度',
+			time: 2020,
 			value: 375321809,
-			decs: '累计接纳量(m3)',
 		}),
+	},
+	config: {
+		timeDesc: 'xxxx年度',
+		desc: '累计接纳量(m3)',
 	},
 };
 export default {
@@ -67,6 +86,10 @@ export default {
 		statisticalVal() {
 			if (this.data) return this.data.value.toString().split('');
 			return [];
+		},
+		timeDesc() {
+			if (!this.data) return '2020年度';
+			return this.config.config.timeDesc.replace('xxxx', this.data.time);
 		},
 	},
 	methods: {
@@ -88,7 +111,7 @@ export default {
 		},
 	},
 	created() {
-		this.configSource = this.parseConfigSource(config);
+		this.configSource = this.parseConfigSource(config, configSource);
 		this.configValue = this.parseConfigValue(config, value);
 	},
 	mounted() {
