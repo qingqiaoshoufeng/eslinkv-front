@@ -1,17 +1,23 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<div class="a-legend-box">
-			<div class="unit">{{data&&data.title}}</div>
+			<div class="unit">{{ title && title }}</div>
 			<div class="legend">
 				<div class="legend1">
-                    <div class="bgc1" :style="`backgroundColor:${data&&data.color1};}`"></div>
-                    <div class="desc1">{{data&&data.desc1}}</div>
-                </div>
+					<div
+						class="bgc1"
+						:style="`backgroundColor:${colorList[0]};}`"
+					></div>
+					<div class="desc1">{{ descList[0] }}</div>
+				</div>
 				<div class="legend2">
-                     <div class="bgc2" :style="`backgroundColor:${data&&data.color2};}`"></div>
-                    <div class="desc2">{{data&&data.desc2}}</div>
-                </div>
-                <!-- <div class="legend2">
+					<div
+						class="bgc2"
+						:style="`backgroundColor:${colorList[1]};}`"
+					></div>
+					<div class="desc2">{{ descList[1] }}</div>
+				</div>
+				<!-- <div class="legend2">
                      <div class="bgc3" :style="`backgroundColor:${data&&data.color3};}`"></div>
                     <div class="desc3">{{data&&data.desc3}}</div>
                 </div> -->
@@ -23,34 +29,74 @@
 <script>
 import mixins from '../../mixins';
 import options from './options';
+import { getInput } from '../../../../lib';
 
-const config = { animation: true };
+const config = {
+	animation: true,
+	config: {
+		color1: true,
+		color2: true,
+		desc1: true,
+		desc2: true,
+		title: true,
+	},
+};
+const configSource = {
+	config: {
+		fields: {
+			color1: getInput('color1', '条形图颜色'),
+			color2: getInput('color2', '折线图颜色'),
+			desc1: getInput('desc1', '条形图名称'),
+			desc2: getInput('desc2', '折线图名称'),
+			title: getInput('title', '条形图单位'),
+		},
+	},
+};
 const value = {
 	api: {
 		data: JSON.stringify({
-            color1:'#00DDFF',
-            color2:'rgba(1,253,210,1)',
-            desc1:'第三方破坏',
-            desc2:'同比',
-			title: '次',
 			yValue: [120, 200, 150, 80, 70, 110, 130],
 			yValue1: [30, 60, 100, 70, 40, 10, 60],
 			xValue: ['5月', '6月', '7月', '8月', '9月', '10月', '11月'],
 		}),
 	},
+	config: {
+		color1: '#00DDFF',
+		color2: 'rgba(1,253,210,1)',
+		desc1: '第三方破坏',
+		desc2: '同比',
+		title: '次',
+	},
 };
 export default {
 	mixins: [mixins],
+	computed: {
+		colorList() {
+			if (!this.data) return ['#00DDFF', 'rgba(1,253,210,1)'];
+			return [this.config.config.color1, this.config.config.color2];
+		},
+		descList() {
+			if (!this.data) return ['第三方破坏', '同比'];
+			return [this.config.config.desc1, this.config.config.desc2];
+		},
+		title() {
+			if (!this.data) return '';
+			return this.config.config.title;
+		},
+	},
 	methods: {
 		setOption(data) {
-            let yValue2 = this.data.yValue.map((item,index) => (this.data.yValue[index]/this.data.yValue1[index])*100)
+			let yValue2 = this.data.yValue.map(
+				(item, index) =>
+					(this.data.yValue[index] / this.data.yValue1[index]) * 100
+			);
 			options.xAxis[0].data = data.xValue;
 			options.series[0].data = data.yValue;
-            options.series[1].data = data.yValue1;
-            // options.series[2].data = yValue2
-            console.log(yValue2)
-            // options.series[0].itemStyle.normal.color = data.color1;
-            options.series[1].itemStyle.normal.color = data.color2;
+			options.series[1].data = data.yValue1;
+			// options.series[2].data = yValue2
+			console.log(yValue2);
+			// options.series[0].itemStyle.normal.color = data.color1;
+			options.series[1].itemStyle.normal.color = data.color2;
 			this.instance && this.instance.setOption(options);
 		},
 	},
@@ -72,7 +118,7 @@ export default {
 		},
 	},
 	created() {
-		this.configSource = this.parseConfigSource(config);
+		this.configSource = this.parseConfigSource(config, configSource);
 		this.configValue = this.parseConfigValue(config, value);
 	},
 };
@@ -92,46 +138,49 @@ export default {
 	.unit {
 		width: 30px;
 		text-align: right;
-        color: #fff;
-        //styleName: 文字/16;
-        font-family: PingFang SC;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 16px;
-        letter-spacing: 0px;
+		color: #fff;
+		//styleName: 文字/16;
+		font-family: PingFang SC;
+		font-size: 16px;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 16px;
+		letter-spacing: 0px;
 	}
 	.legend {
-        display: flex;
-        position: absolute;
-            left: 70%;
-        width: 400px;
-        transform: translate(-50%,0);
-        .legend1,.legend2{
-            display: flex;
-            align-items: center;
-            margin-left: 20px;
-        }
-        .bgc1,.bgc2,.bgc3{
-            width: 16px;
-            height: 8px;
-        }
-        .bgc2{
-            height: 2px;
-        }
-        .desc1,.desc2,.desc3{
-            margin-left: 5px;
-            font-family: PingFang SC;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 16px;
-            letter-spacing: 0px;
-            color: #fff;
-
-        }
-    }
-
+		display: flex;
+		position: absolute;
+		left: 70%;
+		width: 400px;
+		transform: translate(-50%, 0);
+		.legend1,
+		.legend2 {
+			display: flex;
+			align-items: center;
+			margin-left: 20px;
+		}
+		.bgc1,
+		.bgc2,
+		.bgc3 {
+			width: 16px;
+			height: 8px;
+		}
+		.bgc2 {
+			height: 2px;
+		}
+		.desc1,
+		.desc2,
+		.desc3 {
+			margin-left: 5px;
+			font-family: PingFang SC;
+			font-size: 16px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 16px;
+			letter-spacing: 0px;
+			color: #fff;
+		}
+	}
 }
 </style>
 
