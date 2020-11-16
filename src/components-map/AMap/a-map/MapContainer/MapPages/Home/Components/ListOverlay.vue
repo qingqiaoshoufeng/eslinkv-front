@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<Overlay
+		<BaseOverlay
 			v-for="(item, index) in list || []"
 			:key="'ListOverlay' + index"
 			:marker="item"
@@ -12,15 +12,15 @@
 				src="@/assets/amap/images/qiangxiu.gif"
 				class="warnoverlay-gif"
 			/>
-		</Overlay>
+		</BaseOverlay>
 	</div>
 </template>
 <script>
-import { Overlay } from './index';
+import BaseOverlay from './BaseOverlay';
 export default {
 	name: 'ListOverlay',
 	components: {
-		Overlay,
+		BaseOverlay,
 	},
 	props: {
 		marker: {
