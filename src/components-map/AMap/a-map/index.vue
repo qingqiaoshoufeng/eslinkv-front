@@ -59,10 +59,13 @@ export default {
 				g199smrdh4r: 'project',
 				'6gouq223fze': 'service_customer',
 				a70wh40bnz9: 'service_19',
+				'6u1qhjs14ws': 'service_market',
 			};
 			let { index } = e.detail;
+			console.log(index);
 			let pageName = sceneIndexMap[index];
 			if (pageName) {
+				console.log(pageName);
 				bus.$emit('currentSceneChange', pageName);
 			}
 		},

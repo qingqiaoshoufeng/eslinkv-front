@@ -26,31 +26,25 @@
 </template>
 <script>
 //页面覆盖物组件
-import {
-	InspectionCar,
-	InspectionPerson,
-	Grouphall,
-	BranchCompany,
-} from './Components/index.js';
+import { Grouphall, BranchCompany, HeatMap } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
-import { OVERLAYINFOMAP_SERVICE_CUSTOMER } from '../../../config';
+import { OVERLAYINFOMAP_MARKET } from '../../../config';
 
 export default {
 	name: 'HomePage',
 	mixins: [pageMixin],
 	components: {
-		InspectionCar,
-		InspectionPerson,
 		RegionBoundary,
 		OverlayDetail,
 		Grouphall,
 		BranchCompany,
+		HeatMap,
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_CUSTOMER),
+			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_MARKET),
 		};
 	},
 	methods: {},
