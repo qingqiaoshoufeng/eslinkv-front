@@ -23,7 +23,7 @@ import MapContainer from './MapContainer/index';
 import { initAMapApiLoader } from './lib/';
 import bus from './utils/bus';
 import { store } from '../../../openApi';
-
+import { SCENEINDEXMAP } from './config';
 initAMapApiLoader({
 	// 高德key
 	plugin: [
@@ -51,18 +51,8 @@ export default {
 	},
 	methods: {
 		handleSceneChange(e) {
-			let sceneIndexMap = {
-				'8iyxp8u3gtu': 'home-pipe', //供气-管网
-				tbc8uqyrkze: 'home', //供气-管网
-				'9n1zur7e4l': 'home-ucan', //供气-泛能
-				nn16rowdl5r: 'home-station', //供气-场站
-				g199smrdh4r: 'project',
-				'6gouq223fze': 'service_customer',
-				a70wh40bnz9: 'service_19',
-				'6u1qhjs14ws': 'service_market',
-			};
+			let sceneIndexMap = SCENEINDEXMAP;
 			let { index } = e.detail;
-			console.log(index);
 			let pageName = sceneIndexMap[index];
 			if (pageName) {
 				console.log(pageName);

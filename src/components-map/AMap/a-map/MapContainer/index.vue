@@ -10,14 +10,14 @@
 			v-bind="mapConfig"
 		>
 			<!-- 不同场景渲染不同的组件 -->
-			<!-- <template v-if="mapReady">
+			<template v-if="mapReady">
 				<component
 					:activeItem="activeItem"
 					@closePop="handleClosePop"
 					:legendMap="legendMap"
 					:is="mapComponentName"
 				/>
-			</template> -->
+			</template>
 		</el-amap>
 		<!-- 右侧列表 -->
 		<right-panel-list
