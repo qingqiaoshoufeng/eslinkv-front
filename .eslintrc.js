@@ -11,6 +11,9 @@ module.exports = {
 	parserOptions: {
 		ecmaVersion: 2020
 	},
+	globals: {
+		echarts: true
+	},
 	rules: {
 		'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
 		'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',

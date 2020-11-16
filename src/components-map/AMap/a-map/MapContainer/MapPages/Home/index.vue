@@ -86,9 +86,6 @@ export default {
 				return false;
 			}
 		},
-	},
-	beforeDestroy() {
-		this.$amap.clearMap();
-	},
+	}
 };
 </script>

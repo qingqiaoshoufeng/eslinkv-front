@@ -31,9 +31,9 @@ export default {
 						strokeColor: strokeColor,
 					});
 				},
-			});
-			this.$amap.add(geoJSON);
-			this.instanceArr.push(geoJSON);
+            });
+            this.$amap.add(geoJSON);
+            this.instanceArr.push(geoJSON);
 		},
 	},
 	render() {
