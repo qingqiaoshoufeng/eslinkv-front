@@ -13,14 +13,16 @@
 						v-for="(item, index) in statisticalVal"
 						:key="index"
 						class="font-num"
-						:class="{item: item !== ',',comma: item === ',',}"
+						:class="{ item: item !== ',', comma: item === ',' }"
 					>
 						<!-- 滚动盒子 -->
 						<div class="scroll-box" v-if="item !== ','">
 							<div
 								class="scroll-list"
 								ref="numberItem"
-								:style="{transform: `translate(0, -${transform[index]}%)`,}"
+								:style="{
+									transform: `translate(0, -${transform[index]}%)`,
+								}"
 							>
 								<div
 									class="scroll-item"
@@ -135,10 +137,11 @@ export default {
 	display: flex;
 
 	.left {
-		width: 180px;
+		min-width: 180px;
 		height: 80px;
 
 		.time {
+			width: 100%;
 			height: 32px;
 			line-height: 32px;
 			font-size: 32px;
@@ -151,6 +154,7 @@ export default {
 		}
 
 		.decs {
+			width: 100%;
 			font-size: 24px;
 			font-style: normal;
 			font-weight: 400;
