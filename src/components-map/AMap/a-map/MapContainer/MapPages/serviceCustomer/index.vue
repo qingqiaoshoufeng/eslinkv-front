@@ -36,12 +36,14 @@ import {
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
-import { OVERLAYINFOMAP_SERVICE_CUSTOMER,THREESOCIALLINKAGE_SCENEINDEX } from '../../../config';
-import { mutations } from '@/openApi';
-
-
+import {
+	OVERLAYINFOMAP_SERVICE_CUSTOMER,
+	THREESOCIALLINKAGE_SCENEINDEX,
+	THREESOCIALLINKAGE_COMPONENTINDEX,
+} from '../../../config';
+import GoldChart from '@/openApi';
 export default {
-	name: 'HomePage',
+	name: 'serviceCustomer',
 	mixins: [pageMixin],
 	components: {
 		ThreeSocialLinkage,
@@ -58,19 +60,25 @@ export default {
 	},
 	methods: {
 		toViewOverlayDetail(overlay) {
-            let { overlayType } = overlay;
-            let viewOverlayHandlerMap = {
-                'ThreeSocialLinkage':'showThreeSocialLinkageDetail'
-            }
-            let handler = viewOverlayHandlerMap[overlayType]
-            if(handler){
-                this[handler](overlay)
-            }
-        },
-        showThreeSocialLinkageDetail(){
-            //fsg1lcpo1c6 为三社联动的弹窗
-            mutations.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX)
-        }
+			let { overlayType } = overlay;
+			let viewOverlayHandlerMap = {
+				ThreeSocialLinkage: 'showThreeSocialLinkageDetail',
+			};
+			let handler = viewOverlayHandlerMap[overlayType];
+			if (handler) {
+				this[handler](overlay);
+			}
+		},
+		showThreeSocialLinkageDetail() {
+			//打开三社联动的弹框
+			GoldChart.scene.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX);
+			//更新数据
+			this.$nextTick(() => {
+				THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
+					GoldChart.instance.updateComponent(i);
+				});
+			});
+		},
 	},
 };
 </script>

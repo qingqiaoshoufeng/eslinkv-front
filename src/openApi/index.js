@@ -20,7 +20,7 @@ export default GoldChart
 export {store, mutations}
 
 window.GoldChart = GoldChart
-
+window.store = store
 // document.addEventListener('GoldChartReady', function (e) {
 // 	console.log(e.detail)
 // }, false)

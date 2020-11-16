@@ -9,4 +9,8 @@ export const SCENEINDEXMAP = {
     '6u1qhjs14ws': 'service_market'
 }
 
+//三社联动弹窗场景index
 export const THREESOCIALLINKAGE_SCENEINDEX = 'fsg1lcpo1c6'
+
+//三社联动弹窗内的组件array
+export const THREESOCIALLINKAGE_COMPONENTINDEX = ['1suvxfkq6z6']
