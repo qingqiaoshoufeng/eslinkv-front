@@ -14,9 +14,12 @@ context.keys().forEach((name) => {
 	let keyArrLen = keyArr.length
 	let target = apis
 	keyArr.forEach((key, index) => {
-		target[key] = index < keyArrLen - 1 ? {} : content
-		target = target[key]
-	})
+        if(!target[key]){
+            target[key] = index < keyArrLen - 1 ? {} : content
+            target = target[key]
+        }
+    })
+    window.aa = apis
 })
 
 Vue.prototype.$sysApi = apis
