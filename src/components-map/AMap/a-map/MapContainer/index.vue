@@ -10,14 +10,14 @@
 			v-bind="mapConfig"
 		>
 			<!-- 不同场景渲染不同的组件 -->
-			<template v-if="mapReady">
+			<!-- <template v-if="mapReady">
 				<component
 					:activeItem="activeItem"
 					@closePop="handleClosePop"
 					:legendMap="legendMap"
 					:is="mapComponentName"
 				/>
-			</template>
+			</template> -->
 		</el-amap>
 		<!-- 右侧列表 -->
 		<right-panel-list
@@ -48,8 +48,10 @@ import {
 	HOMELEGEND_UCAN,
 	PROJECTLEGEND,
 	SERVICELEGEND,
+	SERVICELEGEND_MARKET,
 	SERVICELEGEND_CUSTOMER,
 	SERVICELEGENDCUSTOMERMAP,
+	SERVICELEGENDMARKETMAP,
 	HOMEOVERLAYCONFIGMAP,
 } from '../config/index';
 import bus from '../utils/bus';
@@ -112,6 +114,7 @@ export default {
 			service: HOMEOVERLAYCONFIGMAP,
 			service_customer: SERVICELEGENDCUSTOMERMAP,
 			project: HOMEOVERLAYCONFIGMAP,
+			service_market: SERVICELEGENDMARKETMAP,
 		};
 		this._pageConfig = {
 			'home-station': {
@@ -130,6 +133,10 @@ export default {
 			service_customer: {
 				mapComponentName: 'serviceCustomerMap',
 				legendConfig: SERVICELEGEND_CUSTOMER,
+			},
+			service_market: {
+				mapComponentName: 'serviceMarketMap',
+				legendConfig: SERVICELEGEND_MARKET,
 			},
 			project: {
 				mapComponentName: 'projectMap',
