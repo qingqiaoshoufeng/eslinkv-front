@@ -44,7 +44,7 @@ export default {
 	props: {
 		data: {
 			type: Object,
-			default: function() {
+			default: function () {
 				return {};
 			},
 		},
@@ -78,8 +78,8 @@ export default {
 						this.isNeedExpend = false;
 					} else {
 						this.heightAuto = contentHeight + 'px';
-                    }
-                    this.isExpend = false 
+					}
+					this.isExpend = false;
 				});
 			},
 			immediate: true,
