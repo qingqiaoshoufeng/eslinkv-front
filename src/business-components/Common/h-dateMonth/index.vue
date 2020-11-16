@@ -2,9 +2,9 @@
 	<div class="widget-part pos-r" :style="styles">
 		<div class="h-dateMonth fn-flex flex-row pos-r">
 			<h2 class="fn-flex flex-row">
-				<img class="h-dateMonth-left" src="/static/icons/h-dateMonth-1.svg" @click="handleChange(-1)"/>
+				<div class="h-dateMonth-left" @click="handleChange(-1)"/>
 				<span>{{now}}</span>
-				<img :class="{disabled}" class="h-dateMonth-right" src="/static/icons/h-dateMonth-1.svg"
+				<div :class="{disabled}" class="h-dateMonth-right"
 					 @click="handleChange(1)"/>
 			</h2>
 		</div>
@@ -60,8 +60,21 @@
 	}
 </script>
 <style lang="scss" scoped>
+	.h-dateMonth-left {
+		background-image: url('/static/icons/h-dateMonth-1.svg');
+		width: 8px;
+		height: 32px;
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
 	.h-dateMonth-right {
 		transform: rotate(180deg);
+		background-image: url('/static/icons/h-dateMonth-1.svg');
+		width: 8px;
+		height: 32px;
+		background-repeat: no-repeat;
+		background-position: center;
 
 		&.disabled {
 			filter: grayscale(100%)

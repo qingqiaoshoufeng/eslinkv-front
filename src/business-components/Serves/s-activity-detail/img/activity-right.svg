@@ -1,0 +1,59 @@
+<svg width="1488" height="838" viewBox="0 0 1488 838" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="1488" height="838" fill="#04115F" fill-opacity="0.8"/>
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="1488" height="838">
+<rect width="1488" height="838" fill="white"/>
+</mask>
+<g mask="url(#mask0)">
+</g>
+<path d="M17 6H102L111 20H613L621 6H1468" stroke="#1197E0" stroke-width="2"/>
+<rect opacity="0.6" x="117" y="5" width="270" height="5" fill="#1197E0"/>
+<rect opacity="0.6" x="522" y="5" width="89" height="5" fill="#1197E0"/>
+<g opacity="0.6">
+<rect x="393" y="5" width="2" height="10" fill="#1197E0"/>
+<rect x="397" y="5" width="2" height="10" fill="#1197E0"/>
+<rect x="401" y="5" width="2" height="10" fill="#1197E0"/>
+<rect x="405" y="5" width="2" height="10" fill="#1197E0"/>
+<rect x="409" y="5" width="2" height="10" fill="#1197E0"/>
+<rect x="413" y="5" width="2" height="10" fill="#1197E0"/>
+<rect x="464" y="5" width="2" height="10" fill="#1197E0"/>
+<rect x="468" y="5" width="2" height="10" fill="#1197E0"/>
+<rect x="472" y="5" width="2" height="10" fill="#1197E0"/>
+<rect x="476" y="5" width="2" height="10" fill="#1197E0"/>
+<rect x="480" y="5" width="2" height="10" fill="#1197E0"/>
+<rect x="484" y="5" width="2" height="10" fill="#1197E0"/>
+<rect x="488" y="5" width="2" height="10" fill="#1197E0"/>
+<rect x="492" y="5" width="2" height="10" fill="#1197E0"/>
+<rect x="496" y="5" width="2" height="10" fill="#1197E0"/>
+<rect x="417" y="5" width="6" height="10" fill="#1197E0"/>
+<rect x="425" y="5" width="6" height="10" fill="#1197E0"/>
+<rect x="433" y="5" width="1" height="10" fill="#1197E0"/>
+<rect x="436" y="5" width="1" height="10" fill="#1197E0"/>
+<rect x="439" y="5" width="1" height="10" fill="#1197E0"/>
+<rect x="442" y="5" width="1" height="10" fill="#1197E0"/>
+<rect x="445" y="5" width="1" height="10" fill="#1197E0"/>
+<rect x="448" y="5" width="1" height="10" fill="#1197E0"/>
+<rect x="451" y="5" width="1" height="10" fill="#1197E0"/>
+<rect x="500" y="5" width="1" height="10" fill="#1197E0"/>
+<rect x="503" y="5" width="1" height="10" fill="#1197E0"/>
+<rect x="506" y="5" width="1" height="10" fill="#1197E0"/>
+<rect x="509" y="5" width="1" height="10" fill="#1197E0"/>
+<rect x="512" y="5" width="1" height="10" fill="#1197E0"/>
+<rect x="515" y="5" width="1" height="10" fill="#1197E0"/>
+<rect x="454" y="5" width="8" height="10" fill="#1197E0"/>
+</g>
+<path d="M6 17V352L20 369V757L6 769V818" stroke="#1197E0" stroke-width="2"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M7 0H5V5H0V7H5V12H7V7H12V5H7V0Z" fill="#FF7217"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M7 826H5V831H0V833H5V838H7V833H12V831H7V826Z" fill="#FF7217"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1483 0H1481V5H1476V7H1481V12H1483V7H1488V5H1483V0Z" fill="#FF7217"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M1483 826H1481V831H1476V833H1481V838H1483V833H1488V831H1483V826Z" fill="#FF7217"/>
+<path d="M1482 19V352L1468 369V757L1482 769V817" stroke="#1197E0" stroke-width="2"/>
+<path d="M20 832H217" stroke="#1197E0" stroke-width="2"/>
+<path d="M229 832H1080" stroke="#1197E0" stroke-width="2"/>
+<path d="M1093 832H1210" stroke="#1197E0" stroke-width="2"/>
+<path d="M1222 832H1339" stroke="#1197E0" stroke-width="2"/>
+<path d="M1351 832H1468" stroke="#1197E0" stroke-width="2"/>
+<path d="M51 832H186" stroke="#1197E0" stroke-width="6"/>
+<path d="M930 832H1065" stroke="#1197E0" stroke-width="6"/>
+<path d="M1096 832H1102" stroke="#1197E0" stroke-width="6"/>
+<path d="M1459 832H1465" stroke="#1197E0" stroke-width="6"/>
+</svg>
