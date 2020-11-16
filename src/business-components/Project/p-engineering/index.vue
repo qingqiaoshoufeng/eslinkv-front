@@ -1,4 +1,3 @@
-
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<div class="engineering-box">

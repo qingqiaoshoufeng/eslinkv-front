@@ -12,7 +12,8 @@ const GoldChart = {
 		updateComponent: (id, data) => {
 			store.instance.kanboard.$refs[id][0].$refs.widgets.updateComponentFormOutSide(data)
 		}
-	},
+    },
+    store
 }
 
 export default GoldChart

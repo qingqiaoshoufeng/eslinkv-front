@@ -24,7 +24,7 @@
 	const configSource = {
 		config: {
 			fields: {
-				title: getInput('background', '描述'),
+				title: getInput('title', '描述'),
 				color: getInput('color', '颜色'),
 			}
 		}

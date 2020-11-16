@@ -154,7 +154,7 @@
 		},
 		watch: {
 			animation: {
-				handler: function (value) {
+				handler: function () {
 					this.replayAnimation = true
 				},
 				deep: true

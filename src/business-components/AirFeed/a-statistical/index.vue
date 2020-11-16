@@ -12,20 +12,15 @@
 					<div
 						v-for="(item, index) in statisticalVal"
 						:key="index"
-						:class="{
-							item: item !== ',',
-							'font-num': true,
-							comma: item === ',',
-						}"
+						class="font-num"
+						:class="{item: item !== ',',comma: item === ',',}"
 					>
 						<!-- 滚动盒子 -->
 						<div class="scroll-box" v-if="item !== ','">
 							<div
 								class="scroll-list"
 								ref="numberItem"
-								:style="{
-									transform: `translate(0, -${transform[index]}%)`,
-								}"
+								:style="{transform: `translate(0, -${transform[index]}%)`,}"
 							>
 								<div
 									class="scroll-item"

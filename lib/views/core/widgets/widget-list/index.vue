@@ -51,7 +51,8 @@
 			let custom = {}
 			store.custom.widgets.map(item => {
 				custom[item.name] = item
-			})
+            })
+            console.log(custom)
 			return {
 				store,
 				panelFixed: false,

@@ -106,31 +106,64 @@ export default {
 	.tip-context-box {
 		flex: 1;
 		color: #fff;
-		display: flex;
-		flex-direction: column;
+
+		.context-desc {
+			font-size: 20px;
+			text-align: left;
+			height: 60%;
+			line-height: 40%;
+		}
+
 		.context-value {
-			width: 100%;
+			font-size: 20px;
+			text-align: left;
+			height: 40%;
+			line-height: 40%;
+			margin-top: 15px;
+		}
+
+		.context-iocn {
+			width: 72px;
+			height: 72px;
 			position: relative;
-			// height: 100%;
-			div {
+
+			img {
 				position: absolute;
-				left: 0;
+				left: 50%;
 				top: 50%;
-				transform: translate(0, -50%);
+				transform: translate(-50%, -50%);
 			}
 		}
-		.context-desc {
-			width: 100%;
-			position: relative;
-			div {
-				position: absolute;
-				left: 0;
-				top: 50%;
-				transform: translate(0, -50%);
-				font-family: PingFang SC;
+
+		.tip-context-box {
+			flex: 1;
+			color: #fff;
+
+			.context-value {
+				width: 100%;
+				position: relative;
+				// height: 100%;
+				div {
+					position: absolute;
+					left: 0;
+					top: 50%;
+					transform: translate(0, -50%);
+				}
+			}
+
+			.context-desc {
+				width: 100%;
+				position: relative;
+
+				div {
+					position: absolute;
+					left: 0;
+					top: 50%;
+					transform: translate(0, -50%);
+					font-family: PingFang SC;
+				}
 			}
 		}
 	}
 }
 </style>
-

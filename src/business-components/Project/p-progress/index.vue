@@ -6,7 +6,7 @@
 </template>
 <script>
 import mixins from '../../mixins';
-import options from './options';
+// import options from './options';
 
 const config = { animation: true };
 const value = {
