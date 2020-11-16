@@ -21,14 +21,15 @@
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
+			@view-detail="toViewOverlayDetail"
 		/>
 	</div>
 </template>
 <script>
 //页面覆盖物组件
 import {
-	InspectionCar,
-	InspectionPerson,
+	ThreeSocialLinkage,
+	ServiceNetworkStation,
 	Grouphall,
 	BranchCompany,
 } from './Components/index.js';
@@ -36,13 +37,15 @@ import {
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
 import { OVERLAYINFOMAP_SERVICE_CUSTOMER } from '../../../config';
+import { mutations } from '@/openApi';
+
 
 export default {
 	name: 'HomePage',
 	mixins: [pageMixin],
 	components: {
-		InspectionCar,
-		InspectionPerson,
+		ThreeSocialLinkage,
+		ServiceNetworkStation,
 		RegionBoundary,
 		OverlayDetail,
 		Grouphall,
@@ -53,7 +56,22 @@ export default {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_CUSTOMER),
 		};
 	},
-	methods: {}
+	methods: {
+		toViewOverlayDetail(overlay) {
+            let { overlayType } = overlay;
+            let viewOverlayHandlerMap = {
+                'ThreeSocialLinkage':'showThreeSocialLinkageDetail'
+            }
+            let handler = viewOverlayHandlerMap[overlayType]
+            if(handler){
+                this[handler](overlay)
+            }
+        },
+        showThreeSocialLinkageDetail(){
+            //fsg1lcpo1c6 为三社联动的弹窗
+            mutations.createSceneInstance('fsg1lcpo1c6')
+        }
+	},
 };
 </script>
 

@@ -93,7 +93,10 @@ export default {
 		},
 		hide() {
 			this.$emit('input', false);
-		},
+        },
+        handleViewDetail(overlay){
+            this.$emit('view-detail',overlay)
+        }
 	},
 };
 </script>

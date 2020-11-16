@@ -1,17 +1,5 @@
 //legend配置
 export const SERVICELEGENDCUSTOMERMAP = {
-    InspectionPerson: {
-        label: '巡检人员',
-        legendIcon: 'icontulirenyuan',
-        icon: 'iconrenyuan',
-        component: 'InspectionPerson',
-    },
-    InspectionCar: {
-        label: '巡检车辆',
-        legendIcon: 'icontulicheliang',
-        icon: 'iconcheliang',
-        component: 'InspectionCar',
-    },
     Grouphall: {
         label: '集团大厅',
         legendIcon: 'icontulijituandating',
@@ -19,27 +7,41 @@ export const SERVICELEGENDCUSTOMERMAP = {
         component: 'Grouphall',
     },
     BranchCompany: {
-        label: '集团大厅',
+        label: '分公司',
         legendIcon: 'icontulifengongsi',
         icon: 'iconfengongsi',
         component: 'BranchCompany',
+    },
+    ServiceNetworkStation: {
+        label: '服务网点',
+        legendIcon: 'icontulifuwuwangdian',
+        icon: 'iconfuwuwangdian',
+        component: 'ServiceNetworkStation',
+    },
+    ThreeSocialLinkage: {
+        label: '三社联动',
+        legendIcon: 'icontulisansheliandong',
+        icon: 'iconsansheliandong',
+        component: 'ThreeSocialLinkage',
     }
-
 }
 
 export const SERVICELEGEND_CUSTOMER = {
-    InspectionPerson: true,
-    InspectionCar: true,
     Grouphall: true,
-    BranchCompany: true
+    BranchCompany: true,
+    ServiceNetworkStation: true,
+    ThreeSocialLinkage: true
 }
 
 //覆盖物详情
 export const OVERLAYINFOMAP_SERVICE_CUSTOMER = {
-    InspectionPerson: {
+    BranchCompany: {
         name: {},
     },
-    InspectionCar: {
+    ServiceNetworkStation:{
+        name:{}
+    },
+    ThreeSocialLinkage: {
         name: {},
     },
     Grouphall: {
