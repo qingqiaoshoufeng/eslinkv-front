@@ -3,9 +3,13 @@
 		<div class="pos-a h-icon-info-bg"></div>
 		<div
 			class="h-icon-info-desc__icon"
-			:style="`background-image: url(${data && data.icon})`"
+			:style="`background-image: url(${
+				config.config && config.config.icon
+			})`"
 		></div>
-		<div class="h-icon-info-desc__text">{{ data && data.text }}</div>
+		<div class="h-icon-info-desc__text">
+			{{ config.config && config.config.desc }}
+		</div>
 	</div>
 </template>
 <script>
@@ -15,23 +19,27 @@ const config = {
 	animation: true,
 	config: {
 		icon: true,
-		text: true,
+		desc: true,
 	},
 };
 const configSource = {
 	config: {
 		fields: {
-			icon: getSelect('icon', '描述', ['/static/icons/phone-border.svg']),
-			text: getInput('text', 'icon'),
+			icon: getSelect('icon', 'icon', [
+				'/static/icons/phone-border.svg',
+				'/static/icons/h-icon-info-desc-1.svg',
+			]),
+			desc: getInput('desc', '描述'),
 		},
 	},
 };
 const value = {
-	api: {
-		data: JSON.stringify({
-			icon: '/static/icons/h-icon-info-desc-1.svg',
-			text: '热线服务业务受理分析(次)',
-		}),
+	// api: {
+	// 	data: JSON.stringify({}),
+	// },
+	config: {
+		icon: '/static/icons/h-icon-info-desc-1.svg',
+		desc: '热线服务业务受理分析(次)',
 	},
 };
 export default {
