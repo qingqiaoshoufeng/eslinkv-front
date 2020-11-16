@@ -71,8 +71,6 @@ export default {
 					const key = keys.shift()
 					result = result[key]
 				}
-				console.log(this.config.api.data)
-				console.log(JSON.stringify(result))
 				this.config.api.data = JSON.stringify(result)
 			})
 		},

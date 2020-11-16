@@ -215,6 +215,7 @@
 			background-color: #5E87C4;
 			height: 12px;
 			margin-right: 32px;
+			transition: all .3s;
 
 			&:last-child {
 				margin-right: 0 !important;
