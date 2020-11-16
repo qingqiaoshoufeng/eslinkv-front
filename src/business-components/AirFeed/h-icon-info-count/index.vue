@@ -22,15 +22,15 @@ import { getInput, getSelect } from '../../../../lib';
 const config = {
 	animation: true,
 	config: {
-		desc: true,
+		text: true,
 		icon: true,
 	},
 };
 const configSource = {
 	config: {
 		fields: {
-			desc: getInput('desc', '描述'),
-			icon: getSelect('icon', 'icon', ['/static/icons/phone-border.svg']),
+			text: getInput('text', '描述'),
+			icon: getSelect('icon', 'icon', ['/static/icons/h-call-count-statistics-1.svg']),
 		},
 	},
 };
@@ -38,13 +38,12 @@ const value = {
 	api: {
 		data: JSON.stringify({
 			icon: '/static/icons/phone-border.svg',
-			text: '累计通话时长:',
 			minutes: 680230,
 		}),
 	},
 	config: {
 		icon: '/static/icons/phone-border.svg',
-		desc: '累计通话时长:',
+		text: '累计通话时长:',
 	},
 };
 export default {

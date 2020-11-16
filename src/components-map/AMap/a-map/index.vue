@@ -62,7 +62,6 @@ export default {
   },
   mounted() {
     document.addEventListener("SceneIndex", this.handleSceneChange);
-    console.log('store')
   },
   beforeDestroy() {
     document.removeEventListener("SceneIndex", this.handleSceneChange);
