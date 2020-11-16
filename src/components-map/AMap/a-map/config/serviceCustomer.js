@@ -18,3 +18,13 @@ export const SERVICELEGEND_CUSTOMER  = {
     InspectionPerson:true,
     InspectionCar:true
 }
+
+//覆盖物详情
+export const OVERLAYINFOMAP_SERVICE_CUSTOMER = {
+	InspectionPerson: {
+		name: {},
+	},
+	InspectionCar: {
+		name: {},
+    }
+}

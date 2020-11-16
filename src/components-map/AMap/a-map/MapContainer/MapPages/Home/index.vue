@@ -19,6 +19,7 @@
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
+            :overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 		/>
 	</div>
@@ -50,6 +51,8 @@ import {
 	OverlayDetail,
 } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
+import { OVERLAYINFOMAP_HOME } from '../../../config';
+
 
 export default {
 	name: 'HomePage',
@@ -76,7 +79,9 @@ export default {
 		RegionBoundary,
 	},
 	data() {
-		return {};
+		return {
+            overlayInfoConfig:Object.freeze(OVERLAYINFOMAP_HOME)
+        };
 	},
 	methods: {
 		init() {

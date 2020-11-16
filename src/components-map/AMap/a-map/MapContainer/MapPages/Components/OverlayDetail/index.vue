@@ -31,7 +31,6 @@
 <script>
 import { AMapMarker } from '../../../../lib';
 import { PopContainer } from '../../../../components/index';
-import { OVERLAYINFOMAP_HOME } from '../../../../config';
 export default {
 	name: 'OverlayDetail',
 	components: {
@@ -48,7 +47,13 @@ export default {
 		value: {
 			type: Boolean,
 			default: false,
-		},
+        },
+        overlayInfoConfig:{
+            type: Object,
+			default() {
+				return {};
+			},
+        },
 		beforeClose: Function,
 	},
 	data() {
@@ -63,7 +68,7 @@ export default {
 			if (val) {
 				if (JSON.stringify(val) !== '{}') {
 					let { overlayType } = val;
-					this.overlayTypeInfo = OVERLAYINFOMAP_HOME[overlayType] || {};
+					this.overlayTypeInfo = this.overlayInfoConfig[overlayType] || {};
 					this.overlay = {
 						...val,
 					};

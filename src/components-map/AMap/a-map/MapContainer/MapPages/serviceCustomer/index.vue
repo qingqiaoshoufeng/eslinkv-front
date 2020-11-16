@@ -19,6 +19,7 @@
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
+			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 		/>
 	</div>
@@ -29,6 +30,7 @@ import { InspectionCar, InspectionPerson } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
+import { OVERLAYINFOMAP_SERVICE_CUSTOMER } from '../../../config';
 
 export default {
 	name: 'HomePage',
@@ -36,16 +38,16 @@ export default {
 	components: {
 		InspectionCar,
 		InspectionPerson,
-        RegionBoundary,
-        OverlayDetail
+		RegionBoundary,
+		OverlayDetail,
 	},
 	data() {
-		return {};
+		return {
+			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_CUSTOMER),
+		};
 	},
-	methods: {
-	},
+	methods: {},
 	beforeDestroy() {
-		let { viewMode } = this;
 		this.$amap.clearMap();
 	},
 };
