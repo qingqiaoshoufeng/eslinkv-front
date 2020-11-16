@@ -2,9 +2,13 @@
 	<div class="h-icon-info-count widget-part" :style="styles">
 		<div
 			class="h-icon-info-count__icon"
-			:style="`background-image: url(${data && data.icon})`"
+			:style="`background-image: url(${
+				config.config && config.config.icon
+			})`"
 		></div>
-		<div class="h-icon-info-count__text">{{ data && data.text }}</div>
+		<div class="h-icon-info-count__text">
+			{{ config.config && config.config.text }}
+		</div>
 		<div class="h-icon-info-count__count font-num">
 			{{ computedMinutes }}
 		</div>

@@ -19,52 +19,36 @@ const value = {
 		data: JSONStringify({
 			list: [
 				{
-					value: {
-						name: '开户',
-						amount: 4500,
-					},
+					name: '开户',
+					amount: 4500,
 				},
 				{
-					value: {
-						name: '开户',
-						amount: 4500,
-					},
+					name: '开户',
+					amount: 4500,
 				},
 				{
-					value: {
-						name: '开户',
-						amount: 14500,
-					},
+					name: '开户',
+					amount: 14500,
 				},
 				{
-					value: {
-						name: '开户',
-						amount: 4500,
-					},
+					name: '开户',
+					amount: 4500,
 				},
 				{
-					value: {
-						name: '开户',
-						amount: 4500,
-					},
+					name: '开户',
+					amount: 4500,
 				},
 				{
-					value: {
-						name: '开户',
-						amount: 4500,
-					},
+					name: '开户',
+					amount: 4500,
 				},
 				{
-					value: {
-						name: '开户',
-						amount: 4500,
-					},
+					name: '开户',
+					amount: 4500,
 				},
 				{
-					value: {
-						name: '开户',
-						amount: 4500,
-					},
+					name: '开户',
+					amount: 4500,
 				},
 			],
 		}),
@@ -88,7 +72,7 @@ export default {
 		maxAmout() {
 			const list = this.list || [];
 			const amoutList = list.reduce((initVal, val) => {
-				initVal.push(val?.value?.amount || 0);
+				initVal.push(val?.amount || 0);
 				return initVal;
 			}, []);
 			// console.log(Math.max(...amoutList));
@@ -96,19 +80,23 @@ export default {
 		},
 		computedList() {
 			return this.list.map((item, index) => {
-                let startColor = !index ? '#FF7217' : '#00DDFF'
-                let endColor = !index ? 'rgba(255, 114, 23, 0)' : 'rgba(0, 221, 255, 0)'
-                let NOBg = !index ? 'rgba(255, 114, 23, 0)' : 'rgba(0, 221, 255, 0)'
-                item.styles = {NOBg,startColor,endColor}
-                // console.log(item)
-                return item
+				let startColor = !index ? '#FF7217' : '#00DDFF';
+				let endColor = !index
+					? 'rgba(255, 114, 23, 0)'
+					: 'rgba(0, 221, 255, 0)';
+				let NOBg = !index
+					? 'rgba(255, 114, 23, 0)'
+					: 'rgba(0, 221, 255, 0)';
+				item.styles = { NOBg, startColor, endColor };
+				// console.log(item)
+				return item;
 			});
 		},
 	},
 	methods: {
 		initList(_list = []) {
 			return _list.map((item, index) => {
-				item.value.NO = `0${index + 1}`;
+				item.NO = `0${index + 1}`;
 				return item;
 			});
 		},

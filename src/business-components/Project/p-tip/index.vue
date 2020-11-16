@@ -1,46 +1,111 @@
 <template>
 	<div class="widget-part" :style="styles">
 		<div class="context-box">
-			<div class="context-iocn" v-if="data && data.isIocn">
-				<img :src="`${data && data.isIocn}`"/>
+			<div class="context-icon" v-if="computeData && computeData.isIcon">
+				<img :src="computeData && computeData.isIcon" />
 			</div>
 			<div class="tip-context-box">
-				<div class="context-value font-num">
-					<div>{{ data && data.value }}</div>
+				<div
+					class="context-value font-num"
+					:style="computeData && computeData.value.style"
+				>
+					<div>{{ computeData && computeData.value.context }}</div>
 				</div>
-				<div class="context-desc">
-					<div>{{ data && data.desc }}</div>
+				<div
+					class="context-desc"
+					:style="computeData && computeData.desc.style"
+				>
+					<div>{{ computeData && computeData.desc.context }}</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
+import mixins from '../../mixins';
+import { getInput, getSelect } from '../../../../lib';
 
-	const config = {animation: true};
-	const value = {
-		api: {
-			data: JSON.stringify({
-				isIocn: '/static/images/project/tip-qizhong.svg',
-				desc:  '标题',
-				value:  24,
-			}),
+const configSource = {
+	config: {
+		fields: {
+			desc: getInput('desc', '标题'),
+			icon: getSelect('icon', 'icon', [
+				'/static/images/project/tip-qizhong.svg',
+			]),
 		},
-	};
-	export default {
-		mixins: [mixins],
-		created() {
-			this.configSource = this.parseConfigSource();
-			this.configValue = this.parseConfigValue(config, value);
+	},
+};
+
+const config = {
+	animation: true,
+	config: {
+		icon: true,
+		desc: true,
+	},
+};
+const value = {
+	api: {
+		data: JSON.stringify({
+			value: {
+				context: 24,
+			},
+		}),
+	},
+	config: {
+		icon: '/static/images/project/tip-qizhong.svg',
+		desc: '标题',
+	},
+};
+export default {
+	mixins: [mixins],
+	computed: {
+		computeData() {
+			if (!this.data || !this.config.config) return;
+			console.log(this.config.config);
+			this.data.isIcon = this.config.config.icon;
+			this.data.desc = {};
+			this.data.desc.context = this.config.config.desc;
+			this.data.desc.style = {
+				fontSize: '20px',
+				textAlign: 'left',
+				height: '60%',
+				lineHeight: '40%',
+			};
+			this.data.value.style = {
+				fontSize: '20px',
+				textAlign: 'left',
+				height: '40%',
+				lineHeight: '40%',
+			};
+			console.log(this.data);
+			return this.data;
 		},
-	};
+	},
+	created() {
+		this.configSource = this.parseConfigSource(config, configSource);
+		this.configValue = this.parseConfigValue(config, value);
+	},
+};
 </script>
 <style lang="scss">
-	.context-box {
-		height: 100%;
-		width: 100%;
-		display: flex;
+.context-box {
+	height: 100%;
+	width: 100%;
+	display: flex;
+	.context-icon {
+		width: 72px;
+		height: 72px;
+		position: relative;
+		img {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+		}
+	}
+	.tip-context-box {
+		flex: 1;
+		color: #fff;
 
 		.context-desc {
 			font-size: 20px;
@@ -54,6 +119,7 @@
 			text-align: left;
 			height: 40%;
 			line-height: 40%;
+			margin-top: 15px;
 		}
 
 		.context-iocn {
@@ -72,8 +138,6 @@
 		.tip-context-box {
 			flex: 1;
 			color: #fff;
-			display: flex;
-			flex-direction: column;
 
 			.context-value {
 				width: 100%;
@@ -101,5 +165,5 @@
 			}
 		}
 	}
+}
 </style>
-

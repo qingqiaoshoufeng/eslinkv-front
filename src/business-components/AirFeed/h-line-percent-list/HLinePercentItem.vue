@@ -1,25 +1,33 @@
 <template>
 	<div class="h-line-percent">
-		<div class="h-line-percent__NO font-num" :style="{background: styles.NOBg}">{{value.NO}}</div>
+		<div
+			class="h-line-percent__NO font-num"
+			:style="{ background: styles.NOBg }"
+		>
+			{{ value.NO }}
+		</div>
 		<div class="h-line-percent__right">
 			<div class="h-line-percent__right__top">
-				<div class="h-line-percent__right__top__name">{{value.name}}</div>
-				<div class="h-line-percent__right__top__amount">{{value.amount}}</div>
+				<div class="h-line-percent__right__top__name">
+					{{ value.name }}
+				</div>
+				<div class="h-line-percent__right__top__amount">
+					{{ value.amount }}
+				</div>
 			</div>
 			<div class="h-line-percent__right__bottom">
 				<div
 					class="h-line-percent__right__bottom__ruler"
 					:style="{
-					background: `linear-gradient(270deg, ${styles.startColor} 0%, ${styles.endColor} 100%)`,
-					width: rulerWidth
-				}"
+						background: `linear-gradient(270deg, ${styles.startColor} 0%, ${styles.endColor} 100%)`,
+						width: rulerWidth,
+					}"
 				></div>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-
 export default {
 	computed: {
 		rulerWidth() {
@@ -32,7 +40,7 @@ export default {
 			return this?.item?.styles || {};
 		},
 		value() {
-			return this?.item?.value || {};
+			return this?.item || {};
 		},
 	},
 	props: {
@@ -44,7 +52,7 @@ export default {
 			type: Object,
 			default: () => ({}),
 		},
-    },
+	},
 };
 </script>
 <style lang="scss">
