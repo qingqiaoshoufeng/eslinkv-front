@@ -84,18 +84,30 @@ export default {
 	mixins: [mixins],
 	computed: {
 		statisticalVal() {
-			if (this.data) return this.data.value.toString().split('');
+			if (this.data) return this.data.value.toLocaleString().split('');
 			return [];
 		},
 		timeDesc() {
-			if (!this.data) return '2020年度';
+			if (!this.data || !this.config.config) return '2020年度';
 			return this.config.config.timeDesc.replace('xxxx', this.data.time);
 		},
+		// 	timeDesc() {
+		// 	if (!this.data || this.config.config) return '2020年度';
+		// 	if (this.config.config.timeDesc.includes('xxxx')) {
+		// 		debugger;
+		// 		return this.config.config.timeDesc.replace(
+		// 			'xxxx',
+		// 			this.data.time
+		// 		);
+		// 	} else {
+		// 		return this.config.config.timeDesc;
+		// 	}
+		// },
 	},
 	methods: {
 		setNumberTransform() {
 			if (this.data) {
-				const numberArr = this.data.value.toString().split('');
+				const numberArr = this.data.value.toLocaleString().split('');
 				this.transform = numberArr.map(item => item * 10);
 			}
 		},

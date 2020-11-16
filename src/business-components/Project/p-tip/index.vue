@@ -1,25 +1,21 @@
 <template>
 	<div class="widget-part" :style="styles">
 		<div class="context-box">
-			<div class="context-iocn" v-if="computedData && data.isIocn">
-				<img
-					:src="`/static/images/project/tip-${
-						computedData && computedData.isIocn
-					}.svg`"
-				/>
+			<div class="context-icon" v-if="computeData && computeData.isIcon">
+				<img :src="computeData && computeData.isIcon" />
 			</div>
 			<div class="tip-context-box">
 				<div
 					class="context-value font-num"
-					:style="computedData && computedData.value.style"
+					:style="computeData && computeData.value.style"
 				>
-					<div>{{ computedData && computedData.value.context }}</div>
+					<div>{{ computeData && computeData.value.context }}</div>
 				</div>
 				<div
 					class="context-desc"
-					:style="computedData && computedData.desc.style"
+					:style="computeData && computeData.desc.style"
 				>
-					<div>{{ computedData && computedData.desc.context }}</div>
+					<div>{{ computeData && computeData.desc.context }}</div>
 				</div>
 			</div>
 		</div>
@@ -27,26 +23,48 @@
 </template>
 <script>
 import mixins from '../../mixins';
+import { getInput, getSelect } from '../../../../lib';
 
-const config = { animation: true };
+const configSource = {
+	config: {
+		fields: {
+			desc: getInput('desc', '标题'),
+			icon: getSelect('icon', 'icon', [
+				'/static/images/project/tip-qizhong.svg',
+			]),
+		},
+	},
+};
+
+const config = {
+	animation: true,
+	config: {
+		icon: true,
+		desc: true,
+	},
+};
 const value = {
 	api: {
 		data: JSON.stringify({
-			isIocn: 'qizhong',
-			desc: {
-				context: '标题',
-			},
 			value: {
 				context: 24,
 			},
 		}),
 	},
+	config: {
+		icon: '/static/images/project/tip-qizhong.svg',
+		desc: '标题',
+	},
 };
 export default {
 	mixins: [mixins],
 	computed: {
-		computedData() {
-			if (!this.data) return;
+		computeData() {
+			if (!this.data || !this.config.config) return;
+			console.log(this.config.config);
+			this.data.isIcon = this.config.config.icon;
+			this.data.desc = {};
+			this.data.desc.context = this.config.config.desc;
 			this.data.desc.style = {
 				fontSize: '20px',
 				textAlign: 'left',
@@ -59,11 +77,12 @@ export default {
 				height: '40%',
 				lineHeight: '40%',
 			};
+			console.log(this.data);
 			return this.data;
 		},
 	},
 	created() {
-		this.configSource = this.parseConfigSource();
+		this.configSource = this.parseConfigSource(config, configSource);
 		this.configValue = this.parseConfigValue(config, value);
 	},
 };
@@ -73,7 +92,7 @@ export default {
 	height: 100%;
 	width: 100%;
 	display: flex;
-	.context-iocn {
+	.context-icon {
 		width: 72px;
 		height: 72px;
 		position: relative;
