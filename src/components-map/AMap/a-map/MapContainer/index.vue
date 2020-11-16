@@ -82,22 +82,6 @@ export default {
             legendMap:{},
 		};
     },
-    // computed:{
-    //     legendMap(){
-    //         let {currentScene,legendConfig,_overlayConfigMap} = this
-    //         let pageName = currentScene.split('-')[0]
-    //         let pageOverlayConfig = _overlayConfigMap[pageName]
-    //         let obj = {}
-    //         Object.keys(legendConfig).map(legend=>{
-    //             let isShow = legendConfig[legend]
-    //             obj[legend] = {
-    //                 ...pageOverlayConfig[legend],
-    //                 isShow
-    //             }
-    //         })
-    //         return obj
-    //     }
-    // },
     watch:{
         currentScene(val){
             console.log(val)

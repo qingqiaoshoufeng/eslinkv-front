@@ -7,7 +7,7 @@
 		}"
 		@click="
 			marker =>
-				$emit('overlay-click', marker, 'PressurereGulatingStation')
+				$emit('overlay-click', marker, 'PressureRegulatingStation')
 		"
 	/>
 </template>

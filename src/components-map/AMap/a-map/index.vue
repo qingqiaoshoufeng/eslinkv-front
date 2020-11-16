@@ -53,6 +53,7 @@ export default {
         "9n1zur7e4l": "home-ucan", //供气-泛能
         nn16rowdl5r: "home-station", //供气-场站
         g199smrdh4r: "project",
+        "6gouq223fze": "service",
       };
       let { index } = e.detail;
       let pageName = sceneIndexMap[index];

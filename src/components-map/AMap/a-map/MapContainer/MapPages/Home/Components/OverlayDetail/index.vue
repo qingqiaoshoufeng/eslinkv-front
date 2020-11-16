@@ -29,9 +29,9 @@
 	</ElAmapMarker>
 </template>
 <script>
-import { AMapMarker } from '../../../../..//lib';
+import { AMapMarker } from '../../../../../lib';
 import { PopContainer } from '../../../../../components/index';
-import { OVERLAYINFOMAP } from './config';
+import { OVERLAYINFOMAP_HOME } from '../../../../../config';
 export default {
 	name: 'OverlayDetail',
 	components: {
@@ -63,7 +63,7 @@ export default {
 			if (val) {
 				if (JSON.stringify(val) !== '{}') {
 					let { overlayType } = val;
-					this.overlayTypeInfo = OVERLAYINFOMAP[overlayType] || {};
+					this.overlayTypeInfo = OVERLAYINFOMAP_HOME[overlayType] || {};
 					this.overlay = {
 						...val,
 					};

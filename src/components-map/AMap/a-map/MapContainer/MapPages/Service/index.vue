@@ -1,52 +1,48 @@
 <template>
 	<div>
-		<template v-for="(config, legend) in legendMap">
-			<template v-if="overlayData[legend]">
-				<template v-for="(item, index) in overlayData[legend]">
-					<component
-						:key="legend + index"
-						:marker="{
-							...item,
-							icon: config.icon,
-						}"
-						:visible="config.isShow"
-						:is="config.component"
-						@click="handleMapOverlayClick(item, legend)"
-					/>
-				</template>
-			</template>
+		<!-- 1.legend不控制显隐的覆盖物 -->
+		<!-- <ListOverlay @overlay-click="handleOverlayClick" /> -->
+
+		<!-- 2.legend控制显隐 -->
+		<!-- <template v-for="(config, legend) in legendMap">
 			<component
-				v-if="!overlayData[legend]"
 				:key="legend"
 				:visible="config.isShow"
-				:is="'HeatMap'"
+				:is="config.component"
+				@overlay-click="handleOverlayClick"
 			/>
-		</template>
+		</template> -->
+		<!-- 覆盖物详情 -->
+		<!-- <OverlayDetail
+			v-model="showOverlayDetail"
+			:data="activeOverlay"
+			:before-close="closeOverlayDetail"
+		/> -->
 	</div>
 </template>
 <script>
-import heatMapData from '@/assets/amap/json/heatMap.json';
-import { Overlay } from '../../../components/';
-import HeatMap from './HeatMap.vue';
-import { SERVICESITUATIONAWARENESSLIST } from '../../../config/index';
-import pageMixin from '../mixins/pageMixin.js';
+// import heatMapData from '@/assets/amap/json/heatMap.json';
+// import { Overlay } from '../../../components/';
+// import HeatMap from './HeatMap.vue';
+// import { SERVICESITUATIONAWARENESSLIST } from '../../../config/index';
+// import pageMixin from '../mixins/pageMixin.js';
 
 export default {
-	components: {
-		Overlay,
-		HeatMap,
-	},
-	mixins: [pageMixin],
-	data() {
-		return {
-			overlayData: {
-				COMMERCIAL: SERVICESITUATIONAWARENESSLIST,
-			},
-		};
-	},
-	beforeDestroy() {
-		this.$amap && this.$amap.clearMap();
-	},
+	// components: {
+	// 	Overlay,
+	// 	HeatMap,
+	// },
+	// mixins: [pageMixin],
+	// data() {
+	// 	return {
+	// 		overlayData: {
+	// 			COMMERCIAL: SERVICESITUATIONAWARENESSLIST,
+	// 		},
+	// 	};
+	// },
+	// beforeDestroy() {
+	// 	this.$amap && this.$amap.clearMap();
+	// },
 };
 </script>
 
