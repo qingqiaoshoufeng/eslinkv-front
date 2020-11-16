@@ -1,33 +1,33 @@
 <template>
-  <div class="widget-part" :style="styles">
+  <div class="widget-part" :style="styles" v-if="data">
     <div class="left-circle"></div>
     <div class="main">
       <div class="main-lt">
-        <div class="title">桂花城紫云苑-杭燃服务进社区活动</div>
+        <div class="title">{{ data.title }}</div>
         <div class="base-info">
           <div class="base-info-item">
             <label>开始时间</label>
-            <span>2020/10/01  08:30</span>
+            <span>{{ data.startTime }}</span>
           </div>
           <div class="base-info-item">
             <label>结束时间</label>
-            <span>2020/10/01  08:30</span>
+            <span>{{ data.endTime }}</span>
           </div>
           <div class="base-info-item">
             <label>活动地点</label>
-            <span>桂花城紫云苑</span>
+            <span>{{ data.place }}</span>
           </div>
           <div class="base-info-item">
             <label>人员组成</label>
-            <span>退休职工</span>
+            <span>{{ data.people }}</span>
           </div>
           <div class="base-info-item">
             <label>参加人数</label>
-            <span>220人</span>
+            <span>{{ data.peopleNum }}人</span>
           </div>
           <div class="base-info-item">
             <label>计划服务用户数量</label>
-            <span>160户</span>
+            <span>{{ data.planNum }}户</span>
           </div>
 
         </div>
@@ -38,21 +38,14 @@
           <span>活动详情</span>
         </div>
         <div class="content-wrap">
-          <div class="content">
-            为积极彰显企业担当，更好地为用户提供优质满意的杭燃服务。9月13日上午，杭天管网输配分公司28名正气志愿者
-            联合杭天服务发展公司27名工作人员，走进盛德嘉苑、假山新村、天时苑、盛德欣苑等小区开展“三社联动、安心安
-            居”杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份...27名工作人员，走进盛德嘉苑、假山新村、天时苑、盛德欣苑等小区开展“三社联动、安心安
-            居”杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份...
-            杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份
-            杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份
-          </div>
+          <div class="content">{{ data.content }}</div>
         </div>
         <div class="quota">
           <div class="chart">
-            <div id="securityCheckRate"></div>
+            <div class="chart-main" :id="id"></div>
             <div class="chart__desc">
               <div class="chart__desc__rate font-num">
-                90%
+                {{ data.securityCheckRate }}%
               </div>
               <div class="chart__desc__font">
                 安检率
@@ -62,7 +55,7 @@
           <div class="quota-detail">
             <div class="quota-row">
               <div class="quota-row-head">
-                <div class="quota-row-head-num font-num">160</div>
+                <div class="quota-row-head-num font-num">{{ data.planCheckNum }}</div>
                 <div class="quota-row-head-txt">计划安检数(户)</div>
               </div>
               <div class="quota-item">
@@ -70,7 +63,7 @@
                   <img src="./img/quota1.svg">
                 </div>
                 <div>
-                  <div class="quota-item-num font-num">210</div>
+                  <div class="quota-item-num font-num">{{ data.brochuresNum }}</div>
                   <div class="quota-item-txt">宣传册发放</div>
                 </div>
               </div>
@@ -79,7 +72,7 @@
                   <img src="./img/quota1.svg">
                 </div>
                 <div>
-                  <div class="quota-item-num font-num">64</div>
+                  <div class="quota-item-num font-num">{{ data.uSaleNum }}</div>
                   <div class="quota-item-txt">优家销量(台)</div>
                 </div>
               </div>
@@ -88,14 +81,14 @@
                   <img src="./img/quota1.svg">
                 </div>
                 <div>
-                  <div class="quota-item-num font-num">24,910</div>
+                  <div class="quota-item-num font-num">{{ data.uSaleMoney }}</div>
                   <div class="quota-item-txt">优家销售额(元)</div>
                 </div>
               </div>
             </div>
             <div class="quota-row">
               <div class="quota-row-head">
-                <div class="quota-row-head-num font-num">120</div>
+                <div class="quota-row-head-num font-num">{{ data.actualCheckNum }}</div>
                 <div class="quota-row-head-txt">实际安检数(户)</div>
               </div>
               <div class="quota-item">
@@ -103,7 +96,7 @@
                   <img src="./img/quota1.svg">
                 </div>
                 <div>
-                  <div class="quota-item-num font-num">60</div>
+                  <div class="quota-item-num font-num">{{ data.installNum }}</div>
                   <div class="quota-item-txt">现场安装数</div>
                 </div>
               </div>
@@ -112,7 +105,7 @@
                   <img src="./img/quota1.svg">
                 </div>
                 <div>
-                  <div class="quota-item-num font-num">32</div>
+                  <div class="quota-item-num font-num">{{ data.repairNum }}</div>
                   <div class="quota-item-txt">现场维修数</div>
                 </div>
               </div>
@@ -121,7 +114,7 @@
         </div>
         <div class="swiper">
           <swiper :options="swiperOption">
-            <swiper-slide v-for="(item,index) in imgList" :key="index">
+            <swiper-slide v-for="(item,index) in data.imgList" :key="index">
               <div :style="{backgroundImage:'url('+item.img+')'}" class="swiper-slide"></div>
             </swiper-slide>
           </swiper>
@@ -150,18 +143,27 @@ const config = { animation: true };
 const value = {
   api: {
     data: JSON.stringify({
-
-    }),
-  },
-};
-export default {
-  components: {
-    Swiper,
-    SwiperSlide
-  },
-  mixins: [mixins],
-  data () {
-    return {
+      title: '桂花城紫云苑-杭燃服务进社区活动',
+      startTime: '2020/10/01  08:30',
+      endTime: '2020/10/01  08:30',
+      place: '桂花城紫云苑',
+      people: '退休职工',
+      peopleNum: 220,
+      planNum: 160,
+      content: `为积极彰显企业担当，更好地为用户提供优质满意的杭燃服务。9月13日上午，杭天管网输配分公司28名正气志愿者
+            联合杭天服务发展公司27名工作人员，走进盛德嘉苑、假山新村、天时苑、盛德欣苑等小区开展“三社联动、安心安
+            居”杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份...27名工作人员，走进盛德嘉苑、假山新村、天时苑、盛德欣苑等小区开展“三社联动、安心安
+            居”杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份...
+            杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份
+            杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份`,
+      securityCheckRate: 90,
+      planCheckNum: 120,
+      brochuresNum: 210,
+      uSaleNum: 64,
+      uSaleMoney: '24,910',
+      actualCheckNum: 120,
+      installNum: 60,
+      repairNum: 120,
       imgList: [
         {
           img: '/static/images/project/01.png',
@@ -176,6 +178,18 @@ export default {
           img: '/static/images/project/04.jpg',
         },
       ],
+      video: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm'
+    }),
+  },
+};
+export default {
+  components: {
+    Swiper,
+    SwiperSlide
+  },
+  mixins: [mixins],
+  data () {
+    return {
       swiperOption: {
         slidesPerView: 4,
         spaceBetween: 30,
@@ -189,31 +203,39 @@ export default {
         muted: true,
         language: 'en',
         playbackRates: [0.7, 1.0, 1.5, 2.0],
-        autoplay: false,
+        autoplay: true,
         sources: [
           {
             type: 'video/mp4',
-            src:
-                'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+            src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
           },
         ],
       }
     }
   },
   methods: {
-    setOption() {
-      this.instance = echarts.init(document.getElementById('securityCheckRate'))
-      this.instance && this.instance.setOption(getOption(90))
+    setOption(data) {
+      this.instance && this.instance.setOption(getOption(data.securityCheckRate))
     },
   },
   watch: {
+    data: {
+      handler(val) {
+        if (this.id) {
+          this.$nextTick(() => {
+            this.instance = echarts.init(document.getElementById(this.id))
+            this.setOption(val)
+            this.$refs.videoPlayer.player.src(val.video)
+          })
+        }
+      },
+      deep: true,
+      immediate: true
+    }
   },
   created() {
     this.configSource = this.parseConfigSource(config);
     this.configValue = this.parseConfigValue(config, value);
-  },
-  mounted() {
-    this.setOption()
   }
 };
 </script>
@@ -367,7 +389,7 @@ export default {
         background-repeat: no-repeat;
         background-size: 100% 100%;
         background-position: center;
-        #securityCheckRate {
+        .chart-main {
           width: 100%;
           height: 100%;
         }
@@ -455,6 +477,7 @@ export default {
         top: 0;
         width: 240px;
         height: 160px;
+        // todo
         background: linear-gradient(90deg, #00ffcf 0%, rgba(0, 255, 207, 0) 100%);
       }
       &:after {
