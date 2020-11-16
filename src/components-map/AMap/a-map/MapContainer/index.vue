@@ -40,7 +40,7 @@ import { AMap } from '../lib';
 import MapLegend from './MapLegend/index';
 import MapTypeLegend from './MapTypeLegend/index';
 import RightPanelList from './RightPaneList/';
-import { HomeMap, serviceCustomerMap } from './MapPages/';
+import { HomeMap, serviceCustomerMap, serviceMarketMap } from './MapPages/';
 // import { HomeMap } from './MapPages/';
 import {
 	HOMELEGEND_STATION,
@@ -62,6 +62,7 @@ export default {
 		ElAmap: AMap,
 		HomeMap,
 		serviceCustomerMap,
+		serviceMarketMap,
 		// ProjectMap,
 		MapLegend,
 		MapTypeLegend,
