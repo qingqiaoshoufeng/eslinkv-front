@@ -16,7 +16,7 @@
 	</div>
 </template>
 <script>
-import BaseOverlay from './BaseOverlay';
+import { BaseOverlay } from '../../Components/index';
 export default {
 	name: 'ListOverlay',
 	components: {
@@ -51,7 +51,7 @@ export default {
 				0: 'iconbaoguanshijian',
 				1: 'iconxieloushijian',
 			};
-            let list =  await this.$sysApi.map.home.getWarningList()
+			let list = await this.$sysApi.map.home.getWarningList();
 			//根据事件类型，判断图标，根据状态，显示图标颜色
 			this.list = list.map(item => {
 				let { status, eventType } = item;

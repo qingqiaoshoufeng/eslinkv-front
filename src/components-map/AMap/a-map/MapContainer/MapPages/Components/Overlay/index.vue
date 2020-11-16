@@ -1,6 +1,6 @@
 <script>
-import { SvgIcon } from '../index.js';
-import { AMapMarker } from '../../lib';
+import { SvgIcon } from '../../../../components/index.js';
+import { AMapMarker } from '../../../../lib';
 export default {
 	name: 'Overlay',
 	functional: true,
@@ -14,7 +14,7 @@ export default {
 		icon = icon ? icon.replace('tuli', '') : icon;
 		if (status === 1) {
 			icon += '-err';
-		}
+        }
 		return (
 			<AMapMarker visible={visible} position={[lng, lat]} vid={name}>
 				<div class={['sample', { active: active }]} on={listeners}>

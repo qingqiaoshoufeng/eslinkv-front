@@ -1,3 +1,3 @@
 export { default as HomeMap } from './Home'
-export { default as ServiceMap } from './Service'
-export { default as ProjectMap } from './Project'
+export { default as serviceCustomerMap } from './serviceCustomer'
+// export { default as ProjectMap } from './Project'

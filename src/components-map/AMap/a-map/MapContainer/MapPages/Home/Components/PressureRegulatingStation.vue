@@ -7,12 +7,12 @@
 		}"
 		@click="
 			marker =>
-				$emit('overlay-click', marker, 'PressurereGulatingStation')
+				$emit('overlay-click', marker, 'PressureRegulatingStation')
 		"
 	/>
 </template>
 <script>
-import BaseOverlay from './BaseOverlay';
+import {BaseOverlay} from '../../Components/index';
 export default {
 	name: 'PressurereGulatingStation',
 	components: {
