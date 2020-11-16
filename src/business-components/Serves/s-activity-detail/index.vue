@@ -183,6 +183,7 @@ const value = {
   },
 };
 export default {
+    name:'suyan',
   components: {
     Swiper,
     SwiperSlide
