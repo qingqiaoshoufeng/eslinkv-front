@@ -7,7 +7,9 @@
       <div class="left-bg"></div>
     </template>
     <template v-else>
-      <div>杭然自定义地图</div>
+      <div>
+          <img class="placeholder-map" src="/static/amap/amap.jpg" alt="">
+      </div>
     </template>
   </div>
 </template>
@@ -100,6 +102,10 @@ export default {
 .left-bg {
   left: 0;
   transform: rotateY(180deg);
+}
+.placeholder-map{
+    width: 100%;
+    height: 100%;
 }
 </style>
 
