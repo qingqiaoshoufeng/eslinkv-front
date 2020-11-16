@@ -19,7 +19,7 @@
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-            :overlayInfoConfig="overlayInfoConfig"
+			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 		/>
 	</div>
@@ -46,13 +46,9 @@ import {
 	UndergroundRepairStation,
 } from './Components/index.js';
 //页面所需公共组件
-import {
-    RegionBoundary,
-	OverlayDetail,
-} from '../Components/index.js';
+import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
 import { OVERLAYINFOMAP_HOME } from '../../../config';
-
 
 export default {
 	name: 'HomePage',
@@ -75,13 +71,13 @@ export default {
 		PipeManageMentStation,
 		PressureRegulatingStation,
 		UndergroundRepairStation,
-        MiddlePressureLine,
+		MiddlePressureLine,
 		RegionBoundary,
 	},
 	data() {
 		return {
-            overlayInfoConfig:Object.freeze(OVERLAYINFOMAP_HOME)
-        };
+			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_HOME),
+		};
 	},
 	methods: {
 		init() {

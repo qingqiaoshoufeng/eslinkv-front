@@ -5,7 +5,7 @@ import qs from 'qs'
 //模糊匹配所有站点
 export function getGrouphallList(data) {
     return request({
-        url: '/map/home/getGrouphallList',
+        url: '/map/serve/getGrouphallList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -14,11 +14,9 @@ export function getGrouphallList(data) {
     })
 }
 
-
-//模糊匹配所有站点
-export function getAllTypeStationList(data) {
+export function getBranchCompanyList(data) {
     return request({
-        url: '/map/home/getAllTypeStationList',
+        url: '/map/serve/getBranchCompanyList',
         method: 'get',
         data: qs.stringify(data),
         headers: {

@@ -16,13 +16,22 @@ export const SERVICELEGENDCUSTOMERMAP = {
         label: '集团大厅',
         legendIcon: 'icontulijituandating',
         icon: 'iconjituandating',
-        component: 'InspectionCar',
+        component: 'Grouphall',
+    },
+    BranchCompany: {
+        label: '集团大厅',
+        legendIcon: 'icontulifengongsi',
+        icon: 'iconfengongsi',
+        component: 'BranchCompany',
     }
+
 }
 
 export const SERVICELEGEND_CUSTOMER = {
     InspectionPerson: true,
-    InspectionCar: true
+    InspectionCar: true,
+    Grouphall: true,
+    BranchCompany: true
 }
 
 //覆盖物详情
@@ -31,6 +40,9 @@ export const OVERLAYINFOMAP_SERVICE_CUSTOMER = {
         name: {},
     },
     InspectionCar: {
+        name: {},
+    },
+    Grouphall: {
         name: {},
     }
 }

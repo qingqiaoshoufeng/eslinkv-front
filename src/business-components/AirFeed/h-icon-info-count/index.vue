@@ -1,3 +1,4 @@
+
 <template>
 	<div class="h-icon-info-count widget-part" :style="styles">
 		<div
@@ -18,7 +19,7 @@
 <script>
 import mixins from '../../mixins';
 import { getInput, getSelect } from '../../../../lib';
-
+// 标记
 const config = {
 	animation: true,
 	config: {
@@ -30,7 +31,9 @@ const configSource = {
 	config: {
 		fields: {
 			text: getInput('text', '描述'),
-			icon: getSelect('icon', 'icon', ['/static/icons/h-call-count-statistics-1.svg']),
+			icon: getSelect('icon', 'icon', [
+				'/static/icons/h-call-count-statistics-1.svg',
+			]),
 		},
 	},
 };

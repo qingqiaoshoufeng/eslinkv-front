@@ -18,47 +18,55 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
-	import getOptions, { barData, lineData, dashLineData } from './options'
-
-	const config = {animation: true}
-	const value = {
-		api: {
-			data: JSON.stringify({
-				barData: barData,
-				lineData: lineData,
-				dashLineData: dashLineData
-			})
-		}
-	}
-	export default {
-		mixins: [mixins],
-		computed: {
+import mixins from '../../mixins';
+import getOptions, { barData, lineData, dashLineData } from './options';
+// 标记
+const config = { animation: true };
+const value = {
+	api: {
+		data: JSON.stringify({
+			barData: barData,
+			lineData: lineData,
+			dashLineData: dashLineData,
+		}),
+	},
+};
+export default {
+	mixins: [mixins],
+	computed: {},
+	methods: {
+		setOption(data) {
+			this.instance &&
+				this.instance.setOption(
+					getOptions(
+						this.data.barData,
+						this.data.lineData,
+						this.data.dashLineData
+					)
+				);
 		},
-		methods: {
-			setOption(data) {
-				this.instance && this.instance.setOption(getOptions(this.data.barData, this.data.lineData, this.data.dashLineData))
-			}
+	},
+	watch: {
+		data: {
+			handler(val) {
+				if (this.id) {
+					this.$nextTick(() => {
+						this.instance = echarts.init(
+							document.getElementById(this.id)
+						);
+						this.setOption(val);
+					});
+				}
+			},
+			deep: true,
+			immediate: true,
 		},
-		watch: {
-			data: {
-				handler(val) {
-					if (this.id) {
-						this.$nextTick(() => {
-							this.instance = echarts.init(document.getElementById(this.id))
-							this.setOption(val)
-						})
-					}
-				},
-				deep: true,
-				immediate: true
-			}
-		},
-		created() {
-			this.configSource = this.parseConfigSource(config);
-			this.configValue = this.parseConfigValue(config, value);
-		}
-	}
+	},
+	created() {
+		this.configSource = this.parseConfigSource(config);
+		this.configValue = this.parseConfigValue(config, value);
+	},
+};
 </script>
 <style lang="scss" scoped>
 .widget-part {

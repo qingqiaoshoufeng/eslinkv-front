@@ -4,14 +4,14 @@
 			visible,
 			...overlayProps,
 		}"
-		@click="marker => $emit('overlay-click', marker, 'Grouphall')"
+		@click="marker => $emit('overlay-click', marker, 'BranchCompany')"
 	/>
 </template>
 <script>
 import { BaseOverlay } from '../../Components/index';
 
 export default {
-	name: 'Grouphall',
+	name: 'BranchCompany',
 	components: {
 		BaseOverlay,
 	},
@@ -22,11 +22,11 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.serve.getGrouphallList;
+		let apiFun = this.$sysApi.map.serve.getBranchCompanyList;
 		return {
 			overlayProps: {
 				apiFun: apiFun,
-				overlayType: 'Grouphall',
+				overlayType: 'BranchCompany',
 				overlayIcon: 'iconjituandating',
 			},
 		};

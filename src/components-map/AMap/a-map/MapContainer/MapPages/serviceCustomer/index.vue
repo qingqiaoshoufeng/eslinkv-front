@@ -26,7 +26,12 @@
 </template>
 <script>
 //页面覆盖物组件
-import { InspectionCar, InspectionPerson } from './Components/index.js';
+import {
+	InspectionCar,
+	InspectionPerson,
+	Grouphall,
+	BranchCompany,
+} from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
@@ -40,6 +45,8 @@ export default {
 		InspectionPerson,
 		RegionBoundary,
 		OverlayDetail,
+		Grouphall,
+		BranchCompany,
 	},
 	data() {
 		return {
