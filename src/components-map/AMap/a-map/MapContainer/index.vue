@@ -48,8 +48,8 @@ import {
 	HOMELEGEND_UCAN,
 	PROJECTLEGEND,
 	SERVICELEGEND,
-    SERVICELEGEND_CUSTOMER,
-    SERVICELEGENDCUSTOMERMAP,
+	SERVICELEGEND_CUSTOMER,
+	SERVICELEGENDCUSTOMERMAP,
 	HOMEOVERLAYCONFIGMAP,
 } from '../config/index';
 import bus from '../utils/bus';
@@ -88,13 +88,13 @@ export default {
 	watch: {
 		currentScene(val) {
 			let { legendConfig, _overlayConfigMap } = this;
-            let pageName = val;
-            console.log(val)
-            //多个场景共用一个地图
+			let pageName = val;
+			console.log(val);
+			//多个场景共用一个地图
 			if (val.indexOf('-') > -1) {
 				pageName = pageName.split('-')[0];
 			}
-            let pageOverlayConfig = _overlayConfigMap[pageName];
+			let pageOverlayConfig = _overlayConfigMap[pageName];
 			let obj = {};
 			Object.keys(legendConfig).map(legend => {
 				let isShow = legendConfig[legend];
@@ -102,7 +102,7 @@ export default {
 					...pageOverlayConfig[legend],
 					isShow,
 				};
-            });
+			});
 			this.legendMap = obj;
 		},
 	},
@@ -127,7 +127,7 @@ export default {
 				mapComponentName: 'homeMap',
 				legendConfig: HOMELEGEND_UCAN,
 			},
-			'service_customer': {
+			service_customer: {
 				mapComponentName: 'serviceCustomerMap',
 				legendConfig: SERVICELEGEND_CUSTOMER,
 			},
@@ -137,7 +137,7 @@ export default {
 			},
 		};
 		bus.$on('currentSceneChange', val => {
-            this.currentScene = val;
+			this.currentScene = val;
 			this.initPage(val);
 		});
 	},
