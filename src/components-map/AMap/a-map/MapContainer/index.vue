@@ -40,14 +40,17 @@ import { AMap } from '../lib';
 import MapLegend from './MapLegend/index';
 import MapTypeLegend from './MapTypeLegend/index';
 import RightPanelList from './RightPaneList/';
-import { HomeMap, ServiceMap, ProjectMap } from './MapPages/';
+import { HomeMap, serviceCustomerMap } from './MapPages/';
+// import { HomeMap } from './MapPages/';
 import {
 	HOMELEGEND_STATION,
 	HOMELEGEND_PIPE,
 	HOMELEGEND_UCAN,
 	PROJECTLEGEND,
-    SERVICELEGEND,
-    HOMEOVERLAYCONFIGMAP,
+	SERVICELEGEND,
+    SERVICELEGEND_CUSTOMER,
+    SERVICELEGENDCUSTOMERMAP,
+	HOMEOVERLAYCONFIGMAP,
 } from '../config/index';
 import bus from '../utils/bus';
 
@@ -56,8 +59,8 @@ export default {
 	components: {
 		ElAmap: AMap,
 		HomeMap,
-		ServiceMap,
-		ProjectMap,
+		serviceCustomerMap,
+		// ProjectMap,
 		MapLegend,
 		MapTypeLegend,
 		RightPanelList,
@@ -75,39 +78,45 @@ export default {
 				mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
 			},
 			mapReady: false,
-            mapComponentName: 'homeMap',
-            currentScene:'home',
+			mapComponentName: 'homeMap',
+			currentScene: 'home',
 			legendConfig: {},
-            activeItem: {},
-            legendMap:{},
+			activeItem: {},
+			legendMap: {},
 		};
-    },
-    watch:{
-        currentScene(val){
+	},
+	watch: {
+		currentScene(val) {
+			let { legendConfig, _overlayConfigMap } = this;
+            let pageName = val;
             console.log(val)
-            let {legendConfig,_overlayConfigMap} = this
-            let pageName = val ? val.split('-')[0] :val
-            let pageOverlayConfig = _overlayConfigMap[pageName]
-            let obj = {}
-            Object.keys(legendConfig).map(legend=>{
-                let isShow = legendConfig[legend]
-                obj[legend] = {
-                    ...pageOverlayConfig[legend],
-                    isShow
-                }
-            })
-            this.legendMap=obj
-        }
-    },
+            //多个场景共用一个地图
+			if (val.indexOf('-') > -1) {
+				pageName = pageName.split('-')[0];
+			}
+            let pageOverlayConfig = _overlayConfigMap[pageName];
+			let obj = {};
+			Object.keys(legendConfig).map(legend => {
+				let isShow = legendConfig[legend];
+				obj[legend] = {
+					...pageOverlayConfig[legend],
+					isShow,
+				};
+            });
+			this.legendMap = obj;
+		},
+	},
 	created() {
-        this._overlayConfigMap = {
-            home:HOMEOVERLAYCONFIGMAP,
-            service:HOMEOVERLAYCONFIGMAP,
-            project:HOMEOVERLAYCONFIGMAP
-        }
+		this._overlayConfigMap = {
+			home: HOMEOVERLAYCONFIGMAP,
+			service: HOMEOVERLAYCONFIGMAP,
+			service_customer: SERVICELEGENDCUSTOMERMAP,
+			project: HOMEOVERLAYCONFIGMAP,
+		};
 		this._pageConfig = {
 			'home-station': {
 				mapComponentName: 'homeMap',
+				rightPanelComponentName: 'homeMap',
 				legendConfig: HOMELEGEND_STATION,
 			},
 			'home-pipe': {
@@ -118,17 +127,17 @@ export default {
 				mapComponentName: 'homeMap',
 				legendConfig: HOMELEGEND_UCAN,
 			},
-			service: {
-				mapComponentName: 'serviceMap',
-				legendConfig: SERVICELEGEND,
+			'service_customer': {
+				mapComponentName: 'serviceCustomerMap',
+				legendConfig: SERVICELEGEND_CUSTOMER,
 			},
 			project: {
 				mapComponentName: 'projectMap',
 				legendConfig: PROJECTLEGEND,
 			},
-        };
+		};
 		bus.$on('currentSceneChange', val => {
-            this.currentScene = val
+            this.currentScene = val;
 			this.initPage(val);
 		});
 	},
@@ -151,7 +160,11 @@ export default {
 			Object.keys(config).forEach(targetProp => {
 				this[targetProp] = config[targetProp];
 			});
-			this.map.setZoom(this.mapConfig.zoom);
+			if (this.map) {
+				let { zoom, center } = this.mapConfig;
+				this.map.setZoom(zoom);
+				this.map.panTo(center);
+			}
 		},
 		handleLegendClick(prop) {
 			let changedItem = this.legendMap[prop];

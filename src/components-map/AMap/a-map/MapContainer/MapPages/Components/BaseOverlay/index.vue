@@ -16,7 +16,7 @@
 </template>
 <script>
 import overlayMixin from '../../mixins/overlayMixin.js';
-import { Overlay } from '../../../../components/index';
+import Overlay from '../Overlay/';
 function findAmapRoot() {
 	if (this.$amap) return this.$amap;
 	let parent = this.$parent;
@@ -39,7 +39,7 @@ export default {
 		},
 		query: {
 			type: Object,
-			default: function() {
+			default: function () {
 				return {};
 			},
 		},

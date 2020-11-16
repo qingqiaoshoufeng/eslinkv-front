@@ -8,7 +8,7 @@
 	/>
 </template>
 <script>
-import BaseOverlay from './BaseOverlay';
+import {BaseOverlay} from '../../Components/index';
 export default {
 	name: 'GasStation',
 	components: {

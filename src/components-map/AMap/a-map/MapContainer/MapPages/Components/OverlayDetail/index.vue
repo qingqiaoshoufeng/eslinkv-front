@@ -29,9 +29,9 @@
 	</ElAmapMarker>
 </template>
 <script>
-import { AMapMarker } from '../../../../../lib';
-import { PopContainer } from '../../../../../components/index';
-import { OVERLAYINFOMAP_HOME } from '../../../../../config';
+import { AMapMarker } from '../../../../lib';
+import { PopContainer } from '../../../../components/index';
+import { OVERLAYINFOMAP_HOME } from '../../../../config';
 export default {
 	name: 'OverlayDetail',
 	components: {

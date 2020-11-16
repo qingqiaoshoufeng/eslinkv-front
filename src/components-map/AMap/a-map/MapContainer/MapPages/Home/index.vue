@@ -26,7 +26,6 @@
 <script>
 //页面覆盖物组件
 import {
-	OverlayDetail,
 	ComprehensiveServiceStation,
 	DistributedEnergyResource,
 	EmergencyAirSourceStation,
@@ -43,9 +42,13 @@ import {
 	NaturalGasStation,
 	PipeManageMentStation,
 	PressureRegulatingStation,
-	RegionBoundary,
 	UndergroundRepairStation,
 } from './Components/index.js';
+//页面所需公共组件
+import {
+    RegionBoundary,
+	OverlayDetail,
+} from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
 
 export default {
@@ -68,9 +71,9 @@ export default {
 		NaturalGasStation,
 		PipeManageMentStation,
 		PressureRegulatingStation,
-		RegionBoundary,
 		UndergroundRepairStation,
-		MiddlePressureLine,
+        MiddlePressureLine,
+		RegionBoundary,
 	},
 	data() {
 		return {};

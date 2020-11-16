@@ -1,4 +1,4 @@
-export { default as OverlayDetail } from './OverlayDetail/'
+//页面内所需组件
 export { default as ComprehensiveServiceStation } from './ComprehensiveServiceStation'
 export { default as DistributedEnergyResource } from './DistributedEnergyResource'
 export { default as EmergencyAirSourceStation } from './EmergencyAirSourceStation'
@@ -15,5 +15,4 @@ export { default as MiddlePressureLine } from './MiddlePressureLine'
 export { default as NaturalGasStation } from './NaturalGasStation'
 export { default as PipeManageMentStation } from './PipeManageMentStation'
 export { default as PressureRegulatingStation } from './PressureRegulatingStation'
-export { default as RegionBoundary } from './RegionBoundary'
 export { default as UndergroundRepairStation } from './UndergroundRepairStation'
