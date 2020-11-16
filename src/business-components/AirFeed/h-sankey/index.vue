@@ -11,8 +11,8 @@
 	const value = {
 		api: {
 			data: JSON.stringify({
-				links: options.links,
-				data: options.data
+				links: options.series.links,
+				data: options.series.data
 			})
 		}
 	}
@@ -22,10 +22,10 @@
 		},
 		methods: {
 			setOption(data) {
+				options.series.links=this.data.links
+				options.series.data=this.data.data
 				this.instance && this.instance.setOption({
-					...options,
-					links: this.data.links,
-					data: this.data.data
+					...options
 				})
 			}
 		},

@@ -25,7 +25,6 @@
     methods: {
 		  back () {
 		    if (!this.data.sceneId) return
-        console.log(this.data.sceneId)
 		    window.GoldChart.scene.destroyScene(this.data.sceneId)
       }
     }
