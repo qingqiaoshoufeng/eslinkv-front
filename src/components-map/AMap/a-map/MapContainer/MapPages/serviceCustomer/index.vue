@@ -46,10 +46,7 @@ export default {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_CUSTOMER),
 		};
 	},
-	methods: {},
-	beforeDestroy() {
-		this.$amap.clearMap();
-	},
+	methods: {}
 };
 </script>
 
