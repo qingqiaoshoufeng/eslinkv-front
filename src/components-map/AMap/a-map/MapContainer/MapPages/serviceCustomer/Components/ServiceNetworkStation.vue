@@ -4,13 +4,13 @@
 			visible,
 			...overlayProps,
 		}"
-		@click="marker => $emit('overlay-click', marker, 'InspectionCar')"
+		@click="marker => $emit('overlay-click', marker, 'ServiceNetworkStation')"
 	/>
 </template>
 <script>
 import {BaseOverlay} from '../../Components/index';
 export default {
-	name: 'InspectionCar',
+	name: 'ServiceNetworkStation',
 	components: {
 		BaseOverlay,
 	},
@@ -21,12 +21,12 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.home.getInspectionCarList;
+		let apiFun = this.$sysApi.map.home.getInspectionPersonList;
 		return {
 			overlayProps: {
 				apiFun: apiFun,
-				overlayType: 'InspectionCar',
-				overlayIcon: 'iconcheliang',
+				overlayType: 'ServiceNetworkStation',
+				overlayIcon: 'iconfuwuwangdian',
 			},
 		};
 	},
