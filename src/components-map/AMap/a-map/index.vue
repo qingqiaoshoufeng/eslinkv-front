@@ -58,7 +58,9 @@ export default {
       };
       let { index } = e.detail;
       let pageName = sceneIndexMap[index];
-      bus.$emit("currentSceneChange", pageName);
+      if(pageName){
+        bus.$emit("currentSceneChange", pageName);
+      }
     },
   },
   mounted() {

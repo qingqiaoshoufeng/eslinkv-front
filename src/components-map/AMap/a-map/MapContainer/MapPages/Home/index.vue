@@ -92,45 +92,7 @@ export default {
 		},
 	},
 	beforeDestroy() {
-		let { viewMode } = this;
 		this.$amap.clearMap();
 	},
 };
 </script>
-
- <style lang="scss" scoped>
-.destination {
-	text-align: center;
-	cursor: pointer;
-	.destination-icon {
-		font-size: 48px;
-	}
-	.destination-gif {
-		display: block;
-		width: 100px;
-		height: 35px;
-		margin-top: -14px;
-	}
-}
-.station-name {
-	font-size: 24px;
-}
-.content {
-	font-size: 18px;
-	margin-top: 8px;
-	color: '#FFD200';
-}
-.btn {
-	padding: 0px 8px;
-	line-height: 32px;
-	background: #0057a9;
-	border-radius: 4px;
-	display: inline-block;
-	cursor: pointer;
-	margin-top: 16px;
-	&:hover {
-		opacity: 0.8;
-	}
-}
-</style>
-
