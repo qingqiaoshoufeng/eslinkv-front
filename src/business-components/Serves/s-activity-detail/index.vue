@@ -221,11 +221,13 @@ export default {
   watch: {
     data: {
       handler(val) {
-        this.$nextTick(() => {
-          this.instance = echarts.init(document.getElementById(this.id))
-          this.setOption(val)
-          this.$refs.videoPlayer.player.src(val.video)
-        })
+        if (this.id) {
+          this.$nextTick(() => {
+            this.instance = echarts.init(document.getElementById(this.id))
+            this.setOption(val)
+            this.$refs.videoPlayer.player.src(val.video)
+          })
+        }
       },
       deep: true,
       immediate: true
