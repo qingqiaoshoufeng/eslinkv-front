@@ -28,7 +28,8 @@
 		/>
 		<!-- 地图类型 -->
 		<MapTypeLegend />
-		<portal-target name="destination"></portal-target>
+		<portal-target name="destination"> </portal-target>
+		<DataStatistics :data="dataStatisticsList" />
 	</div>
 </template>
 
@@ -36,7 +37,8 @@
 import { AMap } from '../lib';
 import MapLegend from './MapLegend/index';
 import MapTypeLegend from './MapTypeLegend/index';
-// import RightPanelList from './RightPaneList/';
+import RightPanelList from './RightPaneList/';
+import { DataStatistics } from '../components';
 //地图覆盖物
 import {
 	AirSupplyMap,
@@ -79,6 +81,7 @@ export default {
 		serviceHangranCode,
 		service19,
 		serviceICcustomer,
+		DataStatistics,
 	},
 	data() {
 		return {
@@ -102,6 +105,7 @@ export default {
 			activeItem: {},
 			legendMap: {},
 			legendMultiple: true,
+			dataStatisticsList: [],
 		};
 	},
 	watch: {
@@ -127,6 +131,25 @@ export default {
 			});
 			this.legendMap = obj;
 			console.log('bbbbb', this.legendMap);
+			let senceDataObj = {
+				nn16rowdl5r: [
+					'门站',
+					'应急气源站',
+					'高中压调压站',
+					'中低压调压箱',
+				],
+				'8iyxp8u3gtu': [
+					'绿色能源综合服务站',
+					'管网运行管理站',
+					'地下抢修点',
+				],
+				p2wovclspks: [
+					'绿色能源综合服务站',
+					'管网运行管理站',
+					'地下抢修点',
+				],
+			};
+			this.getDataStatisticsList();
 		},
 	},
 	created() {
@@ -178,10 +201,10 @@ export default {
 			},
 			service_19: {
 				mapComponentName: 'service19',
-                legendConfig: SERVICELEGEND_SERVICE_19,
-                mapCenter: [120.81259, 30.273295],
+				legendConfig: SERVICELEGEND_SERVICE_19,
+				mapCenter: [120.81259, 30.273295],
 				mapLegendStyle: { left: '18%' },
-				legendMultiple: false,
+				legendMultiple: true,
 			},
 			serviceICcustomer: {
 				mapComponentName: 'serviceICcustomer',
@@ -227,6 +250,9 @@ export default {
 		},
 		handleClosePop() {
 			this.activeItem = {};
+		},
+		getDataStatisticsList() {
+			this.dataStatisticsList = this.$sysApi.map.serve.getDataStatisticsList();
 		},
 	},
 };

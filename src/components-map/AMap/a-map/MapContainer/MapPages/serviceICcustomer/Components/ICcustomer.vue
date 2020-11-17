@@ -32,7 +32,7 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.serve.getGrouphallList;
+		let apiFun = this.$sysApi.map.serve.getICcustomerList;
 		return {
 			apiFun: apiFun,
 		};

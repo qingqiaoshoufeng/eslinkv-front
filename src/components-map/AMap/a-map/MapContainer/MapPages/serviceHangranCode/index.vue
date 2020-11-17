@@ -15,7 +15,9 @@
 			/>
 		</template>
 		<!-- 统计数据 -->
-		<DataStatistics :position="'left'" :data="dataStatisticsList" />
+		<portal to="destination">
+			<DataStatistics :position="'left'" :data="dataStatisticsList" />
+		</portal>
 	</div>
 </template>
 <script>

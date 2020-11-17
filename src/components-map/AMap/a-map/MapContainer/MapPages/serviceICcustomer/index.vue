@@ -24,7 +24,9 @@
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 		/>
-		<DataStatistics :data="dataStatisticsList" />
+		<portal to="destination">
+			<DataStatistics :data="dataStatisticsList" />
+		</portal>
 	</div>
 </template>
 <script>
