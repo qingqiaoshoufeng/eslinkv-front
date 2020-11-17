@@ -56,7 +56,7 @@ export default {
 			console.log(index);
 			let pageName = sceneIndexMap[index];
 			if (pageName) {
-				console.log(pageName);
+				console.log('aaaaa', pageName);
 				bus.$emit('currentSceneChange', pageName);
 			}
 		},

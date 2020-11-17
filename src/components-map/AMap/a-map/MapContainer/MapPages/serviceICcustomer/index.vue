@@ -47,6 +47,7 @@ export default {
 		ICcustomer,
 	},
 	data() {
+		console.log('aaaaaa', OVERLAYINFOMAP_ICCUSTOMER);
 		return {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_ICCUSTOMER),
 		};

@@ -6,14 +6,14 @@
 			visible,
 			apiFun,
 		}"
-		@click="marker => $emit('overlay-click', marker, 'Grouphall')"
+		@click="marker => $emit('overlay-click', marker, 'ICcustomer')"
 	/>
 </template>
 <script>
 import { BaseOverlay } from '../../Components/index';
 
 export default {
-	name: 'Grouphall',
+	name: 'ICcustomer',
 	components: {
 		BaseOverlay,
 	},

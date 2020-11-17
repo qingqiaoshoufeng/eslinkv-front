@@ -54,8 +54,8 @@ import {
 import {
 	AIRSUPPLYLEGEND_STATION,
 	AIRSUPPLYLEGEND_PIPE,
-    AIRSUPPLYLEGEND_UCAN,
-    AIRSUPPLYLEGEND_LNG,
+	AIRSUPPLYLEGEND_UCAN,
+	AIRSUPPLYLEGEND_LNG,
 	SERVICELEGEND_MARKET,
 	SERVICELEGEND_CUSTOMER,
 	SERVICELEGENDCUSTOMERMAP,
@@ -98,7 +98,7 @@ export default {
 			},
 			mapCenter: null,
 			mapLegendStyle: null,
-			mapLegendStyleNormal:{left:'50%'} ,
+			mapLegendStyleNormal: { left: '50%' },
 			mapReady: false,
 			mapComponentName: 'AirSupplyMap',
 			currentScene: 'airsupply',
@@ -110,15 +110,18 @@ export default {
 	},
 	watch: {
 		currentScene(val) {
+			// debugger;
 			let { legendConfig, _overlayConfigMap } = this;
 			let pageName = val;
 			console.log('AAA', val);
 			console.log(legendConfig);
+			console.log(pageName);
 			//多个场景共用一个地图
 			if (val.indexOf('-') > -1) {
 				pageName = pageName.split('-')[0];
 			}
 			let pageOverlayConfig = _overlayConfigMap[pageName];
+			console.log(pageOverlayConfig);
 			let obj = {};
 			Object.keys(legendConfig).map(legend => {
 				let isShow = legendConfig[legend];
@@ -128,6 +131,7 @@ export default {
 				};
 			});
 			this.legendMap = obj;
+			console.log('bbbbb', this.legendMap);
 		},
 	},
 	created() {
@@ -137,7 +141,7 @@ export default {
 			service_market: SERVICELEGENDMARKETMAP,
 			service_hangranCode: SERVICELEGENDHANGRANCODEMAP,
 			service_19: SERVICELEGEND19MAP,
-			service_ICcustomer: SERVICELEGENDICCUSTOMERMAP,
+			serviceICcustomer: SERVICELEGENDICCUSTOMERMAP,
 		};
 		this._pageConfig = {
 			'airsupply-station': {
@@ -155,8 +159,8 @@ export default {
 				mapComponentName: 'AirSupplyMap',
 				legendConfig: AIRSUPPLYLEGEND_UCAN,
 				legendMultiple: true,
-            },
-            'airsupply-lng': {
+			},
+			'airsupply-lng': {
 				mapComponentName: 'AirSupplyMap',
 				legendConfig: AIRSUPPLYLEGEND_LNG,
 				legendMultiple: true,
@@ -213,8 +217,8 @@ export default {
 		initPage(val) {
 			let config = this._pageConfig[val];
 			if (!config) return false;
-            this.mapCenter = null;
-            this.mapLegendStyle = this.mapLegendStyleNormal
+			this.mapCenter = null;
+			this.mapLegendStyle = this.mapLegendStyleNormal;
 			Object.keys(config).forEach(targetProp => {
 				this[targetProp] = config[targetProp];
 			});
@@ -248,7 +252,7 @@ export default {
 	left: 50%;
 	transform: translateX(-50%);
 }
-.right-panel{
-    z-index:100;
+.right-panel {
+	z-index: 100;
 }
 </style>
