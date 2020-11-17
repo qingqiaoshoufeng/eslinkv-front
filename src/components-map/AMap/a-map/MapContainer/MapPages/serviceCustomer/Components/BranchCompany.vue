@@ -1,10 +1,12 @@
 <template>
 	<BaseOverlay
 		v-bind="{
+			overlayIcon,
+			overlayType,
 			visible,
-			...overlayProps,
+			apiFun,
 		}"
-		@click="marker => $emit('overlay-click', marker, 'BranchCompany')"
+		@click="marker => $emit('overlay-click', marker, overlayType)"
 	/>
 </template>
 <script>
@@ -20,17 +22,20 @@ export default {
 			type: Boolean,
 			default: true,
 		},
+		overlayIcon: {
+			type: String,
+			default: '',
+		},
+		overlayType: {
+			type: String,
+			default: '',
+		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.serve.getBranchCompanyList;
 		return {
-			overlayProps: {
-				apiFun: apiFun,
-				overlayType: 'BranchCompany',
-				overlayIcon: 'iconjituandating',
-			},
+			apiFun: this.$sysApi.map.serve.getBranchCompanyList,
 		};
-	},
+	}
 };
 </script>
 
