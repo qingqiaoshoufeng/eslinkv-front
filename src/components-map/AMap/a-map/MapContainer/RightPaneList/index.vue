@@ -57,7 +57,7 @@ export default {
 			rightPaneComponentName: 'HomeList',
 			//配置不同页面  list 右侧列表
 			pageConfig: {
-				home: {
+				airsupply: {
 					rightPaneComponentName: 'HomeList',
 				},
 				service: {
@@ -70,7 +70,7 @@ export default {
 		};
 	},
 	mounted() {
-		this.initPage('home');
+		this.initPage('airsupply');
 	},
 	created() {
 		bus.$on('currentSceneChange', val => {
@@ -88,7 +88,7 @@ export default {
 			});
 			//请求数据
 			let listByPageMap = {
-				home: [],
+				airsupply: [],
 				service: SERVICESITUATIONAWARENESSLIST,
 				project: PROJECTSITUATIONAWARENESSLIST,
 			};

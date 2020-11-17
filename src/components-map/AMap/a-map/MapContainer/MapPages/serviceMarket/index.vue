@@ -35,7 +35,7 @@ import pageMixin from '../mixins/pageMixin.js';
 import { OVERLAYINFOMAP_MARKET } from '../../../config';
 
 export default {
-	name: 'HomePage',
+	name: 'serviceMarket',
 	mixins: [pageMixin],
 	components: {
 		RegionBoundary,
