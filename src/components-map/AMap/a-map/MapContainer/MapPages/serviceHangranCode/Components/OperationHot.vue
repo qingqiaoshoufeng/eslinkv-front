@@ -8,8 +8,7 @@ export default {
 			if (val) {
 				this.init();
 			} else {
-				this._instance &&
-					this._instance.removeFromMap();
+				this._instance && this._instance.removeFromMap();
 				this._instance = null;
 			}
 		},
@@ -23,7 +22,6 @@ export default {
 				radius: 80, //给定半径
 				opacity: [0, 0.8],
 			});
-			window.aaaa = this._instance;
 			this._instance.setDataSet({
 				data: this._heatMapData,
 				max: 4000,
@@ -32,6 +30,12 @@ export default {
 	},
 	render() {
 		return null;
+	},
+	beforeDestroy() {
+		if (this._instance) {
+			this._instance.removeFromMap();
+			this._instance = null;
+		}
 	},
 };
 </script>

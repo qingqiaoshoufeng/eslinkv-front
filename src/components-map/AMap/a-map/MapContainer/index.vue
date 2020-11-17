@@ -52,7 +52,8 @@ import {
 import {
 	AIRSUPPLYLEGEND_STATION,
 	AIRSUPPLYLEGEND_PIPE,
-	AIRSUPPLYLEGEND_UCAN,
+    AIRSUPPLYLEGEND_UCAN,
+    AIRSUPPLYLEGEND_LNG,
 	SERVICELEGEND_MARKET,
 	SERVICELEGEND_CUSTOMER,
 	SERVICELEGENDCUSTOMERMAP,
@@ -89,6 +90,7 @@ export default {
 			},
 			mapCenter: null,
 			mapLegendStyle: null,
+			mapLegendStyleNormal:{left:'50%'} ,
 			mapReady: false,
 			mapComponentName: 'AirSupplyMap',
 			currentScene: 'airsupply',
@@ -142,6 +144,11 @@ export default {
 				mapComponentName: 'AirSupplyMap',
 				legendConfig: AIRSUPPLYLEGEND_UCAN,
 				legendMultiple: true,
+            },
+            'airsupply-lng': {
+				mapComponentName: 'AirSupplyMap',
+				legendConfig: AIRSUPPLYLEGEND_LNG,
+				legendMultiple: true,
 			},
 			service_customer: {
 				mapComponentName: 'serviceCustomerMap',
@@ -184,7 +191,8 @@ export default {
 		initPage(val) {
 			let config = this._pageConfig[val];
 			if (!config) return false;
-			this.mapCenter = null;
+            this.mapCenter = null;
+            this.mapLegendStyle = this.mapLegendStyleNormal
 			Object.keys(config).forEach(targetProp => {
 				this[targetProp] = config[targetProp];
 			});
@@ -217,5 +225,8 @@ export default {
 	bottom: 50px;
 	left: 50%;
 	transform: translateX(-50%);
+}
+.right-panel{
+    z-index:100;
 }
 </style>

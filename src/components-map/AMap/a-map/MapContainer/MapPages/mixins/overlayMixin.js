@@ -51,6 +51,6 @@ export default {
 				})
 			}
 		})
-		this.instanceArr = null
+        this.instanceArr = null
 	},
 }
