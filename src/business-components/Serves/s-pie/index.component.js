@@ -1,5 +1,4 @@
 export default {
-	label: '线上线下业务占比',
 	config: {
 		layout: {
 			size: {
