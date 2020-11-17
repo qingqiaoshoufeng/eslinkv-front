@@ -14,11 +14,15 @@ export default {
 				radius: 80, //给定半径
 				opacity: [0, 0.8],
 			});
+
 			instance.setDataSet({
 				data: apiFun,
 				max: 4000,
 			});
-			this.instanceArr.push(instance);
+
+			if (this.instanceArr) {
+				this.instanceArr.push(instance);
+			}
 		},
 	},
 	render() {

@@ -27,7 +27,7 @@ export default {
 			overlayProps: {
 				apiFun: apiFun,
 				overlayType: 'BranchCompany',
-				overlayIcon: 'iconjituandating',
+				overlayIcon: 'iconfengongsi',
 			},
 		};
 	},
