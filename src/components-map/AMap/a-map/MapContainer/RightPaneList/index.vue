@@ -13,8 +13,8 @@
 			:data="list"
 		>
 			<template slot-scope="{ item }"> -->
-				<component :is="rightPaneComponentName" :data="list"  />
-			<!-- </template>
+		<component :is="rightPaneComponentName" :data="list" />
+		<!-- </template>
 		</PanelContainer> -->
 	</dashboard-panel>
 </template>

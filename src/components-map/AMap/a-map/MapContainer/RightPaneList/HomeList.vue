@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { SvgIcon } from '../..//components/';
+import { SvgIcon } from '../../components/';
 
 export default {
 	components: {
