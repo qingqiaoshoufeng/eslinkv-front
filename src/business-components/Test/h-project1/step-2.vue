@@ -5,8 +5,8 @@
 			<div class="h-project-1-step-2__vertical-line"></div>
 			<div class="h-project-1-step-2__horizontal-line" :class="{'position_left':step===2}">
 				<div  class="h-project-1-step-2__horizontal-line__person">
-					<span>客服部{{step}}</span>
-					<span>秦芳芳</span>
+					<span>{{step2.title}}</span>
+					<span>{{step2.name}}</span>
 				</div>
 			</div>
 		</div>

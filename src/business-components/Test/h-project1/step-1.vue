@@ -5,14 +5,14 @@
 			<div class="h-project-1-step-1__vertical-line"></div>
 			<div class="h-project-1-step-1__horizontal-line">
 				<div class="h-project-1-step-1__horizontal-line__top">
-					<div class="h-project-1-step-1__horizontal-line__top__desc">燃气泄漏</div>
+					<div class="h-project-1-step-1__horizontal-line__top__desc">{{step1.des}}</div>
 					<div class="h-project-1-step-1__horizontal-line__top__alarmer">
-						<span>报警人</span>
-						<span>王磊</span>
+						<span>{{step1.title}}</span>
+						<span>{{step1.name}}</span>
 					</div>
 				</div>
 				<div class="h-project-1-step-1__horizontal-line__bottom">
-					江干区三里亭东苑11
+					{{step1.address}}
 				</div>
 			</div>
 
@@ -31,7 +31,8 @@
 <style lang="scss">
 	.h-project-1-step-1 {
 		left: 0;
-		&__vertical-line{
+
+		&__vertical-line {
 			position: absolute;
 			width: 112px;
 			height: 0px;
@@ -41,6 +42,7 @@
 			border-bottom: 1px dashed #00DDFF;
 			transform: rotate(-90deg);
 		}
+
 		&__horizontal-line {
 			position: absolute;
 			min-width: 338px;
@@ -51,11 +53,13 @@
 			border: 0;
 			border-bottom: 1px dashed #00DDFF;
 			box-sizing: content-box;
+
 			&__top {
 				box-sizing: content-box;
 				display: flex;
 				justify-content: space-between;
 				align-items: flex-end;
+
 				&__desc {
 					font-family: PingFang SC;
 					font-style: normal;
@@ -65,24 +69,28 @@
 					line-height: 32px;
 					display: flex;
 				}
+
 				&__alarmer {
 					display: flex;
 					justify-content: space-between;
 					min-width: 160px;
-					span:nth-child(1){
+
+					span:nth-child(1) {
 						font-family: PingFang SC;
 						font-style: normal;
 						font-weight: normal;
 						font-size: 18px;
 						color: rgba(254, 255, 255, 0.6);
 					}
-					span:nth-child(2){
+
+					span:nth-child(2) {
 						font-family: PingFang SC;
 						font-style: normal;
 						font-weight: normal;
 						font-size: 24px;
 						color: #FFFFFF;
 					}
+
 					background: #001F6D;
 					border-radius: 4px;
 					padding: 4px 8px;
@@ -93,6 +101,7 @@
 
 				}
 			}
+
 			&__bottom {
 				position: absolute;
 				top: 57px;

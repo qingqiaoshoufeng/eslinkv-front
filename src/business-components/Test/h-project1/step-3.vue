@@ -5,8 +5,8 @@
 			<div class="h-project-1-step-3__vertical-line"></div>
 			<div class="h-project-1-step-3__horizontal-line" :class="{'position_left':step===3}">
 				<div  class="h-project-1-step-3__horizontal-line__person">
-					<span>维修部</span>
-					<span>林自原</span>
+					<span>{{step3.title}}</span>
+					<span>{{step3.name}}</span>
 				</div>
 			</div>
 		</div>
