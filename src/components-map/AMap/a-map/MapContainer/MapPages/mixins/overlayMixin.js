@@ -12,7 +12,15 @@ export default {
 			type: Boolean,
 			default: true,
 		},
-	},
+		overlayIcon: {
+			type: String,
+			default: '',
+		},
+		overlayType: {
+			type: String,
+			default: '',
+		},
+    },
 	watch: {
 		visible(val) {
 			if (val) {

@@ -29,10 +29,10 @@ export default {
 			type: String,
 			default: '',
 		},
-	},
+    },
 	data() {
 		return {
-			apiFun: this.$sysApi.map.home.getServiceNetworkStationList,
+			apiFun: this.$sysApi.map.serve.getServiceNetworkStationList,
 		};
 	},
 };
