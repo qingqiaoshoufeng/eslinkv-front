@@ -185,7 +185,9 @@ export default {
 			},
 			service_19: {
 				mapComponentName: 'service19',
-				legendConfig: SERVICELEGEND_SERVICE_19,
+                legendConfig: SERVICELEGEND_SERVICE_19,
+                mapCenter: [120.81259, 30.273295],
+				mapLegendStyle: { left: '18%' },
 				legendMultiple: false,
 			},
 			serviceICcustomer: {
