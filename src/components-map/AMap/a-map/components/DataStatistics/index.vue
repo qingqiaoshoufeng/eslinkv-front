@@ -2,7 +2,7 @@
 	<div class="data_statistics_box" :class="`position-${position}`">
 		<div
 			class="data_statistics_item"
-			v-for="(item, index) in dataStatisticsList"
+			v-for="(item, index) in data"
 			:key="index"
 		>
 			<div class="value">{{ item.value.toLocaleString() }}</div>
@@ -19,37 +19,14 @@ export default {
 			type: String,
 			default: 'right',
 		},
+		data: {
+			type: Array,
+			default: [],
+		},
 	},
 	components: {},
 	data() {
-		return {
-			dataStatisticsList: [
-				{
-					value: 8604120,
-					desc: '居民户',
-				},
-				{
-					value: 7312,
-					desc: '公建户',
-				},
-				{
-					value: 218,
-					desc: '工业户',
-				},
-				{
-					value: 12,
-					desc: '营业服务网点',
-				},
-			],
-		};
-	},
-	methods: {
-		async getDataStatisticsList() {
-			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
-		},
-	},
-	mounted() {
-		this.getDataStatisticsList();
+		return {};
 	},
 };
 </script>

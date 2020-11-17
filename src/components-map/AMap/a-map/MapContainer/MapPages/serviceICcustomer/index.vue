@@ -24,8 +24,7 @@
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 		/>
-		<!-- 统计数据 -->
-		<!-- <DataStatistics :position="'right'" /> -->
+		<DataStatistics :data="dataStatisticsList" />
 	</div>
 </template>
 <script>
@@ -33,7 +32,7 @@
 import { ICcustomer } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
-// import { DataStatistics } from '../../../components';
+import { DataStatistics } from '../../../components';
 import pageMixin from '../mixins/pageMixin.js';
 import { OVERLAYINFOMAP_ICCUSTOMER } from '../../../config';
 import GoldChart from '@/openApi';
@@ -45,14 +44,23 @@ export default {
 		RegionBoundary,
 		OverlayDetail,
 		ICcustomer,
+		DataStatistics,
 	},
 	data() {
 		console.log('aaaaaa', OVERLAYINFOMAP_ICCUSTOMER);
 		return {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_ICCUSTOMER),
+			dataStatisticsList: [],
 		};
 	},
-	methods: {},
+	methods: {
+		async getDataStatisticsList() {
+			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
+		},
+	},
+	mounted() {
+		this.getDataStatisticsList();
+	},
 };
 </script>
 
