@@ -6,9 +6,10 @@ export const SCENEINDEXMAP = {
     p2wovclspks: 'airsupply-lng', //供气-场站
     g199smrdh4r: 'project',
     '6gouq223fze': 'service_customer',
-    a70wh40bnz9: 'service_19',
+    'a70wh40bnz9': 'service_19',
     '6u1qhjs14ws': 'service_market',
-    'bavv56kietf': 'service_hangranCode'
+    'bavv56kietf': 'service_hangranCode',
+    'e40ml4vtfa6': 'serviceICcustomer'
 }
 
 //三社联动弹窗场景index

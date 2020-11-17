@@ -48,6 +48,8 @@ import {
 	serviceCustomerMap,
 	serviceMarketMap,
 	serviceHangranCode,
+	service19,
+	serviceICcustomer,
 } from './MapPages/';
 
 import {
@@ -62,6 +64,10 @@ import {
 	HOMEOVERLAYCONFIGMAP,
 	SERVICELEGEND_HANGRANCODE,
 	SERVICELEGENDHANGRANCODEMAP,
+	SERVICELEGEND19MAP,
+	SERVICELEGEND_SERVICE_19,
+	SERVICELEGENDICCUSTOMERMAP,
+	SERVICELEGEND_ICCUSTOMER,
 } from '../config/index';
 import bus from '../utils/bus';
 
@@ -76,6 +82,8 @@ export default {
 		MapTypeLegend,
 		RightPanelList,
 		serviceHangranCode,
+		service19,
+		serviceICcustomer,
 	},
 	data() {
 		return {
@@ -103,14 +111,18 @@ export default {
 	},
 	watch: {
 		currentScene(val) {
+			// debugger;
 			let { legendConfig, _overlayConfigMap } = this;
 			let pageName = val;
-			console.log(val);
-			//供气页面多个场景共用一个地图
+			console.log('AAA', val);
+			console.log(legendConfig);
+			console.log(pageName);
+			//多个场景共用一个地图
 			if (val.indexOf('-') > -1) {
 				pageName = pageName.split('-')[0];
 			}
 			let pageOverlayConfig = _overlayConfigMap[pageName];
+			console.log(pageOverlayConfig);
 			let obj = {};
 			Object.keys(legendConfig).map(legend => {
 				let isShow = legendConfig[legend];
@@ -120,6 +132,7 @@ export default {
 				};
 			});
 			this.legendMap = obj;
+			console.log('bbbbb', this.legendMap);
 		},
 	},
 	created() {
@@ -128,6 +141,8 @@ export default {
 			service_customer: SERVICELEGENDCUSTOMERMAP,
 			service_market: SERVICELEGENDMARKETMAP,
 			service_hangranCode: SERVICELEGENDHANGRANCODEMAP,
+			service_19: SERVICELEGEND19MAP,
+			serviceICcustomer: SERVICELEGENDICCUSTOMERMAP,
 		};
 		this._pageConfig = {
 			'airsupply-station': {
@@ -168,10 +183,21 @@ export default {
 				mapCenter: [120.81259, 30.273295],
 				mapLegendStyle: { left: '18%' },
 			},
+			service_19: {
+				mapComponentName: 'service19',
+				legendConfig: SERVICELEGEND_SERVICE_19,
+				legendMultiple: false,
+			},
+			serviceICcustomer: {
+				mapComponentName: 'serviceICcustomer',
+				legendConfig: SERVICELEGEND_ICCUSTOMER,
+				legendMultiple: false,
+			},
 		};
 	},
 	mounted() {
 		bus.$on('currentSceneChange', val => {
+			console.log('aaaaaa', val);
 			this.currentScene = val;
 			this.initPage(val);
 		});

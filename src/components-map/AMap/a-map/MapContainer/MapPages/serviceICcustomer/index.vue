@@ -24,29 +24,32 @@
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 		/>
+		<!-- 统计数据 -->
+		<!-- <DataStatistics :position="'right'" /> -->
 	</div>
 </template>
 <script>
 //页面覆盖物组件
-import { Grouphall, BranchCompany, HeatMap } from './Components/index.js';
+import { ICcustomer } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
+// import { DataStatistics } from '../../../components';
 import pageMixin from '../mixins/pageMixin.js';
-import { OVERLAYINFOMAP_MARKET } from '../../../config';
+import { OVERLAYINFOMAP_ICCUSTOMER } from '../../../config';
+import GoldChart from '@/openApi';
 
 export default {
-	name: 'serviceMarket',
+	name: 'serviceICcustomer',
 	mixins: [pageMixin],
 	components: {
 		RegionBoundary,
 		OverlayDetail,
-		Grouphall,
-		BranchCompany,
-		HeatMap,
+		ICcustomer,
 	},
 	data() {
+		console.log('aaaaaa', OVERLAYINFOMAP_ICCUSTOMER);
 		return {
-			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_MARKET),
+			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_ICCUSTOMER),
 		};
 	},
 	methods: {},

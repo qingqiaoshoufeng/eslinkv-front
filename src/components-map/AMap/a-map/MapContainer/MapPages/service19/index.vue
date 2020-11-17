@@ -24,29 +24,31 @@
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 		/>
+		<!-- 统计数据 -->
+		<DataStatistics :position="'left'" />
 	</div>
 </template>
 <script>
 //页面覆盖物组件
-import { Grouphall, BranchCompany, HeatMap } from './Components/index.js';
+import { acceptHot } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
-import { OVERLAYINFOMAP_MARKET } from '../../../config';
+import { DataStatistics } from '../../../components';
+import { OVERLAYINFOMAP_SERVICE_19 } from '../../../config';
 
 export default {
-	name: 'serviceMarket',
+	name: 'service19',
 	mixins: [pageMixin],
 	components: {
 		RegionBoundary,
 		OverlayDetail,
-		Grouphall,
-		BranchCompany,
-		HeatMap,
+		acceptHot,
+		DataStatistics,
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_MARKET),
+			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_19),
 		};
 	},
 	methods: {},
