@@ -15,7 +15,7 @@ const config = { animation: true };
 const value = {
 	api: {
 		data: JSON.stringify({
-			videoSrc: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm'
+			videoSrc: '/static/videos/test.mov'
 		}),
 	},
 };
@@ -34,7 +34,7 @@ export default {
 				sources: [
 					{
 						type: 'video/mp4',
-						src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+						src: '/static/videos/test.mov',
 					},
 				],
 			},

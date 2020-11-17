@@ -178,7 +178,7 @@
 						img: '/static/images/project/04.jpg',
 					},
 				],
-				video: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm'
+				video: '/static/videos/test.mov'
 			}),
 		},
 	};
@@ -207,7 +207,7 @@
 					sources: [
 						{
 							type: 'video/mp4',
-							src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+							src: '/static/videos/test.mov',
 						},
 					],
 				}
