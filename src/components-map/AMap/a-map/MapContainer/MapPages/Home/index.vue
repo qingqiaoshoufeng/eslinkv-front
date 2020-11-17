@@ -12,6 +12,8 @@
 				:key="legend"
 				:visible="config.isShow"
 				:is="config.component"
+				:overlayIcon="config.icon"
+				:overlayType="legend"
 				@overlay-click="handleOverlayClick"
 			/>
 		</template>
@@ -86,6 +88,6 @@ export default {
 				return false;
 			}
 		},
-	}
+	},
 };
 </script>

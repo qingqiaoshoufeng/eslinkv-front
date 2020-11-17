@@ -2,8 +2,10 @@
 <template>
 	<BaseOverlay
 		v-bind="{
+			overlayIcon,
+			overlayType,
 			visible,
-			...overlayProps,
+			apiFun,
 		}"
 		@click="
 			marker => $emit('overlay-click', marker, 'PipeManageMentStation')
@@ -22,15 +24,19 @@ export default {
 			type: Boolean,
 			default: true,
 		},
-	},
+		overlayIcon: {
+			type: String,
+			default: '',
+		},
+		overlayType: {
+			type: String,
+			default: '',
+		},
+    },
 	data() {
 		let apiFun = this.$sysApi.map.home.getPipeManageMentStationList;
 		return {
-			overlayProps: {
 				apiFun: apiFun,
-				overlayType: 'PipeManageMentStation',
-				overlayIcon: 'iconguanwangyunhangguanlizhan',
-			},
 		};
 	},
 };

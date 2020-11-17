@@ -1,14 +1,16 @@
 <template>
 	<BaseOverlay
 		v-bind="{
+			overlayIcon,
+			overlayType,
 			visible,
-			...overlayProps,
+			apiFun,
 		}"
 		@click="marker => $emit('overlay-click', marker, 'InspectionPerson')"
 	/>
 </template>
 <script>
-import {BaseOverlay} from '../../Components/index';
+import { BaseOverlay } from '../../Components/index';
 export default {
 	name: 'InspectionPerson',
 	components: {
@@ -19,15 +21,19 @@ export default {
 			type: Boolean,
 			default: true,
 		},
+		overlayIcon: {
+			type: String,
+			default: '',
+		},
+		overlayType: {
+			type: String,
+			default: '',
+		},
 	},
 	data() {
 		let apiFun = this.$sysApi.map.home.getInspectionPersonList;
 		return {
-			overlayProps: {
-				apiFun: apiFun,
-				overlayType: 'InspectionPerson',
-				overlayIcon: 'iconrenyuan',
-			},
+			apiFun: apiFun,
 		};
 	},
 };

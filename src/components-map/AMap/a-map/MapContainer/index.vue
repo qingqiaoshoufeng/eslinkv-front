@@ -27,7 +27,7 @@
 		<!-- 地图 legend  -->
 		<MapLegend
 			:data="legendMap"
-			@legend-click="handleLegendClick"
+            :multiple="legendMultiple"
 			class="map-legend"
 		/>
 		<!-- 地图类型 -->
@@ -85,7 +85,8 @@ export default {
 			currentScene: 'home',
 			legendConfig: {},
 			activeItem: {},
-			legendMap: {},
+            legendMap: {},
+            legendMultiple:true
 		};
 	},
 	watch: {
@@ -121,27 +122,33 @@ export default {
 			'home-station': {
 				mapComponentName: 'homeMap',
 				rightPanelComponentName: 'homeMap',
-				legendConfig: HOMELEGEND_STATION,
+                legendConfig: HOMELEGEND_STATION,
+                legendMultiple:true,
 			},
 			'home-pipe': {
 				mapComponentName: 'homeMap',
-				legendConfig: HOMELEGEND_PIPE,
+                legendConfig: HOMELEGEND_PIPE,
+                legendMultiple:true,
 			},
 			'home-ucan': {
 				mapComponentName: 'homeMap',
-				legendConfig: HOMELEGEND_UCAN,
+                legendConfig: HOMELEGEND_UCAN,
+                legendMultiple:true,
 			},
 			service_customer: {
 				mapComponentName: 'serviceCustomerMap',
-				legendConfig: SERVICELEGEND_CUSTOMER,
+                legendConfig: SERVICELEGEND_CUSTOMER,
+                legendMultiple:true,
 			},
 			service_market: {
 				mapComponentName: 'serviceMarketMap',
-				legendConfig: SERVICELEGEND_MARKET,
+                legendConfig: SERVICELEGEND_MARKET,
+                legendMultiple:true,
 			},
 			project: {
 				mapComponentName: 'projectMap',
-				legendConfig: PROJECTLEGEND,
+                legendConfig: PROJECTLEGEND,
+                legendMultiple:true,
 			},
 		};
 		bus.$on('currentSceneChange', val => {
@@ -173,10 +180,6 @@ export default {
 				this.map.setZoom(zoom);
 				this.map.panTo(center);
 			}
-		},
-		handleLegendClick(prop) {
-			let changedItem = this.legendMap[prop];
-			changedItem.isShow = !changedItem.isShow;
 		},
 		handleListClick(item) {
 			this.activeItem = item;

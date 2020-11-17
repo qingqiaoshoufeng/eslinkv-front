@@ -12,6 +12,14 @@ export default {
             type: Boolean,
             default: true,
         },
+        overlayIcon: {
+            type: String,
+            default: '',
+        },
+        overlayType: {
+            type: String,
+            default: '',
+        },
     },
     watch: {
         visible(val) {
@@ -34,13 +42,13 @@ export default {
     },
     beforeDestroy() {
         this.instanceArr.forEach((instance) => {
-            if (instance.setDataSet instanceof Function) {
-                instance.setDataSet({
-                    data: [{}],
-                    max: 4000,
-                });
-            }
             this.$amap.remove(instance)
+            // if (instance.setDataSet instanceof Function) {
+            //     instance.setDataSet({
+            //         data: [{}],
+            //         max: 4000,
+            //     });
+            // }
         })
         this.instanceArr = null
     },
