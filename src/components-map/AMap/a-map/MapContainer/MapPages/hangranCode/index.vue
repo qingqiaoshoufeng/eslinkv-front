@@ -39,7 +39,7 @@ import pageMixin from '../mixins/pageMixin.js';
 import { OVERLAYINFOMAP_HANGRANCODE } from '../../../config';
 import GoldChart from '@/openApi';
 export default {
-	name: 'serviceCustomer',
+	name: 'hangranCode',
 	mixins: [pageMixin],
 	components: { RegionBoundary, OverlayDetail, CouplingHot, OperationHot },
 	data() {
