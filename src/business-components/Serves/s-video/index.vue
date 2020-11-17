@@ -1,0 +1,67 @@
+<template>
+	<div class="widget-part" :style="styles">
+    <video-player
+        class="video-player-box"
+        ref="videoPlayer"
+        :options="playerOptions"
+        :playsinline="true"
+        customEventName="customstatechangedeventname"
+    ></video-player>
+	</div>
+</template>
+<script>
+import mixins from '../../mixins';
+const config = { animation: true };
+const value = {
+	api: {
+		data: JSON.stringify({
+			videoSrc: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm'
+		}),
+	},
+};
+export default {
+	mixins: [mixins],
+	data() {
+		return {
+			playerOptions: {
+				// videojs options
+				width: 920,
+				height: 480,
+				muted: true,
+				language: 'en',
+				playbackRates: [0.7, 1.0, 1.5, 2.0],
+				autoplay: true,
+				sources: [
+					{
+						type: 'video/mp4',
+						src: 'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+					},
+				],
+			},
+		};
+	},
+  watch: {
+    data: {
+      handler(val) {
+        this.$refs.videoPlayer && this.$refs.videoPlayer.player.src(val.video)
+      },
+      deep: true,
+      immediate: true
+    }
+  },
+	created() {
+		this.configSource = this.parseConfigSource(config);
+		this.configValue = this.parseConfigValue(config, value);
+	}
+};
+</script>
+<style lang="scss" scoped>
+.widget-part {
+  background: url("./img/video-bg.svg") no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>
+
