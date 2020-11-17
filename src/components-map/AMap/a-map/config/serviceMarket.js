@@ -7,11 +7,12 @@ export const SERVICELEGENDMARKETMAP = {
         component: 'Grouphall',
     },
     BranchCompany: {
-        label: '集团大厅',
+        label: '分公司',
         legendIcon: 'icontulifengongsi',
         icon: 'iconfengongsi',
         component: 'BranchCompany',
     },
+
     HeatMap: {
         label: '销气热力',
         legendIcon: 'icontulixiaoqireli',

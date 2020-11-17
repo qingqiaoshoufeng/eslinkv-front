@@ -4,11 +4,13 @@
 			visible,
 			...overlayProps,
 		}"
-		@click="marker => $emit('overlay-click', marker, 'ServiceNetworkStation')"
+		@click="
+			marker => $emit('overlay-click', marker, 'ServiceNetworkStation')
+		"
 	/>
 </template>
 <script>
-import {BaseOverlay} from '../../Components/index';
+import { BaseOverlay } from '../../Components/index';
 export default {
 	name: 'ServiceNetworkStation',
 	components: {
@@ -21,7 +23,7 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.home.getInspectionPersonList;
+		let apiFun = this.$sysApi.map.serve.getServiceNetworkStationList;
 		return {
 			overlayProps: {
 				apiFun: apiFun,

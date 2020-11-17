@@ -8,7 +8,7 @@
 	/>
 </template>
 <script>
-import {BaseOverlay} from '../../Components/index';
+import { BaseOverlay } from '../../Components/index';
 export default {
 	name: 'ThreeSocialLinkage',
 	components: {
@@ -21,11 +21,12 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.home.getInspectionCarList;
+		let apiFun = this.$sysApi.map.serve.getThreeSocialLinkageList;
+		console.log(apiFun);
 		return {
 			overlayProps: {
 				apiFun: apiFun,
-				overlayType: 'InspectionCar',
+				overlayType: 'ThreeSocialLinkage',
 				overlayIcon: 'iconsansheliandong',
 			},
 		};
