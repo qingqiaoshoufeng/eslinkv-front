@@ -24,6 +24,13 @@
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 		/>
+		<portal to="destination">
+			<!-- 右侧列表 -->
+			<RightPanel
+				class="right-panel"
+				@list-click="handleListClick"
+			></RightPanel>
+		</portal>
 	</div>
 </template>
 <script>
@@ -45,7 +52,8 @@ import {
 	NaturalGasStation,
 	PipeManageMentStation,
 	PressureRegulatingStation,
-	UndergroundRepairStation,
+    UndergroundRepairStation,
+    RightPanel
 } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
@@ -74,7 +82,8 @@ export default {
 		PressureRegulatingStation,
 		UndergroundRepairStation,
 		MiddlePressureLine,
-		RegionBoundary,
+        RegionBoundary,
+        RightPanel
 	},
 	data() {
 		return {
@@ -87,6 +96,9 @@ export default {
 				this.drawPathNavigators();
 				return false;
 			}
+		},
+		handleListClick(item) {
+			this.activeItem = item;
 		},
 	},
 };

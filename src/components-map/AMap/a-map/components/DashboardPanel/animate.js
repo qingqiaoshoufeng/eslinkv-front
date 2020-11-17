@@ -22,7 +22,7 @@ export default {
         },
         speed: {
             type: Number,
-            default: 300,
+            default: 1000,
         },
     },
     methods: {
