@@ -23,7 +23,6 @@
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
-			@view-detail="toViewOverlayDetail"
 		/>
 		<!-- 统计数据 -->
 		<!-- <DataStatistics :data="statisticsdata" /> -->

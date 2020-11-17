@@ -6,7 +6,8 @@ export const SCENEINDEXMAP = {
     g199smrdh4r: 'project',
     '6gouq223fze': 'service_customer',
     a70wh40bnz9: 'service_19',
-    '6u1qhjs14ws': 'service_market'
+    '6u1qhjs14ws': 'service_market',
+    'bavv56kietf': 'service_hangranCode'
 }
 
 //三社联动弹窗场景index

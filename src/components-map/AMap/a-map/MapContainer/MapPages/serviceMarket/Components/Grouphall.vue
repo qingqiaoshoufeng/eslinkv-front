@@ -30,11 +30,11 @@ export default {
 			type: String,
 			default: '',
 		},
-    },
+	},
 	data() {
 		let apiFun = this.$sysApi.map.serve.getGrouphallList;
 		return {
-				apiFun: apiFun,
+			apiFun: apiFun,
 		};
 	},
 };

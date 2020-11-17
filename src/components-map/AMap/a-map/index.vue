@@ -52,7 +52,9 @@ export default {
 	methods: {
 		handleSceneChange(e) {
 			let sceneIndexMap = SCENEINDEXMAP;
+
 			let { index } = e.detail;
+			console.log(index);
 			let pageName = sceneIndexMap[index];
 			if (pageName) {
 				console.log(pageName);

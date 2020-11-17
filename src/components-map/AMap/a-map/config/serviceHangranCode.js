@@ -1,43 +1,31 @@
 //legend配置
-export const SERVICELEGENDHANGRANCODE = {
-    Grouphall: {
+export const SERVICELEGENDHANGRANCODEMAP = {
+    CouplingHot: {
         label: '联码数量热力',
         legendIcon: 'icontulixiaoqireli',
         // icon: 'iconjituandating',
-        component: 'Grouphall',
+        component: 'CouplingHot',
     },
-    BranchCompany: {
-        label: '分公司',
+    OperationHot: {
+        label: '操作数量热力',
         legendIcon: 'icontulifengongsi',
-        icon: 'iconfengongsi',
-        component: 'BranchCompany',
+        // icon: 'iconfengongsi',
+        component: 'OperationHot',
     },
-
-    HeatMap: {
-        label: '销气热力',
-        legendIcon: 'icontulixiaoqireli',
-        // icon: 'iconjituandating',
-        component: 'HeatMap',
-    }
-
 }
 
 export const SERVICELEGEND_HANGRANCODE = {
-    Grouphall: true,
-    BranchCompany: true,
-    HeatMap: true
+    CouplingHot: true,
+    OperationHot: false,
 }
 
 //覆盖物详情
 export const OVERLAYINFOMAP_HANGRANCODE = {
-    Grouphall: {
+    OperationHot: {
         name: {},
     },
 
-    BranchCompany: {
+    CouplingHot: {
         name: {},
     },
-    HeatMap: {
-
-    }
 }

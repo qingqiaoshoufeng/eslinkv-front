@@ -27,7 +27,7 @@
 		<!-- 地图 legend  -->
 		<MapLegend
 			:data="legendMap"
-            :multiple="legendMultiple"
+			:multiple="legendMultiple"
 			class="map-legend"
 		/>
 		<!-- 地图类型 -->
@@ -40,7 +40,12 @@ import { AMap } from '../lib';
 import MapLegend from './MapLegend/index';
 import MapTypeLegend from './MapTypeLegend/index';
 import RightPanelList from './RightPaneList/';
-import { HomeMap, serviceCustomerMap, serviceMarketMap } from './MapPages/';
+import {
+	HomeMap,
+	serviceCustomerMap,
+	serviceMarketMap,
+	serviceHangranCode,
+} from './MapPages/';
 // import { HomeMap } from './MapPages/';
 import {
 	HOMELEGEND_STATION,
@@ -53,6 +58,8 @@ import {
 	SERVICELEGENDCUSTOMERMAP,
 	SERVICELEGENDMARKETMAP,
 	HOMEOVERLAYCONFIGMAP,
+	SERVICELEGEND_HANGRANCODE,
+	SERVICELEGENDHANGRANCODEMAP,
 } from '../config/index';
 import bus from '../utils/bus';
 
@@ -67,6 +74,7 @@ export default {
 		MapLegend,
 		MapTypeLegend,
 		RightPanelList,
+		serviceHangranCode,
 	},
 	data() {
 		return {
@@ -85,8 +93,8 @@ export default {
 			currentScene: 'home',
 			legendConfig: {},
 			activeItem: {},
-            legendMap: {},
-            legendMultiple:true
+			legendMap: {},
+			legendMultiple: true,
 		};
 	},
 	watch: {
@@ -117,38 +125,44 @@ export default {
 			service_customer: SERVICELEGENDCUSTOMERMAP,
 			project: HOMEOVERLAYCONFIGMAP,
 			service_market: SERVICELEGENDMARKETMAP,
+			service_hangranCode: SERVICELEGENDHANGRANCODEMAP,
 		};
 		this._pageConfig = {
 			'home-station': {
 				mapComponentName: 'homeMap',
 				rightPanelComponentName: 'homeMap',
-                legendConfig: HOMELEGEND_STATION,
-                legendMultiple:true,
+				legendConfig: HOMELEGEND_STATION,
+				legendMultiple: true,
 			},
 			'home-pipe': {
 				mapComponentName: 'homeMap',
-                legendConfig: HOMELEGEND_PIPE,
-                legendMultiple:true,
+				legendConfig: HOMELEGEND_PIPE,
+				legendMultiple: true,
 			},
 			'home-ucan': {
 				mapComponentName: 'homeMap',
-                legendConfig: HOMELEGEND_UCAN,
-                legendMultiple:true,
+				legendConfig: HOMELEGEND_UCAN,
+				legendMultiple: true,
 			},
 			service_customer: {
 				mapComponentName: 'serviceCustomerMap',
-                legendConfig: SERVICELEGEND_CUSTOMER,
-                legendMultiple:true,
+				legendConfig: SERVICELEGEND_CUSTOMER,
+				legendMultiple: true,
 			},
 			service_market: {
 				mapComponentName: 'serviceMarketMap',
-                legendConfig: SERVICELEGEND_MARKET,
-                legendMultiple:true,
+				legendConfig: SERVICELEGEND_MARKET,
+				legendMultiple: true,
 			},
 			project: {
 				mapComponentName: 'projectMap',
-                legendConfig: PROJECTLEGEND,
-                legendMultiple:true,
+				legendConfig: PROJECTLEGEND,
+				legendMultiple: true,
+			},
+			service_hangranCode: {
+				mapComponentName: 'serviceHangranCode',
+				legendConfig: SERVICELEGEND_HANGRANCODE,
+				legendMultiple: false,
 			},
 		};
 		bus.$on('currentSceneChange', val => {
