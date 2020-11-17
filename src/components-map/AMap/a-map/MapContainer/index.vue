@@ -40,13 +40,14 @@ import { AMap } from '../lib';
 import MapLegend from './MapLegend/index';
 import MapTypeLegend from './MapTypeLegend/index';
 import RightPanelList from './RightPaneList/';
+// import { HomeMap } from './MapPages/';
 import {
-	HomeMap,
+	AirSupplyMap,
 	serviceCustomerMap,
 	serviceMarketMap,
 	serviceHangranCode,
 } from './MapPages/';
-// import { HomeMap } from './MapPages/';
+// import { AirSupplyMap } from './MapPages/';
 import {
 	HOMELEGEND_STATION,
 	HOMELEGEND_PIPE,
@@ -67,7 +68,7 @@ export default {
 	name: 'MainMap',
 	components: {
 		ElAmap: AMap,
-		HomeMap,
+		AirSupplyMap,
 		serviceCustomerMap,
 		serviceMarketMap,
 		// ProjectMap,
@@ -89,8 +90,8 @@ export default {
 				mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
 			},
 			mapReady: false,
-			mapComponentName: 'homeMap',
-			currentScene: 'home',
+			mapComponentName: 'AirSupplyMap',
+			currentScene: 'airsupply',
 			legendConfig: {},
 			activeItem: {},
 			legendMap: {},
@@ -120,7 +121,7 @@ export default {
 	},
 	created() {
 		this._overlayConfigMap = {
-			home: HOMEOVERLAYCONFIGMAP,
+			airsupply: HOMEOVERLAYCONFIGMAP,
 			service: HOMEOVERLAYCONFIGMAP,
 			service_customer: SERVICELEGENDCUSTOMERMAP,
 			project: HOMEOVERLAYCONFIGMAP,
@@ -128,19 +129,19 @@ export default {
 			service_hangranCode: SERVICELEGENDHANGRANCODEMAP,
 		};
 		this._pageConfig = {
-			'home-station': {
-				mapComponentName: 'homeMap',
-				rightPanelComponentName: 'homeMap',
+			'airsupply-station': {
+				mapComponentName: 'AirSupplyMap',
+				rightPanelComponentName: 'AirSupplyMap',
 				legendConfig: HOMELEGEND_STATION,
 				legendMultiple: true,
 			},
-			'home-pipe': {
-				mapComponentName: 'homeMap',
+			'hoairsupplyme-pipe': {
+				mapComponentName: 'AirSupplyMap',
 				legendConfig: HOMELEGEND_PIPE,
 				legendMultiple: true,
 			},
-			'home-ucan': {
-				mapComponentName: 'homeMap',
+			'airsupply-ucan': {
+				mapComponentName: 'AirSupplyMap',
 				legendConfig: HOMELEGEND_UCAN,
 				legendMultiple: true,
 			},
@@ -178,7 +179,7 @@ export default {
 			console.log('地图初始化完成！');
 			this.mapReady = true;
 			this.map = this.$refs.amap.$amap;
-			this.initPage('home');
+			this.initPage('airsupply-station');
 			setTimeout(() => {
 				this.map.addControl(new window.AMap.MapType());
 			}, 2000);
