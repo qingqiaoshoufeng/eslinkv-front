@@ -23,7 +23,6 @@
 <style lang="scss" scoped>
 	.h-left-bg1 {
 		pointer-events: none;
-		position: absolute;
 		background-image: -webkit-linear-gradient(
 				0deg,
 				rgba(0, 5, 35, 0),
@@ -31,8 +30,6 @@
 		);
 		width: 1128px;
 		height: 1050px;
-		top: 0;
-		left: 0;
 		transform: rotateY(180deg);
 
 		&:after {

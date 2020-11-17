@@ -1,6 +1,15 @@
 <template>
 	<div class="widget-part pos-r" :style="`${styles};top:0`">
-		<div class="h-right-bg1">
+		<div class="h-right-bg2 pos-r">
+			<i class="pos-a"></i>
+			<i class="pos-a"></i>
+			<i class="pos-a"></i>
+			<i class="pos-a"></i>
+			<i class="pos-a"></i>
+			<i class="pos-a"></i>
+			<i class="pos-a"></i>
+			<i class="pos-a"></i>
+			<i class="pos-a"></i>
 		</div>
 	</div>
 </template>
@@ -21,29 +30,17 @@
 	}
 </script>
 <style lang="scss" scoped>
-	.h-right-bg1 {
+	.h-right-bg2 {
 		pointer-events: none;
-		background-image: -webkit-linear-gradient(
-				0deg,
-				rgba(0, 5, 35, 0),
-				rgba(0, 5, 35, 0.9)
-		);
-		width: 1128px;
+		width: 2200px;
 		height: 1050px;
 
-		&:after {
-			content: '';
-			display: block;
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
+		i {
+			width: 2200px;
+			height: 1050px;
 			left: 0;
-			background-image: -webkit-linear-gradient(
-					0deg,
-					rgba(0, 5, 35, 0),
-					rgba(0, 5, 35, 0.9)
-			);
+			top: 0;
+			background: linear-gradient(270deg, #00153E 0%, rgba(0, 21, 62, 0) 100%);
 		}
 	}
 

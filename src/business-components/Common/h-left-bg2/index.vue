@@ -1,6 +1,6 @@
 <template>
 	<div class="widget-part pos-r" :style="`${styles};top:0`">
-		<div class="h-right-bg1">
+		<div class="h-left-bg2">
 		</div>
 	</div>
 </template>
@@ -21,30 +21,11 @@
 	}
 </script>
 <style lang="scss" scoped>
-	.h-right-bg1 {
+	.h-left-bg2 {
 		pointer-events: none;
-		background-image: -webkit-linear-gradient(
-				0deg,
-				rgba(0, 5, 35, 0),
-				rgba(0, 5, 35, 0.9)
-		);
-		width: 1128px;
+		width: 400px;
 		height: 1050px;
-
-		&:after {
-			content: '';
-			display: block;
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			background-image: -webkit-linear-gradient(
-					0deg,
-					rgba(0, 5, 35, 0),
-					rgba(0, 5, 35, 0.9)
-			);
-		}
+		background: linear-gradient(90deg, rgba(0, 11, 62, 0.9) 0%, rgba(0, 11, 62, 0.0001) 100%);
 	}
 
 </style>
