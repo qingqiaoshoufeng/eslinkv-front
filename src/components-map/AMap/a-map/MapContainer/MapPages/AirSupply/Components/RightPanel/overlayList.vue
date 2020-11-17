@@ -32,10 +32,10 @@
 </template>
 
 <script>
-import { SvgIcon } from "../../../components/";
+import { SvgIcon } from "../../../../../components/";
 import {
     HOMEOVERLAYCONFIGMAP,
-} from '../../../config/index';
+} from '../../../../../config/index';
 export default {
   name: "HomeRealTimeList",
   components: {

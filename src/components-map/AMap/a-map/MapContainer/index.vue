@@ -19,11 +19,6 @@
 				/>
 			</template>
 		</el-amap>
-		<!-- 右侧列表 -->
-		<right-panel-list
-			class="right-panel"
-			@list-click="handleListClick"
-		></right-panel-list>
 		<!-- 地图 legend  -->
 		<MapLegend
 			:data="legendMap"
@@ -33,7 +28,7 @@
 		/>
 		<!-- 地图类型 -->
 		<MapTypeLegend />
-		<portal-target name="destination"> </portal-target>
+		<portal-target name="destination"></portal-target>
 	</div>
 </template>
 
@@ -41,7 +36,7 @@
 import { AMap } from '../lib';
 import MapLegend from './MapLegend/index';
 import MapTypeLegend from './MapTypeLegend/index';
-import RightPanelList from './RightPaneList/';
+// import RightPanelList from './RightPaneList/';
 //地图覆盖物
 import {
 	AirSupplyMap,
@@ -80,7 +75,7 @@ export default {
 		serviceMarketMap,
 		MapLegend,
 		MapTypeLegend,
-		RightPanelList,
+		// RightPanelList,
 		serviceHangranCode,
 		service19,
 		serviceICcustomer,
@@ -122,7 +117,6 @@ export default {
 				pageName = pageName.split('-')[0];
 			}
 			let pageOverlayConfig = _overlayConfigMap[pageName];
-			console.log(pageOverlayConfig);
 			let obj = {};
 			Object.keys(legendConfig).map(legend => {
 				let isShow = legendConfig[legend];
@@ -147,7 +141,6 @@ export default {
 		this._pageConfig = {
 			'airsupply-station': {
 				mapComponentName: 'AirSupplyMap',
-				rightPanelComponentName: 'AirSupplyMap',
 				legendConfig: AIRSUPPLYLEGEND_STATION,
 				legendMultiple: true,
 			},
@@ -232,9 +225,6 @@ export default {
 				this.map.panTo(mapCenter ? mapCenter : center, 0);
 			}
 		},
-		handleListClick(item) {
-			this.activeItem = item;
-		},
 		handleClosePop() {
 			this.activeItem = {};
 		},
@@ -254,8 +244,5 @@ export default {
 	bottom: 50px;
 	left: 50%;
 	transform: translateX(-50%);
-}
-.right-panel {
-	z-index: 100;
 }
 </style>
