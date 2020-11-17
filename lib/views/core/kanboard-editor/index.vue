@@ -463,7 +463,7 @@
 		computed: {
 			showParts() {
 				return (item) => {
-					if (item.scene === 0) {
+					if (item.scene === 0 && store.scene.showMainScene) {
 						return true
 					} else if (item.scene === store.scene.index) {
 						return true

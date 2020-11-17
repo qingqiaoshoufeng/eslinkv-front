@@ -7,6 +7,7 @@ const GoldChart = {
 		createScene: mutations.createScene,
 		destroyScene: mutations.destroyScene,
 		createSceneInstance: mutations.createSceneInstance,
+		changeShowMainScene: mutations.changeShowMainScene,
 	},
 	instance: {
 		updateComponent: (id, data) => {

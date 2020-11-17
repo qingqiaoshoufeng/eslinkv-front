@@ -1,6 +1,6 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
-		<div class="h-logo fn-flex flex-row">
+		<div class="h-logo fn-flex flex-row pointer" @click="handleClick">
 			<img src="/static/icons/logo.svg" alt=""/>
 			<div class="right-box">
 				<h2>杭州燃气数字可视化平台</h2>
@@ -15,12 +15,19 @@
 </template>
 <script>
 	import mixins from '../../mixins'
+	import GoldChart from '../../../openApi'
 
 	export default {
 		mixins: [mixins],
 		created() {
 			this.configSource = this.parseConfigSource()
 			this.configValue = this.parseConfigValue()
+		},
+		methods: {
+			handleClick() {
+				GoldChart.scene.changeShowMainScene(false)
+				GoldChart.scene.setSceneIndex('tbc8uqyrkze')
+			}
 		}
 	}
 </script>

@@ -25,6 +25,8 @@
 			:before-close="closeOverlayDetail"
 			@view-detail="toViewOverlayDetail"
 		/>
+		<!-- 统计数据 -->
+		<!-- <DataStatistics :data="statisticsdata" /> -->
 	</div>
 </template>
 <script>
@@ -37,6 +39,7 @@ import {
 } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
+import { DataStatistics } from '../../../components/DashboardPanel';
 import pageMixin from '../mixins/pageMixin.js';
 import {
 	OVERLAYINFOMAP_SERVICE_CUSTOMER,
@@ -54,6 +57,7 @@ export default {
 		OverlayDetail,
 		Grouphall,
 		BranchCompany,
+		DataStatistics,
 	},
 	data() {
 		return {

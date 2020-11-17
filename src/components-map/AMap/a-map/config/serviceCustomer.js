@@ -38,8 +38,8 @@ export const OVERLAYINFOMAP_SERVICE_CUSTOMER = {
     BranchCompany: {
         name: {},
     },
-    ServiceNetworkStation:{
-        name:{}
+    ServiceNetworkStation: {
+        name: {}
     },
     ThreeSocialLinkage: {
         name: {},

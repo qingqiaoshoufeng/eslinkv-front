@@ -133,7 +133,8 @@
 				return val
 			},
 			showParts(item) {
-				if (item.scene === 0) {
+				console.log(this.store.scene.showMainScene)
+				if (item.scene === 0 && this.store.scene.showMainScene) {
 					return true
 				} else if (item.scene === this.store.scene.index) {
 					return true
