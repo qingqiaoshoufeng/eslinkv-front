@@ -1,17 +1,21 @@
 <script>
-import heatMapData from '@/assets/amap/json/heatMap.json';
+// import heatMapData from '@/assets/amap/json/heatMap.json';
 import overlayMixin from '../../mixins/overlayMixin.js';
 export default {
 	mixins: [overlayMixin],
+	data: function () {
+		return {};
+	},
 	methods: {
-		init() {
-			// let map = this.$parent.map;
+		async init() {
+			let apiFun = await this.$sysApi.map.serve.getHeatMapList();
+			console.log(apiFun);
 			let instance = new AMap.HeatMap(this.$amap, {
 				radius: 80, //给定半径
 				opacity: [0, 0.8],
 			});
 			instance.setDataSet({
-				data: heatMapData,
+				data: apiFun,
 				max: 4000,
 			});
 			this.instanceArr.push(instance);

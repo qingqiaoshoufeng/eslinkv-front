@@ -45,3 +45,14 @@ export function getThreeSocialLinkageList(data) {
         },
     })
 }
+// 销气热力
+export function getHeatMapList(data) {
+    return request({
+        url: '/map/serve/getHeatMapList',
+        method: 'get',
+        data: qs.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
