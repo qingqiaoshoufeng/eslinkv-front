@@ -6,21 +6,30 @@
 			maxWidth: maxWidth + 'px',
 		}"
 	>
+		<slot name="prepend"></slot>
 		<div class="legend-content">
-			<div class="legend-list" ref="content">
+			<div
+				class="legend-list"
+				:class="[multiple ? '' : 'legend-radio']"
+				ref="content"
+			>
 				<div
 					v-for="(legend, prop) in data"
 					:key="prop"
 					class="legend-item"
-					:class="{ 'in-active': !legend.isShow }"
 					@click="handleLegendClick(prop)"
 				>
 					<SvgIcon
 						v-if="legend.legendIcon"
 						:icon-name="legend.legendIcon"
 						class="legend-icon"
+						:class="{ 'in-active': !legend.isShow }"
 					></SvgIcon>
-					<span class="legend-label">{{ legend.label }}</span>
+					<span
+						class="legend-label"
+						:class="{ 'in-active': !legend.isShow }"
+						>{{ legend.label }}</span
+					>
 				</div>
 			</div>
 		</div>
@@ -52,6 +61,10 @@ export default {
 			type: Number,
 			default: 1260,
 		},
+		multiple: {
+			type: Boolean,
+			default: true,
+		},
 	},
 	data() {
 		return {
@@ -77,6 +90,7 @@ export default {
 					) {
 						this.isNeedExpend = false;
 					} else {
+						this.isNeedExpend = true;
 						this.heightAuto = contentHeight + 'px';
 					}
 					this.isExpend = false;
@@ -90,6 +104,15 @@ export default {
 	},
 	methods: {
 		handleLegendClick(prop) {
+			let { multiple } = this;
+			if (!multiple) {
+				Object.keys(this.data).forEach(legendKey => {
+					this.data[legendKey].isShow = false;
+				});
+				this.data[prop].isShow = true;
+			}else{
+               this.data[prop].isShow =  !this.data[prop].isShow
+            }
 			this.$emit('legend-click', prop);
 		},
 		handleExpendClick() {
@@ -119,7 +142,24 @@ export default {
 			flex: 1;
 			display: flex;
 			flex-wrap: wrap;
+			&.legend-radio {
+				.legend-item:not(:last-child) {
+					margin-right: 34px;
+					&:after {
+						content: ' ';
+						position: absolute;
+						display: block;
+						width: 2px;
+						height: 24px;
+						background: rgba(255, 255, 255, 0.4);
+						top: 50%;
+						right: -18px;
+						transform: translateY(-50%);
+					}
+				}
+			}
 			.legend-item {
+				position: relative;
 				cursor: pointer;
 				&:not(:last-child) {
 					margin-right: 16px;
@@ -131,9 +171,9 @@ export default {
 				.legend-label {
 					vertical-align: middle;
 				}
-			}
-			.in-active {
-				opacity: 0.5;
+				.in-active {
+					opacity: 0.5;
+				}
 			}
 		}
 	}

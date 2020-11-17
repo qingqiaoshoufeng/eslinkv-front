@@ -10,7 +10,7 @@
 	/>
 </template>
 <script>
-import {BaseOverlay} from '../../Components/index';
+import { BaseOverlay } from '../../Components/index';
 export default {
 	name: 'InspectionPerson',
 	components: {
@@ -29,13 +29,11 @@ export default {
 			type: String,
 			default: '',
 		},
-    },
+	},
 	data() {
 		let apiFun = this.$sysApi.map.home.getInspectionPersonList;
 		return {
-				apiFun: apiFun,
-				overlayType: 'InspectionPerson',
-				overlayIcon: 'iconrenyuan',
+			apiFun: apiFun,
 		};
 	},
 };
