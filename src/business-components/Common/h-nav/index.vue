@@ -22,10 +22,9 @@
 					{title: '首页', index: ['tbc8uqyrkze']},
 					{
 						title: '供气',
-						index: ['nn16rowdl5r', 'p2wovclspks', '8iyxp8u3gtu', 'phugmfxir4d', '9n1zur7e4l', 'j2nq2ycw0er' ]
+						index: ['nn16rowdl5r', 'p2wovclspks', '8iyxp8u3gtu', 'phugmfxir4d', '9n1zur7e4l', 'j2nq2ycw0er']
 					},
 					{title: '服务', index: ['g199smrdh4r']},
-					{title: '工程', index: ['6gouq223fze']},
 					{title: '优家', index: ['o8tkm981qdh']},
 					{title: '体验', index: ['vxoiljh5my9']},
 				]
@@ -41,6 +40,11 @@
 		mixins: [mixins],
 		methods: {
 			changeScene(index) {
+				if (index === 'tbc8uqyrkze') {
+					GoldChart.scene.changeShowMainScene(false)
+				}else{
+					GoldChart.scene.changeShowMainScene(true)
+				}
 				GoldChart.scene.setSceneIndex(index)
 			}
 		},

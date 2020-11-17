@@ -55,7 +55,7 @@ export default {
 					this.$nextTick(() => {
 						this.isRendered = true;
 					});
-				}
+                }
 			},
 			immediate: true,
 		},
@@ -77,7 +77,7 @@ export default {
 		},
 		async getData(query) {
 			try {
-				this.list = await this.apiFun(query);
+                this.list = await this.apiFun(query);
 			} catch (err) {
 				console.log(err, 'err');
 			}

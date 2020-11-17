@@ -1,10 +1,12 @@
 <template>
 	<BaseOverlay
 		v-bind="{
+			overlayIcon,
+			overlayType,
 			visible,
-			...overlayProps,
+			apiFun,
 		}"
-		@click="marker => $emit('overlay-click', marker, 'ThreeSocialLinkage')"
+		@click="marker => $emit('overlay-click', marker, overlayType)"
 	/>
 </template>
 <script>
@@ -19,16 +21,18 @@ export default {
 			type: Boolean,
 			default: true,
 		},
+		overlayIcon: {
+			type: String,
+			default: '',
+		},
+		overlayType: {
+			type: String,
+			default: '',
+		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.serve.getThreeSocialLinkageList;
-		console.log(apiFun);
 		return {
-			overlayProps: {
-				apiFun: apiFun,
-				overlayType: 'ThreeSocialLinkage',
-				overlayIcon: 'iconsansheliandong',
-			},
+			apiFun: this.$sysApi.map.serve.getThreeSocialLinkageList,
 		};
 	},
 };

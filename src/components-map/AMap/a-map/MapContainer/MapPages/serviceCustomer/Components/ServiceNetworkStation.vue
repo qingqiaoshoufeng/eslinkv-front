@@ -1,12 +1,12 @@
 <template>
 	<BaseOverlay
 		v-bind="{
+			overlayIcon,
+			overlayType,
 			visible,
-			...overlayProps,
+			apiFun,
 		}"
-		@click="
-			marker => $emit('overlay-click', marker, 'ServiceNetworkStation')
-		"
+		@click="marker => $emit('overlay-click', marker, overlayType)"
 	/>
 </template>
 <script>
@@ -21,15 +21,18 @@ export default {
 			type: Boolean,
 			default: true,
 		},
+		overlayIcon: {
+			type: String,
+			default: '',
+		},
+		overlayType: {
+			type: String,
+			default: '',
+		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.serve.getServiceNetworkStationList;
 		return {
-			overlayProps: {
-				apiFun: apiFun,
-				overlayType: 'ServiceNetworkStation',
-				overlayIcon: 'iconfuwuwangdian',
-			},
+			apiFun: this.$sysApi.map.home.getServiceNetworkStationList,
 		};
 	},
 };

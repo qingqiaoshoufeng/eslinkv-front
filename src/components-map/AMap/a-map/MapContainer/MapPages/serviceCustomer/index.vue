@@ -11,6 +11,8 @@
 			<component
 				:key="legend"
 				:visible="config.isShow"
+				:overlayIcon="config.icon"
+                :overlayType="legend"
 				:is="config.component"
 				@overlay-click="handleOverlayClick"
 			/>

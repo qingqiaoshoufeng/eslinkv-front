@@ -46,5 +46,5 @@ export const OVERLAYINFOMAP_SERVICE_CUSTOMER = {
     },
     Grouphall: {
         name: {},
-    },
+    }
 }

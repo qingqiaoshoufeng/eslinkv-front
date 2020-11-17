@@ -1,10 +1,12 @@
 <template>
 	<BaseOverlay
 		v-bind="{
+			overlayIcon,
+			overlayType,
 			visible,
-			...overlayProps,
+			apiFun,
 		}"
-		@click="marker => $emit('overlay-click', marker, 'Grouphall')"
+		@click="marker => $emit('overlay-click', marker, overlayType)"
 	/>
 </template>
 <script>
@@ -20,15 +22,18 @@ export default {
 			type: Boolean,
 			default: true,
 		},
-	},
+		overlayIcon: {
+			type: String,
+			default: '',
+		},
+		overlayType: {
+			type: String,
+			default: '',
+		},
+    },
 	data() {
-		let apiFun = this.$sysApi.map.serve.getGrouphallList;
 		return {
-			overlayProps: {
-				apiFun: apiFun,
-				overlayType: 'Grouphall',
-				overlayIcon: 'iconjituandating',
-			},
+			apiFun: this.$sysApi.map.serve.getGrouphallList,
 		};
 	},
 };

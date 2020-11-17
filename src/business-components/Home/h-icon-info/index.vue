@@ -1,7 +1,7 @@
 <template>
 	<div class="widget-part" :style="styles">
 		<div class="icon" :style="`background-image: url(${config.config && config.config.icon})`"></div>
-		<div class="num">{{ data && data.num }}{{config.config.suffix}}</div>
+		<div class="num">{{ data && data.num }}{{config.config && config.config.suffix}}</div>
 		<div class="text">{{ config.config && config.config.text }}</div>
 	</div>
 </template>
