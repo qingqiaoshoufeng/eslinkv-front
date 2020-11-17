@@ -43,12 +43,12 @@ export default {
     beforeDestroy() {
         this.instanceArr.forEach((instance) => {
             this.$amap.remove(instance)
-            // if (instance.setDataSet instanceof Function) {
-            //     instance.setDataSet({
-            //         data: [{}],
-            //         max: 4000,
-            //     });
-            // }
+            if (instance.setDataSet instanceof Function) {
+                instance.setDataSet({
+                    data: [{}],
+                    max: 4000,
+                });
+            }
         })
         this.instanceArr = null
     },

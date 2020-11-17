@@ -39,7 +39,7 @@ import pageMixin from '../mixins/pageMixin.js';
 import { OVERLAYINFOMAP_HANGRANCODE } from '../../../config';
 import GoldChart from '@/openApi';
 export default {
-	name: 'serviceCustomer',
+	name: 'hangranCode',
 	mixins: [pageMixin],
 	components: { RegionBoundary, OverlayDetail, CouplingHot, OperationHot },
 	data() {
@@ -48,16 +48,16 @@ export default {
 		};
 	},
 	methods: {
-		toViewOverlayDetail(overlay) {
-			let { overlayType } = overlay;
-			let viewOverlayHandlerMap = {
-				ThreeSocialLinkage: 'showThreeSocialLinkageDetail',
-			};
-			let handler = viewOverlayHandlerMap[overlayType];
-			if (handler) {
-				this[handler](overlay);
-			}
-		},
+		// toViewOverlayDetail(overlay) {
+		// 	let { overlayType } = overlay;
+		// 	let viewOverlayHandlerMap = {
+		// 		ThreeSocialLinkage: 'showThreeSocialLinkageDetail',
+		// 	};
+		// 	let handler = viewOverlayHandlerMap[overlayType];
+		// 	if (handler) {
+		// 		this[handler](overlay);
+		// 	}
+		// },
 	},
 };
 </script>
