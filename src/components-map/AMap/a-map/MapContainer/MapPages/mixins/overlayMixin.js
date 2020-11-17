@@ -43,10 +43,11 @@ export default {
     beforeDestroy() {
         this.instanceArr.forEach((instance) => {
             this.$amap.remove(instance)
-            if (instance.setDataSet instanceof Function) {
+            //热力图特殊处理
+            if (instance.setDataSet) {
                 instance.setDataSet({
-                    data: [{}],
-                    max: 4000,
+                    data: [],
+                    max: 0,
                 });
             }
         })

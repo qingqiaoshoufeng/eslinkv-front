@@ -8,15 +8,14 @@ export default {
 	},
 	methods: {
 		async init() {
-			let apiFun = await this.$sysApi.map.serve.getHeatMapList();
-			console.log(apiFun);
+			let data = await this.$sysApi.map.serve.getHeatMapList();
 			let instance = new AMap.HeatMap(this.$amap, {
 				radius: 80, //给定半径
 				opacity: [0, 0.8],
 			});
 
 			instance.setDataSet({
-				data: apiFun,
+				data: data,
 				max: 4000,
 			});
 
