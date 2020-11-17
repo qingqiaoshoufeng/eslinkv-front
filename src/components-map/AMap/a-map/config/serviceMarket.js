@@ -12,11 +12,9 @@ export const SERVICELEGENDMARKETMAP = {
         icon: 'iconfengongsi',
         component: 'BranchCompany',
     },
-
     HeatMap: {
         label: '销气热力',
         legendIcon: 'icontulixiaoqireli',
-        // icon: 'iconjituandating',
         component: 'HeatMap',
     }
 
