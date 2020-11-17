@@ -36,7 +36,7 @@ export default {
 		return null;
 	},
 	beforeDestroy() {
-		if (_instance) {
+		if (this._instance) {
 			this._instance.removeFromMap();
 			this._instance = null;
 		}

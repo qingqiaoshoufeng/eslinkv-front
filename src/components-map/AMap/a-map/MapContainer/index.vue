@@ -33,6 +33,7 @@
 		/>
 		<!-- 地图类型 -->
 		<MapTypeLegend />
+		<portal-target name="destination"> </portal-target>
 	</div>
 </template>
 

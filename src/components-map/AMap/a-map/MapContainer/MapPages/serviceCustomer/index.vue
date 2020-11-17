@@ -25,8 +25,10 @@
 			:before-close="closeOverlayDetail"
 			@view-detail="toViewOverlayDetail"
 		/>
-		<!-- 统计数据 -->
-		<DataStatistics :position="'right'" />
+		<portal to="destination">
+			<!-- 统计数据 -->
+			<DataStatistics />
+		</portal>
 	</div>
 </template>
 <script>

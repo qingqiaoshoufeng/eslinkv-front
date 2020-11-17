@@ -12,7 +12,8 @@ import directives from '../lib/directives'
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import './api/index.js'
-
+import PortalVue from 'portal-vue'
+Vue.use(PortalVue)
 Vue.use(VueVideoPlayer)
 Vue.prototype.$debug = debug
 Vue.prototype.$Message = Message
