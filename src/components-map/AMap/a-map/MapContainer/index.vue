@@ -29,10 +29,11 @@
 			:data="legendMap"
 			:multiple="legendMultiple"
 			class="map-legend"
-            :style="mapLegendStyle"
+			:style="mapLegendStyle"
 		/>
 		<!-- 地图类型 -->
 		<MapTypeLegend />
+		<portal-target name="destination"> </portal-target>
 	</div>
 </template>
 
@@ -52,8 +53,8 @@ import {
 import {
 	AIRSUPPLYLEGEND_STATION,
 	AIRSUPPLYLEGEND_PIPE,
-    AIRSUPPLYLEGEND_UCAN,
-    AIRSUPPLYLEGEND_LNG,
+	AIRSUPPLYLEGEND_UCAN,
+	AIRSUPPLYLEGEND_LNG,
 	SERVICELEGEND_MARKET,
 	SERVICELEGEND_CUSTOMER,
 	SERVICELEGENDCUSTOMERMAP,
@@ -90,7 +91,7 @@ export default {
 			},
 			mapCenter: null,
 			mapLegendStyle: null,
-			mapLegendStyleNormal:{left:'50%'} ,
+			mapLegendStyleNormal: { left: '50%' },
 			mapReady: false,
 			mapComponentName: 'AirSupplyMap',
 			currentScene: 'airsupply',
@@ -144,8 +145,8 @@ export default {
 				mapComponentName: 'AirSupplyMap',
 				legendConfig: AIRSUPPLYLEGEND_UCAN,
 				legendMultiple: true,
-            },
-            'airsupply-lng': {
+			},
+			'airsupply-lng': {
 				mapComponentName: 'AirSupplyMap',
 				legendConfig: AIRSUPPLYLEGEND_LNG,
 				legendMultiple: true,
@@ -164,8 +165,8 @@ export default {
 				mapComponentName: 'serviceHangranCode',
 				legendConfig: SERVICELEGEND_HANGRANCODE,
 				legendMultiple: false,
-                mapCenter: [120.81259, 30.273295],
-                mapLegendStyle:{left:'18%'}
+				mapCenter: [120.81259, 30.273295],
+				mapLegendStyle: { left: '18%' },
 			},
 		};
 	},
@@ -191,16 +192,16 @@ export default {
 		initPage(val) {
 			let config = this._pageConfig[val];
 			if (!config) return false;
-            this.mapCenter = null;
-            this.mapLegendStyle = this.mapLegendStyleNormal
+			this.mapCenter = null;
+			this.mapLegendStyle = this.mapLegendStyleNormal;
 			Object.keys(config).forEach(targetProp => {
 				this[targetProp] = config[targetProp];
 			});
 			if (this.map) {
 				let { mapCenter, mapConfig } = this;
 				let { zoom, center } = mapConfig;
-                this.map.setZoom(zoom);
-				this.map.panTo(mapCenter ? mapCenter : center,0);
+				this.map.setZoom(zoom);
+				this.map.panTo(mapCenter ? mapCenter : center, 0);
 			}
 		},
 		handleListClick(item) {
@@ -226,7 +227,7 @@ export default {
 	left: 50%;
 	transform: translateX(-50%);
 }
-.right-panel{
-    z-index:100;
+.right-panel {
+	z-index: 100;
 }
 </style>
