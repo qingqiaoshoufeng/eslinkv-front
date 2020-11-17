@@ -46,6 +46,8 @@ import {
 	serviceCustomerMap,
 	serviceMarketMap,
 	serviceHangranCode,
+	service19,
+	serviceICcustomer,
 } from './MapPages/';
 // import { AirSupplyMap } from './MapPages/';
 import {
@@ -61,6 +63,10 @@ import {
 	HOMEOVERLAYCONFIGMAP,
 	SERVICELEGEND_HANGRANCODE,
 	SERVICELEGENDHANGRANCODEMAP,
+	SERVICELEGEND19MAP,
+	SERVICELEGEND_SERVICE_19,
+	SERVICELEGENDICCUSTOMERMAP,
+	SERVICELEGEND_ICCUSTOMER,
 } from '../config/index';
 import bus from '../utils/bus';
 
@@ -76,6 +82,8 @@ export default {
 		MapTypeLegend,
 		RightPanelList,
 		serviceHangranCode,
+		service19,
+		serviceICcustomer,
 	},
 	data() {
 		return {
@@ -102,7 +110,8 @@ export default {
 		currentScene(val) {
 			let { legendConfig, _overlayConfigMap } = this;
 			let pageName = val;
-			console.log(val);
+			console.log('AAA', val);
+			console.log(legendConfig);
 			//多个场景共用一个地图
 			if (val.indexOf('-') > -1) {
 				pageName = pageName.split('-')[0];
@@ -127,6 +136,8 @@ export default {
 			project: HOMEOVERLAYCONFIGMAP,
 			service_market: SERVICELEGENDMARKETMAP,
 			service_hangranCode: SERVICELEGENDHANGRANCODEMAP,
+			service_19: SERVICELEGEND19MAP,
+			service_ICcustomer: SERVICELEGENDICCUSTOMERMAP,
 		};
 		this._pageConfig = {
 			'airsupply-station': {
@@ -165,8 +176,19 @@ export default {
 				legendConfig: SERVICELEGEND_HANGRANCODE,
 				legendMultiple: false,
 			},
+			service_19: {
+				mapComponentName: 'service19',
+				legendConfig: SERVICELEGEND_SERVICE_19,
+				legendMultiple: false,
+			},
+			serviceICcustomer: {
+				mapComponentName: 'serviceICcustomer',
+				legendConfig: SERVICELEGEND_ICCUSTOMER,
+				legendMultiple: false,
+			},
 		};
 		bus.$on('currentSceneChange', val => {
+			console.log('aaaaaa', val);
 			this.currentScene = val;
 			this.initPage(val);
 		});

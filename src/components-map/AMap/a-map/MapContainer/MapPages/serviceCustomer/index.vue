@@ -26,7 +26,7 @@
 			@view-detail="toViewOverlayDetail"
 		/>
 		<!-- 统计数据 -->
-		<DataStatistics />
+		<DataStatistics :position="'right'" />
 	</div>
 </template>
 <script>

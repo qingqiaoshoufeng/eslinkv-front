@@ -1,5 +1,5 @@
 <template>
-	<div class="data_statistics_box">
+	<div class="data_statistics_box" :class="`position-${position}`">
 		<div
 			class="data_statistics_item"
 			v-for="(item, index) in dataStatisticsList"
@@ -14,6 +14,12 @@
 <script>
 export default {
 	name: 'DataStatistics',
+	props: {
+		position: {
+			type: String,
+			default: 'right',
+		},
+	},
 	components: {},
 	data() {
 		return {
@@ -53,12 +59,11 @@ export default {
 	position: fixed;
 	left: 2681px;
 	top: 158px;
+	z-index: 9999;
 	.data_statistics_item {
 		display: flex;
 		flex-direction: column;
-		text-align: right;
 		margin-top: 36px;
-
 		.value {
 			height: 48px;
 			font-family: DIN Alternate;
@@ -78,6 +83,7 @@ export default {
 			border-radius: 16px;
 			color: #00DDFF;
 			padding-right: 16px;
+			text-align: right;
 			background: linear-gradient(
 				90deg,
 				rgba(0, 77, 150, 0.3) 0%,
@@ -85,6 +91,22 @@ export default {
 			);
 			border-radius: 16px;
 		}
+	}
+}
+.position-left {
+	left: 34px !important;
+	.value {
+		text-align: left !important;
+		padding-left: 16px !important;
+	}
+	.desc {
+		text-align: left !important;
+		padding-left: 16px !important;
+		background: linear-gradient(
+			90deg,
+			#004D96 0%,
+			rgba(0, 77, 150, 0.3) 100%
+		) !important;
 	}
 }
 </style>
