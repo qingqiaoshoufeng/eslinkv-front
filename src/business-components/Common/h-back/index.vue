@@ -1,6 +1,6 @@
 <template>
 	<div class="widget-part" :style="styles" @click="back">
-		<div class="h-back pointer">
+		<div class="h-back pointer fn-flex flex-row">
 			<img src="/static/icons/back.svg"/>
 			<div class="txt">返回</div>
 		</div>
