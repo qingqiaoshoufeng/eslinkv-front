@@ -4,3 +4,5 @@ export * from './service';
 export * from './serviceCustomer';
 export * from './project';
 export * from './serviceMarket';
+export * from './serviceHangranCode';
+
