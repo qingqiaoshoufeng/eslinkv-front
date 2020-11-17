@@ -17,15 +17,16 @@
 	import mixins from '../../mixins'
 	import GoldChart from '../../../openApi'
 
+	const config = {animation: true}
 	export default {
 		mixins: [mixins],
 		created() {
-			this.configSource = this.parseConfigSource()
-			this.configValue = this.parseConfigValue()
+			this.configSource = this.parseConfigSource(config)
+			this.configValue = this.parseConfigValue(config)
 		},
 		methods: {
 			handleClick() {
-				GoldChart.scene.changeShowMainScene(false)
+				// GoldChart.scene.changeShowMainScene(false)
 				GoldChart.scene.setSceneIndex('tbc8uqyrkze')
 			}
 		}

@@ -1,5 +1,5 @@
 <template>
-	<div class="widget-part pos-r" :style="styles">
+	<div class="widget-part pos-r" :style="`${styles}left:0px;top:0px;z-index:13;`">
 		<div class="h-bg pos-r">
 			<div class="h-bg-top pos-a"></div>
 			<div class="h-bg-center pos-a"></div>
@@ -19,15 +19,16 @@
 	import mixins from '../../mixins'
 	import GoldChart from '../../../openApi'
 
+	const config = {animation: true}
 	export default {
 		mixins: [mixins],
 		created() {
-			this.configSource = this.parseConfigSource()
-			this.configValue = this.parseConfigValue()
+			this.configSource = this.parseConfigSource(config)
+			this.configValue = this.parseConfigValue(config)
 		},
 		methods: {
 			handleClick(index) {
-				GoldChart.scene.changeShowMainScene(true)
+				// GoldChart.scene.changeShowMainScene(true)
 				GoldChart.scene.setSceneIndex(index)
 			}
 		}
@@ -45,6 +46,10 @@
 			font-size: 40px;
 			line-height: 40px;
 			margin-right: 174px;
+
+			&:last-child {
+				margin-right: 0;
+			}
 		}
 	}
 
@@ -64,6 +69,7 @@
 		background-size: 3500px 1050px;
 		background-repeat: no-repeat;
 		overflow: hidden;
+		top: 0;
 	}
 
 	.h-bg-left {
