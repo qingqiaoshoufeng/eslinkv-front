@@ -14,6 +14,8 @@
 				@overlay-click="handleOverlayClick"
 			/>
 		</template>
+		<!-- 统计数据 -->
+		<DataStatistics :position="'left'" :data="dataStatisticsList" />
 	</div>
 </template>
 <script>
@@ -23,17 +25,25 @@ import { CouplingHot, OperationHot } from './Components/index.js';
 import { RegionBoundary } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
 import { OVERLAYINFOMAP_HANGRANCODE } from '../../../config';
+import { DataStatistics } from '../../../components';
 import GoldChart from '@/openApi';
 export default {
 	name: 'hangranCode',
 	mixins: [pageMixin],
-	components: { RegionBoundary, CouplingHot, OperationHot },
+	components: { RegionBoundary, CouplingHot, OperationHot, DataStatistics },
 	data() {
 		return {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_HANGRANCODE),
+			dataStatisticsList: [],
 		};
 	},
 	methods: {
+		async getDataStatisticsList() {
+			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
+		},
+	},
+	mounted() {
+		this.getDataStatisticsList();
 	},
 };
 </script>

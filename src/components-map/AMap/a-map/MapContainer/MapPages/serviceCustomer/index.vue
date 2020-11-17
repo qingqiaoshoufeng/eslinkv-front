@@ -27,7 +27,7 @@
 		/>
 		<portal to="destination">
 			<!-- 统计数据 -->
-			<DataStatistics />
+			<DataStatistics :data="dataStatisticsList" />
 		</portal>
 	</div>
 </template>
@@ -66,9 +66,13 @@ export default {
 	data() {
 		return {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_CUSTOMER),
+			dataStatisticsList: [],
 		};
 	},
 	methods: {
+		async getDataStatisticsList() {
+			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
+		},
 		toViewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
 			let viewOverlayHandlerMap = {
@@ -123,6 +127,9 @@ export default {
 				});
 			});
 		},
+	},
+	mounted() {
+		this.getDataStatisticsList();
 	},
 };
 </script>

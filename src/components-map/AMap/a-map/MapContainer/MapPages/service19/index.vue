@@ -25,7 +25,7 @@
 			:before-close="closeOverlayDetail"
 		/>
 		<!-- 统计数据 -->
-		<DataStatistics :position="'left'" />
+		<DataStatistics :position="'left'" :data="dataStatisticsList" />
 	</div>
 </template>
 <script>
@@ -49,9 +49,17 @@ export default {
 	data() {
 		return {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_19),
+			dataStatisticsList: [],
 		};
 	},
-	methods: {},
+	methods: {
+		async getDataStatisticsList() {
+			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
+		},
+	},
+	mounted() {
+		this.getDataStatisticsList();
+	},
 };
 </script>
 
