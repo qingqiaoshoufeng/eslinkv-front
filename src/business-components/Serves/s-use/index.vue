@@ -3,7 +3,7 @@
 		<div class="total">
       <img src="./img/click-logo.svg" alt="">
       <span class="total-txt">累计操作次数</span>
-      <span class="total-num font-num">1,317,190</span>
+      <span class="total-num font-num">{{ data.total }}</span>
     </div>
 		<div class="history">
       <div class="history-item">
@@ -12,8 +12,9 @@
           <div class="history-title-unit">次数</div>
         </div>
         <div class="content">
-          <div class="content-num font-num">1,190</div>
-          <img class="content-icon" src="./img/arrow-down.svg" />
+          <div class="content-num font-num">{{ data.yesterday }}</div>
+          <img class="content-icon" src="./img/arrow-up.svg" v-if="data.yesterdayType === 'up'" />
+          <img class="content-icon" src="./img/arrow-down.svg" v-else />
         </div>
       </div>
       <div class="history-item">
@@ -22,8 +23,9 @@
           <div class="history-title-unit">次数</div>
         </div>
         <div class="content">
-          <div class="content-num font-num">1,190</div>
-          <img class="content-icon" src="./img/arrow-up.svg" />
+          <div class="content-num font-num">{{ data.lastWeek }}</div>
+          <img class="content-icon" src="./img/arrow-up.svg" v-if="data.lastWeekType === 'up'" />
+          <img class="content-icon" src="./img/arrow-down.svg" v-else />
         </div>
       </div>
     </div>
@@ -33,33 +35,24 @@
 import mixins from '../../mixins';
 import { getInput } from '../../../../lib';
 
-const configSource = {
-	config: {
-		fields: {
-			desc: getInput('desc', '描述'),
-		}
-	},
-};
 const config = {
 	animation: true,
-	config: {
-		desc: true,
-	},
 };
 const value = {
 	api: {
 		data: JSON.stringify({
-			value: 24,
+			total: '1,317,190',
+      yesterday: '1,190',
+      yesterdayType: 'up',
+      lastWeek: '1,190',
+      lastWeekType: 'down'
 		}),
-	},
-	config: {
-		desc: '标题',
-	},
+	}
 };
 export default {
 	mixins: [mixins],
 	created() {
-		this.configSource = this.parseConfigSource(config, configSource);
+		this.configSource = this.parseConfigSource(config);
 		this.configValue = this.parseConfigValue(config, value);
 	},
 };
