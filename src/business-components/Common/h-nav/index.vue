@@ -40,11 +40,11 @@
 		mixins: [mixins],
 		methods: {
 			changeScene(index) {
-				if (index === 'tbc8uqyrkze') {
-					GoldChart.scene.changeShowMainScene(false)
-				}else{
-					GoldChart.scene.changeShowMainScene(true)
-				}
+				// if (index === 'tbc8uqyrkze') {
+					// GoldChart.scene.changeShowMainScene(false)
+				// }else{
+					// GoldChart.scene.changeShowMainScene(true)
+				// }
 				GoldChart.scene.setSceneIndex(index)
 			}
 		},

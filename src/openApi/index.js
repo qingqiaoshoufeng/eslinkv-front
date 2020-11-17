@@ -11,10 +11,17 @@ const GoldChart = {
 	},
 	instance: {
 		updateComponent: (id, data) => {
-			store.instance.kanboard.$refs[id][0].$refs.widgets.updateComponentFormOutSide(data)
+			if (store.instance.kanboard.$refs[id]) {
+				console.log(store.instance.kanboard.$refs[id])
+				store.instance.kanboard.$refs[id][0].$refs.widgets.updateComponentFormOutSide(data)
+			}
+			if (store.instance.createKanboard.$refs[id]) {
+				store.instance.createKanboard.$refs[id][0].$refs.widgets.updateComponentFormOutSide(data)
+			}
+
 		}
-    },
-    store
+	},
+	store
 }
 
 export default GoldChart
