@@ -22,7 +22,7 @@
 <script>
 import { DashboardPanel } from '../../components/';
 import PanelContainer from './PanelContainer';
-import HomeList from './Home/';
+// import HomeList from './Home/';
 import ProjectList from './ProjectList';
 import ServiceList from './ServiceList';
 //模拟数据
@@ -36,7 +36,7 @@ export default {
 	name: 'RightPanelList',
 	components: {
 		PanelContainer,
-		HomeList,
+		// HomeList,
 		ProjectList,
 		ServiceList,
 		DashboardPanel,
