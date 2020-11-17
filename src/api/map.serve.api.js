@@ -56,3 +56,15 @@ export function getHeatMapList(data) {
         },
     })
 }
+
+// 获取统计数据列表
+export function getDataStatisticsList(data) {
+    return request({
+        url: '/map/serve/getDataStatisticsList',
+        method: 'get',
+        data: qs.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
