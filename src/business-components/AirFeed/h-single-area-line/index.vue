@@ -6,8 +6,21 @@
 <script>
 	import mixins from '../../mixins';
 	import options from './options'
+	import {getInput} from '../../../../lib';
 
-	const config = {animation: true}
+	const config = {
+		animation: true,
+		config: {
+			title: true
+		}
+	}
+	const configSource = {
+		config: {
+			fields: {
+				title: getInput('title', '标题'),
+			},
+		},
+	};
 	const value = {
 		api: {
 			data: JSON.stringify({
@@ -55,6 +68,9 @@
 					}
 				]
 			})
+		},
+		config: {
+			title: '%'
 		}
 	}
 	export default {
@@ -62,7 +78,7 @@
 		computed: {},
 		methods: {
 			setOption(data) {
-				options.yAxis[0].name = data.title
+				options.yAxis[0].name = this.config.config.title
 				options.series[0].data = data.data.map(item => item.value)
 				options.xAxis[0].data = data.data.map(item => item.name)
 				this.instance && this.instance.setOption(options)
@@ -83,7 +99,7 @@
 			}
 		},
 		created() {
-			this.configSource = this.parseConfigSource(config);
+			this.configSource = this.parseConfigSource(config, configSource);
 			this.configValue = this.parseConfigValue(config, value);
 		}
 	}

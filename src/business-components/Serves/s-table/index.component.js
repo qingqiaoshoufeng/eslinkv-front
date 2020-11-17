@@ -1,9 +1,10 @@
 export default {
+	label: '进度展示',
 	config: {
 		layout: {
 			size: {
-				width: 3500,
-				height: 1050
+				width: 480,
+				height: 540
 			},
 			position: {
 				value: 'relative'

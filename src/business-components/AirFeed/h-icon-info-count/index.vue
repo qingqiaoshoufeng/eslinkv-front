@@ -32,7 +32,8 @@ const configSource = {
 		fields: {
 			text: getInput('text', '描述'),
 			icon: getSelect('icon', 'icon', [
-				'/static/icons/h-call-count-statistics-1.svg',
+				'/static/icons/phone-border.svg',
+				'/static/icons/phone-border-2.svg',
 			]),
 		},
 	},

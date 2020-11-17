@@ -1,5 +1,4 @@
 export default {
-	label: '事故统计',
 	config: {
 		layout: {
 			size: {

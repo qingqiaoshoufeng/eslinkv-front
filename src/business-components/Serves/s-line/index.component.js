@@ -1,5 +1,4 @@
 export default {
-	label: '折线图',
 	config: {
 		layout: {
 			size: {

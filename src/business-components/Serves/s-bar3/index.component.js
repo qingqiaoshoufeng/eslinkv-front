@@ -1,5 +1,4 @@
 export default {
-	label: '线上业务受理情况',
 	config: {
 		layout: {
 			size: {

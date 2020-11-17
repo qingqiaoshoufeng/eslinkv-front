@@ -72,38 +72,6 @@ export default {
 
 
 <style lang="scss" scoped>
-.right-bg,
-.left-bg {
-	pointer-events: none;
-	position: absolute;
-	background-image: -webkit-linear-gradient(
-		0deg,
-		rgba(0, 5, 35, 0),
-		rgba(0, 5, 35, 0.9)
-	);
-	width: 1128px;
-	height: 1050px;
-	top: 0;
-	right: 0;
-	&:after {
-		content: '';
-		display: block;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background-image: -webkit-linear-gradient(
-			0deg,
-			rgba(0, 5, 35, 0),
-			rgba(0, 5, 35, 0.9)
-		);
-	}
-}
-.left-bg {
-	left: 0;
-	transform: rotateY(180deg);
-}
 .placeholder-map {
 	width: 100%;
 	height: 100%;

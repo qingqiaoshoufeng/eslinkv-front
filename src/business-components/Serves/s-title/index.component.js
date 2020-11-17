@@ -1,9 +1,10 @@
 export default {
+	label: '标题',
 	config: {
 		layout: {
 			size: {
-				width: 3500,
-				height: 1050
+				width: 480,
+				height: 64
 			},
 			position: {
 				value: 'relative'

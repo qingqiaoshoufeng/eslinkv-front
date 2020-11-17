@@ -62,6 +62,22 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  /deep/ .vjs-big-play-button {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: auto;
+    border-radius: 50%;
+    width: 72px;
+    height: 72px;
+    background: #fff;
+    .vjs-icon-placeholder:before {
+      color: #000;
+      font-size: 50px;
+      line-height: 70px;
+    }
+  }
 }
 </style>
 

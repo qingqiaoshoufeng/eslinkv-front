@@ -11,7 +11,8 @@
 							{{ label }}
 							<template v-if="widgetListActiveMap[`${tab.name}-${format(type)}`]" slot="content">
 								<div v-for="(widget, index) in widgets" :key="widget.label"
-									 class="widget-item-wrapper">
+									 class="widget-item-wrapper pos-r">
+									<i class="pos-a" style="left:0;top:0;font-size: 12px;">{{widget.type}}</i>
 									<parts
 										:type="widget.type"
 										:style="transform(widget)"
