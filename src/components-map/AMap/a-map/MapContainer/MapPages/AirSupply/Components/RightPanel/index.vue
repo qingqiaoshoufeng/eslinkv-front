@@ -2,12 +2,15 @@
 	<DashboardPanel
 		:delay="0"
 		:show="ready"
-		:speed="500"
+		:speed="300"
 		:transition="true"
 		class="right-panel"
-		enter="animate__animated  animate__animatedfadeInRight"
+		enter="animate__animated animate__fadeInRight"
 	>
-		<Tabs class="tabs-container" v-model="currentTab">
+		<Tabs
+			class="tabs-container"
+			v-model="currentTab"
+		>
 			<TabPanel key="realTime" name="realTime" label="态势感知" lazy>
 				<realTime :data="data" />
 			</TabPanel>

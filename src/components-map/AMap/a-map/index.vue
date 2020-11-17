@@ -3,8 +3,6 @@
 		<template v-if="inPreview">
 			<MapContainer />
 			<!-- 遮罩层 -->
-			<!-- <div class="right-bg"></div>
-			<div class="left-bg"></div> -->
 		</template>
 		<template v-else>
 			<div>

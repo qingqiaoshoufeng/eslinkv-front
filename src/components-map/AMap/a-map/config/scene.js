@@ -1,6 +1,6 @@
 export const SCENEINDEXMAP = {
     '8iyxp8u3gtu': 'airsupply-pipe', //供气-管网
-    tbc8uqyrkze: 'airsupply', //供气-管网
+    // tbc8uqyrkze: 'airsupply', //供气-管网
     '9n1zur7e4l': 'airsupply-ucan', //供气-泛能
     nn16rowdl5r: 'airsupply-station', //供气-场站
     p2wovclspks: 'airsupply-lng', //供气-场站

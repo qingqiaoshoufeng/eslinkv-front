@@ -5,7 +5,7 @@
 		:speed="500"
 		:transition="true"
 		class="right-panel"
-		enter="animate__animated  animate__animatedfadeInRight"
+		enter="animate__animated animate__fadeInRight"
 	>
 		<component :is="rightPaneComponentName" :data="list" />
 	</dashboard-panel>
