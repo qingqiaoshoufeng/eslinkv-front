@@ -3,8 +3,8 @@
 		<template v-if="inPreview">
 			<MapContainer />
 			<!-- 遮罩层 -->
-			<div class="right-bg"></div>
-			<div class="left-bg"></div>
+			<!-- <div class="right-bg"></div>
+			<div class="left-bg"></div> -->
 		</template>
 		<template v-else>
 			<div>
@@ -52,7 +52,6 @@ export default {
 	methods: {
 		handleSceneChange(e) {
 			let sceneIndexMap = SCENEINDEXMAP;
-
 			let { index } = e.detail;
 			console.log(index);
 			let pageName = sceneIndexMap[index];

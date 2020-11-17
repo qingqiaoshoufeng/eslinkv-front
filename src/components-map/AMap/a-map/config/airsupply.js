@@ -95,7 +95,7 @@ export const HOMEOVERLAYCONFIGMAP = {
     },
 }
 // 首页--场站
-export const HOMELEGEND_STATION = {
+export const AIRSUPPLYLEGEND_STATION = {
     HighPressureLine: true,
     HighPressureLine_Process: true,
     MiddlePressureLine: true,
@@ -114,7 +114,7 @@ export const HOMELEGEND_STATION = {
     DistributedEnergyResource: false,
 }
 // 首页--网管
-export const HOMELEGEND_PIPE = {
+export const AIRSUPPLYLEGEND_PIPE = {
     HighPressureLine: true,
     HighPressureLine_Process: true,
     MiddlePressureLine: true,
@@ -134,7 +134,7 @@ export const HOMELEGEND_PIPE = {
 }
 
 // 首页--泛能
-export const HOMELEGEND_UCAN = {
+export const AIRSUPPLYLEGEND_UCAN = {
     LiquefiedGasStation: true,
     NaturalGasStation: true,
     DistributedEnergyResource: true,

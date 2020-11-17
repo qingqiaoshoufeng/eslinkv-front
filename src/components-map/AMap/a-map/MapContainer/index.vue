@@ -29,6 +29,7 @@
 			:data="legendMap"
 			:multiple="legendMultiple"
 			class="map-legend"
+            :style="mapLegendStyle"
 		/>
 		<!-- 地图类型 -->
 		<MapTypeLegend />
@@ -40,20 +41,18 @@ import { AMap } from '../lib';
 import MapLegend from './MapLegend/index';
 import MapTypeLegend from './MapTypeLegend/index';
 import RightPanelList from './RightPaneList/';
-// import { HomeMap } from './MapPages/';
+//地图覆盖物
 import {
 	AirSupplyMap,
 	serviceCustomerMap,
 	serviceMarketMap,
 	serviceHangranCode,
 } from './MapPages/';
-// import { AirSupplyMap } from './MapPages/';
+
 import {
-	HOMELEGEND_STATION,
-	HOMELEGEND_PIPE,
-	HOMELEGEND_UCAN,
-	PROJECTLEGEND,
-	SERVICELEGEND,
+	AIRSUPPLYLEGEND_STATION,
+	AIRSUPPLYLEGEND_PIPE,
+	AIRSUPPLYLEGEND_UCAN,
 	SERVICELEGEND_MARKET,
 	SERVICELEGEND_CUSTOMER,
 	SERVICELEGENDCUSTOMERMAP,
@@ -71,7 +70,6 @@ export default {
 		AirSupplyMap,
 		serviceCustomerMap,
 		serviceMarketMap,
-		// ProjectMap,
 		MapLegend,
 		MapTypeLegend,
 		RightPanelList,
@@ -89,6 +87,8 @@ export default {
 				pitch: 10,
 				mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
 			},
+			mapCenter: null,
+			mapLegendStyle: null,
 			mapReady: false,
 			mapComponentName: 'AirSupplyMap',
 			currentScene: 'airsupply',
@@ -103,7 +103,7 @@ export default {
 			let { legendConfig, _overlayConfigMap } = this;
 			let pageName = val;
 			console.log(val);
-			//多个场景共用一个地图
+			//供气页面多个场景共用一个地图
 			if (val.indexOf('-') > -1) {
 				pageName = pageName.split('-')[0];
 			}
@@ -122,9 +122,7 @@ export default {
 	created() {
 		this._overlayConfigMap = {
 			airsupply: HOMEOVERLAYCONFIGMAP,
-			service: HOMEOVERLAYCONFIGMAP,
 			service_customer: SERVICELEGENDCUSTOMERMAP,
-			project: HOMEOVERLAYCONFIGMAP,
 			service_market: SERVICELEGENDMARKETMAP,
 			service_hangranCode: SERVICELEGENDHANGRANCODEMAP,
 		};
@@ -132,17 +130,17 @@ export default {
 			'airsupply-station': {
 				mapComponentName: 'AirSupplyMap',
 				rightPanelComponentName: 'AirSupplyMap',
-				legendConfig: HOMELEGEND_STATION,
+				legendConfig: AIRSUPPLYLEGEND_STATION,
 				legendMultiple: true,
 			},
 			'hoairsupplyme-pipe': {
 				mapComponentName: 'AirSupplyMap',
-				legendConfig: HOMELEGEND_PIPE,
+				legendConfig: AIRSUPPLYLEGEND_PIPE,
 				legendMultiple: true,
 			},
 			'airsupply-ucan': {
 				mapComponentName: 'AirSupplyMap',
-				legendConfig: HOMELEGEND_UCAN,
+				legendConfig: AIRSUPPLYLEGEND_UCAN,
 				legendMultiple: true,
 			},
 			service_customer: {
@@ -155,17 +153,16 @@ export default {
 				legendConfig: SERVICELEGEND_MARKET,
 				legendMultiple: true,
 			},
-			project: {
-				mapComponentName: 'projectMap',
-				legendConfig: PROJECTLEGEND,
-				legendMultiple: true,
-			},
 			service_hangranCode: {
 				mapComponentName: 'serviceHangranCode',
 				legendConfig: SERVICELEGEND_HANGRANCODE,
 				legendMultiple: false,
+                mapCenter: [120.81259, 30.273295],
+                mapLegendStyle:{left:'18%'}
 			},
 		};
+	},
+	mounted() {
 		bus.$on('currentSceneChange', val => {
 			this.currentScene = val;
 			this.initPage(val);
@@ -187,13 +184,15 @@ export default {
 		initPage(val) {
 			let config = this._pageConfig[val];
 			if (!config) return false;
+			this.mapCenter = null;
 			Object.keys(config).forEach(targetProp => {
 				this[targetProp] = config[targetProp];
 			});
 			if (this.map) {
-				let { zoom, center } = this.mapConfig;
-				this.map.setZoom(zoom);
-				this.map.panTo(center);
+				let { mapCenter, mapConfig } = this;
+				let { zoom, center } = mapConfig;
+                this.map.setZoom(zoom);
+				this.map.panTo(mapCenter ? mapCenter : center,0);
 			}
 		},
 		handleListClick(item) {
@@ -216,8 +215,7 @@ export default {
 .map-legend {
 	position: absolute;
 	bottom: 50px;
-	right: 50%;
-	transform: translateX(50%);
-	max-width: 1414px;
+	left: 50%;
+	transform: translateX(-50%);
 }
 </style>
