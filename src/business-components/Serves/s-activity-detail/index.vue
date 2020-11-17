@@ -183,7 +183,6 @@ const value = {
   },
 };
 export default {
-    name:'suyan',
   components: {
     Swiper,
     SwiperSlide
@@ -474,23 +473,22 @@ export default {
         display: block;
         z-index: 2;
         position: absolute;
-        left: 0;
+        left: -2px;
         top: 0;
-        width: 240px;
+        width: 160px;
         height: 160px;
-        // todo
-        background: linear-gradient(90deg, #00ffcf 0%, rgba(0, 255, 207, 0) 100%);
+        background: linear-gradient(90deg, rgba(2, 2, 61, 1) 0%, rgba(2, 2, 61, 0) 100%);
       }
       &:after {
         content: '';
         display: block;
         z-index: 2;
         position: absolute;
-        right: 0;
+        right: -2px;
         top: 0;
-        width: 240px;
+        width: 160px;
         height: 160px;
-        background: linear-gradient(270deg, #FFFFFF 0%, rgba(255, 255, 255, 0) 100%);
+        background: linear-gradient(270deg, rgba(2, 2, 61, 1) 0%, rgba(2, 2, 61, 0) 100%);
       }
       .swiper-slide {
         width: 240px;
