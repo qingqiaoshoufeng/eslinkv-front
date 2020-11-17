@@ -190,7 +190,7 @@ export default {
 			serviceICcustomer: {
 				mapComponentName: 'serviceICcustomer',
 				legendConfig: SERVICELEGEND_ICCUSTOMER,
-				legendMultiple: false,
+				legendMultiple: true,
 			},
 		};
 	},

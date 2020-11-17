@@ -2,8 +2,8 @@
 export const SERVICELEGENDICCUSTOMERMAP = {
     ICcustomer: {
         label: '工商户',
-        legendIcon: 'icontuligongshanghu',
-        icon: 'icongongshanghu',
+        legendIcon: 'icontulijituandating',
+        icon: 'iconjituandating',
         component: 'ICcustomer',
     }
 
