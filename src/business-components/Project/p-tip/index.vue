@@ -61,7 +61,6 @@ export default {
 	computed: {
 		computeData() {
 			if (!this.data || !this.config.config) return;
-			console.log(this.config.config);
 			this.data.isIcon = this.config.config.icon;
 			this.data.desc = {};
 			this.data.desc.context = this.config.config.desc;
@@ -77,7 +76,6 @@ export default {
 				height: '40%',
 				lineHeight: '40%',
 			};
-			console.log(this.data);
 			return this.data;
 		},
 	},

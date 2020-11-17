@@ -79,31 +79,39 @@
 				return Math.max(...amoutList);
 			},
 			computedList() {
-				return this.list.map((item, index) => {
-					let startColor = !index ? '#FF7217' : '#00DDFF';
-					let endColor = !index
-						? 'rgba(255, 114, 23, 0)'
-						: 'rgba(0, 221, 255, 0)';
-					let NOBg
-					if (index === 0) {
-						NOBg = '#FF7217'
-					} else if (index === 1 || index === 2) {
-						NOBg = '#0057A9'
-					} else {
-						NOBg = 'rgba(255, 255, 255, 0.2)'
-					}
+				if (this.list.length) {
+					return this.list.map((item, index) => {
+						let startColor = !index ? '#FF7217' : '#00DDFF';
+						let endColor = !index
+							? 'rgba(255, 114, 23, 0)'
+							: 'rgba(0, 221, 255, 0)';
+						let NOBg
+						if (index === 0) {
+							NOBg = '#FF7217'
+						} else if (index === 1 || index === 2) {
+							NOBg = '#0057A9'
+						} else {
+							NOBg = 'rgba(255, 255, 255, 0.2)'
+						}
 
-					item.styles = {NOBg, startColor, endColor};
-					return item;
-				});
+						item.styles = {NOBg, startColor, endColor};
+						return item;
+					});
+				} else {
+					return []
+				}
 			},
 		},
 		methods: {
 			initList(_list = []) {
-				return _list.map((item, index) => {
-					item.NO = `0${index + 1}`;
-					return item;
-				});
+				if (_list.length) {
+					return _list.map((item, index) => {
+						item.NO = `0${index + 1}`;
+						return item;
+					});
+				} else {
+					return []
+				}
 			},
 		},
 		watch: {
@@ -118,7 +126,9 @@
 			deep: true,
 		},
 		mounted() {
-			this.list = this.initList(this.data.list)
+			if (this.data) {
+				this.list = this.initList(this.data.list)
+			}
 		}
 	};
 </script>
