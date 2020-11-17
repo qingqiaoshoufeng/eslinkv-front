@@ -31,3 +31,10 @@ document.addEventListener('SceneIndex', function (e) {
 |方法名|参数|作用|
 | --- | --- | --- |
 |widgetUnactived|无|小工具取消选择，面板关闭|
+
+
+## 其他说明
+
+|url参数|作用|备注|
+| --- | --- | --- |
+|needMainScene|主场景是否渲染||

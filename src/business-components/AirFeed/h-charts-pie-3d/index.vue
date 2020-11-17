@@ -1,5 +1,5 @@
 <template>
-	<div class="left-bottom-right">
+	<div class="left-bottom-right widget-part" :style="styles">
 		<div class="left-bottom-right-top">
 			<div class="left-bottom-right-top-content">
 				<div class="left-bottom-right-top-echarts">
@@ -32,10 +32,6 @@
 	</div>
 </template>
 <script>
-import echarts from 'echarts';
-import moment from 'moment';
-import myechart from 'echarts';
-import Vue from 'vue';
 import highcharts from 'highcharts';
 import highcharts3d from 'highcharts/highcharts-3d';
 import lottie from 'lottie-web';
@@ -43,16 +39,13 @@ import pieBgBtnJson from '@/animationJson/yuan1.json';
 import pieTopBg from '@/animationJson/yuan2.json';
 highcharts3d(highcharts);
 import mixins from '../../mixins';
-const config = {};
+const config = {animation: true};
 const value = {
 	api: {
 		data: JSON.stringify([
 			{ typeName: '工业生产', percent: 57.0 },
 			{ typeName: '福利采暖', percent: 3.0 },
 			{ typeName: '商业大灶', percent: 9.0 },
-			{ typeName: '工业辐射', percent: 0.0 },
-			{ typeName: '集中供热', percent: 0.0 },
-			{ typeName: '采暖锅炉', percent: 18.0 },
 			{ typeName: '商业采暖', percent: 2.0 },
 			{ typeName: '福利', percent: 11.0 },
 		]),
