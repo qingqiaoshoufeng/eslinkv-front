@@ -5,9 +5,9 @@
 			<div class="h-project-1-step-8__vertical-line"></div>
 			<div class="h-project-1-step-8__horizontal-line">
 				<div  class="h-project-1-step-8__horizontal-line__desc">
-					<div class="h-project-1-step-8__horizontal-line__desc__title">维修处置内容：</div>
+					<div class="h-project-1-step-8__horizontal-line__desc__title">{{step8.title}}：</div>
 					<p class="h-project-1-step-8__horizontal-line__desc__words">
-						部分管道老旧破损严重导致燃气泄漏，关闭上游阀门后更换泄漏段管道，已恢复供气。
+						{{step8.content}}
 					</p>
 				</div>
 			</div>

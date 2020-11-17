@@ -80,12 +80,20 @@
 				value: {
 					step1: {
 						time: new Date('2020-10-30 22:20') * 1,
+						des: '燃气泄漏',
+						name: '王磊',
+						title: '报警人',
+						address: '江干区三里亭东苑',
 					},
 					step2: {
 						time: new Date('2020-10-30 22:21') * 1,
+						name: '秦芳芳',
+						title: '客服部',
 					},
 					step3: {
 						time: new Date('2020-10-30 22:31') * 1,
+						name: '林自原',
+						title: '维修部',
 					},
 					step4: {
 						time: new Date('2020-10-30 22:48') * 1,
@@ -101,6 +109,8 @@
 					},
 					step8: {
 						time: new Date('2020-10-31 12:57') * 1,
+						title: '维修处置内容',
+						content: '部分管道老旧破损严重导致燃气泄漏，关闭上游阀门后更换泄漏段管道，已恢复供气。'
 					},
 				},
 				videoInfo1: {
@@ -151,7 +161,7 @@
 		data() {
 			return {
 				icon: new Int8Array(80),
-				ratioEnd: 93,
+				ratioEnd: 89,
 				ratioCenter: 50,
 				ratioMin: 6,
 			};

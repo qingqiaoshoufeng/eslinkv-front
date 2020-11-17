@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		<!-- 出车抢修部分 -->
-		<div class="carout-Part" v-else>
+		<div class="carout-Part" v-if="[5].includes(step)">
             <video src="/static/images/airfeed/carout03.webm" controls="controls" autoplay="autoplay" muted="muted" loop>
             </video>
         </div>

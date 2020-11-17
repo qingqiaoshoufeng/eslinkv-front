@@ -9,8 +9,8 @@ export default {
 				this.init();
 			} else {
 				if (this._instance) {
-					this._instance.removeFromMap()
-                    this._instance = null;
+					this._instance.removeFromMap();
+					this._instance = null;
 				}
 			}
 		},
@@ -18,8 +18,8 @@ export default {
 	methods: {
 		async init() {
 			if (!this._heatMapData) {
-                this._heatMapData = await this.$sysApi.map.serve.getHeatMapList();
-                this._heatMapData = this._heatMapData.slice(0,200)
+				this._heatMapData = await this.$sysApi.map.serve.getHeatMapList();
+				this._heatMapData = this._heatMapData.slice(0, 200);
 			}
 			this._instance = new AMap.HeatMap(this.$amap, {
 				radius: 80, //给定半径
@@ -28,12 +28,18 @@ export default {
 			this._instance.setDataSet({
 				data: this._heatMapData,
 				max: 4000,
-            });
-            window.aaa = this._instance
+			});
+			window.aaa = this._instance;
 		},
 	},
 	render() {
 		return null;
+	},
+	beforeDestroy() {
+		if (_instance) {
+			this._instance.removeFromMap();
+			this._instance = null;
+		}
 	},
 };
 </script>
