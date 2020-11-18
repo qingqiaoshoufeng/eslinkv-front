@@ -52,11 +52,10 @@ export default {
 			let sceneIndexMap = SCENEINDEXMAP;
 			let { index } = e.detail;
 			console.log(index);
-			let pageName = sceneIndexMap[index];
-			if (pageName) {
-				console.log('aaaaa', pageName);
+			let pageName = sceneIndexMap[index] || '';
+			// if (pageName) {
 				bus.$emit('currentSceneChange', pageName);
-			}
+			// }
 		},
 	},
 	mounted() {

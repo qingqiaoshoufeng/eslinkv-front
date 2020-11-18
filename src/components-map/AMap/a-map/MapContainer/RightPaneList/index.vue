@@ -7,15 +7,15 @@
 		class="right-panel"
 		enter="animate__animated  animate__animatedfadeInRight"
 	>
-		<!-- <PanelContainer
+		<PanelContainer
 			:activeItem="activeItem"
 			@change="handleClick"
 			:data="list"
 		>
-			<template slot-scope="{ item }"> -->
-		<component :is="rightPaneComponentName" :data="list" />
-		<!-- </template>
-		</PanelContainer> -->
+			<template slot-scope="{ item }">
+				<component :is="rightPaneComponentName" :data="list" />
+			</template>
+		</PanelContainer>
 	</dashboard-panel>
 </template>
 

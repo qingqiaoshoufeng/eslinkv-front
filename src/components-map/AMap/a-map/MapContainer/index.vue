@@ -10,7 +10,7 @@
 			v-bind="mapConfig"
 		>
 			<!-- 不同场景渲染不同的组件 -->
-			<template v-if="mapReady">
+			<template v-if="mapReady && showMap">
 				<component
 					:activeItem="activeItem"
 					@closePop="handleClosePop"
@@ -106,6 +106,7 @@ export default {
 			legendMap: {},
 			legendMultiple: true,
 			dataStatisticsList: [],
+			showMap: false,
 		};
 	},
 	watch: {
@@ -220,6 +221,12 @@ export default {
 	},
 	mounted() {
 		bus.$on('currentSceneChange', val => {
+			console.log('aaaaaa', val);
+			if (!val) {
+				return (this.showMap = false);
+			} else {
+				this.showMap = true;
+			}
 			this.currentScene = val;
 			this.initPage(val);
 			this.getDataStatisticsList();
@@ -240,7 +247,9 @@ export default {
 		},
 		initPage(val) {
 			let config = this._pageConfig[val];
-			if (!config) return false;
+			if (!config) {
+				return false;
+			}
 			this.mapCenter = null;
 			this.mapLegendStyle = this.mapLegendStyleNormal;
 			Object.keys(config).forEach(targetProp => {

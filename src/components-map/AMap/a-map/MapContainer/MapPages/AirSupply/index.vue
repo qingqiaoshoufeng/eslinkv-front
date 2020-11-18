@@ -85,20 +85,45 @@ export default {
 		RegionBoundary,
 		RightPanel,
 	},
+	props: {
+		legendMap: {
+			type: Object,
+			default() {
+				return {};
+			},
+		},
+	},
+	created() {
+		this.$amap = this.$parent.$amap;
+	},
 	data() {
 		return {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_HOME),
+			activeOverlay: {},
+			showOverlayDetail: false,
 		};
 	},
 	methods: {
-		init() {
-			if (this.isMapUIComplete) {
-				this.drawPathNavigators();
-				return false;
+		handleListClick(item) {
+			console.log(item);
+		},
+		handleOverlayClick(overlay, overlayType, isCenter = true) {
+			let { lng, lat } = overlay;
+			overlay.overlayType = overlayType;
+			this.activeOverlay = overlay;
+			this.showOverlayDetail = true;
+			this.$amap.setZoom(14);
+			if (isCenter) {
+				this.$nextTick(() => {
+					this.$amap.panTo([lng, lat], 100);
+				});
 			}
 		},
-		handleListClick(item) {
-			this.activeItem = item;
+		closeOverlayDetail(done) {
+			this.showOverlayDetail = false;
+			this.activeOverlay = {};
+			this.$amap.setZoom(11);
+			done();
 		},
 	},
 };
