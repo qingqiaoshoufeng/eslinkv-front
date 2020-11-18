@@ -32,10 +32,10 @@ export default {
 			overlay.overlayType = overlayType
 			this.activeOverlay = overlay
 			this.showOverlayDetail = true
-			this.$amap.setZoom(14)
+			this.$amap.setZoom(14,100)
 			if (isCenter) {
 				this.$nextTick(() => {
-					this.$amap.panTo([lng, lat])
+					this.$amap.panTo([lng, lat], 100);
 				})
 			}
 		},
@@ -43,7 +43,7 @@ export default {
 			this.showOverlayDetail = false
 			this.activeOverlay = {}
 			this.$emit('close')
-			this.$amap.setZoom(11)
+			this.$amap.setZoom(11,100)
 			done()
 		},
 	},

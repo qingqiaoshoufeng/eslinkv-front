@@ -261,7 +261,7 @@ export default {
 			if (this.map) {
 				let { mapCenter, mapConfig } = this;
 				let { zoom, center } = mapConfig;
-				this.map.setZoom(zoom);
+				this.map.setZoom(zoom,100);
 				this.map.panTo(mapCenter ? mapCenter : center, 0);
 			}
 		},

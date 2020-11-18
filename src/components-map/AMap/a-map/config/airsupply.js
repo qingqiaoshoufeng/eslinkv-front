@@ -27,12 +27,14 @@ export const HOMEOVERLAYCONFIGMAP = {
 		legendIcon: 'icontulirenyuan',
 		icon: 'iconrenyuan',
 		component: 'InspectionPerson',
+		showOverlayName: false,
 	},
 	InspectionCar: {
 		label: '巡检车辆',
 		legendIcon: 'icontulicheliang',
 		icon: 'iconcheliang',
 		component: 'InspectionCar',
+		showOverlayName: false,
 	},
 	GasStation: {
 		label: '门站',

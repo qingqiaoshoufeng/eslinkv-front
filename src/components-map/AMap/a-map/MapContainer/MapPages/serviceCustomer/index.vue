@@ -75,6 +75,9 @@ export default {
 			dataStatisticsList: [],
 		};
 	},
+	created() {
+        this.$amap = this.$parent.$amap;
+	},
 	methods: {
 		async getDataStatisticsList() {
 			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
@@ -122,7 +125,7 @@ export default {
 							},
 							{
 								img: '/static/images/project/02.jpg',
-							}
+							},
 						],
 						video: '/static/videos/test.mov',
 					});

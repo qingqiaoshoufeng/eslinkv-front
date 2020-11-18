@@ -12,9 +12,9 @@
 		>
 			<slot :data="item">
 				<!-- 默认显示图标的名字 -->
-				<!-- <div class="sample-name" v-if="showOverlayName">
-					{{ item }}
-				</div> -->
+				<div class="sample-name" v-if="showOverlayName">
+					{{ item.name }}
+				</div>
 			</slot>
 		</Overlay>
 	</div>
