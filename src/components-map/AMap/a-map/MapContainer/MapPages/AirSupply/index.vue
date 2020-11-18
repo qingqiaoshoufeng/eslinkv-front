@@ -94,7 +94,8 @@ export default {
 		UndergroundRepairStation,
 		MiddlePressureLine,
 		RegionBoundary,
-		RightPanel,
+        RightPanel,
+        RoutePlan
 	},
 	props: {
 		legendMap: {
