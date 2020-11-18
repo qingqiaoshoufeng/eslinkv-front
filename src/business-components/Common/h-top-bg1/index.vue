@@ -1,6 +1,7 @@
 <template>
 	<div class="widget-part pos-r" :style="`${styles};top:0;${inPreview?'pointer-events: none;':''}`">
-		<div class="h-left-bg1">
+		<div class="h-top-bg1">
+			{{readonly}}
 		</div>
 	</div>
 </template>
@@ -21,31 +22,11 @@
 	}
 </script>
 <style lang="scss" scoped>
-	.h-left-bg1 {
+	.h-top-bg1 {
 		pointer-events: none;
-		background-image: -webkit-linear-gradient(
-				0deg,
-				rgba(0, 5, 35, 0),
-				rgba(0, 5, 35, 0.9)
-		);
-		width: 1128px;
-		height: 1050px;
-		transform: rotateY(180deg);
-
-		&:after {
-			content: '';
-			display: block;
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			background-image: -webkit-linear-gradient(
-					0deg,
-					rgba(0, 5, 35, 0),
-					rgba(0, 5, 35, 0.9)
-			);
-		}
+		background: linear-gradient(180deg, #040023 0%, rgba(4, 0, 35, 0.0001) 100%);
+		width: 3500px;
+		height: 200px;
 	}
 
 </style>

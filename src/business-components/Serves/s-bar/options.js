@@ -21,6 +21,12 @@ export default {
     yAxis: {
         type: 'value',
         show: true,
+		splitLine: {
+			lineStyle: {
+				type: "solid",
+				color: "rgba(199, 209, 219, 0.2)"
+			}
+		},
         axisTick: {
             show: false,
             textStyle: {
