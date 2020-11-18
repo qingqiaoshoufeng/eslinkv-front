@@ -3,6 +3,12 @@ export default {
 		fontSize: 16,
 		color: '#FFF'
 	},
+	grid: {
+		top: 40,
+		left: 40,
+		bottom: 30,
+		right: 0
+	},
 	tooltip: {
 		trigger: "axis",
 		axisPointer: {
@@ -36,7 +42,10 @@ export default {
 			show: false
 		},
 		axisLabel: {
-			color: "#fff"
+			color: "#fff",
+			fontSize: 16,
+			lineHeight: 16,
+			interval: 0
 		},
 		offset: 5
 	}],
@@ -47,11 +56,13 @@ export default {
 			show: true,
 			lineStyle: {
 				type: "solid",
-				color: "rgba(199, 209, 219, 0.4)"
+				color: "rgba(199, 209, 219, 0.2)",
 			}
 		},
 		axisLabel: {
-			color: "#fff"
+			color: "#fff",
+			fontSize: 16,
+			lineHeight: 16
 		},
 		axisLine: {
 			show: false

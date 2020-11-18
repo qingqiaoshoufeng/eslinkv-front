@@ -27,12 +27,14 @@ export const HOMEOVERLAYCONFIGMAP = {
 		legendIcon: 'icontulirenyuan',
 		icon: 'iconrenyuan',
 		component: 'InspectionPerson',
+		showOverlayName: false,
 	},
 	InspectionCar: {
 		label: '巡检车辆',
 		legendIcon: 'icontulicheliang',
 		icon: 'iconcheliang',
 		component: 'InspectionCar',
+		showOverlayName: false,
 	},
 	GasStation: {
 		label: '门站',
@@ -95,18 +97,18 @@ export const HOMEOVERLAYCONFIGMAP = {
 		component: 'DistributedEnergyResource',
 	},
 }
-// 首页--场站
+// 首页--高压
 export const AIRSUPPLYLEGEND_STATION = {
 	HighPressureLine: true,
 	HighPressureLine_Process: true,
-	// MiddlePressureLine: true,
-	// LowPressureLine: true,
-	// InspectionPerson: true,
-	// InspectionCar: true,
-	// GasStation: true,
-	// PressureRegulatingStation: true,
-	// EmergencyAirSourceStation: true,
-	// ComprehensiveServiceStation: false,
+	PressureRegulatingStation: true,
+	EmergencyAirSourceStation: true,
+	GasStation: true,
+	MiddlePressureLine: false,
+	LowPressureLine: false,
+	InspectionPerson: false,
+	InspectionCar: false,
+	ComprehensiveServiceStation: false,
 	PipeManageMentStation: false,
 	UndergroundRepairStation: false,
 	LNGStation: false,
@@ -114,19 +116,19 @@ export const AIRSUPPLYLEGEND_STATION = {
 	NaturalGasStation: false,
 	DistributedEnergyResource: false,
 }
-// 首页--网管
+// 首页--中低压
 export const AIRSUPPLYLEGEND_PIPE = {
-	HighPressureLine: true,
-	HighPressureLine_Process: true,
 	MiddlePressureLine: true,
 	LowPressureLine: true,
-	InspectionPerson: true,
-	InspectionCar: true,
-	ComprehensiveServiceStation: true,
-	PipeManageMentStation: true,
-	UndergroundRepairStation: true,
-	GasStation: false,
 	PressureRegulatingStation: false,
+	InspectionPerson: false,
+	InspectionCar: false,
+	HighPressureLine_Process: false,
+	HighPressureLine: false,
+	ComprehensiveServiceStation: false,
+	PipeManageMentStation: false,
+	UndergroundRepairStation: false,
+	GasStation: false,
 	EmergencyAirSourceStation: false,
 	LNGStation: false,
 	LiquefiedGasStation: false,
@@ -134,7 +136,7 @@ export const AIRSUPPLYLEGEND_PIPE = {
 	DistributedEnergyResource: false,
 }
 
-// 首页--泛能
+// 首页--其他
 export const AIRSUPPLYLEGEND_UCAN = {
 	LiquefiedGasStation: true,
 	NaturalGasStation: true,
@@ -156,15 +158,15 @@ export const AIRSUPPLYLEGEND_UCAN = {
 // 首页--LNG
 export const AIRSUPPLYLEGEND_LNG = {
 	LNGStation: true,
-	HighPressureLine: true,
-	HighPressureLine_Process: true,
-	MiddlePressureLine: true,
-	LowPressureLine: true,
-	InspectionPerson: true,
-	InspectionCar: true,
-	GasStation: true,
-	PressureRegulatingStation: true,
-	EmergencyAirSourceStation: true,
+	HighPressureLine: false,
+	HighPressureLine_Process: false,
+	MiddlePressureLine: false,
+	LowPressureLine: false,
+	InspectionPerson: false,
+	InspectionCar: false,
+	GasStation: false,
+	PressureRegulatingStation: false,
+	EmergencyAirSourceStation: false,
 	ComprehensiveServiceStation: false,
 	PipeManageMentStation: false,
 	UndergroundRepairStation: false,
@@ -211,7 +213,7 @@ export const OVERLAYINFOMAP = {
 //覆盖物详情
 export const OVERLAYINFOMAP_HOME = {
 	InspectionPerson: {
-		name: {},
+		employeename: {},
 	},
 	InspectionCar: {
 		name: {},

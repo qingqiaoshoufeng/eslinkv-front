@@ -8,23 +8,31 @@
 		ref="overlayDetailMarker"
 	>
 		<PopContainer class="no-hover-effect" @input="closePop">
-			<div
-				class="info-item"
-				v-for="(info, prop) in overlayTypeInfo"
-				:style="{
-					...info.style,
-					color:
-						overlay.status == 1
-							? info.errColor
-							: info.style && info.style.color,
-				}"
-				:key="prop"
-			>
-				{{ info.formatter ? info.formatter(overlay) : overlay[prop] }}
-			</div>
-			<div class="btn" @click="handleViewDetail(overlay)">
-				查看详情
-			</div>
+			<slot>
+				<div
+					class="info-item"
+					v-for="(info, prop) in overlayTypeInfo"
+					:style="{
+						...info.style,
+						color:
+							overlay.status == 1
+								? info.errColor
+								: info.style && info.style.color,
+					}"
+					:key="prop"
+				>
+					{{
+						info.formatter ? info.formatter(overlay) : overlay[prop]
+					}}
+				</div>
+				<div
+					class="btn"
+					v-if="overlayTypeInfo.showMore"
+					@click="handleViewDetail(overlay)"
+				>
+					查看详情
+				</div>
+			</slot>
 		</PopContainer>
 	</ElAmapMarker>
 </template>
@@ -47,13 +55,13 @@ export default {
 		value: {
 			type: Boolean,
 			default: false,
-        },
-        overlayInfoConfig:{
-            type: Object,
+		},
+		overlayInfoConfig: {
+			type: Object,
 			default() {
 				return {};
 			},
-        },
+		},
 		beforeClose: Function,
 	},
 	data() {
@@ -68,7 +76,8 @@ export default {
 			if (val) {
 				if (JSON.stringify(val) !== '{}') {
 					let { overlayType } = val;
-					this.overlayTypeInfo = this.overlayInfoConfig[overlayType] || {};
+					this.overlayTypeInfo =
+						this.overlayInfoConfig[overlayType] || {};
 					this.overlay = {
 						...val,
 					};
@@ -93,10 +102,10 @@ export default {
 		},
 		hide() {
 			this.$emit('input', false);
-        },
-        handleViewDetail(overlay){
-            this.$emit('view-detail',overlay)
-        }
+		},
+		handleViewDetail(overlay) {
+			this.$emit('view-detail', overlay);
+		},
 	},
 };
 </script>

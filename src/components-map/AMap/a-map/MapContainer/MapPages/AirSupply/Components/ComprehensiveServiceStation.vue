@@ -10,10 +10,12 @@
 			marker =>
 				$emit('overlay-click', marker, 'ComprehensiveServiceStation')
 		"
-	/>
+	>
+		<!-- <div class="sample-name" :slot-scope="{ data }">{{ data.name }}</div> -->
+	</BaseOverlay>
 </template>
 <script>
-import {BaseOverlay} from '../../Components/index';
+import { BaseOverlay } from '../../Components/index';
 export default {
 	name: 'ComprehensiveServiceStation',
 	components: {
@@ -32,11 +34,11 @@ export default {
 			type: String,
 			default: '',
 		},
-    },
+	},
 	data() {
 		let apiFun = this.$sysApi.map.home.getComprehensiveServiceStationList;
 		return {
-				apiFun: apiFun,
+			apiFun: apiFun,
 		};
 	},
 };

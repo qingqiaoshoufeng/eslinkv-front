@@ -83,7 +83,7 @@ export default {
 .right-panel {
 	position: absolute;
 	right: 32px;
-	top: 200px;
+	top: 148px;
 	width: 480px;
 	z-index: 100;
 }

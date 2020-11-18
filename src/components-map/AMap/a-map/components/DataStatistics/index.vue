@@ -35,7 +35,7 @@ export default {
 	width: 280px;
 	position: fixed;
 	left: 2681px;
-	top: 158px;
+	top: 148px;
 	z-index: 9999;
 	.data_statistics_item {
 		display: flex;

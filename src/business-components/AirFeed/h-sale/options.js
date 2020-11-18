@@ -104,7 +104,7 @@ export default function (data) {
 						colorStops: [{
 							offset: 0,
 							color: "rgba(0, 255, 207, 0.5)"
-						},{
+						}, {
 							offset: 1,
 							color: "rgba(0, 255, 207, 0)"
 						}],
@@ -147,12 +147,12 @@ export default function (data) {
 		grid: [{
 			left: 50,
 			right: 50,
-			top: 35,
+			top: '55%',
 			height: '35%'
 		}, {
 			left: 50,
 			right: 50,
-			top: '55%',
+			top: 35,
 			height: '35%'
 		}],
 		yAxis: [{
@@ -202,40 +202,13 @@ export default function (data) {
 					color: "#fff"
 				},
 				offset: 5,
-				inverse: true,
 				gridIndex: 1
 			}],
-		series: [{
-			name: "销售量",
-			type: "line",
-			symbolSize: 16,
-			symbol: 'none',
-			itemStyle: {
-				color: "#fff",
-				borderColor: "#00FFCF",
-			},
-			lineStyle: {
-				color: "#00FFCF"
-			},
-			smooth: true,
-			areaStyle: {
-				color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-					offset: 0,
-					color: "rgba(0, 255, 207, 0.5)"
-				},
-					{
-						offset: 1,
-						color: "rgba(0, 255, 207, 0)"
-					}
-				], false)
-
-			},
-			data: data.map(item => item.lineValue)
-		},
+		series: [
 			{
 				name: "进液量",
 				type: "bar",
-				barWidth: 4,
+				barWidth: 8,
 				itemStyle: {
 					color: "#2C99FF",
 					barBorderRadius: 3.5
@@ -247,27 +220,43 @@ export default function (data) {
 			{
 				name: "出液量",
 				type: "bar",
-				barWidth: 4,
+				barWidth: 8,
 				itemStyle: {
 					color: "#E5615B",
 					barBorderRadius: 3.5
 				},
 				xAxisIndex: 1,
 				yAxisIndex: 1,
+				barGap: '100%',
 				data: data.map(item => item.barValue2)
 			},
 			{
 				name: "气化量",
-				barWidth: 4,
-				type: "bar",
+				type: "line",
+				symbolSize: 16,
+				symbol: 'none',
 				itemStyle: {
-					color: "#00FFCF",
-					barBorderRadius: 3.5
+					color: "#fff",
+					borderColor: "#00FFCF",
 				},
-				xAxisIndex: 1,
-				yAxisIndex: 1,
-				data: data.map(item => item.barValue3)
-			}
+				lineStyle: {
+					color: "#00FFCF"
+				},
+				smooth: true,
+				areaStyle: {
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+						offset: 0,
+						color: "rgba(0, 255, 207, 0.5)"
+					},
+						{
+							offset: 1,
+							color: "rgba(0, 255, 207, 0)"
+						}
+					], false)
+
+				},
+				data: data.map(item => item.lineValue)
+			},
 		]
 	}
 }

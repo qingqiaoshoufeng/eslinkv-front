@@ -8,20 +8,20 @@ export default {
 		SvgIcon,
 		AMapMarker,
 	},
-	render: (h, { props, data, listeners }) => {
+	render: (h, { props, data, listeners, scopedSlots, $slots }) => {
 		let { active, marker, visible = true } = props;
 		let { lat, lng, name, status, icon } = marker;
 		icon = icon ? icon.replace('tuli', '') : icon;
+		if (!lat || !lng) {
+			return null;
+		}
 		return (
 			<AMapMarker visible={visible} position={[lng, lat]} vid={name}>
 				<div class={['sample', { active: active }]} on={listeners}>
 					{icon && (
-						<SvgIcon
-							class="station-icon"
-							icon-name={icon}
-						></SvgIcon>
+						<SvgIcon class="sample-icon" icon-name={icon}></SvgIcon>
 					)}
-					<slot></slot>
+					{$slots.default}
 				</div>
 			</AMapMarker>
 		);
@@ -47,8 +47,17 @@ export default {
 		padding: 0;
 	}
 }
-.station-icon {
+.sample-icon {
 	font-size: 44px;
+}
+.sample-name {
+	font-size: 18px;
+	color: #fff;
+	position: absolute;
+	white-space: nowrap;
+	bottom: -20px;
+	left: 50%;
+	transform: translateX(-50%);
 }
 </style>
 

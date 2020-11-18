@@ -4,7 +4,7 @@
 		<!-- 区域 -->
 		<RegionBoundary />
 		<!-- 态势感知 -->
-		<ListOverlay @overlay-click="handleOverlayClick" />
+		<!-- <ListOverlay @overlay-click="handleOverlayClick" /> -->
 
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
@@ -14,6 +14,9 @@
 				:is="config.component"
 				:overlayIcon="config.icon"
 				:overlayType="legend"
+				:showOverlayName="
+					config.showOverlayName ? config.showOverlayName : null
+				"
 				@overlay-click="handleOverlayClick"
 			/>
 		</template>
@@ -61,7 +64,7 @@ import {
 } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
-import pageMixin from '../mixins/pageMixin.js';
+// import pageMixin from '../mixins/pageMixin.js';
 import {
 	INDEXSCENEMAP,
 	OVERLAYINFOMAP_HOME,
@@ -72,7 +75,7 @@ import GoldChart from '@/openApi';
 
 export default {
 	name: 'HomePage',
-	mixins: [pageMixin],
+	// mixins: [pageMixin],
 	components: {
 		OverlayDetail,
 		ComprehensiveServiceStation,
@@ -109,7 +112,7 @@ export default {
 		},
 	},
 	created() {
-		this.$amap = this.$parent.$amap;
+        this.$amap = this.$parent.$amap;
 	},
 	data() {
 		return {
@@ -125,7 +128,7 @@ export default {
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
-			this.$amap.setZoom(14);
+			this.$amap.setZoom(14,100);
 			if (isCenter) {
 				this.$nextTick(() => {
 					this.$amap.panTo([lng, lat], 100);
@@ -140,7 +143,7 @@ export default {
 			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-			this.$amap.setZoom(11);
+			this.$amap.setZoom(11,100);
 			done();
 		},
 		viewOverlayDetail(overlay) {

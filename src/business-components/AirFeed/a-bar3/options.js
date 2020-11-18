@@ -13,6 +13,8 @@ export default {
         axisLabel: {
             textStyle: {
                 color: '#fff',
+				fontSize: 16,
+				lineHeight: 16
             }
         },
     }],
@@ -25,9 +27,14 @@ export default {
                 color: '#fff',
             }
         },
+		splitLine: {
+			show: false,
+		},
         axisLabel: {
             textStyle: {
                 color: '#fff',
+				fontSize: 16,
+				lineHeight: 16
             }
         },
         axisLine: {
@@ -35,6 +42,12 @@ export default {
         }
     }, {
         name: '次',
+		splitLine: {
+			lineStyle: {
+				type: "solid",
+				color: "rgba(199, 209, 219, 0.2)"
+			}
+		},
         nameTextStyle: {
             color: '#fff',
             fontSize: 16,
@@ -43,9 +56,6 @@ export default {
             lineHeight: 10
         },
         type: 'value',
-        splitLine: {
-            show: true
-        },
         show: true,
         axisTick: {
             show: false,
@@ -57,6 +67,8 @@ export default {
             textStyle: {
                 show: true,
                 color: '#fff',
+				fontSize: 16,
+				lineHeight: 16
             }
         },
         interval: 50,

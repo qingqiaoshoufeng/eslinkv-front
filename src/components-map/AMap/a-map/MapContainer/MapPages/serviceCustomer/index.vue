@@ -75,6 +75,9 @@ export default {
 			dataStatisticsList: [],
 		};
 	},
+	created() {
+        this.$amap = this.$parent.$amap;
+	},
 	methods: {
 		async getDataStatisticsList() {
 			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
@@ -121,10 +124,16 @@ export default {
 								img: '/static/images/project/01.png',
 							},
 							{
-								img: '/static/images/project/02.jpg',
+								img: '/static/images/project/02.png',
+							},
+							{
+								img: '/static/images/project/03.jpg',
+							},
+							{
+								img: '/static/images/project/04.jpg',
 							}
 						],
-						video: '/static/videos/test.mov',
+						video: '/static/videos/1.mp4',
 					});
 				});
 			});
