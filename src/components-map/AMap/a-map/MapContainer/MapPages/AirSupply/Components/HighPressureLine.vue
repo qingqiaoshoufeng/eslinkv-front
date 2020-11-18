@@ -1,39 +1,23 @@
 <script>
 import overlayMixin from '../../mixins/overlayMixin.js';
-//高压线数据
-import GaoYaLineJSON from '@/assets/amap/json/gaoya.json';
 export default {
 	name: 'HighPressureLine',
 	mixins: [overlayMixin],
-	props: {
-		strokeWeight: {
-			type: Number,
-			default: 3,
-		},
-		strokeColor: {
-			type: String,
-			default: '#04F499',
-		},
-	},
 	methods: {
 		init() {
 			this.drawLine();
 		},
-		drawLine() {
-			let { strokeWeight, strokeColor } = this;
-			var geoJSON = new window.AMap.GeoJSON({
-				geoJSON: GaoYaLineJSON,
-				getPolyline: function(geojson, lnglats) {
-					return new AMap.Polyline({
-						path: lnglats,
-						zIndex: 200,
-						strokeWeight: strokeWeight,
-						strokeColor: strokeColor,
-					});
-				},
-            });
-            this.$amap.add(geoJSON);
-            this.instanceArr.push(geoJSON);
+		async drawLine() {
+            this.instanceArr = [];
+            let data = await this.$sysApi.map.home.getHighPressureLine();
+			data.forEach(line => {
+				let polyLine = new AMap.Polyline({
+					...line,
+					zIndex: 200,
+				});
+				polyLine.setMap(this.$amap);
+				this.instanceArr.push(polyLine);
+			});
 		},
 	},
 	render() {

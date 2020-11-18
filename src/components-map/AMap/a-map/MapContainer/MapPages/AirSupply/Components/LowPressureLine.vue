@@ -1,8 +1,6 @@
 低压管网
 <script>
 import overlayMixin from '../../mixins/overlayMixin.js';
-//高压线数据
-import GaoYaLineJSON from '@/assets/amap/json/gaoya.json';
 export default {
 	name: 'LowPressureLine',
 	mixins: [overlayMixin],
@@ -21,20 +19,20 @@ export default {
 			this.drawLine();
 		},
 		drawLine() {
-			let { strokeWeight, strokeColor } = this;
-			var geoJSON = new window.AMap.GeoJSON({
-				geoJSON: GaoYaLineJSON,
-				getPolyline: function(geojson, lnglats) {
-					return new AMap.Polyline({
-						path: lnglats,
-						zIndex: 200,
-						strokeWeight: strokeWeight,
-						strokeColor: strokeColor,
-					});
-				},
-			});
-			this.$amap.add(geoJSON);
-			this.instanceArr.push(geoJSON);
+			// let { strokeWeight, strokeColor } = this;
+			// var geoJSON = new window.AMap.GeoJSON({
+			// 	geoJSON: GaoYaLineJSON,
+			// 	getPolyline: function(geojson, lnglats) {
+			// 		return new AMap.Polyline({
+			// 			path: lnglats,
+			// 			zIndex: 200,
+			// 			strokeWeight: strokeWeight,
+			// 			strokeColor: strokeColor,
+			// 		});
+			// 	},
+			// });
+			// this.$amap.add(geoJSON);
+			// this.instanceArr.push(geoJSON);
 		},
 	},
 	render() {
