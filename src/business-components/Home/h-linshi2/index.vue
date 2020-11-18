@@ -1,6 +1,6 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
-		<div class="h-linshi pos-r">
+		<div class="h-linshi2 pos-r">
 			<img ref="img" class="pos-a" :src="config.config&&config.config.img"/>
 		</div>
 	</div>
@@ -42,19 +42,19 @@
 		mounted() {
 			setTimeout(()=>{
 				this.$refs.img.style.transform=`perspective(763px) rotateY(${this.config.config.transform}deg)`
-				this.$refs.img.style.left=`${this.config.config.left}px`
+				this.$refs.img.style.right=`${this.config.config.left}px`
 			},1500)
 		}
 	}
 </script>
 <style lang="scss">
-	.h-linshi {
+	.h-linshi2 {
 		height: 100%;
 
 		img {
 			height: 100%;
-			transform: rotateY(0);
-			left: 0;
+			transform: rotateY(180deg);
+			right: 0;
 			transition: all .5s;
 			top: 40px;
 		}
