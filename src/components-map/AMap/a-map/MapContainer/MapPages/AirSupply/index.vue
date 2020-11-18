@@ -146,8 +146,8 @@ export default {
 		viewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
 			if (overlayType === 'WARN') {
-                this.showRoutePlan = true;
-                //和场景进行交互
+				this.showRoutePlan = true;
+				//和场景进行交互
 				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
 				//更新数据
 				this.$nextTick(() => {
@@ -196,14 +196,14 @@ export default {
 									'/static/images/project/01.png',
 									'/static/images/project/02.jpg',
 								],
-								videoList: ['/static/videos/test.mov',],
+								videoList: ['/static/videos/test.mov'],
 							},
 							videoInfo2: {
 								imgList: [
 									'/static/images/project/01.png',
 									'/static/images/project/02.jpg',
 								],
-								videoList: ['/static/videos/test.mov',],
+								videoList: ['/static/videos/test.mov'],
 							},
 						});
 					});
@@ -213,3 +213,8 @@ export default {
 	},
 };
 </script>
+<style  lang="scss"  scoped>
+.right-panel {
+	margin-top: 48px !important;
+}
+</style>

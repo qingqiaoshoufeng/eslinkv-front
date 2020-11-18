@@ -8,7 +8,14 @@
 		enter="animate__animated animate__fadeInRight"
 	>
 		<Tabs class="tabs-container" v-model="currentTab">
-			<TabPanel key="realTime" name="realTime" label="态势感知" lazy>
+			<TabPanel
+				key="realTimeWithLevel"
+				name="realTimeWithLevel"
+				label="工艺报警"
+			>
+				<realTimeWithLevel @change="handleClick" />
+			</TabPanel>
+			<TabPanel key="realTime" name="realTime" label="事件报警" lazy>
 				<realTime @change="handleClick" />
 			</TabPanel>
 			<TabPanel
@@ -28,13 +35,15 @@ import { DashboardPanel } from '../../../../../components/';
 import { Tabs, TabPanel } from '../../../Components/Tabs/';
 import overlayList from './overlayList';
 import realTime from './realTime';
+import realTimeWithLevel from './realTimeWithLevel';
+
 export default {
 	name: 'RightlistPanel',
 	data() {
 		return {
 			activeIndex: null,
 			ready: false,
-			currentTab: 'realTime',
+			currentTab: 'realTimeWithLevel',
 		};
 	},
 	components: {
@@ -43,6 +52,7 @@ export default {
 		overlayList,
 		realTime,
 		DashboardPanel,
+		realTimeWithLevel,
 	},
 	mounted() {
 		this.ready = true;

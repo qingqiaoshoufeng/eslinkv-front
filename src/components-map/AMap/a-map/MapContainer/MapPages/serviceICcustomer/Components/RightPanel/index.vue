@@ -8,7 +8,7 @@
 		enter="animate__animated animate__fadeInRight"
 	>
 		<tabsTitle />
-		<Tabs class="tabs-container" v-model="currentTab">
+		<Tabs class="tabs-container-ic" v-model="currentTab">
 			<TabPanel key="realTime" name="realTime" label="态势感知" lazy>
 				<realTime @change="handleClick" />
 			</TabPanel>
@@ -71,12 +71,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/deep/ .tabs__header {
-	display: none !important;
+.tabs-container-ic {
+	/deep/ .tabs__header {
+		display: none !important;
+	}
 }
-/deep/ .tabs-container {
+/deep/ .tabs-container-ic {
 	padding-top: 0px !important;
 }
+
 .right-panel {
 	position: absolute;
 	right: 32px;
