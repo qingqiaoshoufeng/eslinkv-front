@@ -25,9 +25,7 @@ export default {
 			this.handleOverlayClick(val, 'WARN')
 		},
 	},
-	created() {
-		this.$amap = this.$parent.$amap
-	},
+
 	methods: {
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat } = overlay

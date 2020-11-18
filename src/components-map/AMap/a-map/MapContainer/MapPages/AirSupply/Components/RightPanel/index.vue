@@ -7,12 +7,9 @@
 		class="right-panel"
 		enter="animate__animated animate__fadeInRight"
 	>
-		<Tabs
-			class="tabs-container"
-			v-model="currentTab"
-		>
+		<Tabs class="tabs-container" v-model="currentTab">
 			<TabPanel key="realTime" name="realTime" label="态势感知" lazy>
-				<realTime :data="data" />
+				<realTime @change="handleClick" />
 			</TabPanel>
 			<TabPanel
 				key="overlayList"
@@ -20,7 +17,7 @@
 				label="点位列表"
 				lazy
 			>
-				<overlayList />
+				<overlayList @change="handleClick" />
 			</TabPanel>
 		</Tabs>
 	</DashboardPanel>
@@ -47,20 +44,6 @@ export default {
 		realTime,
 		DashboardPanel,
 	},
-	props: {
-		data: {
-			type: Array,
-			default() {
-				return [];
-			},
-		},
-		activeItem: {
-			type: Object,
-			default() {
-				return {};
-			},
-		},
-	},
 	mounted() {
 		this.ready = true;
 	},
@@ -79,7 +62,7 @@ export default {
 	methods: {
 		handleClick(item, index) {
 			this.activeIndex = index;
-			this.$emit('change', item);
+			this.$emit('overlay-click', item);
 		},
 	},
 };
