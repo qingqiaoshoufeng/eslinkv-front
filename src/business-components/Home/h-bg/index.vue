@@ -6,7 +6,8 @@
 			<div class="h-bg-control pos-a"></div>
 			<div class="h-bg-left pos-a"></div>
 			<div class="h-bg-right pos-a"></div>
-			<div class="h-bg-red pos-a"></div>
+			<div class="h-bg-red1 pos-a" @click="open54441"></div>
+			<div class="h-bg-red2 pos-a" @click="openVideo"></div>
 			<ul class="h-bg-nav pos-a fn-flex flex-row">
 				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('nn16rowdl5r')">
 					<img src="./img/nav-1.svg"/>
@@ -25,14 +26,6 @@
 					<span>体验</span>
 				</li>
 			</ul>
-			<div class="h-bg-54441-btn pos-a fn-flex pointer" @click="open54441">
-				<span class="font-num">54441</span>
-				<img src="./img/right-1.svg"/>
-			</div>
-			<div class="h-bg-video-btn pos-a fn-flex pointer" @click="openVideo">
-				<span>企宣</span>
-				<img src="./img/right-2.svg"/>
-			</div>
 			<transition name="slide-down">
 				<h-bg-54441 v-if="status54441" :status="status54441" :close="close54441"/>
 			</transition>
@@ -142,13 +135,21 @@
 		}
 	}
 
-	.h-bg-red {
-		background-image: url('./img/red.png');
-		width: 1902px;
+	.h-bg-red1 {
+		background-image: url('./img/red-1.png');
+		width: 257px;
 		height: 64px;
-		background-size: 1902px 64px;
-		left: 50%;
-		margin-left: -951px;
+		background-size: 257px 64px;
+		left: 783px;
+		bottom: 60px;
+	}
+
+	.h-bg-red2 {
+		background-image: url('./img/red-2.png');
+		width: 257px;
+		height: 64px;
+		background-size: 257px 64px;
+		right: 783px;
 		bottom: 60px;
 	}
 
@@ -215,50 +216,5 @@
 		bottom: -148px;
 		left: 50%;
 		margin-left: -1310px;
-	}
-
-	.h-bg-video-btn {
-		width: 116px;
-		height: 48px;
-		left: 944px;
-		top: 188px;
-		background: #0057A9;
-		font-weight: 600;
-		font-size: 24px;
-		align-items: center;
-		color: #00DDFF;
-		border-radius: 4px;
-
-		span {
-			margin-left: 8px;
-			margin-right: auto;
-		}
-
-		img {
-			margin-right: 8px;
-		}
-	}
-
-	.h-bg-54441-btn {
-		width: 116px;
-		height: 48px;
-		border: 1px solid #00DDFF;
-		border-radius: 4px;
-		left: 2440px;
-		top: 188px;
-		background: #0057A9;
-		color: #FFFFFF;
-		font-weight: bold;
-		font-size: 32px;
-		align-items: center;
-
-		span {
-			margin-left: 8px;
-			margin-right: auto;
-		}
-
-		img {
-			margin-right: 8px;
-		}
 	}
 </style>
