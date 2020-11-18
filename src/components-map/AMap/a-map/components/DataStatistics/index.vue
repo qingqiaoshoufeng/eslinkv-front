@@ -40,7 +40,9 @@ export default {
 	.data_statistics_item {
 		display: flex;
 		flex-direction: column;
-		margin-top: 36px;
+		&:not(:first-child) {
+			margin-top: 36px;
+		}
 		.value {
 			height: 48px;
 			font-family: DIN Alternate;

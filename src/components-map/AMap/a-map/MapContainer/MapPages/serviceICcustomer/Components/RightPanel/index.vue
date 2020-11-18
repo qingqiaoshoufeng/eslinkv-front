@@ -88,7 +88,7 @@ export default {
 	z-index: 100;
 }
 .tabs-container {
-	max-height: calc(100vh - 160px);
+	max-height: 846px;
 	overflow-y: auto;
 	&::-webkit-scrollbar {
 		display: none;

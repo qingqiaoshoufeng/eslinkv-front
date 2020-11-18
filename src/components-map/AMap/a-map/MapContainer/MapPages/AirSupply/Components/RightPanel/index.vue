@@ -7,7 +7,7 @@
 		class="right-panel"
 		enter="animate__animated animate__fadeInRight"
 	>
-		<Tabs class="tabs-container" v-model="currentTab">
+		<Tabs class="tabs-container" :value="value" @input="(val)=>$emit('input',val)">
 			<TabPanel
 				key="realTimeWithLevel"
 				name="realTimeWithLevel"
@@ -42,10 +42,15 @@ export default {
 	data() {
 		return {
 			activeIndex: null,
-			ready: false,
-			currentTab: 'realTimeWithLevel',
+			ready: false
 		};
-	},
+    },
+    props:{
+        value:{
+            type:String,
+            default:'realTimeWithLevel'
+        }
+    },
 	components: {
 		Tabs,
 		TabPanel,
@@ -87,7 +92,7 @@ export default {
 	z-index: 100;
 }
 .tabs-container {
-	max-height: calc(100vh - 160px);
+	max-height: 846px;
 	overflow-y: auto;
 	&::-webkit-scrollbar {
 		display: none;

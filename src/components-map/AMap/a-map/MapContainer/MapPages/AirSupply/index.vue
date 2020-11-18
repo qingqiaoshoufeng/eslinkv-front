@@ -34,6 +34,7 @@
 			<!-- 右侧列表 -->
 			<RightPanel
 				class="right-panel"
+                v-model="activeTab"
 				@overlay-click="handleOverlayClick"
 			></RightPanel>
 		</portal>
@@ -110,7 +111,18 @@ export default {
 			type: String,
 			default: '',
 		},
-	},
+    },
+    watch:{
+        currentScene(val){
+            let sceneMap = {
+                'airsupply-station':'realTimeWithLevel',
+                'airsupply-pipe':'realTime',
+                'airsupply-lng':'overlayList',
+                'airsupply-ucan':'overlayList'
+            }
+            this.activeTab = sceneMap[val]
+        },
+    },
 	created() {
         this.$amap = this.$parent.$amap;
 	},
@@ -119,7 +131,8 @@ export default {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_HOME),
 			activeOverlay: {},
 			showOverlayDetail: false,
-			showRoutePlan: false,
+            showRoutePlan: false,
+            activeTab:'realTimeWithLevel'
 		};
 	},
 	methods: {
@@ -217,7 +230,7 @@ export default {
 };
 </script>
 <style  lang="scss"  scoped>
-.right-panel {
-	margin-top: 48px !important;
-}
+// .right-panel {
+// 	margin-top: 48px !important;
+// }
 </style>
