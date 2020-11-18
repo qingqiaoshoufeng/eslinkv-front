@@ -13,6 +13,8 @@ export default {
         axisLabel:{
             textStyle: {
                 color: '#fff',
+				fontSize: 16,
+				lineHeight: 16
             }
         },
     },
@@ -28,13 +30,15 @@ export default {
         axisLabel:{
             textStyle: {
                 color: '#fff',
+				fontSize: 16,
+				lineHeight: 16
             }
         },
         axisLine: {
             show: false,
         }
     },
-    barWidth: 4,
+    barWidth: 6,
     barGap: 0.5,
     series: [{
         type: 'bar',

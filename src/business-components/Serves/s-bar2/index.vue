@@ -97,9 +97,10 @@ export default {
 	.legend {
 		display: flex;
 		position: absolute;
-		left: 75%;
-		width: 400px;
-		transform: translate(-50%, 0);
+		left: 0;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
 		.legend1,
 		.legend2 {
 			display: flex;
