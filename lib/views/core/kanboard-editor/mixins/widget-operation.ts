@@ -45,6 +45,10 @@ class Mixins extends Vue {
 
 		if (!this.sizeMap[id]) {
 			let size
+
+			/**
+			 * @description 开发阶段 异常情况会出现，宽高未配置的情况，会给定一个默认的宽高
+			 */
 			if (!value.layout.size) {
 				size = {
 					height: 100,
