@@ -28,7 +28,7 @@
 
     computed: {
       active() {
-        const active = this.$parent.currentName === this.name;
+        const active = this.$parent.value === this.name;
         if (active) {
           this.loaded = true;
         }

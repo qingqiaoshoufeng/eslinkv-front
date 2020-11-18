@@ -1,7 +1,7 @@
 <template>
 	<div class="list">
 		<div
-			@click="handleClick(item, index)"
+			@click="handleClick(item, index,'WARN')"
 			v-for="(item, index) in list"
 			:key="index"
 			class="list-item"

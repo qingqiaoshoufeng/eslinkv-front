@@ -1,13 +1,9 @@
 <template>
-	<DashboardPanel
-		:delay="0"
-		:show="ready"
-		:speed="300"
-		:transition="true"
-		class="right-panel"
-		enter="animate__animated animate__fadeInRight"
-	>
-		<Tabs class="tabs-container" :value="value" @input="(val)=>$emit('input',val)">
+		<Tabs
+			class="tabs-container animate__animated animate__fadeInRight"
+			:value="value"
+			@input="val => $emit('input', val)"
+		>
 			<TabPanel
 				key="realTimeWithLevel"
 				name="realTimeWithLevel"
@@ -27,11 +23,9 @@
 				<overlayList @change="handleClick" />
 			</TabPanel>
 		</Tabs>
-	</DashboardPanel>
 </template>
 
 <script>
-import { DashboardPanel } from '../../../../../components/';
 import { Tabs, TabPanel } from '../../../Components/Tabs/';
 import overlayList from './overlayList';
 import realTime from './realTime';
@@ -42,21 +36,20 @@ export default {
 	data() {
 		return {
 			activeIndex: null,
-			ready: false
+			ready: false,
 		};
-    },
-    props:{
-        value:{
-            type:String,
-            default:'realTimeWithLevel'
-        }
-    },
+	},
+	props: {
+		value: {
+			type: String,
+			default: 'realTimeWithLevel',
+		},
+	},
 	components: {
 		Tabs,
 		TabPanel,
 		overlayList,
 		realTime,
-		DashboardPanel,
 		realTimeWithLevel,
 	},
 	mounted() {
@@ -75,9 +68,9 @@ export default {
 		},
 	},
 	methods: {
-		handleClick(item, index) {
+		handleClick(item, index, overlayType) {
 			this.activeIndex = index;
-			this.$emit('overlay-click', item, 'WARN');
+			this.$emit('overlay-click', item, overlayType || 'WARN');
 		},
 	},
 };
@@ -90,6 +83,7 @@ export default {
 	top: 148px;
 	width: 480px;
 	z-index: 100;
+	max-height: 860px;
 }
 .tabs-container {
 	max-height: 846px;

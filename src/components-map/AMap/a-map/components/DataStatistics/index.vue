@@ -1,5 +1,8 @@
 <template>
-	<div class="data_statistics_box" :class="`position-${position}`">
+	<div
+		class="data_statistics_box animate__animated"
+		:class="[`position-${position}`, animate]"
+	>
 		<div
 			class="data_statistics_item"
 			v-for="(item, index) in data"
@@ -22,6 +25,15 @@ export default {
 		data: {
 			type: Array,
 			default: [],
+		},
+	},
+	computed: {
+		animate() {
+            let { position } = this;
+			return (
+				'animate__fadeIn' +
+				(position.charAt(0).toUpperCase() + position.slice(1))
+			);
 		},
 	},
 	components: {},

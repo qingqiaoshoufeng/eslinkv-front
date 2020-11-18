@@ -115,5 +115,6 @@ export default {
 	top: 148px;
 	width: 480px;
 	z-index: 1;
+	max-height: 860px;
 }
 </style>

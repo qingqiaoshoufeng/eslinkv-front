@@ -61,7 +61,6 @@ export default {
 		},
 	},
 	async created() {
-		console.log('awddddddddddddddddddddddddd');
 		this.list = await this.$sysApi.map.home.getWarningList();
 	},
 	watch: {

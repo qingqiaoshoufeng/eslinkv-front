@@ -10,13 +10,13 @@
 			v-bind="mapConfig"
 		>
 			<!-- 不同场景渲染不同的组件 -->
-			<template v-if="mapReady && showMap">
+			<template v-if="mapReady && showMap && mapComponentName">
 				<component
 					:activeItem="activeItem"
 					@closePop="handleClosePop"
 					:legendMap="legendMap"
 					:is="mapComponentName"
-                    :currentScene="currentScene"
+					:currentScene="currentScene"
 				/>
 			</template>
 		</el-amap>
@@ -87,7 +87,7 @@ export default {
 	data() {
 		return {
 			mapConfig: {
-				center: [120.061259, 30.273295],
+				center: [120.061259, 30.183295],
 				zoomEnable: true,
 				doubleClickZoom: false,
 				dragEnable: true,
@@ -226,10 +226,10 @@ export default {
 				return (this.showMap = false);
 			} else {
 				this.showMap = true;
-            }
-            if(val === 'unchange' || val === this.currentScene){
-                return false 
-            }
+			}
+			if (val === 'unchange' || val === this.currentScene) {
+				return false;
+			}
 			this.currentScene = val;
 			this.initPage(val);
 			this.getDataStatisticsList();
@@ -254,16 +254,19 @@ export default {
 				return false;
 			}
 			this.mapCenter = null;
-			this.mapLegendStyle = this.mapLegendStyleNormal;
-			Object.keys(config).forEach(targetProp => {
-				this[targetProp] = config[targetProp];
-			});
-			if (this.map) {
-				let { mapCenter, mapConfig } = this;
-				let { zoom, center } = mapConfig;
-				this.map.setZoom(zoom,100);
-				this.map.panTo(mapCenter ? mapCenter : center, 0);
-			}
+            this.mapLegendStyle = this.mapLegendStyleNormal;
+            this.mapComponentName = null
+			// setTimeout(() => {
+				Object.keys(config).forEach(targetProp => {
+					this[targetProp] = config[targetProp];
+				});
+				if (this.map) {
+					let { mapCenter, mapConfig } = this;
+					let { zoom, center } = mapConfig;
+					this.map.setZoom(zoom, 100);
+					this.map.panTo(mapCenter ? mapCenter : center, 0);
+				}
+			// },2000);
 		},
 		handleClosePop() {
 			this.activeItem = {};

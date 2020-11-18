@@ -1,13 +1,13 @@
 <template>
-	<DashboardPanel
-		:delay="0"
+	<!-- <DashboardPanel
+		:delay="300"
 		:show="ready"
 		:speed="300"
 		:transition="true"
 		class="right-panel"
 		enter="animate__animated animate__fadeInRight"
-	>
-		<Tabs class="tabs-container" v-model="currentTab">
+	> -->
+		<Tabs class="tabs-container animate__animated animate__fadeInRight" v-model="currentTab">
 			<TabPanel key="realTime" name="realTime" label="任务工单" lazy>
 				<realTime @change="handleClick" />
 			</TabPanel>
@@ -20,7 +20,7 @@
 				<overlayList @change="handleClick" />
 			</TabPanel>
 		</Tabs>
-	</DashboardPanel>
+	<!-- </DashboardPanel> -->
 </template>
 
 <script>
@@ -75,6 +75,7 @@ export default {
 	top: 148px;
 	width: 480px;
 	z-index: 100;
+    max-height: 860px;
 }
 .tabs-container {
 	max-height: 846px;
