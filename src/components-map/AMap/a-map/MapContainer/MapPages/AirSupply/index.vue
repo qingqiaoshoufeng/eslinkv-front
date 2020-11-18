@@ -52,8 +52,8 @@ import {
 	NaturalGasStation,
 	PipeManageMentStation,
 	PressureRegulatingStation,
-    UndergroundRepairStation,
-    RightPanel
+	UndergroundRepairStation,
+	RightPanel,
 } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
@@ -82,8 +82,8 @@ export default {
 		PressureRegulatingStation,
 		UndergroundRepairStation,
 		MiddlePressureLine,
-        RegionBoundary,
-        RightPanel
+		RegionBoundary,
+		RightPanel,
 	},
 	data() {
 		return {
