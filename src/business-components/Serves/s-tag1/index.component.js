@@ -2,8 +2,8 @@ export default {
 	config: {
 		layout: {
 			size: {
-				width: 228,
-				height: 84
+				width: 224,
+				height: 173
 			},
 			position: {
 				value: 'relative'
