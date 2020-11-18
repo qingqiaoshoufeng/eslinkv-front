@@ -5,27 +5,27 @@
 			<div class="main-lt">
 				<div class="title">{{ data&&data.title }}</div>
 				<div class="base-info">
-					<div class="base-info-item">
+					<div class="base-info-item fn-flex flex-row">
 						<label>开始时间</label>
 						<span>{{ data&&data.startTime }}</span>
 					</div>
-					<div class="base-info-item">
+					<div class="base-info-item fn-flex flex-row">
 						<label>结束时间</label>
 						<span>{{ data&&data.endTime }}</span>
 					</div>
-					<div class="base-info-item">
+					<div class="base-info-item fn-flex flex-row">
 						<label>活动地点</label>
 						<span>{{ data&&data.place }}</span>
 					</div>
-					<div class="base-info-item">
+					<div class="base-info-item fn-flex flex-row">
 						<label>人员组成</label>
 						<span>{{ data&&data.people }}</span>
 					</div>
-					<div class="base-info-item">
+					<div class="base-info-item fn-flex flex-row">
 						<label>参加人数</label>
 						<span>{{ data&&data.peopleNum }}人</span>
 					</div>
-					<div class="base-info-item">
+					<div class="base-info-item fn-flex flex-row">
 						<label>计划服务用户数量</label>
 						<span>{{ data&&data.planNum }}户</span>
 					</div>

@@ -43,7 +43,9 @@ export default function getOption(data, config) {
 				show: false
 			},
 			axisLabel: {
-				color: "#fff"
+				color: "#fff",
+				fontSize: 16,
+				lineHeight: 16
 			},
 			offset: 5,
 			data: data.map(item => item.name)
@@ -55,11 +57,13 @@ export default function getOption(data, config) {
 				show: true,
 				lineStyle: {
 					type: "solid",
-					color: "rgba(199, 209, 219, 0.4)"
+					color: "rgba(199, 209, 219, 0.2)"
 				}
 			},
 			axisLabel: {
-				color: "#fff"
+				color: "#fff",
+				fontSize: 16,
+				lineHeight: 16
 			},
 			axisLine: {
 				show: false

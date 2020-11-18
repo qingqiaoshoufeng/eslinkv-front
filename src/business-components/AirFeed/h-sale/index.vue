@@ -28,8 +28,8 @@
 		<div class="split-line"></div>
 		<div class="view">
 			<div class="titles">
-				<div>销售量</div>
-				<div>进销存</div>
+				<div>进出液</div>
+				<div>气化量</div>
 			</div>
 			<div class="chart-wrap">
 				<div class="legend">
@@ -44,10 +44,6 @@
 					<div class="legend-item">
 						<div class="legend-color green"></div>
 						<div class="legend-txt">气化量</div>
-					</div>
-					<div class="legend-item">
-						<div class="line-legend"></div>
-						<div class="legend-txt">销售量</div>
 					</div>
 				</div>
 				<div class="chart" :id="id"></div>

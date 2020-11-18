@@ -1,5 +1,5 @@
 <template>
-	<div class="h-call-count-statistics widget-part" :style="styles">
+	<div class="widget-part" :style="styles">
 		<div class="legend">
 			<div class="legend-item">
 				<div class="tanc"></div>
