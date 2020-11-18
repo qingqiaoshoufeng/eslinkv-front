@@ -14,11 +14,8 @@ const config = {
   config: {
     color1: true,
     color2: true,
-    color3: true,
     desc1: true,
     desc2: true,
-    desc3: true,
-    unit: true,
   },
 };
 const value = {

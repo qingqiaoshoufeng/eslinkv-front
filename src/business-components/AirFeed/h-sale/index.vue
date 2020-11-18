@@ -18,7 +18,8 @@
 					</div>
 				</div>
 				<div class="li-num">{{k.value}}</div>
-				<div class="li-name">{{k.name}}<br>储气量(m3)</div>
+				<div class="li-name">{{k.name}}</div>
+				<div class="li-unit">储气量(m3)</div>
 				<div class="active-dot" v-show="currentIndex === i">
 					<div class="dot"></div>
 				</div>
@@ -209,18 +210,18 @@ export default {
 		padding-top: 16px;
 		.jar {
 			position: relative;
-			width: 88px;
-			height: 98px;
+			width: 48px;
+			height: 104px;
 			background: url("/static/icons/jar.svg") no-repeat;
 			background-size: 100% 100%;
 			margin: 0 auto 16px;
 			.jar-heart {
 				position: absolute;
-				top: 11px;
-				left: 5px;
-				width: 78px;
-				height: 78px;
-				border-radius: 50%;
+        top: 3px;
+        left: 4px;
+        width: 40px;
+        height: 92px;
+        border-radius: 16px;
 				background: #001F6D;
 				overflow: hidden;
 				display: flex;
@@ -232,15 +233,14 @@ export default {
 				top: 100%;
 				left: 0;
 				bottom: 0;
-				width: 78px;
-				height: 78px;
+				width: 40px;
 				background: linear-gradient(to top, rgba(0,221,255,0), rgba(0,221,255,1));
 			}
 			.jar-num {
 				z-index: 1;
 				font-weight: bold;
-				font-size: 32px;
-				line-height: 32px;
+				font-size: 24px;
+				line-height: 24px;
 				color: #FFFFFF;
 				text-align: center;
 			}
@@ -253,11 +253,18 @@ export default {
 			color: #FFFFFF;
 			margin-bottom: 4px;
 		}
-		.li-name {
-			font-size: 20px;
-			line-height: 24px;
-			text-align: center;
-			color: #00DDFF;
+    .li-name {
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      color: #00DDFF;
+      margin-bottom: 4px;
+    }
+		.li-unit {
+      font-size: 18px;
+      line-height: 24px;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.75);
 		}
 
 		&.active {
