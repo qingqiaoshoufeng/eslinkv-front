@@ -30,7 +30,7 @@
 		<!-- 地图类型 -->
 		<MapTypeLegend />
 		<portal-target name="destination"> </portal-target>
-		<DataStatistics :data="dataStatisticsList" />
+		<DataStatistics :data="computedDataStatisticsList" />
 	</div>
 </template>
 
@@ -115,9 +115,7 @@ export default {
 			// debugger;
 			let { legendConfig, _overlayConfigMap } = this;
 			let pageName = val;
-			console.log('AAA', val);
-			console.log(legendConfig);
-			console.log(pageName);
+			this.sence = pageName;
 			//多个场景共用一个地图
 			if (val.indexOf('-') > -1) {
 				pageName = pageName.split('-')[0];
@@ -132,26 +130,33 @@ export default {
 				};
 			});
 			this.legendMap = obj;
-			console.log('bbbbb', this.legendMap);
+		},
+	},
+	computed: {
+		computedDataStatisticsList() {
+			if (this.mapComponentName !== 'AirSupplyMap') return [];
 			let senceDataObj = {
-				nn16rowdl5r: [
+				'airsupply-station': [
 					'门站',
 					'应急气源站',
 					'高中压调压站',
 					'中低压调压箱',
 				],
-				'8iyxp8u3gtu': [
+				'airsupply-pipe': [
 					'绿色能源综合服务站',
 					'管网运行管理站',
 					'地下抢修点',
 				],
-				p2wovclspks: [
+				'airsupply-lng': [
 					'绿色能源综合服务站',
 					'管网运行管理站',
 					'地下抢修点',
 				],
+				'airsupply-ucan': ['常用钢瓶用户数量', '在册钢瓶数量'],
 			};
-			this.getDataStatisticsList();
+			return this.dataStatisticsList.filter(item =>
+				senceDataObj[this.sence].includes(item.desc)
+			);
 		},
 	},
 	created() {
@@ -227,6 +232,7 @@ export default {
             }
 			this.currentScene = val;
 			this.initPage(val);
+			this.getDataStatisticsList();
 		});
 	},
 	beforeDestroy() {
@@ -262,8 +268,8 @@ export default {
 		handleClosePop() {
 			this.activeItem = {};
 		},
-		getDataStatisticsList() {
-			this.dataStatisticsList = this.$sysApi.map.serve.getDataStatisticsList();
+		async getDataStatisticsList() {
+			this.dataStatisticsList = await this.$sysApi.map.airSupply.getAirSupplyDataStatisticsList();
 		},
 	},
 };
