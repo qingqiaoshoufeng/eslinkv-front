@@ -139,7 +139,6 @@ export default {
 		text-align: right;
 		color: #fff;
 		//styleName: 文字/16;
-		font-family: PingFang SC;
 		font-size: 16px;
 		font-style: normal;
 		font-weight: 400;
@@ -149,9 +148,10 @@ export default {
 	.legend {
 		display: flex;
 		position: absolute;
-		left: 70%;
-		width: 400px;
-		transform: translate(-50%, 0);
+		left: 0;
+		width: 100%;
+		align-items: center;
+		justify-content: center;
 		.legend1,
 		.legend2 {
 			display: flex;
@@ -171,7 +171,6 @@ export default {
 		.desc2,
 		.desc3 {
 			margin-left: 5px;
-			font-family: PingFang SC;
 			font-size: 16px;
 			font-style: normal;
 			font-weight: 400;

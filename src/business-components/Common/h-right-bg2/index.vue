@@ -1,5 +1,5 @@
 <template>
-	<div class="widget-part pos-r" :style="`${styles};top:0`">
+	<div class="widget-part pos-r" :style="`${styles};top:0;pointer-events: none;`">
 		<div class="h-right-bg2 pos-r">
 			<i class="pos-a"></i>
 			<i class="pos-a"></i>
