@@ -6,8 +6,14 @@
 			<div class="h-bg-control pos-a"></div>
 			<div class="h-bg-left pos-a"></div>
 			<div class="h-bg-right pos-a"></div>
-			<div class="h-bg-red1 pos-a" @click="open54441"></div>
-			<div class="h-bg-red2 pos-a" @click="openVideo"></div>
+			<div class="h-bg-red1 pos-a pointer" :class="{active:status54441}" @click="open54441"></div>
+			<div class="h-bg-red2 pos-a pointer" :class="{active:statusVideo}" @click="openVideo"></div>
+			<transition name="slide-down">
+				<h-bg-54441 v-if="status54441" :status="status54441" :close="close54441"/>
+			</transition>
+			<transition name="slide-down">
+				<h-bg-video v-if="statusVideo" :status="statusVideo" :close="closeVideo"/>
+			</transition>
 			<ul class="h-bg-nav pos-a fn-flex flex-row">
 				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('nn16rowdl5r')">
 					<img src="./img/nav-1.svg"/>
@@ -26,12 +32,6 @@
 					<span>体验</span>
 				</li>
 			</ul>
-			<transition name="slide-down">
-				<h-bg-54441 v-if="status54441" :status="status54441" :close="close54441"/>
-			</transition>
-			<transition name="slide-down">
-				<h-bg-video v-if="statusVideo" :status="statusVideo" :close="closeVideo"/>
-			</transition>
 		</div>
 	</div>
 </template>
@@ -60,6 +60,8 @@
 		methods: {
 			handleClick(index) {
 				GoldChart.scene.setSceneIndex(index)
+				this.status54441 = false
+				this.statusVideo = false
 			},
 			open54441() {
 				this.status54441 = true
@@ -142,6 +144,11 @@
 		background-size: 257px 64px;
 		left: 783px;
 		bottom: 60px;
+		opacity: 0.6;
+
+		&.active {
+			opacity: 1;
+		}
 	}
 
 	.h-bg-red2 {
@@ -151,6 +158,11 @@
 		background-size: 257px 64px;
 		right: 783px;
 		bottom: 60px;
+		opacity: 0.6;
+
+		&.active {
+			opacity: 1;
+		}
 	}
 
 	.h-bg-top {

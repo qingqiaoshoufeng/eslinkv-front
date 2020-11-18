@@ -42,8 +42,29 @@ class Mixins extends Vue {
 		const currentWidget = this.widgetsAdded[id]
 		if (!id || !currentWidget) return
 		this.zIndexMap[id] = value.layout.zIndex
+
 		if (!this.sizeMap[id]) {
-			const {width, height} = value.layout.size
+			let size
+
+			/**
+			 * @description 开发阶段 异常情况会出现，宽高未配置的情况，会给定一个默认的宽高
+			 */
+			if (!value.layout.size) {
+				size = {
+					height: 100,
+					range: {
+						maxHeight: 0,
+						maxWidth: 0,
+						minHeight: 0,
+						minWidth: 0,
+						rangeUnit: "%"
+					},
+					unit: "px",
+					width: 100
+				}
+			}
+
+			const {width = 100, height = 100} = value.layout.size ? value.layout.size : size
 			this.$set(this.sizeMap, id, {w: width, h: height})
 		}
 		if (!this.positionMap[id]) {

@@ -16,6 +16,7 @@
 					@closePop="handleClosePop"
 					:legendMap="legendMap"
 					:is="mapComponentName"
+                    :currentScene="currentScene"
 				/>
 			</template>
 		</el-amap>
@@ -29,7 +30,7 @@
 		<!-- 地图类型 -->
 		<MapTypeLegend />
 		<portal-target name="destination"> </portal-target>
-		<DataStatistics :data="computedDataStatisticsList" />
+		<DataStatistics :data="computedDataStatisticsList" v-if="showMap" />
 	</div>
 </template>
 
@@ -221,12 +222,14 @@ export default {
 	},
 	mounted() {
 		bus.$on('currentSceneChange', val => {
-			console.log('aaaaaa', val);
 			if (!val) {
 				return (this.showMap = false);
 			} else {
 				this.showMap = true;
-			}
+            }
+            if(val === 'unchange' || val === this.currentScene){
+                return false 
+            }
 			this.currentScene = val;
 			this.initPage(val);
 			this.getDataStatisticsList();

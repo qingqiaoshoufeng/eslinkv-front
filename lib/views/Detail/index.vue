@@ -49,14 +49,23 @@
 				this.actualScaleRatio = Math.min(clientWidth / w, clientHeight / h)
 			},
 			queryKanboard() {
-				const {params: {id}} = this.$route
-				const dataBoardId = id
-				this.$api.board.detail({dataBoardId}).then(res => {
-					const value = JSON.parse(res.attribute)
-					this.refill(value)
-					mutations.initScene(value.scene)
-					mutations.listToObj(value)
-				})
+				if (this.$route.name === 'HangRan') {
+					this.$api.board.hangran().then(res => {
+						const value = JSON.parse(res.attribute)
+						this.refill(value)
+						mutations.initScene(value.scene)
+						mutations.listToObj(value)
+					})
+				} else {
+					const {params: {id}} = this.$route
+					const dataBoardId = id
+					this.$api.board.detail({dataBoardId}).then(res => {
+						const value = JSON.parse(res.attribute)
+						this.refill(value)
+						mutations.initScene(value.scene)
+						mutations.listToObj(value)
+					})
+				}
 			},
 			refill(value) {
 				this.$refs.previewContainer.refillConfig(value).then(() => {

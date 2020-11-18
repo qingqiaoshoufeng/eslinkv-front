@@ -5,13 +5,14 @@
 			visible: true,
 			apiFun: getData,
 		}"
-		@click="marker => $emit('overlay-click', marker, 'ListOverlay')"
+		@click="handleOverlayClick"
 	>
-		<!-- <img
-			v-if="item.status !== 0"
-			src="@/assets/amap/images/qiangxiu.gif"
-			class="warnoverlay-gif"
-		/> -->
+		<template slot-scope="{ data }">
+			<img
+				src="@/assets/amap/images/qiangxiu.gif"
+				class="warnoverlay-gif"
+			/>
+		</template>
 	</BaseOverlay>
 </template>
 <script>
@@ -38,10 +39,10 @@ export default {
 					}
 					item.icon = icon;
 					return item;
-				});
+                });
 				resolve(list);
 			});
-		},
+        },
 		handleOverlayClick(marker) {
 			this.$emit('overlay-click', marker, 'WARN');
 		},
