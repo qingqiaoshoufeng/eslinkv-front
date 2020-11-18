@@ -6,6 +6,12 @@ export default function getOption(data, config) {
 			fontSize: 16,
 			color: '#FFF'
 		},
+		grid: {
+			top: 40,
+			bottom: 30,
+			left: 40,
+			right: 10
+		},
 		tooltip: {
 			trigger: "axis",
 			axisPointer: {
