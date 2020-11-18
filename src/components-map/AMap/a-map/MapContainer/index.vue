@@ -30,7 +30,7 @@
 		<!-- 地图类型 -->
 		<MapTypeLegend />
 		<portal-target name="destination"> </portal-target>
-		<DataStatistics :data="computedDataStatisticsList" />
+		<DataStatistics :data="computedDataStatisticsList" v-if="showMap" />
 	</div>
 </template>
 

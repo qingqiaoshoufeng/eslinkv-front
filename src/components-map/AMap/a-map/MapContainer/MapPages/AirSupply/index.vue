@@ -25,6 +25,9 @@
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 		/>
+        <!-- 路线规划 -->
+        <RoutePlan>
+        </RoutePlan>
 		<portal to="destination">
 			<!-- 右侧列表 -->
 			<RightPanel
@@ -54,7 +57,8 @@ import {
 	PipeManageMentStation,
 	PressureRegulatingStation,
 	UndergroundRepairStation,
-	RightPanel,
+    RightPanel,
+    RoutePlan
 } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
