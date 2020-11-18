@@ -121,9 +121,9 @@
 						'/static/images/project/04.jpg',
 					],
 					videoList: [
-						'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+						'/static/videos/test.mov',
 						'http://www.17sucai.com/preview/501914/2017-08-04/%E9%A1%B5%E9%9D%A2/media/mov_bbb.mp4',
-						'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+						'/static/videos/test.mov',
 						'http://vjs.zencdn.net/v/oceans.mp4',
 					],
 				},
@@ -135,9 +135,9 @@
 						'/static/images/project/04.jpg',
 					],
 					videoList: [
-						'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+						'/static/videos/test.mov',
 						'http://www.17sucai.com/preview/501914/2017-08-04/%E9%A1%B5%E9%9D%A2/media/mov_bbb.mp4',
-						'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+						'/static/videos/test.mov',
 						'http://vjs.zencdn.net/v/oceans.mp4',
 					],
 				},

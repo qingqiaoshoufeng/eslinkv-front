@@ -122,7 +122,7 @@ export default {
 							},
 						],
 						video:
-							'https://cdn.theguardian.tv/webM/2015/07/20/150716YesMen_synd_768k_vp8.webm',
+							'/static/videos/test.mov',
 					});
 				});
 			});
