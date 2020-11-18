@@ -12,7 +12,7 @@ export function getAirSupplyDataStatisticsList(data) {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
     })
-},
+}
 export function getAirSupplyHighPressureList(data) {
     return request({
         url: '/map/airSupply/getAirSupplyHighPressureList',
