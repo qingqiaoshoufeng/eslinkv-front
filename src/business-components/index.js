@@ -24,6 +24,8 @@ conf.keys().forEach(name => {
 for (let key in widgetsObject) {
 	widgetsArray.push(widgetsObject[key])
 }
+console.log(widgetsArray)
+
 mutations.setCustomComponents(components)
 mutations.setCustomWidgets({
 	label: '杭然样式',

@@ -1,0 +1,161 @@
+<template>
+	<div class="s-table-status widget-part" :style="styles">
+		<div
+			class="s-table-status__content"
+			v-if="!!data">
+			<vue-seamless-scroll
+				:data="data || []"
+				class="s-table-status__content__seamless-warp"
+				:class-option="classOption">
+				<ul
+					class="s-table-status__content__row"
+					v-for="(item, index) in data?data:[]"
+					:key="index">
+					<li class="text-right">{{item.title || ''}}</li>
+					<li class="pos-r">
+						<i class="pos-a" :style="{width:`${item.value/max*100}%`}"></i>
+					</li>
+					<li class="font-num">{{item.value || ''}}</li>
+					<li>{{item.suffix || ''}}</li>
+				</ul>
+			</vue-seamless-scroll>
+		</div>
+	</div>
+</template>
+<script>
+	import mixins from '../../mixins';
+	import VueSeamLess from 'vue-seamless-scroll'
+
+	const config = {animation: true}
+	const value = {
+		api: {
+			data: JSON.stringify([
+				{
+					title: '钱塘新区',
+					value: 2321343,
+					suffix: 'm3'
+				},
+				{
+					title: '滨江区',
+					value: 2301232,
+					suffix: 'm3'
+				},
+				{
+					title: '萧山区',
+					value: 1254321,
+					suffix: 'm3'
+				},
+				{
+					title: '余杭区',
+					value: 1932315,
+					suffix: 'm3'
+				},
+				{
+					title: '下城区区',
+					value: 1221342,
+					suffix: 'm3'
+				},
+			])
+		}
+	}
+	export default {
+		data() {
+			return {
+				max: 0
+			}
+		},
+		mixins: [mixins],
+		components: {
+			VueSeamLess
+		},
+		methods: {},
+		watch: {
+			data: {
+				handler(val) {
+					if (val) {
+						const list = this.data || []
+						const amoutList = list.reduce((initVal, val) => {
+							initVal.push(val?.value || 0)
+							return initVal
+						}, []);
+						this.max = Math.max(...amoutList)
+					}
+				},
+				deep: true,
+				immediate: true
+			}
+		},
+		computed: {
+			classOption() {
+				return {
+					step: 0.2, // 数值越大速度滚动越快
+					limitMoveNum: this?.data?.length, // 开始无缝滚动的数据量
+					hoverStop: true, // 是否开启鼠标悬停stop
+					direction: 1, // 0向下 1向上 2向左 3向右
+					openWatch: true, // 开启数据实时监控刷新dom
+					singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+					singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+					waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
+				}
+			}
+		},
+		created() {
+			this.configSource = this.parseConfigSource(config);
+			this.configValue = this.parseConfigValue(config, value);
+		},
+	}
+</script>
+<style lang="scss">
+	.s-table-status {
+		&__content {
+			margin-top: 9px;
+			height: 152px;
+
+			&__seamless-warp {
+				height: 200px;
+				overflow: hidden;
+			}
+
+			&__row {
+				width: 480px;
+				height: 24px;
+				display: flex;
+				align-items: center;
+				padding: 4px 8px;
+				box-sizing: border-box;
+				margin-top: 16px;
+
+				& > li {
+					text-align: left;
+					font-size: 16px;
+					line-height: 16px;
+					color: #FFFFFF;
+
+					&:nth-child(1) {
+						width: 90px;
+						color: #00DDFF;
+					}
+
+					&:nth-child(2) {
+						width: 252px;
+						height: 16px;
+						background: rgba(0, 87, 169, 0.2);
+						margin-left: 16px;
+						margin-right: 16px;
+
+						i {
+							height: 8px;
+							left: 4px;
+							top: 4px;
+							background: linear-gradient(270deg, #00DDFF 0%, rgba(0, 221, 255, 0) 100%);
+						}
+					}
+					&:nth-child(4) {
+						font-size: 13px;
+					}
+				}
+			}
+		}
+	}
+</style>
+

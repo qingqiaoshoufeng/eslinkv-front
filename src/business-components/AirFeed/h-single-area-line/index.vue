@@ -1,5 +1,5 @@
 <template>
-	<div class="h-call-count-statistics widget-part" :style="styles">
+	<div class="widget-part" :style="styles">
 		<div class="chart" :id="id"></div>
 	</div>
 </template>
@@ -8,23 +8,23 @@
 	import options from './options'
 	import {getInput} from '../../../../lib';
 
+	const configSource = {
+		config: {
+			fields: {
+				title: getInput('title', '标题'),
+			}
+		}
+	}
+
 	const config = {
 		animation: true,
 		config: {
 			title: true
 		}
 	}
-	const configSource = {
-		config: {
-			fields: {
-				title: getInput('title', '标题'),
-			},
-		},
-	};
 	const value = {
 		api: {
 			data: JSON.stringify({
-				title: '%',
 				data: [
 					{
 						name: "10-1",

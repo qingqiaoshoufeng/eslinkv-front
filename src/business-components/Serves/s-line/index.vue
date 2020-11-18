@@ -1,5 +1,5 @@
 <template>
-	<div class="h-call-count-statistics widget-part" :style="styles">
+	<div class="widget-part" :style="styles">
 		<div class="chart" :id="id"></div>
 	</div>
 </template>
