@@ -15,8 +15,8 @@
     <div class="chart-wrap">
       <div class="chart" :id="id" />
       <div class="content">
-        <div class="content-num font-num">91%</div>
-        <div class="content-txt">联码率</div>
+        <div class="content-num font-num">{{data.rate}}%</div>
+        <div class="content-txt">{{config.config.title}}</div>
       </div>
     </div>
 	</div>

@@ -2050,11 +2050,11 @@ assign-symbols@^1.0.0:
   integrity sha1-WWZ/QfrdTyDMvCu5a41Pf3jsA2c=
 
 astq@^2.7.1:
-  version "2.6.6"
-  resolved "https://registry.npm.taobao.org/astq/download/astq-2.6.6.tgz#5d3cb56dd490ae2d3d4891daf903cc4e73ca39c2"
-  integrity sha1-XTy1bdSQri09SJHa+QPMTnPKOcI=
+  version "2.7.1"
+  resolved "https://registry.yarnpkg.com/astq/-/astq-2.7.1.tgz#f87e43f59302c0b641510a552f0bfa16641920c2"
+  integrity sha512-LCw6BWzTW+haD/c0MPT2baeFdqvG7MvcRh136Cffkf19OYdZPiifH/KH+efy6oRbIbZpJ4qxctBW5MZbYwrulw==
   dependencies:
-    asty "1.8.8"
+    asty "1.8.10"
     cache-lru "1.1.10"
     pegjs "0.10.0"
     pegjs-otf "1.2.16"
@@ -2065,10 +2065,10 @@ astral-regex@^1.0.0:
   resolved "https://registry.npm.taobao.org/astral-regex/download/astral-regex-1.0.0.tgz#6c8c3fb827dd43ee3918f27b82782ab7658a6fd9"
   integrity sha1-bIw/uCfdQ+45GPJ7gngqt2WKb9k=
 
-asty@1.8.8:
-  version "1.8.8"
-  resolved "https://registry.npm.taobao.org/asty/download/asty-1.8.8.tgz#f70175ce58170084b335bec3912ed7e4cd3637c5"
-  integrity sha1-9wF1zlgXAISzNb7DkS7X5M02N8U=
+asty@1.8.10:
+  version "1.8.10"
+  resolved "https://registry.yarnpkg.com/asty/-/asty-1.8.10.tgz#b9bf702043a9429ba6ccc8bcda9f9040cb0aaf8b"
+  integrity sha512-99tRsqP6mT8UuE4oc0SvoGX8wTbKqaRiSOYxmoS/5CaWlrl4RG1NEjHwEFQcv/IGeo9FmagCT1hRAeC7DFiM2A==
 
 async-each@^1.0.1:
   version "1.0.3"
