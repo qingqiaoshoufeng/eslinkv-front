@@ -10,7 +10,8 @@ export const SCENEINDEXMAP = {
 	'6u1qhjs14ws': 'service_market',
 	bavv56kietf: 'service_hangranCode',
 	e40ml4vtfa6: 'serviceICcustomer',
-	zciq8u7tmpl: 'unchange',
+    zciq8u7tmpl: 'unchange', //unchang代表地图不进行切换
+    ahais9szswu:'unchange'
 }
 export const INDEXSCENEMAP = {
 	'airsupply-pipe': '8iyxp8u3gtu', //供气-管网

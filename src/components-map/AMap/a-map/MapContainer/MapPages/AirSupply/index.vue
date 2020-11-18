@@ -25,9 +25,8 @@
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 		/>
-        <!-- 路线规划 -->
-        <RoutePlan>
-        </RoutePlan>
+		<!-- 路线规划 -->
+		<!-- <RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan> -->
 		<portal to="destination">
 			<!-- 右侧列表 -->
 			<RightPanel
@@ -57,8 +56,8 @@ import {
 	PipeManageMentStation,
 	PressureRegulatingStation,
 	UndergroundRepairStation,
-    RightPanel,
-    RoutePlan
+	RightPanel,
+	RoutePlan,
 } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
@@ -94,8 +93,8 @@ export default {
 		UndergroundRepairStation,
 		MiddlePressureLine,
 		RegionBoundary,
-        RightPanel,
-        RoutePlan
+		RightPanel,
+		RoutePlan,
 	},
 	props: {
 		legendMap: {
@@ -117,6 +116,7 @@ export default {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_HOME),
 			activeOverlay: {},
 			showOverlayDetail: false,
+			showRoutePlan: false,
 		};
 	},
 	methods: {
@@ -136,6 +136,7 @@ export default {
 			let { overlayType } = this.activeOverlay;
 			if (overlayType === 'WARN') {
 				GoldChart.scene.setSceneIndex(INDEXSCENEMAP[this.currentScene]);
+				this.showRoutePlan = false;
 			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
@@ -145,6 +146,8 @@ export default {
 		viewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
 			if (overlayType === 'WARN') {
+                this.showRoutePlan = true;
+                //和场景进行交互
 				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
 				//更新数据
 				this.$nextTick(() => {

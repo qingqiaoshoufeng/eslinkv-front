@@ -227,7 +227,7 @@ export default {
 			} else {
 				this.showMap = true;
             }
-            if(val === 'unchange'){
+            if(val === 'unchange' || val === this.currentScene){
                 return false 
             }
 			this.currentScene = val;
