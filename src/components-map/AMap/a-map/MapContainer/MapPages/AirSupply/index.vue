@@ -23,12 +23,13 @@
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
+			@view-detail="viewOverlayDetail"
 		/>
 		<portal to="destination">
 			<!-- 右侧列表 -->
 			<RightPanel
 				class="right-panel"
-				@list-click="handleListClick"
+				@overlay-click="handleOverlayClick"
 			></RightPanel>
 		</portal>
 	</div>
@@ -58,7 +59,13 @@ import {
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
-import { OVERLAYINFOMAP_HOME } from '../../../config';
+import {
+	INDEXSCENEMAP,
+	OVERLAYINFOMAP_HOME,
+	AIRSUPPLY_WARN_SCENEINDEX,
+	AIRSUPPLY_WARN_COMPONENTINDEX,
+} from '../../../config';
+import GoldChart from '@/openApi';
 
 export default {
 	name: 'HomePage',
@@ -92,6 +99,10 @@ export default {
 				return {};
 			},
 		},
+		currentScene: {
+			type: String,
+			default: '',
+		},
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
@@ -104,9 +115,6 @@ export default {
 		};
 	},
 	methods: {
-		handleListClick(item) {
-			console.log(item);
-        },
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat } = overlay;
 			overlay.overlayType = overlayType;
@@ -115,15 +123,98 @@ export default {
 			this.$amap.setZoom(14);
 			if (isCenter) {
 				this.$nextTick(() => {
-					this.$amap.panTo([lng, lat],100);
+					this.$amap.panTo([lng, lat], 100);
 				});
 			}
 		},
 		closeOverlayDetail(done) {
+			let { overlayType } = this.activeOverlay;
+			if (overlayType === 'WARN') {
+				GoldChart.scene.setSceneIndex(INDEXSCENEMAP[this.currentScene]);
+			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
 			this.$amap.setZoom(11);
 			done();
+		},
+		viewOverlayDetail(overlay) {
+			let { overlayType } = overlay;
+			if (overlayType === 'WARN') {
+				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
+				//更新数据
+				this.$nextTick(() => {
+					AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
+						GoldChart.instance.updateComponent(i, {
+							step: 8,
+							value: {
+								step1: {
+									time: new Date('2020-10-30 22:20') * 1,
+									des: '燃气泄漏',
+									name: '王磊',
+									title: '报警人',
+									address: '江干区三里亭东苑',
+								},
+								step2: {
+									time: new Date('2020-10-30 22:21') * 1,
+									name: '秦芳芳',
+									title: '客服部',
+								},
+								step3: {
+									time: new Date('2020-10-30 22:31') * 1,
+									name: '林自原',
+									title: '维修部',
+								},
+								step4: {
+									time: new Date('2020-10-30 22:48') * 1,
+								},
+								step5: {
+									time: new Date('2020-10-30 23:13') * 1,
+								},
+								step6: {
+									time: new Date('2020-10-30 23:50') * 1,
+								},
+								step7: {
+									time: new Date('2020-10-31 11:21') * 1,
+								},
+								step8: {
+									time: new Date('2020-10-31 12:57') * 1,
+									title: '维修处置内容',
+									content:
+										'部分管道老旧破损严重导致燃气泄漏，关闭上游阀门后更换泄漏段管道，已恢复供气。',
+								},
+							},
+							videoInfo1: {
+								imgList: [
+									'/static/images/project/01.png',
+									'/static/images/project/02.jpg',
+									'/static/images/project/03.jpg',
+									'/static/images/project/04.jpg',
+								],
+								videoList: [
+									'/static/videos/test.mov',
+									'http://www.17sucai.com/preview/501914/2017-08-04/%E9%A1%B5%E9%9D%A2/media/mov_bbb.mp4',
+									'/static/videos/test.mov',
+									'http://vjs.zencdn.net/v/oceans.mp4',
+								],
+							},
+							videoInfo2: {
+								imgList: [
+									'/static/images/project/01.png',
+									'/static/images/project/02.jpg',
+									'/static/images/project/03.jpg',
+									'/static/images/project/04.jpg',
+								],
+								videoList: [
+									'/static/videos/test.mov',
+									'http://www.17sucai.com/preview/501914/2017-08-04/%E9%A1%B5%E9%9D%A2/media/mov_bbb.mp4',
+									'/static/videos/test.mov',
+									'http://vjs.zencdn.net/v/oceans.mp4',
+								],
+							},
+						});
+					});
+				});
+			}
 		},
 	},
 };

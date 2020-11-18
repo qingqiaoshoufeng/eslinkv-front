@@ -16,6 +16,7 @@
 					@closePop="handleClosePop"
 					:legendMap="legendMap"
 					:is="mapComponentName"
+                    :currentScene="currentScene"
 				/>
 			</template>
 		</el-amap>
@@ -216,12 +217,14 @@ export default {
 	},
 	mounted() {
 		bus.$on('currentSceneChange', val => {
-			console.log('aaaaaa', val);
 			if (!val) {
 				return (this.showMap = false);
 			} else {
 				this.showMap = true;
-			}
+            }
+            if(val === 'unchange'){
+                return false 
+            }
 			this.currentScene = val;
 			this.initPage(val);
 		});

@@ -12,9 +12,6 @@ export default {
 		let { active, marker, visible = true } = props;
 		let { lat, lng, name, status, icon } = marker;
 		icon = icon ? icon.replace('tuli', '') : icon;
-		if (status === 1) {
-			icon += '-err';
-        }
 		return (
 			<AMapMarker visible={visible} position={[lng, lat]} vid={name}>
 				<div class={['sample', { active: active }]} on={listeners}>

@@ -62,7 +62,7 @@ export default {
 	methods: {
 		handleClick(item, index) {
 			this.activeIndex = index;
-			this.$emit('overlay-click', item);
+			this.$emit('overlay-click', item, 'WARN');
 		},
 	},
 };

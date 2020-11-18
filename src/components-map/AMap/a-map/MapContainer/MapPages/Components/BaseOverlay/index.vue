@@ -10,7 +10,7 @@
 			:visible="visible"
 			@click="$emit('click', item)"
 		>
-			<slot></slot>
+			<slot :data="item"></slot>
 		</Overlay>
 	</div>
 </template>
@@ -55,7 +55,7 @@ export default {
 					this.$nextTick(() => {
 						this.isRendered = true;
 					});
-                }
+				}
 			},
 			immediate: true,
 		},
