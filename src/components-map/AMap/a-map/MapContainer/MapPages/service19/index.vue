@@ -32,7 +32,7 @@
 </template>
 <script>
 //页面覆盖物组件
-import { acceptHot } from './Components/index.js';
+import { BranchCompany } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
@@ -45,7 +45,7 @@ export default {
 	components: {
 		RegionBoundary,
 		OverlayDetail,
-		acceptHot,
+		BranchCompany,
 		DataStatistics,
 	},
 	data() {

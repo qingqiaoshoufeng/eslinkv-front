@@ -1,20 +1,20 @@
 //legend配置
 export const SERVICELEGEND19MAP = {
-    acceptHot: {
-        label: '线上业务受理热力',
-        legendIcon: 'icontulixiaoqireli',
-        // icon: 'iconjituandating',
-        component: 'acceptHot',
+    BranchCompany: {
+        label: '分公司',
+        legendIcon: 'icontulifengongsi',
+        icon: 'iconfengongsi',
+        component: 'BranchCompany',
     },
 }
 
 export const SERVICELEGEND_SERVICE_19 = {
-    acceptHot: true,
+    BranchCompany: true,
 }
 
 //覆盖物详情
 export const OVERLAYINFOMAP_SERVICE_19 = {
-    acceptHot: {
+    BranchCompany: {
         name: {},
     },
 }

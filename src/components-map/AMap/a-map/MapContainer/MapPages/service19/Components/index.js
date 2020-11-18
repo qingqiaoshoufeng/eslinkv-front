@@ -1,1 +1,1 @@
-export { default as acceptHot } from './acceptHot'
+export { default as BranchCompany } from './BranchCompany'
