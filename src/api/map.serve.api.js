@@ -79,3 +79,14 @@ export function getICcustomerList(data) {
         },
     })
 }
+
+export function getAllTypeStationList(data) {
+    return request({
+        url: '/map/serve/getAllTypeStationList',
+        method: 'get',
+        data: qs.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}

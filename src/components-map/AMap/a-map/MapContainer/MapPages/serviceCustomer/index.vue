@@ -28,6 +28,10 @@
 		<portal to="destination">
 			<!-- 统计数据 -->
 			<DataStatistics :data="dataStatisticsList" />
+			<RightPanel
+				class="right-panel"
+				@list-click="handleListClick"
+			></RightPanel>
 		</portal>
 	</div>
 </template>
@@ -38,6 +42,7 @@ import {
 	ServiceNetworkStation,
 	Grouphall,
 	BranchCompany,
+	RightPanel,
 } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
@@ -62,6 +67,7 @@ export default {
 		Grouphall,
 		BranchCompany,
 		DataStatistics,
+		RightPanel,
 	},
 	data() {
 		return {
@@ -82,6 +88,9 @@ export default {
 			if (handler) {
 				this[handler](overlay);
 			}
+		},
+		handleListClick(item) {
+			console.log(item);
 		},
 		showThreeSocialLinkageDetail() {
 			//打开三社联动的弹框
@@ -121,8 +130,7 @@ export default {
 								img: '/static/images/project/04.jpg',
 							},
 						],
-						video:
-							'/static/videos/test.mov',
+						video: '/static/videos/test.mov',
 					});
 				});
 			});
