@@ -14,6 +14,9 @@
 				:is="config.component"
 				:overlayIcon="config.icon"
 				:overlayType="legend"
+				:showOverlayName="
+					config.showOverlayName ? config.showOverlayName : null
+				"
 				@overlay-click="handleOverlayClick"
 			/>
 		</template>
@@ -146,8 +149,8 @@ export default {
 		viewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
 			if (overlayType === 'WARN') {
-                this.showRoutePlan = true;
-                //和场景进行交互
+				this.showRoutePlan = true;
+				//和场景进行交互
 				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
 				//更新数据
 				this.$nextTick(() => {

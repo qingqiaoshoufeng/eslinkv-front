@@ -10,7 +10,12 @@
 			:visible="visible"
 			@click="$emit('click', item)"
 		>
-			<slot :data="item"></slot>
+			<slot :data="item">
+				<!-- 默认显示图标的名字 -->
+				<!-- <div class="sample-name" v-if="showOverlayName">
+					{{ item }}
+				</div> -->
+			</slot>
 		</Overlay>
 	</div>
 </template>
@@ -45,6 +50,10 @@ export default {
 		},
 		overlayIcon: String,
 		overlayType: String,
+		showOverlayName: {
+			type: Boolean,
+			default: true,
+		},
 	},
 	watch: {
 		visible: {
@@ -77,7 +86,7 @@ export default {
 		},
 		async getData(query) {
 			try {
-                this.list = await this.apiFun(query);
+				this.list = await this.apiFun(query);
 			} catch (err) {
 				console.log(err, 'err');
 			}
@@ -86,3 +95,14 @@ export default {
 };
 </script>
 
+<style lang="scss" scoped>
+.sample-name {
+	font-size: 18px;
+	color: #fff;
+	position: absolute;
+	white-space: nowrap;
+	bottom: -20px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+</style>
