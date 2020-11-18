@@ -63,7 +63,7 @@
 						if (store.scene.index === store.scene.list[index]) {
 							mutations.setSceneIndex(store.scene.list[0])
 						}
-						mutations.destroyScene(index)
+						mutations.deleteScene(index)
 					}
 				})
 			}

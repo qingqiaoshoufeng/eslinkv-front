@@ -13,5 +13,15 @@ export function getAirSupplyDataStatisticsList(data) {
         },
     })
 }
+export function getAirSupplyHighPressureList(data) {
+    return request({
+        url: '/map/airSupply/getAirSupplyHighPressureList',
+        method: 'get',
+        data: qs.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
 
 

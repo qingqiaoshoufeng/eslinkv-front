@@ -31,6 +31,7 @@ export default {
 				language: 'en',
 				playbackRates: [0.7, 1.0, 1.5, 2.0],
 				autoplay: true,
+				loop: true,
 				sources: [
 					{
 						type: 'video/mp4',

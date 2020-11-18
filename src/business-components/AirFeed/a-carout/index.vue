@@ -81,7 +81,7 @@
 			},
 			style() {
 				if (this.data) {
-					let rotate = ((this.data.value / 100) * 360) + 6
+					let rotate = ((this.data.value1 / 100) * 360) + 6
 					return {
 						transform: `translateX(-50%) rotate(${rotate}deg)`,
 					}
