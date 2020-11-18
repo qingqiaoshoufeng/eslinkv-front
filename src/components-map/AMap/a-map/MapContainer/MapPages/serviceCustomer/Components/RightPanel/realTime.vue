@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { SvgIcon } from "../../../../../components/";
+import { SvgIcon } from '../../../../../components/';
 
 export default {
 	name: 'HomeRealTimeList',
@@ -61,6 +61,7 @@ export default {
 		},
 	},
 	async created() {
+		console.log('awddddddddddddddddddddddddd');
 		this.list = await this.$sysApi.map.home.getWarningList();
 	},
 	watch: {

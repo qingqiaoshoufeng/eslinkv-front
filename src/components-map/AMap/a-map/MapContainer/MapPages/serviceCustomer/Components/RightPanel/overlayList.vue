@@ -14,12 +14,20 @@
 					class="panel-type-icon"
 				></SvgIcon>
 				<div class="content">
-					{{ item.name }}
+					<div>
+						{{ item.name }}
+					</div>
+
+					<div class="time">
+						{{ item.time }}
+					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="station-name">
-					{{ item.address }}
+					<div>
+						{{ item.address }}
+					</div>
 				</div>
 				<div
 					:class="[
@@ -73,6 +81,7 @@ export default {
 	},
 	methods: {
 		async getData() {
+			console.log('awddddddddddddddddddddddddd');
 			let list = await this.$sysApi.map.serve.getAllTypeStationList();
 			this.list = list
 				.map(item => {
@@ -119,6 +128,15 @@ export default {
 				display: flex;
 				align-items: center;
 				margin-left: 12px;
+				justify-content: space-between;
+				.time {
+					font-family: PingFang SC;
+					font-style: normal;
+					font-weight: normal;
+					font-size: 16px;
+					line-height: 16px;
+					color: #fff;
+				}
 			}
 			.station-name {
 				font-size: 18px;
