@@ -122,13 +122,7 @@ export default {
 							},
 							{
 								img: '/static/images/project/02.jpg',
-							},
-							{
-								img: '/static/images/project/03.jpg',
-							},
-							{
-								img: '/static/images/project/04.jpg',
-							},
+							}
 						],
 						video: '/static/videos/test.mov',
 					});

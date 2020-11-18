@@ -51,19 +51,8 @@ const value = {
 				{
 					img: '/static/images/project/02.jpg',
 				},
-				{
-					img: '/static/images/project/03.jpg',
-				},
-				{
-					img: '/static/images/project/04.jpg',
-				},
 			],
-			videoList: [
-                '/static/videos/test.mov',
-                'http://www.17sucai.com/preview/501914/2017-08-04/%E9%A1%B5%E9%9D%A2/media/mov_bbb.mp4',
-				'/static/videos/test.mov',
-                'http://vjs.zencdn.net/v/oceans.mp4'
-			],
+			videoList: ['/static/videos/test.mov',],
 		}),
 	},
 };
