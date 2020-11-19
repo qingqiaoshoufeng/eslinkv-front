@@ -17,6 +17,7 @@ export const OVERLAYINFOMAP_ICCUSTOMER = {
 	ICcustomer: {
 		fields: {
 			name: {},
-		},
+        },
+        isShowMore:false
 	},
 }

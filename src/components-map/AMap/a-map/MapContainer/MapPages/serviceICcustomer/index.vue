@@ -23,6 +23,7 @@
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
+			@view-detail="viewOverlayDetail"
 		/>
 		<portal to="destination">
 			<DataStatistics :data="dataStatisticsList" />
@@ -51,7 +52,6 @@ export default {
 		RightPanel,
 	},
 	data() {
-		console.log('aaaaaa', OVERLAYINFOMAP_ICCUSTOMER);
 		return {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_ICCUSTOMER),
 			dataStatisticsList: [],
@@ -63,6 +63,17 @@ export default {
 		},
 		handleListClick(item) {
 			console.log(item);
+		},
+		viewOverlayDetail(overlay) {
+			let { overlayType } = overlay;
+				//和场景进行交互
+				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
+				//更新数据
+				this.$nextTick(() => {
+					AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
+                        GoldChart.instance.updateComponent(i)
+                    })
+                })
 		},
 	},
 	mounted() {
