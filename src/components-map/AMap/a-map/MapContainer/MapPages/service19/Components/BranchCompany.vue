@@ -33,7 +33,7 @@ export default {
 	},
 	data() {
 		return {
-			apiFun: this.$sysApi.map.serve.getBranchCompanyList,
+			apiFun: this.$sysApi.map.serve.getBranchCompanyWithDetialInfoList,
 		};
 	},
 };

@@ -24,6 +24,7 @@ export function getBranchCompanyList(data) {
         },
     })
 }
+// 服务网点
 export function getServiceNetworkStationList(data) {
     return request({
         url: '/map/serve/getServiceNetworkStationList',
@@ -90,3 +91,14 @@ export function getAllTypeStationList(data) {
         },
     })
 }
+export function getBranchCompanyWithDetialInfoList(data) {
+    return request({
+        url: '/map/serve/getBranchCompanyWithDetialInfoList',
+        method: 'get',
+        data: qs.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+
