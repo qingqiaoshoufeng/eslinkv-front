@@ -42,182 +42,186 @@
 	</div>
 </template>
 <script>
-import mixins from '../../mixins';
-import { getInput } from '../../../../lib';
-const config = {
-	animation: true,
-	config: {
-		desc: true,
-		timeDesc: true,
-	},
-};
-const configSource = {
-	config: {
-		fields: {
-			desc: getInput('desc', '描述'),
-			timeDesc: getInput('timeDesc', '时间'),
+	import mixins from '../../mixins';
+	import {getInput} from '../../../../lib';
+
+	const config = {
+		animation: true,
+		config: {
+			desc: true,
+			timeDesc: true,
 		},
-	},
-};
-const value = {
-	api: {
-		data: JSON.stringify({
-			time: 2020,
-			value: 375321809,
-		}),
-	},
-	config: {
-		timeDesc: 'xxxx年度',
-		desc: '累计接纳量(m3)',
-	},
-};
-export default {
-	data() {
-		return {
-			scrollList: new Int8Array(10),
-			transform: new Int8Array(9),
-		};
-	},
-	mixins: [mixins],
-	computed: {
-		statisticalVal() {
-			if (this.data) return this.data.value.toLocaleString().split('');
-			return [];
+	};
+	const configSource = {
+		config: {
+			fields: {
+				desc: getInput('desc', '描述'),
+				timeDesc: getInput('timeDesc', '时间'),
+			},
 		},
-		timeDesc() {
-			if (!this.data || !this.config.config) return '2020年度';
-			return this.config.config.timeDesc.replace('xxxx', this.data.time);
+	};
+	const value = {
+		api: {
+			data: JSON.stringify({
+				time: 2020,
+				value: 375321809,
+			}),
 		},
-		// 	timeDesc() {
-		// 	if (!this.data || this.config.config) return '2020年度';
-		// 	if (this.config.config.timeDesc.includes('xxxx')) {
-		// 		debugger;
-		// 		return this.config.config.timeDesc.replace(
-		// 			'xxxx',
-		// 			this.data.time
-		// 		);
-		// 	} else {
-		// 		return this.config.config.timeDesc;
-		// 	}
-		// },
-	},
-	methods: {
-		setNumberTransform() {
-			if (this.data) {
-				const numberArr = this.data.value.toLocaleString().split('');
-				this.transform = numberArr.map(item => item * 10);
-			}
+		config: {
+			timeDesc: 'xxxx年度',
+			desc: '累计接纳量(m3)',
 		},
-	},
-	watch: {
-		data: {
-			handler(val) {
-				if (val) {
-					this.setNumberTransform();
+	};
+	export default {
+		data() {
+			return {
+				scrollList: new Int8Array(10),
+				transform: new Int8Array(9),
+			};
+		},
+		mixins: [mixins],
+		computed: {
+			statisticalVal() {
+				if (this.data) return this.data.value.toLocaleString().split('');
+				return [];
+			},
+			timeDesc() {
+				if (!this.data || !this.config.config) return '2020年度';
+				return this.config.config.timeDesc.replace('xxxx', this.data.time);
+			},
+			// 	timeDesc() {
+			// 	if (!this.data || this.config.config) return '2020年度';
+			// 	if (this.config.config.timeDesc.includes('xxxx')) {
+			// 		debugger;
+			// 		return this.config.config.timeDesc.replace(
+			// 			'xxxx',
+			// 			this.data.time
+			// 		);
+			// 	} else {
+			// 		return this.config.config.timeDesc;
+			// 	}
+			// },
+		},
+		methods: {
+			setNumberTransform() {
+				if (this.data) {
+					const numberArr = this.data.value.toLocaleString().split('');
+					this.transform = numberArr.map(item => item * 10);
 				}
 			},
-			deep: true,
 		},
-	},
-	created() {
-		this.configSource = this.parseConfigSource(config, configSource);
-		this.configValue = this.parseConfigValue(config, value);
-	},
-	mounted() {
-		setTimeout(() => {
-			this.setNumberTransform();
-		}, 500);
-	},
-};
+		watch: {
+			data: {
+				handler(val) {
+					if (val) {
+						this.setNumberTransform();
+					}
+				},
+				deep: true,
+			},
+		},
+		created() {
+			this.configSource = this.parseConfigSource(config, configSource);
+			this.configValue = this.parseConfigValue(config, value);
+		},
+		mounted() {
+			setTimeout(() => {
+				this.setNumberTransform();
+			}, 500);
+		},
+	};
 </script>
 <style lang="scss">
-.statistical-box {
-	width: 100%;
-	height: 100%;
-	display: flex;
+	.statistical-box {
+		width: 100%;
+		height: 100%;
+		display: flex;
 
-	.left {
-		min-width: 180px;
-		height: 80px;
+		.left {
+			min-width: 180px;
+			height: 80px;
 
-		.time {
-			width: 100%;
-			height: 32px;
-			line-height: 32px;
-			font-size: 32px;
-			font-style: normal;
-			font-weight: 600;
-			letter-spacing: 0;
-			text-align: right;
-			color: #fff;
-			margin-top: 11px;
+			.time {
+				width: 100%;
+				height: 32px;
+				line-height: 32px;
+				font-size: 32px;
+				font-style: normal;
+				font-weight: 600;
+				letter-spacing: 0;
+				text-align: right;
+				color: #fff;
+				margin-top: 11px;
+			}
+
+			.decs {
+				width: 100%;
+				font-size: 24px;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 24px;
+				letter-spacing: 0;
+				text-align: right;
+				color: rgba(255, 255, 255, 0.75);
+				margin-top: 16px;
+			}
 		}
 
-		.decs {
-			width: 100%;
-			font-size: 24px;
-			font-style: normal;
-			font-weight: 400;
-			line-height: 24px;
-			letter-spacing: 0;
-			text-align: right;
-			color: rgba(255, 255, 255, 0.75);
-			margin-top: 16px;
-		}
-	}
+		.right {
+			flex: 1;
 
-	.right {
-		flex: 1;
+			.value {
+				width: 100%;
+				height: 100%;
+				display: flex;
+				align-items: center;
 
-		.value {
-			width: 100%;
-			height: 100%;
-			display: flex;
-			align-items: center;
-
-			.item {
-				height: 80px;
-				width: 56px;
-				margin: 0 8px;
-
-				.scroll-box {
+				.item {
 					height: 80px;
 					width: 56px;
-					overflow: hidden;
+					margin: 0 8px;
 
-					.scroll-list {
-						display: flex;
-						flex-direction: column;
-						transition: transform 1s ease-in-out;
+					.scroll-box {
+						height: 80px;
+						width: 56px;
+						overflow: hidden;
 
-						.scroll-item {
-							height: 80px;
-							width: 56px;
-							border-radius: 2px;
-							background-image: url('/static/images/airfeed/statistical.svg');
-							line-height: 80px;
-							text-align: center;
-							font-size: 48px;
-							font-style: normal;
-							font-weight: 700;
-							color: #fff;
+						.scroll-list {
+							display: flex;
+							flex-direction: column;
+							transition: transform 1s ease-in-out;
+
+							.scroll-item {
+								height: 80px;
+								width: 56px;
+								border-radius: 2px;
+								background-image: url('/static/images/airfeed/statistical.svg');
+								line-height: 80px;
+								background-repeat: no-repeat;
+								background-position: 1px 1px;
+								background-size: cover;
+								text-align: center;
+								font-size: 48px;
+								font-style: normal;
+								font-weight: 700;
+								color: #fff;
+							}
 						}
 					}
 				}
-			}
 
-			.comma {
-				width: 12px;
-				height: 80px;
-				font-size: 48px;
-				font-style: normal;
-				font-weight: 700;
-				color: #fff;
-				text-align: center;
-				line-height: 80px;
+				.comma {
+					width: 12px;
+					height: 80px;
+					font-size: 48px;
+					font-style: normal;
+					font-weight: 700;
+					color: #fff;
+					text-align: center;
+					line-height: 80px;
+				}
 			}
 		}
 	}
-}
 </style>
 

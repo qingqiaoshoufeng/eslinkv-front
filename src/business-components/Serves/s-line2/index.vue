@@ -1,7 +1,6 @@
 <template>
 	<div class="widget-part" :style="styles" v-if="data">
 		<div class="chart" :id="id" />
-    <div class="dot"></div>
 	</div>
 </template>
 <script>
@@ -14,31 +13,35 @@ const config = {
   config: {
     color1: true,
     color2: true,
-    desc1: true,
-    desc2: true,
+    lineName1: true,
+    lineName2: true,
+    unit: true
   },
 };
 const value = {
 	api: {
 		data: JSON.stringify({
-			value1: 534,
-      value2: 178
+      xNames: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+      value1: [10, 18, 5, 23, 14, 40, 58, 50, 45, 56, 53, 47, 45, 65, 55, 50],
+      value2: [23, 60, 20, 36, 23, 58, 44, 76, 68, 76, 73, 68, 65, 85, 75, 70]
 		})
 	},
   config: {
-    color1: '#00FFCF',
-    color2: '#E5615B',
-    desc1: '已受理',
-    desc2: '已办结',
+	  color1: '#2C99FF',
+	  color2: '#E5615B',
+    lineName1: '今年',
+    lineName2: '去年',
+    unit: '单'
   }
 }
 const configSource = {
   config: {
     fields: {
-      color1: getInput('color1', '扇形1颜色'),
-      color2: getInput('color2', '扇形2颜色'),
-      desc1: getInput('desc1', '扇形1名称'),
-      desc2: getInput('desc2', '扇形2名称'),
+      color1: getInput('color1', '折线1颜色'),
+      color2: getInput('color2', '折线2颜色'),
+      lineName1: getInput('lineName1', '折线1名称'),
+      lineName2: getInput('lineName2', '折线2名称'),
+      unit: getInput('unit', '单位')
     }
   },
 }
@@ -46,7 +49,7 @@ export default {
 	mixins: [mixins],
 	methods: {
 		setOption(data) {
-			this.instance && this.instance.setOption(getOption(this.data.value1, this.data.value2, this.config.config))
+			this.instance && this.instance.setOption(getOption(this.data, this.config.config))
 		}
 	},
 	watch: {
@@ -73,22 +76,6 @@ export default {
 .chart {
   width: 100%;
 	height: 100%;
-  background: url('/static/icons/ellipse-dashed.svg') no-repeat center;
-  background-size: 128px 128px;
-  position: relative;
-}
-.dot {
-  width: 24px;
-  height: 24px;
-  background: #687692;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  border-radius: 50%;
-  z-index: 1;
 }
 
 </style>
