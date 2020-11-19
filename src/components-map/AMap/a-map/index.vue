@@ -55,7 +55,7 @@ export default {
 			console.log(index);
 			let pageName = sceneIndexMap[index] || '';
 			// if (pageName) {
-				bus.$emit('currentSceneChange', pageName);
+			bus.$emit('currentSceneChange', pageName);
 			// }
 		},
 	},

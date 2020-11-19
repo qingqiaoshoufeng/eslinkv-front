@@ -123,9 +123,9 @@ export default {
 				display: flex;
 				align-items: center;
 				.level {
-					width: 12px;
-					height: 16px;
-					line-height: 16px;
+					width: 20px;
+					height: 24px;
+					line-height: 24px;
 					margin-left: 8px;
 					text-align: center;
 				}

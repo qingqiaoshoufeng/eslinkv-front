@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="ICcustomer1">
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
@@ -66,14 +66,14 @@ export default {
 		},
 		viewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
-				//和场景进行交互
-				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
-				//更新数据
-				this.$nextTick(() => {
-					AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
-                        GoldChart.instance.updateComponent(i)
-                    })
-                })
+			//和场景进行交互
+			GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
+			//更新数据
+			this.$nextTick(() => {
+				AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
+					GoldChart.instance.updateComponent(i);
+				});
+			});
 		},
 	},
 	mounted() {
