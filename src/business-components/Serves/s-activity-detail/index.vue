@@ -69,7 +69,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="./img/quota1.svg">
+									<img src="./img/quota2.svg">
 								</div>
 								<div>
 									<div class="quota-item-num font-num">{{ data&&data.uSaleNum }}</div>
@@ -78,7 +78,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="./img/quota1.svg">
+									<img src="./img/quota3.svg">
 								</div>
 								<div>
 									<div class="quota-item-num font-num">{{ data&&data.uSaleMoney }}</div>
@@ -93,7 +93,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="./img/quota1.svg">
+									<img src="./img/quota4.svg">
 								</div>
 								<div>
 									<div class="quota-item-num font-num">{{ data&&data.installNum }}</div>
@@ -102,7 +102,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="./img/quota1.svg">
+									<img src="./img/quota5.svg">
 								</div>
 								<div>
 									<div class="quota-item-num font-num">{{ data&&data.repairNum }}</div>
@@ -157,7 +157,7 @@
             杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份
             杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份`,
 				securityCheckRate: 90,
-				planCheckNum: 120,
+				planCheckNum: 160,
 				brochuresNum: 210,
 				uSaleNum: 64,
 				uSaleMoney: '24,910',
