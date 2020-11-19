@@ -6,7 +6,9 @@
 			visible,
 			apiFun,
 		}"
-		@click="marker => $emit('overlay-click', marker, overlayType)"
+		ref="BranchCompanyList"
+		@initComplete="initComplete"
+		@click="overlayClickInner"
 	/>
 </template>
 <script>
@@ -35,6 +37,44 @@ export default {
 		return {
 			apiFun: this.$sysApi.map.serve.getBranchCompanyList,
 		};
+	},
+	methods: {
+		overlayClickInner(marker) {
+			// if (this.timer) {
+			// 	clearInterval(this.timer);
+			// 	this.timer = null;
+			// }
+			// this.$emit('overlay-click', marker, this.overlayType, false, false);
+		},
+		initComplete() {
+			this.startCarousel();
+		},
+		startCarousel() {
+			let data = this.$refs.BranchCompanyList.list;
+			let dataLen = data.length;
+			let i = 0;
+			let beforeI = -1;
+			let { overlayType } = this;
+			this.timer = setInterval(() => {
+				this.$emit('overlay-click', data[i], overlayType, false, false);
+				this.$set(data[i], 'active', true);
+				if (beforeI > -1) {
+					data[beforeI].active = false;
+				}
+				beforeI = i;
+				if (i < dataLen - 1) {
+					i++;
+				} else {
+					i = 0;
+				}
+			}, 5000);
+		},
+	},
+	beforeDestroy() {
+		if (this.timer) {
+			clearInterval(this.timer);
+			this.timer = null;
+		}
 	},
 };
 </script>

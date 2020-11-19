@@ -10,11 +10,11 @@ export default {
 		async drawLine() {
 			this.instanceArr = [];
             let data = await this.$sysApi.map.home.getHighPressureLineProcess();
-            console.log('suyan')
 			data.forEach(line => {
 				let polyLine = new AMap.Polyline({
 					...line,
-					zIndex: 200,
+                    zIndex: 200,
+                    strokeWeight:4
 				});
 				polyLine.setMap(this.$amap);
 				this.instanceArr.push(polyLine);

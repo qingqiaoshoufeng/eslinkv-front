@@ -13,7 +13,8 @@ export default {
 			data.forEach(line => {
 				let polyLine = new AMap.Polyline({
 					...line,
-					zIndex: 200,
+                    zIndex: 200,
+                    strokeWeight:4
 				});
 				polyLine.setMap(this.$amap);
 				this.instanceArr.push(polyLine);
