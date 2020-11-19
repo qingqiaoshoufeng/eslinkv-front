@@ -85,7 +85,7 @@ export default function (data, config) {
 			showBackground: true,
 			itemStyle: {
 				normal: {
-					color: config.color2,
+					color: config.color1,
 				}
 			},
 			barWidth: 10,
@@ -97,7 +97,7 @@ export default function (data, config) {
 			showBackground: true,
 			itemStyle: {
 				normal: {
-					color: config.color1,
+					color: config.color2,
 				}
 			},
 			data: data.yValue
