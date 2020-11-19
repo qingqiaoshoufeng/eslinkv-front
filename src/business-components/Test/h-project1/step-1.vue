@@ -65,6 +65,7 @@
 					font-style: normal;
 					font-weight: 600;
 					font-size: 32px;
+                    white-space: nowrap;
 					color: #FF7217;
 					line-height: 32px;
 					display: flex;
