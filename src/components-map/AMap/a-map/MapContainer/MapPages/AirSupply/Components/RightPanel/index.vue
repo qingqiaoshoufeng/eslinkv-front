@@ -68,8 +68,9 @@ export default {
 		},
 	},
 	methods: {
-		handleClick(item, index, overlayType) {
-			this.activeIndex = index;
+		handleClick(item, overlayType) {
+            console.log(overlayType,'overlayType')
+            item.overlayType = overlayType
 			this.$emit('overlay-click', item, overlayType || 'WARN');
 		},
 	},

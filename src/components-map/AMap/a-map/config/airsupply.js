@@ -214,8 +214,8 @@ export const OVERLAYINFOMAP = {
 				},
 				errColor: '#FF7217',
 			},
-        },
-        isShowMore:true
+		},
+		// isShowMore: true,
 	},
 }
 
@@ -305,6 +305,23 @@ export const OVERLAYINFOMAP_HOME = {
 				errColor: '#FF7217',
 			},
         },
-        isShowMore:true
+		isShowMore: true,
+	},
+	WARNEVENT: {
+		fields: {
+			content: {
+				style: {
+					fontSize: '24px',
+				},
+			},
+			address: {
+				style: {
+					fontSize: '18px',
+					color: '#00DDFF',
+				},
+				errColor: '#FF7217',
+			},
+		},
+		isShowMore: true,
 	},
 }
