@@ -9,15 +9,15 @@ export default {
 		AMapMarker,
 	},
 	render: (h, { props, data, listeners, scopedSlots, $slots }) => {
-		let { active, marker, visible = true } = props;
+		let {active=false, marker, visible = true } = props;
 		let { lat, lng, name, status, icon } = marker;
 		icon = icon ? icon.replace('tuli', '') : icon;
 		if (!lat || !lng) {
 			return null;
-		}
+        }
 		return (
 			<AMapMarker visible={visible} position={[lng, lat]} vid={name}>
-				<div class={['sample', { active: active }]} on={listeners}>
+				<div  class='sample' class={['sample',active?'active':'']} on={listeners}>
 					{icon && (
 						<SvgIcon class="sample-icon" icon-name={icon}></SvgIcon>
 					)}
@@ -41,10 +41,15 @@ export default {
 	img {
 		width: 100%;
 	}
-
-	&.active {
-		z-index: 999;
-		padding: 0;
+}
+.active {
+	z-index: 999;
+	padding: 0;
+	>.sample-icon {
+		font-size: 80px !important;
+	}
+	/deep/ .sample-icon {
+		bottom: -60px !important;
 	}
 }
 .sample-icon {

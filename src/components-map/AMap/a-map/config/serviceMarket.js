@@ -23,19 +23,23 @@ export const SERVICELEGENDMARKETMAP = {
 export const SERVICELEGEND_MARKET = {
     Grouphall: true,
     BranchCompany: true,
-    HeatMap: true
+    HeatMap: true,
 }
 
 //覆盖物详情
 export const OVERLAYINFOMAP_MARKET = {
     Grouphall: {
-        name: {},
+        fields: {
+            name: {},
+        },
     },
 
     BranchCompany: {
-        name: {},
+        fields: {
+            name: {},
+        },
     },
     HeatMap: {
-
-    }
+        fields: {},
+    },
 }

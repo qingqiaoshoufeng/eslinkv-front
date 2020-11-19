@@ -7,6 +7,7 @@
 				icon: overlayIcon,
 				...item,
 			}"
+            :active="item.active"
 			:visible="visible"
 			@click="$emit('click', item)"
 		>
@@ -57,12 +58,13 @@ export default {
 	},
 	watch: {
 		visible: {
-			handler(val) {
+			async handler(val) {
 				let { isRendered } = this;
 				if (val && !isRendered) {
-					this.init();
+					await this.getData(this.query);
+					this.isRendered = true;
 					this.$nextTick(() => {
-						this.isRendered = true;
+						this.$emit('initComplete');
 					});
 				}
 			},
@@ -72,7 +74,7 @@ export default {
 	created() {
 		let fun = findAmapRoot.bind(this);
 		this.$amap = fun();
-		this.init();
+		this.getData(this.query);
 	},
 	data() {
 		return {
@@ -81,9 +83,6 @@ export default {
 		};
 	},
 	methods: {
-		init() {
-			this.apiFun && this.getData(this.query);
-		},
 		async getData(query) {
 			try {
 				this.list = await this.apiFun(query);

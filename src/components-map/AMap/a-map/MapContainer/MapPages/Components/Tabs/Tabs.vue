@@ -15,7 +15,20 @@ export default {
 	data() {
 		return {
 			panes: [],
+			currentName: '',
+			activeTab: '',
 		};
+	},
+	watch: {
+		value(val) {
+			console.log(val, 'val');
+			this.currentName = val;
+		},
+		immedate: true,
+	},
+	created() {
+		this.currentName = this.value;
+		this.activeTab = this.value;
 	},
 
 	methods: {
@@ -37,7 +50,6 @@ export default {
 		},
 		handleTabClick(tab, tabName, event) {
 			this.setCurrentName(tabName);
-			this.$emit('tab-click', tab, event);
 		},
 		setCurrentName(value) {
 			this.$emit('input', value);
@@ -45,7 +57,7 @@ export default {
 	},
 
 	render(h) {
-		let { panes, handleTabClick } = this;
+		let { panes, handleTabClick, activeTab } = this;
 
 		const navData = {
 			props: {
@@ -71,7 +83,7 @@ export default {
 								on-click={e =>
 									handleTabClick(panel, panel.name, e)
 								}
-								class={panel.active ? 'active' : ''}
+								class={panel.name === activeTab ? 'active' : ''}
 							>
 								{panel.label}
 							</div>
@@ -79,7 +91,7 @@ export default {
 					})}
 				</div>
 			);
-        }
+		}
 		const panels = <div class="tabs__content">{this.$slots.default}</div>;
 
 		return <div class="tabs">{[header, panels]}</div>;
@@ -95,7 +107,7 @@ export default {
 	padding-top: 48px;
 	.tabs__header {
 		background: #051040;
-		border: 1px solid #1773C9;
+		border: 1px solid #1773c9;
 		box-sizing: border-box;
 		line-height: 46px;
 		display: flex;
@@ -124,7 +136,7 @@ export default {
 					transform: translateX(-50%);
 					border-width: 0 8px 4px;
 					border-style: solid;
-					border-color: transparent transparent #00DDFF;
+					border-color: transparent transparent #00ddff;
 				}
 			}
 		}
@@ -135,7 +147,7 @@ export default {
 			position: absolute;
 			top: 50%;
 			transform: translateY(-50%);
-			background: #1773C9;
+			background: #1773c9;
 			height: 24px;
 			width: 3px;
 		}
@@ -161,8 +173,8 @@ export default {
 		align-items: center;
 		padding-bottom: 8px;
 		border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-        position: absolute;
-        top:0;
+		position: absolute;
+		top: 0;
 
 		h2 {
 			font-weight: 600;

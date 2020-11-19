@@ -14,6 +14,7 @@
 				:overlayIcon="config.icon"
 				:overlayType="legend"
 				:is="config.component"
+                
 				@overlay-click="handleOverlayClick"
 			/>
 		</template>
@@ -60,6 +61,13 @@ export default {
 	methods: {
 		async getDataStatisticsList() {
 			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
+		},
+		closeOverlayDetail(done) {
+			this.showOverlayDetail = false;
+			this.activeOverlay = {};
+			this.$emit('close');
+            this.$amap.setZoom(11, 100);
+			done();
 		},
 	},
 	mounted() {

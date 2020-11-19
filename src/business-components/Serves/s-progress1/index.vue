@@ -79,7 +79,7 @@
 					if (val) {
 						let realArr = []
 						const list = val.reduce((initVal, val) => {
-							initVal.push(val?.value || 0)
+							initVal.push(val.value || 0)
 							return initVal
 						}, [])
 						const max = Math.max(...list)
@@ -87,13 +87,12 @@
 						val.forEach(item => {
 							realArr.push(new Int8Array(Math.ceil(item.value / max * 50)))
 						})
-						console.log(realArr)
 						this.realArr = realArr
 					}
 				},
+				immediate: true,
+				deep: true,
 			},
-			immediate: true,
-			deep: true,
 		},
 		methods: {
 			parseColor(hexStr) {

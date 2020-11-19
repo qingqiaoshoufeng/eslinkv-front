@@ -1,7 +1,6 @@
 <template>
 	<div class="widget-part pos-r" :style="`${styles};top:0;${inPreview?'pointer-events: none;':''}`">
 		<div class="h-top-bg1">
-			{{readonly}}
 		</div>
 	</div>
 </template>
