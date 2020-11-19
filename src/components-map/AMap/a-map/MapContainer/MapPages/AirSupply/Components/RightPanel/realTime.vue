@@ -1,7 +1,7 @@
 <template>
 	<div class="list">
 		<div
-			@click="handleClick(item, index,'WARN')"
+			@click="handleClick(item, index, 'WARN')"
 			v-for="(item, index) in list"
 			:key="index"
 			class="list-item"
@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import { SvgIcon } from "../../../../../components/";
+import { SvgIcon } from '../../../../../components/';
 
 export default {
 	name: 'HomeRealTimeList',
@@ -78,7 +78,7 @@ export default {
 	methods: {
 		handleClick(item, index) {
 			this.activeIndex = index;
-            this.$emit('change', item);
+			this.$emit('change', item);
 		},
 	},
 };
@@ -118,6 +118,12 @@ export default {
 				margin-left: 36px;
 			}
 		}
+	}
+	.status-suc {
+		color: #00ddff;
+	}
+	.status-err {
+		color: #ff7217;
 	}
 }
 </style>

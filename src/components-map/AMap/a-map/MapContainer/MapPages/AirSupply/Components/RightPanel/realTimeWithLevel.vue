@@ -1,7 +1,7 @@
 <template>
 	<div class="list">
 		<div
-			@click="handleClick(item, index,'WARN')"
+			@click="handleClick(item, index, 'WARN')"
 			v-for="(item, index) in list"
 			:key="index"
 			class="list-item"
@@ -16,7 +16,16 @@
 				></SvgIcon>
 				<div class="content">
 					{{ item.content }}
-					<div class="level first">{{ item.level }}</div>
+					<div
+						class="level"
+						:class="{
+							first: item.level === 1,
+							second: item.level === 2,
+							third: item.level === 3,
+						}"
+					>
+						{{ item.level }}
+					</div>
 				</div>
 				<div>
 					{{ item.time }}
@@ -118,6 +127,7 @@ export default {
 					height: 16px;
 					line-height: 16px;
 					margin-left: 8px;
+					text-align: center;
 				}
 				.first {
 					background: #9e1a14;
@@ -136,6 +146,12 @@ export default {
 				margin-left: 36px;
 			}
 		}
+	}
+	.status-suc {
+		color: #00ddff;
+	}
+	.status-err {
+		color: #ff7217;
 	}
 }
 </style>
