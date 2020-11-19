@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="ICcustomer1">
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
@@ -23,6 +23,7 @@
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
+			class=""
 		/>
 		<portal to="destination">
 			<DataStatistics :data="dataStatisticsList" />

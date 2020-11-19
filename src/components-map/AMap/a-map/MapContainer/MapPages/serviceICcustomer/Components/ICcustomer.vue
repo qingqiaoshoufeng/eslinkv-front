@@ -1,11 +1,13 @@
 <template>
 	<BaseOverlay
+		class="ICcustomer1"
 		v-bind="{
 			overlayIcon,
 			overlayType,
 			visible,
 			apiFun,
 		}"
+		:showOverlayName="false"
 		@click="marker => $emit('overlay-click', marker, 'ICcustomer')"
 	/>
 </template>
