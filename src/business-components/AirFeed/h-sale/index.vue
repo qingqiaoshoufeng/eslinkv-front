@@ -408,7 +408,7 @@ export default {
 .x-axis {
 	position: absolute;
 	z-index: 999;
-  bottom: 0;
+  bottom: 10px;
 	left: 50px;
 	right: 50px;
 	background: rgba(0, 87, 169, 0.2);
