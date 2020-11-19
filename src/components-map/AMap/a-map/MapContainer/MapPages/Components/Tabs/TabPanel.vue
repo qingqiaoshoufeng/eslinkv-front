@@ -28,9 +28,10 @@
 
     computed: {
       active() {
-        const active = this.$parent.value === this.name;
+        const active = this.$parent.currentName === this.name;
         if (active) {
           this.loaded = true;
+          this.$parent.activeTab = this.name
         }
         return active;
       }

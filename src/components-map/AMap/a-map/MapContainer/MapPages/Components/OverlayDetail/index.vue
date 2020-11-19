@@ -11,7 +11,7 @@
 			<slot>
 				<div
 					class="info-item"
-					v-for="(info, prop) in overlayTypeInfo"
+					v-for="(info, prop) in overlayTypeInfo.fields"
 					:style="{
 						...info.style,
 						color:
@@ -27,7 +27,7 @@
 				</div>
 				<div
 					class="btn"
-					v-if="overlayTypeInfo.showMore"
+					v-if="overlayTypeInfo.isShowMore"
 					@click="handleViewDetail(overlay)"
 				>
 					查看详情

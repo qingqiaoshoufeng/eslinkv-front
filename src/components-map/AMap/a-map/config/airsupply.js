@@ -177,98 +177,134 @@ export const AIRSUPPLYLEGEND_LNG = {
 
 export const OVERLAYINFOMAP = {
 	GASSTATION: {
-		name: {
-			style: {
-				fontSize: '24px',
+		fields: {
+			name: {
+				style: {
+					fontSize: '24px',
+				},
 			},
-		},
-		inlet: {
-			style: {
-				fontSize: '18px',
+			inlet: {
+				style: {
+					fontSize: '18px',
+				},
 			},
 		},
 	},
 	SURGESTATION: {
-		name: {},
+		fields: {
+			name: {},
+		},
 	},
 	INSPECTIONCAR: {
-		name: {},
+		fields: {
+			name: {},
+		},
 	},
 	WARN: {
-		content: {
-			style: {
-				fontSize: '24px',
+		fields: {
+			content: {
+				style: {
+					fontSize: '24px',
+				},
 			},
-		},
-		address: {
-			style: {
-				fontSize: '18px',
-				color: '#00DDFF',
+			address: {
+				style: {
+					fontSize: '18px',
+					color: '#00DDFF',
+				},
+				errColor: '#FF7217',
 			},
-			errColor: '#FF7217',
-		},
+        },
+        isShowMore:true
 	},
 }
 
 //覆盖物详情
 export const OVERLAYINFOMAP_HOME = {
 	InspectionPerson: {
-		employeename: {},
+		fields: {
+			employeename: {},
+		},
 	},
 	InspectionCar: {
-		name: {},
+		fields: {
+			name: {},
+		},
 	},
 	GasStation: {
-		name: {
-			style: {
-				fontSize: '24px',
+		fields: {
+			name: {
+				style: {
+					fontSize: '24px',
+				},
 			},
-		},
-		inlet: {
-			style: {
-				fontSize: '18px',
+			inlet: {
+				style: {
+					fontSize: '18px',
+				},
 			},
 		},
 	},
 	PressureRegulatingStation: {
-		name: {},
+		fields: {
+			name: {},
+		},
 	},
 	EmergencyAirSourceStation: {
-		name: {},
+		fields: {
+			name: {},
+		},
 	},
 	ComprehensiveServiceStation: {
-		name: {},
+		fields: {
+			name: {},
+		},
 	},
 	PipeManageMentStation: {
-		name: {},
+		fields: {
+			name: {},
+		},
 	},
 	UndergroundRepairStation: {
-		name: {},
+		fields: {
+			name: {},
+		},
 	},
 	LNGStation: {
-		name: {},
+		fields: {
+			name: {},
+		},
 	},
 	LiquefiedGasStation: {
-		name: {},
+		fields: {
+			name: {},
+		},
 	},
 	NaturalGasStation: {
-		name: {},
+		fields: {
+			name: {},
+		},
 	},
 	DistributedEnergyResource: {
-		name: {},
+		fields: {
+			name: {},
+		},
 	},
 	WARN: {
-		content: {
-			style: {
-				fontSize: '24px',
+		fields: {
+			content: {
+				style: {
+					fontSize: '24px',
+				},
 			},
-		},
-		address: {
-			style: {
-				fontSize: '18px',
-				color: '#00DDFF',
+			address: {
+				style: {
+					fontSize: '18px',
+					color: '#00DDFF',
+				},
+				errColor: '#FF7217',
 			},
-			errColor: '#FF7217',
-		},
+        },
+        isShowMore:true
 	},
 }
