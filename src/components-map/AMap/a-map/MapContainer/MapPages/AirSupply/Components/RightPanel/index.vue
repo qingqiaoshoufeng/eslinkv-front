@@ -9,7 +9,7 @@
 				name="realTimeWithLevel"
 				label="工艺报警"
 			>
-				<realTimeWithLevel @change="handleClick" />
+				<realTimeWithLevel />
 			</TabPanel>
 			<TabPanel key="realTime" name="realTime" label="事件报警" lazy>
 				<realTime @change="handleClick" />
