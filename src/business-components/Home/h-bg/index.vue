@@ -11,9 +11,6 @@
 			<transition name="slide-down">
 				<h-bg-54441 v-if="status54441" :status="status54441" :close="close54441"/>
 			</transition>
-			<transition name="slide-down">
-				<h-bg-video v-if="statusVideo" :status="statusVideo" :close="closeVideo"/>
-			</transition>
 			<ul class="h-bg-nav pos-a fn-flex flex-row">
 				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('nn16rowdl5r')">
 					<img src="./img/nav-1.svg"/>
@@ -39,7 +36,6 @@
 	import mixins from '../../mixins'
 	import GoldChart from '../../../openApi'
 	import hBg54441 from './h-bg-54441'
-	import hBgVideo from './h-bg-video'
 
 	const config = {animation: true}
 	export default {
@@ -51,7 +47,7 @@
 		},
 		mixins: [mixins],
 		components: {
-			hBg54441, hBgVideo
+			hBg54441
 		},
 		created() {
 			this.configSource = this.parseConfigSource(config)
@@ -67,7 +63,7 @@
 				this.status54441 = true
 			},
 			openVideo() {
-				this.statusVideo = true
+				GoldChart.scene.createSceneInstance('grdnn9tiey')
 			},
 			close54441() {
 				this.status54441 = false
