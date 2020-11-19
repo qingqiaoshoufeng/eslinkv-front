@@ -98,7 +98,7 @@ export default {
 			this.init();
 		},
 		init() {
-			this.gasPercent = this?.data || [];
+			this.gasPercent = this.data || [];
 			this.drawLeftBottmRightTop(this.gasPercent);
 		},
 		drawLeftBottmRightTop(attr) {

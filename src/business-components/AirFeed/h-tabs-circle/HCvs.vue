@@ -313,7 +313,7 @@ export default {
 			}, 0)
 		},
 		getCtx() {
-			const len = this?.source?.length ?? 0;
+			const len = this.source?.length ?? 0;
 			let width = 719;
 			let height = 163;
 			if(len > 3) {

@@ -65,7 +65,7 @@ export default {
 		},
 		autoCheckTab(){
 			const { interval = 2500 } = this.config || {};
-			const maxIndex = this?.source?.length ?  this?.source?.length - 1 : 0;
+			const maxIndex = this.source?.length ?  this.source?.length - 1 : 0;
 
 			let count = this.actived !== null && this.actived  || 0;
 			this.intervalId = setInterval(() => {
@@ -97,7 +97,7 @@ export default {
 			if(this.waitIntervalId){
 				this.clearWaitInterval();
 			}
-			const { wait = 30000 } = this?.config || {};
+			const { wait = 30000 } = this.config || {};
 			let count = 0;
 			this.waitIntervalId = setInterval(() => {
 				count += 1000;
