@@ -1,5 +1,5 @@
 import {styleParser, widgetMixin} from '../../lib'
-
+import {store} from '../openApi';
 import axios from 'axios'
 import jsonic from 'jsonic'
 
@@ -13,6 +13,7 @@ export default {
 			animateTimer: null,
 			animateActiveIndex: -1,
 			output: null,
+			inPreview: store.scene.status === 'inPreview',
 		}
 	},
 	mixins: [widgetMixin],

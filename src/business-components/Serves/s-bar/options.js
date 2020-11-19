@@ -13,12 +13,20 @@ export default {
         axisLabel:{
             textStyle: {
                 color: '#fff',
+				fontSize: 16,
+				lineHeight: 16
             }
         },
     },
     yAxis: {
         type: 'value',
         show: true,
+		splitLine: {
+			lineStyle: {
+				type: "solid",
+				color: "rgba(199, 209, 219, 0.2)"
+			}
+		},
         axisTick: {
             show: false,
             textStyle: {
@@ -28,13 +36,15 @@ export default {
         axisLabel:{
             textStyle: {
                 color: '#fff',
+				fontSize: 16,
+				lineHeight: 16
             }
         },
         axisLine: {
             show: false,
         }
     },
-    barWidth: 4,
+    barWidth: 6,
     barGap: 0.5,
     series: [{
         type: 'bar',

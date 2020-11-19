@@ -1,5 +1,8 @@
 <template>
-	<div class="data_statistics_box" :class="`position-${position}`">
+	<div
+		class="data_statistics_box animate__animated"
+		:class="[`position-${position}`, animate]"
+	>
 		<div
 			class="data_statistics_item"
 			v-for="(item, index) in data"
@@ -24,6 +27,15 @@ export default {
 			default: [],
 		},
 	},
+	computed: {
+		animate() {
+            let { position } = this;
+			return (
+				'animate__fadeIn' +
+				(position.charAt(0).toUpperCase() + position.slice(1))
+			);
+		},
+	},
 	components: {},
 	data() {
 		return {};
@@ -40,7 +52,9 @@ export default {
 	.data_statistics_item {
 		display: flex;
 		flex-direction: column;
-		margin-top: 36px;
+		&:not(:first-child) {
+			margin-top: 36px;
+		}
 		.value {
 			height: 48px;
 			font-family: DIN Alternate;

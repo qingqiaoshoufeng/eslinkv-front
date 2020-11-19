@@ -35,6 +35,9 @@
 						<h2 class="font-num">{{data&&data.value[animateActiveIndex].month2}}</h2>
 						<p class="pos-a text-center">月度环比</p>
 					</div>
+					<div class="h-project-2-img">
+						<img src="/static/icons/h-project2-1.png" alt=""/>
+					</div>
 				</div>
 			</div>
 			<div class="h-project-2-right text-left">
@@ -192,6 +195,7 @@
 			font-weight: normal;
 			color: #00DDFF;
 			margin-bottom: 8px;
+			white-space: nowrap;
 		}
 
 		h2 {
@@ -322,18 +326,27 @@
 		height: 96px;
 		margin-right: 12px;
 		margin-left: 12px;
-		background-image: url('/static/icons/h-project-2.svg');
+		background-image: url('/static/icons/h-project2-2.svg');
 
 		i {
 			width: 32px;
 			height: 91px;
 			left: 4px;
 			bottom: 4px;
-			background-image: url('/static/icons/h-project-3.svg');
+			background-image: url('/static/icons/h-project2-3.svg');
 			z-index: 9;
 			background-position: bottom;
 			transition: all .3s;
 			background-repeat: no-repeat;
+		}
+	}
+
+	.h-project-2-img {
+		position: relative;
+		left: 196px;
+		img {
+			width: 200px;
+			height: 101px;
 		}
 	}
 

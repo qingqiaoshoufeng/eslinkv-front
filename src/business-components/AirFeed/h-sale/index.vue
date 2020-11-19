@@ -4,28 +4,30 @@
 			<div class="title-txt">LNG宁波挂牌价(元/吨)</div>
 			<div class="num">{{data.lngPrice}}</div>
 		</div>
-		<ul class="jars">
-			<li
-				v-for="(k, i) in data.station"
-				:key="k.name"
-				:class="{active: currentIndex === i}"
-				@click="changeStation(i)"
-			>
-				<div class="jar">
-					<div class="jar-heart">
-						<div class="water" :style="{top: (100-k.percent) + '%'}"></div>
-						<div class="jar-num font-num">{{k.percent}}%</div>
-					</div>
-				</div>
-				<div class="li-num">{{k.value}}</div>
-				<div class="li-name">{{k.name}}</div>
-				<div class="li-unit">储气量(m3)</div>
-				<div class="active-dot" v-show="currentIndex === i">
-					<div class="dot"></div>
-				</div>
-			</li>
-		</ul>
-		<div class="split-line"></div>
+		<div class="ul-wrap">
+      <ul class="jars" :style="{transform: `translateX(${-992*groupIndex}px)`}">
+        <li
+            v-for="(k, i) in data.station"
+            :key="i"
+            :class="{active: currentIndex === i}"
+            @click="changeStation(i)"
+        >
+          <div class="jar">
+            <div class="jar-heart">
+              <div class="water" :style="{top: (100-k.percent) + '%'}"></div>
+              <div class="jar-num font-num">{{k.percent}}%</div>
+            </div>
+          </div>
+          <div class="li-num">{{k.value}}</div>
+          <div class="li-name">{{k.name}}</div>
+          <div class="li-unit">储气量(m3)</div>
+          <div class="active-dot" v-show="currentIndex === i">
+            <div class="dot"></div>
+          </div>
+        </li>
+      </ul>
+      <div class="split-line" style="transform: translateY(-2px)"></div>
+    </div>
 		<div class="view">
 			<div class="titles">
 				<div>进出液</div>
@@ -94,6 +96,30 @@ const value = {
 					percent: 52,
 					value: '324,324',
 					chart: test
+				},
+				{
+					name: '西部站',
+					percent: 66,
+					value: '324,324',
+					chart: test
+				},
+				{
+					name: '门下站',
+					percent: 11,
+					value: '324,324',
+					chart: test
+				},
+				{
+					name: '西林站',
+					percent: 5,
+					value: '324,324',
+					chart: test
+				},
+				{
+					name: '望元站',
+					percent: 52,
+					value: '324,324',
+					chart: test
 				}
 			]
 		})
@@ -104,6 +130,7 @@ export default {
 	data () {
 		return {
 			currentIndex: 0,
+			groupIndex: 0,
 			timer: null,
 			clickTimer: null,
 			isClick: false
@@ -111,8 +138,8 @@ export default {
 	},
 	computed: {
 		month () {
-			if (this.data && this.data.chart) {
-				return this.data.chart.map(v => v.name)
+			if (this.data) {
+				return this.data.station[this.currentIndex].chart.map(v => v.name)
 			}
 			return []
 		}
@@ -151,8 +178,12 @@ export default {
 	mounted() {
 		this.timer = setInterval(() => {
 			if (this.isClick) return
-			if (this.currentIndex === 4) {
-				this.currentIndex = 0
+      if (this.currentIndex === this.data.station.length - 1) {
+        this.currentIndex = 0
+        this.groupIndex = 0
+      } else if (this.currentIndex === (this.groupIndex * 5 + 4)) {
+        this.groupIndex++
+        this.currentIndex++
 			} else {
 				this.currentIndex++
 			}
@@ -192,11 +223,17 @@ export default {
 		color: #FEFFFF;
 	}
 }
+.ul-wrap {
+  overflow: hidden;
+}
 .jars {
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 22px;
-	li {
+  flex-wrap: nowrap;
+  transition: all 0.4s;
+  padding-bottom: 24px;
+  li {
+    flex: none;
 		position: relative;
 		height: 230px;
 		width: 160px;
@@ -204,6 +241,8 @@ export default {
 		background: linear-gradient(0deg, #001F6D 0%, rgba(0, 31, 109, 0) 100%);
 		box-sizing: border-box;
 		padding-top: 16px;
+    margin-right: 48px;
+    &:nth-child(5n){margin-right: 0;}
 		.jar {
 			position: relative;
 			width: 48px;
@@ -369,7 +408,7 @@ export default {
 .x-axis {
 	position: absolute;
 	z-index: 999;
-	top: 46.5%;
+  bottom: 0;
 	left: 50px;
 	right: 50px;
 	background: rgba(0, 87, 169, 0.2);

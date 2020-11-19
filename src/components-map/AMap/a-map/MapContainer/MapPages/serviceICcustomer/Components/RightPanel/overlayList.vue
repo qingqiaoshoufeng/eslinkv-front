@@ -81,7 +81,6 @@ export default {
 	},
 	methods: {
 		async getData() {
-			console.log('awddddddddddddddddddddddddd');
 			let list = await this.$sysApi.map.serve.getAllTypeStationList();
 			this.list = list
 				.map(item => {
