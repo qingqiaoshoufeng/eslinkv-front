@@ -24,4 +24,14 @@ export function getAirSupplyHighPressureList(data) {
     })
 }
 
+export function getEventWarningList(data) {
+    return request({
+        url: '/map/airSupply/getEventWarningList',
+        method: 'get',
+        data: qs.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
 

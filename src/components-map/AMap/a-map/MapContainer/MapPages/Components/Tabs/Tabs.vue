@@ -104,7 +104,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .tabs {
-	padding-top: 48px;
+	perspective: 0px;
+	padding-top: 0;
 	.tabs__header {
 		background: #051040;
 		border: 1px solid #1773c9;
@@ -112,7 +113,7 @@ export default {
 		line-height: 46px;
 		display: flex;
 		font-size: 24px;
-		position: absolute;
+		position: sticky;
 		top: 0;
 		right: 0;
 		left: 0;

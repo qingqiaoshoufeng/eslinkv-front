@@ -27,6 +27,7 @@
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
+			ref="OverlayDetail"
 		/>
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
@@ -34,7 +35,7 @@
 			<!-- 右侧列表 -->
 			<RightPanel
 				class="right-panel"
-                v-model="activeTab"
+				v-model="activeTab"
 				@overlay-click="handleOverlayClick"
 			></RightPanel>
 		</portal>
@@ -111,28 +112,28 @@ export default {
 			type: String,
 			default: '',
 		},
-    },
-    watch:{
-        currentScene(val){
-            let sceneMap = {
-                'airsupply-station':'realTimeWithLevel',
-                'airsupply-pipe':'realTime',
-                'airsupply-lng':'overlayList',
-                'airsupply-ucan':'overlayList'
-            }
-            this.activeTab = sceneMap[val]
-        },
-    },
+	},
+	watch: {
+		currentScene(val) {
+			let sceneMap = {
+				'airsupply-station': 'realTimeWithLevel',
+				'airsupply-pipe': 'realTime',
+				'airsupply-lng': 'overlayList',
+				'airsupply-ucan': 'overlayList',
+			};
+			this.activeTab = sceneMap[val];
+		},
+	},
 	created() {
-        this.$amap = this.$parent.$amap;
+		this.$amap = this.$parent.$amap;
 	},
 	data() {
 		return {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_HOME),
 			activeOverlay: {},
 			showOverlayDetail: false,
-            showRoutePlan: false,
-            activeTab:'realTimeWithLevel'
+			showRoutePlan: false,
+			activeTab: 'realTimeWithLevel',
 		};
 	},
 	methods: {
@@ -141,7 +142,7 @@ export default {
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
-			this.$amap.setZoom(14,100);
+			this.$amap.setZoom(14, 100);
 			if (isCenter) {
 				this.$nextTick(() => {
 					this.$amap.panTo([lng, lat], 100);
@@ -156,19 +157,20 @@ export default {
 			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-            this.$amap.setZoom(11,100);
+			this.$amap.setZoom(11, 100);
 			done();
 		},
 		viewOverlayDetail(overlay) {
-            let { overlayType } = overlay;
-            console.log(overlay,'overlay')
+			let { overlayType } = overlay;
+			console.log(overlay, 'overlay');
 			if (overlayType === 'WARNEVENT') {
-                console.log('渲染路径，23')
-                this.showRoutePlan = true;
-                console.log(overlay)
-                let {content,address} = overlay
+				console.log('渲染路径，23');
+				this.showRoutePlan = true;
+				console.log(overlay);
+				let { content, address } = overlay;
 				//和场景进行交互
 				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
+				// this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = false;
 				//更新数据
 				this.$nextTick(() => {
 					AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {

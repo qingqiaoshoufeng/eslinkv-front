@@ -73,10 +73,11 @@ export default {
 		return {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_CUSTOMER),
 			dataStatisticsList: [],
+			OverlayDetail: null,
 		};
 	},
 	created() {
-        this.$amap = this.$parent.$amap;
+		this.$amap = this.$parent.$amap;
 	},
 	methods: {
 		async getDataStatisticsList() {
@@ -84,6 +85,9 @@ export default {
 		},
 		toViewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
+			console.log(overlayType + 1111111111111);
+			console.log(overlay);
+			this.OverlayDetail = overlay;
 			let viewOverlayHandlerMap = {
 				ThreeSocialLinkage: 'showThreeSocialLinkageDetail',
 			};
@@ -102,7 +106,7 @@ export default {
 			this.$nextTick(() => {
 				THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
 					GoldChart.instance.updateComponent(i, {
-						title: '111桂花城紫云苑-杭燃服务进社区活动',
+						title: `${this.OverlayDetail.name}`,
 						startTime: '2020/10/01  08:30',
 						endTime: '2020/10/01  08:30',
 						place: '桂花城紫云苑',
@@ -131,7 +135,7 @@ export default {
 							},
 							{
 								img: '/static/images/project/04.jpg',
-							}
+							},
 						],
 						video: '/static/videos/1.mp4',
 					});

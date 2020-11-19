@@ -61,7 +61,7 @@ export default {
 		},
 	},
 	async created() {
-		this.list = await this.$sysApi.map.home.getWarningList();
+		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
 	},
 	watch: {
 		activeItem(val) {

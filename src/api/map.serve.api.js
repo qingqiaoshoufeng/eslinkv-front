@@ -102,3 +102,13 @@ export function getBranchCompanyWithDetialInfoList(data) {
     })
 }
 
+export function getStateList(data) {
+    return request({
+        url: '/map/serve/getStateList',
+        method: 'get',
+        data: qs.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}

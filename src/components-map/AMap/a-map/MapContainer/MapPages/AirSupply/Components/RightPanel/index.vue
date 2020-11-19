@@ -1,28 +1,23 @@
 <template>
-		<Tabs
-			class="tabs-container animate__animated animate__fadeInRight"
-			:value="value"
-			@input="val => $emit('input', val)"
+	<Tabs
+		class="tabs-container animate__animated animate__fadeInRight"
+		:value="value"
+		@input="val => $emit('input', val)"
+	>
+		<TabPanel
+			key="realTimeWithLevel"
+			name="realTimeWithLevel"
+			label="工艺报警"
 		>
-			<TabPanel
-				key="realTimeWithLevel"
-				name="realTimeWithLevel"
-				label="工艺报警"
-			>
-				<realTimeWithLevel />
-			</TabPanel>
-			<TabPanel key="realTime" name="realTime" label="事件报警" lazy>
-				<realTime @change="handleClick" />
-			</TabPanel>
-			<TabPanel
-				key="overlayList"
-				name="overlayList"
-				label="点位列表"
-				lazy
-			>
-				<overlayList @change="handleClick" />
-			</TabPanel>
-		</Tabs>
+			<realTimeWithLevel />
+		</TabPanel>
+		<TabPanel key="realTime" name="realTime" label="事件报警" lazy>
+			<realTime @change="handleClick" />
+		</TabPanel>
+		<TabPanel key="overlayList" name="overlayList" label="点位列表" lazy>
+			<overlayList @change="handleClick" />
+		</TabPanel>
+	</Tabs>
 </template>
 
 <script>
@@ -69,8 +64,8 @@ export default {
 	},
 	methods: {
 		handleClick(item, overlayType) {
-            console.log(overlayType,'overlayType')
-            item.overlayType = overlayType
+			console.log(overlayType, 'overlayType');
+			item.overlayType = overlayType;
 			this.$emit('overlay-click', item, overlayType || 'WARN');
 		},
 	},
