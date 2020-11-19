@@ -3,8 +3,8 @@ export default {
 	config: {
 		layout: {
 			size: {
-				width: 922,
-				height: 789
+				width: 992,
+				height: 795
 			},
 			position: {
 				value: 'relative'

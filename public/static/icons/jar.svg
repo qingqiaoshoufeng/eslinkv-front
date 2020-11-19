@@ -4,11 +4,4 @@
 <rect x="21.5" y="93.5" width="5" height="10" fill="#004A8E" stroke="#00DDFF"/>
 <rect x="14" y="11" width="19.5556" height="4.88889" rx="2.44444" fill="#00DDFF"/>
 <rect x="0.5" y="0.5" width="47" height="99" rx="7.5" fill="#001F6D" stroke="#00DDFF"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M7.50879 91C10.441 94.6578 14.9468 97 19.9995 97H27.9995C33.0523 97 37.558 94.6578 40.4903 91H7.50879Z" fill="url(#paint0_linear)"/>
-<defs>
-<linearGradient id="paint0_linear" x1="24" y1="91" x2="24" y2="97" gradientUnits="userSpaceOnUse">
-<stop stop-color="#00DDFF"/>
-<stop offset="1" stop-color="#00DDFF" stop-opacity="0"/>
-</linearGradient>
-</defs>
 </svg>

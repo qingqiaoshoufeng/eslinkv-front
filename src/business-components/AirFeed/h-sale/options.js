@@ -237,20 +237,20 @@ export default function (data) {
 				symbol: 'none',
 				itemStyle: {
 					color: "#fff",
-					borderColor: "#00FFCF",
+					borderColor: "#00DDFF",
 				},
 				lineStyle: {
-					color: "#00FFCF"
+					color: "#00DDFF"
 				},
 				smooth: true,
 				areaStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
 						offset: 0,
-						color: "rgba(0, 255, 207, 0.5)"
+						color: "rgba(0, 221, 255, 0.4)"
 					},
 						{
 							offset: 1,
-							color: "rgba(0, 255, 207, 0)"
+							color: "rgba(0, 221, 255, 0.1)"
 						}
 					], false)
 
