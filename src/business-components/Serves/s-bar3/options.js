@@ -48,6 +48,7 @@ export default function (data, config) {
 			}
 		}, {
 			name: '%',
+			nameLocation: 'start',
 			nameTextStyle: {
 				color: '#fff',
 				fontSize: 16,
