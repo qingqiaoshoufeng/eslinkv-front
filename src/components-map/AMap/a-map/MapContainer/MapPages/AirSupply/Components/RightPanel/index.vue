@@ -63,11 +63,9 @@ export default {
 		},
 	},
 	methods: {
-		handleClick(item, index, overlayType) {
-			console.log('余志强');
-			// console.log(this.$parent.$parent);
-			// this.$parent.$parent.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
-			this.activeIndex = index;
+		handleClick(item, overlayType) {
+			console.log(overlayType, 'overlayType');
+			item.overlayType = overlayType;
 			this.$emit('overlay-click', item, overlayType || 'WARN');
 		},
 	},

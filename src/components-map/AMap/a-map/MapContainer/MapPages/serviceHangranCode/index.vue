@@ -41,7 +41,7 @@ export default {
 	},
 	methods: {
 		async getDataStatisticsList() {
-			this.dataStatisticsList = await this.$sysApi.map.serve.getStateList();
+			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
 		},
 	},
 	mounted() {

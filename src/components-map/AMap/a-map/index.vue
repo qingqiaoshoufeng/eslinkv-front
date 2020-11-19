@@ -30,7 +30,8 @@ initAMapApiLoader({
 		'AMap.DistrictSearch',
 		'AMap.Driving',
 		'AMap.HeatMap',
-		'AMap.GeoJSON',
+        'AMap.GeoJSON',
+        'AMap.MoveAnimation'
 	],
 	uiVersion: '1.1.1',
 	v: '2.0',

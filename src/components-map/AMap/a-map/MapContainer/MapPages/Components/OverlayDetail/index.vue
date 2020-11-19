@@ -80,7 +80,7 @@ export default {
 						this.overlayInfoConfig[overlayType] || {};
 					this.overlay = {
 						...val,
-					};
+                    };
 					if (!this.rendered) {
 						this.rendered = true;
 					} else {

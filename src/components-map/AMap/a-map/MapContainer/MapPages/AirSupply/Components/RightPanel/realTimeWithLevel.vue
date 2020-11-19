@@ -88,7 +88,7 @@ export default {
 	methods: {
 		handleClick(item, index) {
 			this.activeIndex = index;
-			this.$emit('change', item);
+			this.$emit('change', item,'WARN');
 		},
 	},
 };

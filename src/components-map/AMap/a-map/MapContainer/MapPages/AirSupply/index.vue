@@ -30,7 +30,7 @@
 			ref="OverlayDetail"
 		/>
 		<!-- 路线规划 -->
-		<!-- <RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan> -->
+		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
 		<portal to="destination">
 			<!-- 右侧列表 -->
 			<RightPanel
@@ -151,7 +151,7 @@ export default {
 		},
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
-			if (overlayType === 'WARN') {
+			if (overlayType === 'WARNEVENT') {
 				GoldChart.scene.setSceneIndex(INDEXSCENEMAP[this.currentScene]);
 				this.showRoutePlan = false;
 			}
@@ -162,8 +162,12 @@ export default {
 		},
 		viewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
-			if (overlayType === 'WARN') {
+			console.log(overlay, 'overlay');
+			if (overlayType === 'WARNEVENT') {
+				console.log('渲染路径，23');
 				this.showRoutePlan = true;
+				console.log(overlay);
+				let { content, address } = overlay;
 				//和场景进行交互
 				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
 				// this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = false;
@@ -175,10 +179,10 @@ export default {
 							value: {
 								step1: {
 									time: new Date('2020-10-30 22:20') * 1,
-									des: '燃气泄漏',
+									des: content,
 									name: '王磊',
 									title: '报警人',
-									address: '江干区三里亭东苑',
+									address: address,
 								},
 								step2: {
 									time: new Date('2020-10-30 22:21') * 1,
