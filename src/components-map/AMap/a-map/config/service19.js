@@ -3,7 +3,7 @@ export const SERVICELEGEND19MAP = {
     BranchCompany: {
         label: '分公司',
         legendIcon: 'icontulifengongsi',
-        icon: 'iconfengongsi',
+        icon: 'iconfengongsi1',
         component: 'BranchCompany',
     },
 }
