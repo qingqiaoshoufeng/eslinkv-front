@@ -5,14 +5,78 @@
 </template>
 <script>
 	import mixins from '../../mixins';
-	import options from './options'
+	import getOption from './options'
 
 	const config = {animation: true}
 	const value = {
 		api: {
 			data: JSON.stringify({
-				links: options.series.links,
-				data: options.series.data
+				data: [
+          {
+            source: 'a',
+            sourceValue: 100,
+            target: 'a1',
+            value: 40,
+            lineStyle: {
+              opacity: 0.4,
+              color: '#4A7CDE'
+            }
+          }, {
+            source: 'a',
+            target: 'a2',
+            sourceValue: 100,
+            value: 30
+          }, {
+            source: 'a',
+            target: 'a3',
+            sourceValue: 100,
+            value: 30
+          }, {
+            source: 'b',
+            target: 'b1',
+            sourceValue: 40,
+            value: 20
+          }, {
+            source: 'b',
+            target: 'b2',
+            sourceValue: 40,
+            value: 20
+          }, {
+            source: 'c',
+            target: 'c1',
+            sourceValue: 20,
+            value: 8
+          }, {
+            source: 'c',
+            target: 'c2',
+            sourceValue: 20,
+            value: 2
+          }, {
+            source: 'c',
+            target: 'c3',
+            sourceValue: 20,
+            value: 2
+          }, {
+            source: 'c',
+            target: 'c4',
+            sourceValue: 20,
+            value: 2
+          }, {
+            source: 'c',
+            target: 'c5',
+            sourceValue: 20,
+            value: 2
+          }, {
+            source: 'c',
+            target: 'c6',
+            sourceValue: 20,
+            value: 2
+          }, {
+            source: 'c',
+            target: 'c7',
+            sourceValue: 20,
+            value: 2
+          }]
 			})
 		}
 	}
@@ -22,11 +86,7 @@
 		},
 		methods: {
 			setOption(data) {
-				options.series.links=this.data.links
-				options.series.data=this.data.data
-				this.instance && this.instance.setOption({
-					...options
-				})
+				this.instance && this.instance.setOption(getOption(JSON.parse(JSON.stringify(this.data.data))))
 			}
 		},
 		watch: {
