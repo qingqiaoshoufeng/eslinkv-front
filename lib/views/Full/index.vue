@@ -13,6 +13,7 @@
 <script>
 	import kanbanPreview from './preview-base.vue'
 	import {mutations} from '../../store'
+	import {getQueryString} from '../../utils'
 
 	export default {
 		components: {
@@ -65,6 +66,9 @@
 						mutations.initScene(value.scene)
 						mutations.listToObj(value)
 					})
+				}
+				if (getQueryString('scene')) {
+					mutations.setSceneIndex(getQueryString('scene'))
 				}
 			},
 			refill(value) {
