@@ -1,6 +1,6 @@
 <template>
-	<div class="widget-part pos-r" :style="`${styles};top:0;${inPreview?'pointer-events: none;':''}`">
-		<div class="h-left-bg2">
+	<div class="widget-part pos-r" :style="`${styles};top:0;}`">
+		<div class="h-bg1">
 		</div>
 	</div>
 </template>
@@ -21,11 +21,10 @@
 	}
 </script>
 <style lang="scss" scoped>
-	.h-left-bg2 {
-		pointer-events: none;
-		width: 400px;
+	.h-bg1 {
+		background-color: rgba(0, 0, 0, 0.8);
+		width: 3500px;
 		height: 1050px;
-		background: linear-gradient(90deg, rgba(0, 27, 98, 1) 0%, rgba(0, 27, 98, 0) 100%);
 	}
 
 </style>

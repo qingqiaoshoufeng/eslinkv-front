@@ -1,10 +1,9 @@
 export default {
-	label: 'LNG综合分析',
 	config: {
 		layout: {
 			size: {
-				width: 992,
-				height: 795
+				width: 1248,
+				height: 632
 			},
 			position: {
 				value: 'relative'

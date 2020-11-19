@@ -1,7 +1,6 @@
 <template>
 	<div class="widget-part pos-r" :style="`${styles};top:0;${inPreview?'pointer-events: none;':''}`">
 		<div class="h-top-bg1">
-			{{readonly}}
 		</div>
 	</div>
 </template>
@@ -24,7 +23,7 @@
 <style lang="scss" scoped>
 	.h-top-bg1 {
 		pointer-events: none;
-		background: linear-gradient(180deg, #040023 0%, rgba(4, 0, 35, 0.0001) 100%);
+		background: linear-gradient(180deg, rgba(0, 27, 98, 1) 0%, rgba(0, 27, 98, 0) 100%);
 		width: 3500px;
 		height: 200px;
 	}

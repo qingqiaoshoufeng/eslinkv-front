@@ -24,7 +24,9 @@
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
-		/>
+		>
+			<TipDetial :data="activeOverlay" />
+		</OverlayDetail>
 		<!-- 统计数据 -->
 		<portal to="destination">
 			<DataStatistics :position="'left'" :data="dataStatisticsList" />
@@ -33,7 +35,7 @@
 </template>
 <script>
 //页面覆盖物组件
-import { BranchCompany } from './Components/index.js';
+import { BranchCompany, TipDetial } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
@@ -48,6 +50,7 @@ export default {
 		OverlayDetail,
 		BranchCompany,
 		DataStatistics,
+		TipDetial,
 	},
 	data() {
 		return {
@@ -68,6 +71,7 @@ export default {
 		},
 	},
 	mounted() {
+		console.log(this.overlayInfoConfig);
 		this.getDataStatisticsList();
 	},
 };
