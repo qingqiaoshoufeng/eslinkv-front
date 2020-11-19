@@ -1,0 +1,24 @@
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="&#230;&#142;&#146;&#229;&#144;&#141;/&#233;&#135;&#145;&#231;&#137;&#140;">
+<g id="&#231;&#159;&#169;&#229;&#189;&#162; + &#231;&#159;&#169;&#229;&#189;&#162; + &#231;&#159;&#169;&#229;&#189;&#162;&#229;&#164;&#135;&#228;&#187;&#189; 6&#232;&#146;&#153;&#231;&#137;&#136;">
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+<circle id="&#232;&#146;&#153;&#231;&#137;&#136;" cx="12" cy="12" r="12" fill="white"/>
+</mask>
+<g mask="url(#mask0)">
+<rect id="&#231;&#159;&#169;&#229;&#189;&#162;" x="9" width="6" height="10" fill="white"/>
+<rect id="&#231;&#159;&#169;&#229;&#189;&#162;_2" x="9" width="2" height="10" fill="#DF3C3C"/>
+<rect id="&#231;&#159;&#169;&#229;&#189;&#162;&#229;&#164;&#135;&#228;&#187;&#189; 6" x="13" width="2" height="10" fill="#DF3C3C"/>
+</g>
+</g>
+<g id="&#231;&#188;&#150;&#231;&#187;&#132; 9">
+<circle id="&#230;&#164;&#173;&#229;&#156;&#134;&#229;&#189;&#162;" cx="12" cy="14" r="8.5" fill="url(#paint0_linear)" stroke="#E3AA1D"/>
+<path id="&#230;&#152;&#159;&#229;&#189;&#162;" fill-rule="evenodd" clip-rule="evenodd" d="M12 16.5L9.06107 18.0451L9.62236 14.7725L7.24472 12.4549L10.5305 11.9775L12 9L13.4695 11.9775L16.7553 12.4549L14.3776 14.7725L14.9389 18.0451L12 16.5Z" fill="#F0B830"/>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear" x1="3" y1="5" x2="3" y2="23" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFFBBA"/>
+<stop offset="1" stop-color="#FADE5A"/>
+</linearGradient>
+</defs>
+</svg>
