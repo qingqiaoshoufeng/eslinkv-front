@@ -1,28 +1,23 @@
 <template>
-		<Tabs
-			class="tabs-container animate__animated animate__fadeInRight"
-			:value="value"
-			@input="val => $emit('input', val)"
+	<Tabs
+		class="tabs-container animate__animated animate__fadeInRight"
+		:value="value"
+		@input="val => $emit('input', val)"
+	>
+		<TabPanel
+			key="realTimeWithLevel"
+			name="realTimeWithLevel"
+			label="工艺报警"
 		>
-			<TabPanel
-				key="realTimeWithLevel"
-				name="realTimeWithLevel"
-				label="工艺报警"
-			>
-				<realTimeWithLevel @change="handleClick" />
-			</TabPanel>
-			<TabPanel key="realTime" name="realTime" label="事件报警" lazy>
-				<realTime @change="handleClick" />
-			</TabPanel>
-			<TabPanel
-				key="overlayList"
-				name="overlayList"
-				label="点位列表"
-				lazy
-			>
-				<overlayList @change="handleClick" />
-			</TabPanel>
-		</Tabs>
+			<realTimeWithLevel @change="handleClick" />
+		</TabPanel>
+		<TabPanel key="realTime" name="realTime" label="事件报警" lazy>
+			<realTime @change="handleClick" />
+		</TabPanel>
+		<TabPanel key="overlayList" name="overlayList" label="点位列表" lazy>
+			<overlayList @change="handleClick" />
+		</TabPanel>
+	</Tabs>
 </template>
 
 <script>
@@ -69,6 +64,9 @@ export default {
 	},
 	methods: {
 		handleClick(item, index, overlayType) {
+			console.log('余志强');
+			// console.log(this.$parent.$parent);
+			// this.$parent.$parent.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			this.activeIndex = index;
 			this.$emit('overlay-click', item, overlayType || 'WARN');
 		},
