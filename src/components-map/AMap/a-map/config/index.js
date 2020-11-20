@@ -8,7 +8,4 @@ export * from './service19';
 export * from './serviceICcustomer';
 export * from './serviceCustomer';
 
-export * from './service';
-export * from './project';
-
 

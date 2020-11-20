@@ -82,18 +82,22 @@ export default {
 		DistributedEnergyResource,
 		InspectionPerson,
 		InspectionCar,
-        RightPanel,
-        MapLegend,
+		RightPanel,
+		MapLegend,
 		RegionBoundary,
 		RoutePlan, //规划路线
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
+		this.$amap.setZoom(this.zoom, 100);
+		this.$amap.panTo(this.center);
 	},
 	data() {
 		return {
 			overlayInfoConfig: Object.freeze(AIRSUPPLY_UCAN_OVERLAY_MAP),
 			activeOverlay: {},
+			center: [120.061259, 30.183295],
+			zooom: 11,
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'overlayList',

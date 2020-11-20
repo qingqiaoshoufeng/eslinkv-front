@@ -65,7 +65,11 @@ import {
 	RoutePlan, //规划路线
 } from '../Components/index.js';
 //页面所需公共组件
-import { RegionBoundary, OverlayDetail,MapLegend } from '../../Components/index.js';
+import {
+	RegionBoundary,
+	OverlayDetail,
+	MapLegend,
+} from '../../Components/index.js';
 
 import {
 	INDEXSCENEMAP,
@@ -107,11 +111,15 @@ export default {
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
+		this.$amap.setZoom(this.zoom, 100);
+		this.$amap.panTo(this.center);
 	},
 	data() {
 		return {
 			overlayInfoConfig: Object.freeze(AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP),
 			activeOverlay: {},
+			center: [120.061259, 30.183295],
+			zooom: 11,
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'realTime',

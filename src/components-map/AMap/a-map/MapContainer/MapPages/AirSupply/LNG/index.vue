@@ -3,7 +3,6 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
-
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
@@ -44,34 +43,22 @@
 <script>
 //页面覆盖物组件
 import {
-	ComprehensiveServiceStation,
-	DistributedEnergyResource,
-	EmergencyAirSourceStation,
-	GasStation,
-	HighPressureLine,
-	HighPressureLine_Process,
-	MiddlePressureLine,
-	LowPressureLine,
-	InspectionCar,
-	InspectionPerson,
-	LiquefiedGasStation,
-	ListOverlay,
 	LNGStation,
-	NaturalGasStation,
-	PipeManageMentStation,
-	PressureRegulatingStation,
-	UndergroundRepairStation,
 	RightPanel,
 	RoutePlan, //规划路线
 } from '../Components/index.js';
 //页面所需公共组件
-import { RegionBoundary, OverlayDetail,MapLegend } from '../../Components/index.js';
+import {
+	RegionBoundary,
+	OverlayDetail,
+	MapLegend,
+} from '../../Components/index.js';
 
 import {
 	INDEXSCENEMAP,
 	OVERLAYINFOMAP_AIRSUPPLY,
 	AIRSUPPLY_WARN_SCENEINDEX,
-    AIRSUPPLY_WARN_COMPONENTINDEX,
+	AIRSUPPLY_WARN_COMPONENTINDEX,
 } from '../../../../config';
 import {
 	AIRSUPPLY_LNG_OVERLAY_MAP,
@@ -82,35 +69,23 @@ import GoldChart from '@/openApi';
 export default {
 	name: 'AirSupplyHighPressure',
 	components: {
-		OverlayDetail,
-		ComprehensiveServiceStation,
-		DistributedEnergyResource,
-		EmergencyAirSourceStation,
-		GasStation,
-		HighPressureLine,
-		HighPressureLine_Process,
-		InspectionCar,
-		InspectionPerson,
-		LiquefiedGasStation,
-		ListOverlay,
 		LNGStation,
-		LowPressureLine,
-		NaturalGasStation,
-		PipeManageMentStation,
-		PressureRegulatingStation,
-		UndergroundRepairStation,
-		MiddlePressureLine,
-		RegionBoundary,
 		RightPanel,
 		RoutePlan,
+		RegionBoundary,
+		OverlayDetail,
 		MapLegend,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
+			this.$amap.setZoom(this.zoom, 100);
+            this.$amap.panTo(this.center);
 	},
 	data() {
 		return {
 			overlayInfoConfig: Object.freeze(AIRSUPPLY_LNG_OVERLAY_MAP),
+			center: [120.061259, 30.183295],
+			zooom: 11,
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
