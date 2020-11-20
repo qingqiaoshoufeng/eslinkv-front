@@ -63,19 +63,20 @@ import {
 	UndergroundRepairStation,
 	RightPanel,
 	RoutePlan, //规划路线
-} from './Components/index.js';
+} from '../Components/index.js';
 //页面所需公共组件
-import { RegionBoundary, OverlayDetail } from '../Components/index.js';
-import MapLegend from '../../MapLegend/index';
+import { RegionBoundary, OverlayDetail,MapLegend } from '../../Components/index.js';
 
 import {
 	INDEXSCENEMAP,
 	OVERLAYINFOMAP_AIRSUPPLY,
 	AIRSUPPLY_WARN_SCENEINDEX,
 	AIRSUPPLY_WARN_COMPONENTINDEX,
-	AIRSUPPLYOVERLAYCONFIGMAP,
-	AIRSUPPLYLEGEND_LOWPRESSURE,
-} from '../../../config';
+} from '../../../../config';
+import {
+	AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP,
+	AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
+} from './config.js';
 import GoldChart from '@/openApi';
 
 export default {
@@ -106,31 +107,18 @@ export default {
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
-		this.initLenged(AIRSUPPLYOVERLAYCONFIGMAP, AIRSUPPLYLEGEND_LOWPRESSURE);
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_AIRSUPPLY),
+			overlayInfoConfig: Object.freeze(AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP),
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'realTime',
-			legendMap: {},
+			legendMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 		};
 	},
 	methods: {
-        //合并legend配置
-		initLenged(fullConfig, lendConfig) {
-			let obj = {};
-			Object.keys(lendConfig).map(legend => {
-				let isShow = lendConfig[legend];
-				obj[legend] = {
-					...fullConfig[legend],
-					isShow,
-				};
-			});
-			this.legendMap = obj;
-		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat } = overlay;
 			overlay.overlayType = overlayType;

@@ -151,7 +151,7 @@ export default {
 								img: '/static/images/project/04.jpg',
 							},
 						],
-						video: '/static/videos/1.mp4',
+						video: '/static/videos/三社联动视频.MOV',
 					});
 				});
 			});

@@ -63,19 +63,20 @@ import {
 	UndergroundRepairStation,
 	RightPanel,
 	RoutePlan, //规划路线
-} from './Components/index.js';
+} from '../Components/index.js';
 //页面所需公共组件
-import { RegionBoundary, OverlayDetail } from '../Components/index.js';
-import MapLegend from '../../MapLegend/index';
+import { RegionBoundary, OverlayDetail,MapLegend } from '../../Components/index.js';
 
 import {
 	INDEXSCENEMAP,
 	OVERLAYINFOMAP_AIRSUPPLY,
 	AIRSUPPLY_WARN_SCENEINDEX,
-	AIRSUPPLY_WARN_COMPONENTINDEX,
-	AIRSUPPLYOVERLAYCONFIGMAP,
-	AIRSUPPLYLEGEND_UCAN,
-} from '../../../config';
+    AIRSUPPLY_WARN_COMPONENTINDEX,
+} from '../../../../config';
+import {
+	AIRSUPPLY_LNG_OVERLAY_MAP,
+	AIRSUPPLY_LNG_LEGEND_MAP,
+} from './config.js';
 import GoldChart from '@/openApi';
 
 export default {
@@ -106,31 +107,18 @@ export default {
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
-		this.initLenged(AIRSUPPLYOVERLAYCONFIGMAP, AIRSUPPLYLEGEND_UCAN);
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_AIRSUPPLY),
+			overlayInfoConfig: Object.freeze(AIRSUPPLY_LNG_OVERLAY_MAP),
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'overlayList',
-			legendMap: {},
+			legendMap: AIRSUPPLY_LNG_LEGEND_MAP,
 		};
 	},
 	methods: {
-        //合并legend配置
-		initLenged(fullConfig, lendConfig) {
-			let obj = {};
-			Object.keys(lendConfig).map(legend => {
-				let isShow = lendConfig[legend];
-				obj[legend] = {
-					...fullConfig[legend],
-					isShow,
-				};
-			});
-			this.legendMap = obj;
-		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat } = overlay;
 			overlay.overlayType = overlayType;
@@ -210,15 +198,17 @@ export default {
 							},
 							videoInfo1: {
 								imgList: [
-									'/static/images/project/01.png',
-									'/static/images/project/02.jpg',
+									'/static/images/project/qiangxiu01.png',
+									'/static/images/project/qiangxiu02.png',
+									'/static/images/project/qiangxiu03.png',
 								],
 								videoList: ['/static/videos/test.mov'],
 							},
 							videoInfo2: {
 								imgList: [
-									'/static/images/project/01.png',
-									'/static/images/project/02.jpg',
+									'/static/images/project/qiangxiu01.png',
+									'/static/images/project/qiangxiu02.png',
+									'/static/images/project/qiangxiu03.png',
 								],
 								videoList: ['/static/videos/test.mov'],
 							},

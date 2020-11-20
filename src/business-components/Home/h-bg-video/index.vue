@@ -32,7 +32,7 @@
 					sources: [
 						{
 							type: 'video/mp4',
-							src: '/static/videos/test.mov'
+							src: '/static/videos/首页视频.mp4'
 						},
 					],
 				},
