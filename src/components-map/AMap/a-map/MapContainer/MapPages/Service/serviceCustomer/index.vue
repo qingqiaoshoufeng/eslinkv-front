@@ -51,8 +51,7 @@ import {
 	Grouphall,
 	BranchCompany,
 	RightPanelWithServiceCustomer,
-} from './Components/index.js';
-//页面所需公共组件
+} from '../Components/index.js';
 //页面所需公共组件
 import {
 	RegionBoundary,
@@ -71,8 +70,6 @@ import {
 	SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
 } from './config.js';
 import GoldChart from '@/openApi';
-
-console.log(MapLegend, 'saddadd');
 export default {
 	name: 'serviceCustomer',
 	mixins: [pageMixin],
@@ -94,7 +91,7 @@ export default {
 			),
 			dataStatisticsList: [],
 			OverlayDetail: null,
-			// legendMap1: SERVICELEGENDCUSTOMERMAP,
+			legendMap: SERVICE_SERVICECUSTOMER_LEGEND_MAP,
 			legendMultiple: true,
 		};
 	},
@@ -107,8 +104,6 @@ export default {
 		},
 		toViewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
-			console.log(overlayType + 1111111111111);
-			console.log(overlay);
 			this.OverlayDetail = overlay;
 			let viewOverlayHandlerMap = {
 				ThreeSocialLinkage: 'showThreeSocialLinkageDetail',

@@ -5,24 +5,28 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         legendIcon: 'icontulijituandating',
         icon: 'iconjituandating',
         component: 'Grouphall',
+        isShow: true,
     },
     BranchCompany: {
         label: '分公司',
         legendIcon: 'icontulifengongsi',
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
+        isShow: true,
     },
     ServiceNetworkStation: {
         label: '服务网点',
         legendIcon: 'icontulifuwuwangdian',
         icon: 'iconfuwuwangdian',
         component: 'ServiceNetworkStation',
+        isShow: true,
     },
     ThreeSocialLinkage: {
         label: '三社联动',
         legendIcon: 'icontulisansheliandong',
         icon: 'iconsansheliandong',
         component: 'ThreeSocialLinkage',
+        isShow: true,
     }
 }
 

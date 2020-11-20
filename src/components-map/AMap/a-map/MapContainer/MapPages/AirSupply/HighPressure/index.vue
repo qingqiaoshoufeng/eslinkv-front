@@ -45,28 +45,20 @@
 //页面覆盖物组件
 
 import {
-	ComprehensiveServiceStation,
-	DistributedEnergyResource,
-	EmergencyAirSourceStation,
-	GasStation,
 	HighPressureLine,
 	HighPressureLine_Process,
-	MiddlePressureLine,
-	LowPressureLine,
-	InspectionCar,
-	InspectionPerson,
-	LiquefiedGasStation,
-	ListOverlay,
-	LNGStation,
-	NaturalGasStation,
-	PipeManageMentStation,
 	PressureRegulatingStation,
-	UndergroundRepairStation,
+	EmergencyAirSourceStation,
+	GasStation,
 	RightPanel,
 	RoutePlan, //规划路线
 } from '../Components/index.js';
 //页面所需公共组件
-import { RegionBoundary, OverlayDetail,MapLegend } from '../../Components/index.js';
+import {
+	RegionBoundary,
+	OverlayDetail,
+	MapLegend,
+} from '../../Components/index.js';
 
 import {
 	INDEXSCENEMAP,
@@ -82,37 +74,29 @@ import GoldChart from '@/openApi';
 export default {
 	name: 'AirSupplyHighPressure',
 	components: {
-		OverlayDetail,
-		ComprehensiveServiceStation,
-		DistributedEnergyResource,
-		EmergencyAirSourceStation,
-		GasStation,
 		HighPressureLine,
 		HighPressureLine_Process,
-		InspectionCar,
-		InspectionPerson,
-		LiquefiedGasStation,
-		ListOverlay,
-		LNGStation,
-		LowPressureLine,
-		NaturalGasStation,
-		PipeManageMentStation,
 		PressureRegulatingStation,
-		UndergroundRepairStation,
-		MiddlePressureLine,
-		RegionBoundary,
+		EmergencyAirSourceStation,
+		GasStation,
 		RightPanel,
-		RoutePlan,
+		RoutePlan, //规划路线
+		RegionBoundary,
+		OverlayDetail,
 		MapLegend,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
+		this.$amap.setZoom(this.zoom, 100);
+		this.$amap.panTo(this.center);
 	},
 	data() {
 		return {
 			overlayInfoConfig: Object.freeze(
 				AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP
 			),
+			center: [120.061259, 30.183295],
+			zooom: 11,
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
