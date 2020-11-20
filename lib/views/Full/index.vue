@@ -1,7 +1,7 @@
 <template>
 	<div ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen }" class="preview-wrapper">
 		<kanban-preview @mounted="updateKanboardSize" ref="previewContainer"
-						:style="`transform: scale(${scaleRatio},1.03); overflow: hidden;`"/>
+						:style="`transform: scale(${scaleRatio},1); overflow: hidden;`"/>
 		<div class="action-bar">
 			<div v-if="actualScaleRatio < 1" class="action fit-screen" @click="fitScreen = !fitScreen">
 				{{ fitScreen ? '原始大小' : '适应窗口' }}
