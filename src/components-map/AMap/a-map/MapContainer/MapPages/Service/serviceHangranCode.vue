@@ -17,6 +17,12 @@
 		</template>
 		<!-- 统计数据 -->
 		<portal to="destination">
+			<MapLegend
+				:data="legendMap"
+				:multiple="legendMultiple"
+				class="map-legend"
+				:style="mapLegendStyle"
+			/>
 			<DataStatistics :position="'left'" :data="dataStatisticsList" />
 		</portal>
 	</div>
@@ -27,17 +33,29 @@ import { CouplingHot, OperationHot } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
-import { OVERLAYINFOMAP_HANGRANCODE } from '../../../config';
+import MapLegend from '../../MapLegend';
+import {
+	OVERLAYINFOMAP_HANGRANCODE,
+	// SERVICELEGENDHANGRANCODEMAP,
+} from '../../../config';
 import { DataStatistics } from '../../../components';
 import GoldChart from '@/openApi';
 export default {
 	name: 'hangranCode',
 	mixins: [pageMixin],
-	components: { RegionBoundary, CouplingHot, OperationHot, DataStatistics },
+	components: {
+		RegionBoundary,
+		CouplingHot,
+		OperationHot,
+		DataStatistics,
+		MapLegend,
+	},
 	data() {
 		return {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_HANGRANCODE),
 			dataStatisticsList: [],
+			mapLegendStyle: { left: '18%' },
+			legendMultiple: false,
 		};
 	},
 	methods: {
@@ -51,3 +69,11 @@ export default {
 };
 </script>
 
+<style lang="scss" scoped>
+.map-legend {
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+</style>

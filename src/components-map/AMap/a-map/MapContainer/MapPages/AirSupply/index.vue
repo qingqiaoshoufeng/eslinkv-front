@@ -32,6 +32,12 @@
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
 		<portal to="destination">
+			<!-- 图例 -->
+			<MapLegend
+				:data="legendMap"
+				:multiple="legendMultiple"
+				class="map-legend"
+			/>
 			<!-- 右侧列表 -->
 			<RightPanel
 				class="right-panel"
@@ -43,6 +49,7 @@
 </template>
 <script>
 //页面覆盖物组件
+
 import {
 	ComprehensiveServiceStation,
 	DistributedEnergyResource,
@@ -74,6 +81,7 @@ import {
 	AIRSUPPLY_WARN_COMPONENTINDEX,
 } from '../../../config';
 import GoldChart from '@/openApi';
+import MapLegend from '../../MapLegend';
 
 export default {
 	name: 'HomePage',
@@ -100,6 +108,7 @@ export default {
 		RegionBoundary,
 		RightPanel,
 		RoutePlan,
+		MapLegend,
 	},
 	props: {
 		legendMap: {
@@ -134,6 +143,7 @@ export default {
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'realTimeWithLevel',
+			legendMultiple: true,
 		};
 	},
 	methods: {
@@ -237,7 +247,10 @@ export default {
 };
 </script>
 <style  lang="scss"  scoped>
-// .right-panel {
-// 	margin-top: 48px !important;
-// }
+.map-legend {
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+}
 </style>

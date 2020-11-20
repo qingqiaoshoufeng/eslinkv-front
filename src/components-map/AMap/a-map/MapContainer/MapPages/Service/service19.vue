@@ -28,6 +28,12 @@
 		</OverlayDetail>
 		<!-- 统计数据 -->
 		<portal to="destination">
+			<MapLegend
+				:data="legendMap"
+				:multiple="legendMultiple"
+				class="map-legend"
+				:style="mapLegendStyle"
+			/>
 			<DataStatistics :position="'left'" :data="dataStatisticsList" />
 		</portal>
 	</div>
@@ -40,7 +46,7 @@ import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
 import { DataStatistics } from '../../../components';
 import { OVERLAYINFOMAP_SERVICE_19 } from '../../../config';
-
+import MapLegend from '../../MapLegend';
 export default {
 	name: 'service19',
 	mixins: [pageMixin],
@@ -50,11 +56,15 @@ export default {
 		BranchCompany,
 		DataStatistics,
 		TipDetial,
+		MapLegend,
 	},
 	data() {
 		return {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_19),
 			dataStatisticsList: [],
+			// legendMap: SERVICELEGEND19MAP,
+			legendMultiple: true,
+			mapLegendStyle: { left: '18%' },
 		};
 	},
 	methods: {
@@ -76,3 +86,11 @@ export default {
 };
 </script>
 
+<style lang="scss" scoped>
+.map-legend {
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+</style>

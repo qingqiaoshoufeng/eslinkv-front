@@ -21,12 +21,12 @@
 			</template>
 		</el-amap>
 		<!-- 地图 legend  -->
-		<MapLegend
+		<!-- <MapLegend
 			:data="legendMap"
 			:multiple="legendMultiple"
 			class="map-legend"
 			:style="mapLegendStyle"
-		/>
+		/> -->
 		<!-- 地图类型 -->
 		<MapTypeLegend />
 		<portal-target name="destination"> </portal-target>
@@ -130,6 +130,7 @@ export default {
 					isShow,
 				};
 			});
+			console.log(this.legendMap, 'aaaaaa');
 			this.legendMap = obj;
 		},
 	},

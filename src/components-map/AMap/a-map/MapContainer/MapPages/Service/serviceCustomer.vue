@@ -28,12 +28,11 @@
 		/>
 		<portal to="destination">
 			<!-- 图例 -->
-			<!-- <MapLegend
+			<MapLegend
 				:data="legendMap"
 				:multiple="legendMultiple"
 				class="map-legend"
-				:style="mapLegendStyle"
-			/> -->
+			/>
 			<!-- 统计数据 -->
 			<DataStatistics :data="dataStatisticsList" />
 			<!-- 右侧列表 -->
@@ -41,7 +40,6 @@
 				class="right-panel"
 				@list-click="handleListClick"
 			></RightPanelWithServiceCustomer>
-			MapLegend
 		</portal>
 	</div>
 </template>
@@ -55,18 +53,20 @@ import {
 	RightPanelWithServiceCustomer,
 } from './Components/index.js';
 //页面所需公共组件
-import MapLegend from '../../MapLegend/index';
+import MapLegend from '../../MapLegend';
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import { DataStatistics } from '../../../components';
 import pageMixin from '../mixins/pageMixin.js';
 import {
+	// SERVICELEGEND_CUSTOMER,
+	SERVICELEGENDCUSTOMERMAP,
 	OVERLAYINFOMAP_SERVICE_CUSTOMER,
 	THREESOCIALLINKAGE_SCENEINDEX,
 	THREESOCIALLINKAGE_COMPONENTINDEX,
 } from '../../../config';
 import GoldChart from '@/openApi';
 
-console.log(DataStatistics);
+console.log(MapLegend, 'saddadd');
 export default {
 	name: 'serviceCustomer',
 	mixins: [pageMixin],
@@ -79,12 +79,15 @@ export default {
 		BranchCompany,
 		DataStatistics,
 		RightPanelWithServiceCustomer,
+		MapLegend,
 	},
 	data() {
 		return {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_CUSTOMER),
 			dataStatisticsList: [],
 			OverlayDetail: null,
+			// legendMap1: SERVICELEGENDCUSTOMERMAP,
+			legendMultiple: true,
 		};
 	},
 	created() {
@@ -159,4 +162,11 @@ export default {
 	},
 };
 </script>
-
+<style lang="scss" scoped>
+.map-legend {
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+</style>

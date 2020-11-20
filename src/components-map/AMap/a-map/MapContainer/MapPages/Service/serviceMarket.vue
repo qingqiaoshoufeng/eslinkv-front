@@ -25,6 +25,14 @@
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 		/>
+		<portal to="destination">
+			<!-- 图例 -->
+			<MapLegend
+				:data="legendMap"
+				:multiple="legendMultiple"
+				class="map-legend"
+			/>
+		</portal>
 	</div>
 </template>
 <script>
@@ -34,7 +42,7 @@ import { Grouphall, BranchCompany, HeatMap } from './Components/index.js';
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
 import { OVERLAYINFOMAP_MARKET } from '../../../config';
-
+import MapLegend from '../../MapLegend';
 export default {
 	name: 'serviceMarket',
 	mixins: [pageMixin],
@@ -44,13 +52,25 @@ export default {
 		Grouphall,
 		BranchCompany,
 		HeatMap,
+		MapLegend,
 	},
 	data() {
 		return {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_MARKET),
+			// legendMap: SERVICELEGENDMARKETMAP,
+			mapLegendStyle: { left: '18%' },
+			legendMultiple: true,
 		};
 	},
 	methods: {},
 };
 </script>
 
+<style lang="scss" scoped>
+.map-legend {
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+</style>
