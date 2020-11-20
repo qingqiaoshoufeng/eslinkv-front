@@ -83,12 +83,12 @@ export default {
 		rulerWidth() {
 			// 比例根据视觉稿来的
 			const rate = 388 / 4500;
-			return (this?.data?.amount * rate ?? 0) + 'px';
+			return (this.data?.amount * rate ?? 0) + 'px';
 		},
 		classOption() {
 			return {
 				step: 0.2, // 数值越大速度滚动越快
-				limitMoveNum: this?.data?.length, // 开始无缝滚动的数据量
+				limitMoveNum: this.data?.length, // 开始无缝滚动的数据量
 				hoverStop: true, // 是否开启鼠标悬停stop
 				direction: 1, // 0向下 1向上 2向左 3向右
 				openWatch: true, // 开启数据实时监控刷新dom

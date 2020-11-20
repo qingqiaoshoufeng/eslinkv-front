@@ -1,4 +1,17 @@
-<template ></template>
+<template>
+	<Overlay
+		:key="'warn111'"
+		:marker="{
+			icon,
+			...data,
+		}"
+		ref="marker"
+		:visible="true"
+		@click="$emit('click', item)"
+	>
+		<img src="@/assets/amap/images/qiangxiu.gif" class="warnoverlay-gif" />
+	</Overlay>
+</template>
 <script>
 import { Overlay } from '../../../Components/index';
 let eventTypeIconMap = {
@@ -11,7 +24,9 @@ export default {
 		Overlay,
 	},
 	data() {
-		return {};
+		return {
+			icon: 'iconbaoguanshijian',
+		};
 	},
 	props: {
 		data: {
@@ -45,55 +60,65 @@ export default {
 	watch: {
 		data: {
 			handler(val) {
-				let { data } = this;
-				let compData = {
-					...data,
-					assignment: {
-						lng: 120.1420324,
-						gpstime: '2020-11-18 15:30:33.0',
-						employeeid: '11005',
-						employeename: '阚杰',
-						lat: 30.3036494,
-					},
-				};
-				console.log(this.data);
-				let { lat: endLat, lng: endLng, assignment } = compData;
-				let { lat: startLat, lng: startLng } = assignment;
-				//构造路线导航类
-				if (!this.driving) {
-					this.driving = new AMap.Driving({
-						hideMarkers: true,
-						showTraffic: false,
-						isOutline: false,
-						autoFitView: true,
-					});
-				}
-				this.driving.search(
-					new AMap.LngLat(startLng, startLat),
-					new AMap.LngLat(endLng, endLat),
-					(status, result) => {
-						if (status === 'complete') {
-							const { routes = [] } = result;
-							const { steps = [] } = routes[0];
-							var pathData = [];
-							steps.forEach(i => {
-								let pathArr = i.path;
-								pathArr.forEach(({ lng, lat }) => {
-									pathData.push([lng, lat]);
-								});
-							});
-							let passedLen = Math.ceil(
-								Math.random() * pathData.length
-							);
-							this.drawLine(
-								pathData,
-								pathData.slice(0, passedLen),
-								[endLng, endLat],
-								[startLng, startLat]
-							);
-						}
+				this.reset();
+				setTimeout(() => {
+					let { data } = this;
+					let compData = {
+						...data,
+						assignment: {
+							lng: 120.1420324,
+							gpstime: '2020-11-18 15:30:33.0',
+							employeeid: '11005',
+							employeename: '阚杰',
+							lat: 30.3036494,
+						},
+					};
+					if (this.$refs.marker) {
+						let { lng, lat, status } = data;
+						this.$refs.marker.$amapComponent.setPosition(
+							new window.AMap.LngLat(lng, lat)
+						);
+						this.icon = eventTypeIconMap[status] || 'iconbaoguanshijian';
 					}
-				);
+
+					let { lat: endLat, lng: endLng, assignment } = compData;
+					let { lat: startLat, lng: startLng } = assignment;
+					//构造路线导航类
+					if (!this.driving) {
+						this.driving = new AMap.Driving({
+							hideMarkers: true,
+							showTraffic: false,
+							isOutline: false,
+							autoFitView: true,
+						});
+					}
+					this.driving.search(
+						new AMap.LngLat(startLng, startLat),
+						new AMap.LngLat(endLng, endLat),
+						(status, result) => {
+							if (status === 'complete') {
+								const { routes = [] } = result;
+								const { steps = [] } = routes[0];
+								var pathData = [];
+								steps.forEach(i => {
+									let pathArr = i.path;
+									pathArr.forEach(({ lng, lat }) => {
+										pathData.push([lng, lat]);
+									});
+								});
+								let passedLen = Math.ceil(
+									Math.random() * pathData.length
+								);
+								this.drawLine(
+									pathData,
+									pathData.slice(0, passedLen),
+									[endLng, endLat],
+									[startLng, startLat]
+								);
+							}
+						}
+					);
+				}, 1000);
 			},
 			immediate: true,
 		},
@@ -114,16 +139,19 @@ export default {
 				path: lineArr,
 				showDir: true,
 				strokeColor: '#FFD200', //线颜色
+				strokeOpacity: 1,
+				fillColor: '#FFD200', //线颜色
 				strokeWeight: 10, //线宽
 			});
 
 			this.passedPolyline = new AMap.Polyline({
 				map: map,
 				strokeColor: '#BDBDBD', //线颜色
+				fillColor: '#BDBDBD', //线颜色
 				strokeWeight: 10, //线宽
 				strokeOpacity: 1, //线透明度
 			});
-            let { northEast, southWest } = this.polyline.getBounds();
+			let { northEast, southWest } = this.polyline.getBounds();
 			this.setRouteFitMap(northEast, southWest);
 			this.marker.on('moving', e => {
 				this.passedPolyline.setPath(e.passedPath);
@@ -137,7 +165,13 @@ export default {
 			startAnimation();
 		},
 		reset() {
-			this.map.remove([this.marker, this.passedPolyline, this.polyline]);
+			if (this.map && this.marker) {
+				this.map.remove([
+					this.marker,
+					this.passedPolyline,
+					this.polyline,
+				]);
+			}
 		},
 		setRouteFitMap(northeast, southwest) {
 			let { lat: northeastLat, lng: northeastLng } = northeast;
@@ -176,4 +210,15 @@ export default {
 		height: 44px !important;
 	}
 }
+.warnoverlay-gif {
+	display: block;
+	width: 100px;
+	height: 35px;
+	margin-top: -14px;
+	margin-left: -23px;
+}
+
+// img {
+// 	width: 100%;
+// }
 </style>

@@ -86,7 +86,7 @@ export default {
 		rulerWidth() {
 			// 比例根据视觉稿来的
 			const rate = 388 / 4500;
-			return (this?.data?.amount * rate ?? 0) + 'px';
+			return (this.data?.amount * rate ?? 0) + 'px';
 		},
 		classOption() {
 			return {

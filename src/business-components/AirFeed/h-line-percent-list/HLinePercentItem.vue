@@ -33,14 +33,14 @@ export default {
 		rulerWidth() {
 			// 根据视觉稿来的
 			const safeWidth = 388;
-			const safeCountPerPx = safeWidth / this?.maxAmout;
-			return this?.value?.amount * safeCountPerPx + 'px';
+			const safeCountPerPx = safeWidth / this.maxAmout;
+			return this.value?.amount * safeCountPerPx + 'px';
 		},
 		styles() {
-			return this?.item?.styles || {};
+			return this.item?.styles || {};
 		},
 		value() {
-			return this?.item || {};
+			return this.item || {};
 		},
 	},
 	props: {
