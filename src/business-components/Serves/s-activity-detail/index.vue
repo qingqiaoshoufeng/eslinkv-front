@@ -32,7 +32,7 @@
 				</div>
 				<div class="detail-title">
 					<div class="detail-title-logo">
-						<img src="./img/detail-title.svg" alt="" />
+						<img src="./img/detail-title.svg" alt=""/>
 					</div>
 					<span>活动详情</span>
 				</div>
@@ -61,7 +61,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="./img/quota1.svg" />
+									<img src="./img/quota1.svg"/>
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
@@ -72,7 +72,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="./img/quota2.svg" />
+									<img src="./img/quota2.svg"/>
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
@@ -85,7 +85,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="./img/quota3.svg" />
+									<img src="./img/quota3.svg"/>
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
@@ -108,7 +108,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="./img/quota4.svg" />
+									<img src="./img/quota4.svg"/>
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
@@ -119,7 +119,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="./img/quota5.svg" />
+									<img src="./img/quota5.svg"/>
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
@@ -161,23 +161,23 @@
 	</div>
 </template>
 <script>
-import mixins from '../../mixins';
-import getOption from './options';
-import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
-import 'swiper/css/swiper.css';
+	import mixins from '../../mixins';
+	import getOption from './options';
+	import {Swiper, SwiperSlide} from 'vue-awesome-swiper';
+	import 'swiper/css/swiper.css';
 
-const config = { animation: true };
-const value = {
-	api: {
-		data: JSON.stringify({
-			title: '桂花城紫云苑-杭燃服务进社区活动',
-			startTime: '2020/10/01  08:30',
-			endTime: '2020/10/01  08:30',
-			place: '桂花城紫云苑',
-			people: '退休职工',
-			peopleNum: 220,
-			planNum: 160,
-			content: `为积极彰显企业担当，更好地为用户提供优质满意的杭燃服务。9月13日上午，杭天管网输配分公司28名正气志愿者
+	const config = {animation: true};
+	const value = {
+		api: {
+			data: JSON.stringify({
+				title: '桂花城紫云苑-杭燃服务进社区活动',
+				startTime: '2020/10/01  08:30',
+				endTime: '2020/10/01  08:30',
+				place: '桂花城紫云苑',
+				people: '退休职工',
+				peopleNum: 220,
+				planNum: 160,
+				content: `为积极彰显企业担当，更好地为用户提供优质满意的杭燃服务。9月13日上午，杭天管网输配分公司28名正气志愿者
             联合杭天服务发展公司27名工作人员，走进盛德嘉苑、假山新村、天时苑、盛德欣苑等小区开展“三社联动、安心安
             居”杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份...27名工作人员，走进盛德嘉苑、假山新村、天时苑、盛德欣苑等小区开展“三社联动、安心安
             居”杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份...
@@ -255,23 +255,22 @@ const value = {
 				immediate: true
 			}
 		},
-	},
-	created() {
-		this.configSource = this.parseConfigSource(config);
-		this.configValue = this.parseConfigValue(config, value);
-	},
-};
+		created() {
+			this.configSource = this.parseConfigSource(config);
+			this.configValue = this.parseConfigValue(config, value);
+		},
+	}
 </script>
 <style lang="scss" scoped>
-.widget-part {
-	width: 3500px;
-	height: 1050px;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	background: url('./img/activity-service-bg.png') no-repeat;
-	background-size: 100% 100%;
-	padding: 0 280px;
+	.widget-part {
+		width: 3500px;
+		height: 1050px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		background: url('./img/activity-service-bg.png') no-repeat;
+		background-size: 100% 100%;
+		padding: 0 280px;
 
 		.left-circle {
 			background: url("/static/images/serves/left-circle.svg") no-repeat;
@@ -280,319 +279,319 @@ const value = {
 			height: 100%;
 		}
 
-	.right-circle {
-		background: url('/static/images/serves/right-circle.svg') no-repeat;
-		background-size: 100% 100%;
-		width: 220px;
-		height: 100%;
-	}
-}
-
-.main {
-	flex: 1;
-	display: flex;
-	justify-content: space-between;
-
-	.main-lt {
-		width: 992px;
-
-		.title {
-			position: relative;
-			background: url('./img/activity-title.svg') no-repeat;
+		.right-circle {
+			background: url('/static/images/serves/right-circle.svg') no-repeat;
 			background-size: 100% 100%;
-			width: 992px;
-			height: 64px;
-			line-height: 64px;
-			font-size: 32px;
-			color: #feffff;
-			padding: 0 32px;
-
-			&:before {
-				display: block;
-				content: '';
-				position: absolute;
-				left: 8px;
-				width: 4px;
-				height: 24px;
-				top: 20px;
-				background: #00ddff;
-				box-shadow: 0px 0px 4px #00ddff;
-			}
-
-			&:after {
-				display: block;
-				content: '';
-				position: absolute;
-				right: 8px;
-				width: 4px;
-				height: 24px;
-				top: 20px;
-				background: #00ddff;
-				box-shadow: 0px 0px 4px #00ddff;
-			}
+			width: 220px;
+			height: 100%;
 		}
+	}
 
-		.base-info {
-			display: flex;
-			flex-wrap: wrap;
-			padding-right: 300px;
-			margin-top: 24px;
+	.main {
+		flex: 1;
+		display: flex;
+		justify-content: space-between;
 
-			.base-info-item {
-				width: 326px;
-				margin-bottom: 16px;
+		.main-lt {
+			width: 992px;
 
-				label {
-					font-size: 18px;
-					line-height: 24px;
-					color: #00ddff;
-					margin-right: 16px;
+			.title {
+				position: relative;
+				background: url('./img/activity-title.svg') no-repeat;
+				background-size: 100% 100%;
+				width: 992px;
+				height: 64px;
+				line-height: 64px;
+				font-size: 32px;
+				color: #feffff;
+				padding: 0 32px;
+
+				&:before {
+					display: block;
+					content: '';
+					position: absolute;
+					left: 8px;
+					width: 4px;
+					height: 24px;
+					top: 20px;
+					background: #00ddff;
+					box-shadow: 0px 0px 4px #00ddff;
 				}
 
-				> span {
-					font-size: 18px;
+				&:after {
+					display: block;
+					content: '';
+					position: absolute;
+					right: 8px;
+					width: 4px;
+					height: 24px;
+					top: 20px;
+					background: #00ddff;
+					box-shadow: 0px 0px 4px #00ddff;
+				}
+			}
+
+			.base-info {
+				display: flex;
+				flex-wrap: wrap;
+				padding-right: 300px;
+				margin-top: 24px;
+
+				.base-info-item {
+					width: 326px;
+					margin-bottom: 16px;
+
+					label {
+						font-size: 18px;
+						line-height: 24px;
+						color: #00ddff;
+						margin-right: 16px;
+					}
+
+					> span {
+						font-size: 18px;
+						line-height: 24px;
+						color: #feffff;
+					}
+				}
+			}
+
+			.detail-title {
+				width: 100%;
+				background: linear-gradient(
+						90deg,
+						rgba(196, 196, 196, 0.2) 0%,
+						rgba(196, 196, 196, 0) 100.94%
+				);
+				height: 44px;
+				display: flex;
+				align-items: center;
+				padding-left: 6px;
+				margin: 8px 0 16px;
+
+				.detail-title-logo {
+					width: 32px;
+					height: 32px;
+					background: #064f94;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					margin-right: 10px;
+
+					img {
+						width: 22px;
+						height: 24px;
+					}
+				}
+
+				span {
+					font-size: 20px;
 					line-height: 24px;
 					color: #feffff;
 				}
 			}
-		}
 
-		.detail-title {
-			width: 100%;
-			background: linear-gradient(
-				90deg,
-				rgba(196, 196, 196, 0.2) 0%,
-				rgba(196, 196, 196, 0) 100.94%
-			);
-			height: 44px;
-			display: flex;
-			align-items: center;
-			padding-left: 6px;
-			margin: 8px 0 16px;
+			.content-wrap {
+				height: 160px;
+				background: #001f6d;
+				border-radius: 4px;
+				font-size: 18px;
+				line-height: 32px;
+				color: #ffffff;
+				padding: 24px 8px 24px 24px;
+			}
 
-			.detail-title-logo {
-				width: 32px;
-				height: 32px;
-				background: #064f94;
+			.content {
+				height: 100%;
+				padding-right: 29px;
+				overflow-y: auto;
+
+				&::-webkit-scrollbar {
+					/*滚动条整体样式*/
+					width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+					height: 1px;
+				}
+
+				&::-webkit-scrollbar-thumb {
+					/*滚动条里面小方块*/
+					background: #00ddff;
+				}
+
+				&::-webkit-scrollbar-track {
+					/*滚动条里面轨道*/
+					background: rgba(255, 255, 255, 0.4);
+				}
+			}
+
+			.quota {
 				display: flex;
-				align-items: center;
-				justify-content: center;
-				margin-right: 10px;
+				margin-top: 44px;
 
-				img {
-					width: 22px;
-					height: 24px;
-				}
-			}
+				.chart {
+					position: relative;
+					width: 136px;
+					height: 136px;
+					flex: none;
+					margin-right: 30px;
+					background-image: url('/static/icons/ellipse-dashed.svg');
+					background-repeat: no-repeat;
+					background-size: 100% 100%;
+					background-position: center;
 
-			span {
-				font-size: 20px;
-				line-height: 24px;
-				color: #feffff;
-			}
-		}
-
-		.content-wrap {
-			height: 160px;
-			background: #001f6d;
-			border-radius: 4px;
-			font-size: 18px;
-			line-height: 32px;
-			color: #ffffff;
-			padding: 24px 8px 24px 24px;
-		}
-
-		.content {
-			height: 100%;
-			padding-right: 29px;
-			overflow-y: auto;
-
-			&::-webkit-scrollbar {
-				/*滚动条整体样式*/
-				width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
-				height: 1px;
-			}
-
-			&::-webkit-scrollbar-thumb {
-				/*滚动条里面小方块*/
-				background: #00ddff;
-			}
-
-			&::-webkit-scrollbar-track {
-				/*滚动条里面轨道*/
-				background: rgba(255, 255, 255, 0.4);
-			}
-		}
-
-		.quota {
-			display: flex;
-			margin-top: 44px;
-
-			.chart {
-				position: relative;
-				width: 136px;
-				height: 136px;
-				flex: none;
-				margin-right: 30px;
-				background-image: url('/static/icons/ellipse-dashed.svg');
-				background-repeat: no-repeat;
-				background-size: 100% 100%;
-				background-position: center;
-
-				.chart-main {
-					width: 100%;
-					height: 100%;
-				}
-
-				&__desc {
-					position: absolute;
-					display: flex;
-					flex-direction: column;
-					top: 41px;
-					left: 50%;
-					width: 100%;
-					text-align: center;
-					transform: translateX(-50%);
-
-					&__rate {
-						font-weight: bold;
-						font-size: 32px;
-						line-height: 32px;
-						color: #feffff;
+					.chart-main {
+						width: 100%;
+						height: 100%;
 					}
 
-					&__font {
-						font-size: 18px;
-						line-height: 24px;
-						color: rgba(255, 255, 255, 0.75);
-						margin-top: 7px;
-					}
-				}
-			}
+					&__desc {
+						position: absolute;
+						display: flex;
+						flex-direction: column;
+						top: 41px;
+						left: 50%;
+						width: 100%;
+						text-align: center;
+						transform: translateX(-50%);
 
-			.quota-detail {
-				.quota-row {
-					display: flex;
-					margin-bottom: 16px;
-
-					.quota-row-head {
-						width: 144px;
-
-						.quota-row-head-num {
+						&__rate {
 							font-weight: bold;
-							font-size: 24px;
-							line-height: 24px;
+							font-size: 32px;
+							line-height: 32px;
 							color: #feffff;
 						}
 
-						.quota-row-head-txt {
+						&__font {
 							font-size: 18px;
 							line-height: 24px;
 							color: rgba(255, 255, 255, 0.75);
-							margin-top: 4px;
+							margin-top: 7px;
 						}
 					}
+				}
 
-					.quota-item {
+				.quota-detail {
+					.quota-row {
 						display: flex;
-						width: 200px;
+						margin-bottom: 16px;
 
-						.quota-item-logo {
-							width: 56px;
-							height: 56px;
-							background: #064f94;
+						.quota-row-head {
+							width: 144px;
+
+							.quota-row-head-num {
+								font-weight: bold;
+								font-size: 24px;
+								line-height: 24px;
+								color: #feffff;
+							}
+
+							.quota-row-head-txt {
+								font-size: 18px;
+								line-height: 24px;
+								color: rgba(255, 255, 255, 0.75);
+								margin-top: 4px;
+							}
+						}
+
+						.quota-item {
 							display: flex;
-							align-items: center;
-							justify-content: center;
-							margin-right: 16px;
-						}
+							width: 200px;
 
-						.quota-item-num {
-							font-weight: bold;
-							font-size: 24px;
-							line-height: 24px;
-							color: #feffff;
-						}
+							.quota-item-logo {
+								width: 56px;
+								height: 56px;
+								background: #064f94;
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								margin-right: 16px;
+							}
 
-						.quota-item-txt {
-							font-size: 18px;
-							line-height: 24px;
-							color: #00ddff;
-							margin-top: 8px;
+							.quota-item-num {
+								font-weight: bold;
+								font-size: 24px;
+								line-height: 24px;
+								color: #feffff;
+							}
+
+							.quota-item-txt {
+								font-size: 18px;
+								line-height: 24px;
+								color: #00ddff;
+								margin-top: 8px;
+							}
 						}
 					}
 				}
 			}
+
+			.swiper {
+				margin-top: 30px;
+				position: relative;
+
+				&:before {
+					content: '';
+					display: block;
+					z-index: 2;
+					position: absolute;
+					left: -2px;
+					top: 0;
+					width: 160px;
+					height: 160px;
+					background: linear-gradient(
+							90deg,
+							rgba(2, 2, 61, 1) 0%,
+							rgba(2, 2, 61, 0) 100%
+					);
+				}
+
+				&:after {
+					content: '';
+					display: block;
+					z-index: 2;
+					position: absolute;
+					right: -2px;
+					top: 0;
+					width: 160px;
+					height: 160px;
+					background: linear-gradient(
+							270deg,
+							rgba(2, 2, 61, 1) 0%,
+							rgba(2, 2, 61, 0) 100%
+					);
+				}
+
+				.swiper-slide {
+					width: 240px;
+					height: 160px;
+				}
+			}
 		}
 
-		.swiper {
-			margin-top: 30px;
-			position: relative;
+		.main-rt {
+			width: 1488px;
+			height: 838px;
+			background: url('./img/activity-right.svg') no-repeat;
+			background-size: 100% 100%;
+			padding: 40px 68px 0;
 
-			&:before {
-				content: '';
-				display: block;
-				z-index: 2;
-				position: absolute;
-				left: -2px;
+			/deep/ .vjs-big-play-button {
+				left: 0;
+				right: 0;
+				bottom: 0;
 				top: 0;
-				width: 160px;
-				height: 160px;
-				background: linear-gradient(
-					90deg,
-					rgba(2, 2, 61, 1) 0%,
-					rgba(2, 2, 61, 0) 100%
-				);
-			}
+				margin: auto;
+				border-radius: 50%;
+				width: 72px;
+				height: 72px;
+				background: #fff;
 
-			&:after {
-				content: '';
-				display: block;
-				z-index: 2;
-				position: absolute;
-				right: -2px;
-				top: 0;
-				width: 160px;
-				height: 160px;
-				background: linear-gradient(
-					270deg,
-					rgba(2, 2, 61, 1) 0%,
-					rgba(2, 2, 61, 0) 100%
-				);
-			}
-
-			.swiper-slide {
-				width: 240px;
-				height: 160px;
+				.vjs-icon-placeholder:before {
+					color: #000;
+					font-size: 50px;
+					line-height: 70px;
+				}
 			}
 		}
 	}
-
-	.main-rt {
-		width: 1488px;
-		height: 838px;
-		background: url('./img/activity-right.svg') no-repeat;
-		background-size: 100% 100%;
-		padding: 40px 68px 0;
-
-		/deep/ .vjs-big-play-button {
-			left: 0;
-			right: 0;
-			bottom: 0;
-			top: 0;
-			margin: auto;
-			border-radius: 50%;
-			width: 72px;
-			height: 72px;
-			background: #fff;
-
-			.vjs-icon-placeholder:before {
-				color: #000;
-				font-size: 50px;
-				line-height: 70px;
-			}
-		}
-	}
-}
 </style>
 
