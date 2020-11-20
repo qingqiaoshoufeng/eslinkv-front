@@ -5,6 +5,7 @@ export const SERVICELEGEND19MAP = {
         legendIcon: 'icontulifengongsi',
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
+        isShow:true
     },
 }
 
