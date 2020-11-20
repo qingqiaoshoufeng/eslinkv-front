@@ -49,9 +49,13 @@
 		components: {
 			hBg54441
 		},
+		beforeDestroy() {
+			document.removeEventListener('DestroyScene', this.closeVideo)
+		},
 		created() {
 			this.configSource = this.parseConfigSource(config)
 			this.configValue = this.parseConfigValue(config)
+			document.addEventListener('DestroyScene', this.closeVideo, false)
 		},
 		methods: {
 			handleClick(index) {
@@ -63,13 +67,16 @@
 				this.status54441 = true
 			},
 			openVideo() {
-				GoldChart.scene.createSceneInstance('grdnn9tiey')
+				this.statusVideo = true
+				GoldChart.scene.createSceneInstance('grdnn9tiey', 'slideUp')
 			},
 			close54441() {
 				this.status54441 = false
 			},
-			closeVideo() {
-				this.statusVideo = false
+			closeVideo(e) {
+				if (e.detail.index === 'grdnn9tiey') {
+					this.statusVideo = false
+				}
 			}
 		}
 	}
