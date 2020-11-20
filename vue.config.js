@@ -87,7 +87,7 @@ module.exports = {
 					.end()
 			}
 			config.plugins.delete('prefetch')
-		}else {
+		} else {
 			config.resolve.symlinks(true)
 		}
 	},

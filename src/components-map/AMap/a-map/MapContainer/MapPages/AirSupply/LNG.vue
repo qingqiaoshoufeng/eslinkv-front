@@ -210,15 +210,17 @@ export default {
 							},
 							videoInfo1: {
 								imgList: [
-									'/static/images/project/01.png',
-									'/static/images/project/02.jpg',
+									'/static/images/project/qiangxiu01.png',
+									'/static/images/project/qiangxiu02.png',
+									'/static/images/project/qiangxiu03.png',
 								],
 								videoList: ['/static/videos/test.mov'],
 							},
 							videoInfo2: {
 								imgList: [
-									'/static/images/project/01.png',
-									'/static/images/project/02.jpg',
+									'/static/images/project/qiangxiu01.png',
+									'/static/images/project/qiangxiu02.png',
+									'/static/images/project/qiangxiu03.png',
 								],
 								videoList: ['/static/videos/test.mov'],
 							},

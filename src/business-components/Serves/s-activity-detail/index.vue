@@ -183,79 +183,77 @@ const value = {
             居”杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份...
             杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份
             杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份`,
-			securityCheckRate: 90,
-			planCheckNum: 160,
-			brochuresNum: 210,
-			uSaleNum: 64,
-			uSaleMoney: '24,910',
-			actualCheckNum: 120,
-			installNum: 60,
-			repairNum: 120,
-			imgList: [
-				{
-					img: '/static/images/project/01.png',
-				},
-				{
-					img: '/static/images/project/02.jpg',
-				},
-			],
-			video: '/static/videos/test.mov',
-		}),
-	},
-};
-export default {
-	components: {
-		Swiper,
-		SwiperSlide,
-	},
-	mixins: [mixins],
-	data() {
-		return {
-			swiperOption: {
-				slidesPerView: 4,
-				spaceBetween: 30,
-				centeredSlides: true,
-				loop: true,
-				autoplay: true,
-			},
-			playerOptions: {
-				width: 1352,
-				height: 760,
-				muted: true,
-				language: 'en',
-				playbackRates: [0.7, 1.0, 1.5, 2.0],
-				autoplay: true,
-				loop: true,
-				sources: [
+				securityCheckRate: 90,
+				planCheckNum: 160,
+				brochuresNum: 210,
+				uSaleNum: 64,
+				uSaleMoney: '24,910',
+				actualCheckNum: 120,
+				installNum: 60,
+				repairNum: 120,
+				imgList: [
 					{
-						type: 'video/mp4',
-						src: '/static/videos/test.mov',
+						img: '/static/images/project/01.png',
 					},
+					{
+						img: '/static/images/project/02.jpg',
+					}
 				],
-			},
-		};
-	},
-	methods: {
-		setOption(data) {
-			this.instance &&
-				this.instance.setOption(getOption(data.securityCheckRate));
+				video: '/static/videos/三社联动视频.MOV'
+			}),
 		},
-	},
-	watch: {
-		data: {
-			handler(val) {
-				if (this.id) {
-					this.$nextTick(() => {
-						this.instance = echarts.init(
-							document.getElementById(this.id)
-						);
-						this.setOption(val);
-						this.$refs.videoPlayer.player.src(val.video);
-					});
+	};
+	export default {
+		components: {
+			Swiper,
+			SwiperSlide
+		},
+		mixins: [mixins],
+		data() {
+			return {
+				swiperOption: {
+					slidesPerView: 4,
+					spaceBetween: 30,
+					centeredSlides: true,
+					loop: true,
+					autoplay: true
+				},
+				playerOptions: {
+					width: 1352,
+					height: 760,
+					muted: true,
+					language: 'en',
+					playbackRates: [0.7, 1.0, 1.5, 2.0],
+					autoplay: true,
+					loop: true,
+					sources: [
+						{
+							type: 'video/mp4',
+							src: '/static/videos/test.mov',
+						},
+					],
 				}
+			}
+		},
+		methods: {
+			setOption(data) {
+				this.instance && this.instance.setOption(getOption(data.securityCheckRate))
 			},
-			deep: true,
-			immediate: true,
+		},
+		watch: {
+			data: {
+				handler(val) {
+					if (this.id) {
+						this.$nextTick(() => {
+							this.instance = echarts.init(document.getElementById(this.id))
+							this.setOption(val)
+							this.playerOptions.sources[0].src = val.video
+						})
+					}
+				},
+				deep: true,
+				immediate: true
+			}
 		},
 	},
 	created() {
@@ -275,12 +273,12 @@ export default {
 	background-size: 100% 100%;
 	padding: 0 280px;
 
-	.left-circle {
-		background: url('/static/images/serves/left-circle.svg') no-repeat;
-		background-size: 100% 100%;
-		width: 220px;
-		height: 100%;
-	}
+		.left-circle {
+			background: url("/static/images/serves/left-circle.svg") no-repeat;
+			background-size: 100% 100%;
+			width: 220px;
+			height: 100%;
+		}
 
 	.right-circle {
 		background: url('/static/images/serves/right-circle.svg') no-repeat;
