@@ -18,26 +18,7 @@
 
 <script>
 import MapContainer from './MapContainer/index';
-import { initAMapApiLoader } from './lib/';
-import bus from './utils/bus';
 import { store } from '../../../openApi';
-import { SCENEINDEXMAP } from './config';
-initAMapApiLoader({
-	// 高德key
-	plugin: [
-		'AMap.Scale',
-		'AMap.MapType',
-		'AMap.DistrictSearch',
-		'AMap.Driving',
-		'AMap.HeatMap',
-		'AMap.GeoJSON',
-		'AMap.MoveAnimation',
-	],
-	uiVersion: '1.1.1',
-	v: '2.0',
-	key: '8081bdaac8258a8a4a6244bf16084fed',
-});
-
 export default {
 	name: 'HRMap',
 	components: {
@@ -47,24 +28,7 @@ export default {
 		return {
 			inPreview: store.scene.status === 'inPreview',
 		};
-	},
-	methods: {
-		handleSceneChange(e) {
-			let sceneIndexMap = SCENEINDEXMAP;
-			let { index } = e.detail;
-			console.log(index);
-			let pageName = sceneIndexMap[index] || '';
-			// if (pageName) {
-			bus.$emit('currentSceneChange', pageName);
-			// }
-		},
-	},
-	mounted() {
-		document.addEventListener('SceneIndex', this.handleSceneChange);
-	},
-	beforeDestroy() {
-		document.removeEventListener('SceneIndex', this.handleSceneChange);
-	},
+	}
 };
 </script>
 
@@ -88,3 +52,4 @@ export default {
 	z-index: 1100 !important;
 }
 </style>
+
