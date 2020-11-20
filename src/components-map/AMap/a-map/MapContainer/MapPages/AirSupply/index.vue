@@ -138,6 +138,7 @@ export default {
 	},
 	methods: {
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
+			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat } = overlay;
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
@@ -170,7 +171,7 @@ export default {
 				let { content, address } = overlay;
 				//和场景进行交互
 				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
-				// this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = false;
+				this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = false;
 				//更新数据
 				this.$nextTick(() => {
 					AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
