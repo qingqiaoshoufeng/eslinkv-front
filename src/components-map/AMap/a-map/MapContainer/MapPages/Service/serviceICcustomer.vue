@@ -27,6 +27,11 @@
 			@view-detail="viewOverlayDetail"
 		/>
 		<portal to="destination">
+			<MapLegend
+				:data="legendMap"
+				:multiple="legendMultiple"
+				class="map-legend"
+			/>
 			<DataStatistics :data="dataStatisticsList" />
 			<RightPanelWithServiceICcustomer
 				class="right-panel"
@@ -41,11 +46,15 @@ import {
 	ICcustomer,
 	RightPanelWithServiceICcustomer,
 } from './Components/index.js';
+import MapLegend from '../../MapLegend';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import { DataStatistics } from '../../../components';
 import pageMixin from '../mixins/pageMixin.js';
-import { OVERLAYINFOMAP_ICCUSTOMER } from '../../../config';
+import {
+	OVERLAYINFOMAP_ICCUSTOMER,
+	// SERVICELEGENDICCUSTOMERMAP,
+} from '../../../config';
 import GoldChart from '@/openApi';
 
 export default {
@@ -57,11 +66,14 @@ export default {
 		ICcustomer,
 		DataStatistics,
 		RightPanelWithServiceICcustomer,
+		MapLegend,
 	},
 	data() {
 		return {
 			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_ICCUSTOMER),
 			dataStatisticsList: [],
+			// legendMap: SERVICELEGENDICCUSTOMERMAP,
+			legendMultiple: true,
 		};
 	},
 	methods: {
@@ -89,3 +101,11 @@ export default {
 };
 </script>
 
+<style lang="scss" scoped>
+.map-legend {
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+}
+</style>

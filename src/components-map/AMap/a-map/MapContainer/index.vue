@@ -22,7 +22,7 @@
 
 <script>
 import { AMap } from '../lib';
-import MapLegend from './MapLegend/index';
+// import MapLegend from './MapLegend/index';
 // import MapTypeLegend from './MapTypeLegend/index';
 //引入页面
 const files = require.context('./MapPages/', true, /page\.js$/);
