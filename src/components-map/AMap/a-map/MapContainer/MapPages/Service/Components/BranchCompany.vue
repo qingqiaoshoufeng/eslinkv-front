@@ -1,3 +1,4 @@
+<!-- 分公司 -->
 <template>
 	<BaseOverlay
 		v-bind="{
@@ -11,8 +12,9 @@
 </template>
 <script>
 import { BaseOverlay } from '../../Components/index';
+
 export default {
-	name: 'ThreeSocialLinkage',
+	name: 'BranchCompany',
 	components: {
 		BaseOverlay,
 	},
@@ -32,7 +34,7 @@ export default {
 	},
 	data() {
 		return {
-			apiFun: this.$sysApi.map.serve.getThreeSocialLinkageList,
+			apiFun: this.$sysApi.map.serve.getBranchCompanyList,
 		};
 	},
 };

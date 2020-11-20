@@ -1,3 +1,4 @@
+<!-- 三社联动 -->
 <template>
 	<BaseOverlay
 		v-bind="{
@@ -11,9 +12,8 @@
 </template>
 <script>
 import { BaseOverlay } from '../../Components/index';
-
 export default {
-	name: 'Grouphall',
+	name: 'ThreeSocialLinkage',
 	components: {
 		BaseOverlay,
 	},
@@ -30,10 +30,10 @@ export default {
 			type: String,
 			default: '',
 		},
-    },
+	},
 	data() {
 		return {
-			apiFun: this.$sysApi.map.serve.getGrouphallList,
+			apiFun: this.$sysApi.map.serve.getThreeSocialLinkageList,
 		};
 	},
 };

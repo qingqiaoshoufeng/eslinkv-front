@@ -1,3 +1,4 @@
+<!-- 集团大厅 -->
 <template>
 	<BaseOverlay
 		v-bind="{
@@ -6,7 +7,7 @@
 			visible,
 			apiFun,
 		}"
-		@click="marker => $emit('overlay-click', marker, 'Grouphall')"
+		@click="marker => $emit('overlay-click', marker, overlayType)"
 	/>
 </template>
 <script>
@@ -32,9 +33,8 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.serve.getGrouphallList;
 		return {
-			apiFun: apiFun,
+			apiFun: this.$sysApi.map.serve.getGrouphallList,
 		};
 	},
 };

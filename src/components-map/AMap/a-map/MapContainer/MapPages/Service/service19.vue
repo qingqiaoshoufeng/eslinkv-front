@@ -23,33 +23,56 @@
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
-		/>
+		>
+			<TipDetial :data="activeOverlay" />
+		</OverlayDetail>
+		<!-- 统计数据 -->
+		<portal to="destination">
+			<DataStatistics :position="'left'" :data="dataStatisticsList" />
+		</portal>
 	</div>
 </template>
 <script>
 //页面覆盖物组件
-import { Grouphall, BranchCompany, HeatMap } from './Components/index.js';
+import { BranchCompany, TipDetial } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
-import { OVERLAYINFOMAP_MARKET } from '../../../config';
+import { DataStatistics } from '../../../components';
+import { OVERLAYINFOMAP_SERVICE_19 } from '../../../config';
 
 export default {
-	name: 'serviceMarket',
+	name: 'service19',
 	mixins: [pageMixin],
 	components: {
 		RegionBoundary,
 		OverlayDetail,
-		Grouphall,
 		BranchCompany,
-		HeatMap,
+		DataStatistics,
+		TipDetial,
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_MARKET),
+			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_19),
+			dataStatisticsList: [],
 		};
 	},
-	methods: {},
+	methods: {
+		async getDataStatisticsList() {
+			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
+		},
+		closeOverlayDetail(done) {
+			this.showOverlayDetail = false;
+			this.activeOverlay = {};
+			this.$emit('close');
+			this.$amap.setZoom(11, 100);
+			done();
+		},
+	},
+	mounted() {
+		console.log(this.overlayInfoConfig);
+		this.getDataStatisticsList();
+	},
 };
 </script>
 
