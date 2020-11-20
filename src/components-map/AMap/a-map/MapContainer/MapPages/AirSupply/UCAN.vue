@@ -3,8 +3,6 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
-		<!-- 态势感知 -->
-		<!-- <ListOverlay @overlay-click="handleOverlayClick" /> -->
 
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
@@ -32,6 +30,8 @@
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
 		<portal to="destination">
+			<!-- 图例 -->
+			<MapLegend :data="legendMap" class="map-legend" />
 			<!-- 右侧列表 -->
 			<RightPanel
 				class="right-panel"
@@ -62,22 +62,24 @@ import {
 	PressureRegulatingStation,
 	UndergroundRepairStation,
 	RightPanel,
-	RoutePlan,
+	RoutePlan, //规划路线
 } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
-// import pageMixin from '../mixins/pageMixin.js';
+import MapLegend from '../../MapLegend/index';
+
 import {
 	INDEXSCENEMAP,
-	OVERLAYINFOMAP_HOME,
+	OVERLAYINFOMAP_AIRSUPPLY,
 	AIRSUPPLY_WARN_SCENEINDEX,
 	AIRSUPPLY_WARN_COMPONENTINDEX,
+	AIRSUPPLYOVERLAYCONFIGMAP,
+	AIRSUPPLYLEGEND_UCAN,
 } from '../../../config';
 import GoldChart from '@/openApi';
 
 export default {
-	name: 'HomePage',
-	// mixins: [pageMixin],
+	name: 'AirSupplyHighPressure',
 	components: {
 		OverlayDetail,
 		ComprehensiveServiceStation,
@@ -100,43 +102,35 @@ export default {
 		RegionBoundary,
 		RightPanel,
 		RoutePlan,
-	},
-	props: {
-		legendMap: {
-			type: Object,
-			default() {
-				return {};
-			},
-		},
-		currentScene: {
-			type: String,
-			default: '',
-		},
-	},
-	watch: {
-		currentScene(val) {
-			let sceneMap = {
-				'airsupply-station': 'realTimeWithLevel',
-				'airsupply-pipe': 'realTime',
-				'airsupply-lng': 'overlayList',
-				'airsupply-ucan': 'overlayList',
-			};
-			this.activeTab = sceneMap[val];
-		},
+		MapLegend,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
+		this.initLenged(AIRSUPPLYOVERLAYCONFIGMAP, AIRSUPPLYLEGEND_UCAN);
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_HOME),
+			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_AIRSUPPLY),
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'realTimeWithLevel',
+			activeTab: 'overlayList',
+			legendMap: {},
 		};
 	},
 	methods: {
+        //合并legend配置
+		initLenged(fullConfig, lendConfig) {
+			let obj = {};
+			Object.keys(lendConfig).map(legend => {
+				let isShow = lendConfig[legend];
+				obj[legend] = {
+					...fullConfig[legend],
+					isShow,
+				};
+			});
+			this.legendMap = obj;
+		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat } = overlay;
 			overlay.overlayType = overlayType;
@@ -152,7 +146,9 @@ export default {
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
 			if (overlayType === 'WARNEVENT') {
-				GoldChart.scene.setSceneIndex(INDEXSCENEMAP[this.currentScene]);
+				GoldChart.scene.setSceneIndex(
+					INDEXSCENEMAP['AirSupplyHighPressure']
+				);
 				this.showRoutePlan = false;
 			}
 			this.showOverlayDetail = false;
@@ -170,7 +166,6 @@ export default {
 				let { content, address } = overlay;
 				//和场景进行交互
 				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
-				// this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = false;
 				//更新数据
 				this.$nextTick(() => {
 					AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
@@ -236,7 +231,10 @@ export default {
 };
 </script>
 <style  lang="scss"  scoped>
-// .right-panel {
-// 	margin-top: 48px !important;
-// }
+.map-legend {
+	position: absolute;
+	bottom: 50px;
+	left: 50%;
+	transform: translateX(-50%);
+}
 </style>

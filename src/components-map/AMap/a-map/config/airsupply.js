@@ -1,5 +1,5 @@
 // 首页覆盖物配置项
-export const HOMEOVERLAYCONFIGMAP = {
+export const AIRSUPPLYOVERLAYCONFIGMAP = {
 	HighPressureLine: {
 		label: '高压管网',
 		legendIcon: 'icontuligaoyaguanwang',
@@ -98,42 +98,42 @@ export const HOMEOVERLAYCONFIGMAP = {
 	},
 }
 // 首页--高压
-export const AIRSUPPLYLEGEND_STATION = {
+export const AIRSUPPLYLEGEND_HIGHPRESSURE = {
 	HighPressureLine: true,
 	HighPressureLine_Process: true,
 	PressureRegulatingStation: true,
 	EmergencyAirSourceStation: true,
 	GasStation: true,
-	MiddlePressureLine: false,
-	LowPressureLine: false,
-	InspectionPerson: false,
-	InspectionCar: false,
-	ComprehensiveServiceStation: false,
-	PipeManageMentStation: false,
-	UndergroundRepairStation: false,
-	LNGStation: false,
-	LiquefiedGasStation: false,
-	NaturalGasStation: false,
-	DistributedEnergyResource: false,
+	// MiddlePressureLine: false,
+	// LowPressureLine: false,
+	// InspectionPerson: false,
+	// InspectionCar: false,
+	// ComprehensiveServiceStation: false,
+	// PipeManageMentStation: false,
+	// UndergroundRepairStation: false,
+	// LNGStation: false,
+	// LiquefiedGasStation: false,
+	// NaturalGasStation: false,
+	// DistributedEnergyResource: false,
 }
 // 首页--中低压
-export const AIRSUPPLYLEGEND_PIPE = {
+export const AIRSUPPLYLEGEND_LOWPRESSURE = {
 	MiddlePressureLine: true,
 	LowPressureLine: true,
-	PressureRegulatingStation: false,
-	InspectionPerson: false,
-	InspectionCar: false,
-	HighPressureLine_Process: false,
-	HighPressureLine: false,
-	ComprehensiveServiceStation: false,
-	PipeManageMentStation: false,
-	UndergroundRepairStation: false,
-	GasStation: false,
-	EmergencyAirSourceStation: false,
-	LNGStation: false,
-	LiquefiedGasStation: false,
-	NaturalGasStation: false,
-	DistributedEnergyResource: false,
+	// PressureRegulatingStation: false,
+	// InspectionPerson: false,
+	// InspectionCar: false,
+	// HighPressureLine_Process: false,
+	// HighPressureLine: false,
+	// ComprehensiveServiceStation: false,
+	// PipeManageMentStation: false,
+	// UndergroundRepairStation: false,
+	// GasStation: false,
+	// EmergencyAirSourceStation: false,
+	// LNGStation: false,
+	// LiquefiedGasStation: false,
+	// NaturalGasStation: false,
+	// DistributedEnergyResource: false,
 }
 
 // 首页--其他
@@ -141,38 +141,38 @@ export const AIRSUPPLYLEGEND_UCAN = {
 	LiquefiedGasStation: true,
 	NaturalGasStation: true,
 	DistributedEnergyResource: true,
-	HighPressureLine: false,
-	HighPressureLine_Process: false,
-	MiddlePressureLine: false,
-	LowPressureLine: false,
-	InspectionPerson: false,
-	InspectionCar: false,
-	LNGStation: false,
-	GasStation: false,
-	PressureRegulatingStation: false,
-	EmergencyAirSourceStation: false,
-	ComprehensiveServiceStation: false,
-	PipeManageMentStation: false,
-	UndergroundRepairStation: false,
+	// HighPressureLine: false,
+	// HighPressureLine_Process: false,
+	// MiddlePressureLine: false,
+	// LowPressureLine: false,
+	// InspectionPerson: false,
+	// InspectionCar: false,
+	// LNGStation: false,
+	// GasStation: false,
+	// PressureRegulatingStation: false,
+	// EmergencyAirSourceStation: false,
+	// ComprehensiveServiceStation: false,
+	// PipeManageMentStation: false,
+	// UndergroundRepairStation: false,
 }
 // 首页--LNG
 export const AIRSUPPLYLEGEND_LNG = {
 	LNGStation: true,
-	HighPressureLine: false,
-	HighPressureLine_Process: false,
-	MiddlePressureLine: false,
-	LowPressureLine: false,
-	InspectionPerson: false,
-	InspectionCar: false,
-	GasStation: false,
-	PressureRegulatingStation: false,
-	EmergencyAirSourceStation: false,
-	ComprehensiveServiceStation: false,
-	PipeManageMentStation: false,
-	UndergroundRepairStation: false,
-	LiquefiedGasStation: false,
-	NaturalGasStation: false,
-	DistributedEnergyResource: false,
+	// HighPressureLine: false,
+	// HighPressureLine_Process: false,
+	// MiddlePressureLine: false,
+	// LowPressureLine: false,
+	// InspectionPerson: false,
+	// InspectionCar: false,
+	// GasStation: false,
+	// PressureRegulatingStation: false,
+	// EmergencyAirSourceStation: false,
+	// ComprehensiveServiceStation: false,
+	// PipeManageMentStation: false,
+	// UndergroundRepairStation: false,
+	// LiquefiedGasStation: false,
+	// NaturalGasStation: false,
+	// DistributedEnergyResource: false,
 }
 
 export const OVERLAYINFOMAP = {
@@ -220,7 +220,7 @@ export const OVERLAYINFOMAP = {
 }
 
 //覆盖物详情
-export const OVERLAYINFOMAP_HOME = {
+export const OVERLAYINFOMAP_AIRSUPPLY = {
 	InspectionPerson: {
 		fields: {
 			employeename: {},

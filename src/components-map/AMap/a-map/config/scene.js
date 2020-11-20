@@ -1,9 +1,9 @@
 export const SCENEINDEXMAP = {
-	'8iyxp8u3gtu': 'airsupply-pipe', //供气-管网
+	'8iyxp8u3gtu': 'AirSupplyLowPressure', //供气-管网
 	// tbc8uqyrkze: 'airsupply', //供气-管网
-	'9n1zur7e4l': 'airsupply-ucan', //供气-泛能
-	nn16rowdl5r: 'airsupply-station', //供气-场站
-	p2wovclspks: 'airsupply-lng', //供气-场站
+	'9n1zur7e4l': 'AirSupplyUCAN', //供气-泛能
+	nn16rowdl5r: 'AirSupplyHighPressure', //供气-场站
+	p2wovclspks: 'AirSupplyLNG', //供气-场站
 	g199smrdh4r: 'project',
 	'6gouq223fze': 'service_customer',
 	a70wh40bnz9: 'service_19',
@@ -14,10 +14,10 @@ export const SCENEINDEXMAP = {
     ahais9szswu:'unchange'
 }
 export const INDEXSCENEMAP = {
-	'airsupply-pipe': '8iyxp8u3gtu', //供气-管网
-	'airsupply-ucan': '9n1zur7e4l', //供气-泛能
-	'airsupply-station': 'nn16rowdl5r', //供气-场站
-	'airsupply-lng': 'p2wovclspks', //供气-lng
+	'AirSupplyLowPressure': '8iyxp8u3gtu', //供气-管网
+	'AirSupplyUCAN': '9n1zur7e4l', //供气-泛能
+	'AirSupplyHighPressure': 'nn16rowdl5r', //供气-场站
+	'AirSupplyLNG': 'p2wovclspks', //供气-lng
 }
 //三社联动弹窗场景index
 export const THREESOCIALLINKAGE_SCENEINDEX = 'fsg1lcpo1c6'

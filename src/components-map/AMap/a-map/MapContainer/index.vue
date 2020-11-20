@@ -9,57 +9,42 @@
 			}"
 			v-bind="mapConfig"
 		>
-			<!-- 不同场景渲染不同的组件 -->
+			<!-- 不同场景渲染不同的页面 -->
 			<template v-if="mapReady && showMap && mapComponentName">
-				<component
-					:activeItem="activeItem"
-					@closePop="handleClosePop"
-					:legendMap="legendMap"
-					:is="mapComponentName"
-					:currentScene="currentScene"
-				/>
+				<component @closePop="handleClosePop" :is="mapComponentName" />
 			</template>
 		</el-amap>
-		<!-- 地图 legend  -->
-		<MapLegend
-			:data="legendMap"
-			:multiple="legendMultiple"
-			class="map-legend"
-			:style="mapLegendStyle"
-		/>
 		<!-- 地图类型 -->
-		<MapTypeLegend />
-		<portal-target name="destination"> </portal-target>
-		<DataStatistics :data="computedDataStatisticsList" v-if="showMap" />
+		<!-- <MapTypeLegend /> -->
+		<portal-target name="destination"></portal-target>
 	</div>
 </template>
 
 <script>
 import { AMap } from '../lib';
 import MapLegend from './MapLegend/index';
-import MapTypeLegend from './MapTypeLegend/index';
-import RightPanelList from './RightPaneList/';
-import { DataStatistics } from '../components';
-//地图覆盖物
+// import MapTypeLegend from './MapTypeLegend/index';
+//引入页面
+const files = require.context('./MapPages/', true, /page\.js$/);
+const modules = {};
+const path = require('path');
+files.keys().forEach(key => {
+	let pageModule = files(key).default || files(key);
+	const pageName = path.dirname(key).slice(2);
+	Object.keys(pageModule).forEach(subPageName => {
+		modules[pageName + subPageName] = pageModule[subPageName];
+	});
+});
 import {
-	AirSupplyMap,
-	serviceCustomerMap,
-	serviceMarketMap,
-	serviceHangranCode,
-	service19,
-	serviceICcustomer,
-} from './MapPages/';
-
-import {
-	AIRSUPPLYLEGEND_STATION,
-	AIRSUPPLYLEGEND_PIPE,
+	AIRSUPPLYLEGEND_LOWPRESSURE,
+	AIRSUPPLYLEGEND_HIGHPRESSURE,
 	AIRSUPPLYLEGEND_UCAN,
 	AIRSUPPLYLEGEND_LNG,
 	SERVICELEGEND_MARKET,
 	SERVICELEGEND_CUSTOMER,
 	SERVICELEGENDCUSTOMERMAP,
 	SERVICELEGENDMARKETMAP,
-	HOMEOVERLAYCONFIGMAP,
+	AIRSUPPLYOVERLAYCONFIGMAP,
 	SERVICELEGEND_HANGRANCODE,
 	SERVICELEGENDHANGRANCODEMAP,
 	SERVICELEGEND19MAP,
@@ -73,16 +58,17 @@ export default {
 	name: 'MainMap',
 	components: {
 		ElAmap: AMap,
-		AirSupplyMap,
-		serviceCustomerMap,
-		serviceMarketMap,
-		MapLegend,
-		MapTypeLegend,
+		// AirSupplyMap,
+		// serviceCustomerMap,
+		// serviceMarketMap,
+		// MapLegend,
+		// MapTypeLegend,
 		// RightPanelList,
-		serviceHangranCode,
-		service19,
-		serviceICcustomer,
-		DataStatistics,
+		// serviceHangranCode,
+		// service19,
+		// serviceICcustomer,
+		// DataStatistics,
+		...modules,
 	},
 	data() {
 		return {
@@ -100,7 +86,7 @@ export default {
 			mapLegendStyle: null,
 			mapLegendStyleNormal: { left: '50%' },
 			mapReady: false,
-			mapComponentName: 'AirSupplyMap',
+			mapComponentName: 'AirSupplyHighPressure',
 			currentScene: 'airsupply',
 			legendConfig: {},
 			activeItem: {},
@@ -113,46 +99,47 @@ export default {
 	watch: {
 		currentScene(val) {
 			// debugger;
-			let { legendConfig, _overlayConfigMap } = this;
-			let pageName = val;
-			this.sence = pageName;
-			//多个场景共用一个地图
-			if (val.indexOf('-') > -1) {
-				pageName = pageName.split('-')[0];
-			}
-			let pageOverlayConfig = _overlayConfigMap[pageName];
-			let obj = {};
-			Object.keys(legendConfig).map(legend => {
-				let isShow = legendConfig[legend];
-				obj[legend] = {
-					...pageOverlayConfig[legend],
-					isShow,
-				};
-			});
-			this.legendMap = obj;
+			// let { legendConfig, _overlayConfigMap } = this;
+			// let pageName = val;
+			// this.sence = pageName;
+			// //多个场景共用一个地图
+			// if (val.indexOf('-') > -1) {
+			// 	pageName = pageName.split('-')[0];
+			// }
+			// let pageOverlayConfig = _overlayConfigMap[pageName];
+			// let obj = {};
+			// Object.keys(legendConfig).map(legend => {
+			// 	let isShow = legendConfig[legend];
+			// 	obj[legend] = {
+			// 		...pageOverlayConfig[legend],
+			// 		isShow,
+			// 	};
+			// });
+			// this.legendMap = obj;
+			this.mapComponentName = val;
 		},
 	},
 	computed: {
 		computedDataStatisticsList() {
-			if (this.mapComponentName !== 'AirSupplyMap') return [];
+			if (this.mapComponentName !== 'AirSupplyHighPressure') return [];
 			let senceDataObj = {
-				'airsupply-station': [
+				AirSupplyHighPressure: [
 					'门站',
 					'应急气源站',
 					'高中压调压站',
 					'中低压调压箱',
 				],
-				'airsupply-pipe': [
+				AirSupplyLowPressure: [
 					'绿色能源综合服务站',
 					'管网运行管理站',
 					'地下抢修点',
 				],
-				'airsupply-lng': [
+				AirSupplyLNG: [
 					'绿色能源综合服务站',
 					'管网运行管理站',
 					'地下抢修点',
 				],
-				'airsupply-ucan': ['常用钢瓶用户数量', '在册钢瓶数量'],
+				AirSupplyUCAN: ['常用钢瓶用户数量', '在册钢瓶数量'],
 			};
 			return this.dataStatisticsList.filter(item =>
 				senceDataObj[this.sence].includes(item.desc)
@@ -161,7 +148,7 @@ export default {
 	},
 	created() {
 		this._overlayConfigMap = {
-			airsupply: HOMEOVERLAYCONFIGMAP,
+			airsupply: AIRSUPPLYOVERLAYCONFIGMAP,
 			service_customer: SERVICELEGENDCUSTOMERMAP,
 			service_market: SERVICELEGENDMARKETMAP,
 			service_hangranCode: SERVICELEGENDHANGRANCODEMAP,
@@ -169,22 +156,22 @@ export default {
 			serviceICcustomer: SERVICELEGENDICCUSTOMERMAP,
 		};
 		this._pageConfig = {
-			'airsupply-station': {
-				mapComponentName: 'AirSupplyMap',
-				legendConfig: AIRSUPPLYLEGEND_STATION,
+			AirSupplyHighPressure: {
+				mapComponentName: 'AirSupplyHighPressure',
+				legendConfig: AIRSUPPLYLEGEND_LOWPRESSURE,
 				legendMultiple: true,
 			},
-			'hoairsupplyme-pipe': {
-				mapComponentName: 'AirSupplyMap',
-				legendConfig: AIRSUPPLYLEGEND_PIPE,
+			AirSupplyLowPressure: {
+				mapComponentName: 'AirSupplyLowPressure',
+				legendConfig: AIRSUPPLYLEGEND_LOWPRESSURE,
 				legendMultiple: true,
 			},
-			'airsupply-ucan': {
-				mapComponentName: 'AirSupplyMap',
+			AirSupplyUCAN: {
+				mapComponentName: 'AirSupplyUCAN',
 				legendConfig: AIRSUPPLYLEGEND_UCAN,
 				legendMultiple: true,
 			},
-			'airsupply-lng': {
+			AirSupplyLNG: {
 				mapComponentName: 'AirSupplyMap',
 				legendConfig: AIRSUPPLYLEGEND_LNG,
 				legendMultiple: true,
@@ -243,7 +230,7 @@ export default {
 			console.log('地图初始化完成！');
 			this.mapReady = true;
 			this.map = this.$refs.amap.$amap;
-			this.initPage('airsupply-station');
+			this.initPage('AirSupplyHighPressure');
 			setTimeout(() => {
 				this.map.addControl(new window.AMap.MapType());
 			}, 2000);
@@ -254,18 +241,18 @@ export default {
 				return false;
 			}
 			this.mapCenter = null;
-            this.mapLegendStyle = this.mapLegendStyleNormal;
-            this.mapComponentName = null
+			this.mapLegendStyle = this.mapLegendStyleNormal;
+			this.mapComponentName = null;
 			// setTimeout(() => {
-				Object.keys(config).forEach(targetProp => {
-					this[targetProp] = config[targetProp];
-				});
-				if (this.map) {
-					let { mapCenter, mapConfig } = this;
-					let { zoom, center } = mapConfig;
-					this.map.setZoom(zoom, 100);
-					this.map.panTo(mapCenter ? mapCenter : center, 0);
-				}
+			Object.keys(config).forEach(targetProp => {
+				this[targetProp] = config[targetProp];
+			});
+			if (this.map) {
+				let { mapCenter, mapConfig } = this;
+				let { zoom, center } = mapConfig;
+				this.map.setZoom(zoom, 100);
+				this.map.panTo(mapCenter ? mapCenter : center, 0);
+			}
 			// },2000);
 		},
 		handleClosePop() {
@@ -284,11 +271,5 @@ export default {
 	left: 0;
 	width: 3560px;
 	height: 1380px;
-}
-.map-legend {
-	position: absolute;
-	bottom: 50px;
-	left: 50%;
-	transform: translateX(-50%);
 }
 </style>
