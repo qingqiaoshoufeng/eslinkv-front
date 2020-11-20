@@ -1,3 +1,4 @@
+<!-- 销气热力 -->
 <script>
 // import heatMapData from '@/assets/amap/json/heatMap.json';
 import overlayMixin from '../../mixins/overlayMixin.js';

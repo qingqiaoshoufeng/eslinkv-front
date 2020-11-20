@@ -1,3 +1,4 @@
+<!-- 服务网点 -->
 <template>
 	<BaseOverlay
 		v-bind="{
@@ -6,14 +7,13 @@
 			visible,
 			apiFun,
 		}"
-		@click="marker => $emit('overlay-click', marker, 'BranchCompany')"
+		@click="marker => $emit('overlay-click', marker, overlayType)"
 	/>
 </template>
 <script>
 import { BaseOverlay } from '../../Components/index';
-
 export default {
-	name: 'BranchCompany',
+	name: 'ServiceNetworkStation',
 	components: {
 		BaseOverlay,
 	},
@@ -32,9 +32,8 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.serve.getBranchCompanyList;
 		return {
-			apiFun: apiFun,
+			apiFun: this.$sysApi.map.serve.getServiceNetworkStationList,
 		};
 	},
 };

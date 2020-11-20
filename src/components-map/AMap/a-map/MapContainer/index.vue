@@ -94,6 +94,7 @@ export default {
 			legendMultiple: true,
 			dataStatisticsList: [],
 			showMap: false,
+			sence: null,
 		};
 	},
 	watch: {
@@ -177,12 +178,12 @@ export default {
 				legendMultiple: true,
 			},
 			service_customer: {
-				mapComponentName: 'serviceCustomerMap',
+				mapComponentName: 'serviceCustomer',
 				legendConfig: SERVICELEGEND_CUSTOMER,
 				legendMultiple: true,
 			},
 			service_market: {
-				mapComponentName: 'serviceMarketMap',
+				mapComponentName: 'serviceMarket',
 				legendConfig: SERVICELEGEND_MARKET,
 				legendMultiple: true,
 			},

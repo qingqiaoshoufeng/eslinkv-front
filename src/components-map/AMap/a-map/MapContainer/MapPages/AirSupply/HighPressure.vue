@@ -132,6 +132,7 @@ export default {
 			this.legendMap = obj;
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
+			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat } = overlay;
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;

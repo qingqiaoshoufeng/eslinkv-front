@@ -1,3 +1,4 @@
+<!-- 客户服务 -->
 <template>
 	<div>
 		<!-- 1.legend不控制显隐的覆盖物 -->
@@ -26,12 +27,21 @@
 			@view-detail="toViewOverlayDetail"
 		/>
 		<portal to="destination">
+			<!-- 图例 -->
+			<!-- <MapLegend
+				:data="legendMap"
+				:multiple="legendMultiple"
+				class="map-legend"
+				:style="mapLegendStyle"
+			/> -->
 			<!-- 统计数据 -->
 			<DataStatistics :data="dataStatisticsList" />
-			<RightPanel
+			<!-- 右侧列表 -->
+			<RightPanelWithServiceCustomer
 				class="right-panel"
 				@list-click="handleListClick"
-			></RightPanel>
+			></RightPanelWithServiceCustomer>
+			MapLegend
 		</portal>
 	</div>
 </template>
@@ -42,9 +52,10 @@ import {
 	ServiceNetworkStation,
 	Grouphall,
 	BranchCompany,
-	RightPanel,
+	RightPanelWithServiceCustomer,
 } from './Components/index.js';
 //页面所需公共组件
+import MapLegend from '../../MapLegend/index';
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import { DataStatistics } from '../../../components';
 import pageMixin from '../mixins/pageMixin.js';
@@ -67,7 +78,7 @@ export default {
 		Grouphall,
 		BranchCompany,
 		DataStatistics,
-		RightPanel,
+		RightPanelWithServiceCustomer,
 	},
 	data() {
 		return {

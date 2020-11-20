@@ -1,3 +1,4 @@
+<!-- 销售 -->
 <template>
 	<div>
 		<!-- 1.legend不控制显隐的覆盖物 -->
@@ -14,7 +15,6 @@
 				:overlayIcon="config.icon"
 				:overlayType="legend"
 				:is="config.component"
-                
 				@overlay-click="handleOverlayClick"
 			/>
 		</template>
@@ -24,56 +24,33 @@
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
-		>
-			<TipDetial :data="activeOverlay" />
-		</OverlayDetail>
-		<!-- 统计数据 -->
-		<portal to="destination">
-			<DataStatistics :position="'left'" :data="dataStatisticsList" />
-		</portal>
+		/>
 	</div>
 </template>
 <script>
 //页面覆盖物组件
-import { BranchCompany, TipDetial } from './Components/index.js';
+import { Grouphall, BranchCompany, HeatMap } from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import pageMixin from '../mixins/pageMixin.js';
-import { DataStatistics } from '../../../components';
-import { OVERLAYINFOMAP_SERVICE_19 } from '../../../config';
+import { OVERLAYINFOMAP_MARKET } from '../../../config';
 
 export default {
-	name: 'service19',
+	name: 'serviceMarket',
 	mixins: [pageMixin],
 	components: {
 		RegionBoundary,
 		OverlayDetail,
+		Grouphall,
 		BranchCompany,
-		DataStatistics,
-		TipDetial,
+		HeatMap,
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_19),
-			dataStatisticsList: [],
+			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_MARKET),
 		};
 	},
-	methods: {
-		async getDataStatisticsList() {
-			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
-		},
-		closeOverlayDetail(done) {
-			this.showOverlayDetail = false;
-			this.activeOverlay = {};
-			this.$emit('close');
-            this.$amap.setZoom(11, 100);
-			done();
-		},
-	},
-	mounted() {
-		console.log(this.overlayInfoConfig);
-		this.getDataStatisticsList();
-	},
+	methods: {},
 };
 </script>
 
