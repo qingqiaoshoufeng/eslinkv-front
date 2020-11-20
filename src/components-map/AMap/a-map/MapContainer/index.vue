@@ -58,16 +58,6 @@ export default {
 	name: 'MainMap',
 	components: {
 		ElAmap: AMap,
-		// AirSupplyMap,
-		// serviceCustomerMap,
-		// serviceMarketMap,
-		// MapLegend,
-		// MapTypeLegend,
-		// RightPanelList,
-		// serviceHangranCode,
-		// service19,
-		// serviceICcustomer,
-		// DataStatistics,
 		...modules,
 	},
 	data() {
