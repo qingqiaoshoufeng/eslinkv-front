@@ -41,14 +41,14 @@ import MapTypeLegend from './MapTypeLegend/index';
 import RightPanelList from './RightPaneList/';
 import { DataStatistics } from '../components';
 //地图覆盖物
+import { AirSupplyMap } from './MapPages/';
 import {
-	AirSupplyMap,
-	serviceCustomerMap,
-	serviceMarketMap,
+	serviceCustomer,
+	serviceMarket,
 	serviceHangranCode,
 	service19,
 	serviceICcustomer,
-} from './MapPages/';
+} from './MapPages/Service/';
 
 import {
 	AIRSUPPLYLEGEND_STATION,
@@ -74,8 +74,8 @@ export default {
 	components: {
 		ElAmap: AMap,
 		AirSupplyMap,
-		serviceCustomerMap,
-		serviceMarketMap,
+		serviceCustomer,
+		serviceMarket,
 		MapLegend,
 		MapTypeLegend,
 		// RightPanelList,
@@ -108,6 +108,7 @@ export default {
 			legendMultiple: true,
 			dataStatisticsList: [],
 			showMap: false,
+			sence: null,
 		};
 	},
 	watch: {
@@ -190,12 +191,12 @@ export default {
 				legendMultiple: true,
 			},
 			service_customer: {
-				mapComponentName: 'serviceCustomerMap',
+				mapComponentName: 'serviceCustomer',
 				legendConfig: SERVICELEGEND_CUSTOMER,
 				legendMultiple: true,
 			},
 			service_market: {
-				mapComponentName: 'serviceMarketMap',
+				mapComponentName: 'serviceMarket',
 				legendConfig: SERVICELEGEND_MARKET,
 				legendMultiple: true,
 			},
@@ -254,18 +255,18 @@ export default {
 				return false;
 			}
 			this.mapCenter = null;
-            this.mapLegendStyle = this.mapLegendStyleNormal;
-            this.mapComponentName = null
+			this.mapLegendStyle = this.mapLegendStyleNormal;
+			this.mapComponentName = null;
 			// setTimeout(() => {
-				Object.keys(config).forEach(targetProp => {
-					this[targetProp] = config[targetProp];
-				});
-				if (this.map) {
-					let { mapCenter, mapConfig } = this;
-					let { zoom, center } = mapConfig;
-					this.map.setZoom(zoom, 100);
-					this.map.panTo(mapCenter ? mapCenter : center, 0);
-				}
+			Object.keys(config).forEach(targetProp => {
+				this[targetProp] = config[targetProp];
+			});
+			if (this.map) {
+				let { mapCenter, mapConfig } = this;
+				let { zoom, center } = mapConfig;
+				this.map.setZoom(zoom, 100);
+				this.map.panTo(mapCenter ? mapCenter : center, 0);
+			}
 			// },2000);
 		},
 		handleClosePop() {

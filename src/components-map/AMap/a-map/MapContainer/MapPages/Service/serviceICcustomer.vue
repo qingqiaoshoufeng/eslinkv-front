@@ -28,13 +28,19 @@
 		/>
 		<portal to="destination">
 			<DataStatistics :data="dataStatisticsList" />
-			<RightPanel class="right-panel" @list-click="handleListClick" />
+			<RightPanelWithServiceICcustomer
+				class="right-panel"
+				@list-click="handleListClick"
+			/>
 		</portal>
 	</div>
 </template>
 <script>
 //页面覆盖物组件
-import { ICcustomer, RightPanel } from './Components/index.js';
+import {
+	ICcustomer,
+	RightPanelWithServiceICcustomer,
+} from './Components/index.js';
 //页面所需公共组件
 import { RegionBoundary, OverlayDetail } from '../Components/index.js';
 import { DataStatistics } from '../../../components';
@@ -50,7 +56,7 @@ export default {
 		OverlayDetail,
 		ICcustomer,
 		DataStatistics,
-		RightPanel,
+		RightPanelWithServiceICcustomer,
 	},
 	data() {
 		return {
