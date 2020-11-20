@@ -31,7 +31,7 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx", "src/components-map/AMap/a-map/MapContainer/MapPages/AirSupply/index.js"
   ],
   "exclude": [
     "node_modules"

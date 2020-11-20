@@ -34,7 +34,7 @@
 <script>
 import { SvgIcon } from "../../../../../components/";
 import {
-    HOMEOVERLAYCONFIGMAP,
+    AIRSUPPLYOVERLAYCONFIGMAP,
 } from '../../../../../config/index';
 export default {
   name: "HomeRealTimeList",
@@ -75,7 +75,7 @@ export default {
       let list =  await this.$sysApi.map.home.getAllTypeStationList()
       this.list = list.map(item=>{
           let {stationType} = item
-          let config = HOMEOVERLAYCONFIGMAP[stationType] 
+          let config = AIRSUPPLYOVERLAYCONFIGMAP[stationType] 
           if(config){
               item.icon = config.legendIcon
           }
