@@ -40,7 +40,7 @@
 </template>
 <script>
 //页面覆盖物组件
-import { BranchCompany, TipDetial } from './Components/index.js';
+import { BranchCompany, TipDetial } from '../Components/index.js';
 //页面所需公共组件
 import {
 	RegionBoundary,
@@ -50,11 +50,9 @@ import {
 // 页面配置项
 
 import { DataStatistics } from '../../../../components';
-import { OVERLAYINFOMAP_SERVICE_19 } from '../../../config';
-import MapLegend from '../../MapLegend';
+import { SERVICE_SERVICE19_OVERLAY_MAP } from './config';
 export default {
 	name: 'service19',
-	mixins: [pageMixin],
 	components: {
 		RegionBoundary,
 		OverlayDetail,

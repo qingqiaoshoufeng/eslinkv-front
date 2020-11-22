@@ -37,15 +37,19 @@
 </template>
 <script>
 //页面覆盖物组件
-import { Grouphall, BranchCompany, HeatMap } from './Components/index.js';
+import { Grouphall, BranchCompany, HeatMap } from '../Components/index.js';
 //页面所需公共组件
-import { RegionBoundary, OverlayDetail } from '../Components/index.js';
-import pageMixin from '../mixins/pageMixin.js';
-import { OVERLAYINFOMAP_MARKET } from '../../../config';
-import MapLegend from '../../MapLegend';
+import {
+	RegionBoundary,
+	OverlayDetail,
+	MapLegend,
+} from '../Components/index.js';
+import {
+	SERVICE_SERVICEMARKET_OVERLAY_MAP,
+	SERVICE_SERVICEMARKET_LEGEND_MAP,
+} from './config';
 export default {
 	name: 'serviceMarket',
-	mixins: [pageMixin],
 	components: {
 		RegionBoundary,
 		OverlayDetail,
@@ -56,8 +60,8 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_MARKET),
-			// legendMap: SERVICELEGENDMARKETMAP,
+			overlayInfoConfig: Object.freeze(SERVICE_SERVICEMARKET_OVERLAY_MAP),
+			legendMap: SERVICE_SERVICEMARKET_LEGEND_MAP,
 			mapLegendStyle: { left: '18%' },
 			legendMultiple: true,
 		};

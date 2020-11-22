@@ -58,8 +58,7 @@ import {
 	OverlayDetail,
 	MapLegend,
 } from '../../Components/index.js';
-import { DataStatistics } from '../../../components';
-import pageMixin from '../mixins/pageMixin.js';
+import { DataStatistics } from '../../../../components';
 import {
 	THREESOCIALLINKAGE_SCENEINDEX,
 	THREESOCIALLINKAGE_COMPONENTINDEX,
@@ -69,10 +68,8 @@ import {
 	SERVICE_SERVICECUSTOMER_LEGEND_MAP,
 	SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
 } from './config.js';
-import GoldChart from '@/openApi';
 export default {
 	name: 'serviceCustomer',
-	mixins: [pageMixin],
 	components: {
 		ThreeSocialLinkage,
 		ServiceNetworkStation,

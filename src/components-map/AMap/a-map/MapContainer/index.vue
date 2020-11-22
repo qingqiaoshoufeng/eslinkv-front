@@ -9,13 +9,13 @@
 			}"
 			v-bind="mapConfig"
 		>
-			<!-- 不同场景渲染不同的页面 -->
+			<!-- 页面 -->
 			<template v-if="showMapPage">
 				<component :is="mapComponentName" />
 			</template>
 		</el-amap>
 		<!-- 地图类型 -->
-		<!-- <MapTypeLegend /> -->
+		<MapTypeLegend />
 		<!-- 传送门的出口 -->
 		<portal-target name="destination"></portal-target>
 	</div>
@@ -23,6 +23,8 @@
 
 <script>
 import { AMap } from '../lib';
+import MapTypeLegend from './MapTypeLegend';
+import mapMixin from './mapMixin.js';
 //引入页面
 const files = require.context('./MapPages/', true, /page\.js$/);
 const mapPages = {};
@@ -34,11 +36,13 @@ files.keys().forEach(key => {
 		mapPages[pageName + subPageName] = pageModule[subPageName];
 	});
 });
-import bus from '../utils/bus';
+
 export default {
 	name: 'MainMap',
+	mixins: [mapMixin],
 	components: {
 		ElAmap: AMap,
+		MapTypeLegend,
 		...mapPages,
 	},
 	data() {
@@ -53,38 +57,7 @@ export default {
 				pitch: 10,
 				mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
 			},
-			mapReady: false,
-			showMap: false,
-			mapComponentName: 'AirSupplyHighPressure',
 		};
-	},
-	computed: {
-		showMapPage() {
-			let { mapReady, showMap, mapComponentName } = this;
-			return mapReady && showMap && mapComponentName;
-		},
-	},
-	mounted() {
-		bus.$on('currentSceneChange', val => {
-			if (!val) {
-				return (this.showMap = false);
-			} else {
-				this.showMap = true;
-			}
-			if (val === 'unchange' || val === this.mapComponentName) {
-				return false;
-			}
-			this.mapComponentName = val;
-		});
-	},
-	methods: {
-		mapInit() {
-			console.log('地图初始化完成！');
-			this.mapReady = true;
-		},
-	},
-	beforeDestroy() {
-		bus.$off(['currentSceneChange']);
 	},
 };
 </script>

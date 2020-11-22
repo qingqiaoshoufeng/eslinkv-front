@@ -48,7 +48,7 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import {getSelect, getInput} from "../../../../lib";
+	import { getInput } from "../../../../lib";
 
 	const configSource = {
 		config: {
@@ -75,8 +75,64 @@
 		    building: [
           {
             name: '燃气报警系统',
-
-          }
+            desc1: '累计销量',
+            desc2: '累计销售金额',
+            value1: 4856,
+            unit1: '台',
+            value2: 326084,
+            unit2: '元',
+            icon1: '/static/images/home/home-u-1.svg'
+          },
+          {
+            name: '燃气保险',
+            desc1: '累计销量',
+            desc2: '累计销售金额',
+            value1: 2342,
+            unit1: '笔',
+            value2: 567517,
+            unit2: '元',
+            icon1: '/static/images/home/home-u-2.svg'
+          },
+          {
+            name: '金属管',
+            desc1: '年度销量',
+            desc2: '累计销售金额',
+            value1: 56332,
+            unit1: '根',
+            value2: 578567,
+            unit2: '元',
+            icon1: '/static/images/home/home-u-3.svg'
+          },
+          {
+            name: '非居民燃气设施',
+            desc1: '累计销量',
+            desc2: '累计销售金额',
+            value1: 302,
+            unit1: '台',
+            value2: 785235,
+            unit2: '元',
+            icon1: '/static/images/home/home-u-4.svg'
+          },
+          {
+            name: '供暖工程',
+            desc1: '累计销量',
+            desc2: '累计销售金额',
+            value1: 4856,
+            unit1: '个',
+            value2: 326084,
+            unit2: '元',
+            icon1: '/static/images/home/home-u-5.svg'
+          },
+          {
+            name: '居民燃气设施',
+            desc1: '年度销量',
+            desc2: '年度销售金额',
+            value1: 4856,
+            unit1: '台',
+            value2: 326084,
+            unit2: '元',
+            icon1: '/static/images/home/home-u-6.svg'
+          },
         ]
       }
     }
@@ -160,6 +216,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 40px;
+  margin-top: 24px;
   .detail-item {
     flex: 1;
     text-align: left;

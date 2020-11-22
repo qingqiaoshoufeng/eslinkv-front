@@ -29,20 +29,20 @@
 </template>
 <script>
 //页面覆盖物组件
-import { CouplingHot, OperationHot } from './Components/index.js';
+import { CouplingHot, OperationHot } from '../Components/index.js';
 //页面所需公共组件
-import { RegionBoundary } from '../Components/index.js';
-import pageMixin from '../mixins/pageMixin.js';
-import MapLegend from '../../MapLegend';
 import {
-	OVERLAYINFOMAP_HANGRANCODE,
-	// SERVICELEGENDHANGRANCODEMAP,
-} from '../../../config';
-import { DataStatistics } from '../../../components';
-import GoldChart from '@/openApi';
+	RegionBoundary,
+	OverlayDetail,
+	MapLegend,
+} from '../../Components/index.js';
+import {
+	SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
+	SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP,
+} from './config';
+import { DataStatistics } from '../../../../components';
 export default {
 	name: 'hangranCode',
-	mixins: [pageMixin],
 	components: {
 		RegionBoundary,
 		CouplingHot,
@@ -52,8 +52,11 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_HANGRANCODE),
+			overlayInfoConfig: Object.freeze(
+				SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP
+			),
 			dataStatisticsList: [],
+			legendMap: SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
 			mapLegendStyle: { left: '18%' },
 			legendMultiple: false,
 		};

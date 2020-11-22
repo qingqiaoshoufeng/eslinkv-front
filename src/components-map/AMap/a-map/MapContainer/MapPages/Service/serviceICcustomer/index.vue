@@ -1,5 +1,6 @@
+<!-- 工商户 -->
 <template>
-	<div>
+	<div class="ICcustomer1">
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
@@ -23,64 +24,79 @@
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
-		>
-			<TipDetial :data="activeOverlay" />
-		</OverlayDetail>
-		<!-- 统计数据 -->
+			@view-detail="viewOverlayDetail"
+		/>
 		<portal to="destination">
 			<MapLegend
 				:data="legendMap"
 				:multiple="legendMultiple"
 				class="map-legend"
-				:style="mapLegendStyle"
 			/>
-			<DataStatistics :position="'left'" :data="dataStatisticsList" />
+			<DataStatistics :data="dataStatisticsList" />
+			<RightPanelWithServiceICcustomer
+				class="right-panel"
+				@list-click="handleListClick"
+			/>
 		</portal>
 	</div>
 </template>
 <script>
 //页面覆盖物组件
-import { BranchCompany, TipDetial } from './Components/index.js';
+import {
+	ICcustomer,
+	RightPanelWithServiceICcustomer,
+} from '../Components/index.js';
 //页面所需公共组件
-import { RegionBoundary, OverlayDetail } from '../Components/index.js';
-import pageMixin from '../mixins/pageMixin.js';
-import { DataStatistics } from '../../../components';
-import { OVERLAYINFOMAP_SERVICE_19 } from '../../../config';
-import MapLegend from '../../MapLegend';
+import {
+	RegionBoundary,
+	OverlayDetail,
+	MapLegend,
+} from '../Components/index.js';
+import { DataStatistics } from '../../../../components';
+import {
+	SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
+	SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP,
+} from './config';
 export default {
-	name: 'service19',
-	mixins: [pageMixin],
+	name: 'serviceICcustomer',
 	components: {
 		RegionBoundary,
 		OverlayDetail,
-		BranchCompany,
+		ICcustomer,
 		DataStatistics,
-		TipDetial,
+		RightPanelWithServiceICcustomer,
 		MapLegend,
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_19),
+			overlayInfoConfig: Object.freeze(
+				SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP
+			),
 			dataStatisticsList: [],
-			// legendMap: SERVICELEGEND19MAP,
+			legendMap: SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
 			legendMultiple: true,
-			mapLegendStyle: { left: '18%' },
 		};
 	},
 	methods: {
 		async getDataStatisticsList() {
 			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
 		},
-		closeOverlayDetail(done) {
-			this.showOverlayDetail = false;
-			this.activeOverlay = {};
-			this.$emit('close');
-			this.$amap.setZoom(11, 100);
-			done();
+		handleListClick(item) {
+			console.log(item);
 		},
+		// viewOverlayDetail(overlay) {
+		// 	let { overlayType } = overlay;
+		// 	//和场景进行交互
+		// 	GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
+		// 	//更新数据
+		// 	this.$nextTick(() => {
+		// 		AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
+		// 			GoldChart.instance.updateComponent(i);
+		// 		});
+		// 	});
+		// },
 	},
 	mounted() {
-		console.log(this.overlayInfoConfig);
 		this.getDataStatisticsList();
 	},
 };
