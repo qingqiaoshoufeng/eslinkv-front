@@ -187,7 +187,7 @@
 		},
 		mounted() {
 			setTimeout(()=>{
-				this.$refs.img.style.transform=`perspective(763px) rotateY(${this.config.config.transform}deg)`
+				this.$refs.img.style.transform=`perspective(763px) rotateY(${this.config.config.transform}deg) translateZ(-120px)`
 				this.$refs.img.style.left=`${this.config.config.left}px`
 			},1500)
 		}
@@ -196,6 +196,7 @@
 <style lang="scss" scoped>
 .widget-part {
   transition: all .5s;
+  padding-top: 40px;
 }
 	.title {
 		display: flex;

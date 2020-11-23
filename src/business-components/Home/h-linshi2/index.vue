@@ -1,5 +1,5 @@
 <template>
-	<div class="widget-part" :style="styles" ref="img">
+	<div class="widget-part" :style="styles" ref="img" v-if="data">
     <section class="title">
       <div class="title-txt">杭燃优家</div>
       <div class="color"></div>
@@ -182,7 +182,8 @@
 		},
     mounted() {
       setTimeout(()=>{
-        this.$refs.img.style.transform=`perspective(763px) rotateY(${this.config.config.transform}deg)`
+        this.$refs.img.style.transform=`perspective(763px) rotateY(${this.config.config.transform}deg) translateZ(-120px)`
+        this.$refs.img.style.left=`auto`
         this.$refs.img.style.right=`${this.config.config.left}px`
       },1500)
     },
@@ -195,6 +196,7 @@
 <style lang="scss" scoped>
 .widget-part {
   transition: all .5s;
+  padding-top: 40px;
 }
 .title {
   display: flex;
