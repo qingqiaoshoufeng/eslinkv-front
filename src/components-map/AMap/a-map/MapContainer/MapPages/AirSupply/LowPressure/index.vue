@@ -209,14 +209,14 @@ export default {
 									'/static/images/project/01.png',
 									'/static/images/project/02.jpg',
 								],
-								videoList: ['/static/videos/test.mov'],
+								videoList: ['/cdn/videos/test.mov'],
 							},
 							videoInfo2: {
 								imgList: [
 									'/static/images/project/01.png',
 									'/static/images/project/02.jpg',
 								],
-								videoList: ['/static/videos/test.mov'],
+								videoList: ['/cdn/videos/test.mov'],
 							},
 						});
 					});

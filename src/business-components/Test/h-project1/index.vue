@@ -115,11 +115,11 @@
 				},
 				videoInfo1: {
 					imgList: ['/static/images/project/01.png', '/static/images/project/02.jpg',],
-					videoList: ['/static/videos/test.mov',],
+					videoList: ['/cdn/videos/sanshe.MOV',],
 				},
 				videoInfo2: {
 					imgList: ['/static/images/project/01.png', '/static/images/project/02.jpg',],
-					videoList: ['/static/videos/test.mov',],
+					videoList: ['/cdn/videos/sanshe.MOV',],
 				},
 			}),
 		},

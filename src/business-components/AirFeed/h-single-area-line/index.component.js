@@ -1,5 +1,4 @@
 export default {
-	label: '供销差率',
 	config: {
 		layout: {
 			size: {

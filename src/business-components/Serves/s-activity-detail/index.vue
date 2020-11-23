@@ -199,7 +199,7 @@
 						img: '/static/images/project/02.jpg',
 					}
 				],
-				video: '/static/videos/三社联动视频.MOV'
+				video: '/cdn/videos/sanshe.MOV'
 			}),
 		},
 	};
@@ -229,7 +229,7 @@
 					sources: [
 						{
 							type: 'video/mp4',
-							src: '/static/videos/test.mov',
+							src: '/cdn/videos/sanshe.MOV',
 						},
 					],
 				}

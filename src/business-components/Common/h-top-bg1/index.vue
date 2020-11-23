@@ -23,7 +23,7 @@
 <style lang="scss" scoped>
 	.h-top-bg1 {
 		pointer-events: none;
-		background: linear-gradient(180deg, rgba(0, 27, 98, 1) 0%, rgba(0, 27, 98, 0) 100%);
+		background: linear-gradient(180deg, rgba(0, 4, 98, 1) 0%, rgba(0, 4, 98, 0) 100%);
 		width: 3500px;
 		height: 200px;
 	}
