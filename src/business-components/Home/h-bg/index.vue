@@ -14,19 +14,19 @@
 			<ul class="h-bg-nav pos-a fn-flex flex-row">
 				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('nn16rowdl5r')">
 					<img src="./img/nav-1.svg"/>
-					　<span>供气</span>
+					　<span>杭燃供气</span>
 				</li>
 				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('6gouq223fze')">
 					<img src="./img/nav-2.svg"/>
-					<span>服务</span>
+					<span>杭燃服务</span>
 				</li>
 				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('o8tkm981qdh')">
 					<img src="./img/nav-3.svg"/>
-					<span>优家</span>
+					<span>杭燃优家</span>
 				</li>
 				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('vxoiljh5my9')">
 					<img src="./img/nav-4.svg"/>
-					<span>体验</span>
+					<span>杭燃体验</span>
 				</li>
 			</ul>
 		</div>
@@ -89,7 +89,7 @@
 
 		li {
 			color: #fff;
-			font-weight: 600;
+			font-weight: normal;
 			font-size: 40px;
 			line-height: 40px;
 			margin-right: 174px;
@@ -119,6 +119,7 @@
 			}
 
 			&:hover {
+        font-weight: bold;
 				&:before {
 					width: 160px;
 					height: 180px;

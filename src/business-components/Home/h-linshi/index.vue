@@ -2,7 +2,7 @@
 	<div class="widget-part" :style="styles" v-if="data" ref="img">
     <section class="title">
       <div class="color"></div>
-      <div class="title-txt">供气</div>
+      <div class="title-txt">杭燃供气</div>
     </section>
     <section class="total">
       <img src="./img/air-bar.svg" class="total-icon">
@@ -64,7 +64,7 @@
     </ul>
     <section class="title">
       <div class="color"></div>
-      <div class="title-txt">服务</div>
+      <div class="title-txt">杭燃服务</div>
     </section>
 
     <section class="service">
