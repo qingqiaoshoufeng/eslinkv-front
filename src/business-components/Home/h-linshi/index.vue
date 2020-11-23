@@ -1,5 +1,5 @@
 <template>
-	<div class="widget-part" :style="styles" v-if="data">
+	<div class="widget-part" :style="styles" v-if="data" ref="img">
     <section class="title">
       <div class="color"></div>
       <div class="title-txt">供气</div>
@@ -8,15 +8,57 @@
       <img src="./img/air-bar.svg" class="total-icon">
       <div class="total-info">
         <div class="total-title">年度累计供气量</div>
-        <div class="num font-num">{{ data.total.toLocaleString() }} <span>万m³</span></div>
+        <div class="num font-num">{{ data.total | toThousand }} <span>万m³</span></div>
       </div>
     </section>
     <ul class="air">
-      <li v-for="(k, i) in 7" :key="i" class="li">
+      <li class="li">
         <div class="air-name">门站</div>
         <div>
-          <span class="air-num font-num">5</span>
+          <span class="air-num font-num">{{ data.air.value1 | toThousand }}</span>
           <span class="air-unit">座</span>
+        </div>
+      </li>
+      <li class="li">
+        <div class="air-name">高压管线</div>
+        <div>
+          <span class="air-num font-num">{{ data.air.value2 | toThousand }}</span>
+          <span class="air-unit">km</span>
+        </div>
+      </li>
+      <li class="li">
+        <div class="air-name">高中压调压站</div>
+        <div>
+          <span class="air-num font-num">{{ data.air.value3 | toThousand }}</span>
+          <span class="air-unit">个</span>
+        </div>
+      </li>
+      <li class="li">
+        <div class="air-name">中压管线</div>
+        <div>
+          <span class="air-num font-num">{{ data.air.value4 | toThousand }}</span>
+          <span class="air-unit">km</span>
+        </div>
+      </li>
+      <li class="li">
+        <div class="air-name">应急气源站</div>
+        <div>
+          <span class="air-num font-num">{{ data.air.value5 | toThousand }}</span>
+          <span class="air-unit">座</span>
+        </div>
+      </li>
+      <li class="li">
+        <div class="air-name">低压管线</div>
+        <div>
+          <span class="air-num font-num">{{ data.air.value6 | toThousand }}</span>
+          <span class="air-unit">km</span>
+        </div>
+      </li>
+      <li class="li">
+        <div class="air-name">调压器</div>
+        <div>
+          <span class="air-num font-num">{{ data.air.value7 | toThousand }}</span>
+          <span class="air-unit">个</span>
         </div>
       </li>
     </ul>
@@ -27,15 +69,50 @@
 
     <section class="service">
       <ul>
-        <li v-for="(k, i) in 5" :key="i" class="li">
+        <li class="li">
           <div class="air-name">居民户</div>
           <div>
-            <span class="air-num font-num">15645</span>
+            <span class="air-num font-num">{{ data.service.value1 | toThousand }}</span>
+            <span class="air-unit">户</span>
+          </div>
+        </li>
+        <li class="li">
+          <div class="air-name">公建用户</div>
+          <div>
+            <span class="air-num font-num">{{ data.service.value2 | toThousand }}</span>
+            <span class="air-unit">户</span>
+          </div>
+        </li>
+        <li class="li">
+          <div class="air-name">工业用户</div>
+          <div>
+            <span class="air-num font-num">{{ data.service.value3 | toThousand }}</span>
+            <span class="air-unit">户</span>
+          </div>
+        </li>
+        <li class="li">
+          <div class="air-name">在用钢瓶用户</div>
+          <div>
+            <span class="air-num font-num">{{ data.service.value4 | toThousand }}</span>
+            <span class="air-unit">户</span>
+          </div>
+        </li>
+        <li class="li">
+          <div class="air-name">在册钢瓶用户</div>
+          <div>
+            <span class="air-num font-num">{{ data.service.value5 | toThousand }}</span>
             <span class="air-unit">户</span>
           </div>
         </li>
       </ul>
-      <img src="./img/standard.svg" class="standard">
+      <div class="standard">
+        <img src="./img/standard.svg">
+        <p>
+          一个工作日<br>
+          0份资料容缺受理<br>
+          受理通气两个环节
+        </p>
+      </div>
     </section>
     <section class="links">
       <div class="link" :class="{active: curr === 0}" @click="getLink(0)">最多跑<br/>一次4.0</div>
@@ -69,10 +146,26 @@
 	  api: {
 	    data: {
 	      total: 78528,
+        air: {
+	        value1: 5,
+	        value2: 236,
+	        value3: 25,
+	        value4: 2627,
+	        value5: 2,
+	        value6: 4652,
+	        value7: 5438,
+        },
+        service: {
+	        value1: 13253458,
+	        value2: 9332,
+	        value3: 318,
+	        value4: 121865,
+	        value5: 254336,
+        }
       }
     },
 		config: {
-			transform: 149,
+			transform: 30,
 			left: -50,
 		}
 	}
@@ -94,13 +187,17 @@
 		},
 		mounted() {
 			setTimeout(()=>{
-				this.$refs.img.style.transform=`perspective(763px) rotateY(${this.config.config.transform}deg)`
+				this.$refs.img.style.transform=`perspective(763px) rotateY(${this.config.config.transform}deg) translateZ(-120px)`
 				this.$refs.img.style.left=`${this.config.config.left}px`
 			},1500)
 		}
 	}
 </script>
 <style lang="scss" scoped>
+.widget-part {
+  transition: all .5s;
+  padding-top: 40px;
+}
 	.title {
 		display: flex;
     align-items: center;
@@ -132,14 +229,6 @@
         background: #fff;
       }
     }
-
-		img {
-			height: 100%;
-			transform: rotateY(0);
-			left: 0;
-			transition: all .5s;
-			top: 40px;
-		}
 	}
   .total {
     margin-top: 30px;
@@ -236,8 +325,17 @@
       margin-bottom: 9px;
     }
     .standard {
-      width: 144px;
-      height: 130px;
+      img {
+        width: 144px;
+        height: 130px;
+      }
+      p {
+        font-size: 16px;
+        line-height: 22px;
+        text-align: center;
+        color: #5EE2FD;
+        margin-top: 4px;
+      }
     }
   }
   .links {

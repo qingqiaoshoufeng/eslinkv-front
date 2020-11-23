@@ -9,6 +9,7 @@ import './business-components'
 import './components-map'
 import { debug } from '../plugins'
 import directives from '../lib/directives'
+import * as filters from '@/utils/filter'
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import './api/index.js'
@@ -23,6 +24,8 @@ Vue.config.productionTip = false
 Object.keys(directives).forEach((key) => {
 	Vue.directive(key, directives[key])
 })
+Object.keys(filters).forEach(key => Vue.filter(key, filters[key]))
+
 new Vue({
 	router,
 	render: (h) => h(App),
