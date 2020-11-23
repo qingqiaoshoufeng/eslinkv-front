@@ -38,7 +38,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="right-more pos-r">
+			<div class="right-more pos-r" @click="handleClick" :class="{pointer:config.config.sceneId}">
 				<div class="right-more-total font-num">{{data&&data.today |toThousand}}</div>
 				<div class="right-more-des">今日供气量(m³)</div>
 			</div>
@@ -46,14 +46,16 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
-	import {getInput} from '../../../../lib';
+	import mixins from '../../mixins'
+	import {getInput} from '../../../../lib'
+	import GoldChart from '../../../openApi'
 
 	const config = {
 		animation: true,
 		config: {
 			desc: true,
 			timeDesc: true,
+			sceneId: true,
 		},
 	};
 	const configSource = {
@@ -61,6 +63,7 @@
 			fields: {
 				desc: getInput('desc', '描述'),
 				timeDesc: getInput('timeDesc', '时间'),
+				sceneId: getInput('sceneId', '场景id'),
 			},
 		},
 	};
@@ -75,6 +78,7 @@
 		config: {
 			timeDesc: 'xxxx年度',
 			desc: '累计接纳量(m3)',
+			sceneId: '',
 		},
 	};
 	export default {
@@ -96,6 +100,10 @@
 			},
 		},
 		methods: {
+			handleClick() {
+				if (this.config.config.sceneId)
+					GoldChart.scene.createSceneInstance(this.config.config.sceneId, 'slideRight')
+			},
 			setNumberTransform() {
 				if (this.data) {
 					const numberArr = this.data.value.toLocaleString().split('');

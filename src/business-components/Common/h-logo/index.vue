@@ -67,8 +67,7 @@
 					height: 4px;
 					position: absolute;
 					background-color: rgba(255, 255, 255, 0.6);
-					left: 50%;
-					margin-left: 68px;
+					left: 120px;
 					top: 50%;
 					margin-top: -2px;
 				}
@@ -80,8 +79,7 @@
 					width: 4px;
 					height: 4px;
 					position: absolute;
-					left: 50%;
-					margin-left: 98px;
+					left: 125px;
 					top: 50%;
 					margin-top: -2px;
 					background-color: rgba(255, 255, 255, 0.6);

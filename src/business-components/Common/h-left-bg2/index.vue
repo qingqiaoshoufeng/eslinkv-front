@@ -25,7 +25,7 @@
 		pointer-events: none;
 		width: 400px;
 		height: 1050px;
-		background: linear-gradient(90deg, rgba(0, 27, 98, 1) 0%, rgba(0, 27, 98, 0) 100%);
+		background: linear-gradient(90deg, rgba(0, 4, 98, 1) 0%, rgba(0, 4, 98, 0) 100%);
 	}
 
 </style>
