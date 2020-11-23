@@ -49,6 +49,11 @@ export default {
 								strokeOpacity: '1',
 								strokeStyle: 'dashed',
 								strokeColor: '#509CE1',
+								on: {
+									mouseover(e) {
+										console.log(e, 'e');
+									},
+								},
 							});
 							this.instanceArr.push(instance);
 						}
