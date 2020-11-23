@@ -50,7 +50,10 @@ import {
 // 页面配置项
 
 import { DataStatistics } from '../../../../components';
-import { SERVICE_SERVICE19_OVERLAY_MAP } from './config';
+import {
+	SERVICE_SERVICE19_LEGEND_MAP,
+	SERVICE_SERVICE19_OVERLAY_MAP,
+} from './config';
 export default {
 	name: 'service19',
 	components: {
@@ -63,14 +66,36 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_19),
+			overlayInfoConfig: Object.freeze(SERVICE_SERVICE19_OVERLAY_MAP),
 			dataStatisticsList: [],
-			// legendMap: SERVICELEGEND19MAP,
+			legendMap: SERVICE_SERVICE19_LEGEND_MAP,
 			legendMultiple: true,
 			mapLegendStyle: { left: '18%' },
+			activeOverlay: {},
+			showOverlayDetail: false,
+
+			center: [120.80971, 30.302216],
 		};
 	},
+	created() {
+		this.$amap = this.$parent.$amap;
+		this.$amap.setZoom(this.zoom, 100);
+		this.$amap.panTo(this.center);
+	},
 	methods: {
+		handleOverlayClick(overlay, overlayType, isCenter = true) {
+			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
+			let { lng, lat } = overlay;
+			overlay.overlayType = overlayType;
+			this.activeOverlay = overlay;
+			this.showOverlayDetail = true;
+			this.$amap.setZoom(14, 100);
+			if (isCenter) {
+				this.$nextTick(() => {
+					this.$amap.panTo([lng, lat], 100);
+				});
+			}
+		},
 		async getDataStatisticsList() {
 			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
 		},
@@ -90,6 +115,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/deep/.el-vue-amap-container {
+	position: fixed;
+	top: 0;
+	left: -500px !important;
+	width: 3560px;
+	height: 1380px;
+}
 .map-legend {
 	position: absolute;
 	bottom: 50px;

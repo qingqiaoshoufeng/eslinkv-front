@@ -25,6 +25,7 @@
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
+			ref="OverlayDetail"
 		/>
 		<portal to="destination">
 			<MapLegend
@@ -51,7 +52,7 @@ import {
 	RegionBoundary,
 	OverlayDetail,
 	MapLegend,
-} from '../Components/index.js';
+} from '../../Components/index.js';
 import { DataStatistics } from '../../../../components';
 import {
 	SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
@@ -75,26 +76,56 @@ export default {
 			dataStatisticsList: [],
 			legendMap: SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
 			legendMultiple: true,
+			showOverlayDetail: false,
+			activeOverlay: {},
 		};
 	},
 	methods: {
+		closeOverlayDetail(done) {
+			let { overlayType } = this.activeOverlay;
+			if (overlayType === 'WARNEVENT') {
+				GoldChart.scene.setSceneIndex(
+					INDEXSCENEMAP['AirSupplyHighPressure']
+				);
+				this.showRoutePlan = false;
+			}
+			this.showOverlayDetail = false;
+			this.activeOverlay = {};
+			this.$amap.setZoom(11, 100);
+			done();
+		},
+		handleOverlayClick(overlay, overlayType, isCenter = true) {
+			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
+			let { lng, lat } = overlay;
+			overlay.overlayType = overlayType;
+			this.activeOverlay = overlay;
+			this.showOverlayDetail = true;
+			this.$amap.setZoom(14, 100);
+			if (isCenter) {
+				this.$nextTick(() => {
+					this.$amap.panTo([lng, lat], 100);
+				});
+			}
+		},
 		async getDataStatisticsList() {
 			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
 		},
 		handleListClick(item) {
 			console.log(item);
 		},
-		// viewOverlayDetail(overlay) {
-		// 	let { overlayType } = overlay;
-		// 	//和场景进行交互
-		// 	GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
-		// 	//更新数据
-		// 	this.$nextTick(() => {
-		// 		AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
-		// 			GoldChart.instance.updateComponent(i);
-		// 		});
-		// 	});
-		// },
+		viewOverlayDetail(overlay) {
+			let { overlayType } = overlay;
+			//和场景进行交互
+			GoldChart.scene.setSceneIndex(
+				SERVICE_SERVICEHANGRANCODE_LEGEND_MAP
+			);
+			//更新数据
+			this.$nextTick(() => {
+				AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
+					GoldChart.instance.updateComponent(i);
+				});
+			});
+		},
 	},
 	mounted() {
 		this.getDataStatisticsList();

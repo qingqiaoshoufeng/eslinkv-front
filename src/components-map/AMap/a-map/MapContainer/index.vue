@@ -36,6 +36,7 @@ files.keys().forEach(key => {
 		mapPages[pageName + subPageName] = pageModule[subPageName];
 	});
 });
+console.log(mapPages);
 
 export default {
 	name: 'MainMap',

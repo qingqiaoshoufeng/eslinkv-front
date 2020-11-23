@@ -24,6 +24,7 @@
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
+			ref="OverlayDetail"
 		/>
 		<portal to="destination">
 			<!-- 图例 -->
@@ -43,7 +44,7 @@ import {
 	RegionBoundary,
 	OverlayDetail,
 	MapLegend,
-} from '../Components/index.js';
+} from '../../Components/index.js';
 import {
 	SERVICE_SERVICEMARKET_OVERLAY_MAP,
 	SERVICE_SERVICEMARKET_LEGEND_MAP,
@@ -64,9 +65,37 @@ export default {
 			legendMap: SERVICE_SERVICEMARKET_LEGEND_MAP,
 			mapLegendStyle: { left: '18%' },
 			legendMultiple: true,
+			showOverlayDetail: false,
+			activeOverlay: {},
 		};
 	},
-	methods: {},
+	methods: {
+		// 暂留
+		closeOverlayDetail(done) {
+			let { overlayType } = this.activeOverlay;
+			if (overlayType === 'WARNEVENT') {
+				GoldChart.scene.setSceneIndex(INDEXSCENEMAP['ServiceMarket']);
+				this.showRoutePlan = false;
+			}
+			this.showOverlayDetail = false;
+			this.activeOverlay = {};
+			this.$amap.setZoom(11, 100);
+			done();
+		},
+		handleOverlayClick(overlay, overlayType, isCenter = true) {
+			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
+			let { lng, lat } = overlay;
+			overlay.overlayType = overlayType;
+			this.activeOverlay = overlay;
+			this.showOverlayDetail = true;
+			this.$amap.setZoom(14, 100);
+			if (isCenter) {
+				this.$nextTick(() => {
+					this.$amap.panTo([lng, lat], 100);
+				});
+			}
+		},
+	},
 };
 </script>
 

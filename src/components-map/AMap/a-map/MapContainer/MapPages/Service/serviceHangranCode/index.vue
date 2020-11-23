@@ -59,9 +59,23 @@ export default {
 			legendMap: SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
 			mapLegendStyle: { left: '18%' },
 			legendMultiple: false,
+			showOverlayDetail: false,
 		};
 	},
 	methods: {
+		handleOverlayClick(overlay, overlayType, isCenter = true) {
+			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
+			let { lng, lat } = overlay;
+			overlay.overlayType = overlayType;
+			this.activeOverlay = overlay;
+			this.showOverlayDetail = true;
+			this.$amap.setZoom(14, 100);
+			if (isCenter) {
+				this.$nextTick(() => {
+					this.$amap.panTo([lng, lat], 100);
+				});
+			}
+		},
 		async getDataStatisticsList() {
 			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
 		},

@@ -5,6 +5,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         legendIcon: 'icontulixiaoqireli',
         // icon: 'iconjituandating',
         component: 'CouplingHot',
+        isShow: true,
     },
     OperationHot: {
         label: '操作数量热力',
