@@ -4,7 +4,7 @@ export default {
 		layout: {
 			size: {
 				width: 480,
-				height: 576
+				height: 492
 			},
 			position: {
 				value: 'relative'
