@@ -60,7 +60,13 @@ export default {
 			mapLegendStyle: { left: '18%' },
 			legendMultiple: false,
 			showOverlayDetail: false,
+			center: [120.80971, 30.302216],
 		};
+	},
+	created() {
+		this.$amap = this.$parent.$amap;
+		this.$amap.setZoom(this.zoom, 100);
+		this.$amap.panTo(this.center);
 	},
 	methods: {
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
