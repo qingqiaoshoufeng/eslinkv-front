@@ -9,15 +9,17 @@ export default {
 		},
 		async drawLine() {
 			this.instanceArr = [];
-            let data = await this.$sysApi.map.home.getHighPressureLineProcess();
+			let data = await this.$sysApi.map.home.getHighPressureLineProcess();
 			data.forEach(line => {
 				let polyLine = new AMap.Polyline({
 					...line,
-                    zIndex: 200,
-                    strokeWeight:4
+					zIndex: 200,
+					strokeWeight: 4,
 				});
-				polyLine.setMap(this.$amap);
-				this.instanceArr.push(polyLine);
+				if (this.instanceArr) {
+					polyLine.setMap(this.$amap);
+					this.instanceArr.push(polyLine);
+				}
 			});
 		},
 	},
