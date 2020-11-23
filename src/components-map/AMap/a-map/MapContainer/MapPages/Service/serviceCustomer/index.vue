@@ -188,14 +188,14 @@ export default {
 									'/static/images/project/01.png',
 									'/static/images/project/02.jpg',
 								],
-								videoList: ['/static/videos/test.mov'],
+								videoList: ['/cdn/videos/test.mov'],
 							},
 							videoInfo2: {
 								imgList: [
 									'/static/images/project/01.png',
 									'/static/images/project/02.jpg',
 								],
-								videoList: ['/static/videos/test.mov'],
+								videoList: ['/cdn/videos/test.mov'],
 							},
 						});
 					});
@@ -257,7 +257,7 @@ export default {
 								img: '/static/images/project/04.jpg',
 							},
 						],
-						video: '/static/videos/1.mp4',
+						video: '/cdn/videos/1.mp4',
 					});
 				});
 			});

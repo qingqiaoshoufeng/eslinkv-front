@@ -52,7 +52,7 @@ const value = {
 					img: '/static/images/project/02.jpg',
 				},
 			],
-			videoList: ['/static/videos/test.mov',],
+			videoList: ['/cdn/videos/test.mov',],
 		}),
 	},
 };
@@ -74,7 +74,7 @@ export default {
 					{
 						type: 'video/mp4',
 						src:
-							'/static/videos/test.mov',
+							'/cdn/videos/test.mov',
 					},
 				],
 			},

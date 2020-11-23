@@ -16,7 +16,7 @@
 	const value = {
 		api: {
 			data: JSON.stringify({
-				videoSrc: '/static/videos/test.mov'
+				videoSrc: '/cdn/videos/test.mov'
 			}),
 		},
 	};
@@ -35,7 +35,7 @@
 					sources: [
 						{
 							type: 'video/mp4',
-							src: '/static/videos/test.mov',
+							src: '/cdn/videos/test.mov',
 						},
 					],
 				},

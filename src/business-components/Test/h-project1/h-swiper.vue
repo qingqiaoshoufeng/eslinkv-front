@@ -52,7 +52,7 @@
 							'/static/images/project/01.png',
 							'/static/images/project/02.jpg',
 						],
-						videoList: ['/static/videos/test.mov',],
+						videoList: ['/cdn/videos/test.mov',],
 					};
 				},
 			},
@@ -77,7 +77,7 @@
 					sources: [
 						{
 							type: 'video/mp4',
-							src: '/static/videos/test.mov',
+							src: '/cdn/videos/test.mov',
 						},
 					],
 				},

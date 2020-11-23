@@ -177,7 +177,7 @@ export default {
 									'/static/images/project/qiangxiu02.png',
 									'/static/images/project/qiangxiu03.png',
 								],
-								videoList: ['/static/videos/test.mov'],
+								videoList: ['/cdn/videos/test.mov'],
 							},
 							videoInfo2: {
 								imgList: [
@@ -185,7 +185,7 @@ export default {
 									'/static/images/project/qiangxiu02.png',
 									'/static/images/project/qiangxiu03.png',
 								],
-								videoList: ['/static/videos/test.mov'],
+								videoList: ['/cdn/videos/test.mov'],
 							},
 						});
 					});

@@ -38,7 +38,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="right-more pos-r" @click="handleClick" :class="{pointer:config.config.sceneId}">
+			<div class="right-more pos-r" @click="handleClick" :class="{pointer:config.config&&config.config.sceneId}">
 				<div class="right-more-total font-num">{{data&&data.today |toThousand}}</div>
 				<div class="right-more-des">今日供气量(m³)</div>
 			</div>
