@@ -32,7 +32,7 @@
 					sources: [
 						{
 							type: 'video/mp4',
-							src: '/cdn/videos/首页视频.mp4'
+							src: '/cdn/videos/shouye.mp4'
 						},
 					],
 				},

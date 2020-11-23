@@ -257,7 +257,7 @@ export default {
 								img: '/static/images/project/04.jpg',
 							},
 						],
-						video: '/cdn/videos/1.mp4',
+						video: '/cdn/videos/sanshe.MOV',
 					});
 				});
 			});

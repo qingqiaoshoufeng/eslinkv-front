@@ -52,7 +52,7 @@
 							'/static/images/project/01.png',
 							'/static/images/project/02.jpg',
 						],
-						videoList: ['/cdn/videos/test.mov',],
+						videoList: ['/cdn/videos/sanshe.MOV',],
 					};
 				},
 			},
@@ -77,7 +77,7 @@
 					sources: [
 						{
 							type: 'video/mp4',
-							src: '/cdn/videos/test.mov',
+							src: '/cdn/videos/sanshe.MOV',
 						},
 					],
 				},
