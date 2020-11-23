@@ -1,55 +1,56 @@
 <template>
 	<div class="widget-part" :style="styles" ref="img" v-if="data">
-    <section class="title">
-      <div class="title-txt">杭燃优家</div>
-      <div class="color"></div>
-    </section>
-    <section class="detail">
-      <div class="detail-item">
-        <div class="detail-item-icon" :style="`background-image: url(${
+		<section class="title">
+			<div class="title-txt">杭燃优家</div>
+			<div class="color"></div>
+		</section>
+		<section class="detail">
+			<div class="detail-item">
+				<div class="detail-item-icon" :style="`background-image: url(${
 				currBuilding.icon1
 			})`"></div>
-        <div>
-          <div class="detail-item-title">{{ currBuilding.desc1 }}</div>
-          <div class="detail-item-num">{{ currBuilding.value1 }} <span>{{ currBuilding.unit1 }}</span></div>
-        </div>
-      </div>
-      <div class="detail-item">
-        <div class="detail-item-icon money"></div>
-        <div>
-          <div class="detail-item-title">{{ currBuilding.desc2 }}</div>
-          <div class="detail-item-num">{{ currBuilding.value2 | toThousand }} <span>元</span></div>
-        </div>
-      </div>
-    </section>
-    <section class="building">
-      <div class="circle">
-        <div
-            class="item"
-            :class="[getItemIndex(i)]"
-            v-for="(k, i) in data.building"
-        >{{k.name}}</div>
-      </div>
-    </section>
-    <section class="title">
-      <div class="title-txt">杭燃体验</div>
-      <div class="color"></div>
-    </section>
-    <section class="fans">
-      <div style="text-align: left">
-        <div class="fan-title">数媒粉丝日活(人)</div>
-        <div class="fan-num font-num">{{ data.fanDailyNum }}</div>
-      </div>
-      <div style="text-align: right">
-        <div class="fan-title">数媒粉丝总数(人)</div>
-        <div class="fan-num font-num">{{ data.fanTotalNum }}</div>
-      </div>
-    </section>
+				<div>
+					<div class="detail-item-title">{{ currBuilding.desc1 }}</div>
+					<div class="detail-item-num">{{ currBuilding.value1 }} <span>{{ currBuilding.unit1 }}</span></div>
+				</div>
+			</div>
+			<div class="detail-item">
+				<div class="detail-item-icon money"></div>
+				<div>
+					<div class="detail-item-title">{{ currBuilding.desc2 }}</div>
+					<div class="detail-item-num">{{ currBuilding.value2 | toThousand }} <span>元</span></div>
+				</div>
+			</div>
+		</section>
+		<section class="building">
+			<div class="circle">
+				<div
+					class="item"
+					:class="[getItemIndex(i)]"
+					v-for="(k, i) in data.building"
+				>{{k.name}}
+				</div>
+			</div>
+		</section>
+		<section class="title">
+			<div class="title-txt">杭燃体验</div>
+			<div class="color"></div>
+		</section>
+		<section class="fans">
+			<div style="text-align: left">
+				<div class="fan-title">数媒粉丝日活(人)</div>
+				<div class="fan-num font-num">{{ data.fanDailyNum }}</div>
+			</div>
+			<div style="text-align: right">
+				<div class="fan-title">数媒粉丝总数(人)</div>
+				<div class="fan-num font-num">{{ data.fanTotalNum }}</div>
+			</div>
+		</section>
 	</div>
 </template>
 <script>
 	import mixins from '../../mixins'
-	import { getInput } from "../../../../lib";
+	import {getInput} from "../../../../lib";
 
 	const configSource = {
 		config: {
@@ -71,114 +72,114 @@
 			transform: -30,
 			left: -50,
 		},
-    api: {
-		  data: {
-		    fanDailyNum: 123,
-		    fanTotalNum: 425673,
-		    building: [
-          {
-            name: '燃气报警系统',
-            desc1: '累计销量',
-            desc2: '累计销售金额',
-            value1: 4856,
-            unit1: '台',
-            value2: 326084,
-            unit2: '元',
-            icon1: '/static/images/home/home-u-1.svg'
-          },
-          {
-            name: '燃气保险',
-            desc1: '累计销量',
-            desc2: '累计销售金额',
-            value1: 2342,
-            unit1: '笔',
-            value2: 567517,
-            unit2: '元',
-            icon1: '/static/images/home/home-u-2.svg'
-          },
-          {
-            name: '金属管',
-            desc1: '年度销量',
-            desc2: '累计销售金额',
-            value1: 56332,
-            unit1: '根',
-            value2: 578567,
-            unit2: '元',
-            icon1: '/static/images/home/home-u-3.svg'
-          },
-          {
-            name: '非居民燃气设施',
-            desc1: '累计销量',
-            desc2: '累计销售金额',
-            value1: 302,
-            unit1: '台',
-            value2: 785235,
-            unit2: '元',
-            icon1: '/static/images/home/home-u-4.svg'
-          },
-          {
-            name: '供暖工程',
-            desc1: '累计销量',
-            desc2: '累计销售金额',
-            value1: 4856,
-            unit1: '个',
-            value2: 326084,
-            unit2: '元',
-            icon1: '/static/images/home/home-u-5.svg'
-          },
-          {
-            name: '居民燃气设施',
-            desc1: '年度销量',
-            desc2: '年度销售金额',
-            value1: 4856,
-            unit1: '台',
-            value2: 326084,
-            unit2: '元',
-            icon1: '/static/images/home/home-u-6.svg'
-          },
-        ]
-      }
-    }
+		api: {
+			data: {
+				fanDailyNum: 123,
+				fanTotalNum: 425673,
+				building: [
+					{
+						name: '燃气报警系统',
+						desc1: '累计销量',
+						desc2: '累计销售金额',
+						value1: 4856,
+						unit1: '台',
+						value2: 326084,
+						unit2: '元',
+						icon1: '/static/images/home/home-u-1.svg'
+					},
+					{
+						name: '燃气保险',
+						desc1: '累计销量',
+						desc2: '累计销售金额',
+						value1: 2342,
+						unit1: '笔',
+						value2: 567517,
+						unit2: '元',
+						icon1: '/static/images/home/home-u-2.svg'
+					},
+					{
+						name: '金属管',
+						desc1: '年度销量',
+						desc2: '累计销售金额',
+						value1: 56332,
+						unit1: '根',
+						value2: 578567,
+						unit2: '元',
+						icon1: '/static/images/home/home-u-3.svg'
+					},
+					{
+						name: '非居民燃气设施',
+						desc1: '累计销量',
+						desc2: '累计销售金额',
+						value1: 302,
+						unit1: '台',
+						value2: 785235,
+						unit2: '元',
+						icon1: '/static/images/home/home-u-4.svg'
+					},
+					{
+						name: '供暖工程',
+						desc1: '累计销量',
+						desc2: '累计销售金额',
+						value1: 4856,
+						unit1: '个',
+						value2: 326084,
+						unit2: '元',
+						icon1: '/static/images/home/home-u-5.svg'
+					},
+					{
+						name: '居民燃气设施',
+						desc1: '年度销量',
+						desc2: '年度销售金额',
+						value1: 4856,
+						unit1: '台',
+						value2: 326084,
+						unit2: '元',
+						icon1: '/static/images/home/home-u-6.svg'
+					},
+				]
+			}
+		}
 	}
 	export default {
 		mixins: [mixins],
-    data () {
-		  return {
-        buildingTimer: null,
-        loopIndex: 1,
-        index1: 1,
-        index2: 2,
-        index3: 3,
-        index4: 4,
-        index5: 5,
-        index6: 6
-      }
-    },
-    computed: {
-		  currBuilding () {
-		    return this.data?.building[((this.loopIndex - 1) % 6)] || {}
-      }
-    },
-    methods: {
-		  getItemIndex (i) {
-		    const n = (i + this.loopIndex) % 6
-		    return `index-${n}`
-      },
-		  count (n) {
-		    if (n === 6) {
-		      n = 1
-        } else {
-		      n++
-        }
-		    return n
-      }
-    },
+		data() {
+			return {
+				buildingTimer: null,
+				loopIndex: 1,
+				index1: 1,
+				index2: 2,
+				index3: 3,
+				index4: 4,
+				index5: 5,
+				index6: 6
+			}
+		},
+		computed: {
+			currBuilding() {
+				return this.data?.building[((this.loopIndex - 1) % 6)] || {}
+			}
+		},
+		methods: {
+			getItemIndex(i) {
+				const n = (i + this.loopIndex) % 6
+				return `index-${n}`
+			},
+			count(n) {
+				if (n === 6) {
+					n = 1
+				} else {
+					n++
+				}
+				return n
+			}
+		},
 		created() {
 			this.configSource = this.parseConfigSource(config, configSource)
 			this.configValue = this.parseConfigValue(config, value)
-      this.buildingTimer = setInterval(() => {
-        this.loopIndex++
-      }, 3000)
+			this.buildingTimer = setInterval(() => {
+				this.loopIndex++
+			}, 3000)
 		},
     mounted() {
       setTimeout(()=>{
