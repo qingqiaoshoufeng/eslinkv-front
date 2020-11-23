@@ -7,6 +7,7 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
+				v-if="config.isShow"
 				:key="legend"
 				:visible="config.isShow"
 				:overlayIcon="config.icon"
@@ -97,20 +98,23 @@ export default {
 		change(data) {
 			let { switch1, switch2 } = data;
 			this.switchData = data;
-			if (switch1) {
-				this.legendMap.OperationHot.isShow = this.switchData.switch2;
-				setTimeout(() => {
-					this.legendMap.CouplingHot.isShow = this.switchData.switch1;
-				}, 2000);
-			} else if (switch2) {
-				this.legendMap.CouplingHot.isShow = this.switchData.switch1;
-				setTimeout(() => {
-					this.legendMap.OperationHot.isShow = this.switchData.switch2;
-				}, 2000);
-			} else {
-				this.legendMap.CouplingHot.isShow = this.switchData.switch1;
-				this.legendMap.OperationHot.isShow = this.switchData.switch2;
-			}
+			this.legendMap.CouplingHot.isShow = this.switchData.switch1;
+			this.legendMap.OperationHot.isShow = this.switchData.switch2;
+			// this.switchData = data;
+			// if (switch1) {
+			// 	this.legendMap.OperationHot.isShow = this.switchData.switch2;
+			// 	setTimeout(() => {
+			// 		this.legendMap.CouplingHot.isShow = this.switchData.switch1;
+			// 	}, 2000);
+			// } else if (switch2) {
+			// 	this.legendMap.CouplingHot.isShow = this.switchData.switch1;
+			// 	setTimeout(() => {
+			// 		this.legendMap.OperationHot.isShow = this.switchData.switch2;
+			// 	}, 2000);
+			// } else {
+			// 	this.legendMap.CouplingHot.isShow = this.switchData.switch1;
+			// 	this.legendMap.OperationHot.isShow = this.switchData.switch2;
+			// }
 		},
 	},
 	mounted() {

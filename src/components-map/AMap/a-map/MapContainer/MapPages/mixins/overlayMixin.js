@@ -30,6 +30,12 @@ export default {
             } else {
                 this.instanceArr.forEach((instance) => {
                     instance.hide()
+                    if (instance.setDataSet) {
+                        instance.setDataSet({
+                            data: [],
+                            max: 0,
+                        })
+                    }
                 })
             }
         },
