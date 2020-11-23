@@ -1,3 +1,4 @@
+<!-- 19厅 -->
 <template>
 	<div>
 		<!-- 1.legend不控制显隐的覆盖物 -->
@@ -73,8 +74,8 @@ export default {
 			mapLegendStyle: { left: '18%' },
 			activeOverlay: {},
 			showOverlayDetail: false,
-			zooom: 11,
-			center: [120.80971, 30.302216],
+			zoom: 11,
+			center: [120.80971, 30.202216],
 		};
 	},
 	created() {
@@ -115,13 +116,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-/deep/.el-vue-amap-container {
-	position: fixed;
-	top: 0;
-	left: -500px !important;
-	width: 3560px;
-	height: 1380px;
-}
 .map-legend {
 	position: absolute;
 	bottom: 50px;

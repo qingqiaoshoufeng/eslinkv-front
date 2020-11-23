@@ -96,7 +96,7 @@ export default {
 				AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP
 			),
 			center: [120.061259, 30.183295],
-			zooom: 11,
+			zoom: 11,
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,

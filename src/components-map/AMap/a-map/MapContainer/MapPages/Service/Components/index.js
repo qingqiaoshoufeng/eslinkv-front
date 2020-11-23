@@ -1,14 +1,15 @@
 //页面内所需组件
-export { default as ThreeSocialLinkage } from './ThreeSocialLinkage'
-export { default as ServiceNetworkStation } from './ServiceNetworkStation'
-export { default as Grouphall } from './Grouphall'
-export { default as BranchCompany } from './BranchCompany'
-export { default as RightPanelWithServiceCustomer } from './RightPanelWithServiceCustomer'
-export { default as CouplingHot } from './CouplingHot'
-export { default as HeatMap } from './HeatMap'
-export { default as OperationHot } from './OperationHot'
-export { default as RightPanelWithServiceICcustomer } from './RightPanelWithServiceICcustomer'
-export { default as ICcustomer } from './ICcustomer'
-export { default as TipDetial } from './TipDetial'
+export { default as ThreeSocialLinkage } from './ThreeSocialLinkage'   // 三社联动
+export { default as ServiceNetworkStation } from './ServiceNetworkStation' // 服务网点
+export { default as Grouphall } from './Grouphall'  // 集团大厅
+export { default as BranchCompany } from './BranchCompany' // 分公司
+export { default as RightPanelWithServiceCustomer } from './RightPanelWithServiceCustomer' // 客户服务右侧table
+export { default as CouplingHot } from './CouplingHot' // 联动数量热力
+export { default as HeatMap } from './HeatMap'  //销气热力
+export { default as OperationHot } from './OperationHot' // 操作数量热力
+export { default as RightPanelWithServiceICcustomer } from './RightPanelWithServiceICcustomer' // 工商户右侧table
+export { default as ICcustomer } from './ICcustomer' // 工商户
+export { default as SwitchBox } from './SwitchBox' // 热力图控制盒子
+// export { default as TipDetial } from './TipDetial' // 工商户table组件
 
 

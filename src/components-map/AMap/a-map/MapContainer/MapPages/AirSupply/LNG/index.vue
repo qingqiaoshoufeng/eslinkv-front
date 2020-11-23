@@ -78,14 +78,14 @@ export default {
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
-			this.$amap.setZoom(this.zoom, 100);
-            this.$amap.panTo(this.center);
+		this.$amap.setZoom(this.zoom, 100);
+		this.$amap.panTo(this.center);
 	},
 	data() {
 		return {
 			overlayInfoConfig: Object.freeze(AIRSUPPLY_LNG_OVERLAY_MAP),
 			center: [120.061259, 30.183295],
-			zooom: 11,
+			zoom: 11,
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,

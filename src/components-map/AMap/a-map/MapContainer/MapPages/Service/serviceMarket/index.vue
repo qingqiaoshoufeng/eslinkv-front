@@ -68,13 +68,15 @@ export default {
 			showOverlayDetail: false,
 			activeOverlay: {},
 			center: [120.061259, 30.183295],
-			zooom: 11,
+			zoom: 11,
 		};
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.panTo(this.center);
+		console.log('余志强');
+		console.log(this.zoom);
 	},
 	methods: {
 		// 暂留

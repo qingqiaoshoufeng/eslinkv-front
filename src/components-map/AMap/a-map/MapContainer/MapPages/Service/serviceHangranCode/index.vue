@@ -23,13 +23,14 @@
 				class="map-legend"
 				:style="mapLegendStyle"
 			/>
+			<SwitchBox />
 			<DataStatistics :position="'left'" :data="dataStatisticsList" />
 		</portal>
 	</div>
 </template>
 <script>
 //页面覆盖物组件
-import { CouplingHot, OperationHot } from '../Components/index.js';
+import { CouplingHot, OperationHot, SwitchBox } from '../Components/index.js';
 //页面所需公共组件
 import {
 	RegionBoundary,
@@ -49,6 +50,7 @@ export default {
 		OperationHot,
 		DataStatistics,
 		MapLegend,
+		SwitchBox,
 	},
 	data() {
 		return {
@@ -60,8 +62,8 @@ export default {
 			mapLegendStyle: { left: '18%' },
 			legendMultiple: false,
 			showOverlayDetail: false,
-			center: [120.80971, 30.302216],
-			zooom: 11,
+			center: [120.80971, 30.102216],
+			zoom: 12,
 		};
 	},
 	created() {

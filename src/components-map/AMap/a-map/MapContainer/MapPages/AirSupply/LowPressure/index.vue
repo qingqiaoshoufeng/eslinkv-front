@@ -119,7 +119,7 @@ export default {
 			overlayInfoConfig: Object.freeze(AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP),
 			activeOverlay: {},
 			center: [120.061259, 30.183295],
-			zooom: 11,
+			zoom: 11,
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'realTime',
