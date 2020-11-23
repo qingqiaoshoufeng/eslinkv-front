@@ -69,7 +69,7 @@ export function getDataStatisticsList(data) {
         },
     })
 }
-// 获取统计数据列表
+// 获取工商户列表
 export function getICcustomerList(data) {
     return request({
         url: '/map/serve/getICcustomerList',

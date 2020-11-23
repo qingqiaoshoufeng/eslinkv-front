@@ -3,7 +3,7 @@
 		<div class="h-logo fn-flex flex-row pointer" @click="handleClick">
 			<img src="/static/icons/logo.svg" alt=""/>
 			<div class="right-box">
-				<h2>杭州燃气数字可视化平台</h2>
+				<h2>杭州燃气数字平台</h2>
 				<ul class="fn-flex flex-row">
 					<li class="text-left pos-r">云上燃气</li>
 					<li class="text-center pos-r">智慧能源</li>

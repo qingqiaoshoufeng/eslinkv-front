@@ -13,6 +13,7 @@ export function getAirSupplyDataStatisticsList(data) {
         },
     })
 }
+// 高压站
 export function getAirSupplyHighPressureList(data) {
     return request({
         url: '/map/airSupply/getAirSupplyHighPressureList',
@@ -23,7 +24,7 @@ export function getAirSupplyHighPressureList(data) {
         },
     })
 }
-
+// 事件警报
 export function getEventWarningList(data) {
     return request({
         url: '/map/airSupply/getEventWarningList',

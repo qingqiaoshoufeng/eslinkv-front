@@ -77,6 +77,11 @@ module.exports = {
         ]
     },
     chainWebpack: config => {
+        config.module
+            .rule('vue')
+            .use('iview')
+            .loader('iview-loader')
+            .options({ prefix: false })
         config.resolve.alias
             .set('@lib', path.resolve(__dirname, './lib'));
         if (isProduction) {

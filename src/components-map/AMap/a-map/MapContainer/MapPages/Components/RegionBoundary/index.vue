@@ -41,7 +41,6 @@ export default {
 						for (var i = 0, l = bounds.length; i < l; i++) {
 							let instance = new window.AMap.Polygon({
 								path: bounds[i],
-								map,
 								strokeWeight: 2,
 								fillOpacity: 0.6,
 								// fillColor: '#002276',
@@ -49,13 +48,11 @@ export default {
 								strokeOpacity: '1',
 								strokeStyle: 'dashed',
 								strokeColor: '#509CE1',
-								on: {
-									mouseover(e) {
-										console.log(e, 'e');
-									},
-								},
 							});
-							this.instanceArr.push(instance);
+							if (this.instanceArr) {
+								map.add(instance);
+								this.instanceArr.push(instance);
+							}
 						}
 					}
 				});

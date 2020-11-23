@@ -20,7 +20,7 @@
 						</div>
 						<div class="fn-flex flex-column text-left">
 							<h2 class="font-num">{{data&&data.value[animateActiveIndex].total}}</h2>
-							<p>{{data&&data.value[animateActiveIndex].name}}(万m3)</p>
+							<p>月度接纳(万m³)</p>
 						</div>
 					</div>
 					<div class="h-project-2-curve pos-r">
@@ -35,14 +35,18 @@
 						<h2 class="font-num">{{data&&data.value[animateActiveIndex].month2}}</h2>
 						<p class="pos-a text-center">月度环比</p>
 					</div>
-					<div class="h-project-2-img">
-						<img src="/static/icons/h-project2-1.png" alt=""/>
-					</div>
 				</div>
 			</div>
 			<div class="h-project-2-right text-left">
-				<h2 class="font-num">{{data&&data.value[animateActiveIndex].quick}}</h2>
-				<p>瞬时接纳量(m3/h)</p>
+				<h1>{{data&&data.value[animateActiveIndex].name}}</h1>
+				<div>
+					<h2 class="font-num">{{data&&data.value[animateActiveIndex].today}}</h2>
+					<p>今日接纳量(万m³)</p>
+				</div>
+				<div>
+					<h2 class="font-num">{{data&&data.value[animateActiveIndex].quick}}</h2>
+					<p>瞬时接纳量(m3/h)</p>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -60,6 +64,7 @@
 						name: '所前门站',
 						ratio: 6,
 						total: 1235,
+						today: 290.02,
 						quick: 290.02,
 						month1: '+6%',
 						month2: '-5%',
@@ -69,6 +74,7 @@
 						name: '北门站',
 						ratio: 8,
 						total: 935,
+						today: 290.02,
 						quick: 390.02,
 						month1: '+6%',
 						month2: '-5%',
@@ -78,6 +84,7 @@
 						name: '江东门站',
 						ratio: 12,
 						total: 1235,
+						today: 290.02,
 						quick: 190.02,
 						month1: '+6%',
 						month2: '-5%',
@@ -87,6 +94,7 @@
 						name: '下沙站',
 						ratio: 42,
 						total: 735,
+						today: 290.02,
 						quick: 193.2,
 						month1: '+6%',
 						month2: '-5%',
@@ -96,6 +104,7 @@
 						name: '南门站',
 						ratio: 32,
 						total: 835,
+						today: 290.02,
 						quick: 90.02,
 						month1: '+6%',
 						month2: '-5%',
@@ -187,7 +196,16 @@
 </script>
 <style lang="scss">
 	.h-project-2-right {
-		margin-left: 42px;
+		margin-left: 17px;
+		padding-left: 24px;
+		border-left: 1px dashed rgba(255, 255, 255, 0.4);
+
+		h1 {
+			color: #00DDFF;
+			font-size: 20px;
+			line-height: 24px;
+			font-weight: normal;
+		}
 
 		p {
 			font-size: 18px;
@@ -344,6 +362,7 @@
 	.h-project-2-img {
 		position: relative;
 		left: 196px;
+
 		img {
 			width: 200px;
 			height: 101px;
