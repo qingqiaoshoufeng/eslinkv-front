@@ -13,6 +13,7 @@
 				:overlayType="legend"
 				:is="config.component"
 				@overlay-click="handleOverlayClick"
+				:ref="config.component"
 			/>
 		</template>
 		<!-- 统计数据 -->
@@ -25,7 +26,7 @@
 			/>
 
 			<DataStatistics :position="'left'" :data="dataStatisticsList" />
-			<SwitchBox data.async="" />
+			<SwitchBox @switch-change="change" />
 		</portal>
 	</div>
 </template>
@@ -64,7 +65,11 @@ export default {
 			legendMultiple: false,
 			showOverlayDetail: false,
 			center: [120.80971, 30.102216],
-			zoom: 12,
+			zoom: 11,
+			switchData: {
+				switch1: true,
+				switch2: false,
+			},
 		};
 	},
 	created() {
@@ -88,6 +93,24 @@ export default {
 		},
 		async getDataStatisticsList() {
 			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
+		},
+		change(data) {
+			let { switch1, switch2 } = data;
+			this.switchData = data;
+			if (switch1) {
+				this.legendMap.OperationHot.isShow = this.switchData.switch2;
+				setTimeout(() => {
+					this.legendMap.CouplingHot.isShow = this.switchData.switch1;
+				}, 2000);
+			} else if (switch2) {
+				this.legendMap.CouplingHot.isShow = this.switchData.switch1;
+				setTimeout(() => {
+					this.legendMap.OperationHot.isShow = this.switchData.switch2;
+				}, 2000);
+			} else {
+				this.legendMap.CouplingHot.isShow = this.switchData.switch1;
+				this.legendMap.OperationHot.isShow = this.switchData.switch2;
+			}
 		},
 	},
 	mounted() {

@@ -6,6 +6,7 @@ export default {
 	mixins: [overlayMixin],
 	watch: {
 		visible(val) {
+			console.log(val, 'bbb');
 			if (val) {
 				this.init();
 			} else {
@@ -27,6 +28,7 @@ export default {
 				data: this._heatMapData,
 				max: 4000,
 			});
+			window.bbb = this._instance;
 		},
 	},
 	render() {

@@ -12,6 +12,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         legendIcon: 'icontulifengongsi',
         // icon: 'iconfengongsi',
         component: 'OperationHot',
+        isShow: false,
     },
 }
 

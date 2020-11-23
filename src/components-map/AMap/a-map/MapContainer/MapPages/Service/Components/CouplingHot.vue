@@ -1,3 +1,4 @@
+<!-- 三社联动 -->
 <script>
 import overlayMixin from '../../mixins/overlayMixin.js';
 export default {
@@ -5,6 +6,7 @@ export default {
 	mixins: [overlayMixin],
 	watch: {
 		visible(val) {
+			console.log(val, 'aaa');
 			if (val) {
 				this.init();
 			} else {

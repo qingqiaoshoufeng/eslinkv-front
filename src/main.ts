@@ -16,7 +16,7 @@ import './api/index.js'
 import PortalVue from 'portal-vue'
 Vue.use(PortalVue)
 Vue.use(VueVideoPlayer)
-Vue.component('Switch', Switch);
+Vue.component('iSwitch', Switch);
 Vue.prototype.$debug = debug
 Vue.prototype.$Message = Message
 Vue.prototype.$Modal = Modal
