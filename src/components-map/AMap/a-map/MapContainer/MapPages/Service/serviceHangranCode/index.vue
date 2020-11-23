@@ -61,6 +61,7 @@ export default {
 			legendMultiple: false,
 			showOverlayDetail: false,
 			center: [120.80971, 30.302216],
+			zooom: 11,
 		};
 	},
 	created() {

@@ -95,10 +95,14 @@ export default {
 			OverlayDetail: null,
 			legendMap: SERVICE_SERVICECUSTOMER_LEGEND_MAP,
 			legendMultiple: true,
+			center: [120.061259, 30.183295],
+			zooom: 11,
 		};
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
+		this.$amap.setZoom(this.zoom, 100);
+		this.$amap.panTo(this.center);
 	},
 	methods: {
 		handleOverlayClick(overlay, overlayType, isCenter = true) {

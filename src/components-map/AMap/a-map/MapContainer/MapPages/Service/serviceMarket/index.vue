@@ -68,6 +68,7 @@ export default {
 			showOverlayDetail: false,
 			activeOverlay: {},
 			center: [120.061259, 30.183295],
+			zooom: 11,
 		};
 	},
 	created() {
