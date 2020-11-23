@@ -13,7 +13,7 @@
       <div class="outside">
         <h5>{{curr.name}}外供量</h5>
         <div class="sub">
-          <div class="sub-item" v-for="(k, i) in curr.children">
+          <div class="sub-item" v-for="(k, i) in (curr.children || [])">
             <div class="sub-item-rank font-num">{{ i + 1 }}</div>
             <div class="sub-detail">
               <div class="sub-title">{{ k.name }}</div>
@@ -160,7 +160,7 @@ export default {
 	},
   mounted() {
 	  this.timer = setInterval(() => {
-	    if (this.index === 11) {
+	    if (this.index === this.data.length - 1) {
 	      this.index = 0
       } else {
 	      this.index++
