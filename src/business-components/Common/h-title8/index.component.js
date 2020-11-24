@@ -1,12 +1,9 @@
 export default {
-	label: 'h-tabs-circle',
 	config: {
 		layout: {
 			size: {
-				width: 992,
-				height: 214
-				// width: 719,
-				// height: 163
+				width: 258,
+				height: 64
 			},
 			position: {
 				value: 'relative'

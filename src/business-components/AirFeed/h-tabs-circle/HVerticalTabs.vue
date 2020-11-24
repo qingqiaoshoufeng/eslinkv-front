@@ -141,8 +141,6 @@ export default {
 				background-size: 24px;
 				background-position: center;
 				background-repeat: no-repeat;
-				margin-right: 8px;
-				margin-top: 7px;
 				float: right;
 				margin-right: 8px;
 				margin-top: 7px;
