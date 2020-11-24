@@ -68,8 +68,8 @@ export default {
 		},
 		beforeClose: Function,
 		detialBoxWidth: {
-			type: Number,
-			default: 240,
+			type: String,
+			default: '240px',
 		},
 	},
 	data() {

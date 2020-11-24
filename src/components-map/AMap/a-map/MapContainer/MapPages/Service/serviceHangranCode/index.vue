@@ -21,7 +21,7 @@
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:detialBoxWidth="300"
+			:detialBoxWidth="'450px'"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 			@view-detail="showOverlayDetail"
