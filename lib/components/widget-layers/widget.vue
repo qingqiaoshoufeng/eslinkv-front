@@ -24,6 +24,7 @@
 				/>
 				<Icon type="md-trash" class="icon-button remove header-action" title="删除"
 					  @click="parent.$emit('delete-widget', props.id)"/>
+				<Icon type="ios-globe" v-if="props.config.api?props.config.api.url:false" title="已填写api接口"/>
 			</div>
 			<div class="widget-type">{{props.typeDes}}</div>
 			<div class="right z-index-editor header-action">

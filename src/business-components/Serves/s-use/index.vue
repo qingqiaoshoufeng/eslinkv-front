@@ -3,7 +3,7 @@
 		<div class="total">
 			<img src="./img/click-logo.svg" alt="">
 			<span class="total-txt">累计操作次数</span>
-			<span class="total-num font-num">{{ data&&data.total.toLocaleString() }}</span>
+			<span class="total-num font-num">{{ data&&data.total| toThousand }}</span>
 		</div>
 		<div class="history">
 			<div class="history-item">
@@ -12,7 +12,7 @@
 					<div class="history-title-unit">次数</div>
 				</div>
 				<div class="content">
-					<div class="content-num font-num">{{ data&&data.yesterday.toLocaleString() }}</div>
+					<div class="content-num font-num">{{ data&&data.yesterday| toThousand }}</div>
 					<img class="content-icon" src="./img/arrow-up.svg" v-if="data.yesterdayType === 'up'"/>
 					<img class="content-icon" src="./img/arrow-down.svg" v-else/>
 				</div>
@@ -23,7 +23,7 @@
 					<div class="history-title-unit">次数</div>
 				</div>
 				<div class="content">
-					<div class="content-num font-num">{{ data&&data.lastWeek.toLocaleString() }}</div>
+					<div class="content-num font-num">{{ data&&data.lastWeek| toThousand }}</div>
 					<img class="content-icon" src="./img/arrow-up.svg" v-if="data.lastWeekType === 'up'"/>
 					<img class="content-icon" src="./img/arrow-down.svg" v-else/>
 				</div>

@@ -6,7 +6,7 @@
 		</ul>
 		<div class="pos-a h-ring-1-legend-box">
 			<ul class="h-ring-1-legend" :style="legengdTransform">
-				<li class="fn-flex flex-row" v-for="(item,index) in data?data.value:[]" :key="index"
+				<li class="fn-flex flex-row" v-for="(item,index) in data?data:[]" :key="index"
 					@click="activeHandler(index)"
 					:class="[{active:animateActiveIndex===index}]">
 					<i class="circle"
@@ -43,8 +43,8 @@
 	}
 	const value = {
 		api: {
-			data: JSON.stringify({
-				value: [
+			data: JSON.stringify(
+				[
 					{value: 12.5, des: '111', title: '南门站'},
 					{value: 12.5, des: '', title: '北门站'},
 					{value: 12.5, des: '', title: '下沙门站'},
@@ -53,7 +53,7 @@
 					{value: 12.5, des: '', title: '杭州东站'},
 					{value: 12.5, des: '', title: '杭州西站'},
 				]
-			})
+			)
 		},
 		config: {
 			background: '/static/icons/h-ring1-1.svg',
@@ -72,7 +72,7 @@
 		computed: {
 			legengdTransform() {
 				if (this.data) {
-					if (this.data.value.length <= this.showSize + 1) {
+					if (this.data.length <= this.showSize + 1) {
 						return {transform: `translateY(0px)`}
 					} else {
 						if (this.animateActiveIndex > this.showSize) {
@@ -105,7 +105,7 @@
 				}, 2000)
 			},
 			setOption(data) {
-				options.series[0].data = data.value
+				options.series[0].data = data.map(item => item.value)
 				options.color = JSON.parse(this.config.config.color)
 				this.instance && this.instance.setOption(options)
 			},
@@ -115,9 +115,9 @@
 					this.instance.dispatchAction({
 						type: 'downplay',
 						seriesIndex: 0,
-						dataIndex: this.animateActiveIndex % data.value.length
+						dataIndex: this.animateActiveIndex % data.length
 					})
-					if (this.animateActiveIndex >= data.value.length - 1) {
+					if (this.animateActiveIndex >= data.length - 1) {
 						this.animateActiveIndex = 0
 					} else {
 						this.animateActiveIndex = this.animateActiveIndex + 1
@@ -125,7 +125,7 @@
 					this.instance.dispatchAction({
 						type: 'highlight',
 						seriesIndex: 0,
-						dataIndex: this.animateActiveIndex % data.value.length
+						dataIndex: this.animateActiveIndex % data.length
 					})
 				}, 1000)
 			}
@@ -134,7 +134,7 @@
 			data: {
 				handler(val) {
 					if (this.id) {
-						const data = {...val}
+						const data = [...val]
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
 							this.setOption(data)

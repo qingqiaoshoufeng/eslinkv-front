@@ -11,10 +11,12 @@
 		</header>
 		<div class="widget-list-wrapper pos-r">
 			<div class="widget-list pos-r" v-if="filteredWidgets.length">
-				<template v-for="widget in filteredWidgets"  >
-					<widget :key="widget.id" v-bind="widget" v-if="widget.scene===store.scene.index">
+				<template v-for="widget in filteredWidgets">
+					<widget :key="widget.id" v-bind="widget" v-if="widget.scene===store.scene.index"
+							:config="config(widget.id)">
 						<template v-if="widget.isCombinationWidget">
-							<widget v-for="child in widget.children" :key="child.id" v-bind="child"/>
+							<widget v-for="child in widget.children" :key="child.id" v-bind="child"
+									:config="config(widget.id)"/>
 						</template>
 					</widget>
 				</template>
@@ -28,8 +30,10 @@
 	import widgetsTypes from '../../views/core/widgets/widget-type-list'
 	import {Select, Option, Button, Icon} from 'view-design'
 	import {store} from '../../store'
+
 	export default {
 		components: {widget, Select, Option, Button, Icon},
+		inject: ['kanboardEditor'],
 		props: {
 			widgets: {
 				type: Array,
@@ -51,6 +55,16 @@
 			}
 		},
 		computed: {
+			config() {
+				return (id) => {
+					if (this.kanboardEditor) {
+						const data = this.kanboardEditor.widgetsAdded
+						const item = data[id]
+						return item.config
+					}
+					return {}
+				}
+			},
 			filteredWidgets() {
 				if (!this.widgetType) return this.widgets
 				return this.widgets.filter(widget => {

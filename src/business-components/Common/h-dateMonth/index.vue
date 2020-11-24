@@ -50,12 +50,15 @@
 					}
 				}
 				this.selectValue = addMonths(this.selectValue, index)
-				this.emitComponentUpdate({value: this.selectValue, label: this.now})
+				this.emitComponentUpdate({month: format(this.selectValue, 'yyyy-MM')})
 			},
 		},
 		created() {
 			this.configSource = this.parseConfigSource(config)
 			this.configValue = this.parseConfigValue(config, value)
+		},
+		mounted() {
+			this.emitComponentUpdate({month: format(this.selectValue, 'yyyy-MM')})
 		}
 	}
 </script>
