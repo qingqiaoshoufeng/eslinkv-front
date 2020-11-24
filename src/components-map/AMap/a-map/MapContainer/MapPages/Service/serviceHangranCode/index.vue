@@ -13,7 +13,7 @@
 				:overlayIcon="config.icon"
 				:overlayType="legend"
 				:is="config.component"
-				:data="allTypeStationList[config.component + 'List'] || []"
+				:data="allTypeStationList[config.dataProp]"
 				@overlay-click="handleOverlayClick"
 				:ref="config.component"
 			/>
@@ -111,6 +111,7 @@ export default {
 		this.$amap.panTo(this.center, 100);
 	},
 	methods: {
+		// 关闭详情
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
 			if (overlayType === 'WARNEVENT') {
@@ -124,20 +125,15 @@ export default {
 			this.$amap.setZoom(11, 100);
 			done();
 		},
+		// 点击地图marker
 		handleOverlayClick(overlay, overlayType, isCenter = false) {
 			console.log(111);
+			console.log(overlay);
 			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat } = overlay;
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
-			// this.$amap.setZoom(14, 100);
-			// console.log([lng, lat]);
-			// if (isCenter) {
-			// 	this.$nextTick(() => {
-			// 		this.$amap.panTo([lng, lat], 100);
-			// 	});
-			// }
 		},
 		async getDataStatisticsList() {
 			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
@@ -154,6 +150,7 @@ export default {
 			this.allTypeStationList = await this.$sysApi.map.serve.getHangranCodeList(
 				params
 			);
+			console.log(this.allTypeStationList);
 		},
 		// 切换热力图显示隐藏
 		change(data) {

@@ -27,8 +27,9 @@ let errMessage = '网络异常，请重试'
 request.interceptors.response.use(
     (response) => {
         const { data } = response
+        // console.log(data)
         if (data) {
-            if (data.code === 0) {
+            if (data.code === 0 || data.returnCode === '0000') {
                 return data.data
             } else if (data.responseCode === '101002') {
                 // 未登录

@@ -6,6 +6,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         icon: 'iconjituandating',
         component: 'Grouphall',
         isShow: true,
+        dataProp: 'grouphallList'
     },
     BranchCompany: {
         label: '分公司',
@@ -13,13 +14,15 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
         isShow: true,
+        dataProp: 'branchCompanyList'
     },
     ServiceStation: {
         label: '综合服务站',
         legendIcon: 'icontulizonghefuwuzhan1',
         icon: 'iconzonghefuwuzhan1',
-        component: 'BranchCompany',
+        component: 'ServiceStation',
         isShow: true,
+        dataProp: 'comprehensiveServiceStationList'
     },
     CouplingHot: {
         label: '联码数量热力',

@@ -137,13 +137,11 @@ export function getCircleOption (data) {
 }
 
 export function getLineOption (data) {
-    var  getname=['周一','周二','周三','周四','周五','周六','周日'];
-    var  getvalue=[60,70,80,90,50,65,49];
     return {
         grid: {
-            top: '10%',
+            top: '20%',
             right: '5%',
-            left: '5%',
+            left: '10%',
             bottom: '5%'
         },
 
@@ -152,7 +150,7 @@ export function getLineOption (data) {
             color: '#FFF'
         },
         xAxis: [{
-            data: getname,
+            data: data.lineX,
             axisLabel: {
                 show: false
             },
@@ -184,16 +182,9 @@ export function getLineOption (data) {
         animation: false,
         series: [{
             type: 'line',
-            data: getvalue,
+            data: data.lineY,
             symbol: 'circle',
             symbolSize: 0,
-            /*itemStyle: {
-                normal: {
-                    color: '#FFF',
-                    borderColor: '#94DDFF',
-                    borderWidth: 3
-                },
-            },*/
             lineStyle: {
                 width: 3,
                 color: '#00DDFF'
@@ -211,6 +202,48 @@ export function getLineOption (data) {
                         }],false),
                 }
             },
+            markPoint: {
+                symbol: 'circle',
+                symbolSize: 8,
+                itemStyle: {
+                    color: '#fff',
+                    borderWidth: 4,
+                    borderColor: 'rgba(0, 255, 207, 0.5)'
+                },
+                label: {
+                    show: true,
+                    distance: 20,
+                    offset: [-38, -24],
+                    textBorderWidth: 0,
+                    textShadowBlur: 0,
+                    textShadowColor:'transparent',
+                    formatter: param => {
+                        return '{card|' + param.value + 'km}'
+                    },
+                    rich: {
+                        'card': {
+                            width: 84,
+                            height: 30,
+                            fontSize: 18,
+                            lineHeight: 18,
+                            backgroundColor: '#0057A9',
+                            borderRadius: 0,
+                            borderColor: '#00DDFF',
+                            borderWidth: 1,
+                            align: 'center',
+                            color: '#ffffff'
+                        }
+                    }
+                },
+                data: [{
+                    type: 'max'
+                },{
+                    type: 'min',
+                    label: {
+                        show: false
+                    }
+                }]
+            }
         }]
     }
 }

@@ -2,6 +2,11 @@
 	<div class="widget-part h-tabs-circle" :style="styles" v-if="data">
     <div class="develop">
       <div class="develop-chart" ref="develop"></div>
+      <div class="develop-axis">
+        <div class="develop-axis-start">2011</div>
+        <div class="develop-axis-name">管线发展趋势</div>
+        <div class="develop-axis-end">2020</div>
+      </div>
     </div>
     <div class="dash"></div>
 		<h-vertical-tabs
@@ -25,12 +30,14 @@
 import mixins from '../../mixins';
 import HCvs from './HCvs';
 import HVerticalTabs from './HVerticalTabs';
-import { getCircleOption } from './options'
+import { getCircleOption, getLineOption } from './options'
 
 const config = { animation: true };
 const value = {
 	api: {
 		data: JSON.stringify({
+      lineX: ['2001','2002','2003','2004','2005','2006','2020'],
+      lineY: [30,40,50,60,66,77,90],
       circle: [
         [
           {
@@ -159,17 +166,32 @@ export default {
 	    return this.data ? this.data.circle[this.tabActived] : []
     }
   },
+  watch: {
+    data: {
+      handler(val) {
+        if (this.id) {
+          this.$nextTick(() => {
+            echarts.init(this.$refs.develop).setOption(getLineOption(this.data))
+            echarts.init(this.$refs.circle).setOption(getCircleOption(this.curr))
+          })
+        }
+      },
+      deep: true,
+      immediate: true
+    }
+  },
 	mixins: [mixins],
 	created() {
 		this.configSource = this.parseConfigSource(config);
 		this.configValue = this.parseConfigValue(config, value);
 	},
-	mounted() {},
+	mounted() {
+
+  },
 	methods: {
 		tabActivedChange(tabActived) {
 			this.tabActived = tabActived
-      this.instance = echarts.init(this.$refs.circle)
-      this.instance.setOption(getCircleOption(this.curr))
+      echarts.init(this.$refs.circle).setOption(getCircleOption(this.curr))
 		}
 	},
 };
@@ -185,6 +207,22 @@ export default {
     .develop-chart {
       width: 317px;
       height: 165px;
+    }
+    .develop-axis {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px;
+      color: #FFFFFF;
+      width: 270px;
+      margin-left: 27px;
+      .develop-axis-name {
+        width: 140px;
+        height: 24px;
+        background: #072e85;
+        border-radius: 12px;
+        color: #00DDFF;
+      }
     }
   }
   .dash {

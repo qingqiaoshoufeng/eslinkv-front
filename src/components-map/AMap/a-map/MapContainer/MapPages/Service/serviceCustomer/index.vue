@@ -102,7 +102,7 @@ export default {
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
-		this.$amap.panTo(this.center,100);
+		this.$amap.panTo(this.center, 100);
 	},
 	methods: {
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
