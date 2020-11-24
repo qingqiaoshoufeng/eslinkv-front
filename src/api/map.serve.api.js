@@ -2,10 +2,8 @@ import request from './request'
 import qs from 'qs'
 const HANGRANURL = '/hangran'
 const DATAURL = '/data'
-// 获取杭燃码部分数据
+// 获取杭燃码地图部分数据 分公司、集团大厅、综合服务站
 export function getHangranCodeList(data) {
-    console.log(qs.stringify(data))
-    console.log(data)
     return request({
         url: `${HANGRANURL}/gasCode/mapDataResult`,
         method: 'get',
@@ -15,6 +13,18 @@ export function getHangranCodeList(data) {
         },
     })
 }
+// 获取工商户地图数据 勇用大户、分公司
+export function getICcustomerList1(data) {
+    return request({
+        url: `${HANGRANURL}/gasCode/mapDataResult`,
+        method: 'get',
+        data: qs.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+
 // 集团大厅站点
 //模糊匹配所有站点
 export function getGrouphallList(data) {

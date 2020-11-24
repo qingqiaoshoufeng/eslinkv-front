@@ -16,6 +16,8 @@
 				:overlayType="legend"
 				:is="config.component"
 				@overlay-click="handleOverlayClick"
+				:ref="config.component"
+				:data="allTypeStationList[config.dataProp]"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->
@@ -24,9 +26,12 @@
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
+			:detialBoxWidth="'350px'"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
-		/>
+		>
+			<TipDetial :data="activeOverlay" />
+		</OverlayDetail>
 		<portal to="destination">
 			<MapLegend
 				:data="legendMap"
@@ -44,8 +49,11 @@
 <script>
 //页面覆盖物组件
 import {
-	ICcustomer,
+	// ICcustomer,
 	RightPanelWithServiceICcustomer,
+	BranchCompany,
+	MajorClient,
+	TipDetial,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -63,10 +71,13 @@ export default {
 	components: {
 		RegionBoundary,
 		OverlayDetail,
-		ICcustomer,
+		// ICcustomer,
 		DataStatistics,
 		RightPanelWithServiceICcustomer,
 		MapLegend,
+		BranchCompany,
+		MajorClient,
+		TipDetial,
 	},
 	data() {
 		return {
@@ -80,42 +91,38 @@ export default {
 			activeOverlay: {},
 			center: [120.061259, 30.183295],
 			zoom: 11,
+			allTypeStationList: {},
 		};
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
-		this.$amap.panTo(this.center,100);
+		this.$amap.panTo(this.center, 100);
 	},
 	methods: {
 		closeOverlayDetail(done) {
-			let { overlayType } = this.activeOverlay;
-			if (overlayType === 'WARNEVENT') {
-				GoldChart.scene.setSceneIndex(
-					INDEXSCENEMAP['AirSupplyHighPressure']
-				);
-				this.showRoutePlan = false;
-			}
-			this.showOverlayDetail = false;
-			this.activeOverlay = {};
-			this.$amap.setZoom(11, 100);
 			done();
 		},
-		handleOverlayClick(overlay, overlayType, isCenter = true) {
+		handleOverlayClick(overlay, overlayType, isCenter = false) {
 			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat } = overlay;
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
-			this.$amap.setZoom(14, 100);
-			if (isCenter) {
-				this.$nextTick(() => {
-					this.$amap.panTo([lng, lat], 100);
-				});
-			}
 		},
+		// 请求统计数据
 		async getDataStatisticsList() {
 			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
+		},
+		// 请求用气大户、分公司数据
+		async getAllTypeStationList() {
+			let params = {
+				type: ['MajorClient', 'BranchCompany'],
+			};
+			this.allTypeStationList = await this.$sysApi.map.serve.getICcustomerList(
+				params
+			);
+			console.log(this.allTypeStationList);
 		},
 		handleListClick(item) {
 			console.log(item);
@@ -136,6 +143,7 @@ export default {
 	},
 	mounted() {
 		this.getDataStatisticsList();
+		this.getAllTypeStationList();
 	},
 };
 </script>
