@@ -2,7 +2,7 @@
 	<div class="widget-part" :style="styles" v-if="data">
 		<img :src="config.config&&config.config.img" alt="">
 		<div class="desc">{{ config.config&&config.config.desc }}</div>
-		<div class="num font-num">{{ data.value.toLocaleString() }}</div>
+		<div class="num font-num">{{ data.value | toThousand }}</div>
 	</div>
 </template>
 <script>

@@ -115,11 +115,11 @@
 			</div>
 		</section>
 		<section class="links">
-			<div class="link" :class="{active: curr === 0}" @click="getLink(0)">最多跑<br/>一次4.0</div>
-			<div class="link" :class="{active: curr === 1}" @click="getLink(1)">三社联动<br/>安心安居</div>
-			<div class="link" :class="{active: curr === 2}" @click="getLink(2)">31个<br/>服务网点</div>
-			<div class="link" :class="{active: curr === 3}" @click="getLink(3)">网上19<br/>营业厅</div>
-			<div class="link" :class="{active: curr === 4}" @click="getLink(4)">杭燃码</div>
+			<div class="link" :class="{active: animateActiveIndex === 0}">最多跑<br/>一次4.0</div>
+			<div class="link" :class="{active: animateActiveIndex === 1}">三社联动<br/>安心安居</div>
+			<div class="link" :class="{active: animateActiveIndex === 2}">31个<br/>服务网点</div>
+			<div class="link" :class="{active: animateActiveIndex === 3}">网上19<br/>营业厅</div>
+			<div class="link" :class="{active: animateActiveIndex === 4}">杭燃码</div>
 		</section>
 	</div>
 </template>
@@ -171,16 +171,6 @@
 	}
 	export default {
 		mixins: [mixins],
-		data() {
-			return {
-				curr: 0
-			}
-		},
-		methods: {
-			getLink(n) {
-				this.curr = n
-			}
-		},
 		created() {
 			this.configSource = this.parseConfigSource(config, configSource)
 			this.configValue = this.parseConfigValue(config, value)
@@ -190,6 +180,14 @@
 				this.$refs.img.style.transform = `perspective(763px) rotateY(${this.config.config.transform}deg) translateZ(-120px)`
 				this.$refs.img.style.left = `${this.config.config.left}px`
 			}, 1500)
+
+			this.animateTimer = setInterval(() => {
+				if (this.animateActiveIndex < 4) {
+					this.animateActiveIndex = this.animateActiveIndex + 1
+				} else {
+					this.animateActiveIndex = 0
+				}
+			}, 1000)
 		}
 	}
 </script>
@@ -287,6 +285,7 @@
 		padding-bottom: 8px;
 		margin-bottom: 20px;
 		position: relative;
+		white-space: nowrap;
 
 		&:before {
 			content: '';
@@ -372,11 +371,14 @@
 			font-size: 18px;
 			line-height: 24px;
 			color: #FFFFFF;
-			background: rgba(0, 87, 169, 0.5);
+			background-color: rgba(0, 87, 169, 0.5);
 			border-radius: 50%;
+			background-image: url("./img/link-bg.svg");
+			background-repeat: no-repeat;
+			background-size: 0;
+			transition: all .3s;
 
 			&.active {
-				background: url("./img/link-bg.svg") no-repeat;
 				background-size: 100% 100%;
 			}
 		}

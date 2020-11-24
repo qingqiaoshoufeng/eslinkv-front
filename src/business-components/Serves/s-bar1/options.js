@@ -10,6 +10,9 @@ export default {
         axisTick: {
             show: false,
         },
+		axisLine: {
+			show: false,
+		},
         axisLabel: {
             textStyle: {
                 color: '#fff',
@@ -19,6 +22,12 @@ export default {
     yAxis: [{
         type: 'value',
         show: true,
+		splitLine: {
+			lineStyle: {
+				type: "solid",
+				color: "rgba(199, 209, 219, 0.2)"
+			}
+		},
         axisTick: {
             show: false,
             textStyle: {
@@ -44,7 +53,7 @@ export default {
         },
         type: 'value',
         splitLine:{
-            show: true
+            show: false
         },
         show: true,
         axisTick: {
@@ -61,7 +70,7 @@ export default {
         },
         interval: 25,
         axisLine: {
-            show: true,
+            show: false,
         }
     }],
     barGap: -0.8,
