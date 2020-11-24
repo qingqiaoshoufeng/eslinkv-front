@@ -11,6 +11,7 @@
 			<div class="close-btn" @click="$emit('input', false)">
 				<svg-icon icon-name="iconbaseline-close-px"></svg-icon>
 			</div>
+			<div class="triangle"></div>
 			<slot></slot>
 		</div>
 	</DashboardPanel>
@@ -55,7 +56,18 @@ export default {
 	border: 1px solid #00ddff;
 	box-sizing: border-box;
 	color: #fff;
-	margin: -150px 0 0 -80px;
+	margin: -15px 0 0 10px;
+	transform: translate(-50%, -100%);
+	.triangle {
+		width: 0;
+		height: 0;
+		position: absolute;
+		bottom: -15px;
+		left: 50%;
+		border-left: solid 15px transparent;
+		border-right: solid 15px transparent;
+		border-top: solid 15px #00ddff;
+	}
 	.close-btn {
 		background: #0057a9;
 		border: 1px solid #00ddff;

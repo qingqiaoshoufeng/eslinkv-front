@@ -10,6 +10,8 @@ export { default as OperationHot } from './OperationHot' // 操作数量热力
 export { default as RightPanelWithServiceICcustomer } from './RightPanelWithServiceICcustomer' // 工商户右侧table
 export { default as ICcustomer } from './ICcustomer' // 工商户
 export { default as SwitchBox } from './SwitchBox' // 热力图控制盒子
-// export { default as TipDetial } from './TipDetial' // 工商户table组件
+export { default as ServiceStation } from './ServiceStation' // 综合服务站
+
+export { default as TipDetial } from './TipDetial' // 分公司详情自定义组件
 
 

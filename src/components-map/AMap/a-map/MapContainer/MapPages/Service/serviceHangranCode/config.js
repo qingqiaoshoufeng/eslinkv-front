@@ -1,5 +1,26 @@
 // 覆盖物legend配置
 export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
+    Grouphall: {
+        label: '集团大厅',
+        legendIcon: 'icontulijituandating',
+        icon: 'iconjituandating',
+        component: 'Grouphall',
+        isShow: true,
+    },
+    BranchCompany: {
+        label: '分公司',
+        legendIcon: 'icontulifengongsi',
+        icon: 'iconfengongsi1',
+        component: 'BranchCompany',
+        isShow: true,
+    },
+    ServiceStation: {
+        label: '综合服务站',
+        legendIcon: 'icontulizonghefuwuzhan1',
+        icon: 'iconzonghefuwuzhan1',
+        component: 'BranchCompany',
+        isShow: true,
+    },
     CouplingHot: {
         label: '联码数量热力',
         legendIcon: 'icontulixiaoqireli',

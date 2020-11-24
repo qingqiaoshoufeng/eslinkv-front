@@ -7,7 +7,11 @@
 		:visible="value"
 		ref="overlayDetailMarker"
 	>
-		<PopContainer class="no-hover-effect" @input="closePop">
+		<PopContainer
+			class="no-hover-effect"
+			@input="closePop"
+			:width="detialBoxWidth"
+		>
 			<slot>
 				<div
 					class="info-item"
@@ -63,6 +67,10 @@ export default {
 			},
 		},
 		beforeClose: Function,
+		detialBoxWidth: {
+			type: Number,
+			default: 240,
+		},
 	},
 	data() {
 		return {
@@ -80,7 +88,7 @@ export default {
 						this.overlayInfoConfig[overlayType] || {};
 					this.overlay = {
 						...val,
-                    };
+					};
 					if (!this.rendered) {
 						this.rendered = true;
 					} else {

@@ -1,4 +1,3 @@
-<!-- 19厅 -->
 <template>
 	<div>
 		<!-- 1.legend不控制显隐的覆盖物 -->
@@ -24,7 +23,6 @@
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
-			ref="OverlayDetail"
 		>
 			<TipDetial :data="activeOverlay" />
 		</OverlayDetail>
@@ -42,22 +40,16 @@
 </template>
 <script>
 //页面覆盖物组件
-import { BranchCompany, TipDetial } from '../Components/index.js';
+import { BranchCompany, TipDetial } from './Components/index.js';
 //页面所需公共组件
-import {
-	RegionBoundary,
-	OverlayDetail,
-	MapLegend,
-} from '../../Components/index.js';
-// 页面配置项
-
-import { DataStatistics } from '../../../../components';
-import {
-	SERVICE_SERVICE19_LEGEND_MAP,
-	SERVICE_SERVICE19_OVERLAY_MAP,
-} from './config';
+import { RegionBoundary, OverlayDetail } from '../Components/index.js';
+import pageMixin from '../mixins/pageMixin.js';
+import { DataStatistics } from '../../../components';
+import { OVERLAYINFOMAP_SERVICE_19 } from '../../../config';
+import MapLegend from '../../MapLegend';
 export default {
 	name: 'service19',
+	mixins: [pageMixin],
 	components: {
 		RegionBoundary,
 		OverlayDetail,
@@ -68,36 +60,15 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(SERVICE_SERVICE19_OVERLAY_MAP),
+			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_19),
 			dataStatisticsList: [],
-			legendMap: SERVICE_SERVICE19_LEGEND_MAP,
+			// legendMap: SERVICELEGEND19MAP,
 			legendMultiple: true,
 			mapLegendStyle: { left: '18%' },
 			activeOverlay: {},
-			showOverlayDetail: false,
-			zoom: 11,
-			center: [120.80971, 30.202216],
 		};
 	},
-	created() {
-		this.$amap = this.$parent.$amap;
-		this.$amap.setZoom(this.zoom, 100);
-		this.$amap.panTo(this.center, 100);
-	},
 	methods: {
-		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
-			let { lng, lat } = overlay;
-			overlay.overlayType = overlayType;
-			this.activeOverlay = overlay;
-			this.showOverlayDetail = true;
-			this.$amap.setZoom(14, 100);
-			if (isCenter) {
-				this.$nextTick(() => {
-					this.$amap.panTo([lng, lat], 100);
-				});
-			}
-		},
 		async getDataStatisticsList() {
 			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
 		},

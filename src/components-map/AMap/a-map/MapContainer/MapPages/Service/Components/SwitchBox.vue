@@ -1,42 +1,32 @@
+<!--杭燃码热力图选择器 -->
 <template>
 	<div class="hangrancode_switch_Box">
 		<div>
 			累计联码数量热力
 			<i-switch
-				v-model="data1.switch1"
+				v-model="data.switch1"
 				@on-change="change(1)"
-				true-color="#13ce66"
-				false-color="#ff4949"
+				true-color="#0057A9"
+				false-color="#0057A9"
 			/>{{ data.switch1 ? 'no' : 'off' }}
 		</div>
 		<div>
 			月操作数量热力
 			<i-switch
-				v-model="data1.switch2"
+				v-model="data.switch2"
 				@on-change="change(2)"
-				true-color="#13ce66"
-				false-color="#ff4949"
+				true-color="#0057A9"
+				false-color="#0057A9"
 			/>{{ data.switch2 ? 'no' : 'off' }}
 		</div>
 	</div>
 </template>
 <script>
 export default {
-	name: 'TipDetial',
-	props: {
-		data: {
-			Type: Object,
-			default() {
-				return {
-					switch1: true,
-					switch2: false,
-				};
-			},
-		},
-	},
+	name: 'SwitchBox',
 	data() {
 		return {
-			data1: {
+			data: {
 				switch1: true,
 				switch2: false,
 			},
@@ -45,11 +35,11 @@ export default {
 	methods: {
 		change(e) {
 			if (e === 1) {
-				this.data1.switch1 && (this.data1.switch2 = false);
+				this.data.switch1 && (this.data.switch2 = false);
 			} else {
-				this.data1.switch2 && (this.data1.switch1 = false);
+				this.data.switch2 && (this.data.switch1 = false);
 			}
-			this.$emit('switch-change', this.data1);
+			this.$emit('switch-change', this.data);
 		},
 	},
 	mounted() {},
@@ -60,8 +50,8 @@ export default {
 	position: fixed;
 	width: 251px;
 	height: 88px;
-	left: 1000px;
-	bottom: 800px;
+	left: 32px;
+	bottom: 32px;
 	z-index: 99999;
 	display: flex;
 	flex-direction: column;
@@ -85,7 +75,8 @@ export default {
 
 		color: #00ffcf;
 		.ivu-switch {
-			margin: 0, 12px, 0, 8px;
+			margin-left: 12px;
+			margin-right: 8px;
 		}
 	}
 }
