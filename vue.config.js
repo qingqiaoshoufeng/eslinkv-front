@@ -35,6 +35,13 @@ module.exports = {
 				pathRewrite: {
 					'^/cdn': '/'
 				}
+			},
+			'/server': {
+				target: 'http://192.168.1.33:9082',
+				changeOrigin: true,
+				pathRewrite: {
+					'^/server': '/'
+				}
 			}
         }
     },

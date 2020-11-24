@@ -41,6 +41,8 @@
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
 			font-weight: normal;
+			letter-spacing: 21px;
+			white-space: nowrap;
 		}
 
 		img {
@@ -51,6 +53,7 @@
 
 		ul {
 			margin-top: 14px;
+			width: 528px;
 		}
 
 		li {
@@ -67,7 +70,8 @@
 					height: 4px;
 					position: absolute;
 					background-color: rgba(255, 255, 255, 0.6);
-					left: 120px;
+					left: 50%;
+					margin-left: 68px;
 					top: 50%;
 					margin-top: -2px;
 				}
@@ -79,7 +83,8 @@
 					width: 4px;
 					height: 4px;
 					position: absolute;
-					left: 125px;
+					left: 50%;
+					margin-left: 98px;
 					top: 50%;
 					margin-top: -2px;
 					background-color: rgba(255, 255, 255, 0.6);
