@@ -1,12 +1,9 @@
 <template>
-	<div class="h-table-status widget-part" :style="styles">
+	<div class="h-table-status widget-part" :style="styles" v-if="data">
 		<ul class="h-table-status__title1">
-			<li>时间</li>
-			<li>客户</li>
-			<li>地点</li>
-			<li>工单内容</li>
+			<li v-for="(k, i) in config.config.titles">{{ k }}</li>
 		</ul>
-		<div class="h-table-status__content1" v-if="!!data">
+		<div class="h-table-status__content1">
 			<vue-seamless-scroll
 				:data="data || []"
 				class="h-table-status__content1__seamless-warp1"
@@ -29,7 +26,20 @@
 <script>
 import mixins from '../../mixins';
 import VueSeamLess from 'vue-seamless-scroll';
-const config = { animation: true };
+import {getInput} from "@lib/views/core/widgets/parts/lib/config-tools";
+const config = {
+  animation: true,
+  config: {
+    titles: true
+  }
+};
+const configSource = {
+  config: {
+    fields: {
+      title: getInput('titles', '标题'),
+    }
+  }
+}
 const value = {
 	api: {
 		data: JSON.stringify([
@@ -72,6 +82,9 @@ const value = {
 			},
 		]),
 	},
+  config: {
+    titles: ['时间', '报警人', '地点', '工单内容']
+  }
 };
 export default {
 	mixins: [mixins],
@@ -80,11 +93,6 @@ export default {
 	},
 	methods: {},
 	computed: {
-		rulerWidth() {
-			// 比例根据视觉稿来的
-			const rate = 388 / 4500;
-			return (this.data?.amount * rate ?? 0) + 'px';
-		},
 		classOption() {
 			return {
 				step: 0.2, // 数值越大速度滚动越快
@@ -96,18 +104,19 @@ export default {
 				singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
 				waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
 			};
-		},
+		}
 	},
 	created() {
-		this.configSource = this.parseConfigSource(config);
+		this.configSource = this.parseConfigSource(config, configSource);
 		this.configValue = this.parseConfigValue(config, value);
 	},
 };
 </script>
 <style lang="scss">
 .h-table-status {
+  width: 100%;
 	&__title1 {
-		width: 992px;
+		width: 100%;
 		height: 32px;
 		background: rgba(23, 123, 255, 0.2);
 		display: flex;
@@ -121,16 +130,16 @@ export default {
 			color: #00CBF4;
 			text-align: left;
 			&:nth-child(1) {
-				width: 160px;
+				width: 16%;
 			}
 			&:nth-child(2) {
-				width: 208px;
+				width: 21%;
 			}
 			&:nth-child(3) {
-				width: 360px;
+				width: 36.3%;
 			}
 			&:nth-child(4) {
-				width: 250px;
+				width: 25.2%;
 			}
 		}
 	}
@@ -143,7 +152,7 @@ export default {
 			overflow: hidden;
 		}
 		&__row1 {
-			width: 992px;
+      width: 100%;
 			height: 24px;
 			display: flex;
 			align-items: center;
@@ -157,17 +166,17 @@ export default {
 				line-height: 16px;
 				color: #FFFFFF;
 				&:nth-child(1) {
-					width: 160px;
+          width: 16%;
 					color: rgba(255, 255, 255, 0.6);
 				}
 				&:nth-child(2) {
-					width: 208px;
+          width: 21%;
 				}
 				&:nth-child(3) {
-					width: 360px;
+          width: 36.3%;
 				}
 				&:nth-child(4) {
-					width: 250px;
+          width: 25.2%;
 					color: #FF7217;
 				}
 			}

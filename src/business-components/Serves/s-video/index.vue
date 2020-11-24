@@ -1,5 +1,5 @@
 <template>
-	<div class="widget-part" :style="styles">
+	<div class="widget-part" :style="styles" v-if="data">
 		<video-player
 			class="video-player-box"
 			ref="videoPlayer"
