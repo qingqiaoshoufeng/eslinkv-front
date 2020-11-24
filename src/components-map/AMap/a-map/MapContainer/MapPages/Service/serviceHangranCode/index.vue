@@ -13,6 +13,7 @@
 				:overlayIcon="config.icon"
 				:overlayType="legend"
 				:is="config.component"
+				:data="allTypeStationList[config.component + 'List'] || []"
 				@overlay-click="handleOverlayClick"
 				:ref="config.component"
 			/>
@@ -101,6 +102,7 @@ export default {
 			showOverlayDetail: false,
 			center: [120.80971, 30.102216],
 			zoom: 11,
+			allTypeStationList: {},
 		};
 	},
 	created() {
@@ -140,6 +142,20 @@ export default {
 		async getDataStatisticsList() {
 			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
 		},
+		// 请求集团大厅，分公司，综合服务站数据列表
+		async getAllTypeStationList() {
+			let params = {
+				type: [
+					'Grouphall',
+					'BranchCompany',
+					'ComprehensiveServiceStation',
+				],
+			};
+			this.allTypeStationList = await this.$sysApi.map.serve.getHangranCodeList(
+				params
+			);
+		},
+		// 切换热力图显示隐藏
 		change(data) {
 			let { switch1, switch2 } = data;
 			this.overlayMap.CouplingHot.isShow = switch1;
@@ -148,6 +164,8 @@ export default {
 	},
 	mounted() {
 		this.getDataStatisticsList();
+		this.getAllTypeStationList();
+		console.log(this.overlayMap);
 	},
 };
 </script>

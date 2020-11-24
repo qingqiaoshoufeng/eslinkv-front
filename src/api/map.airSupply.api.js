@@ -5,7 +5,7 @@ import qs from 'qs'
 //模糊匹配所有站点
 export function getAirSupplyDataStatisticsList(data) {
     return request({
-        url: '/map/airSupply/getAirSupplyDataStatisticsList',
+        url: DATAURL + '/map/airSupply/getAirSupplyDataStatisticsList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -16,7 +16,7 @@ export function getAirSupplyDataStatisticsList(data) {
 // 高压站
 export function getAirSupplyHighPressureList(data) {
     return request({
-        url: '/map/airSupply/getAirSupplyHighPressureList',
+        url: DATAURL + '/map/airSupply/getAirSupplyHighPressureList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -27,7 +27,7 @@ export function getAirSupplyHighPressureList(data) {
 // 事件警报
 export function getEventWarningList(data) {
     return request({
-        url: '/map/airSupply/getEventWarningList',
+        url: DATAURL + '/map/airSupply/getEventWarningList',
         method: 'get',
         data: qs.stringify(data),
         headers: {

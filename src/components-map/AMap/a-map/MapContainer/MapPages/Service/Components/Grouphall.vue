@@ -5,6 +5,7 @@
 			overlayIcon,
 			overlayType,
 			visible,
+			data,
 			apiFun,
 		}"
 		@click="marker => $emit('overlay-click', marker, overlayType)"
@@ -30,6 +31,12 @@ export default {
 		overlayType: {
 			type: String,
 			default: '',
+		},
+		data: {
+			type: Array,
+			default() {
+				return [];
+			},
 		},
 	},
 	data() {
