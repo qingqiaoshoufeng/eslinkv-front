@@ -66,14 +66,17 @@ export default {
 				[method.toUpperCase() === 'GET' ? 'params' : 'data']: method.toUpperCase() === 'GET' ? parseParams(data) : data
 			}
 			const keys = path ? path.split('.') : []
-			request(config).then(res => {
-				let result = res
-				while (keys.length) {
-					const key = keys.shift()
-					result = result[key]
-				}
-				this.config.api.data = JSON.stringify(result)
-			})
+
+			if (url) {
+				request(config).then(res => {
+					let result = res
+					while (keys.length) {
+						const key = keys.shift()
+						result = result[key]
+					}
+					this.config.api.data = JSON.stringify(result)
+				})
+			}
 		},
 	},
 	computed: {

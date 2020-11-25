@@ -49,6 +49,7 @@
 	import mixins from '../../mixins'
 	import {getInput} from '../../../../lib'
 	import GoldChart from '../../../openApi'
+	import format from 'date-fns/format'
 
 	const config = {
 		animation: true,
@@ -56,6 +57,7 @@
 			desc: true,
 			timeDesc: true,
 			sceneId: true,
+			componentId: true,
 		},
 	};
 	const configSource = {
@@ -64,6 +66,7 @@
 				desc: getInput('desc', '描述'),
 				timeDesc: getInput('timeDesc', '时间'),
 				sceneId: getInput('sceneId', '场景id'),
+				componentId: getInput('componentId', '组件id'),
 			},
 		},
 	};
@@ -79,6 +82,7 @@
 			timeDesc: 'xxxx年度',
 			desc: '累计接纳量(m3)',
 			sceneId: '',
+			componentId: '',
 		},
 	};
 	export default {
@@ -101,8 +105,17 @@
 		},
 		methods: {
 			handleClick() {
-				if (this.config.config.sceneId)
+				if (this.config.config.sceneId) {
 					GoldChart.scene.createSceneInstance(this.config.config.sceneId, 'slideRight')
+					if (this.config.config.componentId) {
+						this.$nextTick(() => {
+							GoldChart.instance.updateComponent(this.config.config.componentId, {
+								selectType: '日',
+								selectValue: format(new Date(), 'yyyy.MM.dd')
+							})
+						})
+					}
+				}
 			},
 			setNumberTransform() {
 				if (this.data) {

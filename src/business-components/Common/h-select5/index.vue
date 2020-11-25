@@ -2,9 +2,9 @@
 	<div class="widget-part pos-r" :style="styles">
 		<div class="h-select5 fn-flex flex-row pos-r">
 			<h2 class="fn-flex flex-row">
-				<span class="pos-r" :class="{active:selectValue==='year'}" @click="handleChange('year')">年</span>
-				<span class="pos-r" :class="{active:selectValue==='month'}" @click="handleChange('month')">月</span>
-				<span class="pos-r" :class="{active:selectValue==='day'}" @click="handleChange('day')">日</span>
+				<span class="pos-r pointer" :class="{active:selectValue==='year'}" @click="handleChange('year')">年</span>
+				<span class="pos-r pointer" :class="{active:selectValue==='month'}" @click="handleChange('month')">月</span>
+				<span class="pos-r pointer" :class="{active:selectValue==='day'}" @click="handleChange('day')">日</span>
 			</h2>
 		</div>
 	</div>
