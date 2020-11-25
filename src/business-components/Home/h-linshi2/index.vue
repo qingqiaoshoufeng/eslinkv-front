@@ -40,8 +40,8 @@
       <div class="title-txt">杭燃体验</div>
       <img src="/static/icons/right-icon.svg">
 		</section>
-		<div class="container" style="padding-bottom: 0;">
-      <section class="fans">
+    <section class="fans">
+      <div class="fans-top">
         <div style="text-align: left">
           <div class="fan-title">数媒粉丝日活(人)</div>
           <div class="fan-num font-num">{{ data.fanDailyNum }}</div>
@@ -50,9 +50,9 @@
           <div class="fan-title">数媒粉丝总数(人)</div>
           <div class="fan-num font-num">{{ data.fanTotalNum }}</div>
         </div>
-      </section>
-    </div>
-	</div>
+      </div>
+    </section>
+  </div>
 </template>
 <script>
 	import mixins from '../../mixins'
@@ -307,11 +307,14 @@
   }
 }
 .fans {
-  height: 420px;
+  height: 412px;
   background: url("./img/expbg.svg") no-repeat;
   background-size: 100% 100%;
-  display: flex;
-  justify-content: space-between;
+  .fans-top {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 16px 0;
+  }
   .fan-title {
     font-size: 24px;
     line-height: 24px;
