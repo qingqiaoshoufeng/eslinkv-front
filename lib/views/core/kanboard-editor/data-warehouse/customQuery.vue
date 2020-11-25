@@ -3,10 +3,10 @@
 	<div class="custom-query">
 		<div class="ivu-form-item-required source">
 			<label class="ivu-form-item-label">数据来源</label>
-			<handleContentMoveEnd v-model="dataType">
+			<RadioGroup v-model="dataType">
 				<Radio label="0"><span>数仓</span></Radio>
 				<Radio label="1"><span>数据源</span></Radio>
-			</handleContentMoveEnd>
+			</RadioGroup>
 		</div>
 		<Form v-if="dataType == 0" :model="queryCustom" :label-width="70" style="width: 100%; display: block"
 			  ref="queryCustom" :rules="queryCustomRule">
@@ -36,7 +36,7 @@
 <script>
 	import esSql from '../../../../components/esSql.vue';
 	import customSource from './customSource';
-	import {RadioGroup, Radio} from 'view-design'
+	import {RadioGroup, Radio, Select, Option, FormItem, Form} from 'view-design'
 
 	export default {
 		props: {
@@ -49,7 +49,7 @@
 		components: {
 			esSql,
 			customSource,
-			RadioGroup, Radio
+			RadioGroup, Radio, Select, Option, FormItem, Form
 		},
 		data() {
 			return {
@@ -97,20 +97,15 @@
 		methods: {
 			// 获取项目列表
 			getProList() {
-				this.$api.getProList().then((res) => {
-					if (res.responseCode == 100000) {
-						let list = [];
-						let data = res.result;
-						data.map((item) => {
-							list.push({
-								value: item.id,
-								label: item.name
-							});
+				this.$api.dataWarehouse.getProList().then((data) => {
+					let list = [];
+					data.map((item) => {
+						list.push({
+							value: item.id,
+							label: item.name
 						});
-						this.queryCustomList.projectList = list;
-					}
-				}).catch(error => {
-					console.warn('数仓接口请求失败', error)
+					});
+					this.queryCustomList.projectList = list;
 				})
 			},
 
@@ -120,24 +115,20 @@
 					this.$Message.warning('请先选择项目');
 					return;
 				}
-				this.$api.getProDatabaseList({id: id}).then((res) => {
-					if (res.responseCode == 100000) {
-						let list = [];
-						let data = res.result.databaseList;
-						if (data.length == 0) {
-							this.$Message.info('当前项目下无库');
-						} else {
-							data.map((item, index) => {
-								list.push({
-									value: item.id,
-									label: item.name
-								});
+				this.$api.dataWarehouse.getProDatabaseList({id: id}).then((res) => {
+					let list = [];
+					let data = res.databaseList;
+					if (data.length == 0) {
+						this.$Message.info('当前项目下无库');
+					} else {
+						data.map((item, index) => {
+							list.push({
+								value: item.id,
+								label: item.name
 							});
-						}
-						this.queryCustomList.databaseList = list;
+						});
 					}
-				}).catch(error => {
-					console.warn('数仓接口请求失败', error)
+					this.queryCustomList.databaseList = list;
 				})
 			},
 			// 修改选中项目清空值

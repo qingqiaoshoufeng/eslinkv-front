@@ -14,7 +14,8 @@
 </template>
 <script>
 	import selectSource from './selectSource'
-	import {RadioGroup,Radio} from 'view-design'
+	import {RadioGroup, Radio} from 'view-design'
+	import esFormNew from '../../../../components/es-form-new'
 
 	export default {
 		props: {
@@ -76,24 +77,19 @@
 				}
 			};
 		},
-		components: {selectSource, RadioGroup,Radio},
+		components: {selectSource, RadioGroup, Radio, esFormNew},
 		methods: {
 			// 获取查询项目列表
 			getProList() {
-				this.$api.getProList().then((res) => {
-					if (res.responseCode == 100000) {
-						let list = [];
-						let data = res.result;
-						data.map((item) => {
-							list.push({
-								value: item.id.toString(),
-								label: item.name
-							});
+				this.$api.dataWarehouse.getProList().then((data) => {
+					let list = [];
+					data.map((item) => {
+						list.push({
+							value: item.id.toString(),
+							label: item.name
 						});
-						this.selectObj.templetDetailList[0].dataSourceList = list;
-					}
-				}).catch(error => {
-					console.warn('数仓接口请求失败', error)
+					});
+					this.selectObj.templetDetailList[0].dataSourceList = list;
 				})
 			},
 			// 获取查询名称列表
@@ -103,24 +99,19 @@
 					return;
 				}
 				this.selectObj.templetDetailList[1].dataSourceList = [];
-				this.$api.getAnalyseList({projectId: projectId}).then((res) => {
-					if (res.responseCode == 100000) {
-						let arr = [];
-						let data = res.result;
-						if (data.length > 0) {
-							data.map((item) => {
-								arr.push({
-									value: item.id.toString(),
-									label: item.name
-								});
+				this.$api.dataWarehouse.getAnalyseList({projectId: projectId}).then((data) => {
+					let arr = [];
+					if (data.length > 0) {
+						data.map((item) => {
+							arr.push({
+								value: item.id.toString(),
+								label: item.name
 							});
-							this.selectObj.templetDetailList[1].dataSourceList = arr;
-						} else {
-							this.$Message.info('该项目下无结果');
-						}
+						});
+						this.selectObj.templetDetailList[1].dataSourceList = arr;
+					} else {
+						this.$Message.info('该项目下无结果');
 					}
-				}).catch(error => {
-					console.warn('数仓接口请求失败', error)
 				})
 			},
 			getSource(data) {

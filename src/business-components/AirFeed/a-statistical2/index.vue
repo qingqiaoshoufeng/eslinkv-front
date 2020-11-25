@@ -176,7 +176,7 @@
 				line-height: 24px;
 				letter-spacing: 0;
 				text-align: right;
-				color: #00FFCF;
+				color: #00DDFF;
 				margin-top: 16px;
 			}
 		}
@@ -255,13 +255,13 @@
 			}
 
 			.right-more-des {
-				color: #00FFCF;
+				color: #00DDFF;
 				font-weight: 600;
 			}
 
 			.right-more-total {
 				color: #fff;
-				font-size: 32px;
+				font-size: 40px;
 				line-height: 32px;
 				padding-top: 13px;
 				margin-bottom: 7px;

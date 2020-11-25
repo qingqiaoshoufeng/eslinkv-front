@@ -64,48 +64,9 @@
 </template>
 
 <script>
-// import { ESVCommon } from 'esvcp-pc';
 export default {
     name: 'es-image-viewer',
     props: {
-        // // 图片url数组
-        // imgUrlList: {
-        //     type: Array,
-        //     default() {
-        //         return [];
-        //     },
-        //     required: true
-        // },
-        // // 图片alt描述
-        // alt: {
-        //     type: String,
-        //     default: '图片',
-        //     required: false
-        // },
-        // // 当前图片索引
-        // index: {
-        //     type: Number,
-        //     default: 0,
-        //     required: false
-        // },
-        // // 底部文字描述
-        // title: {
-        //     type: String,
-        //     default: '图片',
-        //     required: false
-        // },
-        // // 点击空白处是否可关闭
-        // closable: {
-        //     type: Boolean,
-        //     default: true,
-        //     required: false
-        // },
-        // // 是否可循环浏览图片
-        // cyclical: {
-        //     type: Boolean,
-        //     default: true,
-        //     required: false
-        // }
     },
 
     data() {

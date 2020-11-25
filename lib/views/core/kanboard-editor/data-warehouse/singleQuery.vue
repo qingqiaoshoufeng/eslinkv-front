@@ -11,16 +11,25 @@
 		<div v-if="dataType == 0">
 			<Form :model="querySingle" :label-width="90" class="single-query-form" ref="querySingle"
 				  :rules="querySingleRules" label-position="left">
-				<FormItem label="项目名" prop="projectId" :label-width="70">
-					<i-elect v-model="querySingle.projectId" @on-change="changeSinglePro" @on-open-change="openSinglePro"
-							transfer filterable>
+				<FormItem label="项目" prop="projectId" :label-width="70">
+					<i-select v-model="querySingle.projectId" @on-change="changeSinglePro"
+							  @on-open-change="openSinglePro"
+							  transfer filterable>
 						<i-option v-for="v in querySingleList.projectList" :value="v.value" :key="v.value">{{ v.label }}
 						</i-option>
-					</i-elect>
+					</i-select>
+				</FormItem>
+				<FormItem label="查询名称" prop="projectId" :label-width="70">
+					<i-select v-model="querySingle.projectId" @on-change="changeSinglePro"
+							  @on-open-change="openSinglePro"
+							  transfer filterable>
+						<i-option v-for="v in querySingleList.projectList" :value="v.value" :key="v.value">{{ v.label }}
+						</i-option>
+					</i-select>
 				</FormItem>
 				<FormItem label="数据库名称" prop="databaseId">
 					<i-select v-model="querySingle.databaseId" @on-change="changeSingleDatabase"
-							@on-open-change="openSingleDatabase" transfer filterable>
+							  @on-open-change="openSingleDatabase" transfer filterable>
 						<i-option v-for="v in querySingleList.databaseList" :value="v.value" :key="v.value">{{ v.label
 							}}
 						</i-option>
@@ -28,7 +37,7 @@
 				</FormItem>
 				<FormItem label="表名称" prop="tableId" :label-width="70">
 					<i-select v-model="querySingle.tableId" @on-change="changeSingleTable"
-							@on-open-change="openSingleTable" transfer filterable>
+							  @on-open-change="openSingleTable" transfer filterable>
 						<i-option v-for="v in querySingleList.tableList" :value="v.value" :key="v.value">{{ v.label }}
 						</i-option>
 					</i-select>
@@ -81,11 +90,21 @@
 </template>
 <script>
 	import sourceTag from './source'
-	import {RadioGroup, Input, Form, FormItem, Select, Col, Row, Option} from 'view-design'
+	import {RadioGroup, Radio, Input, Form, FormItem, Select, Col, Row, Option, Icon} from 'view-design'
 
 	export default {
 		components: {
-			sourceTag, RadioGroup, Input, Form, FormItem, 'i-select': Select, 'i-col': Col, Row, 'i-option': Option
+			sourceTag,
+			RadioGroup,
+			Radio,
+			Input,
+			Form,
+			FormItem,
+			'i-select': Select,
+			'i-col': Col,
+			Row,
+			'i-option': Option,
+			Icon
 		},
 		props: {
 			lastQuery: {
@@ -198,20 +217,15 @@
 		methods: {
 			// 获取项目列表
 			getProList() {
-				this.$api.getProList().then((res) => {
-					if (res.responseCode == 100000) {
-						let list = [];
-						let data = res.result;
-						data.map((item) => {
-							list.push({
-								value: item.id,
-								label: item.name
-							});
+				this.$api.dataWarehouse.getProList().then((data) => {
+					let list = [];
+					data.map((item) => {
+						list.push({
+							value: item.id,
+							label: item.name
 						});
-						this.querySingleList.projectList = list;
-					}
-				}).catch(error => {
-					console.warn('数仓接口请求失败', error)
+					});
+					this.querySingleList.projectList = list;
 				})
 			},
 			// 获取当前项目下的数据库列表
@@ -220,24 +234,20 @@
 					this.$Message.warning('请先选择项目');
 					return;
 				}
-				this.$api.getProDatabaseList({id: id}).then((res) => {
-					if (res.responseCode == 100000) {
-						let list = [];
-						let data = res.result.databaseList;
-						if (data.length == 0) {
-							this.$Message.info('当前项目下无库');
-						} else {
-							data.map((item, index) => {
-								list.push({
-									value: item.id,
-									label: item.name
-								});
+				this.$api.dataWarehouse.getProDatabaseList({id: id}).then((res) => {
+					let list = [];
+					let data = res.databaseList;
+					if (data.length == 0) {
+						this.$Message.info('当前项目下无库');
+					} else {
+						data.map((item, index) => {
+							list.push({
+								value: item.id,
+								label: item.name
 							});
-						}
-						this.querySingleList.databaseList = list;
+						});
 					}
-				}).catch(error => {
-					console.warn('数仓接口请求失败', error)
+					this.querySingleList.databaseList = list;
 				})
 			},
 			// 获取当前数据库下的数据表列表
@@ -246,24 +256,20 @@
 					this.$Message.warning('请先选择数据库');
 					return;
 				}
-				this.$api.getDatabaseTableList({id: id}).then((res) => {
-					if (res.responseCode == 100000) {
-						let list = [];
-						let data = res.result.tableList;
-						if (data.length == 0) {
-							this.$Message.info('当前数据库为空');
-						} else {
-							data.map((item, i) => {
-								list.push({
-									value: item.id,
-									label: item.name
-								});
+				this.$api.dataWarehouse.getDatabaseTableList({id: id}).then((res) => {
+					let list = [];
+					let data = res.tableList;
+					if (data.length == 0) {
+						this.$Message.info('当前数据库为空');
+					} else {
+						data.map((item, i) => {
+							list.push({
+								value: item.id,
+								label: item.name
 							});
-						}
-						this.querySingleList.tableList = list;
+						});
 					}
-				}).catch(error => {
-					console.warn('数仓接口请求失败', error)
+					this.querySingleList.tableList = list;
 				})
 			},
 			// 切换项目 清空之前的值
@@ -359,20 +365,16 @@
 			'querySingle.tableId': {
 				handler(value) {
 					if (value) {
-						this.$api.getTableDetail({id: value}).then((res) => {
-							if (res.responseCode == 100000) {
-								let list = [];
-								let data = JSON.parse(res.result.fieldSet);
-								data.map((item) => {
-									list.push({
-										value: item.fieldName,
-										label: item.fieldName
-									});
+						this.$api.dataWarehouse.getTableDetail({id: value}).then((res) => {
+							let list = [];
+							let data = JSON.parse(res.fieldSet);
+							data.map((item) => {
+								list.push({
+									value: item.fieldName,
+									label: item.fieldName
 								});
-								this.querySingleList.fieldList = list;
-							}
-						}).catch(error => {
-							console.warn('数仓接口请求失败', error)
+							});
+							this.querySingleList.fieldList = list;
 						})
 					}
 				}
