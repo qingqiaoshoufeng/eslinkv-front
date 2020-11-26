@@ -36,6 +36,7 @@ export default {
             let sceneIndexMap = SCENEINDEXMAP
             let { index } = e.detail
             let pageName = sceneIndexMap[index] || ''
+            console.log(pageName,'eee')
             if (!pageName) {
                 return (this.showMap = false)
             } else {
@@ -50,11 +51,6 @@ export default {
         mapInit() {
             console.log('地图初始化完成！')
             this.mapReady = true
-            let map = this.$refs.amap.$amap
-            window.ss = map
-            map.on('click',(e)=>{
-                console.log(e,'e')
-            })
         },
     },
     mounted() {

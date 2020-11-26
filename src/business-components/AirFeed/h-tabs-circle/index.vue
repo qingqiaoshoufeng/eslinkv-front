@@ -15,7 +15,8 @@
 			:defaultActived="tabActived"
 			@actived-change="tabActivedChange"
 		/>
-    <div class="chart-circle" ref="circle"></div>
+    <pie class="chart-circle" v-if="tabActived === 2" :data="data.circle[tabActived]"></pie>
+    <div class="chart-circle" ref="circle" v-else></div>
     <ul class="circle-legend">
       <li v-for="(k, i) in curr" :key="i">
         <div class="circle-legend-color"></div>
@@ -30,6 +31,7 @@
 import mixins from '../../mixins';
 import HCvs from './HCvs';
 import HVerticalTabs from './HVerticalTabs';
+import pie from './pie';
 import { getCircleOption, getLineOption } from './options'
 
 const config = { animation: true };
@@ -73,7 +75,7 @@ const value = {
         ],
         [
           {
-            name: '这个',
+            name: 'PE管',
             percent: 50,
             count: 321,
             circleStyle: '#FB592C',
@@ -83,7 +85,7 @@ const value = {
             percentStyle: '',
           },
           {
-            name: '哈哈哈',
+            name: '钢管',
             percent: 80,
             count: 321,
             circleStyle: '#18CEB9',
@@ -93,7 +95,7 @@ const value = {
             percentStyle: '',
           },
           {
-            name: '嘻嘻嘻',
+            name: '镀锌管',
             percent: 40,
             count: 321,
             circleStyle: '#2C99FF',
@@ -101,11 +103,11 @@ const value = {
             countStyle: '',
             unitStyle: '',
             percentStyle: '',
-          },
+          }
         ],
         [
           {
-            name: '为为额',
+            name: 'DN700',
             percent: 20,
             count: 321,
             circleStyle: '#FB592C',
@@ -115,7 +117,7 @@ const value = {
             percentStyle: '',
           },
           {
-            name: '为人很好',
+            name: 'DN500',
             percent: 60,
             count: 321,
             circleStyle: '#18CEB9',
@@ -125,7 +127,37 @@ const value = {
             percentStyle: '',
           },
           {
-            name: '水电费是谁的',
+            name: 'DN300',
+            percent: 10,
+            count: 321,
+            circleStyle: '#2C99FF',
+            unit: 'km',
+            countStyle: '',
+            unitStyle: '',
+            percentStyle: '',
+          },
+          {
+            name: 'DN250',
+            percent: 10,
+            count: 321,
+            circleStyle: '#2C99FF',
+            unit: 'km',
+            countStyle: '',
+            unitStyle: '',
+            percentStyle: '',
+          },
+          {
+            name: 'DN200',
+            percent: 10,
+            count: 321,
+            circleStyle: '#2C99FF',
+            unit: 'km',
+            countStyle: '',
+            unitStyle: '',
+            percentStyle: '',
+          },
+          {
+            name: 'DN100',
             percent: 10,
             count: 321,
             circleStyle: '#2C99FF',
@@ -144,6 +176,7 @@ export default {
 	components: {
 		HCvs,
 		HVerticalTabs,
+		pie,
 	},
 	data() {
 		return {
@@ -191,7 +224,9 @@ export default {
 	methods: {
 		tabActivedChange(tabActived) {
 			this.tabActived = tabActived
-      echarts.init(this.$refs.circle).setOption(getCircleOption(this.curr))
+      this.$nextTick(() => {
+        this.$refs.circle && echarts.init(this.$refs.circle).setOption(getCircleOption(this.curr))
+      })
 		}
 	},
 };
@@ -250,12 +285,14 @@ export default {
         border: 4px solid #2c99ff;
         margin-right: 10px;
       }
-      &:nth-child(2) .circle-legend-color {
-        border-color: #18CEB9;
-      }
-      &:nth-child(3) .circle-legend-color {
-        border-color: #FB592C;
-      }
+      &:nth-child(2) .circle-legend-color {border-color: #18CEB9;}
+      &:nth-child(3) .circle-legend-color {border-color: #FB592C;}
+      &:nth-child(4) .circle-legend-color {border-color: #367cf6;}
+      &:nth-child(5) .circle-legend-color {border-color: #84e4fc;}
+      &:nth-child(6) .circle-legend-color {border-color: #f8cd47;}
+      &:nth-child(7) .circle-legend-color {border-color: #fceb50;}
+      &:nth-child(8) .circle-legend-color {border-color: #ed9144;}
+      &:nth-child(9) .circle-legend-color {border-color: #5fcbb9;}
       .circle-legend-name {
         width: 84px;
         text-align: left;

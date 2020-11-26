@@ -1,11 +1,11 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
-		<div class="h-select fn-flex flex-row pos-r">
+		<div class="h-select7 fn-flex flex-row pos-r">
 			<h2 class="fn-flex flex-row" @click="showOptions=!showOptions">
 				<span>{{selectLabel}}</span>
 				<img src="/static/icons/h-select-1.svg"/>
 			</h2>
-			<ul class="pos-a" v-if="showOptions">
+			<ul class="pos-a" v-if="showOptions" :class="{active:showOptions}">
 				<li class="pointer" v-for="item in data?data:[]" @click="handleChange(item)">
 					{{item.label}}
 				</li>
@@ -20,7 +20,7 @@
 
 	const value = {
 		api: {
-			data: JSON.stringify([{"label": "居民户", "value": "jumin"}]),
+			data: JSON.stringify([{"label": "物联网表", "value": "wulianwang"}]),
 			bind: {
 				enable: true,
 				role: ['provider']
@@ -31,8 +31,8 @@
 		data() {
 			return {
 				showOptions: false,
-				selectLabel: '居民户',
-				selectValue: 'jumin'
+				selectLabel: '物联网表',
+				selectValue: 'wulianwang'
 			}
 		},
 		mixins: [mixins],
@@ -57,18 +57,25 @@
 	}
 </script>
 <style lang="scss">
-	.h-select {
+	.h-select7 {
 		height: 100%;
-		background: #001F6D;
-		border: 1px solid #0057A9;
+		background: #0057A9;
 		border-radius: 4px;
 
 		ul {
 			top: 24px;
 			right: 0;
 			width: 100%;
-			border: 1px solid #0057A9;
+			background: #0057A9;
 			border-radius: 4px;
+
+			&.active {
+				padding: 8px 0;
+				height: auto;
+				max-height: 207px;
+				border: 1px solid #00DDFF;
+				overflow-y: auto;
+			}
 		}
 
 		h2 {
@@ -92,14 +99,17 @@
 		li {
 			color: #fff;
 			font-size: 16px;
-			line-height: 20px;
+			line-height: 32px;
 			padding-right: 8px;
-			border-bottom: 1px solid #0057A9;
 			transition: all .3s;
-			background: #001F6D;
+			height: 32px;
 
 			&:hover {
-				opacity: 0.8;
+				background: rgba(0, 221, 255, 0.5);
+			}
+
+			&.active {
+				background: rgba(0, 221, 255, 0.5);
 			}
 
 			&:last-child {

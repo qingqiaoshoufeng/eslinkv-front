@@ -46,7 +46,7 @@ export default {
           radius: ['52%', '64%'],
           avoidLabelOverlap: false,
           startAngle: 270,
-          color: ['#00FFCF', '#2194FF', '#E5615B'],
+          color: ['#db4f49', '#367cf6', '#84e4fc', '#f8cd47', '#fceb50', '#ed9144', '#5fcbb9'],
           label: {
             formatter: function(params) {
               const percent = (params.value * 100 / total).toFixed(2)

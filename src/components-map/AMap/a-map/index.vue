@@ -4,13 +4,7 @@
 			<MapContainer />
 		</template>
 		<template v-else>
-			<div>
-				<img
-					class="placeholder-map"
-					src="/static/amap/amap.jpg"
-					alt=""
-				/>
-			</div>
+			<img class="placeholder-map" src="/static/amap/amap.jpg" alt="" />
 		</template>
 	</div>
 </template>
@@ -23,11 +17,11 @@ export default {
 	components: {
 		MapContainer,
 	},
-    computed:{
-        inPreview(){
-            return store.scene.status === 'inPreview'
-        }
-    }
+	computed: {
+		inPreview() {
+			return store.scene.status === 'inPreview';
+		},
+	},
 };
 </script>
 
@@ -60,11 +54,11 @@ export default {
 	z-index: 1100 !important;
 }
 .amap-marker {
-    transform:scale(0.384857) !important;
+	transform: scale(0.384857) !important;
 }
 
-.amap-logo{
-    display: none !important;
+.amap-logo {
+	display: none !important;
 }
 </style>
 

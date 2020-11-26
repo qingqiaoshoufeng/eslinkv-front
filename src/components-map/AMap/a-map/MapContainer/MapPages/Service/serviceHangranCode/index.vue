@@ -4,6 +4,7 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
+        <SaleAreaBoundary /> 
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component
@@ -64,7 +65,8 @@ import {
 	Grouphall,
 	BranchCompany,
 	ServiceStation,
-	TipDetial,
+    TipDetial,
+    SaleAreaBoundary
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -91,7 +93,8 @@ export default {
 		BranchCompany,
 		ServiceStation,
 		OverlayDetail,
-		TipDetial,
+        TipDetial,
+        SaleAreaBoundary
 	},
 	data() {
 		let {

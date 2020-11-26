@@ -1,6 +1,6 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
-		<div class="h-select fn-flex flex-row pos-r">
+		<div class="h-select3 fn-flex flex-row pos-r">
 			<h2 class="fn-flex flex-row" @click="showOptions=!showOptions">
 				<span>{{selectLabel}}</span>
 				<img src="/static/icons/h-select-1.svg"/>
@@ -57,7 +57,7 @@
 	}
 </script>
 <style lang="scss">
-	.h-select {
+	.h-select3 {
 		height: 100%;
 		background: #001F6D;
 		border: 1px solid #0057A9;
