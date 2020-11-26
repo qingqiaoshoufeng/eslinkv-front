@@ -1,7 +1,13 @@
 <template>
 	<div ref="kanboardWrapper" class="preview-wrapper">
+		<div class="scene-menu">
+			<div v-for="(scene, sceneIndex) in sceneMap" :key="sceneIndex" @click="changeScene(sceneIndex)">
+				{{ scene }}
+			</div>
+		</div>
 		<amap
-			:style="`transform:scale(${actualScaleRatio});width:${kanboardSize.width}px;height:${kanboardSize.height}px`"
+			class="amap-wrapper"
+			:style="`transform:scale(${actualScaleRatio});overflow: hidden;`"
 		/>
 	</div>
 </template>
@@ -14,57 +20,34 @@ export default {
 	},
 	data() {
 		return {
-			kanboardSize: {
-				width: 1920,
-				height: 1080,
+			sceneMap: {
+				'8iyxp8u3gtu': 'AirSupplyLowPressure', //供气-管网
+				'9n1zur7e4l': 'AirSupplyUCAN', //供气-泛能
+				nn16rowdl5r: 'AirSupplyHighPressure', //供气-场站
+				p2wovclspks: 'AirSupplyLNG', //供气-场站
+				'6gouq223fze': 'ServiceCustomer',
+				a70wh40bnz9: 'ServiceNineteen',
+				'6u1qhjs14ws': 'ServiceMarket',
+				bavv56kietf: 'ServiceHangranCode',
+				e40ml4vtfa6: 'serviceICcustomer',
 			},
-			screenSize: {
-				width: 1920,
-				height: 1080,
+			kanboardSize: {
+				width: 3500,
+				height: 1050,
 			},
 			actualScaleRatio: 1,
 		};
 	},
 	methods: {
+        changeScene(sceneIndex){
+            let event = new CustomEvent('SceneIndex', {detail: {index:sceneIndex}})
+		    document.dispatchEvent(event)
+        },
 		updateKanboardSize(val) {
-			const arr = val.split(';');
-			const w = arr[0].replace(/width:(.*)px/, '$1');
-			const h = arr[1].replace(/height:(.*)px/, '$1');
-			this.kanboardSize.width = w;
-			this.kanboardSize.height = h;
 			const { clientWidth, clientHeight } = document.body;
-			this.screenSize.width = clientWidth;
-			this.screenSize.height = clientHeight;
-			this.actualScaleRatio = Math.min(clientWidth / w, clientHeight / h);
-		},
-		queryKanboard() {
-			if (this.$route.name === 'HangRan') {
-				this.$api.board.hangran().then(res => {
-					const value = JSON.parse(res.attribute);
-					this.refill(value);
-					mutations.initScene(value.scene);
-					mutations.listToObj(value);
-				});
-			} else {
-				const {
-					params: { id },
-				} = this.$route;
-				const dataBoardId = id;
-				this.$api.board.detail({ dataBoardId }).then(res => {
-					const value = JSON.parse(res.attribute);
-					this.refill(value);
-					mutations.initScene(value.scene);
-					mutations.listToObj(value);
-				});
-			}
-			if (getQueryString('scene')) {
-				mutations.setSceneIndex(getQueryString('scene'));
-			}
-		},
-		refill(value) {
-			this.$refs.previewContainer.refillConfig(value).then(() => {
-				this.ready = true;
-			});
+			const { width, height } = this.kanboardSize;
+			let ratio = Math.min(clientWidth / width, clientHeight / height);
+			this.actualScaleRatio = ratio < 1 ? ratio : 1;
 		},
 	},
 	computed: {
@@ -75,7 +58,7 @@ export default {
 		},
 	},
 	mounted() {
-		this.queryKanboard();
+		this.updateKanboardSize();
 	},
 };
 </script>
@@ -91,6 +74,28 @@ export default {
 	background: #0f3b69;
 	z-index: 99999;
 	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	.scene-menu {
+		position: absolute;
+		top: 0;
+        display: flex;
+        color:#fff;
+        font-size:20px;
+        >div{
+            margin-right: 20px;
+        }
+	}
+	.amap-wrapper {
+		width: 3500px;
+		height: 1050px;
+		background-size: cover;
+		background-position: center center;
+		background-repeat: no-repeat;
+		flex-shrink: 0;
+		flex-grow: 0;
+	}
 
 	&.active {
 		overflow: auto;
