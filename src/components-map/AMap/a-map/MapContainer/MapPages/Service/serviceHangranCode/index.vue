@@ -13,6 +13,7 @@
 				:overlayIcon="config.icon"
 				:overlayType="legend"
 				:is="config.component"
+				:data="allTypeStationList[config.dataProp]"
 				@overlay-click="handleOverlayClick"
 				:ref="config.component"
 			/>
@@ -101,6 +102,7 @@ export default {
 			showOverlayDetail: false,
 			center: [120.80971, 30.102216],
 			zoom: 11,
+			allTypeStationList: {},
 		};
 	},
 	created() {
@@ -109,6 +111,7 @@ export default {
 		this.$amap.panTo(this.center, 100);
 	},
 	methods: {
+		// 关闭详情
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
 			if (overlayType === 'WARNEVENT') {
@@ -122,24 +125,34 @@ export default {
 			this.$amap.setZoom(11, 100);
 			done();
 		},
+		// 点击地图marker
 		handleOverlayClick(overlay, overlayType, isCenter = false) {
 			console.log(111);
+			console.log(overlay);
 			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat } = overlay;
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
-			// this.$amap.setZoom(14, 100);
-			// console.log([lng, lat]);
-			// if (isCenter) {
-			// 	this.$nextTick(() => {
-			// 		this.$amap.panTo([lng, lat], 100);
-			// 	});
-			// }
 		},
 		async getDataStatisticsList() {
 			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
 		},
+		// 请求集团大厅，分公司，综合服务站数据列表
+		async getAllTypeStationList() {
+			let params = {
+				type: [
+					'Grouphall',
+					'BranchCompany',
+					'ComprehensiveServiceStation',
+				],
+			};
+			this.allTypeStationList = await this.$sysApi.map.serve.getHangranCodeList(
+				params
+			);
+			console.log(this.allTypeStationList);
+		},
+		// 切换热力图显示隐藏
 		change(data) {
 			let { switch1, switch2 } = data;
 			this.overlayMap.CouplingHot.isShow = switch1;
@@ -148,6 +161,8 @@ export default {
 	},
 	mounted() {
 		this.getDataStatisticsList();
+		this.getAllTypeStationList();
+		console.log(this.overlayMap);
 	},
 };
 </script>

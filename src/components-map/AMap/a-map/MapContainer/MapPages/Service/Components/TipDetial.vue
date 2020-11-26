@@ -7,7 +7,7 @@
 		<div class="detial_info_list">
 			<div
 				class="item"
-				v-for="(item, index) in detialInfoList"
+				v-for="(item, index) in data.detialInfo || []"
 				:key="index"
 			>
 				<span class="label">{{ `${item.name}: ` }}</span>
@@ -54,7 +54,9 @@ export default {
 		};
 	},
 	methods: {},
-	mounted() {},
+	mounted() {
+		console.log(this.data.detialInfo);
+	},
 };
 </script>
 <style lang="scss" scoped>

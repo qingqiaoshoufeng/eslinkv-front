@@ -30,6 +30,13 @@ module.exports = {
                     '^/api': '/'
                 }
             },
+            '/hangran': {
+                target: 'http://192.168.1.33:9082',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/hangran': '/'
+                }
+            },
             '/data': {
                 target: 'http://127.0.0.1:7001',
                 changeOrigin: true,
@@ -37,20 +44,20 @@ module.exports = {
                     '^/data': '/'
                 }
             },
-			'/cdn': {
-				target: 'http://127.0.0.1:7001',
-				changeOrigin: true,
-				pathRewrite: {
-					'^/cdn': '/'
-				}
-			},
-			'/server': {
-				target: 'http://192.168.1.33:9082',
-				changeOrigin: true,
-				pathRewrite: {
-					'^/server': '/'
-				}
-			}
+            '/cdn': {
+                target: 'http://127.0.0.1:7001',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/cdn': '/'
+                }
+            },
+            '/server': {
+                target: 'http://192.168.1.33:9082',
+                changeOrigin: true,
+                pathRewrite: {
+                    '^/server': '/'
+                }
+            }
         }
     },
     css: {

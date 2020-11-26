@@ -18,95 +18,153 @@
 	</div>
 </template>
 <script>
-import mixins from '../../mixins';
-import getOptions, { barData, lineData, dashLineData } from './options';
-// 标记
-const config = { animation: true };
-const value = {
-	api: {
-		data: JSON.stringify({
-			barData: barData,
-			lineData: lineData,
-			dashLineData: dashLineData,
-		}),
-	},
-};
-export default {
-	mixins: [mixins],
-	computed: {},
-	methods: {
-		setOption(data) {
-			this.instance &&
-				this.instance.setOption(
-					getOptions(
-						this.data.barData,
-						this.data.lineData,
-						this.data.dashLineData
-					)
-				);
-		},
-	},
-	watch: {
-		data: {
-			handler(val) {
-				if (this.id) {
-					this.$nextTick(() => {
-						this.instance = echarts.init(
-							document.getElementById(this.id)
-						);
-						this.setOption(val);
-					});
-				}
+	import mixins from '../../mixins';
+	import getOptions, {data} from './options'
+	import {getInput} from '../../../../lib'
+	import GoldChart from '../../../openApi'
+	import format from 'date-fns/format'
+
+	const configSource = {
+		config: {
+			fields: {
+				sceneId: getInput('sceneId', '场景id'),
+				componentId: getInput('componentId', '组件id'),
 			},
-			deep: true,
-			immediate: true,
 		},
-	},
-	created() {
-		this.configSource = this.parseConfigSource(config);
-		this.configValue = this.parseConfigValue(config, value);
-	},
-};
+	};
+	const config = {
+		animation: true,
+		config: {
+			sceneId: true,
+			componentId: true,
+		},
+	};
+	const value = {
+		api: {
+			data: JSON.stringify(data),
+		},
+		config: {
+			sceneId: '',
+			componentId: '',
+		},
+	};
+	export default {
+		mixins: [mixins],
+		computed: {},
+		methods: {
+			setOption() {
+				const xData = this.data.map(item => item.xData)
+				const barData = this.data.map(item => item.barData)
+				const lineData = this.data.map(item => item.lineData)
+				const dashLineData = this.data.map(item => item.dashLineData)
+				this.instance && this.instance.setOption(
+					getOptions(
+						xData,
+						barData,
+						lineData,
+						dashLineData
+					)
+				)
+				this.instance.off('click', this.handleClick)
+				this.instance.on('click', this.handleClick)
+			},
+			handleClick(params) {
+				const item = this.data[params.dataIndex]
+				let selectType = '日'
+				let selectValue = format(new Date(), 'yyyy.MM.dd')
+				if (item.xData.indexOf('月') !== -1) {
+					selectType = '月'
+					selectValue = format(new Date(item.time), 'yyyy.MM')
+				} else if (item.xData.indexOf('年') !== -1) {
+					selectType = '年'
+					selectValue = format(new Date(item.time), 'yyyy')
+				} else {
+					selectValue = format(new Date(item.time), 'yyyy.MM.dd')
+				}
+
+				if (this.config.config.sceneId) {
+					GoldChart.scene.createSceneInstance(this.config.config.sceneId, 'slideRight')
+					if (this.config.config.componentId) {
+						this.$nextTick(() => {
+							GoldChart.instance.updateComponent(this.config.config.componentId, {
+								data: {
+									selectType,
+									selectValue
+								}
+							})
+						})
+					}
+				}
+			}
+		},
+		watch: {
+			data: {
+				handler(val) {
+					if (this.id) {
+						this.$nextTick(() => {
+							this.instance = echarts.init(
+								document.getElementById(this.id)
+							);
+							this.setOption(val);
+						});
+					}
+				},
+				deep: true,
+				immediate: true,
+			},
+		},
+		created() {
+			this.configSource = this.parseConfigSource(config, configSource);
+			this.configValue = this.parseConfigValue(config, value);
+		},
+	};
 </script>
 <style lang="scss" scoped>
-.widget-part {
-	position: relative;
-	.legend {
-		position: absolute;
-		left: 0;
-		top: 22px;
-		width: 100%;
-		display: flex;
-		justify-content: center;
-		font-size: 16px;
-		line-height: 16px;
-		color: #FFFFFF;
-		.legend-item {
+	.widget-part {
+		position: relative;
+
+		.legend {
+			position: absolute;
+			left: 0;
+			top: 22px;
+			width: 100%;
 			display: flex;
-			align-items: center;
-			margin: 0 8px;
-		}
-		.tanc {
-			width: 16px;
-			height: 8px;
-			background: #00DDFF;
-		}
-		.line-legend {
-			width: 16px;
-			height: 2px;
-			background: #E5615B;
-			&.green {
-				background: #00FFCF;
+			justify-content: center;
+			font-size: 16px;
+			line-height: 16px;
+			color: #FFFFFF;
+
+			.legend-item {
+				display: flex;
+				align-items: center;
+				margin: 0 8px;
+			}
+
+			.tanc {
+				width: 16px;
+				height: 8px;
+				background: #00DDFF;
+			}
+
+			.line-legend {
+				width: 16px;
+				height: 2px;
+				background: #E5615B;
+
+				&.green {
+					background: #00FFCF;
+				}
+			}
+
+			.txt {
+				margin-left: 4px;
 			}
 		}
-		.txt {
-			margin-left: 4px;
-		}
 	}
-}
-.chart {
-	width: 100%;
-	height: 100%;
-}
+
+	.chart {
+		width: 100%;
+		height: 100%;
+	}
 </style>
 

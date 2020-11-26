@@ -29,6 +29,7 @@
 					<span>杭燃体验</span>
 				</li>
 			</ul>
+			<div class="h-bg-start1 pos-a pointer" @click="handleStart" :class="{active:statusStart}"></div>
 		</div>
 	</div>
 </template>
@@ -36,13 +37,32 @@
 	import mixins from '../../mixins'
 	import GoldChart from '../../../openApi'
 	import hBg54441 from './h-bg-54441'
+	import {getInput} from '../../../../lib'
 
-	const config = {animation: true}
+	const configSource = {
+		config: {
+			fields: {
+				sceneId: getInput('sceneId', '场景ID'),
+			},
+		},
+	};
+	const value = {
+		config: {
+			sceneId: '',
+		},
+	};
+	const config = {
+		animation: true,
+		config: {
+			sceneId: true
+		}
+	}
 	export default {
 		data() {
 			return {
 				status54441: false,
 				statusVideo: false,
+				statusStart: false,
 			}
 		},
 		mixins: [mixins],
@@ -53,13 +73,34 @@
 			document.removeEventListener('DestroyScene', this.closeVideo)
 		},
 		created() {
-			this.configSource = this.parseConfigSource(config)
-			this.configValue = this.parseConfigValue(config)
+			this.configSource = this.parseConfigSource(config, configSource)
+			this.configValue = this.parseConfigValue(config, value)
 			document.addEventListener('DestroyScene', this.closeVideo, false)
 		},
+		mounted() {
+			if (this.inPreview) {
+				if (this.config.config.sceneId) {
+					GoldChart.scene.createSceneInstance(JSON.parse(this.config.config.sceneId)[0], 'fadeIn', 'none')
+				}
+			}
+		},
 		methods: {
+			handleStart() {
+				if (this.config.config.sceneId) {
+					if (this.statusStart) {
+						GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[1])
+						GoldChart.scene.createSceneInstance(JSON.parse(this.config.config.sceneId)[0], 'fadeIn', 'none')
+					} else {
+						GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[0])
+						GoldChart.scene.createSceneInstance(JSON.parse(this.config.config.sceneId)[1], 'fadeIn', 'none')
+					}
+					this.statusStart = !this.statusStart
+				}
+			},
 			handleClick(index) {
 				GoldChart.scene.setSceneIndex(index)
+				GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[0])
+				GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[1])
 				this.status54441 = false
 				this.statusVideo = false
 			},
@@ -82,18 +123,35 @@
 	}
 </script>
 <style lang="scss">
+	.h-bg-start1 {
+		width: 72px;
+		height: 72px;
+		background-image: url('./img/start1-active.svg');
+		left: 50%;
+		bottom: 27px;
+		margin-left: 540px;
+
+		&.active {
+			background-image: url('./img/start1.svg');
+		}
+	}
+
 	.h-bg-nav {
 		bottom: 27px;
 		left: 50%;
 		transform: translateX(-50%);
 
 		li {
-			color: #fff;
+			color: rgba(255, 255, 255, 0.75);
 			font-weight: normal;
-			font-size: 40px;
-			line-height: 40px;
-			margin-right: 174px;
+			margin-right: 96px;
 			justify-content: center;
+			transition: all .3s;
+
+			span {
+				font-size: 40px;
+				line-height: 40px;
+			}
 
 			img {
 				margin-bottom: 37px;
@@ -119,7 +177,9 @@
 			}
 
 			&:hover {
-        font-weight: bold;
+				font-weight: bold;
+				color: rgba(255, 255, 255, 1);
+
 				&:before {
 					width: 160px;
 					height: 180px;
@@ -146,7 +206,7 @@
 		width: 257px;
 		height: 64px;
 		background-size: 257px 64px;
-		left: 783px;
+		left: 738px;
 		bottom: 60px;
 		opacity: 0.6;
 
@@ -160,7 +220,7 @@
 		width: 257px;
 		height: 64px;
 		background-size: 257px 64px;
-		right: 783px;
+		right: 738px;
 		bottom: 60px;
 		opacity: 0.6;
 
@@ -229,7 +289,7 @@
 		background-size: 2620px 498px;
 		width: 2620px;
 		height: 498px;
-		bottom: -148px;
+		bottom: -116px;
 		left: 50%;
 		margin-left: -1310px;
 	}

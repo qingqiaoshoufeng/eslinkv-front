@@ -1,13 +1,13 @@
 <template>
 	<div v-if="isRendered">
 		<Overlay
-			v-for="(item, index) in list || []"
+			v-for="(item, index) in !data.length ? list : data || []"
 			:key="overlayType + index"
 			:marker="{
 				icon: overlayIcon,
 				...item,
 			}"
-            :active="item.active"
+			:active="item.active"
 			:visible="visible"
 			@click="$emit('click', item)"
 		>
@@ -38,6 +38,12 @@ export default {
 		Overlay,
 	},
 	props: {
+		data: {
+			type: Array,
+			default() {
+				return [];
+			},
+		},
 		apiFun: Function,
 		visible: {
 			type: Boolean,

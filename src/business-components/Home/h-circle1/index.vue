@@ -76,9 +76,6 @@
 			}
 		},
 		methods: {
-			updateComponent(value) {
-				console.log(value)
-			}
 		},
 		created() {
 			this.configSource = this.parseConfigSource(config)

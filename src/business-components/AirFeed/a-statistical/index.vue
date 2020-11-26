@@ -2,7 +2,7 @@
 	<div class="widget-part pos-r" :style="styles">
 		<div class="statistical-box">
 			<div class="left fn-flex flex-column">
-				<div class="time">{{ timeDesc }}</div>
+				<div class="time">{{ year }}{{config.config && config.config.timeDesc}}</div>
 				<div class="decs">
 					{{ config.config && config.config.desc }}
 				</div>
@@ -44,6 +44,7 @@
 <script>
 	import mixins from '../../mixins';
 	import {getInput} from '../../../../lib';
+	import format from 'date-fns/format'
 
 	const config = {
 		animation: true,
@@ -63,18 +64,19 @@
 	const value = {
 		api: {
 			data: JSON.stringify({
-				time: 2020,
 				value: 375321809,
 			}),
 		},
 		config: {
-			timeDesc: 'xxxx年度',
+			timeDesc: '年度',
 			desc: '累计接纳量(m3)',
 		},
 	};
 	export default {
 		data() {
+			const year = format(new Date(), 'yyyy')
 			return {
+				year,
 				scrollList: new Int8Array(10),
 				transform: new Int8Array(9),
 			};
@@ -82,30 +84,14 @@
 		mixins: [mixins],
 		computed: {
 			statisticalVal() {
-				if (this.data) return this.data.value.toLocaleString().split('');
+				if (this.data) return Number(this.data.value).toLocaleString().split('');
 				return [];
 			},
-			timeDesc() {
-				if (!this.data || !this.config.config) return '2020年度';
-				return this.config.config.timeDesc.replace('xxxx', this.data.time);
-			},
-			// 	timeDesc() {
-			// 	if (!this.data || this.config.config) return '2020年度';
-			// 	if (this.config.config.timeDesc.includes('xxxx')) {
-			// 		debugger;
-			// 		return this.config.config.timeDesc.replace(
-			// 			'xxxx',
-			// 			this.data.time
-			// 		);
-			// 	} else {
-			// 		return this.config.config.timeDesc;
-			// 	}
-			// },
 		},
 		methods: {
 			setNumberTransform() {
 				if (this.data) {
-					const numberArr = this.data.value.toLocaleString().split('');
+					const numberArr = Number(this.data.value).toLocaleString().split('');
 					this.transform = numberArr.map(item => item * 10);
 				}
 			},
@@ -162,7 +148,7 @@
 				line-height: 24px;
 				letter-spacing: 0;
 				text-align: right;
-				color: rgba(255, 255, 255, 0.75);
+				color: #00DDFF;
 				margin-top: 16px;
 			}
 		}

@@ -2,23 +2,23 @@
 	<div class="widget-part pos-r" :style="styles">
 		<div class="h-select4 fn-flex flex-row pos-r">
 			<h3 class="fn-flex flex-row" @click="openLeft">
-				<span>{{selectType}}</span>
+				<span>{{data&&data.selectType}}</span>
 				<img src="/static/icons/h-select-1.svg" :class="{active:showLOptions}"/>
 			</h3>
 			<h2 class="fn-flex flex-row" @click="openRight">
-				<span>{{selectValue}}</span>
+				<span>{{data&&data.selectValue}}</span>
 				<img src="/static/icons/h-select-1.svg" :class="{active:showROptions}"/>
 			</h2>
-			<ul class="pos-a h-select4-right-options" :class="{active:showROptions}">
+			<ul class="pos-a h-select4-right-options" :class="{active:showROptions}" v-if="data">
 				<li class="pointer"
-					:class="{active:selectValue===item}"
+					:class="{active:data.selectValue===item}"
 					v-for="item in selectROptions" @click="handleRChange(item)">
 					{{item}}
 				</li>
 			</ul>
-			<ul class="pos-a h-select4-left-options" :class="{active:showLOptions}">
+			<ul class="pos-a h-select4-left-options" :class="{active:showLOptions}" v-if="data">
 				<li class="pointer"
-					:class="{active:selectType===item}"
+					:class="{active:data.selectType===item}"
 					v-for="item in selectLOptions" @click="handleLChange(item)">
 					{{item}}
 				</li>
@@ -37,6 +37,10 @@
 
 	const value = {
 		api: {
+			data: {
+				selectType: '日',
+				selectValue: format(new Date(), 'yyyy.MM.dd'),
+			},
 			bind: {
 				enable: true,
 				role: ['provider']
@@ -48,13 +52,22 @@
 			return {
 				showROptions: false,
 				showLOptions: false,
-				selectValue: format(new Date(), 'yyyy.MM.dd'),
-				selectType: '日',
 				selectROptions: [],
 				selectLOptions: ['日', '月', '年']
 			}
 		},
 		mixins: [mixins],
+		watch: {
+			data: {
+				handler(val) {
+					if (val) {
+						this.init(this.data.selectType)
+					}
+				},
+				deep: true,
+				immediate: true
+			}
+		},
 		methods: {
 			openLeft() {
 				this.showLOptions = !this.showLOptions
@@ -65,14 +78,14 @@
 				this.showLOptions = false
 			},
 			handleRChange(item) {
-				this.selectValue = item
+				this.data.selectValue = item
 				this.showROptions = false
-				this.emitComponentUpdate({value: item, label: this.selectType})
+				this.emitComponentUpdate({value: item, label: this.data.selectType})
 			},
 			handleLChange(item) {
 				this.init(item, true)
 				this.showLOptions = false
-				this.selectType = item
+				this.data.selectType = item
 			},
 			init(type, need = false) {
 				let i = 0
@@ -91,7 +104,7 @@
 				}
 				this.selectROptions = selectROptions
 				if (need) {
-					this.selectValue = selectROptions[0]
+					this.data.selectValue = selectROptions[0]
 					this.emitComponentUpdate({value: selectROptions[0], label: type})
 				}
 			}
@@ -101,10 +114,9 @@
 			this.configValue = this.parseConfigValue(config, value)
 		},
 		mounted() {
-			this.init(this.selectType)
 			this.emitComponentUpdate({
-				value: this.selectValue,
-				label: this.selectType,
+				value: this.data.selectValue,
+				label: this.data.selectType,
 			})
 		}
 	}

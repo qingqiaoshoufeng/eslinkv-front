@@ -33,7 +33,7 @@
 </script>
 <style lang="scss" scoped>
 	.h-slide-bg {
-		width: 807px;
+		width: 100%;
 		height: 1050px;
 		background: rgba(11, 0, 90, 0.9);
 		border-left: 1px solid #00DDFF;

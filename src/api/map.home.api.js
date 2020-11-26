@@ -1,10 +1,10 @@
 import request from './request'
 import qs from 'qs'
-
+const DATAURL = '/data'
 //门站列表
 export function getGasStationList(data) {
     return request({
-        url: '/map/home/getGasStationList',
+        url: DATAURL + '/map/home/getGasStationList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -16,7 +16,7 @@ export function getGasStationList(data) {
 //地下抢修点
 export function getUndergroundRepairStationList(data) {
     return request({
-        url: '/map/home/getUndergroundRepairStationList',
+        url: DATAURL + '/map/home/getUndergroundRepairStationList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -28,7 +28,7 @@ export function getUndergroundRepairStationList(data) {
 //分布式能源
 export function getDistributedEnergyResourceList(data) {
     return request({
-        url: '/map/home/getDistributedEnergyResourceList',
+        url: DATAURL + '/map/home/getDistributedEnergyResourceList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -40,7 +40,7 @@ export function getDistributedEnergyResourceList(data) {
 //应急气源站
 export function getEmergencyAirSourceStationList(data) {
     return request({
-        url: '/map/home/getEmergencyAirSourceStationList',
+        url: DATAURL + '/map/home/getEmergencyAirSourceStationList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -52,7 +52,7 @@ export function getEmergencyAirSourceStationList(data) {
 //高压管线
 export function getHighPressureLine(data) {
     return request({
-        url: '/map/home/getHighPressureLine',
+        url: DATAURL + '/map/home/getHighPressureLine',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -64,7 +64,7 @@ export function getHighPressureLine(data) {
 //高压管线在建中
 export function getHighPressureLineProcess(data) {
     return request({
-        url: '/map/home/getHighPressureLineProcess',
+        url: DATAURL + '/map/home/getHighPressureLineProcess',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -76,7 +76,7 @@ export function getHighPressureLineProcess(data) {
 //低压线
 export function getLowPressureLine(data) {
     return request({
-        url: '/map/home/getLowPressureLine',
+        url: DATAURL + '/map/home/getLowPressureLine',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -88,7 +88,7 @@ export function getLowPressureLine(data) {
 //中压线
 export function getMiddlePressureLine(data) {
     return request({
-        url: '/map/home/getMiddlePressureLine',
+        url: DATAURL + '/map/home/getMiddlePressureLine',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -100,7 +100,7 @@ export function getMiddlePressureLine(data) {
 //巡检车辆
 export function getInspectionCarList(data) {
     return request({
-        url: '/map/home/getInspectionCarList',
+        url: DATAURL + '/map/home/getInspectionCarList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -112,7 +112,7 @@ export function getInspectionCarList(data) {
 //巡检人员
 export function getInspectionPersonList(data) {
     return request({
-        url: '/map/home/getInspectionPersonList',
+        url: DATAURL + '/map/home/getInspectionPersonList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -124,7 +124,7 @@ export function getInspectionPersonList(data) {
 //液压站
 export function getLiquefiedGasStationList(data) {
     return request({
-        url: '/map/home/getLiquefiedGasStationList',
+        url: DATAURL + '/map/home/getLiquefiedGasStationList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -136,7 +136,7 @@ export function getLiquefiedGasStationList(data) {
 //LNG站
 export function getLNGStationList(data) {
     return request({
-        url: '/map/home/getLNGStationList',
+        url: DATAURL + '/map/home/getLNGStationList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -148,7 +148,7 @@ export function getLNGStationList(data) {
 //调压站
 export function getPressureRegulatingStationList(data) {
     return request({
-        url: '/map/home/getPressureRegulatingStationList',
+        url: DATAURL + '/map/home/getPressureRegulatingStationList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -160,7 +160,7 @@ export function getPressureRegulatingStationList(data) {
 // 综合服务站
 export function getComprehensiveServiceStationList(data) {
     return request({
-        url: '/map/home/getComprehensiveServiceStationList',
+        url: DATAURL + '/map/home/getComprehensiveServiceStationList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -172,7 +172,7 @@ export function getComprehensiveServiceStationList(data) {
 // 管网运行管理站
 export function getPipeManageMentStationList(data) {
     return request({
-        url: '/map/home/getPipeManageMentStationList',
+        url: DATAURL + '/map/home/getPipeManageMentStationList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -184,7 +184,7 @@ export function getPipeManageMentStationList(data) {
 //加气站
 export function getNaturalGasStationList(data) {
     return request({
-        url: '/map/home/getNaturalGasStationList',
+        url: DATAURL + '/map/home/getNaturalGasStationList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -196,7 +196,7 @@ export function getNaturalGasStationList(data) {
 //态势感知
 export function getWarningList(data) {
     return request({
-        url: '/map/home/getWarningList',
+        url: DATAURL + '/map/home/getWarningList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -206,7 +206,7 @@ export function getWarningList(data) {
 }
 export function getWarningList1(data) {
     return request({
-        url: '/map/home/getWarningList1',
+        url: DATAURL + '/map/home/getWarningList1',
         method: 'get',
         data: qs.stringify(data),
         headers: {
@@ -219,7 +219,7 @@ export function getWarningList1(data) {
 //模糊匹配所有站点
 export function getAllTypeStationList(data) {
     return request({
-        url: '/map/home/getAllTypeStationList',
+        url: DATAURL + '/map/home/getAllTypeStationList',
         method: 'get',
         data: qs.stringify(data),
         headers: {
