@@ -148,7 +148,7 @@
 				line-height: 24px;
 				letter-spacing: 0;
 				text-align: right;
-				color: rgba(255, 255, 255, 0.75);
+				color: #00DDFF;
 				margin-top: 16px;
 			}
 		}

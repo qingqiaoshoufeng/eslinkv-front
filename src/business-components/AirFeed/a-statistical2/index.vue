@@ -2,7 +2,7 @@
 	<div class="widget-part pos-r" :style="styles">
 		<div class="statistical2-box">
 			<div class="left fn-flex flex-column">
-				<div class="time">{{ timeDesc }}</div>
+				<div class="time">{{ year }}{{config.config && config.config.timeDesc}}</div>
 				<div class="decs">
 					{{ config.config && config.config.desc }}
 				</div>
@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div class="right-more pos-r" @click="handleClick" :class="{pointer:config.config&&config.config.sceneId}">
-				<div class="right-more-total font-num">{{data&&data.today |toThousand}}</div>
+				<div class="right-more-total font-num">{{data&&data.todayData |toThousand}}</div>
 				<div class="right-more-des">今日供气量(m³)</div>
 			</div>
 		</div>
@@ -49,6 +49,7 @@
 	import mixins from '../../mixins'
 	import {getInput} from '../../../../lib'
 	import GoldChart from '../../../openApi'
+	import format from 'date-fns/format'
 
 	const config = {
 		animation: true,
@@ -56,6 +57,7 @@
 			desc: true,
 			timeDesc: true,
 			sceneId: true,
+			componentId: true,
 		},
 	};
 	const configSource = {
@@ -64,26 +66,30 @@
 				desc: getInput('desc', '描述'),
 				timeDesc: getInput('timeDesc', '时间'),
 				sceneId: getInput('sceneId', '场景id'),
+				componentId: getInput('componentId', '组件id'),
 			},
 		},
 	};
 	const value = {
 		api: {
 			data: JSON.stringify({
-				today: 964383,
+				todayData: 964383,
 				time: 2020,
-				value: 375321809,
+				yearData: 375321809,
 			}),
 		},
 		config: {
 			timeDesc: 'xxxx年度',
 			desc: '累计接纳量(m3)',
 			sceneId: '',
+			componentId: '',
 		},
 	};
 	export default {
 		data() {
+			const year = format(new Date(), 'yyyy')
 			return {
+				year,
 				scrollList: new Int8Array(10),
 				transform: new Int8Array(9),
 			};
@@ -91,7 +97,7 @@
 		mixins: [mixins],
 		computed: {
 			statisticalVal() {
-				if (this.data) return this.data.value.toLocaleString().split('');
+				if (this.data) return this.data.yearData.toLocaleString().split('');
 				return [];
 			},
 			timeDesc() {
@@ -101,12 +107,23 @@
 		},
 		methods: {
 			handleClick() {
-				if (this.config.config.sceneId)
+				if (this.config.config.sceneId) {
 					GoldChart.scene.createSceneInstance(this.config.config.sceneId, 'slideRight')
+					if (this.config.config.componentId) {
+						this.$nextTick(() => {
+							GoldChart.instance.updateComponent(this.config.config.componentId, {
+								data: {
+									selectType: '日',
+									selectValue: format(new Date(), 'yyyy.MM.dd')
+								}
+							})
+						})
+					}
+				}
 			},
 			setNumberTransform() {
 				if (this.data) {
-					const numberArr = this.data.value.toLocaleString().split('');
+					const numberArr = this.data.yearData.toLocaleString().split('');
 					this.transform = numberArr.map(item => item * 10);
 				}
 			},
@@ -163,7 +180,7 @@
 				line-height: 24px;
 				letter-spacing: 0;
 				text-align: right;
-				color: #00FFCF;
+				color: #00DDFF;
 				margin-top: 16px;
 			}
 		}
@@ -242,13 +259,13 @@
 			}
 
 			.right-more-des {
-				color: #00FFCF;
+				color: #00DDFF;
 				font-weight: 600;
 			}
 
 			.right-more-total {
 				color: #fff;
-				font-size: 32px;
+				font-size: 40px;
 				line-height: 32px;
 				padding-top: 13px;
 				margin-bottom: 7px;

@@ -14,13 +14,12 @@ const GoldChart = {
 			if (store.instance.kanboard.$refs[id]) {
 				store.instance.kanboard.$refs[id][0].$refs.widgets.updateComponentFormOutSide(data)
 			}
-			if(store.instance.createKanboard){
+			if (store.instance.createKanboard) {
 				if (store.instance.createKanboard.$refs[id]) {
 					store.instance.createKanboard.$refs[id][0].$refs.widgets.updateComponentFormOutSide(data)
 				}
 			}
-
-		}
+		},
 	},
 	store
 }
@@ -28,8 +27,8 @@ const GoldChart = {
 export default GoldChart
 export {store, mutations}
 
-window.GoldChart = GoldChart
-window.store = store
+if (process.env.NODE_ENV !== 'production')
+	window.GoldChart = GoldChart
 // document.addEventListener('GoldChartReady', function (e) {
 // 	console.log(e.detail)
 // }, false)

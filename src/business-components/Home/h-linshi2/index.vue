@@ -1,52 +1,58 @@
 <template>
 	<div class="widget-part" :style="styles" ref="img" v-if="data">
 		<section class="title">
-			<div class="title-txt">杭燃优家</div>
-			<div class="color"></div>
+      <img src="/static/icons/left-icon.svg">
+      <div class="title-txt">杭燃优家</div>
+      <img src="/static/icons/right-icon.svg">
 		</section>
-		<section class="detail">
-			<div class="detail-item">
-				<div class="detail-item-icon" :style="`background-image: url(${
+		<div class="container">
+      <section class="detail">
+        <div class="detail-item">
+          <div class="detail-item-icon" :style="`background-image: url(${
 				currBuilding.icon1
 			})`"></div>
-				<div>
-					<div class="detail-item-title">{{ currBuilding.desc1 }}</div>
-					<div class="detail-item-num">{{ currBuilding.value1 }} <span>{{ currBuilding.unit1 }}</span></div>
-				</div>
-			</div>
-			<div class="detail-item">
-				<div class="detail-item-icon money"></div>
-				<div>
-					<div class="detail-item-title">{{ currBuilding.desc2 }}</div>
-					<div class="detail-item-num">{{ currBuilding.value2 | toThousand }} <span>元</span></div>
-				</div>
-			</div>
-		</section>
-		<section class="building">
-			<div class="circle">
-				<div
-					class="item"
-					:class="[getItemIndex(i)]"
-					v-for="(k, i) in data.building"
-				>{{k.name}}
-				</div>
-			</div>
-		</section>
+          <div>
+            <div class="detail-item-title">{{ currBuilding.desc1 }}</div>
+            <div class="detail-item-num">{{ currBuilding.value1 }} <span>{{ currBuilding.unit1 }}</span></div>
+          </div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item-icon money"></div>
+          <div>
+            <div class="detail-item-title">{{ currBuilding.desc2 }}</div>
+            <div class="detail-item-num">{{ currBuilding.value2 | toThousand }} <span>元</span></div>
+          </div>
+        </div>
+      </section>
+      <section class="building">
+        <div class="circle">
+          <div
+              class="item"
+              :class="[getItemIndex(i)]"
+              v-for="(k, i) in data.building"
+          >{{k.name}}
+          </div>
+        </div>
+      </section>
+    </div>
 		<section class="title">
-			<div class="title-txt">杭燃体验</div>
-			<div class="color"></div>
+      <img src="/static/icons/left-icon.svg">
+      <div class="title-txt">杭燃体验</div>
+      <img src="/static/icons/right-icon.svg">
 		</section>
-		<section class="fans">
-			<div style="text-align: left">
-				<div class="fan-title">数媒粉丝日活(人)</div>
-				<div class="fan-num font-num">{{ data.fanDailyNum }}</div>
-			</div>
-			<div style="text-align: right">
-				<div class="fan-title">数媒粉丝总数(人)</div>
-				<div class="fan-num font-num">{{ data.fanTotalNum }}</div>
-			</div>
-		</section>
-	</div>
+    <section class="fans">
+      <div class="fans-top">
+        <div style="text-align: left">
+          <div class="fan-title">数媒粉丝日活(人)</div>
+          <div class="fan-num font-num">{{ data.fanDailyNum }}</div>
+        </div>
+        <div style="text-align: right">
+          <div class="fan-title">数媒粉丝总数(人)</div>
+          <div class="fan-num font-num">{{ data.fanTotalNum }}</div>
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
 <script>
 	import mixins from '../../mixins'
@@ -202,41 +208,29 @@
 .title {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  .color {
-    width: 6px;
-    height: 40px;
-    transform: skewY(30deg);
-    background: #00DDFF;
-  }
+  justify-content: center;
+  height: 48px;
+  background: rgba(0, 87, 169, 0.5);
+  border: 1px solid #00DDFF;
   .title-txt {
-    position: relative;
-    width: 586px;
-    text-align: right;
     font-weight: 600;
     font-size: 32px;
     line-height: 32px;
     color: #FFFFFF;
-    padding-bottom: 6px;
-    margin-right: 8px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-    &:after{
-      content: '';
-      display: block;
-      width: 24px;
-      height: 1px;
-      position: absolute;
-      left: 0;
-      bottom: -1px;
-      background: #fff;
-    }
+    margin: 0 8px;
   }
 }
+.container {
+  border: 1px solid #00DDFF;
+  border-top-width: 0;
+  padding: 22px 20px 10px;
+  margin-bottom: 32px;
+}
+
 .detail {
   display: flex;
   align-items: center;
   margin-bottom: 40px;
-  margin-top: 24px;
   .detail-item {
     flex: 1;
     text-align: left;
@@ -273,7 +267,6 @@
 .building {
   height: 250px;
   background: url("./img/building.svg") no-repeat center center;
-  margin-bottom: 45px;
   .circle {
     position: relative;
     height: 250px;
@@ -314,12 +307,14 @@
   }
 }
 .fans {
-  height: 420px;
+  height: 412px;
   background: url("./img/expbg.svg") no-repeat;
   background-size: 100% 100%;
-  padding-top: 16px;
-  display: flex;
-  justify-content: space-between;
+  .fans-top {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 16px 0;
+  }
   .fan-title {
     font-size: 24px;
     line-height: 24px;

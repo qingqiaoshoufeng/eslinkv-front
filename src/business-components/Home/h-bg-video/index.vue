@@ -11,6 +11,7 @@
 			></video-player>
 			<img class="h-bg-video-right" src="../h-bg/img/video-right.svg" alt=""/>
 			<div class="h-bg-video-close pointer pos-a" @click="handleClose"></div>
+			<div class="h-bg-video-close1 pointer pos-a" @click="handleClose"></div>
 		</div>
 	</div>
 </template>
@@ -84,5 +85,13 @@
 		margin-left: 570px;
 		top: -35px;
 		background-size: 32px;
+	}
+
+	.h-bg-video-close1 {
+		width: 257px;
+		height: 64px;
+		bottom: -200px;
+		left: 50%;
+		margin-left: 725px;
 	}
 </style>

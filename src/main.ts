@@ -14,6 +14,7 @@ import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import './api/index.js'
 import PortalVue from 'portal-vue'
+// import './utils/rem';
 Vue.use(PortalVue)
 Vue.use(VueVideoPlayer)
 Vue.component('iSwitch', Switch);

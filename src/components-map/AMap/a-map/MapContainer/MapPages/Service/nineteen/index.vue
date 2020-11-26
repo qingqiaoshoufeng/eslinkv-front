@@ -75,7 +75,7 @@ export default {
 			mapLegendStyle: { left: '18%' },
 			activeOverlay: {},
 			showOverlayDetail: false,
-			zoom: 11,
+			zoom: 10,
 			center: [120.80971, 30.202216],
 		};
 	},

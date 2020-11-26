@@ -123,6 +123,7 @@ img {
 	transform: translateX(-50%);
 	left: 50%;
 	font-size: 20px;
+    font-weight: 500;
 	position: absolute;
 }
 

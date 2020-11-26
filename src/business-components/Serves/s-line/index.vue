@@ -20,6 +20,7 @@
 	const config = {
     animation: true,
     config: {
+      unit: true,
       color: true,
       icon: true
     }

@@ -7,6 +7,7 @@
 		<box title="第一方阵" :content="content5" :style="{marginRight:0}"/>
 		<div class="h-bg-54441-num pos-a"></div>
 		<div class="h-bg-54441-close pos-a pointer" @click="close"></div>
+		<div class="h-bg-54441-close1 pos-a pointer" @click="close"></div>
 	</div>
 </template>
 <script>
@@ -71,13 +72,21 @@
 	}
 
 	.h-bg-54441 {
-		top: 395px;
+		top: 305px;
 		width: 100%;
 		justify-content: center;
 
 		.h-bg-54441-box {
 			margin-right: 110px;
 		}
+	}
+
+	.h-bg-54441-close1 {
+		width: 257px;
+		height: 64px;
+		bottom: -470px;
+		left: 50%;
+		margin-left: -1015px;
 	}
 
 	.h-bg-54441-close {

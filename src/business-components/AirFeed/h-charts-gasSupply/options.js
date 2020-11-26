@@ -1,19 +1,20 @@
-let xData = [];
-let barDataTest = [];
-let lineData1 = [];
-let lineData2 = [];
+import addMonths from 'date-fns/addMonths'
+import format from 'date-fns/format'
+
+let dataTest = []
 for (let i = 1; i < 13; i++) {
-	xData.push(i + "月");
-	barDataTest.push(parseInt(i * Math.random() * 100))
-	lineData1.push(parseInt(Math.random() * 100))
-	lineData2.push(parseInt(Math.random() * 100))
+	let obj = {}
+	obj.xData = format(addMonths(new Date(), `-${i}`), 'M') + "月"
+	obj.time = addMonths(new Date(), `-${i}`)
+	obj.barData = parseInt(i * Math.random() * 100)
+	obj.lineData = parseInt(Math.random() * 100)
+	obj.dashLineData = parseInt(Math.random() * 100)
+	dataTest.push(obj)
 }
 
-export const barData = barDataTest
-export const lineData = lineData1
-export const dashLineData = lineData2
+export const data = dataTest
 
-export default function (barData, lineData, dashLineData) {
+export default function (xData, barData, lineData, dashLineData) {
 	return {
 		"tooltip": {
 			"trigger": "axis",

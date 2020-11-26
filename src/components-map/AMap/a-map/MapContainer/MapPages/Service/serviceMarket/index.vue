@@ -68,7 +68,7 @@ export default {
 			showOverlayDetail: false,
 			activeOverlay: {},
 			center: [120.061259, 30.183295],
-			zoom: 11,
+			zoom: 10,
 		};
 	},
 	created() {
