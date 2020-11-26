@@ -2,7 +2,6 @@
 	<div class="widget-part pos-r" :style="`${styles}left:0px;top:0px;z-index:13;`">
 		<div class="h-bg pos-r">
 			<div class="h-bg-top pos-a"></div>
-			<div class="h-bg-center pos-a"></div>
 			<div class="h-bg-control pos-a"></div>
 			<div class="h-bg-left pos-a"></div>
 			<div class="h-bg-right pos-a"></div>
@@ -11,6 +10,7 @@
 			<transition name="slide-down">
 				<h-bg-54441 v-if="status54441" :status="status54441" :close="close54441"/>
 			</transition>
+			<div class="h-bg-center pos-a"></div>
 			<ul class="h-bg-nav pos-a fn-flex flex-row">
 				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('nn16rowdl5r')">
 					<img src="./img/nav-1.svg"/>
@@ -99,8 +99,11 @@
 			},
 			handleClick(index) {
 				GoldChart.scene.setSceneIndex(index)
-				GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[0])
-				GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[1])
+				if (this.statusStart) {
+					GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[1])
+				} else {
+					GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[0])
+				}
 				this.status54441 = false
 				this.statusVideo = false
 			},
@@ -281,6 +284,7 @@
 		margin-left: -884px;
 		top: 50%;
 		margin-top: -292px;
+		pointer-events: none;
 	}
 
 	.h-bg-control {

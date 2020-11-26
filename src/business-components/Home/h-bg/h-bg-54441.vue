@@ -84,7 +84,7 @@
 	.h-bg-54441-close1 {
 		width: 257px;
 		height: 64px;
-		bottom: -380px;
+		bottom: -470px;
 		left: 50%;
 		margin-left: -1015px;
 	}
