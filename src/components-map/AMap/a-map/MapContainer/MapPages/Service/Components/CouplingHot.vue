@@ -32,7 +32,7 @@ export default {
 				// this._heatMapData = this._heatMapData.slice(0, 200);
 			}
 			this._instance = new AMap.HeatMap(this.$amap, {
-				radius: 80, //给定半径
+				radius: 30, //给定半径
 				opacity: [0, 0.8],
 			});
 			this._instance.setDataSet({

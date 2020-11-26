@@ -40,6 +40,7 @@
 
 <script>
 import { SvgIcon } from '../../../../../components/';
+import { SERVICE_SERVICEICCUSTOMER_LEGEND_MAP } from '../../serviceICcustomer/config';
 
 export default {
 	name: 'HomeRealTimeList',
@@ -61,8 +62,12 @@ export default {
 		},
 	},
 	async created() {
-		this.list = await this.$sysApi.map.serve.getICcustomerSituationAwareness();
-		console.log(this.list);
+		try {
+			this.list = await this.$sysApi.map.serve.getICcustomerSituationAwareness();
+			console.log(this.list);
+		} catch (error) {
+			console.log(error);
+		}
 	},
 	watch: {
 		activeItem(val) {
@@ -79,7 +84,16 @@ export default {
 	methods: {
 		handleClick(item, index) {
 			this.activeIndex = index;
-			this.$emit('change', item);
+			let {
+				detailList,
+				component: overlayType,
+			} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP['WarningICcustomer'];
+			console.log(
+				SERVICE_SERVICEICCUSTOMER_LEGEND_MAP['WarningICcustomer']
+			);
+			console.log(overlayType);
+			console.log(item);
+			this.$emit('change', { ...item, detailList, overlayType });
 		},
 	},
 };
