@@ -27,7 +27,7 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import options from './options'
+	import getOption from './options'
 	import {getInput, getSelect} from "../../../../lib";
   import HVerticalTabs from '../../AirFeed/h-tabs-circle/HVerticalTabs';
 
@@ -139,7 +139,7 @@
 		methods: {
       tabActivedChange(tabActived) {
         this.tabActived = tabActived
-        // echarts.init(this.$refs.circle).setOption(getCircleOption(this.curr))
+        this.setOption(this.data[tabActived].data)
       },
 			activeHandler(index) {
 				clearInterval(this.animateTimer)
@@ -159,9 +159,7 @@
 				}, 2000)
 			},
 			setOption(data) {
-				options.series[0].data = data.map(item => item.value)
-				options.color = JSON.parse(this.config.config.color)
-				this.instance && this.instance.setOption(options)
+				this.instance && this.instance.setOption(getOption(data, this.config.config))
 			},
 			show(data) {
 				clearInterval(this.animateTimer)

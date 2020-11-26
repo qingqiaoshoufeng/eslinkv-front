@@ -44,7 +44,7 @@
 		watch: {
 			data: {
 				handler(val) {
-					this.playerOptions.sources[0].src=val.videoSrc
+					this.playerOptions.sources[0].src=val?.videoSrc
 				},
 				deep: true,
 				immediate: true

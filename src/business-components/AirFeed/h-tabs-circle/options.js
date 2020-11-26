@@ -27,7 +27,7 @@ export function getCircleOption (data) {
         },
         series: [
             {
-                name: xAxis[2],
+                name: xAxis[0],
                 clockWise: false,
                 type: 'pie',
                 center: ['40%', '50%'],
@@ -98,7 +98,7 @@ export function getCircleOption (data) {
                 ]
             },
             {
-                name: xAxis[0],
+                name: xAxis[2],
                 type: 'pie',
                 clockWise: false,
                 center: ['40%', '50%'],
