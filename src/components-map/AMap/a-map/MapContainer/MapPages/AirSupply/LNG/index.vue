@@ -85,7 +85,7 @@
 			return {
 				overlayInfoConfig: Object.freeze(AIRSUPPLY_LNG_OVERLAY_MAP),
 				center: [120.061259, 30.183295],
-				zoom: 11,
+				zoom: 10,
 				activeOverlay: {},
 				showOverlayDetail: false,
 				showRoutePlan: false,

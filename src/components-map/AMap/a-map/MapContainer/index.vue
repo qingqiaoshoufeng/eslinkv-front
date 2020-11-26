@@ -4,7 +4,7 @@
 			vid="overviewMap"
 			ref="amap"
 			class="hr-map"
-			:style="`transform: scale(${reverseScaleRatio}); overflow: hidden;`"
+			:style="`transform: scale(${reverseScaleRatio}); overflow: hidden;width:${kanboardSize.width}px;height:${kanboardSize.height}px`"
 			:events="{
 				init: mapInit,
 			}"
@@ -53,7 +53,7 @@ export default {
 				zoomEnable: true,
 				doubleClickZoom: false,
 				dragEnable: true,
-				zoom: 11,
+				zoom: 10,
 				viewMode: '3D',
 				pitch: 10,
 				mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
@@ -75,7 +75,6 @@ export default {
 		},
 	},
 	mounted() {
-        window.aaa = this.$refs.amap.$amap
 		this.updateKanboardSize();
 	},
 };

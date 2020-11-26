@@ -97,7 +97,7 @@
 				legendMap: SERVICE_SERVICECUSTOMER_LEGEND_MAP,
 				legendMultiple: true,
 				center: [120.061259, 30.233295],
-				zoom: 11,
+				zoom: 10,
 			};
 		},
 		created() {
