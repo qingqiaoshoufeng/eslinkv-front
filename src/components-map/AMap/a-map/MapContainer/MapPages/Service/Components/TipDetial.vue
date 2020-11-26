@@ -7,11 +7,13 @@
 		<div class="detial_info_list">
 			<div
 				class="item"
-				v-for="(item, index) in data.detialInfo || []"
+				v-for="(item, index) in data.detailList || []"
 				:key="index"
 			>
-				<span class="label">{{ `${item.name}: ` }}</span>
-				<span class="value">{{ item.value }}</span>
+				<span class="label">{{ `${item.label}: ` }}</span>
+				<span class="value">{{
+					`${detailInfo[item.prop] + item.DW} `
+				}}</span>
 			</div>
 		</div>
 	</div>
@@ -21,6 +23,12 @@ export default {
 	name: 'TipDetial',
 	props: {
 		data: {
+			Type: Object,
+			default() {
+				return {};
+			},
+		},
+		detailInfo: {
 			Type: Object,
 			default() {
 				return {};

@@ -7,12 +7,15 @@
 		class="right-panel"
 		enter="animate__animated animate__fadeInRight"
 	> -->
-		<!-- <tabsTitle /> -->
-		<Tabs class="tabs-container-ic animate__animated animate__fadeInRight" v-model="currentTab">
-			<TabPanel key="realTime" name="realTime" label="态势感知" lazy>
-				<realTime @change="handleClick" />
-			</TabPanel>
-			<!-- <TabPanel
+	<!-- <tabsTitle /> -->
+	<Tabs
+		class="tabs-container-ic animate__animated animate__fadeInRight"
+		v-model="currentTab"
+	>
+		<TabPanel key="realTime" name="realTime" label="态势感知" lazy>
+			<realTime @change="handleClick" />
+		</TabPanel>
+		<!-- <TabPanel
 				key="overlayList"
 				name="overlayList"
 				label="三社联动"
@@ -20,8 +23,8 @@
 			>
 				<overlayList @change="handleClick" />
 			</TabPanel> -->
-		</Tabs>
-	</DashboardPanel>
+	</Tabs>
+	<!-- </DashboardPanel> -->
 </template>
 index.vue
 <script>
@@ -86,7 +89,7 @@ export default {
 	top: 148px;
 	width: 480px;
 	z-index: 100;
-   max-height: 860px;
+	max-height: 860px;
 }
 .tabs-container {
 	max-height: 846px;

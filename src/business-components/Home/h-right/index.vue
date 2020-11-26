@@ -8,39 +8,15 @@
 		<section class="container">
       <h3>用气类型用气量分析</h3>
       <ul class="gas">
-        <li>
-          <img src="./img/gas-use1.svg">
+        <li v-for="(k, i) in data.data1" :key="i">
+          <img :src="k.icon">
           <div class="gas-main">
             <div class="gas-info">
-              <div class="gas-title">居民户</div>
-              <div class="gas-num"><em>{{ data.data1.value1 | toThousand }}</em> 万m³</div>
+              <div class="gas-title">{{ k.name }}</div>
+              <div class="gas-num"><em>{{ k.value | toThousand }}</em> 万m³</div>
             </div>
             <div class="gas-progress">
-              <div class="progress" :style="{width: data.data1.percent1 + '%'}"></div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <img src="./img/gas-use2.svg">
-          <div class="gas-main">
-            <div class="gas-info">
-              <div class="gas-title">公建户</div>
-              <div class="gas-num"><em>{{ data.data1.value2 | toThousand }}</em> 万m³</div>
-            </div>
-            <div class="gas-progress">
-              <div class="progress" :style="{width: data.data1.percent2 + '%'}"></div>
-            </div>
-          </div>
-        </li>
-        <li>
-          <img src="./img/gas-use3.svg">
-          <div class="gas-main">
-            <div class="gas-info">
-              <div class="gas-title">工业户</div>
-              <div class="gas-num"><em>{{ data.data1.value3 | toThousand }}</em> 万m³</div>
-            </div>
-            <div class="gas-progress">
-              <div class="progress" :style="{width: data.data1.percent3 + '%'}"></div>
+              <div class="progress" :style="{width: k.percent + '%'}"></div>
             </div>
           </div>
         </li>
@@ -73,14 +49,26 @@
 	const value = {
 		api: {
 			data: {
-        data1: {
-          value1: 1335566,
-          percent1: 60,
-          value2: 126655,
-          percent2: 70,
-          value3: 1326886,
-          percent3: 90,
-        },
+        data1: [
+          {
+            name: '居民户',
+            value: 1233556,
+            percent: 60,
+            icon: '/static/images/home/gas-use1.svg'
+          },
+          {
+            name: '公建户',
+            value: 125638,
+            percent: 70,
+            icon: '/static/images/home/gas-use2.svg'
+          },
+          {
+            name: '工业户',
+            value: 1689667,
+            percent: 90,
+            icon: '/static/images/home/gas-use3.svg'
+          }
+        ],
 			  data2: [
           {
             name: '城区1',

@@ -1,3 +1,5 @@
+// 引入详情字典
+import { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth } from "../../../../utils/dictionary"
 // 覆盖物legend配置
 export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
     Grouphall: {
@@ -6,7 +8,8 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         icon: 'iconjituandating',
         component: 'Grouphall',
         isShow: true,
-        dataProp: 'grouphallList'
+        dataProp: 'grouphallList',
+        detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
     },
     BranchCompany: {
         label: '分公司',
@@ -14,7 +17,8 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
         isShow: true,
-        dataProp: 'branchCompanyList'
+        dataProp: 'branchCompanyList',
+        detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
     },
     ServiceStation: {
         label: '综合服务站',
@@ -22,7 +26,8 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         icon: 'iconzonghefuwuzhan1',
         component: 'ServiceStation',
         isShow: true,
-        dataProp: 'comprehensiveServiceStationList'
+        dataProp: 'comprehensiveServiceStationList',
+        detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
     },
     CouplingHot: {
         label: '联码数量热力',
@@ -30,6 +35,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         // icon: 'iconjituandating',
         component: 'CouplingHot',
         isShow: true,
+        dataProp: 'total'
     },
     OperationHot: {
         label: '操作数量热力',
@@ -37,6 +43,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         // icon: 'iconfengongsi',
         component: 'OperationHot',
         isShow: false,
+        dataProp: 'month'
     },
 }
 
@@ -54,3 +61,5 @@ export const SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP = {
         },
     },
 }
+// 杭燃码统计数据
+export const DATASTATISTICSLIST = [couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth]

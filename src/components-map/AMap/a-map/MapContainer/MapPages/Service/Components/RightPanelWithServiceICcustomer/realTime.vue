@@ -61,7 +61,8 @@ export default {
 		},
 	},
 	async created() {
-		this.list = await this.$sysApi.map.serve.getStateList();
+		this.list = await this.$sysApi.map.serve.getICcustomerSituationAwareness();
+		console.log(this.list);
 	},
 	watch: {
 		activeItem(val) {

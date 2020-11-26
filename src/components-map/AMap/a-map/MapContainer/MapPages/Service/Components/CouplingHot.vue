@@ -1,9 +1,17 @@
-<!-- 三社联动 -->
+<!-- 联码数量热力 -->
 <script>
 import overlayMixin from '../../mixins/overlayMixin.js';
 export default {
 	name: 'CouplingHot',
 	mixins: [overlayMixin],
+	props: {
+		data: {
+			type: Array,
+			default() {
+				return [];
+			},
+		},
+	},
 	watch: {
 		visible(val) {
 			console.log(val, 'aaa');
@@ -20,8 +28,8 @@ export default {
 	methods: {
 		async init() {
 			if (!this._heatMapData) {
-				this._heatMapData = await this.$sysApi.map.serve.getHeatMapList();
-				this._heatMapData = this._heatMapData.slice(0, 200);
+				this._heatMapData = this.data;
+				// this._heatMapData = this._heatMapData.slice(0, 200);
 			}
 			this._instance = new AMap.HeatMap(this.$amap, {
 				radius: 80, //给定半径
@@ -31,7 +39,6 @@ export default {
 				data: this._heatMapData,
 				max: 4000,
 			});
-			window.aaa = this._instance;
 		},
 	},
 	render() {

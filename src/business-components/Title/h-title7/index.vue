@@ -39,7 +39,7 @@
 </script>
 <style lang="scss">
 	.h-title-7 {
-		background: linear-gradient(90deg, rgba(0, 87, 169, 0.4) 0%, rgba(0, 87, 169, 0) 100%);
+		background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
 		height: 100%;
 
 		p {

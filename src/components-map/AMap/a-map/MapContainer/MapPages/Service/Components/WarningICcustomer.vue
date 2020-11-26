@@ -1,13 +1,12 @@
-<!-- 用气大户 -->
+<!-- 工商户警报 -->
 <template>
 	<BaseOverlay
 		v-bind="{
 			overlayIcon,
 			overlayType,
 			visible,
-			data,
 			apiFun,
-			detailList,
+			data,
 		}"
 		@click="
 			marker =>
@@ -19,7 +18,7 @@
 import { BaseOverlay } from '../../Components/index';
 
 export default {
-	name: 'MajorClient',
+	name: 'BranchCompany',
 	components: {
 		BaseOverlay,
 	},
@@ -51,7 +50,7 @@ export default {
 	},
 	data() {
 		return {
-			apiFun: this.$sysApi.map.serve.getGrouphallList,
+			apiFun: this.$sysApi.map.serve.getBranchCompanyList,
 		};
 	},
 };

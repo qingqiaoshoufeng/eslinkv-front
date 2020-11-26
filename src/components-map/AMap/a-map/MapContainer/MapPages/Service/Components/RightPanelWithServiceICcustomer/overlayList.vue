@@ -81,7 +81,8 @@ export default {
 	},
 	methods: {
 		async getData() {
-			let list = await this.$sysApi.map.serve.getAllTypeStationList();
+			// let list = await this.$sysApi.map.serve.getAllTypeStationList();
+
 			this.list = list
 				.map(item => {
 					let { stationType } = item;

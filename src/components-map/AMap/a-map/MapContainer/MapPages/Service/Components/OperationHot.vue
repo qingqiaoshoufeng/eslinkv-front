@@ -4,6 +4,14 @@ import overlayMixin from '../../mixins/overlayMixin.js';
 export default {
 	name: 'OperationHot',
 	mixins: [overlayMixin],
+	props: {
+		data: {
+			type: Array,
+			default() {
+				return [];
+			},
+		},
+	},
 	watch: {
 		visible(val) {
 			console.log(val, 'bbb');
@@ -18,7 +26,7 @@ export default {
 	methods: {
 		async init() {
 			if (!this._heatMapData) {
-				this._heatMapData = await this.$sysApi.map.serve.getHeatMapList();
+				this._heatMapData = this.data;
 			}
 			this._instance = new AMap.HeatMap(this.$amap, {
 				radius: 80, //给定半径
