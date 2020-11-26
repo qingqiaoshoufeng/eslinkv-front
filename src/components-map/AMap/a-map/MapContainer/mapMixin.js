@@ -50,6 +50,11 @@ export default {
         mapInit() {
             console.log('地图初始化完成！')
             this.mapReady = true
+            let map = this.$refs.amap.$amap
+            window.ss = map
+            map.on('click',(e)=>{
+                console.log(e,'e')
+            })
         },
     },
     mounted() {
@@ -59,3 +64,6 @@ export default {
         document.removeEventListener('SceneIndex', this.handleSceneChange)
     },
 }
+
+
+

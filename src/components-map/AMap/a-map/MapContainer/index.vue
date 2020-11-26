@@ -4,6 +4,7 @@
 			vid="overviewMap"
 			ref="amap"
 			class="hr-map"
+			:style="`transform: scale(${reverseScaleRatio}); overflow: hidden;`"
 			:events="{
 				init: mapInit,
 			}"
@@ -36,7 +37,6 @@ files.keys().forEach(key => {
 		mapPages[pageName + subPageName] = pageModule[subPageName];
 	});
 });
-console.log(mapPages);
 
 export default {
 	name: 'MainMap',
@@ -58,16 +58,40 @@ export default {
 				pitch: 10,
 				mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
 			},
+			kanboardSize: {
+				width: 3500,
+				height: 1050,
+			},
+			reverseScaleRatio: 1,
 		};
+	},
+	methods: {
+		updateKanboardSize() {
+			const { clientWidth, clientHeight } = document.body;
+			const { width, height } = this.kanboardSize;
+			let ratio = Math.min(clientWidth / width, clientHeight / height);
+			ratio = ratio < 1 ? ratio : 1;
+			this.reverseScaleRatio = 1 / ratio;
+		},
+	},
+	mounted() {
+        window.aaa = this.$refs.amap.$amap
+		this.updateKanboardSize();
 	},
 };
 </script>
  <style lang="scss" scoped>
+.map-container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
 .hr-map {
-	position: fixed;
+	position: absolute;
 	top: 0;
 	left: 0;
-	width: 3560px;
-	height: 1380px;
+	bottom: 0;
+	right: 0;
 }
 </style>
+

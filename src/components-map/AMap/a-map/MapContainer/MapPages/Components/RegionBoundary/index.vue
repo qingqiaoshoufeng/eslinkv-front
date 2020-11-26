@@ -8,6 +8,11 @@ export default {
 		//根据缩放比例控制显示隐藏
 		this.$amap.on('zoomend', this.handleMapZoomChange);
 	},
+	props: {
+		selectAreaChange: {
+			type: Function,
+		},
+	},
 	methods: {
 		init() {
 			this.drawRegionBoundary(this.$amap);
@@ -41,15 +46,35 @@ export default {
 						for (var i = 0, l = bounds.length; i < l; i++) {
 							let instance = new window.AMap.Polygon({
 								path: bounds[i],
-								strokeWeight: 2,
+								strokeWeight: 1,
 								fillOpacity: 0.6,
-								// fillColor: '#002276',
 								fillColor: '#0054B7',
 								strokeOpacity: '1',
 								strokeStyle: 'dashed',
-								strokeColor: '#509CE1',
+								strokeColor: '#FFDC45',
+								strokeDasharray: [3, 6],
+								extData: {
+									area: area,
+								},
 							});
+
 							if (this.instanceArr) {
+                                //选中区域
+								if (this.selectAreaChange) {
+									instance.on('mouseover', e => {
+										let areaData = e.target._opts.extData;
+										this.selectAreaChange(areaData);
+										instance.setOptions({
+											fillColor: '#0085FF',
+										});
+									});
+									instance.on('mouseout', () => {
+										this.selectAreaChange();
+										instance.setOptions({
+											fillColor: '#0054B7',
+										});
+									});
+								}
 								map.add(instance);
 								this.instanceArr.push(instance);
 							}

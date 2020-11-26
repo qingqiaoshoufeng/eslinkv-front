@@ -1,8 +1,7 @@
 <template>
-	<div>
+	<div class="map-box">
 		<template v-if="inPreview">
 			<MapContainer />
-			<!-- 遮罩层 -->
 		</template>
 		<template v-else>
 			<div>
@@ -24,17 +23,26 @@ export default {
 	components: {
 		MapContainer,
 	},
-	data() {
-		return {
-			inPreview: store.scene.status === 'inPreview',
-		};
-	},
+    computed:{
+        inPreview(){
+            return store.scene.status === 'inPreview'
+        }
+    }
 };
 </script>
 
 
 <style lang="scss" scoped>
 .placeholder-map {
+	width: 100%;
+	height: 100%;
+}
+.map-box {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
 	width: 100%;
 	height: 100%;
 }
@@ -51,5 +59,14 @@ export default {
 .amap-markers {
 	z-index: 1100 !important;
 }
+.amap-marker {
+    transform:scale(0.384857) !important;
+}
+
+.amap-logo{
+    display: none !important;
+}
 </style>
+
+
 

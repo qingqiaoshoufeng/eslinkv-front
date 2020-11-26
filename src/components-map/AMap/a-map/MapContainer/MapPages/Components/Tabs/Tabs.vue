@@ -107,7 +107,7 @@ export default {
 	perspective: 0px;
 	padding-top: 0;
 	.tabs__header {
-		background: #051040;
+		background: rgba(0,87,169,0.5);
 		border: 1px solid #1773c9;
 		box-sizing: border-box;
 		line-height: 46px;

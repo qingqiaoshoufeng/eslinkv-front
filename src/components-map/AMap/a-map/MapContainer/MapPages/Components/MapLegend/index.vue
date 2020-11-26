@@ -132,7 +132,7 @@ export default {
 	border-radius: 16px;
 	color: #fff;
 	padding: 0 40px;
-	line-height: 56px;
+	line-height: 54px;
 	user-select: none;
 	font-size: 18px;
 	display: flex;
