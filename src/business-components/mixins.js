@@ -39,8 +39,15 @@ export default {
 		/**
 		 * @description 外部更新组件
 		 */
-		updateComponentFormOutSide(data) {
-			this.config.api.data = JSON.stringify(data)
+		updateComponentFormOutSide({data, url, path, method}) {
+			if (data)
+				this.config.api.data = JSON.stringify(data)
+			if (url)
+				this.config.api.url = url
+			if (path)
+				this.config.api.path = path
+			if (method)
+				this.config.api.path = method
 		},
 		/**
 		 * @description 组件间联动后的 ajax 数据重新请求

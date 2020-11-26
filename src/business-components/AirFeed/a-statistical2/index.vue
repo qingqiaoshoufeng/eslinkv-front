@@ -112,8 +112,10 @@
 					if (this.config.config.componentId) {
 						this.$nextTick(() => {
 							GoldChart.instance.updateComponent(this.config.config.componentId, {
-								selectType: '日',
-								selectValue: format(new Date(), 'yyyy.MM.dd')
+								data: {
+									selectType: '日',
+									selectValue: format(new Date(), 'yyyy.MM.dd')
+								}
 							})
 						})
 					}

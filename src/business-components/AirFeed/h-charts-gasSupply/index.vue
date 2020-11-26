@@ -87,8 +87,10 @@
 					if (this.config.config.componentId) {
 						this.$nextTick(() => {
 							GoldChart.instance.updateComponent(this.config.config.componentId, {
-								selectType,
-								selectValue
+								data: {
+									selectType,
+									selectValue
+								}
 							})
 						})
 					}
