@@ -1,132 +1,132 @@
 <template>
 	<div class="widget-part" :style="styles" v-if="data" ref="img">
 		<section class="title">
-      <img src="/static/icons/left-icon.svg">
+			<img src="/static/icons/left-icon.svg">
 			<div class="title-txt">杭燃供气</div>
-      <img src="/static/icons/right-icon.svg">
-    </section>
+			<img src="/static/icons/right-icon.svg">
+		</section>
 		<div class="container" style="padding-bottom: 10px;">
-      <section class="total">
-        <img src="./img/air-bar.svg" class="total-icon">
-        <div class="total-info">
-          <div class="total-title">年度累计供气量</div>
-          <div class="num font-num">{{ data.total | toThousand }} <span>万m³</span></div>
-        </div>
-      </section>
-      <ul class="air">
-        <li class="li">
-          <div class="air-name">门站</div>
-          <div>
-            <span class="air-num font-num">{{ data.air.shop | toThousand }}</span>
-            <span class="air-unit">座</span>
-          </div>
-        </li>
-        <li class="li">
-          <div class="air-name">高压管线</div>
-          <div>
-            <span class="air-num font-num">{{ data.air.highPipeline | toThousand }}</span>
-            <span class="air-unit">km</span>
-          </div>
-        </li>
-        <li class="li">
-          <div class="air-name">高中压调压站</div>
-          <div>
-            <span class="air-num font-num">{{ data.air.pressureStation | toThousand }}</span>
-            <span class="air-unit">个</span>
-          </div>
-        </li>
-        <li class="li">
-          <div class="air-name">中压管线</div>
-          <div>
-            <span class="air-num font-num">{{ data.air.mediumPipeline | toThousand }}</span>
-            <span class="air-unit">km</span>
-          </div>
-        </li>
-        <li class="li">
-          <div class="air-name">应急气源站</div>
-          <div>
-            <span class="air-num font-num">{{ data.air.gasStation | toThousand }}</span>
-            <span class="air-unit">座</span>
-          </div>
-        </li>
-        <li class="li">
-          <div class="air-name">低压管线</div>
-          <div>
-            <span class="air-num font-num">{{ data.air.lowPipeline | toThousand }}</span>
-            <span class="air-unit">km</span>
-          </div>
-        </li>
-        <li class="li">
-          <div class="air-name">调压器</div>
-          <div>
-            <span class="air-num font-num">{{ data.air.voltageRegulator | toThousand }}</span>
-            <span class="air-unit">个</span>
-          </div>
-        </li>
-      </ul>
-    </div>
+			<section class="total">
+				<img src="./img/air-bar.svg" class="total-icon">
+				<div class="total-info">
+					<div class="total-title">年度累计供气量</div>
+					<div class="num font-num">{{ data.total | toThousand }} <span>万m³</span></div>
+				</div>
+			</section>
+			<ul class="air">
+				<li class="li">
+					<div class="air-name">门站</div>
+					<div>
+						<span class="air-num font-num">{{ data.air.shop | toThousand }}</span>
+						<span class="air-unit">座</span>
+					</div>
+				</li>
+				<li class="li">
+					<div class="air-name">高压管线</div>
+					<div>
+						<span class="air-num font-num">{{ data.air.highPipeline | toThousand }}</span>
+						<span class="air-unit">km</span>
+					</div>
+				</li>
+				<li class="li">
+					<div class="air-name">高中压调压站</div>
+					<div>
+						<span class="air-num font-num">{{ data.air.pressureStation | toThousand }}</span>
+						<span class="air-unit">个</span>
+					</div>
+				</li>
+				<li class="li">
+					<div class="air-name">中压管线</div>
+					<div>
+						<span class="air-num font-num">{{ data.air.mediumPipeline | toThousand }}</span>
+						<span class="air-unit">km</span>
+					</div>
+				</li>
+				<li class="li">
+					<div class="air-name">应急气源站</div>
+					<div>
+						<span class="air-num font-num">{{ data.air.gasStation | toThousand }}</span>
+						<span class="air-unit">座</span>
+					</div>
+				</li>
+				<li class="li">
+					<div class="air-name">低压管线</div>
+					<div>
+						<span class="air-num font-num">{{ data.air.lowPipeline | toThousand }}</span>
+						<span class="air-unit">km</span>
+					</div>
+				</li>
+				<li class="li">
+					<div class="air-name">调压器</div>
+					<div>
+						<span class="air-num font-num">{{ data.air.voltageRegulator | toThousand }}</span>
+						<span class="air-unit">个</span>
+					</div>
+				</li>
+			</ul>
+		</div>
 		<section class="title">
-      <img src="/static/icons/left-icon.svg">
-      <div class="title-txt">杭燃服务</div>
-      <img src="/static/icons/right-icon.svg">
+			<img src="/static/icons/left-icon.svg">
+			<div class="title-txt">杭燃服务</div>
+			<img src="/static/icons/right-icon.svg">
 		</section>
 
 		<div class="container">
-      <section class="service">
-        <ul>
-          <li class="li">
-            <div class="air-name">居民户</div>
-            <div>
-              <span class="air-num font-num">{{ data.service.household | toThousand }}</span>
-              <span class="air-unit">户</span>
-            </div>
-          </li>
-          <li class="li">
-            <div class="air-name">公建用户</div>
-            <div>
-              <span class="air-num font-num">{{ data.service.publicUsers | toThousand }}</span>
-              <span class="air-unit">户</span>
-            </div>
-          </li>
-          <li class="li">
-            <div class="air-name">工业用户</div>
-            <div>
-              <span class="air-num font-num">{{ data.service.industrialUsers | toThousand }}</span>
-              <span class="air-unit">户</span>
-            </div>
-          </li>
-          <li class="li">
-            <div class="air-name">在用钢瓶用户</div>
-            <div>
-              <span class="air-num font-num">{{ data.service.inUseUsers | toThousand }}</span>
-              <span class="air-unit">户</span>
-            </div>
-          </li>
-          <li class="li">
-            <div class="air-name">在册钢瓶用户</div>
-            <div>
-              <span class="air-num font-num">{{ data.service.registeredUsers | toThousand }}</span>
-              <span class="air-unit">户</span>
-            </div>
-          </li>
-        </ul>
-        <div class="standard">
-          <img src="./img/standard.svg">
-          <p>
-            一个工作日<br>
-            0份资料容缺受理<br>
-            受理通气两个环节
-          </p>
-        </div>
-      </section>
-      <section class="links">
-        <div class="link" :class="{active: animateActiveIndex === 0}">最多跑<br/>一次4.0</div>
-        <div class="link" :class="{active: animateActiveIndex === 1}">三社联动<br/>安心安居</div>
-        <div class="link" :class="{active: animateActiveIndex === 2}">31个<br/>服务网点</div>
-        <div class="link" :class="{active: animateActiveIndex === 3}">网上19<br/>营业厅</div>
-        <div class="link" :class="{active: animateActiveIndex === 4}">杭燃码</div>
-      </section>
-    </div>
+			<section class="service">
+				<ul>
+					<li class="li">
+						<div class="air-name">居民户</div>
+						<div>
+							<span class="air-num font-num">{{ data.service.household | toThousand }}</span>
+							<span class="air-unit">户</span>
+						</div>
+					</li>
+					<li class="li">
+						<div class="air-name">公建用户</div>
+						<div>
+							<span class="air-num font-num">{{ data.service.publicUsers | toThousand }}</span>
+							<span class="air-unit">户</span>
+						</div>
+					</li>
+					<li class="li">
+						<div class="air-name">工业用户</div>
+						<div>
+							<span class="air-num font-num">{{ data.service.industrialUsers | toThousand }}</span>
+							<span class="air-unit">户</span>
+						</div>
+					</li>
+					<li class="li">
+						<div class="air-name">在用钢瓶用户</div>
+						<div>
+							<span class="air-num font-num">{{ data.service.inUseUsers | toThousand }}</span>
+							<span class="air-unit">户</span>
+						</div>
+					</li>
+					<li class="li">
+						<div class="air-name">在册钢瓶用户</div>
+						<div>
+							<span class="air-num font-num">{{ data.service.registeredUsers | toThousand }}</span>
+							<span class="air-unit">户</span>
+						</div>
+					</li>
+				</ul>
+				<div class="standard">
+					<img src="./img/standard.svg">
+					<p>
+						一个工作日<br>
+						0份资料容缺受理<br>
+						受理通气两个环节
+					</p>
+				</div>
+			</section>
+			<section class="links">
+				<div class="link" :class="{active: animateActiveIndex === 0}">最多跑<br/>一次4.0</div>
+				<div class="link" :class="{active: animateActiveIndex === 1}">三社联动<br/>安心安居</div>
+				<div class="link" :class="{active: animateActiveIndex === 2}">31个<br/>服务网点</div>
+				<div class="link" :class="{active: animateActiveIndex === 3}">网上19<br/>营业厅</div>
+				<div class="link" :class="{active: animateActiveIndex === 4}">杭燃码</div>
+			</section>
+		</div>
 	</div>
 </template>
 <script>
@@ -182,9 +182,10 @@
 			this.configValue = this.parseConfigValue(config, value)
 		},
 		mounted() {
+			const _self = this.$refs.img
 			setTimeout(() => {
-				this.$refs.img.style.transform = `perspective(763px) rotateY(${this.config.config.transform}deg) translateZ(-120px)`
-				this.$refs.img.style.left = `${this.config.config.left}px`
+				_self.style.transform = `perspective(763px) rotateY(${this.config.config.transform}deg) translateZ(-120px)`
+				_self.style.left = `${this.config.config.left}px`
 			}, 1500)
 
 			this.animateTimer = setInterval(() => {
@@ -206,25 +207,26 @@
 	.title {
 		display: flex;
 		align-items: center;
-    justify-content: center;
-    height: 48px;
-    background: rgba(0, 87, 169, 0.5);
-    border: 1px solid #00DDFF;
+		justify-content: center;
+		height: 48px;
+		background: rgba(0, 87, 169, 0.5);
+		border: 1px solid #00DDFF;
+
 		.title-txt {
 			font-weight: 600;
 			font-size: 32px;
 			line-height: 32px;
 			color: #FFFFFF;
-      margin: 0 8px;
+			margin: 0 8px;
 		}
 	}
 
-  .container {
-    border: 1px solid #00DDFF;
-    border-top-width: 0;
-    padding: 30px 30px 20px;
-    margin-bottom: 32px;
-  }
+	.container {
+		border: 1px solid #00DDFF;
+		border-top-width: 0;
+		padding: 30px 30px 20px;
+		margin-bottom: 32px;
+	}
 
 	.total {
 		margin-bottom: 30px;

@@ -2,7 +2,7 @@
 	<div class="widget-part pos-r" :style="styles">
 		<div class="statistical2-box">
 			<div class="left fn-flex flex-column">
-				<div class="time">{{ timeDesc }}</div>
+				<div class="time">{{ year }}{{config.config && config.config.timeDesc}}</div>
 				<div class="decs">
 					{{ config.config && config.config.desc }}
 				</div>
@@ -39,7 +39,7 @@
 				</div>
 			</div>
 			<div class="right-more pos-r" @click="handleClick" :class="{pointer:config.config&&config.config.sceneId}">
-				<div class="right-more-total font-num">{{data&&data.today |toThousand}}</div>
+				<div class="right-more-total font-num">{{data&&data.todayData |toThousand}}</div>
 				<div class="right-more-des">今日供气量(m³)</div>
 			</div>
 		</div>
@@ -73,9 +73,9 @@
 	const value = {
 		api: {
 			data: JSON.stringify({
-				today: 964383,
+				todayData: 964383,
 				time: 2020,
-				value: 375321809,
+				yearData: 375321809,
 			}),
 		},
 		config: {
@@ -87,7 +87,9 @@
 	};
 	export default {
 		data() {
+			const year = format(new Date(), 'yyyy')
 			return {
+				year,
 				scrollList: new Int8Array(10),
 				transform: new Int8Array(9),
 			};
@@ -95,7 +97,7 @@
 		mixins: [mixins],
 		computed: {
 			statisticalVal() {
-				if (this.data) return this.data.value.toLocaleString().split('');
+				if (this.data) return this.data.yearData.toLocaleString().split('');
 				return [];
 			},
 			timeDesc() {
@@ -119,7 +121,7 @@
 			},
 			setNumberTransform() {
 				if (this.data) {
-					const numberArr = this.data.value.toLocaleString().split('');
+					const numberArr = this.data.yearData.toLocaleString().split('');
 					this.transform = numberArr.map(item => item * 10);
 				}
 			},
