@@ -95,7 +95,7 @@
 
 			&__num {
 				@extend .num-common;
-				color: #FF7217;
+				color: #FF7217 !important;
 			}
 
 			&__desc {
