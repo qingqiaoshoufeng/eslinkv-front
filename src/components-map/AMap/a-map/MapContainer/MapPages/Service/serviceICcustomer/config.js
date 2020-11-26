@@ -1,12 +1,16 @@
+
+// 引入详情字典
+import { ICcustomer, useNumberYestoday, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal } from "../../../../utils/dictionary"
 // 覆盖物legend配置
-export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
+export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
     MajorClient: {
         label: '用气大户',
-        legendIcon: 'icontulifengongsi',
-        icon: 'iconfengongsi1',
+        legendIcon: 'icontuliyongqidahu',
+        icon: 'iconyongqidahu',
         component: 'MajorClient',
         isShow: true,
-        dataProp: 'MajorClientList'
+        dataProp: 'MajorClientList',
+        detailList: [useNumberYestoday]
     },
     BranchCompany: {
         label: '分公司',
@@ -14,12 +18,22 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
         isShow: true,
-        dataProp: 'branchCompanyList'
+        dataProp: 'branchCompanyList',
+        detailList: [ICcustomer, useNumberYestoday, warningYestoday]
     },
+    WarningICcustomer: {
+        label: '报警',
+        legendIcon: 'icontulifengongsi',
+        icon: 'iconfengongsi1',
+        component: 'WarningICcustomer',
+        isShow: true,
+        dataProp: 'WarningICcustomerList',
+        detailList: []
+    }
 }
 
 //覆盖物详情
-export const SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP = {
+export const SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP = {
     BranchCompany: {
         fields: {
             name: {},
@@ -32,3 +46,6 @@ export const SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP = {
     },
 
 }
+
+// 工商户统计数据
+export const DATASTATISTICSLIST = [FTPNumber, warningYestodayTotal, warningYestodayMetersTotal]

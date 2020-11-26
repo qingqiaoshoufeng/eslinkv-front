@@ -6,8 +6,12 @@
 			overlayType,
 			visible,
 			apiFun,
+			detailList,
 		}"
-		@click="marker => $emit('overlay-click', marker, overlayType)"
+		@click="
+			marker =>
+				$emit('overlay-click', { detailList, ...marker }, overlayType)
+		"
 	/>
 </template>
 <script>
@@ -29,6 +33,12 @@ export default {
 		overlayType: {
 			type: String,
 			default: '',
+		},
+		detailList: {
+			type: Array,
+			default() {
+				return [];
+			},
 		},
 	},
 	data() {

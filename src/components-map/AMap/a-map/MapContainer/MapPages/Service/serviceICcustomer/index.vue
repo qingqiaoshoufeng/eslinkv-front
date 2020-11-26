@@ -8,7 +8,7 @@
 		<!-- <ListOverlay @overlay-click="handleOverlayClick" /> -->
 
 		<!-- 2.legend控制显隐 -->
-		<template v-for="(config, legend) in legendMap">
+		<template v-for="(config, legend) in overlayMap">
 			<component
 				:key="legend"
 				:visible="config.isShow"
@@ -17,6 +17,7 @@
 				:is="config.component"
 				@overlay-click="handleOverlayClick"
 				:ref="config.component"
+				:detailList="config.detailList"
 				:data="allTypeStationList[config.dataProp]"
 			/>
 		</template>
@@ -24,13 +25,13 @@
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
+			:detialBoxWidth="'450px'"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
-			:detialBoxWidth="'350px'"
-			@view-detail="viewOverlayDetail"
+			@view-detail="showOverlayDetail"
 			ref="OverlayDetail"
 		>
-			<TipDetial :data="activeOverlay" />
+			<TipDetial :data="activeOverlay" :detailInfo="detailInfo" />
 		</OverlayDetail>
 		<portal to="destination">
 			<MapLegend
@@ -38,7 +39,10 @@
 				:multiple="legendMultiple"
 				class="map-legend"
 			/>
-			<DataStatistics :data="dataStatisticsList" />
+			<DataStatistics
+				:dataStatisticsList="dataStatisticsList"
+				:data="ICcustomerDetailInfo"
+			/>
 			<RightPanelWithServiceICcustomer
 				class="right-panel"
 				@list-click="handleListClick"
@@ -53,6 +57,7 @@ import {
 	RightPanelWithServiceICcustomer,
 	BranchCompany,
 	MajorClient,
+	WarningICcustomer,
 	TipDetial,
 } from '../Components/index.js';
 //页面所需公共组件
@@ -63,35 +68,44 @@ import {
 } from '../../Components/index.js';
 import { DataStatistics } from '../../../../components';
 import {
-	SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
-	SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP,
+	SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
+	SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP,
+	DATASTATISTICSLIST,
 } from './config';
 export default {
 	name: 'serviceICcustomer',
 	components: {
 		RegionBoundary,
 		OverlayDetail,
-		// ICcustomer,
 		DataStatistics,
 		RightPanelWithServiceICcustomer,
 		MapLegend,
 		BranchCompany,
 		MajorClient,
 		TipDetial,
+		WarningICcustomer,
 	},
 	data() {
+		let {
+			MajorClient,
+			BranchCompany,
+			WarningICcustomer,
+		} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP;
 		return {
 			overlayInfoConfig: Object.freeze(
-				SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP
+				SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP
 			),
-			dataStatisticsList: [],
-			legendMap: SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
+			dataStatisticsList: DATASTATISTICSLIST,
+			overlayMap: SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
+			legendMap: { MajorClient, BranchCompany },
 			legendMultiple: true,
 			showOverlayDetail: false,
 			activeOverlay: {},
 			center: [120.061259, 30.183295],
 			zoom: 11,
 			allTypeStationList: {},
+			detailInfo: {},
+			ICcustomerDetailInfo: {},
 		};
 	},
 	created() {
@@ -103,12 +117,19 @@ export default {
 		closeOverlayDetail(done) {
 			done();
 		},
+		// 点击地图marker
 		handleOverlayClick(overlay, overlayType, isCenter = false) {
-			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
-			let { lng, lat } = overlay;
+			console.log(overlay);
+			let { lng, lat, id, overlayType: type, detailList } = overlay;
+			let params = {
+				id,
+				type,
+				params: detailList.map(item => item.prop).toString(),
+			};
+			this.getDetailInfo(params);
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
-			this.showOverlayDetail = true;
+			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 		},
 		// 请求统计数据
 		async getDataStatisticsList() {
@@ -122,6 +143,51 @@ export default {
 			this.allTypeStationList = await this.$sysApi.map.serve.getICcustomerList(
 				params
 			);
+			console.log(this.allTypeStationList);
+		},
+
+		// 联码新增统计数据
+		async getDataStatisticsList() {
+			this.ICcustomerDetailInfo = await this.$sysApi.map.serve.getICcustomerCallingInfo();
+		},
+
+		// 请求用气大户，分公司，综合服务站数据列表
+		async getAllTypeStationList() {
+			let params = {
+				type: ['MajorClient', 'BranchCompany'],
+			};
+			let res = await this.$sysApi.map.serve.getHangranCodeList(params);
+			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+		},
+		// 获取热力图信息
+		async getAllHotList() {
+			let params = {
+				type: ['useHotYear'],
+			};
+			let res = await this.$sysApi.map.serve.getHangranCodeHotList();
+			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+		},
+		//获取站点详情
+		async getDetailInfo(params) {
+			console.log(params);
+			this.detailInfo = await this.$sysApi.map.serve.getICcustomerDetailInfo(
+				params
+			);
+			this.showOverlayDetail = true;
+		},
+		// 获取右侧table列表报警信息
+		async getWarningList(params) {
+			console.log(params);
+			let WarningICcustomerList = await this.$sysApi.map.serve.getICcustomerSituationAwareness(
+				params
+			);
+			WarningICcustomerList = WarningICcustomerList.filter(
+				item => item.status === '1'
+			);
+			this.allTypeStationList = {
+				...this.allTypeStationList,
+				WarningICcustomerList,
+			};
 			console.log(this.allTypeStationList);
 		},
 		handleListClick(item) {
@@ -144,6 +210,7 @@ export default {
 	mounted() {
 		this.getDataStatisticsList();
 		this.getAllTypeStationList();
+		this.getWarningList();
 	},
 };
 </script>

@@ -5,11 +5,13 @@
 	>
 		<div
 			class="data_statistics_item"
-			v-for="(item, index) in data"
+			v-for="(item, index) in dataStatisticsList"
 			:key="index"
 		>
-			<div class="value">{{ item.value.toLocaleString() }}</div>
-			<div class="desc">{{ item.desc }}</div>
+			<div class="value">
+				{{ data[item.prop] && data[item.prop].toLocaleString() }}
+			</div>
+			<div class="desc">{{ item.label }}</div>
 		</div>
 	</div>
 </template>
@@ -22,14 +24,20 @@ export default {
 			type: String,
 			default: 'right',
 		},
-		data: {
+		dataStatisticsList: {
 			type: Array,
-			default: [],
+			default() {
+				return [];
+			},
+		},
+		data: {
+			type: [Object, Array],
+			default: {},
 		},
 	},
 	computed: {
 		animate() {
-            let { position } = this;
+			let { position } = this;
 			return (
 				'animate__fadeIn' +
 				(position.charAt(0).toUpperCase() + position.slice(1))
@@ -72,13 +80,13 @@ export default {
 			margin-top: 8px;
 			font-size: 24px;
 			border-radius: 16px;
-			color: #00DDFF;
+			color: #00ddff;
 			padding-right: 16px;
 			text-align: right;
 			background: linear-gradient(
 				90deg,
 				rgba(0, 77, 150, 0.3) 0%,
-				#004D96 100%
+				#004d96 100%
 			);
 			border-radius: 16px;
 		}
@@ -95,7 +103,7 @@ export default {
 		padding-left: 16px !important;
 		background: linear-gradient(
 			90deg,
-			#004D96 0%,
+			#004d96 0%,
 			rgba(0, 77, 150, 0.3) 100%
 		) !important;
 	}

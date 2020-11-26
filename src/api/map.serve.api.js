@@ -13,6 +13,51 @@ export function getHangranCodeList(data) {
         },
     })
 }
+// 获取杭燃码地图热力图部分数据
+export function getHangranCodeHotList(data) {
+    return request({
+        url: `${HANGRANURL}/gasCode/heatCount`,
+        method: 'get',
+        data: qs.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+// 获取杭燃码门站详情
+export function getHangranCodeDetailInfo(data) {
+    return request({
+        url: `${HANGRANURL}/gasCode/mapDetailInfo`,
+        method: 'get',
+        data: qs.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+// 联码新增统计数据
+export function getCouplingIncreaseInfo(data) {
+    return request({
+        url: `${HANGRANURL}/gasCode/addNum`,
+        method: 'get',
+        data: qs.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+
+// 累积联码用户数
+export function getAccumulativeTotal(data) {
+    return request({
+        url: `${HANGRANURL}/gasCode/accumulativeTotal`,
+        method: 'get',
+        data: qs.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
 // 获取工商户地图数据 勇用大户、分公司
 export function getICcustomerList1(data) {
     return request({
@@ -24,9 +69,41 @@ export function getICcustomerList1(data) {
         },
     })
 }
+// 获取工商户门站详情
+export function getICcustomerDetailInfo(data) {
+    return request({
+        url: `${HANGRANURL}/businessAnalysis/mapDetailInfo`,
+        method: 'get',
+        data: qs.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+// 获取工商户报警汇总信息
+export function getICcustomerCallingInfo(data) {
+    return request({
+        url: `${HANGRANURL}/businessAnalysis/callResult`,
+        method: 'get',
+        data: qs.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+// 态势感知列表
+export function getICcustomerSituationAwareness(data) {
+    return request({
+        url: `${HANGRANURL}/businessAnalysis/situationAwareness`,
+        method: 'get',
+        data: qs.stringify(data),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
 
 // 集团大厅站点
-//模糊匹配所有站点
 export function getGrouphallList(data) {
     return request({
         url: DATAURL + '/map/serve/getGrouphallList',

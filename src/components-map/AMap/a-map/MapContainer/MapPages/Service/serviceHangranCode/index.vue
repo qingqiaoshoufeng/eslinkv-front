@@ -7,7 +7,11 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component
-				v-if="config.isShow"
+				v-if="
+					config.isShow &&
+					allTypeStationList[config.dataProp] &&
+					allTypeStationList[config.dataProp].length
+				"
 				:key="legend"
 				:visible="config.isShow"
 				:overlayIcon="config.icon"
@@ -15,6 +19,7 @@
 				:is="config.component"
 				:data="allTypeStationList[config.dataProp]"
 				@overlay-click="handleOverlayClick"
+				:detailList="config.detailList"
 				:ref="config.component"
 			/>
 		</template>
@@ -28,7 +33,7 @@
 			@view-detail="showOverlayDetail"
 			ref="OverlayDetail"
 		>
-			<TipDetial :data="activeOverlay" />
+			<TipDetial :data="activeOverlay" :detailInfo="detailInfo" />
 		</OverlayDetail>
 
 		<portal to="destination">
@@ -40,7 +45,11 @@
 				:style="mapLegendStyle"
 			/>
 			<!-- 统计数据 -->
-			<DataStatistics :position="'left'" :data="dataStatisticsList" />
+			<DataStatistics
+				:position="'left'"
+				:dataStatisticsList="dataStatisticsList"
+				:data="couplingIncreaseInfo"
+			/>
 			<!-- 选择器盒子 -->
 			<i-switchBox @switch-change="change" />
 		</portal>
@@ -66,6 +75,7 @@ import {
 import {
 	SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
 	SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP,
+	DATASTATISTICSLIST,
 } from './config';
 import { DataStatistics } from '../../../../components';
 export default {
@@ -93,7 +103,7 @@ export default {
 			overlayInfoConfig: Object.freeze(
 				SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP
 			),
-			dataStatisticsList: [],
+			dataStatisticsList: DATASTATISTICSLIST,
 			overlayMap: SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
 			legendMap: { Grouphall, BranchCompany, ServiceStation },
 			mapLegendStyle: { left: '18%' },
@@ -103,6 +113,8 @@ export default {
 			center: [120.80971, 30.102216],
 			zoom: 11,
 			allTypeStationList: {},
+			detailInfo: {},
+			couplingIncreaseInfo: {},
 		};
 	},
 	created() {
@@ -114,6 +126,7 @@ export default {
 		// 关闭详情
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
+
 			if (overlayType === 'WARNEVENT') {
 				GoldChart.scene.setSceneIndex(
 					INDEXSCENEMAP['ServiceHangranCode']
@@ -127,16 +140,20 @@ export default {
 		},
 		// 点击地图marker
 		handleOverlayClick(overlay, overlayType, isCenter = false) {
-			console.log(111);
-			console.log(overlay);
-			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
-			let { lng, lat } = overlay;
+			let { lng, lat, id, overlayType: type, detailList } = overlay;
+			let params = {
+				id,
+				type,
+				params: detailList.map(item => item.prop).toString(),
+			};
+			this.getDetailInfo(params);
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
-			this.showOverlayDetail = true;
+			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 		},
+		// 联码新增统计数据
 		async getDataStatisticsList() {
-			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
+			this.couplingIncreaseInfo = await this.$sysApi.map.serve.getCouplingIncreaseInfo();
 		},
 		// 请求集团大厅，分公司，综合服务站数据列表
 		async getAllTypeStationList() {
@@ -147,10 +164,23 @@ export default {
 					'ComprehensiveServiceStation',
 				],
 			};
-			this.allTypeStationList = await this.$sysApi.map.serve.getHangranCodeList(
+			let res = await this.$sysApi.map.serve.getHangranCodeList(params);
+			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+		},
+		// 获取热力图信息
+		async getAllHotList() {
+			let params = {
+				type: ['total', 'month'],
+			};
+			let res = await this.$sysApi.map.serve.getHangranCodeHotList();
+			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+		},
+		//获取站点详情
+		async getDetailInfo(params) {
+			this.detailInfo = await this.$sysApi.map.serve.getHangranCodeDetailInfo(
 				params
 			);
-			console.log(this.allTypeStationList);
+			this.showOverlayDetail = true;
 		},
 		// 切换热力图显示隐藏
 		change(data) {
@@ -160,9 +190,9 @@ export default {
 		},
 	},
 	mounted() {
+		this.getAllHotList();
 		this.getDataStatisticsList();
 		this.getAllTypeStationList();
-		console.log(this.overlayMap);
 	},
 };
 </script>

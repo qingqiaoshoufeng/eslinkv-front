@@ -2,7 +2,7 @@
 <template>
 	<div class="hangrancode_switch_Box">
 		<div>
-			累计联码数量热力
+			<span class="label">累计联码数量热力</span>
 			<i-switch
 				v-model="data.switch1"
 				@on-change="change(1)"
@@ -11,7 +11,7 @@
 			/>{{ data.switch1 ? 'no' : 'off' }}
 		</div>
 		<div>
-			月操作数量热力
+			<span class="label">月操作数量热力</span>
 			<i-switch
 				v-model="data.switch2"
 				@on-change="change(2)"
@@ -57,6 +57,16 @@ export default {
 	flex-direction: column;
 	border: 1px solid #00ddff;
 	border-radius: 8px;
+	.label {
+		display: inline-block;
+		width: 145px;
+	}
+	.ivu-switch-checked:after {
+		background-color: rgba(255, 255, 255, 0.4) !important;
+		.ivu-switch-inner:after {
+			background-color: rgba(255, 255, 255, 0.4) !important;
+		}
+	}
 	div {
 		display: flex;
 		height: 44px;

@@ -8,7 +8,10 @@
 			apiFun,
 		}"
 		:showOverlayName="false"
-		@click="marker => $emit('overlay-click', marker, 'ICcustomer')"
+		@click="
+			marker =>
+				$emit('overlay-click', { detailList, ...marker }, 'ICcustomer')
+		"
 	/>
 </template>
 <script>
@@ -31,6 +34,12 @@ export default {
 		overlayType: {
 			type: String,
 			default: '',
+		},
+		detailList: {
+			type: Array,
+			default() {
+				return [];
+			},
 		},
 	},
 	data() {

@@ -8,7 +8,10 @@
 			apiFun,
 			data,
 		}"
-		@click="marker => $emit('overlay-click', marker, overlayType)"
+		@click="
+			marker =>
+				$emit('overlay-click', { detailList, ...marker }, overlayType)
+		"
 	/>
 </template>
 <script>
@@ -38,11 +41,20 @@ export default {
 				return [];
 			},
 		},
+		detailList: {
+			type: Array,
+			default() {
+				return [];
+			},
+		},
 	},
 	data() {
 		return {
 			apiFun: this.$sysApi.map.serve.getBranchCompanyList,
 		};
+	},
+	mounted() {
+		console.log(this.detailList);
 	},
 };
 </script>
