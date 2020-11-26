@@ -97,7 +97,6 @@ export function getCircleOption (data) {
 
                 ]
             },
-
             {
                 name: xAxis[0],
                 type: 'pie',

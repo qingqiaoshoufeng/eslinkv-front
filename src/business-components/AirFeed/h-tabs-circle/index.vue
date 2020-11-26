@@ -73,7 +73,7 @@ const value = {
         ],
         [
           {
-            name: '这个',
+            name: 'PE管',
             percent: 50,
             count: 321,
             circleStyle: '#FB592C',
@@ -83,7 +83,7 @@ const value = {
             percentStyle: '',
           },
           {
-            name: '哈哈哈',
+            name: '钢管',
             percent: 80,
             count: 321,
             circleStyle: '#18CEB9',
@@ -93,7 +93,7 @@ const value = {
             percentStyle: '',
           },
           {
-            name: '嘻嘻嘻',
+            name: '镀锌管',
             percent: 40,
             count: 321,
             circleStyle: '#2C99FF',
@@ -102,10 +102,20 @@ const value = {
             unitStyle: '',
             percentStyle: '',
           },
+          {
+            name: '其他',
+            percent: 40,
+            count: 321,
+            circleStyle: '#2C99FF',
+            unit: 'km',
+            countStyle: '',
+            unitStyle: '',
+            percentStyle: '',
+          }
         ],
         [
           {
-            name: '为为额',
+            name: 'DN700',
             percent: 20,
             count: 321,
             circleStyle: '#FB592C',
@@ -115,7 +125,7 @@ const value = {
             percentStyle: '',
           },
           {
-            name: '为人很好',
+            name: 'DN500',
             percent: 60,
             count: 321,
             circleStyle: '#18CEB9',
@@ -125,7 +135,37 @@ const value = {
             percentStyle: '',
           },
           {
-            name: '水电费是谁的',
+            name: 'DN300',
+            percent: 10,
+            count: 321,
+            circleStyle: '#2C99FF',
+            unit: 'km',
+            countStyle: '',
+            unitStyle: '',
+            percentStyle: '',
+          },
+          {
+            name: 'DN250',
+            percent: 10,
+            count: 321,
+            circleStyle: '#2C99FF',
+            unit: 'km',
+            countStyle: '',
+            unitStyle: '',
+            percentStyle: '',
+          },
+          {
+            name: 'DN200',
+            percent: 10,
+            count: 321,
+            circleStyle: '#2C99FF',
+            unit: 'km',
+            countStyle: '',
+            unitStyle: '',
+            percentStyle: '',
+          },
+          {
+            name: 'DN100',
             percent: 10,
             count: 321,
             circleStyle: '#2C99FF',
