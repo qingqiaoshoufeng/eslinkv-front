@@ -4,13 +4,7 @@
 			<MapContainer />
 		</template>
 		<template v-else>
-			<div>
-				<img
-					class="placeholder-map"
-					src="/static/amap/amap.jpg"
-					alt=""
-				/>
-			</div>
+			<img class="placeholder-map" src="/static/amap/amap.jpg" alt="" />
 		</template>
 	</div>
 </template>
@@ -34,11 +28,8 @@ export default {
 
 <style lang="scss" scoped>
 .placeholder-map {
-	position: fixed;
-	top: 0;
-	right: 0;
-	left: 0;
-	bottom: 0;
+	width: 100%;
+	height: 100%;
 }
 .map-box {
 	position: relative;
