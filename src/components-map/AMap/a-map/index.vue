@@ -23,19 +23,22 @@ export default {
 	components: {
 		MapContainer,
 	},
-    computed:{
-        inPreview(){
-            return store.scene.status === 'inPreview'
-        }
-    }
+	computed: {
+		inPreview() {
+			return store.scene.status === 'inPreview';
+		},
+	},
 };
 </script>
 
 
 <style lang="scss" scoped>
 .placeholder-map {
-	width: 100%;
-	height: 100%;
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	bottom: 0;
 }
 .map-box {
 	position: relative;
@@ -60,11 +63,11 @@ export default {
 	z-index: 1100 !important;
 }
 .amap-marker {
-    transform:scale(0.384857) !important;
+	transform: scale(0.384857) !important;
 }
 
-.amap-logo{
-    display: none !important;
+.amap-logo {
+	display: none !important;
 }
 </style>
 
