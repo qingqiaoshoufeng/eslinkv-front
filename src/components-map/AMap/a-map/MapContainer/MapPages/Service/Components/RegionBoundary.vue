@@ -39,6 +39,7 @@ export default {
 					var bounds = result.districtList[0].boundaries;
 					if (bounds) {
 						for (var i = 0, l = bounds.length; i < l; i++) {
+                            console.log(JSON.stringify(bounds[i]))
 							let instance = new window.AMap.Polygon({
 								path: bounds[i],
 								map,
