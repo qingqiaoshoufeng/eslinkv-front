@@ -21,23 +21,23 @@ export default {
 			var district = new window.AMap.DistrictSearch({
 					extensions: 'all',
 					subdistrict: 0,
-                    level: 'district',
+                    level: 'city',
                     showbiz:false,
 				}),
 				districts = [
-					'江干区',
-					'上城区',
-					'下城区',
-					'拱墅区',
-					'西湖区',
-					'滨江区',
-					'萧山区',
-					'余杭区',
-					'富阳区',
-					'临安区',
-					'桐庐县',
-					'淳安县',  
-					'建德市',  
+					'杭州市',
+					// '上城区',
+					// '下城区',
+					// '拱墅区',
+					// '西湖区',
+					// '滨江区',
+					// '萧山区',
+					// '余杭区',
+					// '富阳区',
+					// '临安区',
+					// '桐庐县',
+					// '淳安县',  
+					// '建德市',  
 				];
             this.instanceArr = [];
 			districts.forEach(area => {
@@ -75,7 +75,9 @@ export default {
 											fillColor: '#0054B7',
 										});
 									});
-								}
+                                }
+                                console.log(instance.getBounds())
+                                instance.on('click',(e)=>{console.log(e)})
 								map.add(instance);
 								this.instanceArr.push(instance);
 							}

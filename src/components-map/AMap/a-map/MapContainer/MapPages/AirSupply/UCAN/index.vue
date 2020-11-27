@@ -10,7 +10,7 @@
 				:key="legend"
 				:visible="config.isShow"
 				:is="config.component"
-				:overlayIcon="config.icon"
+				:overlayIcon="config.legendIcon"
 				:overlayType="legend"
 				:showOverlayName="
 					config.showOverlayName ? config.showOverlayName : null

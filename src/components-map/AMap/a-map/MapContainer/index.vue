@@ -12,7 +12,7 @@
 		>
 			<!-- 页面 -->
 			<template v-if="showMapPage">
-				<component :is="mapComponentName" />
+				<component :reverseScaleRatio="reverseScaleRatio" :is="mapComponentName" />
 			</template>
 		</el-amap>
 		<!-- 地图类型 -->
@@ -71,7 +71,7 @@ export default {
 			const { width, height } = this.kanboardSize;
 			let ratio = Math.min(clientWidth / width, clientHeight / height);
 			ratio = ratio < 1 ? ratio : 1;
-			this.reverseScaleRatio = 1 / ratio;
+            this.reverseScaleRatio = 1 / ratio;
 			// this.reverseScaleRatio = 1 
 		},
 	},

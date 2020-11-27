@@ -4,8 +4,8 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 1.区域 -->
 		<RegionBoundary />
-        <!-- 2.销售区域 -->
-        <SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" /> 
+		<!-- 2.销售区域 -->
+		<SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" />
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component
@@ -16,7 +16,7 @@
 				"
 				:key="legend"
 				:visible="config.isShow"
-				:overlayIcon="config.icon"
+				:overlayIcon="config.legendIcon"
 				:overlayType="legend"
 				:is="config.component"
 				:data="allTypeStationList[config.dataProp]"
@@ -66,8 +66,8 @@ import {
 	Grouphall,
 	BranchCompany,
 	ServiceStation,
-    TipDetial,
-    SaleAreaBoundary
+	TipDetial,
+	SaleAreaBoundary,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -75,6 +75,7 @@ import {
 	OverlayDetail,
 	MapLegend,
 } from '../../Components/index.js';
+import pageMixin from '../../mixins/pageMixin';
 import {
 	SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
 	SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP,
@@ -83,6 +84,7 @@ import {
 import { DataStatistics } from '../../../../components';
 export default {
 	name: 'hangranCode',
+	mixins: [pageMixin],
 	components: {
 		RegionBoundary,
 		CouplingHot,
@@ -94,8 +96,8 @@ export default {
 		BranchCompany,
 		ServiceStation,
 		OverlayDetail,
-        TipDetial,
-        SaleAreaBoundary
+		TipDetial,
+		SaleAreaBoundary,
 	},
 	data() {
 		let {
@@ -118,19 +120,24 @@ export default {
 			zoom: 10,
 			allTypeStationList: {},
 			detailInfo: {},
-            couplingIncreaseInfo: {},
-            activeArea:'杭州钱江燃气有限公司'
+			couplingIncreaseInfo: {},
+			activeArea: '杭州钱江燃气有限公司',
 		};
 	},
+	// created() {
+	// 	this.$amap = this.$parent.$amap;
+	// 	this.$amap.setZoom(this.zoom, 100);
+	// 	this.$amap.panTo(this.center, 100);
+	// },
 	created() {
-		this.$amap = this.$parent.$amap;
-		this.$amap.setZoom(this.zoom, 100);
-		this.$amap.panTo(this.center, 100);
+		this.$nextTick(() => {
+			this.mapFitView(-0.2, 0.4,0.2);
+		});
 	},
 	methods: {
-        saleAreaChange(val){
-            console.log(val)
-        },
+		saleAreaChange(val) {
+			console.log(val);
+		},
 		// 关闭详情
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;

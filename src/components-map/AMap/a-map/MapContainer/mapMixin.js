@@ -51,6 +51,14 @@ export default {
         mapInit() {
             console.log('地图初始化完成！')
             this.mapReady = true
+            window.suyanMap = this.$refs.amap.$amap
+            window.suyanMap.on('click',(e)=>{console.log(e)})
+            // suyanMap.setFitView([ new AMap.Marker({
+            //     position: [119.421306, 29.92495]
+            // }), new AMap.Marker({
+            //     position: [120.718659, 30.463387]
+            // })],true,[273,273,500,500])
+            // suyanMap.setFitView([],true,[])
         },
     },
     mounted() {
