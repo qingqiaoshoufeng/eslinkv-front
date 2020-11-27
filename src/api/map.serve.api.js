@@ -1,6 +1,6 @@
 import request from './request'
 import qs from 'qs'
-const HANGRANURL = '/hangran'
+const HANGRANURL = '/server'
 const DATAURL = '/data'
 // 获取杭燃码地图部分数据 分公司、集团大厅、综合服务站
 export function getHangranCodeList(data) {
