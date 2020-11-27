@@ -76,6 +76,7 @@ import {
 	OverlayDetail,
 	MapLegend,
 } from '../../Components/index.js';
+import pageMixin from '../../mixins/pageMixin';
 import {
 	SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
 	SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP,
@@ -84,6 +85,7 @@ import {
 import { DataStatistics } from '../../../../components';
 export default {
 	name: 'hangranCode',
+	mixins: [pageMixin],
 	components: {
 		RegionBoundary,
 		CouplingHot,
@@ -124,10 +126,15 @@ export default {
 			left: 10,
 		};
 	},
+	// created() {
+	// 	this.$amap = this.$parent.$amap;
+	// 	this.$amap.setZoom(this.zoom, 100);
+	// 	this.$amap.panTo(this.center, 100);
+	// },
 	created() {
-		this.$amap = this.$parent.$amap;
-		this.$amap.setZoom(this.zoom, 100);
-		this.$amap.panTo(this.center, 100);
+		this.$nextTick(() => {
+			this.mapFitView(-0.2, 0.4, 0.2);
+		});
 	},
 	methods: {
 		saleAreaChange(val) {

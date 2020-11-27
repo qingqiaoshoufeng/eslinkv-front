@@ -63,6 +63,9 @@ export default {
 .sample-icon {
 	font-size: 44px;
 }
+.sample-icon:hover {
+	transform: scale(1.2);
+}
 .sample-name {
 	font-size: 18px;
 	color: #fff;

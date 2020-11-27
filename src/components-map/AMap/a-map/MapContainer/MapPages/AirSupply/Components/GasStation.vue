@@ -5,6 +5,7 @@
 			overlayType,
 			visible,
 			apiFun,
+			iconSize: 56,
 		}"
 		@click="marker => $emit('overlay-click', marker, 'GasStation')"
 	>
@@ -123,7 +124,7 @@ img {
 	transform: translateX(-50%);
 	left: 50%;
 	font-size: 20px;
-    font-weight: 500;
+	font-weight: 500;
 	position: absolute;
 }
 
@@ -131,7 +132,7 @@ img {
 	position: absolute;
 	width: 33px;
 	height: 88px;
-	color: #62FFF5;
+	color: #62fff5;
 	font-size: 26px;
 }
 // }

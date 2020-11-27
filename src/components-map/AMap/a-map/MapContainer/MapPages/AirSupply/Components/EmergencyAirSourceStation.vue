@@ -5,6 +5,7 @@
 			overlayType,
 			visible,
 			apiFun,
+			iconSize: 52,
 		}"
 		@click="
 			marker =>
@@ -13,7 +14,7 @@
 	/>
 </template>
 <script>
-import {BaseOverlay} from '../../Components/index';
+import { BaseOverlay } from '../../Components/index';
 export default {
 	name: 'EmergencyAirSourceStation',
 	components: {
@@ -32,11 +33,11 @@ export default {
 			type: String,
 			default: '',
 		},
-    },
+	},
 	data() {
 		let apiFun = this.$sysApi.map.home.getEmergencyAirSourceStationList;
 		return {
-				apiFun: apiFun,
+			apiFun: apiFun,
 		};
 	},
 };

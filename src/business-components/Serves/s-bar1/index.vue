@@ -4,15 +4,15 @@
 			<div class="unit">{{data&&data.title}}</div>
 			<div class="legend">
 				<div class="legend1">
-					<div class="bgc1" :style="`backgroundColor:${data&&data.color1};}`"></div>
+					<div class="bgc1" :style="`backgroundColor:${config.config&&config.config.color1};}`"></div>
 					<div class="desc1">{{data&&data.desc1}}</div>
 				</div>
 				<div class="legend2">
-					<div class="bgc2" :style="`backgroundColor:${data&&data.color2};}`"></div>
+					<div class="bgc2" :style="`backgroundColor:${config.config&&config.config.color2};}`"></div>
 					<div class="desc2">{{data&&data.desc2}}</div>
 				</div>
 				<div class="legend2">
-					<div class="bgc3" :style="`backgroundColor:${data&&data.color3};}`"></div>
+					<div class="bgc3" :style="`backgroundColor:${config.config&&config.config.color3};}`"></div>
 					<div class="desc3">{{data&&data.desc3}}</div>
 				</div>
 			</div>
@@ -23,14 +23,33 @@
 <script>
 	import mixins from '../../mixins';
 	import options from './options';
+	import {getInput} from "@lib";
 
-	const config = {animation: true};
+	const configSource = {
+		config: {
+			fields: {
+				color1: getInput('color1', '1颜色'),
+				color2: getInput('color2', '2颜色'),
+				color3: getInput('color3', '3颜色'),
+			}
+		},
+	}
+	const config = {
+		animation: true,
+		config: {
+			color1: true,
+			color2: true,
+			color3: true,
+		}
+	};
 	const value = {
+		config: {
+			color1: '#00DDFF',
+			color2: '#0057A9',
+			color3: '#01FDD2',
+		},
 		api: {
 			data: JSON.stringify({
-				color1: '#00DDFF',
-				color2: '#0057A9',
-				color3: '#01FDD2',
 				desc1: '绑定户数',
 				desc2: '抄表户数',
 				desc3: '自助抄表率',
@@ -50,10 +69,9 @@
 				options.series[1].data = data.yValue;
 				options.series[0].data = data.yValue1;
 				options.series[2].data = yValue2
-				console.log(yValue2)
-				options.series[0].itemStyle.normal.color = data.color2;
-				options.series[1].itemStyle.normal.color = data.color1;
-				options.series[2].itemStyle.normal.color = data.color3;
+				options.series[0].itemStyle.normal.color = this.config.config.color2;
+				options.series[1].itemStyle.normal.color = this.config.config.color1;
+				options.series[2].itemStyle.normal.color = this.config.config.color3;
 				this.instance && this.instance.setOption(options);
 			},
 		},
@@ -75,7 +93,7 @@
 			},
 		},
 		created() {
-			this.configSource = this.parseConfigSource(config);
+			this.configSource = this.parseConfigSource(config, configSource);
 			this.configValue = this.parseConfigValue(config, value);
 		},
 	};

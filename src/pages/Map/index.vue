@@ -1,10 +1,15 @@
 <template>
 	<div ref="kanboardWrapper" class="preview-wrapper">
 		<div class="scene-menu">
-			<div v-for="(scene, sceneIndex) in sceneMap" :key="sceneIndex" @click="changeScene(sceneIndex)">
+			<div
+				v-for="(scene, sceneIndex) in sceneMap"
+				:key="sceneIndex"
+				@click="changeScene(sceneIndex)"
+			>
 				{{ scene }}
 			</div>
 		</div>
+		<!-- <amap class="amap-wrapper" /> -->
 		<amap
 			class="amap-wrapper"
 			:style="`transform:scale(${actualScaleRatio});overflow: hidden;`"
@@ -39,10 +44,12 @@ export default {
 		};
 	},
 	methods: {
-        changeScene(sceneIndex){
-            let event = new CustomEvent('SceneIndex', {detail: {index:sceneIndex}})
-		    document.dispatchEvent(event)
-        },
+		changeScene(sceneIndex) {
+			let event = new CustomEvent('SceneIndex', {
+				detail: { index: sceneIndex },
+			});
+			document.dispatchEvent(event);
+		},
 		updateKanboardSize(val) {
 			const { clientWidth, clientHeight } = document.body;
 			const { width, height } = this.kanboardSize;
@@ -80,12 +87,13 @@ export default {
 	.scene-menu {
 		position: absolute;
 		top: 0;
-        display: flex;
-        color:#fff;
-        font-size:20px;
-        >div{
-            margin-right: 20px;
-        }
+		display: flex;
+		color: #fff;
+		font-size: 20px;
+        z-index:2000;
+		> div {
+			margin-right: 20px;
+		}
 	}
 	.amap-wrapper {
 		width: 3500px;

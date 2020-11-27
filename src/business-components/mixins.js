@@ -56,34 +56,7 @@ export default {
 			if (!this.config.api) {
 				return
 			}
-			const parseParams = (params = {}) => {
-				if (typeof params === 'string') {
-					try {
-						return jsonic(params.trim())
-					} catch (e) {
-					}
-				}
-				return params
-			}
-			const {url, method, path} = this.config.api
-
-			const config = {
-				url,
-				method,
-				[method.toUpperCase() === 'GET' ? 'params' : 'data']: method.toUpperCase() === 'GET' ? parseParams(data) : data
-			}
-			const keys = path ? path.split('.') : []
-
-			if (url) {
-				request(config).then(res => {
-					let result = res
-					while (keys.length) {
-						const key = keys.shift()
-						result = result[key]
-					}
-					this.config.api.data = JSON.stringify(result)
-				})
-			}
+			this.config.api.params = JSON.stringify(data)
 		},
 	},
 	computed: {

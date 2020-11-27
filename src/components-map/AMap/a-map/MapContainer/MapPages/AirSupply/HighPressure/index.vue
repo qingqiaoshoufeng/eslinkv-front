@@ -26,6 +26,7 @@
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
+			:left="left"
 		/>
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
@@ -104,6 +105,7 @@ export default {
 			showRoutePlan: false,
 			activeTab: 'statAawareness',
 			legendMap: AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
+			left: 10,
 		};
 	},
 	methods: {
@@ -114,7 +116,8 @@ export default {
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
-
+			// 计算弹框偏移量
+			this.left = this.offset(overlayType);
 			console.log(overlay);
 			// 警报效果后门 后期修正
 			if (index === 3) {
@@ -153,6 +156,14 @@ export default {
 					});
 				}
 			}
+		},
+		offset(overlayType) {
+			let offsetObj = {
+				GasStation: 15,
+				EmergencyAirSourceStation: 12,
+			};
+			console.log(offsetObj[overlayType]);
+			return offsetObj[overlayType] || 10;
 		},
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
