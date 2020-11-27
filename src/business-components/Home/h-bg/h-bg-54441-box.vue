@@ -1,10 +1,9 @@
 <template>
-	<div class="h-bg-54441-box pos-r">
+	<div class="h-bg-54441-box fn-flex flex-column">
 		<div class="fn-flex flex-row">
-			<img src="./img/box.svg"/>
-			<h2>{{title}}</h2>
+			<h2 class="text-center">{{title}}</h2>
 		</div>
-		<ul class="text-center">
+		<ul class="text-center fn-flex flex-column">
 			<li v-for="(item,index) in content" :key="index">{{item}}</li>
 		</ul>
 	</div>
@@ -26,7 +25,7 @@
 </script>
 <style lang="scss">
 	.h-bg-54441-box {
-		background: rgba(0, 0, 0, 0.4);
+		background: linear-gradient(142.18deg, #001A77 0%, #057CD1 103.19%);
 		border: 1px solid #00DDFF;
 		width: 192px;
 		height: 212px;
@@ -56,6 +55,12 @@
 			height: 16px;
 		}
 
+		ul {
+			flex: 1;
+			align-items: center;
+			justify-content: center;
+		}
+
 		> div {
 			margin: 16px;
 			align-items: center;
@@ -68,6 +73,7 @@
 		}
 
 		h2 {
+			width: 100%;
 			font-weight: 600;
 			font-size: 32px;
 			line-height: 32px;

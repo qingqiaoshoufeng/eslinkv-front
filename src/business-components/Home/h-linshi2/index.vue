@@ -152,18 +152,13 @@
 		data() {
 			return {
 				buildingTimer: null,
-				loopIndex: 1,
-				index1: 1,
-				index2: 2,
-				index3: 3,
-				index4: 4,
-				index5: 5,
-				index6: 6
+				loopIndex: 1
 			}
 		},
 		computed: {
 			currBuilding() {
-				return this.data?.building[((this.loopIndex - 1) % 6)] || {}
+			  const map = new Map([[1, 2], [2, 1], [3, 0], [4, 5], [5, 4], [0, 3]])
+				return this.data?.building[map.get(this.loopIndex % 6)] || {}
 			}
 		},
 		methods: {

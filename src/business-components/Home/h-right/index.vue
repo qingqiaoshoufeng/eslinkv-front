@@ -13,7 +13,7 @@
 					<div class="gas-main">
 						<div class="gas-info">
 							<div class="gas-title">{{ k.name }}</div>
-							<div class="gas-num"><em>{{ k.value | toThousand }}</em> 万m³</div>
+							<div class="gas-num"><em>{{ k.value/10000 | toThousand }}</em> 万m³</div>
 						</div>
 						<div class="gas-progress">
 							<div class="progress" :style="{width: k.percent*100 + '%'}"></div>
