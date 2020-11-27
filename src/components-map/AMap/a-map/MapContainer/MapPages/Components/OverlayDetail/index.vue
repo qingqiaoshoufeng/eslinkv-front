@@ -11,6 +11,7 @@
 			class="no-hover-effect"
 			@input="closePop"
 			:width="detialBoxWidth"
+			:left="left"
 		>
 			<slot>
 				<div
@@ -56,6 +57,7 @@ export default {
 				return {};
 			},
 		},
+		left: { type: Number, default: 10 },
 		value: {
 			type: Boolean,
 			default: false,

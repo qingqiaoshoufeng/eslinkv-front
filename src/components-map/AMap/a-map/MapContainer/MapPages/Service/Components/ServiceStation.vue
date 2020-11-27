@@ -10,7 +10,11 @@
 		}"
 		@click="
 			marker =>
-				$emit('overlay-click', { detailList, ...marker }, overlayType)
+				$emit(
+					'overlay-click',
+					{ detailList, ...marker, overlayType },
+					overlayType
+				)
 		"
 	/>
 </template>

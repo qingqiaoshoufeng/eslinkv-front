@@ -12,7 +12,7 @@
 			<component
 				:key="legend"
 				:visible="config.isShow"
-				:overlayIcon="config.icon"
+				:overlayIcon="config.legendIcon"
 				:overlayType="legend"
 				:is="config.component"
 				@overlay-click="handleOverlayClick"

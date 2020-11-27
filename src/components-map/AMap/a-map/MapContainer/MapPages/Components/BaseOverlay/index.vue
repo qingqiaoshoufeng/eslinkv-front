@@ -6,6 +6,7 @@
 			:marker="{
 				icon: overlayIcon,
 				...item,
+				iconSize,
 			}"
 			:active="item.active"
 			:visible="visible"
@@ -43,6 +44,10 @@ export default {
 			default() {
 				return [];
 			},
+		},
+		iconSize: {
+			type: Number,
+			default: 44,
 		},
 		apiFun: Function,
 		visible: {

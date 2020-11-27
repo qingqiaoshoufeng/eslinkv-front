@@ -7,7 +7,7 @@
 		enter="animated fadeIn"
 		leave="animated fadeOut"
 	>
-		<div class="pop-container" :style="{ width }">
+		<div class="pop-container" :style="{ width, marginLeft: `${left}px` }">
 			<div class="close-btn" @click="$emit('input', false)">
 				<svg-icon icon-name="iconbaseline-close-px"></svg-icon>
 			</div>
@@ -34,6 +34,10 @@ export default {
 		width: {
 			type: String,
 			default: '240px',
+		},
+		left: {
+			type: Number,
+			default: 10,
 		},
 	},
 	data() {

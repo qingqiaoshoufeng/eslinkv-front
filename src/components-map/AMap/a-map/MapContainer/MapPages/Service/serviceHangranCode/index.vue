@@ -4,8 +4,8 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 1.区域 -->
 		<RegionBoundary />
-        <!-- 2.销售区域 -->
-        <SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" /> 
+		<!-- 2.销售区域 -->
+		<SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" />
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component
@@ -16,7 +16,7 @@
 				"
 				:key="legend"
 				:visible="config.isShow"
-				:overlayIcon="config.icon"
+				:overlayIcon="config.legendIcon"
 				:overlayType="legend"
 				:is="config.component"
 				:data="allTypeStationList[config.dataProp]"
@@ -34,6 +34,7 @@
 			:before-close="closeOverlayDetail"
 			@view-detail="showOverlayDetail"
 			ref="OverlayDetail"
+			:left="left"
 		>
 			<TipDetial :data="activeOverlay" :detailInfo="detailInfo" />
 		</OverlayDetail>
@@ -66,8 +67,8 @@ import {
 	Grouphall,
 	BranchCompany,
 	ServiceStation,
-    TipDetial,
-    SaleAreaBoundary
+	TipDetial,
+	SaleAreaBoundary,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -94,8 +95,8 @@ export default {
 		BranchCompany,
 		ServiceStation,
 		OverlayDetail,
-        TipDetial,
-        SaleAreaBoundary
+		TipDetial,
+		SaleAreaBoundary,
 	},
 	data() {
 		let {
@@ -118,8 +119,9 @@ export default {
 			zoom: 10,
 			allTypeStationList: {},
 			detailInfo: {},
-            couplingIncreaseInfo: {},
-            activeArea:'杭州钱江燃气有限公司'
+			couplingIncreaseInfo: {},
+			activeArea: '杭州钱江燃气有限公司',
+			left: 10,
 		};
 	},
 	created() {
@@ -128,9 +130,9 @@ export default {
 		this.$amap.panTo(this.center, 100);
 	},
 	methods: {
-        saleAreaChange(val){
-            console.log(val)
-        },
+		saleAreaChange(val) {
+			console.log(val);
+		},
 		// 关闭详情
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
@@ -148,6 +150,7 @@ export default {
 		},
 		// 点击地图marker
 		handleOverlayClick(overlay, overlayType, isCenter = false) {
+			console.log(overlay);
 			let { lng, lat, id, overlayType: type, detailList } = overlay;
 			let params = {
 				id,
@@ -155,8 +158,10 @@ export default {
 				params: detailList.map(item => item.prop).toString(),
 			};
 			this.getDetailInfo(params);
-			overlay.overlayType = overlayType;
+			// overlay.overlayType = overlayType || overlayType;
 			this.activeOverlay = overlay;
+			console.log(type);
+			this.left = ['BranchCompany', 'Grouphall'].includes(type) ? 15 : 10;
 			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 		},
 		// 联码新增统计数据

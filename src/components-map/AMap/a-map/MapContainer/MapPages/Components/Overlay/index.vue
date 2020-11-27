@@ -9,17 +9,25 @@ export default {
 		AMapMarker,
 	},
 	render: (h, { props, data, listeners, scopedSlots, $slots }) => {
-		let {active=false, marker, visible = true } = props;
-		let { lat, lng, name, status, icon } = marker;
-		icon = icon ? icon.replace('tuli', '') : icon;
+		let { active = false, marker, visible = true } = props;
+		let { lat, lng, name, status, icon, iconSize } = marker;
+		// icon = icon ? icon.replace('tuli', '') : icon;
 		if (!lat || !lng) {
 			return null;
-        }
+		}
 		return (
 			<AMapMarker visible={visible} position={[lng, lat]} vid={name}>
-				<div  class='sample' class={['sample',active?'active':'']} on={listeners}>
+				<div
+					class="sample"
+					class={['sample', active ? 'active' : '']}
+					on={listeners}
+				>
 					{icon && (
-						<SvgIcon class="sample-icon" icon-name={icon}></SvgIcon>
+						<SvgIcon
+							class="sample-icon"
+							icon-name={icon}
+							style={{ fontSize: `${iconSize}px` }}
+						></SvgIcon>
 					)}
 					{$slots.default}
 				</div>
@@ -45,7 +53,7 @@ export default {
 .active {
 	z-index: 999;
 	padding: 0;
-	>.sample-icon {
+	> .sample-icon {
 		font-size: 80px !important;
 	}
 	/deep/ .sample-icon {
