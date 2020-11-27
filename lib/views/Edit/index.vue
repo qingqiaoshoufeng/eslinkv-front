@@ -13,6 +13,7 @@
 				<Button type="default" @click="preview">预览</Button>
 				<Button type="primary" @click="editBoard" :loading="loading">保存</Button>
 				<Button type="default" @click="publishBoard" :loading="loading">发布</Button>
+				<Button type="default" @click="exportKanboardData" :loading="loading">导出</Button>
 			</div>
 		</d-footer>
 		<transition name="preview-fade">
@@ -31,6 +32,7 @@
 	import dFooter from '../../components/d-footer'
 	import {Button} from 'view-design'
 	import {mutations} from '../../store'
+	import downloadFile from '../../vendor/download-file'
 
 	export default {
 		name: 'Edit',
@@ -62,6 +64,77 @@
 			};
 		},
 		methods: {
+			exportKanboardData() {
+				const data = this.$refs.kanboardEditor.prepareKanboardData()
+				let fileName = data.name
+				this.$Modal.confirm({
+					title: '看板导出',
+					render: (h) => {
+						return h(
+							'div',
+							{
+								class: 'form-wrapper'
+							},
+							[
+								h(
+									'p',
+									'导出功能用于看板数据备份、迁移。'
+								),
+								h(
+									'div',
+									{
+										class: 'form-item'
+									},
+									[
+										h(
+											'label',
+											{
+												class: 'form-label text-right'
+											},
+											'文件名称'
+										),
+										h(
+											'Input',
+											{
+												attrs: {
+													placeholder: '自定义导出文件名'
+												},
+												props: {
+													value: fileName
+												},
+												on: {
+													input: (val) => {
+														fileName = val
+													}
+												}
+											},
+											[
+												h(
+													'span',
+													{
+														slot: 'append'
+													},
+													'.json'
+												)
+											]
+										)
+									]
+								)
+							]
+						)
+					},
+					onOk: () => {
+						const config = {...data}
+						config.data = JSON.parse(config.attribute)
+						delete config.attribute
+						downloadFile(config, fileName, 'json')
+					},
+					onCancel: () => {
+					},
+					okText: '确定',
+					cancelText: '取消'
+				})
+			},
 			previewBack() {
 				this.previewOpen = false
 				this.$router.back()
