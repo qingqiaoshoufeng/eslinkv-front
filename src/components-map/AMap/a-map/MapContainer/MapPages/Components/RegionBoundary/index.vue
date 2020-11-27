@@ -21,7 +21,8 @@ export default {
 			var district = new window.AMap.DistrictSearch({
 					extensions: 'all',
 					subdistrict: 0,
-					level: 'district',
+                    level: 'district',
+                    showbiz:false,
 				}),
 				districts = [
 					'江干区',
@@ -35,13 +36,13 @@ export default {
 					'富阳区',
 					'临安区',
 					'桐庐县',
-					'淳安县',
-					'建德市',
+					'淳安县',  
+					'建德市',  
 				];
-			this.instanceArr = [];
+            this.instanceArr = [];
 			districts.forEach(area => {
 				district.search(area, (status, result) => {
-					var bounds = result.districtList[0].boundaries;
+                    var bounds = result.districtList[0].boundaries;
 					if (bounds) {
 						for (var i = 0, l = bounds.length; i < l; i++) {
 							let instance = new window.AMap.Polygon({
@@ -57,8 +58,7 @@ export default {
 								extData: {
 									area: area,
 								},
-							});
-
+                            });
 							if (this.instanceArr) {
                                 //选中区域
 								if (this.selectAreaChange) {

@@ -2,9 +2,10 @@
 <template>
 	<div>
 		<!-- 1.legend不控制显隐的覆盖物 -->
-		<!-- 区域 -->
+		<!-- 1.区域 -->
 		<RegionBoundary />
-        <SaleAreaBoundary /> 
+        <!-- 2.销售区域 -->
+        <SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" /> 
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component
@@ -117,7 +118,8 @@ export default {
 			zoom: 10,
 			allTypeStationList: {},
 			detailInfo: {},
-			couplingIncreaseInfo: {},
+            couplingIncreaseInfo: {},
+            activeArea:'杭州钱江燃气有限公司'
 		};
 	},
 	created() {
@@ -126,6 +128,9 @@ export default {
 		this.$amap.panTo(this.center, 100);
 	},
 	methods: {
+        saleAreaChange(val){
+            console.log(val)
+        },
 		// 关闭详情
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;

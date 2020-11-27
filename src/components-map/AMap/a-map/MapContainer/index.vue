@@ -72,6 +72,7 @@ export default {
 			let ratio = Math.min(clientWidth / width, clientHeight / height);
 			ratio = ratio < 1 ? ratio : 1;
 			this.reverseScaleRatio = 1 / ratio;
+			// this.reverseScaleRatio = 1 
 		},
 	},
 	mounted() {
