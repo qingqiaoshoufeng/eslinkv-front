@@ -20,23 +20,26 @@ module.exports = {
         open: true,
         disableHostCheck: true,
         proxy: {
-            '/api': {
-                target: 'http://ebp-pc.hw-qa.eslink.net.cn',
+            '/hangran': {
+                target: 'http://ebp-pc.hzrq.local:15003',
                 changeOrigin: true,
                 headers: {
-                    Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
+                    Cookie: 'SESSION=6de331ba-2224-41dd-afb6-4984557cd03e'
                 },
-                pathRewrite: {
-                    '^/api': '/'
-                }
-            },
-            '/hangran': {
-                target: 'http://192.168.1.33:9082',
-                changeOrigin: true,
                 pathRewrite: {
                     '^/hangran': '/'
                 }
             },
+			'/api': {
+				target: 'http://ebp-pc.hw-qa.eslink.net.cn',
+				changeOrigin: true,
+				headers: {
+					Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
+				},
+				pathRewrite: {
+					'^/api': '/'
+				}
+			},
             '/data': {
                 target: 'http://127.0.0.1:7001',
                 changeOrigin: true,

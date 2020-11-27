@@ -32,7 +32,7 @@
 				</div>
 				<div class="detail-title">
 					<div class="detail-title-logo">
-						<img src="./img/detail-title.svg" alt=""/>
+						<img src="img/detail-title.svg" alt=""/>
 					</div>
 					<span>活动详情</span>
 				</div>
@@ -61,7 +61,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="./img/quota1.svg"/>
+									<img src="img/quota1.svg"/>
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
@@ -72,7 +72,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="./img/quota2.svg"/>
+									<img src="img/quota2.svg"/>
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
@@ -85,7 +85,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="./img/quota3.svg"/>
+									<img src="img/quota3.svg"/>
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
@@ -108,7 +108,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="./img/quota4.svg"/>
+									<img src="img/quota4.svg"/>
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
@@ -119,7 +119,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="./img/quota5.svg"/>
+									<img src="img/quota5.svg"/>
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
@@ -268,7 +268,7 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		background: url('./img/activity-service-bg.png') no-repeat;
+		background: url('img/activity-service-bg.png') no-repeat;
 		background-size: 100% 100%;
 		padding: 0 280px;
 
@@ -297,7 +297,7 @@
 
 			.title {
 				position: relative;
-				background: url('./img/activity-title.svg') no-repeat;
+				background: url('img/activity-title.svg') no-repeat;
 				background-size: 100% 100%;
 				width: 992px;
 				height: 64px;
@@ -570,7 +570,7 @@
 		.main-rt {
 			width: 1488px;
 			height: 838px;
-			background: url('./img/activity-right.svg') no-repeat;
+			background: url('img/activity-right.svg') no-repeat;
 			background-size: 100% 100%;
 			padding: 40px 68px 0;
 

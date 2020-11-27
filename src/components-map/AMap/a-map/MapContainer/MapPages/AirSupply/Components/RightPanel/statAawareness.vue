@@ -1,7 +1,7 @@
 <template>
 	<div class="list">
 		<div
-			@click="handleClick(item, index)"
+			@click="handleClick(item, index, 'WARN')"
 			v-for="(item, index) in list"
 			:key="index"
 			class="list-item"
@@ -16,6 +16,12 @@
 				></SvgIcon>
 				<div class="content">
 					{{ item.content }}
+					<div
+						class="type"
+						:class="{ isEvent: item.type === '事件' }"
+					>
+						{{ item.type }}
+					</div>
 				</div>
 				<div>
 					{{ item.time }}
@@ -40,7 +46,6 @@
 
 <script>
 import { SvgIcon } from '../../../../../components/';
-import { SERVICE_SERVICEICCUSTOMER_LEGEND_MAP } from '../../serviceICcustomer/config';
 
 export default {
 	name: 'HomeRealTimeList',
@@ -62,12 +67,7 @@ export default {
 		},
 	},
 	async created() {
-		try {
-			this.list = await this.$sysApi.map.serve.getICcustomerSituationAwareness();
-			console.log(this.list);
-		} catch (error) {
-			console.log(error);
-		}
+		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
 	},
 	watch: {
 		activeItem(val) {
@@ -83,17 +83,9 @@ export default {
 	},
 	methods: {
 		handleClick(item, index) {
-			this.activeIndex = index;
-			let {
-				detailList,
-				component: overlayType,
-			} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP['WarningICcustomer'];
-			console.log(
-				SERVICE_SERVICEICCUSTOMER_LEGEND_MAP['WarningICcustomer']
-			);
-			console.log(overlayType);
 			console.log(item);
-			this.$emit('change', { ...item, detailList, overlayType });
+			this.activeIndex = index;
+			this.$emit('change', { ...item, index }, 'WARNEVENT');
 		},
 	},
 };
@@ -125,6 +117,28 @@ export default {
 				display: flex;
 				align-items: center;
 				margin-left: 12px;
+				font-size: 24px;
+				.type {
+					font-family: PingFang SC;
+					font-style: normal;
+					font-weight: normal;
+					font-size: 16px;
+					line-height: 16px;
+					line-height: 24px;
+					display: inline-block;
+					margin-left: 12px;
+					border: 1px solid #ffd200;
+					box-sizing: border-box;
+					border-radius: 4px;
+					width: 40px;
+					height: 24px;
+					text-align: center;
+					color: #fff;
+					justify-content: center;
+				}
+				.isEvent {
+					border: 1px solid #001a77 !important;
+				}
 			}
 			.station-name {
 				font-size: 18px;
@@ -133,6 +147,12 @@ export default {
 				margin-left: 36px;
 			}
 		}
+	}
+	.status-suc {
+		color: #00ddff;
+	}
+	.status-err {
+		color: #ff7217;
 	}
 }
 </style>

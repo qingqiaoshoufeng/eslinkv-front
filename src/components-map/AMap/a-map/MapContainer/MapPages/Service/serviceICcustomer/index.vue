@@ -31,7 +31,11 @@
 			@view-detail="showOverlayDetail"
 			ref="OverlayDetail"
 		>
-			<TipDetial :data="activeOverlay" :detailInfo="detailInfo" />
+			<TipDetial
+				:data="activeOverlay"
+				:detailInfo="detailInfo"
+				:isShowMore="isShowMore"
+			/>
 		</OverlayDetail>
 		<portal to="destination">
 			<MapLegend
@@ -46,6 +50,7 @@
 			<RightPanelWithServiceICcustomer
 				class="right-panel"
 				@list-click="handleListClick"
+				@overlay-click="handleOverlayClick"
 			/>
 		</portal>
 	</div>
@@ -106,6 +111,7 @@ export default {
 			allTypeStationList: {},
 			detailInfo: {},
 			ICcustomerDetailInfo: {},
+			isShowMore: false,
 		};
 	},
 	created() {
@@ -120,6 +126,7 @@ export default {
 		// 点击地图marker
 		handleOverlayClick(overlay, overlayType, isCenter = false) {
 			console.log(overlay);
+			overlay.overlayType = overlayType || overlay.overlayType;
 			let { lng, lat, id, overlayType: type, detailList } = overlay;
 			let params = {
 				id,
@@ -127,9 +134,11 @@ export default {
 				params: detailList.map(item => item.prop).toString(),
 			};
 			this.getDetailInfo(params);
-			overlay.overlayType = overlayType;
+
 			this.activeOverlay = overlay;
-			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
+			this.isShowMore = ['WarningICcustomer'].includes(type);
+
+			console.log(this.isShowMore, type);
 		},
 		// 请求统计数据
 		async getDataStatisticsList() {

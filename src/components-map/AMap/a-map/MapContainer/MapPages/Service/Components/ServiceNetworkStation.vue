@@ -8,7 +8,8 @@
 			apiFun,
 		}"
 		@click="marker => $emit('overlay-click', marker, overlayType)"
-	/>
+	>
+	</BaseOverlay>
 </template>
 <script>
 import { BaseOverlay } from '../../Components/index';

@@ -12,7 +12,15 @@
 			marker =>
 				$emit('overlay-click', { detailList, ...marker }, overlayType)
 		"
-	/>
+	>
+		<video
+			src="@/assets/amap/images/warning-circle.webm"
+			controls="controls"
+			autoplay="autoplay"
+			muted="muted"
+			loop
+		></video>
+	</BaseOverlay>
 </template>
 <script>
 import { BaseOverlay } from '../../Components/index';
@@ -55,6 +63,16 @@ export default {
 	},
 };
 </script>
+<style lang="scss" scoped>
+video::-webkit-media-controls {
+	display: none !important;
+}
+video {
+	margin-left: -38px;
+	margin-top: -66px;
+	outline: none;
+}
+</style>
 
 
 

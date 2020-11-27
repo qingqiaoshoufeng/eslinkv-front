@@ -1,6 +1,6 @@
 <template>
 	<div class="TipDetial">
-		<div class="companyName">{{ data.name }}</div>
+		<div class="companyName">{{ data.name || data.address }}</div>
 		<!-- <div class="accept">{{ `本月已受理数量: ${data.accept}` }}</div>
 		<div class="complete">{{ `本月已办结数量: ${data.complete}` }}</div>
 		<div class="percentage">{{ `本月办结率: ${data.percentage}` }}</div> -->
@@ -15,6 +15,9 @@
 					`${detailInfo[item.prop] + item.DW} `
 				}}</span>
 			</div>
+		</div>
+		<div class="btn" v-if="isShowMore" @click="handleViewDetail()">
+			查看详情
 		</div>
 	</div>
 </template>
@@ -34,34 +37,17 @@ export default {
 				return {};
 			},
 		},
+		isShowMore: {
+			Type: Boolean,
+			default: false,
+		},
 	},
 	data() {
-		return {
-			detialInfoList: [
-				{
-					name: '今日操作',
-					value: '16次',
-				},
-				{
-					name: '本周操作',
-					value: '125次',
-				},
-				{
-					name: '联码户数',
-					value: '13453户',
-				},
-				{
-					name: '联码率',
-					value: '62%',
-				},
-				{
-					name: '本月新增联码户数',
-					value: '62户',
-				},
-			],
-		};
+		return {};
 	},
-	methods: {},
+	methods: {
+		handleViewDetail() {},
+	},
 	mounted() {
 		console.log(this.data.detialInfo);
 	},
@@ -114,6 +100,20 @@ export default {
 	}
 	.accept {
 		margin-top: 16px;
+	}
+	.btn {
+		padding: 0px 8px;
+		line-height: 32px;
+		width: 80px;
+		height: 32px;
+		background: #0057a9;
+		border-radius: 4px;
+		display: inline-block;
+		cursor: pointer;
+		margin-top: 16px;
+		&:hover {
+			opacity: 0.8;
+		}
 	}
 }
 </style>

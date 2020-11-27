@@ -24,11 +24,11 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
     WarningICcustomer: {
         label: '报警',
         legendIcon: 'icontulifengongsi',
-        icon: 'iconfengongsi1',
+        icon: 'iconyongqidahu1',
         component: 'WarningICcustomer',
         isShow: true,
         dataProp: 'WarningICcustomerList',
-        detailList: []
+        detailList: [useNumberYestoday]
     }
 }
 
