@@ -7,9 +7,7 @@
 			<div class="h-bg-right pos-a"></div>
 			<div class="h-bg-red1 pos-a pointer" :class="{active:status54441}" @click="open54441"></div>
 			<div class="h-bg-red2 pos-a pointer" :class="{active:statusVideo}" @click="openVideo"></div>
-			<transition name="slide-down">
-				<h-bg-54441 v-if="status54441" :status="status54441" :close="close54441"/>
-			</transition>
+			<h-bg-54441 v-if="status54441" :status="status54441" :close="close54441"/>
 			<div class="h-bg-center pos-a"></div>
 			<ul class="h-bg-nav pos-a fn-flex flex-row">
 				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('nn16rowdl5r')">
@@ -29,7 +27,11 @@
 					<span>杭燃体验</span>
 				</li>
 			</ul>
-			<div class="h-bg-start1 pos-a pointer" @click="handleStart" :class="{active:statusStart}"></div>
+			<video src="./img/start1-active.webm" autoplay="autoplay" loop="loop"
+				   class="h-bg-start1 pos-a pointer"
+				   @click="handleStart"
+				   v-if="statusStart"></video>
+			<div class="h-bg-start1 pos-a pointer" @click="handleStart" v-else></div>
 		</div>
 	</div>
 </template>
@@ -129,14 +131,10 @@
 	.h-bg-start1 {
 		width: 72px;
 		height: 72px;
-		background-image: url('./img/start1-active.svg');
+		background-image: url('./img/start1.svg');
 		left: 50%;
 		bottom: 27px;
 		margin-left: 540px;
-
-		&.active {
-			background-image: url('./img/start1.svg');
-		}
 	}
 
 	.h-bg-nav {
