@@ -17,14 +17,10 @@
 				<div class="content">
 					{{ item.content }}
 					<div
-						class="level"
-						:class="{
-							first: item.level === 1,
-							second: item.level === 2,
-							third: item.level === 3,
-						}"
+						class="type"
+						:class="{ isEvent: item.type === '事件' }"
 					>
-						{{ item.level }}
+						{{ item.type }}
 					</div>
 				</div>
 				<div>
@@ -52,7 +48,7 @@
 import { SvgIcon } from '../../../../../components/';
 
 export default {
-	name: 'realTimeWithLevel',
+	name: 'HomeRealTimeList',
 	components: {
 		SvgIcon,
 	},
@@ -71,7 +67,7 @@ export default {
 		},
 	},
 	async created() {
-		this.list = await this.$sysApi.map.home.getWarningList1();
+		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
 	},
 	watch: {
 		activeItem(val) {
@@ -87,8 +83,9 @@ export default {
 	},
 	methods: {
 		handleClick(item, index) {
+			console.log(item);
 			this.activeIndex = index;
-			this.$emit('change', item, 'WARN');
+			this.$emit('change', { ...item, index }, 'WARNEVENT');
 		},
 	},
 };
@@ -120,23 +117,27 @@ export default {
 				display: flex;
 				align-items: center;
 				margin-left: 12px;
-				display: flex;
-				align-items: center;
-				.level {
-					width: 20px;
-					height: 24px;
+				font-size: 24px;
+				.type {
+					font-family: PingFang SC;
+					font-style: normal;
+					font-weight: normal;
+					font-size: 16px;
+					line-height: 16px;
 					line-height: 24px;
-					margin-left: 8px;
+					display: inline-block;
+					margin-left: 12px;
+					border: 1px solid #ffd200;
+					box-sizing: border-box;
+					border-radius: 4px;
+					width: 40px;
+					height: 24px;
 					text-align: center;
+					color: #fff;
+					justify-content: center;
 				}
-				.first {
-					background: #9e1a14;
-				}
-				.second {
-					background: #be4a18;
-				}
-				.third {
-					background: #cf8900;
+				.isEvent {
+					border: 1px solid #001a77 !important;
 				}
 			}
 			.station-name {

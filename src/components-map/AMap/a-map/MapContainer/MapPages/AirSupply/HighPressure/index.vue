@@ -64,6 +64,8 @@ import {
 	INDEXSCENEMAP,
 	AIRSUPPLY_WARN_SCENEINDEX,
 	AIRSUPPLY_WARN_COMPONENTINDEX,
+	AIRSUPPLY_WARN_MODEL_SCENEINDEX,
+	AIRSUPPLY_WARN__MODEL_COMPONENTINDEX,
 } from '../../../../config';
 import {
 	AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
@@ -100,22 +102,56 @@ export default {
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'realTimeWithLevel',
+			activeTab: 'statAawareness',
 			legendMap: AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
 		};
 	},
 	methods: {
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
+			console.log(11);
 			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
-			let { lng, lat } = overlay;
+			let { lng, lat, address, time, index } = overlay;
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
-			this.$amap.setZoom(14, 100);
-			if (isCenter) {
+
+			console.log(overlay);
+			// 警报效果后门 后期修正
+			if (index === 3) {
+				GoldChart.scene.createSceneInstance(
+					AIRSUPPLY_WARN_MODEL_SCENEINDEX,
+					'fadeIn',
+					'none'
+				);
 				this.$nextTick(() => {
-					this.$amap.panTo([lng, lat], 100);
+					AIRSUPPLY_WARN__MODEL_COMPONENTINDEX.forEach(item => {
+						console.log(item);
+						GoldChart.instance.updateComponent(item, {
+							data: {
+								time: time,
+								title: address,
+							},
+						});
+					});
 				});
+				setTimeout(() => {
+					GoldChart.scene.destroyScene(
+						AIRSUPPLY_WARN_MODEL_SCENEINDEX
+					);
+					this.$amap.setZoom(14, 100);
+					if (isCenter) {
+						this.$nextTick(() => {
+							this.$amap.panTo([lng, lat], 100);
+						});
+					}
+				}, 3000);
+			} else {
+				this.$amap.setZoom(14, 100);
+				if (isCenter) {
+					this.$nextTick(() => {
+						this.$amap.panTo([lng, lat], 100);
+					});
+				}
 			}
 		},
 		closeOverlayDetail(done) {
@@ -132,6 +168,7 @@ export default {
 			done();
 		},
 		viewOverlayDetail(overlay) {
+			console.log(111111);
 			let { overlayType } = overlay;
 			console.log(overlay, 'overlay');
 			if (overlayType === 'WARNEVENT') {
@@ -140,8 +177,9 @@ export default {
 				console.log(overlay);
 				let { content, address } = overlay;
 				//和场景进行交互
+
 				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
-				//更新数据
+
 				this.$nextTick(() => {
 					AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
 						GoldChart.instance.updateComponent(i, {
