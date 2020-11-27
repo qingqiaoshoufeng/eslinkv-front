@@ -73,11 +73,11 @@
 					position: absolute;
 					background: #00DDFF;
 					border-radius: 4px;
-					width: 64px;
+					width: 100%;
 					height: 4px;
 					bottom: 0;
 					left: 50%;
-					margin-left: -32px;
+					transform: translateX(-50%);
 				}
 			}
 		}
