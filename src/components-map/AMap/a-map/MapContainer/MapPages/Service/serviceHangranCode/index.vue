@@ -139,6 +139,18 @@ export default {
 	methods: {
 		saleAreaChange(val) {
 			console.log(val);
+			let params = this.allTypeStationList.branchCompanyList.find(
+				item => item.name === val
+			);
+
+			params = {
+				...params,
+				detailList:
+					SERVICE_SERVICEHANGRANCODE_LEGEND_MAP.BranchCompany
+						.detailList,
+			};
+			console.log(params);
+			this.handleOverlayClick(params);
 		},
 		// 关闭详情
 		closeOverlayDetail(done) {
@@ -178,12 +190,13 @@ export default {
 		// 请求集团大厅，分公司，综合服务站数据列表
 		async getAllTypeStationList() {
 			let params = {
-				type: [
+				types: [
 					'Grouphall',
 					'BranchCompany',
 					'ComprehensiveServiceStation',
-				],
+				].toString(),
 			};
+			console.log(params);
 			let res = await this.$sysApi.map.serve.getHangranCodeList(params);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
 		},

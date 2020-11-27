@@ -7,7 +7,7 @@ export function getHangranCodeList(data) {
     return request({
         url: `${HANGRANURL}/gasCode/mapDataResult`,
         method: 'get',
-        data: qs.stringify(data),
+        params: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -18,7 +18,7 @@ export function getHangranCodeHotList(data) {
     return request({
         url: `${HANGRANURL}/gasCode/heatCount`,
         method: 'get',
-        data: qs.stringify(data),
+        params: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -29,7 +29,7 @@ export function getHangranCodeDetailInfo(data) {
     return request({
         url: `${HANGRANURL}/gasCode/mapDetailInfo`,
         method: 'get',
-        data: qs.stringify(data),
+        params: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },

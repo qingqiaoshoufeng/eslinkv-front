@@ -11,12 +11,15 @@ export default {
 	render: (h, { props, data, listeners, scopedSlots, $slots }) => {
 		let { active = false, marker, visible = true } = props;
 		let { lat, lng, name, status, icon, iconSize } = marker;
-		// icon = icon ? icon.replace('tuli', '') : icon;
-		if (!lat || !lng) {
+		if (!parseFloat(lat) || !parseFloat(lng)) {
 			return null;
 		}
 		return (
-			<AMapMarker visible={visible} position={[lng, lat]} vid={name}>
+			<AMapMarker
+				visible={visible}
+				position={[lng || 0, lat || 0]}
+				vid={name}
+			>
 				<div
 					class="sample"
 					class={['sample', active ? 'active' : '']}
