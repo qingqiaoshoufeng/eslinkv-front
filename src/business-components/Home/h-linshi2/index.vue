@@ -20,7 +20,7 @@
           <div class="detail-item-icon money"></div>
           <div>
             <div class="detail-item-title">{{ currBuilding.desc2 }}</div>
-            <div class="detail-item-num">{{ currBuilding.value2 | toThousand }} <span>元</span></div>
+            <div class="detail-item-num">{{ currBuilding.value2/10000 | toThousand }} <span>万元</span></div>
           </div>
         </div>
       </section>

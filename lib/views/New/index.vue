@@ -15,8 +15,18 @@
 				<Button type="default" class="return" @click="exit">返回</Button>
 				<Button type="default" @click="preview">预览</Button>
 				<Button type="primary" @click="addBoard" :loading="loading">保存</Button>
+				<Button type="default" @click="exportKanboardData" :loading="loading">导出</Button>
+				<Button type="default" @click="showImportModal" :loading="loading">导入</Button>
 			</div>
 		</d-footer>
+		<Modal v-model="importModal">
+			<Form>
+				<FormItem>
+					<label for="originFile" class="style-file-input">全覆盖导入</label>
+					<input class="fn-hide" id="originFile" type="file" accept="application/json" @change="handleFile"/>
+				</FormItem>
+			</Form>
+		</Modal>
 		<transition name="preview-fade">
 			<div v-if="previewOpen" class="preview-wrapper">
 				<router-view @close="previewBack"></router-view>
@@ -32,7 +42,9 @@
 	import loadMask from '../../components/load-mask/index'
 	import dFooter from '../../components/d-footer/index'
 	import * as widgetBindManager from '../mixins/widget-bind-manage'
-	import {Button} from 'view-design'
+	import {Button, Input, Modal, Form, FormItem} from 'view-design'
+	import downloadFile from '../../vendor/download-file'
+	import {mutations} from '../../store'
 
 	export default {
 		name: 'New',
@@ -43,8 +55,10 @@
 		components: {
 			core,
 			loadMask,
+			Modal,
 			Button,
-			'd-footer': dFooter
+			'd-footer': dFooter,
+			'i-input': Input, Form, FormItem
 		},
 		props: {
 			data: {
@@ -54,13 +68,108 @@
 		},
 		data() {
 			return {
+				importModal: false,
 				loading: false,
 				querying: false,
 				templateConfig: {},
-				previewOpen: false
+				previewOpen: false,
 			}
 		},
 		methods: {
+			showImportModal() {
+				this.importModal = true
+			},
+			handleFile(e) {
+				const file = e.target.files[0]
+				const reader = new FileReader()
+				reader.onload = (e) => {
+					try {
+						this.loading = true
+						const result = JSON.parse(e.target.result)
+						const {data, createTime, name} = result
+						this.renderByDetail({name, attribute: data, createTime})
+						this.importModal = false
+						this.loading = false
+					} catch (e) {
+						this.$Message.error('配置文件识别失败')
+					}
+				}
+				reader.onerror = () => {
+					this.$Message.error('配置文件识别失败')
+				}
+				reader.readAsText(file)
+			},
+			renderByDetail(res) {
+				const {attribute, createTime, name} = res
+				this.kanboardName = name
+				document.title = `编辑 - ${name} - 数据看板`
+				this.createTime = createTime
+				let value
+				if (typeof attribute === 'string') {
+					value = JSON.parse(attribute)
+				} else {
+					value = attribute
+				}
+				if (value.scene) {
+					console.log(1)
+					mutations.initScene(value.scene)
+				}
+				this.querying = false
+				this.$refs.kanboardEditor.refillConfig(value)
+			},
+			exportKanboardData() {
+				const data = this.$refs.kanboardEditor.prepareKanboardData()
+				let fileName = `${data.name}-${new Date() * 1}`
+				this.$Modal.confirm({
+					title: '看板导出',
+					components: {
+						'i-input': Input,
+					},
+					render: (h) => {
+						return h(
+							'div',
+							{
+								class: 'form-wrapper'
+							},
+							[
+								h(
+									'p',
+									'导出功能用于看板数据备份、迁移。'
+								),
+								h(
+									'div',
+									{
+										class: 'form-item'
+									},
+									[
+										h(
+											'label',
+											{
+												class: 'form-label text-right'
+											},
+											'文件名称'
+										),
+										h(
+											'span',
+											`${fileName}.json`
+										)
+									]
+								)
+							]
+						)
+					},
+					onOk: () => {
+						const config = {...data}
+						config.data = JSON.parse(config.attribute)
+						delete config.attribute
+						downloadFile(config, fileName, 'json')
+					},
+					onCancel: () => {
+					},
+					okText: '确定',
+					cancelText: '取消'
+				})
+			},
 			previewBack() {
 				this.previewOpen = false
 				this.$router.back()
@@ -152,10 +261,6 @@
 			.ivu-steps-title {
 				line-height: 26px;
 			}
-		}
-
-		.ivu-modal-body {
-			padding: 0 !important;
 		}
 	}
 
