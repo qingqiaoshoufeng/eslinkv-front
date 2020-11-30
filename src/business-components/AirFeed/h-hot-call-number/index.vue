@@ -71,7 +71,7 @@
 		.desc-common {
 			font-size: 18px;
 			line-height: 24px;
-			color: #00DDFF;
+			color: #fff;
 		}
 
 		&__oncall {
@@ -81,6 +81,7 @@
 
 			&__num {
 				@extend .num-common;
+				color: #00FFCF!important;
 			}
 
 			&__desc {

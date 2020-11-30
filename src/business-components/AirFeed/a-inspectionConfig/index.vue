@@ -88,14 +88,14 @@
 		h2 {
 			font-size: 48px;
 			line-height: 48px;
-			color: #fff;
+			color: #00FFCF;
 			margin-top: 18px;
 		}
 
 		p {
 			font-size: 20px;
 			line-height: 24px;
-			color: #00DDFF;
+			color: #fff;
 			margin-top: 14px;
 			text-align: left;
 		}
@@ -153,7 +153,7 @@
 				text-align: left;
 				font-size: 32px;
 				line-height: 32px;
-				color: #FFDC45;
+				color: #fff;
 				padding-left: 34px;
 			}
 

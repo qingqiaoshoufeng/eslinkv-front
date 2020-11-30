@@ -201,7 +201,7 @@
 		border-left: 1px dashed rgba(255, 255, 255, 0.4);
 
 		h1 {
-			color: #fff;
+			color: #00DDFF;
 			font-size: 24px;
 			line-height: 24px;
 		}
@@ -210,7 +210,7 @@
 			font-size: 20px;
 			line-height: 24px;
 			font-weight: normal;
-			color: #00DDFF;
+			color: #fff;
 			margin-bottom: 8px;
 			white-space: nowrap;
 		}
@@ -244,6 +244,10 @@
 
 			&.active {
 				background-color: #00DDFF;
+
+				h2 {
+					color: #00DDFF;
+				}
 
 				span {
 					color: #00DDFF;

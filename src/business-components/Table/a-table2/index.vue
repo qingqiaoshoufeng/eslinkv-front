@@ -216,7 +216,7 @@
 
 					&:nth-child(4) {
 						width: 113px;
-						color: #FF7217;
+						color: #FFDC45;
 					}
 
 					&:nth-child(5) {
@@ -224,7 +224,7 @@
 						color: #00FFCF;
 
 						&.active {
-							color: #FF7217;
+							color: #FFDC45;
 						}
 					}
 
