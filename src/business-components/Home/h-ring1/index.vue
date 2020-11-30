@@ -58,7 +58,7 @@
 		config: {
 			background: '/static/icons/h-ring1-1.svg',
 			suffix: '%',
-			color: JSON.stringify(['#00DDFF', 'rgba(1,253,210,.5)', 'rgba(36,104,206,.5)', 'rgba(228,53,53,.5)', 'rgba(252,155,93,.5)']),
+      color: JSON.stringify(['#db4f49', '#367cf6', '#84e4fc', '#f8cd47', '#fceb50', '#ed9144', '#5fcbb9']),
 		}
 	}
 	export default {
