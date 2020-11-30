@@ -108,6 +108,7 @@ export default {
 				show: false,
 			}
 		},
+		symbol: 'none',
 		itemStyle: {
 			normal: {
 				color: '#01FDD2',
