@@ -169,6 +169,9 @@ export default function getOption(data, config) {
                 },
                 markLine: {
                     symbol: 'none',
+                    label: {
+                        show: false
+                    },
                     data: [
                         [{
                             yAxis: 'min',
@@ -233,6 +236,9 @@ export default function getOption(data, config) {
                 },
                 markLine: {
                     symbol: 'none',
+                    label: {
+                        show: false
+                    },
                     data: [
                         [{
                             yAxis: 'min',
