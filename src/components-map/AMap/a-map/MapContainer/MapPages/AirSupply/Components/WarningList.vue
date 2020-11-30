@@ -18,6 +18,7 @@
 				v-if="item.type === '工艺'"
 			/>
 			<video
+				class="warning-videO"
 				src="@/assets/amap/images/warning-circle.webm"
 				controls="controls"
 				autoplay="autoplay"
@@ -58,11 +59,11 @@ export default {
 </script>
 
 
-<style lang="scss">
+<style lang="scss" scoped>
 video::-webkit-media-controls {
 	display: none !important;
 }
-video {
+.warning-videO {
 	margin-left: -38px;
 	margin-top: -66px;
 	outline: none;

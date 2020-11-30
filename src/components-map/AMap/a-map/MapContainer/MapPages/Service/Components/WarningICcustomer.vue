@@ -14,6 +14,7 @@
 		"
 	>
 		<video
+			class="warning-videO"
 			src="@/assets/amap/images/warning-circle.webm"
 			controls="controls"
 			autoplay="autoplay"
@@ -67,7 +68,7 @@ export default {
 video::-webkit-media-controls {
 	display: none !important;
 }
-video {
+.warning-videO {
 	margin-left: -38px;
 	margin-top: -66px;
 	outline: none;
