@@ -164,7 +164,6 @@ export default {
 			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-			this.$amap.setZoom(11, 100);
 			done();
 		},
 		// 点击地图marker

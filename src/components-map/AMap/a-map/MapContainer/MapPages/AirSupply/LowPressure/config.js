@@ -68,21 +68,21 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         legendIcon: 'icontulimenzhan',
         icon: 'iconmenzhan',
         component: 'GasStation',
-        isShow: true,
+        isShow: false,
     },
     PressureRegulatingStation: {
         label: '调压站',
         legendIcon: 'icontulitiaoyazhan',
         icon: 'icontiaoyazhan',
         component: 'PressureRegulatingStation',
-        isShow: true,
+        isShow: false,
     },
     EmergencyAirSourceStation: {
         label: '应急气源站',
         legendIcon: 'icontuliqiyuanzhan',
         icon: 'iconqiyuanzhan',
         component: 'EmergencyAirSourceStation',
-        isShow: true,
+        isShow: false,
     },
 
 
@@ -121,10 +121,39 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         component: 'DistributedEnergyResource',
         isShow: false,
     },
+    WarningList: {
+        label: '告警',
+        legendIcon: 'icontulinengyuanzhan',
+        icon: 'iconnengyuanzhan',
+        component: 'WarningList',
+        isShow: true,
+    },
 }
 
 //覆盖物详情
-export const AIRSUPPLY_PRESSURE_OVERLAY_MAP = {
+export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
+    EmergencyAirSourceStation: {
+        fields: {
+            name: {
+                style: {
+                    fontSize: '32px',
+                    color: '#FFDC45'
+                },
+                errColor: '#FFDC45'
+            },
+        },
+    },
+    ServiceStation: {
+        fields: {
+            name: {
+                style: {
+                    fontSize: '32px',
+                    color: '#FFDC45'
+                },
+                errColor: '#FFDC45'
+            },
+        },
+    },
     LiquefiedGasStation: {
         fields: {
             name: {},
@@ -161,19 +190,40 @@ export const AIRSUPPLY_PRESSURE_OVERLAY_MAP = {
         fields: {
             content: {
                 style: {
-                    fontSize: '24px',
+                    fontSize: '32px',
+                    color: '#FFDC45'
                 },
+                errColor: '#FFDC45'
             },
             address: {
                 style: {
-                    fontSize: '18px',
+                    fontSize: '24px',
                     color: '#00DDFF',
                 },
-                errColor: '#FF7217',
+                errColor: '#fff',
             },
         },
         isShowMore: true,
     },
+    WarningList: {
+        fields: {
+            content: {
+                style: {
+                    fontSize: '32px',
+                    color: '#FFDC45'
+                },
+                errColor: '#FFDC45'
+            },
+            address: {
+                style: {
+                    fontSize: '24px',
+                    color: '#fff',
+                },
+                errColor: '#fff',
+            },
+        },
+        isShowMore: true,
+    }
 }
 // 中低压统计数据
 export const DATASTATISTICSLIST = [LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber]

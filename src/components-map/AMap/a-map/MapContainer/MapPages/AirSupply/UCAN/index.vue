@@ -26,6 +26,7 @@
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
+			:detialBoxWidth="'400px'"
 		/>
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
@@ -64,6 +65,7 @@ import {
 	PipeManageMentStation,
 	UndergroundRepairStation,
 	OngroundRepairStation,
+	WarningList,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -113,6 +115,7 @@ export default {
 		PipeManageMentStation,
 		UndergroundRepairStation,
 		OngroundRepairStation,
+		WarningList,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
@@ -147,14 +150,14 @@ export default {
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
 			if (overlayType === 'WARNEVENT') {
-				GoldChart.scene.setSceneIndex(
-					INDEXSCENEMAP['AirSupplyHighPressure']
-				);
+				GoldChart.scene.setSceneIndex(INDEXSCENEMAP['AirSupplyUCAN']);
 				this.showRoutePlan = false;
 			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-			this.$amap.setZoom(11, 100);
+			// this.$amap.setZoom(11, 100);
+			this.$amap.setZoom(this.zoom, 100);
+			this.$amap.panTo(this.center, 100);
 			done();
 		},
 		viewOverlayDetail(overlay) {

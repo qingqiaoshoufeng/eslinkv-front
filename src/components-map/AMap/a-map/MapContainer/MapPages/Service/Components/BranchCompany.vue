@@ -8,6 +8,7 @@
 			apiFun,
 			data,
 			iconSize: 56,
+			nameStyle,
 		}"
 		@click="
 			marker =>
@@ -56,6 +57,9 @@ export default {
 	data() {
 		return {
 			apiFun: this.$sysApi.map.serve.getBranchCompanyList,
+			nameStyle: {
+				fontSize: '24px',
+			},
 		};
 	},
 	mounted() {

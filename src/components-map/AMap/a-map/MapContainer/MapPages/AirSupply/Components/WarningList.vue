@@ -5,17 +5,19 @@
 			:key="index"
 			:marker="{
 				icon: `${eventTypeIconMap[item.eventType]}${
-					item.status ? '-suc' : ''
+					item.status ? '' : '-suc'
 				}`,
 				...item,
 			}"
 			:visible="true"
-			@click="$emit('overlay-click', item)"
+			@click="
+				$emit('overlay-click', { overlayType: 'WarningList', ...item })
+			"
 		>
 			<img
 				src="@/assets/amap/images/qiangxiu.gif"
 				class="warnoverlay-gif"
-				v-if="item.type === '工艺'"
+				v-if="item.type === '工艺' && item.status"
 			/>
 			<video
 				class="warning-videO"
@@ -24,7 +26,7 @@
 				autoplay="autoplay"
 				muted="muted"
 				loop
-				v-if="item.type === '事件'"
+				v-if="item.type === '事件' && item.status"
 			></video>
 		</Overlay>
 	</div>
@@ -32,13 +34,19 @@
 <script>
 import { Overlay } from '../../Components/index';
 let eventTypeIconMap = {
-	0: 'iconbaoguanshijian',
-	1: 'iconxieloushijian',
+	0: 'icontulibaoguanshijian',
+	1: 'icontulixieloushijian',
 };
 export default {
 	name: 'RoutePlan',
 	components: {
 		Overlay,
+	},
+	props: {
+		overlayType: {
+			type: String,
+			default: 'WarningList',
+		},
 	},
 	data() {
 		return {
@@ -51,7 +59,7 @@ export default {
 	async created() {
 		this.map = this.$parent.$amap;
 		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
-		console.log(res);
+		// console.log(res);
 		// this.list = res.filter(item => item.status);
 		// console.log(this.list, 1111);
 	},
@@ -65,7 +73,7 @@ video::-webkit-media-controls {
 }
 .warning-videO {
 	margin-left: -38px;
-	margin-top: -66px;
+	margin-top: -80px;
 	outline: none;
 }
 .amap-icon {
@@ -80,8 +88,8 @@ video::-webkit-media-controls {
 	display: block;
 	width: 100px;
 	height: 35px;
-	margin-top: -14px;
-	margin-left: -23px;
+	margin-top: -40px;
+	margin-left: -30px;
 }
 
 // img {

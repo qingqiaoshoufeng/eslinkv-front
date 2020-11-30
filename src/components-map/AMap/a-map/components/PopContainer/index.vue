@@ -54,6 +54,7 @@ export default {
 <style lang="scss" scoped>
 .pop-container {
 	position: relative;
+	min-width: 240px;
 	padding: 16px;
 	font-size: 16px;
 	background: rgba(0, 11, 37, 0.8);

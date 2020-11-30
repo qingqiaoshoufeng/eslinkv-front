@@ -8,7 +8,7 @@
 			v-for="(item, index) in dataStatisticsList"
 			:key="index"
 		>
-			<div class="value" :class="item.type">
+			<div class="value font-num" :class="item.type">
 				{{ data[item.prop] && data[item.prop].toLocaleString() }}
 			</div>
 			<div class="desc">{{ item.label }}</div>
@@ -71,7 +71,7 @@ export default {
 			font-weight: 700;
 			line-height: 48px;
 			text-align: right;
-			color: #fff;
+			color: #ffdc45;
 			padding-right: 16px;
 		}
 		.warning {
@@ -83,7 +83,7 @@ export default {
 			margin-top: 8px;
 			font-size: 24px;
 			border-radius: 16px;
-			color: #00ddff;
+			color: #fff;
 			padding-right: 16px;
 			text-align: right;
 			background: linear-gradient(

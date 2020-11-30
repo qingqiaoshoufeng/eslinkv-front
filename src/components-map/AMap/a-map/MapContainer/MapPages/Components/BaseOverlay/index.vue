@@ -10,11 +10,15 @@
 			}"
 			:active="item.active"
 			:visible="visible"
-			@click="$emit('click', item)"
+			@click="click(item)"
 		>
 			<slot :data="item">
 				<!-- 默认显示图标的名字 -->
-				<div class="sample-name" v-if="showOverlayName">
+				<div
+					class="sample-name"
+					:style="nameStyle"
+					v-if="showOverlayName"
+				>
 					{{ item.name }}
 				</div>
 			</slot>
@@ -43,6 +47,12 @@ export default {
 			type: Array,
 			default() {
 				return [];
+			},
+		},
+		nameStyle: {
+			type: Object,
+			default: function () {
+				return {};
 			},
 		},
 		iconSize: {
@@ -86,6 +96,7 @@ export default {
 		let fun = findAmapRoot.bind(this);
 		this.$amap = fun();
 		this.getData(this.query);
+		console.log(this.nameStyle, 22222);
 	},
 	data() {
 		return {
@@ -97,9 +108,14 @@ export default {
 		async getData(query) {
 			try {
 				this.list = await this.apiFun(query);
+				// console.log(this.list);
 			} catch (err) {
 				console.log(err, 'err');
 			}
+		},
+		click(item) {
+			// console.log(item, 1111111);
+			this.$emit('click', item);
 		},
 	},
 };
@@ -107,7 +123,7 @@ export default {
 
 <style lang="scss" scoped>
 .sample-name {
-	font-size: 18px;
+	font-size: 20px;
 	color: #fff;
 	position: absolute;
 	white-space: nowrap;
