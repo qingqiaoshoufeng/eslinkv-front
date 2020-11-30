@@ -24,7 +24,7 @@
 				<li class="li">
 					<div class="air-name">高压管线</div>
 					<div>
-						<span class="air-num font-num">{{ data.air.highPipeline | toThousand }}</span>
+						<span class="air-num font-num">{{ data.air.highPipeline/1000  | toThousand }}</span>
 						<span class="air-unit">km</span>
 					</div>
 				</li>
@@ -38,7 +38,7 @@
 				<li class="li">
 					<div class="air-name">中压管线</div>
 					<div>
-						<span class="air-num font-num">{{ data.air.mediumPipeline | toThousand }}</span>
+						<span class="air-num font-num">{{ data.air.mediumPipeline/1000  | toThousand }}</span>
 						<span class="air-unit">km</span>
 					</div>
 				</li>
@@ -52,7 +52,7 @@
 				<li class="li">
 					<div class="air-name">低压管线</div>
 					<div>
-						<span class="air-num font-num">{{ data.air.lowPipeline | toThousand }}</span>
+						<span class="air-num font-num">{{ data.air.lowPipeline/1000 | toThousand }}</span>
 						<span class="air-unit">km</span>
 					</div>
 				</li>
