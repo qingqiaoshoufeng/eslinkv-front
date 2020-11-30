@@ -45,11 +45,16 @@
 	};
 	const value = {
 		api: {
-			data: JSON.stringify({
-				yValue: [120, 200, 150, 80, 70, 110, 130],
-				yValue1: [120, 200, 150, 80, 70, 110, 130],
-				xValue: ['5月', '6月', '7月', '8月', '9月', '10月', '11月'],
-			}),
+			data: JSON.stringify([
+					{yValue1: 120, yValue2: 120, xValue: '5月'},
+					{yValue1: 200, yValue2: 200, xValue: '6月'},
+					{yValue1: 150, yValue2: 150, xValue: '7月'},
+					{yValue1: 80, yValue2: 80, xValue: '8月'},
+					{yValue1: 70, yValue2: 70, xValue: '9月'},
+					{yValue1: 110, yValue2: 110, xValue: '10月'},
+					{yValue1: 130, yValue2: 130, xValue: '11月'},
+				]
+			),
 		},
 		config: {
 			color1: '#2C99FF',
@@ -63,11 +68,11 @@
 		mixins: [mixins],
 		methods: {
 			setOption(data) {
-				options.xAxis.data = data.xValue;
-				options.series[0].data = data.yValue;
+				options.xAxis.data = data.map(item => item.xValue);
+				options.series[0].data = data.map(item => item.yValue1);
 				options.series[0].itemStyle.normal.color = this.config.config.color1;
 				options.series[1].itemStyle.normal.color = this.config.config.color2;
-				options.series[1].data = data.yValue1;
+				options.series[1].data = data.map(item => item.yValue2);
 				this.instance && this.instance.setOption(options);
 			},
 		},
@@ -75,7 +80,7 @@
 			data: {
 				handler(val) {
 					if (this.id) {
-						const data = {...val};
+						const data = [...val];
 						this.$nextTick(() => {
 							this.instance = echarts.init(
 								document.getElementById(this.id)
