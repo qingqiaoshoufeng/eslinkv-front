@@ -201,14 +201,13 @@
 		border-left: 1px dashed rgba(255, 255, 255, 0.4);
 
 		h1 {
-			color: #00DDFF;
-			font-size: 20px;
+			color: #fff;
+			font-size: 24px;
 			line-height: 24px;
-			font-weight: normal;
 		}
 
 		p {
-			font-size: 18px;
+			font-size: 20px;
 			line-height: 24px;
 			font-weight: normal;
 			color: #00DDFF;
@@ -260,7 +259,7 @@
 			}
 
 			h2 {
-				font-size: 18px;
+				font-size: 20px;
 				line-height: 24px;
 				color: #FFFFFF;
 				font-weight: normal;
