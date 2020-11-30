@@ -1,7 +1,7 @@
 <template>
 	<div class="widget-part pos-r" :style="`${styles}left:0px;top:0px;z-index:13;`">
 		<div class="h-bg pos-r">
-			<video class="pos-a" src="./img/bg.webm" autoplay="autoplay" loop="loop"></video>
+			<video class="pos-a bg-video" src="./img/bg.webm" autoplay="autoplay" loop="loop"></video>
 			<div class="h-bg-top pos-a"></div>
 			<div class="h-bg-control pos-a"></div>
 			<div class="h-bg-left pos-a"></div>
@@ -248,7 +248,7 @@
 		overflow: hidden;
 		top: 0;
 
-		video {
+		.bg-video {
 			height: 100%;
 			width: 100%;
 			left: 0;
