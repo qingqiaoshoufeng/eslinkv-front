@@ -30,6 +30,12 @@
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
 		<portal to="destination">
+			<!-- 统计数据 -->
+			<DataStatistics
+				:position="'right'"
+				:dataStatisticsList="dataStatisticsList"
+				:data="dataStatisticsInfo"
+			/>
 			<!-- 图例 -->
 			<MapLegend :data="legendMap" class="map-legend" />
 			<!-- 右侧列表 -->
@@ -66,12 +72,14 @@ import {
 	RoutePlan, //规划路线
 	ListOverlay,
 } from '../Components/index.js';
+
 //页面所需公共组件
 import {
 	RegionBoundary,
 	OverlayDetail,
 	MapLegend,
 } from '../../Components/index.js';
+import { DataStatistics } from '../../../../components';
 
 import {
 	INDEXSCENEMAP,
@@ -80,6 +88,7 @@ import {
 	AIRSUPPLY_WARN_COMPONENTINDEX,
 } from '../../../../config';
 import {
+	DATASTATISTICSLIST,
 	AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP,
 	AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 } from './config.js';
@@ -113,6 +122,7 @@ export default {
 		MapLegend,
 		PressureRegulatingStation,
 		OngroundRepairStation,
+		DataStatistics,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
@@ -129,6 +139,15 @@ export default {
 			showRoutePlan: false,
 			activeTab: 'statAawareness',
 			legendMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
+			dataStatisticsList: DATASTATISTICSLIST,
+			dataStatisticsInfo: {
+				Mediumline: 2627,
+				Lowline: 4652,
+				GreenServeStation: 5,
+				ManageStation: 5,
+				OnNumber: 12,
+				UnderNumber: 12,
+			},
 		};
 	},
 	methods: {

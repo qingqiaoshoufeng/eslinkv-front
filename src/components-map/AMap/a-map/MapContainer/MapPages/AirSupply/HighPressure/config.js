@@ -1,3 +1,5 @@
+// 引入详情字典
+import { HighPressureGasStation, HighPressurePressureRegulatingStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber } from "../../../../utils/dictionary"
 // 覆盖物legend配置
 export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
     HighPressureLine: {
@@ -114,6 +116,14 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
         component: 'DistributedEnergyResource',
         isShow: false,
     },
+    WarningList: {
+        label: '告警',
+        legendIcon: 'icontulinengyuanzhan',
+        icon: 'iconnengyuanzhan',
+        component: 'WarningList',
+        isShow: true,
+    },
+
 }
 
 //覆盖物详情
@@ -176,4 +186,20 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
         },
         isShowMore: true,
     },
+    WarningList: {
+        fields: {
+            address: {
+                style: {
+                    fontSize: '18px',
+                    color: '#00DDFF',
+                },
+                errColor: '#FF7217',
+            },
+        },
+
+    }
 }
+
+
+// 高压统计数据
+export const DATASTATISTICSLIST = [HighPressureGasStation, HighPressurePressureRegulatingStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber]

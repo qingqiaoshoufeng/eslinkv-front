@@ -120,7 +120,7 @@ export const AIRSUPPLY_UCAN_LEGEND_MAP = {
         legendIcon: 'icontulidishangqiangxiudian',
         icon: 'icontulidishangqiangxiudian',
         component: 'EmergencyAirSourceStation',
-        isShow: true,
+        isShow: false,
     },
 
 }

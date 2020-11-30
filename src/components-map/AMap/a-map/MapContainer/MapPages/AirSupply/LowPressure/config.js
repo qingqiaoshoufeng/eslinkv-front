@@ -1,3 +1,6 @@
+// 引入详情字典
+import { LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber } from "../../../../utils/dictionary"
+
 // 首页覆盖物配置项
 export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
     MiddlePressureLine: {
@@ -172,4 +175,6 @@ export const AIRSUPPLY_PRESSURE_OVERLAY_MAP = {
         isShowMore: true,
     },
 }
+// 中低压统计数据
+export const DATASTATISTICSLIST = [LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber]
 

@@ -1,3 +1,5 @@
+// 引入详情字典
+import { LNGstationNumber } from "../../../../utils/dictionary"
 // 覆盖物legend配置
 export const AIRSUPPLY_LNG_LEGEND_MAP = {
     LNGStation: {
@@ -156,6 +158,8 @@ export const AIRSUPPLY_LNG_OVERLAY_MAP = {
                 errColor: '#FF7217',
             },
         },
-        isShowMore: false,
+        isShowMore: true,
     },
 }
+// LNG统计数据
+export const DATASTATISTICSLIST = [LNGstationNumber]

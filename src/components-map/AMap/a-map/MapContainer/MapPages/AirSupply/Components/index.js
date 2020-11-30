@@ -18,6 +18,8 @@ export { default as PressureRegulatingStation } from './PressureRegulatingStatio
 export { default as UndergroundRepairStation } from './UndergroundRepairStation'
 export { default as OngroundRepairStation } from './OngroundRepairStation'
 export { default as ServiceStation } from './ServiceStation'
+export { default as WarningList } from './WarningList'
+
 
 
 export { default as RightPanel } from './RightPanel/'
