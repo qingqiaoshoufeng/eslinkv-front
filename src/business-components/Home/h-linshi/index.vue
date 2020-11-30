@@ -10,7 +10,7 @@
 				<img src="./img/air-bar.svg" class="total-icon">
 				<div class="total-info">
 					<div class="total-title">年度累计供气量</div>
-					<div class="num font-num">{{ data.total | toThousand }} <span>万m³</span></div>
+					<div class="num font-num">{{ data.total | toThousand }} <span>m³</span></div>
 				</div>
 			</section>
 			<ul class="air">
