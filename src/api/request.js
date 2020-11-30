@@ -4,7 +4,7 @@ import axios from 'axios'
 const request = axios.create()
 
 request.defaults.baseURL =
-    process.env.NODE_ENV !== 'production' ? '/' : '/data'
+    process.env.NODE_ENV !== 'production' ? '/' : '/'
 request.defaults.timeout = 10000
 request.interceptors.request.use(
     function (config) {
