@@ -46,13 +46,26 @@
 //页面覆盖物组件
 
 import {
-	HighPressureLine,
-	HighPressureLine_Process,
-	PressureRegulatingStation,
-	EmergencyAirSourceStation,
-	GasStation,
+	ComprehensiveServiceStation,
+	LiquefiedGasStation,
+	NaturalGasStation,
+	DistributedEnergyResource,
+	InspectionPerson,
+	InspectionCar,
 	RightPanel,
 	RoutePlan, //规划路线
+	LNGStation,
+	HighPressureLine,
+	HighPressureLine_Process,
+	MiddlePressureLine,
+	LowPressureLine,
+	GasStation,
+	PressureRegulatingStation,
+	EmergencyAirSourceStation,
+	ServiceStation,
+	PipeManageMentStation,
+	UndergroundRepairStation,
+	OngroundRepairStation,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -77,16 +90,29 @@ import GoldChart from '@/openApi';
 export default {
 	name: 'AirSupplyHighPressure',
 	components: {
-		HighPressureLine,
-		HighPressureLine_Process,
-		PressureRegulatingStation,
-		EmergencyAirSourceStation,
-		GasStation,
-		RightPanel,
-		RoutePlan, //规划路线
 		RegionBoundary,
 		OverlayDetail,
 		MapLegend,
+		ComprehensiveServiceStation,
+		LiquefiedGasStation,
+		NaturalGasStation,
+		DistributedEnergyResource,
+		InspectionPerson,
+		InspectionCar,
+		RightPanel,
+		RoutePlan, //规划路线
+		LNGStation,
+		HighPressureLine,
+		HighPressureLine_Process,
+		MiddlePressureLine,
+		LowPressureLine,
+		GasStation,
+		PressureRegulatingStation,
+		EmergencyAirSourceStation,
+		ServiceStation,
+		PipeManageMentStation,
+		UndergroundRepairStation,
+		OngroundRepairStation,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;

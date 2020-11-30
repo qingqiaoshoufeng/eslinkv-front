@@ -43,9 +43,26 @@
 <script>
 //页面覆盖物组件
 import {
-	LNGStation,
+	ComprehensiveServiceStation,
+	LiquefiedGasStation,
+	NaturalGasStation,
+	DistributedEnergyResource,
+	InspectionPerson,
+	InspectionCar,
 	RightPanel,
 	RoutePlan, //规划路线
+	LNGStation,
+	HighPressureLine,
+	HighPressureLine_Process,
+	MiddlePressureLine,
+	LowPressureLine,
+	GasStation,
+	PressureRegulatingStation,
+	EmergencyAirSourceStation,
+	ServiceStation,
+	PipeManageMentStation,
+	UndergroundRepairStation,
+	OngroundRepairStation,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -75,6 +92,14 @@ export default {
 		RegionBoundary,
 		OverlayDetail,
 		MapLegend,
+		HighPressureLine,
+		HighPressureLine_Process,
+		MiddlePressureLine,
+		LowPressureLine,
+		InspectionPerson,
+		GasStation,
+		PressureRegulatingStation,
+		EmergencyAirSourceStation,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
@@ -89,7 +114,7 @@ export default {
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'overlayList',
+			activeTab: 'statAawareness',
 			legendMap: AIRSUPPLY_LNG_LEGEND_MAP,
 		};
 	},

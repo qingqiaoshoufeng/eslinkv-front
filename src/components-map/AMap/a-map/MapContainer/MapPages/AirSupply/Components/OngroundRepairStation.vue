@@ -1,4 +1,4 @@
-<!-- 综合服务站 -->
+地上抢修点
 <template>
 	<BaseOverlay
 		v-bind="{
@@ -6,22 +6,16 @@
 			overlayType,
 			visible,
 			apiFun,
-			detailList,
 		}"
 		@click="
-			marker =>
-				$emit(
-					'overlay-click',
-					{ detailList, ...marker, overlayType },
-					overlayType
-				)
+			marker => $emit('overlay-click', marker, 'UndergroundRepairStation')
 		"
 	/>
 </template>
 <script>
 import { BaseOverlay } from '../../Components/index';
 export default {
-	name: 'ServiceNetworkStation',
+	name: 'OngroundRepairStation',
 	components: {
 		BaseOverlay,
 	},
@@ -38,16 +32,11 @@ export default {
 			type: String,
 			default: '',
 		},
-		detailList: {
-			type: Array,
-			default() {
-				return [];
-			},
-		},
 	},
 	data() {
+		let apiFun = this.$sysApi.map.home.getUndergroundRepairStationList;
 		return {
-			apiFun: this.$sysApi.map.serve.getServiceNetworkStationList,
+			apiFun: apiFun,
 		};
 	},
 };

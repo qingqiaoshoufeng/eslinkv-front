@@ -13,7 +13,7 @@
 	/>
 </template>
 <script>
-import {BaseOverlay} from '../../Components/index';
+import { BaseOverlay } from '../../Components/index';
 export default {
 	name: 'PipeManageMentStation',
 	components: {
@@ -32,11 +32,11 @@ export default {
 			type: String,
 			default: '',
 		},
-    },
+	},
 	data() {
 		let apiFun = this.$sysApi.map.home.getPipeManageMentStationList;
 		return {
-				apiFun: apiFun,
+			apiFun: apiFun,
 		};
 	},
 };

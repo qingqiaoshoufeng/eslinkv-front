@@ -16,6 +16,10 @@ export { default as NaturalGasStation } from './NaturalGasStation'
 export { default as PipeManageMentStation } from './PipeManageMentStation'
 export { default as PressureRegulatingStation } from './PressureRegulatingStation'
 export { default as UndergroundRepairStation } from './UndergroundRepairStation'
+export { default as OngroundRepairStation } from './OngroundRepairStation'
+export { default as ServiceStation } from './ServiceStation'
+
+
 export { default as RightPanel } from './RightPanel/'
 export { default as RoutePlan } from './RoutePlan/'
 
