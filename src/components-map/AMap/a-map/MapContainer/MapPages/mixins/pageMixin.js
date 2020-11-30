@@ -25,9 +25,6 @@ export default {
 	},
 	created() {
 		this.$amap = this.$parent.$amap
-		this.$nextTick(() => {
-			this.mapFitView(-0.2, 0.4)
-		})
 	},
 	watch: {
 		activeItem(val) {
@@ -35,7 +32,6 @@ export default {
 			this.handleOverlayClick(val, 'WARN')
 		},
 	},
-
 	methods: {
 		/**
 		 *

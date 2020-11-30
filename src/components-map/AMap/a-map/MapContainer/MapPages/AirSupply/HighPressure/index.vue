@@ -3,7 +3,6 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
-
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
@@ -54,6 +53,7 @@ import {
 	RightPanel,
 	RoutePlan, //规划路线
 } from '../Components/index.js';
+
 //页面所需公共组件
 import {
 	RegionBoundary,
