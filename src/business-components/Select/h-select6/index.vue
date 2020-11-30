@@ -2,9 +2,9 @@
 	<div class="widget-part pos-r" :style="styles">
 		<div class="h-select6 fn-flex flex-row pos-r">
 			<h2 class="fn-flex flex-row">
-				<span class="pos-r" :class="{active:selectValue==='day'}" @click="handleChange('day')">三日对比</span>
-				<span class="pos-r" :class="{active:selectValue==='month'}" @click="handleChange('month')">月度对比</span>
-				<span class="pos-r" :class="{active:selectValue==='year'}" @click="handleChange('year')">年度对比</span>
+				<span class="pos-r pointer" :class="{active:selectValue==='day'}" @click="handleChange('day')">三日对比</span>
+				<span class="pos-r pointer" :class="{active:selectValue==='month'}" @click="handleChange('month')">月度对比</span>
+				<span class="pos-r pointer" :class="{active:selectValue==='year'}" @click="handleChange('year')">年度对比</span>
 			</h2>
 		</div>
 	</div>
@@ -25,7 +25,6 @@
 	export default {
 		data() {
 			return {
-				showOptions: false,
 				selectValue: 'month'
 			}
 		},

@@ -4,7 +4,7 @@
 			<div class="swiper" @click="back" :class="{active: offset > 0}"><span class="left"></span></div>
 			<div class="scroll-wrapper">
 				<ul class="scroll" :style="{transform: `translateX(-${offsetX}px)`}" ref="scroll">
-					<li v-for="(k, i) in data" :class="{active: i === currIndex}" :key="i" @click="drawLine(k, i)">
+					<li class="pointer" v-for="(k, i) in data" :class="{active: i === currIndex}" :key="i" @click="drawLine(k, i)">
 						{{k.name}}
 					</li>
 				</ul>
