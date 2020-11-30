@@ -40,7 +40,6 @@ export default {
          * @description 外部更新组件
          */
         updateComponentFormOutSide({ data, url, path, method }) {
-            console.log(data)
             if (data)
                 this.config.api.data = JSON.stringify(data)
             if (url)
@@ -57,34 +56,13 @@ export default {
             if (!this.config.api) {
                 return
             }
-            const parseParams = (params = {}) => {
-                if (typeof params === 'string') {
-                    try {
-                        return jsonic(params.trim())
-                    } catch (e) {
-                    }
-                }
-                return params
+            let params = this.config.api.params
+            if (params) {
+                params = { ...params, ...data }
+            } else {
+                params = data
             }
-            const { url, method, path } = this.config.api
-
-            const config = {
-                url,
-                method,
-                [method.toUpperCase() === 'GET' ? 'params' : 'data']: method.toUpperCase() === 'GET' ? parseParams(data) : data
-            }
-            const keys = path ? path.split('.') : []
-
-            if (url) {
-                request(config).then(res => {
-                    let result = res
-                    while (keys.length) {
-                        const key = keys.shift()
-                        result = result[key]
-                    }
-                    this.config.api.data = JSON.stringify(result)
-                })
-            }
+            this.config.api.params = JSON.stringify(params)
         },
     },
     computed: {

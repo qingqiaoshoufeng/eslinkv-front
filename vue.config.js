@@ -20,17 +20,17 @@ module.exports = {
         open: true,
         disableHostCheck: true,
         proxy: {
-            '/hangran': {
+            '^/hangran': {
                 target: 'http://ebp-pc.hzrq.local:15003',
                 changeOrigin: true,
                 headers: {
-                    Cookie: 'SESSION=6de331ba-2224-41dd-afb6-4984557cd03e'
+                    Cookie: 'SESSION=c83dcac1-f734-4131-8463-9977c291d9ee'
                 },
                 pathRewrite: {
                     '^/hangran': '/'
                 }
             },
-			'/api': {
+			'^/api': {
 				target: 'http://ebp-pc.hw-qa.eslink.net.cn',
 				changeOrigin: true,
 				headers: {
@@ -40,21 +40,21 @@ module.exports = {
 					'^/api': '/'
 				}
 			},
-            '/data': {
+            '^/data': {
                 target: 'http://127.0.0.1:7001',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/data': '/'
                 }
             },
-            '/cdn': {
+            '^/cdn': {
                 target: 'http://127.0.0.1:7001',
                 changeOrigin: true,
                 pathRewrite: {
                     '^/cdn': '/'
                 }
             },
-            '/server': {
+            '^/server': {
                 target: 'http://192.168.1.33:9082',
                 changeOrigin: true,
                 pathRewrite: {

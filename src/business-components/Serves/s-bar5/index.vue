@@ -12,8 +12,8 @@
 					<div class="desc2">{{config.config.desc2}}</div>
 				</div>
 			</div>
-      <div class="unit unit2">{{config.config.unit2}}</div>
-    </div>
+			<div class="unit unit2">{{config.config.unit2}}</div>
+		</div>
 		<div class="h-line-1" :id="id"/>
 	</div>
 </template>
@@ -29,8 +29,8 @@
 				color2: getInput('color2', '条形图颜色2'),
 				desc1: getInput('desc1', '条形图名称1'),
 				desc2: getInput('desc2', '条形图名称2'),
-        unit1: getInput('unit1', '条形图左侧单位'),
-        unit2: getInput('unit2', '条形图右侧单位')
+				unit1: getInput('unit1', '条形图左侧单位'),
+				unit2: getInput('unit2', '条形图右侧单位')
 			},
 		},
 	};
@@ -42,17 +42,51 @@
 			color2: true,
 			desc1: true,
 			desc2: true,
-      unit1: true,
-      unit2: true,
+			unit1: true,
+			unit2: true,
 		}
 	};
 	const value = {
 		api: {
-			data: JSON.stringify({
-				yValue: [120, 200, 150, 80, 70, 110, 130],
-				yValue1: [120, 200, 150, 80, 70, 110, 130],
-				xValue: ['5月', '6月', '7月', '8月', '9月', '10月', '11月'],
-			}),
+			data: JSON.stringify(
+				[
+					{
+						yValue1: 120,
+						yValue2: 120,
+						xValue: '5月',
+					},
+					{
+						yValue1: 200,
+						yValue2: 200,
+						xValue: '6月',
+					},
+					{
+						yValue1: 150,
+						yValue2: 150,
+						xValue: '7月',
+					},
+					{
+						yValue1: 80,
+						yValue2: 80,
+						xValue: '8月',
+					},
+					{
+						yValue1: 70,
+						yValue2: 70,
+						xValue: '9月',
+					},
+					{
+						yValue1: 110,
+						yValue2: 110,
+						xValue: '10月',
+					},
+					{
+						yValue1: 130,
+						yValue2: 130,
+						xValue: '11月',
+					},
+				]
+			),
 		},
 		config: {
 			color1: '#2C99FF',
@@ -67,11 +101,14 @@
 		mixins: [mixins],
 		methods: {
 			setOption(data) {
-				options.xAxis.data = data.xValue;
-				options.series[0].data = data.yValue;
+				const xValue = data.map(item => item.xValue)
+				const yValue1 = data.map(item => item.yValue1)
+				const yValue2 = data.map(item => item.yValue2)
+				options.xAxis.data = xValue;
+				options.series[0].data = yValue1;
 				options.series[0].itemStyle.normal.color = this.config.config.color1;
 				options.series[1].itemStyle.normal.color = this.config.config.color2;
-				options.series[1].data = data.yValue1;
+				options.series[1].data = yValue2;
 				this.instance && this.instance.setOption(options);
 			},
 		},
@@ -79,7 +116,7 @@
 			data: {
 				handler(val) {
 					if (this.id) {
-						const data = {...val};
+						const data = [...val];
 						this.$nextTick(() => {
 							this.instance = echarts.init(
 								document.getElementById(this.id)
@@ -107,7 +144,7 @@
 		width: 100%;
 		height: 20px;
 		display: flex;
-    justify-content: space-between;
+		justify-content: space-between;
 		align-items: center;
 		position: absolute;
 		top: 10px;
@@ -122,9 +159,10 @@
 			font-weight: 400;
 			line-height: 16px;
 			letter-spacing: 0;
-      &.unit2 {
-        padding-right: 20px;
-      }
+
+			&.unit2 {
+				padding-right: 20px;
+			}
 		}
 
 		.legend {
