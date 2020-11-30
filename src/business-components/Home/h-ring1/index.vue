@@ -13,7 +13,7 @@
 					   :style="{color:config.config&&JSON.parse(config.config.color)[index%(config.config?JSON.parse(config.config.color).length:0)]}"/>
 					<label class="ellipsis">{{item.title}}</label>
 					<a>{{item.des}}</a>
-					<span>{{item.value}}{{config.config&&config.config.suffix}}</span>
+					<span>{{item.b}}{{config.config&&config.config.suffix}}</span>
 				</li>
 			</ul>
 		</div>

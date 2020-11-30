@@ -56,7 +56,13 @@ export default {
 			if (!this.config.api) {
 				return
 			}
-			this.config.api.params = JSON.stringify(data)
+			let params = this.config.api.params
+			if (params) {
+				params = {...params, ...data}
+			} else {
+				params = data
+			}
+			this.config.api.params = JSON.stringify(params)
 		},
 	},
 	computed: {
