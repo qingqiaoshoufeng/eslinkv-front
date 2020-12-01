@@ -28,40 +28,41 @@ export default {
 			type: Function,
 		},
 	},
+	computed: {
+		zIndexInner() {
+			return this.visible ? this.zIndex : 0;
+		},
+	},
 	watch: {
 		visible: {
 			handler(val) {
-				if (val) {
-					if (this.originInstance) {
-						this.originInstance.zIndex = this.zIndex;
-					} else {
-						this.load();
-					}
-				} else {
-					this.originInstance.zIndex = 0;
-				}
+				this.originInstance.setzIndex(this.zIndexInner);
 			},
 		},
 	},
 	created() {
 		let fun = findAmapRoot.bind(this);
 		this.$amap = fun();
-		if (this.visible) {
-			this.load();
-		}
+		this.load();
 	},
 	methods: {
 		load() {
-			const { BMap, opacity, zIndex, getTileUrl } = this;
+			const { BMap, opacity, zIndexInner, getTileUrl } = this;
 			if (!getTileUrl) {
 				return false;
 			}
 			this.originInstance = new AMap.TileLayer({
-				zIndex,
+				zIndex:zIndexInner,
 				opacity,
 				getTileUrl: getTileUrl,
-            });
+			});
 			this.$amap.addLayer(this.originInstance);
+		},
+		reload() {
+			this.originInstance && this.$amap.remove(this.originInstance);
+			this.$nextTick(() => {
+				this.load();
+			});
 		},
 	},
 	beforeDestroy() {

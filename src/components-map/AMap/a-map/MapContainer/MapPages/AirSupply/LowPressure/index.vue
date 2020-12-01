@@ -3,8 +3,12 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
-        <!-- 中低压 -->
-		<AMapTile :getTileUrl="getTileUrl" />
+		<!-- 中低压 -->
+		<AMapTile
+			ref="mapTile"
+			:visible="!!tilesQuery.length"
+			:getTileUrl="getTileUrl"
+		/>
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
@@ -97,7 +101,7 @@ import {
 	AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 } from './config.js';
 import GoldChart from '@/openApi';
-import getHangZhouGasGISPosition from '../../../../utils/getHangZhouGasGISPosition'
+import getHangZhouGasGISPosition from '../../../../utils/getHangZhouGasGISPosition';
 
 export default {
 	name: 'AirSupplyHighPressure',
@@ -135,6 +139,7 @@ export default {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.panTo(this.center, 100);
+		window.legendMap = this.legendMap;
 	},
 	data() {
 		return {
@@ -157,9 +162,30 @@ export default {
 			},
 		};
 	},
+	computed: {
+		tilesQuery() {
+			const { MiddlePressureLine, LowPressureLine } = this.legendMap;
+			const {
+				isShow: isShowM,
+				tileQuery: tileQueryM,
+			} = MiddlePressureLine;
+			const { isShow: isShowL, tileQuery: tileQueryL } = LowPressureLine;
+			let queryArr = [];
+			if (isShowM) {
+				queryArr.push(tileQueryM);
+			}
+			if (isShowL) {
+				queryArr.push(tileQueryL);
+			}
+			if (queryArr.length && this.$refs.mapTile) {
+				this.$refs.mapTile.reload();
+			}
+			return queryArr;
+		},
+	},
 	methods: {
 		getTileUrl(x, y, zoom) {
-			const tilesQuery = '11,12,10'; //this.tilesQuery
+			const tilesQuery = String(this.tilesQuery);
 			const {
 				leftBottomX,
 				leftBottomY,
