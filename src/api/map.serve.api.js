@@ -40,7 +40,7 @@ export function getCouplingIncreaseInfo(data) {
     return request({
         url: `${HANGRANURL}/gasCode/addNum`,
         method: 'get',
-        data: qs.stringify(data),
+        data: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -58,12 +58,12 @@ export function getAccumulativeTotal(data) {
         },
     })
 }
-// 获取工商户地图数据 勇用大户、分公司
+// 获取工商户地图数据 用气大户、分公司
 export function getICcustomerList1(data) {
     return request({
         url: `${HANGRANURL}/gasCode/mapDataResult`,
         method: 'get',
-        data: qs.stringify(data),
+        data: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
