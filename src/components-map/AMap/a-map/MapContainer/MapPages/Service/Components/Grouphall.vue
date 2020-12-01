@@ -8,8 +8,8 @@
 			data,
 			apiFun,
 			detailList,
-			iconSize: 56,
 			nameStyle,
+            ...$attrs
 		}"
 		@click="
 			marker =>

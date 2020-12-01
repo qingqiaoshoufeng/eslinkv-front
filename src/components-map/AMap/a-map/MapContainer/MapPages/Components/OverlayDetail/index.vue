@@ -97,7 +97,7 @@ export default {
 					this.overlay = {
 						...val,
 					};
-					let legendConfig = this.legendMap[overlayType] || {};
+                    let legendConfig = this.legendMap[overlayType] || {};
 					let marginBottom = legendConfig.iconSize || 19;
 					this.marginBottom = marginBottom / 2;
 					if (!this.rendered) {

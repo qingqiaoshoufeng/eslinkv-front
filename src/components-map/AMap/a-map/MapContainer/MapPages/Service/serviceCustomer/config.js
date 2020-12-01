@@ -3,7 +3,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
     Grouphall: {
         label: '集团大厅',
         legendIcon: 'icontulijituandating',
-        iconSize:38,
+        iconSize:56,
         icon:'iconjituandating',
         component: 'Grouphall',
         isShow: true,
@@ -11,7 +11,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
     BranchCompany: {
         label: '分公司',
         legendIcon: 'icontulifengongsi',
-        iconSize:38,
+        iconSize:56,
         icon:'iconfengongsi1',
         component: 'BranchCompany',
         isShow: true,
