@@ -110,9 +110,9 @@ export default {
 					this.data[legendKey].isShow = false;
 				});
 				this.data[prop].isShow = true;
-			}else{
-               this.data[prop].isShow =  !this.data[prop].isShow
-            }
+			} else {
+				this.data[prop].isShow = !this.data[prop].isShow;
+			}
 			this.$emit('legend-click', prop);
 		},
 		handleExpendClick() {
@@ -124,6 +124,7 @@ export default {
 
 <style lang="scss" scoped>
 .legend-container {
+	z-index: 999;
 	transition: height linear 0.3s;
 	background: rgba(0, 0, 0, 0.8);
 	border: 1px solid #0065df;
