@@ -21,11 +21,12 @@
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
+            :legendMap="legendMap"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
-			:detialBoxWidth="'400px'"
+			:detialBoxWidth="400"
 		/>
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>

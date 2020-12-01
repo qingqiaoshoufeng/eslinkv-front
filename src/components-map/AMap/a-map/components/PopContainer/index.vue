@@ -7,7 +7,7 @@
 		enter="animated fadeIn"
 		leave="animated fadeOut"
 	>
-		<div class="pop-container" :style="{ width, marginLeft: `${left}px` }">
+		<div class="pop-container" :style="{transform:`translate(-50%, calc(-100% - ${bottom+15}px)`, width }">
 			<div class="close-btn" @click="$emit('input', false)">
 				<svg-icon icon-name="iconbaseline-close-px"></svg-icon>
 			</div>
@@ -35,9 +35,9 @@ export default {
 			type: String,
 			default: '240px',
 		},
-		left: {
+		bottom: {
 			type: Number,
-			default: 10,
+			default: 19,
 		},
 	},
 	data() {
@@ -61,7 +61,6 @@ export default {
 	border: 1px solid #00ddff;
 	box-sizing: border-box;
 	color: #fff;
-	margin: -15px 0 0 10px;
 	transform: translate(-50%, -100%);
 	.triangle {
 		width: 0;
@@ -69,6 +68,7 @@ export default {
 		position: absolute;
 		bottom: -15px;
 		left: 50%;
+        transform:translateX(-50%);
 		border-left: solid 15px transparent;
 		border-right: solid 15px transparent;
 		border-top: solid 15px #00ddff;

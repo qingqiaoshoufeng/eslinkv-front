@@ -10,8 +10,8 @@
 		<PopContainer
 			class="no-hover-effect"
 			@input="closePop"
-			:width="detialBoxWidth"
-			:left="left"
+			:bottom="marginBottom"
+			:width="detialBoxWidth + 'px'"
 		>
 			<slot>
 				<div
@@ -57,7 +57,6 @@ export default {
 				return {};
 			},
 		},
-		left: { type: Number, default: 10 },
 		value: {
 			type: Boolean,
 			default: false,
@@ -68,10 +67,16 @@ export default {
 				return {};
 			},
 		},
+		legendMap: {
+			type: Object,
+			default() {
+				return {};
+			},
+		},
 		beforeClose: Function,
 		detialBoxWidth: {
-			type: String,
-			default: '240px',
+			type: Number,
+			default: 240,
 		},
 	},
 	data() {
@@ -79,6 +84,7 @@ export default {
 			overlayTypeInfo: {},
 			overlay: {},
 			rendered: false,
+			marginBottom: 19,
 		};
 	},
 	watch: {
@@ -91,6 +97,9 @@ export default {
 					this.overlay = {
 						...val,
 					};
+					let legendConfig = this.legendMap[overlayType] || {};
+					let marginBottom = legendConfig.iconSize || 19;
+					this.marginBottom = marginBottom / 2;
 					if (!this.rendered) {
 						this.rendered = true;
 					} else {

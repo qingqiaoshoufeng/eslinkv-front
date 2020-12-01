@@ -44,11 +44,11 @@ export default {
 
 <style lang="scss" scoped>
 .sample {
-	width: 54px;
-	height: 54px;
+	// width: 54px;
+	// height: 54px;
 	position: absolute;
 	cursor: pointer;
-	padding: 3px;
+	// padding: 3px;
 	box-sizing: border-box;
 
 	img {

@@ -21,6 +21,7 @@
 		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
+            :legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"

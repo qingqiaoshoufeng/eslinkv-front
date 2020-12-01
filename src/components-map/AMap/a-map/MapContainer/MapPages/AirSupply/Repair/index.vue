@@ -9,7 +9,7 @@
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
 			:left="left"
-			:detialBoxWidth="'400px'"
+			:detialBoxWidth="400"
 		/>
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay"></RoutePlan>
