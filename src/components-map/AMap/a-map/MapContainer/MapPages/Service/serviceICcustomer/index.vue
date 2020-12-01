@@ -171,8 +171,7 @@ export default {
 			params[ICcustomer_WARN__COMPONENTINDEX[7]] = temperature;
 			GoldChart.scene.createSceneInstance(
 				ICcustomer_WARN__SCENEINDEX,
-				'fadeIn',
-				'none'
+				'slideRight'
 			);
 			this.$nextTick(() => {
 				ICcustomer_WARN__COMPONENTINDEX.forEach(item => {
