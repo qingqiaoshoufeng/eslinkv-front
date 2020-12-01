@@ -29,6 +29,12 @@
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
 		<portal to="destination">
+			<!-- 统计数据 -->
+			<DataStatistics
+				:position="'right'"
+				:dataStatisticsList="dataStatisticsList"
+				:data="dataStatisticsInfo"
+			/>
 			<!-- 图例 -->
 			<MapLegend :data="legendMap" class="map-legend" />
 			<!-- 右侧列表 -->
@@ -43,9 +49,26 @@
 <script>
 //页面覆盖物组件
 import {
-	LNGStation,
+	ComprehensiveServiceStation,
+	LiquefiedGasStation,
+	NaturalGasStation,
+	DistributedEnergyResource,
+	InspectionPerson,
+	InspectionCar,
 	RightPanel,
 	RoutePlan, //规划路线
+	LNGStation,
+	HighPressureLine,
+	HighPressureLine_Process,
+	MiddlePressureLine,
+	LowPressureLine,
+	GasStation,
+	PressureRegulatingStation,
+	EmergencyAirSourceStation,
+	ServiceStation,
+	PipeManageMentStation,
+	UndergroundRepairStation,
+	OngroundRepairStation,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -53,6 +76,7 @@ import {
 	OverlayDetail,
 	MapLegend,
 } from '../../Components/index.js';
+import { DataStatistics } from '../../../../components';
 
 import {
 	INDEXSCENEMAP,
@@ -61,6 +85,7 @@ import {
 	AIRSUPPLY_WARN_COMPONENTINDEX,
 } from '../../../../config';
 import {
+	DATASTATISTICSLIST,
 	AIRSUPPLY_LNG_OVERLAY_MAP,
 	AIRSUPPLY_LNG_LEGEND_MAP,
 } from './config.js';
@@ -75,6 +100,20 @@ export default {
 		RegionBoundary,
 		OverlayDetail,
 		MapLegend,
+		HighPressureLine,
+		HighPressureLine_Process,
+		MiddlePressureLine,
+		LowPressureLine,
+		InspectionPerson,
+		GasStation,
+		PressureRegulatingStation,
+		EmergencyAirSourceStation,
+		NaturalGasStation,
+		DistributedEnergyResource,
+		LiquefiedGasStation,
+		ServiceStation,
+		InspectionCar,
+		DataStatistics,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
@@ -89,8 +128,12 @@ export default {
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'overlayList',
+			activeTab: 'statAawareness',
 			legendMap: AIRSUPPLY_LNG_LEGEND_MAP,
+			dataStatisticsList: DATASTATISTICSLIST,
+			dataStatisticsInfo: {
+				stationNumber: 8,
+			},
 		};
 	},
 	methods: {

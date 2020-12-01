@@ -68,6 +68,7 @@ export default {
 	},
 	async created() {
 		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
+		console.log(this.list);
 	},
 	watch: {
 		activeItem(val) {

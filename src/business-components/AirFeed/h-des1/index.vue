@@ -65,7 +65,7 @@
 		p {
 			font-size: 20px;
 			line-height: 24px;
-			color: #00DDFF;
+			color: #fff;
 		}
 
 		h2 {

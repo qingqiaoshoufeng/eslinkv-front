@@ -32,7 +32,7 @@
 		methods: {
 			handleChange(index) {
 				this.selectValue = index
-				this.emitComponentUpdate({type: this.selectValue})
+				this.emitComponentUpdate({compareType: this.selectValue})
 			},
 		},
 		created() {
@@ -40,7 +40,7 @@
 			this.configValue = this.parseConfigValue(config, value)
 		},
 		mounted() {
-			this.emitComponentUpdate({type: this.selectValue})
+			this.emitComponentUpdate({compareType: this.selectValue})
 		}
 	}
 </script>

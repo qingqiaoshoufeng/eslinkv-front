@@ -63,7 +63,7 @@
 						data: this.data.map(item => item.x)
 					}],
 					yAxis: [{
-						name: "万m³",
+						name: "吨",
 						type: "value",
 						splitLine: {
 							show: true,

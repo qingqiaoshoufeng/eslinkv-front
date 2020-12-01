@@ -1,5 +1,6 @@
 import CoordinateTransform from './CoordinateTransform'
 var TileLnglatTransform = require('tile-lnglat-transform')
+// import TransformClassSlippy from './TransformClassSlippy'
 
 const RESOLUTIONS = [
 	262144,
@@ -52,7 +53,7 @@ export default function getPosition(x, y, zoom) {
 	let maxx = (x + 1) * TILE_WIDTH * res
 	let maxy = (y + 1) * TILE_WIDTH * res
     let min = TileLnglatTransformGaode.pixelToLnglat(null, null, x, y, zoom)
-    min = coordinateTransform.GCJ2BD(min.lng,min.lat)
+    // min = coordinateTransform.GCJ2BD(min.lng,min.lat)
 	let max = TileLnglatTransformGaode.pixelToLnglat(
 		null,
 		null,

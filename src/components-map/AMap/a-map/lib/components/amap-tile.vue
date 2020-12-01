@@ -1,5 +1,4 @@
 <script>
-import getHangZhouGasGISPosition from './getHangZhouGasGISPosition';
 function findAmapRoot() {
 	if (this.$amap) return this.$amap;
 	let parent = this.$parent;
@@ -61,12 +60,12 @@ export default {
 				zIndex,
 				opacity,
 				getTileUrl: getTileUrl,
-			});
+            });
 			this.$amap.addLayer(this.originInstance);
 		},
 	},
 	beforeDestroy() {
-		this.originInstance && this.$map.remove(this.originInstance);
+		this.originInstance && this.$amap.remove(this.originInstance);
 	},
 };
 </script>

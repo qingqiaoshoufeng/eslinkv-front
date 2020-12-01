@@ -44,6 +44,7 @@
 <script>
 //页面覆盖物组件
 import {
+	ComprehensiveServiceStation,
 	LiquefiedGasStation,
 	NaturalGasStation,
 	DistributedEnergyResource,
@@ -51,6 +52,18 @@ import {
 	InspectionCar,
 	RightPanel,
 	RoutePlan, //规划路线
+	LNGStation,
+	HighPressureLine,
+	HighPressureLine_Process,
+	MiddlePressureLine,
+	LowPressureLine,
+	GasStation,
+	PressureRegulatingStation,
+	EmergencyAirSourceStation,
+	ServiceStation,
+	PipeManageMentStation,
+	UndergroundRepairStation,
+	OngroundRepairStation,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -77,15 +90,29 @@ export default {
 	name: 'AirSupplyHighPressure',
 	components: {
 		OverlayDetail,
+
+		MapLegend,
+		RegionBoundary,
+		ComprehensiveServiceStation,
 		LiquefiedGasStation,
 		NaturalGasStation,
 		DistributedEnergyResource,
 		InspectionPerson,
 		InspectionCar,
 		RightPanel,
-		MapLegend,
-		RegionBoundary,
 		RoutePlan, //规划路线
+		LNGStation,
+		HighPressureLine,
+		HighPressureLine_Process,
+		MiddlePressureLine,
+		LowPressureLine,
+		GasStation,
+		PressureRegulatingStation,
+		EmergencyAirSourceStation,
+		ServiceStation,
+		PipeManageMentStation,
+		UndergroundRepairStation,
+		OngroundRepairStation,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
@@ -100,7 +127,7 @@ export default {
 			zooom: 11,
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'overlayList',
+			activeTab: 'statAawareness',
 			legendMap: AIRSUPPLY_UCAN_LEGEND_MAP,
 		};
 	},

@@ -204,8 +204,8 @@ export default {
       handler(val) {
         if (this.id) {
           this.$nextTick(() => {
-            echarts.init(this.$refs.develop).setOption(getLineOption(this.data))
-            echarts.init(this.$refs.circle).setOption(getCircleOption(this.curr))
+            this.$refs.develop && echarts.init(this.$refs.develop).setOption(getLineOption(this.data))
+            this.$refs.circle && echarts.init(this.$refs.circle).setOption(getCircleOption(this.curr))
           })
         }
       },

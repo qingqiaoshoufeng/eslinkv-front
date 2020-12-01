@@ -30,6 +30,12 @@
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
 		<portal to="destination">
+			<!-- 统计数据 -->
+			<DataStatistics
+				:position="'right'"
+				:dataStatisticsList="dataStatisticsList"
+				:data="dataStatisticsInfo"
+			/>
 			<!-- 图例 -->
 			<MapLegend :data="legendMap" class="map-legend" />
 			<!-- 右侧列表 -->
@@ -45,16 +51,32 @@
 //页面覆盖物组件
 
 import {
-	HighPressureLine,
-	HighPressureLine_Process,
-	PressureRegulatingStation,
-	EmergencyAirSourceStation,
-	GasStation,
+	ComprehensiveServiceStation,
+	LiquefiedGasStation,
+	NaturalGasStation,
+	DistributedEnergyResource,
+	InspectionPerson,
+	InspectionCar,
 	RightPanel,
 	RoutePlan, //规划路线
+	LNGStation,
+	HighPressureLine,
+	HighPressureLine_Process,
+	MiddlePressureLine,
+	LowPressureLine,
+	GasStation,
+	PressureRegulatingStation,
+	EmergencyAirSourceStation,
+	ServiceStation,
+	PipeManageMentStation,
+	UndergroundRepairStation,
+	OngroundRepairStation,
+	WarningList,
 } from '../Components/index.js';
 
+import { DataStatistics } from '../../../../components';
 //页面所需公共组件
+import pageMixin from '../../mixins/pageMixin';
 import {
 	RegionBoundary,
 	OverlayDetail,
@@ -71,27 +93,48 @@ import {
 import {
 	AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
 	AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP,
+	DATASTATISTICSLIST,
 } from './config.js';
 import GoldChart from '@/openApi';
 
 export default {
 	name: 'AirSupplyHighPressure',
+	// mixins: [pageMixin],
 	components: {
-		HighPressureLine,
-		HighPressureLine_Process,
-		PressureRegulatingStation,
-		EmergencyAirSourceStation,
-		GasStation,
-		RightPanel,
-		RoutePlan, //规划路线
 		RegionBoundary,
 		OverlayDetail,
 		MapLegend,
+		ComprehensiveServiceStation,
+		LiquefiedGasStation,
+		NaturalGasStation,
+		DistributedEnergyResource,
+		InspectionPerson,
+		InspectionCar,
+		RightPanel,
+		RoutePlan, //规划路线
+		LNGStation,
+		HighPressureLine,
+		HighPressureLine_Process,
+		MiddlePressureLine,
+		LowPressureLine,
+		GasStation,
+		PressureRegulatingStation,
+		EmergencyAirSourceStation,
+		ServiceStation,
+		PipeManageMentStation,
+		UndergroundRepairStation,
+		OngroundRepairStation,
+		WarningList,
+		DataStatistics,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.panTo(this.center, 100);
+		// 修正地图位置
+		// this.$nextTick(() => {
+		// 	this.mapFitView(-0.2, 0.4);
+		// });
 	},
 	data() {
 		return {
@@ -106,14 +149,26 @@ export default {
 			activeTab: 'statAawareness',
 			legendMap: AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
 			left: 10,
+			dataStatisticsList: DATASTATISTICSLIST,
+			dataStatisticsInfo: {
+				GasStation: 5,
+				PressureRegulatingStation: 2,
+				HighPressureGasStation: 24,
+				HighPressureLineLength: 236,
+				CarNumber: 12,
+				InspectionNumber: 22,
+				PreservationNumber: 35,
+			},
 		};
 	},
 	methods: {
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
+			console.log(overlay);
 			console.log(11);
 			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat, address, time, index } = overlay;
 			overlay.overlayType = overlayType;
+			overlay.name = overlay.address;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
 			// 计算弹框偏移量
