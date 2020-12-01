@@ -15,9 +15,9 @@
 				:key="legend"
 				:visible="config.isShow"
 				:is="config.component"
-				:overlayIcon="config.legendIcon"
+				:overlayIcon="config.icon ? config.icon : config.legendIcon"
 				:overlayType="legend"
-                :iconSize="config.iconSize"
+				:iconSize="config.iconSize"
 				:showOverlayName="
 					config.showOverlayName ? config.showOverlayName : null
 				"
