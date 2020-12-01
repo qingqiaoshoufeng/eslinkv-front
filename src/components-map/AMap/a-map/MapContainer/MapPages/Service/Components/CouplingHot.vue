@@ -27,10 +27,14 @@ export default {
 	},
 	methods: {
 		async init() {
+			// debugger;
 			if (!this._heatMapData) {
-				this._heatMapData = this.data;
-				// this._heatMapData = this._heatMapData.slice(0, 200);
+				// this._heatMapData = this.data;
+				this._heatMapData = await this.$sysApi.map.serve.getHeatMapList();
+				console.log(this._heatMapData, 5555);
+				this._heatMapData = this._heatMapData.slice(0, 180);
 			}
+			console.log(this._heatMapData, 6666);
 			this._instance = new AMap.HeatMap(this.$amap, {
 				radius: 30, //给定半径
 				opacity: [0, 0.8],
