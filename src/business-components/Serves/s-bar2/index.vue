@@ -1,15 +1,15 @@
 <template>
-	<div class="widget-part pos-r" :style="styles">
+	<div class="widget-part pos-r" :style="styles" v-if="data">
 		<div class="legend-box2">
-			<div class="unit">{{data&&data.title}}</div>
+			<div class="unit">{{config.config.title}}</div>
 			<div class="legend">
 				<div class="legend1">
-					<div class="bgc1" :style="`backgroundColor:${data&&data.color1};}`"></div>
-					<div class="desc1">{{data&&data.desc1}}</div>
+					<div class="bgc1" :style="`backgroundColor:${config.config.color1};}`"></div>
+					<div class="desc1">{{config.config.desc1}}</div>
 				</div>
 				<div class="legend2">
-					<div class="bgc2" :style="`backgroundColor:${data&&data.color2};}`"></div>
-					<div class="desc2">{{data&&data.desc2}}</div>
+					<div class="bgc2" :style="`backgroundColor:${config.config.color2};}`"></div>
+					<div class="desc2">{{config.config.desc2}}</div>
 				</div>
 			</div>
 		</div>
@@ -18,33 +18,83 @@
 </template>
 <script>
 import mixins from '../../mixins';
-import options from './options';
+import getOption from './options';
+import {getInput} from "@lib/views/core/widgets/parts/lib/config-tools";
 
-const config = { animation: true };
+const config = {
+  animation: true,
+  config: {
+    color2: true,
+    color1: true,
+    desc1: true,
+    desc2: true,
+    title: true,
+  }
+}
+const configSource = {
+  config: {
+    fields: {
+      color1: getInput('color1', '颜色1'),
+      color2: getInput('color2', '颜色2'),
+      desc1: getInput('desc1', '名称1'),
+      desc2: getInput('desc2', '名称2'),
+      title: getInput('title', '单位'),
+    },
+  },
+}
 const value = {
 	api: {
-		data: JSON.stringify({
-			color2: '#00DDFF',
-			color1: '#0057A9',
-			desc1: '产量',
-			desc2: '销量',
-			title: '户',
-			yValue: [120, 200, 150, 80, 70, 110, 130],
-			yValue1: [130, 400, 170, 100, 100, 110, 130],
-			xValue: ['5月', '6月', '7月', '8月', '9月', '10月', '11月'],
-		}),
+		data: JSON.stringify([
+      {
+        yValue: 120,
+        yValue1: 130,
+        xValue: '5月'
+      },
+      {
+        yValue: 200,
+        yValue1: 400,
+        xValue: '6月'
+      },
+      {
+        yValue: 150,
+        yValue1: 170,
+        xValue: '7月'
+      },
+      {
+        yValue: 80,
+        yValue1: 100,
+        xValue: '8月'
+      },
+      {
+        yValue: 70,
+        yValue1: 100,
+        xValue: '9月'
+      },
+      {
+        yValue: 110,
+        yValue1: 110,
+        xValue: '10月'
+      },
+      {
+        yValue: 130,
+        yValue1: 130,
+        xValue: '11月'
+      },
+    ]),
 	},
+  config: {
+    color2: '#00DDFF',
+    color1: '#0057A9',
+    desc1: '产量',
+    desc2: '销量',
+    title: '户'
+  }
 };
 export default {
 	mixins: [mixins],
 	methods: {
 		setOption(data) {
-			options.xAxis[0].data = data.xValue;
-			options.series[1].data = data.yValue;
-			options.series[0].data = data.yValue1;
-			options.series[0].itemStyle.normal.color = data.color1;
-			options.series[1].itemStyle.normal.color = data.color2;
-			this.instance && this.instance.setOption(options);
+			this.instance && this.instance.setOption(getOption(this.data, this.config.config));
 		},
 	},
 	watch: {
@@ -65,7 +115,7 @@ export default {
 		},
 	},
 	created() {
-		this.configSource = this.parseConfigSource(config);
+		this.configSource = this.parseConfigSource(config, configSource);
 		this.configValue = this.parseConfigValue(config, value);
 	},
 };

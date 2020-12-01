@@ -72,7 +72,7 @@
 					width: 100%;
 					height: 4px;
 					background: transparent;
-					bottom: 0;
+					bottom: -5px;
 					left: 0;
 					transition: all .3s;
 				}

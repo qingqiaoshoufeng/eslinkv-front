@@ -57,7 +57,7 @@ export default function (data) {
         yAxis: [{
             type: 'category',
             name: "",
-            data: data.yNames,
+            data: data.map(v => v.x),
             axisLabel: {
                 textStyle: {
                     fontSize: 18,
@@ -78,13 +78,13 @@ export default function (data) {
             itemStyle: {
                 barBorderRadius: 4
             },
-            data: data.data[0],
+            data: data.map(v => v.y1),
         },
             {
                 name: '昨日',
                 type: 'bar',
                 barWidth: 4,
-                data: data.data[1],
+                data: data.map(v => v.y2),
                 itemStyle: {
                     barBorderRadius: 4
                 }
@@ -93,7 +93,7 @@ export default function (data) {
                 name: '前日',
                 type: 'bar',
                 barWidth: 4,
-                data: data.data[2],
+                data: data.map(v => v.y3),
                 itemStyle: {
                     barBorderRadius: 4
                 }
