@@ -70,7 +70,7 @@ video::-webkit-media-controls {
 }
 .warning-videO {
 	margin-left: -38px;
-	margin-top: -66px;
+	margin-top: -80px;
 	outline: none;
 }
 </style>

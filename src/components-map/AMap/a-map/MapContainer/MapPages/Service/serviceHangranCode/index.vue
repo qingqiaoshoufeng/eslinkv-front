@@ -50,7 +50,7 @@
 				:data="couplingIncreaseInfo"
 			/>
 			<!-- 选择器盒子 -->
-			<i-switchBox @switch-change="change" />
+			<i-switchBox @switch-change="switchChange" :data="swichBoxInfo" />
 		</portal>
 	</div>
 </template>
@@ -77,6 +77,7 @@ import {
 	SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
 	SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP,
 	DATASTATISTICSLIST,
+	SWICHBOX,
 } from './config';
 import { DataStatistics } from '../../../../components';
 export default {
@@ -120,6 +121,7 @@ export default {
 			couplingIncreaseInfo: {},
 			activeArea: '杭州钱江燃气有限公司',
 			left: 10,
+			swichBoxInfo: SWICHBOX,
 		};
 	},
 	// created() {
@@ -219,10 +221,16 @@ export default {
 			this.showOverlayDetail = true;
 		},
 		// 切换热力图显示隐藏
-		change(data) {
-			let { switch1, switch2 } = data;
-			this.overlayMap.CouplingHot.isShow = switch1;
-			this.overlayMap.OperationHot.isShow = switch2;
+		switchChange(data, type) {
+			if (type === 'coupling' && data[0].value) {
+				data[1].value = false;
+			} else if (type === 'operation' && data[1].value) {
+				data[0].value = false;
+			}
+			this.swichBoxInfo = data;
+			let [{ value: value1 }, { value: value2 }] = this.swichBoxInfo;
+			this.overlayMap.CouplingHot.isShow = value1;
+			this.overlayMap.OperationHot.isShow = value2;
 		},
 	},
 	mounted() {

@@ -12,19 +12,26 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         dataProp: 'MajorClientList',
         detailList: [useNumberYestoday]
     },
-    BranchCompany: {
-        label: '分公司',
-        legendIcon: 'icontulifengongsi',
-        icon: 'iconfengongsi1',
-        component: 'BranchCompany',
+
+    sellHot: {
+        label: '用气大户',
+        component: 'sellHot',
         isShow: true,
-        dataProp: 'branchCompanyList',
-        detailList: [ICcustomer, useNumberYestoday, warningYestoday]
+        dataProp: 'sellHot',
     },
+    // BranchCompany: {
+    //     label: '分公司',
+    //     legendIcon: 'icontulifengongsi',
+    //     icon: 'iconfengongsi1',
+    //     component: 'BranchCompany',
+    //     isShow: true,
+    //     dataProp: 'branchCompanyList',
+    //     detailList: [ICcustomer, useNumberYestoday, warningYestoday]
+    // },
     WarningICcustomer: {
         label: '报警',
-        legendIcon: 'icontulifengongsi',
-        icon: 'iconyongqidahu1',
+        legendIcon: 'iconyongqidahu2',
+        icon: 'iconyongqidahu2',
         component: 'WarningICcustomer',
         isShow: true,
         dataProp: 'WarningICcustomerList',
@@ -34,11 +41,11 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
 
 //覆盖物详情
 export const SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP = {
-    BranchCompany: {
-        fields: {
-            name: {},
-        },
-    },
+    // BranchCompany: {
+    //     fields: {
+    //         name: {},
+    //     },
+    // },
     BranchCompany: {
         fields: {
             name: {},
@@ -49,3 +56,7 @@ export const SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP = {
 
 // 工商户统计数据
 export const DATASTATISTICSLIST = [FTPNumber, warningYestodayTotal, warningYestodayMetersTotal]
+// SwitchBox配置 
+export const SWICHBOX = [
+    { label: '年度销售气量热力', value: true, type: 'sellHot' },
+]

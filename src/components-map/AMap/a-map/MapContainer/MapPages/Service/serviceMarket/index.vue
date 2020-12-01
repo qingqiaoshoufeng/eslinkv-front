@@ -69,6 +69,7 @@ export default {
 			activeOverlay: {},
 			center: [120.061259, 30.183295],
 			zoom: 10,
+			swichBoxInfo: SWICHBOX,
 		};
 	},
 	created() {

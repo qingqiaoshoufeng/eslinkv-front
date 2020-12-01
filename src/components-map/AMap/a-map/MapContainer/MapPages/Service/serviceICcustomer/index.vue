@@ -4,8 +4,8 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
-		<!-- 态势感知 -->
-		<!-- <ListOverlay @overlay-click="handleOverlayClick" /> -->
+		<!-- 2.销售区域 -->
+		<SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" />
 
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
@@ -52,6 +52,12 @@
 				@list-click="handleListClick"
 				@overlay-click="handleOverlayClick"
 			/>
+			<!-- 选择器盒子 -->
+			<i-switchBox
+				@switch-change="switchChange"
+				:data="swichBoxInfo"
+				:className="{ left: true }"
+			/>
 		</portal>
 	</div>
 </template>
@@ -64,6 +70,9 @@ import {
 	MajorClient,
 	WarningICcustomer,
 	TipDetial,
+	SaleAreaBoundary,
+	SwitchBox,
+	sellHot,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -76,6 +85,7 @@ import {
 	SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
 	SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP,
 	DATASTATISTICSLIST,
+	SWICHBOX,
 } from './config';
 export default {
 	name: 'serviceICcustomer',
@@ -89,11 +99,13 @@ export default {
 		MajorClient,
 		TipDetial,
 		WarningICcustomer,
+		SaleAreaBoundary,
+		iSwitchBox: SwitchBox,
+		sellHot,
 	},
 	data() {
 		let {
 			MajorClient,
-			BranchCompany,
 			WarningICcustomer,
 		} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP;
 		return {
@@ -102,7 +114,7 @@ export default {
 			),
 			dataStatisticsList: DATASTATISTICSLIST,
 			overlayMap: SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
-			legendMap: { MajorClient, BranchCompany },
+			legendMap: { MajorClient },
 			legendMultiple: true,
 			showOverlayDetail: false,
 			activeOverlay: {},
@@ -112,6 +124,8 @@ export default {
 			detailInfo: {},
 			ICcustomerDetailInfo: {},
 			isShowMore: false,
+			activeArea: '杭州钱江燃气有限公司',
+			swichBoxInfo: SWICHBOX,
 		};
 	},
 	created() {
@@ -120,6 +134,27 @@ export default {
 		this.$amap.panTo(this.center, 100);
 	},
 	methods: {
+		// 板块图变化
+		saleAreaChange(val) {
+			console.log(val);
+			let params = this.allTypeStationList.branchCompanyList.find(
+				item => item.name === val
+			);
+			params = {
+				...params,
+				detailList:
+					SERVICE_SERVICEHANGRANCODE_LEGEND_MAP.BranchCompany
+						.detailList,
+			};
+			console.log(params);
+			this.handleOverlayClick(params);
+		},
+		// 切换热力图显示隐藏
+		switchChange(data, type) {
+			this.swichBoxInfo = data;
+			let [{ value }] = this.swichBoxInfo;
+			this.overlayMap.sellHot.isShow = value;
+		},
 		closeOverlayDetail(done) {
 			done();
 		},
@@ -140,10 +175,10 @@ export default {
 
 			console.log(this.isShowMore, type);
 		},
-		// 请求统计数据
-		async getDataStatisticsList() {
-			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
-		},
+		// // 请求统计数据
+		// async getDataStatisticsList() {
+		// 	this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
+		// },
 		// 请求用气大户、分公司数据
 		async getAllTypeStationList() {
 			let params = {

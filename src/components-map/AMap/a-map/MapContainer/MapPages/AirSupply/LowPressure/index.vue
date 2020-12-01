@@ -3,7 +3,7 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
-        <!-- 中低压 -->
+		<!-- 中低压 -->
 		<AMapTile :getTileUrl="getTileUrl" />
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
@@ -97,7 +97,7 @@ import {
 	AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 } from './config.js';
 import GoldChart from '@/openApi';
-import getHangZhouGasGISPosition from '../../../../utils/getHangZhouGasGISPosition'
+import getHangZhouGasGISPosition from '../../../../utils/getHangZhouGasGISPosition';
 
 export default {
 	name: 'AirSupplyHighPressure',
@@ -141,7 +141,7 @@ export default {
 			overlayInfoConfig: Object.freeze(AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP),
 			activeOverlay: {},
 			center: [120.121259, 30.183295],
-			zoom: 12.2,
+			zoom: 10,
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'statAawareness',
