@@ -72,7 +72,8 @@
 					muted: true,
 					language: 'en',
 					playbackRates: [0.7, 1.0, 1.5, 2.0],
-					autoplay: true,
+					// autoplay: true,
+					poster: '/static/images/video-bg.png',
 					loop: true,
 					sources: [
 						{
