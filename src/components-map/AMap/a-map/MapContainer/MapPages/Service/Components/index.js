@@ -14,7 +14,7 @@ export { default as ServiceStation } from './ServiceStation' // 综合服务站
 export { default as MajorClient } from './MajorClient' // 用气大户 
 export { default as SaleAreaBoundary } from './SaleAreaBoundary' // 销售区域
 export { default as WarningICcustomer } from './WarningICcustomer' // 用气大户 
-export { default as useHotYear } from './useHotYear' // 用气大户 
+export { default as useHotYear } from './useHotYear' // 年度销气热力 
 
 
 export { default as TipDetial } from './TipDetial' // 分公司详情自定义组件  

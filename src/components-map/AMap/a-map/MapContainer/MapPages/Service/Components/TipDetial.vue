@@ -46,7 +46,9 @@ export default {
 		return {};
 	},
 	methods: {
-		handleViewDetail() {},
+		handleViewDetail() {
+			this.$emit('view-detail');
+		},
 	},
 	mounted() {
 		console.log(this.data.detialInfo);

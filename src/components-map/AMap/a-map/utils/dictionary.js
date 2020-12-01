@@ -44,10 +44,17 @@ let ICcustomer = {
     DW: '户',
     prop: "iCcustomer"
 }
+// 工商户详情
 let useNumberYestoday = {
     label: '昨日用气量',
     DW: 'm³',
     prop: "useNumberYestoday"
+}
+
+let ICcustomerStatus = {
+    label: '流量异常',
+    DW: '',
+    prop: "ICcustomerStatus"
 }
 
 let warningYestoday = {
@@ -148,7 +155,7 @@ let LNGstationNumber = {
     prop: "stationNumber",
 }
 
+// 
 
 
-
-export { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, ICcustomer, useNumberYestoday, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, HighPressureGasStation, HighPressurePressureRegulatingStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber, LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber, LNGstationNumber }
+export { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, ICcustomer, useNumberYestoday, ICcustomerStatus, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, HighPressureGasStation, HighPressurePressureRegulatingStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber, LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber, LNGstationNumber }

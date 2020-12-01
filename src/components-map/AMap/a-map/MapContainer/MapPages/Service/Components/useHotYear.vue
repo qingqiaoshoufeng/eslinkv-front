@@ -2,7 +2,7 @@
 <script>
 import overlayMixin from '../../mixins/overlayMixin.js';
 export default {
-	name: 'CouplingHot',
+	name: 'useHotYear',
 	mixins: [overlayMixin],
 	props: {
 		data: {
@@ -34,9 +34,9 @@ export default {
 				// console.log(this._heatMapData, 5555);
 				// this._heatMapData = this._heatMapData.slice(0, 180);
 			}
-			console.log(this._heatMapData, 6666);
+			// console.log(this._heatMapData, 6666);
 			this._instance = new AMap.HeatMap(this.$amap, {
-				radius: 5, //给定半径
+				radius: 30, //给定半径
 				opacity: [0, 0.8],
 			});
 			this._instance.setDataSet({
@@ -53,6 +53,9 @@ export default {
 			this._instance.removeFromMap();
 			this._instance = null;
 		}
+	},
+	mounted() {
+		console.log(this.data);
 	},
 };
 </script>
