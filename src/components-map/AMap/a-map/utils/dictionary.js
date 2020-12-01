@@ -1,4 +1,3 @@
-import { getCouplingIncreaseInfo } from "../../../../api/map.serve.api";
 
 let OperationToday = {
     label: '今日操作',

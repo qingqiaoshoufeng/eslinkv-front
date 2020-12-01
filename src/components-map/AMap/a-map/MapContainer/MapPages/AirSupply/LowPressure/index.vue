@@ -3,7 +3,8 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
-
+        <!-- 中低压 -->
+		<AMapTile :getTileUrl="getTileUrl" />
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
@@ -74,6 +75,7 @@ import {
 	ListOverlay,
 	WarningList,
 } from '../Components/index.js';
+import { AMapTile } from '../../../../lib';
 
 //页面所需公共组件
 import {
@@ -95,6 +97,7 @@ import {
 	AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 } from './config.js';
 import GoldChart from '@/openApi';
+import getHangZhouGasGISPosition from '../../../../utils/getHangZhouGasGISPosition'
 
 export default {
 	name: 'AirSupplyHighPressure',
@@ -122,6 +125,7 @@ export default {
 		RightPanel,
 		RoutePlan,
 		MapLegend,
+		AMapTile,
 		PressureRegulatingStation,
 		OngroundRepairStation,
 		DataStatistics,
@@ -136,8 +140,8 @@ export default {
 		return {
 			overlayInfoConfig: Object.freeze(AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP),
 			activeOverlay: {},
-			center: [120.061259, 30.183295],
-			zoom: 10,
+			center: [120.121259, 30.183295],
+			zoom: 12.2,
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'statAawareness',
@@ -154,6 +158,18 @@ export default {
 		};
 	},
 	methods: {
+		getTileUrl(x, y, zoom) {
+			const tilesQuery = '11,12,10'; //this.tilesQuery
+			const {
+				leftBottomX,
+				leftBottomY,
+				rightTopX,
+				rightTopY,
+				width,
+				height,
+			} = getHangZhouGasGISPosition(x, y, zoom);
+			return `http://192.168.1.104:6080/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
+		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat } = overlay;
 			overlay.overlayType = overlayType;

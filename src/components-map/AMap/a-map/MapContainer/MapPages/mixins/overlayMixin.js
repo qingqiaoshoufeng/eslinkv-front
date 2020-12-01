@@ -21,12 +21,21 @@ export default {
             default: '',
         },
     },
+    data(){
+        return {
+            hasLoad:false
+        }
+    },
     watch: {
         visible(val) {
             if (val) {
-                this.instanceArr.forEach((instance) => {
-                    instance.show()
-                })
+                if(this.hasLoad){
+                    this.instanceArr.forEach((instance) => {
+                        instance.show()
+                    })
+                }else{
+                    this.init()
+                }
             } else {
                 this.instanceArr.forEach((instance) => {
                     instance.hide()
@@ -40,11 +49,14 @@ export default {
             }
         },
     },
-    created() {
+     created() {
         this.instanceArr = []
         let fun = findAmapRoot.bind(this)
         this.$amap = fun()
-        this.init && this.init()
+        if(this.visible){
+            this.init && this.init()
+            this.hasLoad = true
+        }
     },
     methods: {
         clearInstance() {

@@ -6,7 +6,8 @@ export default {
 	methods: {
 		init() {
 			this.drawLine();
-		},
+        },
+        
 		async drawLine() {
 			this.instanceArr = [];
 			let data = await this.$sysApi.map.home.getHighPressureLineProcess();
