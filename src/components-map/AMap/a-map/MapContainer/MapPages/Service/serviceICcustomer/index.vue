@@ -25,7 +25,7 @@
 		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
-             :legendMap="legendMap"
+			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
 			:detialBoxWidth="450"
@@ -153,10 +153,12 @@ export default {
 			params[ICcustomer_WARN__COMPONENTINDEX[0]] = {
 				title: address,
 			};
-			params[ICcustomer_WARN__COMPONENTINDEX[1]] = `${content}(${
-				eventType === 1 ? '待处理' : '已处理'
-			})`;
-			params[ICcustomer_WARN__COMPONENTINDEX[2]] = useNumberYestoday;
+			params[ICcustomer_WARN__COMPONENTINDEX[1]] = {
+				value: `${content}(${eventType === 1 ? '待处理' : '已处理'})`,
+			};
+			params[ICcustomer_WARN__COMPONENTINDEX[2]] = {
+				value: useNumberYestoday,
+			};
 			let {
 				total,
 				instant,
@@ -175,6 +177,7 @@ export default {
 			this.$nextTick(() => {
 				ICcustomer_WARN__COMPONENTINDEX.forEach(item => {
 					console.log(item);
+					console.log(params[item]);
 					GoldChart.instance.updateComponent(item, {
 						data: params[item],
 					});
