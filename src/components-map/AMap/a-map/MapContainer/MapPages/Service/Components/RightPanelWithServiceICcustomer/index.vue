@@ -26,7 +26,6 @@
 	</Tabs>
 	<!-- </DashboardPanel> -->
 </template>
-index.vue
 <script>
 import { DashboardPanel } from '../../../../../components/';
 import { Tabs, TabPanel } from '../../../Components/Tabs/';

@@ -72,7 +72,7 @@ import {
 	TipDetial,
 	SaleAreaBoundary,
 	SwitchBox,
-	sellHot,
+	useHotYear,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -101,7 +101,7 @@ export default {
 		WarningICcustomer,
 		SaleAreaBoundary,
 		iSwitchBox: SwitchBox,
-		sellHot,
+		useHotYear,
 	},
 	data() {
 		let {
@@ -153,7 +153,7 @@ export default {
 		switchChange(data, type) {
 			this.swichBoxInfo = data;
 			let [{ value }] = this.swichBoxInfo;
-			this.overlayMap.sellHot.isShow = value;
+			this.overlayMap.useHotYear.isShow = value;
 		},
 		closeOverlayDetail(done) {
 			done();
@@ -175,11 +175,7 @@ export default {
 
 			console.log(this.isShowMore, type);
 		},
-		// // 请求统计数据
-		// async getDataStatisticsList() {
-		// 	this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
-		// },
-		// 请求用气大户、分公司数据
+
 		async getAllTypeStationList() {
 			let params = {
 				type: ['MajorClient', 'BranchCompany'],

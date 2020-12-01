@@ -10,14 +10,15 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         component: 'MajorClient',
         isShow: true,
         dataProp: 'MajorClientList',
-        detailList: [useNumberYestoday]
+        detailList: ['useNumberYestoday']
     },
 
-    sellHot: {
+    useHotYear: {
         label: '用气大户',
-        component: 'sellHot',
+        component: 'useHotYear',
         isShow: true,
-        dataProp: 'sellHot',
+        dataProp: 'useHotYear',
+        detailList: ['useNumberYestoday']
     },
     // BranchCompany: {
     //     label: '分公司',
@@ -35,7 +36,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         component: 'WarningICcustomer',
         isShow: true,
         dataProp: 'WarningICcustomerList',
-        detailList: [useNumberYestoday]
+        detailList: ['useNumberYestoday']
     }
 }
 
@@ -58,5 +59,5 @@ export const SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP = {
 export const DATASTATISTICSLIST = [FTPNumber, warningYestodayTotal, warningYestodayMetersTotal]
 // SwitchBox配置 
 export const SWICHBOX = [
-    { label: '年度销售气量热力', value: true, type: 'sellHot' },
+    { label: '年度销售气量热力', value: true, type: 'useHotYear' },
 ]

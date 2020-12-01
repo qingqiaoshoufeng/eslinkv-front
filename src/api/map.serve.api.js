@@ -74,7 +74,7 @@ export function getICcustomerDetailInfo(data) {
     return request({
         url: `${HANGRANURL}/businessAnalysis/mapDetailInfo`,
         method: 'get',
-        data: qs.stringify(data),
+        data: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
