@@ -13,9 +13,8 @@
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
 				:overlayType="legend"
 				:iconSize="config.iconSize"
-				:showOverlayName="
-					config.showOverlayName ? config.showOverlayName : null
-				"
+
+
 				@overlay-click="handleOverlayClick"
 			/>
 		</template>

@@ -11,9 +11,7 @@
 				:is="config.component"
                 :overlayIcon="config.icon ? config.icon : config.legendIcon"
 				:overlayType="legend"
-				:showOverlayName="
-					config.showOverlayName ? config.showOverlayName : null
-				"
+				:showOverlayName="config.showOverlayName===false ? config.showOverlayName : undefined"
 				@overlay-click="handleOverlayClick"
 			/>
 		</template>
