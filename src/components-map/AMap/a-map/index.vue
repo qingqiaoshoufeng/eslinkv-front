@@ -53,10 +53,6 @@ export default {
 .amap-markers {
 	z-index: 1100 !important;
 }
-.amap-marker {
-	transform: scale(0.384857) !important;
-}
-
 .amap-logo {
 	display: none !important;
 }

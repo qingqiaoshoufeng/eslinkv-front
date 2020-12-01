@@ -5,6 +5,7 @@
 			overlayType,
 			visible,
 			apiFun,
+			...$attrs,
 		}"
 		@click="
 			marker =>

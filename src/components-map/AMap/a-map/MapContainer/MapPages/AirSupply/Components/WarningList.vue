@@ -7,6 +7,7 @@
 				icon: `${eventTypeIconMap[item.eventType]}${
 					item.status ? '' : '-suc'
 				}`,
+                iconSize:iconSize,
 				...item,
 			}"
 			:visible="true"
@@ -46,7 +47,11 @@ export default {
 		overlayType: {
 			type: String,
 			default: 'WarningList',
-		},
+        },
+        iconSize:{
+            type:Number,
+            default:38
+        }
 	},
 	data() {
 		return {
@@ -72,23 +77,23 @@ video::-webkit-media-controls {
 	display: none !important;
 }
 .warning-videO {
-	margin-left: -38px;
-	margin-top: -80px;
+	margin-left: -40px;
+	margin-top: -78px;
 	outline: none;
 }
 .amap-icon {
-	width: 44px !important;
-	height: 44px !important;
+	width: 38px !important;
+	height: 38px !important;
 	> img {
-		width: 44px !important;
-		height: 44px !important;
+		width: 38px !important;
+		height: 38px !important;
 	}
 }
 .warnoverlay-gif {
 	display: block;
 	width: 100px;
 	height: 35px;
-	margin-top: -40px;
+	margin-top: -36px;
 	margin-left: -30px;
 }
 

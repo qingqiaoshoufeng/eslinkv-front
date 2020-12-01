@@ -6,6 +6,7 @@
 			overlayType,
 			visible,
 			apiFun,
+			...$attrs,
 		}"
 		@click="marker => $emit('overlay-click', marker, 'LiquefiedGasStation')"
 	/>

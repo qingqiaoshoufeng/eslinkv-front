@@ -1,7 +1,7 @@
 <template>
 	<div v-if="isRendered">
 		<Overlay
-			v-for="(item, index) in !data.length ? list : data || []"
+			v-for="(item, index) in list"
 			:key="overlayType + index"
 			:marker="{
 				icon: overlayIcon,
@@ -45,9 +45,6 @@ export default {
 	props: {
 		data: {
 			type: Array,
-			default() {
-				return [];
-			},
 		},
 		nameStyle: {
 			type: Object,
@@ -95,7 +92,6 @@ export default {
 	created() {
 		let fun = findAmapRoot.bind(this);
 		this.$amap = fun();
-		this.getData(this.query);
 	},
 	data() {
 		return {
@@ -104,16 +100,18 @@ export default {
 		};
 	},
 	methods: {
+        //外部有传入数据则使用外部传入数据，or 调用接口
 		async getData(query) {
+			if (this.data) {
+				return (this.list = this.data);
+			}
 			try {
 				this.list = await this.apiFun(query);
-				// console.log(this.list);
 			} catch (err) {
 				console.log(err, 'err');
 			}
 		},
 		click(item) {
-			// console.log(item, 1111111);
 			this.$emit('click', item);
 		},
 	},

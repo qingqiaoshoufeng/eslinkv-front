@@ -1,29 +1,5 @@
 <template>
 	<div>
-		<!-- 1.legend不控制显隐的覆盖物 -->
-		<!-- 区域 -->
-		<!-- <RegionBoundary /> -->
-		<!-- 中低压管网 -->
-		<AMapTile
-			ref="mapTile"
-			:visible="!!tilesQuery.length"
-			:getTileUrl="getTileUrl"
-		/>
-		<!-- 2.legend控制显隐 -->
-		<template v-for="(config, legend) in legendMap">
-			<component
-				:key="legend"
-				:visible="config.isShow"
-				:is="config.component"
-				:overlayIcon="config.legendIcon"
-				:overlayType="legend"
-                :iconSize="config.iconSize"
-				:showOverlayName="
-					config.showOverlayName ? config.showOverlayName : null
-				"
-				@overlay-click="handleOverlayClick"
-			/>
-		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
 			v-model="showOverlayDetail"
@@ -32,19 +8,12 @@
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
+			:left="left"
 			:detialBoxWidth="'400px'"
 		/>
 		<!-- 路线规划 -->
-		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
+		<RoutePlan :data="activeOverlay"></RoutePlan>
 		<portal to="destination">
-			<!-- 统计数据 -->
-			<DataStatistics
-				:position="'right'"
-				:dataStatisticsList="dataStatisticsList"
-				:data="dataStatisticsInfo"
-			/>
-			<!-- 图例 -->
-			<MapLegend :data="legendMap" class="map-legend" />
 			<!-- 右侧列表 -->
 			<RightPanel
 				class="right-panel"
@@ -56,85 +25,78 @@
 </template>
 <script>
 //页面覆盖物组件
+
 import {
-	InspectionCar,
 	ComprehensiveServiceStation,
 	LiquefiedGasStation,
 	NaturalGasStation,
 	DistributedEnergyResource,
+	InspectionPerson,
+	InspectionCar,
+	RightPanel,
+	RoutePlan, //规划路线
 	LNGStation,
 	HighPressureLine,
 	HighPressureLine_Process,
 	MiddlePressureLine,
 	LowPressureLine,
-	InspectionPerson,
 	GasStation,
 	PressureRegulatingStation,
 	EmergencyAirSourceStation,
+	ServiceStation,
 	PipeManageMentStation,
 	UndergroundRepairStation,
 	OngroundRepairStation,
-	ServiceStation,
-	RightPanel,
-	RoutePlan, //规划路线
-	ListOverlay,
 	WarningList,
 } from '../Components/index.js';
-import { AMapTile } from '../../../../lib';
 
+import { DataStatistics } from '../../../../components';
 //页面所需公共组件
+import pageMixin from '../../mixins/pageMixin';
 import {
 	RegionBoundary,
 	OverlayDetail,
 	MapLegend,
 } from '../../Components/index.js';
-import { DataStatistics } from '../../../../components';
 
 import {
 	INDEXSCENEMAP,
-	OVERLAYINFOMAP_AIRSUPPLY,
 	AIRSUPPLY_WARN_SCENEINDEX,
 	AIRSUPPLY_WARN_COMPONENTINDEX,
+	AIRSUPPLY_WARN_MODEL_SCENEINDEX,
+	AIRSUPPLY_WARN__MODEL_COMPONENTINDEX,
 } from '../../../../config';
-import {
-	DATASTATISTICSLIST,
-	AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP,
-	AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
-} from './config.js';
 import GoldChart from '@/openApi';
-import getHangZhouGasGISPosition from '../../../../utils/getHangZhouGasGISPosition';
 
 export default {
 	name: 'AirSupplyHighPressure',
+	// mixins: [pageMixin],
 	components: {
+		RegionBoundary,
 		OverlayDetail,
+		MapLegend,
 		ComprehensiveServiceStation,
+		LiquefiedGasStation,
+		NaturalGasStation,
 		DistributedEnergyResource,
-		EmergencyAirSourceStation,
-		GasStation,
+		InspectionPerson,
+		InspectionCar,
+		RightPanel,
+		RoutePlan, //规划路线
+		LNGStation,
 		HighPressureLine,
 		HighPressureLine_Process,
-		InspectionCar,
-		InspectionPerson,
-		LiquefiedGasStation,
-		ListOverlay,
-		LNGStation,
-		LowPressureLine,
-		NaturalGasStation,
-		PipeManageMentStation,
-		PressureRegulatingStation,
-		UndergroundRepairStation,
-		ServiceStation,
 		MiddlePressureLine,
-		RegionBoundary,
-		RightPanel,
-		RoutePlan,
-		MapLegend,
-		AMapTile,
+		LowPressureLine,
+		GasStation,
 		PressureRegulatingStation,
+		EmergencyAirSourceStation,
+		ServiceStation,
+		PipeManageMentStation,
+		UndergroundRepairStation,
 		OngroundRepairStation,
-		DataStatistics,
 		WarningList,
+		DataStatistics,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
@@ -143,79 +105,90 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP),
+			center: [120.061259, 30.183295],
+			zoom: 10,
 			activeOverlay: {},
-			center: [120.121259, 30.183295],
-			zoom: 14,
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'statAawareness',
-			legendMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
-			dataStatisticsList: DATASTATISTICSLIST,
+			left: 10,
 			dataStatisticsInfo: {
-				Mediumline: 2627,
-				Lowline: 4652,
-				GreenServeStation: 5,
-				ManageStation: 5,
-				OnNumber: 12,
-				UnderNumber: 12,
+				GasStation: 5,
+				PressureRegulatingStation: 2,
+				HighPressureGasStation: 24,
+				HighPressureLineLength: 236,
+				CarNumber: 12,
+				InspectionNumber: 22,
+				PreservationNumber: 35,
 			},
 		};
 	},
-	computed: {
-		tilesQuery() {
-			const { MiddlePressureLine, LowPressureLine } = this.legendMap;
-			const {
-				isShow: isShowM,
-				tileQuery: tileQueryM,
-			} = MiddlePressureLine;
-			const { isShow: isShowL, tileQuery: tileQueryL } = LowPressureLine;
-			let queryArr = [];
-			if (isShowM) {
-				queryArr.push(tileQueryM);
-			}
-			if (isShowL) {
-				queryArr.push(tileQueryL);
-			}
-			//条件变化刷新地图
-			if (queryArr.length && this.$refs.mapTile) {
-				this.$refs.mapTile.reload();
-			}
-			return queryArr;
-		},
-	},
 	methods: {
-		getTileUrl(x, y, zoom) {
-			const tilesQuery = String(this.tilesQuery);
-			const {
-				leftBottomX,
-				leftBottomY,
-				rightTopX,
-				rightTopY,
-				width,
-				height,
-			} = getHangZhouGasGISPosition(x, y, zoom);
-			return `${window.api.MAP_GIS_URL}/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
-		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			let { lng, lat } = overlay;
-			overlay.overlayType = overlayType;
 			console.log(overlay);
 			console.log(overlayType);
+			console.log(11);
+			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
+			let { lng, lat, address, time, index } = overlay;
+			overlay.overlayType = overlayType || overlay.overlayType;
+			overlay.name = overlay.address || overlay.name;
 			this.activeOverlay = overlay;
+			console.log(this.activeOverlay);
 			this.showOverlayDetail = true;
-			this.$amap.setZoom(14, 100);
-			if (isCenter) {
+			// 计算弹框偏移量
+			this.left = this.offset(overlayType);
+			console.log(overlay);
+			// 警报效果后门 后期修正
+			if (index === 3) {
+				GoldChart.scene.createSceneInstance(
+					AIRSUPPLY_WARN_MODEL_SCENEINDEX,
+					'fadeIn',
+					'none'
+				);
 				this.$nextTick(() => {
-					this.$amap.panTo([lng, lat], 100);
+					AIRSUPPLY_WARN__MODEL_COMPONENTINDEX.forEach(item => {
+						console.log(item);
+						GoldChart.instance.updateComponent(item, {
+							data: {
+								time: time,
+								title: address,
+							},
+						});
+					});
 				});
+				setTimeout(() => {
+					GoldChart.scene.destroyScene(
+						AIRSUPPLY_WARN_MODEL_SCENEINDEX
+					);
+					this.$amap.setZoom(14, 100);
+					if (isCenter) {
+						this.$nextTick(() => {
+							this.$amap.panTo([lng, lat], 100);
+						});
+					}
+				}, 3000);
+			} else {
+				this.$amap.setZoom(14, 100);
+				if (isCenter) {
+					this.$nextTick(() => {
+						this.$amap.panTo([lng, lat], 100);
+					});
+				}
 			}
+		},
+		offset(overlayType) {
+			let offsetObj = {
+				GasStation: 15,
+				EmergencyAirSourceStation: 12,
+			};
+			console.log(offsetObj[overlayType]);
+			return offsetObj[overlayType] || 10;
 		},
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
 			if (overlayType === 'WARNEVENT') {
 				GoldChart.scene.setSceneIndex(
-					INDEXSCENEMAP['AirSupplyLowPressure']
+					INDEXSCENEMAP['AirSupplyHighPressure']
 				);
 				this.showRoutePlan = false;
 			}
@@ -227,6 +200,7 @@ export default {
 			done();
 		},
 		viewOverlayDetail(overlay) {
+			console.log(111111);
 			let { overlayType } = overlay;
 			console.log(overlay, 'overlay');
 			if (overlayType === 'WARNEVENT') {
@@ -235,8 +209,9 @@ export default {
 				console.log(overlay);
 				let { content, address } = overlay;
 				//和场景进行交互
+
 				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
-				//更新数据
+
 				this.$nextTick(() => {
 					AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
 						GoldChart.instance.updateComponent(i, {
@@ -302,12 +277,3 @@ export default {
 	},
 };
 </script>
-<style lang="scss" scoped>
-.map-legend {
-	position: absolute;
-	bottom: 50px;
-	left: 50%;
-	transform: translateX(-50%);
-	z-index: 99;
-}
-</style>

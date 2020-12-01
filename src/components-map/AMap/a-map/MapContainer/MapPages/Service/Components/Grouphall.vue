@@ -44,9 +44,6 @@ export default {
 		},
 		data: {
 			type: Array,
-			default() {
-				return [];
-			},
 		},
 		detailList: {
 			type: Array,

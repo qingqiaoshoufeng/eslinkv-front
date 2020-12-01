@@ -12,6 +12,7 @@
 				:is="config.component"
 				:overlayIcon="config.legendIcon"
 				:overlayType="legend"
+                :iconSize="config.iconSize"
 				:showOverlayName="
 					config.showOverlayName ? config.showOverlayName : null
 				"

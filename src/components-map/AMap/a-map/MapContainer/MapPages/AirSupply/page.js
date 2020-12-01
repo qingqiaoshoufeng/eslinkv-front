@@ -7,5 +7,7 @@ export { default as LowPressure } from './LowPressure/'
 export { default as LNG } from './LNG/'
 // 1.4泛能（其他）
 export { default as UCAN } from './UCAN/'
+// 1.5 抢修处置
+export { default as Repair } from './Repair/'
 
 

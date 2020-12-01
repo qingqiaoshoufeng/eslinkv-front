@@ -5,7 +5,7 @@
 			overlayType,
 			visible,
 			apiFun,
-			iconSize: 52,
+			...$attrs,
 		}"
 		@click="
 			marker =>

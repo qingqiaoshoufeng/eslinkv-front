@@ -54,7 +54,7 @@ export default {
 			const { clientWidth, clientHeight } = document.body;
 			const { width, height } = this.kanboardSize;
 			let ratio = Math.min(clientWidth / width, clientHeight / height);
-			this.actualScaleRatio = ratio < 1 ? ratio : 1;
+			// this.actualScaleRatio = ratio < 1 ? ratio : 1;
 		},
 	},
 	computed: {

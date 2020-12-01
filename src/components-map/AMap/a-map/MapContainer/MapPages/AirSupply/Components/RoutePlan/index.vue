@@ -137,7 +137,8 @@ export default {
 			this.polyline = new AMap.Polyline({
 				map: map,
 				path: lineArr,
-				showDir: true,
+                showDir: true,
+                zIndex:1500,
 				strokeColor: '#FFD200', //线颜色
 				strokeOpacity: 1,
 				fillColor: '#FFD200', //线颜色
@@ -145,7 +146,8 @@ export default {
 			});
 
 			this.passedPolyline = new AMap.Polyline({
-				map: map,
+                map: map,
+                zIndex:1500,
 				strokeColor: '#BDBDBD', //线颜色
 				fillColor: '#BDBDBD', //线颜色
 				strokeWeight: 10, //线宽

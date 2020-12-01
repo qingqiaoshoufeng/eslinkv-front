@@ -6,6 +6,7 @@
 			overlayType,
 			visible,
 			apiFun,
+			...$attrs,
 		}"
 		@click="click"
 	/>

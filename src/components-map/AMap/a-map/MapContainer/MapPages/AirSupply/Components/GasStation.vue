@@ -5,7 +5,7 @@
 			overlayType,
 			visible,
 			apiFun,
-			iconSize: 56,
+			...$attrs,
 		}"
 		@click="marker => $emit('overlay-click', marker, 'GasStation')"
 	>
@@ -43,7 +43,7 @@ export default {
 		active: {
 			type: Boolean,
 			default: false,
-		},
+        }
 	},
 	data() {
 		let apiFun = this.$sysApi.map.home.getGasStationList;

@@ -6,6 +6,7 @@
 			overlayType,
 			visible,
 			apiFun,
+			...$attrs,
 			data,
 			iconSize: 56,
 			nameStyle,

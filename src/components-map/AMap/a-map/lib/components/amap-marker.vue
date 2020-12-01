@@ -12,7 +12,8 @@ export default {
 	mixins: [registerMixin],
 	props: [
 		'vid',
-		'position',
+        'position',
+        'anchor',
 		'offset',
 		'icon',
 		'content',
@@ -112,7 +113,7 @@ export default {
 				options.content = this.tmpVM.$refs.node;
 			}
 
-			this.$amapComponent = new AMap.Marker(options);
+			this.$amapComponent = new AMap.Marker({...options,anchor:'center',offset:[10,10]});
 		},
 
 		$$getExtData() {

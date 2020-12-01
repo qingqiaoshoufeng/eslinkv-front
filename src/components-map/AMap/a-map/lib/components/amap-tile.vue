@@ -52,16 +52,15 @@ export default {
 				return false;
 			}
 			this.originInstance = new AMap.TileLayer({
-				zIndex:zIndexInner,
+				zIndex: zIndexInner,
 				opacity,
 				getTileUrl: getTileUrl,
 			});
 			this.$amap.addLayer(this.originInstance);
 		},
 		reload() {
-			this.originInstance && this.$amap.remove(this.originInstance);
 			this.$nextTick(() => {
-				this.load();
+				this.originInstance && this.originInstance.reload();
 			});
 		},
 	},
