@@ -35,7 +35,7 @@ export default {
 		let apiFun = this.$sysApi.map.home.getPressureRegulatingStationList;
 		apiFun().then(res => {
 			console.log(res, 3333);
-		});
+		});  
 		return {
 			apiFun: apiFun,
 		};

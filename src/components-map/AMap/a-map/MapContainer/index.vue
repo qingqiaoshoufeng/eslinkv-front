@@ -12,13 +12,16 @@
 		>
 			<!-- 页面 -->
 			<template v-if="showMapPage">
-				<component :reverseScaleRatio="reverseScaleRatio" :is="mapComponentName" />
+				<component
+					:reverseScaleRatio="reverseScaleRatio"
+					:is="mapComponentName"
+				/>
 			</template>
 		</el-amap>
 		<!-- 地图类型 -->
 		<MapTypeLegend />
 		<!-- 传送门的出口 -->
-		<portal-target name="destination"></portal-target>
+		<portal-target class="portal-target" name="destination"></portal-target>
 	</div>
 </template>
 
@@ -71,8 +74,8 @@ export default {
 			const { width, height } = this.kanboardSize;
 			let ratio = Math.min(clientWidth / width, clientHeight / height);
 			ratio = ratio < 1 ? ratio : 1;
-            this.reverseScaleRatio = 1 / ratio;
-			// this.reverseScaleRatio = 1 
+			this.reverseScaleRatio = 1 / ratio;
+			// this.reverseScaleRatio = 1
 		},
 	},
 	mounted() {
@@ -92,6 +95,9 @@ export default {
 	left: 0;
 	bottom: 0;
 	right: 0;
+}
+.portal-target {
+	z-index: 100;
 }
 </style>
 
