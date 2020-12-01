@@ -84,6 +84,9 @@ export default {
 };
 </script>
  <style lang="scss" scoped>
+.vue-portal-target {
+	z-index: 99;
+}
 .map-container {
 	position: relative;
 	width: 100%;
