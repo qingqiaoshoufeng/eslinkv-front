@@ -159,7 +159,6 @@ export default {
 	},
 	methods: {
 		getTileUrl(x, y, zoom) {
-			console.log(x, y, zoom);
 			const tilesQuery = '11,12,10'; //this.tilesQuery
 			const {
 				leftBottomX,

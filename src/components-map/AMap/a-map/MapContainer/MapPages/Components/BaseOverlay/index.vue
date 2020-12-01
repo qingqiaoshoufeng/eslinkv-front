@@ -96,7 +96,6 @@ export default {
 		let fun = findAmapRoot.bind(this);
 		this.$amap = fun();
 		this.getData(this.query);
-		console.log(this.nameStyle, 22222);
 	},
 	data() {
 		return {

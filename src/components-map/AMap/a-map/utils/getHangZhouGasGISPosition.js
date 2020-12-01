@@ -1,28 +1,6 @@
 import CoordinateTransform from './CoordinateTransform'
-var TileLnglatTransform = require('tile-lnglat-transform')
-// import TransformClassSlippy from './TransformClassSlippy'
+import TransformClassSlippy from './TransformClassSlippy'
 
-const RESOLUTIONS = [
-	262144,
-	131072,
-	65536,
-	32768,
-	16384,
-	8192,
-	4096,
-	2048,
-	1024,
-	512,
-	256,
-	128,
-	64,
-	32,
-	16,
-	8,
-	4,
-	2,
-	1,
-]
 const TILE_WIDTH = 256
 
 const XB = 119.3414085
@@ -37,8 +15,6 @@ function bd_2_HZGAS(x, b, k) {
 	return (x - b) * k
 }
 
-var TileLnglatTransformGaode = TileLnglatTransform.TileLnglatTransformGaode
-window.TileLnglatTransformGaode = TileLnglatTransformGaode
 /**
  * 百度地图墨卡托坐标系 转换杭州燃气GIS 坐标系
  * @param x
@@ -47,14 +23,9 @@ window.TileLnglatTransformGaode = TileLnglatTransformGaode
  * @returns {{leftBottomX: *, leftBottomY: *, rightTopX: *, rightTopY: *, width: number, height: number}}
  */
 export default function getPosition(x, y, zoom) {
-	const res = RESOLUTIONS[zoom]
-	let minx = x * TILE_WIDTH * res
-	let miny = y * TILE_WIDTH * res
-	let maxx = (x + 1) * TILE_WIDTH * res
-	let maxy = (y + 1) * TILE_WIDTH * res
-    let min = TileLnglatTransformGaode.pixelToLnglat(null, null, x, y, zoom)
-    // min = coordinateTransform.GCJ2BD(min.lng,min.lat)
-	let max = TileLnglatTransformGaode.pixelToLnglat(
+    let min = TransformClassSlippy.pixelToLnglat(null, null, x, y, zoom)
+    min = coordinateTransform.GCJ2BD(min.lng,min.lat)
+	let max = TransformClassSlippy.pixelToLnglat(
 		null,
 		null,
 		x + 1,
