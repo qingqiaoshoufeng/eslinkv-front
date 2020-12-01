@@ -4,7 +4,15 @@
 		<!-- 区域 -->
 		<RegionBoundary />
 		<!-- 中低压 -->
+<<<<<<< HEAD
 		<AMapTile :getTileUrl="getTileUrl" />
+=======
+		<AMapTile
+			ref="mapTile"
+			:visible="!!tilesQuery.length"
+			:getTileUrl="getTileUrl"
+		/>
+>>>>>>> ce5003f7ff02812baea90fe1f25f76d58ca66841
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
@@ -135,6 +143,7 @@ export default {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.panTo(this.center, 100);
+		window.legendMap = this.legendMap;
 	},
 	data() {
 		return {
@@ -157,9 +166,30 @@ export default {
 			},
 		};
 	},
+	computed: {
+		tilesQuery() {
+			const { MiddlePressureLine, LowPressureLine } = this.legendMap;
+			const {
+				isShow: isShowM,
+				tileQuery: tileQueryM,
+			} = MiddlePressureLine;
+			const { isShow: isShowL, tileQuery: tileQueryL } = LowPressureLine;
+			let queryArr = [];
+			if (isShowM) {
+				queryArr.push(tileQueryM);
+			}
+			if (isShowL) {
+				queryArr.push(tileQueryL);
+			}
+			if (queryArr.length && this.$refs.mapTile) {
+				this.$refs.mapTile.reload();
+			}
+			return queryArr;
+		},
+	},
 	methods: {
 		getTileUrl(x, y, zoom) {
-			const tilesQuery = '11,12,10'; //this.tilesQuery
+			const tilesQuery = String(this.tilesQuery);
 			const {
 				leftBottomX,
 				leftBottomY,
