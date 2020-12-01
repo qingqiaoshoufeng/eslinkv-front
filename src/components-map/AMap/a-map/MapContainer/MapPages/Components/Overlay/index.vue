@@ -10,13 +10,15 @@ export default {
 	},
 	render: (h, { props, data, listeners, scopedSlots, $slots }) => {
 		let { active = false, marker, visible = true } = props;
-		let { lat, lng, name, status, icon, iconSize } = marker;
+        let { lat, lng, name, status, icon, iconSize = 38 } = marker;
+        let offset = [ -iconSize/2,-iconSize/2]
 		if (!parseFloat(lat) || !parseFloat(lng)) {
 			return null;
 		}
 		return (
 			<AMapMarker
-				visible={visible}
+                visible={visible}
+                offset={offset}
 				position={[lng || 0, lat || 0]}
 				vid={name}
 			>

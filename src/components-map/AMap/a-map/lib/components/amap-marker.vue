@@ -113,7 +113,7 @@ export default {
 				options.content = this.tmpVM.$refs.node;
 			}
 
-			this.$amapComponent = new AMap.Marker({...options,anchor:'center',offset:[10,10]});
+			this.$amapComponent = new AMap.Marker({...options,anchor:'center',offset:[-26,-26]});
 		},
 
 		$$getExtData() {
