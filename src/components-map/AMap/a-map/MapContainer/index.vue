@@ -21,7 +21,7 @@
 		<!-- 地图类型 -->
 		<MapTypeLegend />
 		<!-- 传送门的出口 -->
-		<portal-target name="destination"></portal-target>
+		<portal-target class="portal-target" name="destination"></portal-target>
 	</div>
 </template>
 
@@ -98,6 +98,9 @@ export default {
 	left: 0;
 	bottom: 0;
 	right: 0;
+}
+.portal-target {
+	z-index: 100;
 }
 </style>
 
