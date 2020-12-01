@@ -1,15 +1,15 @@
 <template>
-	<div class="widget-part pos-r" :style="styles">
+	<div class="widget-part pos-r" :style="styles" v-if="data">
 		<div class="legend-box">
-			<div class="unit">{{config.config&&config.config.title}}</div>
+			<div class="unit">{{config.config.title}}</div>
 			<div class="legend">
 				<div class="legend1">
-					<div class="bgc1" :style="`backgroundColor:${config.config&&config.config.color1};}`"></div>
-					<div class="desc1">{{config.config&&config.config.desc1}}</div>
+					<div class="bgc1" :style="`backgroundColor:${config.config.color1};}`"></div>
+					<div class="desc1">{{config.config.desc1}}</div>
 				</div>
 				<div class="legend2">
-					<div class="bgc2" :style="`backgroundColor:${config.config&&config.config.color2};}`"></div>
-					<div class="desc2">{{config.config&&config.config.desc2}}</div>
+					<div class="bgc2" :style="`backgroundColor:${config.config.color2};}`"></div>
+					<div class="desc2">{{config.config.desc2}}</div>
 				</div>
 			</div>
 		</div>
@@ -18,7 +18,7 @@
 </template>
 <script>
 	import mixins from '../../mixins';
-	import options from './options';
+	import getOption from './options';
 	import {getInput} from '../../../../lib'
 
 	const configSource = {
@@ -68,12 +68,7 @@
 		mixins: [mixins],
 		methods: {
 			setOption(data) {
-				options.xAxis.data = data.map(item => item.xValue);
-				options.series[0].data = data.map(item => item.yValue1);
-				options.series[0].itemStyle.normal.color = this.config.config.color1;
-				options.series[1].itemStyle.normal.color = this.config.config.color2;
-				options.series[1].data = data.map(item => item.yValue2);
-				this.instance && this.instance.setOption(options);
+				this.instance && this.instance.setOption(getOption(this.data, this.config.config));
 			},
 		},
 		watch: {

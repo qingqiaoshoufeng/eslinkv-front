@@ -3,6 +3,7 @@
 		<h-vertical-tabs
 			class="h-tabs-circle__tabs"
 			:source="data"
+      :hasInterval="false"
 			:defaultActived="tabActived"
 			@actived-change="tabActivedChange"
 		/>
@@ -54,7 +55,7 @@
 				{
 					name: '区域',
 					data: [
-						{value: 12.5, des: '111', title: '南门站'},
+						{value: 13.5, des: '111', title: '南门站'},
 						{value: 12.5, des: '', title: '北门站'},
 						{value: 12.5, des: '', title: '下沙门站'},
 						{value: 12.5, des: '', title: '江东门站'},
@@ -70,7 +71,7 @@
 				{
 					name: '子公司',
 					data: [
-						{value: 12.5, des: '111', title: '南门站'},
+						{value: 14.5, des: '111', title: '南门站'},
 						{value: 12.5, des: '', title: '北门站'},
 						{value: 12.5, des: '', title: '下沙门站'},
 						{value: 12.5, des: '', title: '江东门站'},
@@ -86,7 +87,7 @@
 				{
 					name: '用气性质',
 					data: [
-						{value: 12.5, des: '111', title: '南门站'},
+						{value: 15.5, des: '111', title: '南门站'},
 						{value: 12.5, des: '', title: '北门站'},
 						{value: 12.5, des: '', title: '下沙门站'},
 						{value: 12.5, des: '', title: '江东门站'},
@@ -160,6 +161,8 @@
 			},
 			setOption(data) {
 				this.instance && this.instance.setOption(getOption(data, this.config.config))
+        this.animateActiveIndex = 0
+        this.show(data)
 			},
 			show(data) {
 				clearInterval(this.animateTimer)
@@ -190,7 +193,6 @@
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
 							this.setOption(data[this.tabActived].data)
-							this.show(data[this.tabActived].data)
 						})
 					}
 				},

@@ -43,6 +43,10 @@ export default {
 			type: Number,
 			default: 0
 		},
+    hasInterval: {
+			type: Boolean,
+			default: true
+		},
 		source: {
 			type: Array,
 			default: () => ([])
@@ -50,7 +54,7 @@ export default {
 	},
 	mounted(){
 		this.actived = this.defaultActived || 0;
-		this.beginInterval();
+		this.hasInterval && this.beginInterval();
 	},
 	destroyed(){
 		this.clearInterval();
