@@ -3,14 +3,16 @@ export const SERVICE_SERVICEMARKET_LEGEND_MAP = {
     Grouphall: {
         label: '集团大厅',
         legendIcon: 'icontulijituandating',
-        icon: 'iconjituandating',
+        iconSize:38,
+        icon:'iconjituandating',
         component: 'Grouphall',
         isShow: true,
     },
     BranchCompany: {
         label: '分公司',
         legendIcon: 'icontulifengongsi',
-        icon: 'iconfengongsi1',
+        iconSize:38,
+        icon:'iconfengongsi1',
         component: 'BranchCompany',
         isShow: true,
     },

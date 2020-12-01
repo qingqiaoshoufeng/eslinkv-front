@@ -13,6 +13,7 @@
 				:key="legend"
 				:visible="config.isShow"
 				:overlayIcon="config.legendIcon"
+                :iconSize="config.iconSize"
 				:overlayType="legend"
 				:is="config.component"
 				:data="allTypeStationList[config.dataProp]"
@@ -23,9 +24,10 @@
 		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
+             :legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:detialBoxWidth="'450px'"
+			:detialBoxWidth="450"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 			@view-detail="showOverlayDetail"

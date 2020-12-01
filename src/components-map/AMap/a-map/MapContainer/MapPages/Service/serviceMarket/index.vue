@@ -13,6 +13,7 @@
 				:key="legend"
 				:visible="config.isShow"
 				:overlayIcon="config.legendIcon"
+				:iconSize="config.iconSize"
 				:overlayType="legend"
 				:is="config.component"
 				@overlay-click="handleOverlayClick"
@@ -20,6 +21,7 @@
 		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
+            :legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"

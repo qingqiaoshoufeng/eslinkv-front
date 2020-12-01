@@ -10,13 +10,15 @@ export default {
 	},
 	render: (h, { props, data, listeners, scopedSlots, $slots }) => {
 		let { active = false, marker, visible = true } = props;
-		let { lat, lng, name, status, icon, iconSize } = marker;
+        let { lat, lng, name, status, icon, iconSize = 38 } = marker;
+        let offset = [ -iconSize/2,-iconSize/2]
 		if (!parseFloat(lat) || !parseFloat(lng)) {
 			return null;
 		}
 		return (
 			<AMapMarker
-				visible={visible}
+                visible={visible}
+                offset={offset}
 				position={[lng || 0, lat || 0]}
 				vid={name}
 			>
@@ -42,11 +44,11 @@ export default {
 
 <style lang="scss" scoped>
 .sample {
-	width: 54px;
-	height: 54px;
+	// width: 54px;
+	// height: 54px;
 	position: absolute;
 	cursor: pointer;
-	padding: 3px;
+	// padding: 3px;
 	box-sizing: border-box;
 
 	img {
@@ -74,7 +76,6 @@ export default {
 	color: #fff;
 	position: absolute;
 	white-space: nowrap;
-	bottom: -20px;
 	left: 50%;
 	transform: translateX(-50%);
 }

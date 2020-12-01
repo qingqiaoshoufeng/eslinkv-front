@@ -18,21 +18,20 @@
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
 				:overlayType="legend"
 				:iconSize="config.iconSize"
-				:showOverlayName="
-					config.showOverlayName ? config.showOverlayName : null
-				"
+				:showOverlayName="config.showOverlayName===false ? config.showOverlayName : undefined"
 				@overlay-click="handleOverlayClick"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
+			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
-			:detialBoxWidth="'400px'"
+			:detialBoxWidth="400"
 		/>
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>

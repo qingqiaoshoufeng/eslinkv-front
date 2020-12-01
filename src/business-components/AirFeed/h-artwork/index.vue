@@ -1,6 +1,6 @@
 <template>
   <div class="widget-part" :style="styles" v-if="data">
-    <image-view :images="images" :option="option" :show-image="false" class="art"></image-view>
+    <image-view :images="[data.image]" :option="option" :show-image="false" class="art"></image-view>
     <img class="tooltip" src="./img/tooltip.svg">
   </div>
 </template>
@@ -13,7 +13,9 @@ const config = {
 }
 const value = {
   api: {
-    data: JSON.stringify({})
+    data: JSON.stringify({
+      image: '/static/images/airfeed/art.svg'
+    })
   }
 }
 export default {
@@ -23,7 +25,6 @@ export default {
   },
   data() {
     return {
-      images: ['/static/images/airfeed/art.svg'],
       option: {
         "inline": true,
         "button": false,

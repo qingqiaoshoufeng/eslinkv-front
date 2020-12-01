@@ -11,9 +11,7 @@
 				:is="config.component"
                 :overlayIcon="config.icon ? config.icon : config.legendIcon"
 				:overlayType="legend"
-				:showOverlayName="
-					config.showOverlayName ? config.showOverlayName : null
-				"
+				:showOverlayName="config.showOverlayName===false ? config.showOverlayName : undefined"
 				@overlay-click="handleOverlayClick"
 			/>
 		</template>
@@ -21,11 +19,12 @@
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
+            :legendMap="legendMap"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
-			:detialBoxWidth="'400px'"
+			:detialBoxWidth="400"
 		/>
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>

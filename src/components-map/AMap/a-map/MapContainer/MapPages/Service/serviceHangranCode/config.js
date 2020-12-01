@@ -5,7 +5,8 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
     Grouphall: {
         label: '集团大厅',
         legendIcon: 'icontulijituandating',
-        icon: 'iconjituandating',
+        iconSize:56,
+        icon:'iconjituandating',
         component: 'Grouphall',
         isShow: true,
         dataProp: 'grouphallList',
@@ -14,7 +15,8 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
     BranchCompany: {
         label: '分公司',
         legendIcon: 'icontulifengongsi',
-        icon: 'iconfengongsi1',
+        iconSize:56,
+        icon:'iconfengongsi1',
         component: 'BranchCompany',
         isShow: true,
         dataProp: 'branchCompanyList',
@@ -23,7 +25,8 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
     ServiceStation: {
         label: '综合服务站',
         legendIcon: 'icontulizonghefuwuzhan1',
-        icon: 'iconzonghefuwuzhan1',
+        iconSize:38,
+        icon:'iconzonghefuwuzhan1',
         component: 'ServiceStation',
         isShow: true,
         dataProp: 'comprehensiveServiceStationList',

@@ -124,7 +124,6 @@ export default {
 	color: #fff;
 	position: absolute;
 	white-space: nowrap;
-	bottom: -20px;
 	left: 50%;
 	transform: translateX(-50%);
 }
