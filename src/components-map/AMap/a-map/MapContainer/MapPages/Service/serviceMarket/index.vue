@@ -13,6 +13,7 @@
 				:key="legend"
 				:visible="config.isShow"
 				:overlayIcon="config.legendIcon"
+				:iconSize="config.iconSize"
 				:overlayType="legend"
 				:is="config.component"
 				@overlay-click="handleOverlayClick"

@@ -18,6 +18,7 @@
 				:visible="config.isShow"
 				:is="config.component"
 				:overlayIcon="config.legendIcon"
+				:iconSize="config.iconSize"
 				:overlayType="legend"
 				:showOverlayName="
 					config.showOverlayName ? config.showOverlayName : null
