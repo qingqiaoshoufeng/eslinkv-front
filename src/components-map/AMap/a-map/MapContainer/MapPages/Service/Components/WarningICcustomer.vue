@@ -1,57 +1,47 @@
-<!-- 工商户警报 -->
 <template>
-	<BaseOverlay
-		v-bind="{
-			overlayIcon,
-			overlayType,
-			visible,
-			apiFun,
-			...$attrs,
-			data,
-		}"
-		@click="
-			marker =>
-				$emit('overlay-click', { detailList, ...marker }, overlayType)
-		"
-	>
-		<video
-			class="warning-videO"
-			src="@/assets/amap/images/warning-circle.webm"
-			controls="controls"
-			autoplay="autoplay"
-			muted="muted"
-			loop
-		></video>
-	</BaseOverlay>
+	<div>
+		<Overlay
+			v-for="(item, index) in data"
+			:key="index"
+			:marker="{
+				icon: `${eventTypeIconMap[item.eventType]}`,
+				...item,
+				...$attrs,
+			}"
+			:visible="true"
+			@click="
+				$emit('overlay-click', { overlayType: 'WarningList', ...item })
+			"
+		>
+			<video
+				class="warning-videO"
+				src="@/assets/amap/images/warning-circle.webm"
+				controls="controls"
+				autoplay="autoplay"
+				muted="muted"
+				loop
+				v-if="item.eventType"
+			></video>
+		</Overlay>
+	</div>
 </template>
 <script>
-import { BaseOverlay } from '../../Components/index';
-
+import { Overlay } from '../../Components/index';
+let eventTypeIconMap = {
+	0: 'icontuli-gongshanghu',
+	1: 'iconyongqidahu2',
+};
 export default {
-	name: 'BranchCompany',
+	name: 'useHotYear',
 	components: {
-		BaseOverlay,
+		Overlay,
 	},
 	props: {
-		visible: {
-			type: Boolean,
-			default: true,
-		},
-		overlayIcon: {
-			type: String,
-			default: '',
-		},
 		overlayType: {
 			type: String,
-			default: '',
+			default: 'WarningList',
 		},
 		data: {
-			type: Array,
-			default() {
-				return [];
-			},
-		},
-		detailList: {
 			type: Array,
 			default() {
 				return [];
@@ -60,21 +50,51 @@ export default {
 	},
 	data() {
 		return {
-			apiFun: this.$sysApi.map.serve.getBranchCompanyList,
+			eventTypeIconMap,
 		};
+	},
+
+	async created() {
+		this.map = this.$parent.$amap;
+
+		// this.list = await this.$sysApi.map.airSupply.getEventWarningList();
+		// console.log(res);
+		// this.list = res.filter(item => item.status);
+		// console.log(this.list, 1111);
+	},
+	mounted() {
+		console.log(this.data, 2222);
 	},
 };
 </script>
+
+
 <style lang="scss" scoped>
 video::-webkit-media-controls {
 	display: none !important;
 }
 .warning-videO {
 	margin-left: -38px;
-	margin-top: -66px;
+	margin-top: -80px;
 	outline: none;
 }
+.amap-icon {
+	width: 44px !important;
+	height: 44px !important;
+	> img {
+		width: 44px !important;
+		height: 44px !important;
+	}
+}
+.warnoverlay-gif {
+	display: block;
+	width: 100px;
+	height: 35px;
+	margin-top: -40px;
+	margin-left: -30px;
+}
+
+// img {
+// 	width: 100%;
+// }
 </style>
-
-
-

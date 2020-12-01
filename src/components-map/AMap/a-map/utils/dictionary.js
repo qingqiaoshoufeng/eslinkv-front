@@ -25,9 +25,9 @@ let NewCouplingNumber = {
     prop: "newCouplingNumber"
 }
 let couplingIncreaseToday = {
-    label: '今日新增联码数',
+    label: '昨日新增联码数',
     DW: '',
-    prop: "today"
+    prop: "yesterday"
 }
 let couplingIncreaseWeek = {
     label: '近一周新增联码数',

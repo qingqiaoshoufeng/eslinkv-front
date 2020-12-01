@@ -1,55 +1,53 @@
 <!--杭燃码热力图选择器 -->
 <template>
-	<div class="hangrancode_switch_Box">
-		<div>
-			<span class="label">累计联码数量热力</span>
+	<div class="hangrancode_switch_Box" :class="className">
+		<div class="item" v-for="(item, index) in data" :key="index">
+			<span class="label">{{ item.label }}</span>
 			<i-switch
-				v-model="data.switch1"
-				@on-change="change(1)"
+				v-model="item.value"
+				@on-change="change(item.type)"
 				true-color="#0057A9"
 				false-color="#0057A9"
-			/>{{ data.switch1 ? 'no' : 'off' }}
-		</div>
-		<div>
-			<span class="label">月操作数量热力</span>
-			<i-switch
-				v-model="data.switch2"
-				@on-change="change(2)"
-				true-color="#0057A9"
-				false-color="#0057A9"
-			/>{{ data.switch2 ? 'no' : 'off' }}
+			/>{{ item.value ? 'on' : 'off' }}
 		</div>
 	</div>
 </template>
 <script>
 export default {
 	name: 'SwitchBox',
-	data() {
-		return {
-			data: {
-				switch1: true,
-				switch2: false,
+	props: {
+		data: {
+			type: Array,
+			default() {
+				return [];
 			},
-		};
-	},
-	methods: {
-		change(e) {
-			if (e === 1) {
-				this.data.switch1 && (this.data.switch2 = false);
-			} else {
-				this.data.switch2 && (this.data.switch1 = false);
-			}
-			this.$emit('switch-change', this.data);
+		},
+		className: {
+			type: Object,
+			default() {
+				return {};
+			},
 		},
 	},
-	mounted() {},
+	data() {
+		return {};
+	},
+	methods: {
+		change(type) {
+			this.$emit('switch-change', this.data, type);
+		},
+	},
+	mounted() {
+		console.log();
+	},
 };
 </script>
 <style lang="scss" scoped>
 .hangrancode_switch_Box {
+	padding: 8px 16px;
 	position: fixed;
-	width: 251px;
-	height: 88px;
+	// width: 251px;
+	// height: 88px;
 	left: 32px;
 	bottom: 32px;
 	z-index: 99999;
@@ -89,6 +87,9 @@ export default {
 			margin-right: 8px;
 		}
 	}
+}
+.left {
+	left: 2695px;
 }
 </style>
 

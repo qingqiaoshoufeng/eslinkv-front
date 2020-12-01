@@ -63,3 +63,9 @@ export const SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP = {
 }
 // 杭燃码统计数据
 export const DATASTATISTICSLIST = [couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth]
+
+// SwitchBox配置 
+export const SWICHBOX = [
+    { label: '累计联码数量热力', value: true, type: 'coupling' },
+    { label: '月操作数量热力', value: false, type: 'operation' }
+]
