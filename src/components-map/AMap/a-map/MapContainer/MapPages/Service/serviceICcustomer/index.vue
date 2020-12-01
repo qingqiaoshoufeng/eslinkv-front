@@ -1,88 +1,79 @@
+<!-- 工商户 -->
 <template>
-	<div>
+	<div class="ICcustomer1">
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
-		<!-- 中低压 -->
-
-		<AMapTile
-			ref="mapTile"
-			:visible="!!tilesQuery.length"
-			:getTileUrl="getTileUrl"
-		/>
+		<!-- 2.销售区域 -->
+		<SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" />
 
 		<!-- 2.legend控制显隐 -->
-		<template v-for="(config, legend) in legendMap">
+		<template v-for="(config, legend) in overlayMap">
 			<component
 				:key="legend"
 				:visible="config.isShow"
-				:is="config.component"
 				:overlayIcon="config.legendIcon"
 				:overlayType="legend"
-				:showOverlayName="
-					config.showOverlayName ? config.showOverlayName : null
-				"
+				:is="config.component"
 				@overlay-click="handleOverlayClick"
+				:ref="config.component"
+				:detailList="config.detailList"
+				:data="allTypeStationList[config.dataProp]"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
+			:detialBoxWidth="'450px'"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
-			@view-detail="viewOverlayDetail"
+			@view-detail="showOverlayDetail"
 			ref="OverlayDetail"
-			:detialBoxWidth="'400px'"
-		/>
-		<!-- 路线规划 -->
-		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
-		<portal to="destination">
-			<!-- 统计数据 -->
-			<DataStatistics
-				:position="'right'"
-				:dataStatisticsList="dataStatisticsList"
-				:data="dataStatisticsInfo"
+		>
+			<TipDetial
+				:data="activeOverlay"
+				:detailInfo="detailInfo"
+				:isShowMore="isShowMore"
 			/>
-			<!-- 图例 -->
-			<MapLegend :data="legendMap" class="map-legend" />
-			<!-- 右侧列表 -->
-			<RightPanel
+		</OverlayDetail>
+		<portal to="destination">
+			<MapLegend
+				:data="legendMap"
+				:multiple="legendMultiple"
+				class="map-legend"
+			/>
+			<DataStatistics
+				:dataStatisticsList="dataStatisticsList"
+				:data="ICcustomerDetailInfo"
+			/>
+			<RightPanelWithServiceICcustomer
 				class="right-panel"
-				v-model="activeTab"
+				@list-click="handleListClick"
 				@overlay-click="handleOverlayClick"
-			></RightPanel>
+			/>
+			<!-- 选择器盒子 -->
+			<i-switchBox
+				@switch-change="switchChange"
+				:data="swichBoxInfo"
+				:className="{ left: true }"
+			/>
 		</portal>
 	</div>
 </template>
 <script>
 //页面覆盖物组件
 import {
-	InspectionCar,
-	ComprehensiveServiceStation,
-	LiquefiedGasStation,
-	NaturalGasStation,
-	DistributedEnergyResource,
-	LNGStation,
-	HighPressureLine,
-	HighPressureLine_Process,
-	MiddlePressureLine,
-	LowPressureLine,
-	InspectionPerson,
-	GasStation,
-	PressureRegulatingStation,
-	EmergencyAirSourceStation,
-	PipeManageMentStation,
-	UndergroundRepairStation,
-	OngroundRepairStation,
-	ServiceStation,
-	RightPanel,
-	RoutePlan, //规划路线
-	ListOverlay,
-	WarningList,
+	// ICcustomer,
+	RightPanelWithServiceICcustomer,
+	BranchCompany,
+	MajorClient,
+	WarningICcustomer,
+	TipDetial,
+	SaleAreaBoundary,
+	SwitchBox,
+	useHotYear,
 } from '../Components/index.js';
-import { AMapTile } from '../../../../lib';
-
 //页面所需公共组件
 import {
 	RegionBoundary,
@@ -90,225 +81,185 @@ import {
 	MapLegend,
 } from '../../Components/index.js';
 import { DataStatistics } from '../../../../components';
-
 import {
-	INDEXSCENEMAP,
-	OVERLAYINFOMAP_AIRSUPPLY,
-	AIRSUPPLY_WARN_SCENEINDEX,
-	AIRSUPPLY_WARN_COMPONENTINDEX,
-} from '../../../../config';
-import {
+	SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
+	SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP,
 	DATASTATISTICSLIST,
-	AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP,
-	AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
-} from './config.js';
-import GoldChart from '@/openApi';
-import getHangZhouGasGISPosition from '../../../../utils/getHangZhouGasGISPosition';
-
+	SWICHBOX,
+} from './config';
 export default {
-	name: 'AirSupplyHighPressure',
+	name: 'serviceICcustomer',
 	components: {
-		OverlayDetail,
-		ComprehensiveServiceStation,
-		DistributedEnergyResource,
-		EmergencyAirSourceStation,
-		GasStation,
-		HighPressureLine,
-		HighPressureLine_Process,
-		InspectionCar,
-		InspectionPerson,
-		LiquefiedGasStation,
-		ListOverlay,
-		LNGStation,
-		LowPressureLine,
-		NaturalGasStation,
-		PipeManageMentStation,
-		PressureRegulatingStation,
-		UndergroundRepairStation,
-		ServiceStation,
-		MiddlePressureLine,
 		RegionBoundary,
-		RightPanel,
-		RoutePlan,
-		MapLegend,
-		AMapTile,
-		PressureRegulatingStation,
-		OngroundRepairStation,
+		OverlayDetail,
 		DataStatistics,
-		WarningList,
+		RightPanelWithServiceICcustomer,
+		MapLegend,
+		BranchCompany,
+		MajorClient,
+		TipDetial,
+		WarningICcustomer,
+		SaleAreaBoundary,
+		iSwitchBox: SwitchBox,
+		useHotYear,
+	},
+	data() {
+		let {
+			MajorClient,
+			WarningICcustomer,
+		} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP;
+		return {
+			overlayInfoConfig: Object.freeze(
+				SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP
+			),
+			dataStatisticsList: DATASTATISTICSLIST,
+			overlayMap: SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
+			legendMap: { MajorClient },
+			legendMultiple: true,
+			showOverlayDetail: false,
+			activeOverlay: {},
+			center: [120.061259, 30.183295],
+			zoom: 10,
+			allTypeStationList: {},
+			detailInfo: {},
+			ICcustomerDetailInfo: {},
+			isShowMore: false,
+			activeArea: '杭州钱江燃气有限公司',
+			swichBoxInfo: SWICHBOX,
+		};
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.panTo(this.center, 100);
-		window.legendMap = this.legendMap;
-	},
-	data() {
-		return {
-			overlayInfoConfig: Object.freeze(AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP),
-			activeOverlay: {},
-			center: [120.121259, 30.183295],
-			zoom: 10,
-			showOverlayDetail: false,
-			showRoutePlan: false,
-			activeTab: 'statAawareness',
-			legendMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
-			dataStatisticsList: DATASTATISTICSLIST,
-			dataStatisticsInfo: {
-				Mediumline: 2627,
-				Lowline: 4652,
-				GreenServeStation: 5,
-				ManageStation: 5,
-				OnNumber: 12,
-				UnderNumber: 12,
-			},
-		};
-	},
-	computed: {
-		tilesQuery() {
-			const { MiddlePressureLine, LowPressureLine } = this.legendMap;
-			const {
-				isShow: isShowM,
-				tileQuery: tileQueryM,
-			} = MiddlePressureLine;
-			const { isShow: isShowL, tileQuery: tileQueryL } = LowPressureLine;
-			let queryArr = [];
-			if (isShowM) {
-				queryArr.push(tileQueryM);
-			}
-			if (isShowL) {
-				queryArr.push(tileQueryL);
-			}
-			if (queryArr.length && this.$refs.mapTile) {
-				this.$refs.mapTile.reload();
-			}
-			return queryArr;
-		},
 	},
 	methods: {
-		getTileUrl(x, y, zoom) {
-			const tilesQuery = String(this.tilesQuery);
-			const {
-				leftBottomX,
-				leftBottomY,
-				rightTopX,
-				rightTopY,
-				width,
-				height,
-			} = getHangZhouGasGISPosition(x, y, zoom);
-			return `http://192.168.1.104:6080/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
+		// 板块图变化
+		saleAreaChange(val) {
+			console.log(val);
+			let params = this.allTypeStationList.branchCompanyList.find(
+				item => item.name === val
+			);
+			params = {
+				...params,
+				detailList:
+					SERVICE_SERVICEHANGRANCODE_LEGEND_MAP.BranchCompany
+						.detailList,
+			};
+			console.log(params);
+			this.handleOverlayClick(params);
 		},
-		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			let { lng, lat } = overlay;
-			overlay.overlayType = overlayType;
-			console.log(overlay);
-			console.log(overlayType);
-			this.activeOverlay = overlay;
-			this.showOverlayDetail = true;
-			this.$amap.setZoom(14, 100);
-			if (isCenter) {
-				this.$nextTick(() => {
-					this.$amap.panTo([lng, lat], 100);
-				});
-			}
+		// 切换热力图显示隐藏
+		switchChange(data, type) {
+			this.swichBoxInfo = data;
+			let [{ value }] = this.swichBoxInfo;
+			this.overlayMap.useHotYear.isShow = value;
 		},
 		closeOverlayDetail(done) {
-			let { overlayType } = this.activeOverlay;
-			if (overlayType === 'WARNEVENT') {
-				GoldChart.scene.setSceneIndex(
-					INDEXSCENEMAP['AirSupplyLowPressure']
-				);
-				this.showRoutePlan = false;
-			}
-			this.showOverlayDetail = false;
-			this.activeOverlay = {};
-			// this.$amap.setZoom(11, 100);
-			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.panTo(this.center, 100);
 			done();
+		},
+		// 点击地图marker
+		handleOverlayClick(overlay, overlayType, isCenter = false) {
+			console.log(overlay);
+			overlay.overlayType = overlayType || overlay.overlayType;
+			let { lng, lat, id, overlayType: type, detailList } = overlay;
+			let params = {
+				id,
+				type,
+				params: detailList.map(item => item.prop).toString(),
+			};
+			this.getDetailInfo(params);
+
+			this.activeOverlay = overlay;
+			this.isShowMore = ['WarningICcustomer'].includes(type);
+
+			console.log(this.isShowMore, type);
+		},
+
+		async getAllTypeStationList() {
+			let params = {
+				type: ['MajorClient', 'BranchCompany'],
+			};
+			this.allTypeStationList = await this.$sysApi.map.serve.getICcustomerList(
+				params
+			);
+			console.log(this.allTypeStationList);
+		},
+
+		// 联码新增统计数据
+		async getDataStatisticsList() {
+			this.ICcustomerDetailInfo = await this.$sysApi.map.serve.getICcustomerCallingInfo();
+		},
+
+		// 请求用气大户，分公司，综合服务站数据列表
+		async getAllTypeStationList() {
+			let params = {
+				type: ['MajorClient', 'BranchCompany'],
+			};
+			let res = await this.$sysApi.map.serve.getHangranCodeList(params);
+			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+		},
+		// 获取热力图信息
+		async getAllHotList() {
+			let params = {
+				type: ['useHotYear'],
+			};
+			let res = await this.$sysApi.map.serve.getHangranCodeHotList();
+			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+		},
+		//获取站点详情
+		async getDetailInfo(params) {
+			console.log(params);
+			this.detailInfo = await this.$sysApi.map.serve.getICcustomerDetailInfo(
+				params
+			);
+			this.showOverlayDetail = true;
+		},
+		// 获取右侧table列表报警信息
+		async getWarningList(params) {
+			console.log(params);
+			let WarningICcustomerList = await this.$sysApi.map.serve.getICcustomerSituationAwareness(
+				params
+			);
+			WarningICcustomerList = WarningICcustomerList.filter(
+				item => item.status === '1'
+			);
+			this.allTypeStationList = {
+				...this.allTypeStationList,
+				WarningICcustomerList,
+			};
+			console.log(this.allTypeStationList);
+		},
+		handleListClick(item) {
+			console.log(item);
 		},
 		viewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
-			console.log(overlay, 'overlay');
-			if (overlayType === 'WARNEVENT') {
-				console.log('渲染路径，23');
-				this.showRoutePlan = true;
-				console.log(overlay);
-				let { content, address } = overlay;
-				//和场景进行交互
-				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
-				//更新数据
-				this.$nextTick(() => {
-					AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
-						GoldChart.instance.updateComponent(i, {
-							data: {
-								step: 8,
-								value: {
-									step1: {
-										time: new Date('2020-10-30 22:20') * 1,
-										des: content,
-										name: '王磊',
-										title: '报警人',
-										address: address,
-									},
-									step2: {
-										time: new Date('2020-10-30 22:21') * 1,
-										name: '秦芳芳',
-										title: '客服部',
-									},
-									step3: {
-										time: new Date('2020-10-30 22:31') * 1,
-										name: '林自原',
-										title: '维修部',
-									},
-									step4: {
-										time: new Date('2020-10-30 22:48') * 1,
-									},
-									step5: {
-										time: new Date('2020-10-30 23:13') * 1,
-									},
-									step6: {
-										time: new Date('2020-10-30 23:50') * 1,
-									},
-									step7: {
-										time: new Date('2020-10-31 11:21') * 1,
-									},
-									step8: {
-										time: new Date('2020-10-31 12:57') * 1,
-										title: '维修处置内容',
-										content:
-											'部分管道老旧破损严重导致燃气泄漏，关闭上游阀门后更换泄漏段管道，已恢复供气。',
-									},
-								},
-								videoInfo1: {
-									imgList: [
-										'/static/images/project/01.png',
-										'/static/images/project/02.jpg',
-									],
-									videoList: ['/cdn/videos/test.mov'],
-								},
-								videoInfo2: {
-									imgList: [
-										'/static/images/project/01.png',
-										'/static/images/project/02.jpg',
-									],
-									videoList: ['/cdn/videos/test.mov'],
-								},
-							},
-						});
-					});
+			//和场景进行交互
+			GoldChart.scene.setSceneIndex(
+				SERVICE_SERVICEHANGRANCODE_LEGEND_MAP
+			);
+			//更新数据
+			this.$nextTick(() => {
+				AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
+					GoldChart.instance.updateComponent(i);
 				});
-			}
+			});
 		},
+	},
+	mounted() {
+		this.getDataStatisticsList();
+		this.getAllTypeStationList();
+		this.getWarningList();
 	},
 };
 </script>
+
 <style lang="scss" scoped>
 .map-legend {
 	position: absolute;
 	bottom: 50px;
 	left: 50%;
 	transform: translateX(-50%);
-	z-index: 99;
 }
 </style>
