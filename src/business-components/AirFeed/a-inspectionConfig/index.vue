@@ -88,14 +88,16 @@
 		h2 {
 			font-size: 48px;
 			line-height: 48px;
-			color: #fff;
+			color: #00FFCF;
+			margin-top: 18px;
 		}
 
 		p {
 			font-size: 20px;
 			line-height: 24px;
-			color: #00DDFF;
+			color: #fff;
 			margin-top: 14px;
+			text-align: left;
 		}
 	}
 
@@ -135,10 +137,10 @@
 
 			&:nth-child(2) {
 				.inspection-desc {
-					color: #00FFCF;
+					color: #fff;
 
 					&:before {
-						border: 4px solid #00FFCF;
+						border: 4px solid #00DDFF;
 					}
 				}
 			}
@@ -163,7 +165,7 @@
 				font-size: 20px;
 				line-height: 24px;
 				white-space: nowrap;
-				color: #00DDFF;
+				color: #fff;
 				text-align: center;
 				position: relative;
 

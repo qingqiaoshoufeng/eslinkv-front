@@ -8,12 +8,12 @@
 		<section class="lng">
 			<div class="lng-top">
 				<div>
-					<div class="lng-num font-num">{{data.ling.toDayLING/10000}}</div>
-					<div class="lng-desc">今日LNG气化量(万m³)</div>
+					<div class="lng-num font-num">{{data.ling.toDayLING}}</div>
+					<div class="lng-desc">今日LNG气化量(吨)</div>
 				</div>
 				<div>
-					<div class="lng-num font-num">{{data.ling.yearLING/10000}}</div>
-					<div class="lng-desc">年度LNG气化量(万m³)</div>
+					<div class="lng-num font-num">{{data.ling.yearLING|toThousand}}</div>
+					<div class="lng-desc">年度LNG气化量(吨)</div>
 				</div>
 			</div>
 			<div class="lng-chart">

@@ -11,7 +11,8 @@
 					</li>
 				</ul>
 			</div>
-			<div class="swiper" @click="next" :class="{active: offset < data.typeList.length}"><span class="right"></span></div>
+			<div class="swiper" @click="next" :class="{active: offset < data.typeList.length}"><span
+				class="right"></span></div>
 		</div>
 		<div class="chart" :id="id"/>
 	</div>
@@ -211,7 +212,7 @@
 				background: #0057A9;
 				font-size: 16px;
 				line-height: 32px;
-				color: #00DDFF;
+				color: rgba(255, 255, 255, 0.75);
 				margin-right: 8px;
 
 				&.active {

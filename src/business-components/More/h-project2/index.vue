@@ -202,16 +202,15 @@
 
 		h1 {
 			color: #00DDFF;
-			font-size: 20px;
+			font-size: 24px;
 			line-height: 24px;
-			font-weight: normal;
 		}
 
 		p {
-			font-size: 18px;
+			font-size: 20px;
 			line-height: 24px;
 			font-weight: normal;
-			color: #00DDFF;
+			color: #fff;
 			margin-bottom: 8px;
 			white-space: nowrap;
 		}
@@ -246,6 +245,10 @@
 			&.active {
 				background-color: #00DDFF;
 
+				h2 {
+					color: #00DDFF;
+				}
+
 				span {
 					color: #00DDFF;
 				}
@@ -260,7 +263,7 @@
 			}
 
 			h2 {
-				font-size: 18px;
+				font-size: 20px;
 				line-height: 24px;
 				color: #FFFFFF;
 				font-weight: normal;

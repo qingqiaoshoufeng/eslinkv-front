@@ -10,7 +10,7 @@
 				<img src="./img/air-bar.svg" class="total-icon">
 				<div class="total-info">
 					<div class="total-title">年度累计供气量</div>
-					<div class="num font-num">{{ data.total | toThousand }} <span>万m³</span></div>
+					<div class="num font-num">{{ data.total | toThousand }} <span>m³</span></div>
 				</div>
 			</section>
 			<ul class="air">
@@ -24,7 +24,7 @@
 				<li class="li">
 					<div class="air-name">高压管线</div>
 					<div>
-						<span class="air-num font-num">{{ data.air.highPipeline | toThousand }}</span>
+						<span class="air-num font-num">{{ data.air.highPipeline/1000  | toThousand }}</span>
 						<span class="air-unit">km</span>
 					</div>
 				</li>
@@ -38,7 +38,7 @@
 				<li class="li">
 					<div class="air-name">中压管线</div>
 					<div>
-						<span class="air-num font-num">{{ data.air.mediumPipeline | toThousand }}</span>
+						<span class="air-num font-num">{{ data.air.mediumPipeline/1000  | toThousand }}</span>
 						<span class="air-unit">km</span>
 					</div>
 				</li>
@@ -52,7 +52,7 @@
 				<li class="li">
 					<div class="air-name">低压管线</div>
 					<div>
-						<span class="air-num font-num">{{ data.air.lowPipeline | toThousand }}</span>
+						<span class="air-num font-num">{{ data.air.lowPipeline/1000 | toThousand }}</span>
 						<span class="air-unit">km</span>
 					</div>
 				</li>

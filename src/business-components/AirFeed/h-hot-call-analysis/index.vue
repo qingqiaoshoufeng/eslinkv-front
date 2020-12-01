@@ -109,7 +109,7 @@
 	.h-hot-call-analysis-call-title {
 		font-size: 18px;
 		line-height: 24px;
-		color: #00DDFF;
+		color: #fff;
 		margin-right: 16px;
 	}
 
@@ -130,7 +130,7 @@
 	.h-hot-call-analysis-free-title {
 		font-size: 18px;
 		line-height: 24px;
-		color: #00FFCF;
+		color: #fff;
 		margin-left: 4px;
 		margin-right: 16px;
 	}

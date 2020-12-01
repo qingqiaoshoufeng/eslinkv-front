@@ -103,7 +103,7 @@
 			height: 48px;
 			font-size: 18px;
 			line-height: 24px;
-			color: #00FFCF;
+			color: #fff;
 		}
 
 		.num {
@@ -111,7 +111,7 @@
 			font-size: 40px;
 			line-height: 48px;
 			text-align: center;
-			color: #FEFFFF;
+			color: #00FFCF;
 			margin: 6px 0 10px;
 		}
 
