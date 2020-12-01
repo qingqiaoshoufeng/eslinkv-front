@@ -7,6 +7,7 @@
 			visible,
 			apiFun,
 			detailList,
+			data,
 		}"
 		@click="
 			marker =>
@@ -39,6 +40,12 @@ export default {
 			default: '',
 		},
 		detailList: {
+			type: Array,
+			default() {
+				return [];
+			},
+		},
+		data: {
 			type: Array,
 			default() {
 				return [];

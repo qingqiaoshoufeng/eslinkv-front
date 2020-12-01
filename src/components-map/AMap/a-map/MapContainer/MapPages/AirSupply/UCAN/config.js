@@ -122,11 +122,40 @@ export const AIRSUPPLY_UCAN_LEGEND_MAP = {
         component: 'EmergencyAirSourceStation',
         isShow: false,
     },
+    WarningList: {
+        label: '告警',
+        legendIcon: 'icontulinengyuanzhan',
+        icon: 'iconnengyuanzhan',
+        component: 'WarningList',
+        isShow: true,
+    },
 
 }
 
 //覆盖物详情
 export const AIRSUPPLY_UCAN_OVERLAY_MAP = {
+    EmergencyAirSourceStation: {
+        fields: {
+            name: {
+                style: {
+                    fontSize: '32px',
+                    color: '#FFDC45'
+                },
+                errColor: '#FFDC45'
+            },
+        },
+    },
+    ServiceStation: {
+        fields: {
+            name: {
+                style: {
+                    fontSize: '32px',
+                    color: '#FFDC45'
+                },
+                errColor: '#FFDC45'
+            },
+        },
+    },
     LiquefiedGasStation: {
         fields: {
             name: {},
@@ -163,17 +192,38 @@ export const AIRSUPPLY_UCAN_OVERLAY_MAP = {
         fields: {
             content: {
                 style: {
-                    fontSize: '24px',
+                    fontSize: '32px',
+                    color: '#FFDC45'
                 },
+                errColor: '#FFDC45'
             },
             address: {
                 style: {
-                    fontSize: '18px',
-                    color: '#00DDFF',
+                    fontSize: '24px',
+                    color: '#fff',
                 },
-                errColor: '#FF7217',
+                errColor: '#fff',
             },
         },
-        isShowMore: false,
+        isShowMore: true,
     },
+    WarningList: {
+        fields: {
+            content: {
+                style: {
+                    fontSize: '32px',
+                    color: '#FFDC45'
+                },
+                errColor: '#FFDC45'
+            },
+            address: {
+                style: {
+                    fontSize: '24px',
+                    color: '#fff',
+                },
+                errColor: '#fff',
+            },
+        },
+        isShowMore: true,
+    }
 }

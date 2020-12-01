@@ -164,16 +164,16 @@ export default {
 			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-			this.$amap.setZoom(11, 100);
 			done();
 		},
 		// 点击地图marker
 		handleOverlayClick(overlay, overlayType, isCenter = false) {
 			console.log(overlay);
-			let { lng, lat, id, overlayType: type, detailList } = overlay;
+			let { lng, lat, id, overlayType: type, detailList, name } = overlay;
 			let params = {
 				id,
 				type,
+				name,
 				params: detailList.map(item => item.prop).toString(),
 			};
 			this.getDetailInfo(params);
@@ -205,7 +205,14 @@ export default {
 			let params = {
 				type: ['total', 'month'],
 			};
-			let res = await this.$sysApi.map.serve.getHangranCodeHotList();
+			let res;
+			try {
+				res = await this.$sysApi.map.serve.getHangranCodeHotList();
+			} catch (error) {
+				res = { total: [], month: [] };
+			}
+
+			console.log(res, 1111322322);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
 		},
 		//获取站点详情

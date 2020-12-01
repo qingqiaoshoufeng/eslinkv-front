@@ -1,4 +1,4 @@
-import { hexToRgba } from '@/utils'
+import {hexToRgba} from '@/utils'
 
 export default function getOption(data, config) {
 	return {
@@ -89,11 +89,11 @@ export default function getOption(data, config) {
 			areaStyle: {
 				color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
 					offset: 0,
-					color: hexToRgba(config.color, 0)
+					color: hexToRgba(config.color, 0.5)
 				},
 					{
 						offset: 1,
-						color: hexToRgba(config.color, 0.5)
+						color: hexToRgba(config.color, 0)
 					}
 				], false)
 			},

@@ -27,6 +27,7 @@
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
+			:detialBoxWidth="'400px'"
 		/>
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
@@ -72,6 +73,7 @@ import {
 	RightPanel,
 	RoutePlan, //规划路线
 	ListOverlay,
+	WarningList,
 } from '../Components/index.js';
 import { AMapTile } from '../../../../lib';
 
@@ -127,6 +129,7 @@ export default {
 		PressureRegulatingStation,
 		OngroundRepairStation,
 		DataStatistics,
+		WarningList,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
@@ -171,6 +174,8 @@ export default {
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat } = overlay;
 			overlay.overlayType = overlayType;
+			console.log(overlay);
+			console.log(overlayType);
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
 			this.$amap.setZoom(14, 100);
@@ -184,13 +189,15 @@ export default {
 			let { overlayType } = this.activeOverlay;
 			if (overlayType === 'WARNEVENT') {
 				GoldChart.scene.setSceneIndex(
-					INDEXSCENEMAP['AirSupplyHighPressure']
+					INDEXSCENEMAP['AirSupplyLowPressure']
 				);
 				this.showRoutePlan = false;
 			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-			this.$amap.setZoom(11, 100);
+			// this.$amap.setZoom(11, 100);
+			this.$amap.setZoom(this.zoom, 100);
+			this.$amap.panTo(this.center, 100);
 			done();
 		},
 		viewOverlayDetail(overlay) {

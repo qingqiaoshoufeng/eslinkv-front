@@ -12,7 +12,7 @@
 					<div class="lng-desc">今日LNG气化量(吨)</div>
 				</div>
 				<div>
-					<div class="lng-num font-num">{{data.ling.yearLING}}</div>
+					<div class="lng-num font-num">{{data.ling.yearLING|toThousand}}</div>
 					<div class="lng-desc">年度LNG气化量(吨)</div>
 				</div>
 			</div>

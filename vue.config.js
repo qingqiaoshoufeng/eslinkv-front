@@ -24,7 +24,7 @@ module.exports = {
                 target: 'http://ebp-pc.hzrq.local:15003',
                 changeOrigin: true,
                 headers: {
-                    Cookie: 'SESSION=c83dcac1-f734-4131-8463-9977c291d9ee'
+                    Cookie: 'SESSION=206cb57d-6e3c-475f-99f9-ccc1b9cf5f2d'
                 },
                 pathRewrite: {
                     '^/hangran': '/'

@@ -10,7 +10,7 @@
 				:visible="config.isShow"
 				:is="config.component"
 				:overlayIcon="config.legendIcon"
-				:overlayType="legend"
+				:overlayType="config.component"
 				:showOverlayName="
 					config.showOverlayName ? config.showOverlayName : null
 				"
@@ -26,6 +26,7 @@
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
 			:left="left"
+			:detialBoxWidth="'400px'"
 		/>
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
@@ -164,12 +165,14 @@ export default {
 	methods: {
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			console.log(overlay);
+			console.log(overlayType);
 			console.log(11);
 			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat, address, time, index } = overlay;
-			overlay.overlayType = overlayType;
-			overlay.name = overlay.address;
+			overlay.overlayType = overlayType || overlay.overlayType;
+			overlay.name = overlay.address || overlay.name;
 			this.activeOverlay = overlay;
+			console.log(this.activeOverlay);
 			this.showOverlayDetail = true;
 			// 计算弹框偏移量
 			this.left = this.offset(overlayType);
@@ -230,7 +233,9 @@ export default {
 			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-			this.$amap.setZoom(11, 100);
+			// this.$amap.setZoom(11, 100);
+			this.$amap.setZoom(this.zoom, 100);
+			this.$amap.panTo(this.center, 100);
 			done();
 		},
 		viewOverlayDetail(overlay) {

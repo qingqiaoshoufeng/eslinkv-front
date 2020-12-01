@@ -138,7 +138,7 @@ export default {
 					justify-content: center;
 				}
 				.isEvent {
-					border: 1px solid #001a77 !important;
+					border: 1px solid #00ddff !important;
 				}
 			}
 			.station-name {

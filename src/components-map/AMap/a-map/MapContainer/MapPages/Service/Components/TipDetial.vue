@@ -63,7 +63,7 @@ export default {
 		font-family: PingFang SC;
 		font-style: normal;
 		font-weight: normal;
-		font-size: 24px;
+		font-size: 32px;
 		line-height: 24px;
 		color: #ffd200;
 	}
@@ -89,12 +89,14 @@ export default {
 			font-weight: normal;
 			font-size: 24px;
 			line-height: 32px;
+
 			/* or 133% */
 			color: #ffffff;
 			.label {
-				color: #00ddff;
+				color: #fff;
 			}
 			.value {
+				color: #ffd200;
 			}
 		}
 	}

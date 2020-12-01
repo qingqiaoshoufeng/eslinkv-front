@@ -128,6 +128,17 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 
 //覆盖物详情
 export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
+    ServiceStation: {
+        fields: {
+            name: {
+                style: {
+                    fontSize: '32px',
+                    color: '#FFDC45'
+                },
+                errColor: '#FFDC45'
+            },
+        },
+    },
     GasStation: {
         fields: {
             name: {
@@ -144,12 +155,24 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
     },
     PressureRegulatingStation: {
         fields: {
-            name: {},
+            name: {
+                style: {
+                    fontSize: '32px',
+                    color: '#FFDC45'
+                },
+                errColor: '#FFDC45'
+            },
         },
     },
     EmergencyAirSourceStation: {
         fields: {
-            name: {},
+            name: {
+                style: {
+                    fontSize: '32px',
+                    color: '#FFDC45'
+                },
+                errColor: '#FFDC45'
+            },
         },
     },
     WARN: {
@@ -173,27 +196,36 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
         fields: {
             content: {
                 style: {
-                    fontSize: '24px',
+                    fontSize: '32px',
+                    color: '#FFDC45'
                 },
+                errColor: '#FFDC45'
             },
             address: {
                 style: {
-                    fontSize: '18px',
+                    fontSize: '24px',
                     color: '#00DDFF',
                 },
-                errColor: '#FF7217',
+                errColor: '#fff',
             },
         },
         isShowMore: true,
     },
     WarningList: {
         fields: {
+            content: {
+                style: {
+                    fontSize: '32px',
+                    color: '#FFDC45'
+                },
+                errColor: '#FFDC45'
+            },
             address: {
                 style: {
-                    fontSize: '18px',
-                    color: '#00DDFF',
+                    fontSize: '24px',
+                    color: '#fff',
                 },
-                errColor: '#FF7217',
+                errColor: '#fff',
             },
         },
 

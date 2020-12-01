@@ -23,7 +23,7 @@
 <script>
 	import mixins from '../../mixins';
 	import options from './options';
-	import {getInput} from "@lib";
+	import {getInput, getBooleanInput} from "@lib";
 
 	const configSource = {
 		config: {
@@ -35,6 +35,7 @@
 				color3: getInput('color3', '3颜色'),
 				desc3: getInput('desc3', '3描述'),
 				title: getInput('title', '标题'),
+        lineSmooth: getBooleanInput('lineSmooth', '曲线是否平滑')
 			}
 		},
 	}
@@ -48,6 +49,7 @@
 			color3: true,
 			desc3: true,
 			title: true,
+      lineSmooth: true,
 		}
 	};
 	const value = {
@@ -59,6 +61,8 @@
 			desc2: '抄表户数',
 			desc3: '自助抄表率',
 			title: '户',
+      lineSmooth: true,
+      hasSymbal: true,
 		},
 		api: {
 			data: JSON.stringify([
@@ -118,6 +122,7 @@
 				options.series[0].itemStyle.normal.color = this.config.config.color2;
 				options.series[1].itemStyle.normal.color = this.config.config.color1;
 				options.series[2].itemStyle.normal.color = this.config.config.color3;
+				options.series[2].smooth = this.config.config.lineSmooth
 				this.instance && this.instance.setOption(options);
 			},
 		},

@@ -123,8 +123,8 @@ img {
 	white-space: nowrap;
 	transform: translateX(-50%);
 	left: 50%;
-	font-size: 20px;
-	font-weight: 500;
+	font-size: 24px;
+	font-weight: 700;
 	position: absolute;
 }
 
