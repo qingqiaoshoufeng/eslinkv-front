@@ -1,5 +1,3 @@
-import { color } from "highcharts";
-
 export default {
     series: [
         {

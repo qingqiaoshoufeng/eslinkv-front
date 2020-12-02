@@ -1,5 +1,3 @@
-import { hexToRgba } from '@/utils/index'
-import options from "@/business-components/Serves/s-securitycheck/options";
 
 export default function (percentage) {
     const options = {
@@ -104,7 +102,8 @@ export default function (percentage) {
             {
                 value: 3.5,
                 itemStyle: {
-                    color: `rgba(0, 221, 255,${opacity})`,
+                    // color: `rgba(0, 221, 255,${opacity})`,
+                    color: `#00FFCF`,
                 },
             },
             {
@@ -153,7 +152,7 @@ export default function (percentage) {
         newData = [...newData, {
             value: 3.5,
             itemStyle: {
-                color: `rgba(255, 255, 255, .1)`,
+                color: `rgba(0, 87, 169, 0.5)`,
             },
         }, {
             value: 0.5,

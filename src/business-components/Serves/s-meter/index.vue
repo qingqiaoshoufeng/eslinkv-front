@@ -5,14 +5,20 @@
 				v-for="(k, i) in data"
 				:key="i"
 				:class="{active: i === index}"
-			>{{ k.date }}
+			>
+        <div class="li-progress" :style="{right: `${100-k.percent}%`}"></div>
+        <div class="li-main">
+          <div class="li-name">{{ k.name }}</div>
+          <div class="li-percent">{{ k.percent }}%</div>
+          <img src="/static/icons/arrow-right.svg">
+        </div>
 			</li>
 		</ul>
 		<div class="rows">
 			<div class="row">
 				<div class="info">
-					<img :src="config.config&&config.config.img1" alt="">
-					<span class="info-txt">{{config.config&&config.config.desc1}}</span>
+					<img :src="config.config.img1" alt="">
+					<span class="info-txt">{{config.config.desc1}}</span>
 					<span class="info-num font-num">{{ activeItem.num1 }}</span>
 				</div>
 				<div class="progress">
@@ -23,8 +29,8 @@
 			</div>
 			<div class="row">
 				<div class="info">
-					<img :src="config.config&&config.config.img2" alt="">
-					<span class="info-txt">{{config.config&&config.config.desc2}}</span>
+					<img :src="config.config.img2" alt="">
+					<span class="info-txt">{{config.config.desc2}}</span>
 					<span class="info-num font-num">{{ activeItem.num2 }}</span>
 				</div>
 				<div class="progress">
@@ -37,7 +43,7 @@
 		<div class="chart-wrap">
 			<div class="chart" :id="id"/>
 			<div class="chart-info">
-				<div class="chart-info-num font-num">{{ activeItem.percent }}%</div>
+				<div class="chart-info-num font-num">{{ activeItem.finishRate }}%</div>
 				<div class="chart-info-txt">抄表率</div>
 			</div>
 		</div>
@@ -72,53 +78,41 @@
 		api: {
 			data: JSON.stringify([
 				{
-					date: '2020.06',
+					name: '安装工单',
 					rate1: 0.8,
 					rate2: 0.5,
 					num1: 674,
 					num2: 236,
-					percent: 56
+					percent: 36,
+          finishRate: 56
 				},
 				{
-					date: '2020.07',
+					name: '维修工单',
 					rate1: 0.9,
 					rate2: 0.3,
 					num1: 674,
 					num2: 653,
-					percent: 80
+					percent: 44,
+          finishRate: 32
 				},
 				{
-					date: '2020.08',
+          name: '通气点火',
 					rate1: 0.9,
 					rate2: 0.7,
 					num1: 674,
 					num2: 234,
-					percent: 75
+					percent: 19,
+          finishRate: 66
 				},
 				{
-					date: '2020.09',
+          name: '拆迁改工单',
 					rate1: 0.2,
 					rate2: 0.5,
 					num1: 674,
 					num2: 236,
-					percent: 22
-				},
-				{
-					date: '2020.10',
-					rate1: 0.8,
-					rate2: 0.5,
-					num1: 78,
-					num2: 236,
-					percent: 33
-				},
-				{
-					date: '2020.11',
-					rate1: 0.4,
-					rate2: 0.75,
-					num1: 543,
-					num2: 236,
-					percent: 44
-				},
+					percent: 1,
+          finishRate: 84
+        }
 			])
 		},
 		config: {
@@ -133,7 +127,7 @@
 		mixins: [mixins],
 		methods: {
 			setOption(data) {
-				this.instance && this.instance.setOption(getOption(this.activeItem.percent))
+				this.instance && this.instance.setOption(getOption(this.activeItem.finishRate))
 			}
 		},
 		data() {
@@ -188,39 +182,57 @@
 		align-items: center;
 
 		.list {
-			height: 188px;
-			padding-right: 12px;
-			border-right: 4px solid rgba(0, 87, 169, 0.5);
+      flex: none;
 			display: flex;
+      margin-right: 68px;
 			flex-direction: column;
 			justify-content: space-around;
 
 			li {
+        width: 200px;
+        height: 40px;
 				position: relative;
-				text-align: center;
 				font-size: 18px;
+        margin-bottom: 8px;
 				color: rgba(255, 255, 255, 0.75);
+        background: rgba(0, 31, 109, 0.5);
 
-				&.active {
-					width: 88px;
-					height: 32px;
-					line-height: 32px;
-					background: linear-gradient(270deg, rgba(0, 87, 169, 0.5) 0%, rgba(0, 87, 169, 0) 100%);
-					color: #00DDFF;
+        &.active {
+          color: #fff;
+          border: 1px solid #00DDFF;
+          .li-progress {
+            background: rgba(0, 221, 255, 0.5);
+          }
+        }
 
-					&:after {
-						content: '';
-						display: block;
-						position: absolute;
-						top: 9px;
-						right: -20px;
-						width: 12px;
-						height: 12px;
-						border-radius: 50%;
-						background: #00DDFF;
-						border: 2px solid #0057A9;
-					}
-				}
+				.li-progress {
+          position: absolute;
+          left: 0;
+          right: 30%;
+          top: 0;
+          bottom: 0;
+          z-index: 5;
+          background: #0057A9;
+        }
+        .li-main {
+          position: absolute;
+          left: 0;
+          right: 0;
+          top: 0;
+          bottom: 0;
+          z-index: 6;
+          padding: 0 12px;
+          display: flex;
+          align-items: center;
+          text-align: left;
+          .li-name {
+            width: 100px;
+          }
+          .li-percent {
+            width: 30px;
+            margin-right: 30px;
+          }
+        }
 			}
 		}
 
