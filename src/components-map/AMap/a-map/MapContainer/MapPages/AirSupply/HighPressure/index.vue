@@ -27,7 +27,7 @@
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:legendMap="legendMap"
+			:legendMap="overlayMap"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
@@ -145,6 +145,17 @@ export default {
 		// });
 	},
 	data() {
+		let {
+			HighPressureLine,
+			HighPressureLine_Process,
+			MiddlePressureLine,
+			LowPressureLine,
+			InspectionPerson,
+			InspectionCar,
+			GasStation,
+			PressureRegulatingStation,
+			EmergencyAirSourceStation,
+		} = AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP;
 		return {
 			overlayInfoConfig: Object.freeze(
 				AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP
@@ -156,6 +167,17 @@ export default {
 			showRoutePlan: false,
 			activeTab: 'statAawareness',
 			legendMap: AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
+			overlayMap: {
+				HighPressureLine,
+				HighPressureLine_Process,
+				MiddlePressureLine,
+				LowPressureLine,
+				InspectionPerson,
+				InspectionCar,
+				GasStation,
+				PressureRegulatingStation,
+				EmergencyAirSourceStation,
+			},
 			left: 10,
 			dataStatisticsList: DATASTATISTICSLIST,
 			dataStatisticsInfo: {
@@ -330,13 +352,13 @@ export default {
 					'GasStation', // '门站',
 					'PressureRegulatingStation', // '调压站',
 					'EmergencyAirSourceStation', // '应急气源站',
-					'ServiceStation', // '综合服务站',
-					'PipeManageMentStation', // '管网运行管理站',
-					'UndergroundRepairStation', // '地下抢修点',
-					'LNGStation', // 'LNG站',
-					'LiquefiedGasStation', // '液化气站',
-					'NaturalGasStation', // '加气站',
-					'DistributedEnergyResource', // '分布式能源',
+					// 'ServiceStation', // '综合服务站',
+					// 'PipeManageMentStation', // '管网运行管理站',
+					// 'UndergroundRepairStation', // '地下抢修点',
+					// 'LNGStation', // 'LNG站',
+					// 'LiquefiedGasStation', // '液化气站',
+					// 'NaturalGasStation', // '加气站',
+					// 'DistributedEnergyResource', // '分布式能源',
 				].toString(),
 			};
 			let res = await this.$sysApi.map.airSupply.getAllTypeStationList(

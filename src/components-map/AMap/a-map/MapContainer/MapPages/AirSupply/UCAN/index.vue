@@ -7,6 +7,7 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
+				v-if="config.isShow && allTypeStationList[config.dataProp]"
 				:key="legend"
 				:visible="config.isShow"
 				:is="config.component"
@@ -14,11 +15,13 @@
 				:overlayType="legend"
 				:iconSize="config.iconSize"
 				@overlay-click="handleOverlayClick"
+				:detailList="config.detailList"
+				:data="allTypeStationList[config.dataProp]"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
-			:legendMap="legendMap"
+			:legendMap="overlayMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"
@@ -129,7 +132,15 @@ export default {
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.panTo(this.center, 100);
 	},
+	mounted() {
+		this.getAllTypeStationList();
+	},
 	data() {
+		let {
+			LiquefiedGasStation,
+			NaturalGasStation,
+			DistributedEnergyResource,
+		} = AIRSUPPLY_UCAN_LEGEND_MAP;
 		return {
 			overlayInfoConfig: Object.freeze(AIRSUPPLY_UCAN_OVERLAY_MAP),
 			activeOverlay: {},
@@ -138,15 +149,46 @@ export default {
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'statAawareness',
-			legendMap: AIRSUPPLY_UCAN_LEGEND_MAP,
+			legendMap: {
+				LiquefiedGasStation,
+				NaturalGasStation,
+				DistributedEnergyResource,
+			},
+			overlayMap: AIRSUPPLY_UCAN_LEGEND_MAP,
 			dataStatisticsList: DATASTATISTICSLIST,
 			dataStatisticsInfo: {
 				commonUseNumber: 21742,
 				registerNumber: 44579,
 			},
+			allTypeStationList: {},
 		};
 	},
 	methods: {
+		// 获取所有站点数据
+		async getAllTypeStationList() {
+			let params = {
+				types: [
+					// 'InspectionPerson', // '巡检人员',
+					// 'InspectionCar', // '巡检车辆',
+					// 'GasStation', // '门站',
+					// 'PressureRegulatingStation', // '调压站',
+					// 'EmergencyAirSourceStation', // '应急气源站',
+					// 'ServiceStation', // '综合服务站',
+					// 'PipeManageMentStation', // '管网运行管理站',
+					// 'UndergroundRepairStation', // '地下抢修点',
+					'OngroundRepairStation', // '地上抢修点',
+					// 'LNGStation', // 'LNG站',
+					'LiquefiedGasStation', // '液化气站',
+					'NaturalGasStation', // '加气站',
+					'DistributedEnergyResource', // '分布式能源',
+				].toString(),
+			};
+			let res = await this.$sysApi.map.airSupply.getAllTypeStationList(
+				params
+			);
+			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			console.log(this.allTypeStationList);
+		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat } = overlay;
 			overlay.overlayType = overlayType;

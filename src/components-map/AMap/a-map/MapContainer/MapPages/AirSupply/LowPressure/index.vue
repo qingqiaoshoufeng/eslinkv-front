@@ -10,16 +10,23 @@
 			:getTileUrl="getTileUrl"
 		/>
 		<!-- 2.legend控制显隐 -->
-		<template v-for="(config, legend) in legendMap">
+		<template v-for="(config, legend) in overlayMap">
 			<component
+				v-if="config.isShow && allTypeStationList[config.dataProp]"
 				:key="legend"
 				:visible="config.isShow"
 				:is="config.component"
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
 				:overlayType="legend"
 				:iconSize="config.iconSize"
-				:showOverlayName="config.showOverlayName===false ? config.showOverlayName : undefined"
+				:showOverlayName="
+					config.showOverlayName === false
+						? config.showOverlayName
+						: undefined
+				"
 				@overlay-click="handleOverlayClick"
+				:detailList="config.detailList"
+				:data="allTypeStationList[config.dataProp]"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->
@@ -140,7 +147,21 @@ export default {
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.panTo(this.center, 100);
 	},
+	mounted() {
+		this.getAllTypeStationList();
+	},
 	data() {
+		let {
+			MiddlePressureLine,
+			LowPressureLine,
+
+			InspectionCar,
+			InspectionPerson,
+			ServiceStation,
+			PipeManageMentStation,
+			UndergroundRepairStation,
+			OngroundRepairStation,
+		} = AIRSUPPLY_LOWPRESSURE_LEGEND_MAP;
 		return {
 			overlayInfoConfig: Object.freeze(AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP),
 			activeOverlay: {},
@@ -149,7 +170,17 @@ export default {
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'statAawareness',
-			legendMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
+			legendMap: {
+				MiddlePressureLine,
+				LowPressureLine,
+				InspectionCar,
+				InspectionPerson,
+				ServiceStation,
+				PipeManageMentStation,
+				UndergroundRepairStation,
+				OngroundRepairStation,
+			},
+			overlayMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 			dataStatisticsList: DATASTATISTICSLIST,
 			dataStatisticsInfo: {
 				Mediumline: 2627,
@@ -159,6 +190,7 @@ export default {
 				OnNumber: 12,
 				UnderNumber: 12,
 			},
+			allTypeStationList: {},
 		};
 	},
 	computed: {
@@ -184,6 +216,32 @@ export default {
 		},
 	},
 	methods: {
+		// 获取所有站点数据
+		async getAllTypeStationList() {
+			console.log(1111111);
+			let params = {
+				types: [
+					// 'InspectionPerson', // '巡检人员',
+					// 'InspectionCar', // '巡检车辆',
+					// 'GasStation', // '门站',
+					// 'PressureRegulatingStation', // '调压站',
+					// 'EmergencyAirSourceStation', // '应急气源站',
+					'ServiceStation', // '综合服务站',
+					'PipeManageMentStation', // '管网运行管理站',
+					'UndergroundRepairStation', // '地下抢修点',
+					'OngroundRepairStation', // '地上抢修点',
+					// 'LNGStation', // 'LNG站',
+					// 'LiquefiedGasStation', // '液化气站',
+					// 'NaturalGasStation', // '加气站',
+					// 'DistributedEnergyResource', // '分布式能源',
+				].toString(),
+			};
+			let res = await this.$sysApi.map.airSupply.getAllTypeStationList(
+				params
+			);
+			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			console.log(this.allTypeStationList);
+		},
 		getTileUrl(x, y, zoom) {
 			const tilesQuery = String(this.tilesQuery);
 			const {

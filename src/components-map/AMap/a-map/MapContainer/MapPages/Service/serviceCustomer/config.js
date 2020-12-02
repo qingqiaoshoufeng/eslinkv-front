@@ -42,7 +42,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         icon: 'iconsansheliandong',
         component: 'ThreeSocialLinkage',
         isShow: true,
-        dataProp: 'threeSocialLinkage',
+        dataProp: 'threeSocialLinkageList',
         detailList: []
     }
 }

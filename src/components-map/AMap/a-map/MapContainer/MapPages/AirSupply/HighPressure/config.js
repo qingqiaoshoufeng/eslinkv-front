@@ -9,6 +9,8 @@ import {
     HighPressurePreservationNumber,
 } from '../../../../utils/dictionary'
 // 覆盖物legend配置
+
+
 export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
     HighPressureLine: {
         label: '高压管网',
@@ -85,67 +87,67 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
         dataProp: "emergencyAirSourceStationList"
         //
     },
-    ServiceStation: {
-        label: '综合服务站',
-        legendIcon: 'icontulizonghefuwuzhan1',
-        iconSize: 38,
-        component: 'ServiceStation',
-        isShow: true,
-        dataProp: 'comprehensiveServiceStationList',
-        // detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
-    },
-    PipeManageMentStation: {
-        label: '管网运行管理站',
-        legendIcon: 'icontuliqiyuanzhan',
-        iconSize: 38,
-        component: 'EmergencyAirSourceStation',
-        isShow: false,
-        dataProp: "pipeManageMentStationList"
-        //
-    },
-    UndergroundRepairStation: {
-        label: '地下抢修点',
-        legendIcon: 'tulidixiaqiangxiudian',
-        iconSize: 38,
-        component: 'EmergencyAirSourceStation',
-        isShow: false,
-        dataProp: "undergroundRepairStationList"
-        //
-    },
-    LNGStation: {
-        label: 'LNG站',
-        legendIcon: 'icontulilNG',
-        iconSize: 38,
-        component: 'LNGStation',
-        isShow: false,
-        dataProp: "lngstationlist"
-        //
-    },
-    LiquefiedGasStation: {
-        label: '液化气站',
-        legendIcon: 'icontuliyehuaqi',
-        iconSize: 38,
-        component: 'LiquefiedGasStation',
-        isShow: false,
-        dataProp: "liquefiedGasStationList"
-        // 
-    },
-    NaturalGasStation: {
-        label: '加气站',
-        iconSize: 38,
-        legendIcon: 'icontulijiaqizhan',
-        component: 'NaturalGasStation',
-        isShow: false,
-        dataProp: "naturalGasStationList"
-    },
-    DistributedEnergyResource: {
-        label: '分布式能源',
-        legendIcon: 'icontulinengyuanzhan',
-        iconSize: 38,
-        component: 'DistributedEnergyResource',
-        isShow: false,
-        dataProp: ""
-    },
+    // ServiceStation: {
+    //     label: '综合服务站',
+    //     legendIcon: 'icontulizonghefuwuzhan1',
+    //     iconSize: 38,
+    //     component: 'ServiceStation',
+    //     isShow: true,
+    //     dataProp: 'comprehensiveServiceStationList',
+    //     // detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
+    // },
+    // PipeManageMentStation: {
+    //     label: '管网运行管理站',
+    //     legendIcon: 'icontuliqiyuanzhan',
+    //     iconSize: 38,
+    //     component: 'EmergencyAirSourceStation',
+    //     isShow: false,
+    //     dataProp: "pipeManageMentStationList"
+    //     //
+    // },
+    // UndergroundRepairStation: {
+    //     label: '地下抢修点',
+    //     legendIcon: 'tulidixiaqiangxiudian',
+    //     iconSize: 38,
+    //     component: 'EmergencyAirSourceStation',
+    //     isShow: false,
+    //     dataProp: "undergroundRepairStationList"
+    //     //
+    // },
+    // LNGStation: {
+    //     label: 'LNG站',
+    //     legendIcon: 'icontulilNG',
+    //     iconSize: 38,
+    //     component: 'LNGStation',
+    //     isShow: false,
+    //     dataProp: "lngstationlist"
+    //     //
+    // },
+    // LiquefiedGasStation: {
+    //     label: '液化气站',
+    //     legendIcon: 'icontuliyehuaqi',
+    //     iconSize: 38,
+    //     component: 'LiquefiedGasStation',
+    //     isShow: false,
+    //     dataProp: "liquefiedGasStationList"
+    //     // 
+    // },
+    // NaturalGasStation: {
+    //     label: '加气站',
+    //     iconSize: 38,
+    //     legendIcon: 'icontulijiaqizhan',
+    //     component: 'NaturalGasStation',
+    //     isShow: false,
+    //     dataProp: "naturalGasStationList"
+    // },
+    // DistributedEnergyResource: {
+    //     label: '分布式能源',
+    //     legendIcon: 'icontulinengyuanzhan',
+    //     iconSize: 38,
+    //     component: 'DistributedEnergyResource',
+    //     isShow: false,
+    //     dataProp: ""
+    // },
     WarningList: {
         label: '告警',
         legendIcon: 'icontulinengyuanzhan',
@@ -158,17 +160,17 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 
 //覆盖物详情
 export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
-    ServiceStation: {
-        fields: {
-            name: {
-                style: {
-                    fontSize: '32px',
-                    color: '#FFDC45',
-                },
-                errColor: '#FFDC45',
-            },
-        },
-    },
+    // ServiceStation: {
+    //     fields: {
+    //         name: {
+    //             style: {
+    //                 fontSize: '32px',
+    //                 color: '#FFDC45',
+    //             },
+    //             errColor: '#FFDC45',
+    //         },
+    //     },
+    // },
     GasStation: {
         fields: {
             name: {
@@ -281,6 +283,7 @@ let aaa = {
     ServiceStation: '综合服务站',   /// 
     PipeManageMentStation: '管网运行管理站',
     UndergroundRepairStation: '地下抢修点',
+    OngroundRepairStation: '地上抢修点', // 
     LNGStation: 'LNG站',
     LiquefiedGasStation: '液化气站',
     NaturalGasStation: '加气站',
