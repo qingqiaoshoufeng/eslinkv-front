@@ -6,8 +6,8 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
     MajorClient: {
         label: '用气大户',
         legendIcon: 'icontuliyongqidahu',
-        iconSize:38,
-        icon:'iconyongqidahu',
+        iconSize: 38,
+        icon: 'iconyongqidahu',
         component: 'MajorClient',
         isShow: true,
         dataProp: 'majorClientList',
@@ -32,8 +32,8 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
     WarningICcustomer: {
         label: '报警',
         legendIcon: 'iconyongqidahu2',
-        iconSize:38,
-        icon:'iconyongqidahu2',
+        iconSize: 38,
+        icon: 'iconyongqidahu2',
         component: 'WarningICcustomer',
         isShow: true,
         dataProp: 'WarningICcustomerList',

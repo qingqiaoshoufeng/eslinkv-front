@@ -21,7 +21,7 @@
 		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
-            :legendMap="legendMap"
+			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
 			:overlayInfoConfig="overlayInfoConfig"
@@ -71,7 +71,7 @@ export default {
 			activeOverlay: {},
 			center: [120.061259, 30.183295],
 			zoom: 10,
-			swichBoxInfo: SWICHBOX,
+			// swichBoxInfo: SWICHBOX,
 		};
 	},
 	created() {

@@ -55,8 +55,8 @@ import {
 
 import { DataStatistics } from '../../../../components';
 import {
-	SERVICE_SERVICE19_LEGEND_MAP,
-	SERVICE_SERVICE19_OVERLAY_MAP,
+	SERVICE_SERVICENINETEEN_LEGEND_MAP,
+	SERVICE_SERVICENINETEEN_OVERLAY_MAP,
 } from './config';
 export default {
 	name: 'service19',
@@ -70,9 +70,11 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(SERVICE_SERVICE19_OVERLAY_MAP),
+			overlayInfoConfig: Object.freeze(
+				SERVICE_SERVICENINETEEN_LEGEND_MAP
+			),
 			dataStatisticsList: [],
-			legendMap: SERVICE_SERVICE19_LEGEND_MAP,
+			legendMap: SERVICE_SERVICENINETEEN_OVERLAY_MAP,
 			legendMultiple: true,
 			mapLegendStyle: { left: '18%' },
 			activeOverlay: {},

@@ -154,8 +154,64 @@ let LNGstationNumber = {
     DW: '',
     prop: "stationNumber",
 }
+// 其他 站统计数据
+let commonUseNumber = {
+    label: '常用钢瓶用户数量',
+    DW: '',
+    prop: "commonUseNumber",
+}
+let registerNumber = {
+    label: '在册钢瓶数量',
+    DW: '',
+    prop: "registerNumber",
+}
 
-// 
+
+// 19厅数统计数据
+let OnlineType = {
+    label: '线上业务服务类型',
+    DW: '',
+    prop: "stationNumber",
+}
+
+let TodayApplication = {
+    label: '今日业务申请',
+    DW: '',
+    prop: "apply_nbr",
+}
+
+let TodayUnproving = {
+    label: '今日待审核',
+    DW: '',
+    prop: "pending_nbr",
+}
+let TodayPass = {
+    label: '今日审核通过',
+    DW: '',
+    prop: "stationNumber",
+}
+let TodayProvingTo2 = {
+    label: '今日2小时审核率',
+    DW: '',
+    prop: "stationNumber",
+}
+// 19厅详情接口
+let monthAccpet = {
+    label: '本月已受理',
+    DW: '单',
+    prop: "stationNumber",
+}
+let monthManage = {
+    label: '本月已办结',
+    DW: '单',
+    prop: "stationNumber",
+}
+let monthManagePercent = {
+    label: '本月办结率',
+    DW: '单',
+    prop: "stationNumber",
+}
 
 
-export { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, ICcustomer, useNumberYestoday, ICcustomerStatus, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, HighPressureGasStation, HighPressurePressureRegulatingStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber, LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber, LNGstationNumber }
+
+export { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, ICcustomer, useNumberYestoday, ICcustomerStatus, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, HighPressureGasStation, HighPressurePressureRegulatingStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber, LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber, LNGstationNumber, commonUseNumber, registerNumber, OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent }

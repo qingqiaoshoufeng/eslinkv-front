@@ -146,7 +146,7 @@ export default {
 	methods: {
 		// 查看详情，弹出详情场景
 		async showMoreDetail() {
-			let { address, content, eventType, id } = this.activeOverlay;
+			let { address, content, status, id } = this.activeOverlay;
 			let { useNumberYestoday } = this.detailInfo;
 			console.log(this.activeOverlay, this.detailInfo);
 			let params = {};
@@ -154,7 +154,7 @@ export default {
 				title: address,
 			};
 			params[ICcustomer_WARN__COMPONENTINDEX[1]] = {
-				value: `${content}(${eventType === 1 ? '待处理' : '已处理'})`,
+				value: `${content}(${status === '1' ? '待处理' : '已处理'})`,
 			};
 			params[ICcustomer_WARN__COMPONENTINDEX[2]] = {
 				value: useNumberYestoday,
@@ -222,7 +222,7 @@ export default {
 				overlayType: type,
 				detailList,
 				name,
-				eventType,
+				status,
 			} = overlay;
 			let params = {
 				name,
@@ -230,7 +230,7 @@ export default {
 				type,
 				params: 'useNumberYestoday',
 			};
-			this.getDetailInfo(params, eventType);
+			this.getDetailInfo(params, status);
 
 			this.activeOverlay = overlay;
 			console.log(type);
@@ -262,16 +262,16 @@ export default {
 			console.log(this.allTypeStationList, 111111);
 		},
 		//获取站点详情
-		async getDetailInfo(params, eventType) {
-			console.log(params, eventType);
+		async getDetailInfo(params, status) {
+			console.log(params, status);
 			console.log(params);
 			this.detailInfo = await this.$sysApi.map.serve.getICcustomerDetailInfo(
 				params
 			);
-			if (eventType && eventType === 1) {
-				this.detailInfo.ICcustomerStatus = '待处理';
-			} else if (!eventType && eventType === 0) {
+			if (status && status === '0') {
 				this.detailInfo.ICcustomerStatus = '已处理';
+			} else if (status && status === '1') {
+				this.detailInfo.ICcustomerStatus = '待处理';
 			}
 			this.showOverlayDetail = true;
 		},
@@ -281,9 +281,9 @@ export default {
 			let WarningICcustomerList = await this.$sysApi.map.serve.getICcustomerSituationAwareness(
 				params
 			);
-			WarningICcustomerList = WarningICcustomerList.filter(
-				item => item.status === '1'
-			);
+			// WarningICcustomerList = WarningICcustomerList.filter(
+			// 	item => item.status === '1'
+			// );
 			this.allTypeStationList = {
 				...this.allTypeStationList,
 				WarningICcustomerList,

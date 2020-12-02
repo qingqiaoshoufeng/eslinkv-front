@@ -1,6 +1,14 @@
 import request from './request'
 import qs from 'qs'
 const DATAURL = '/data'
+
+//合并数仓数据
+function mergeArgument() {
+    let data = {
+        projectId: 823,
+        // queryId:
+    }
+}
 //门站列表
 export function getGasStationList(data) {
     return request({

@@ -13,8 +13,6 @@
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
 				:overlayType="legend"
 				:iconSize="config.iconSize"
-
-
 				@overlay-click="handleOverlayClick"
 			/>
 		</template>
@@ -32,6 +30,12 @@
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
 		<portal to="destination">
+			<!-- 统计数据 -->
+			<DataStatistics
+				:position="'right'"
+				:dataStatisticsList="dataStatisticsList"
+				:data="dataStatisticsInfo"
+			/>
 			<!-- 图例 -->
 			<MapLegend :data="legendMap" class="map-legend" />
 			<!-- 右侧列表 -->
@@ -74,7 +78,7 @@ import {
 	OverlayDetail,
 	MapLegend,
 } from '../../Components/index.js';
-
+import { DataStatistics } from '../../../../components';
 import {
 	INDEXSCENEMAP,
 	OVERLAYINFOMAP_AIRSUPPLY,
@@ -86,6 +90,7 @@ import {
 import {
 	AIRSUPPLY_UCAN_LEGEND_MAP,
 	AIRSUPPLY_UCAN_OVERLAY_MAP,
+	DATASTATISTICSLIST,
 } from './config.js';
 import GoldChart from '@/openApi';
 
@@ -117,6 +122,7 @@ export default {
 		UndergroundRepairStation,
 		OngroundRepairStation,
 		WarningList,
+		DataStatistics,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
@@ -133,6 +139,11 @@ export default {
 			showRoutePlan: false,
 			activeTab: 'statAawareness',
 			legendMap: AIRSUPPLY_UCAN_LEGEND_MAP,
+			dataStatisticsList: DATASTATISTICSLIST,
+			dataStatisticsInfo: {
+				commonUseNumber: 21742,
+				registerNumber: 44579,
+			},
 		};
 	},
 	methods: {
