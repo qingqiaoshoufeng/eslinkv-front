@@ -10,7 +10,9 @@
 			}"
 			:active="item.active"
 			:visible="visible"
-			@click="click(item)"
+			@click="handleClick(item)"
+			@mouseover="handleMouseOver(item)"
+			@mouseleave="handleMouseLeave(item)"
 		>
 			<slot :data="item">
 				<!-- 默认显示图标的名字 -->
@@ -100,7 +102,7 @@ export default {
 		};
 	},
 	methods: {
-        //外部有传入数据则使用外部传入数据，or 调用接口
+		//外部有传入数据则使用外部传入数据，or 调用接口
 		async getData(query) {
 			if (this.data) {
 				return (this.list = this.data);
@@ -111,8 +113,14 @@ export default {
 				console.log(err, 'err');
 			}
 		},
-		click(item) {
+		handleClick(item) {
 			this.$emit('click', item);
+		},
+		handleMouseOver(item) {
+			this.$emit('mouseover', item);
+		},
+		handleMouseLeave(item) {
+			this.$emit('mouseleave', item);
 		},
 	},
 };

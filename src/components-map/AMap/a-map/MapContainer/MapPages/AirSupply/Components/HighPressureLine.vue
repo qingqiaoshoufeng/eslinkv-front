@@ -14,7 +14,7 @@ export default {
 				let polyLine = new AMap.Polyline({
 					...line,
 					zIndex: 200,
-					strokeWeight: 5,
+					strokeWeight: 4,
 				});
 				if (this.instanceArr) {
 					this.$amap.add(polyLine);
