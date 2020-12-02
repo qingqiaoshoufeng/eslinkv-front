@@ -15,9 +15,6 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import addMonths from 'date-fns/addMonths'
-	import isSameMonth from 'date-fns/isSameMonth'
-	import format from 'date-fns/format'
 
 	const config = {animation: true}
 

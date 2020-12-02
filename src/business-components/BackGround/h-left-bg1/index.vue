@@ -1,14 +1,11 @@
 <template>
 	<div class="widget-part pos-r" :style="`${styles};top:0;${inPreview?'pointer-events: none;':''}`">
-		<div class="h-right-bg1">
+		<div class="h-left-bg1">
 		</div>
 	</div>
 </template>
 <script>
 	import mixins from '../../mixins'
-	import addMonths from 'date-fns/addMonths'
-	import isSameMonth from 'date-fns/isSameMonth'
-	import format from 'date-fns/format'
 
 	const config = {animation: true}
 
@@ -21,7 +18,7 @@
 	}
 </script>
 <style lang="scss" scoped>
-	.h-right-bg1 {
+	.h-left-bg1 {
 		pointer-events: none;
 		background-image: -webkit-linear-gradient(
 				0deg,
@@ -30,6 +27,7 @@
 		);
 		width: 1128px;
 		height: 1050px;
+		transform: rotateY(180deg);
 
 		&:after {
 			content: '';
