@@ -16,11 +16,11 @@
 	const value = {
 		api: {
 			data: JSON.stringify([
-				{"label": "江东门站", "value": "jiangdong"},
-				{"label": "所前门站", "value": "suoqianmen"},
-				{"label": "北门站", "value": "beimen"},
-				{"label": "下沙站", "value": "xiasha"},
-				{"label": "南门站", "value": "nanmen"}
+				{"label": "江东门站", "value": "jiangdongmenzhan"},
+				{"label": "所前门站", "value": "suoqianmenzhan"},
+				{"label": "北门站", "value": "beimenzhan"},
+				{"label": "下沙站", "value": "xiashamenzhan"},
+				{"label": "南门站", "value": "tianranqinanmenzhan"}
 			]),
 			bind: {
 				enable: true,
@@ -33,7 +33,7 @@
 			return {
 				showOptions: false,
 				selectLabel: '江东门站',
-				selectValue: 'jiangdong'
+				selectValue: 'jiangdongmenzhan'
 			}
 		},
 		mixins: [mixins],
