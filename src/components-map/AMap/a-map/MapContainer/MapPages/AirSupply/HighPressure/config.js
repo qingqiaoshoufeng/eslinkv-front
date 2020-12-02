@@ -248,3 +248,18 @@ export const DATASTATISTICSLIST = [
 	HighPressureInspectionNumber,
 	HighPressurePreservationNumber,
 ]
+
+let aaa = {
+	InspectionPerson: '巡检人员',
+	InspectionCar: '巡检车辆',
+	GasStation: '门站',
+	PressureRegulatingStation: '调压站',
+	EmergencyAirSourceStation: '应急气源站',
+	ServiceStation: '综合服务站',
+	PipeManageMentStation: '管网运行管理站',
+	UndergroundRepairStation: '地下抢修点',
+	LNGStation: 'LNG站',
+	LiquefiedGasStation: '液化气站',
+	NaturalGasStation: '加气站',
+	DistributedEnergyResource: '分布式能源',
+}

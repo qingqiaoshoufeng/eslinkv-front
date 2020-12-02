@@ -12,10 +12,7 @@
 		>
 			<!-- 页面 -->
 			<template v-if="showMapPage">
-				<component
-					:reverseScaleRatio="reverseScaleRatio"
-					:is="mapComponentName"
-				/>
+				<component :is="mapComponentName" />
 			</template>
 		</el-amap>
 		<!-- 地图类型 -->
@@ -43,7 +40,14 @@ files.keys().forEach(key => {
 
 export default {
 	name: 'MainMap',
-	mixins: [mapMixin],
+    mixins: [mapMixin],
+    provide(){
+        return {
+            parentInfo:{
+                scaleRatio:1
+            }
+        }
+    },
 	components: {
 		ElAmap: AMap,
 		MapTypeLegend,
@@ -65,7 +69,6 @@ export default {
 				width: 3500,
 				height: 1050,
 			},
-			scaleRatio: 1,
 			reverseScaleRatio: 1,
 		};
 	},
@@ -74,17 +77,14 @@ export default {
 			const { clientWidth, clientHeight } = document.body;
 			const { width, height } = this.kanboardSize;
 			let ratio = Math.min(clientWidth / width, clientHeight / height);
-			this.scaleRatio = ratio < 1 ? ratio : 1;
-			this.reverseScaleRatio = 1 / this.scaleRatio;
+			ratio = ratio < 1 ? ratio : 1;
+            this.reverseScaleRatio = 1 / ratio;
+            this._provided.parentInfo.scaleRatio = ratio
 			// this.reverseScaleRatio = 1
 		},
 	},
 	mounted() {
 		this.updateKanboardSize();
-		console.log(this.$refs.amap);
-		this.$nextTick(function () {
-			this.$el.style.setProperty('--scaleRatio', 0.3);
-		});
 	},
 };
 </script>
@@ -106,11 +106,6 @@ export default {
 }
 .portal-target {
 	z-index: 100;
-}
-/deep/ .amap-markers {
-	// transform: scale(var(--scaleRatio));
-    // transform:scale(0.38) !important;
-    background:red;
 }
 </style>
 

@@ -10,10 +10,11 @@ const TAG = 'el-amap-marker';
 export default {
 	name: TAG,
 	mixins: [registerMixin],
+	inject: ['parentInfo'],
 	props: [
 		'vid',
-        'position',
-        'anchor',
+		'position',
+		'anchor',
 		'offset',
 		'icon',
 		'content',
@@ -93,6 +94,7 @@ export default {
 		};
 	},
 	created() {
+		let scaleRatio = this.scaleRatio;
 		this.tmpVM = new Vue({
 			data() {
 				return { node: '' };
@@ -101,19 +103,34 @@ export default {
 				const { node } = this;
 				return h(
 					'div',
-					{ ref: 'node' },
+					{
+						ref: 'node',
+						style: `transform: scale(${scaleRatio});transform-origin:center center`,
+					},
 					Array.isArray(node) ? node : [node]
 				);
 			},
 		}).$mount();
 	},
+	computed: {
+		scaleRatio() {
+			return (this.parentInfo && this.parentInfo.scaleRatio) || 1;
+		},
+	},
 	methods: {
 		__initComponent(options) {
+            let {scaleRatio,offset}  = this
 			if (this.$slots.default && this.$slots.default.length) {
 				options.content = this.tmpVM.$refs.node;
 			}
+			let compOffset = offset || [0, 0];
+			let [offsetX, offsetY] = compOffset;
+			compOffset = [offsetX * scaleRatio, offsetY * scaleRatio];
 
-			this.$amapComponent = new AMap.Marker({...options,offset:this.offset || [0,0]});
+			this.$amapComponent = new AMap.Marker({
+				...options,
+				offset: compOffset,
+			});
 		},
 
 		$$getExtData() {
