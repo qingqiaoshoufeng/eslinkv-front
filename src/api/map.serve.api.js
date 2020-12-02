@@ -134,10 +134,30 @@ export function getNineteenStationList() {
 export function getNineteenStatisticsInfo() {
 
 }
-// 查询工商户站点详情
+// 查询19厅站点详情
 
-
-
+// 查询客户服务 站点列表
+export function getServiceCustomerStationList() {
+    return request({
+        url: `${HANGRANURL}/threeSocial/mapDataResult`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+// 查询客户服务统计数据
+export function getServiceCustomerStatisticsInfo(data) {
+    return request({
+        url: `${HANGRANURL}/threeSocial/houseNum`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
 // 集团大厅站点
 export function getGrouphallList(data) {
     return request({

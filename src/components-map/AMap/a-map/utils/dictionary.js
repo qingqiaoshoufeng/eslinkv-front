@@ -166,6 +166,27 @@ let registerNumber = {
     prop: "registerNumber",
 }
 
+// 客户服务统计数据
+let citizenNumber = {
+    label: '居民户',
+    DW: '',
+    prop: "resident",
+}
+let publicBuildNumber = {
+    label: '公建户',
+    DW: '',
+    prop: "surname",
+}
+let industryNumber = {
+    label: '工业户',
+    DW: '',
+    prop: "industry",
+}
+let businessServe = {
+    label: '营业服务网点',
+    DW: '',
+    prop: "service",
+}
 
 // 19厅数统计数据
 let OnlineType = {
@@ -214,4 +235,4 @@ let monthManagePercent = {
 
 
 
-export { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, ICcustomer, useNumberYestoday, ICcustomerStatus, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, HighPressureGasStation, HighPressurePressureRegulatingStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber, LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber, LNGstationNumber, commonUseNumber, registerNumber, OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent }
+export { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, ICcustomer, useNumberYestoday, ICcustomerStatus, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, HighPressureGasStation, HighPressurePressureRegulatingStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber, LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber, LNGstationNumber, commonUseNumber, registerNumber, citizenNumber, publicBuildNumber, industryNumber, businessServe, OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent }

@@ -37,7 +37,11 @@
 				class="map-legend"
 			/>
 			<!-- 统计数据 -->
-			<DataStatistics :data="dataStatisticsList" />
+			<DataStatistics
+				:position="'right'"
+				:dataStatisticsList="dataStatisticsList"
+				:data="dataStatisticsInfo"
+			/>
 			<!-- 右侧列表 -->
 			<RightPanelWithServiceCustomer
 				class="right-panel"
@@ -70,6 +74,7 @@ import {
 
 import GoldChart from '@/openApi';
 import {
+	DATASTATISTICSLIST,
 	SERVICE_SERVICECUSTOMER_LEGEND_MAP,
 	SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
 } from './config.js';
@@ -94,12 +99,19 @@ export default {
 			),
 			showOverlayDetail: false,
 			activeOverlay: {},
-			dataStatisticsList: [],
 			OverlayDetail: null,
 			legendMap: SERVICE_SERVICECUSTOMER_LEGEND_MAP,
 			legendMultiple: true,
 			center: [120.061259, 30.233295],
 			zoom: 10,
+			allTypeStationList: {},
+			dataStatisticsList: DATASTATISTICSLIST,
+			dataStatisticsInfo: {
+				citizenNumber: 0,
+				publicBuildNumber: 0,
+				industryNumber: 0,
+				businessServe: 0,
+			},
 		};
 	},
 	created() {
@@ -208,7 +220,12 @@ export default {
 			}
 		},
 		async getDataStatisticsList() {
-			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
+			console.log(11111);
+			console.log(
+				this.$sysApi.map.serve.getServiceCustomerStatisticsInfo
+			);
+			this.dataStatisticsInfo = await this.$sysApi.map.serve.getServiceCustomerStatisticsInfo();
+			console.log(this.dataStatisticsInfo, 1111111);
 		},
 		toViewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
@@ -269,6 +286,8 @@ export default {
 				});
 			});
 		},
+		// 查询客户服务站点列表
+		getServiceCustomerStationList() {},
 	},
 	mounted() {
 		this.getDataStatisticsList();

@@ -4,8 +4,8 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
-		<!-- 态势感知 -->
-		<!-- <ListOverlay @overlay-click="handleOverlayClick" /> -->
+		<!-- 2.销售区域 -->
+		<SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" />
 
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
@@ -74,13 +74,15 @@ export default {
 				SERVICE_SERVICENINETEEN_LEGEND_MAP
 			),
 			dataStatisticsList: [],
-			legendMap: SERVICE_SERVICENINETEEN_OVERLAY_MAP,
+			legendMap: SERVICE_SERVICENINETEEN_LEGEND_MAP,
 			legendMultiple: true,
 			mapLegendStyle: { left: '18%' },
 			activeOverlay: {},
 			showOverlayDetail: false,
 			zoom: 10,
 			center: [120.80971, 30.202216],
+			activeArea: '杭州钱江燃气有限公司',
+			allTypeStationList: {},
 		};
 	},
 	created() {
@@ -89,6 +91,19 @@ export default {
 		this.$amap.panTo(this.center, 100);
 	},
 	methods: {
+		// 板块图变化
+		saleAreaChange(val) {
+			console.log(val);
+			let params = this.allTypeStationList.branchCompanyList.find(
+				item => item.name === val
+			);
+			params = {
+				...params,
+				detailList:
+					SERVICE_SERVICENINETEEN_LEGEND_MAP.BranchCompany.detailList,
+			};
+			this.handleOverlayClick(params);
+		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat } = overlay;
@@ -96,11 +111,11 @@ export default {
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
 			this.$amap.setZoom(14, 100);
-			if (isCenter) {
-				this.$nextTick(() => {
-					this.$amap.panTo([lng, lat], 100);
-				});
-			}
+			// if (isCenter) {
+			// 	this.$nextTick(() => {
+			// 		this.$amap.panTo([lng, lat], 100);
+			// 	});
+			// }
 		},
 		async getDataStatisticsList() {
 			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();

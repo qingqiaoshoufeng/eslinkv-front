@@ -6,6 +6,7 @@ export const SERVICE_SERVICENINETEEN_LEGEND_MAP = {
     BranchCompany: {
         label: '分公司',
         legendIcon: 'icontulifengongsi',
+        iconSize: 56,
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
         isShow: true,
