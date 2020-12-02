@@ -1,0 +1,40 @@
+<template>
+	<div class="widget-part pos-r" :style="styles">
+		<div class="h-slide-bg-back pointer" @click="handleClick"></div>
+	</div>
+</template>
+<script>
+	import mixins from '../../mixins'
+	import GoldChart from '../../../openApi'
+
+	const config = {animation: true}
+	const value = {
+		api: {
+			data: JSON.stringify({
+				sceneId: ''
+			})
+		}
+	}
+	export default {
+		mixins: [mixins],
+		created() {
+			this.configSource = this.parseConfigSource(config)
+			this.configValue = this.parseConfigValue(config, value)
+		},
+		methods: {
+			handleClick() {
+				if (this.data.sceneId)
+					GoldChart.scene.destroyScene(this.data.sceneId)
+			}
+		}
+	}
+</script>
+<style lang="scss" scoped>
+
+	.h-slide-bg-back {
+		background-image: url('./img/back.svg');
+		width: 24px;
+		height: 112px;
+	}
+</style>
+

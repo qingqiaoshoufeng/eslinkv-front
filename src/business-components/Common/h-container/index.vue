@@ -1,0 +1,71 @@
+<template>
+	<div class="widget-part" :style="styles" v-if="data">
+    <section class="title">
+      <img src="/static/icons/left-icon.svg">
+      <div class="title-txt">年度LNG气量</div>
+      <img src="/static/icons/right-icon.svg">
+    </section>
+    <section class="main"></section>
+	</div>
+</template>
+<script>
+import mixins from '../../mixins';
+import {getInput} from "@lib/views/core/widgets/parts/lib/config-tools";
+
+const config = {
+  animation: true,
+  config: {
+    title: true
+  },
+};
+const value = {
+	api: {
+		data: JSON.stringify({})
+	},
+  config: {
+    title: '供气量'
+  }
+}
+const configSource = {
+  config: {
+    fields: {
+      title: getInput('unit', '标题')
+    }
+  }
+}
+export default {
+	mixins: [mixins],
+	created() {
+		this.configSource = this.parseConfigSource(config, configSource);
+		this.configValue = this.parseConfigValue(config, value);
+	},
+};
+</script>
+<style lang="scss" scoped>
+.widget-part {
+  display: flex;
+  flex-direction: column;
+}
+.main {
+  flex: 1;
+  border: 1px solid #00DDFF;
+  border-top: none;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  background: url("./img/title-bg.svg") no-repeat;
+  background-size: 100% 100%;
+
+  .title-txt {
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 32px;
+    color: #FFFFFF;
+    margin: 0 8px;
+  }
+}
+</style>
+

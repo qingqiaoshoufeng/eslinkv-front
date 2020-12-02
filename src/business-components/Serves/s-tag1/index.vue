@@ -1,6 +1,6 @@
 <template>
 	<div class="widget-part" :style="styles" v-if="data">
-		<div class="num font-num">{{ data&&data.value.toLocaleString() }}</div>
+		<div class="num font-num">{{ data&&data.value |toThousand }}</div>
 		<div class="txt">{{ config.config&&config.config.desc }}</div>
 		<div class="flex">
 			<div>

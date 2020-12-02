@@ -162,7 +162,7 @@ export default {
 			if (!this.plugins || !this.plugins.length) return;
 
 			//  store plugin instances
-			this.$plugins = this.$plugins || {};
+            this.$plugins = this.$plugins || {};
 
 			this.plugins.forEach(_plugin => {
 				const realPluginOptions = this.convertAMapPluginProps(_plugin);

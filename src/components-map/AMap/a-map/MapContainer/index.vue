@@ -58,7 +58,7 @@ export default {
 				dragEnable: true,
 				zoom: 10,
 				viewMode: '3D',
-				pitch: 10,
+                pitch: 10,
 				mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
 			},
 			kanboardSize: {
@@ -82,7 +82,6 @@ export default {
 	mounted() {
 		this.updateKanboardSize();
 		console.log(this.$refs.amap);
-		window.suyan = this.$el;
 		this.$nextTick(function () {
 			this.$el.style.setProperty('--scaleRatio', 0.3);
 		});

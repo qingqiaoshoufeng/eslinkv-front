@@ -10,7 +10,7 @@
 			{{ config.config && config.config.text }}
 		</div>
 		<div class="h-icon-info-count__count font-num">
-			{{ computedMinutes }}
+			{{ data&&data.minutes | toThousand }}
 		</div>
 		<div class="h-icon-info-count__unit">分钟</div>
 	</div>
@@ -52,12 +52,6 @@
 	export default {
 		mixins: [mixins],
 		methods: {},
-		computed: {
-			computedMinutes() {
-				if (!this.data) return 0;
-				return this.data.minutes.toLocaleString();
-			},
-		},
 		created() {
 			this.configSource = this.parseConfigSource(config, configSource);
 			this.configValue = this.parseConfigValue(config, value);

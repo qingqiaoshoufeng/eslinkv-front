@@ -1,14 +1,22 @@
 <template>
 	<div class="wrap">
 		<div class="chart" ref="chart"></div>
-		<div class="unit">单位：万m³</div>
+		<div class="unit">单位：{{ unit }}</div>
 	</div>
 </template>
 
 <script>
 
 	export default {
-		props: ['data'],
+		props: {
+		  data: {
+		    type: Object
+      },
+      unit: {
+		    type: String,
+        default: '万m³'
+      }
+    },
 		watch: {
 			data: {
 				handler(val) {

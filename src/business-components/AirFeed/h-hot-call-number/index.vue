@@ -4,10 +4,11 @@
 			class="h-hot-call-number__bg"
 			src="/static/images/hot-call-number.webm"
 			loop
+			muted
 			autoplay></video>
 		<div class="h-hot-call-number__oncall">
 			<div class="h-hot-call-number__oncall__num font-num">
-				{{ data && data.onCall || ''}}
+				{{ data && data.onCall}}
 			</div>
 			<div class="h-hot-call-number__oncall__desc">
 				通话中
@@ -15,7 +16,7 @@
 		</div>
 		<div class="h-hot-call-number__onwait">
 			<div class="h-hot-call-number__onwait__num font-num">
-				{{ data && data.onWait || ''}}
+				{{ data && data.onWait}}
 			</div>
 			<div class="h-hot-call-number__onwait__desc font-num">
 				等待中
