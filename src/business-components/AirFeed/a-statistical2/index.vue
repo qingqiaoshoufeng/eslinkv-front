@@ -40,7 +40,7 @@
 			</div>
 			<div class="right-more pos-r" @click="handleClick" :class="{pointer:config.config&&config.config.sceneId}">
 				<div class="right-more-total font-num">{{data&&data.todayData |toThousand}}</div>
-				<div class="right-more-des">今日供气量(m³)</div>
+				<div class="right-more-des">{{config.config && config.config.rightDesc}}</div>
 			</div>
 		</div>
 	</div>
@@ -56,6 +56,7 @@
 		config: {
 			desc: true,
 			timeDesc: true,
+			rightDesc: true,
 			sceneId: true,
 			componentId: true,
 		},
@@ -65,6 +66,7 @@
 			fields: {
 				desc: getInput('desc', '描述'),
 				timeDesc: getInput('timeDesc', '时间'),
+				rightDesc: getInput('rightDesc', '今日描述'),
 				sceneId: getInput('sceneId', '场景id'),
 				componentId: getInput('componentId', '组件id'),
 			},
@@ -79,7 +81,8 @@
 			}),
 		},
 		config: {
-			timeDesc: 'xxxx年度',
+			timeDesc: '年度',
+			rightDesc: '今日供气量(m³)',
 			desc: '累计接纳量(m3)',
 			sceneId: '',
 			componentId: '',

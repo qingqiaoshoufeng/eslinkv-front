@@ -10,7 +10,11 @@
 			}"
 			:visible="true"
 			@click="
-				$emit('overlay-click', { overlayType: 'WarningList', ...item })
+				$emit('overlay-click', {
+					overlayType: 'WarningICcustomer',
+					...item,
+					detailList,
+				})
 			"
 		>
 			<video
@@ -39,9 +43,15 @@ export default {
 	props: {
 		overlayType: {
 			type: String,
-			default: 'WarningList',
+			default: 'WarningICcustomer',
 		},
 		data: {
+			type: Array,
+			default() {
+				return [];
+			},
+		},
+		detailList: {
 			type: Array,
 			default() {
 				return [];
@@ -57,7 +67,7 @@ export default {
 	async created() {
 		this.map = this.$parent.$amap;
 
-		// this.list = await this.$sysApi.map.airSupply.getEventWarningList();
+		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
 		// console.log(res);
 		// this.list = res.filter(item => item.status);
 		// console.log(this.list, 1111);
@@ -77,6 +87,7 @@ video::-webkit-media-controls {
 	margin-left: -38px;
 	margin-top: -80px;
 	outline: none;
+	position: absolute;
 }
 .amap-icon {
 	width: 44px !important;

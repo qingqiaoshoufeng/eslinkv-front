@@ -113,7 +113,11 @@
 				this.currIndex = row.label
 				let params = this.config.api.params
 				if (params) {
-					params.industry = row.code
+					if (typeof params === 'string') {
+						params = {...JSON.parse(params), industry: row.code}
+					} else {
+						params = {...params, industry: row.code}
+					}
 				} else {
 					params = {}
 					params.industry = row.code

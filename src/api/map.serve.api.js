@@ -40,7 +40,7 @@ export function getCouplingIncreaseInfo(data) {
     return request({
         url: `${HANGRANURL}/gasCode/addNum`,
         method: 'get',
-        data: data,
+        params: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -52,18 +52,19 @@ export function getAccumulativeTotal(data) {
     return request({
         url: `${HANGRANURL}/gasCode/accumulativeTotal`,
         method: 'get',
-        data: qs.stringify(data),
+        params: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
     })
 }
 // 获取工商户地图数据 用气大户、分公司
-export function getICcustomerList1(data) {
+export function getICcustomerStationList(data) {
+    console.log(data, 7777777)
     return request({
-        url: `${HANGRANURL}/gasCode/mapDataResult`,
+        url: `${HANGRANURL}/businessAnalysis/mapDataResult`,
         method: 'get',
-        data: data,
+        params: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -74,7 +75,7 @@ export function getICcustomerDetailInfo(data) {
     return request({
         url: `${HANGRANURL}/businessAnalysis/mapDetailInfo`,
         method: 'get',
-        data: data,
+        params: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
@@ -85,18 +86,41 @@ export function getICcustomerCallingInfo(data) {
     return request({
         url: `${HANGRANURL}/businessAnalysis/callResult`,
         method: 'get',
-        data: qs.stringify(data),
+        params: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },
     })
 }
+// 获取工商户年用气热力图
+export function getICcustomerHotInfo(data) {
+    return request({
+        url: `${HANGRANURL}/businessAnalysis/heatCount`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+// 获取态势感知详情
+export function getICcustomerWarningDetialInfo(data) {
+    return request({
+        url: `${HANGRANURL}/businessAnalysis/situationAwarenessDetailInfo`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+
 // 态势感知列表
 export function getICcustomerSituationAwareness(data) {
     return request({
         url: `${HANGRANURL}/businessAnalysis/situationAwareness`,
         method: 'get',
-        data: qs.stringify(data),
+        params: data,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
         },

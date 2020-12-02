@@ -1,6 +1,6 @@
 
 // 引入详情字典
-import { ICcustomer, useNumberYestoday, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal } from "../../../../utils/dictionary"
+import { ICcustomer, useNumberYestoday, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, ICcustomerStatus } from "../../../../utils/dictionary"
 // 覆盖物legend配置
 export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
     MajorClient: {
@@ -10,26 +10,25 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         icon:'iconyongqidahu',
         component: 'MajorClient',
         isShow: true,
-        dataProp: 'MajorClientList',
-        detailList: ['useNumberYestoday']
+        dataProp: 'majorClientList',
+        detailList: [useNumberYestoday]
     },
 
     useHotYear: {
         label: '用气大户',
         component: 'useHotYear',
         isShow: true,
-        dataProp: 'useHotYear',
-        detailList: ['useNumberYestoday']
+        dataProp: 'year',
     },
-    // BranchCompany: {
-    //     label: '分公司',
-    //     legendIcon: 'icontulifengongsi',
-    //     icon: 'iconfengongsi1',
-    //     component: 'BranchCompany',
-    //     isShow: true,
-    //     dataProp: 'branchCompanyList',
-    //     detailList: [ICcustomer, useNumberYestoday, warningYestoday]
-    // },
+    BranchCompany: {
+        label: '分公司',
+        legendIcon: 'icontulifengongsi',
+        icon: 'iconfengongsi1',
+        component: 'BranchCompany',
+        isShow: true,
+        dataProp: 'branchCompanyList',
+        detailList: [ICcustomer, useNumberYestoday, warningYestoday]
+    },
     WarningICcustomer: {
         label: '报警',
         legendIcon: 'iconyongqidahu2',
@@ -38,7 +37,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         component: 'WarningICcustomer',
         isShow: true,
         dataProp: 'WarningICcustomerList',
-        detailList: ['useNumberYestoday']
+        detailList: [useNumberYestoday, ICcustomerStatus]
     }
 }
 

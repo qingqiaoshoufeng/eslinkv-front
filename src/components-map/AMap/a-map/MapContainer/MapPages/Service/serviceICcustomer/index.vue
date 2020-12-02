@@ -10,6 +10,7 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component
+				v-if="config.isShow && allTypeStationList[config.dataProp]"
 				:key="legend"
 				:visible="config.isShow"
 				:overlayIcon="config.legendIcon"
@@ -24,19 +25,20 @@
 		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
-             :legendMap="legendMap"
+			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
 			:detialBoxWidth="450"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
-			@view-detail="showOverlayDetail"
+			@view-detail="showMoreDetail"
 			ref="OverlayDetail"
 		>
 			<TipDetial
 				:data="activeOverlay"
 				:detailInfo="detailInfo"
 				:isShowMore="isShowMore"
+				@view-detail="showMoreDetail"
 			/>
 		</OverlayDetail>
 		<portal to="destination">
@@ -89,6 +91,10 @@ import {
 	DATASTATISTICSLIST,
 	SWICHBOX,
 } from './config';
+import {
+	ICcustomer_WARN__SCENEINDEX,
+	ICcustomer_WARN__COMPONENTINDEX,
+} from '../../../../config';
 export default {
 	name: 'serviceICcustomer',
 	components: {
@@ -108,6 +114,7 @@ export default {
 	data() {
 		let {
 			MajorClient,
+			BranchCompany,
 			WarningICcustomer,
 		} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP;
 		return {
@@ -116,7 +123,7 @@ export default {
 			),
 			dataStatisticsList: DATASTATISTICSLIST,
 			overlayMap: SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
-			legendMap: { MajorClient },
+			legendMap: { MajorClient, BranchCompany },
 			legendMultiple: true,
 			showOverlayDetail: false,
 			activeOverlay: {},
@@ -128,6 +135,7 @@ export default {
 			isShowMore: false,
 			activeArea: '杭州钱江燃气有限公司',
 			swichBoxInfo: SWICHBOX,
+			WarningDetialInfo: {},
 		};
 	},
 	created() {
@@ -136,6 +144,47 @@ export default {
 		this.$amap.panTo(this.center, 100);
 	},
 	methods: {
+		// 查看详情，弹出详情场景
+		async showMoreDetail() {
+			let { address, content, eventType, id } = this.activeOverlay;
+			let { useNumberYestoday } = this.detailInfo;
+			console.log(this.activeOverlay, this.detailInfo);
+			let params = {};
+			params[ICcustomer_WARN__COMPONENTINDEX[0]] = {
+				title: address,
+			};
+			params[ICcustomer_WARN__COMPONENTINDEX[1]] = {
+				value: `${content}(${eventType === 1 ? '待处理' : '已处理'})`,
+			};
+			params[ICcustomer_WARN__COMPONENTINDEX[2]] = {
+				value: useNumberYestoday,
+			};
+			let {
+				total,
+				instant,
+				pressure,
+				temperature,
+			} = await this.getICcustomerWarningDetialInfo(id);
+			params[ICcustomer_WARN__COMPONENTINDEX[3]] = total;
+			params[ICcustomer_WARN__COMPONENTINDEX[4]] = instant;
+			params[ICcustomer_WARN__COMPONENTINDEX[5]] = pressure;
+			params[ICcustomer_WARN__COMPONENTINDEX[7]] = temperature;
+			GoldChart.scene.createSceneInstance(
+				ICcustomer_WARN__SCENEINDEX,
+				'slideRight'
+			);
+			this.$nextTick(() => {
+				ICcustomer_WARN__COMPONENTINDEX.forEach(item => {
+					console.log(item);
+					console.log(params[item]);
+					GoldChart.instance.updateComponent(item, {
+						data: params[item],
+					});
+				});
+			});
+
+			// params.
+		},
 		// 板块图变化
 		saleAreaChange(val) {
 			console.log(val);
@@ -158,34 +207,46 @@ export default {
 			this.overlayMap.useHotYear.isShow = value;
 		},
 		closeOverlayDetail(done) {
+			// console.log(1111111111111);
+			this.showOverlayDetail = false;
 			done();
 		},
 		// 点击地图marker
 		handleOverlayClick(overlay, overlayType, isCenter = false) {
 			console.log(overlay);
 			overlay.overlayType = overlayType || overlay.overlayType;
-			let { lng, lat, id, overlayType: type, detailList } = overlay;
+			let {
+				lng,
+				lat,
+				id,
+				overlayType: type,
+				detailList,
+				name,
+				eventType,
+			} = overlay;
 			let params = {
+				name,
 				id,
 				type,
-				params: detailList.map(item => item.prop).toString(),
+				params: 'useNumberYestoday',
 			};
-			this.getDetailInfo(params);
+			this.getDetailInfo(params, eventType);
 
 			this.activeOverlay = overlay;
+			console.log(type);
 			this.isShowMore = ['WarningICcustomer'].includes(type);
-
-			console.log(this.isShowMore, type);
 		},
-
+		// 请求用气大户，分公司，综合服务站数据列表
 		async getAllTypeStationList() {
 			let params = {
-				type: ['MajorClient', 'BranchCompany'],
+				types: ['MajorClient', 'BranchCompany'].toString(),
 			};
-			this.allTypeStationList = await this.$sysApi.map.serve.getICcustomerList(
+			console.log(params, 33333);
+			let res = await this.$sysApi.map.serve.getICcustomerStationList(
 				params
 			);
-			console.log(this.allTypeStationList);
+			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			console.log(this.allTypeStationList, 111111111);
 		},
 
 		// 联码新增统计数据
@@ -193,28 +254,25 @@ export default {
 			this.ICcustomerDetailInfo = await this.$sysApi.map.serve.getICcustomerCallingInfo();
 		},
 
-		// 请求用气大户，分公司，综合服务站数据列表
-		async getAllTypeStationList() {
-			let params = {
-				type: ['MajorClient', 'BranchCompany'],
-			};
-			let res = await this.$sysApi.map.serve.getHangranCodeList(params);
-			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-		},
 		// 获取热力图信息
 		async getAllHotList() {
-			let params = {
-				type: ['useHotYear'],
-			};
-			let res = await this.$sysApi.map.serve.getHangranCodeHotList();
+			let res = await this.$sysApi.map.serve.getICcustomerHotInfo();
+			console.log(res, 121212);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			console.log(this.allTypeStationList, 111111);
 		},
 		//获取站点详情
-		async getDetailInfo(params) {
+		async getDetailInfo(params, eventType) {
+			console.log(params, eventType);
 			console.log(params);
 			this.detailInfo = await this.$sysApi.map.serve.getICcustomerDetailInfo(
 				params
 			);
+			if (eventType && eventType === 1) {
+				this.detailInfo.ICcustomerStatus = '待处理';
+			} else if (!eventType && eventType === 0) {
+				this.detailInfo.ICcustomerStatus = '已处理';
+			}
 			this.showOverlayDetail = true;
 		},
 		// 获取右侧table列表报警信息
@@ -235,6 +293,13 @@ export default {
 		handleListClick(item) {
 			console.log(item);
 		},
+		// 查看态势感知详情列表
+		getICcustomerWarningDetialInfo(id) {
+			let params = {
+				id,
+			};
+			return this.$sysApi.map.serve.getICcustomerWarningDetialInfo();
+		},
 		viewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
 			//和场景进行交互
@@ -253,6 +318,7 @@ export default {
 		this.getDataStatisticsList();
 		this.getAllTypeStationList();
 		this.getWarningList();
+		this.getAllHotList();
 	},
 };
 </script>

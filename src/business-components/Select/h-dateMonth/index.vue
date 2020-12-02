@@ -30,11 +30,13 @@
 		data() {
 			return {
 				showOptions: false,
-				selectValue: new Date()
+				selectValue: addMonths(new Date(), -1)
 			}
 		},
 		computed: {
 			disabled() {
+				if (new Date().getDate() === 1)
+					return true
 				return isSameMonth(new Date(), this.selectValue)
 			},
 			now() {

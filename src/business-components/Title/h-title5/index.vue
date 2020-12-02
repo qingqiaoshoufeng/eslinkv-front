@@ -1,38 +1,28 @@
 <template>
 	<div class="widget-part" :style="styles">
 		<div class="h-title-5">
-			<p class="pos-r text-left">{{config.config&&config.config.title}}</p>
+			<p class="pos-r text-left">{{data&&data.title}}</p>
 		</div>
 	</div>
 </template>
 <script>
 	import mixins from '../../mixins'
-	import {getInput} from "@lib"
 
 	const config = {
 		animation: true,
-		config: {
-			title: true
-		}
-	}
-
-	const configSource = {
-		config: {
-			fields: {
-				title: getInput('title', '标题'),
-			}
-		},
 	}
 
 	const value = {
-		config: {
-			title: '标题'
+		api: {
+			data:JSON.stringify({
+				title: '标题'
+			})
 		}
 	}
 	export default {
 		mixins: [mixins],
 		created() {
-			this.configSource = this.parseConfigSource(config, configSource)
+			this.configSource = this.parseConfigSource(config)
 			this.configValue = this.parseConfigValue(config, value)
 		}
 	}

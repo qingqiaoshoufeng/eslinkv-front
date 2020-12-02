@@ -1,6 +1,6 @@
 export default {
 	grid: {
-		left: 35,
+		left: 55,
 		right: 30,
 		top: 45,
 		bottom: 40

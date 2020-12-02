@@ -5,7 +5,7 @@ export default {
 	},
 	grid: {
 		top: 40,
-		left: 40,
+		left: 80,
 		bottom: 30,
 		right: 0
 	},
