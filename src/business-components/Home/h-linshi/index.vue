@@ -182,11 +182,11 @@
 			this.configValue = this.parseConfigValue(config, value)
 		},
 		mounted() {
-			const _self = this.$refs.img
-			setTimeout(() => {
-				_self.style.transform = `perspective(763px) rotateY(${this.config.config.transform}deg) translateZ(-120px)`
-				_self.style.left = `${this.config.config.left}px`
-			}, 1500)
+			// const _self = this.$refs.img
+			// setTimeout(() => {
+			// 	_self.style.transform = `perspective(763px) rotateY(${this.config.config.transform}deg) translateZ(-120px)`
+			// 	_self.style.left = `${this.config.config.left}px`
+			// }, 1500)
 
 			this.animateTimer = setInterval(() => {
 				if (this.animateActiveIndex < 4) {

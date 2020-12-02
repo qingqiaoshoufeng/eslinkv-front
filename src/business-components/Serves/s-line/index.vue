@@ -6,25 +6,25 @@
 <script>
 	import mixins from '../../mixins';
 	import getOption from './options'
-  import {getInput} from "@lib";
+	import {getInput} from "@lib";
 
-  const configSource = {
-    config: {
-      fields: {
-        unit: getInput('unit', '纵坐标单位'),
-        color: getInput('color', '线条颜色'),
-        icon: getInput('icon', '拐点图标') // png转base64，data:开头
-      }
-    },
-  }
+	const configSource = {
+		config: {
+			fields: {
+				unit: getInput('unit', '纵坐标单位'),
+				color: getInput('color', '线条颜色'),
+				icon: getInput('icon', '拐点图标') // png转base64，data:开头
+			}
+		},
+	}
 	const config = {
-    animation: true,
-    config: {
-      unit: true,
-      color: true,
-      icon: true
-    }
-  }
+		animation: true,
+		config: {
+			unit: true,
+			color: true,
+			icon: true
+		}
+	}
 	const value = {
 		api: {
 			data: JSON.stringify({
@@ -72,18 +72,18 @@
 				]
 			})
 		},
-    config: {
-		  unit: '%',
-      color: '#00DDFF',
-      icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFUSURBVHgBjVNBTsNADJzNgSPqDwhCHDjBE+AF8AT6A35AeQH8IPwg9AWBFyQ3JNqwOXFNOSEhgbG9bfE2SdWRnGy83rHXnjhsYkbnSHDJqyu2dOmt1L5xhxPX2PBkvSppBE/37Mnxi09+X+DIObUEYxBesIcCNcdIbARx1FRiTo9MMsIQZG9ODxobkUhm2dgVkkgqUbxSyh/eZiailK1gaykgF19USU2t9osXGTNebxxeHbRoI5IZTULVcp83OjMEOQ2jMFWEyvlB9nq0HW3UCz6b9LRogWF0JiQEDT7owPiqLQTT9Spcu0pYIFN8sVD+MR6oQnw3JrUSBOnKSMrOGHPT/SKaQBCe10Yqgroy7IqO8EQY7zzOXp0bhMyZjn4pvDCFQ7eA45+H+LmPUoVltKGlerrlPc8x4UeTMwzXU16KH0x455S/ViSNNpvwhGP3bMP/AKHGMIU7wYTyAAAAAElFTkSuQmCC'
-    }
+		config: {
+			unit: '户',
+			color: '#00DDFF',
+			icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFUSURBVHgBjVNBTsNADJzNgSPqDwhCHDjBE+AF8AT6A35AeQH8IPwg9AWBFyQ3JNqwOXFNOSEhgbG9bfE2SdWRnGy83rHXnjhsYkbnSHDJqyu2dOmt1L5xhxPX2PBkvSppBE/37Mnxi09+X+DIObUEYxBesIcCNcdIbARx1FRiTo9MMsIQZG9ODxobkUhm2dgVkkgqUbxSyh/eZiailK1gaykgF19USU2t9osXGTNebxxeHbRoI5IZTULVcp83OjMEOQ2jMFWEyvlB9nq0HW3UCz6b9LRogWF0JiQEDT7owPiqLQTT9Spcu0pYIFN8sVD+MR6oQnw3JrUSBOnKSMrOGHPT/SKaQBCe10Yqgroy7IqO8EQY7zzOXp0bhMyZjn4pvDCFQ7eA45+H+LmPUoVltKGlerrlPc8x4UeTMwzXU16KH0x455S/ViSNNpvwhGP3bMP/AKHGMIU7wYTyAAAAAElFTkSuQmCC'
+		}
 	}
 	export default {
 		mixins: [mixins],
 		computed: {},
 		methods: {
 			setOption(data) {
-				// options.yAxis[0].name = data.title
+				// options.yAxis[0].name = this.config.config.title
 				// options.series[0].data = data.data.map(item => item.value)
 				// options.xAxis[0].data = data.data.map(item => item.name)
 				this.instance && this.instance.setOption(getOption(this.data.data, this.config.config))

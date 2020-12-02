@@ -1,7 +1,7 @@
 <template>
 	<div class="widget-part" :style="styles">
 		<div class="h-hot-call-analysis">
-			<h2 class="text-left">坐席使用分析</h2>
+			<h2 class="text-left">坐席使用情况</h2>
 			<div class="h-hot-call-analysis-content fn-flex flex-row">
 				<div class="h-hot-call-analysis-call-block"></div>
 				<div class="h-hot-call-analysis-call-title">通话</div>

@@ -9,7 +9,7 @@ export default function getOption(data, config) {
 		grid: {
 			top: 40,
 			bottom: 30,
-			left: 40,
+			left: 65,
 			right: 10
 		},
 		tooltip: {
@@ -51,7 +51,7 @@ export default function getOption(data, config) {
 			data: data.map(item => item.name)
 		}],
 		yAxis: [{
-			name: "%",
+			name: config.unit,
 			type: "value",
 			splitLine: {
 				show: true,
