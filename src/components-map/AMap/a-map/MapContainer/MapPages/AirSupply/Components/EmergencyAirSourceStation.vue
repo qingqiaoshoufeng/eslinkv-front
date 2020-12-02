@@ -6,6 +6,7 @@
 			visible,
 			apiFun,
 			...$attrs,
+			data,
 		}"
 		@click="
 			marker =>
@@ -32,6 +33,15 @@ export default {
 		overlayType: {
 			type: String,
 			default: '',
+		},
+		data: {
+			type: Array,
+		},
+		detailList: {
+			type: Array,
+			default() {
+				return [];
+			},
 		},
 	},
 	data() {

@@ -6,12 +6,13 @@
 			visible,
 			apiFun,
 			...$attrs,
+			data,
 		}"
 		@click="marker => $emit('overlay-click', marker, 'LNGStation')"
 	/>
 </template>
 <script>
-import {BaseOverlay} from '../../Components/index';
+import { BaseOverlay } from '../../Components/index';
 export default {
 	name: 'LNGStation',
 	components: {
@@ -30,11 +31,20 @@ export default {
 			type: String,
 			default: '',
 		},
-    },
+		data: {
+			type: Array,
+		},
+		detailList: {
+			type: Array,
+			default() {
+				return [];
+			},
+		},
+	},
 	data() {
 		let apiFun = this.$sysApi.map.home.getLNGStationList;
 		return {
-				apiFun: apiFun,
+			apiFun: apiFun,
 		};
 	},
 };

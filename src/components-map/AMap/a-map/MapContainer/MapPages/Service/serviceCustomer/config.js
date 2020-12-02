@@ -1,6 +1,6 @@
 
 // 引入详情字典
-import { citizenNumber, publicBuildNumber, industryNumber, businessServe } from "../../../../utils/dictionary"
+import { citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, } from "../../../../utils/dictionary"
 
 
 // 覆盖物legend配置
@@ -20,6 +20,10 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
         isShow: true,
+        dataProp: 'branchCompanyList',
+        detailList: [citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial]
+
+
     },
     ServiceNetworkStation: {
         label: '服务网点',
@@ -28,6 +32,8 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         icon: 'iconfuwuwangdian',
         component: 'ServiceNetworkStation',
         isShow: true,
+        dataProp: 'networkStationList',
+        detailList: []
     },
     ThreeSocialLinkage: {
         label: '三社联动',
@@ -36,6 +42,8 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         icon: 'iconsansheliandong',
         component: 'ThreeSocialLinkage',
         isShow: true,
+        dataProp: 'threeSocialLinkage',
+        detailList: []
     }
 }
 

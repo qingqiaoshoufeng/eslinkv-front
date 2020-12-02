@@ -16,6 +16,8 @@
 				:iconSize="config.iconSize"
 				:overlayType="legend"
 				:is="config.component"
+				:detailList="config.detailList"
+				:data="allTypeStationList[config.dataProp]"
 				@overlay-click="handleOverlayClick"
 			/>
 		</template>
@@ -71,6 +73,7 @@ export default {
 			activeOverlay: {},
 			center: [120.061259, 30.183295],
 			zoom: 10,
+			allTypeStationList: {},
 			// swichBoxInfo: SWICHBOX,
 		};
 	},

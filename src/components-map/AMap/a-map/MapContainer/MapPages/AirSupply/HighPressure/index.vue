@@ -6,13 +6,20 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
+				v-if="config.isShow && allTypeStationList[config.dataProp]"
 				:key="legend"
 				:visible="config.isShow"
 				:is="config.component"
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
 				:overlayType="config.component"
 				:iconSize="config.iconSize"
-				:showOverlayName="config.showOverlayName===false ? config.showOverlayName : undefined"
+				:showOverlayName="
+					config.showOverlayName === false
+						? config.showOverlayName
+						: undefined
+				"
+				:detailList="config.detailList"
+				:data="allTypeStationList[config.dataProp]"
 				@overlay-click="handleOverlayClick"
 			/>
 		</template>
@@ -160,6 +167,7 @@ export default {
 				InspectionNumber: 22,
 				PreservationNumber: 35,
 			},
+			allTypeStationList: {},
 		};
 	},
 	methods: {
@@ -313,6 +321,33 @@ export default {
 				});
 			}
 		},
+		// 获取所有站点数据
+		async getAllTypeStationList() {
+			let params = {
+				types: [
+					'InspectionPerson', // '巡检人员',
+					'InspectionCar', // '巡检车辆',
+					'GasStation', // '门站',
+					'PressureRegulatingStation', // '调压站',
+					'EmergencyAirSourceStation', // '应急气源站',
+					'ServiceStation', // '综合服务站',
+					'PipeManageMentStation', // '管网运行管理站',
+					'UndergroundRepairStation', // '地下抢修点',
+					'LNGStation', // 'LNG站',
+					'LiquefiedGasStation', // '液化气站',
+					'NaturalGasStation', // '加气站',
+					'DistributedEnergyResource', // '分布式能源',
+				].toString(),
+			};
+			let res = await this.$sysApi.map.airSupply.getAllTypeStationList(
+				params
+			);
+			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			console.log(this.allTypeStationList);
+		},
+	},
+	mounted() {
+		this.getAllTypeStationList();
 	},
 };
 </script>

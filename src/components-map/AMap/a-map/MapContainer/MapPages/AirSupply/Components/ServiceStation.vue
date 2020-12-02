@@ -8,6 +8,7 @@
 			apiFun,
 			...$attrs,
 			detailList,
+			data,
 		}"
 		@click="
 			marker =>
@@ -38,6 +39,9 @@ export default {
 		overlayType: {
 			type: String,
 			default: '',
+		},
+		data: {
+			type: Array,
 		},
 		detailList: {
 			type: Array,

@@ -136,8 +136,8 @@ export function getNineteenStatisticsInfo() {
 }
 // 查询19厅站点详情
 
-// 查询客户服务 站点列表
-export function getServiceCustomerStationList() {
+// 查询客户服务站点列表
+export function getServiceCustomerStationList(data) {
     return request({
         url: `${HANGRANURL}/threeSocial/mapDataResult`,
         method: 'get',
@@ -151,6 +151,17 @@ export function getServiceCustomerStationList() {
 export function getServiceCustomerStatisticsInfo(data) {
     return request({
         url: `${HANGRANURL}/threeSocial/houseNum`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+// 查询客户服务站点详情
+export function getServiceCustomerDetialInfo(data) {
+    return request({
+        url: `${HANGRANURL}/threeSocial/mapDetailInfo`,
         method: 'get',
         params: data,
         headers: {

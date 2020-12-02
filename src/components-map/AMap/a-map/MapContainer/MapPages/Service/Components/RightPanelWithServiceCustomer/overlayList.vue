@@ -44,7 +44,7 @@
 
 <script>
 import { SvgIcon } from '../../../../../components/';
-import { SERVICELEGENDCUSTOMERMAP } from '../../../../../config/index';
+import { SERVICE_SERVICECUSTOMER_LEGEND_MAP } from '../../serviceCustomer/config';
 export default {
 	name: 'HomeRealTimeList',
 	components: {
@@ -85,7 +85,9 @@ export default {
 			this.list = list
 				.map(item => {
 					let { stationType } = item;
-					let config = SERVICELEGENDCUSTOMERMAP[stationType];
+					console.log(stationType);
+					let config =
+						SERVICE_SERVICECUSTOMER_LEGEND_MAP[stationType];
 					if (config) {
 						item.icon = config.legendIcon;
 					}

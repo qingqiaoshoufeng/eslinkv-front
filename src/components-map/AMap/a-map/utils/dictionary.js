@@ -187,6 +187,37 @@ let businessServe = {
     DW: '',
     prop: "service",
 }
+// 客户服务详情数据
+let citizenNumberDetial = {
+    label: '居民户',
+    DW: '户',
+    prop: "citizenNumberDetial",
+}
+let publicBuildNumberDetial = {
+    label: '公建户',
+    DW: '户',
+    prop: "publicBuildNumberDetial",
+}
+let industryNumberDetial = {
+    label: '工业户',
+    DW: '户',
+    prop: "industryNumberDetial",
+}
+let monthAccountDetial = {
+    label: '本月开户',
+    DW: '户',
+    prop: "monthAccountDetial",
+}
+let monthInstallDetial = {
+    label: '本月安装',
+    DW: '户',
+    prop: "monthInstallDetial",
+}
+let monthFireDetial = {
+    label: '本月点火',
+    DW: '户',
+    prop: "monthFireDetial",
+}
 
 // 19厅数统计数据
 let OnlineType = {
@@ -235,4 +266,4 @@ let monthManagePercent = {
 
 
 
-export { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, ICcustomer, useNumberYestoday, ICcustomerStatus, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, HighPressureGasStation, HighPressurePressureRegulatingStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber, LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber, LNGstationNumber, commonUseNumber, registerNumber, citizenNumber, publicBuildNumber, industryNumber, businessServe, OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent }
+export { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, ICcustomer, useNumberYestoday, ICcustomerStatus, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, HighPressureGasStation, HighPressurePressureRegulatingStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber, LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber, LNGstationNumber, commonUseNumber, registerNumber, citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent }

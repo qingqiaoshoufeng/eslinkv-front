@@ -10,25 +10,37 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
+				v-if="config.isShow && allTypeStationList[config.dataProp]"
 				:key="legend"
 				:visible="config.isShow"
 				:overlayIcon="config.legendIcon"
 				:iconSize="config.iconSize"
-				:overlayType="legend"
+				:overlayType="config.component"
 				:is="config.component"
 				@overlay-click="handleOverlayClick"
+				:detailList="config.detailList"
+				:data="allTypeStationList[config.dataProp]"
 			/>
 		</template>
+		<!-- 覆盖物详情 -->
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
+			:detialBoxWidth="450"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
-			@view-detail="toViewOverlayDetail"
+			@view-detail="showMoreDetail"
 			ref="OverlayDetail"
-		/>
+		>
+			<TipDetial
+				:data="activeOverlay"
+				:detailInfo="detailInfo"
+				:isShowMore="isShowMore"
+				@view-detail="showMoreDetail"
+			/>
+		</OverlayDetail>
 		<portal to="destination">
 			<!-- 图例 -->
 			<MapLegend
@@ -58,6 +70,7 @@ import {
 	Grouphall,
 	BranchCompany,
 	RightPanelWithServiceCustomer,
+	TipDetial,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -91,6 +104,7 @@ export default {
 		DataStatistics,
 		RightPanelWithServiceCustomer,
 		MapLegend,
+		TipDetial,
 	},
 	data() {
 		return {
@@ -112,6 +126,8 @@ export default {
 				industryNumber: 0,
 				businessServe: 0,
 			},
+			detailInfo: {},
+			isShowMore: false,
 		};
 	},
 	created() {
@@ -120,18 +136,31 @@ export default {
 		this.$amap.panTo(this.center, 100);
 	},
 	methods: {
-		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
-			let { lng, lat } = overlay;
-			overlay.overlayType = overlayType;
-			this.activeOverlay = overlay;
-			this.showOverlayDetail = true;
-			this.$amap.setZoom(14, 100);
-			if (isCenter) {
-				this.$nextTick(() => {
-					this.$amap.panTo([lng, lat], 100);
-				});
+		showMoreDetail() {
+			this.showThreeSocialLinkageDetail();
+		},
+		async handleOverlayClick(overlay, overlayType1, isCenter = false) {
+			console.log(overlay);
+			let { lng, lat, type, name, id, overlayType } = overlay;
+			let params = {
+				name,
+				id,
+				type,
+			};
+			console.log(overlayType);
+			if (['BranchCompany'].includes(overlayType)) {
+				this.detailInfo = await this.getDetailInfo(params);
 			}
+			this.activeOverlay = overlay;
+			console.log(this.detailInfo);
+			this.showOverlayDetail = true;
+			this.isShowMore = ['ThreeSocialLinkage'].includes(overlayType);
+			// if (isCenter) {
+			// 	this.$nextTick(() => {
+			// this.$amap.setZoom(14, 100);
+			// 		this.$amap.panTo([lng, lat], 100);
+			// 	});
+			// }
 		},
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
@@ -219,14 +248,7 @@ export default {
 				});
 			}
 		},
-		async getDataStatisticsList() {
-			console.log(11111);
-			console.log(
-				this.$sysApi.map.serve.getServiceCustomerStatisticsInfo
-			);
-			this.dataStatisticsInfo = await this.$sysApi.map.serve.getServiceCustomerStatisticsInfo();
-			console.log(this.dataStatisticsInfo, 1111111);
-		},
+
 		toViewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
 			this.OverlayDetail = overlay;
@@ -286,11 +308,38 @@ export default {
 				});
 			});
 		},
+		// 客户服务统一数据
+		async getDataStatisticsList() {
+			console.log(11111);
+			console.log(
+				this.$sysApi.map.serve.getServiceCustomerStatisticsInfo
+			);
+			this.dataStatisticsInfo = await this.$sysApi.map.serve.getServiceCustomerStatisticsInfo();
+			console.log(this.dataStatisticsInfo, 1111111);
+		},
 		// 查询客户服务站点列表
-		getServiceCustomerStationList() {},
+		async getAllTypeStationList() {
+			let params = {
+				types: [
+					'NetworkStation',
+					'BranchCompany',
+					'ThreeSocialLinkage',
+				].toString(),
+			};
+			let res = await this.$sysApi.map.serve.getServiceCustomerStationList(
+				params
+			);
+			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			console.log(this.allTypeStationList, 33333);
+		},
+		// 查看详情接口
+		getDetailInfo(params) {
+			return this.$sysApi.map.serve.getServiceCustomerDetialInfo(params);
+		},
 	},
 	mounted() {
 		this.getDataStatisticsList();
+		this.getAllTypeStationList();
 	},
 };
 </script>

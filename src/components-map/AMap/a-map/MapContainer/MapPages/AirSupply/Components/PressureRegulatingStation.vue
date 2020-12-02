@@ -7,6 +7,7 @@
 			visible,
 			apiFun,
 			...$attrs,
+			data,
 		}"
 		@click="click"
 	/>
@@ -30,6 +31,15 @@ export default {
 		overlayType: {
 			type: String,
 			default: '',
+		},
+		data: {
+			type: Array,
+		},
+		detailList: {
+			type: Array,
+			default() {
+				return [];
+			},
 		},
 	},
 	data() {
