@@ -126,6 +126,7 @@
 			font-weight: 400;
 			line-height: 16px;
 			letter-spacing: 0;
+			white-space: nowrap;
 		}
 
 		.legend {
