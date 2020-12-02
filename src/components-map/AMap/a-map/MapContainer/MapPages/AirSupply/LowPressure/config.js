@@ -77,6 +77,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         legendIcon: 'icontulitiaoyazhan',
 		iconSize: 38,
         component: 'PressureRegulatingStation',
+        tileQuery:[34],
         isShow: false,
     },
     EmergencyAirSourceStation: {

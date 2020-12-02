@@ -18,7 +18,11 @@
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
 				:overlayType="legend"
 				:iconSize="config.iconSize"
-				:showOverlayName="config.showOverlayName===false ? config.showOverlayName : undefined"
+				:showOverlayName="
+					config.showOverlayName === false
+						? config.showOverlayName
+						: undefined
+				"
 				@overlay-click="handleOverlayClick"
 			/>
 		</template>
@@ -68,7 +72,7 @@ import {
 	LowPressureLine,
 	InspectionPerson,
 	GasStation,
-	PressureRegulatingStation,
+	// PressureRegulatingStation,
 	EmergencyAirSourceStation,
 	PipeManageMentStation,
 	UndergroundRepairStation,
@@ -121,7 +125,7 @@ export default {
 		LowPressureLine,
 		NaturalGasStation,
 		PipeManageMentStation,
-		PressureRegulatingStation,
+		// PressureRegulatingStation,
 		UndergroundRepairStation,
 		ServiceStation,
 		MiddlePressureLine,
@@ -130,7 +134,7 @@ export default {
 		RoutePlan,
 		MapLegend,
 		AMapTile,
-		PressureRegulatingStation,
+		// PressureRegulatingStation,
 		OngroundRepairStation,
 		DataStatistics,
 		WarningList,
@@ -163,18 +167,29 @@ export default {
 	},
 	computed: {
 		tilesQuery() {
-			const { MiddlePressureLine, LowPressureLine } = this.legendMap;
+			const {
+				MiddlePressureLine,
+				LowPressureLine,
+				PressureRegulatingStation,
+			} = this.legendMap;
 			const {
 				isShow: isShowM,
 				tileQuery: tileQueryM,
 			} = MiddlePressureLine;
 			const { isShow: isShowL, tileQuery: tileQueryL } = LowPressureLine;
+			const {
+				isShow: isShowP,
+				tileQuery: tileQueryP,
+			} = PressureRegulatingStation;
 			let queryArr = [];
 			if (isShowM) {
 				queryArr.push(tileQueryM);
 			}
 			if (isShowL) {
 				queryArr.push(tileQueryL);
+			}
+			if (isShowP) {
+				queryArr.push(tileQueryP);
 			}
 			//条件变化刷新地图
 			if (queryArr.length && this.$refs.mapTile) {

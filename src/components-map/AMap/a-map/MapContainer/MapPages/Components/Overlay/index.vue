@@ -44,7 +44,7 @@ export default {
 
 <style lang="scss" scoped>
 .sample {
-	position: absolute;
+	position: relative;
 	cursor: pointer;
 	box-sizing: border-box;
     
