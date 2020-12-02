@@ -7,12 +7,13 @@
 			visible,
 			apiFun,
 			...$attrs,
+			data,
 		}"
 		@click="marker => $emit('overlay-click', marker, 'NaturalGasStation')"
 	/>
 </template>
 <script>
-import {BaseOverlay} from '../../Components/index';
+import { BaseOverlay } from '../../Components/index';
 export default {
 	name: 'NaturalGasStation',
 	components: {
@@ -31,11 +32,20 @@ export default {
 			type: String,
 			default: '',
 		},
-    },
+		data: {
+			type: Array,
+		},
+		detailList: {
+			type: Array,
+			default() {
+				return [];
+			},
+		},
+	},
 	data() {
 		let apiFun = this.$sysApi.map.home.getNaturalGasStationList;
 		return {
-				apiFun: apiFun,
+			apiFun: apiFun,
 		};
 	},
 };

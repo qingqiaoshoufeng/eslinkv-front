@@ -103,18 +103,6 @@ export function getICcustomerHotInfo(data) {
         },
     })
 }
-// 获取态势感知详情
-export function getICcustomerWarningDetialInfo(data) {
-    return request({
-        url: `${HANGRANURL}/businessAnalysis/situationAwarenessDetailInfo`,
-        method: 'get',
-        params: data,
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    })
-}
-
 // 态势感知列表
 export function getICcustomerSituationAwareness(data) {
     return request({
@@ -126,7 +114,61 @@ export function getICcustomerSituationAwareness(data) {
         },
     })
 }
+// 获取态势感知调出场景详情
+export function getICcustomerWarningDetialInfo(data) {
+    return request({
+        url: `${HANGRANURL}/businessAnalysis/situationAwarenessDetailInfo`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+// 19厅模块
+// 查询19厅服务物列表
+export function getNineteenStationList() {
 
+}
+// 查询19厅统计数据
+export function getNineteenStatisticsInfo() {
+
+}
+// 查询19厅站点详情
+
+// 查询客户服务站点列表
+export function getServiceCustomerStationList(data) {
+    return request({
+        url: `${HANGRANURL}/threeSocial/mapDataResult`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+// 查询客户服务统计数据
+export function getServiceCustomerStatisticsInfo(data) {
+    return request({
+        url: `${HANGRANURL}/threeSocial/houseNum`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+// 查询客户服务站点详情
+export function getServiceCustomerDetialInfo(data) {
+    return request({
+        url: `${HANGRANURL}/threeSocial/mapDetailInfo`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
 // 集团大厅站点
 export function getGrouphallList(data) {
     return request({

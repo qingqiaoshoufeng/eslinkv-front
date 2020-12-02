@@ -45,7 +45,7 @@
 				</div>
 				<div>
 					<h2 class="font-num">{{data&&data.value[animateActiveIndex].quick}}</h2>
-					<p>瞬时接纳量(m3/h)</p>
+					<p>瞬时接纳量(m³/h)</p>
 				</div>
 			</div>
 		</div>
@@ -237,6 +237,7 @@
 			height: 12px;
 			margin-right: 32px;
 			transition: all .3s;
+      min-width: 50px;
 
 			&:last-child {
 				margin-right: 0 !important;

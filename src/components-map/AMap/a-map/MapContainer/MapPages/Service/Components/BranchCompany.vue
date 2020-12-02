@@ -7,7 +7,7 @@
 			visible,
 			apiFun,
 			data,
-            ...$attrs,
+			...$attrs,
 			nameStyle,
 		}"
 		@click="
@@ -63,7 +63,8 @@ export default {
 		};
 	},
 	mounted() {
-		console.log(this.detailList);
+		console.log(this.data, '1111');
+		console.log(this.overlayType, '1111');
 	},
 };
 </script>

@@ -1,13 +1,13 @@
 <template>
 	<div>
 		<Overlay
-			v-for="(item, index) in list"
+			v-for="(item, index) in data.length ? data : list"
 			:key="index"
 			:marker="{
 				icon: `${eventTypeIconMap[item.eventType]}${
 					item.status ? '' : '-suc'
 				}`,
-                iconSize:iconSize,
+				iconSize: iconSize,
 				...item,
 			}"
 			:visible="true"
@@ -47,11 +47,20 @@ export default {
 		overlayType: {
 			type: String,
 			default: 'WarningList',
-        },
-        iconSize:{
-            type:Number,
-            default:38
-        }
+		},
+		iconSize: {
+			type: Number,
+			default: 38,
+		},
+		data: {
+			type: Array,
+		},
+		detailList: {
+			type: Array,
+			default() {
+				return [];
+			},
+		},
 	},
 	data() {
 		return {

@@ -28,11 +28,12 @@
 					<span>杭燃体验</span>
 				</li>
 			</ul>
-			<video src="./img/start1-active.webm" autoplay="autoplay" loop="loop"
-				   class="h-bg-start1 pos-a pointer"
-				   @click="handleStart"
-				   v-if="statusStart"></video>
-			<div class="h-bg-start1 pos-a pointer" @click="handleStart" v-else></div>
+			<div class="h-bg-start1-box pos-a">
+				<video src="./img/start1-active.webm" autoplay="autoplay" loop="loop"
+					   class="h-bg-start1-video pos-a pointer"
+					   @click="handleStart"></video>
+				<div class="h-bg-start1 pos-a pointer" @click="handleStart"></div>
+			</div>
 		</div>
 	</div>
 </template>
@@ -90,23 +91,23 @@
 		methods: {
 			handleStart() {
 				if (this.config.config.sceneId) {
-					if (this.statusStart) {
-						GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[1])
-						GoldChart.scene.createSceneInstance(JSON.parse(this.config.config.sceneId)[0], 'fadeIn', 'none')
-					} else {
-						GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[0])
-						GoldChart.scene.createSceneInstance(JSON.parse(this.config.config.sceneId)[1], 'fadeIn', 'none')
-					}
-					this.statusStart = !this.statusStart
+					// if (this.statusStart) {
+					// 	GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[1])
+					// 	GoldChart.scene.createSceneInstance(JSON.parse(this.config.config.sceneId)[0], 'fadeIn', 'none')
+					// } else {
+					// 	GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[0])
+					GoldChart.scene.createSceneInstance(JSON.parse(this.config.config.sceneId)[1], 'fadeIn')
+					// }
+					// this.statusStart = !this.statusStart
 				}
 			},
 			handleClick(index) {
 				GoldChart.scene.setSceneIndex(index)
-				if (this.statusStart) {
-					GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[1])
-				} else {
-					GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[0])
-				}
+				// if (this.statusStart) {
+				// 	GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[1])
+				// } else {
+				GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[0])
+				// }
 				this.status54441 = false
 				this.statusVideo = false
 			},
@@ -129,13 +130,39 @@
 	}
 </script>
 <style lang="scss">
+	.h-bg-start1-box {
+		left: 50%;
+		bottom: 27px;
+		margin-left: 540px;
+
+		&:hover {
+			.h-bg-start1-video {
+				opacity: 1;
+			}
+
+			.h-bg-start1 {
+				opacity: 0;
+			}
+		}
+	}
+
+	.h-bg-start1-video {
+		width: 72px;
+		height: 72px;
+		left: 0;
+		bottom: 0;
+		opacity: 0;
+		transition: all .3s;
+	}
+
 	.h-bg-start1 {
 		width: 72px;
 		height: 72px;
 		background-image: url('./img/start1.svg');
-		left: 50%;
-		bottom: 27px;
-		margin-left: 540px;
+		left: 0;
+		bottom: 0;
+		opacity: 1;
+		transition: all .3s;
 	}
 
 	.h-bg-nav {

@@ -6,6 +6,7 @@
 			visible,
 			apiFun,
 			...$attrs,
+			data,
 		}"
 		@click="marker => $emit('overlay-click', marker, 'GasStation')"
 	>
@@ -43,7 +44,16 @@ export default {
 		active: {
 			type: Boolean,
 			default: false,
-        }
+		},
+		data: {
+			type: Array,
+		},
+		detailList: {
+			type: Array,
+			default() {
+				return [];
+			},
+		},
 	},
 	data() {
 		let apiFun = this.$sysApi.map.home.getGasStationList;

@@ -4,7 +4,7 @@
 			v-for="(item, index) in data"
 			:key="index"
 			:marker="{
-				icon: `${eventTypeIconMap[item.eventType]}`,
+				icon: `${eventTypeIconMap[item.status]}`,
 				...item,
 				...$attrs,
 			}"
@@ -24,7 +24,7 @@
 				autoplay="autoplay"
 				muted="muted"
 				loop
-				v-if="item.eventType"
+				v-if="item.status === '1'"
 			></video>
 		</Overlay>
 	</div>
@@ -84,8 +84,8 @@ video::-webkit-media-controls {
 	display: none !important;
 }
 .warning-videO {
-	margin-left: -38px;
-	margin-top: -80px;
+	margin-left: -80px;
+	margin-top: -40px;
 	outline: none;
 	position: absolute;
 }
@@ -96,13 +96,6 @@ video::-webkit-media-controls {
 		width: 44px !important;
 		height: 44px !important;
 	}
-}
-.warnoverlay-gif {
-	display: block;
-	width: 100px;
-	height: 35px;
-	margin-top: -40px;
-	margin-left: -30px;
 }
 
 // img {

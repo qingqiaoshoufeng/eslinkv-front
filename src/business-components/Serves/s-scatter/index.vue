@@ -28,7 +28,7 @@ const value = {
 		})
 	},
   config: {
-    unit: '万m3'
+    unit: '万m³'
   }
 }
 const configSource = {

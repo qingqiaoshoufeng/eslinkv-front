@@ -20,7 +20,7 @@
           </div>
           <div class="li-num">{{k.value}}</div>
           <div class="li-name">{{k.name}}</div>
-          <div class="li-unit">储气量(m3)</div>
+          <div class="li-unit">储气量(m³)</div>
           <div class="active-dot" v-show="currentIndex === i">
             <div class="dot"></div>
           </div>
