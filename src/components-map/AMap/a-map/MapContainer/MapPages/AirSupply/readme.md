@@ -8,7 +8,9 @@ let legendMap = {
 		legendIcon: '图例图标',
 		icon: '地图上图标',
 		component: '覆盖物对应组件名称',
-		isShow: '是否默认开启（true/false)',
+        isShow: '是否默认开启（true/false)',
+        dataProp:'后端返回data中的数据',
+        tileQuery:'gis切片需要的查询参数',
 	},
 }
 ```

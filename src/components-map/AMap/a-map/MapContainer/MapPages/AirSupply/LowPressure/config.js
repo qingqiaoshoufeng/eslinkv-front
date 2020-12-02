@@ -6,14 +6,12 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
     MiddlePressureLine: {
         label: '中压管网',
         legendIcon: 'icontulizhongyaguanwang',
-        component: 'MiddlePressureLine',
         isShow: true,
         tileQuery:[11,12],
     },
     LowPressureLine: {
         label: '低压管网',
         legendIcon: 'icontulidiyaguanwang',
-        component: 'LowPressureLine',
         isShow: true,
         tileQuery:[10]
     },
@@ -76,7 +74,6 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         label: '调压站',
         legendIcon: 'icontulitiaoyazhan',
 		iconSize: 38,
-        component: 'PressureRegulatingStation',
         tileQuery:[34],
         isShow: false,
     },

@@ -12,6 +12,7 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
+                v-if="config.component"
 				:key="legend"
 				:visible="config.isShow"
 				:is="config.component"
@@ -68,8 +69,6 @@ import {
 	LNGStation,
 	HighPressureLine,
 	HighPressureLine_Process,
-	MiddlePressureLine,
-	LowPressureLine,
 	InspectionPerson,
 	GasStation,
 	// PressureRegulatingStation,
@@ -122,13 +121,11 @@ export default {
 		LiquefiedGasStation,
 		ListOverlay,
 		LNGStation,
-		LowPressureLine,
 		NaturalGasStation,
 		PipeManageMentStation,
 		// PressureRegulatingStation,
 		UndergroundRepairStation,
 		ServiceStation,
-		MiddlePressureLine,
 		RegionBoundary,
 		RightPanel,
 		RoutePlan,
