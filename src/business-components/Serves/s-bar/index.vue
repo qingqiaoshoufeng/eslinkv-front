@@ -5,11 +5,11 @@
 			<div class="legend" v-if="config.config.showLegend">
 				<div class="legend1">
 					<div class="bgc1" :style="`backgroundColor:${config.config.color1};}`"></div>
-					<div class="desc1">{{config.config.desc1}}</div>
+					<div class="desc1">{{data.legend1 || config.config.desc1}}</div>
 				</div>
 				<div class="legend2">
 					<div class="bgc2" :style="`backgroundColor:${config.config.color2};}`"></div>
-					<div class="desc2">{{config.config.desc2}}</div>
+					<div class="desc2">{{data.legend2 || config.config.desc2}}</div>
 				</div>
 			</div>
 		</div>
@@ -51,16 +51,19 @@
 	};
 	const value = {
 		api: {
-			data: JSON.stringify([
-					{yValue1: 120, yValue2: 120, xValue: '5月'},
-					{yValue1: 200, yValue2: 200, xValue: '6月'},
-					{yValue1: 150, yValue2: 150, xValue: '7月'},
-					{yValue1: 80, yValue2: 80, xValue: '8月'},
-					{yValue1: 70, yValue2: 70, xValue: '9月'},
-					{yValue1: 110, yValue2: 110, xValue: '10月'},
-					{yValue1: 130, yValue2: 130, xValue: '11月'},
-				]
-			),
+			data: JSON.stringify({
+        legend1: '', // 没有则取config中的数据
+        legend2: '',
+        data: [
+          {yValue1: 120, yValue2: 120, xValue: '5月'},
+          {yValue1: 200, yValue2: 200, xValue: '6月'},
+          {yValue1: 150, yValue2: 150, xValue: '7月'},
+          {yValue1: 80, yValue2: 80, xValue: '8月'},
+          {yValue1: 70, yValue2: 70, xValue: '9月'},
+          {yValue1: 110, yValue2: 110, xValue: '10月'},
+          {yValue1: 130, yValue2: 130, xValue: '11月'},
+        ]
+      }),
 		},
 		config: {
 			color1: '#2C99FF',
@@ -76,20 +79,19 @@
 	export default {
 		mixins: [mixins],
 		methods: {
-			setOption(data) {
-				this.instance && this.instance.setOption(getOption(this.data, this.config.config));
+			setOption() {
+				this.instance && this.instance.setOption(getOption(this.data.data, this.config.config));
 			},
 		},
 		watch: {
 			data: {
 				handler(val) {
 					if (this.id) {
-						const data = [...val];
 						this.$nextTick(() => {
 							this.instance = echarts.init(
 								document.getElementById(this.id)
 							);
-							this.setOption(data);
+							this.setOption();
 						});
 					}
 				},
