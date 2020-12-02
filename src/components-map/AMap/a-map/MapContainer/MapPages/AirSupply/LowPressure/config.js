@@ -6,14 +6,12 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
     MiddlePressureLine: {
         label: '中压管网',
         legendIcon: 'icontulizhongyaguanwang',
-        component: 'MiddlePressureLine',
         isShow: true,
         tileQuery: [11, 12],
     },
     LowPressureLine: {
         label: '低压管网',
         legendIcon: 'icontulidiyaguanwang',
-        component: 'LowPressureLine',
         isShow: true,
         tileQuery: [10]
     },
@@ -82,6 +80,28 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
     //     component: 'PressureRegulatingStation',
     //     isShow: false,
     // },
+    // EmergencyAirSourceStation: {
+    //     label: '应急气源站',
+    //     legendIcon: 'icontuliqiyuanzhan',
+    // 	iconSize: 38,
+    //     component: 'EmergencyAirSourceStation',
+    //     isShow: false,
+    // },
+    // },
+    // GasStation: {
+    //     label: '门站',
+    //     legendIcon: 'icontulimenzhan',
+    // 	iconSize: 52,
+    //     component: 'GasStation',
+    //     isShow: false,
+    // },
+    PressureRegulatingStation: {
+        label: '调压站',
+        legendIcon: 'icontulitiaoyazhan',
+        iconSize: 38,
+        tileQuery: [34],
+        isShow: false,
+    },
     // EmergencyAirSourceStation: {
     //     label: '应急气源站',
     //     legendIcon: 'icontuliqiyuanzhan',

@@ -24,11 +24,36 @@
 	}
 	const value = {
 		api: {
-			data: JSON.stringify({
-				value: [['10', 4000], ['11', 6000], ['12', 5000], ['01', 6000],
-					['02', 7000], ['03', 6000], ['04', 4000], ['05', 3000],
-					['06', 3500], ['07', 3800], ['08', 4000], ['09', 5000]]
-			})
+			data: JSON.stringify([
+				{
+					x: 10,
+					y: 4000
+				},
+				{
+					x: 11,
+					y: 6000
+				},
+				{
+					x: 12,
+					y: 5000
+				},
+				{
+					x: '01',
+					y: 6000
+				},
+				{
+					x: '02',
+					y: 7000
+				},
+				{
+					x: '03',
+					y: 6000
+				},
+				{
+					x: '04',
+					y: 4000
+				}
+			])
 		},
 		config: {
 			title: '用户'
@@ -38,7 +63,14 @@
 		mixins: [mixins],
 		methods: {
 			setOption(data) {
-				options.series[0].data = data.value
+				const value = data.map(item => {
+					let i = []
+					i.push(item.x)
+					i.push(item.y)
+					return i
+				})
+				console.log(value)
+				options.series[0].data = value
 				this.instance && this.instance.setOption(options)
 			},
 		},
@@ -46,7 +78,7 @@
 			data: {
 				handler(val) {
 					if (this.id) {
-						const data = {...val}
+						const data = [...val]
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
 							this.setOption(data)

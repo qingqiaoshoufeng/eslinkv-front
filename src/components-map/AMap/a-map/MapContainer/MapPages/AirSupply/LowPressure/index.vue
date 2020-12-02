@@ -12,7 +12,11 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component
-				v-if="config.isShow && allTypeStationList[config.dataProp]"
+				v-if="
+					config.isShow &&
+					allTypeStationList[config.dataProp] &&
+					config.component
+				"
 				:key="legend"
 				:visible="config.isShow"
 				:is="config.component"
@@ -71,11 +75,9 @@ import {
 	LNGStation,
 	HighPressureLine,
 	HighPressureLine_Process,
-	MiddlePressureLine,
-	LowPressureLine,
 	InspectionPerson,
 	GasStation,
-	PressureRegulatingStation,
+	// PressureRegulatingStation,
 	EmergencyAirSourceStation,
 	PipeManageMentStation,
 	UndergroundRepairStation,
@@ -125,19 +127,17 @@ export default {
 		LiquefiedGasStation,
 		ListOverlay,
 		LNGStation,
-		LowPressureLine,
 		NaturalGasStation,
 		PipeManageMentStation,
-		PressureRegulatingStation,
+		// PressureRegulatingStation,
 		UndergroundRepairStation,
 		ServiceStation,
-		MiddlePressureLine,
 		RegionBoundary,
 		RightPanel,
 		RoutePlan,
 		MapLegend,
 		AMapTile,
-		PressureRegulatingStation,
+		// PressureRegulatingStation,
 		OngroundRepairStation,
 		DataStatistics,
 		WarningList,
@@ -195,18 +195,29 @@ export default {
 	},
 	computed: {
 		tilesQuery() {
-			const { MiddlePressureLine, LowPressureLine } = this.legendMap;
+			const {
+				MiddlePressureLine,
+				LowPressureLine,
+				PressureRegulatingStation,
+			} = this.legendMap;
 			const {
 				isShow: isShowM,
 				tileQuery: tileQueryM,
 			} = MiddlePressureLine;
 			const { isShow: isShowL, tileQuery: tileQueryL } = LowPressureLine;
+			const {
+				isShow: isShowP,
+				tileQuery: tileQueryP,
+			} = PressureRegulatingStation;
 			let queryArr = [];
 			if (isShowM) {
 				queryArr.push(tileQueryM);
 			}
 			if (isShowL) {
 				queryArr.push(tileQueryL);
+			}
+			if (isShowP) {
+				queryArr.push(tileQueryP);
 			}
 			//条件变化刷新地图
 			if (queryArr.length && this.$refs.mapTile) {

@@ -121,7 +121,7 @@
 			swiperinfo: {
 				handler(val) {
 					if (val) {
-						this.$refs.videoPlayer.player.src(val.videoList[0])
+            this.$refs.videoPlayer && this.$refs.videoPlayer.player.src(val.videoList[0])
 					}
 				},
 				deep: true

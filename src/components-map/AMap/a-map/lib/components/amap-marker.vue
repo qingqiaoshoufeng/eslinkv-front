@@ -129,7 +129,7 @@ export default {
 
 			this.$amapComponent = new AMap.Marker({
 				...options,
-				offset: compOffset,
+				offset: offset,
 			});
 		},
 

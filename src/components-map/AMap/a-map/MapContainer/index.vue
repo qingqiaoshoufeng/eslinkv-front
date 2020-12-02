@@ -68,7 +68,8 @@ export default {
 			kanboardSize: {
 				width: 3500,
 				height: 1050,
-			},
+            },
+            scaleRatio:1,
 			reverseScaleRatio: 1,
 		};
 	},
@@ -80,6 +81,7 @@ export default {
 			ratio = ratio < 1 ? ratio : 1;
             this.reverseScaleRatio = 1 / ratio;
             this._provided.parentInfo.scaleRatio = ratio
+            this.scaleRatio = ratio
 			// this.reverseScaleRatio = 1
 		},
 	},

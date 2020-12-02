@@ -7,7 +7,13 @@
 		enter="animated fadeIn"
 		leave="animated fadeOut"
 	>
-		<div class="pop-container" :style="{transform:`translate(-50%, calc(-100% - ${bottom+15}px)`, width }">
+		<div
+			class="pop-container"
+			:style="{
+				transform: `translate(${translateX}, calc(-100% - ${bottom + 15}px)`,
+				width,
+			}"
+		>
 			<div class="close-btn" @click="$emit('input', false)">
 				<svg-icon icon-name="iconbaseline-close-px"></svg-icon>
 			</div>
@@ -22,6 +28,7 @@ import SvgIcon from '../SvgIcon/index';
 import DashboardPanel from '../DashboardPanel/index';
 export default {
 	name: 'PopContainer',
+	// inject: ['parentInfo'],
 	components: {
 		SvgIcon,
 		DashboardPanel,
@@ -44,6 +51,20 @@ export default {
 		return {
 			ready: false,
 		};
+	},
+	computed: {
+		scaleRatio() {
+			return (this.parentInfo && this.parentInfo.scaleRatio) || 1;
+		},
+		translateX() {
+            let { scaleRatio } = this;
+            console.log(scaleRatio,'scaleRatio')
+			return '-'+((1 - scaleRatio) / scaleRatio + 1) * 50 + '%';
+		},
+		translateY() {
+			let { scaleRatio } = this;
+			return ((1 - scaleRatio) / scaleRatio + 1) * 50 + '%';
+		},
 	},
 	mounted() {
 		this.ready = true;
@@ -68,7 +89,7 @@ export default {
 		position: absolute;
 		bottom: -15px;
 		left: 50%;
-        transform:translateX(-50%);
+		transform: translateX(-50%);
 		border-left: solid 15px transparent;
 		border-right: solid 15px transparent;
 		border-top: solid 15px #00ddff;
