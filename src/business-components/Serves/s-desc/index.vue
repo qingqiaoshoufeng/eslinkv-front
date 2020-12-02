@@ -1,7 +1,7 @@
 <template>
 	<div class="widget-part" :style="styles" v-if="data">
     <div class="title">{{ config.config.title }}</div>
-    <div class="num font-num">{{ data.num }}</div>
+    <div class="num font-num" :style="{color: config.config.numColor}">{{ data.num }}</div>
 	</div>
 </template>
 <script>
@@ -11,7 +11,8 @@ import {getInput} from "@lib/views/core/widgets/parts/lib/config-tools";
 const config = {
   animation: true,
   config: {
-    title: true
+    title: true,
+    numColor: true
   },
 };
 const value = {
@@ -21,13 +22,15 @@ const value = {
     })
 	},
   config: {
-    title: '通讯异常'
+    title: '通讯异常',
+    numColor: '#fff'
   }
 }
 const configSource = {
   config: {
     fields: {
-      title: getInput('title', '标题')
+      title: getInput('title', '标题'),
+      numColor: getInput('numColor', '数字颜色')
     }
   }
 }
