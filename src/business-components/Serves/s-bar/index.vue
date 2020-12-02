@@ -2,7 +2,7 @@
 	<div class="widget-part pos-r" :style="styles" v-if="data">
 		<div class="legend-box">
 			<div class="unit">{{config.config.title}}</div>
-			<div class="legend">
+			<div class="legend" v-if="config.config.showLegend">
 				<div class="legend1">
 					<div class="bgc1" :style="`backgroundColor:${config.config.color1};}`"></div>
 					<div class="desc1">{{config.config.desc1}}</div>
@@ -19,7 +19,7 @@
 <script>
 	import mixins from '../../mixins';
 	import getOption from './options';
-	import {getInput} from '../../../../lib'
+	import {getInput, getBooleanInput, getInputNumber } from '../../../../lib'
 
 	const configSource = {
 		config: {
@@ -29,6 +29,9 @@
 				desc1: getInput('desc1', '条形图名称1'),
 				desc2: getInput('desc2', '条形图名称2'),
 				title: getInput('title', '条形图单位'),
+				showBackground: getBooleanInput('showBackground', '柱状图柱的背景'),
+				showLegend: getBooleanInput('showLegend', '显示图例'),
+        barBorderRadius: getInputNumber('barBorderRadius', '柱的圆角'),
 			},
 		},
 	};
@@ -41,6 +44,9 @@
 			desc1: true,
 			desc2: true,
 			title: true,
+      showBackground: true,
+      showLegend: true,
+      barBorderRadius: true,
 		}
 	};
 	const value = {
@@ -62,6 +68,9 @@
 			desc1: '工商户',
 			desc2: '居民户',
 			title: '台',
+      showLegend: true,
+      showBackground: true,
+      barBorderRadius: 4
 		}
 	};
 	export default {

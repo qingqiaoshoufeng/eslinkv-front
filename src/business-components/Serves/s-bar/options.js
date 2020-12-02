@@ -50,22 +50,18 @@ export default function getOption(data, config) {
         barGap: 0.5,
         series: [{
             type: 'bar',
-            showBackground: true,
+            showBackground: config.showBackground,
             itemStyle: {
-                normal: {
-                    color: config.color1,
-                    barBorderRadius: 4
-                }
+                color: config.color1,
+                barBorderRadius: config.barBorderRadius
             },
             data: data.map(item => item.yValue1)
         }, {
             type: 'bar',
-            showBackground: true,
+            showBackground: config.showBackground,
             itemStyle: {
-                normal: {
-                    color: config.color2,
-                    barBorderRadius: 4
-                }
+                color: config.color2,
+                barBorderRadius: config.barBorderRadius
             },
             data: data.map(item => item.yValue2)
         }]
