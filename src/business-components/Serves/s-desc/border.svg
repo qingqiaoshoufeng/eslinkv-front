@@ -1,0 +1,6 @@
+<svg width="175" height="64" viewBox="0 0 175 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="175" height="64" fill="#000959"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M0 21L2 23V41L0 43V21Z" fill="#00DDFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M175 21L173 23V41L175 43V21Z" fill="#00DDFF"/>
+<rect x="0.5" y="0.5" width="174" height="63" stroke="#00DDFF" stroke-opacity="0.6"/>
+</svg>
