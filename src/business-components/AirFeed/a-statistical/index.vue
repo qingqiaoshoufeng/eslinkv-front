@@ -69,7 +69,7 @@
 		},
 		config: {
 			timeDesc: '年度',
-			desc: '累计接纳量(m3)',
+			desc: '累计接纳量(m³)',
 		},
 	};
 	export default {

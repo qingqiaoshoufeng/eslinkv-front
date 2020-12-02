@@ -1,13 +1,15 @@
 <template>
 	<div class="widget-part" :style="styles" v-if="data">
-    <img :src="config.config.icon">
-    <div class="gas-main">
-      <div class="gas-info">
-        <div class="gas-title">{{ config.config.title }}</div>
-        <div class="gas-num font-num"><em>{{ data.value / 10000 | toThousand }}</em> {{ config.config.unit }}</div>
-      </div>
-      <div class="gas-progress">
-        <div class="progress" :style="{width: data.percent + '%'}"></div>
+    <div v-for="(k, i) in data" class="item">
+      <img :src="k.icon">
+      <div class="gas-main">
+        <div class="gas-info">
+          <div class="gas-title">{{ k.title }}</div>
+          <div class="gas-num font-num"><em>{{ k.value / 10000 | toThousand }}</em> {{ config.config.unit }}</div>
+        </div>
+        <div class="gas-progress">
+          <div class="progress" :style="{width: k.percent + '%'}"></div>
+        </div>
       </div>
     </div>
 	</div>
@@ -19,30 +21,40 @@
 	const configSource = {
 		config: {
 			fields: {
-				title: getInput('title', '标题'),
         unit: getInput('unit', '单位'),
-        icon: getSelect('icon', 'icon', ['/static/images/home/gas-use1.svg', '/static/images/home/gas-use2.svg', '/static/images/home/gas-use3.svg']),
 			}
 		}
 	}
 	const config = {
 		animation: true,
 		config: {
-      title: true,
       unit: true,
-      icon: true,
 		}
 	}
 	const value = {
 		api: {
-			data: JSON.stringify({
-        value: 1233556,
-        percent: 60
-      })
+			data: JSON.stringify([
+        {
+          value: 1233556,
+          percent: 60,
+          title: '居民户',
+          icon: '/static/images/home/gas-use1.svg',
+        },
+        {
+          value: 69999,
+          percent: 30,
+          title: '公建户',
+          icon: '/static/images/home/gas-use2.svg',
+        },
+        {
+          value: 45332,
+          percent: 20,
+          title: '工业户',
+          icon: '/static/images/home/gas-use3.svg',
+        }
+      ])
 		},
 		config: {
-      title: '居民户',
-			icon: '/static/images/home/gas-use1.svg',
 			unit: '万m³',
 		}
 	}
@@ -55,9 +67,10 @@
 	}
 </script>
 <style lang="scss" scoped>
-	.widget-part {
+	.item {
     display: flex;
     align-items: center;
+    margin-bottom: 32px;
     > img {
       width: 56px;
       height: 56px;

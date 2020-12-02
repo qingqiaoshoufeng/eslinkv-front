@@ -83,7 +83,7 @@
 		config: {
 			timeDesc: '年度',
 			rightDesc: '今日供气量(m³)',
-			desc: '累计接纳量(m3)',
+			desc: '累计接纳量(m³)',
 			sceneId: '',
 			componentId: '',
 		},

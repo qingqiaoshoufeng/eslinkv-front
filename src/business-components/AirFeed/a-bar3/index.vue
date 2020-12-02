@@ -64,7 +64,7 @@ const value = {
 		color2: 'rgba(1,253,210,1)',
 		desc1: '加气量',
 		desc2: '加气车次',
-		title: 'm3',
+		title: 'm³',
 	},
 };
 export default {

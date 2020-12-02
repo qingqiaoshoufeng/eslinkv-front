@@ -62,7 +62,7 @@ export default function (xData, barData, lineData, dashLineData) {
 			"data": xData,
 		}],
 		"yAxis": [{
-			"name": '万m3',
+			"name": '万m³',
 			nameTextStyle: {
 				color: '#fff',
 				fontSize: 16,
