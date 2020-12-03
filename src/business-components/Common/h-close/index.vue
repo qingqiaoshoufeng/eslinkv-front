@@ -1,7 +1,7 @@
 <template>
 	<div class="widget-part" :style="styles">
-    <img src="./close.svg" @click="back" class="img"/>
-  </div>
+		<img src="./close.svg" @click="back" class="img pointer"/>
+	</div>
 </template>
 <script>
 	import mixins from '../../mixins'
@@ -25,15 +25,15 @@
 		methods: {
 			back() {
 				if (!this.data.sceneId) return
-				GoldChart.scene.destroyScene(this.data.sceneId)
+				GoldChart.scene.setSceneIndex(this.data.sceneId)
 			}
 		}
 	}
 </script>
 <style lang="scss" scoped>
 	.img {
-    width: 100%;
-    height: 100%;
-  }
+		width: 100%;
+		height: 100%;
+	}
 </style>
 
