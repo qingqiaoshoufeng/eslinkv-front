@@ -47,7 +47,6 @@
 	import GoldChart from '../../../openApi'
 	import hBg54441 from './h-bg-54441'
 	import {getInput} from '../../../../lib'
-  import Template from "@lib/views/core/kanboard-editor/mixins/template";
 
 	const configSource = {
 		config: {
@@ -78,7 +77,6 @@
 		},
 		mixins: [mixins],
 		components: {
-      Template,
 			hBg54441
 		},
 		beforeDestroy() {
