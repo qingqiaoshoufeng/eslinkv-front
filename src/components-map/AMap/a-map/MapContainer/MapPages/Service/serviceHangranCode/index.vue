@@ -9,11 +9,16 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component
-				v-if="config.isShow && allTypeStationList[config.dataProp]"
+				v-if="
+					config.isShow &&
+					allTypeStationList[config.dataProp] &&
+					allTypeStationList[config.dataProp].length &&
+					config.component
+				"
 				:key="legend"
 				:visible="config.isShow"
 				:overlayIcon="config.legendIcon"
-                :iconSize="config.iconSize"
+				:iconSize="config.iconSize"
 				:overlayType="legend"
 				:is="config.component"
 				:data="allTypeStationList[config.dataProp]"
@@ -24,7 +29,7 @@
 		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
-             :legendMap="legendMap"
+			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
 			:detialBoxWidth="450"
@@ -209,7 +214,8 @@ export default {
 			try {
 				res = await this.$sysApi.map.serve.getHangranCodeHotList();
 			} catch (error) {
-				res = { total: [], month: [] };
+				// res = { total: [], month: [] };
+				res = {};
 			}
 
 			console.log(res, 1111322322);

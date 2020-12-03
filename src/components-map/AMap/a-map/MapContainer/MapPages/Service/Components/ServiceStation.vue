@@ -7,7 +7,6 @@
 			visible,
 			apiFun,
 			...$attrs,
-			detailList,
 			data,
 		}"
 		@click="
@@ -23,7 +22,7 @@
 <script>
 import { BaseOverlay } from '../../Components/index';
 export default {
-	name: 'ServiceNetworkStation',
+	name: 'ServiceStation',
 	components: {
 		BaseOverlay,
 	},
@@ -57,6 +56,9 @@ export default {
 		return {
 			apiFun: this.$sysApi.map.serve.getServiceNetworkStationList,
 		};
+	},
+	mounted() {
+		console.log(this.data, '余志强');
 	},
 };
 </script>
