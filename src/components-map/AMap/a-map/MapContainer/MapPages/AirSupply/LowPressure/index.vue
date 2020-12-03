@@ -27,6 +27,7 @@
 						? config.showOverlayName
 						: undefined
 				"
+                :data="allTypeStationList[config.dataProp]"
 				@overlay-click="handleOverlayClick"
 				:detailList="config.detailList"
 			/>
@@ -162,6 +163,7 @@ export default {
 				UnderNumber: 12,
 			},
 			allTypeStationList: {},
+			dataReady: false,
 		};
 	},
 	computed: {

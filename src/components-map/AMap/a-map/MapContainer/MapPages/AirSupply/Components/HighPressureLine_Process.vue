@@ -9,8 +9,14 @@ export default {
         },
         
 		async drawLine() {
-			this.instanceArr = [];
-			let data = await this.$sysApi.map.home.getHighPressureLineProcess();
+            this.instanceArr = [];
+            let data =  []
+            if(this.data){
+                data = this.data
+                console.log('data',data)
+            } else {
+                data = await this.$sysApi.map.home.getHighPressureLineProcess();
+            }
 			data.forEach(line => {
 				let polyLine = new AMap.Polyline({
 					...line,

@@ -8,7 +8,7 @@
           <div class="gas-num font-num"><em>{{ k.value / 10000 | toThousand }}</em> {{ config.config.unit }}</div>
         </div>
         <div class="gas-progress">
-          <div class="progress" :style="{width: k.percent + '%'}"></div>
+          <div class="progress" :style="{width: k.percent*100 + '%'}"></div>
         </div>
       </div>
     </div>

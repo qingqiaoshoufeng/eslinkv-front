@@ -6,7 +6,7 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
-				v-if="config.isShow && allTypeStationList[config.dataProp]"
+				v-if="allTypeStationList[config.dataProp]"
 				:key="legend"
 				:visible="config.isShow"
 				:is="config.component"

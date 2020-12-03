@@ -8,8 +8,13 @@ export default {
 			this.drawLine();
 		},
 		async drawLine() {
-			this.instanceArr = [];
-			let data = await this.$sysApi.map.home.getHighPressureLine();
+            this.instanceArr = [];
+            let data =  []
+			if (this.data) {
+				data = this.data;
+			} else {
+				data = await this.$sysApi.map.home.getHighPressureLine();
+			}
 			data.forEach(line => {
 				let polyLine = new AMap.Polyline({
 					...line,
