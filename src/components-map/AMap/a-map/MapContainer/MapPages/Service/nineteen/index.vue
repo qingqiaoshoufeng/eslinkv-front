@@ -95,7 +95,7 @@ export default {
 			activeOverlay: {},
 			showOverlayDetail: false,
 			zoom: 10,
-			center: [120.80971, 30.202216],
+			center: [120.90522766, 30.33199066],
 			activeArea: '杭州钱江燃气有限公司',
 			allTypeStationList: {},
 		};

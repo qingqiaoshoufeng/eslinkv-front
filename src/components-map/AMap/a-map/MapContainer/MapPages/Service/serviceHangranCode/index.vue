@@ -138,7 +138,7 @@ export default {
 			showOverlayDetail: false,
 			// 120.12039185； 纬度：30.17273413
 			// center: [120.80971, 30.102216],
-			center: [120.22750854, 30.32280411],
+			center: [120.90522766, 30.53565084],
 			zoom: 10,
 			allTypeStationList: {},
 			detailInfo: {},
@@ -158,7 +158,7 @@ export default {
 	// },
 	created() {
 		this.$nextTick(() => {
-			this.mapFitView(-0.2, 0.4, 0.2);
+			this.mapFitView(-0.3, 0.4, 0.2);
 		});
 	},
 	methods: {
