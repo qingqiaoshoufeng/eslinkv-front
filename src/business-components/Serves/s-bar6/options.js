@@ -1,10 +1,5 @@
 
 export default function (data, config) {
-    var xData = ['省直', '济南', '青岛', '淄博', '枣庄', '东营', '烟台', '潍坊', '济宁','1','2','3','4','5','6'];
-    var yydata = [122, 111, 111, 232, 113, 333, 123, 123,211, 232, 113, 333, 123, 123, 112];
-    var ysdata = [122, 111, 111, 232, 113, 333, 123, 123,211, 232, 113, 333, 123, 123, 112];
-    var hsdata = [122, 111, 111, 232, 113, 333, 123, 123,211, 232, 113, 333, 123, 123, 112];
-
     return {
         textStyle: {
             fontSize: 16,
@@ -28,7 +23,7 @@ export default function (data, config) {
             top: '20%',
             bottom: '4%',
             right:'3%',
-            left:'0%',
+            left:'1%',
             containLabel: true
         },
         animationDuration: 3000,
