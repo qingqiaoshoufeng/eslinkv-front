@@ -31,10 +31,10 @@ module.exports = {
                 }
             },
 			'^/api': {
-				target: 'http://ebp-pc.hw-qa.eslink.net.cn',
+				target: 'http://ebp-pc.hzrq.local:15003',
 				changeOrigin: true,
 				headers: {
-					Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
+					Cookie: 'SESSION=206cb57d-6e3c-475f-99f9-ccc1b9cf5f2d'
 				},
 				pathRewrite: {
 					'^/api': '/'
