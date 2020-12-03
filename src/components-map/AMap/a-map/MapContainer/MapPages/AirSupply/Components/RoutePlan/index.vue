@@ -105,7 +105,8 @@ export default {
 									pathArr.forEach(({ lng, lat }) => {
 										pathData.push([lng, lat]);
 									});
-								});
+                                });
+                                console.log(pathData,'pathData')
 								let passedLen = Math.ceil(
 									Math.random() * pathData.length
 								);

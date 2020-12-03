@@ -15,6 +15,13 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         isShow: true,
         tileQuery: [10]
     },
+    PressureRegulatingStation: {
+        label: '调压站',
+        legendIcon: 'icontulitiaoyazhan',
+        iconSize: 38,
+        tileQuery: [34],
+        isShow: false,
+    },
     InspectionPerson: {
         label: '巡检人员',
         legendIcon: 'icontulirenyuan',
@@ -33,51 +40,44 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         showOverlayName: false,
         isShow: true,
     },
-    ServiceStation: {
-        label: '综合服务站',
-        legendIcon: 'icontulizonghefuwuzhan1',
-        iconSize: 38,
-        component: 'ServiceStation',
-        isShow: true,
-        dataProp: 'serviceStationList',
-        // detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
-    },
-    PipeManageMentStation: {
-        label: '管网运行管理站',
-        legendIcon: 'icontuliqiyuanzhan',
-        iconSize: 38,
-        component: 'EmergencyAirSourceStation',
-        isShow: true,
-        dataProp: "pipeManageMentStationList"
-    },
-    UndergroundRepairStation: {
-        label: '地下抢修点',
-        legendIcon: 'icontulidixiaqiangxiudian',
-        iconSize: 38,
-        component: 'EmergencyAirSourceStation',
-        isShow: true,
-        dataProp: "undergroundRepairStationList"
-    },
-    OngroundRepairStation: {
-        label: '地上抢修点',
-        legendIcon: 'icontulidishangqiangxiudian',
-        iconSize: 38,
-        component: 'EmergencyAirSourceStation',
-        isShow: true,
-        dataProp: "OngroundRepairStationList"
-    },
+    // ServiceStation: {
+    //     label: '综合服务站',
+    //     legendIcon: 'icontulizonghefuwuzhan1',
+    //     iconSize: 38,
+    //     component: 'ServiceStation',
+    //     isShow: true,
+    //     dataProp: 'serviceStationList',
+    //     // detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
+    // },
+    // PipeManageMentStation: {
+    //     label: '管网运行管理站',
+    //     legendIcon: 'icontuliqiyuanzhan',
+    //     iconSize: 38,
+    //     component: 'EmergencyAirSourceStation',
+    //     isShow: true,
+    //     dataProp: "pipeManageMentStationList"
+    // },
+    // UndergroundRepairStation: {
+    //     label: '地下抢修点',
+    //     legendIcon: 'icontulidixiaqiangxiudian',
+    //     iconSize: 38,
+    //     component: 'EmergencyAirSourceStation',
+    //     isShow: true,
+    //     dataProp: "undergroundRepairStationList"
+    // },
+    // OngroundRepairStation: {
+    //     label: '地上抢修点',
+    //     legendIcon: 'icontulidishangqiangxiudian',
+    //     iconSize: 38,
+    //     component: 'EmergencyAirSourceStation',
+    //     isShow: true,
+    //     dataProp: "OngroundRepairStationList"
+    // },
     // GasStation: {
     //     label: '门站',
     //     legendIcon: 'icontulimenzhan',
     // 	iconSize: 52,
     //     component: 'GasStation',
-    //     isShow: false,
-    // },
-    // PressureRegulatingStation: {
-    //     label: '调压站',
-    //     legendIcon: 'icontulitiaoyazhan',
-    // 	iconSize: 38,
-    //     component: 'PressureRegulatingStation',
     //     isShow: false,
     // },
     // EmergencyAirSourceStation: {
@@ -95,13 +95,6 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
     //     component: 'GasStation',
     //     isShow: false,
     // },
-    PressureRegulatingStation: {
-        label: '调压站',
-        legendIcon: 'icontulitiaoyazhan',
-        iconSize: 38,
-        tileQuery: [34],
-        isShow: false,
-    },
     // EmergencyAirSourceStation: {
     //     label: '应急气源站',
     //     legendIcon: 'icontuliqiyuanzhan',

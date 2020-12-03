@@ -28,7 +28,6 @@ import SvgIcon from '../SvgIcon/index';
 import DashboardPanel from '../DashboardPanel/index';
 export default {
 	name: 'PopContainer',
-	// inject: ['parentInfo'],
 	components: {
 		SvgIcon,
 		DashboardPanel,
@@ -58,7 +57,6 @@ export default {
 		},
 		translateX() {
             let { scaleRatio } = this;
-            console.log(scaleRatio,'scaleRatio')
 			return '-'+((1 - scaleRatio) / scaleRatio + 1) * 50 + '%';
 		},
 		translateY() {
