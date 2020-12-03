@@ -127,7 +127,7 @@ export default {
 			legendMultiple: true,
 			showOverlayDetail: false,
 			activeOverlay: {},
-			center: [120.061259, 30.183295],
+			center: [120.22476196, 30.30531764],
 			zoom: 11,
 			allTypeStationList: {},
 			detailInfo: {},
