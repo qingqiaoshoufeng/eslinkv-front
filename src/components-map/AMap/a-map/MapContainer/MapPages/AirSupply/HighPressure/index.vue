@@ -362,7 +362,7 @@ export default {
 			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo();
 		},
 		// 获取高压管网数据
-		async getDataStatisticsInfo() {
+		async getHighPressurePipe() {
             let pipeData = await this.$sysApi.map.airSupply.getHighPressurePipe();
             this.allTypeStationList = {
                 ...this.allTypeStationList,
@@ -372,7 +372,8 @@ export default {
 	},
 	mounted() {
 		this.getAllTypeStationList();
-		this.getDataStatisticsInfo();
+        this.getDataStatisticsInfo();
+        this.getHighPressurePipe();
 	},
 };
 </script>
