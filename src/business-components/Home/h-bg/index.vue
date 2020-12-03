@@ -3,7 +3,8 @@
 		<div class="h-bg pos-r" :class="{bg54441: status54441}">
 			<div class="h-bg-back pos-a"></div>
 			<template v-if="!status54441">
-				<video class="pos-a bg-video" src="/static/videos/bg1.webm" autoplay="autoplay" @ended="end" ref="video"></video>
+				<video class="pos-a bg-video" src="/static/videos/bg1.webm" autoplay="autoplay" @ended="end" ref="video" v-show="!video1Ended"></video>
+				<video class="pos-a bg-video" src="/static/videos/bg2.webm" autoplay="autoplay" loop ref="video2" v-show="video1Ended"></video>
 			</template>
 			<div class="h-bg-top pos-a"></div>
 			<div class="h-bg-control pos-a"></div>
@@ -38,6 +39,7 @@
 				<div class="h-bg-start1 pos-a pointer" @click="handleStart"></div>
 			</div>
 		</div>
+    <video preload src="/static/videos/bg2.webm"></video>
 	</div>
 </template>
 <script>
@@ -96,8 +98,6 @@
 		  end () {
         if (this.video1Ended) return
         this.video1Ended = true
-        this.$refs.video.src = '/static/videos/bg2.webm'
-        this.$refs.video.loop = true
       },
 			handleStart() {
 				if (this.config.config.sceneId) {
