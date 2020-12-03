@@ -237,7 +237,7 @@
 			height: 12px;
 			margin-right: 32px;
 			transition: all .3s;
-      min-width: 50px;
+      		min-width: 80px;
 
 			&:last-child {
 				margin-right: 0 !important;

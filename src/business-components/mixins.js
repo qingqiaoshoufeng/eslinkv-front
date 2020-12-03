@@ -39,7 +39,9 @@ export default {
 		/**
 		 * @description 外部更新组件
 		 */
-		updateComponentFormOutSide({data, url, path, method}) {
+		updateComponentFormOutSide({data, url, path, method, params}) {
+			if (params)
+				this.config.api.params = JSON.stringify(params)
 			if (data)
 				this.config.api.data = JSON.stringify(data)
 			if (url)
@@ -47,7 +49,7 @@ export default {
 			if (path)
 				this.config.api.path = path
 			if (method)
-				this.config.api.path = method
+				this.config.api.method = method
 		},
 		/**
 		 * @description 组件间联动后的 ajax 数据重新请求
