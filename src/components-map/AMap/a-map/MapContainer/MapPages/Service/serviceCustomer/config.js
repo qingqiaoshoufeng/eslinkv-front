@@ -31,7 +31,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         iconSize: 38,
         icon: 'iconfuwuwangdian',
         component: 'ServiceNetworkStation',
-        isShow: true,
+        isShow: false,
         dataProp: 'networkStationList',
         detailList: []
     },

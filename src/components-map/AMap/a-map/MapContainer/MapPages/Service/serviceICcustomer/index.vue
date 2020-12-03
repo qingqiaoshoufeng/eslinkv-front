@@ -128,7 +128,7 @@ export default {
 			showOverlayDetail: false,
 			activeOverlay: {},
 			center: [120.061259, 30.183295],
-			zoom: 10,
+			zoom: 11,
 			allTypeStationList: {},
 			detailInfo: {},
 			ICcustomerDetailInfo: {},

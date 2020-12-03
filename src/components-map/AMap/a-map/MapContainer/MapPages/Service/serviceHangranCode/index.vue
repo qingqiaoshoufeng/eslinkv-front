@@ -136,7 +136,9 @@ export default {
 			activeOverlay: {},
 			legendMultiple: true,
 			showOverlayDetail: false,
-			center: [120.80971, 30.102216],
+			// 120.12039185； 纬度：30.17273413
+			// center: [120.80971, 30.102216],
+			center: [120.22750854, 30.32280411],
 			zoom: 10,
 			allTypeStationList: {},
 			detailInfo: {},
