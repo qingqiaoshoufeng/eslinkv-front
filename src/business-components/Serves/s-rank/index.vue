@@ -8,8 +8,8 @@
         <div class="rank" v-else>{{ i + 1 }}</div>
         <div class="txt">{{ k.name }}</div>
         <div class="num font-num">{{ k.num.toLocaleString() }}m³</div>
-        <img class="arrow" src="./img/arrow-up.svg" v-if="k.isUp"/>
-        <img class="arrow" src="./img/arrow-down.svg" v-else/>
+        <img class="arrow" src="/static/icons/arrow-up.svg" v-if="k.isUp"/>
+        <img class="arrow" src="/static/icons/arrow-down.svg" v-else/>
       </li>
     </ul>
 	</div>
