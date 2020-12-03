@@ -1,7 +1,7 @@
 // 引入详情字典
 import {
     HighPressureGasStation,
-    HighPressurePressureRegulatingStation,
+    emergencyAirSourceStation,
     HighPressureHighPressureGasStation,
     HighPressureLineLength,
     HighPressureCarNumber,
@@ -266,7 +266,7 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
 // 高压统计数据
 export const DATASTATISTICSLIST = [
     HighPressureGasStation,
-    HighPressurePressureRegulatingStation,
+    emergencyAirSourceStation,
     HighPressureHighPressureGasStation,
     HighPressureLineLength,
     HighPressureCarNumber,

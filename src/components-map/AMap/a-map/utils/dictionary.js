@@ -82,38 +82,38 @@ let warningYestodayMetersTotal = {
 let HighPressureGasStation = {
     label: '门站',
     DW: '',
-    prop: "GasStation"
+    prop: "gageStation"
 }
-let HighPressurePressureRegulatingStation = {
-    label: '调压站',
+let emergencyAirSourceStation = {
+    label: '应急气源站',
     DW: '',
-    prop: "PressureRegulatingStation"
+    prop: "emergencyAirSourceStation"
 }
 let HighPressureHighPressureGasStation = {
     label: '高中压调压站',
     DW: '',
-    prop: "HighPressureGasStation"
+    prop: "pressureRegulatingStation"
 }
 let HighPressureLineLength = {
     label: '高压管线长度(km)',
     DW: '',
-    prop: "HighPressureLineLength"
+    prop: "pipelineLength"
 }
 let HighPressureCarNumber = {
     label: '高压巡检车辆',
     DW: '',
-    prop: "CarNumber"
+    prop: "car"
 }
 
 let HighPressureInspectionNumber = {
     label: '高压巡检人员',
     DW: '',
-    prop: "InspectionNumber"
+    prop: "inspectPeople"
 }
 let HighPressurePreservationNumber = {
     label: '高压场站维保人员',
     DW: '',
-    prop: "PreservationNumber"
+    prop: "repairPeople"
 }
 // 中低压数据配置
 let LowPressureMediumline = {
@@ -266,4 +266,4 @@ let monthManagePercent = {
 
 
 
-export { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, ICcustomer, useNumberYestoday, ICcustomerStatus, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, HighPressureGasStation, HighPressurePressureRegulatingStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber, LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber, LNGstationNumber, commonUseNumber, registerNumber, citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent }
+export { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, ICcustomer, useNumberYestoday, ICcustomerStatus, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, HighPressureGasStation, emergencyAirSourceStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber, LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber, LNGstationNumber, commonUseNumber, registerNumber, citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent }
