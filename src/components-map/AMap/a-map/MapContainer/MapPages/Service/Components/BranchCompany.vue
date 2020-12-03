@@ -1,4 +1,4 @@
-<!-- 分公司 -->
+<!-- 子公司 -->
 <template>
 	<BaseOverlay
 		v-bind="{

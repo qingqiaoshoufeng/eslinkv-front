@@ -1,9 +1,13 @@
 <template>
 	<div class="widget-part pos-r" :style="`${styles}left:0px;top:0px;z-index:13;`">
-		<div class="h-bg pos-r" :class="{bg54441: status54441}">
+		<div class="h-bg pos-r">
 			<div class="h-bg-back pos-a"></div>
+			<div class="h-bg-5441 pos-a" v-if="status54441"></div>
 			<template v-if="!status54441">
-				<video class="pos-a bg-video" src="/static/videos/bg1.webm" autoplay="autoplay" @ended="end" ref="video"></video>
+				<video class="pos-a bg-video" src="/static/videos/bg1.webm" autoplay="autoplay" @ended="end" ref="video"
+					   v-show="!video1Ended"></video>
+				<video class="pos-a bg-video" src="/static/videos/bg2.webm" autoplay="autoplay" loop ref="video2"
+					   v-show="video1Ended"></video>
 			</template>
 			<div class="h-bg-top pos-a"></div>
 			<div class="h-bg-control pos-a"></div>
@@ -38,6 +42,7 @@
 				<div class="h-bg-start1 pos-a pointer" @click="handleStart"></div>
 			</div>
 		</div>
+		<video preload src="/static/videos/bg2.webm"></video>
 	</div>
 </template>
 <script>
@@ -67,7 +72,7 @@
 	export default {
 		data() {
 			return {
-        video1Ended: false,
+				video1Ended: false,
 				status54441: false,
 				statusVideo: false,
 				statusStart: false,
@@ -93,12 +98,10 @@
 			}
 		},
 		methods: {
-		  end () {
-        if (this.video1Ended) return
-        this.video1Ended = true
-        this.$refs.video.src = '/static/videos/bg2.webm'
-        this.$refs.video.loop = true
-      },
+			end() {
+				if (this.video1Ended) return
+				this.video1Ended = true
+			},
 			handleStart() {
 				if (this.config.config.sceneId) {
 					// if (this.statusStart) {
@@ -129,7 +132,7 @@
 				GoldChart.scene.createSceneInstance('grdnn9tiey', 'slideUp')
 			},
 			close54441() {
-        this.video1Ended = false
+				this.video1Ended = false
 				this.status54441 = false
 			},
 			closeVideo(e) {
@@ -287,17 +290,19 @@
 		background-size: 2275px 161px;
 	}
 
+	.h-bg-5441 {
+		background: url("./img/bg-54441.png") no-repeat;
+		background-size: 100% 100%;
+		height: 100%;
+		width: 100%;
+	}
+
 	.h-bg {
 		height: 100%;
 		background-size: 3500px 1050px;
 		background-repeat: no-repeat;
 		overflow: hidden;
 		top: 0;
-
-    &.bg54441 {
-      background: url("./img/bg-54441.png") no-repeat;
-      background-size: 100% 100%;
-    }
 
 		.bg-video {
 			height: 100%;

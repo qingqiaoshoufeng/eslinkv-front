@@ -240,12 +240,12 @@ let TodayUnproving = {
 let TodayPass = {
     label: '今日审核通过',
     DW: '',
-    prop: "stationNumber",
+    prop: "accept_nbr",
 }
 let TodayProvingTo2 = {
     label: '今日2小时审核率',
     DW: '',
-    prop: "stationNumber",
+    prop: "accept_2hour_rate",
 }
 // 19厅详情接口
 let monthAccpet = {
@@ -264,6 +264,13 @@ let monthManagePercent = {
     prop: "stationNumber",
 }
 
+
+// accept_2hour_rate: 0
+// accept_nbr: "150"
+// apply_all_nbr: "55694"
+// apply_nbr: "295"
+// busi_type: "5"
+// pending_nbr: "105"
 
 
 export { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, ICcustomer, useNumberYestoday, ICcustomerStatus, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, HighPressureGasStation, emergencyAirSourceStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber, LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber, LNGstationNumber, commonUseNumber, registerNumber, citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent }

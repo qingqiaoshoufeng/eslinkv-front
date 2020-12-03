@@ -127,8 +127,8 @@ export default {
 			legendMultiple: true,
 			showOverlayDetail: false,
 			activeOverlay: {},
-			center: [120.061259, 30.183295],
-			zoom: 10,
+			center: [120.22476196, 30.30531764],
+			zoom: 11,
 			allTypeStationList: {},
 			detailInfo: {},
 			ICcustomerDetailInfo: {},
@@ -207,7 +207,6 @@ export default {
 			this.overlayMap.useHotYear.isShow = value;
 		},
 		closeOverlayDetail(done) {
-			// console.log(1111111111111);
 			this.showOverlayDetail = false;
 			done();
 		},
@@ -236,7 +235,7 @@ export default {
 			console.log(type);
 			this.isShowMore = ['WarningICcustomer'].includes(type);
 		},
-		// 请求用气大户，分公司，综合服务站数据列表
+		// 请求用气大户，子公司，综合服务站数据列表
 		async getAllTypeStationList() {
 			let params = {
 				types: ['MajorClient', 'BranchCompany'].toString(),

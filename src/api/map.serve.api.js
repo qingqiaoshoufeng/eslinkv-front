@@ -2,7 +2,7 @@ import request from './request'
 import qs from 'qs'
 const HANGRANURL = '/server'
 const DATAURL = '/data'
-// 获取杭燃码地图部分数据 分公司、集团大厅、综合服务站
+// 获取杭燃码地图部分数据 子公司、集团大厅、综合服务站
 export function getHangranCodeList(data) {
     return request({
         url: `${HANGRANURL}/gasCode/mapDataResult`,
@@ -35,6 +35,17 @@ export function getHangranCodeDetailInfo(data) {
         },
     })
 }
+// 点击查询杭燃码下服务厅详情   
+export function clickGetBranchCompanyDetialInfo(data) {
+    return request({
+        url: `${HANGRANURL}/gasCode/mapBranchCompanyInfo`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
 // 联码新增统计数据
 export function getCouplingIncreaseInfo(data) {
     return request({
@@ -58,7 +69,7 @@ export function getAccumulativeTotal(data) {
         },
     })
 }
-// 获取工商户地图数据 用气大户、分公司
+// 获取工商户地图数据 用气大户、子公司
 export function getICcustomerStationList(data) {
     console.log(data, 7777777)
     return request({
@@ -131,8 +142,15 @@ export function getNineteenStationList() {
 
 }
 // 查询19厅统计数据
-export function getNineteenStatisticsInfo() {
-
+export function getNineteenStatisticsInfo(data) {
+    return request({
+        url: `server/api/impalaByQueryId`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
 }
 // 查询19厅站点详情
 
@@ -180,6 +198,18 @@ export function getServiceCustomerTaskList(data) {
         },
     })
 }
+// 客户服务三社联动信息
+
+export function getServiceCustomerThreeSocialList(data) {
+    return request({
+        url: `${HANGRANURL}/threeSocial/event`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
 
 // 集团大厅站点
 export function getGrouphallList(data) {
@@ -192,7 +222,7 @@ export function getGrouphallList(data) {
         },
     })
 }
-// 分公司
+// 子公司
 export function getBranchCompanyList(data) {
     return request({
         url: DATAURL + '/map/serve/getBranchCompanyList',

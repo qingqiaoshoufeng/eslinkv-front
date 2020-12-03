@@ -62,6 +62,7 @@ export default {
 	},
 	async created() {
 		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
+		console.log(this.list, '余志强');
 	},
 	watch: {
 		activeItem(val) {
@@ -78,7 +79,7 @@ export default {
 	methods: {
 		handleClick(item, index) {
 			this.activeIndex = index;
-			this.$emit('change', item,'WARNEVENT');
+			this.$emit('change', item, 'WARNEVENT');
 		},
 	},
 };

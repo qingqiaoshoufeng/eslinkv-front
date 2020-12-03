@@ -9,14 +9,22 @@
 
 	export default {
 		props: {
-		  data: {
-		    type: Array
-      },
-      unit: {
-		    type: String,
-        default: '万m³'
-      }
-    },
+			data: {
+				type: Array
+			},
+			text: {
+				type: String,
+				default: '区域'
+			},
+			subtext: {
+				type: String,
+				default: '销售气量'
+			},
+			unit: {
+				type: String,
+				default: '万m³'
+			}
+		},
 		watch: {
 			data: {
 				handler(val) {
@@ -33,8 +41,8 @@
 				const total = this.data.reduce((p, n) => p + n.value, 0)
 				return {
 					title: {
-						text: '区域',
-						subtext: '销售气量',
+						text: this.text,
+						subtext: this.subtext,
 						left: 'center',
 						top: '35%',
 						textStyle: {
@@ -64,7 +72,7 @@
 							padding: [0, -100],
 							rich: {
 								normal: {
-									fontSize: 14,
+									fontSize: 15,
 									lineHeight: 14,
 									color: '#fff',
 									padding: [6, 0, 0, 0],
@@ -72,7 +80,7 @@
 								},
 								value: {
 									align: 'left',
-									fontSize: 14,
+									fontSize: 15,
 									lineHeight: 14,
 									color: '#fff',
 									padding: [-8, 0, 0, 0],

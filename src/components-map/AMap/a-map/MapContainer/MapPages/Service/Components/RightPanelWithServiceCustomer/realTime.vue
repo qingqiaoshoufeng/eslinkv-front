@@ -61,7 +61,8 @@ export default {
 		},
 	},
 	async created() {
-		this.list = await this.$sysApi.map.home.getWarningList();
+		// this.list = await this.$sysApi.map.home.getWarningList();
+		this.list = await this.$sysApi.map.serve.getServiceCustomerTaskList();
 	},
 	watch: {
 		activeItem(val) {

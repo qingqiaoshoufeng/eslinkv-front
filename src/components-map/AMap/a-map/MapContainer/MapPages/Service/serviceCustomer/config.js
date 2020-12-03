@@ -14,7 +14,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
     //     isShow: true,
     // },
     BranchCompany: {
-        label: '分公司',
+        label: '子公司',
         legendIcon: 'icontulifengongsi',
         iconSize: 56,
         icon: 'iconfengongsi1',
@@ -31,7 +31,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         iconSize: 38,
         icon: 'iconfuwuwangdian',
         component: 'ServiceNetworkStation',
-        isShow: true,
+        isShow: false,
         dataProp: 'networkStationList',
         detailList: []
     },
@@ -46,13 +46,13 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         detailList: []
     },
     TaskList: {
-        label: '三社联动',
-        legendIcon: 'icontulisansheliandong',
+        label: '任务工单',
+        legendIcon: 'iconrenwugongdan',
         iconSize: 38,
-        icon: 'iconsansheliandong',
+        icon: 'iconrenwugongdan',
         component: 'ThreeSocialLinkage',
         isShow: false,
-        dataProp: 'threeSocialLinkageList',
+        dataProp: 'TaskList',
         detailList: []
     }
 }

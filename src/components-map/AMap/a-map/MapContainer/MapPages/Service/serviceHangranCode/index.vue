@@ -40,7 +40,13 @@
 			ref="OverlayDetail"
 			:left="left"
 		>
-			<TipDetial :data="activeOverlay" :detailInfo="detailInfo" />
+			<component
+				:is="detailComponentName"
+				:data="activeOverlay"
+				:detailInfo="detailInfo"
+			/>
+			<!-- <TipDetial :data="activeOverlay" :detailInfo="detailInfo"  /> -->
+			<!-- <ClickTipDetial :data="activeOverlay" :detailInfo="detailInfo" /> -->
 		</OverlayDetail>
 
 		<portal to="destination">
@@ -73,6 +79,7 @@ import {
 	BranchCompany,
 	ServiceStation,
 	TipDetial,
+	ClickTipDetial,
 	SaleAreaBoundary,
 } from '../Components/index.js';
 //页面所需公共组件
@@ -104,6 +111,7 @@ export default {
 		ServiceStation,
 		OverlayDetail,
 		TipDetial,
+		ClickTipDetial,
 		SaleAreaBoundary,
 	},
 	data() {
@@ -118,13 +126,19 @@ export default {
 			),
 			dataStatisticsList: DATASTATISTICSLIST,
 			overlayMap: SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
-			legendMap: { Grouphall, BranchCompany, ServiceStation },
+			legendMap: {
+				// Grouphall,
+				BranchCompany,
+				//  ServiceStation
+			},
 
 			mapLegendStyle: { left: '18%' },
 			activeOverlay: {},
 			legendMultiple: true,
 			showOverlayDetail: false,
-			center: [120.80971, 30.102216],
+			// 120.12039185； 纬度：30.17273413
+			// center: [120.80971, 30.102216],
+			center: [120.22750854, 30.32280411],
 			zoom: 10,
 			allTypeStationList: {},
 			detailInfo: {},
@@ -134,6 +148,7 @@ export default {
 			swichBoxInfo: SWICHBOX,
 			intervalId: null,
 			detialBoxWidth: 450,
+			detailComponentName: 'TipDetial',
 		};
 	},
 	// created() {
@@ -174,31 +189,32 @@ export default {
 			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
+			this.carouseComplBranchCompanyInfo();
 			done();
 		},
 		// 点击地图marker
-		handleOverlayClick(overlay, overlayType, isCenter = false) {
+		async handleOverlayClick(overlay, overlayType, isCenter = false) {
+			this.detailComponentName = 'ClickTipDetial';
 			this.clearInterval();
 			console.log(overlay);
 			let { lng, lat, id, overlayType: type, detailList, name } = overlay;
 			let params = {
-				id,
-				type,
 				name,
-				params: detailList.map(item => item.prop).toString(),
 			};
-			this.getDetailInfo(params);
-			// overlay.overlayType = overlayType || overlayType;
+			let res = await this.clickGetBranchCompanyDetialInfo(params);
+
 			this.activeOverlay = overlay;
-			console.log(type);
-			this.left = ['BranchCompany', 'Grouphall'].includes(type) ? 15 : 10;
-			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
+			this.activeOverlay.detailList = res;
+			this.showOverlayDetail = true;
+			console.log(this.activeOverlay);
+			// this.left = ['BranchCompany', 'Grouphall'].includes(type) ? 15 : 10;
+			// this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 		},
 		// 联码新增统计数据
 		async getDataStatisticsList() {
 			this.couplingIncreaseInfo = await this.$sysApi.map.serve.getCouplingIncreaseInfo();
 		},
-		// 请求集团大厅，分公司，综合服务站数据列表
+		// 请求集团大厅，子公司，综合服务站数据列表
 		async getAllTypeStationList() {
 			let params = {
 				types: [
@@ -238,6 +254,13 @@ export default {
 			);
 			this.showOverlayDetail = true;
 		},
+
+		// 获取点击站点服务站详情
+		async clickGetBranchCompanyDetialInfo(params) {
+			return this.$sysApi.map.serve.clickGetBranchCompanyDetialInfo(
+				params
+			);
+		},
 		// 切换热力图显示隐藏
 		switchChange(data, type) {
 			if (type === 'coupling' && data[0].value) {
@@ -252,6 +275,7 @@ export default {
 		},
 		// 开启定时器 展示公司详情
 		carouseComplBranchCompanyInfo() {
+			this.detailComponentName = 'TipDetial';
 			let index = 0;
 			console.log(this.allTypeStationList, '余志强');
 			let length = this.allTypeStationList.branchCompanyList.length;
@@ -264,6 +288,7 @@ export default {
 				this.activeOverlay = {
 					...this.allTypeStationList.branchCompanyList[currentIndex],
 					type: 'BranchCompany',
+					overlayType: 'BranchCompany',
 					detailList:
 						SERVICE_SERVICEHANGRANCODE_LEGEND_MAP['BranchCompany']
 							.detailList,
@@ -271,10 +296,6 @@ export default {
 				this.detailInfo = this.activeOverlay.gasCodeMapDetailInfoVO;
 				this.showOverlayDetail = true;
 				console.log(this.activeOverlay);
-				// overlay = {overlay,type:}
-				// console.log(currentIndex);
-				// console.log(overlay);
-				// this.handleOverlayClick();
 			}, 3000);
 		},
 		// 关闭定时器
@@ -289,6 +310,7 @@ export default {
 		this.getAllTypeStationList();
 	},
 	beforeDestroy() {
+		console.log('aaaaaaaaaaaaaa');
 		this.clearInterval();
 	},
 };

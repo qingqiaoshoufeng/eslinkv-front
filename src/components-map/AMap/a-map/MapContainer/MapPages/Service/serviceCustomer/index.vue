@@ -71,6 +71,7 @@ import {
 	BranchCompany,
 	RightPanelWithServiceCustomer,
 	TipDetial,
+	TaskList,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -105,6 +106,7 @@ export default {
 		RightPanelWithServiceCustomer,
 		MapLegend,
 		TipDetial,
+		TaskList,
 	},
 	data() {
 		return {
@@ -172,7 +174,7 @@ export default {
 			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-			this.$amap.setZoom(11, 100);
+			// this.$amap.setZoom(11, 100);
 			done();
 		},
 		viewOverlayDetail(overlay) {
@@ -271,7 +273,7 @@ export default {
 				THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
 					GoldChart.instance.updateComponent(i, {
 						data: {
-							title: `${this.OverlayDetail.name}`,
+							title: `${this.activeOverlay.name}`,
 							startTime: '2020/10/01  08:30',
 							endTime: '2020/10/01  08:30',
 							place: '桂花城紫云苑',
@@ -279,7 +281,7 @@ export default {
 							peopleNum: 220,
 							planNum: 160,
 							content:
-								'为积极彰显企业担当，更好地为用户提供优质满意的杭燃服务。9月13日上午，杭天管网输配分公司28名正气志愿者\n            联合杭天服务发展公司27名工作人员，走进盛德嘉苑、假山新村、天时苑、盛德欣苑等小区开展“三社联动、安心安\n            居”杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份...27名工作人员，走进盛德嘉苑、假山新村、天时苑、盛德欣苑等小区开展“三社联动、安心安\n            居”杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份...\n            杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份\n            杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份',
+								'为积极彰显企业担当，更好地为用户提供优质满意的杭燃服务。9月13日上午，杭天管网输配子公司28名正气志愿者\n            联合杭天服务发展公司27名工作人员，走进盛德嘉苑、假山新村、天时苑、盛德欣苑等小区开展“三社联动、安心安\n            居”杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份...27名工作人员，走进盛德嘉苑、假山新村、天时苑、盛德欣苑等小区开展“三社联动、安心安\n            居”杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份...\n            杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份\n            杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份',
 							securityCheckRate: 90,
 							planCheckNum: 120,
 							brochuresNum: 210,
@@ -334,9 +336,22 @@ export default {
 		},
 		// 获取任务工单列表
 		async getTasklist() {
-			let res = await this.$sysApi.map.serve.getServiceCustomerTaskList;
-			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			let TaskList = await this.$sysApi.map.serve.getServiceCustomerTaskList();
+			this.allTypeStationList = {
+				...this.allTypeStationList,
+				TaskList,
+			};
+			console.log(this.allTypeStationList);
 		},
+		// // 获取三社联动列表
+		// async getServiceCustomerThreeSocialList() {
+		// 	let threeSocialLinkageList = await this.$sysApi.map.serve
+		// 		.getServiceCustomerThreeSocialList;
+		// 	this.allTypeStationList = {
+		// 		...this.allTypeStationList,
+		// 		...threeSocialLinkageList,
+		// 	};
+		// },
 		// 查看详情接口
 		getDetailInfo(params) {
 			return this.$sysApi.map.serve.getServiceCustomerDetialInfo(params);
