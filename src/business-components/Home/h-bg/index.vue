@@ -1,9 +1,8 @@
 <template>
 	<div class="widget-part pos-r" :style="`${styles}left:0px;top:0px;z-index:13;`">
 		<div class="h-bg pos-r" :class="{bg54441: status54441}">
-			<template v-if="!status54441">
-        <video class="pos-a bg-video" src="./img/bg1.webm" autoplay="autoplay" @ended="video1Ended = true" v-if="!video1Ended"></video>
-        <video class="pos-a bg-video" src="./img/bg2.webm" autoplay="autoplay" loop="loop" v-else></video>
+      <template v-if="!status54441">
+        <video class="pos-a bg-video" src="/static/videos/bg1.webm" autoplay="autoplay" @ended="end" ref="video"></video>
       </template>
 			<div class="h-bg-top pos-a"></div>
 			<div class="h-bg-control pos-a"></div>
@@ -95,6 +94,12 @@
 			}
 		},
 		methods: {
+		  end () {
+        if (this.video1Ended) return
+        this.video1Ended = true
+        this.$refs.video.src = '/static/videos/bg2.webm'
+        this.$refs.video.loop = true
+      },
 			handleStart() {
 				if (this.config.config.sceneId) {
 					// if (this.statusStart) {
@@ -125,6 +130,7 @@
 				GoldChart.scene.createSceneInstance('grdnn9tiey', 'slideUp')
 			},
 			close54441() {
+        this.video1Ended = false
 				this.status54441 = false
 			},
 			closeVideo(e) {

@@ -1,0 +1,112 @@
+<template>
+	<div class="widget-part" :style="styles" v-if="data">
+    <img src="/static/images/experience/info-icon1.svg" class="icon">
+    <div class="info">
+      <div class="info-nun font-num">{{ data.num }}</div>
+      <div class="info-txt">{{ config.config.desc1 }}</div>
+    </div>
+    <div class="change">
+      <div class="change-num font-num">
+        <span>{{ data.changeNum }}</span>
+        <img src="/static/icons/arrow-up.svg" class="arrow" v-if="data.isIncrease">
+        <img src="/static/icons/arrow-down.svg" class="arrow" v-else>
+      </div>
+      <div class="change-txt">{{ config.config.desc2 }}</div>
+    </div>
+	</div>
+</template>
+<script>
+import mixins from '../../mixins';
+import {getInput} from "@lib/views/core/widgets/parts/lib/config-tools";
+
+const config = {
+  animation: true,
+  config: {
+    icon: true,
+    desc1: true,
+    desc2: true
+  },
+};
+const value = {
+	api: {
+		data: JSON.stringify({
+      num: 22326,
+      changeNum: 12,
+      isIncrease: true
+    })
+	},
+  config: {
+    icon: '/static/images/experience/info-icon1.svg',
+    desc1: '累计粉丝(人)',
+    desc2: '今日新增(人)'
+  }
+}
+const configSource = {
+  config: {
+    fields: {
+      icon: getInput('icon', '标题'),
+      desc1: getInput('desc1', '描述1'),
+      desc2: getInput('desc2', '描述2')
+    }
+  }
+}
+export default {
+	mixins: [mixins],
+	created() {
+		this.configSource = this.parseConfigSource(config, configSource);
+		this.configValue = this.parseConfigValue(config, value);
+	},
+};
+</script>
+<style lang="scss" scoped>
+.widget-part {
+  display: flex;
+  align-items: center;
+  .icon {
+    width: 80px;
+    height: 80px;
+    margin-right: 22px;
+  }
+  .info {
+    flex: 1;
+    text-align: left;
+    .info-nun {
+      font-weight: bold;
+      font-size: 48px;
+      line-height: 48px;
+      color: #FEFFFF;
+    }
+    .info-txt {
+      font-size: 20px;
+      line-height: 24px;
+      color: #00DDFF;
+      margin-top: 4px;
+    }
+  }
+  .change {
+    text-align: left;
+    width: 130px;
+    height: 85px;
+    background: linear-gradient(180deg, rgba(0, 221, 255, 0.3) 0%, rgba(0, 221, 255, 0) 100%);
+    border-radius: 8px;
+    padding: 20px 8px;
+    .change-num {
+      font-weight: bold;
+      font-size: 32px;
+      line-height: 32px;
+      color: #FEFFFF;
+      .arrow {
+        width: 12px;
+        margin-left: 14px;
+      }
+    }
+    .change-txt {
+      font-size: 20px;
+      line-height: 24px;
+      color: #00DDFF;
+      margin-top: 4px;
+    }
+  }
+}
+</style>
+
