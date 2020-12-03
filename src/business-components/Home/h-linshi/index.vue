@@ -226,6 +226,7 @@
 		border-top-width: 0;
 		padding: 30px 30px 20px;
 		margin-bottom: 32px;
+		background: rgba(2, 15, 137, 1);
 	}
 
 	.total {

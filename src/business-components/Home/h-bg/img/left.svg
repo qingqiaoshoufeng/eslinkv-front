@@ -31,9 +31,9 @@
 <stop offset="0.6875" stop-color="#00DDFF"/>
 <stop offset="0.916667" stop-color="#00DDFF" stop-opacity="0"/>
 </linearGradient>
-<linearGradient id="paint5_linear" x1="293" y1="588.023" x2="707" y2="588.023" gradientUnits="userSpaceOnUse">
-<stop stop-color="#091B46"/>
-<stop offset="1" stop-color="#091B46" stop-opacity="0.5"/>
+<linearGradient id="paint5_linear" x1="0" y1="588.023" x2="707" y2="588.023" gradientUnits="userSpaceOnUse">
+<stop stop-color="#000462"/>
+<stop offset="1" stop-color="#000462" stop-opacity="0.5"/>
 </linearGradient>
 </defs>
 </svg>
