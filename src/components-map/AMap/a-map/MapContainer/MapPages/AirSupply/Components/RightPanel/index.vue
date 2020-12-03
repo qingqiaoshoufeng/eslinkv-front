@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { Tabs, TabPanel } from '../../../Components/Tabs/';
+import { Tabs, TabPanel } from '../../../../../components/Tabs/';
 import overlayList from './overlayList';
 // import realTime from './realTime';
 // import realTimeWithLevel from './realTimeWithLevel';

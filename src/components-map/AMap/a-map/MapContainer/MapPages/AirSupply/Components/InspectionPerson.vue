@@ -11,7 +11,7 @@
 	/>
 </template>
 <script>
-import { BaseOverlay } from '../../Components/index';
+import { BaseOverlay } from '../../../../components/index';
 export default {
 	name: 'InspectionPerson',
 	components: {

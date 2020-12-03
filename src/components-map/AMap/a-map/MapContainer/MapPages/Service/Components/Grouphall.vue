@@ -9,7 +9,7 @@
 			apiFun,
 			detailList,
 			nameStyle,
-            ...$attrs
+			...$attrs,
 		}"
 		@click="
 			marker =>
@@ -22,7 +22,7 @@
 	/>
 </template>
 <script>
-import { BaseOverlay } from '../../Components/index';
+import { BaseOverlay } from '../../../../components/index';
 
 export default {
 	name: 'Grouphall',

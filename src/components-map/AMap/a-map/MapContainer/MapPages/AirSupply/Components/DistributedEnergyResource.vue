@@ -14,7 +14,7 @@
 	/>
 </template>
 <script>
-import { BaseOverlay } from '../../Components/index';
+import { BaseOverlay } from '../../../../components/index';
 export default {
 	name: 'DistributedEnergyResource',
 	components: {
@@ -33,11 +33,11 @@ export default {
 			type: String,
 			default: '',
 		},
-    },
+	},
 	data() {
-        let apiFun = this.$sysApi.map.home.getDistributedEnergyResourceList;
+		let apiFun = this.$sysApi.map.home.getDistributedEnergyResourceList;
 		return {
-				apiFun: apiFun,
+			apiFun: apiFun,
 		};
 	},
 };

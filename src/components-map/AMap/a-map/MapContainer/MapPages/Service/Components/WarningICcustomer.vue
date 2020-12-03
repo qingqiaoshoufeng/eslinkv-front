@@ -30,7 +30,7 @@
 	</div>
 </template>
 <script>
-import { Overlay } from '../../Components/index';
+import { Overlay } from '../../../../components/index';
 let eventTypeIconMap = {
 	0: 'icontuli-gongshanghu',
 	1: 'iconyongqidahu2',

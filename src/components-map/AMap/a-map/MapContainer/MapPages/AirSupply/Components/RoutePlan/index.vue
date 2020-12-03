@@ -13,7 +13,7 @@
 	</Overlay>
 </template>
 <script>
-import { Overlay } from '../../../Components/index';
+import { Overlay } from '../../../../../components/index';
 let eventTypeIconMap = {
 	0: 'iconbaoguanshijian',
 	1: 'iconxieloushijian',
@@ -78,7 +78,8 @@ export default {
 						this.$refs.marker.$amapComponent.setPosition(
 							new window.AMap.LngLat(lng, lat)
 						);
-						this.icon = eventTypeIconMap[status] || 'iconbaoguanshijian';
+						this.icon =
+							eventTypeIconMap[status] || 'iconbaoguanshijian';
 					}
 
 					let { lat: endLat, lng: endLng, assignment } = compData;
@@ -105,8 +106,8 @@ export default {
 									pathArr.forEach(({ lng, lat }) => {
 										pathData.push([lng, lat]);
 									});
-                                });
-                                console.log(pathData,'pathData')
+								});
+								console.log(pathData, 'pathData');
 								let passedLen = Math.ceil(
 									Math.random() * pathData.length
 								);
@@ -138,8 +139,8 @@ export default {
 			this.polyline = new AMap.Polyline({
 				map: map,
 				path: lineArr,
-                showDir: true,
-                zIndex:1500,
+				showDir: true,
+				zIndex: 1500,
 				strokeColor: '#FFD200', //线颜色
 				strokeOpacity: 1,
 				fillColor: '#FFD200', //线颜色
@@ -147,8 +148,8 @@ export default {
 			});
 
 			this.passedPolyline = new AMap.Polyline({
-                map: map,
-                zIndex:1500,
+				map: map,
+				zIndex: 1500,
 				strokeColor: '#BDBDBD', //线颜色
 				fillColor: '#BDBDBD', //线颜色
 				strokeWeight: 10, //线宽

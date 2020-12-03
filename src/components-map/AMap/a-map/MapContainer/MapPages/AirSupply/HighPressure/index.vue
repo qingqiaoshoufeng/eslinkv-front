@@ -88,7 +88,7 @@ import {
 	MapLegend,
 } from '../../../../components';
 //页面所需公共组件
-import pageMixin from '../../mixins/pageMixin';
+import pageMixin from '../../../../mixins/pageMixin';
 // import {
 
 // } from '../../../Components/index.js';
