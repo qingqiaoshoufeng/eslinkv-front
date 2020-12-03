@@ -1,6 +1,6 @@
 <!-- 联码数量热力 -->
 <script>
-import overlayMixin from '../../mixins/overlayMixin.js';
+import overlayMixin from '../../../../mixins/overlayMixin.js';
 export default {
 	name: 'useHotYear',
 	mixins: [overlayMixin],

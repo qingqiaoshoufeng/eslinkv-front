@@ -1,5 +1,5 @@
 <script>
-import overlayMixin from '../../mixins/overlayMixin.js';
+import overlayMixin from '../../../../mixins/overlayMixin.js';
 export default {
 	name: 'HighPressureLine',
 	mixins: [overlayMixin],

@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import { SvgIcon } from '../../../../components/';
+import  SvgIcon  from '../SvgIcon/index';
 export default {
 	name: 'Legend',
 	props: {

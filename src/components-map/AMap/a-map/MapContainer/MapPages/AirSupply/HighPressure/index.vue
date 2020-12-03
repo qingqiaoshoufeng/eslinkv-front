@@ -81,14 +81,17 @@ import {
 	WarningList,
 } from '../Components/index.js';
 
-import { DataStatistics } from '../../../../components';
-//页面所需公共组件
-import pageMixin from '../../mixins/pageMixin';
 import {
+	DataStatistics,
 	RegionBoundary,
 	OverlayDetail,
 	MapLegend,
-} from '../../Components/index.js';
+} from '../../../../components';
+//页面所需公共组件
+import pageMixin from '../../mixins/pageMixin';
+// import {
+
+// } from '../../../Components/index.js';
 
 import {
 	INDEXSCENEMAP,
