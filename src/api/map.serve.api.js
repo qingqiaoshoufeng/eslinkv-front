@@ -35,6 +35,17 @@ export function getHangranCodeDetailInfo(data) {
         },
     })
 }
+// 点击查询杭燃码下服务厅详情   
+export function clickGetBranchCompanyDetialInfo(data) {
+    return request({
+        url: `${HANGRANURL}/gasCode/mapBranchCompanyInfo`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
 // 联码新增统计数据
 export function getCouplingIncreaseInfo(data) {
     return request({

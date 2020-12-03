@@ -187,23 +187,24 @@ export default {
 			done();
 		},
 		// 点击地图marker
-		handleOverlayClick(overlay, overlayType, isCenter = false) {
+		async handleOverlayClick(overlay, overlayType, isCenter = false) {
 			this.detailComponentName = 'ClickTipDetial';
 			this.clearInterval();
 			console.log(overlay);
 			let { lng, lat, id, overlayType: type, detailList, name } = overlay;
 			let params = {
-				id,
-				type,
+				// id,
+				// type,
 				name,
-				params: detailList.map(item => item.prop).toString(),
+				// params: detailList.map(item => item.prop).toString(),
 			};
-			this.getDetailInfo(params);
-			// overlay.overlayType = overlayType || overlayType;
+			let res = await this.clickGetBranchCompanyDetialInfo(params);
+
 			this.activeOverlay = overlay;
-			console.log(type);
-			this.left = ['BranchCompany', 'Grouphall'].includes(type) ? 15 : 10;
-			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
+			this.activeOverlay.detailList = res;
+			console.log(this.activeOverlay);
+			// this.left = ['BranchCompany', 'Grouphall'].includes(type) ? 15 : 10;
+			// this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 		},
 		// 联码新增统计数据
 		async getDataStatisticsList() {
@@ -249,8 +250,13 @@ export default {
 			);
 			this.showOverlayDetail = true;
 		},
-		// 点击获取子公司下服务站详情
-		async clickGetBranchCompanyDetialInfo() {},
+
+		// 获取点击站点服务站详情
+		async clickGetBranchCompanyDetialInfo(params) {
+			return this.$sysApi.map.serve.clickGetBranchCompanyDetialInfo(
+				params
+			);
+		},
 		// 切换热力图显示隐藏
 		switchChange(data, type) {
 			if (type === 'coupling' && data[0].value) {
@@ -278,6 +284,7 @@ export default {
 				this.activeOverlay = {
 					...this.allTypeStationList.branchCompanyList[currentIndex],
 					type: 'BranchCompany',
+					overlayType: 'BranchCompany',
 					detailList:
 						SERVICE_SERVICEHANGRANCODE_LEGEND_MAP['BranchCompany']
 							.detailList,

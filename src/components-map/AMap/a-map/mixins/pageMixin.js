@@ -41,7 +41,6 @@ export default {
             let { parentInfo } = this
             let { scaleRatio: screenScaleRatio } = parentInfo || {}
             let paddingTop = ((1 - screenScaleRatio) / 2) * 1050
-            console.log(topOffest, scale, paddingTop)
             // 上下偏移，缩放
             this.$amap.setFitView(
                 [

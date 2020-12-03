@@ -35,7 +35,6 @@ module.exports = {
                 changeOrigin: true,
                 headers: {
                     Cookie: 'SESSION=b3b8b8a6-0794-4fb3-88a1-d9654d66d417'
-
                 },
                 pathRewrite: {
                     '^/api': '/'

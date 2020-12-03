@@ -10,9 +10,9 @@
 				v-for="(item, index) in data.detailList || []"
 				:key="index"
 			>
-				<span class="index">{{ index }}</span>
+				<span class="index">{{ index + 1 }}</span>
 				<span class="label">{{ `${item.name}: ` }}</span>
-				<span class="value">{{ `${item.name}户` }}</span>
+				<span class="value">{{ `${item.value}户` }}</span>
 			</div>
 		</div>
 		<div class="btn" v-if="isShowMore" @click="handleViewDetail()">

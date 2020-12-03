@@ -17,7 +17,7 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
         legendIcon: 'icontuligaoyaguanwang',
         component: 'HighPressureLine',
         isShow: true,
-        dataProp: "highPressureLine"
+        dataProp: "middlePressureLine"
     },
     HighPressureLine_Process: {
         label: '高压管网(建设中)',
