@@ -14,7 +14,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
     //     isShow: true,
     // },
     BranchCompany: {
-        label: '分公司',
+        label: '子公司',
         legendIcon: 'icontulifengongsi',
         iconSize: 56,
         icon: 'iconfengongsi1',

@@ -14,7 +14,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
     },
     BranchCompany: {
-        label: '分公司',
+        label: '子公司',
         legendIcon: 'icontulifengongsi',
         iconSize: 56,
         icon: 'iconfengongsi1',

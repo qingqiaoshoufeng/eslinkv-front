@@ -4,7 +4,7 @@ import { OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayProvingTo
 // 覆盖物legend配置
 export const SERVICE_SERVICENINETEEN_LEGEND_MAP = {
     BranchCompany: {
-        label: '分公司',
+        label: '子公司',
         legendIcon: 'icontulifengongsi',
         iconSize: 56,
         icon: 'iconfengongsi1',

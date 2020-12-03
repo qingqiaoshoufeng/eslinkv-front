@@ -2,7 +2,7 @@ import request from './request'
 import qs from 'qs'
 const HANGRANURL = '/server'
 const DATAURL = '/data'
-// 获取杭燃码地图部分数据 分公司、集团大厅、综合服务站
+// 获取杭燃码地图部分数据 子公司、集团大厅、综合服务站
 export function getHangranCodeList(data) {
     return request({
         url: `${HANGRANURL}/gasCode/mapDataResult`,
@@ -58,7 +58,7 @@ export function getAccumulativeTotal(data) {
         },
     })
 }
-// 获取工商户地图数据 用气大户、分公司
+// 获取工商户地图数据 用气大户、子公司
 export function getICcustomerStationList(data) {
     console.log(data, 7777777)
     return request({
@@ -192,7 +192,7 @@ export function getGrouphallList(data) {
         },
     })
 }
-// 分公司
+// 子公司
 export function getBranchCompanyList(data) {
     return request({
         url: DATAURL + '/map/serve/getBranchCompanyList',

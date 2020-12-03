@@ -198,7 +198,7 @@ export default {
 		async getDataStatisticsList() {
 			this.couplingIncreaseInfo = await this.$sysApi.map.serve.getCouplingIncreaseInfo();
 		},
-		// 请求集团大厅，分公司，综合服务站数据列表
+		// 请求集团大厅，子公司，综合服务站数据列表
 		async getAllTypeStationList() {
 			let params = {
 				types: [
@@ -271,10 +271,6 @@ export default {
 				this.detailInfo = this.activeOverlay.gasCodeMapDetailInfoVO;
 				this.showOverlayDetail = true;
 				console.log(this.activeOverlay);
-				// overlay = {overlay,type:}
-				// console.log(currentIndex);
-				// console.log(overlay);
-				// this.handleOverlayClick();
 			}, 3000);
 		},
 		// 关闭定时器

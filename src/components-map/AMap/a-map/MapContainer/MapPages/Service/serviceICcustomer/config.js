@@ -21,7 +21,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         dataProp: 'year',
     },
     BranchCompany: {
-        label: '分公司',
+        label: '子公司',
         legendIcon: 'icontulifengongsi',
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
