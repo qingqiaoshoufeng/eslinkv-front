@@ -3,9 +3,7 @@
 		<div class="h-bg pos-r" :class="{bg54441: status54441}">
 			<div class="h-bg-back pos-a"></div>
 			<template v-if="!status54441">
-				<video class="pos-a bg-video" src="./img/bg1.webm" autoplay="autoplay" @ended="video1Ended = true"
-					   v-if="!video1Ended"></video>
-				<video class="pos-a bg-video" src="./img/bg2.webm" autoplay="autoplay" loop="loop" v-else></video>
+				<video class="pos-a bg-video" src="/static/videos/bg1.webm" autoplay="autoplay" @ended="end" ref="video"></video>
 			</template>
 			<div class="h-bg-top pos-a"></div>
 			<div class="h-bg-control pos-a"></div>
