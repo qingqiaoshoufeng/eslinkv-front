@@ -23,7 +23,10 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
 
         dataProp: 'branchCompanyList',
 
-        detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
+        detailList: [OperationToday, OperationWeek, CouplingNumber,
+            //  CouplingPercent, 
+            //  NewCouplingNumber
+        ]
     },
     ServiceStation: {
         label: '综合服务站',

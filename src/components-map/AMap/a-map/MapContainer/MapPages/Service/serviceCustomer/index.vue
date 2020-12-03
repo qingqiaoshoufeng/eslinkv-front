@@ -332,6 +332,11 @@ export default {
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
 			console.log(this.allTypeStationList, 33333);
 		},
+		// 获取任务工单列表
+		async getTasklist() {
+			let res = await this.$sysApi.map.serve.getServiceCustomerTaskList;
+			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+		},
 		// 查看详情接口
 		getDetailInfo(params) {
 			return this.$sysApi.map.serve.getServiceCustomerDetialInfo(params);
@@ -340,6 +345,7 @@ export default {
 	mounted() {
 		this.getDataStatisticsList();
 		this.getAllTypeStationList();
+		this.getTasklist();
 	},
 };
 </script>
