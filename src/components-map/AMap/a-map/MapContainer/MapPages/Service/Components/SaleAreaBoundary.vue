@@ -1,6 +1,6 @@
 区域边界线
 <script>
-import overlayMixin from '../../mixins/overlayMixin.js';
+import overlayMixin from '../../../../mixins/overlayMixin.js';
 import axios from 'axios';
 export default {
 	name: 'SaleAreaBoundary',

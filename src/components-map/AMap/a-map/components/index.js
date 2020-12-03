@@ -1,6 +1,10 @@
-//地图公用组件
 export { default as DashboardPanel } from './DashboardPanel'
 export { default as PopContainer } from './PopContainer'
 export { default as SvgIcon } from './SvgIcon'
 export { default as DataStatistics } from './DataStatistics'
+export { default as RegionBoundary } from './RegionBoundary'
+export { default as OverlayDetail } from './OverlayDetail/'
+export { default as BaseOverlay } from './BaseOverlay/'
+export { default as Overlay } from './Overlay/'
+export { default as MapLegend } from './MapLegend/'
 

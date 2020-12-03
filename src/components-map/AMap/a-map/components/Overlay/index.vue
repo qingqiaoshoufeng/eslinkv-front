@@ -1,6 +1,6 @@
 <script>
-import { SvgIcon } from '../../../../components/index.js';
-import { AMapMarker } from '../../../../lib';
+import { SvgIcon } from '../SvgIcon';
+import { AMapMarker } from '../../lib';
 export default {
 	name: 'Overlay',
 	functional: true,

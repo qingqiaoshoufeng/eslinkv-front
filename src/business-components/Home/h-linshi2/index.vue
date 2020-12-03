@@ -224,7 +224,7 @@
 		border-top-width: 0;
 		padding: 22px 20px 10px;
 		margin-bottom: 32px;
-		background: rgba(2, 15, 137, 1);
+    background: rgba(2, 15, 137, 0.5);
 	}
 
 	.detail {
@@ -324,10 +324,10 @@
 
 	.fans {
 		height: 412px;
-		background-image: url("./img/expbg.svg");
-		background-size: 100% 100%;
-		background-color: rgba(2, 15, 137, 1);
-		background-repeat: no-repeat;
+    background: rgba(2, 15, 137, 0.5) url("./img/expbg.svg") no-repeat center;
+		background-size: 94% 94%;
+    border: 1px solid #00DDFF;
+    border-top-width: 0;
 		.fans-top {
 			display: flex;
 			justify-content: space-between;
