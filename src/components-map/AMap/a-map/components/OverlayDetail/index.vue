@@ -43,7 +43,7 @@
 </template>
 <script>
 import { AMapMarker } from '../../lib';
-import { PopContainer } from '../PopContainer';
+import PopContainer from '../PopContainer';
 export default {
     name: 'OverlayDetail',
 	components: {

@@ -1,5 +1,5 @@
 <script>
-import { SvgIcon } from '../SvgIcon';
+import  SvgIcon  from '../SvgIcon';
 import { AMapMarker } from '../../lib';
 export default {
 	name: 'Overlay',

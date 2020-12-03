@@ -91,7 +91,7 @@ import {
 import pageMixin from '../../../../mixins/pageMixin';
 // import {
 
-// } from '../../../Components/index.js';
+// } from '../../../../../components/index.js';
 
 import {
 	INDEXSCENEMAP,
