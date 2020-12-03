@@ -9,11 +9,16 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component
-				v-if="config.isShow && allTypeStationList[config.dataProp]"
-				:key="legend"
+				v-if="
+					config.isShow &&
+					allTypeStationList[config.dataProp] &&
+					allTypeStationList[config.dataProp].length &&
+					config.component
+				"
+				:key="config.component"
 				:visible="config.isShow"
 				:overlayIcon="config.legendIcon"
-                :iconSize="config.iconSize"
+				:iconSize="config.iconSize"
 				:overlayType="legend"
 				:is="config.component"
 				:data="allTypeStationList[config.dataProp]"
@@ -22,9 +27,10 @@
 				:ref="config.component"
 			/>
 		</template>
+
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
-             :legendMap="legendMap"
+			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
 			:detialBoxWidth="450"
@@ -112,6 +118,7 @@ export default {
 			dataStatisticsList: DATASTATISTICSLIST,
 			overlayMap: SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
 			legendMap: { Grouphall, BranchCompany, ServiceStation },
+
 			mapLegendStyle: { left: '18%' },
 			activeOverlay: {},
 			legendMultiple: true,
@@ -199,6 +206,7 @@ export default {
 			console.log(params);
 			let res = await this.$sysApi.map.serve.getHangranCodeList(params);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			console.log(this.allTypeStationList, '余志强');
 		},
 		// 获取热力图信息
 		async getAllHotList() {
@@ -209,11 +217,13 @@ export default {
 			try {
 				res = await this.$sysApi.map.serve.getHangranCodeHotList();
 			} catch (error) {
-				res = { total: [], month: [] };
+				// res = { total: [], month: [] };
+				res = {};
 			}
 
 			console.log(res, 1111322322);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			console.log(this.allTypeStationList, '余志强');
 		},
 		//获取站点详情
 		async getDetailInfo(params) {

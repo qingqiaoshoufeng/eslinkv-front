@@ -1,7 +1,8 @@
 <template>
 	<div class="widget-part pos-r" :style="`${styles}left:0px;top:0px;z-index:13;`">
 		<div class="h-bg pos-r">
-			<video class="pos-a bg-video" src="./img/bg.webm" autoplay="autoplay" loop="loop"></video>
+			<video class="pos-a bg-video" src="./img/bg1.webm" autoplay="autoplay" ref="video1"></video>
+			<video class="pos-a bg-video" src="./img/bg2.webm" autoplay="autoplay" ref="video2" loop="loop"></video>
 			<div class="h-bg-top pos-a"></div>
 			<div class="h-bg-control pos-a"></div>
 			<div class="h-bg-left pos-a"></div>
@@ -87,6 +88,9 @@
 					GoldChart.scene.createSceneInstance(JSON.parse(this.config.config.sceneId)[0], 'fadeIn', 'none')
 				}
 			}
+			this.$refs.video1.addEventListener("ended", function () {
+				this.$refs.video1.style.display = 'none'
+			})
 		},
 		methods: {
 			handleStart() {

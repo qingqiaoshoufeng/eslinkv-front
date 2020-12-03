@@ -5,40 +5,46 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
     Grouphall: {
         label: '集团大厅',
         legendIcon: 'icontulijituandating',
-        iconSize:56,
-        icon:'iconjituandating',
+        iconSize: 56,
+        icon: 'iconjituandating',
         component: 'Grouphall',
         isShow: true,
         dataProp: 'grouphallList',
+
         detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
     },
     BranchCompany: {
         label: '分公司',
         legendIcon: 'icontulifengongsi',
-        iconSize:56,
-        icon:'iconfengongsi1',
+        iconSize: 56,
+        icon: 'iconfengongsi1',
         component: 'BranchCompany',
         isShow: true,
+
         dataProp: 'branchCompanyList',
+
         detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
     },
     ServiceStation: {
         label: '综合服务站',
         legendIcon: 'icontulizonghefuwuzhan1',
-        iconSize:38,
-        icon:'iconzonghefuwuzhan1',
+        iconSize: 38,
+        icon: 'iconzonghefuwuzhan1',
         component: 'ServiceStation',
         isShow: true,
         dataProp: 'comprehensiveServiceStationList',
+
         detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
     },
     CouplingHot: {
         label: '联码数量热力',
         legendIcon: 'icontulixiaoqireli',
-        // icon: 'iconjituandating',
+
         component: 'CouplingHot',
         isShow: true,
+
         dataProp: 'total'
+
     },
     OperationHot: {
         label: '操作数量热力',
@@ -47,6 +53,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         component: 'OperationHot',
         isShow: false,
         dataProp: 'month'
+
     },
 }
 

@@ -44,7 +44,11 @@
 </template>
 <script>
 //页面覆盖物组件
-import { BranchCompany, TipDetial } from '../Components/index.js';
+import {
+	BranchCompany,
+	TipDetial,
+	SaleAreaBoundary,
+} from '../Components/index.js';
 //页面所需公共组件
 import {
 	RegionBoundary,
@@ -67,6 +71,7 @@ export default {
 		DataStatistics,
 		TipDetial,
 		MapLegend,
+		SaleAreaBoundary,
 	},
 	data() {
 		return {
