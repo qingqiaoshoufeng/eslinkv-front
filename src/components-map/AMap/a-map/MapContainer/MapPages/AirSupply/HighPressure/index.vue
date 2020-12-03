@@ -158,7 +158,7 @@ export default {
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'statAawareness',
+			activeTab: 'realTime',
 			legendMap: AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
 			overlayMap: {
 				HighPressureLine,
@@ -363,17 +363,17 @@ export default {
 		},
 		// 获取高压管网数据
 		async getHighPressurePipe() {
-            let pipeData = await this.$sysApi.map.airSupply.getHighPressurePipe();
-            this.allTypeStationList = {
-                ...this.allTypeStationList,
-                ...pipeData
-            }
+			let pipeData = await this.$sysApi.map.airSupply.getHighPressurePipe();
+			this.allTypeStationList = {
+				...this.allTypeStationList,
+				...pipeData,
+			};
 		},
 	},
 	mounted() {
 		this.getAllTypeStationList();
-        this.getDataStatisticsInfo();
-        this.getHighPressurePipe();
+		this.getDataStatisticsInfo();
+		this.getHighPressurePipe();
 	},
 };
 </script>

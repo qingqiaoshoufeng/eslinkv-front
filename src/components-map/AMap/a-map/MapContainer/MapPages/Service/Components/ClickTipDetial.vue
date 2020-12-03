@@ -11,7 +11,7 @@
 				:key="index"
 			>
 				<span class="index">{{ index + 1 }}</span>
-				<span class="label">{{ `${item.name}: ` }}</span>
+				<span class="label">{{ `${item.name}联码数: ` }}</span>
 				<span class="value">{{ `${item.value}户` }}</span>
 			</div>
 		</div>
@@ -101,6 +101,7 @@ export default {
 			/* or 133% */
 			color: #ffffff;
 			.label {
+				margin-left: 7px;
 				color: #fff;
 			}
 			.value {

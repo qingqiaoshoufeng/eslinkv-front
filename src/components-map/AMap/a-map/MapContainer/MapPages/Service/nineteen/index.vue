@@ -10,6 +10,7 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
+				v-if="config.isShow && allTypeStationList[config.dataProp]"
 				:key="legend"
 				:visible="config.isShow"
 				:overlayIcon="config.legendIcon"
@@ -29,6 +30,7 @@
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 			ref="OverlayDetail"
+			:detialBoxWidth="450"
 		>
 			<TipDetial :data="activeOverlay" />
 		</OverlayDetail>
@@ -40,7 +42,11 @@
 				class="map-legend"
 				:style="mapLegendStyle"
 			/>
-			<DataStatistics :position="'left'" :data="dataStatisticsList" />
+			<DataStatistics
+				:position="'left'"
+				:dataStatisticsList="dataStatisticsList"
+				:data="dataStatisticsInfo"
+			/>
 		</portal>
 	</div>
 </template>
@@ -63,6 +69,7 @@ import { DataStatistics } from '../../../../components';
 import {
 	SERVICE_SERVICENINETEEN_LEGEND_MAP,
 	SERVICE_SERVICENINETEEN_OVERLAY_MAP,
+	DATASTATISTICSLIST,
 } from './config';
 export default {
 	name: 'service19',
@@ -80,7 +87,8 @@ export default {
 			overlayInfoConfig: Object.freeze(
 				SERVICE_SERVICENINETEEN_LEGEND_MAP
 			),
-			dataStatisticsList: [],
+			dataStatisticsList: DATASTATISTICSLIST,
+			dataStatisticsInfo: {},
 			legendMap: SERVICE_SERVICENINETEEN_LEGEND_MAP,
 			legendMultiple: true,
 			mapLegendStyle: { left: '18%' },
@@ -117,7 +125,7 @@ export default {
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
-			this.$amap.setZoom(14, 100);
+			// this.$amap.setZoom(14, 100);
 			// if (isCenter) {
 			// 	this.$nextTick(() => {
 			// 		this.$amap.panTo([lng, lat], 100);
@@ -125,7 +133,21 @@ export default {
 			// }
 		},
 		async getDataStatisticsList() {
-			this.dataStatisticsList = await this.$sysApi.map.serve.getDataStatisticsList();
+			console.log(222222222222);
+			let params = {
+				projectId: 20,
+				queryId: 898,
+				params: '',
+			};
+			let res = await this.$sysApi.map.serve.getNineteenStatisticsInfo(
+				params
+			);
+			// console.log(res[0]['accept_2hour_rate']);
+			// res[0]['accept_2hour_rate'] =
+			// 	(res[0]['accept_2hour_rate'] * 100).toFixed(2) + '%';
+			this.dataStatisticsInfo = res[0];
+			console.log(222222222222);
+			console.log(this.dataStatisticsInfo);
 		},
 		closeOverlayDetail(done) {
 			this.showOverlayDetail = false;
@@ -148,7 +170,7 @@ export default {
 	mounted() {
 		console.log(this.overlayInfoConfig);
 		this.getAllTypeStationList();
-		// this.getDataStatisticsList();
+		this.getDataStatisticsList();
 	},
 };
 </script>

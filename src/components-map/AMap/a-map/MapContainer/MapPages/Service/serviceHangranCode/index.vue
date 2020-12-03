@@ -5,7 +5,7 @@
 		<!-- 1.区域 -->
 		<RegionBoundary />
 		<!-- 2.销售区域 -->
-		<SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" />
+		<!-- <SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" /> -->
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component
@@ -126,7 +126,11 @@ export default {
 			),
 			dataStatisticsList: DATASTATISTICSLIST,
 			overlayMap: SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
-			legendMap: { Grouphall, BranchCompany, ServiceStation },
+			legendMap: {
+				// Grouphall,
+				BranchCompany,
+				//  ServiceStation
+			},
 
 			mapLegendStyle: { left: '18%' },
 			activeOverlay: {},
@@ -193,15 +197,13 @@ export default {
 			console.log(overlay);
 			let { lng, lat, id, overlayType: type, detailList, name } = overlay;
 			let params = {
-				// id,
-				// type,
 				name,
-				// params: detailList.map(item => item.prop).toString(),
 			};
 			let res = await this.clickGetBranchCompanyDetialInfo(params);
 
 			this.activeOverlay = overlay;
 			this.activeOverlay.detailList = res;
+			this.showOverlayDetail = true;
 			console.log(this.activeOverlay);
 			// this.left = ['BranchCompany', 'Grouphall'].includes(type) ? 15 : 10;
 			// this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
@@ -306,6 +308,7 @@ export default {
 		this.getAllTypeStationList();
 	},
 	beforeDestroy() {
+		console.log('aaaaaaaaaaaaaa');
 		this.clearInterval();
 	},
 };

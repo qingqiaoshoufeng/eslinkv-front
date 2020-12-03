@@ -207,7 +207,6 @@ export default {
 			this.overlayMap.useHotYear.isShow = value;
 		},
 		closeOverlayDetail(done) {
-			// console.log(1111111111111);
 			this.showOverlayDetail = false;
 			done();
 		},

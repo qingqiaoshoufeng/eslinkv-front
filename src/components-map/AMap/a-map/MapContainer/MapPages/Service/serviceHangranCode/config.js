@@ -52,7 +52,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
     OperationHot: {
         label: '操作数量热力',
         legendIcon: 'icontulifengongsi',
-        // icon: 'iconfengongsi',
+        icon: 'iconfengongsi',
         component: 'OperationHot',
         isShow: false,
         dataProp: 'month'

@@ -4,12 +4,20 @@
 		:value="value"
 		@input="val => $emit('input', val)"
 	>
-		<TabPanel key="statAawareness" name="statAawareness" label="态势感知">
+		<!-- <TabPanel key="statAawareness" name="statAawareness" label="态势感知">
 			<statAawareness @change="handleClick" />
-		</TabPanel>
-		<!-- <TabPanel key="realTime" name="realTime" label="事件报警" lazy>
-			<realTime @change="handleClick" />
 		</TabPanel> -->
+		<TabPanel key="realTime" name="realTime" label="事件报警" lazy>
+			<realTime @change="handleClick" />
+		</TabPanel>
+		<TabPanel
+			key="realTimeWithLevel"
+			name="realTimeWithLevel"
+			label="事件报警"
+			lazy
+		>
+			<realTimeWithLevel @change="handleClick" />
+		</TabPanel>
 		<TabPanel key="overlayList" name="overlayList" label="点位列表" lazy>
 			<overlayList @change="handleClick" />
 		</TabPanel>
@@ -19,8 +27,8 @@
 <script>
 import { Tabs, TabPanel } from '../../../../../components/Tabs/';
 import overlayList from './overlayList';
-// import realTime from './realTime';
-// import realTimeWithLevel from './realTimeWithLevel';
+import realTime from './realTime';
+import realTimeWithLevel from './realTimeWithLevel';
 import statAawareness from './statAawareness';
 
 export default {
@@ -41,8 +49,8 @@ export default {
 		Tabs,
 		TabPanel,
 		overlayList,
-		// realTime,
-		// realTimeWithLevel,
+		realTime,
+		realTimeWithLevel,
 		statAawareness,
 	},
 	mounted() {
