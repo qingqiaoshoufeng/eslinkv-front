@@ -15,7 +15,7 @@
 					class="panel-type-icon"
 				></SvgIcon>
 				<div class="content">
-					{{ item.content }}
+					{{ item.description }}
 					<div
 						class="level"
 						:class="{
@@ -38,7 +38,7 @@
 				<div
 					:class="[
 						'status',
-						item.status == 0 ? 'status-suc' : 'status-err',
+						item.priority == '已处理' ? 'status-suc' : 'status-err',
 					]"
 				>
 					{{ item.statusText }}
@@ -71,7 +71,7 @@ export default {
 		},
 	},
 	async created() {
-		this.list = await this.$sysApi.map.home.getWarningList1();
+		this.list = await this.$sysApi.map.airSupply.getProcessWarningList();
 	},
 	watch: {
 		activeItem(val) {
@@ -99,7 +99,7 @@ export default {
 	color: #fff;
 	font-size: 16px;
 	.list-item {
-		height: 96px;
+		// height: 96px;
 		padding: 20px 8px;
 		box-sizing: border-box;
 		cursor: pointer;

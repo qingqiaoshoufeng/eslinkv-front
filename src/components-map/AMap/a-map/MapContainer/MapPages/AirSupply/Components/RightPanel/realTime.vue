@@ -15,7 +15,7 @@
 					class="panel-type-icon"
 				></SvgIcon>
 				<div class="content">
-					{{ item.content }}
+					{{ item.repairContent }}
 				</div>
 				<div>
 					{{ item.time }}
@@ -28,10 +28,10 @@
 				<div
 					:class="[
 						'status',
-						item.status == 0 ? 'status-suc' : 'status-err',
+						item.stateName == '处理完成' ? 'status-suc' : 'status-err',
 					]"
 				>
-					{{ item.statusText }}
+					{{ item.stateName }}
 				</div>
 			</div>
 		</div>
@@ -62,7 +62,6 @@ export default {
 	},
 	async created() {
 		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
-		console.log(this.list, '余志强');
 	},
 	watch: {
 		activeItem(val) {

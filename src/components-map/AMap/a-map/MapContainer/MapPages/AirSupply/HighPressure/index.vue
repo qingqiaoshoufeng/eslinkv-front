@@ -172,7 +172,7 @@ export default {
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'realTime',
+			activeTab: 'realTimeWithLevel',
 			legendMap: AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
 			overlayMap: {
 				HighPressureLine,

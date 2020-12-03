@@ -142,7 +142,7 @@ export default {
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'statAawareness',
+			activeTab: 'realTime',
 			legendMap: { LNGStation },
 			overlayMap: AIRSUPPLY_LNG_LEGEND_MAP,
 			dataStatisticsList: DATASTATISTICSLIST,

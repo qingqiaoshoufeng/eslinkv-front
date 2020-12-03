@@ -1,13 +1,14 @@
 <template>
   <div
     class="-tab-pane"
-    v-if="(!lazy || loaded) || active"
+    v-if="active"
     v-show="active"
     role="tabpan"
     :aria-hidden="!active"
     :id="`pane-${name}`"
     :aria-labledby="`tab-${name}`"
   >
+    <!-- v-if="(!lazy || loaded) || active" -->
     <slot></slot>
   </div>
 </template>

@@ -100,7 +100,6 @@ export default {
 	name: 'AirSupplyHighPressure',
 	components: {
 		OverlayDetail,
-
 		MapLegend,
 		RegionBoundary,
 		ComprehensiveServiceStation,
@@ -132,7 +131,7 @@ export default {
 	},
 	mounted() {
         this.getAllTypeStationList();
-        // this.getDataStatisticsInfo()
+        this.getDataStatisticsInfo();
 	},
 	data() {
 		let {
@@ -147,7 +146,7 @@ export default {
 			zooom: 11,
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'statAawareness',
+			activeTab: 'realTime',
 			legendMap: {
 				LiquefiedGasStation,
 				NaturalGasStation,

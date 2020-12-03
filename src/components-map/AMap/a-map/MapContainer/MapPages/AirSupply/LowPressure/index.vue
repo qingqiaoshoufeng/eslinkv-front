@@ -151,7 +151,7 @@ export default {
 			zoom: 14,
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'statAawareness',
+			activeTab: 'realTime',
 			legendMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 			overlayMap: AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP,
 			dataStatisticsList: DATASTATISTICSLIST,

@@ -158,12 +158,12 @@ let LNGstationNumber = {
 let commonUseNumber = {
     label: '常用钢瓶用户数量',
     DW: '',
-    prop: "commonUseNumber",
+    prop: "user",
 }
 let registerNumber = {
     label: '在册钢瓶数量',
     DW: '',
-    prop: "registerNumber",
+    prop: "register",
 }
 
 // 客户服务统计数据

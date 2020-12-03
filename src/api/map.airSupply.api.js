@@ -47,6 +47,28 @@ export function getStationRealTimeInfo(data) {
 		},
 	})
 }
+//高中压工艺报警
+export function getProcessWarningList(data) {
+	return request({
+		url: HANGRANURL + '/highMidPressure/detail',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+//高中压事件报警
+export function getEventWarningList(data) {
+	return request({
+		url: HANGRANURL + '/situationAwareness/list',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
 // 集团大厅站点
 //模糊匹配所有站点
 export function getAirSupplyDataStatisticsList(data) {
@@ -63,17 +85,6 @@ export function getAirSupplyDataStatisticsList(data) {
 export function getAirSupplyHighPressureList(data) {
 	return request({
 		url: DATAURL + '/map/airSupply/getAirSupplyHighPressureList',
-		method: 'get',
-		data: qs.stringify(data),
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-		},
-	})
-}
-// 事件警报
-export function getEventWarningList(data) {
-	return request({
-		url: DATAURL + '/map/airSupply/getEventWarningList',
 		method: 'get',
 		data: qs.stringify(data),
 		headers: {
