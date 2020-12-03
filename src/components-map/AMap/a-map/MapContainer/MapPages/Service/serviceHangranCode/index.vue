@@ -15,7 +15,7 @@
 					allTypeStationList[config.dataProp].length &&
 					config.component
 				"
-				:key="legend"
+				:key="config.component"
 				:visible="config.isShow"
 				:overlayIcon="config.legendIcon"
 				:iconSize="config.iconSize"
@@ -27,6 +27,7 @@
 				:ref="config.component"
 			/>
 		</template>
+
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
 			:legendMap="legendMap"
@@ -117,6 +118,7 @@ export default {
 			dataStatisticsList: DATASTATISTICSLIST,
 			overlayMap: SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
 			legendMap: { Grouphall, BranchCompany, ServiceStation },
+
 			mapLegendStyle: { left: '18%' },
 			activeOverlay: {},
 			legendMultiple: true,
@@ -204,6 +206,7 @@ export default {
 			console.log(params);
 			let res = await this.$sysApi.map.serve.getHangranCodeList(params);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			console.log(this.allTypeStationList, '余志强');
 		},
 		// 获取热力图信息
 		async getAllHotList() {
@@ -220,6 +223,7 @@ export default {
 
 			console.log(res, 1111322322);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			console.log(this.allTypeStationList, '余志强');
 		},
 		//获取站点详情
 		async getDetailInfo(params) {

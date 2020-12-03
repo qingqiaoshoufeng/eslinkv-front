@@ -9,9 +9,8 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         icon: 'iconjituandating',
         component: 'Grouphall',
         isShow: true,
-        // dataProp: 'grouphallList',
-        // dataProp: 'branchCompanyList',
-        dataProp: 'comprehensiveServiceStationList',
+        dataProp: 'grouphallList',
+
         detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
     },
     BranchCompany: {
@@ -21,9 +20,9 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
         isShow: true,
-        // dataProp: 'branchCompanyList',
-        // dataProp: 'branchCompanyList',
-        dataProp: 'comprehensiveServiceStationList',
+
+        dataProp: 'branchCompanyList',
+
         detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
     },
     ServiceStation: {
@@ -34,19 +33,18 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         component: 'ServiceStation',
         isShow: true,
         dataProp: 'comprehensiveServiceStationList',
-        // dataProp: 'comprehensiveServiceStationList',
-        // dataProp: 'branchCompanyList',
+
         detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
     },
     CouplingHot: {
         label: '联码数量热力',
         legendIcon: 'icontulixiaoqireli',
-        // icon: 'iconjituandating',
+
         component: 'CouplingHot',
         isShow: true,
-        dataProp: 'comprehensiveServiceStationList',
-        // dataProp: 'total'
-        // dataProp: 'branchCompanyList',
+
+        dataProp: 'total'
+
     },
     OperationHot: {
         label: '操作数量热力',
@@ -54,9 +52,8 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         // icon: 'iconfengongsi',
         component: 'OperationHot',
         isShow: false,
-        dataProp: 'comprehensiveServiceStationList',
-        // dataProp: 'month'
-        // dataProp: 'branchCompanyList',
+        dataProp: 'month'
+
     },
 }
 
