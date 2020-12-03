@@ -10,7 +10,7 @@
 		<div
 			class="pop-container"
 			:style="{
-				transform: `translate(${translateX}, calc(-100% - ${bottom + 15}px)`,
+				transform: `translate(${translateX}, calc(${translateY})`,
 				width,
 			}"
 		>
@@ -44,24 +44,35 @@ export default {
 		bottom: {
 			type: Number,
 			default: 19,
-		},
+        },
+        parentInfo:{
+            type:Object,
+            default(){
+                return {}
+            }
+        }
 	},
 	data() {
 		return {
 			ready: false,
 		};
-	},
+    },
+    created(){
+        console.log(this.parentInfo)
+    },
 	computed: {
 		scaleRatio() {
 			return (this.parentInfo && this.parentInfo.scaleRatio) || 1;
 		},
 		translateX() {
             let { scaleRatio } = this;
-			return '-'+((1 - scaleRatio) / scaleRatio + 1) * 50 + '%';
+            console.log(scaleRatio,'scaleRatio')
+			return `-${((1 - scaleRatio) / scaleRatio + 1) * 50}%`;
 		},
 		translateY() {
-			let { scaleRatio } = this;
-			return ((1 - scaleRatio) / scaleRatio + 1) * 50 + '%';
+            let { scaleRatio,bottom } = this;
+            let marginBottom = bottom + 14
+			return `-${(1 - scaleRatio)/scaleRatio*100 + 50}% - ${marginBottom}px`;
 		},
 	},
 	mounted() {

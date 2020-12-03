@@ -1,7 +1,7 @@
 export default function getOption(data, config) {
     return {
         grid: {
-            left: 50,
+            left: 70,
             right: 0,
             top: 45,
             bottom: 40

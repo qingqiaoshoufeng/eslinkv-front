@@ -1,5 +1,4 @@
 export default {
-	inject: ['parentInfo'],
 	props: {
 		activeItem: {
 			type: Object,
