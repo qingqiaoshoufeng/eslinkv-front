@@ -169,6 +169,18 @@ export function getServiceCustomerDetialInfo(data) {
         },
     })
 }
+// 客户服务任务工单列表
+export function getServiceCustomerTaskList(data) {
+    return request({
+        url: `${HANGRANURL}/threeSocial/task`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+
 // 集团大厅站点
 export function getGrouphallList(data) {
     return request({

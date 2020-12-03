@@ -47,7 +47,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
     },
     TaskList: {
         label: '三社联动',
-        // legendIcon: 'icontulisansheliandong',
+        legendIcon: 'icontulisansheliandong',
         iconSize: 38,
         icon: 'iconsansheliandong',
         component: 'ThreeSocialLinkage',

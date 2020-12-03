@@ -245,6 +245,19 @@ export default {
 			this.overlayMap.CouplingHot.isShow = value1;
 			this.overlayMap.OperationHot.isShow = value2;
 		},
+		// 开启定时器 展示公司详情
+		carouseComplBranchCompanyInfo() {
+			let index = 0;
+			let length = this.this.allTypeStationList.branchCompanyList.length;
+			setInterval(() => {
+				let currentIndex = index++ / length;
+				let overlay = this.allTypeStationList.branchCompanyList[
+					currentIndex
+				];
+				console.log(overlay);
+				handleOverlayClick();
+			}, 3000);
+		},
 	},
 	mounted() {
 		this.getAllHotList();
