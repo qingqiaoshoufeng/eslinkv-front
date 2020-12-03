@@ -33,7 +33,7 @@
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:detialBoxWidth="450"
+			:detialBoxWidth="detialBoxWidth"
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 			@view-detail="showOverlayDetail"
@@ -132,6 +132,8 @@ export default {
 			activeArea: '杭州钱江燃气有限公司',
 			left: 10,
 			swichBoxInfo: SWICHBOX,
+			intervalId: null,
+			detialBoxWidth: 450,
 		};
 	},
 	// created() {
@@ -176,6 +178,7 @@ export default {
 		},
 		// 点击地图marker
 		handleOverlayClick(overlay, overlayType, isCenter = false) {
+			this.clearInterval();
 			console.log(overlay);
 			let { lng, lat, id, overlayType: type, detailList, name } = overlay;
 			let params = {
@@ -205,9 +208,11 @@ export default {
 				].toString(),
 			};
 			console.log(params);
+			this.detialBoxWidth = 450;
 			let res = await this.$sysApi.map.serve.getHangranCodeList(params);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
 			console.log(this.allTypeStationList, '余志强');
+			this.carouseComplBranchCompanyInfo();
 		},
 		// 获取热力图信息
 		async getAllHotList() {
@@ -248,21 +253,43 @@ export default {
 		// 开启定时器 展示公司详情
 		carouseComplBranchCompanyInfo() {
 			let index = 0;
-			let length = this.this.allTypeStationList.branchCompanyList.length;
-			setInterval(() => {
-				let currentIndex = index++ / length;
-				let overlay = this.allTypeStationList.branchCompanyList[
-					currentIndex
-				];
-				console.log(overlay);
-				handleOverlayClick();
+			console.log(this.allTypeStationList, '余志强');
+			let length = this.allTypeStationList.branchCompanyList.length;
+			if (this.intervalId) {
+				this.clearInterval();
+			}
+			this.intervalId = setInterval(() => {
+				let currentIndex = index++ % length;
+				// let overlay =
+				this.activeOverlay = {
+					...this.allTypeStationList.branchCompanyList[currentIndex],
+					type: 'BranchCompany',
+					detailList:
+						SERVICE_SERVICEHANGRANCODE_LEGEND_MAP['BranchCompany']
+							.detailList,
+				};
+				this.detailInfo = this.activeOverlay.gasCodeMapDetailInfoVO;
+				this.showOverlayDetail = true;
+				console.log(this.activeOverlay);
+				// overlay = {overlay,type:}
+				// console.log(currentIndex);
+				// console.log(overlay);
+				// this.handleOverlayClick();
 			}, 3000);
+		},
+		// 关闭定时器
+		clearInterval() {
+			clearInterval(this.intervalId);
+			this.intervalId = null;
 		},
 	},
 	mounted() {
 		this.getAllHotList();
 		this.getDataStatisticsList();
 		this.getAllTypeStationList();
+	},
+	beforeDestroy() {
+		this.clearInterval();
 	},
 };
 </script>
