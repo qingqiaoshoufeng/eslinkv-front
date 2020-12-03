@@ -19,7 +19,7 @@
 <script>
 	import mixins from '../../mixins';
 	import getOption from './options';
-	import {getInput, getBooleanInput, getInputNumber } from '../../../../lib'
+	import {getInput, getBooleanInput, getInputNumber} from '../../../../lib'
 
 	const configSource = {
 		config: {
@@ -31,7 +31,7 @@
 				title: getInput('title', '条形图单位'),
 				showBackground: getBooleanInput('showBackground', '柱状图柱的背景'),
 				showLegend: getBooleanInput('showLegend', '显示图例'),
-        barBorderRadius: getInputNumber('barBorderRadius', '柱的圆角'),
+				barBorderRadius: getInputNumber('barBorderRadius', '柱的圆角'),
 			},
 		},
 	};
@@ -44,26 +44,26 @@
 			desc1: true,
 			desc2: true,
 			title: true,
-      showBackground: true,
-      showLegend: true,
-      barBorderRadius: true,
+			showBackground: true,
+			showLegend: true,
+			barBorderRadius: true,
 		}
 	};
 	const value = {
 		api: {
 			data: JSON.stringify({
-        legend1: '', // 没有则取config中的数据
-        legend2: '',
-        data: [
-          {yValue1: 120, yValue2: 120, xValue: '5月'},
-          {yValue1: 200, yValue2: 200, xValue: '6月'},
-          {yValue1: 150, yValue2: 150, xValue: '7月'},
-          {yValue1: 80, yValue2: 80, xValue: '8月'},
-          {yValue1: 70, yValue2: 70, xValue: '9月'},
-          {yValue1: 110, yValue2: 110, xValue: '10月'},
-          {yValue1: 130, yValue2: 130, xValue: '11月'},
-        ]
-      }),
+				legend1: '', // 没有则取config中的数据
+				legend2: '',
+				data: [
+					{yValue1: 120, yValue2: 120, xValue: '5月'},
+					{yValue1: 200, yValue2: 200, xValue: '6月'},
+					{yValue1: 150, yValue2: 150, xValue: '7月'},
+					{yValue1: 80, yValue2: 80, xValue: '8月'},
+					{yValue1: 70, yValue2: 70, xValue: '9月'},
+					{yValue1: 110, yValue2: 110, xValue: '10月'},
+					{yValue1: 130, yValue2: 130, xValue: '11月'},
+				]
+			}),
 		},
 		config: {
 			color1: '#2C99FF',
@@ -71,9 +71,9 @@
 			desc1: '工商户',
 			desc2: '居民户',
 			title: '台',
-      showLegend: true,
-      showBackground: true,
-      barBorderRadius: 4
+			showLegend: true,
+			showBackground: true,
+			barBorderRadius: 4
 		}
 	};
 	export default {
