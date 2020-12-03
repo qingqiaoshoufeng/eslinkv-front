@@ -12,6 +12,7 @@
 			@input="closePop"
 			:bottom="marginBottom"
 			:width="detialBoxWidth + 'px'"
+            :parentInfo="parentInfo"
 		>
 			<slot>
 				<div
@@ -45,7 +46,8 @@
 import { AMapMarker } from '../../lib';
 import PopContainer from '../PopContainer';
 export default {
-    name: 'OverlayDetail',
+	name: 'OverlayDetail',
+	inject: ['parentInfo'],
 	components: {
 		PopContainer,
 		ElAmapMarker: AMapMarker,
@@ -87,6 +89,9 @@ export default {
 			marginBottom: 19,
 		};
 	},
+	created() {
+		console.log(this.parentInfo, 'parentInfo');
+	},
 	watch: {
 		data(val) {
 			if (val) {
@@ -97,7 +102,7 @@ export default {
 					this.overlay = {
 						...val,
 					};
-                    let legendConfig = this.legendMap[overlayType] || {};
+					let legendConfig = this.legendMap[overlayType] || {};
 					let marginBottom = legendConfig.iconSize || 19;
 					this.marginBottom = marginBottom / 2;
 					if (!this.rendered) {

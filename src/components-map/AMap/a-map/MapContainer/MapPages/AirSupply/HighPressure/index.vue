@@ -57,7 +57,6 @@
 </template>
 <script>
 //页面覆盖物组件
-
 import {
 	ComprehensiveServiceStation,
 	LiquefiedGasStation,
@@ -81,17 +80,13 @@ import {
 	WarningList,
 } from '../Components/index.js';
 
+//页面所需公共组件
 import {
 	DataStatistics,
 	RegionBoundary,
 	OverlayDetail,
 	MapLegend,
 } from '../../../../components';
-//页面所需公共组件
-import pageMixin from '../../../../mixins/pageMixin';
-// import {
-
-// } from '../../../../../components/index.js';
 
 import {
 	INDEXSCENEMAP,
@@ -99,7 +94,8 @@ import {
 	AIRSUPPLY_WARN_COMPONENTINDEX,
 	AIRSUPPLY_WARN_MODEL_SCENEINDEX,
 	AIRSUPPLY_WARN__MODEL_COMPONENTINDEX,
-} from '../../../../config';
+} from '../../../../config/scene';
+
 import {
 	AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
 	AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP,
@@ -108,8 +104,8 @@ import {
 import GoldChart from '@/openApi';
 
 export default {
-	name: 'AirSupplyHighPressure',
-	// mixins: [pageMixin],
+    name: 'AirSupplyHighPressure',
+    inject:['parentInfo'],
 	components: {
 		RegionBoundary,
 		OverlayDetail,
@@ -139,11 +135,7 @@ export default {
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
-		this.$amap.panTo(this.center, 100);
-		// 修正地图位置
-		// this.$nextTick(() => {
-		// 	this.mapFitView(-0.2, 0.4);
-		// });
+        this.$amap.panTo(this.center, 100);
 	},
 	data() {
 		let {
@@ -195,9 +187,6 @@ export default {
 	},
 	methods: {
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			console.log(overlay);
-			console.log(overlayType);
-			console.log(11);
 			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat, address, time, index } = overlay;
 			overlay.overlayType = overlayType || overlay.overlayType;

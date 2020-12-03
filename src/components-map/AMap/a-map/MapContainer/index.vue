@@ -41,7 +41,6 @@ files.keys().forEach(key => {
 export default {
 	name: 'MainMap',
     mixins: [mapMixin],
-	inject: ['parentInfo'],
     provide(){
         return {
             parentInfo:{

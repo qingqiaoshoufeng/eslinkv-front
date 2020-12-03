@@ -81,21 +81,23 @@ import {
 import {
 	RegionBoundary,
 	OverlayDetail,
-	MapLegend,
+    MapLegend,
+    DataStatistics
 } from '../../../../components/index.js';
-import { DataStatistics } from '../../../../components';
 
+//场景相关配置
 import {
 	INDEXSCENEMAP,
-	OVERLAYINFOMAP_AIRSUPPLY,
 	AIRSUPPLY_WARN_SCENEINDEX,
 	AIRSUPPLY_WARN_COMPONENTINDEX,
-} from '../../../../config';
+} from '../../../../config/scene';
+//页面配置
 import {
 	DATASTATISTICSLIST,
 	AIRSUPPLY_LNG_OVERLAY_MAP,
 	AIRSUPPLY_LNG_LEGEND_MAP,
 } from './config.js';
+//系统公共api
 import GoldChart from '@/openApi';
 
 export default {
