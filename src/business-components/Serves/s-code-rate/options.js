@@ -15,24 +15,13 @@ export default function (data) {
                         "show": false
                     },
                     itemStyle: {
-                        color: {
-                            type: "linear",
-                            x: 0,
-                            y: 1,
-                            x2: 0,
-                            y2: 0,
-                            colorStops: [
-                                {
-                                    offset: 0,
-                                    color: "rgba(0,255,207,0)" // 0% 处的颜色
-                                },
-                                {
-                                    offset: 1,
-                                    color: "rgba(0,255,207,1)" // 100% 处的颜色
-                                }
-                            ],
-                            global: false // 缺省为 false
-                        }
+                        color: new echarts.graphic.LinearGradient(0, 0, 1, 0, [{
+                            offset: 0,
+                            color: 'rgba(0,255,207,0)'
+                        }, {
+                            offset: 1,
+                            color: 'rgba(0,255,207,1)'
+                        }]),
                     },
                     labelLine: {show: false}
                 },
