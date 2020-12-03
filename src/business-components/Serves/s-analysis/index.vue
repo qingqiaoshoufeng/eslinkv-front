@@ -1,11 +1,11 @@
 <template>
-	<div class="widget-part pos-r" :style="styles">
+	<div class="widget-part pos-r" :style="styles" v-if="data">
 		<div class="analysis-box">
 			<div class="h-line-1" :id="id" />
 			<div class="context">
-				<div v-for="(item,index) in data&&data.dataList" :key="index" class="context-item">
+				<div v-for="(item,index) in data.dataList" :key="index" class="context-item">
 					<div class="item-name">{{item.name}}</div>
-					<div class="item-value">{{item.value}}</div>
+					<div class="item-value">{{item.value | toThousand }}</div>
 				</div>
 			</div>
 		</div>
@@ -13,7 +13,7 @@
 </template>
 <script>
 import mixins from '../../mixins';
-import options from './options';
+import getOption from './options';
 
 const config = { animation: true };
 const value = {
@@ -23,27 +23,27 @@ const value = {
 				{
 					name: '安装',
 					value: 2430,
-					maxValue: 5340,
+					percent: 0.67,
 				},
 				{
 					name: '开户',
 					value: 4312,
-					maxValue: 5340,
+          percent: 0.55,
 				},
 				{
 					name: '维修',
 					value: 5340,
-					maxValue: 5340,
+          percent: 0.67,
 				},
 				{
 					name: '咨询',
 					value: 340,
-					maxValue: 540,
+          percent: 0.3,
 				},
 				{
 					name: '其他',
 					value: 2430,
-					maxValue: 5340,
+          percent: 0.56,
 				},
 			],
 		}),
@@ -53,14 +53,7 @@ export default {
 	mixins: [mixins],
 	methods: {
 		setOption(data) {
-			options.series.data[0].value = data.dataList.map(
-				item => item.value
-			);
-			options.radar.indicator = data.dataList.map(item => {
-				return { name: item.name, max: item.maxValue };
-			});
-			console.log(options);
-			this.instance && this.instance.setOption(options);
+			this.instance && this.instance.setOption(getOption(this.data));
 		},
 	},
 	watch: {
@@ -86,7 +79,7 @@ export default {
 	},
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .analysis-box {
 	display: flex;
 	.h-line-1 {
