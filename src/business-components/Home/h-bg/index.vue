@@ -1,8 +1,10 @@
 <template>
 	<div class="widget-part pos-r" :style="`${styles}left:0px;top:0px;z-index:13;`">
-		<div class="h-bg pos-r">
-			<video class="pos-a bg-video" src="./img/bg1.webm" autoplay="autoplay" ref="video1"></video>
-			<video class="pos-a bg-video" src="./img/bg2.webm" autoplay="autoplay" ref="video2" loop="loop"></video>
+		<div class="h-bg pos-r" :class="{bg54441: status54441}">
+			<template v-if="!status54441">
+        <video class="pos-a bg-video" src="./img/bg1.webm" autoplay="autoplay" @ended="video1Ended = true" v-if="!video1Ended"></video>
+        <video class="pos-a bg-video" src="./img/bg2.webm" autoplay="autoplay" loop="loop" v-else></video>
+      </template>
 			<div class="h-bg-top pos-a"></div>
 			<div class="h-bg-control pos-a"></div>
 			<div class="h-bg-left pos-a"></div>
@@ -43,6 +45,7 @@
 	import GoldChart from '../../../openApi'
 	import hBg54441 from './h-bg-54441'
 	import {getInput} from '../../../../lib'
+  import Template from "@lib/views/core/kanboard-editor/mixins/template";
 
 	const configSource = {
 		config: {
@@ -65,6 +68,7 @@
 	export default {
 		data() {
 			return {
+        video1Ended: false,
 				status54441: false,
 				statusVideo: false,
 				statusStart: false,
@@ -72,6 +76,7 @@
 		},
 		mixins: [mixins],
 		components: {
+      Template,
 			hBg54441
 		},
 		beforeDestroy() {
@@ -88,9 +93,6 @@
 					GoldChart.scene.createSceneInstance(JSON.parse(this.config.config.sceneId)[0], 'fadeIn', 'none')
 				}
 			}
-			this.$refs.video1.addEventListener("ended", function () {
-				this.$refs.video1.style.display = 'none'
-			})
 		},
 		methods: {
 			handleStart() {
@@ -133,7 +135,7 @@
 		}
 	}
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	.h-bg-start1-box {
 		left: 50%;
 		bottom: 27px;
@@ -278,6 +280,11 @@
 		background-repeat: no-repeat;
 		overflow: hidden;
 		top: 0;
+
+    &.bg54441 {
+      background: url("./img/bg-54441.png") no-repeat;
+      background-size: 100% 100%;
+    }
 
 		.bg-video {
 			height: 100%;
