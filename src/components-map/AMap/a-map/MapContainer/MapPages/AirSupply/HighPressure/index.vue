@@ -104,8 +104,8 @@ import {
 import GoldChart from '@/openApi';
 
 export default {
-    name: 'AirSupplyHighPressure',
-    inject:['parentInfo'],
+	name: 'AirSupplyHighPressure',
+	inject: ['parentInfo'],
 	components: {
 		RegionBoundary,
 		OverlayDetail,
@@ -135,7 +135,7 @@ export default {
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
-        this.$amap.panTo(this.center, 100);
+		this.$amap.panTo(this.center, 100);
 	},
 	data() {
 		let {
@@ -360,6 +360,14 @@ export default {
 		// 获取高压统计数据
 		async getDataStatisticsInfo() {
 			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo();
+		},
+		// 获取高压管网数据
+		async getDataStatisticsInfo() {
+            let pipeData = await this.$sysApi.map.airSupply.getHighPressurePipe();
+            this.allTypeStationList = {
+                ...this.allTypeStationList,
+                ...pipeData
+            }
 		},
 	},
 	mounted() {

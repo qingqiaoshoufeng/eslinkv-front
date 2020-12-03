@@ -71,7 +71,7 @@ export default {
 		},
 		translateY() {
             let { scaleRatio,bottom } = this;
-            let marginBottom = (bottom )*scaleRatio + 20
+            let marginBottom = bottom + 14
 			return `-${(1 - scaleRatio)/scaleRatio*100 + 50}% - ${marginBottom}px`;
 		},
 	},

@@ -17,14 +17,14 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
         legendIcon: 'icontuligaoyaguanwang',
         component: 'HighPressureLine',
         isShow: true,
-        dataProp: ""
+        dataProp: "highPressureLine"
     },
     HighPressureLine_Process: {
         label: '高压管网(建设中)',
         legendIcon: 'icontulizhongyaguanwang-progress',
         component: 'HighPressureLine_Process',
         isShow: true,
-        dataProp: ""
+        dataProp: "highPressureLine_Process"
     },
     MiddlePressureLine: {
         label: '中压管网',

@@ -25,6 +25,17 @@ export function getHighPressureStatisticsInfo(data) {
         },
     })
 }
+// 高压管网（包括是否建成）
+export function getHighPressurePipe(data) {
+    return request({
+        url: HANGRANURL + '/applyAir/applyAirPipeResult',
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
 // 集团大厅站点
 //模糊匹配所有站点
 export function getAirSupplyDataStatisticsList(data) {
