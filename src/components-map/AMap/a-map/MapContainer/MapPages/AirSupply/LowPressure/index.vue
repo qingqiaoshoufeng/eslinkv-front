@@ -1,9 +1,12 @@
 <template>
 	<div>
 		<!-- 1.legend不控制显隐的覆盖物 -->
-		<!-- 区域 -->
-		<!-- <RegionBoundary /> -->
-		<!-- 中低压管网 -->
+		<!-- 1.1 报警点位-->
+		<WarningList
+			:visible="true"
+			:overlayIcon="config.icon ? config.icon : config.legendIcon"
+		/>
+		<!-- 特殊 中低压管网需要legend控制显隐 -->
 		<AMapTile
 			ref="mapTile"
 			:visible="!!tilesQuery.length"
@@ -12,11 +15,7 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component
-				v-if="
-					config.isShow &&
-					allTypeStationList[config.dataProp] &&
-					config.component
-				"
+				v-if="config.component"
 				:key="legend"
 				:visible="config.isShow"
 				:is="config.component"
@@ -30,7 +29,6 @@
 				"
 				@overlay-click="handleOverlayClick"
 				:detailList="config.detailList"
-				:data="allTypeStationList[config.dataProp]"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->
@@ -73,10 +71,10 @@ import {
 	NaturalGasStation,
 	DistributedEnergyResource,
 	LNGStation,
-	HighPressureLine,
-	HighPressureLine_Process,
 	InspectionPerson,
-	GasStation,
+    GasStation, 
+    // HighPressureLine,
+	// HighPressureLine_Process,
 	// PressureRegulatingStation,
 	EmergencyAirSourceStation,
 	PipeManageMentStation,
@@ -92,7 +90,6 @@ import { AMapTile } from '../../../../lib';
 
 //页面所需公共组件
 import {
-	RegionBoundary,
 	OverlayDetail,
 	MapLegend,
 } from '../../Components/index.js';
@@ -113,15 +110,15 @@ import GoldChart from '@/openApi';
 import getHangZhouGasGISPosition from '../../../../utils/getHangZhouGasGISPosition';
 
 export default {
-	name: 'AirSupplyHighPressure',
+	name: 'LowPressure',
 	components: {
 		OverlayDetail,
 		ComprehensiveServiceStation,
 		DistributedEnergyResource,
 		EmergencyAirSourceStation,
 		GasStation,
-		HighPressureLine,
-		HighPressureLine_Process,
+		// HighPressureLine,
+		// HighPressureLine_Process,
 		InspectionCar,
 		InspectionPerson,
 		LiquefiedGasStation,
@@ -129,15 +126,12 @@ export default {
 		LNGStation,
 		NaturalGasStation,
 		PipeManageMentStation,
-		// PressureRegulatingStation,
 		UndergroundRepairStation,
 		ServiceStation,
-		RegionBoundary,
 		RightPanel,
 		RoutePlan,
 		MapLegend,
 		AMapTile,
-		// PressureRegulatingStation,
 		OngroundRepairStation,
 		DataStatistics,
 		WarningList,
@@ -151,17 +145,6 @@ export default {
 		this.getAllTypeStationList();
 	},
 	data() {
-		let {
-			MiddlePressureLine,
-			LowPressureLine,
-
-			InspectionCar,
-			InspectionPerson,
-			ServiceStation,
-			PipeManageMentStation,
-			UndergroundRepairStation,
-			OngroundRepairStation,
-		} = AIRSUPPLY_LOWPRESSURE_LEGEND_MAP;
 		return {
 			overlayInfoConfig: Object.freeze(AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP),
 			activeOverlay: {},
@@ -170,17 +153,8 @@ export default {
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'statAawareness',
-			legendMap: {
-				MiddlePressureLine,
-				LowPressureLine,
-				InspectionCar,
-				InspectionPerson,
-				ServiceStation,
-				PipeManageMentStation,
-				UndergroundRepairStation,
-				OngroundRepairStation,
-			},
-			overlayMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
+			legendMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
+			overlayMap: AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP,
 			dataStatisticsList: DATASTATISTICSLIST,
 			dataStatisticsInfo: {
 				Mediumline: 2627,
@@ -200,6 +174,7 @@ export default {
 				LowPressureLine,
 				PressureRegulatingStation,
 			} = this.legendMap;
+			console.log(this.legendMap, 'legendMap');
 			const {
 				isShow: isShowM,
 				tileQuery: tileQueryM,
@@ -229,7 +204,6 @@ export default {
 	methods: {
 		// 获取所有站点数据
 		async getAllTypeStationList() {
-			console.log(1111111);
 			let params = {
 				types: [
 					// 'InspectionPerson', // '巡检人员',

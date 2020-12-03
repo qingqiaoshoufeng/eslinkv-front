@@ -45,7 +45,7 @@
 import { AMapMarker } from '../../../../lib';
 import { PopContainer } from '../../../../components/index';
 export default {
-	name: 'OverlayDetail',
+    name: 'OverlayDetail',
 	components: {
 		PopContainer,
 		ElAmapMarker: AMapMarker,

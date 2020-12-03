@@ -99,7 +99,7 @@ import {
 import GoldChart from '@/openApi';
 
 export default {
-	name: 'AirSupplyHighPressure',
+	name: 'LNG',
 	components: {
 		LNGStation,
 		RightPanel,
