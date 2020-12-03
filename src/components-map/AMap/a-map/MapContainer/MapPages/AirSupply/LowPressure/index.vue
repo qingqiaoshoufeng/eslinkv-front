@@ -71,10 +71,9 @@ import {
 	NaturalGasStation,
 	DistributedEnergyResource,
 	LNGStation,
-
 	InspectionPerson,
-    GasStation, 
-    // HighPressureLine,
+	GasStation,
+	// HighPressureLine,
 	// HighPressureLine_Process,
 	// PressureRegulatingStation,
 	EmergencyAirSourceStation,
@@ -90,10 +89,7 @@ import {
 import { AMapTile } from '../../../../lib';
 
 //页面所需公共组件
-import {
-	OverlayDetail,
-	MapLegend,
-} from '../../../../components/index.js';
+import { OverlayDetail, MapLegend } from '../../../../components/index.js';
 import { DataStatistics } from '../../../../components';
 
 import {

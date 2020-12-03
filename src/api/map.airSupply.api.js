@@ -14,7 +14,17 @@ export function getAllTypeStationList(data) {
         },
     })
 }
-
+// 高压统计数据 
+export function getHighPressureStatisticsInfo(data) {
+    return request({
+        url: HANGRANURL + '/airFeed/rightIndex',
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
 // 集团大厅站点
 //模糊匹配所有站点
 export function getAirSupplyDataStatisticsList(data) {

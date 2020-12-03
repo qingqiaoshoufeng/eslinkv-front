@@ -44,6 +44,16 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         isShow: true,
         dataProp: 'threeSocialLinkageList',
         detailList: []
+    },
+    TaskList: {
+        label: '三社联动',
+        // legendIcon: 'icontulisansheliandong',
+        iconSize: 38,
+        icon: 'iconsansheliandong',
+        component: 'ThreeSocialLinkage',
+        isShow: false,
+        dataProp: 'threeSocialLinkageList',
+        detailList: []
     }
 }
 

@@ -357,9 +357,14 @@ export default {
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
 			console.log(this.allTypeStationList);
 		},
+		// 获取高压统计数据
+		async getDataStatisticsInfo() {
+			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo();
+		},
 	},
 	mounted() {
 		this.getAllTypeStationList();
+		this.getDataStatisticsInfo();
 	},
 };
 </script>

@@ -9,7 +9,7 @@
 			apiFun,
 			detailList,
 			nameStyle,
-            ...$attrs
+			...$attrs,
 		}"
 		@click="
 			marker =>

@@ -33,11 +33,11 @@ export default {
 			type: String,
 			default: '',
 		},
-    },
+	},
 	data() {
-        let apiFun = this.$sysApi.map.home.getDistributedEnergyResourceList;
+		let apiFun = this.$sysApi.map.home.getDistributedEnergyResourceList;
 		return {
-				apiFun: apiFun,
+			apiFun: apiFun,
 		};
 	},
 };

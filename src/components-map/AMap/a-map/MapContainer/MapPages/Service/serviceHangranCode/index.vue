@@ -51,7 +51,7 @@
 				class="map-legend"
 				:style="mapLegendStyle"
 			/>
-            
+
 			<!-- 统计数据 -->
 			<DataStatistics
 				:position="'left'"

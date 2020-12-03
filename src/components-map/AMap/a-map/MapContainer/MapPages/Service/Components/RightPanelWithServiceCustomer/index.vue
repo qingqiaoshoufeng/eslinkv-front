@@ -7,19 +7,17 @@
 		class="right-panel"
 		enter="animate__animated animate__fadeInRight"
 	> -->
-		<Tabs class="tabs-container animate__animated animate__fadeInRight" v-model="currentTab">
-			<TabPanel key="realTime" name="realTime" label="任务工单" lazy>
-				<realTime @change="handleClick" />
-			</TabPanel>
-			<TabPanel
-				key="overlayList"
-				name="overlayList"
-				label="三社联动"
-				lazy
-			>
-				<overlayList @change="handleClick" />
-			</TabPanel>
-		</Tabs>
+	<Tabs
+		class="tabs-container animate__animated animate__fadeInRight"
+		v-model="currentTab"
+	>
+		<TabPanel key="realTime" name="realTime" label="任务工单" lazy>
+			<realTime @change="handleClick" />
+		</TabPanel>
+		<TabPanel key="overlayList" name="overlayList" label="三社联动" lazy>
+			<overlayList @change="handleClick" />
+		</TabPanel>
+	</Tabs>
 	<!-- </DashboardPanel> -->
 </template>
 
@@ -75,7 +73,7 @@ export default {
 	top: 148px;
 	width: 480px;
 	z-index: 100;
-    max-height: 860px;
+	max-height: 860px;
 }
 .tabs-container {
 	max-height: 846px;

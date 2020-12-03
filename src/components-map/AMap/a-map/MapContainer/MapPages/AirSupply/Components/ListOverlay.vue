@@ -21,7 +21,7 @@ export default {
 	name: 'ListOverlay',
 	components: {
 		BaseOverlay,
-    },
+	},
 	methods: {
 		async getData() {
 			let eventTypeIconMap = {
@@ -39,10 +39,10 @@ export default {
 					}
 					item.icon = icon;
 					return item;
-                });
+				});
 				resolve(list);
 			});
-        },
+		},
 		handleOverlayClick(marker) {
 			this.$emit('overlay-click', marker, 'WARN');
 		},

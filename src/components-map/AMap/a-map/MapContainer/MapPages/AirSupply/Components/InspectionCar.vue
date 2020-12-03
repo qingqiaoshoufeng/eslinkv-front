@@ -11,7 +11,7 @@
 	/>
 </template>
 <script>
-import {BaseOverlay} from '../../../../components/index';
+import { BaseOverlay } from '../../../../components/index';
 export default {
 	name: 'InspectionCar',
 	components: {
@@ -30,11 +30,11 @@ export default {
 			type: String,
 			default: '',
 		},
-    },
+	},
 	data() {
 		let apiFun = this.$sysApi.map.home.getInspectionCarList;
 		return {
-				apiFun: apiFun,
+			apiFun: apiFun,
 		};
 	},
 };
