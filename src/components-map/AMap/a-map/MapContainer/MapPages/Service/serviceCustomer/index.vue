@@ -71,6 +71,7 @@ import {
 	BranchCompany,
 	RightPanelWithServiceCustomer,
 	TipDetial,
+	TaskList,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -105,6 +106,7 @@ export default {
 		RightPanelWithServiceCustomer,
 		MapLegend,
 		TipDetial,
+		TaskList,
 	},
 	data() {
 		return {
@@ -172,7 +174,7 @@ export default {
 			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-			this.$amap.setZoom(11, 100);
+			// this.$amap.setZoom(11, 100);
 			done();
 		},
 		viewOverlayDetail(overlay) {
@@ -271,7 +273,7 @@ export default {
 				THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
 					GoldChart.instance.updateComponent(i, {
 						data: {
-							title: `${this.OverlayDetail.name}`,
+							title: `${this.activeOverlay.name}`,
 							startTime: '2020/10/01  08:30',
 							endTime: '2020/10/01  08:30',
 							place: '桂花城紫云苑',
@@ -334,9 +336,22 @@ export default {
 		},
 		// 获取任务工单列表
 		async getTasklist() {
-			let res = await this.$sysApi.map.serve.getServiceCustomerTaskList;
-			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			let TaskList = await this.$sysApi.map.serve.getServiceCustomerTaskList();
+			this.allTypeStationList = {
+				...this.allTypeStationList,
+				TaskList,
+			};
+			console.log(this.allTypeStationList);
 		},
+		// // 获取三社联动列表
+		// async getServiceCustomerThreeSocialList() {
+		// 	let threeSocialLinkageList = await this.$sysApi.map.serve
+		// 		.getServiceCustomerThreeSocialList;
+		// 	this.allTypeStationList = {
+		// 		...this.allTypeStationList,
+		// 		...threeSocialLinkageList,
+		// 	};
+		// },
 		// 查看详情接口
 		getDetailInfo(params) {
 			return this.$sysApi.map.serve.getServiceCustomerDetialInfo(params);

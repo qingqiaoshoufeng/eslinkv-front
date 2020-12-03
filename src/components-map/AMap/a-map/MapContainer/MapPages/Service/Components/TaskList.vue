@@ -17,7 +17,7 @@
 				})
 			"
 		>
-			<video
+			<!-- <video
 				class="warning-videO"
 				src="@/assets/amap/images/warning-circle.webm"
 				controls="controls"
@@ -25,15 +25,15 @@
 				muted="muted"
 				loop
 				v-if="item.status === '1'"
-			></video>
+			></video> -->
 		</Overlay>
 	</div>
 </template>
 <script>
 import { Overlay } from '../../../../components/index';
 let eventTypeIconMap = {
-	0: 'icontuli-gongshanghu',
-	1: 'iconyongqidahu2',
+	0: 'iconrenwugongdan-suc',
+	1: 'iconrenwugongdan',
 };
 export default {
 	name: 'useHotYear',
@@ -68,6 +68,7 @@ export default {
 		this.map = this.$parent.$amap;
 
 		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
+		console.log(this.list);
 		// console.log(res);
 		// this.list = res.filter(item => item.status);
 		// console.log(this.list, 1111);

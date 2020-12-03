@@ -198,6 +198,18 @@ export function getServiceCustomerTaskList(data) {
         },
     })
 }
+// 客户服务三社联动信息
+
+export function getServiceCustomerThreeSocialList(data) {
+    return request({
+        url: `${HANGRANURL}/threeSocial/event`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
 
 // 集团大厅站点
 export function getGrouphallList(data) {

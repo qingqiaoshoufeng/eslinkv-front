@@ -5,7 +5,7 @@
 		<!-- 1.区域 -->
 		<RegionBoundary />
 		<!-- 2.销售区域 -->
-		<!-- <SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" /> -->
+		<SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" />
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component

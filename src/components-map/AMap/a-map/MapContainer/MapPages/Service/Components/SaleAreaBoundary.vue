@@ -49,12 +49,12 @@ export default {
 						path: saleAreaJson[area],
 						map,
 						zIndex: 2000,
-						strokeWeight: 2,
+						strokeWeight: 1,
 						fillOpacity: 0,
 						fillColor: '#0085FF',
 						strokeOpacity: 1,
 						strokeStyle: 'dashed',
-						strokeColor: '#FFDC45',
+						strokeColor: '#00DDFF',
 						extData: {
 							area: area,
 						},
@@ -83,8 +83,8 @@ export default {
 							});
 						}
 					});
-                    this.instanceArr.push(instance);
-                    //默认选中
+					this.instanceArr.push(instance);
+					//默认选中
 					if (this.value) {
 						let instanceIndex = this._instanceMap[this.value];
 						this.instanceArr[instanceIndex].setOptions({
