@@ -34,7 +34,21 @@
 			ref="OverlayDetail"
 			:left="left"
 			:detialBoxWidth="400"
-		/>
+		>
+			<template v-if="activeOverlay.detail">
+				<div class="detail-name">{{ activeOverlay.name }}</div>
+				<div
+					class="fn-flex"
+					v-for="(item, prop) in activeOverlay.detail"
+					:key="prop"
+				>
+					<div class="detail-label">{{ item.name }}：</div>
+					<div class="detail-value">
+						{{ item.value }}{{ item.dw }}
+					</div>
+				</div>
+			</template>
+		</OverlayDetail>
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
 		<portal to="destination">
@@ -153,7 +167,7 @@ export default {
 			overlayInfoConfig: Object.freeze(
 				AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP
 			),
-			center: [120.061259, 30.183295],
+			center: [120.061259, 30.233295],
 			zoom: 10,
 			activeOverlay: {},
 			showOverlayDetail: false,
@@ -359,21 +373,21 @@ export default {
 		},
 		// 获取高压统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo();
+			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo({type:'HighPressure'});
 		},
 		// 获取高压管网数据
 		async getHighPressurePipe() {
-            let pipeData = await this.$sysApi.map.airSupply.getHighPressurePipe();
-            this.allTypeStationList = {
-                ...this.allTypeStationList,
-                ...pipeData
-            }
+			let pipeData = await this.$sysApi.map.airSupply.getHighPressurePipe();
+			this.allTypeStationList = {
+				...this.allTypeStationList,
+				...pipeData,
+			};
 		},
 	},
 	mounted() {
 		this.getAllTypeStationList();
-        this.getDataStatisticsInfo();
-        this.getHighPressurePipe();
+		this.getDataStatisticsInfo();
+		this.getHighPressurePipe();
 	},
 };
 </script>
@@ -383,5 +397,18 @@ export default {
 	bottom: 50px;
 	left: 50%;
 	transform: translateX(-50%);
+}
+.detail-name {
+	font-weight: 600;
+	font-size: 32px;
+	color: #ffdc45;
+}
+.detail-label {
+	font-size: 24px;
+	color:#fff;
+}
+.detail-value {
+	font-size: 24px;
+	color:#ffdc45;
 }
 </style>

@@ -131,7 +131,8 @@ export default {
 		this.$amap.panTo(this.center, 100);
 	},
 	mounted() {
-		this.getAllTypeStationList();
+        this.getAllTypeStationList();
+        // this.getDataStatisticsInfo()
 	},
 	data() {
 		let {
@@ -171,7 +172,7 @@ export default {
 					// 'GasStation', // '门站',
 					// 'PressureRegulatingStation', // '调压站',
 					// 'EmergencyAirSourceStation', // '应急气源站',
-					// 'ServiceStation', // '综合服务站',
+					'ServiceStation', // '综合服务站',
 					// 'PipeManageMentStation', // '管网运行管理站',
 					// 'UndergroundRepairStation', // '地下抢修点',
 					'OngroundRepairStation', // '地上抢修点',
@@ -185,7 +186,12 @@ export default {
 				params
 			);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-			console.log(this.allTypeStationList);
+        },
+        		// 获取统计数据
+		async getDataStatisticsInfo() {
+			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
+				{ type: 'UCAN' }
+			);
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat } = overlay;

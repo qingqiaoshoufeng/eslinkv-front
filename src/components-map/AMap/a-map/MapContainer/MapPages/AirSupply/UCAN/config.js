@@ -101,15 +101,15 @@ export const AIRSUPPLY_UCAN_LEGEND_MAP = {
     //     component: 'EmergencyAirSourceStation',
     //     isShow: false,
     // },
-    // ServiceStation: {
-    //     label: '综合服务站',
-    //     legendIcon: 'icontulizonghefuwuzhan1',
-    //     iconSize: 38,
-    //     component: 'ServiceStation',
-    //     isShow: false,
-    //     dataProp: 'comprehensiveServiceStationList',
-    //     // detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
-    // },
+    ServiceStation: {
+        label: '综合服务站',
+        legendIcon: 'icontulizonghefuwuzhan1',
+        iconSize: 38,
+        component: 'ServiceStation',
+        isShow: false,
+        dataProp: 'comprehensiveServiceStationList',
+        // detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
+    },
     // PipeManageMentStation: {
     //     label: '管网运行管理站',
     //     legendIcon: 'icontuliqiyuanzhan',

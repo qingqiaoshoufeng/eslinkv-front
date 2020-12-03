@@ -8,7 +8,7 @@
 			...$attrs,
 			data,
 		}"
-		@click="marker => $emit('overlay-click', marker, 'GasStation')"
+		@click="handleOverlayClick"
 	>
 		<template slot-scope="{ data }">
 			<div :class="[{ active: active }, data.inletDirection]">
@@ -59,7 +59,46 @@ export default {
 		let apiFun = this.$sysApi.map.home.getGasStationList;
 		return {
 			apiFun: apiFun,
+			propDwMap: {
+				flow: 'm³/h',
+				inPressure: 'MPa',
+				inTemp: '℃',
+				outPressure: 'MPa',
+				outTemp: '℃',
+				todayAirFeed: 'm³',
+			},
 		};
+	},
+	methods: {
+		async handleOverlayClick(marker) {
+			let { id, name, type } = marker;
+			let data = await this.$sysApi.map.airSupply.getStationRealTimeInfo({
+				id,
+				name,
+				type,
+			});
+			let dataComp = {};
+			Object.keys(data).forEach(prop => {
+				let dw = this.propDwMap[prop];
+				if (typeof data[prop] !== 'object') {
+					return false;
+				}
+				data[prop].forEach((item, index) => {
+					let { name, value } = item;
+					let propInner = prop + index;
+					dataComp[propInner] = {
+						name,
+                        value: value,
+                        dw
+					};
+				});
+			});
+			this.$emit(
+				'overlay-click',
+				{ ...marker, detail: dataComp },
+				'GasStation'
+			);
+		},
 	},
 };
 </script>

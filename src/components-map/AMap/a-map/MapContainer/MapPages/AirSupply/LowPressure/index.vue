@@ -2,10 +2,10 @@
 	<div>
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 1.1 报警点位-->
-		<WarningList
+		<!-- <WarningList
 			:visible="true"
 			:overlayIcon="config.icon ? config.icon : config.legendIcon"
-		/>
+		/> -->
 		<!-- 特殊 中低压管网需要legend控制显隐 -->
 		<AMapTile
 			ref="mapTile"
@@ -27,7 +27,7 @@
 						? config.showOverlayName
 						: undefined
 				"
-                :data="allTypeStationList[config.dataProp]"
+				:data="allTypeStationList[config.dataProp]"
 				@overlay-click="handleOverlayClick"
 				:detailList="config.detailList"
 			/>
@@ -140,7 +140,8 @@ export default {
 		this.$amap.panTo(this.center, 100);
 	},
 	mounted() {
-		this.getAllTypeStationList();
+        this.getAllTypeStationList();
+        this.getDataStatisticsInfo()
 	},
 	data() {
 		return {
@@ -224,7 +225,12 @@ export default {
 				params
 			);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-			console.log(this.allTypeStationList);
+		},
+		// 获取统计数据
+		async getDataStatisticsInfo() {
+			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
+				{ type: 'LowPressure' }
+			);
 		},
 		getTileUrl(x, y, zoom) {
 			const tilesQuery = String(this.tilesQuery);

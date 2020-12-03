@@ -169,12 +169,7 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
 				style: {
 					fontSize: '24px',
 				},
-			},
-			inlet: {
-				style: {
-					fontSize: '18px',
-				},
-			},
+            },
 		},
 	},
 	PressureRegulatingStation: {
