@@ -51,12 +51,12 @@ import {
 
 import { DataStatistics } from '../../../../components';
 //页面所需公共组件
-import pageMixin from '../../mixins/pageMixin';
+import pageMixin from '../../../../mixins/pageMixin';
 import {
 	RegionBoundary,
 	OverlayDetail,
 	MapLegend,
-} from '../../Components/index.js';
+} from '../../../../components/index.js';
 
 import {
 	INDEXSCENEMAP,

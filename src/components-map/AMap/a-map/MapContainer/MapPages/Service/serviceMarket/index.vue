@@ -48,7 +48,7 @@ import {
 	RegionBoundary,
 	OverlayDetail,
 	MapLegend,
-} from '../../Components/index.js';
+} from '../../../../components/index.js';
 import {
 	SERVICE_SERVICEMARKET_OVERLAY_MAP,
 	SERVICE_SERVICEMARKET_LEGEND_MAP,

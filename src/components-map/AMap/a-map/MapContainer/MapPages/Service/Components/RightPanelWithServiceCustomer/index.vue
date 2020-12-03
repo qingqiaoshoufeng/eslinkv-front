@@ -25,7 +25,7 @@
 
 <script>
 import { DashboardPanel } from '../../../../../components/';
-import { Tabs, TabPanel } from '../../../Components/Tabs/';
+import { Tabs, TabPanel } from '../../../../../components/Tabs/';
 import overlayList from './overlayList';
 import realTime from './realTime';
 export default {

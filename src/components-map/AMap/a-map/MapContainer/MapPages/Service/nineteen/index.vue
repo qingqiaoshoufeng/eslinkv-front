@@ -54,7 +54,7 @@ import {
 	RegionBoundary,
 	OverlayDetail,
 	MapLegend,
-} from '../../Components/index.js';
+} from '../../../../components/index.js';
 // 页面配置项
 
 import { DataStatistics } from '../../../../components';

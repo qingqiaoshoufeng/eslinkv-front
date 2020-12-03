@@ -13,7 +13,7 @@
 	</Overlay>
 </template>
 <script>
-import { Overlay } from '../../../Components/index';
+import { Overlay } from '../../../../../components/index';
 let eventTypeIconMap = {
 	0: 'iconbaoguanshijian',
 	1: 'iconxieloushijian',

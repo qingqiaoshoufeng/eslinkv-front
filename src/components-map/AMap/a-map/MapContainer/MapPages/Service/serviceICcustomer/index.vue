@@ -83,7 +83,7 @@ import {
 	RegionBoundary,
 	OverlayDetail,
 	MapLegend,
-} from '../../Components/index.js';
+} from '../../../../components/index.js';
 import { DataStatistics } from '../../../../components';
 import {
 	SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,

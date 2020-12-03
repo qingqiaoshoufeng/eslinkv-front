@@ -80,8 +80,8 @@ import {
 	RegionBoundary,
 	OverlayDetail,
 	MapLegend,
-} from '../../Components/index.js';
-import pageMixin from '../../mixins/pageMixin';
+} from '../../../../components/index.js';
+import pageMixin from '../../../../mixins/pageMixin';
 import {
 	SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
 	SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP,
