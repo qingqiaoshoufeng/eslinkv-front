@@ -182,12 +182,6 @@
 			this.configValue = this.parseConfigValue(config, value)
 		},
 		mounted() {
-			// const _self = this.$refs.img
-			// setTimeout(() => {
-			// 	_self.style.transform = `perspective(763px) rotateY(${this.config.config.transform}deg) translateZ(-120px)`
-			// 	_self.style.left = `${this.config.config.left}px`
-			// }, 1500)
-
 			this.animateTimer = setInterval(() => {
 				if (this.animateActiveIndex < 4) {
 					this.animateActiveIndex = this.animateActiveIndex + 1
@@ -360,7 +354,7 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
-			font-size: 18px;
+			font-size: 20px;
 			line-height: 24px;
 			color: #FFFFFF;
 			background-color: rgba(0, 87, 169, 0.5);
