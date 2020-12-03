@@ -40,7 +40,13 @@
 			ref="OverlayDetail"
 			:left="left"
 		>
-			<TipDetial :data="activeOverlay" :detailInfo="detailInfo" />
+			<component
+				:is="detailComponentName"
+				:data="activeOverlay"
+				:detailInfo="detailInfo"
+			/>
+			<!-- <TipDetial :data="activeOverlay" :detailInfo="detailInfo"  /> -->
+			<!-- <ClickTipDetial :data="activeOverlay" :detailInfo="detailInfo" /> -->
 		</OverlayDetail>
 
 		<portal to="destination">
@@ -73,6 +79,7 @@ import {
 	BranchCompany,
 	ServiceStation,
 	TipDetial,
+	ClickTipDetial,
 	SaleAreaBoundary,
 } from '../Components/index.js';
 //页面所需公共组件
@@ -104,6 +111,7 @@ export default {
 		ServiceStation,
 		OverlayDetail,
 		TipDetial,
+		ClickTipDetial,
 		SaleAreaBoundary,
 	},
 	data() {
@@ -134,6 +142,7 @@ export default {
 			swichBoxInfo: SWICHBOX,
 			intervalId: null,
 			detialBoxWidth: 450,
+			detailComponentName: 'TipDetial',
 		};
 	},
 	// created() {
@@ -174,10 +183,12 @@ export default {
 			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
+			this.carouseComplBranchCompanyInfo();
 			done();
 		},
 		// 点击地图marker
 		handleOverlayClick(overlay, overlayType, isCenter = false) {
+			this.detailComponentName = 'ClickTipDetial';
 			this.clearInterval();
 			console.log(overlay);
 			let { lng, lat, id, overlayType: type, detailList, name } = overlay;
@@ -238,6 +249,8 @@ export default {
 			);
 			this.showOverlayDetail = true;
 		},
+		// 点击获取子公司下服务站详情
+		async clickGetBranchCompanyDetialInfo() {},
 		// 切换热力图显示隐藏
 		switchChange(data, type) {
 			if (type === 'coupling' && data[0].value) {
@@ -252,6 +265,7 @@ export default {
 		},
 		// 开启定时器 展示公司详情
 		carouseComplBranchCompanyInfo() {
+			this.detailComponentName = 'TipDetial';
 			let index = 0;
 			console.log(this.allTypeStationList, '余志强');
 			let length = this.allTypeStationList.branchCompanyList.length;

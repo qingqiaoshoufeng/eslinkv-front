@@ -17,6 +17,8 @@
 				:overlayType="legend"
 				:is="config.component"
 				@overlay-click="handleOverlayClick"
+				:detailList="config.detailList"
+				:data="allTypeStationList[config.dataProp]"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->
@@ -132,10 +134,21 @@ export default {
 			this.$amap.setZoom(11, 100);
 			done();
 		},
+		// 请求集团大厅，子公司，综合服务站数据列表
+		async getAllTypeStationList() {
+			let params = {
+				types: ['BranchCompany'].toString(),
+			};
+			console.log(params);
+			let res = await this.$sysApi.map.serve.getHangranCodeList(params);
+			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			console.log(this.allTypeStationList, '余志强');
+		},
 	},
 	mounted() {
 		console.log(this.overlayInfoConfig);
-		this.getDataStatisticsList();
+		this.getAllTypeStationList();
+		// this.getDataStatisticsList();
 	},
 };
 </script>

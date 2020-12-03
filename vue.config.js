@@ -24,22 +24,23 @@ module.exports = {
                 target: 'http://ebp-pc.hzrq.local:15003',
                 changeOrigin: true,
                 headers: {
-                    Cookie: 'SESSION=206cb57d-6e3c-475f-99f9-ccc1b9cf5f2d'
+                    Cookie: 'SESSION=b3b8b8a6-0794-4fb3-88a1-d9654d66d417'
                 },
                 pathRewrite: {
                     '^/hangran': '/'
                 }
             },
-			'^/api': {
-				target: 'http://ebp-pc.hzrq.local:15003',
-				changeOrigin: true,
-				headers: {
-					Cookie: 'SESSION=206cb57d-6e3c-475f-99f9-ccc1b9cf5f2d'
-				},
-				pathRewrite: {
-					'^/api': '/'
-				}
-			},
+            '^/api': {
+                target: 'http://ebp-pc.hzrq.local:15003',
+                changeOrigin: true,
+                headers: {
+                    Cookie: 'SESSION=b3b8b8a6-0794-4fb3-88a1-d9654d66d417'
+
+                },
+                pathRewrite: {
+                    '^/api': '/'
+                }
+            },
             '^/data': {
                 target: 'http://127.0.0.1:7001',
                 changeOrigin: true,
