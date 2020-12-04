@@ -1,9 +1,8 @@
 <template>
-	<div class="list">
+	<div class="process-warning">
 		<vue-seamless-scroll
 			:data="list || []"
-			class="content-warp"
-			style="height: 100%"
+			class="list"
 			:class-option="classOption"
 		>
 			<div
@@ -64,7 +63,7 @@ import { SvgIcon } from '../../../../../components/';
 import VueSeamLess from 'vue-seamless-scroll';
 
 export default {
-	name: 'realTimeWithLevel',
+	name: 'ProcessWarningList',
 	components: {
 		SvgIcon,
 		VueSeamLess,
@@ -122,11 +121,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list {
+.process-warning {
 	color: #fff;
 	font-size: 16px;
+    height: 800px;
+	overflow: hidden;
 	.list-item {
-		// height: 96px;
 		padding: 20px 8px;
 		box-sizing: border-box;
 		cursor: pointer;
