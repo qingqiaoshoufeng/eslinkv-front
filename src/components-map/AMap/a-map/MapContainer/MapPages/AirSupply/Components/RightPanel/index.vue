@@ -7,7 +7,7 @@
 		<!-- <TabPanel key="statAawareness" name="statAawareness" label="态势感知">
 			<statAawareness @change="handleClick" />
 		</TabPanel> -->
-		<TabPanel key="realTime" name="realTime" label="事件报警" lazy>
+		<TabPanel key="realTime" name="realTime" label="工艺报警" lazy>
 			<realTime @change="handleClick" />
 		</TabPanel>
 		<TabPanel

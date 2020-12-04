@@ -2,13 +2,13 @@
 	<div>
 		<Overlay
 			v-for="(item, index) in data"
-			:key="index"
+			:key="item.clickNumber"
 			:marker="{
 				icon: `${eventTypeIconMap[item.status]}`,
 				...item,
 				...$attrs,
 			}"
-			:visible="true"
+			:visible="activeIndex === index"
 			@click="
 				$emit('overlay-click', {
 					overlayType: 'TaskList',
@@ -57,18 +57,30 @@ export default {
 				return [];
 			},
 		},
+		activeIndex: {
+			type: Number,
+			default: -1,
+		},
 	},
 	data() {
 		return {
 			eventTypeIconMap,
 		};
 	},
-
+	watch: {
+		data: {
+			handler(val) {
+				this.data = val;
+			},
+			deep: true,
+		},
+	},
 	async created() {
 		this.map = this.$parent.$amap;
 
-		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
-		console.log(this.list);
+		// this.list = await this.$sysApi.map.airSupply.getEventWarningList();
+		// console.log(this.list);
+
 		// console.log(res);
 		// this.list = res.filter(item => item.status);
 		// console.log(this.list, 1111);

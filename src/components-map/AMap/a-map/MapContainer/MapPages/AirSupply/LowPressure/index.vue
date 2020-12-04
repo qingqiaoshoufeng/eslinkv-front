@@ -27,7 +27,7 @@
 						? config.showOverlayName
 						: undefined
 				"
-                :data="allTypeStationList[config.dataProp]"
+				:data="allTypeStationList[config.dataProp]"
 				@overlay-click="handleOverlayClick"
 				:detailList="config.detailList"
 			/>

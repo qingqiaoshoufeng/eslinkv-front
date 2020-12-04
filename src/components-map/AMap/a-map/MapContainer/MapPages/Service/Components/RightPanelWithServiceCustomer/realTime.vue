@@ -50,6 +50,7 @@ export default {
 		return {
 			activeIndex: null,
 			list: [],
+			clickNumber: 0,
 		};
 	},
 	props: {
@@ -78,7 +79,9 @@ export default {
 	},
 	methods: {
 		handleClick(item, index) {
+			item.activeIndex = index;
 			this.activeIndex = index;
+			console.log(item);
 			this.$emit('change', item);
 		},
 	},
