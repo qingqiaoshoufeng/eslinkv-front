@@ -107,7 +107,6 @@ export default {
 										pathData.push([lng, lat]);
 									});
 								});
-								console.log(pathData, 'pathData');
 								let passedLen = Math.ceil(
 									Math.random() * pathData.length
 								);

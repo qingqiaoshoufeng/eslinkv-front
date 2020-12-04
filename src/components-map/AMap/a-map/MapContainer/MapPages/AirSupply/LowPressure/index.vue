@@ -4,10 +4,11 @@
 		<!-- 1.1 报警点位-->
 		<WarningList
 			:visible="true"
-            type="事件"
+			type="事件"
 			overlayIcon="icontulinengyuanzhan"
 			:iconSize="38"
-            :apiFun="$sysApi.map.airSupply.getEventWarningList"
+			@overlay-click="handleOverlayClick"
+			:apiFun="$sysApi.map.airSupply.getEventWarningList"
 		/>
 		<!-- 特殊 中低压管网需要legend控制显隐 -->
 		<AMapTile
@@ -37,7 +38,9 @@
 		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
-            :iconSize="activeOverlay.overlayType==='WarningList'?38:undefined"
+			:iconSize="
+				activeOverlay.overlayType === 'WarningList' ? 38 : undefined
+			"
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
@@ -151,8 +154,8 @@ export default {
 		return {
 			overlayInfoConfig: Object.freeze(AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP),
 			activeOverlay: {},
-			center: [120.121259, 30.183295],
-			zoom: 14,
+			center: [120.151562, 30.273297],
+			zoom: 18,
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'realTime',
@@ -178,7 +181,6 @@ export default {
 				LowPressureLine,
 				PressureRegulatingStation,
 			} = this.legendMap;
-			console.log(this.legendMap, 'legendMap');
 			const {
 				isShow: isShowM,
 				tileQuery: tileQueryM,
@@ -251,14 +253,12 @@ export default {
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat } = overlay;
 			overlay.overlayType = overlayType;
-			console.log(overlay);
-			console.log(overlayType);
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
-			this.$amap.setZoom(14, 100);
 			if (isCenter) {
+				this.$amap.panTo([lng, lat], 100);
 				this.$nextTick(() => {
-					this.$amap.panTo([lng, lat], 100);
+					this.$amap.setZoom(14, 100);
 				});
 			}
 		},
@@ -279,7 +279,6 @@ export default {
 		},
 		viewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
-			console.log(overlay, 'overlay');
 			if (overlayType === 'WARNEVENT') {
 				console.log('渲染路径，23');
 				this.showRoutePlan = true;

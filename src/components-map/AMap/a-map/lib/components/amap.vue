@@ -131,7 +131,6 @@ export default {
 	},
 
 	mounted() {
-        window.suyanaaa = this.createMap.bind(this)
         this.createMap();
 	},
 

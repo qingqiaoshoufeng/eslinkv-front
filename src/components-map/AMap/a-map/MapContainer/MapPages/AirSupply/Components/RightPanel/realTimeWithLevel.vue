@@ -1,60 +1,73 @@
 <template>
 	<div class="list">
-		<div
-			@click="handleClick(item, index, 'WARN')"
-			v-for="(item, index) in list"
-			:key="index"
-			class="list-item"
-			:class="{ active: activeIndex === index }"
+		<vue-seamless-scroll
+			:data="list || []"
+			class="content-warp"
+			style="height: 100%"
+			:class-option="classOption"
 		>
-			<div class="row">
-				<SvgIcon
-					:icon-name="
-						item.priority == '已处理' ? 'iconzhengchang' : 'iconyichang'
-					"
-					class="panel-type-icon"
-				></SvgIcon>
-				<div class="content">
-					{{ item.description }}
-					<div
-						class="level"
-						:class="{
-							first: item.level === 1,
-							second: item.level === 2,
-							third: item.level === 3,
-						}"
-					>
-						{{ item.level }}
+			<div
+				@click="handleClick(item, index, 'WarningList')"
+				v-for="(item, index) in list"
+				:key="index"
+				class="list-item"
+				:class="{ active: activeIndex === index }"
+			>
+				<div class="row">
+					<SvgIcon
+						:icon-name="
+							item.priority == '已处理'
+								? 'iconzhengchang'
+								: 'iconyichang'
+						"
+						class="panel-type-icon"
+					></SvgIcon>
+					<div class="content">
+						{{ item.description }}
+						<div
+							class="level"
+							:class="{
+								first: item.level === 1,
+								second: item.level === 2,
+								third: item.level === 3,
+							}"
+						>
+							{{ item.level }}
+						</div>
+					</div>
+					<div>
+						{{ item.time }}
 					</div>
 				</div>
-				<div>
-					{{ item.time }}
+				<div class="row">
+					<div class="station-name">
+						{{ item.address }}
+					</div>
+					<div
+						:class="[
+							'status',
+							item.priority == '已处理'
+								? 'status-suc'
+								: 'status-err',
+						]"
+					>
+						{{ item.statusText }}
+					</div>
 				</div>
 			</div>
-			<div class="row">
-				<div class="station-name">
-					{{ item.address }}
-				</div>
-				<div
-					:class="[
-						'status',
-						item.priority == '已处理' ? 'status-suc' : 'status-err',
-					]"
-				>
-					{{ item.statusText }}
-				</div>
-			</div>
-		</div>
+		</vue-seamless-scroll>
 	</div>
 </template>
 
 <script>
 import { SvgIcon } from '../../../../../components/';
+import VueSeamLess from 'vue-seamless-scroll';
 
 export default {
 	name: 'realTimeWithLevel',
 	components: {
 		SvgIcon,
+		VueSeamLess,
 	},
 	data() {
 		return {
@@ -73,6 +86,20 @@ export default {
 	async created() {
 		this.list = await this.$sysApi.map.airSupply.getProcessWarningList();
 	},
+	computed: {
+		classOption() {
+			return {
+				step: 0.2, // 数值越大速度滚动越快
+				limitMoveNum: this.list?.length, // 开始无缝滚动的数据量
+				hoverStop: true, // 是否开启鼠标悬停stop
+				direction: 1, // 0向下 1向上 2向左 3向右
+				openWatch: true, // 开启数据实时监控刷新dom
+				singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
+				singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
+				waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
+			};
+		},
+	},
 	watch: {
 		activeItem(val) {
 			if (JSON.stringify(val) == '{}') {
@@ -88,7 +115,7 @@ export default {
 	methods: {
 		handleClick(item, index) {
 			this.activeIndex = index;
-			this.$emit('change', item, 'WARN');
+			this.$emit('change', item, 'WarningList');
 		},
 	},
 };

@@ -4,10 +4,11 @@
 		<!-- 1.1 报警点位-->
 		<WarningList
 			:visible="true"
-            type="工艺"
+			type="工艺"
 			overlayIcon="icontulinengyuanzhan"
-            :apiFun="$sysApi.map.airSupply.getProcessWarningList"
+			:apiFun="$sysApi.map.airSupply.getProcessWarningList"
 			:iconSize="38"
+			@overlay-click="handleOverlayClick"
 		/>
 		<!-- 区域 -->
 		<RegionBoundary />
@@ -29,7 +30,7 @@
 				:detailList="config.detailList"
 				:data="allTypeStationList[config.dataProp]"
 				@overlay-click="handleOverlayClick"
-                @close="closeOverlayDetail"
+				@close="closeOverlayDetail"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->
@@ -40,12 +41,14 @@
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
-            :iconSize="activeOverlay.overlayType==='WarningList'?38:undefined"
+			:iconSize="
+				activeOverlay.overlayType === 'WarningList' ? 38 : undefined
+			"
 			ref="OverlayDetail"
 			:left="left"
 			:detialBoxWidth="400"
 		>
-			<template v-if="activeOverlay.detail">
+			<div class="overlay-detail" v-if="activeOverlay.detail">
 				<div class="detail-name">{{ activeOverlay.name }}</div>
 				<div
 					class="fn-flex"
@@ -57,7 +60,7 @@
 						{{ item.value }}{{ item.dw }}
 					</div>
 				</div>
-			</template>
+			</div>
 		</OverlayDetail>
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
@@ -214,15 +217,12 @@ export default {
 			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat, address, time, index } = overlay;
 			overlay.overlayType = overlayType || overlay.overlayType;
-			overlay.name = overlay.address || overlay.name;
 			this.activeOverlay = overlay;
-			console.log(this.activeOverlay);
 			this.showOverlayDetail = true;
 			// 计算弹框偏移量
 			this.left = this.offset(overlayType);
-			console.log(overlay);
 			// 警报效果后门 后期修正
-			if (index === 3) {
+			if (overlayType === 'WarningList') {
 				GoldChart.scene.createSceneInstance(
 					AIRSUPPLY_WARN_MODEL_SCENEINDEX,
 					'fadeIn',
@@ -230,7 +230,6 @@ export default {
 				);
 				this.$nextTick(() => {
 					AIRSUPPLY_WARN__MODEL_COMPONENTINDEX.forEach(item => {
-						console.log(item);
 						GoldChart.instance.updateComponent(item, {
 							data: {
 								time: time,
@@ -243,8 +242,8 @@ export default {
 					GoldChart.scene.destroyScene(
 						AIRSUPPLY_WARN_MODEL_SCENEINDEX
 					);
-					this.$amap.setZoom(14, 100);
 					if (isCenter) {
+						this.$amap.setZoom(14, 100);
 						this.$nextTick(() => {
 							this.$amap.panTo([lng, lat], 100);
 						});
@@ -252,7 +251,7 @@ export default {
 				}, 3000);
 			} else {
 				if (isCenter) {
-                    this.$amap.setZoom(14, 100);
+					this.$amap.setZoom(14, 100);
 					this.$nextTick(() => {
 						this.$amap.panTo([lng, lat], 100);
 					});
@@ -264,7 +263,6 @@ export default {
 				GasStation: 15,
 				EmergencyAirSourceStation: 12,
 			};
-			console.log(offsetObj[overlayType]);
 			return offsetObj[overlayType] || 10;
 		},
 		closeOverlayDetail(done) {
@@ -279,19 +277,15 @@ export default {
 			this.activeOverlay = {};
 			// this.$amap.setZoom(11, 100);
 			this.$amap.setZoom(this.zoom, 100);
-            this.$amap.panTo(this.center, 100);
-            if(done){
-			    done();
-            }
+			this.$amap.panTo(this.center, 100);
+			if (done) {
+				done();
+			}
 		},
 		viewOverlayDetail(overlay) {
-			console.log(111111);
 			let { overlayType } = overlay;
-			console.log(overlay, 'overlay');
 			if (overlayType === 'WARNEVENT') {
-				console.log('渲染路径，23');
 				this.showRoutePlan = true;
-				console.log(overlay);
 				let { content, address } = overlay;
 				//和场景进行交互
 
@@ -381,7 +375,6 @@ export default {
 				params
 			);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-			console.log(this.allTypeStationList);
 		},
 		// 获取高压统计数据
 		async getDataStatisticsInfo() {
@@ -412,17 +405,19 @@ export default {
 	left: 50%;
 	transform: translateX(-50%);
 }
-.detail-name {
-	font-weight: 600;
-	font-size: 32px;
-	color: #ffdc45;
-}
-.detail-label {
-	font-size: 24px;
-	color: #fff;
-}
-.detail-value {
-	font-size: 24px;
-	color: #ffdc45;
+.overlay-detail {
+	.detail-name {
+		font-weight: 600;
+		font-size: 32px;
+		color: #ffdc45;
+	}
+	.detail-label {
+		font-size: 24px;
+		color: #fff;
+	}
+	.detail-value {
+		font-size: 24px;
+		color: #ffdc45;
+	}
 }
 </style>

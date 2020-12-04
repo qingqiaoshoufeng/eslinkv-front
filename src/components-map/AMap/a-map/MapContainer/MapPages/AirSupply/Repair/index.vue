@@ -104,7 +104,7 @@ export default {
 	data() {
 		return {
 			center: [120.061259, 30.233295],
-			zoom: 10.7,
+			zoom: 10.8,
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
@@ -123,15 +123,11 @@ export default {
 	},
 	methods: {
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			console.log(overlay);
-			console.log(overlayType);
-			console.log(11);
 			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat, address, time, index } = overlay;
 			overlay.overlayType = overlayType || overlay.overlayType;
 			overlay.name = overlay.address || overlay.name;
 			this.activeOverlay = overlay;
-			console.log(this.activeOverlay);
 			this.showOverlayDetail = true;
 			// 计算弹框偏移量
 			this.left = this.offset(overlayType);
@@ -145,7 +141,6 @@ export default {
 				);
 				this.$nextTick(() => {
 					AIRSUPPLY_WARN__MODEL_COMPONENTINDEX.forEach(item => {
-						console.log(item);
 						GoldChart.instance.updateComponent(item, {
 							data: {
 								time: time,
@@ -198,9 +193,7 @@ export default {
 			done();
 		},
 		viewOverlayDetail(overlay) {
-			console.log(111111);
 			let { overlayType } = overlay;
-			console.log(overlay, 'overlay');
 			if (overlayType === 'WARNEVENT') {
 				console.log('渲染路径，23');
 				this.showRoutePlan = true;

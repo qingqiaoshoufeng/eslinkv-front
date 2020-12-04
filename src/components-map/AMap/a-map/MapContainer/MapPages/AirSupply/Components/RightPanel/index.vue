@@ -73,9 +73,8 @@ export default {
 	},
 	methods: {
 		handleClick(item, overlayType) {
-			console.log(overlayType, 'overlayType');
 			item.overlayType = overlayType;
-			this.$emit('overlay-click', item, overlayType || 'WARN');
+			this.$emit('overlay-click', item, overlayType || 'WarningList');
 		},
 	},
 };

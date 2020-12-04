@@ -4,9 +4,7 @@
 			v-for="(item, index) in data ? data : list"
 			:key="index"
 			:marker="{
-				icon: `icontulixieloushijian${
-					item.statusName=='已处理' ? '-suc' : ''
-				}`,
+				icon: `${icon}${item.statusName == '已处理' ? '-suc' : ''}`,
 				iconSize: iconSize,
 				...item,
 			}"
@@ -15,11 +13,11 @@
 				$emit('overlay-click', { overlayType: 'WarningList', ...item })
 			"
 		>
-			<img
+			<!-- <img
 				src="@/assets/amap/images/qiangxiu.gif"
 				class="warnoverlay-gif"
-				v-if="type === '工艺' && item.statusName!='已处理'"
-			/>
+				v-if="type === '工艺' && item.statusName != '已处理'"
+			/> -->
 			<video
 				class="warning-videO"
 				src="@/assets/amap/images/warning-circle.webm"
@@ -27,7 +25,7 @@
 				autoplay="autoplay"
 				muted="muted"
 				loop
-				v-if="type === '事件' && item.statusName !=='处理完成'"
+				v-if="type === '事件' && item.statusName !== '处理完成'"
 			></video>
 		</Overlay>
 	</div>
@@ -35,8 +33,8 @@
 <script>
 import { Overlay } from '../../../../components/index';
 let eventTypeIconMap = {
-	0: 'icontulibaoguanshijian',
-	1: 'icontulixieloushijian',
+	工艺: 'icongongyiyichang',
+	事件: 'icontulixieloushijian',
 };
 export default {
 	name: 'WariningList',
@@ -47,7 +45,7 @@ export default {
 		type: {
 			type: String,
 			default: '工艺',
-        },
+		},
 		iconSize: {
 			type: Number,
 			default: 38,
@@ -60,27 +58,31 @@ export default {
 			default() {
 				return [];
 			},
-        },
-        apiFun:{
-			type: Function
-        },
+		},
+		apiFun: {
+			type: Function,
+		},
 	},
 	data() {
 		return {
-			icon: 'iconbaoguanshijian',
+			icon: 'icongongyiyichang',
 			list: [],
 			eventTypeIconMap,
 		};
 	},
 
 	async created() {
-        this.map = this.$parent.$amap;
-        if(this.apiFun){
-            this.list = await this.apiFun()
-            console.log(this.list,'list')
-        }else{
-		    this.list = await this.$sysApi.map.airSupply.getEventWarningList();
-        }
+		this.map = this.$parent.$amap;
+		this.icon = eventTypeIconMap[this.type];
+		if (this.apiFun) {
+			this.list = await this.apiFun();
+			// this.list = this.list.fitler(item => {
+			// 	let { statusName } = item;
+			// 	return statusName !== '已处理';
+			// });
+		} else {
+			this.list = await this.$sysApi.map.airSupply.getEventWarningList();
+		}
 	},
 };
 </script>
@@ -94,7 +96,7 @@ video::-webkit-media-controls {
 	margin-left: -80px;
 	margin-top: -40px;
 	outline: none;
-    position: absolute;
+	position: absolute;
 }
 .amap-icon {
 	width: 38px !important;
@@ -105,7 +107,7 @@ video::-webkit-media-controls {
 	}
 }
 .warnoverlay-gif {
-      transform:translateX(-50%);
+	transform: translateX(-50%);
 	position: absolute;
 	display: block;
 	width: 100px;

@@ -6,6 +6,7 @@
 			visible,
 			apiFun,
 			...$attrs,
+            data
 		}"
 		@click="marker => $emit('overlay-click', marker, 'InspectionPerson')"
 	/>
@@ -29,6 +30,9 @@ export default {
 		overlayType: {
 			type: String,
 			default: '',
+		},
+		data: {
+			type: Array,
 		},
 	},
 	data() {

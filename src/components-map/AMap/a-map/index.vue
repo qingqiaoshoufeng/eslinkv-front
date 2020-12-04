@@ -1,6 +1,6 @@
 <template>
 	<div class="map-box">
-		<template v-if="inPreview">
+		<template v-if="ready && inPreview">
 			<MapContainer />
 		</template>
 		<template v-else>
@@ -21,6 +21,23 @@ export default {
 		inPreview() {
 			return store.scene.status === 'inPreview';
 		},
+	},
+	data() {
+		return {
+			ready: false,
+		};
+	},
+	methods: {
+		resetMap() {
+			this.ready = false;
+			setTimeout(() => {
+				console.log('加载');
+				this.ready = true;
+			}, 5000);
+		},
+	},
+	mounted() {
+		window.resetMap = this.resetMap.bind(this);
 	},
 };
 </script>

@@ -210,11 +210,8 @@ export default {
 
 		viewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
-			console.log(overlay, 'overlay');
 			if (overlayType === 'WARNEVENT') {
-				console.log('渲染路径，23');
 				this.showRoutePlan = true;
-				console.log(overlay);
 				let { content, address } = overlay;
 				//和场景进行交互
 				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
