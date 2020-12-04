@@ -11,19 +11,19 @@
 			</template>
 			<div class="h-bg-top pos-a"></div>
 			<transition name="slide-down">
-				<div class="pos-a h-bg-num1" v-show="video1Ended">3,108万m³</div>
+				<div class="pos-a h-bg-num1" v-show="video1Ended &&!status54441">3,108万m³</div>
 			</transition>
 			<transition name="slide-down">
-				<div class="pos-a h-bg-num2" v-show="video1Ended">976万m³</div>
+				<div class="pos-a h-bg-num2" v-show="video1Ended &&!status54441">976万m³</div>
 			</transition>
 			<transition name="slide-down">
-				<div class="pos-a h-bg-num3" v-show="video1Ended">34万m³</div>
+				<div class="pos-a h-bg-num3" v-show="video1Ended &&!status54441">34万m³</div>
 			</transition>
 			<transition name="slide-down">
-				<div class="pos-a h-bg-num4" v-show="video1Ended">240万m³</div>
+				<div class="pos-a h-bg-num4" v-show="video1Ended &&!status54441">240万m³</div>
 			</transition>
 			<transition name="slide-down">
-				<div class="pos-a h-bg-num5" v-show="video1Ended">1,425万m³</div>
+				<div class="pos-a h-bg-num5" v-show="video1Ended&&!status54441">1,425万m³</div>
 			</transition>
 			<div class="h-bg-control pos-a"></div>
 			<div class="h-bg-left pos-a"></div>
