@@ -33,6 +33,27 @@
 				@close="closeOverlayDetail"
 			/>
 		</template>
+		<!-- 2.legend不控制显隐 -->
+		<template v-for="(config, legend) in withoutLegendOverlay">
+			<component
+				v-if="allTypeStationList[config.dataProp]"
+				:key="legend"
+				:visible="config.isShow"
+				:is="config.component"
+				:overlayIcon="config.icon ? config.icon : config.legendIcon"
+				:overlayType="config.component"
+				:iconSize="config.iconSize"
+				:showOverlayName="
+					config.showOverlayName === false
+						? config.showOverlayName
+						: undefined
+				"
+				:detailList="config.detailList"
+				:data="allTypeStationList[config.dataProp]"
+				@overlay-click="handleOverlayClick"
+				@close="closeOverlayDetail"
+			/>
+		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
 			v-model="showOverlayDetail"
@@ -125,6 +146,7 @@ import {
 
 import {
 	AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
+	AIRSUPPLY_HIGHPRESSURE_NO_LEGEND_MAP,
 	AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP,
 	DATASTATISTICSLIST,
 } from './config.js';
@@ -198,6 +220,7 @@ export default {
 				PressureRegulatingStation,
 				EmergencyAirSourceStation,
 			},
+			withoutLegendOverlay: AIRSUPPLY_HIGHPRESSURE_NO_LEGEND_MAP,
 			left: 10,
 			dataStatisticsList: DATASTATISTICSLIST,
 			dataStatisticsInfo: {

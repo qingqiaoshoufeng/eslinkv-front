@@ -149,7 +149,16 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
     // 	dataProp: 'WarningList',
     // },
 }
-
+export const AIRSUPPLY_HIGHPRESSURE_NO_LEGEND_MAP = {
+    WarningList: {
+        label: '告警',
+        legendIcon: 'icontulinengyuanzhan',
+        iconSize: 38,
+        component: 'WarningList',
+        isShow: true,
+        dataProp: 'WarningList',
+    },
+}
 //覆盖物详情
 export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
     // ServiceStation: {
@@ -196,20 +205,20 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
     },
     WARN: {
         fields: {
-            content: {
+            name: {
                 style: {
                     fontSize: '32px',
                     color: '#FFDC45',
                 },
                 errColor: '#FFDC45',
             },
-            address: {
-                style: {
-                    fontSize: '18px',
-                    color: '#00DDFF',
-                },
-                errColor: '#FF7217',
-            },
+            // address: {
+            //     style: {
+            //         fontSize: '32px',
+            //         color: '#FFDC45',
+            //     },
+            //     errColor: '#FFDC45',
+            // },
         },
         isShowMore: true,
     },
