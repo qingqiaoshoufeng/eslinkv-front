@@ -119,51 +119,51 @@ let HighPressurePreservationNumber = {
 let LowPressureMediumline = {
     label: '中压管线(km)',
     DW: '',
-    prop: "Mediumline"
+    prop: "lowLength"
 }
 let LowPressureLowline = {
     label: '低压管线(km)',
     DW: '',
-    prop: "Lowline"
+    prop: "smallLength"
 }
 let LowPressureGreenServeStation = {
     label: '绿色能源综合服务站',
     DW: '',
-    prop: "GreenServeStation"
+    prop: "greenStation"
 }
 let LowPressureManageStation = {
     label: '管网运行管理站',
     DW: '',
-    prop: "ManageStation"
+    prop: "gwxxStation"
 }
 let LowPressureOnNumber = {
     label: '地上抢修点',
     DW: '',
-    prop: "OnNumber",
+    prop: "up",
     type: 'warning'
 }
 let LowPressureUnderNumber = {
     label: '地下抢修点',
     DW: '',
-    prop: "UnderNumber",
+    prop: "down",
     type: 'warning'
 }
 // lng站统计数据
 let LNGstationNumber = {
     label: 'LNG站点',
     DW: '',
-    prop: "stationNumber",
+    prop: "lINGStation",
 }
 // 其他 站统计数据
 let commonUseNumber = {
     label: '常用钢瓶用户数量',
     DW: '',
-    prop: "commonUseNumber",
+    prop: "user",
 }
 let registerNumber = {
     label: '在册钢瓶数量',
     DW: '',
-    prop: "registerNumber",
+    prop: "register",
 }
 
 // 客户服务统计数据
@@ -222,22 +222,22 @@ let monthFireDetial = {
 let serviceCustomerPipeline = {
     label: '渠道',
     DW: '户',
-    prop: "monthFireDetial",
+    prop: "channel",
 }
 let serviceCustomerCustomer = {
     label: '客户',
     DW: '户',
-    prop: "monthFireDetial",
+    prop: "customer",
 }
 let serviceCustomerAddress = {
     label: '地址',
     DW: '户',
-    prop: "monthFireDetial",
+    prop: "address",
 }
 let serviceCustomerStatus = {
     label: '状态',
     DW: '户',
-    prop: "monthFireDetial",
+    prop: "statusText",
 }
 
 

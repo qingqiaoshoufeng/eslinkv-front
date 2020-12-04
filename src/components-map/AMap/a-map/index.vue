@@ -50,13 +50,13 @@ export default {
 		}
 	}
 }
-.amap-marker{
-    pointer-events: none !important;
-    >div{
-        >div{
-            pointer-events: all;
-        }
-    }
+.amap-marker {
+	pointer-events: none !important;
+	> div {
+		> div {
+			pointer-events: all;
+		}
+	}
 }
 .amap-markers {
 	z-index: 1100 !important;

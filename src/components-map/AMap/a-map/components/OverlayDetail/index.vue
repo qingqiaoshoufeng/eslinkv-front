@@ -12,7 +12,7 @@
 			@input="closePop"
 			:bottom="marginBottom"
 			:width="detialBoxWidth + 'px'"
-            :parentInfo="parentInfo"
+			:parentInfo="parentInfo"
 		>
 			<slot>
 				<div
@@ -80,6 +80,9 @@ export default {
 			type: Number,
 			default: 240,
 		},
+		iconSize: {
+			type: Number,
+		},
 	},
 	data() {
 		return {
@@ -103,7 +106,7 @@ export default {
 						...val,
 					};
 					let legendConfig = this.legendMap[overlayType] || {};
-					let marginBottom = legendConfig.iconSize || 19;
+					let marginBottom = this.iconSize || legendConfig.iconSize || 19;
 					this.marginBottom = marginBottom / 2;
 					if (!this.rendered) {
 						this.rendered = true;

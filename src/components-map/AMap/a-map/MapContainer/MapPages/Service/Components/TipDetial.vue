@@ -1,6 +1,8 @@
 <template>
 	<div class="TipDetial">
-		<div class="companyName">{{ data.name || data.address }}</div>
+		<div class="companyName">
+			{{ data.name || data.context || data.address }}
+		</div>
 		<!-- <div class="accept">{{ `本月已受理数量: ${data.accept}` }}</div>
 		<div class="complete">{{ `本月已办结数量: ${data.complete}` }}</div>
 		<div class="percentage">{{ `本月办结率: ${data.percentage}` }}</div> -->

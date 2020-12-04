@@ -171,10 +171,14 @@ export default {
 		// 请求详情数据
 		getDetialInfo(name) {
 			let params = {
+				chartQueryType: 0,
+				dataAnalyseId: 901,
+				dataType: 0,
 				projectId: 20,
 				queryId: 901,
 				type: name,
 			};
+			params.params = JSON.stringify(params);
 			return this.$sysApi.map.serve.getNineteenStationDetailInfo(params);
 		},
 	},

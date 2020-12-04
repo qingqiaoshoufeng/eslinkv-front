@@ -150,6 +150,7 @@ export default {
 			let { useNumberYestoday } = this.detailInfo;
 			console.log(this.activeOverlay, this.detailInfo);
 			let params = {};
+			console.log(address);
 			params[ICcustomer_WARN__COMPONENTINDEX[0]] = {
 				title: address,
 			};

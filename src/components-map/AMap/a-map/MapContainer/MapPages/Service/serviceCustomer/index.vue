@@ -275,16 +275,21 @@ export default {
 			}
 		},
 		handleListClick(item) {
-			console.log(item);
-			let { name, time, activeIndex } = item;
+			let { name, time, activeIndex, overlayType } = item;
+			if (overlayType === 'ThreeSocialLinkage') {
+				this.handleOverlayClick(item);
+				return;
+			}
 			this.activeIndex = activeIndex;
 			this.activeOverlay = {
 				detailList:
 					SERVICE_SERVICECUSTOMER_LEGEND_MAP.TaskList.detailList,
-				name,
-				time,
+				...item,
 			};
-			this.detailInfo = {};
+			console.log(item);
+			this.detailInfo = item;
+			console.log(this.activeOverlay);
+			this.showOverlayDetail = true;
 		},
 		showThreeSocialLinkageDetail() {
 			//打开三社联动的弹框

@@ -1,19 +1,19 @@
 <template>
-	<div class="widget-part pos-r" :style="styles">
-		<div class="h-ring-1" :id="id"/>
-		<ul class="h-ring-1-icon pos-a" :style="{backgroundImage:`url(${config.config&&config.config.background})`}">
+	<div class="widget-part pos-r" :style="styles" v-if="data">
+		<div class="e-ring" :id="id"/>
+		<ul class="e-ring-icon pos-a" :style="{backgroundImage:`url(${config.config.background})`}">
 			<li class="pos-a" v-for="(item,index) in icon" :key="index" :style="{transform:`rotate(${3.6*index}deg)`}"/>
 		</ul>
-		<div class="pos-a h-ring-1-legend-box">
-			<ul class="h-ring-1-legend" :style="legengdTransform">
+		<div class="pos-a e-ring-legend-box">
+			<ul class="e-ring-legend" :style="legengdTransform">
 				<li class="fn-flex flex-row" v-for="(item,index) in data?data:[]" :key="index"
 					@click="activeHandler(index)"
 					:class="[{active:animateActiveIndex===index}]">
 					<i class="circle"
-					   :style="{color:config.config&&JSON.parse(config.config.color)[index%(config.config?JSON.parse(config.config.color).length:0)]}"/>
+					   :style="{color:JSON.parse(config.config.color)[index%(config.config?JSON.parse(config.config.color).length:0)]}"/>
 					<label class="ellipsis">{{item.title}}</label>
 					<a>{{item.des}}</a>
-					<span>{{item.b}}{{config.config&&config.config.suffix}}</span>
+					<span>{{item.value}}{{config.config.suffix}}</span>
 				</li>
 			</ul>
 		</div>
@@ -56,7 +56,7 @@
 			)
 		},
 		config: {
-			background: '/static/icons/h-ring1-1.svg',
+			background: '/static/icons/h-ring1-3.svg',
 			suffix: '%',
       color: JSON.stringify(['#db4f49', '#367cf6', '#84e4fc', '#f8cd47', '#fceb50', '#ed9144', '#5fcbb9']),
 		}
@@ -153,45 +153,49 @@
 	}
 </script>
 <style lang="scss" scoped>
-	.h-ring-1 {
+	.e-ring {
 		height: 100%;
 	}
 
-	.h-ring-1-icon {
+	.e-ring-icon {
 		background-size: 40px 49px;
 		background-repeat: no-repeat;
 		background-position: center;
-		width: 112px;
-		height: 112px;
+    width: 100px;
+    height: 100px;
 		top: 50%;
-		left: 25%;
-		margin-left: -56px;
-		margin-top: -56px;
+		left: 10%;
+		margin-left: -50px;
+		margin-top: -50px;
 
 		li {
 			width: 2px;
 			height: 8px;
 			background-color: rgba(255, 255, 255, 0.2);
 			top: 0;
-			left: 50%;
+			left: 51%;
 			margin-left: -1px;
-			transform-origin: 0 56px;
+			transform-origin: 0 50px;
 		}
 	}
 
-	.h-ring-1-legend-box {
-		right: 25px;
-		top: 49px;
+	.e-ring-legend-box {
+		left: 24%;
+		top: 45px;
 		max-height: 176px;
 		overflow-y: hidden;
 	}
 
-	.h-ring-1-legend {
+	.e-ring-legend {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 660px;
 		transition: all .3s;
 
 		li {
 			align-items: center;
-			min-width: 132px;
+			min-width: 313px;
 			padding: 8px;
 
 			&.active {
@@ -220,6 +224,8 @@
 		}
 
 		a {
+      flex: 1;
+      text-align: right;
 			margin-right: 10px;
 		}
 

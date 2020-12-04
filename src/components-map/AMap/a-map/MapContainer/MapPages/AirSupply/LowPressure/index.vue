@@ -4,7 +4,10 @@
 		<!-- 1.1 报警点位-->
 		<WarningList
 			:visible="true"
-			:overlayIcon="config.icon ? config.icon : config.legendIcon"
+            type="事件"
+			overlayIcon="icontulinengyuanzhan"
+			:iconSize="38"
+            :apiFun="$sysApi.map.airSupply.getEventWarningList"
 		/>
 		<!-- 特殊 中低压管网需要legend控制显隐 -->
 		<AMapTile
@@ -34,6 +37,7 @@
 		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
+            :iconSize="activeOverlay.overlayType==='WarningList'?38:undefined"
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
@@ -141,6 +145,7 @@ export default {
 	},
 	mounted() {
 		this.getAllTypeStationList();
+		this.getDataStatisticsInfo();
 	},
 	data() {
 		return {
@@ -150,7 +155,7 @@ export default {
 			zoom: 14,
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'statAawareness',
+			activeTab: 'realTime',
 			legendMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 			overlayMap: AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP,
 			dataStatisticsList: DATASTATISTICSLIST,
@@ -205,8 +210,8 @@ export default {
 		async getAllTypeStationList() {
 			let params = {
 				types: [
-					// 'InspectionPerson', // '巡检人员',
-					// 'InspectionCar', // '巡检车辆',
+					'InspectionPerson', // '巡检人员',
+					'InspectionCar', // '巡检车辆',
 					// 'GasStation', // '门站',
 					// 'PressureRegulatingStation', // '调压站',
 					// 'EmergencyAirSourceStation', // '应急气源站',
@@ -224,7 +229,12 @@ export default {
 				params
 			);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-			console.log(this.allTypeStationList);
+		},
+		// 获取统计数据
+		async getDataStatisticsInfo() {
+			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
+				{ type: 'LowPressure' }
+			);
 		},
 		getTileUrl(x, y, zoom) {
 			const tilesQuery = String(this.tilesQuery);

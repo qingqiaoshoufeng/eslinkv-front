@@ -7,17 +7,20 @@
 		<!-- <TabPanel key="statAawareness" name="statAawareness" label="态势感知">
 			<statAawareness @change="handleClick" />
 		</TabPanel> -->
-		<TabPanel key="realTime" name="realTime" label="工艺报警" lazy>
+		<!-- <TabPanel key="realTime" name="realTime" label="工艺报警" lazy>
 			<realTime @change="handleClick" />
-		</TabPanel>
+		</TabPanel> -->
 		<TabPanel
 			key="realTimeWithLevel"
 			name="realTimeWithLevel"
-			label="事件报警"
-			lazy
+			label="工艺报警"
 		>
 			<realTimeWithLevel @change="handleClick" />
 		</TabPanel>
+		<TabPanel key="realTime" name="realTime" label="事件报警">
+			<realTime @change="handleClick" />
+		</TabPanel>
+
 		<TabPanel key="overlayList" name="overlayList" label="点位列表" lazy>
 			<overlayList @change="handleClick" />
 		</TabPanel>

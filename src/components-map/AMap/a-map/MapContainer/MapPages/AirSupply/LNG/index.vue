@@ -81,8 +81,8 @@ import {
 import {
 	RegionBoundary,
 	OverlayDetail,
-    MapLegend,
-    DataStatistics
+	MapLegend,
+	DataStatistics,
 } from '../../../../components/index.js';
 
 //场景相关配置
@@ -130,18 +130,19 @@ export default {
 		this.$amap.panTo(this.center, 100);
 	},
 	mounted() {
-		this.getAllTypeStationList();
+        this.getAllTypeStationList();
+        this.getDataStatisticsInfo()
 	},
 	data() {
 		let { LNGStation } = AIRSUPPLY_LNG_LEGEND_MAP;
 		return {
 			overlayInfoConfig: Object.freeze(AIRSUPPLY_LNG_OVERLAY_MAP),
-			center: [120.061259, 30.183295],
-			zoom: 10,
+			center: [120.061259, 30.233295],
+			zoom: 10.7,
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'statAawareness',
+			activeTab: 'realTime',
 			legendMap: { LNGStation },
 			overlayMap: AIRSUPPLY_LNG_LEGEND_MAP,
 			dataStatisticsList: DATASTATISTICSLIST,
@@ -174,7 +175,12 @@ export default {
 				params
 			);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-			console.log(this.allTypeStationList);
+		},
+		// 获取统计数据
+		async getDataStatisticsInfo() {
+			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
+				{ type: 'LNG' }
+			);
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat } = overlay;
@@ -201,6 +207,7 @@ export default {
 			this.$amap.panTo(this.center, 100);
 			done();
 		},
+
 		viewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
 			console.log(overlay, 'overlay');

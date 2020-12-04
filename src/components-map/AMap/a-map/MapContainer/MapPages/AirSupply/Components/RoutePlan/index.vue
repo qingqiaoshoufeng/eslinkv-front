@@ -132,7 +132,7 @@ export default {
 				map: map,
 				position: endPose,
 				icon: '/static/amap/car.png',
-				offset: new AMap.Pixel(-22, -22),
+				offset: new AMap.Pixel(-15, -15),
 			});
 
 			// 绘制轨迹
@@ -140,7 +140,6 @@ export default {
 				map: map,
 				path: lineArr,
 				showDir: true,
-				zIndex: 1500,
 				strokeColor: '#FFD200', //线颜色
 				strokeOpacity: 1,
 				fillColor: '#FFD200', //线颜色
@@ -163,7 +162,7 @@ export default {
 			let startAnimation = () => {
 				this.marker.moveAlong(passedPath, {
 					duration: 100,
-					autoRotation: false,
+					// autoRotation: false,
 				});
 			};
 			startAnimation();
@@ -207,19 +206,20 @@ export default {
 
 <style lang="scss">
 .amap-icon {
-	width: 44px !important;
-	height: 44px !important;
+	width: 30px !important;
+	height: 60px !important;
 	> img {
-		width: 44px !important;
-		height: 44px !important;
+		width: 30px !important;
 	}
 }
 .warnoverlay-gif {
+      transform:translateX(-50%);
+	position: absolute;
 	display: block;
 	width: 100px;
 	height: 35px;
 	margin-top: -14px;
-	margin-left: -23px;
+	margin-left: 19px;
 }
 
 // img {

@@ -81,22 +81,25 @@ export default {
 	},
 	methods: {
 		async getData() {
-			let list = await this.$sysApi.map.serve.getAllTypeStationList();
-			this.list = list
-				.map(item => {
-					let { stationType } = item;
-					console.log(stationType);
-					let config =
-						SERVICE_SERVICECUSTOMER_LEGEND_MAP[stationType];
-					if (config) {
-						item.icon = config.legendIcon;
-					}
-					return item;
-				})
-				.filter(itm => 'ThreeSocialLinkage' === itm.stationType);
+			res = await this.$sysApi.map.serve.getServiceCustomerStatisticsInfo();
+			this.list = res.threeSocialLinkageList;
+			// let list = await this.$sysApi.map.serve.getAllTypeStationList();
+			// this.list = list
+			// 	.map(item => {
+			// 		let { stationType } = item;
+			// 		console.log(stationType);
+			// 		let config =
+			// 			SERVICE_SERVICECUSTOMER_LEGEND_MAP[stationType];
+			// 		if (config) {
+			// 			item.icon = config.legendIcon;
+			// 		}
+			// 		return item;
+			// 	})
+			// 	.filter(itm => 'ThreeSocialLinkage' === itm.stationType);
 		},
 		handleClick(item, index) {
 			this.activeIndex = index;
+			item.overlayType = 'ThreeSocialLinkage';
 			this.$emit('change', item);
 		},
 	},
