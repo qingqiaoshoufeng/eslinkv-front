@@ -10,21 +10,6 @@
 					   v-show="video1Ended"></video>
 			</template>
 			<div class="h-bg-top pos-a"></div>
-			<transition name="slide-down">
-				<div class="pos-a h-bg-num1" v-show="video1Ended &&!status54441">3,108万m³</div>
-			</transition>
-			<transition name="slide-down">
-				<div class="pos-a h-bg-num2" v-show="video1Ended &&!status54441">976万m³</div>
-			</transition>
-			<transition name="slide-down">
-				<div class="pos-a h-bg-num3" v-show="video1Ended &&!status54441">34万m³</div>
-			</transition>
-			<transition name="slide-down">
-				<div class="pos-a h-bg-num4" v-show="video1Ended &&!status54441">240万m³</div>
-			</transition>
-			<transition name="slide-down">
-				<div class="pos-a h-bg-num5" v-show="video1Ended&&!status54441">1,425万m³</div>
-			</transition>
 			<div class="h-bg-control pos-a"></div>
 			<div class="h-bg-left pos-a"></div>
 			<div class="h-bg-right pos-a"></div>
@@ -33,21 +18,29 @@
 			<h-bg-54441 v-if="status54441" :status="status54441" :close="close54441"/>
 			<div class="h-bg-center pos-a"></div>
 			<ul class="h-bg-nav pos-a fn-flex flex-row">
-				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('nn16rowdl5r')">
-					<img src="./img/nav-1.svg"/>
-					　<span>杭燃供气</span>
+				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('nn16rowdl5r')" @mouseover="nav1=true"
+					@mouseleave="nav1=false">
+					<video class="pos-a" src="./img/nav-1.webm" v-if="nav1" autoplay="autoplay"/>
+					<img class="pos-a" src="./img/nav-1.svg" v-show="!nav1"/>
+					<span class="pos-a">杭燃供气</span>
 				</li>
-				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('6gouq223fze')">
-					<img src="./img/nav-2.svg"/>
-					<span>杭燃服务</span>
+				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('6gouq223fze')" @mouseover="nav2=true"
+					@mouseleave="nav2=false">
+					<video class="pos-a" src="./img/nav-2.webm" v-if="nav2" autoplay="autoplay"/>
+					<img class="pos-a" src="./img/nav-2.svg" v-show="!nav2"/>
+					<span class="pos-a">杭燃服务</span>
 				</li>
-				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('o8tkm981qdh')">
-					<img src="./img/nav-3.svg"/>
-					<span>杭燃优家</span>
+				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('o8tkm981qdh')" @mouseover="nav3=true"
+					@mouseleave="nav3=false">
+					<video class="pos-a" src="./img/nav-3.webm" v-if="nav3" autoplay="autoplay"/>
+					<img class="pos-a" src="./img/nav-3.svg" v-show="!nav3"/>
+					<span class="pos-a">杭燃优家</span>
 				</li>
-				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('vxoiljh5my9')">
-					<img src="./img/nav-4.svg"/>
-					<span>杭燃体验</span>
+				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('vxoiljh5my9')" @mouseover="nav4=true"
+					@mouseleave="nav4=false">
+					<video class="pos-a" src="./img/nav-4.webm" v-if="nav4" autoplay="autoplay"/>
+					<img class="pos-a" src="./img/nav-4.svg" v-show="!nav4"/>
+					<span class="pos-a">杭燃体验</span>
 				</li>
 			</ul>
 			<div class="h-bg-start1-box pos-a">
@@ -87,6 +80,10 @@
 	export default {
 		data() {
 			return {
+				nav1: false,
+				nav2: false,
+				nav3: false,
+				nav4: false,
 				video1Ended: false,
 				status54441: false,
 				statusVideo: false,
@@ -159,40 +156,6 @@
 	}
 </script>
 <style lang="scss" scoped>
-	.h-bg-num1, .h-bg-num2, .h-bg-num3, .h-bg-num4, .h-bg-num5 {
-		color: #fff;
-		font-size: 48px;
-		z-index: 999;
-	}
-
-	.h-bg-num1 {
-		top: 377px;
-		left: 1806px;
-		font-size: 40px;
-	}
-
-	.h-bg-num2 {
-		top: 411px;
-		left: 1274px;
-		font-size: 40px;
-	}
-
-	.h-bg-num3 {
-		top: 526px;
-		left: 2240px;
-	}
-
-	.h-bg-num4 {
-		top: 633px;
-		left: 1604px;
-	}
-
-	.h-bg-num5 {
-		top: 456px;
-		left: 2125px;
-		font-size: 44px;
-	}
-
 	.h-bg-start1-box {
 		left: 50%;
 		bottom: 27px;
@@ -239,14 +202,48 @@
 			margin-right: 96px;
 			justify-content: center;
 			transition: all .3s;
+			width: 160px;
+			height: 160px;
 
 			span {
 				font-size: 40px;
 				line-height: 40px;
+				top: 107px;
+			}
+
+			video {
+				left: 50%;
+				transform: translateX(-50%);
 			}
 
 			img {
-				margin-bottom: 37px;
+				top: 0;
+				left: 50%;
+				transform: translateX(-50%);
+			}
+
+			&:nth-child(1) {
+				video {
+					top: -6px;
+				}
+			}
+
+			&:nth-child(2) {
+				video {
+					top: -12px;
+				}
+			}
+
+			&:nth-child(3) {
+				video {
+					top: -6px;
+				}
+			}
+
+			&:nth-child(4) {
+				video {
+					top: -14px;
+				}
 			}
 
 			&:before {
@@ -256,6 +253,8 @@
 				transition: all .3s;
 				left: 50%;
 				margin-left: -80px;
+				width: 160px;
+				height: 180px;
 			}
 
 			&:after {
@@ -263,6 +262,8 @@
 				position: absolute;
 				opacity: 0;
 				left: 50%;
+				width: 160px;
+				height: 8px;
 				margin-left: -80px;
 				bottom: -27px;
 				transition: all .3s;
@@ -273,15 +274,11 @@
 				color: rgba(255, 255, 255, 1);
 
 				&:before {
-					width: 160px;
-					height: 180px;
 					opacity: 1;
 					background: linear-gradient(180deg, rgba(0, 87, 169, 0) 0%, rgba(0, 87, 169, 0.3) 100%);
 				}
 
 				&:after {
-					width: 160px;
-					height: 8px;
 					opacity: 1;
 					background: #00DDFF;
 				}

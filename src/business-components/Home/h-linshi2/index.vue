@@ -8,9 +8,7 @@
 		<div class="container">
 			<section class="detail">
 				<div class="detail-item">
-					<div class="detail-item-icon" :style="`background-image: url(${
-				currBuilding.icon1
-			})`"></div>
+					<div class="detail-item-icon" :style="`background-image: url(${currBuilding.icon1})`"></div>
 					<div>
 						<div class="detail-item-title">{{ currBuilding.desc1 }}</div>
 						<div class="detail-item-num">{{ currBuilding.value1 }} <span>{{ currBuilding.unit1 }}</span>
@@ -224,7 +222,7 @@
 		border-top-width: 0;
 		padding: 22px 20px 10px;
 		margin-bottom: 32px;
-    background: rgba(2, 15, 137, 1);
+		background: rgba(2, 15, 137, 1);
 	}
 
 	.detail {
@@ -324,10 +322,11 @@
 
 	.fans {
 		height: 412px;
-    background: rgba(2, 15, 137, 1) url("./img/expbg.svg") no-repeat center;
+		background: rgba(2, 15, 137, 1) url("./img/expbg.svg") no-repeat center;
 		background-size: 94% 94%;
-    border: 1px solid #00DDFF;
-    border-top-width: 0;
+		border: 1px solid #00DDFF;
+		border-top-width: 0;
+
 		.fans-top {
 			display: flex;
 			justify-content: space-between;

@@ -42,7 +42,10 @@
 				this.selectValue = item.value
 				this.selectLabel = item.label
 				this.showOptions = false
-				this.emitComponentUpdate(item)
+				this.emitComponentUpdate({
+					value: this.selectLabel,
+					label: this.selectValue,
+				})
 			}
 		},
 		created() {
@@ -103,23 +106,35 @@
 					top: 0;
 					background: #00DDFF;
 				}
-			}
 
-			&:after {
-				width: 15px;
-				height: 15px;
-				background-image: url('./img/right.svg');
-				background-size: 15px;
-				right: 14px;
-				top: 50%;
-				margin-top: -7.5px;
-				content: '';
-				position: absolute;
+				&:after {
+					width: 15px;
+					height: 15px;
+					background-image: url('./img/right.svg');
+					background-size: 15px;
+					right: 14px;
+					top: 50%;
+					margin-top: -7.5px;
+					content: '';
+					position: absolute;
+				}
 			}
 
 			&.active {
 				background: #0057A9;
 				color: #fff;
+
+				&:after {
+					width: 15px;
+					height: 15px;
+					background-image: url('./img/right.svg');
+					background-size: 15px;
+					right: 14px;
+					top: 50%;
+					margin-top: -7.5px;
+					content: '';
+					position: absolute;
+				}
 
 				&:before {
 					content: '';
