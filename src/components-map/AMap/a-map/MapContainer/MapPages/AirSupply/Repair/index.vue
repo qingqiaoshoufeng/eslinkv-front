@@ -103,8 +103,8 @@ export default {
 	},
 	data() {
 		return {
-			center: [120.061259, 30.183295],
-			zoom: 10,
+			center: [120.061259, 30.233295],
+			zoom: 10.7,
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,

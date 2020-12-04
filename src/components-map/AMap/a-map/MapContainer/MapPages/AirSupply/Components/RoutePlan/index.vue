@@ -140,7 +140,7 @@ export default {
 				map: map,
 				path: lineArr,
 				showDir: true,
- 				strokeColor: '#FFD200', //线颜色
+				strokeColor: '#FFD200', //线颜色
 				strokeOpacity: 1,
 				fillColor: '#FFD200', //线颜色
 				strokeWeight: 10, //线宽
@@ -213,11 +213,13 @@ export default {
 	}
 }
 .warnoverlay-gif {
+      transform:translateX(-50%);
+	position: absolute;
 	display: block;
 	width: 100px;
 	height: 35px;
 	margin-top: -14px;
-	margin-left: -23px;
+	margin-left: 19px;
 }
 
 // img {

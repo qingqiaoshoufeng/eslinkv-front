@@ -63,11 +63,13 @@ export default {
 		font-size: 48px;
 	}
 	.warnoverlay-gif {
+      transform:translateX(-50%);
+		position: absolute;
 		display: block;
 		width: 100px;
 		height: 35px;
 		margin-top: -14px;
-		margin-left: -23px;
+		margin-left: 19px;
 	}
 
 	img {

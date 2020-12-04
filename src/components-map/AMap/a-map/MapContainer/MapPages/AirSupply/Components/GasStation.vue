@@ -9,6 +9,8 @@
 			data,
 		}"
 		@click="handleOverlayClick"
+        @mouseover="handleMouseover"
+        @mouseleave="handleMouseleave"
 	>
 		<template slot-scope="{ data }">
 			<div :class="[{ active: active }, data.inletDirection]">
@@ -70,7 +72,7 @@ export default {
 		};
 	},
 	methods: {
-		async handleOverlayClick(marker) {
+		async handleOverlayClick(marker,isCenter=true) {
 			let { id, name, type } = marker;
 			let data = await this.$sysApi.map.airSupply.getStationRealTimeInfo({
 				id,
@@ -96,9 +98,17 @@ export default {
 			this.$emit(
 				'overlay-click',
 				{ ...marker, detail: dataComp },
-				'GasStation'
+                'GasStation',
+                isCenter
 			);
-		},
+        },
+        handleMouseover(marker){
+            this.handleOverlayClick(marker,false)
+        },
+        handleMouseleave(){
+            console.log('leave')
+            this.$emit('close')
+        }
 	},
 };
 </script>

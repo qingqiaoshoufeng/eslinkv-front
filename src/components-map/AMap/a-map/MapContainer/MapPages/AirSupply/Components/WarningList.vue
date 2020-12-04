@@ -1,11 +1,11 @@
 <template>
 	<div>
 		<Overlay
-			v-for="(item, index) in data.length ? data : list"
+			v-for="(item, index) in data ? data : list"
 			:key="index"
 			:marker="{
-				icon: `${eventTypeIconMap[item.eventType]}${
-					item.status ? '' : '-suc'
+				icon: `icontulixieloushijian${
+					item.statusName=='已处理' ? '-suc' : ''
 				}`,
 				iconSize: iconSize,
 				...item,
@@ -18,7 +18,7 @@
 			<img
 				src="@/assets/amap/images/qiangxiu.gif"
 				class="warnoverlay-gif"
-				v-if="item.type === '工艺' && item.status"
+				v-if="type === '工艺' && item.statusName!='已处理'"
 			/>
 			<video
 				class="warning-videO"
@@ -27,7 +27,7 @@
 				autoplay="autoplay"
 				muted="muted"
 				loop
-				v-if="item.type === '事件' && item.status"
+				v-if="type === '事件' && item.statusName !=='处理完成'"
 			></video>
 		</Overlay>
 	</div>
@@ -39,15 +39,15 @@ let eventTypeIconMap = {
 	1: 'icontulixieloushijian',
 };
 export default {
-	name: 'RoutePlan',
+	name: 'WariningList',
 	components: {
 		Overlay,
 	},
 	props: {
-		overlayType: {
+		type: {
 			type: String,
-			default: 'WarningList',
-		},
+			default: '工艺',
+        },
 		iconSize: {
 			type: Number,
 			default: 38,
@@ -60,7 +60,10 @@ export default {
 			default() {
 				return [];
 			},
-		},
+        },
+        apiFun:{
+			type: Function
+        },
 	},
 	data() {
 		return {
@@ -71,11 +74,13 @@ export default {
 	},
 
 	async created() {
-		this.map = this.$parent.$amap;
-		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
-		// console.log(res);
-		// this.list = res.filter(item => item.status);
-		// console.log(this.list, 1111);
+        this.map = this.$parent.$amap;
+        if(this.apiFun){
+            this.list = await this.apiFun()
+            console.log(this.list,'list')
+        }else{
+		    this.list = await this.$sysApi.map.airSupply.getEventWarningList();
+        }
 	},
 };
 </script>
@@ -86,9 +91,10 @@ video::-webkit-media-controls {
 	display: none !important;
 }
 .warning-videO {
-	margin-left: -40px;
-	margin-top: -78px;
+	margin-left: -80px;
+	margin-top: -40px;
 	outline: none;
+    position: absolute;
 }
 .amap-icon {
 	width: 38px !important;
@@ -99,11 +105,13 @@ video::-webkit-media-controls {
 	}
 }
 .warnoverlay-gif {
+      transform:translateX(-50%);
+	position: absolute;
 	display: block;
 	width: 100px;
 	height: 35px;
 	margin-top: -36px;
-	margin-left: -30px;
+	margin-left: 19px;
 }
 
 // img {

@@ -1,6 +1,14 @@
 <template>
 	<div>
 		<!-- 1.legend不控制显隐的覆盖物 -->
+		<!-- 1.1 报警点位-->
+		<WarningList
+			:visible="true"
+            type="工艺"
+			overlayIcon="icontulinengyuanzhan"
+            :apiFun="$sysApi.map.airSupply.getProcessWarningList"
+			:iconSize="38"
+		/>
 		<!-- 区域 -->
 		<RegionBoundary />
 		<!-- 2.legend控制显隐 -->
@@ -21,6 +29,7 @@
 				:detailList="config.detailList"
 				:data="allTypeStationList[config.dataProp]"
 				@overlay-click="handleOverlayClick"
+                @close="closeOverlayDetail"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->
@@ -31,6 +40,7 @@
 			:overlayInfoConfig="overlayInfoConfig"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
+            :iconSize="activeOverlay.overlayType==='WarningList'?38:undefined"
 			ref="OverlayDetail"
 			:left="left"
 			:detialBoxWidth="400"
@@ -168,7 +178,7 @@ export default {
 				AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP
 			),
 			center: [120.061259, 30.233295],
-			zoom: 10,
+			zoom: 10.7,
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
@@ -241,8 +251,8 @@ export default {
 					}
 				}, 3000);
 			} else {
-				this.$amap.setZoom(14, 100);
 				if (isCenter) {
+                    this.$amap.setZoom(14, 100);
 					this.$nextTick(() => {
 						this.$amap.panTo([lng, lat], 100);
 					});
@@ -269,8 +279,10 @@ export default {
 			this.activeOverlay = {};
 			// this.$amap.setZoom(11, 100);
 			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.panTo(this.center, 100);
-			done();
+            this.$amap.panTo(this.center, 100);
+            if(done){
+			    done();
+            }
 		},
 		viewOverlayDetail(overlay) {
 			console.log(111111);
@@ -373,7 +385,9 @@ export default {
 		},
 		// 获取高压统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo({type:'HighPressure'});
+			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
+				{ type: 'HighPressure' }
+			);
 		},
 		// 获取高压管网数据
 		async getHighPressurePipe() {
@@ -405,10 +419,10 @@ export default {
 }
 .detail-label {
 	font-size: 24px;
-	color:#fff;
+	color: #fff;
 }
 .detail-value {
 	font-size: 24px;
-	color:#ffdc45;
+	color: #ffdc45;
 }
 </style>

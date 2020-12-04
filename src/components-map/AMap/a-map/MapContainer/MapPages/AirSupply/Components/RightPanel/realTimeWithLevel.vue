@@ -10,7 +10,7 @@
 			<div class="row">
 				<SvgIcon
 					:icon-name="
-						item.status == 0 ? 'iconzhengchang' : 'iconyichang'
+						item.priority == '已处理' ? 'iconzhengchang' : 'iconyichang'
 					"
 					class="panel-type-icon"
 				></SvgIcon>

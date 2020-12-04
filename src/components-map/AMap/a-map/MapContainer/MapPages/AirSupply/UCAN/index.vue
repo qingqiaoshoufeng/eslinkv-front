@@ -142,7 +142,7 @@ export default {
 		return {
 			overlayInfoConfig: Object.freeze(AIRSUPPLY_UCAN_OVERLAY_MAP),
 			activeOverlay: {},
-			center: [120.061259, 30.183295],
+			center: [120.061259, 30.233295],
 			zooom: 11,
 			showOverlayDetail: false,
 			showRoutePlan: false,

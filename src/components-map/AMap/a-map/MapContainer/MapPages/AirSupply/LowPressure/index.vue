@@ -2,10 +2,13 @@
 	<div>
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 1.1 报警点位-->
-		<!-- <WarningList
+		<WarningList
 			:visible="true"
-			:overlayIcon="config.icon ? config.icon : config.legendIcon"
-		/> -->
+            type="事件"
+			overlayIcon="icontulinengyuanzhan"
+			:iconSize="38"
+            :apiFun="$sysApi.map.airSupply.getEventWarningList"
+		/>
 		<!-- 特殊 中低压管网需要legend控制显隐 -->
 		<AMapTile
 			ref="mapTile"
@@ -34,6 +37,7 @@
 		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
+            :iconSize="activeOverlay.overlayType==='WarningList'?38:undefined"
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
@@ -140,8 +144,8 @@ export default {
 		this.$amap.panTo(this.center, 100);
 	},
 	mounted() {
-        this.getAllTypeStationList();
-        this.getDataStatisticsInfo()
+		this.getAllTypeStationList();
+		this.getDataStatisticsInfo();
 	},
 	data() {
 		return {
@@ -206,8 +210,8 @@ export default {
 		async getAllTypeStationList() {
 			let params = {
 				types: [
-					// 'InspectionPerson', // '巡检人员',
-					// 'InspectionCar', // '巡检车辆',
+					'InspectionPerson', // '巡检人员',
+					'InspectionCar', // '巡检车辆',
 					// 'GasStation', // '门站',
 					// 'PressureRegulatingStation', // '调压站',
 					// 'EmergencyAirSourceStation', // '应急气源站',

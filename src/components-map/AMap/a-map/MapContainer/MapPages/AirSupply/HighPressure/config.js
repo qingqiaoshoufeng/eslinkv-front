@@ -71,7 +71,7 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 		component: 'InspectionPerson',
 		showOverlayName: false,
 		isShow: false,
-		dataProp: '',
+		dataProp: 'InspectionPerson',
 	},
 	InspectionCar: {
 		label: '巡检车辆',
@@ -81,7 +81,7 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 		component: 'InspectionCar',
 		showOverlayName: false,
 		isShow: false,
-		dataProp: '',
+		dataProp: 'InspectionCar',
 	},
 	// ServiceStation: {
 	//     label: '综合服务站',
@@ -231,8 +231,8 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
 		isShowMore: true,
 	},
 	WarningList: {
-		fields: {
-			content: {
+		fields: {    
+			description: {
 				style: {
 					fontSize: '32px',
 					color: '#FFDC45',

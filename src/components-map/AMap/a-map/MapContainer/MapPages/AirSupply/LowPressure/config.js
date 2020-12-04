@@ -36,7 +36,8 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		icon: 'iconrenyuan',
 		component: 'InspectionPerson',
 		showOverlayName: false,
-		isShow: true,
+        isShow: true,
+        dataProp:'InspectionPerson'
 	},
 	InspectionCar: {
 		label: '巡检车辆',
@@ -45,7 +46,8 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		icon: 'iconcheliang',
 		component: 'InspectionCar',
 		showOverlayName: false,
-		isShow: true,
+        isShow: true,
+        dataProp:'InspectionCar'
 	},
 	// ServiceStation: {
 	//     label: '综合服务站',
@@ -231,7 +233,7 @@ export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
 	},
 	WarningList: {
 		fields: {
-			content: {
+			repairContent: {
 				style: {
 					fontSize: '32px',
 					color: '#FFDC45',

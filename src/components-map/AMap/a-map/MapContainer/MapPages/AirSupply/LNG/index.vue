@@ -137,8 +137,8 @@ export default {
 		let { LNGStation } = AIRSUPPLY_LNG_LEGEND_MAP;
 		return {
 			overlayInfoConfig: Object.freeze(AIRSUPPLY_LNG_OVERLAY_MAP),
-			center: [120.061259, 30.183295],
-			zoom: 10,
+			center: [120.061259, 30.233295],
+			zoom: 10.7,
 			activeOverlay: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
