@@ -13,33 +13,49 @@
 			<div class="h-bg-control pos-a"></div>
 			<div class="h-bg-left pos-a"></div>
 			<div class="h-bg-right pos-a"></div>
-			<div class="h-bg-red1 pos-a pointer" :class="{active:status54441}" @click="open54441"></div>
-			<div class="h-bg-red2 pos-a pointer" :class="{active:statusVideo}" @click="openVideo"></div>
+			<div @mouseover="hover54441=true"
+				 @mouseleave="hover54441=false">
+				<video class="h-bg-red1 pos-a pointer" src="./img/dengleft.webm" @click="open54441" v-if="hover54441"
+					   autoplay="autoplay" loop="loop"></video>
+				<div class="h-bg-red1 pos-a pointer" :class="{active:status54441}" @click="open54441"
+					 v-else></div>
+			</div>
+			<div @mouseover="hoverVideo=true"
+				 @mouseleave="hoverVideo=false">
+				<video class="h-bg-red2 pos-a pointer" src="./img/dengright.webm" @click="openVideo"
+					   v-if="hoverVideo" autoplay="autoplay" loop="loop"></video>
+				<div class="h-bg-red2 pos-a pointer" :class="{active:statusVideo}" @click="openVideo"
+					 v-else></div>
+			</div>
 			<h-bg-54441 v-if="status54441" :status="status54441" :close="close54441"/>
 			<div class="h-bg-center pos-a"></div>
 			<ul class="h-bg-nav pos-a fn-flex flex-row">
-				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('nn16rowdl5r')" @mouseover="nav1=true"
-					@mouseleave="nav1=false">
-					<video class="pos-a" src="./img/nav-1.webm" v-if="nav1" autoplay="autoplay"/>
-					<img class="pos-a" src="./img/nav-1.svg" v-show="!nav1"/>
+				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('nn16rowdl5r')"
+					@mouseover="hoverNav1=true"
+					@mouseleave="hoverNav1=false">
+					<video class="pos-a" src="./img/nav-1.webm" v-if="hoverNav1" autoplay="autoplay"/>
+					<img class="pos-a" src="./img/nav-1.svg" v-show="!hoverNav1"/>
 					<span class="pos-a">杭燃供气</span>
 				</li>
-				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('6gouq223fze')" @mouseover="nav2=true"
-					@mouseleave="nav2=false">
-					<video class="pos-a" src="./img/nav-2.webm" v-if="nav2" autoplay="autoplay"/>
-					<img class="pos-a" src="./img/nav-2.svg" v-show="!nav2"/>
+				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('6gouq223fze')"
+					@mouseover="hoverNav2=true"
+					@mouseleave="hoverNav2=false">
+					<video class="pos-a" src="./img/nav-2.webm" v-if="hoverNav2" autoplay="autoplay"/>
+					<img class="pos-a" src="./img/nav-2.svg" v-show="!hoverNav2"/>
 					<span class="pos-a">杭燃服务</span>
 				</li>
-				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('o8tkm981qdh')" @mouseover="nav3=true"
-					@mouseleave="nav3=false">
-					<video class="pos-a" src="./img/nav-3.webm" v-if="nav3" autoplay="autoplay"/>
-					<img class="pos-a" src="./img/nav-3.svg" v-show="!nav3"/>
+				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('o8tkm981qdh')"
+					@mouseover="hoverNav3=true"
+					@mouseleave="hoverNav3=false">
+					<video class="pos-a" src="./img/nav-3.webm" v-if="hoverNav3" autoplay="autoplay"/>
+					<img class="pos-a" src="./img/nav-3.svg" v-show="!hoverNav3"/>
 					<span class="pos-a">杭燃优家</span>
 				</li>
-				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('vxoiljh5my9')" @mouseover="nav4=true"
-					@mouseleave="nav4=false">
-					<video class="pos-a" src="./img/nav-4.webm" v-if="nav4" autoplay="autoplay"/>
-					<img class="pos-a" src="./img/nav-4.svg" v-show="!nav4"/>
+				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('vxoiljh5my9')"
+					@mouseover="hoverNav4=true"
+					@mouseleave="hoverNav4=false">
+					<video class="pos-a" src="./img/nav-4.webm" v-if="hoverNav4" autoplay="autoplay"/>
+					<img class="pos-a" src="./img/nav-4.svg" v-show="!hoverNav4"/>
 					<span class="pos-a">杭燃体验</span>
 				</li>
 			</ul>
@@ -80,10 +96,12 @@
 	export default {
 		data() {
 			return {
-				nav1: false,
-				nav2: false,
-				nav3: false,
-				nav4: false,
+				hoverNav1: false,
+				hoverNav2: false,
+				hoverNav3: false,
+				hoverNav4: false,
+				hover54441: false,
+				hoverVideo: false,
 				video1Ended: false,
 				status54441: false,
 				statusVideo: false,
@@ -138,9 +156,11 @@
 			},
 			open54441() {
 				this.status54441 = true
+				this.hover54441 = false
 			},
 			openVideo() {
 				this.statusVideo = true
+				this.hoverVideo = false
 				GoldChart.scene.createSceneInstance('grdnn9tiey', 'slideUp')
 			},
 			close54441() {
@@ -290,13 +310,26 @@
 		}
 	}
 
-	.h-bg-red1 {
+	div.h-bg-red1 {
 		background-image: url('./img/red-1.png');
+		background-size: 257px 64px;
+		opacity: 0.6;
+
+		&.active {
+			opacity: 1;
+		}
+	}
+
+	.h-bg-red1 {
 		width: 257px;
 		height: 64px;
-		background-size: 257px 64px;
 		left: 738px;
 		bottom: 60px;
+	}
+
+	div.h-bg-red2 {
+		background-image: url('./img/red-2.png');
+		background-size: 257px 64px;
 		opacity: 0.6;
 
 		&.active {
@@ -305,17 +338,10 @@
 	}
 
 	.h-bg-red2 {
-		background-image: url('./img/red-2.png');
 		width: 257px;
 		height: 64px;
-		background-size: 257px 64px;
 		right: 738px;
 		bottom: 60px;
-		opacity: 0.6;
-
-		&.active {
-			opacity: 1;
-		}
 	}
 
 	.h-bg-back {
