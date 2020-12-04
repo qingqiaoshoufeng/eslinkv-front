@@ -1,7 +1,7 @@
 <template>
 	<div class="list">
 		<div
-			@click="handleClick(item, index, 'WARN')"
+			@click="handleClick(item, index, 'WarningList')"
 			v-for="(item, index) in list"
 			:key="index"
 			class="list-item"
@@ -68,7 +68,6 @@ export default {
 	},
 	async created() {
 		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
-		console.log(this.list);
 	},
 	watch: {
 		activeItem(val) {
@@ -84,7 +83,6 @@ export default {
 	},
 	methods: {
 		handleClick(item, index) {
-			console.log(item);
 			this.activeIndex = index;
 			this.$emit('change', { ...item, index }, 'WARNEVENT');
 		},

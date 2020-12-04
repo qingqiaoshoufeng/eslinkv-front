@@ -6,6 +6,7 @@
 			visible,
 			apiFun,
 			...$attrs,
+			data,
 		}"
 		@click="marker => $emit('overlay-click', marker, 'InspectionCar')"
 	/>
@@ -30,7 +31,10 @@ export default {
 			type: String,
 			default: '',
 		},
-	},
+		data: {
+			type: Array,
+		},
+    },
 	data() {
 		let apiFun = this.$sysApi.map.home.getInspectionCarList;
 		return {

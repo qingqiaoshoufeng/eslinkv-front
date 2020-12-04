@@ -37,7 +37,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		component: 'InspectionPerson',
 		showOverlayName: false,
         isShow: true,
-        dataProp:'InspectionPerson'
+        dataProp:'inspectionPersonList'
 	},
 	InspectionCar: {
 		label: '巡检车辆',
@@ -47,7 +47,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		component: 'InspectionCar',
 		showOverlayName: false,
         isShow: true,
-        dataProp:'InspectionCar'
+        dataProp:'inspectionPersonList'
 	},
 	// ServiceStation: {
 	//     label: '综合服务站',

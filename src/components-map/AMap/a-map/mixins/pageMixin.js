@@ -23,7 +23,7 @@ export default {
     watch: {
         activeItem(val) {
             if (JSON.stringify(val) === '{}') return false
-            this.handleOverlayClick(val, 'WARN')
+            this.handleOverlayClick(val, 'WarningList')
         },
     },
 

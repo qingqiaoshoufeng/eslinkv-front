@@ -44,7 +44,7 @@ export default {
 			});
 		},
 		handleOverlayClick(marker) {
-			this.$emit('overlay-click', marker, 'WARN');
+			this.$emit('overlay-click', marker, 'WarningList');
 		},
 	},
 };
