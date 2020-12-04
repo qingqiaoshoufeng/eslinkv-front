@@ -22,7 +22,16 @@
 				:data="allTypeStationList[config.dataProp]"
 			/>
 		</template>
-		<!-- 覆盖物详情 -->
+		<!-- 2.legend不控制显隐 -->
+		<ClickTaskList
+			:iconSize="38"
+			@overlay-click="handleOverlayClick"
+			:detailList="[]"
+			:activeIndex="activeIndex"
+			:data="allTypeStationList.TaskList"
+			ref="OverlayDetail"
+		/>
+
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
 			:legendMap="legendMap"
@@ -72,6 +81,7 @@ import {
 	RightPanelWithServiceCustomer,
 	TipDetial,
 	TaskList,
+	ClickTaskList,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -107,6 +117,7 @@ export default {
 		MapLegend,
 		TipDetial,
 		TaskList,
+		ClickTaskList,
 	},
 	data() {
 		return {
@@ -130,6 +141,7 @@ export default {
 			},
 			detailInfo: {},
 			isShowMore: false,
+			activeIndex: null,
 		};
 	},
 	created() {
@@ -263,7 +275,21 @@ export default {
 			}
 		},
 		handleListClick(item) {
+			let { name, time, activeIndex, overlayType } = item;
+			if (overlayType === 'ThreeSocialLinkage') {
+				this.handleOverlayClick(item);
+				return;
+			}
+			this.activeIndex = activeIndex;
+			this.activeOverlay = {
+				detailList:
+					SERVICE_SERVICECUSTOMER_LEGEND_MAP.TaskList.detailList,
+				...item,
+			};
 			console.log(item);
+			this.detailInfo = item;
+			console.log(this.activeOverlay);
+			this.showOverlayDetail = true;
 		},
 		showThreeSocialLinkageDetail() {
 			//打开三社联动的弹框

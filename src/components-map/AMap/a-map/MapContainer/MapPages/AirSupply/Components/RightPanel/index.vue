@@ -7,6 +7,9 @@
 		<!-- <TabPanel key="statAawareness" name="statAawareness" label="态势感知">
 			<statAawareness @change="handleClick" />
 		</TabPanel> -->
+		<!-- <TabPanel key="realTime" name="realTime" label="工艺报警" lazy>
+			<realTime @change="handleClick" />
+		</TabPanel> -->
 		<TabPanel
 			key="realTimeWithLevel"
 			name="realTimeWithLevel"
@@ -54,7 +57,7 @@ export default {
 		statAawareness,
 	},
 	mounted() {
-        this.ready = true;
+		this.ready = true;
 	},
 	watch: {
 		activeItem(val) {

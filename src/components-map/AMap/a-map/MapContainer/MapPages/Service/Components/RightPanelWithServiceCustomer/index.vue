@@ -59,8 +59,10 @@ export default {
 	},
 	methods: {
 		handleClick(item, index) {
+			console.log('list-click');
 			this.activeIndex = index;
-			this.$emit('overlay-click', item);
+			console.log(item);
+			this.$emit('list-click', item);
 		},
 	},
 };

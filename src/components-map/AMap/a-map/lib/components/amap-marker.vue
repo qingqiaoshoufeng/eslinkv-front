@@ -119,7 +119,7 @@ export default {
 	},
 	methods: {
 		__initComponent(options) {
-            let {scaleRatio,offset}  = this
+			let { scaleRatio, offset } = this;
 			if (this.$slots.default && this.$slots.default.length) {
 				options.content = this.tmpVM.$refs.node;
 			}

@@ -17,6 +17,8 @@ export { default as WarningICcustomer } from './WarningICcustomer' // 用气大�
 export { default as useHotYear } from './useHotYear' // 年度销气热力 
 export { default as TaskList } from './TaskList' // 任务工单 
 export { default as ClickTipDetial } from './ClickTipDetial' // 任务工单 
+export { default as ClickTaskList } from './ClickTaskList' // 点击展示任务工单 
+
 
 
 export { default as TipDetial } from './TipDetial' // 子公司详情自定义组件  

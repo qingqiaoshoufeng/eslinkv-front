@@ -1,6 +1,6 @@
 
 // 引入详情字典
-import { citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, } from "../../../../utils/dictionary"
+import { citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus } from "../../../../utils/dictionary"
 
 
 // 覆盖物legend配置
@@ -50,11 +50,21 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         legendIcon: 'iconrenwugongdan',
         iconSize: 38,
         icon: 'iconrenwugongdan',
-        component: 'ThreeSocialLinkage',
+        component: 'TaskList',
         isShow: false,
         dataProp: 'TaskList',
-        detailList: []
-    }
+        detailList: [serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus]
+    },
+    // ClickTaskList: {
+    //     label: '任务工单',
+    //     legendIcon: 'iconrenwugongdan',
+    //     iconSize: 38,
+    //     icon: 'iconrenwugongdan',
+    //     component: 'ClickTaskList',
+    //     isShow: true,
+    //     dataProp: 'ClickTaskList',
+    //     detailList: []
+    // }
 }
 
 //覆盖物详情

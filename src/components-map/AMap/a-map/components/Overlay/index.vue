@@ -1,5 +1,5 @@
 <script>
-import  SvgIcon  from '../SvgIcon';
+import SvgIcon from '../SvgIcon';
 import { AMapMarker } from '../../lib';
 export default {
 	name: 'Overlay',
@@ -10,15 +10,15 @@ export default {
 	},
 	render: (h, { props, data, listeners, scopedSlots, $slots }) => {
 		let { active = false, marker, visible = true } = props;
-        let { lat, lng, name, status, icon, iconSize = 38 } = marker;
-        let offset = [ -iconSize/2,-iconSize/2]
+		let { lat, lng, name, status, icon, iconSize = 38 } = marker;
+		let offset = [-iconSize / 2, -iconSize / 2];
 		if (!parseFloat(lat) || !parseFloat(lng)) {
 			return null;
 		}
 		return (
 			<AMapMarker
-                visible={visible}
-                offset={offset}
+				visible={visible}
+				offset={offset}
 				position={[lng || 0, lat || 0]}
 				vid={name}
 			>
@@ -47,7 +47,7 @@ export default {
 	position: relative;
 	cursor: pointer;
 	box-sizing: border-box;
-    
+
 	img {
 		width: 100%;
 	}

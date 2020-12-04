@@ -39,6 +39,7 @@
 </template>
 
 <script>
+import { TaskList } from '..';
 import { SvgIcon } from '../../../../../components/';
 
 export default {
@@ -50,6 +51,7 @@ export default {
 		return {
 			activeIndex: null,
 			list: [],
+			clickNumber: 0,
 		};
 	},
 	props: {
@@ -78,7 +80,10 @@ export default {
 	},
 	methods: {
 		handleClick(item, index) {
+			item.activeIndex = index;
 			this.activeIndex = index;
+			item.overlayType = 'TaskList';
+			console.log(item);
 			this.$emit('change', item);
 		},
 	},

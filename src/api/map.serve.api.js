@@ -154,6 +154,16 @@ export function getNineteenStatisticsInfo(data) {
 }
 // 查询19厅站点详情
 
+export function getNineteenStationDetailInfo(data) {
+    return request({
+        url: `/server/api/impalaByQueryId`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
 // 查询客户服务站点列表
 export function getServiceCustomerStationList(data) {
     return request({

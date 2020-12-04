@@ -35,7 +35,7 @@ export const AIRSUPPLY_WARN_MODEL_SCENEINDEX = 's7q8z58f84'
 export const AIRSUPPLY_WARN__MODEL_COMPONENTINDEX = ['5twi4542r5i']
 // 工商户警报
 export const ICcustomer_WARN__SCENEINDEX = '7gpqnjnklb4'
-export const ICcustomer_WARN__COMPONENTINDEX = ['qxy0rmgc2zg', 'qxy0rmgc2zg', 'ucodxj4case', 'ucodxj4case', 'v05qrzfpet9', 'hxxs8j4tw0v', 'jjt38a1zdh']
+export const ICcustomer_WARN__COMPONENTINDEX = ['qxy0rmgc2zg', 'qxy0rmgc2zg', , 'ucodxj4case', 'v05qrzfpet9', 'hxxs8j4tw0v', 'jjt38a1zdh']
 // { 'tkxadgbmu0k': 'tkxadgbmu0k', 'ttek9npf3vb': 'ttek9npf3vb', 'nhgqy71gr3b': 'nhgqy71gr3b', 'd72fx6tk8a7': 'd72fx6tk8a7', 'pujdkocv3tm': 'pujdkocv3tm', 'pxlyqnfzs8i': 'pxlyqnfzs8i', 'z4ur1tcmbgm': 'z4ur1tcmbgm' }
 // 
 

@@ -32,7 +32,7 @@
 			ref="OverlayDetail"
 			:detialBoxWidth="450"
 		>
-			<TipDetial :data="activeOverlay" />
+			<TipDetial :data="activeOverlay" :detailInfo="detailInfo" />
 		</OverlayDetail>
 		<!-- 统计数据 -->
 		<portal to="destination">
@@ -95,9 +95,10 @@ export default {
 			activeOverlay: {},
 			showOverlayDetail: false,
 			zoom: 10,
-			center: [120.80971, 30.202216],
+			center: [120.90522766, 30.33199066],
 			activeArea: '杭州钱江燃气有限公司',
 			allTypeStationList: {},
+			detailInfo: {},
 		};
 	},
 	created() {
@@ -119,12 +120,15 @@ export default {
 			};
 			this.handleOverlayClick(params);
 		},
-		handleOverlayClick(overlay, overlayType, isCenter = true) {
+		async handleOverlayClick(overlay, overlayType, isCenter = true) {
 			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
-			let { lng, lat } = overlay;
+			let { lng, lat, name } = overlay;
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
+			let res = await this.getDetialInfo(name);
+			console.log(res);
+			this.detailInfo = res[0];
 			// this.$amap.setZoom(14, 100);
 			// if (isCenter) {
 			// 	this.$nextTick(() => {
@@ -142,9 +146,7 @@ export default {
 			let res = await this.$sysApi.map.serve.getNineteenStatisticsInfo(
 				params
 			);
-			// console.log(res[0]['accept_2hour_rate']);
-			// res[0]['accept_2hour_rate'] =
-			// 	(res[0]['accept_2hour_rate'] * 100).toFixed(2) + '%';
+
 			this.dataStatisticsInfo = res[0];
 			console.log(222222222222);
 			console.log(this.dataStatisticsInfo);
@@ -165,6 +167,19 @@ export default {
 			let res = await this.$sysApi.map.serve.getHangranCodeList(params);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
 			console.log(this.allTypeStationList, '余志强');
+		},
+		// 请求详情数据
+		getDetialInfo(name) {
+			let params = {
+				chartQueryType: 0,
+				dataAnalyseId: 901,
+				dataType: 0,
+				projectId: 20,
+				queryId: 901,
+				type: name,
+			};
+			params.params = JSON.stringify(params);
+			return this.$sysApi.map.serve.getNineteenStationDetailInfo(params);
 		},
 	},
 	mounted() {
