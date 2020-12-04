@@ -2,14 +2,14 @@
 	<div>
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 1.1 报警点位-->
-		<WarningList
+		<!-- <WarningList
 			:visible="true"
 			type="事件"
 			overlayIcon="icontulinengyuanzhan"
 			:iconSize="38"
 			@overlay-click="handleOverlayClick"
 			:apiFun="$sysApi.map.airSupply.getEventWarningList"
-		/>
+		/> -->
 		<!-- 特殊 中低压管网需要legend控制显隐 -->
 		<AMapTile
 			ref="mapTile"

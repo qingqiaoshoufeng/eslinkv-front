@@ -1,9 +1,9 @@
 <template>
-	<div class="list">
+	<div class="process-warning">
 		<vue-seamless-scroll
 			:data="list || []"
-			class="content-warp"
-			style="height: 100%"
+			class="list"
+			ref="bbb"
 			:class-option="classOption"
 		>
 			<div
@@ -36,7 +36,7 @@
 						</div>
 					</div>
 					<div>
-						{{ item.time }}
+						{{ item.alarmTime }}
 					</div>
 				</div>
 				<div class="row">
@@ -64,7 +64,7 @@ import { SvgIcon } from '../../../../../components/';
 import VueSeamLess from 'vue-seamless-scroll';
 
 export default {
-	name: 'realTimeWithLevel',
+	name: 'ProcessWarningList',
 	components: {
 		SvgIcon,
 		VueSeamLess,
@@ -85,6 +85,11 @@ export default {
 	},
 	async created() {
 		this.list = await this.$sysApi.map.airSupply.getProcessWarningList();
+	},
+	mounted() {
+		console.log('bbb');
+		window.bbb = this.$refs.bbb;
+		setTimeout(this.$refs.bbb._initMove(), 3000);
 	},
 	computed: {
 		classOption() {
@@ -122,11 +127,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list {
+.process-warning {
 	color: #fff;
 	font-size: 16px;
+	height: 800px;
+	overflow: hidden;
 	.list-item {
-		// height: 96px;
 		padding: 20px 8px;
 		box-sizing: border-box;
 		cursor: pointer;

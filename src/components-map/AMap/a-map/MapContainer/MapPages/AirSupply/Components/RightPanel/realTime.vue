@@ -1,9 +1,9 @@
 <template>
-	<div class="list">
+	<div class="real-time">
 		<vue-seamless-scroll
 			:data="list || []"
-			class="content-warp"
-			style="height: 100%"
+			class="event-warning"
+            ref="aaa"
 			:class-option="classOption"
 		>
 			<div
@@ -26,7 +26,7 @@
 						{{ item.repairContent }}
 					</div>
 					<div>
-						{{ item.time }}
+						{{ item.callDate }}
 					</div>
 				</div>
 				<div class="row">
@@ -72,11 +72,15 @@ export default {
 				return {};
 			},
 		},
-	},
+    },
+        mounted(){
+            console.log('aaa')
+        setTimeout(this.$refs.aaa._initMove(),3000)
+    },
 	computed: {
 		classOption() {
 			return {
-				step: 0.2, // 数值越大速度滚动越快
+				step: 0.3, // 数值越大速度滚动越快
 				limitMoveNum: this.list?.length, // 开始无缝滚动的数据量
 				hoverStop: true, // 是否开启鼠标悬停stop
 				direction: 1, // 0向下 1向上 2向左 3向右
@@ -112,9 +116,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.list {
+.event-warning {
 	color: #fff;
 	font-size: 16px;
+	height: 800px;
+	overflow: hidden;
 	.list-item {
 		height: 96px;
 		padding: 20px 8px;
