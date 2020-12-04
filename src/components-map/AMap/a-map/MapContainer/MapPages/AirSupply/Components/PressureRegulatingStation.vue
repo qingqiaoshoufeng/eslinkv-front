@@ -93,7 +93,6 @@ export default {
 			this.handleOverlayClick(marker, false);
 		},
 		handleMouseleave() {
-            console.log('leace')
 			this.$emit('close');
 		},
 	},

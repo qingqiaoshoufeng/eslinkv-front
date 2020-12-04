@@ -106,7 +106,6 @@ export default {
             this.handleOverlayClick(marker,false)
         },
         handleMouseleave(){
-            console.log('leave')
             this.$emit('close')
         }
 	},
