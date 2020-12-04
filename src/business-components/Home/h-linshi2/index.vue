@@ -242,7 +242,7 @@
 				width: 80px;
 				height: 80px;
 				margin-right: 8px;
-				background: #0f3b69;
+				background: #0049ce;
 
 				&.money {
 					background-image: url("/static/images/home/home-u-0.svg");

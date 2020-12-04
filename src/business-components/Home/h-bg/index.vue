@@ -10,6 +10,21 @@
 					   v-show="video1Ended"></video>
 			</template>
 			<div class="h-bg-top pos-a"></div>
+			<transition name="slide-down">
+				<div class="pos-a h-bg-num1" v-show="video1Ended &&!status54441">3,108万m³</div>
+			</transition>
+			<transition name="slide-down">
+				<div class="pos-a h-bg-num2" v-show="video1Ended &&!status54441">976万m³</div>
+			</transition>
+			<transition name="slide-down">
+				<div class="pos-a h-bg-num3" v-show="video1Ended &&!status54441">34万m³</div>
+			</transition>
+			<transition name="slide-down">
+				<div class="pos-a h-bg-num4" v-show="video1Ended &&!status54441">240万m³</div>
+			</transition>
+			<transition name="slide-down">
+				<div class="pos-a h-bg-num5" v-show="video1Ended&&!status54441">1,425万m³</div>
+			</transition>
 			<div class="h-bg-control pos-a"></div>
 			<div class="h-bg-left pos-a"></div>
 			<div class="h-bg-right pos-a"></div>
@@ -144,6 +159,40 @@
 	}
 </script>
 <style lang="scss" scoped>
+	.h-bg-num1, .h-bg-num2, .h-bg-num3, .h-bg-num4, .h-bg-num5 {
+		color: #fff;
+		font-size: 48px;
+		z-index: 999;
+	}
+
+	.h-bg-num1 {
+		top: 377px;
+		left: 1806px;
+		font-size: 40px;
+	}
+
+	.h-bg-num2 {
+		top: 411px;
+		left: 1274px;
+		font-size: 40px;
+	}
+
+	.h-bg-num3 {
+		top: 526px;
+		left: 2240px;
+	}
+
+	.h-bg-num4 {
+		top: 633px;
+		left: 1604px;
+	}
+
+	.h-bg-num5 {
+		top: 456px;
+		left: 2125px;
+		font-size: 44px;
+	}
+
 	.h-bg-start1-box {
 		left: 50%;
 		bottom: 27px;
