@@ -3,6 +3,7 @@
 		<vue-seamless-scroll
 			:data="list || []"
 			class="list"
+			ref="bbb"
 			:class-option="classOption"
 		>
 			<div
@@ -35,7 +36,7 @@
 						</div>
 					</div>
 					<div>
-						{{ item.time }}
+						{{ item.alarmTime }}
 					</div>
 				</div>
 				<div class="row">
@@ -85,6 +86,11 @@ export default {
 	async created() {
 		this.list = await this.$sysApi.map.airSupply.getProcessWarningList();
 	},
+	mounted() {
+		console.log('bbb');
+		window.bbb = this.$refs.bbb;
+		setTimeout(this.$refs.bbb._initMove(), 3000);
+	},
 	computed: {
 		classOption() {
 			return {
@@ -124,7 +130,7 @@ export default {
 .process-warning {
 	color: #fff;
 	font-size: 16px;
-    height: 800px;
+	height: 800px;
 	overflow: hidden;
 	.list-item {
 		padding: 20px 8px;

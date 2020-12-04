@@ -3,6 +3,7 @@
 		<vue-seamless-scroll
 			:data="list || []"
 			class="event-warning"
+            ref="aaa"
 			:class-option="classOption"
 		>
 			<div
@@ -25,7 +26,7 @@
 						{{ item.repairContent }}
 					</div>
 					<div>
-						{{ item.time }}
+						{{ item.callDate }}
 					</div>
 				</div>
 				<div class="row">
@@ -71,7 +72,11 @@ export default {
 				return {};
 			},
 		},
-	},
+    },
+        mounted(){
+            console.log('aaa')
+        setTimeout(this.$refs.aaa._initMove(),3000)
+    },
 	computed: {
 		classOption() {
 			return {

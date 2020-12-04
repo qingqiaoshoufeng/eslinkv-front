@@ -2,14 +2,14 @@
 	<div>
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 1.1 报警点位-->
-		<WarningList
+		<!-- <WarningList
 			:visible="true"
 			type="工艺"
 			overlayIcon="icontulinengyuanzhan"
 			:apiFun="$sysApi.map.airSupply.getProcessWarningList"
 			:iconSize="38"
 			@overlay-click="handleOverlayClick"
-		/>
+		/> -->
 		<!-- 区域 -->
 		<RegionBoundary />
 		<!-- 2.legend控制显隐 -->
