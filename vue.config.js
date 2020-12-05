@@ -11,6 +11,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 // });
 const needReport = false
 module.exports = {
+    // transpileDependencies: ['view-design'],
     assetsDir: 'static',
     productionSourceMap: false,
     lintOnSave: true,
@@ -102,6 +103,7 @@ module.exports = {
                     }
                 }
             }
+            config.entry.app = ["babel-polyfill", "./src/main.ts"];
         }
         config.resolve.extensions = [".js", ".vue", ".json", ".ts", ".tsx"]
         config.externals = [
@@ -113,12 +115,18 @@ module.exports = {
         ]
     },
     chainWebpack: config => {
-        config.entry.app = ['@babel/polyfill', './src/main.js'];
+        config.entry.app = ['@babel/polyfill', './src/main.ts'];
         config.module
             .rule('vue')
             .use('iview')
             .loader('iview-loader')
-            .options({ prefix: false })
+            .options({ prefix: false }).end()
+        config.module
+            .rule("view-design")  //  我目前用的是新版本的iview ,旧版本的iview，用iview代替view-design
+            .test(/view-design.src.*?js$/)
+            .use("babel")
+            .loader("babel-loader")
+            .end()
         config.resolve.alias
             .set('@lib', path.resolve(__dirname, './lib'));
         if (isProduction) {

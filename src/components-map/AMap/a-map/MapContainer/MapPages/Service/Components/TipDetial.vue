@@ -13,7 +13,7 @@
 				:key="index"
 			>
 				<span class="label">{{ `${item.label}: ` }}</span>
-				<span class="value">{{
+				<span class="value" v-show="detailInfo[item.prop]">{{
 					`${detailInfo[item.prop] + item.DW} `
 				}}</span>
 			</div>
