@@ -33,11 +33,15 @@ export const AIRSUPPLY_WARN_COMPONENTINDEX = ['3y1yl6sy7qi']
 // 供气告警场景
 export const AIRSUPPLY_WARN_MODEL_SCENEINDEX = 's7q8z58f84'
 export const AIRSUPPLY_WARN__MODEL_COMPONENTINDEX = ['5twi4542r5i']
+
+// 供气工艺图场景
+export const AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX = 'zcklf7lfbq'
+export const AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX = ['vmuwvj985ff']
 // 工商户警报
 export const ICcustomer_WARN__SCENEINDEX = '7gpqnjnklb4'
 export const ICcustomer_WARN__COMPONENTINDEX = ['qxy0rmgc2zg', 'qxy0rmgc2zg', , 'ucodxj4case', 'v05qrzfpet9', 'hxxs8j4tw0v', 'jjt38a1zdh']
 // { 'tkxadgbmu0k': 'tkxadgbmu0k', 'ttek9npf3vb': 'ttek9npf3vb', 'nhgqy71gr3b': 'nhgqy71gr3b', 'd72fx6tk8a7': 'd72fx6tk8a7', 'pujdkocv3tm': 'pujdkocv3tm', 'pxlyqnfzs8i': 'pxlyqnfzs8i', 'z4ur1tcmbgm': 'z4ur1tcmbgm' }
-// 
+//
 
 
 

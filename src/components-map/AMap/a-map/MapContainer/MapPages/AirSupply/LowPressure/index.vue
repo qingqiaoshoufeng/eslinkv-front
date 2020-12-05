@@ -149,6 +149,12 @@ export default {
 	mounted() {
 		this.getAllTypeStationList();
 		this.getDataStatisticsInfo();
+		window.setCenter = this.setCenter.bind(this);
+	},
+	watch: {
+		center(val) {
+			this.$amap.panTo(val, 100);
+		},
 	},
 	data() {
 		return {
@@ -208,6 +214,10 @@ export default {
 		},
 	},
 	methods: {
+		setCenter(center) {
+			this.center = center || this.center;
+			console.log(this.center);
+		},
 		// 获取所有站点数据
 		async getAllTypeStationList() {
 			let params = {

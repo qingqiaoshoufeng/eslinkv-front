@@ -40,14 +40,14 @@ files.keys().forEach(key => {
 
 export default {
 	name: 'MainMap',
-    mixins: [mapMixin],
-    provide(){
-        return {
-            parentInfo:{
-                scaleRatio:this.scaleRatio
-            }
-        }
-    },
+	mixins: [mapMixin],
+	provide() {
+		return {
+			parentInfo: {
+				scaleRatio: this.scaleRatio,
+			},
+		};
+	},
 	components: {
 		ElAmap: AMap,
 		MapTypeLegend,
@@ -62,14 +62,14 @@ export default {
 				dragEnable: true,
 				zoom: 10,
 				viewMode: '3D',
-                pitch: 10,
+				pitch: 10,
 				mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
 			},
 			kanboardSize: {
 				width: 3500,
 				height: 1050,
-            },
-            scaleRatio:1,
+			},
+			scaleRatio: 1,
 			reverseScaleRatio: 1,
 		};
 	},
@@ -79,13 +79,14 @@ export default {
 			const { width, height } = this.kanboardSize;
 			let ratio = Math.min(clientWidth / width, clientHeight / height);
 			ratio = ratio < 1 ? ratio : 1;
-            this.reverseScaleRatio = 1 / ratio;
-            this._provided.parentInfo.scaleRatio = ratio
+			this.reverseScaleRatio = 1 / ratio;
+			this._provided.parentInfo.scaleRatio = ratio;
 			// this.reverseScaleRatio = 1
 		},
 	},
 	mounted() {
-        this.updateKanboardSize();
+		this.updateKanboardSize();
+		console.log('yuzhiqiang ');
 	},
 };
 </script>

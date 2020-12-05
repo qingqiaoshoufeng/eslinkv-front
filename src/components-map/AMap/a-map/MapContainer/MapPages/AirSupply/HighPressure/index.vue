@@ -33,6 +33,27 @@
 				@close="closeOverlayDetail"
 			/>
 		</template>
+		<!-- 2.legend不控制显隐 -->
+		<template v-for="(config, legend) in withoutLegendOverlay">
+			<component
+				v-if="allTypeStationList[config.dataProp]"
+				:key="legend"
+				:visible="config.isShow"
+				:is="config.component"
+				:overlayIcon="config.icon ? config.icon : config.legendIcon"
+				:overlayType="config.component"
+				:iconSize="config.iconSize"
+				:showOverlayName="
+					config.showOverlayName === false
+						? config.showOverlayName
+						: undefined
+				"
+				:detailList="config.detailList"
+				:data="allTypeStationList[config.dataProp]"
+				@overlay-click="handleOverlayClick"
+				@close="closeOverlayDetail"
+			/>
+		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
 			v-model="showOverlayDetail"
@@ -59,6 +80,9 @@
 					<div class="detail-value">
 						{{ item.value }}{{ item.dw }}
 					</div>
+				</div>
+				<div class="btn" v-show="isShowMore" @click="getMoreDetail">
+					更多详情
 				</div>
 			</div>
 		</OverlayDetail>
@@ -121,10 +145,13 @@ import {
 	AIRSUPPLY_WARN_COMPONENTINDEX,
 	AIRSUPPLY_WARN_MODEL_SCENEINDEX,
 	AIRSUPPLY_WARN__MODEL_COMPONENTINDEX,
+	AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
+	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX,
 } from '../../../../config/scene';
 
 import {
 	AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
+	AIRSUPPLY_HIGHPRESSURE_NO_LEGEND_MAP,
 	AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP,
 	DATASTATISTICSLIST,
 } from './config.js';
@@ -164,6 +191,11 @@ export default {
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.panTo(this.center, 100);
 	},
+	watch: {
+		center(val) {
+			this.$amap.panTo(val, 100);
+		},
+	},
 	data() {
 		let {
 			HighPressureLine,
@@ -198,6 +230,7 @@ export default {
 				PressureRegulatingStation,
 				EmergencyAirSourceStation,
 			},
+			withoutLegendOverlay: AIRSUPPLY_HIGHPRESSURE_NO_LEGEND_MAP,
 			left: 10,
 			dataStatisticsList: DATASTATISTICSLIST,
 			dataStatisticsInfo: {
@@ -210,15 +243,43 @@ export default {
 				PreservationNumber: 35,
 			},
 			allTypeStationList: {},
+			isShowMore: false,
 		};
 	},
 	methods: {
+		setCenter(center) {
+			this.center = center || this.center;
+			console.log(this.center);
+		},
+		// 获取门站更多详情
+		getMoreDetail() {
+			let { overlayType, name } = this.activeOverlay;
+			if (overlayType === 'GasStation') {
+				GoldChart.scene.createSceneInstance(
+					AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
+					'slideRight'
+				);
+				this.$nextTick(() => {
+					AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX.forEach(item => {
+						console.log(item);
+						console.log(name);
+						GoldChart.instance.updateComponent(item, {
+							data: {
+								title: name,
+							},
+						});
+					});
+				});
+			}
+		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat, address, time, index } = overlay;
 			overlay.overlayType = overlayType || overlay.overlayType;
+			console.log(overlay, overlayType);
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
+			console.log(overlayType);
+			this.isShowMore = ['GasStation'].includes(overlayType);
 			// 计算弹框偏移量
 			this.left = this.offset(overlayType);
 			if (isCenter) {
@@ -365,6 +426,7 @@ export default {
 		this.getAllTypeStationList();
 		this.getDataStatisticsInfo();
 		this.getHighPressurePipe();
+		window.setCenter = this.setCenter.bind(this);
 	},
 };
 </script>
@@ -388,6 +450,20 @@ export default {
 	.detail-value {
 		font-size: 24px;
 		color: #ffdc45;
+	}
+	.btn {
+		padding: 0px 8px;
+		line-height: 32px;
+		width: 80px;
+		height: 32px;
+		background: #0057a9;
+		border-radius: 4px;
+		display: inline-block;
+		cursor: pointer;
+		margin-top: 16px;
+		&:hover {
+			opacity: 0.8;
+		}
 	}
 }
 </style>

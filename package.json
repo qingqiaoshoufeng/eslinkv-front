@@ -10,6 +10,7 @@
     "fix": "eslint --fix --ext .js --ext .jsx --ext .vue src/"
   },
   "dependencies": {
+    "@babel/runtime": "^7.12.5",
     "@jiaminghi/data-view": "^2.10.0",
     "@simonwep/pickr": "^1.7.4",
     "astq": "^2.7.1",
@@ -49,6 +50,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.12.1",
     "@babel/plugin-proposal-optional-chaining": "^7.12.1",
+    "@babel/plugin-transform-runtime": "^7.12.1",
     "@typescript-eslint/eslint-plugin": "^4.5.0",
     "@typescript-eslint/parser": "^4.5.0",
     "@vue/cli-plugin-babel": "~4.5.0",

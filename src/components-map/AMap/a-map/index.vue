@@ -26,7 +26,24 @@ export default {
 		return {
 			ready: false,
 		};
-	}
+	},
+	methods: {
+		resetMap() {
+			this.ready = false;
+			console.log(111111);
+			setTimeout(() => {
+				console.log('加载');
+				this.ready = true;
+				console.log(this.ready);
+			}, 5000);
+		},
+	},
+	mounted() {
+		window.resetMap = this.resetMap.bind(this);
+		this.resetMap();
+		console.log('yuzhiqiang');
+		console.log(store.scene.status);
+	},
 };
 </script>
 

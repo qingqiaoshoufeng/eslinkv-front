@@ -146,18 +146,20 @@ export const AIRSUPPLY_LNG_OVERLAY_MAP = {
     },
     WARN: {
         fields: {
-            content: {
+            name: {
                 style: {
-                    fontSize: '24px',
+                    fontSize: '32px',
+                    color: '#FFDC45',
                 },
+                errColor: '#FFDC45',
             },
-            address: {
-                style: {
-                    fontSize: '18px',
-                    color: '#00DDFF',
-                },
-                errColor: '#FF7217',
-            },
+            // address: {
+            //     style: {
+            //         fontSize: '18px',
+            //         color: '#00DDFF',
+            //     },
+            //     errColor: '#FF7217',
+            // },
         },
         isShowMore: false,
     },

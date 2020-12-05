@@ -106,7 +106,16 @@ export default {
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.panTo(this.center, 100);
 	},
+	watch: {
+		center(val) {
+			this.$amap.panTo(val, 100);
+		},
+	},
 	methods: {
+		setCenter(center) {
+			this.center = center || this.center;
+			console.log(this.center);
+		},
 		// 板块图变化
 		saleAreaChange(val) {
 			console.log(val);
@@ -186,6 +195,7 @@ export default {
 		console.log(this.overlayInfoConfig);
 		this.getAllTypeStationList();
 		this.getDataStatisticsList();
+		window.setCenter = this.setCenter.bind(this);
 	},
 };
 </script>

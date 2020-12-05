@@ -143,7 +143,16 @@ export default {
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.panTo(this.center, 100);
 	},
+	watch: {
+		center(val) {
+			this.$amap.panTo(val, 100);
+		},
+	},
 	methods: {
+		setCenter(center) {
+			this.center = center || this.center;
+			console.log(this.center);
+		},
 		// 查看详情，弹出详情场景
 		async showMoreDetail() {
 			let { address, content, status, id } = this.activeOverlay;
@@ -319,6 +328,7 @@ export default {
 		this.getAllTypeStationList();
 		this.getWarningList();
 		this.getAllHotList();
+		window.setCenter = this.setCenter.bind(this);
 	},
 };
 </script>

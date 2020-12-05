@@ -15,8 +15,18 @@ import 'video.js/dist/video-js.css'
 import './api/index.js'
 import PortalVue from 'portal-vue'
 import 'babel-polyfill'
+// import 'es6-promise/auto'
+// import Es6Promise from 'es6-promise'
+
+// require('es6-promise').polyfill()
+// Es6Promise.polyfill()
 
 // import './utils/rem';
+
+import "core-js/stable";
+import "regenerator-runtime/runtime"
+
+
 Vue.use(PortalVue)
 Vue.use(VueVideoPlayer)
 Vue.component('iSwitch', Switch);

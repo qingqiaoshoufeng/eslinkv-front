@@ -130,8 +130,14 @@ export default {
 		this.$amap.panTo(this.center, 100);
 	},
 	mounted() {
-        this.getAllTypeStationList();
-        this.getDataStatisticsInfo();
+		this.getAllTypeStationList();
+		this.getDataStatisticsInfo();
+		window.setCenter = this.setCenter.bind(this);
+	},
+	watch: {
+		center(val) {
+			this.$amap.panTo(val, 100);
+		},
 	},
 	data() {
 		let {
@@ -162,6 +168,10 @@ export default {
 		};
 	},
 	methods: {
+		setCenter(center) {
+			this.center = center || this.center;
+			console.log(this.center);
+		},
 		// 获取所有站点数据
 		async getAllTypeStationList() {
 			let params = {
@@ -185,8 +195,8 @@ export default {
 				params
 			);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-        },
-        		// 获取统计数据
+		},
+		// 获取统计数据
 		async getDataStatisticsInfo() {
 			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
 				{ type: 'UCAN' }
