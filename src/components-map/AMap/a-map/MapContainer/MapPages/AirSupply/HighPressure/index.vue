@@ -81,6 +81,9 @@
 						{{ item.value }}{{ item.dw }}
 					</div>
 				</div>
+				<div class="btn" v-show="isShowMore" @click="getMoreDetail">
+					更多详情
+				</div>
 			</div>
 		</OverlayDetail>
 		<!-- 路线规划 -->
@@ -142,6 +145,8 @@ import {
 	AIRSUPPLY_WARN_COMPONENTINDEX,
 	AIRSUPPLY_WARN_MODEL_SCENEINDEX,
 	AIRSUPPLY_WARN__MODEL_COMPONENTINDEX,
+	AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
+	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX,
 } from '../../../../config/scene';
 
 import {
@@ -185,6 +190,11 @@ export default {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.panTo(this.center, 100);
+	},
+	watch: {
+		center(val) {
+			this.$amap.panTo(val, 100);
+		},
 	},
 	data() {
 		let {
@@ -233,15 +243,43 @@ export default {
 				PreservationNumber: 35,
 			},
 			allTypeStationList: {},
+			isShowMore: false,
 		};
 	},
 	methods: {
+		setCenter(center) {
+			this.center = center || this.center;
+			console.log(this.center);
+		},
+		// 获取门站更多详情
+		getMoreDetail() {
+			let { overlayType, name } = this.activeOverlay;
+			if (overlayType === 'GasStation') {
+				GoldChart.scene.createSceneInstance(
+					AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
+					'slideRight'
+				);
+				this.$nextTick(() => {
+					AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX.forEach(item => {
+						console.log(item);
+						console.log(name);
+						GoldChart.instance.updateComponent(item, {
+							data: {
+								title: name,
+							},
+						});
+					});
+				});
+			}
+		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat, address, time, index } = overlay;
 			overlay.overlayType = overlayType || overlay.overlayType;
+			console.log(overlay, overlayType);
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
+			console.log(overlayType);
+			this.isShowMore = ['GasStation'].includes(overlayType);
 			// 计算弹框偏移量
 			this.left = this.offset(overlayType);
 			// 警报效果后门 后期修正
@@ -272,6 +310,8 @@ export default {
 						});
 					}
 				}, 3000);
+			} else if (overlayType === 'gasStation') {
+				this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			} else {
 				if (isCenter) {
 					this.$amap.setZoom(14, 100);
@@ -418,6 +458,7 @@ export default {
 		this.getAllTypeStationList();
 		this.getDataStatisticsInfo();
 		this.getHighPressurePipe();
+		window.setCenter = this.setCenter.bind(this);
 	},
 };
 </script>
@@ -441,6 +482,20 @@ export default {
 	.detail-value {
 		font-size: 24px;
 		color: #ffdc45;
+	}
+	.btn {
+		padding: 0px 8px;
+		line-height: 32px;
+		width: 80px;
+		height: 32px;
+		background: #0057a9;
+		border-radius: 4px;
+		display: inline-block;
+		cursor: pointer;
+		margin-top: 16px;
+		&:hover {
+			opacity: 0.8;
+		}
 	}
 }
 </style>

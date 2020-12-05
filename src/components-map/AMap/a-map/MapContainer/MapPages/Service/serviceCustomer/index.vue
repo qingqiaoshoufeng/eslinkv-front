@@ -144,12 +144,22 @@ export default {
 			activeIndex: null,
 		};
 	},
+
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.panTo(this.center, 100);
 	},
+	watch: {
+		center(val) {
+			this.$amap.panTo(val, 100);
+		},
+	},
 	methods: {
+		setCenter(center) {
+			this.center = center || this.center;
+			console.log(this.center);
+		},
 		showMoreDetail() {
 			this.showThreeSocialLinkageDetail();
 		},
@@ -387,6 +397,7 @@ export default {
 		this.getDataStatisticsList();
 		this.getAllTypeStationList();
 		this.getTasklist();
+		window.setCenter = this.setCenter.bind(this);
 	},
 };
 </script>

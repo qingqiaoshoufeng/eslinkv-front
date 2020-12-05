@@ -45,6 +45,7 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
         iconSize: 52,
         component: 'GasStation',
         isShow: true,
+        isShowMore: true,
         dataProp: 'gasStationList',
     },
     PressureRegulatingStation: {

@@ -1,6 +1,6 @@
 <template>
 	<div class="map-box">
-		<template v-if="ready && inPreview">
+		<template v-if="inPreview">
 			<MapContainer />
 		</template>
 		<template v-else>

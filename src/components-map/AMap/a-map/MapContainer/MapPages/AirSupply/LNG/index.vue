@@ -124,14 +124,20 @@ export default {
 		DataStatistics,
 		WarningList,
 	},
+	watch: {
+		center(val) {
+			this.$amap.panTo(val, 100);
+		},
+	},
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.panTo(this.center, 100);
 	},
 	mounted() {
-        this.getAllTypeStationList();
-        this.getDataStatisticsInfo()
+		this.getAllTypeStationList();
+		this.getDataStatisticsInfo();
+		window.setCenter = this.setCenter.bind(this);
 	},
 	data() {
 		let { LNGStation } = AIRSUPPLY_LNG_LEGEND_MAP;
@@ -153,6 +159,10 @@ export default {
 		};
 	},
 	methods: {
+		setCenter(center) {
+			this.center = center || this.center;
+			console.log(this.center);
+		},
 		// 获取所有站点数据
 		async getAllTypeStationList() {
 			let params = {

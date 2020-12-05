@@ -160,6 +160,7 @@ export default {
 		this.$nextTick(() => {
 			this.mapFitView(-0.3, 0.4, 0.2);
 		});
+		window.mapFitView = this.mapFitView.bind(this);
 	},
 	methods: {
 		saleAreaChange(val) {
