@@ -1,9 +1,10 @@
 <template>
 	<div class="real-time">
 		<vue-seamless-scroll
-			:data="list || []"
+			:data="list"
 			class="event-warning"
             ref="aaa"
+            v-if="active && list.length"
 			:class-option="classOption"
 		>
 			<div
@@ -73,10 +74,6 @@ export default {
 			},
 		},
     },
-        mounted(){
-            console.log('aaa')
-        setTimeout(this.$refs.aaa._initMove(),3000)
-    },
 	computed: {
 		classOption() {
 			return {
@@ -89,7 +86,10 @@ export default {
 				singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
 				waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
 			};
-		},
+        },
+        active(){
+            return this.$parent.active 
+        }
 	},
 	async created() {
 		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
