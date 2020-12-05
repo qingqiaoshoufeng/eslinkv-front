@@ -49,7 +49,7 @@
 				this.selectValue = item.value
 				this.selectLabel = item.label
 				this.showOptions = false
-				this.emitComponentUpdate({metertypecode: this.selectValue})
+				this.emitComponentUpdate(item)
 			}
 		},
 		created() {
@@ -58,7 +58,8 @@
 		},
 		mounted() {
 			this.emitComponentUpdate({
-				metertypecode: this.selectValue,
+				value: this.selectLabel,
+				label: this.selectValue,
 			})
 		}
 	}
