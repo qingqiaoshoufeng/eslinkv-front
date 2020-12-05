@@ -221,41 +221,11 @@ export default {
 			this.showOverlayDetail = true;
 			// 计算弹框偏移量
 			this.left = this.offset(overlayType);
-			// 警报效果后门 后期修正
-			if (overlayType === 'WarningList') {
-				GoldChart.scene.createSceneInstance(
-					AIRSUPPLY_WARN_MODEL_SCENEINDEX,
-					'fadeIn',
-					'none'
-				);
+			if (isCenter) {
+				this.$amap.setZoom(14, 100);
 				this.$nextTick(() => {
-					AIRSUPPLY_WARN__MODEL_COMPONENTINDEX.forEach(item => {
-						GoldChart.instance.updateComponent(item, {
-							data: {
-								time: time,
-								title: address,
-							},
-						});
-					});
+					this.$amap.panTo([lng, lat], 100);
 				});
-				setTimeout(() => {
-					GoldChart.scene.destroyScene(
-						AIRSUPPLY_WARN_MODEL_SCENEINDEX
-					);
-					if (isCenter) {
-						this.$amap.setZoom(14, 100);
-						this.$nextTick(() => {
-							this.$amap.panTo([lng, lat], 100);
-						});
-					}
-				}, 3000);
-			} else {
-				if (isCenter) {
-					this.$amap.setZoom(14, 100);
-					this.$nextTick(() => {
-						this.$amap.panTo([lng, lat], 100);
-					});
-				}
 			}
 		},
 		offset(overlayType) {

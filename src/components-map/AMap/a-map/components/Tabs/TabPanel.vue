@@ -1,7 +1,6 @@
 <template>
 	<div
 		class="tab-panel"
-		v-if="!lazy || loaded"
 		v-show="active"
 		role="tabpan"
 		:aria-hidden="!active"

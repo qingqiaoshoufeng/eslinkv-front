@@ -111,7 +111,7 @@ export default {
 	color: #fff;
 	font-size: 16px;
 	.list-item {
-		height: 96px;
+		// height: 96px;
 		padding: 20px 8px;
 		box-sizing: border-box;
 		cursor: pointer;
