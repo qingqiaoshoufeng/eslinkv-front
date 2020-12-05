@@ -38,7 +38,7 @@
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
 			:detialBoxWidth="450"
-			:overlayInfoConfig="overlayInfoConfig"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			@view-detail="showMoreDetail"
 			ref="OverlayDetail"
@@ -121,7 +121,7 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(
+			overlayInfoConfigMap: Object.freeze(
 				SERVICE_SERVICECUSTOMER_OVERLAY_MAP
 			),
 			showOverlayDetail: false,

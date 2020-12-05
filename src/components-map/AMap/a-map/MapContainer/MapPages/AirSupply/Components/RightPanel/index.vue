@@ -18,7 +18,10 @@
 			<realTimeWithLevel @change="handleClick" />
 		</TabPanel>
 		<TabPanel key="realTime" name="realTime" label="事件报警">
-			<realTime @change="handleClick" />
+			<realTime
+				@before-change="handleBeforeChange"
+				@change="handleClick"
+			/>
 		</TabPanel>
 
 		<TabPanel key="overlayList" name="overlayList" label="点位列表" lazy>
@@ -75,6 +78,10 @@ export default {
 		handleClick(item, overlayType) {
 			item.overlayType = overlayType;
 			this.$emit('overlay-click', item, overlayType || 'WarningList');
+		},
+		handleBeforeChange(item, overlayType) {
+			item.overlayType = overlayType;
+			this.$emit('before-overlay-change', item, overlayType || 'WarningList');
 		},
 	},
 };

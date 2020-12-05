@@ -87,7 +87,7 @@ export default {
 	computed: {
 		classOption() {
 			return {
-				step: 0.2, // 数值越大速度滚动越快
+				step: 1, // 数值越大速度滚动越快
 				limitMoveNum: this.list?.length, // 开始无缝滚动的数据量
 				hoverStop: true, // 是否开启鼠标悬停stop
 				direction: 1, // 0向下 1向上 2向左 3向右
@@ -116,6 +116,7 @@ export default {
 	methods: {
 		handleClick(listItem, index) {
 			let { address, time } = listItem;
+			this.$emit('before-change', listItem, 'WarningList');
 			GoldChart.scene.createSceneInstance(
 				AIRSUPPLY_WARN_MODEL_SCENEINDEX,
 				'fadeIn',
@@ -133,6 +134,8 @@ export default {
 			});
 			setTimeout(() => {
 				GoldChart.scene.destroyScene(AIRSUPPLY_WARN_MODEL_SCENEINDEX);
+				listItem.status = listItem.priority == '已处理' ? 0 : 1;
+				listItem.type = 'WarningList'
 				this.$emit('change', listItem, 'WarningList');
 			}, 3000);
 		},

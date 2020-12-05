@@ -24,7 +24,7 @@
 			:legendMap="overlayMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:overlayInfoConfig="overlayInfoConfig"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
@@ -146,7 +146,7 @@ export default {
 			DistributedEnergyResource,
 		} = AIRSUPPLY_UCAN_LEGEND_MAP;
 		return {
-			overlayInfoConfig: Object.freeze(AIRSUPPLY_UCAN_OVERLAY_MAP),
+			overlayInfoConfigMap: Object.freeze(AIRSUPPLY_UCAN_OVERLAY_MAP),
 			activeOverlay: {},
 			center: [120.061259, 30.233295],
 			zooom: 11,

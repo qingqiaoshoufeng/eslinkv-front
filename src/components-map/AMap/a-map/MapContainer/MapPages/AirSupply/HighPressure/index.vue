@@ -10,6 +10,13 @@
 			:iconSize="38"
 			@overlay-click="handleOverlayClick"
 		/> -->
+		<!-- 报警点位 -->
+		<WarnEvent
+			v-model="activeWarnData"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
+		></WarnEvent>
+		<!-- 路线规划 -->
+		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
 		<!-- 区域 -->
 		<RegionBoundary />
 		<!-- 2.legend控制显隐 -->
@@ -58,15 +65,11 @@
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:legendMap="overlayMap"
-			:overlayInfoConfig="overlayInfoConfig"
+			:legendMap="legendMap"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
-			:iconSize="
-				activeOverlay.overlayType === 'WarningList' ? 38 : undefined
-			"
 			ref="OverlayDetail"
-			:left="left"
 			:detialBoxWidth="400"
 		>
 			<div class="overlay-detail" v-if="activeOverlay.detail">
@@ -86,8 +89,6 @@
 				</div>
 			</div>
 		</OverlayDetail>
-		<!-- 路线规划 -->
-		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
 		<portal to="destination">
 			<!-- 统计数据 -->
 			<DataStatistics
@@ -101,7 +102,8 @@
 			<RightPanel
 				class="right-panel"
 				v-model="activeTab"
-				@overlay-click="handleOverlayClick"
+				@overlay-click="handleListClick"
+				@before-overlay-change="beforeListClickChange"
 			></RightPanel>
 		</portal>
 	</div>
@@ -129,6 +131,7 @@ import {
 	UndergroundRepairStation,
 	OngroundRepairStation,
 	WarningList,
+	WarnEvent,
 } from '../Components/index.js';
 
 //页面所需公共组件
@@ -185,6 +188,7 @@ export default {
 		OngroundRepairStation,
 		WarningList,
 		DataStatistics,
+		WarnEvent,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
@@ -197,41 +201,19 @@ export default {
 		},
 	},
 	data() {
-		let {
-			HighPressureLine,
-			HighPressureLine_Process,
-			MiddlePressureLine,
-			LowPressureLine,
-			InspectionPerson,
-			InspectionCar,
-			GasStation,
-			PressureRegulatingStation,
-			EmergencyAirSourceStation,
-		} = AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP;
 		return {
-			overlayInfoConfig: Object.freeze(
+			overlayInfoConfigMap: Object.freeze(
 				AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP
 			),
+			legendMap: AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
 			center: [120.061259, 30.233295],
 			zoom: 10.7,
 			activeOverlay: {},
+			activeWarnData: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'realTimeWithLevel',
-			legendMap: AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
-			overlayMap: {
-				HighPressureLine,
-				HighPressureLine_Process,
-				MiddlePressureLine,
-				LowPressureLine,
-				InspectionPerson,
-				InspectionCar,
-				GasStation,
-				PressureRegulatingStation,
-				EmergencyAirSourceStation,
-			},
 			withoutLegendOverlay: AIRSUPPLY_HIGHPRESSURE_NO_LEGEND_MAP,
-			left: 10,
 			dataStatisticsList: DATASTATISTICSLIST,
 			dataStatisticsInfo: {
 				GasStation: 5,
@@ -261,8 +243,6 @@ export default {
 				);
 				this.$nextTick(() => {
 					AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX.forEach(item => {
-						console.log(item);
-						console.log(name);
 						GoldChart.instance.updateComponent(item, {
 							data: {
 								title: name,
@@ -272,29 +252,24 @@ export default {
 				});
 			}
 		},
+		setZoomAndPanTo(lng, lat) {
+			this.$amap.setZoom(14, 100);
+			this.$nextTick(() => {
+				this.$amap.panTo([lng, lat], 100);
+			});
+		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat, address, time, index } = overlay;
 			overlay.overlayType = overlayType || overlay.overlayType;
 			console.log(overlay, overlayType);
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
-			console.log(overlayType);
 			this.isShowMore = ['GasStation'].includes(overlayType);
-			// 计算弹框偏移量
-			this.left = this.offset(overlayType);
 			if (isCenter) {
-				this.$amap.setZoom(14, 100);
-				this.$nextTick(() => {
-					this.$amap.panTo([lng, lat], 100);
-				});
+				this.setZoomAndPanTo();
 			}
-		},
-		offset(overlayType) {
-			let offsetObj = {
-				GasStation: 15,
-				EmergencyAirSourceStation: 12,
-			};
-			return offsetObj[overlayType] || 10;
+			if (overlayType === 'WARNEVENT') {
+			}
 		},
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
@@ -420,6 +395,17 @@ export default {
 				...this.allTypeStationList,
 				...pipeData,
 			};
+		},
+		beforeListClickChange() {
+			this.activeWarnData = {};
+			this.$amap.setZoom(this.zoom, 100);
+			this.$amap.panTo(this.center, 100);
+		},
+		handleListClick(overlay, overlayType) {
+			let { lng, lat, address, time, index } = overlay;
+			overlay.overlayType = overlayType || overlay.overlayType;
+			this.activeWarnData = overlay;
+			this.setZoomAndPanTo(lng, lat);
 		},
 	},
 	mounted() {

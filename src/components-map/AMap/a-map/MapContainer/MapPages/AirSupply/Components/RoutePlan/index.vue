@@ -166,16 +166,12 @@ export default {
 			}
 			let { scaleRatio } = this.parentInfo;
 			let paddingTop = (1050 - 1050 * scaleRatio) / 2;
-			let paddingRight = (3500 * scaleRatio) / 2.6;
-			let paddingLeft = 3500 - paddingRight * 1.6;
-			console.log(pathDataAll[0]);
-			console.log(pathDataAll[pathDataAll.length - 1]);
-			console.log(paddingTop, paddingRight);
+			let paddingRight = (3500 - ((3500 * scaleRatio) / 2.6) * 1.6) / 2;
 			this.map.setFitView(null, [
 				paddingTop+80,
-				paddingTop,
+				paddingTop+80,
 				paddingRight,
-				paddingLeft,
+				paddingRight,
 			]);
 		},
 		reset() {

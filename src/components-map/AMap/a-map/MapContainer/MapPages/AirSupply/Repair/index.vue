@@ -4,7 +4,7 @@
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:overlayInfoConfig="overlayInfoConfig"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"

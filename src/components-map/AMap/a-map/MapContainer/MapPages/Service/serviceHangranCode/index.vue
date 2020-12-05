@@ -34,7 +34,7 @@
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
 			:detialBoxWidth="detialBoxWidth"
-			:overlayInfoConfig="overlayInfoConfig"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			@view-detail="showOverlayDetail"
 			ref="OverlayDetail"
@@ -121,7 +121,7 @@ export default {
 			ServiceStation,
 		} = SERVICE_SERVICEHANGRANCODE_LEGEND_MAP;
 		return {
-			overlayInfoConfig: Object.freeze(
+			overlayInfoConfigMap: Object.freeze(
 				SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP
 			),
 			dataStatisticsList: DATASTATISTICSLIST,

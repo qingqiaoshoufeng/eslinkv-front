@@ -27,7 +27,7 @@
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
 			:legendMap="overlayMap"
-			:overlayInfoConfig="overlayInfoConfig"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
@@ -142,7 +142,7 @@ export default {
 	data() {
 		let { LNGStation } = AIRSUPPLY_LNG_LEGEND_MAP;
 		return {
-			overlayInfoConfig: Object.freeze(AIRSUPPLY_LNG_OVERLAY_MAP),
+			overlayInfoConfigMap: Object.freeze(AIRSUPPLY_LNG_OVERLAY_MAP),
 			center: [120.061259, 30.233295],
 			zoom: 10.7,
 			activeOverlay: {},

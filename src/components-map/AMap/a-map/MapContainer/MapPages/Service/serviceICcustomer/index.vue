@@ -29,7 +29,7 @@
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
 			:detialBoxWidth="450"
-			:overlayInfoConfig="overlayInfoConfig"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			@view-detail="showMoreDetail"
 			ref="OverlayDetail"
@@ -118,7 +118,7 @@ export default {
 			WarningICcustomer,
 		} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP;
 		return {
-			overlayInfoConfig: Object.freeze(
+			overlayInfoConfigMap: Object.freeze(
 				SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP
 			),
 			dataStatisticsList: DATASTATISTICSLIST,

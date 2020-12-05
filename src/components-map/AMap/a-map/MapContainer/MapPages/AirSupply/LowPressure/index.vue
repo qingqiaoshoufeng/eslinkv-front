@@ -44,7 +44,7 @@
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:overlayInfoConfig="overlayInfoConfig"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
@@ -158,7 +158,7 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP),
+			overlayInfoConfigMap: Object.freeze(AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP),
 			activeOverlay: {},
 			center: [120.151562, 30.273297],
 			zoom: 18,

@@ -27,7 +27,7 @@
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:overlayInfoConfig="overlayInfoConfig"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			ref="OverlayDetail"
 			:detialBoxWidth="450"
@@ -84,7 +84,7 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(
+			overlayInfoConfigMap: Object.freeze(
 				SERVICE_SERVICENINETEEN_LEGEND_MAP
 			),
 			dataStatisticsList: DATASTATISTICSLIST,
@@ -192,7 +192,7 @@ export default {
 		},
 	},
 	mounted() {
-		console.log(this.overlayInfoConfig);
+		console.log(this.overlayInfoConfigMap);
 		this.getAllTypeStationList();
 		this.getDataStatisticsList();
 		window.setCenter = this.setCenter.bind(this);
