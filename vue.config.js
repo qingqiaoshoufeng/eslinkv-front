@@ -113,6 +113,7 @@ module.exports = {
         ]
     },
     chainWebpack: config => {
+        config.entry.app = ['@babel/polyfill', './src/main.js'];
         config.module
             .rule('vue')
             .use('iview')
