@@ -23,8 +23,8 @@ import 'babel-polyfill'
 
 // import './utils/rem';
 
-import "core-js/stable";
-import "regenerator-runtime/runtime"
+// import "core-js/stable";
+// import "regenerator-runtime/runtime"
 
 
 Vue.use(PortalVue)

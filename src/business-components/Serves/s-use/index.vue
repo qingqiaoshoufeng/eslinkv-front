@@ -2,13 +2,13 @@
 	<div class="widget-part" :style="styles" v-if="data">
 		<div class="total">
 			<img src="./img/click-logo.svg" alt="">
-			<span class="total-txt">累计操作次数</span>
+			<span class="total-txt">累计点击次数</span>
 			<span class="total-num font-num">{{ data&&data.total| toThousand }}</span>
 		</div>
 		<div class="history">
 			<div class="history-item">
 				<div class="history-title">
-					<div class="history-title-txt">昨日操作</div>
+					<div class="history-title-txt">昨日点击</div>
 					<div class="history-title-unit">次数</div>
 				</div>
 				<div class="content">
@@ -19,7 +19,7 @@
 			</div>
 			<div class="history-item">
 				<div class="history-title">
-					<div class="history-title-txt">上周操作</div>
+					<div class="history-title-txt">上周点击</div>
 					<div class="history-title-unit">次数</div>
 				</div>
 				<div class="content">

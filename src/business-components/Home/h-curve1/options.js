@@ -25,7 +25,13 @@ export default  {
 				color: "rgba(255, 255, 255, 1)",
 				fontSize: 16,
 				lineHeight: 16
+			},
+			formatter:function (value, index) {
+				if (index%3===0)
+					return value
+				return ''
 			}
+
 		}
 	},
 	yAxis: {
