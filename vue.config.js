@@ -11,7 +11,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 // });
 const needReport = false
 module.exports = {
-	transpileDependencies:['@simonwep','vue-draggable-resizable-gorkys2','swiper','dom7'],
+	// transpileDependencies:['@simonwep','vue-draggable-resizable-gorkys2','swiper','dom7'],
     assetsDir: 'static',
     productionSourceMap: false,
     lintOnSave: true,
@@ -104,7 +104,7 @@ module.exports = {
             //     }
             // }
         }
-		config.entry.app = ["babel-polyfill", "./src/main.ts"];
+		// config.entry.app = ["babel-polyfill", "./src/main.ts"];
         config.resolve.extensions = [".js", ".vue", ".json", ".ts", ".tsx"]
         config.externals = [
             {
@@ -115,7 +115,7 @@ module.exports = {
         ]
     },
     chainWebpack: config => {
-		config.entry.app = ["babel-polyfill", "./src/main.ts"];
+		// config.entry.app = ["babel-polyfill", "./src/main.ts"];
 
         config.module
             .rule('vue')
