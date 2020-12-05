@@ -5,6 +5,7 @@
 			class="list"
 			ref="bbb"
 			:class-option="classOption"
+            v-if="active && list.length"
 		>
 			<div
 				@click="handleClick(item, index, 'WarningList')"
@@ -35,23 +36,13 @@
 							{{ item.level }}
 						</div>
 					</div>
-					<div>
-						{{ item.alarmTime }}
-					</div>
 				</div>
 				<div class="row">
 					<div class="station-name">
 						{{ item.address }}
 					</div>
-					<div
-						:class="[
-							'status',
-							item.priority == '已处理'
-								? 'status-suc'
-								: 'status-err',
-						]"
-					>
-						{{ item.statusText }}
+					<div>
+						{{ item.alarmTime }}
 					</div>
 				</div>
 			</div>
@@ -82,14 +73,9 @@ export default {
 				return {};
 			},
 		},
-	},
+    },
 	async created() {
 		this.list = await this.$sysApi.map.airSupply.getProcessWarningList();
-	},
-	mounted() {
-		console.log('bbb');
-		window.bbb = this.$refs.bbb;
-		setTimeout(this.$refs.bbb._initMove(), 3000);
 	},
 	computed: {
 		classOption() {
@@ -103,6 +89,9 @@ export default {
 				singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
 				waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
 			};
+		},
+		active() {
+			return this.$parent.active;
 		},
 	},
 	watch: {
@@ -143,10 +132,11 @@ export default {
 		.panel-type-icon {
 			width: 24px;
 			height: 24px;
+			margin-top: 8px;
 		}
 		.row {
 			display: flex;
-			align-items: center;
+			// align-items: center;
 			.content {
 				flex: 1;
 				font-size: 24px;

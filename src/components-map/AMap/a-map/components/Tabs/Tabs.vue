@@ -21,10 +21,8 @@ export default {
 	},
 	watch: {
 		value(val) {
-			console.log(val, 'val');
 			this.currentName = val;
 		},
-		immedate: true,
 	},
 	created() {
 		this.currentName = this.value;
@@ -106,9 +104,9 @@ export default {
 .tabs {
 	perspective: 0px;
 	padding-top: 0;
-    position: relative;
+	position: relative;
 	.tabs__header {
-		background: rgba(0,87,169,0.5);
+		background: rgba(0, 87, 169, 0.5);
 		border: 1px solid #1773c9;
 		box-sizing: border-box;
 		line-height: 46px;
@@ -160,10 +158,9 @@ export default {
 			right: 0;
 		}
 	}
-    .tabs__content{
-        // position:absolute;
-        // top:48px;
-    }
+	.tabs__content {
+		position: relative;
+	}
 }
 .flex-row {
 	width: 480px;
