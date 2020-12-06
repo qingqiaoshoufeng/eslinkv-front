@@ -7,7 +7,8 @@
 			visible,
 			apiFun,
 		}"
-		@click="marker => $emit('overlay-click', marker, overlayType)"
+		@mouseover="marker => $emit('overlay-click', marker, overlayType)"
+		@mouseleave="handleMouseleave"
 	>
 	</BaseOverlay>
 </template>
@@ -36,6 +37,11 @@ export default {
 		return {
 			apiFun: this.$sysApi.map.serve.getServiceNetworkStationList,
 		};
+	},
+	methods: {
+		handleMouseleave() {
+			this.$emit('close');
+		},
 	},
 };
 </script>

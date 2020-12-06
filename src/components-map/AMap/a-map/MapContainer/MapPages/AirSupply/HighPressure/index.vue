@@ -12,11 +12,10 @@
 		/> -->
 		<!-- 报警点位 -->
 		<WarnEvent
-			v-model="activeWarnData"
+			:data="activeWarnData"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
+			@close="closeWarnEventDetail"
 		></WarnEvent>
-		<!-- 路线规划 -->
-		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
 		<!-- 区域 -->
 		<RegionBoundary />
 		<!-- 2.legend控制显隐 -->
@@ -37,7 +36,7 @@
 				:detailList="config.detailList"
 				:data="allTypeStationList[config.dataProp]"
 				@overlay-click="handleOverlayClick"
-				@close="closeOverlayDetail"
+				@close="closeOverlayDetail('', false)"
 			/>
 		</template>
 		<!-- 2.legend不控制显隐 -->
@@ -103,7 +102,6 @@
 				class="right-panel"
 				v-model="activeTab"
 				@overlay-click="handleListClick"
-				@before-overlay-change="beforeListClickChange"
 			></RightPanel>
 		</portal>
 	</div>
@@ -193,7 +191,7 @@ export default {
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
-		this.$amap.panTo(this.center, 100);
+		this.$amap.setCenter(this.center, 100);
 	},
 	watch: {
 		center(val) {
@@ -260,105 +258,29 @@ export default {
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat, address, time, index } = overlay;
-			overlay.overlayType = overlayType || overlay.overlayType;
-			console.log(overlay, overlayType);
-			this.activeOverlay = overlay;
-			this.showOverlayDetail = true;
-			this.isShowMore = ['GasStation'].includes(overlayType);
-			if (isCenter) {
-				this.setZoomAndPanTo();
-			}
-			if (overlayType === 'WARNEVENT') {
-			}
+			// if (isCenter) {
+			// 	this.setZoomAndPanTo(lng, lat + 0.005);
+			// }
+			setTimeout(() => {
+				overlay.overlayType = overlayType || overlay.overlayType;
+				this.activeOverlay = overlay;
+				this.showOverlayDetail = true;
+				this.isShowMore = ['GasStation'].includes(overlayType);
+			}, 300);
 		},
-		closeOverlayDetail(done) {
+		closeOverlayDetail(done, isZoom = true) {
 			let { overlayType } = this.activeOverlay;
-			if (overlayType === 'WARNEVENT') {
-				GoldChart.scene.setSceneIndex(
-					INDEXSCENEMAP['AirSupplyHighPressure']
-				);
-				this.showRoutePlan = false;
-			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-			// this.$amap.setZoom(11, 100);
-			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.panTo(this.center, 100);
+			if (isZoom) {
+				this.$amap.setZoom(this.zoom, 100);
+				this.$amap.setCenter(this.center, 100);
+			}
 			if (done) {
 				done();
 			}
 		},
-		viewOverlayDetail(overlay) {
-			let { overlayType } = overlay;
-			if (overlayType === 'WARNEVENT') {
-				this.showRoutePlan = true;
-				let { content, address } = overlay;
-				//和场景进行交互
-
-				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
-
-				this.$nextTick(() => {
-					AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
-						GoldChart.instance.updateComponent(i, {
-							data: {
-								step: 8,
-								value: {
-									step1: {
-										time: new Date('2020-10-30 22:20') * 1,
-										des: content,
-										name: '王磊',
-										title: '报警人',
-										address: address,
-									},
-									step2: {
-										time: new Date('2020-10-30 22:21') * 1,
-										name: '秦芳芳',
-										title: '客服部',
-									},
-									step3: {
-										time: new Date('2020-10-30 22:31') * 1,
-										name: '林自原',
-										title: '维修部',
-									},
-									step4: {
-										time: new Date('2020-10-30 22:48') * 1,
-									},
-									step5: {
-										time: new Date('2020-10-30 23:13') * 1,
-									},
-									step6: {
-										time: new Date('2020-10-30 23:50') * 1,
-									},
-									step7: {
-										time: new Date('2020-10-31 11:21') * 1,
-									},
-									step8: {
-										time: new Date('2020-10-31 12:57') * 1,
-										title: '维修处置内容',
-										content:
-											'部分管道老旧破损严重导致燃气泄漏，关闭上游阀门后更换泄漏段管道，已恢复供气。',
-									},
-								},
-								videoInfo1: {
-									imgList: [
-										'/static/images/project/01.png',
-										'/static/images/project/02.jpg',
-									],
-									videoList: ['/cdn/videos/test.mov'],
-								},
-								videoInfo2: {
-									imgList: [
-										'/static/images/project/01.png',
-										'/static/images/project/02.jpg',
-									],
-									videoList: ['/cdn/videos/test.mov'],
-								},
-							},
-						});
-					});
-				});
-			}
-		},
+		viewOverlayDetail(overlay) {},
 		// 获取所有站点数据
 		async getAllTypeStationList() {
 			let params = {
@@ -396,16 +318,22 @@ export default {
 				...pipeData,
 			};
 		},
-		beforeListClickChange() {
-			this.activeWarnData = {};
-			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.panTo(this.center, 100);
-		},
 		handleListClick(overlay, overlayType) {
 			let { lng, lat, address, time, index } = overlay;
 			overlay.overlayType = overlayType || overlay.overlayType;
 			this.activeWarnData = overlay;
 			this.setZoomAndPanTo(lng, lat);
+		},
+		handleListClick(overlay, overlayType) {
+			let { lng, lat, address, time, index } = overlay;
+            overlay.overlayType = overlayType || overlay.overlayType;
+			this.activeWarnData = overlay;
+			this.setZoomAndPanTo(lng, lat);
+		},
+		closeWarnEventDetail() {
+			this.activeWarnData = {};
+			this.$amap.setZoom(this.zoom, 100);
+			this.$amap.setCenter(this.center, 100);
 		},
 	},
 	mounted() {

@@ -10,7 +10,7 @@
 		<div
 			class="sample"
 			:class="['sample', active ? 'active' : '']"
-			:on="$listeners"
+			v-on="$listeners"
 		>
 			<SvgIcon
 				class="sample-icon"

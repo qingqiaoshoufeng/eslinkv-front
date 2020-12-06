@@ -11,7 +11,7 @@
 			:active="item.active"
 			:visible="visible"
 			@click="handleClick(item)"
-			@mouseover="handleMouseOver(item)"
+			@mouseenter="handleMouseOver(item)"
 			@mouseleave="handleMouseLeave(item)"
 		>
 			<slot :data="item">
@@ -117,10 +117,12 @@ export default {
 			this.$emit('click', item);
 		},
 		handleMouseOver(item) {
-			this.$emit('mouseover', item);
+ 			this.$emit('mouseover', item);
 		},
 		handleMouseLeave(item) {
-			this.$emit('mouseleave', item);
+            this.$nextTick(()=>{
+			    this.$emit('mouseleave', item);
+            })
 		},
 	},
 };

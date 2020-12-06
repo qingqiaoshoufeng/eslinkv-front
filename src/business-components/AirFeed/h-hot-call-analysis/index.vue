@@ -4,7 +4,7 @@
 			<h2 class="text-left">坐席使用情况</h2>
 			<div class="h-hot-call-analysis-content fn-flex flex-row">
 				<div class="h-hot-call-analysis-call-block"></div>
-				<div class="h-hot-call-analysis-call-title">通话</div>
+				<div class="h-hot-call-analysis-call-title">忙碌</div>
 				<div class="h-hot-call-analysis-call-num font-num">{{data&&data.onCall}}</div>
 				<div class="h-hot-call-analysis-free-block"></div>
 				<div class="h-hot-call-analysis-free-title">空闲</div>

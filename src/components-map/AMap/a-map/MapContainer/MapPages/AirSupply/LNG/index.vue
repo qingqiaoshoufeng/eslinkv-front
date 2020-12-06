@@ -3,6 +3,12 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
+		<!-- 报警点位 -->
+		<WarnEvent
+			:data="activeWarnData"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
+			@close="closeWarnEventDetail"
+		></WarnEvent>
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
@@ -34,7 +40,7 @@
 			:detialBoxWidth="400"
 		/>
 		<!-- 路线规划 -->
-		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
+		<!-- <RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan> -->
 		<portal to="destination">
 			<!-- 统计数据 -->
 			<DataStatistics
@@ -48,7 +54,7 @@
 			<RightPanel
 				class="right-panel"
 				v-model="activeTab"
-				@overlay-click="handleOverlayClick"
+				@overlay-click="handleListClick"
 			></RightPanel>
 		</portal>
 	</div>
@@ -76,6 +82,7 @@ import {
 	UndergroundRepairStation,
 	OngroundRepairStation,
 	WarningList,
+	WarnEvent,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -123,6 +130,7 @@ export default {
 		InspectionCar,
 		DataStatistics,
 		WarningList,
+		WarnEvent,
 	},
 	watch: {
 		center(val) {
@@ -132,7 +140,7 @@ export default {
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
-		this.$amap.panTo(this.center, 100);
+		this.$amap.setCenter(this.center, 100);
 	},
 	mounted() {
 		this.getAllTypeStationList();
@@ -146,6 +154,7 @@ export default {
 			center: [120.061259, 30.233295],
 			zoom: 10.7,
 			activeOverlay: {},
+			activeWarnData: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'realTime',
@@ -197,12 +206,9 @@ export default {
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
-			this.$amap.setZoom(14, 100);
-			if (isCenter) {
-				this.$nextTick(() => {
-					this.$amap.panTo([lng, lat], 100);
-				});
-			}
+			// if (isCenter) {
+			// 	this.setZoomAndPanTo(lng, lat + 0.005);
+			// }
 		},
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
@@ -214,81 +220,27 @@ export default {
 			this.activeOverlay = {};
 			// this.$amap.setZoom(11, 100);
 			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.panTo(this.center, 100);
+			this.$amap.setCenter(this.center, 100);
 			done();
 		},
-
 		viewOverlayDetail(overlay) {
-			let { overlayType } = overlay;
-			if (overlayType === 'WARNEVENT') {
-				this.showRoutePlan = true;
-				let { content, address } = overlay;
-				//和场景进行交互
-				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
-				//更新数据
-				this.$nextTick(() => {
-					AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
-						GoldChart.instance.updateComponent(i, {
-							data: {
-								step: 8,
-								value: {
-									step1: {
-										time: new Date('2020-10-30 22:20') * 1,
-										des: content,
-										name: '王磊',
-										title: '报警人',
-										address: address,
-									},
-									step2: {
-										time: new Date('2020-10-30 22:21') * 1,
-										name: '秦芳芳',
-										title: '客服部',
-									},
-									step3: {
-										time: new Date('2020-10-30 22:31') * 1,
-										name: '林自原',
-										title: '维修部',
-									},
-									step4: {
-										time: new Date('2020-10-30 22:48') * 1,
-									},
-									step5: {
-										time: new Date('2020-10-30 23:13') * 1,
-									},
-									step6: {
-										time: new Date('2020-10-30 23:50') * 1,
-									},
-									step7: {
-										time: new Date('2020-10-31 11:21') * 1,
-									},
-									step8: {
-										time: new Date('2020-10-31 12:57') * 1,
-										title: '维修处置内容',
-										content:
-											'部分管道老旧破损严重导致燃气泄漏，关闭上游阀门后更换泄漏段管道，已恢复供气。',
-									},
-								},
-								videoInfo1: {
-									imgList: [
-										'/static/images/project/qiangxiu01.png',
-										'/static/images/project/qiangxiu02.png',
-										'/static/images/project/qiangxiu03.png',
-									],
-									videoList: ['/cdn/videos/test.mov'],
-								},
-								videoInfo2: {
-									imgList: [
-										'/static/images/project/qiangxiu01.png',
-										'/static/images/project/qiangxiu02.png',
-										'/static/images/project/qiangxiu03.png',
-									],
-									videoList: ['/cdn/videos/test.mov'],
-								},
-							},
-						});
-					});
-				});
-			}
+		},
+		setZoomAndPanTo(lng, lat) {
+			this.$amap.setZoom(14, 100);
+			this.$nextTick(() => {
+				this.$amap.panTo([lng, lat], 100);
+			});
+		},
+		handleListClick(overlay, overlayType) {
+			let { lng, lat, address, time, index } = overlay;
+			overlay.overlayType = overlayType || overlay.overlayType;
+			this.activeWarnData = overlay;
+			this.setZoomAndPanTo(lng, lat);
+		},
+		closeWarnEventDetail() {
+			this.activeWarnData = {};
+			this.$amap.setZoom(this.zoom, 100);
+			this.$amap.setCenter(this.center, 100);
 		},
 	},
 };

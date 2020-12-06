@@ -6,11 +6,11 @@
 			overlayType,
 			visible,
 			apiFun,
-			data,
+			data: dataInner,
 			...$attrs,
 			nameStyle,
 		}"
-		@click="
+		@mouseover="
 			marker =>
 				$emit(
 					'overlay-click',
@@ -18,6 +18,7 @@
 					overlayType
 				)
 		"
+		@mouseleave="handleMouseleave"
 	/>
 </template>
 <script>
@@ -54,6 +55,14 @@ export default {
 			},
 		},
 	},
+	computed: {
+		dataInner() {
+			return this.data.map(item => {
+				item.name = item.name.replace(/有限公司|分公司/, '');
+				return item;
+			});
+		},
+	},
 	data() {
 		return {
 			apiFun: this.$sysApi.map.serve.getBranchCompanyList,
@@ -65,6 +74,11 @@ export default {
 	mounted() {
 		console.log(this.data, '1111');
 		console.log(this.overlayType, '1111');
+	},
+	methods: {
+		handleMouseleave() {
+			this.$emit('close');
+		},
 	},
 };
 </script>

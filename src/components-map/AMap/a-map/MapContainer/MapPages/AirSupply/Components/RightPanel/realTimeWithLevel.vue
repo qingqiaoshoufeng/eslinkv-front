@@ -117,27 +117,27 @@ export default {
 		handleClick(listItem, index) {
 			let { address, time } = listItem;
 			this.$emit('before-change', listItem, 'WarningList');
-			GoldChart.scene.createSceneInstance(
-				AIRSUPPLY_WARN_MODEL_SCENEINDEX,
-				'fadeIn',
-				'none'
-			);
-			this.$nextTick(() => {
-				AIRSUPPLY_WARN__MODEL_COMPONENTINDEX.forEach(item => {
-					GoldChart.instance.updateComponent(item, {
-						data: {
-							time: time,
-							title: address,
-						},
-					});
-				});
-			});
-			setTimeout(() => {
-				GoldChart.scene.destroyScene(AIRSUPPLY_WARN_MODEL_SCENEINDEX);
+			// GoldChart.scene.createSceneInstance(
+			// 	AIRSUPPLY_WARN_MODEL_SCENEINDEX,
+			// 	'fadeIn',
+			// 	'none'
+			// );
+			// this.$nextTick(() => {
+			// 	AIRSUPPLY_WARN__MODEL_COMPONENTINDEX.forEach(item => {
+			// 		GoldChart.instance.updateComponent(item, {
+			// 			data: {
+			// 				time: time,
+			// 				title: address,
+			// 			},
+			// 		});
+			// 	});
+			// });
+			// setTimeout(() => {
+			// 	GoldChart.scene.destroyScene(AIRSUPPLY_WARN_MODEL_SCENEINDEX);
 				listItem.status = listItem.priority == '已处理' ? 0 : 1;
 				listItem.type = 'WarningList'
 				this.$emit('change', listItem, 'WarningList');
-			}, 3000);
+			// }, 3000);
 		},
 	},
 };

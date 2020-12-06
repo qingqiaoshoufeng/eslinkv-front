@@ -6,9 +6,11 @@
 			visible,
 			apiFun,
 			...$attrs,
-            data
+			data,
 		}"
-		@click="marker => $emit('overlay-click', marker, 'InspectionPerson')"
+		@click="handleOverlayClick"
+		@mouseover="handleMouseover"
+		@mouseleave="handleMouseleave"
 	/>
 </template>
 <script>
@@ -40,6 +42,16 @@ export default {
 		return {
 			apiFun: apiFun,
 		};
+	},
+	methods: {
+		handleMouseover(marker) {
+			let { id, name, type } = marker;
+			this.$emit('overlay-click', marker, 'InspectionPerson', false);
+		},
+		handleOverlayClick(marker) {},
+		handleMouseleave() {
+			this.$emit('close');
+		},
 	},
 };
 </script>
