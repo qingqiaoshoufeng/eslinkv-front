@@ -12,7 +12,7 @@ const isProduction = process.env.NODE_ENV === 'production'
 // });
 const needReport = false
 module.exports = {
-    // transpileDependencies:['@simonwep','vue-draggable-resizable-gorkys2','swiper','dom7'],
+    transpileDependencies: ['@simonwep', 'vue-draggable-resizable-gorkys2', 'swiper', 'dom7'],
     assetsDir: 'static',
     productionSourceMap: false,
     lintOnSave: true,
