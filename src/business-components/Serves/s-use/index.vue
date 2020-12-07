@@ -2,7 +2,7 @@
 	<div class="widget-part" :style="styles" v-if="data">
 		<div class="total">
 			<img src="./img/click-logo.svg" alt="">
-			<span class="total-txt">累计点击次数</span>
+			<span class="total-txt">本月累计点击次数</span>
 			<span class="total-num font-num">{{ data&&data.total| toThousand }}</span>
 		</div>
 		<div class="history">
