@@ -7,15 +7,14 @@
 		:vid="marker.name"
 		ref="marker"
 	>
-		<div
-			:class="['sample', active ? 'active' : '']"
-			v-on="$listeners"
-		>
-			<SvgIcon
-				class="sample-icon"
-				:iconName="marker.icon"
-				:style="{ fontSize: (marker.iconSize || 38) + 'px' }"
-			></SvgIcon>
+		<div :class="['sample', active ? 'active' : '']" v-on="$listeners">
+			<slot name="icon">
+				<SvgIcon
+					class="sample-icon"
+					:iconName="marker.icon"
+					:style="{ fontSize: (marker.iconSize || 38) + 'px' }"
+				></SvgIcon>
+			</slot>
 			<slot></slot>
 		</div>
 	</AMapMarker>
@@ -68,7 +67,7 @@ export default {
 	},
 	methods: {
 		getInstance() {
-			return  this.$refs.marker && this.$refs.marker.$amapComponent;
+			return this.$refs.marker && this.$refs.marker.$amapComponent;
 		},
 	},
 };

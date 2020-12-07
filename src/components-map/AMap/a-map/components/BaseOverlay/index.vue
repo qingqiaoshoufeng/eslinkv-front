@@ -14,6 +14,9 @@
 			@mouseenter.stop="handleMouseOver(item)"
 			@mouseleave.stop="handleMouseLeave(item)"
 		>
+        <!-- <slot name="icon" >
+            <template slot="icon"></template>
+        </slot> -->
 			<slot :data="item">
 				<!-- 默认显示图标的名字 -->
 				<div
@@ -47,11 +50,11 @@ export default {
 	props: {
 		data: {
 			type: Array,
-        },
-        overlayName:{
-            type:String,
-            default:'name'
-        },
+		},
+		overlayName: {
+			type: String,
+			default: 'name',
+		},
 		nameStyle: {
 			type: Object,
 			default: function () {
@@ -85,7 +88,8 @@ export default {
 			async handler(val) {
 				let { isRendered } = this;
 				if (val && !isRendered) {
-					await this.getData(this.query);
+                    await this.getData(this.query);
+                    console.log(this.list)
 					this.isRendered = true;
 					this.$nextTick(() => {
 						this.$emit('initComplete');
@@ -121,12 +125,12 @@ export default {
 			this.$emit('click', item);
 		},
 		handleMouseOver(item) {
- 			this.$emit('mouseover', item);
+			this.$emit('mouseover', item);
 		},
 		handleMouseLeave(item) {
-            this.$nextTick(()=>{
-			    this.$emit('mouseleave', item);
-            })
+			this.$nextTick(() => {
+				this.$emit('mouseleave', item);
+			});
 		},
 	},
 };

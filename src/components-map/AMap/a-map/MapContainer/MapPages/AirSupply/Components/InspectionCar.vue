@@ -8,10 +8,15 @@
 			...$attrs,
 			data,
 		}"
+		v-if="ready"
 		@click="handleOverlayClick"
 		@mouseover="handleMouseover"
 		@mouseleave="handleMouseleave"
-	/>
+	>
+     <template slot="icon">
+          aaaa
+     </template>
+    </BaseOverlay>
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index';
@@ -33,15 +38,18 @@ export default {
 			type: String,
 			default: '',
 		},
-		data: {
-			type: Array,
-		},
 	},
 	data() {
 		let apiFun = this.$sysApi.map.home.getInspectionCarList;
 		return {
 			apiFun: apiFun,
+			data: [],
+			ready: false,
 		};
+	},
+	async created() {
+		await this.getData();
+		this.ready = true;
 	},
 	methods: {
 		handleMouseover(marker) {
@@ -52,6 +60,27 @@ export default {
 		handleMouseleave() {
 			this.$emit('close');
 		},
+		async getData() {
+			let params = {
+				types: ['InspectionCar'].toString(),
+			};
+			let res = await this.$sysApi.map.airSupply.getAllTypeStationList(
+				params
+			);
+            this.data = (res && res['inspectionCarList']) || [];
+            console.log('aaaa')
+			if (!this.ready) {
+				this.timer = setInterval(() => {
+					this.getData();
+				}, 120000);
+			}
+		},
+	},
+	beforeDestroy() {
+		if (this.timer) {
+			clearInterval(this.timer);
+			this.timer = null;
+		}
 	},
 };
 </script>

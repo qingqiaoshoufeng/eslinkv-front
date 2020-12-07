@@ -123,6 +123,7 @@ export default {
 					});
 				});
 			});
+			this.$emit('close');
 		},
 		handleMouseleave() {
 			this.$emit('close');

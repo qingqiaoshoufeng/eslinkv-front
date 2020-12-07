@@ -190,7 +190,7 @@ export default {
 			// this.$amap.setZoom(11, 100);
 			this.$amap.setZoom(this.zoom, 100);
 			this.$amap.panTo(this.center, 100);
-			done();
+            done && done();
 		},
 		viewOverlayDetail(overlay) {
 			let { overlayType } = overlay;

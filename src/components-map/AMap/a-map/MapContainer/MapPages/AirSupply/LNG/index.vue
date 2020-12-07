@@ -221,7 +221,7 @@ export default {
 			// this.$amap.setZoom(11, 100);
 			this.$amap.setZoom(this.zoom, 100);
 			this.$amap.setCenter(this.center, 100);
-			done();
+			done && done();
 		},
 		viewOverlayDetail(overlay) {
 		},
