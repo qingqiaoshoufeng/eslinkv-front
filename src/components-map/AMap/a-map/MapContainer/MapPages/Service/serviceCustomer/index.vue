@@ -20,6 +20,7 @@
 				@overlay-click="handleOverlayClick"
 				:detailList="config.detailList"
 				:data="allTypeStationList[config.dataProp]"
+				@close="closeOverlayDetail('')"
 			/>
 		</template>
 		<!-- 2.legend不控制显隐 -->
@@ -38,7 +39,7 @@
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
 			:detialBoxWidth="450"
-			:overlayInfoConfig="overlayInfoConfig"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			@view-detail="showMoreDetail"
 			ref="OverlayDetail"
@@ -121,7 +122,7 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(
+			overlayInfoConfigMap: Object.freeze(
 				SERVICE_SERVICECUSTOMER_OVERLAY_MAP
 			),
 			showOverlayDetail: false,
@@ -148,7 +149,7 @@ export default {
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
-		this.$amap.panTo(this.center, 100);
+		this.$amap.setCenter(this.center, 100);
 	},
 	watch: {
 		center(val) {
@@ -164,113 +165,28 @@ export default {
 			this.showThreeSocialLinkageDetail();
 		},
 		async handleOverlayClick(overlay, overlayType1, isCenter = false) {
-			console.log(overlay);
 			let { lng, lat, type, name, id, overlayType } = overlay;
 			let params = {
 				name,
 				id,
 				type,
 			};
-			console.log(overlayType);
 			if (['BranchCompany'].includes(overlayType)) {
 				this.detailInfo = await this.getDetailInfo(params);
 			}
 			this.activeOverlay = overlay;
-			console.log(this.detailInfo);
 			this.showOverlayDetail = true;
 			this.isShowMore = ['ThreeSocialLinkage'].includes(overlayType);
-			// if (isCenter) {
-			// 	this.$nextTick(() => {
-			// this.$amap.setZoom(14, 100);
-			// 		this.$amap.panTo([lng, lat], 100);
-			// 	});
-			// }
 		},
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
-			if (overlayType === 'WARNEVENT') {
-				GoldChart.scene.setSceneIndex(
-					INDEXSCENEMAP['AirSupplyHighPressure']
-				);
-				this.showRoutePlan = false;
-			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-			// this.$amap.setZoom(11, 100);
-			done();
+			done && done();
 		},
 		viewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
 			console.log(overlay, 'overlay');
-			if (overlayType === 'WARNEVENT') {
-				console.log('渲染路径，23');
-				this.showRoutePlan = true;
-				console.log(overlay);
-				let { content, address } = overlay;
-				//和场景进行交互
-				GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
-				//更新数据
-				this.$nextTick(() => {
-					AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
-						GoldChart.instance.updateComponent(i, {
-							data: {
-								step: 8,
-								value: {
-									step1: {
-										time: new Date('2020-10-30 22:20') * 1,
-										des: content,
-										name: '王磊',
-										title: '报警人',
-										address: address,
-									},
-									step2: {
-										time: new Date('2020-10-30 22:21') * 1,
-										name: '秦芳芳',
-										title: '客服部',
-									},
-									step3: {
-										time: new Date('2020-10-30 22:31') * 1,
-										name: '林自原',
-										title: '维修部',
-									},
-									step4: {
-										time: new Date('2020-10-30 22:48') * 1,
-									},
-									step5: {
-										time: new Date('2020-10-30 23:13') * 1,
-									},
-									step6: {
-										time: new Date('2020-10-30 23:50') * 1,
-									},
-									step7: {
-										time: new Date('2020-10-31 11:21') * 1,
-									},
-									step8: {
-										time: new Date('2020-10-31 12:57') * 1,
-										title: '维修处置内容',
-										content:
-											'部分管道老旧破损严重导致燃气泄漏，关闭上游阀门后更换泄漏段管道，已恢复供气。',
-									},
-								},
-								videoInfo1: {
-									imgList: [
-										'/static/images/project/01.png',
-										'/static/images/project/02.jpg',
-									],
-									videoList: ['/cdn/videos/test.mov'],
-								},
-								videoInfo2: {
-									imgList: [
-										'/static/images/project/01.png',
-										'/static/images/project/02.jpg',
-									],
-									videoList: ['/cdn/videos/test.mov'],
-								},
-							},
-						});
-					});
-				});
-			}
 		},
 
 		toViewOverlayDetail(overlay) {
@@ -379,15 +295,6 @@ export default {
 			};
 			console.log(this.allTypeStationList);
 		},
-		// // 获取三社联动列表
-		// async getServiceCustomerThreeSocialList() {
-		// 	let threeSocialLinkageList = await this.$sysApi.map.serve
-		// 		.getServiceCustomerThreeSocialList;
-		// 	this.allTypeStationList = {
-		// 		...this.allTypeStationList,
-		// 		...threeSocialLinkageList,
-		// 	};
-		// },
 		// 查看详情接口
 		getDetailInfo(params) {
 			return this.$sysApi.map.serve.getServiceCustomerDetialInfo(params);

@@ -10,7 +10,7 @@ export const SCENEINDEXMAP = {
     '6u1qhjs14ws': 'ServiceMarket',
     bavv56kietf: 'ServiceHangranCode',
     e40ml4vtfa6: 'serviceICcustomer',
-    zciq8u7tmpl: 'unchange', //unchang代表地图不进行切换
+    zciq8u7tmpl: 'unchange-routeplan', //unchang代表地图不进行切换
     ahais9szswu: 'unchange'
 }
 export const INDEXSCENEMAP = {

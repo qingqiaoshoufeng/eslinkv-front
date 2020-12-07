@@ -23,7 +23,7 @@
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:overlayInfoConfig="overlayInfoConfig"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			@view-detail="toViewOverlayDetail"
 		/>
@@ -84,7 +84,7 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_CUSTOMER),
+			overlayInfoConfigMap: Object.freeze(OVERLAYINFOMAP_SERVICE_CUSTOMER),
 			dataStatisticsList: [],
 			OverlayDetail: null,
 			// legendMap1: SERVICELEGENDCUSTOMERMAP,

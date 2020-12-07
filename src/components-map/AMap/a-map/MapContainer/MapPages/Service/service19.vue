@@ -22,7 +22,7 @@
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:overlayInfoConfig="overlayInfoConfig"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 		>
 			<TipDetial :data="activeOverlay" />
@@ -61,7 +61,7 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(OVERLAYINFOMAP_SERVICE_19),
+			overlayInfoConfigMap: Object.freeze(OVERLAYINFOMAP_SERVICE_19),
 			dataStatisticsList: [],
 			// legendMap: SERVICELEGEND19MAP,
 			legendMultiple: true,
@@ -82,7 +82,7 @@ export default {
 		},
 	},
 	mounted() {
-		console.log(this.overlayInfoConfig);
+		console.log(this.overlayInfoConfigMap);
 		this.getDataStatisticsList();
 	},
 };

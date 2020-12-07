@@ -26,7 +26,7 @@
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:overlayInfoConfig="overlayInfoConfig"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			ref="OverlayDetail"
 		/>
@@ -65,7 +65,7 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(SERVICE_SERVICEMARKET_OVERLAY_MAP),
+			overlayInfoConfigMap: Object.freeze(SERVICE_SERVICEMARKET_OVERLAY_MAP),
 			legendMap: SERVICE_SERVICEMARKET_LEGEND_MAP,
 			mapLegendStyle: { left: '18%' },
 			legendMultiple: true,
@@ -80,7 +80,7 @@ export default {
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
-		this.$amap.panTo(this.center, 100);
+		this.$amap.setCenter(this.center, 100);
 	},
 	methods: {
 		// 暂留

@@ -11,10 +11,11 @@
 				class="item"
 				v-for="(item, index) in data.detailList || []"
 				:key="index"
+				v-show="detailInfo[item.prop]"
 			>
 				<span class="label">{{ `${item.label}: ` }}</span>
-				<span class="value" v-show="detailInfo[item.prop]">{{
-					`${detailInfo[item.prop] + item.DW} `
+				<span class="value">{{
+					`${(detailInfo[item.prop] || item.defaultVal) + item.DW} `
 				}}</span>
 			</div>
 		</div>

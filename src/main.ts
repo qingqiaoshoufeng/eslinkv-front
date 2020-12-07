@@ -14,21 +14,8 @@ import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import './api/index.js'
 import PortalVue from 'portal-vue'
-import 'babel-polyfill'
+import '@babel/polyfill'
 
-// import Promise from 'promise-polyfill'
-// var Promise = require('promise-polyfill').default;
-// var Promise = require('promise-polyfill').default
-// import 'es6-promise/auto'
-// import Es6Promise from 'es6-promise'
-
-// require('es6-promise').polyfill()
-// Es6Promise.polyfill()
-
-// import './utils/rem';
-
-// import "core-js/stable";
-// import "regenerator-runtime/runtime"
 
 
 Vue.use(PortalVue)

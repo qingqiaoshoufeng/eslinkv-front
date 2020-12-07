@@ -47,7 +47,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         component: 'InspectionCar',
         showOverlayName: false,
         isShow: true,
-        dataProp: 'inspectionPersonList'
+        dataProp: 'inspectionCarList'
     },
     // ServiceStation: {
     //     label: '综合服务站',
@@ -252,6 +252,30 @@ export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
         },
         isShowMore: true,
     },
+    InspectionPerson: {
+		fields: {
+			name: {
+				style: {
+					fontSize: '32px',
+					color: '#FFDC45',
+				},
+				errColor: '#FFDC45',
+			},
+		},
+		isShowMore: false,
+	},
+	InspectionCar: {
+		fields: {
+			name: {
+				style: {
+					fontSize: '32px',
+					color: '#FFDC45',
+				},
+				errColor: '#FFDC45',
+			},
+		},
+		isShowMore: false,
+	},
 }
 // 中低压统计数据
 export const DATASTATISTICSLIST = [

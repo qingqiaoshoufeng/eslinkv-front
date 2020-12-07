@@ -3,8 +3,8 @@
 		<vue-seamless-scroll
 			:data="list"
 			class="event-warning"
-            ref="aaa"
-            v-if="active && list.length"
+			ref="aaa"
+			v-if="active && list.length"
 			:class-option="classOption"
 		>
 			<div
@@ -73,11 +73,11 @@ export default {
 				return {};
 			},
 		},
-    },
+	},
 	computed: {
 		classOption() {
 			return {
-				step: 0.3, // 数值越大速度滚动越快
+				step: 1, // 数值越大速度滚动越快
 				limitMoveNum: this.list?.length, // 开始无缝滚动的数据量
 				hoverStop: true, // 是否开启鼠标悬停stop
 				direction: 1, // 0向下 1向上 2向左 3向右
@@ -86,10 +86,10 @@ export default {
 				singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
 				waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
 			};
-        },
-        active(){
-            return this.$parent.active 
-        }
+		},
+		active() {
+			return this.$parent.active;
+		},
 	},
 	async created() {
 		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
@@ -108,8 +108,9 @@ export default {
 	},
 	methods: {
 		handleClick(item, index) {
-            this.activeIndex = index;
-            console.log(item,'item')
+			this.activeIndex = index;
+			item.status = item.stateName == '处理完成' ? 0 : 1;
+			item.type = 'WARNEVENT';
 			this.$emit('change', item, 'WARNEVENT');
 		},
 	},

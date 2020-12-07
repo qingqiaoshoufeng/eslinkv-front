@@ -8,7 +8,9 @@
 			...$attrs,
 			data,
 		}"
-		@click="marker => $emit('overlay-click', marker, 'InspectionCar')"
+		@click="handleOverlayClick"
+		@mouseover="handleMouseover"
+		@mouseleave="handleMouseleave"
 	/>
 </template>
 <script>
@@ -34,12 +36,22 @@ export default {
 		data: {
 			type: Array,
 		},
-    },
+	},
 	data() {
 		let apiFun = this.$sysApi.map.home.getInspectionCarList;
 		return {
 			apiFun: apiFun,
 		};
+	},
+	methods: {
+		handleMouseover(marker) {
+			let { id, name, type } = marker;
+			this.$emit('overlay-click', marker, 'InspectionCar', false);
+		},
+		handleOverlayClick(marker) {},
+		handleMouseleave() {
+			this.$emit('close');
+		},
 	},
 };
 </script>

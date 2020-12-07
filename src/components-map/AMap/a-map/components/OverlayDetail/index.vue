@@ -45,6 +45,7 @@
 <script>
 import { AMapMarker } from '../../lib';
 import PopContainer from '../PopContainer';
+
 export default {
 	name: 'OverlayDetail',
 	inject: ['parentInfo'],
@@ -63,7 +64,7 @@ export default {
 			type: Boolean,
 			default: false,
 		},
-		overlayInfoConfig: {
+		overlayInfoConfigMap: {
 			type: Object,
 			default() {
 				return {};
@@ -101,12 +102,13 @@ export default {
 				if (JSON.stringify(val) !== '{}') {
 					let { overlayType } = val;
 					this.overlayTypeInfo =
-						this.overlayInfoConfig[overlayType] || {};
+						this.overlayInfoConfigMap[overlayType] || {};
 					this.overlay = {
 						...val,
 					};
 					let legendConfig = this.legendMap[overlayType] || {};
-					let marginBottom = this.iconSize || legendConfig.iconSize || 19;
+					let marginBottom =
+						this.iconSize || legendConfig.iconSize || 38;
 					this.marginBottom = marginBottom / 2;
 					if (!this.rendered) {
 						this.rendered = true;

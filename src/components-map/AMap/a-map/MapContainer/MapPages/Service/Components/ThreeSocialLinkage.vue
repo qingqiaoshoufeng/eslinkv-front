@@ -9,7 +9,7 @@
 			...$attrs,
 			data,
 		}"
-		@click="
+		@mouseover="
 			marker =>
 				$emit(
 					'overlay-click',
@@ -17,6 +17,7 @@
 					overlayType
 				)
 		"
+        @mouseleave="handleMouseleave"
 	/>
 </template>
 <script>
@@ -56,6 +57,11 @@ export default {
 		return {
 			apiFun: this.$sysApi.map.serve.getThreeSocialLinkageList,
 		};
+    },
+    	methods: {
+		handleMouseleave() {
+			this.$emit('close');
+		},
 	},
 };
 </script>

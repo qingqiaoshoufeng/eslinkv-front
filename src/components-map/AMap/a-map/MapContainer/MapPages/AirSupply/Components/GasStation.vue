@@ -9,8 +9,8 @@
 			data,
 		}"
 		@click="handleOverlayClick"
-        @mouseover="handleMouseover"
-        @mouseleave="handleMouseleave"
+		@mouseover="handleMouseover"
+		@mouseleave="handleMouseleave"
 	>
 		<template slot-scope="{ data }">
 			<div :class="[{ active: active }, data.inletDirection]">
@@ -24,7 +24,13 @@
 	</BaseOverlay>
 </template>
 <script>
+import {
+	AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
+	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX,
+} from '../../../../config/scene';
 import { BaseOverlay } from '../../../../components/index';
+import GoldChart from '@/openApi';
+
 export default {
 	name: 'GasStation',
 	components: {
@@ -72,7 +78,7 @@ export default {
 		};
 	},
 	methods: {
-		async handleOverlayClick(marker,isCenter=true) {
+		async handleMouseover(marker) {
 			let { id, name, type } = marker;
 			let data = await this.$sysApi.map.airSupply.getStationRealTimeInfo({
 				id,
@@ -90,24 +96,37 @@ export default {
 					let propInner = prop + index;
 					dataComp[propInner] = {
 						name,
-                        value: value,
-                        dw
+						value: value,
+						dw,
 					};
 				});
 			});
 			this.$emit(
 				'overlay-click',
 				{ ...marker, detail: dataComp },
-                'GasStation',
-                isCenter
+				'GasStation',
+				false
 			);
-        },
-        handleMouseover(marker){
-            this.handleOverlayClick(marker,false)
-        },
-        handleMouseleave(){
-            this.$emit('close')
-        }
+		},
+		handleOverlayClick(marker) {
+			let { name } = marker;
+			GoldChart.scene.createSceneInstance(
+				AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
+				'slideRight'
+			);
+			this.$nextTick(() => {
+				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX.forEach(item => {
+					GoldChart.instance.updateComponent(item, {
+						data: {
+							title: name,
+						},
+					});
+				});
+			});
+		},
+		handleMouseleave() {
+			this.$emit('close');
+		},
 	},
 };
 </script>

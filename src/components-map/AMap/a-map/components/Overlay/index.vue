@@ -1,43 +1,76 @@
+<template>
+	<AMapMarker
+		:visible="visible"
+		:offset="offset"
+		v-if="verifyLngLat"
+		:position="[marker.lng, marker.lat]"
+		:vid="marker.name"
+		ref="marker"
+	>
+		<div
+			class="sample"
+			:class="['sample', active ? 'active' : '']"
+			v-on="$listeners"
+		>
+			<SvgIcon
+				class="sample-icon"
+				:iconName="marker.icon"
+				:style="{ fontSize: (marker.iconSize || 38) + 'px' }"
+			></SvgIcon>
+			<slot></slot>
+		</div>
+	</AMapMarker>
+</template>
+  
 <script>
 import SvgIcon from '../SvgIcon';
 import { AMapMarker } from '../../lib';
 export default {
 	name: 'Overlay',
-	functional: true,
 	components: {
 		SvgIcon,
 		AMapMarker,
 	},
-	render: (h, { props, data, listeners, scopedSlots, $slots }) => {
-		let { active = false, marker, visible = true } = props;
-		let { lat, lng, name, status, icon, iconSize = 38 } = marker;
-		let offset = [-iconSize / 2, -iconSize / 2];
-		if (!parseFloat(lat) || !parseFloat(lng)) {
-			return null;
-		}
-		return (
-			<AMapMarker
-				visible={visible}
-				offset={offset}
-				position={[lng || 0, lat || 0]}
-				vid={name}
-			>
-				<div
-					class="sample"
-					class={['sample', active ? 'active' : '']}
-					on={listeners}
-				>
-					{icon && (
-						<SvgIcon
-							class="sample-icon"
-							icon-name={icon}
-							style={{ fontSize: `${iconSize}px` }}
-						></SvgIcon>
-					)}
-					{$slots.default}
-				</div>
-			</AMapMarker>
-		);
+	props: {
+		visible: {
+			type: Boolean,
+			default: true,
+		},
+		marker: {
+			type: Object,
+			default() {
+				return {};
+			},
+		},
+		active: {
+			type: Boolean,
+			default: false,
+		},
+	},
+	computed: {
+		offset() {
+			let { iconSize } = this.marker;
+			iconSize = iconSize || 38;
+			return [-iconSize / 2, -iconSize / 2];
+		},
+		verifyLngLat() {
+			let { lng, lat } = this.marker;
+			return typeof lng === 'number' && typeof lat === 'number';
+		},
+	},
+	watch: {
+		marker(val) {
+			let { lng, lat } = val;
+			let instance = this.getInstance();
+			if (instance && lng) {
+				instance.setPosition(new AMap.LngLat(lng, lat));
+			}
+		},
+	},
+	methods: {
+		getInstance() {
+			return  this.$refs.marker && this.$refs.marker.$amapComponent;
+		},
 	},
 };
 </script>

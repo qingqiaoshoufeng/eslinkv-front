@@ -95,7 +95,7 @@ let HighPressureHighPressureGasStation = {
     prop: "pressureRegulatingStation"
 }
 let HighPressureLineLength = {
-    label: '高压管线长度(km)',
+    label: '高压管线长度(m)',
     DW: '',
     prop: "pipelineLength"
 }
@@ -117,12 +117,12 @@ let HighPressurePreservationNumber = {
 }
 // 中低压数据配置
 let LowPressureMediumline = {
-    label: '中压管线(km)',
+    label: '中压管线(m)',
     DW: '',
     prop: "lowLength"
 }
 let LowPressureLowline = {
-    label: '低压管线(km)',
+    label: '低压管线(m)',
     DW: '',
     prop: "smallLength"
 }
@@ -274,16 +274,19 @@ let monthAccpet = {
     label: '本月已受理',
     DW: '单',
     prop: "accept_m_nbr",
+    defaultVal:0
 }
 let monthManage = {
     label: '本月已办结',
     DW: '单',
     prop: "finished_m_nbr",
+    defaultVal:0
 }
 let monthManagePercent = {
     label: '本月办结率',
     DW: '单',
     prop: "finished_m_rate",
+    defaultVal:0
 }
 
 

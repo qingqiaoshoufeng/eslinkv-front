@@ -121,13 +121,13 @@ module.exports = {
             .rule('vue')
             .use('iview')
             .loader('iview-loader')
-            .options({ prefix: false }).end()
-        config.module
-            .rule("view-design")  //  我目前用的是新版本的iview ,旧版本的iview，用iview代替view-design
-            .test(/view-design.src.*?js$/)
-            .use("babel")
-            .loader("babel-loader")
-            .end()
+            .options({ prefix: false })
+        // config.module
+        //     .rule("view-design")  //  我目前用的是新版本的iview ,旧版本的iview，用iview代替view-design
+        //     .test(/view-design.src.*?js$/)
+        //     .use("babel")
+        //     .loader("babel-loader")
+        //     .end()
         config.resolve.alias
             .set('@lib', path.resolve(__dirname, './lib'));
         if (isProduction) {

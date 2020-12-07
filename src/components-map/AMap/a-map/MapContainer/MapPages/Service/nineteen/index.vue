@@ -27,7 +27,7 @@
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:overlayInfoConfig="overlayInfoConfig"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			ref="OverlayDetail"
 			:detialBoxWidth="450"
@@ -84,7 +84,7 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfig: Object.freeze(
+			overlayInfoConfigMap: Object.freeze(
 				SERVICE_SERVICENINETEEN_LEGEND_MAP
 			),
 			dataStatisticsList: DATASTATISTICSLIST,
@@ -104,7 +104,7 @@ export default {
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
-		this.$amap.panTo(this.center, 100);
+		this.$amap.setCenter(this.center, 100);
 	},
 	watch: {
 		center(val) {
@@ -138,12 +138,6 @@ export default {
 			let res = await this.getDetialInfo(name);
 			console.log(res);
 			this.detailInfo = res[0];
-			// this.$amap.setZoom(14, 100);
-			// if (isCenter) {
-			// 	this.$nextTick(() => {
-			// 		this.$amap.panTo([lng, lat], 100);
-			// 	});
-			// }
 		},
 		async getDataStatisticsList() {
 			console.log(222222222222);
@@ -192,7 +186,7 @@ export default {
 		},
 	},
 	mounted() {
-		console.log(this.overlayInfoConfig);
+		console.log(this.overlayInfoConfigMap);
 		this.getAllTypeStationList();
 		this.getDataStatisticsList();
 		window.setCenter = this.setCenter.bind(this);

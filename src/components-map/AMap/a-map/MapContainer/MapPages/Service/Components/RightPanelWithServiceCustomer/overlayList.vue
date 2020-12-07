@@ -82,8 +82,15 @@ export default {
 	},
 	methods: {
 		async getData() {
-			res = await this.$sysApi.map.serve.getServiceCustomerStatisticsInfo();
+			let params = {
+				types: ['ThreeSocialLinkage'].toString(),
+			};
+			let res = await this.$sysApi.map.serve
+				.getServiceCustomerThreeSocialList
+				// params
+				();
 			this.list = res.threeSocialLinkageList;
+			console.log(res);
 			console.log(this.list, 888888888888888888888888888888);
 			// let list = await this.$sysApi.map.serve.getAllTypeStationList();
 			// this.list = list

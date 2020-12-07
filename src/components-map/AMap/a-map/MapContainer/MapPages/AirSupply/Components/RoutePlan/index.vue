@@ -1,23 +1,14 @@
-<template>
-	<Overlay
-		:key="'warn111'"
-		:marker="{
-			icon,
-			...data,
-		}"
-		ref="marker"
-		:visible="true"
-		@click="$emit('click', item)"
-	>
-		<img src="@/assets/amap/images/qiangxiu.gif" class="warnoverlay-gif" />
-	</Overlay>
-</template>
+<template></template>
 <script>
+function findAmapRoot() {
+	if (this.$amap) return this.$amap;
+	let parent = this.$parent;
+	if (parent) {
+		let fun = findAmapRoot.bind(parent);
+		return fun();
+	}
+}
 import { Overlay } from '../../../../../components/index';
-let eventTypeIconMap = {
-	0: 'iconbaoguanshijian',
-	1: 'iconxieloushijian',
-};
 export default {
 	name: 'RoutePlan',
 	inject: ['parentInfo'],
@@ -47,9 +38,6 @@ export default {
 				};
 			},
 		},
-	},
-	created() {
-		this.map = this.$parent.$amap;
 	},
 	watch: {
 		data: {
@@ -121,9 +109,13 @@ export default {
 			immediate: true,
 		},
 	},
+	created() {
+		let fun = findAmapRoot.bind(this);
+		this.map = fun();
+	},
 	methods: {
 		drawLine(passedPathData = [], planPathData = []) {
-			let map = this.$parent.$amap;
+			let map = this.map;
 			// 1.已行驶路径 + 预测轨迹
 			let pathDataAll = [...passedPathData, ...planPathData];
 			this.pathAll = new AMap.Polyline({
@@ -166,16 +158,12 @@ export default {
 			}
 			let { scaleRatio } = this.parentInfo;
 			let paddingTop = (1050 - 1050 * scaleRatio) / 2;
-			let paddingRight = (3500 * scaleRatio) / 2.6;
-			let paddingLeft = 3500 - paddingRight * 1.6;
-			console.log(pathDataAll[0]);
-			console.log(pathDataAll[pathDataAll.length - 1]);
-			console.log(paddingTop, paddingRight);
-			this.map.setFitView(null, [
-				paddingTop+80,
-				paddingTop,
+			let paddingRight = (3500 - ((3500 * scaleRatio) / 2.6) * 1.6) / 2;
+			this.map.setFitView(this.pathAll, false, [
+				paddingTop + 80,
+				paddingTop + 40,
 				paddingRight,
-				paddingLeft,
+				paddingRight,
 			]);
 		},
 		reset() {
@@ -188,7 +176,7 @@ export default {
 	},
 	beforeDestroy() {
 		this.reset();
-	},
+    }
 };
 </script>
 

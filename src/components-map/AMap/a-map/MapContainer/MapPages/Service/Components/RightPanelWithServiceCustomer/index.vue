@@ -18,7 +18,6 @@
 			<overlayList @change="handleClick" />
 		</TabPanel>
 	</Tabs>
-	<!-- </DashboardPanel> -->
 </template>
 
 <script>
