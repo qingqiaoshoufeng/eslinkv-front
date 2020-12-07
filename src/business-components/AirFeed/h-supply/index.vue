@@ -3,7 +3,7 @@
 		<div class="container">
       <div class="main">
         <ul>
-          <li class="item" v-for="(k, i) in data" :class="{active: i === index}">
+          <li class="item" v-for="(k, i) in data" :class="{active: i === index}" :key="i" @click="changeTab(i)">
             <div class="title">{{ k.name }} {{ k.value | toThousand }}</div>
             <div class="bar" :style="{width: getBarWidth(k.value)}"></div>
           </li>
@@ -138,7 +138,8 @@ export default {
   data () {
 	  return {
 	    index: 0,
-      timer: null
+      timer: null,
+      restartTimer: null,
     }
   },
   computed: {
@@ -152,6 +153,23 @@ export default {
     },
 	  getSubBarWidth (value) {
       return ~~(value / this.curr.children[0].value * 92) + 'px'
+    },
+    changeTab (n) {
+      clearInterval(this.timer)
+      clearTimeout(this.restartTimer)
+      this.index = n
+      this.restartTimer = setTimeout(() => {
+        this.startInterval()
+      }, 2000)
+    },
+    startInterval () {
+      this.timer = setInterval(() => {
+        if (this.index === this.data.length - 1) {
+          this.index = 0
+        } else {
+          this.index++
+        }
+      }, 2000)
     }
   },
 	created() {
@@ -159,17 +177,13 @@ export default {
 		this.configValue = this.parseConfigValue(config, value)
 	},
   mounted() {
-	  this.timer = setInterval(() => {
-	    if (this.index === this.data.length - 1) {
-	      this.index = 0
-      } else {
-	      this.index++
-      }
-    }, 2000)
+	  this.startInterval()
   },
   beforeDestroy() {
 	  clearInterval(this.timer)
+	  clearTimeout(this.restartTimer)
     this.timer = null
+    this.restartTimer = null
   }
 }
 </script>

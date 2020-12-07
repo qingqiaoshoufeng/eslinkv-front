@@ -1,6 +1,5 @@
 <template>
 	<div class="widget-part" :style="styles" v-if="data">
-    <img src="./img/line.svg" class="line">
     <div class="container">
       <div class="title">线路详情</div>
       <ul class="list">
@@ -13,7 +12,6 @@
         </li>
       </ul>
     </div>
-    <img src="./img/line.svg" class="line2">
 	</div>
 </template>
 <script>
@@ -87,20 +85,6 @@ export default {
         margin-top: 8px;
       }
     }
-  }
-
-  .line {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-  }
-
-  .line2 {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
   }
 }
 </style>
