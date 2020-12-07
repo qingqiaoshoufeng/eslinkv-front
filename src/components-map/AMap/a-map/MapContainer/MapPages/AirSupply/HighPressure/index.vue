@@ -322,7 +322,8 @@ export default {
 			let { lng, lat, address, time, index } = overlay;
 			overlay.overlayType = overlayType || overlay.overlayType;
 			this.activeWarnData = overlay;
-			this.setZoomAndPanTo(lng, lat);
+            this.setZoomAndPanTo(lng, lat);
+            cosnole.log(overlay,'1qww')
 		},
 		handleListClick(overlay, overlayType) {
 			let { lng, lat, address, time, index } = overlay;

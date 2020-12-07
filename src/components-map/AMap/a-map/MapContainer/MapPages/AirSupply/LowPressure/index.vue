@@ -23,7 +23,7 @@
 			:getTileUrl="getTileUrl"
 		/>
 		<!-- 2.legend控制显隐 -->
-		<template v-for="(config, legend) in overlayMap">
+		<template v-for="(config, legend) in legendMap">
 			<component
 				v-if="config.component"
 				:key="legend"
@@ -294,7 +294,7 @@ export default {
 			// this.$amap.setZoom(11, 100);
 			this.$amap.setZoom(this.zoom, 100);
 			this.$amap.setCenter(this.center, 100);
-			done();
+            done && done();
 		},
 		viewOverlayDetail(overlay) {
 			let { overlayType } = overlay;

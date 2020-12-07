@@ -92,7 +92,10 @@ export default {
 		},
 	},
 	async created() {
-		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
+		this.getData();
+		this.timer = setInterval(() => {
+			this.getData();
+		}, 120000);
 	},
 	watch: {
 		activeItem(val) {
@@ -107,12 +110,21 @@ export default {
 		},
 	},
 	methods: {
+		async getData() {
+            this.list = await this.$sysApi.map.airSupply.getEventWarningList();
+		},
 		handleClick(item, index) {
 			this.activeIndex = index;
 			item.status = item.stateName == '处理完成' ? 0 : 1;
 			item.type = 'WARNEVENT';
 			this.$emit('change', item, 'WARNEVENT');
 		},
+	},
+	beforeDestroy() {
+		if (this.timer) {
+			clearInterval(this.timer);
+			this.timer = null;
+		}
 	},
 };
 </script>

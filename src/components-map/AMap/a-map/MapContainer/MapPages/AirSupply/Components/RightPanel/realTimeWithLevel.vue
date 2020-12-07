@@ -1,52 +1,52 @@
 <template>
 	<div class="process-warning">
-		<vue-seamless-scroll
+		<!-- <vue-seamless-scroll
 			:data="list || []"
 			class="list"
 			ref="bbb"
 			:class-option="classOption"
 			v-if="active && list.length"
+		> -->
+		<div
+			@click="handleClick(item, index, 'WarningList')"
+			v-for="(item, index) in list"
+			:key="index"
+			class="list-item"
+			:class="{ active: activeIndex === index }"
 		>
-			<div
-				@click="handleClick(item, index, 'WarningList')"
-				v-for="(item, index) in list"
-				:key="index"
-				class="list-item"
-				:class="{ active: activeIndex === index }"
-			>
-				<div class="row">
-					<SvgIcon
-						:icon-name="
-							item.priority == '已处理'
-								? 'iconzhengchang'
-								: 'iconyichang'
-						"
-						class="panel-type-icon"
-					></SvgIcon>
-					<div class="content">
-						{{ item.description }}
-						<div
-							class="level"
-							:class="{
-								first: item.level === 1,
-								second: item.level === 2,
-								third: item.level === 3,
-							}"
-						>
-							{{ item.level }}
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="station-name">
-						{{ item.address }}
-					</div>
-					<div>
-						{{ item.alarmTime }}
+			<div class="row">
+				<SvgIcon
+					:icon-name="
+						item.priority == '已处理'
+							? 'iconzhengchang'
+							: 'iconyichang'
+					"
+					class="panel-type-icon"
+				></SvgIcon>
+				<div class="content">
+					{{ item.description }}
+					<div
+						class="level"
+						:class="{
+							first: item.level === 1,
+							second: item.level === 2,
+							third: item.level === 3,
+						}"
+					>
+						{{ item.level }}
 					</div>
 				</div>
 			</div>
-		</vue-seamless-scroll>
+			<div class="row">
+				<div class="station-name">
+					{{ item.address }}
+				</div>
+				<div>
+					{{ item.alarmTime }}
+				</div>
+			</div>
+		</div>
+		<!-- </vue-seamless-scroll> -->
 	</div>
 </template>
 
@@ -82,7 +82,10 @@ export default {
 		},
 	},
 	async created() {
-		this.list = await this.$sysApi.map.airSupply.getProcessWarningList();
+		this.getData();
+		this.timer = setInterval(() => {
+			this.getData();
+		}, 120000);
 	},
 	computed: {
 		classOption() {
@@ -115,6 +118,7 @@ export default {
 	},
 	methods: {
 		handleClick(listItem, index) {
+			console.log('suyan1111');
 			let { address, time } = listItem;
 			this.$emit('before-change', listItem, 'WarningList');
 			// GoldChart.scene.createSceneInstance(
@@ -134,11 +138,26 @@ export default {
 			// });
 			// setTimeout(() => {
 			// 	GoldChart.scene.destroyScene(AIRSUPPLY_WARN_MODEL_SCENEINDEX);
-				listItem.status = listItem.priority == '已处理' ? 0 : 1;
-				listItem.type = 'WarningList'
-				this.$emit('change', listItem, 'WarningList');
+			listItem.status = listItem.priority == '已处理' ? 0 : 1;
+			listItem.type = 'WarningList';
+			this.$emit('change', listItem, 'WarningList');
 			// }, 3000);
 		},
+		async getData() {
+			this.list = await this.$sysApi.map.airSupply.getProcessWarningList();
+		},
+		handleClick(item, index) {
+			this.activeIndex = index;
+			item.status = item.stateName == '处理完成' ? 0 : 1;
+			item.type = 'WARNEVENT';
+			this.$emit('change', item, 'WARNEVENT');
+		},
+	},
+	beforeDestroy() {
+		if (this.timer) {
+			clearInterval(this.timer);
+			this.timer = null;
+		}
 	},
 };
 </script>
@@ -148,7 +167,7 @@ export default {
 	color: #fff;
 	font-size: 16px;
 	height: 800px;
-	overflow: hidden;
+	overflow-y: scroll;
 	.list-item {
 		padding: 20px 8px;
 		box-sizing: border-box;

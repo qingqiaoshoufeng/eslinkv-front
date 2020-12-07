@@ -76,7 +76,7 @@ export default {
 	},
 	methods: {
 		handleClick(item, overlayType) {
-			item.overlayType = overlayType;
+            item.overlayType = overlayType;
 			this.$emit('overlay-click', item, overlayType || 'WarningList');
 		},
 		handleBeforeChange(item, overlayType) {
