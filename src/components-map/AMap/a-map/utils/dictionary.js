@@ -274,16 +274,19 @@ let monthAccpet = {
     label: '本月已受理',
     DW: '单',
     prop: "accept_m_nbr",
+    defaultVal:2000
 }
 let monthManage = {
     label: '本月已办结',
     DW: '单',
     prop: "finished_m_nbr",
+    defaultVal:1950
 }
 let monthManagePercent = {
     label: '本月办结率',
     DW: '单',
     prop: "finished_m_rate",
+    defaultVal:90
 }
 
 

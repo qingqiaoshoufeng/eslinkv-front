@@ -21,7 +21,7 @@
 					:style="nameStyle"
 					v-if="showOverlayName"
 				>
-					{{ item.name }}
+					{{ item[overlayName] }}
 				</div>
 			</slot>
 		</Overlay>
@@ -47,7 +47,11 @@ export default {
 	props: {
 		data: {
 			type: Array,
-		},
+        },
+        overlayName:{
+            type:String,
+            default:'name'
+        },
 		nameStyle: {
 			type: Object,
 			default: function () {

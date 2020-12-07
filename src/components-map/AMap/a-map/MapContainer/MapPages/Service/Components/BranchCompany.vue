@@ -9,6 +9,7 @@
 			data: dataInner,
 			...$attrs,
 			nameStyle,
+            overlayName:'colName'
 		}"
 		@mouseover="
 			marker =>
@@ -58,7 +59,7 @@ export default {
 	computed: {
 		dataInner() {
 			return this.data.map(item => {
-				item.name = item.name.replace(/有限公司|分公司/, '');
+				item.colName = item.name.replace(/有限公司|分公司/, '');
 				return item;
 			});
 		},

@@ -14,7 +14,7 @@ import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import './api/index.js'
 import PortalVue from 'portal-vue'
-import 'babel-polyfill'
+import '@babel/polyfill'
 // import 'es6-promise/auto'
 // import Es6Promise from 'es6-promise'
 
