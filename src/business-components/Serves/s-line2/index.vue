@@ -4,14 +4,14 @@
 			<div class="swiper" @click="back" :class="{active: offset > 0}"><span class="left"></span></div>
 			<div class="scroll-wrapper">
 				<ul class="scroll" :style="{transform: `translateX(-${offsetX}px)`}" ref="scroll">
-					<li class="pointer" v-for="(k) in data.typeList" :class="{active: k.label === currIndex}"
+					<li class="pointer" v-for="(k) in list" :class="{active: k.label === currIndex}"
 						:key="k.label"
 						@click="drawLine(k)">
 						{{k.label}}
 					</li>
 				</ul>
 			</div>
-			<div class="swiper" @click="next" :class="{active: offset < data.typeList.length}"><span
+			<div class="swiper" @click="next" :class="{active: offset < list.length}"><span
 				class="right"></span></div>
 		</div>
 		<div class="chart" :id="id"/>
@@ -49,21 +49,6 @@
 		api: {
 			data: JSON.stringify(
 				{
-					typeList: [
-						{label: '全部', code: ''},
-						{label: '工业', code: ''},
-						{label: '餐饮', code: ''},
-						{label: '酒店式公寓', code: ''},
-						{label: '汽车加气', code: ''},
-						{label: '民政(社会团体)', code: ''},
-						{label: '政府机关', code: ''},
-						{label: '写字楼', code: ''},
-						{label: '医院', code: ''},
-						{label: '商场', code: ''},
-						{label: '娱乐', code: ''},
-						{label: '学校', code: ''},
-						{label: '宾馆', code: ''},
-					],
 					data: test
 				})
 		},
@@ -92,7 +77,8 @@
 			return {
 				offset: 0,
 				offsetX: 0,
-				currIndex: '全部'
+				currIndex: '全部',
+				list:[]
 			}
 		},
 		methods: {
@@ -139,6 +125,7 @@
 			data: {
 				handler(val) {
 					if (this.id) {
+						console.log(val)
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
 							this.setOption(val.data)
@@ -152,6 +139,11 @@
 		created() {
 			this.configSource = this.parseConfigSource(config, configSource);
 			this.configValue = this.parseConfigValue(config, value);
+		},
+		mounted() {
+			this.$sysApi.bussiness.businessAnalysisType().then(res=>{
+				this.list=res.typeList
+			})
 		}
 	};
 </script>
