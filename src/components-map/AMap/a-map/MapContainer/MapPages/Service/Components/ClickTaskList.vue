@@ -9,13 +9,15 @@
 				...$attrs,
 			}"
 			:visible="activeIndex === index"
-			@click="
+			@mouseover="
 				$emit('overlay-click', {
 					overlayType: 'TaskList',
 					...item,
 					detailList,
 				})
 			"
+			@click="handleOverlayClick"
+			@mouseleave="handleMouseleave"
 		>
 			<!-- <video
 				class="warning-videO"
@@ -87,6 +89,18 @@ export default {
 	},
 	mounted() {
 		console.log(this.data, 2222);
+	},
+	methods: {
+		handleOverlayClick(marker) {
+			console.log('click');
+			this.$emit('view-detail', {
+				...marker,
+				overlayType: this.overlayType,
+			});
+		},
+		handleMouseleave() {
+			this.$emit('close');
+		},
 	},
 };
 </script>

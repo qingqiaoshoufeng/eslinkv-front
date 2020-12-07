@@ -19,6 +19,7 @@
 				:is="config.component"
 				@overlay-click="handleOverlayClick"
 				:detailList="config.detailList"
+				@view-detail="showMoreDetail"
 				:data="allTypeStationList[config.dataProp]"
 				@close="closeOverlayDetail('')"
 			/>
@@ -212,9 +213,9 @@ export default {
 					SERVICE_SERVICECUSTOMER_LEGEND_MAP.TaskList.detailList,
 				...item,
 			};
-			console.log(item);
+
 			this.detailInfo = item;
-			console.log(this.activeOverlay);
+
 			this.showOverlayDetail = true;
 		},
 		showThreeSocialLinkageDetail() {

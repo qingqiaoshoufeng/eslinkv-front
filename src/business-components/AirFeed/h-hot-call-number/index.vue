@@ -8,7 +8,7 @@
 			autoplay></video>
 		<div class="h-hot-call-number__oncall">
 			<div class="h-hot-call-number__oncall__num font-num">
-				{{ data && data.onCall}}
+				{{ data && data.onCall ||0}}
 			</div>
 			<div class="h-hot-call-number__oncall__desc">
 				通话中
@@ -16,7 +16,7 @@
 		</div>
 		<div class="h-hot-call-number__onwait">
 			<div class="h-hot-call-number__onwait__num font-num">
-				{{ data && data.onWait}}
+				{{ data && data.onWait ||0}}
 			</div>
 			<div class="h-hot-call-number__onwait__desc font-num">
 				等待中

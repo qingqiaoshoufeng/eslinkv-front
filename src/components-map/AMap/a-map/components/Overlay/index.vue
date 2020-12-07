@@ -8,7 +8,6 @@
 		ref="marker"
 	>
 		<div
-			class="sample"
 			:class="['sample', active ? 'active' : '']"
 			v-on="$listeners"
 		>

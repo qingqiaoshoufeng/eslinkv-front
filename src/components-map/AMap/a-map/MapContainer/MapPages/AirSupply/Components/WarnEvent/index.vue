@@ -40,6 +40,7 @@
 import bus from '../../../../../utils/bus';
 import { Overlay, OverlayDetail } from '../../../../../components/index';
 import RoutePlan from '../RoutePlan';
+import GoldChart from '@/openApi'
 import {
 	INDEXSCENEMAP,
 	OVERLAYINFOMAP_AIRSUPPLY,

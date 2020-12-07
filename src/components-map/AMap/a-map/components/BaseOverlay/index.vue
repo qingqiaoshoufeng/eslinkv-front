@@ -10,9 +10,9 @@
 			}"
 			:active="item.active"
 			:visible="visible"
-			@click="handleClick(item)"
-			@mouseenter="handleMouseOver(item)"
-			@mouseleave="handleMouseLeave(item)"
+			@click.stop="handleClick(item)"
+			@mouseenter.stop="handleMouseOver(item)"
+			@mouseleave.stop="handleMouseLeave(item)"
 		>
 			<slot :data="item">
 				<!-- 默认显示图标的名字 -->

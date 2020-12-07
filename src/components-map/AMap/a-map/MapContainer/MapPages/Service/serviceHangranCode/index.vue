@@ -25,6 +25,7 @@
 				@overlay-click="handleOverlayClick"
 				:detailList="config.detailList"
 				:ref="config.component"
+				@close="closeOverlayDetail('')"
 			/>
 		</template>
 

@@ -7,7 +7,7 @@
         <img class="rank-icon" src="./img/rank3.svg" v-else-if="i === 2">
         <div class="rank" v-else>{{ i + 1 }}</div>
         <div class="txt">{{ k.name }}</div>
-        <div class="num font-num">{{ k.num.toLocaleString() }}m³</div>
+        <div class="num font-num">{{ k.num | toThousand }}m³</div>
         <img class="arrow" src="/static/icons/arrow-up.svg" v-if="k.isUp"/>
         <img class="arrow" src="/static/icons/arrow-down.svg" v-else/>
       </li>
@@ -95,7 +95,7 @@ export default {
       margin-right: 16px;
     }
     .num {
-      width: 80px;
+      min-width: 80px;
       font-weight: bold;
       font-size: 24px;
       line-height: 24px;

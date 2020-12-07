@@ -17,7 +17,8 @@
 					overlayType
 				)
 		"
-        @mouseleave="handleMouseleave"
+		@click="handleOverlayClick"
+		@mouseleave="handleMouseleave"
 	/>
 </template>
 <script>
@@ -57,8 +58,15 @@ export default {
 		return {
 			apiFun: this.$sysApi.map.serve.getThreeSocialLinkageList,
 		};
-    },
-    	methods: {
+	},
+	methods: {
+		handleOverlayClick(marker) {
+             console.log('click')
+            this.$emit(
+					'view-detail',
+					{  ...marker, overlayType:this.overlayType },
+                )
+        },
 		handleMouseleave() {
 			this.$emit('close');
 		},

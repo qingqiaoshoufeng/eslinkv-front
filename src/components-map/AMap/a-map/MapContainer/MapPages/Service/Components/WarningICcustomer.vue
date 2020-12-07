@@ -9,13 +9,15 @@
 				...$attrs,
 			}"
 			:visible="true"
-			@click="
+			@mouseover="
 				$emit('overlay-click', {
 					overlayType: 'WarningICcustomer',
 					...item,
 					detailList,
 				})
 			"
+			@click="handleOverlayClick"
+			@mouseleave="handleMouseleave"
 		>
 			<video
 				class="warning-videO"
@@ -25,6 +27,7 @@
 				muted="muted"
 				loop
 				v-if="item.status === '1'"
+				pointE
 			></video>
 		</Overlay>
 	</div>
@@ -75,6 +78,19 @@ export default {
 	mounted() {
 		console.log(this.data, 2222);
 	},
+	methods: {
+		handleMouseleave() {
+			console.log('close');
+			this.$emit('before-close');
+		},
+		handleOverlayClick(marker) {
+			console.log('click');
+			this.$emit('view-detail', {
+				...marker,
+				overlayType: this.overlayType,
+			});
+		},
+	},
 };
 </script>
 
@@ -88,6 +104,7 @@ video::-webkit-media-controls {
 	margin-top: -40px;
 	outline: none;
 	position: absolute;
+	pointer-events: none;
 }
 .amap-icon {
 	width: 44px !important;
