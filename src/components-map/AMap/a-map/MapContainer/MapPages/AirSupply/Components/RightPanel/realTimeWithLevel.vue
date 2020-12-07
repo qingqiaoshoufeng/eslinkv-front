@@ -5,7 +5,7 @@
 			class="list"
 			ref="bbb"
 			:class-option="classOption"
-            v-if="active && list.length"
+			v-if="active && list.length"
 		>
 			<div
 				@click="handleClick(item, index, 'WarningList')"
@@ -53,7 +53,14 @@
 <script>
 import { SvgIcon } from '../../../../../components/';
 import VueSeamLess from 'vue-seamless-scroll';
-
+import GoldChart from '@/openApi';
+import {
+	INDEXSCENEMAP,
+	AIRSUPPLY_WARN_SCENEINDEX,
+	AIRSUPPLY_WARN_COMPONENTINDEX,
+	AIRSUPPLY_WARN_MODEL_SCENEINDEX,
+	AIRSUPPLY_WARN__MODEL_COMPONENTINDEX,
+} from '../../../../../config/scene';
 export default {
 	name: 'ProcessWarningList',
 	components: {
@@ -73,7 +80,7 @@ export default {
 				return {};
 			},
 		},
-    },
+	},
 	async created() {
 		this.list = await this.$sysApi.map.airSupply.getProcessWarningList();
 	},
@@ -107,9 +114,27 @@ export default {
 		},
 	},
 	methods: {
-		handleClick(item, index) {
-			this.activeIndex = index;
-			this.$emit('change', item, 'WarningList');
+		handleClick(listItem, index) {
+			let { address, time } = listItem;
+			GoldChart.scene.createSceneInstance(
+				AIRSUPPLY_WARN_MODEL_SCENEINDEX,
+				'fadeIn',
+				'none'
+			);
+			this.$nextTick(() => {
+				AIRSUPPLY_WARN__MODEL_COMPONENTINDEX.forEach(item => {
+					GoldChart.instance.updateComponent(item, {
+						data: {
+							time: time,
+							title: address,
+						},
+					});
+				});
+			});
+			setTimeout(() => {
+				GoldChart.scene.destroyScene(AIRSUPPLY_WARN_MODEL_SCENEINDEX);
+				this.$emit('change', listItem, 'WarningList');
+			}, 3000);
 		},
 	},
 };

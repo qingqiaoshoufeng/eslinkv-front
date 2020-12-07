@@ -108,7 +108,8 @@ export default {
 	},
 	methods: {
 		handleClick(item, index) {
-			this.activeIndex = index;
+            this.activeIndex = index;
+            console.log(item,'item')
 			this.$emit('change', item, 'WARNEVENT');
 		},
 	},
@@ -122,7 +123,7 @@ export default {
 	height: 800px;
 	overflow: hidden;
 	.list-item {
-		height: 96px;
+		// height: 96px;
 		padding: 20px 8px;
 		box-sizing: border-box;
 		cursor: pointer;

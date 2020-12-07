@@ -26,6 +26,11 @@ import 'babel-polyfill'
 // Es6Promise.polyfill()
 
 // import './utils/rem';
+
+// import "core-js/stable";
+// import "regenerator-runtime/runtime"
+
+
 Vue.use(PortalVue)
 Vue.use(VueVideoPlayer)
 Vue.component('iSwitch', Switch);

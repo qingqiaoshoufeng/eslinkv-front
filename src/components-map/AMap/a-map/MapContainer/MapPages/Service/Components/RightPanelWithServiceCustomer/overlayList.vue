@@ -65,6 +65,7 @@ export default {
 		},
 	},
 	created() {
+		console.log(1111111111111111111, 68);
 		this.getData();
 	},
 	watch: {
@@ -83,6 +84,7 @@ export default {
 		async getData() {
 			res = await this.$sysApi.map.serve.getServiceCustomerStatisticsInfo();
 			this.list = res.threeSocialLinkageList;
+			console.log(this.list, 888888888888888888888888888888);
 			// let list = await this.$sysApi.map.serve.getAllTypeStationList();
 			// this.list = list
 			// 	.map(item => {
@@ -111,7 +113,7 @@ export default {
 	color: #fff;
 	font-size: 16px;
 	.list-item {
-		height: 96px;
+		// height: 96px;
 		padding: 20px 8px;
 		box-sizing: border-box;
 		cursor: pointer;
