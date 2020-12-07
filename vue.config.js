@@ -1,4 +1,5 @@
 const path = require('path');
+const webpack = require('webpack')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
 // 引入等比适配插件
@@ -113,6 +114,13 @@ module.exports = {
                 'echarts': 'echarts'
             }
         ]
+        config.plugins.push(
+            new webpack.ProvidePlugin({
+                $: 'jquery',
+                jQuery: 'jquery',
+                'windows.jQuery': 'jquery'
+            })
+        )
     },
     chainWebpack: config => {
 		// config.entry.app = ["babel-polyfill", "./src/main.ts"];
