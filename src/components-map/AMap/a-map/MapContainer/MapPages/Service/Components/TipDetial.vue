@@ -14,7 +14,7 @@
 			>
 				<span class="label">{{ `${item.label}: ` }}</span>
 				<span class="value">{{
-					`${detailInfo[item.prop] + item.DW} `
+					`${(detailInfo[item.prop] || item.defaultVal) + item.DW} `
 				}}</span>
 			</div>
 		</div>
