@@ -19,6 +19,7 @@
 				:is="config.component"
 				@overlay-click="handleOverlayClick"
 				:detailList="config.detailList"
+                @view-detail="showMoreDetail"
 				:data="allTypeStationList[config.dataProp]"
                 @close="closeOverlayDetail('')"
 			/>

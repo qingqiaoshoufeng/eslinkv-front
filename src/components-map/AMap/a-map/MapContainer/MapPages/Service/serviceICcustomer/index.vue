@@ -19,6 +19,7 @@
 				:is="config.component"
 				@overlay-click="handleOverlayClick"
 				:ref="config.component"
+                @view-detail="showMoreDetail"
 				:detailList="config.detailList"
 				:data="allTypeStationList[config.dataProp]"
 			/>
@@ -31,14 +32,14 @@
 			:detialBoxWidth="450"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
-			@view-detail="showMoreDetail"
+			@view-detail="showMoreDetail()"
 			ref="OverlayDetail"
 		>
 			<TipDetial
 				:data="activeOverlay"
 				:detailInfo="detailInfo"
 				:isShowMore="isShowMore"
-				@view-detail="showMoreDetail"
+				@view-detail="showMoreDetail()"
 			/>
 		</OverlayDetail>
 		<portal to="destination">
@@ -88,8 +89,7 @@ import { DataStatistics } from '../../../../components';
 import {
 	SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
 	SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP,
-    DATASTATISTICSLIST,
-    SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
+	DATASTATISTICSLIST,
 	SWICHBOX,
 } from './config';
 import {
@@ -155,8 +155,9 @@ export default {
 			console.log(this.center);
 		},
 		// 查看详情，弹出详情场景
-		async showMoreDetail() {
-			let { address, content, status, id } = this.activeOverlay;
+		async showMoreDetail(activeOverlay) {
+            console.log('aaa')
+			let { address, content, status, id } = activeOverlay || this.activeOverlay;
 			let { useNumberYestoday } = this.detailInfo;
 			console.log(this.activeOverlay, this.detailInfo);
 			let params = {};
