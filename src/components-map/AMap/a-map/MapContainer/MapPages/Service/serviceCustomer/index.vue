@@ -32,6 +32,7 @@
 			:activeIndex="activeIndex"
 			:data="allTypeStationList.TaskList"
 			ref="OverlayDetail"
+			@close="closeOverlayDetail('')"
 		/>
 
 		<!-- 覆盖物详情 -->

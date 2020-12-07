@@ -16,7 +16,6 @@
 					detailList,
 				})
 			"
-			@click="handleOverlayClick"
 			@mouseleave="handleMouseleave"
 		>
 			<!-- <video
@@ -99,6 +98,7 @@ export default {
 			});
 		},
 		handleMouseleave() {
+			console.log('close');
 			this.$emit('close');
 		},
 	},
