@@ -111,6 +111,12 @@ export default {
 		.row {
 			display: flex;
 			align-items: center;
+			.status-err {
+				color: #ffdc45;
+			}
+			.status-suc {
+				color: #00ddff;
+			}
 			.content {
 				flex: 1;
 				font-size: 24px;

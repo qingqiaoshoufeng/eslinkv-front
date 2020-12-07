@@ -174,6 +174,15 @@ export default {
 			};
 			if (['BranchCompany'].includes(overlayType)) {
 				this.detailInfo = await this.getDetailInfo(params);
+			} else if (overlayType === 'TaskList') {
+				console.log(overlayType);
+				console.log(this.allTypeStationList.TaskList);
+				overlay.activeIndex = this.allTypeStationList.TaskList.findIndex(
+					item => item.id === overlay.id
+				);
+				console.log(overlay);
+				this.handleListClick(overlay);
+				return;
 			}
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
@@ -202,6 +211,7 @@ export default {
 			}
 		},
 		handleListClick(item) {
+			// debugger;
 			let { name, time, activeIndex, overlayType } = item;
 			if (overlayType === 'ThreeSocialLinkage') {
 				this.handleOverlayClick(item);
@@ -209,9 +219,9 @@ export default {
 			}
 			this.activeIndex = activeIndex;
 			this.activeOverlay = {
+				...item,
 				detailList:
 					SERVICE_SERVICECUSTOMER_LEGEND_MAP.TaskList.detailList,
-				...item,
 			};
 
 			this.detailInfo = item;
@@ -287,6 +297,8 @@ export default {
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
 			console.log(this.allTypeStationList, 33333);
 		},
+		// 查询三社联动站点列表
+
 		// 获取任务工单列表
 		async getTasklist() {
 			let TaskList = await this.$sysApi.map.serve.getServiceCustomerTaskList();

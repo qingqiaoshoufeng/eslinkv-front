@@ -179,7 +179,7 @@ export default {
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
 			this.carouseComplBranchCompanyInfo();
-			done();
+			done && done();
 		},
 		// 点击地图marker
 		async handleOverlayClick(overlay, overlayType, isCenter = false) {
