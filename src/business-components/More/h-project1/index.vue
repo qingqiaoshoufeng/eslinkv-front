@@ -1,63 +1,71 @@
 <template>
-	<div class="widget-part" :style="styles">
+	<div class="widget-part h-project-1-wrapper" :style="styles" v-if="data">
 		<div class="h-project-1 pos-r">
 			<ul class="h-project-1-icon pos-a fn-flex flex-row">
 				<li v-for="(item ,index) in icon" :key="index"/>
 			</ul>
 			<div class="h-project-1-ratio pos-a" :style="{width:`${ratio}%`}"></div>
 		</div>
-		<step1 v-bind="data&&data.value" class="h-project-1-step-box pos-a h-project-1-step-box-bottom"/>
+    <div class="step8-info" v-if="data.value.step8 && data.value.step8.title" @click="isShowContent = true">
+      <span>{{ data.value.step8.title }} ></span>
+    </div>
+    <div class="step8-info-content" v-if="isShowContent">
+      <img src="./img/close.svg" class="step8-info-content-close" @click="isShowContent = false">
+      <p>{{ data.value.step8.content }}</p>
+    </div>
+
+    <step1 v-bind="data.value" class="h-project-1-step-box pos-a h-project-1-step-box-bottom"/>
 		<step2
-			v-if="data&&data.step>=2"
-			v-bind="data&&data.value"
+			v-if="data.step>=2"
+			v-bind="data.value"
 			class="h-project-1-step-box pos-a"
-			:class="data&&data.step===2?'h-project-1-step-box-bottom':'h-project-1-step-box-top'"
-			:step="data&&data.step"
+			:class="data.step===2?'h-project-1-step-box-bottom':'h-project-1-step-box-top'"
+			:step="data.step"
 			:left="ratio2"
 		/>
 		<step3
-			v-if="data&&data.step>=3"
-			v-bind="data&&data.value"
+			v-if="data.step>=3"
+			v-bind="data.value"
 			class="h-project-1-step-box pos-a"
-			:class="data&&data.step===3?'h-project-1-step-box-bottom':'h-project-1-step-box-top'"
-			:step="data&&data.step"
+			:class="data.step===3?'h-project-1-step-box-bottom':'h-project-1-step-box-top'"
+			:step="data.step"
 			:left="ratio3"
 		/>
 		<step4
-			v-if="data&&data.step>=4"
-			v-bind="data&&data.value"
+			v-if="data.step>=4"
+			v-bind="data.value"
 			class="h-project-1-step-box pos-a h-project-1-step-box-bottom"
-			:step="data&&data.step"
+			:step="data.step"
 			:left="ratio4"
 		/>
 		<step5
-			v-if="data&&data.step>=5"
-			v-bind="data&&data.value"
+			v-if="data.step>=5"
+			v-bind="data.value"
 			class="h-project-1-step-box pos-a"
-			:class="data&&data.step===5?'h-project-1-step-box-bottom':'h-project-1-step-box-top'"
-			:step="data&&data.step"
+			:class="data.step===5?'h-project-1-step-box-bottom':'h-project-1-step-box-top'"
+			:step="data.step"
 			:left="ratio5"
 		/>
 		<step6
-			v-if="data&&data.step>=6"
-			v-bind="data&&data.value"
+			v-if="data.step>=6"
+			v-bind="data.value"
 			class="h-project-1-step-box pos-a h-project-1-step-box-bottom"
-			:step="data&&data.step"
+			:step="data.step"
 			:left="ratio6"
 		/>
 		<step7
-			v-if="data&&data.step===7"
-			v-bind="data&&data.value"
+			v-if="data.step===7"
+			v-bind="data.value"
 			class="h-project-1-step-box pos-a h-project-1-step-box-bottom"
 			:left="ratioEnd"
 		/>
 		<step8
-			v-if="data&&data.step>=8"
-			v-bind="data&&data.value"
+			v-if="data.step>=8"
+			v-bind="data.value"
 			class="h-project-1-step-box pos-a h-project-1-step-box-top"
 			:left="ratioEnd"
 		/>
-		<hswiper :swiperinfo="swiperInfo" :step="data&&data.step"/>
+		<hswiper :swiperinfo="swiperInfo" :step="data.step"/>
 	</div>
 </template>
 <script>
@@ -140,6 +148,7 @@
 		},
 		data() {
 			return {
+			  isShowContent: false,
 				icon: new Int8Array(80),
 				ratioEnd: 89,
 				ratioCenter: 50,
@@ -253,8 +262,8 @@
 						if (current / total > 0.7) {
 							diff = 0.7;
 						}
-						if (diff < this.ratioMin * 5) return this.ratioMin * 5;
-						return diff;
+						if (100 * diff < this.ratioMin * 5) return this.ratioMin * 5;
+						return diff * 100;
 					}
 				}
 				return 0;
@@ -353,4 +362,62 @@
 		height: 10px;
 		background: linear-gradient(270deg, #00ffcf 0%, rgba(0, 255, 207, 0) 100%);
 	}
+
+
+  .h-project-1-wrapper {
+    .step8-info {
+      position: absolute;
+      top: 20px;
+      right: 5px;
+      background: #0057A9;
+      border: 1px solid #00DDFF;
+      box-sizing: border-box;
+      border-radius: 16px;
+      font-size: 18px;
+      color: #FFFFFF;
+      padding: 4px 8px;
+      cursor: pointer;
+    }
+
+    .step8-info-content {
+      position: absolute;
+      right: -380px;
+      overflow: auto;
+      top: -20px;
+      text-align: right;
+
+      p {
+        width: 380px;
+        height: 280px;
+        background: #001A77;
+        border: 1px solid #00DDFF;
+        font-size: 18px;
+        color: #FFFFFF;
+        padding: 16px;
+        text-align: left;
+        &::-webkit-scrollbar {
+          /*滚动条整体样式*/
+          width: 10px; /*高宽分别对应横竖滚动条的尺寸*/
+          height: 1px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          /*滚动条里面小方块*/
+          background: #00ddff;
+        }
+
+        &::-webkit-scrollbar-track {
+          /*滚动条里面轨道*/
+          background: rgba(255, 255, 255, 0.4);
+        }
+      }
+
+      .step8-info-content-close {
+        width: 24px;
+        height: 24px;
+        margin-bottom: 8px;
+        cursor: pointer;
+      }
+    }
+  }
 </style>

@@ -71,6 +71,8 @@ export default {
     width: 200px;
     text-align: center;
     line-height: 56px;
+    cursor: pointer;
+    &:hover{color: #fff;}
     &:after {
       content: '';
       display: block;
