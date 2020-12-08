@@ -5,11 +5,7 @@
 		<!-- 区域 -->
 		<RegionBoundary />
 		<!-- 2.销售区域 -->
-		<SaleAreaBoundary
-			v-model="activeArea"
-			@input="saleAreaChange"
-			@mouseout="closeOverlayDetail('')"
-		/>
+		<SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" />
 
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
@@ -201,19 +197,18 @@ export default {
 		},
 		// 板块图变化
 		saleAreaChange(val) {
-			let params = this.allTypeStationList.branchCompanyList.find(
-				item => item.name === val
-			);
-			this.$refs.BranchCompany[0].mouseIn = true;
-			params = {
-				overlayType: 'BranchCompany',
-				...params,
-				detailList:
-					SERVICE_SERVICEICCUSTOMER_LEGEND_MAP.BranchCompany
-						.detailList,
-			};
-
-			this.handleOverlayClick(params);
+			// let params = this.allTypeStationList.branchCompanyList.find(
+			// 	item => item.name === val
+			// );
+			// this.$refs.BranchCompany[0].mouseIn = true;
+			// params = {
+			// 	overlayType: 'BranchCompany',
+			// 	...params,
+			// 	detailList:
+			// 		SERVICE_SERVICEICCUSTOMER_LEGEND_MAP.BranchCompany
+			// 			.detailList,
+			// };
+			// this.handleOverlayClick(params);
 		},
 		// 切换热力图显示隐藏
 		switchChange(data, type) {
@@ -246,8 +241,7 @@ export default {
 				type,
 				params: 'useNumberYestoday',
 			};
-			console.log('余志强');
-			console.log(overlay);
+			this.activeArea = name;
 			this.activeOverlay = overlay;
 			this.getDetailInfo(params, status);
 

@@ -24,8 +24,9 @@
 		watch: {
 			'config.api.params': {
 				handler(val) {
-					if (val)
-						this.config.api.data = JSON.stringify({title: `${JSON.parse(val).value}工艺图`})
+					if (val){
+						this.config.api.data = JSON.stringify({title: `${val.label}工艺图`})
+					}
 				},
 			}
 		},

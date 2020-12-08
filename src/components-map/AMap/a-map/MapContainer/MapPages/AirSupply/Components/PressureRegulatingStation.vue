@@ -70,6 +70,7 @@ export default {
 				name,
 				type,
 			});
+			console.log(data);
 			let dataComp = {};
 			Object.keys(data).forEach(prop => {
 				let dw = this.propDwMap[prop];
@@ -81,7 +82,7 @@ export default {
 					let propInner = prop + index;
 					dataComp[propInner] = {
 						name,
-						value: value,
+						value: value.toFixed(2),
 						dw,
 					};
 				});
