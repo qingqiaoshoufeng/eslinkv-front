@@ -219,8 +219,7 @@
 								background-image: url('/static/images/airfeed/statistical.svg');
 								line-height: 80px;
 								background-repeat: no-repeat;
-								background-position: 1px 1px;
-								background-size: cover;
+								background-size: 100% 100%;
 								text-align: center;
 								font-size: 48px;
 								font-style: normal;
