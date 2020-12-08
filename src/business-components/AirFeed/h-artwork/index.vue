@@ -28,8 +28,9 @@
 		watch: {
 			'config.api.params': {
 				handler(val) {
-					if (val)
-						this.config.api.data = JSON.stringify({image: JSON.parse(val).value})
+					if (val){
+						this.config.api.data = JSON.stringify({image: val.value})
+					}
 				},
 			}
 		},

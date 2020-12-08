@@ -26,7 +26,8 @@
 <script>
 import {
 	AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
-	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX,
+	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
+	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2
 } from '../../../../config/scene';
 import { BaseOverlay } from '../../../../components/index';
 import GoldChart from '@/openApi';
@@ -123,12 +124,19 @@ export default {
 				'slideRight'
 			);
 			this.$nextTick(() => {
-				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX.forEach(item => {
+				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach(item => {
 					GoldChart.instance.updateComponent(item, {
 						data: {
 							label: name,
 							stationId: id,
 						},
+					});
+				});
+				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach(item => {
+					GoldChart.instance.updateComponent(item, {
+						params:{
+							id
+						}
 					});
 				});
 			});

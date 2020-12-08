@@ -1,7 +1,7 @@
 import {styleParser, widgetMixin} from '../../lib'
 import {store} from '../openApi';
+import GoldChart from '../openApi';
 import axios from 'axios'
-import jsonic from 'jsonic'
 
 const request = axios.create({
 	withCredentials: false
@@ -29,21 +29,35 @@ export default {
 		 * @description 组件间联动，被关联组件收动添加 updateComponent 方法
 		 */
 		emitComponentUpdate(data) {
-			this.configValue.api.bind.refIds.forEach(ref => {
-				const dom = this.kanboardEditor.$refs[ref][0].$refs.widgets
-				if (typeof dom.updateComponent === 'function')
-					dom.updateComponent(data)
-				dom.updateAjax(data)
-			})
+			if(this.configValue){
+				this.configValue.api.bind.refIds.forEach(ref => {
+					let dom
+					if(this.kanboardEditor.$refs[ref]){
+						dom = this.kanboardEditor.$refs[ref][0].$refs.widgets
+					}else{
+						if(store.instance.createKanboard){
+							if(store.instance.createKanboard.$refs[ref]){
+								dom =store.instance.createKanboard.$refs[ref][0].$refs.widgets
+							}
+						}
+					}
+					if (typeof dom.updateComponent === 'function')
+						dom.updateComponent(data)
+					dom.updateAjax(data)
+				})
+			}
 		},
 		/**
 		 * @description 外部更新组件
 		 */
 		updateComponentFormOutSide({data, url, path, method, params}) {
-			if (params)
+			if (params){
 				this.config.api.params = JSON.stringify(params)
-			if (data)
+			}
+			if (data){
 				this.config.api.data = JSON.stringify(data)
+			}
+
 			if (url)
 				this.config.api.url = url
 			if (path)
@@ -55,6 +69,9 @@ export default {
 		 * @description 组件间联动后的 ajax 数据重新请求
 		 */
 		updateAjax(data) {
+			if(!this.config){
+				return
+			}
 			if (!this.config.api) {
 				return
 			}
@@ -68,7 +85,7 @@ export default {
 			} else {
 				params = data
 			}
-			this.config.api.params = JSON.stringify(params)
+			this.config.api.params = params
 		},
 	},
 	computed: {
