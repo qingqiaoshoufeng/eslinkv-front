@@ -82,6 +82,7 @@ export default {
 								fillOpacity: 0,
 							});
 						}
+						this.$emit('mouseout');
 					});
 					this.instanceArr.push(instance);
 					//默认选中

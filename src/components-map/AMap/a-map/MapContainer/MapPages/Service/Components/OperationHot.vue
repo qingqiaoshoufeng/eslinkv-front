@@ -14,7 +14,6 @@ export default {
 	},
 	watch: {
 		visible(val) {
-			console.log(val, 'bbb');
 			if (val) {
 				this.init();
 			} else {
@@ -32,7 +31,7 @@ export default {
 				// console.log(this._heatMapData, 5555);
 				// this._heatMapData = this._heatMapData.slice(180);
 			}
-			console.log(this._heatMapData, 6666);
+
 			this._instance = new AMap.HeatMap(this.$amap, {
 				radius: 30, //给定半径
 				opacity: [0, 0.8],

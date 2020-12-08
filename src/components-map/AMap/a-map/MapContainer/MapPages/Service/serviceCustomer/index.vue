@@ -161,7 +161,6 @@ export default {
 	methods: {
 		setCenter(center) {
 			this.center = center || this.center;
-			console.log(this.center);
 		},
 		showMoreDetail() {
 			this.showThreeSocialLinkageDetail();
@@ -176,12 +175,10 @@ export default {
 			if (['BranchCompany'].includes(overlayType)) {
 				this.detailInfo = await this.getDetailInfo(params);
 			} else if (overlayType === 'TaskList') {
-				console.log(overlayType);
-				console.log(this.allTypeStationList.TaskList);
 				overlay.activeIndex = this.allTypeStationList.TaskList.findIndex(
 					item => item.id === overlay.id
 				);
-				console.log(overlay);
+
 				this.handleListClick(overlay);
 				return;
 			}
@@ -192,12 +189,11 @@ export default {
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
 			this.showOverlayDetail = false;
-			this.activeOverlay = {};
+			// this.activeOverlay = {};
 			done && done();
 		},
 		viewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
-			console.log(overlay, 'overlay');
 		},
 
 		toViewOverlayDetail(overlay) {
@@ -276,12 +272,7 @@ export default {
 		},
 		// 客户服务统一数据
 		async getDataStatisticsList() {
-			console.log(11111);
-			console.log(
-				this.$sysApi.map.serve.getServiceCustomerStatisticsInfo
-			);
 			this.dataStatisticsInfo = await this.$sysApi.map.serve.getServiceCustomerStatisticsInfo();
-			console.log(this.dataStatisticsInfo, 1111111);
 		},
 		// 查询客户服务站点列表
 		async getAllTypeStationList() {
@@ -296,7 +287,6 @@ export default {
 				params
 			);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-			console.log(this.allTypeStationList, 33333);
 		},
 		// 查询三社联动站点列表
 
@@ -307,7 +297,6 @@ export default {
 				...this.allTypeStationList,
 				TaskList,
 			};
-			console.log(this.allTypeStationList);
 		},
 		// 查看详情接口
 		getDetailInfo(params) {

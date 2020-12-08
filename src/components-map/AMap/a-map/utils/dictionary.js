@@ -245,7 +245,7 @@ let serviceCustomerStatus = {
 let OnlineType = {
     label: '线上业务服务类型',
     DW: '',
-    prop: "stationNumber",
+    prop: "busi_type",
 }
 
 let TodayApplication = {
@@ -274,19 +274,19 @@ let monthAccpet = {
     label: '本月已受理',
     DW: '单',
     prop: "accept_m_nbr",
-    defaultVal:0
+    defaultVal: 0
 }
 let monthManage = {
     label: '本月已办结',
     DW: '单',
     prop: "finished_m_nbr",
-    defaultVal:0
+    defaultVal: 0
 }
 let monthManagePercent = {
     label: '本月办结率',
     DW: '单',
     prop: "finished_m_rate",
-    defaultVal:0
+    defaultVal: 0
 }
 
 

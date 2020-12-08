@@ -64,10 +64,7 @@ export default {
 	async created() {
 		try {
 			this.list = await this.$sysApi.map.serve.getICcustomerSituationAwareness();
-			console.log(this.list);
-		} catch (error) {
-			console.log(error);
-		}
+		} catch (error) {}
 	},
 	watch: {
 		activeItem(val) {
@@ -88,10 +85,7 @@ export default {
 				detailList,
 				component: overlayType,
 			} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP['WarningICcustomer'];
-			console.log(
-				SERVICE_SERVICEICCUSTOMER_LEGEND_MAP['WarningICcustomer']
-			);
-			console.log(overlayType);
+
 			this.$emit('change', { ...item, detailList, overlayType });
 		},
 	},
@@ -118,6 +112,12 @@ export default {
 		.row {
 			display: flex;
 			align-items: center;
+			.status-err {
+				color: #ffdc45;
+			}
+			.status-suc {
+				color: #00ddff;
+			}
 			.content {
 				flex: 1;
 				font-size: 24px;

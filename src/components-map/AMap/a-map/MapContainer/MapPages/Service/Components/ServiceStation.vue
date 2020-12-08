@@ -57,9 +57,7 @@ export default {
 			apiFun: this.$sysApi.map.serve.getServiceNetworkStationList,
 		};
 	},
-	mounted() {
-		console.log(this.data, '余志强');
-	},
+	mounted() {},
 };
 </script>
 

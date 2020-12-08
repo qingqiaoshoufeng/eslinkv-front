@@ -5,7 +5,11 @@
 		<!-- 区域 -->
 		<RegionBoundary />
 		<!-- 2.销售区域 -->
-		<SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" />
+		<SaleAreaBoundary
+			v-model="activeArea"
+			@input="saleAreaChange"
+			@mouseout="closeOverlayDetail('')"
+		/>
 
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
@@ -114,11 +118,9 @@ export default {
 	methods: {
 		setCenter(center) {
 			this.center = center || this.center;
-			console.log(this.center);
 		},
 		// 板块图变化
 		saleAreaChange(val) {
-			console.log(val);
 			let params = this.allTypeStationList.branchCompanyList.find(
 				item => item.name === val
 			);
@@ -136,11 +138,10 @@ export default {
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
 			let res = await this.getDetialInfo(name);
-			console.log(res);
+
 			this.detailInfo = res[0];
 		},
 		async getDataStatisticsList() {
-			console.log(222222222222);
 			let params = {
 				projectId: 20,
 				queryId: 898,
@@ -151,25 +152,24 @@ export default {
 			);
 
 			this.dataStatisticsInfo = res[0];
-			console.log(222222222222);
-			console.log(this.dataStatisticsInfo);
 		},
 		closeOverlayDetail(done) {
 			this.showOverlayDetail = false;
-			this.activeOverlay = {};
+			// this.activeOverlay = {};
 			this.$emit('close');
-			this.$amap.setZoom(11, 100);
-			done();
+			// this.$amap.setZoom(11, 100);
+			done && done();
 		},
 		// 请求集团大厅，子公司，综合服务站数据列表
 		async getAllTypeStationList() {
 			let params = {
 				types: ['BranchCompany'].toString(),
 			};
-			console.log(params);
-			let res = await this.$sysApi.map.serve.getHangranCodeList(params);
+
+			let res = await this.$sysApi.map.serve.getICcustomerStationList(
+				params
+			);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-			console.log(this.allTypeStationList, '余志强');
 		},
 		// 请求详情数据
 		getDetialInfo(name) {
@@ -186,7 +186,6 @@ export default {
 		},
 	},
 	mounted() {
-		console.log(this.overlayInfoConfigMap);
 		this.getAllTypeStationList();
 		this.getDataStatisticsList();
 		window.setCenter = this.setCenter.bind(this);

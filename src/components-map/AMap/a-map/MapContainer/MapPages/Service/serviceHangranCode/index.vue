@@ -5,7 +5,11 @@
 		<!-- 1.区域 -->
 		<RegionBoundary />
 		<!-- 2.销售区域 -->
-		<SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" />
+		<SaleAreaBoundary
+			v-model="activeArea"
+			@input="saleAreaChange"
+			@mouseout="closeOverlayDetail('')"
+		/>
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component
@@ -179,13 +183,13 @@ export default {
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
 			this.carouseComplBranchCompanyInfo();
+			this.activeArea = '';
 			done && done();
 		},
 		// 点击地图marker
 		async handleOverlayClick(overlay, overlayType, isCenter = false) {
 			this.detailComponentName = 'ClickTipDetial';
 			this.clearInterval();
-			console.log(overlay);
 			let { lng, lat, id, overlayType: type, detailList, name } = overlay;
 			let params = {
 				name,
@@ -196,8 +200,6 @@ export default {
 			this.activeOverlay.detailList = res;
 			this.detialBoxWidth = 500;
 			this.showOverlayDetail = true;
-
-			console.log(this.activeOverlay);
 		},
 		// 联码新增统计数据
 		async getDataStatisticsList() {
@@ -212,11 +214,11 @@ export default {
 					'ComprehensiveServiceStation',
 				].toString(),
 			};
-			console.log(params);
+
 			this.detialBoxWidth = 450;
 			let res = await this.$sysApi.map.serve.getHangranCodeList(params);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-			console.log(this.allTypeStationList, '余志强');
+
 			this.carouseComplBranchCompanyInfo();
 		},
 		// 获取热力图信息
@@ -232,9 +234,7 @@ export default {
 				res = {};
 			}
 
-			console.log(res, 1111322322);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-			console.log(this.allTypeStationList, '余志强');
 		},
 		//获取站点详情
 		async getDetailInfo(params) {
@@ -265,7 +265,7 @@ export default {
 		carouseComplBranchCompanyInfo() {
 			this.detailComponentName = 'TipDetial';
 			let index = 0;
-			console.log(this.allTypeStationList, '余志强');
+
 			let length = this.allTypeStationList.branchCompanyList.length;
 			if (this.intervalId) {
 				this.clearInterval();
@@ -283,7 +283,6 @@ export default {
 				};
 				this.detailInfo = this.activeOverlay.gasCodeMapDetailInfoVO;
 				this.showOverlayDetail = true;
-				console.log(this.activeOverlay);
 			}, 3000);
 		},
 		// 关闭定时器
@@ -298,7 +297,6 @@ export default {
 		this.getAllTypeStationList();
 	},
 	beforeDestroy() {
-		console.log('aaaaaaaaaaaaaa');
 		this.clearInterval();
 	},
 };

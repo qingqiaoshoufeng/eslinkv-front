@@ -14,7 +14,6 @@ export default {
 	},
 	watch: {
 		visible(val) {
-			console.log(val, 'aaa');
 			if (val) {
 				this.init();
 			} else {
@@ -54,9 +53,7 @@ export default {
 			this._instance = null;
 		}
 	},
-	mounted() {
-		console.log(this.data);
-	},
+	mounted() {},
 };
 </script>
 

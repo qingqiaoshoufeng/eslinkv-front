@@ -51,9 +51,7 @@ export default {
 			this.$emit('view-detail');
 		},
 	},
-	mounted() {
-		console.log(this.data.detialInfo);
-	},
+	mounted() {},
 };
 </script>
 <style lang="scss" scoped>

@@ -58,7 +58,7 @@ export const SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP = {
 
 // 工商户统计数据
 export const DATASTATISTICSLIST = [FTPNumber, warningYestodayTotal, warningYestodayMetersTotal]
-// SwitchBox配置 
+// SwitchBox配置
 export const SWICHBOX = [
     { label: '年度销售气量热力', value: true, type: 'useHotYear' },
 ]

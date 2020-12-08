@@ -86,19 +86,15 @@ export default {
 		// this.list = res.filter(item => item.status);
 		// console.log(this.list, 1111);
 	},
-	mounted() {
-		console.log(this.data, 2222);
-	},
+	mounted() {},
 	methods: {
 		handleOverlayClick(marker) {
-			console.log('click');
 			this.$emit('view-detail', {
 				...marker,
 				overlayType: this.overlayType,
 			});
 		},
 		handleMouseleave() {
-			console.log('close');
 			this.$emit('close');
 		},
 	},

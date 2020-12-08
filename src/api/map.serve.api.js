@@ -35,7 +35,7 @@ export function getHangranCodeDetailInfo(data) {
         },
     })
 }
-// 点击查询杭燃码下服务厅详情   
+// 点击查询杭燃码下服务厅详情
 export function clickGetBranchCompanyDetialInfo(data) {
     return request({
         url: `${HANGRANURL}/gasCode/mapBranchCompanyInfo`,
@@ -71,7 +71,7 @@ export function getAccumulativeTotal(data) {
 }
 // 获取工商户地图数据 用气大户、子公司
 export function getICcustomerStationList(data) {
-    console.log(data, 7777777)
+
     return request({
         url: `${HANGRANURL}/businessAnalysis/mapDataResult`,
         method: 'get',

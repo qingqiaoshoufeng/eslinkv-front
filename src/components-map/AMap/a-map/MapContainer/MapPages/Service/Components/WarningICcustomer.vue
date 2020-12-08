@@ -75,16 +75,12 @@ export default {
 		// this.list = res.filter(item => item.status);
 		// console.log(this.list, 1111);
 	},
-	mounted() {
-		console.log(this.data, 2222);
-	},
+	mounted() {},
 	methods: {
 		handleMouseleave() {
-			console.log('close');
 			this.$emit('before-close');
 		},
 		handleOverlayClick(marker) {
-			console.log('click');
 			this.$emit('view-detail', {
 				...marker,
 				overlayType: this.overlayType,

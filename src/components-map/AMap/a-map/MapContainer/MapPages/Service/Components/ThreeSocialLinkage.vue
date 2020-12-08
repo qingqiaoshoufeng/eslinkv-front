@@ -61,12 +61,11 @@ export default {
 	},
 	methods: {
 		handleOverlayClick(marker) {
-             console.log('click')
-            this.$emit(
-					'view-detail',
-					{  ...marker, overlayType:this.overlayType },
-                )
-        },
+			this.$emit('view-detail', {
+				...marker,
+				overlayType: this.overlayType,
+			});
+		},
 		handleMouseleave() {
 			this.$emit('close');
 		},

@@ -93,13 +93,10 @@ export default {
 			marginBottom: 19,
 		};
 	},
-	created() {
-		console.log(this.parentInfo, 'parentInfo');
-	},
+	created() {},
 	watch: {
 		data(val) {
 			if (val) {
-                console.log(val,'suyanval')
 				if (JSON.stringify(val) !== '{}') {
 					let { overlayType } = val;
 					this.overlayTypeInfo =

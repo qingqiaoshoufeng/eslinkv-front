@@ -9,7 +9,7 @@
 			data: dataInner,
 			...$attrs,
 			nameStyle,
-            overlayName:'colName'
+			overlayName: 'colName',
 		}"
 		@mouseover="
 			marker =>
@@ -72,10 +72,7 @@ export default {
 			},
 		};
 	},
-	mounted() {
-		console.log(this.data, '1111');
-		console.log(this.overlayType, '1111');
-	},
+	mounted() {},
 	methods: {
 		handleMouseleave() {
 			this.$emit('close');

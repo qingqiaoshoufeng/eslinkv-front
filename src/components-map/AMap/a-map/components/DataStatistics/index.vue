@@ -32,7 +32,10 @@ export default {
 		},
 		data: {
 			type: [Object, Array],
-			default: {},
+			default() {
+				{
+				}
+			},
 		},
 	},
 	computed: {
