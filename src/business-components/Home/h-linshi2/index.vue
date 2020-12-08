@@ -39,7 +39,8 @@
 			<div class="title-txt">杭燃体验</div>
 			<img src="/static/icons/right-icon.svg">
 		</section>
-		<section class="fans">
+		<section class="fans pos-r">
+			<video class="fans-video pos-a" autoplay="autoplay" loop="loop" src="./img/shouyetiyan.webm"></video>
 			<div class="fans-top">
 				<div style="text-align: left">
 					<div class="fan-title">数媒粉丝日活(人)</div>
@@ -319,11 +320,13 @@
 			}
 		}
 	}
-
+	.fans-video{
+		height: 412px;
+		left: 50%;
+		transform: translateX(-50%);
+	}
 	.fans {
 		height: 412px;
-    background: #011B79 url("./img/expbg.svg") no-repeat center;
-		background-size: 94% 94%;
 		border: 1px solid #00DDFF;
 		border-top-width: 0;
 
