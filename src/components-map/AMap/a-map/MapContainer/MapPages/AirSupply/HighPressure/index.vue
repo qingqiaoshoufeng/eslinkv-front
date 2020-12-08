@@ -83,9 +83,7 @@
 						{{ item.value }}{{ item.dw }}
 					</div>
 				</div>
-				<div class="btn" v-show="isShowMore" @click="getMoreDetail">
-					更多详情
-				</div>
+				<div class="btn" v-show="isShowMore">更多详情</div>
 			</div>
 		</OverlayDetail>
 		<portal to="destination">
