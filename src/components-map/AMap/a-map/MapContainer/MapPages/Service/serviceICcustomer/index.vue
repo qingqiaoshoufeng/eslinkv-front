@@ -227,7 +227,6 @@ export default {
 		},
 		// 点击地图marker
 		handleOverlayClick(overlay, overlayType, isCenter = false) {
-			console.log(overlay);
 			overlay.overlayType = overlayType || overlay.overlayType;
 			let {
 				lng,

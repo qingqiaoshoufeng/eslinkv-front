@@ -116,7 +116,8 @@ export default {
 			}
 		},
 		handleOverlayClick(marker) {
-			let { name } = marker;
+			let { name, id } = marker;
+			// debugger;
 			GoldChart.scene.createSceneInstance(
 				AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
 				'slideRight'
@@ -125,7 +126,8 @@ export default {
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX.forEach(item => {
 					GoldChart.instance.updateComponent(item, {
 						data: {
-							title: name,
+							label: name,
+							stationId: id,
 						},
 					});
 				});
