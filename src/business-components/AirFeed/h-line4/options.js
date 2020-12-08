@@ -8,7 +8,7 @@ export default function getOption(data, config) {
         },
         grid: {
             top: 40,
-            left: 40,
+            left: 60,
             bottom: 30,
             right: 60
         },
@@ -40,7 +40,6 @@ export default function getOption(data, config) {
                         color: '#fff',
                     }
                 },
-                interval: 20,
                 nameTextStyle: {
                     color: 'rgba(255, 255, 255, 0.75)',
                     padding: [0, 30, 0, 0]

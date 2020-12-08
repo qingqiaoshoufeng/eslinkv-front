@@ -238,7 +238,7 @@ export default {
 		height: 230px;
 		width: 160px;
 		text-align: center;
-		background: linear-gradient(0deg, #001F6D 0%, rgba(0, 31, 109, 0) 100%);
+    background: linear-gradient(180deg, rgba(0, 68, 169, 0.3) 0%, rgba(0, 68, 169, 0) 100%);
 		box-sizing: border-box;
 		padding-top: 16px;
     margin-right: 48px;
@@ -303,7 +303,7 @@ export default {
 		}
 
 		&.active {
-			border: 1px solid #0057A9;
+			border: 1px solid rgba(0, 221, 255, 0.5);
 			&:after {
 				content: '';
 				display: block;

@@ -66,7 +66,7 @@ export default function getOption(data, config) {
                 name: 'Mpa',
                 scale: true,
                 min: y1Min.toFixed(2),
-                interval: 0.05,
+                splitNumber: 4,
                 axisTick: {
                     show: false,
                     textStyle: {
