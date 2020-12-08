@@ -9,6 +9,8 @@
 			apiFun,
 			detailList,
 		}"
+		@mouseover="mouseover"
+		@mouseleave="mouseleave"
 		@click="
 			marker =>
 				$emit('overlay-click', { detailList, ...marker }, overlayType)
@@ -52,7 +54,26 @@ export default {
 	data() {
 		return {
 			apiFun: this.$sysApi.map.serve.getGrouphallList,
+			mouseIn: false,
 		};
+	},
+	methods: {
+		mouseover(marker) {
+			this.mouseIn = true;
+			this.$emit(
+				'overlay-click',
+				{
+					detailList: this.detailList,
+					...marker,
+					overlayType: this.overlayType,
+				},
+				this.overlayType
+			);
+		},
+		mouseleave() {
+			this.mouseIn = false;
+			this.$emit('close');
+		},
 	},
 };
 </script>

@@ -167,7 +167,7 @@ export default {
 				AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP
 			),
 			legendMap: AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
-			activeTab: 'realTimeWithLevel',
+			activeTab: 'processWarning',
 			dataStatisticsList: DATASTATISTICSLIST,
 			activeOverlay: {},
 			activeWarnData: {},

@@ -12,8 +12,8 @@
 			>
 				<span class="index">{{ index + 1 }}</span>
 				<span class="label">{{ `${item.name}联码数` }}</span>
-				<span class="value">{{
-					`${item.value.toLocaleString()}户`
+				<span class="value" v-show="item.value">{{
+					`${item.value && item.value.toLocaleString()}户`
 				}}</span>
 			</div>
 		</div>
@@ -53,9 +53,7 @@ export default {
 			a.toLocale;
 		},
 	},
-	mounted() {
-		console.log(this.data.detialInfo);
-	},
+	mounted() {},
 };
 </script>
 <style lang="scss" scoped>

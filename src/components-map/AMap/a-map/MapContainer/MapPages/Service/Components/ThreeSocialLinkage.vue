@@ -9,14 +9,7 @@
 			...$attrs,
 			data,
 		}"
-		@mouseover="
-			marker =>
-				$emit(
-					'overlay-click',
-					{ detailList, ...marker, overlayType },
-					overlayType
-				)
-		"
+		@mouseover="mouseover"
 		@click="handleOverlayClick"
 		@mouseleave="handleMouseleave"
 	/>
@@ -61,13 +54,25 @@ export default {
 	},
 	methods: {
 		handleOverlayClick(marker) {
-             console.log('click')
-            this.$emit(
-					'view-detail',
-					{  ...marker, overlayType:this.overlayType },
-                )
-        },
+			this.$emit('view-detail', {
+				...marker,
+				overlayType: this.overlayType,
+			});
+		},
+		mouseover(marker) {
+			this.mouseIn = true;
+			this.$emit(
+				'overlay-click',
+				{
+					detailList: this.detailList,
+					...marker,
+					overlayType: this.overlayType,
+				},
+				this.overlayType
+			);
+		},
 		handleMouseleave() {
+			this.mouseIn = false;
 			this.$emit('close');
 		},
 	},

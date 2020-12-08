@@ -65,7 +65,6 @@ export default {
 		},
 	},
 	created() {
-		console.log(1111111111111111111, 68);
 		this.getData();
 	},
 	watch: {
@@ -85,7 +84,7 @@ export default {
 			let res = await this.$sysApi.map.serve.getServiceCustomerThreeSocialList();
 			this.list = res.map(item => {
 				let { stationType } = item;
-				console.log(stationType);
+
 				let config = SERVICE_SERVICECUSTOMER_LEGEND_MAP[stationType];
 				if (config) {
 					item.icon = config.legendIcon;

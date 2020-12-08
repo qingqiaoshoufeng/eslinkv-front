@@ -93,11 +93,11 @@ export default {
 		showCloseBtn: {
 			type: Boolean,
 			default: false,
-        },
-        showMore:{
-            type:Boolean,
-            type:true
-        }
+		},
+		showMore: {
+			type: Boolean,
+			type: true,
+		},
 	},
 	data() {
 		return {

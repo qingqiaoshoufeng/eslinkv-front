@@ -32,7 +32,7 @@ export default {
 	},
 	methods: {
 		changeMaptype() {
-			this.isExpend = !this.isExpend;
+            this.isExpend = !this.isExpend;
 		},
 	},
 };

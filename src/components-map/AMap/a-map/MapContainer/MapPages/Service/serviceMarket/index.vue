@@ -65,7 +65,9 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfigMap: Object.freeze(SERVICE_SERVICEMARKET_OVERLAY_MAP),
+			overlayInfoConfigMap: Object.freeze(
+				SERVICE_SERVICEMARKET_OVERLAY_MAP
+			),
 			legendMap: SERVICE_SERVICEMARKET_LEGEND_MAP,
 			mapLegendStyle: { left: '18%' },
 			legendMultiple: true,
@@ -91,7 +93,7 @@ export default {
 				this.showRoutePlan = false;
 			}
 			this.showOverlayDetail = false;
-			this.activeOverlay = {};
+			// this.activeOverlay = {};
 			this.$amap.setZoom(11, 100);
 			done();
 		},

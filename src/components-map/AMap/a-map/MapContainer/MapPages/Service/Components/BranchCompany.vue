@@ -9,17 +9,10 @@
 			data: dataInner,
 			...$attrs,
 			nameStyle,
-            overlayName:'colName'
+			overlayName: 'colName',
 		}"
-		@mouseover="
-			marker =>
-				$emit(
-					'overlay-click',
-					{ detailList, ...marker, overlayType },
-					overlayType
-				)
-		"
-		@mouseleave="handleMouseleave"
+		@mouseover="mouseover"
+		@mouseleave="mouseleave"
 	/>
 </template>
 <script>
@@ -70,14 +63,26 @@ export default {
 			nameStyle: {
 				fontSize: '24px',
 			},
+			mouseIn: false,
 		};
 	},
-	mounted() {
-		console.log(this.data, '1111');
-		console.log(this.overlayType, '1111');
-	},
+	mounted() {},
 	methods: {
-		handleMouseleave() {
+		mouseover(marker) {
+			if (this.mouseIn) return false;
+			this.mouseIn = true;
+			this.$emit(
+				'overlay-click',
+				{
+					detailList: this.detailList,
+					...marker,
+					overlayType: this.overlayType,
+				},
+				this.overlayType
+			);
+		},
+		mouseleave() {
+			this.mouseIn = false;
 			this.$emit('close');
 		},
 	},

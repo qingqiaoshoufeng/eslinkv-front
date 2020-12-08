@@ -9,15 +9,9 @@
 				...$attrs,
 			}"
 			:visible="true"
-			@mouseover="
-				$emit('overlay-click', {
-					overlayType: 'WarningICcustomer',
-					...item,
-					detailList,
-				})
-			"
+			@mouseover="mouseover(item)"
 			@click="handleOverlayClick"
-			@mouseleave="handleMouseleave"
+			@mouseleave="mouseleave"
 		>
 			<video
 				class="warning-videO"
@@ -34,12 +28,9 @@
 </template>
 <script>
 import { Overlay } from '../../../../components/index';
-let eventTypeIconMap = {
-	0: 'icontuli-gongshanghu',
-	1: 'iconyongqidahu2',
-};
+
 export default {
-	name: 'useHotYear',
+	name: 'WarningICcustomer',
 	components: {
 		Overlay,
 	},
@@ -62,8 +53,13 @@ export default {
 		},
 	},
 	data() {
+		let eventTypeIconMap = {
+			0: 'icontuli-gongshanghu',
+			1: 'iconyongqidahu2',
+		};
 		return {
 			eventTypeIconMap,
+			mouseIn: false,
 		};
 	},
 
@@ -75,16 +71,22 @@ export default {
 		// this.list = res.filter(item => item.status);
 		// console.log(this.list, 1111);
 	},
-	mounted() {
-		console.log(this.data, 2222);
-	},
+	mounted() {},
 	methods: {
-		handleMouseleave() {
-			console.log('close');
+		mouseleave() {
+			this.mouseIn = false;
 			this.$emit('before-close');
 		},
+		mouseover(item) {
+			this.mouseIn = true;
+			this.$emit('overlay-click', {
+				overlayType: 'WarningICcustomer',
+				...item,
+				detailList: this.detailList,
+			});
+		},
 		handleOverlayClick(marker) {
-			console.log('click');
+			this.mouseIn = true;
 			this.$emit('view-detail', {
 				...marker,
 				overlayType: this.overlayType,

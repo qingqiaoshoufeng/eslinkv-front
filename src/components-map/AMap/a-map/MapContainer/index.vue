@@ -56,16 +56,6 @@ export default {
 	},
 	data() {
 		return {
-			mapConfig: {
-				center: [120.131259, 30.263295],
-				zoomEnable: true,
-				doubleClickZoom: false,
-				dragEnable: true,
-				zoom: 10,
-				viewMode: '3D',
-				pitch: 10,
-				mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
-			},
 			kanboardSize: {
 				width: 3500,
 				height: 1050,

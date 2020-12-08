@@ -5,7 +5,11 @@
 		<!-- 区域 -->
 		<RegionBoundary />
 		<!-- 2.销售区域 -->
-		<SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" />
+		<SaleAreaBoundary
+			v-model="activeArea"
+			@input="saleAreaChange"
+			@mouseout="closeOverlayDetail('')"
+		/>
 
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
@@ -153,17 +157,15 @@ export default {
 	methods: {
 		setCenter(center) {
 			this.center = center || this.center;
-			console.log(this.center);
 		},
 		// 查看详情，弹出详情场景
 		async showMoreDetail(activeOverlay) {
-			console.log('aaa');
 			let { address, content, status, id } =
 				activeOverlay || this.activeOverlay;
 			let { useNumberYestoday } = this.detailInfo;
-			console.log(this.activeOverlay, this.detailInfo);
+
 			let params = {};
-			console.log(address);
+
 			params[ICcustomer_WARN__COMPONENTINDEX[0]] = {
 				title: address,
 			};
@@ -189,8 +191,6 @@ export default {
 			);
 			this.$nextTick(() => {
 				ICcustomer_WARN__COMPONENTINDEX.forEach(item => {
-					console.log(item);
-					console.log(params[item]);
 					GoldChart.instance.updateComponent(item, {
 						data: params[item],
 					});
@@ -201,17 +201,18 @@ export default {
 		},
 		// 板块图变化
 		saleAreaChange(val) {
-			console.log(val);
 			let params = this.allTypeStationList.branchCompanyList.find(
 				item => item.name === val
 			);
+			this.$refs.BranchCompany[0].mouseIn = true;
 			params = {
+				overlayType: 'BranchCompany',
 				...params,
 				detailList:
-					SERVICE_SERVICEHANGRANCODE_LEGEND_MAP.BranchCompany
+					SERVICE_SERVICEICCUSTOMER_LEGEND_MAP.BranchCompany
 						.detailList,
 			};
-			console.log(params);
+
 			this.handleOverlayClick(params);
 		},
 		// 切换热力图显示隐藏
@@ -221,12 +222,14 @@ export default {
 			this.overlayMap.useHotYear.isShow = value;
 		},
 		closeOverlayDetail(done) {
+			// debugger;
 			this.showOverlayDetail = false;
-			this.activeOverlay = {};
+			// this.activeOverlay = {};
 			done && done();
 		},
 		// 点击地图marker
 		handleOverlayClick(overlay, overlayType, isCenter = false) {
+			// debugger;
 			overlay.overlayType = overlayType || overlay.overlayType;
 			let {
 				lng,
@@ -243,8 +246,11 @@ export default {
 				type,
 				params: 'useNumberYestoday',
 			};
-			this.getDetailInfo(params, status);
+			console.log('余志强');
+			console.log(overlay);
 			this.activeOverlay = overlay;
+			this.getDetailInfo(params, status);
+
 			this.isShowMore = ['WarningICcustomer'].includes(type);
 		},
 		// 请求用气大户，子公司，综合服务站数据列表
@@ -278,11 +284,14 @@ export default {
 			} else if (status && status === '1') {
 				this.detailInfo.ICcustomerStatus = '待处理';
 			}
-			this.showOverlayDetail = true;
+			console.log();
+			this.showOverlayDetail = this.$refs[
+				this.activeOverlay.overlayType
+			][0].mouseIn;
+			console.log(this.activeOverlay);
 		},
 		// 获取右侧table列表报警信息
 		async getWarningList(params) {
-			console.log(params);
 			let WarningICcustomerList = await this.$sysApi.map.serve.getICcustomerSituationAwareness(
 				params
 			);
@@ -290,11 +299,8 @@ export default {
 				...this.allTypeStationList,
 				WarningICcustomerList,
 			};
-			console.log(this.allTypeStationList);
 		},
-		handleListClick(item) {
-			console.log(item);
-		},
+		handleListClick(item) {},
 		// 查看态势感知详情列表
 		getICcustomerWarningDetialInfo(id) {
 			let params = {
@@ -302,19 +308,19 @@ export default {
 			};
 			return this.$sysApi.map.serve.getICcustomerWarningDetialInfo();
 		},
-		viewOverlayDetail(overlay) {
-			let { overlayType } = overlay;
-			//和场景进行交互
-			GoldChart.scene.setSceneIndex(
-				SERVICE_SERVICEHANGRANCODE_LEGEND_MAP
-			);
-			//更新数据
-			this.$nextTick(() => {
-				AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
-					GoldChart.instance.updateComponent(i);
-				});
-			});
-		},
+		// viewOverlayDetail(overlay) {
+		// 	let { overlayType } = overlay;
+		// 	//和场景进行交互
+		// 	GoldChart.scene.setSceneIndex(
+		// 		SERVICE_SERVICEHANGRANCODE_LEGEND_MAP
+		// 	);
+		// 	//更新数据
+		// 	this.$nextTick(() => {
+		// 		AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
+		// 			GoldChart.instance.updateComponent(i);
+		// 		});
+		// 	});
+		// },
 	},
 	mounted() {
 		this.getDataStatisticsList();

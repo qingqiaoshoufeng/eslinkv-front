@@ -95,7 +95,7 @@ let HighPressureHighPressureGasStation = {
     prop: "pressureRegulatingStation"
 }
 let HighPressureLineLength = {
-    label: '高压管线长度(m)',
+    label: '高压管线长度(km)',
     DW: '',
     prop: "pipelineLength"
 }
@@ -117,12 +117,12 @@ let HighPressurePreservationNumber = {
 }
 // 中低压数据配置
 let LowPressureMediumline = {
-    label: '中压管线(m)',
+    label: '中压管线(km)',
     DW: '',
     prop: "lowLength"
 }
 let LowPressureLowline = {
-    label: '低压管线(m)',
+    label: '低压管线(km)',
     DW: '',
     prop: "smallLength"
 }
@@ -221,22 +221,22 @@ let monthFireDetial = {
 // 客户服务任务工单详情
 let serviceCustomerPipeline = {
     label: '渠道',
-    DW: '户',
+    DW: '',
     prop: "channel",
 }
 let serviceCustomerCustomer = {
     label: '客户',
-    DW: '户',
+    DW: '',
     prop: "customer",
 }
 let serviceCustomerAddress = {
     label: '地址',
-    DW: '户',
+    DW: '',
     prop: "address",
 }
 let serviceCustomerStatus = {
     label: '状态',
-    DW: '户',
+    DW: '',
     prop: "statusText",
 }
 
@@ -245,7 +245,7 @@ let serviceCustomerStatus = {
 let OnlineType = {
     label: '线上业务服务类型',
     DW: '',
-    prop: "stationNumber",
+    prop: "busi_type",
 }
 
 let TodayApplication = {
@@ -274,19 +274,19 @@ let monthAccpet = {
     label: '本月已受理',
     DW: '单',
     prop: "accept_m_nbr",
-    defaultVal:0
+    defaultVal: 0
 }
 let monthManage = {
     label: '本月已办结',
     DW: '单',
     prop: "finished_m_nbr",
-    defaultVal:0
+    defaultVal: 0
 }
 let monthManagePercent = {
     label: '本月办结率',
     DW: '单',
     prop: "finished_m_rate",
-    defaultVal:0
+    defaultVal: 0
 }
 
 
