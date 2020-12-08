@@ -5,11 +5,7 @@
 		<!-- 1.区域 -->
 		<RegionBoundary />
 		<!-- 2.销售区域 -->
-		<SaleAreaBoundary
-			v-model="activeArea"
-			@input="saleAreaChange"
-			@mouseout="closeOverlayDetail('')"
-		/>
+		<SaleAreaBoundary v-model="activeArea" />
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component
@@ -165,17 +161,16 @@ export default {
 	methods: {
 		// 销售区域变化
 		saleAreaChange(val) {
-			let params = this.allTypeStationList.branchCompanyList.find(
-				item => item.name === val
-			);
-
-			params = {
-				...params,
-				detailList:
-					SERVICE_SERVICEHANGRANCODE_LEGEND_MAP.BranchCompany
-						.detailList,
-			};
-			this.handleOverlayClick(params);
+			// let params = this.allTypeStationList.branchCompanyList.find(
+			// 	item => item.name === val
+			// );
+			// params = {
+			// 	...params,
+			// 	detailList:
+			// 		SERVICE_SERVICEHANGRANCODE_LEGEND_MAP.BranchCompany
+			// 			.detailList,
+			// };
+			// this.handleOverlayClick(params);
 		},
 		// 关闭详情
 		closeOverlayDetail(done) {
@@ -191,15 +186,15 @@ export default {
 			this.detailComponentName = 'ClickTipDetial';
 			this.clearInterval();
 			let { lng, lat, id, overlayType: type, detailList, name } = overlay;
+			this.activeArea = name;
 			let params = {
 				name,
 			};
 			let res = await this.clickGetBranchCompanyDetialInfo(params);
-
 			this.activeOverlay = overlay;
 			this.activeOverlay.detailList = res;
 			this.detialBoxWidth = 500;
-			this.showOverlayDetail = true;
+			this.showOverlayDetail = this.$refs.BranchCompany[0].mouseIn;
 		},
 		// 联码新增统计数据
 		async getDataStatisticsList() {

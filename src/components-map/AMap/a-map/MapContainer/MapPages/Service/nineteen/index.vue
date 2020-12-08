@@ -5,11 +5,7 @@
 		<!-- 区域 -->
 		<RegionBoundary />
 		<!-- 2.销售区域 -->
-		<SaleAreaBoundary
-			v-model="activeArea"
-			@input="saleAreaChange"
-			@mouseout="closeOverlayDetail('')"
-		/>
+		<SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" />
 
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
@@ -122,27 +118,27 @@ export default {
 		},
 		// 板块图变化
 		saleAreaChange(val) {
-			this.$refs.BranchCompany[0].mouseIn = true;
-			let params = this.allTypeStationList.branchCompanyList.find(
-				item => item.name === val
-			);
-			params = {
-				overlayType: 'BranchCompany',
-				...params,
-				detailList:
-					SERVICE_SERVICENINETEEN_LEGEND_MAP.BranchCompany.detailList,
-			};
-			this.handleOverlayClick(params);
+			// this.$refs.BranchCompany[0].mouseIn = true;
+			// let params = this.allTypeStationList.branchCompanyList.find(
+			// 	item => item.name === val
+			// );
+			// params = {
+			// 	overlayType: 'BranchCompany',
+			// 	...params,
+			// 	detailList:
+			// 		SERVICE_SERVICENINETEEN_LEGEND_MAP.BranchCompany.detailList,
+			// };
+			// this.handleOverlayClick(params);
 		},
 		async handleOverlayClick(overlay, overlayType, isCenter = true) {
 			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat, name } = overlay;
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
-
-			let res = await this.getDetialInfo(name);
-			this.showOverlayDetail = this.$refs.BranchCompany[0].mouseIn;
-			this.detailInfo = res[0];
+			// []
+			this.activeArea = name;
+			console.log(name);
+			this.getDetialInfo(name);
 		},
 		async getDataStatisticsList() {
 			let params = {
@@ -175,7 +171,7 @@ export default {
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
 		},
 		// 请求详情数据
-		getDetialInfo(name) {
+		async getDetialInfo(name) {
 			let params = {
 				chartQueryType: 0,
 				dataAnalyseId: 901,
@@ -185,7 +181,11 @@ export default {
 				type: name,
 			};
 			params.params = JSON.stringify(params);
-			return this.$sysApi.map.serve.getNineteenStationDetailInfo(params);
+			let res = await this.$sysApi.map.serve.getNineteenStationDetailInfo(
+				params
+			);
+			this.detailInfo = res[0];
+			this.showOverlayDetail = this.$refs.BranchCompany[0].mouseIn;
 		},
 	},
 	mounted() {
