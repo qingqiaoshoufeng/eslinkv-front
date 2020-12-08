@@ -14,6 +14,10 @@
 		</div>
 		<div class="chart-wrap">
 			<div class="chart" :id="id"/>
+      <div class="pointBox" :style="style">
+        <div class="radius"></div>
+        <div class="carout_point"></div>
+      </div>
 			<div class="content">
 				<div class="content-num font-num">{{data.rate}}%</div>
 				<div class="content-txt">{{config.config.title}}</div>
@@ -86,6 +90,19 @@
 				immediate: true,
 			},
 		},
+    computed: {
+      style() {
+        if (this.data) {
+          let rotate = ((this.data.rate / 100) * 360) + 6
+          return {
+            transform: `translateX(-50%) rotate(${rotate}deg)`,
+          }
+        }
+        return {
+          transform: `translateX(-50%) rotate(0deg)`,
+        }
+      }
+    },
 		created() {
 			this.configSource = this.parseConfigSource(config, configSource);
 			this.configValue = this.parseConfigValue(config, value);
@@ -142,10 +159,13 @@
 			background: url('./img/rate-bg.svg') no-repeat;
 			background-size: 100% 100%;
 			position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
 			.chart {
-				width: 100%;
-				height: 100%;
+				width: 160px;
+				height: 160px;
 			}
 
 			.content {
@@ -170,5 +190,22 @@
 		}
 	}
 
+  .pointBox {
+    height: 160px;
+    width: 10px;
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    opacity: 1;
+
+    .carout_point {
+      width: 15px;
+      height: 15px;
+      background: #fff;
+      position: absolute;
+      bottom: -4px;
+      border-radius: 10px;
+    }
+  }
 </style>
 
