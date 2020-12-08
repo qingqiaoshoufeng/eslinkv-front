@@ -18,10 +18,7 @@
 			<realTimeWithLevel @change="handleClick" />
 		</TabPanel>
 		<TabPanel key="realTime" name="realTime" label="事件报警">
-			<realTime
-				@before-change="handleBeforeChange"
-				@change="handleClick"
-			/>
+			<realTime @change="handleClick" />
 		</TabPanel>
 
 		<TabPanel key="overlayList" name="overlayList" label="点位列表" lazy>
@@ -75,13 +72,24 @@ export default {
 		},
 	},
 	methods: {
-		handleClick(item, overlayType) {
-            item.overlayType = overlayType;
-			this.$emit('overlay-click', item, overlayType || 'WarningList');
-		},
-		handleBeforeChange(item, overlayType) {
-			item.overlayType = overlayType;
-			this.$emit('before-overlay-change', item, overlayType || 'WarningList');
+		handleClick(item) {
+			this.geocoder = new AMap.Geocoder({
+				city: '330100',
+			});
+			//普通报警地点，调用高德地址查询地址
+			if (!item.lat) {
+				this.geocoder.getLocation(item.address, (status, result) => {
+					if (status === 'complete' && result.geocodes.length) {
+						var lnglat = result.geocodes[0].location;
+						let { lng, lat } = lnglat;
+						item.lat = lat;
+						item.lng = lng;
+						this.$emit('overlay-click', item);
+					} else {
+						console.log('根据地址查询位置失败');
+					}
+				});
+			}
 		},
 	},
 };

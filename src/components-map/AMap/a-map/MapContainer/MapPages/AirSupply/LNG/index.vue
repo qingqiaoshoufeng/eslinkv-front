@@ -37,7 +37,7 @@
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
-			:detialBoxWidth="400"
+			:width="400"
 		/>
 		<!-- 路线规划 -->
 		<!-- <RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan> -->
@@ -151,7 +151,7 @@ export default {
 		let { LNGStation } = AIRSUPPLY_LNG_LEGEND_MAP;
 		return {
 			overlayInfoConfigMap: Object.freeze(AIRSUPPLY_LNG_OVERLAY_MAP),
-			center: [120.061259, 30.233295],
+			center: [120.131259, 30.263295],
 			zoom: 10.7,
 			activeOverlay: {},
 			activeWarnData: {},

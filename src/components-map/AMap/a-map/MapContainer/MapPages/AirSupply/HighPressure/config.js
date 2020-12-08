@@ -25,27 +25,12 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 		isShow: true,
 		dataProp: 'highPressureLine_Process',
 	},
-	// MiddlePressureLine: {
-	//     label: '中压管网',
-	//     legendIcon: 'icontulizhongyaguanwang',
-	//     component: 'MiddlePressureLine',
-	//     isShow: true,
-	//     dataProp: ""
-	// },
-	// LowPressureLine: {
-	//     label: '低压管网',
-	//     legendIcon: 'icontulidiyaguanwang',
-	//     component: 'LowPressureLine',
-	//     isShow: true,
-	//     dataProp: ""
-	// },
 	GasStation: {
 		label: '门站',
 		legendIcon: 'icontulimenzhan',
 		iconSize: 52,
 		component: 'GasStation',
 		isShow: true,
-		isShowMore: true,
 		dataProp: 'gasStationList',
 	},
 	PressureRegulatingStation: {
@@ -140,39 +125,10 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 	//     component: 'DistributedEnergyResource',
 	//     isShow: false,
 	//     dataProp: ""
-	// },
-	// WarningList: {
-	// 	label: '告警',
-	// 	legendIcon: 'icontulinengyuanzhan',
-	// 	iconSize: 38,
-	// 	component: 'WarningList',
-	// 	isShow: true,
-	// 	dataProp: 'WarningList',
-	// },
-}
-export const AIRSUPPLY_HIGHPRESSURE_NO_LEGEND_MAP = {
-	WarningList: {
-		label: '告警',
-		legendIcon: 'icontulinengyuanzhan',
-		iconSize: 38,
-		component: 'WarningList',
-		isShow: true,
-		dataProp: 'WarningList',
-	},
+	// }
 }
 //覆盖物详情
 export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
-	// ServiceStation: {
-	//     fields: {
-	//         name: {
-	//             style: {
-	//                 fontSize: '32px',
-	//                 color: '#FFDC45',
-	//             },
-	//             errColor: '#FFDC45',
-	//         },
-	//     },
-	// },
 	GasStation: {
 		fields: {
 			name: {
@@ -240,7 +196,6 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
 				errColor: '#fff',
 			},
 		},
-		isShowMore: false,
 	},
 	InspectionPerson: {
 		fields: {
@@ -252,7 +207,6 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
 				errColor: '#FFDC45',
 			},
 		},
-		isShowMore: false,
 	},
 	InspectionCar: {
 		fields: {
@@ -264,7 +218,6 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
 				errColor: '#FFDC45',
 			},
 		},
-		isShowMore: false,
 	},
 }
 

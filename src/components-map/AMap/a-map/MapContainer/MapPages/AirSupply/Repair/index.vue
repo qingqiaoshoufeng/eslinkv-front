@@ -9,7 +9,7 @@
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
 			:left="left"
-			:detialBoxWidth="400"
+			:width="400"
 		/>
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay"></RoutePlan>
@@ -103,7 +103,7 @@ export default {
 	},
 	data() {
 		return {
-			center: [120.061259, 30.233295],
+			center: [120.131259, 30.263295],
 			zoom: 10.8,
 			activeOverlay: {},
 			showOverlayDetail: false,

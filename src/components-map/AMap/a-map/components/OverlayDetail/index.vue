@@ -7,13 +7,17 @@
 		:visible="value"
 		ref="overlayDetailMarker"
 	>
-		<PopContainer
-			class="no-hover-effect"
-			@input="closePop"
-			:bottom="marginBottom"
-			:width="detialBoxWidth + 'px'"
-			:parentInfo="parentInfo"
+		<div
+			class="pop-content"
+			:style="{
+				transform: `translate(${translateX}, calc(${translateY})`,
+				width: width + 'px',
+			}"
 		>
+			<div class="close-btn" v-show="showCloseBtnInner" @click="closePop">
+				<svg-icon icon-name="iconbaseline-close-px"></svg-icon>
+			</div>
+			<div class="triangle"></div>
 			<slot>
 				<div
 					class="info-item"
@@ -33,18 +37,19 @@
 				</div>
 				<div
 					class="btn"
-					v-if="overlayTypeInfo.isShowMore"
+					v-if="showMore && overlayTypeInfo.isShowMore === true"
 					@click="handleViewDetail(overlay)"
 				>
 					查看详情
 				</div>
 			</slot>
-		</PopContainer>
+		</div>
 	</ElAmapMarker>
 </template>
 <script>
 import { AMapMarker } from '../../lib';
 import PopContainer from '../PopContainer';
+import SvgIcon from '../SvgIcon/index';
 
 export default {
 	name: 'OverlayDetail',
@@ -52,6 +57,7 @@ export default {
 	components: {
 		PopContainer,
 		ElAmapMarker: AMapMarker,
+		SvgIcon,
 	},
 	props: {
 		data: {
@@ -77,13 +83,21 @@ export default {
 			},
 		},
 		beforeClose: Function,
-		detialBoxWidth: {
+		width: {
 			type: Number,
 			default: 240,
 		},
 		iconSize: {
 			type: Number,
 		},
+		showCloseBtn: {
+			type: Boolean,
+			default: false,
+        },
+        showMore:{
+            type:Boolean,
+            type:true
+        }
 	},
 	data() {
 		return {
@@ -91,10 +105,8 @@ export default {
 			overlay: {},
 			rendered: false,
 			marginBottom: 19,
+			showCloseBtnInner: undefined,
 		};
-	},
-	created() {
-		console.log(this.parentInfo, 'parentInfo');
 	},
 	watch: {
 		data(val) {
@@ -109,6 +121,8 @@ export default {
 					let legendConfig = this.legendMap[overlayType] || {};
 					let marginBottom =
 						this.iconSize || legendConfig.iconSize || 38;
+					this.showCloseBtnInner =
+						!!legendConfig.showPopCloseBtn || this.showCloseBtn;
 					this.marginBottom = marginBottom / 2;
 					if (!this.rendered) {
 						this.rendered = true;
@@ -136,23 +150,27 @@ export default {
 			this.$emit('view-detail', overlay);
 		},
 	},
+	computed: {
+		scaleRatio() {
+			return (this.parentInfo && this.parentInfo.scaleRatio) || 1;
+		},
+		translateX() {
+			let { scaleRatio } = this;
+			console.log(scaleRatio, 'scaleRatio');
+			return `-${((1 - scaleRatio) / scaleRatio + 1) * 50}%`;
+		},
+		translateY() {
+			let { scaleRatio, marginBottom } = this;
+			marginBottom = marginBottom + 14;
+			return `-${
+				((1 - scaleRatio) / scaleRatio) * 50 + 100
+			}% - ${marginBottom}px`;
+		},
+	},
 };
 </script>
 
  <style lang="scss" scoped>
-.destination {
-	text-align: center;
-	cursor: pointer;
-	.destination-icon {
-		font-size: 48px;
-	}
-	.destination-gif {
-		display: block;
-		width: 100px;
-		height: 35px;
-		margin-top: -14px;
-	}
-}
 .info-item {
 	font-size: 24px;
 }
@@ -166,6 +184,45 @@ export default {
 	margin-top: 16px;
 	&:hover {
 		opacity: 0.8;
+	}
+}
+.pop-content {
+	position: relative;
+	min-width: 240px;
+	padding: 16px;
+	font-size: 16px;
+	background: rgba(0, 11, 37, 0.8);
+	border: 1px solid #00ddff;
+	box-sizing: border-box;
+	color: #fff;
+	transform: translate(-50%, -100%);
+	.triangle {
+		width: 0;
+		height: 0;
+		position: absolute;
+		bottom: -15px;
+		left: 50%;
+		transform: translateX(-50%);
+		border-left: solid 15px transparent;
+		border-right: solid 15px transparent;
+		border-top: solid 15px #00ddff;
+	}
+	.close-btn {
+		background: #0057a9;
+		border: 1px solid #00ddff;
+		box-sizing: border-box;
+		width: 24px;
+		height: 24px;
+		position: absolute;
+		top: -32px;
+		right: 0px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		&:active {
+			opacity: 0.8;
+		}
 	}
 }
 </style>

@@ -30,7 +30,7 @@
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:detialBoxWidth="450"
+			:width="450"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			@view-detail="showMoreDetail()"

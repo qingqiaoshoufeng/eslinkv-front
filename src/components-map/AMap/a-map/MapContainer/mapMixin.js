@@ -10,7 +10,8 @@ initAMapApiLoader({
 		'AMap.Driving',
 		'AMap.HeatMap',
 		'AMap.GeoJSON',
-		'AMap.MoveAnimation',
+        'AMap.MoveAnimation',
+        'AMap.Geocoder'
 	],
 	uiVersion: '1.1.1',
 	v: '2.0',

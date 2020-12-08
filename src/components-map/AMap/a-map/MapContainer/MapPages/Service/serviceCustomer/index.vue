@@ -4,9 +4,6 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
-		<!-- 态势感知 -->
-		<!-- <ListOverlay @overlay-click="handleOverlayClick" /> -->
-
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
@@ -40,7 +37,7 @@
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:detialBoxWidth="450"
+			:width="450"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			@view-detail="showMoreDetail"
@@ -132,7 +129,7 @@ export default {
 			OverlayDetail: null,
 			legendMap: SERVICE_SERVICECUSTOMER_LEGEND_MAP,
 			legendMultiple: true,
-			center: [120.061259, 30.233295],
+			center: [120.131259, 30.263295],
 			zoom: 10,
 			allTypeStationList: {},
 			dataStatisticsList: DATASTATISTICSLIST,

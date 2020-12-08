@@ -1,28 +1,19 @@
 <template>
 	<div>
 		<!-- 1.legend不控制显隐的覆盖物 -->
-		<!-- 1.1 报警点位-->
-		<!-- <WarningList
-			:visible="true"
-			type="工艺"
-			overlayIcon="icontulinengyuanzhan"
-			:apiFun="$sysApi.map.airSupply.getProcessWarningList"
-			:iconSize="38"
-			@overlay-click="handleOverlayClick"
-		/> -->
-		<!-- 报警点位 -->
+		<!-- 工艺报警和事件报警报警地图点位 -->
 		<WarnEvent
 			:data="activeWarnData"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
 		></WarnEvent>
-		<!-- 区域 -->
+		<!-- 行政区域覆盖物 -->
 		<RegionBoundary />
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
-				v-if="allTypeStationList[config.dataProp]"
 				:key="legend"
+                v-if="allTypeStationList[config.dataProp]"
 				:visible="config.isShow"
 				:is="config.component"
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
@@ -39,27 +30,6 @@
 				@close="closeOverlayDetail('', false)"
 			/>
 		</template>
-		<!-- 2.legend不控制显隐 -->
-		<template v-for="(config, legend) in withoutLegendOverlay">
-			<component
-				v-if="allTypeStationList[config.dataProp]"
-				:key="legend"
-				:visible="config.isShow"
-				:is="config.component"
-				:overlayIcon="config.icon ? config.icon : config.legendIcon"
-				:overlayType="config.component"
-				:iconSize="config.iconSize"
-				:showOverlayName="
-					config.showOverlayName === false
-						? config.showOverlayName
-						: undefined
-				"
-				:detailList="config.detailList"
-				:data="allTypeStationList[config.dataProp]"
-				@overlay-click="handleOverlayClick"
-				@close="closeOverlayDetail"
-			/>
-		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
 			v-model="showOverlayDetail"
@@ -67,9 +37,8 @@
 			:legendMap="legendMap"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
-			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
-			:detialBoxWidth="400"
+			:width="400"
 		>
 			<div class="overlay-detail" v-if="activeOverlay.detail">
 				<div class="detail-name">{{ activeOverlay.name }}</div>
@@ -114,7 +83,6 @@ import {
 	InspectionPerson,
 	InspectionCar,
 	RightPanel,
-	RoutePlan, //规划路线
 	LNGStation,
 	HighPressureLine,
 	HighPressureLine_Process,
@@ -126,7 +94,6 @@ import {
 	PipeManageMentStation,
 	UndergroundRepairStation,
 	OngroundRepairStation,
-	WarningList,
 	WarnEvent,
 } from '../Components/index.js';
 
@@ -150,7 +117,6 @@ import {
 
 import {
 	AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
-	AIRSUPPLY_HIGHPRESSURE_NO_LEGEND_MAP,
 	AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP,
 	DATASTATISTICSLIST,
 } from './config.js';
@@ -170,7 +136,6 @@ export default {
 		InspectionPerson,
 		InspectionCar,
 		RightPanel,
-		RoutePlan, //规划路线
 		LNGStation,
 		HighPressureLine,
 		HighPressureLine_Process,
@@ -182,14 +147,12 @@ export default {
 		PipeManageMentStation,
 		UndergroundRepairStation,
 		OngroundRepairStation,
-		WarningList,
 		DataStatistics,
 		WarnEvent,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
-		this.$amap.setZoom(this.zoom, 100);
-		this.$amap.setCenter(this.center, 100);
+		this.setZoomAndPanTo(...this.center, this.zoom);
 	},
 	watch: {
 		center(val) {
@@ -198,19 +161,17 @@ export default {
 	},
 	data() {
 		return {
+			center: [120.131259, 30.263295],
+			zoom: 10.2,
 			overlayInfoConfigMap: Object.freeze(
 				AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP
 			),
 			legendMap: AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
-			center: [120.061259, 30.233295],
-			zoom: 10.7,
+			activeTab: 'realTimeWithLevel',
+			dataStatisticsList: DATASTATISTICSLIST,
 			activeOverlay: {},
 			activeWarnData: {},
 			showOverlayDetail: false,
-			showRoutePlan: false,
-			activeTab: 'realTimeWithLevel',
-			withoutLegendOverlay: AIRSUPPLY_HIGHPRESSURE_NO_LEGEND_MAP,
-			dataStatisticsList: DATASTATISTICSLIST,
 			dataStatisticsInfo: {
 				GasStation: 5,
 				PressureRegulatingStation: 2,
@@ -225,57 +186,13 @@ export default {
 		};
 	},
 	methods: {
-		setCenter(center) {
-			this.center = center || this.center;
-			console.log(this.center);
-		},
-		setZoomAndPanTo(lng, lat) {
-			this.$amap.setZoom(14, 100);
-			this.$nextTick(() => {
-				this.$amap.panTo([lng, lat], 100);
-			});
-		},
-		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			let { lng, lat, address, time, index } = overlay;
-			// if (isCenter) {
-			// 	this.setZoomAndPanTo(lng, lat + 0.005);
-			// }
-			setTimeout(() => {
-				overlay.overlayType = overlayType || overlay.overlayType;
-				this.activeOverlay = overlay;
-				this.showOverlayDetail = true;
-				this.isShowMore = ['GasStation'].includes(overlayType);
-			}, 300);
-		},
-		closeOverlayDetail(done, isZoom = true) {
-			let { overlayType } = this.activeOverlay;
-			this.showOverlayDetail = false;
-			this.activeOverlay = {};
-			if (isZoom) {
-				this.$amap.setZoom(this.zoom, 100);
-				this.$amap.setCenter(this.center, 100);
-			}
-			if (done) {
-				done();
-			}
-		},
-		viewOverlayDetail(overlay) {},
-		// 获取所有站点数据
+		// 1.获取所有站点数据
 		async getAllTypeStationList() {
 			let params = {
 				types: [
-					// 'InspectionPerson', // '巡检人员',
-					// 'InspectionCar', // '巡检车辆',
 					'GasStation', // '门站',
 					'PressureRegulatingStation', // '调压站',
 					'EmergencyAirSourceStation', // '应急气源站',
-					// 'ServiceStation', // '综合服务站',
-					// 'PipeManageMentStation', // '管网运行管理站',
-					// 'UndergroundRepairStation', // '地下抢修点',
-					// 'LNGStation', // 'LNG站',
-					// 'LiquefiedGasStation', // '液化气站',
-					// 'NaturalGasStation', // '加气站',
-					// 'DistributedEnergyResource', // '分布式能源',
 				].toString(),
 			};
 			let res = await this.$sysApi.map.airSupply.getAllTypeStationList(
@@ -283,13 +200,13 @@ export default {
 			);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
 		},
-		// 获取高压统计数据
+		// 2.获取高压统计数据
 		async getDataStatisticsInfo() {
 			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
 				{ type: 'HighPressure' }
 			);
 		},
-		// 获取高压管网数据
+		// 3.获取高压管网，高压管网建设中数据
 		async getHighPressurePipe() {
 			let pipeData = await this.$sysApi.map.airSupply.getHighPressurePipe();
 			this.allTypeStationList = {
@@ -297,25 +214,41 @@ export default {
 				...pipeData,
 			};
 		},
-		handleListClick(overlay, overlayType) {
+		setZoomAndPanTo(lng, lat, zoom = 14) {
+			this.$amap.setZoom(zoom, 100);
+			this.$amap.panTo([lng, lat], 100);
+		},
+		handleOverlayClick(overlay, overlayType) {
 			let { lng, lat, address, time, index } = overlay;
 			overlay.overlayType = overlayType || overlay.overlayType;
+			this.activeOverlay = overlay;
+			this.showOverlayDetail = true;
+		},
+		closeOverlayDetail(done, isZoom = true) {
+			let { overlayType } = this.activeOverlay;
+			this.showOverlayDetail = false;
+			this.activeOverlay = {};
+			if (isZoom) {
+				this.setZoomAndPanTo(...this.center, this.zoom);
+			}
+			if (done) {
+				done();
+			}
+		},
+		handleListClick(overlay) {
+			let { lng, lat } = overlay;
 			this.activeWarnData = overlay;
 			this.setZoomAndPanTo(lng, lat);
-			cosnole.log(overlay, '1qww');
 		},
-
 		closeWarnEventDetail() {
 			this.activeWarnData = {};
-			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.setCenter(this.center, 100);
+			this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 	},
 	mounted() {
 		this.getAllTypeStationList();
 		this.getDataStatisticsInfo();
 		this.getHighPressurePipe();
-		window.setCenter = this.setCenter.bind(this);
 	},
 };
 </script>
