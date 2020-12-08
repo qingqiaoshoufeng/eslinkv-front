@@ -129,6 +129,9 @@ export default {
 							label: name,
 							stationId: id,
 						},
+						params:{
+							id
+						}
 					});
 				});
 			});

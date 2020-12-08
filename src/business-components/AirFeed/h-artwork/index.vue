@@ -28,8 +28,9 @@
 		watch: {
 			'config.api.params': {
 				handler(val) {
-					if (val)
-						this.config.api.data = JSON.stringify({image: JSON.parse(val).value})
+					if (val){
+						this.config.api.data = JSON.stringify({image: val.value})
+					}
 				},
 			}
 		},
@@ -60,6 +61,9 @@
 	}
 </script>
 <style lang="scss" scoped>
+	.viewer-backdrop{
+		background: transparent!important;
+	}
 	.widget-part {
 		.art {
 			width: 100%;

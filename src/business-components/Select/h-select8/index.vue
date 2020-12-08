@@ -1,8 +1,7 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<ul class="h-select8 fn-flex flex-column pos-r">
-			<li class="pointer pos-r text-left" :class="{active:data.label===item.label}" v-for="item in list"
-				@click="handleChange(item)">
+			<li class="pointer pos-r text-left" :class="{active:data.label===item.label}" v-for="item in list">
 				{{item.label}}
 			</li>
 		</ul>
@@ -32,7 +31,7 @@
 					{"label": "江东门站", "value": "jiangdongmenzhan"},
 					{"label": "所前门站", "value": "suoqianmenzhan"},
 					{"label": "北门站", "value": "beimenzhan"},
-					{"label": "下沙站", "value": "xiashamenzhan"},
+					{"label": "下沙门站", "value": "xiashamenzhan"},
 					{"label": "南门站", "value": "tianranqinanmenzhan"}
 				],
 				showOptions: false,
@@ -50,10 +49,15 @@
 								c=item
 							}
 						})
-						this.emitComponentUpdate({
-							value: this.selectLabel,
-							label: this.selectValue,
-						})
+						if(c){
+							this.selectValue=c.value
+							this.selectLabel=c.label
+							this.emitComponentUpdate({
+								id:val.stationId,
+								value: c.value,
+								label: c.label,
+							})
+						}
 					}
 				},
 				deep: true,
@@ -62,16 +66,16 @@
 		},
 		mixins: [mixins],
 		methods: {
-			handleChange(item) {
-				this.data.label = item.label
-				this.selectValue = item.value
-				this.selectLabel = item.label
-				this.showOptions = false
-				this.emitComponentUpdate({
-					value: this.selectLabel,
-					label: this.selectValue,
-				})
-			}
+			// handleChange(item) {
+			// 	// this.config.api.data .label = item.label
+			// 	this.selectValue = item.value
+			// 	this.selectLabel = item.label
+			// 	this.showOptions = false
+			// 	this.emitComponentUpdate({
+			// 		value: this.selectLabel,
+			// 		label: this.selectValue,
+			// 	})
+			// }
 		},
 		created() {
 			this.configSource = this.parseConfigSource(config)

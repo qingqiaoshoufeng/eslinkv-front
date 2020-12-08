@@ -20,7 +20,7 @@
 
 	const value = {
 		api: {
-			data: JSON.stringify([{"label": "居民户", "value": "jumin"}]),
+			data: JSON.stringify([{"label": "居民户", "value": "居民户"},{"label": "公建户", "value": "公建用户"},{"label": "工业户", "value": "工业用户"}]),
 			bind: {
 				enable: true,
 				role: ['provider']
@@ -32,7 +32,7 @@
 			return {
 				showOptions: false,
 				selectLabel: '居民户',
-				selectValue: 'jumin'
+				selectValue: '居民户'
 			}
 		},
 		mixins: [mixins],
@@ -41,7 +41,9 @@
 				this.selectValue = item.value
 				this.selectLabel = item.label
 				this.showOptions = false
-				this.emitComponentUpdate(item)
+				this.emitComponentUpdate({
+					type: this.selectValue,
+				})
 			}
 		},
 		created() {
@@ -50,8 +52,7 @@
 		},
 		mounted() {
 			this.emitComponentUpdate({
-				value: this.selectLabel,
-				label: this.selectValue,
+				type: this.selectValue,
 			})
 		}
 	}
