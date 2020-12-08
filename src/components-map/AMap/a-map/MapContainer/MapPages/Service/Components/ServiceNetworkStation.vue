@@ -7,7 +7,7 @@
 			visible,
 			apiFun,
 		}"
-		@mouseover="marker => $emit('overlay-click', marker, overlayType)"
+		@mouseover="mouseover"
 		@mouseleave="handleMouseleave"
 	>
 	</BaseOverlay>
@@ -39,7 +39,20 @@ export default {
 		};
 	},
 	methods: {
+		mouseover(marker) {
+			this.mouseIn = true;
+			this.$emit(
+				'overlay-click',
+				{
+					detailList: this.detailList,
+					...marker,
+					overlayType: this.overlayType,
+				},
+				this.overlayType
+			);
+		},
 		handleMouseleave() {
+			this.mouseIn = false;
 			this.$emit('close');
 		},
 	},

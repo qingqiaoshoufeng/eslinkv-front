@@ -204,7 +204,9 @@ export default {
 			let params = this.allTypeStationList.branchCompanyList.find(
 				item => item.name === val
 			);
+			this.$refs.BranchCompany[0].mouseIn = true;
 			params = {
+				overlayType: 'BranchCompany',
 				...params,
 				detailList:
 					SERVICE_SERVICEICCUSTOMER_LEGEND_MAP.BranchCompany
@@ -282,7 +284,10 @@ export default {
 			} else if (status && status === '1') {
 				this.detailInfo.ICcustomerStatus = '待处理';
 			}
-			this.showOverlayDetail = true;
+			console.log();
+			this.showOverlayDetail = this.$refs[
+				this.activeOverlay.overlayType
+			][0].mouseIn;
 			console.log(this.activeOverlay);
 		},
 		// 获取右侧table列表报警信息

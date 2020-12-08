@@ -11,15 +11,8 @@
 			nameStyle,
 			overlayName: 'colName',
 		}"
-		@mouseover="
-			marker =>
-				$emit(
-					'overlay-click',
-					{ detailList, ...marker, overlayType },
-					overlayType
-				)
-		"
-		@mouseleave="handleMouseleave"
+		@mouseover="mouseover"
+		@mouseleave="mouseleave"
 	/>
 </template>
 <script>
@@ -70,11 +63,25 @@ export default {
 			nameStyle: {
 				fontSize: '24px',
 			},
+			mouseIn: false,
 		};
 	},
 	mounted() {},
 	methods: {
-		handleMouseleave() {
+		mouseover(marker) {
+			this.mouseIn = true;
+			this.$emit(
+				'overlay-click',
+				{
+					detailList: this.detailList,
+					...marker,
+					overlayType: this.overlayType,
+				},
+				this.overlayType
+			);
+		},
+		mouseleave() {
+			this.mouseIn = false;
 			this.$emit('close');
 		},
 	},

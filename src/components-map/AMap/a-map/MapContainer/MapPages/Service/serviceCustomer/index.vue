@@ -22,6 +22,7 @@
 				@view-detail="showMoreDetail"
 				:data="allTypeStationList[config.dataProp]"
 				@close="closeOverlayDetail('')"
+				:ref="config.component"
 			/>
 		</template>
 		<!-- 2.legend不控制显隐 -->
@@ -183,7 +184,12 @@ export default {
 				return;
 			}
 			this.activeOverlay = overlay;
-			this.showOverlayDetail = true;
+			console.log(overlayType);
+
+			console.log(this.$refs);
+			// console.log(this.$refs.overlayType, '余志强');
+			this.showOverlayDetail = this.$refs[overlayType][0].mouseIn;
+			// console.log(this.$refs.overlayType.mouseIn);
 			this.isShowMore = ['ThreeSocialLinkage'].includes(overlayType);
 		},
 		closeOverlayDetail(done) {
@@ -211,6 +217,7 @@ export default {
 			// debugger;
 			let { name, time, activeIndex, overlayType } = item;
 			if (overlayType === 'ThreeSocialLinkage') {
+				this.$refs.ThreeSocialLinkage[0].mouseIn = true;
 				this.handleOverlayClick(item);
 				return;
 			}

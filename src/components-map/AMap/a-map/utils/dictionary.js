@@ -221,22 +221,22 @@ let monthFireDetial = {
 // 客户服务任务工单详情
 let serviceCustomerPipeline = {
     label: '渠道',
-    DW: '户',
+    DW: '',
     prop: "channel",
 }
 let serviceCustomerCustomer = {
     label: '客户',
-    DW: '户',
+    DW: '',
     prop: "customer",
 }
 let serviceCustomerAddress = {
     label: '地址',
-    DW: '户',
+    DW: '',
     prop: "address",
 }
 let serviceCustomerStatus = {
     label: '状态',
-    DW: '户',
+    DW: '',
     prop: "statusText",
 }
 

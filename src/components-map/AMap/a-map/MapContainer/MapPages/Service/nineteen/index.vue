@@ -24,6 +24,7 @@
 				@overlay-click="handleOverlayClick"
 				:detailList="config.detailList"
 				:data="allTypeStationList[config.dataProp]"
+				:ref="config.component"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->
@@ -121,10 +122,12 @@ export default {
 		},
 		// 板块图变化
 		saleAreaChange(val) {
+			this.$refs.BranchCompany[0].mouseIn = true;
 			let params = this.allTypeStationList.branchCompanyList.find(
 				item => item.name === val
 			);
 			params = {
+				overlayType: 'BranchCompany',
 				...params,
 				detailList:
 					SERVICE_SERVICENINETEEN_LEGEND_MAP.BranchCompany.detailList,
@@ -136,9 +139,9 @@ export default {
 			let { lng, lat, name } = overlay;
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
-			this.showOverlayDetail = true;
-			let res = await this.getDetialInfo(name);
 
+			let res = await this.getDetialInfo(name);
+			this.showOverlayDetail = this.$refs.BranchCompany[0].mouseIn;
 			this.detailInfo = res[0];
 		},
 		async getDataStatisticsList() {
@@ -155,7 +158,7 @@ export default {
 		},
 		closeOverlayDetail(done) {
 			this.showOverlayDetail = false;
-			// this.activeOverlay = {};
+			this.activeOverlay = {};
 			this.$emit('close');
 			// this.$amap.setZoom(11, 100);
 			done && done();

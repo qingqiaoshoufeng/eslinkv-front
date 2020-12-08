@@ -15,7 +15,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
     },
 
     useHotYear: {
-        label: '工商户',
+        label: '年度热力',
         component: 'useHotYear',
         isShow: true,
         dataProp: 'year',
