@@ -231,25 +231,6 @@ export default {
 			this.center = center || this.center;
 			console.log(this.center);
 		},
-		// 获取门站更多详情
-		getMoreDetail() {
-			let { overlayType, name } = this.activeOverlay;
-			if (overlayType === 'GasStation') {
-				GoldChart.scene.createSceneInstance(
-					AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
-					'slideRight'
-				);
-				this.$nextTick(() => {
-					AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX.forEach(item => {
-						GoldChart.instance.updateComponent(item, {
-							data: {
-								title: name,
-							},
-						});
-					});
-				});
-			}
-		},
 		setZoomAndPanTo(lng, lat) {
 			this.$amap.setZoom(14, 100);
 			this.$nextTick(() => {
@@ -322,15 +303,10 @@ export default {
 			let { lng, lat, address, time, index } = overlay;
 			overlay.overlayType = overlayType || overlay.overlayType;
 			this.activeWarnData = overlay;
-            this.setZoomAndPanTo(lng, lat);
-            cosnole.log(overlay,'1qww')
-		},
-		handleListClick(overlay, overlayType) {
-			let { lng, lat, address, time, index } = overlay;
-            overlay.overlayType = overlayType || overlay.overlayType;
-			this.activeWarnData = overlay;
 			this.setZoomAndPanTo(lng, lat);
+			cosnole.log(overlay, '1qww');
 		},
+
 		closeWarnEventDetail() {
 			this.activeWarnData = {};
 			this.$amap.setZoom(this.zoom, 100);
