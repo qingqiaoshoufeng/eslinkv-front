@@ -138,12 +138,6 @@ export default {
 			let res = await this.getDetialInfo(name);
 			console.log(res);
 			this.detailInfo = res[0];
-			// this.$amap.setZoom(14, 100);
-			// if (isCenter) {
-			// 	this.$nextTick(() => {
-			// 		this.$amap.panTo([lng, lat], 100);
-			// 	});
-			// }
 		},
 		async getDataStatisticsList() {
 			console.log(222222222222);

@@ -25,6 +25,7 @@
 				@overlay-click="handleOverlayClick"
 				:detailList="config.detailList"
 				:ref="config.component"
+				@close="closeOverlayDetail('')"
 			/>
 		</template>
 
@@ -147,15 +148,10 @@ export default {
 			left: 10,
 			swichBoxInfo: SWICHBOX,
 			intervalId: null,
-			detialBoxWidth: 450,
+			detialBoxWidth: 480, // 详情弹框宽度
 			detailComponentName: 'TipDetial',
 		};
 	},
-	// created() {
-	// 	this.$amap = this.$parent.$amap;
-	// 	this.$amap.setZoom(this.zoom, 100);
-	// 	this.$amap.setCenter(this.center, 100);
-	// },
 	created() {
 		this.$nextTick(() => {
 			this.mapFitView(-0.3, 0.4, 0.2);
@@ -163,8 +159,8 @@ export default {
 		window.mapFitView = this.mapFitView.bind(this);
 	},
 	methods: {
+		// 销售区域变化
 		saleAreaChange(val) {
-			console.log(val);
 			let params = this.allTypeStationList.branchCompanyList.find(
 				item => item.name === val
 			);
@@ -175,23 +171,15 @@ export default {
 					SERVICE_SERVICEHANGRANCODE_LEGEND_MAP.BranchCompany
 						.detailList,
 			};
-			console.log(params);
 			this.handleOverlayClick(params);
 		},
 		// 关闭详情
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
-
-			if (overlayType === 'WARNEVENT') {
-				GoldChart.scene.setSceneIndex(
-					INDEXSCENEMAP['ServiceHangranCode']
-				);
-				this.showRoutePlan = false;
-			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
 			this.carouseComplBranchCompanyInfo();
-			done();
+			done && done();
 		},
 		// 点击地图marker
 		async handleOverlayClick(overlay, overlayType, isCenter = false) {
@@ -206,10 +194,10 @@ export default {
 
 			this.activeOverlay = overlay;
 			this.activeOverlay.detailList = res;
+			this.detialBoxWidth = 500;
 			this.showOverlayDetail = true;
+
 			console.log(this.activeOverlay);
-			// this.left = ['BranchCompany', 'Grouphall'].includes(type) ? 15 : 10;
-			// this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 		},
 		// 联码新增统计数据
 		async getDataStatisticsList() {
@@ -255,7 +243,6 @@ export default {
 			);
 			this.showOverlayDetail = true;
 		},
-
 		// 获取点击站点服务站详情
 		async clickGetBranchCompanyDetialInfo(params) {
 			return this.$sysApi.map.serve.clickGetBranchCompanyDetialInfo(

@@ -11,8 +11,10 @@
 				:key="index"
 			>
 				<span class="index">{{ index + 1 }}</span>
-				<span class="label">{{ `${item.name}联码数: ` }}</span>
-				<span class="value">{{ `${item.value}户` }}</span>
+				<span class="label">{{ `${item.name}联码数` }}</span>
+				<span class="value">{{
+					`${item.value.toLocaleString()}户`
+				}}</span>
 			</div>
 		</div>
 		<div class="btn" v-if="isShowMore" @click="handleViewDetail()">
@@ -47,6 +49,8 @@ export default {
 	methods: {
 		handleViewDetail() {
 			this.$emit('view-detail');
+			var a = 111;
+			a.toLocale;
 		},
 	},
 	mounted() {
@@ -80,10 +84,11 @@ export default {
 		color: #ffffff;
 	}
 	.detial_info_list {
-		width: 450px;
+		width: 500px;
 		margin-top: 16px;
 		.item {
 			min-width: 50%;
+			width: 90%;
 			display: inline-block;
 			font-family: PingFang SC;
 			font-style: normal;
@@ -106,6 +111,7 @@ export default {
 			}
 			.value {
 				color: #ffd200;
+				float: right;
 			}
 		}
 	}

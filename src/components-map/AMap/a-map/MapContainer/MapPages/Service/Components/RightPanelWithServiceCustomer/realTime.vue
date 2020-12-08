@@ -64,6 +64,7 @@ export default {
 	},
 	async created() {
 		// this.list = await this.$sysApi.map.home.getWarningList();
+		console.log('0000000000000000000000000000000');
 		this.list = await this.$sysApi.map.serve.getServiceCustomerTaskList();
 	},
 	watch: {
@@ -109,6 +110,12 @@ export default {
 		.row {
 			display: flex;
 			align-items: center;
+			.status-err {
+				color: #ffdc45;
+			}
+			.status-suc {
+				color: #00ddff;
+			}
 			.content {
 				flex: 1;
 				font-size: 24px;

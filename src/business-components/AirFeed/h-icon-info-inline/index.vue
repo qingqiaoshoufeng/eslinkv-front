@@ -39,7 +39,7 @@ const value = {
 	},
 	config: {
 		icon: '/static/icons/h-inline-logo1.svg',
-		text: '居民户',
+		text: '',
 	},
 };
 export default {

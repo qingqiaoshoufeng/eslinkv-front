@@ -19,9 +19,10 @@
 				:is="config.component"
 				@overlay-click="handleOverlayClick"
 				:ref="config.component"
-                @view-detail="showMoreDetail"
+				@view-detail="showMoreDetail"
 				:detailList="config.detailList"
 				:data="allTypeStationList[config.dataProp]"
+				@close="closeOverlayDetail('')"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->
@@ -156,8 +157,9 @@ export default {
 		},
 		// 查看详情，弹出详情场景
 		async showMoreDetail(activeOverlay) {
-            console.log('aaa')
-			let { address, content, status, id } = activeOverlay || this.activeOverlay;
+			console.log('aaa');
+			let { address, content, status, id } =
+				activeOverlay || this.activeOverlay;
 			let { useNumberYestoday } = this.detailInfo;
 			console.log(this.activeOverlay, this.detailInfo);
 			let params = {};
@@ -220,7 +222,8 @@ export default {
 		},
 		closeOverlayDetail(done) {
 			this.showOverlayDetail = false;
-			done();
+			this.activeOverlay = {};
+			done && done();
 		},
 		// 点击地图marker
 		handleOverlayClick(overlay, overlayType, isCenter = false) {
@@ -242,9 +245,7 @@ export default {
 				params: 'useNumberYestoday',
 			};
 			this.getDetailInfo(params, status);
-
 			this.activeOverlay = overlay;
-			console.log(type);
 			this.isShowMore = ['WarningICcustomer'].includes(type);
 		},
 		// 请求用气大户，子公司，综合服务站数据列表
@@ -252,12 +253,10 @@ export default {
 			let params = {
 				types: ['MajorClient', 'BranchCompany'].toString(),
 			};
-			console.log(params, 33333);
 			let res = await this.$sysApi.map.serve.getICcustomerStationList(
 				params
 			);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-			console.log(this.allTypeStationList, 111111111);
 		},
 
 		// 联码新增统计数据
@@ -268,14 +267,10 @@ export default {
 		// 获取热力图信息
 		async getAllHotList() {
 			let res = await this.$sysApi.map.serve.getICcustomerHotInfo();
-			console.log(res, 121212);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-			console.log(this.allTypeStationList, 111111);
 		},
 		//获取站点详情
 		async getDetailInfo(params, status) {
-			console.log(params, status);
-			console.log(params);
 			this.detailInfo = await this.$sysApi.map.serve.getICcustomerDetailInfo(
 				params
 			);
@@ -292,9 +287,6 @@ export default {
 			let WarningICcustomerList = await this.$sysApi.map.serve.getICcustomerSituationAwareness(
 				params
 			);
-			// WarningICcustomerList = WarningICcustomerList.filter(
-			// 	item => item.status === '1'
-			// );
 			this.allTypeStationList = {
 				...this.allTypeStationList,
 				WarningICcustomerList,

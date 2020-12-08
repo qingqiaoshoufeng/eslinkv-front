@@ -1,7 +1,7 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<ul class="h-select8 fn-flex flex-column pos-r">
-			<li class="pointer pos-r text-left" :class="{active:selectValue===item.value}" v-for="item in data?data:[]"
+			<li class="pointer pos-r text-left" :class="{active:data.label===item.label}" v-for="item in list"
 				@click="handleChange(item)">
 				{{item.label}}
 			</li>
@@ -15,13 +15,10 @@
 
 	const value = {
 		api: {
-			data: JSON.stringify([
-				{"label": "江东门站", "value": "jiangdongmenzhan"},
-				{"label": "所前门站", "value": "suoqianmenzhan"},
-				{"label": "北门站", "value": "beimenzhan"},
-				{"label": "下沙站", "value": "xiashamenzhan"},
-				{"label": "南门站", "value": "tianranqinanmenzhan"}
-			]),
+			data: JSON.stringify({
+				label: '江东门站',
+				stationId: null
+			}),
 			bind: {
 				enable: true,
 				role: ['provider']
@@ -31,14 +28,42 @@
 	export default {
 		data() {
 			return {
+				list:[
+					{"label": "江东门站", "value": "jiangdongmenzhan"},
+					{"label": "所前门站", "value": "suoqianmenzhan"},
+					{"label": "北门站", "value": "beimenzhan"},
+					{"label": "下沙站", "value": "xiashamenzhan"},
+					{"label": "南门站", "value": "tianranqinanmenzhan"}
+				],
 				showOptions: false,
 				selectLabel: '江东门站',
 				selectValue: 'jiangdongmenzhan'
 			}
 		},
+		watch:{
+			data: {
+				handler(val) {
+					if (val) {
+						let c
+						this.list.forEach(item=>{
+							if(item.label ===val.label){
+								c=item
+							}
+						})
+						this.emitComponentUpdate({
+							value: this.selectLabel,
+							label: this.selectValue,
+						})
+					}
+				},
+				deep: true,
+				immediate: true
+			}
+		},
 		mixins: [mixins],
 		methods: {
 			handleChange(item) {
+				this.data.label = item.label
 				this.selectValue = item.value
 				this.selectLabel = item.label
 				this.showOptions = false

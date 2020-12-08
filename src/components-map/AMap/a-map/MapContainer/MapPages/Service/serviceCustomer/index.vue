@@ -19,9 +19,9 @@
 				:is="config.component"
 				@overlay-click="handleOverlayClick"
 				:detailList="config.detailList"
-                @view-detail="showMoreDetail"
+				@view-detail="showMoreDetail"
 				:data="allTypeStationList[config.dataProp]"
-                @close="closeOverlayDetail('')"
+				@close="closeOverlayDetail('')"
 			/>
 		</template>
 		<!-- 2.legend不控制显隐 -->
@@ -32,6 +32,7 @@
 			:activeIndex="activeIndex"
 			:data="allTypeStationList.TaskList"
 			ref="OverlayDetail"
+			@close="closeOverlayDetail('')"
 		/>
 
 		<!-- 覆盖物详情 -->
@@ -166,33 +167,32 @@ export default {
 			this.showThreeSocialLinkageDetail();
 		},
 		async handleOverlayClick(overlay, overlayType1, isCenter = false) {
-			console.log(overlay);
 			let { lng, lat, type, name, id, overlayType } = overlay;
 			let params = {
 				name,
 				id,
 				type,
 			};
-			console.log(overlayType);
 			if (['BranchCompany'].includes(overlayType)) {
 				this.detailInfo = await this.getDetailInfo(params);
+			} else if (overlayType === 'TaskList') {
+				console.log(overlayType);
+				console.log(this.allTypeStationList.TaskList);
+				overlay.activeIndex = this.allTypeStationList.TaskList.findIndex(
+					item => item.id === overlay.id
+				);
+				console.log(overlay);
+				this.handleListClick(overlay);
+				return;
 			}
 			this.activeOverlay = overlay;
-			console.log(this.detailInfo);
 			this.showOverlayDetail = true;
 			this.isShowMore = ['ThreeSocialLinkage'].includes(overlayType);
-			// if (isCenter) {
-			// 	this.$nextTick(() => {
-			// this.$amap.setZoom(14, 100);
-			// 		this.$amap.panTo([lng, lat], 100);
-			// 	});
-			// }
 		},
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-			// this.$amap.setZoom(11, 100);
 			done && done();
 		},
 		viewOverlayDetail(overlay) {
@@ -212,6 +212,7 @@ export default {
 			}
 		},
 		handleListClick(item) {
+			// debugger;
 			let { name, time, activeIndex, overlayType } = item;
 			if (overlayType === 'ThreeSocialLinkage') {
 				this.handleOverlayClick(item);
@@ -219,13 +220,13 @@ export default {
 			}
 			this.activeIndex = activeIndex;
 			this.activeOverlay = {
+				...item,
 				detailList:
 					SERVICE_SERVICECUSTOMER_LEGEND_MAP.TaskList.detailList,
-				...item,
 			};
-			console.log(item);
+
 			this.detailInfo = item;
-			console.log(this.activeOverlay);
+
 			this.showOverlayDetail = true;
 		},
 		showThreeSocialLinkageDetail() {
@@ -297,6 +298,8 @@ export default {
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
 			console.log(this.allTypeStationList, 33333);
 		},
+		// 查询三社联动站点列表
+
 		// 获取任务工单列表
 		async getTasklist() {
 			let TaskList = await this.$sysApi.map.serve.getServiceCustomerTaskList();
@@ -306,15 +309,6 @@ export default {
 			};
 			console.log(this.allTypeStationList);
 		},
-		// // 获取三社联动列表
-		// async getServiceCustomerThreeSocialList() {
-		// 	let threeSocialLinkageList = await this.$sysApi.map.serve
-		// 		.getServiceCustomerThreeSocialList;
-		// 	this.allTypeStationList = {
-		// 		...this.allTypeStationList,
-		// 		...threeSocialLinkageList,
-		// 	};
-		// },
 		// 查看详情接口
 		getDetailInfo(params) {
 			return this.$sysApi.map.serve.getServiceCustomerDetialInfo(params);
