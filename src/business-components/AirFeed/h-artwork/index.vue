@@ -61,9 +61,6 @@
 	}
 </script>
 <style lang="scss" scoped>
-	.viewer-backdrop{
-		background: transparent!important;
-	}
 	.widget-part {
 		.art {
 			width: 100%;
