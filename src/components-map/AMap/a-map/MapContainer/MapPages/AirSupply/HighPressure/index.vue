@@ -285,8 +285,8 @@ export default {
 		async getAllTypeStationList() {
 			let params = {
 				types: [
-					'InspectionPerson', // '巡检人员',
-					'InspectionCar', // '巡检车辆',
+					// 'InspectionPerson', // '巡检人员',
+					// 'InspectionCar', // '巡检车辆',
 					'GasStation', // '门站',
 					'PressureRegulatingStation', // '调压站',
 					'EmergencyAirSourceStation', // '应急气源站',
@@ -317,13 +317,6 @@ export default {
 				...this.allTypeStationList,
 				...pipeData,
 			};
-		},
-		handleListClick(overlay, overlayType) {
-			let { lng, lat, address, time, index } = overlay;
-			overlay.overlayType = overlayType || overlay.overlayType;
-			this.activeWarnData = overlay;
-            this.setZoomAndPanTo(lng, lat);
-            cosnole.log(overlay,'1qww')
 		},
 		handleListClick(overlay, overlayType) {
 			let { lng, lat, address, time, index } = overlay;

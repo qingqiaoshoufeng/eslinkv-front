@@ -83,7 +83,6 @@ export default {
 			item.activeIndex = index;
 			this.activeIndex = index;
 			item.overlayType = 'TaskList';
-			console.log(item);
 			this.$emit('change', item);
 		},
 	},
