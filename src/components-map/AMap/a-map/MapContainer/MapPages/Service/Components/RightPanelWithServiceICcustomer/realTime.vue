@@ -92,7 +92,6 @@ export default {
 				SERVICE_SERVICEICCUSTOMER_LEGEND_MAP['WarningICcustomer']
 			);
 			console.log(overlayType);
-			console.log(item);
 			this.$emit('change', { ...item, detailList, overlayType });
 		},
 	},
