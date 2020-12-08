@@ -99,7 +99,6 @@ export default {
 	watch: {
 		data(val) {
 			if (val) {
-                console.log(val,'suyanval')
 				if (JSON.stringify(val) !== '{}') {
 					let { overlayType } = val;
 					this.overlayTypeInfo =

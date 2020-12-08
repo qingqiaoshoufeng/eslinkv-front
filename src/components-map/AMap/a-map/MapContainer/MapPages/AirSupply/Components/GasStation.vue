@@ -75,10 +75,15 @@ export default {
 				outTemp: '℃',
 				todayAirFeed: 'm³',
 			},
+			mouseIn: false,
 		};
 	},
 	methods: {
 		async handleMouseover(marker) {
+			if (this.mouseIn) {
+				return false;
+			}
+			this.mouseIn = true;
 			let { id, name, type } = marker;
 			let data = await this.$sysApi.map.airSupply.getStationRealTimeInfo({
 				id,
@@ -101,12 +106,14 @@ export default {
 					};
 				});
 			});
-			this.$emit(
-				'overlay-click',
-				{ ...marker, detail: dataComp },
-				'GasStation',
-				false
-			);
+			if (this.mouseIn) {
+				this.$emit(
+					'overlay-click',
+					{ ...marker, detail: dataComp },
+					'GasStation',
+					false
+				);
+			}
 		},
 		handleOverlayClick(marker) {
 			let { name } = marker;
@@ -126,6 +133,7 @@ export default {
 			this.$emit('close');
 		},
 		handleMouseleave() {
+			this.mouseIn = false;
 			this.$emit('close');
 		},
 	},
