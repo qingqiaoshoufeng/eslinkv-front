@@ -10,11 +10,11 @@
 			}"
 			:active="item.active"
 			:visible="visible"
-			@click.stop="handleClick(item)"
-			@mouseenter.stop="handleMouseOver(item)"
-			@mouseleave.stop="handleMouseLeave(item)"
+			@click="handleClick(item)"
+			@mouseover="handleMouseOver(item)"
+			@mouseleave="handleMouseLeave(item)"
 		>
-        <!-- <slot name="icon" >
+			<!-- <slot name="icon" >
             <template slot="icon"></template>
         </slot> -->
 			<slot :data="item">
@@ -88,8 +88,8 @@ export default {
 			async handler(val) {
 				let { isRendered } = this;
 				if (val && !isRendered) {
-                    await this.getData(this.query);
-                    console.log(this.list)
+					await this.getData(this.query);
+					console.log(this.list);
 					this.isRendered = true;
 					this.$nextTick(() => {
 						this.$emit('initComplete');
@@ -128,9 +128,7 @@ export default {
 			this.$emit('mouseover', item);
 		},
 		handleMouseLeave(item) {
-			this.$nextTick(() => {
-				this.$emit('mouseleave', item);
-			});
+			this.$emit('mouseleave', item);
 		},
 	},
 };
