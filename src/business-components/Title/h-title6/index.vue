@@ -65,6 +65,7 @@
 			margin-right: 24px;
 
 			&.active {
+				color: rgba(255, 255, 255, 1);
 				&:before {
 					position: absolute;
 					content: '';
