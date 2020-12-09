@@ -159,10 +159,12 @@ export default {
 		};
 	},
 	created() {
+		this.$amap = this.$parent.$amap;
 		this.$nextTick(() => {
 			this.mapFitView(-0.3, 0.4, 0.2);
 		});
 		window.mapFitView = this.mapFitView.bind(this);
+		console.log(this.$amap);
 	},
 	methods: {
 		// 销售区域变化
@@ -266,13 +268,12 @@ export default {
 		carouseComplBranchCompanyInfo() {
 			this.detailComponentName = 'TipDetial';
 			let index = 0;
-			let i = 0.3;
+
 			let length = this.allTypeStationList.branchCompanyList.length;
 			if (this.intervalId) {
 				this.clearInterval();
 			}
 			this.intervalId = setInterval(() => {
-				i += 0.5;
 				let currentIndex = index++ % length;
 				// let overlay =
 				this.activeOverlay = {
@@ -283,10 +284,29 @@ export default {
 						SERVICE_SERVICEHANGRANCODE_LEGEND_MAP['BranchCompany']
 							.detailList,
 				};
+				let { name } = this.activeOverlay;
+				console.log(name);
+				let address = {
+					杭州天然气有限公司: { value: [120.99105835, 30.29227485] },
+					杭州钱江燃气有限公司: {
+						value: [121.09405518, 30.29419946],
+					},
+					桐庐杭燃燃气有限公司: {
+						value: [120.57769775, 29.75007093],
+					},
+					海宁星港燃气有限公司: {
+						value: [121.26159668, 30.33559623],
+					},
+				};
 				this.detailInfo = this.activeOverlay.gasCodeMapDetailInfoVO;
 				this.showOverlayDetail = true;
+				this.$amap.panTo(address[name].value, 100);
+				// this.$amap.panTo([120.99105835, 30.29227485], 100);
 
-				this.mapFitView(...this.params[currentIndex], false);
+				// this.$amap.panTo([121.09405518, 30.39419946], 100);
+				// this.$amap.panTo([120.57769775, 29.75007093], 100);
+
+				// this.$amap.panTo([121.26159668, 30.52559623], 100);
 			}, 3000);
 		},
 		// 关闭定时器

@@ -230,45 +230,15 @@ export default {
 			this.showOverlayDetail = true;
 		},
 		showThreeSocialLinkageDetail() {
+			let { id } = this.activeOverlay;
+			console.log(id);
 			//打开三社联动的弹框
 			GoldChart.scene.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX);
-			//更新数据
 			this.$nextTick(() => {
 				THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
 					GoldChart.instance.updateComponent(i, {
-						data: {
-							title: `${this.activeOverlay.name}`,
-							startTime: '2020/10/01  08:30',
-							endTime: '2020/10/01  08:30',
-							place: '桂花城紫云苑',
-							people: '退休职工',
-							peopleNum: 220,
-							planNum: 160,
-							content:
-								'为积极彰显企业担当，更好地为用户提供优质满意的杭燃服务。9月13日上午，杭天管网输配子公司28名正气志愿者\n            联合杭天服务发展公司27名工作人员，走进盛德嘉苑、假山新村、天时苑、盛德欣苑等小区开展“三社联动、安心安\n            居”杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份...27名工作人员，走进盛德嘉苑、假山新村、天时苑、盛德欣苑等小区开展“三社联动、安心安\n            居”杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份...\n            杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份\n            杭燃服务进社区活动，与社区居民积极互动，现场咨询42人/次，发放宣传资料31份',
-							securityCheckRate: 90,
-							planCheckNum: 120,
-							brochuresNum: 210,
-							uSaleNum: 64,
-							uSaleMoney: '24,910',
-							actualCheckNum: 120,
-							installNum: 60,
-							repairNum: 120,
-							imgList: [
-								{
-									img: '/static/images/project/01.png',
-								},
-								{
-									img: '/static/images/project/02.png',
-								},
-								{
-									img: '/static/images/project/03.jpg',
-								},
-								{
-									img: '/static/images/project/04.jpg',
-								},
-							],
-							video: '/cdn/videos/sanshe.MOV',
+						params: {
+							id,
 						},
 					});
 				});

@@ -52,7 +52,7 @@ export default {
                         position: [120.721945, 30.496516 - topOffest - scale],
                     }),
                 ],
-                false,
+                true,
                 [paddingTop, paddingTop, 0, 0]
             )
             //x轴向偏移

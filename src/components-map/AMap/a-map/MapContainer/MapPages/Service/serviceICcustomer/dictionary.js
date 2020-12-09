@@ -5,10 +5,22 @@ let ICcustomer = {
     Fixed: 0
 }
 
-let useNumberYestoday = {
-    label: '昨日用气量',
+let useNumberToday = {
+    label: '今日用气量',
     DW: 'm³',
-    prop: "useNumberYestoday",
+    prop: "useNumberToday",
+    Fixed: 2
+}
+let useNumberYear = {
+    label: '年度用气量',
+    DW: 'm³',
+    prop: "useNumberYear",
+    Fixed: 2
+}
+let useNumberMonth = {
+    label: '本月用气量',
+    DW: 'm³',
+    prop: "useNumberMonth",
     Fixed: 2
 }
 
@@ -39,4 +51,4 @@ let warningYestodayMetersTotal = {
     DW: '',
     prop: "yesterdayMeterNumer"
 }
-export { ICcustomer, useNumberYestoday, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, ICcustomerStatus }
+export { ICcustomer, useNumberToday, useNumberYear, useNumberMonth, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, ICcustomerStatus }

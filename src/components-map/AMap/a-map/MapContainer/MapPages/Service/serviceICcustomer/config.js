@@ -1,6 +1,6 @@
 
 // 引入详情字典
-import { ICcustomer, useNumberYestoday, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, ICcustomerStatus } from "./dictionary"
+import { ICcustomer, useNumberYestoday, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, ICcustomerStatus, useNumberToday, useNumberYear, useNumberMonth, } from "./dictionary"
 // 覆盖物legend配置
 export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
     MajorClient: {
@@ -27,7 +27,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         component: 'BranchCompany',
         isShow: true,
         dataProp: 'branchCompanyList',
-        detailList: [ICcustomer, useNumberYestoday, warningYestoday]
+        detailList: [ICcustomer, useNumberToday, useNumberYear, useNumberMonth,]
     },
     WarningICcustomer: {
         label: '报警',
@@ -37,7 +37,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         component: 'WarningICcustomer',
         isShow: true,
         dataProp: 'WarningICcustomerList',
-        detailList: [useNumberYestoday, ICcustomerStatus]
+        detailList: [useNumberToday, useNumberYear, useNumberMonth,]
     }
 }
 

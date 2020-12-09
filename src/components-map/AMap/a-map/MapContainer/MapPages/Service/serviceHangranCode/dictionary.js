@@ -1,11 +1,11 @@
 let OperationToday = {
-    label: '今日操作',
+    label: '今日扫码',
     DW: '次',
     prop: "operationToday",
     Fixed: 0
 };
 let OperationWeek = {
-    label: '本周操作',
+    label: '本周扫码',
     DW: '次',
     prop: "operationWeek",
     Fixed: 0
