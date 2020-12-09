@@ -57,7 +57,8 @@
 				</div>
 				<div
 					class="btn"
-					v-if="showMore && overlayDetailConfig.isShowMore === true"
+					@click="handleViewDetail"
+					v-if="showMore || overlayDetailConfig.isShowMore === true"
 				>
 					更多详情
 				</div>

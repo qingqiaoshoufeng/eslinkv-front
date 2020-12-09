@@ -24,7 +24,11 @@
 		<!-- 详情弹窗 -->
 		<OverlayDetail
 			v-model="showOverlayDetail"
-			v-bind="OverlayDetailProp"
+			v-bind="{
+				showMore,
+				data,
+				...OverlayDetailProp,
+			}"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
@@ -74,37 +78,36 @@ export default {
 			showOverlayDetail: true,
 			showRoutePlan: false,
 			showMore: true,
+            visible: false,
+            overlayIcon:'',
+            OverlayDetailProp:{}
 		};
 	},
-	computed: {
-		visible() {
-			return JSON.stringify(this.data) !== '{}';
-		},
-		//报警图标
-		overlayIcon() {
-			let { status, overlayType } = this.data;
-			let iconMap = {
-				WARNEVENT: 'iconshijian1',
-				WarningList: 'icongongyiyichang',
-			};
-			return iconMap[overlayType] + (status === 0 ? '-suc' : '');
-		},
-		OverlayDetailProp() {
-			let { data, overlayInfoConfigMap, showMore, legendMap } = this;
-			if (JSON.stringify(data) !== '{}') {
-				let { overlayType } = data;
-				//详情展示信息配置
+	watch: {
+		data(val) {
+			if (JSON.stringify(val) !== '{}') {
+				let { overlayType, status } = val;
+				let { overlayInfoConfigMap } = this;
+				let iconMap = {
+					WARNEVENT: 'iconshijian1',
+					WarningList: 'icongongyiyichang',
+				};
 				let overlayDetailConfig =
 					overlayInfoConfigMap[overlayType] || {};
-				this.showOverlayDetail = true;
-				return {
-					data,
+				//弹窗详情
+				this.OverlayDetailProp = {
 					iconSize: 38,
 					overlayDetailConfig,
-					showMore: true,
 					showCloseBtn: true,
 				};
+				//报警图标
+				this.overlayIcon =
+					iconMap[overlayType] + (status === 0 ? '-suc' : '');
+				this.visible = true;
+				this.showMore = overlayType === 'WARNEVENT';
+				this.showOverlayDetail = true;
 			} else {
+				this.visible = false;
 				this.showOverlayDetail = false;
 				return {};
 			}
@@ -228,8 +231,4 @@ video::-webkit-media-controls {
 	margin-top: -36px;
 	margin-left: 19px;
 }
-
-// img {
-// 	width: 100%;
-// }
 </style>
