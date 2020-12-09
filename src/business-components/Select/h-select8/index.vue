@@ -9,7 +9,11 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-
+	import {
+		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
+		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
+	} from '../../../components-map/AMap/a-map/config/scene'
+	import GoldChart from '../../../openApi'
 	const config = {animation: true}
 
 	const value = {
@@ -43,12 +47,7 @@
 							}
 						})
 						if(c){
-							this.selectValue=c.value
 							this.selectLabel=c.label
-							this.emitComponentUpdate({
-								id: val.stationId,
-								label: c.label,
-							})
 						}
 					}
 				},
@@ -58,13 +57,30 @@
 		},
 		mixins: [mixins],
 		methods: {
-			handleChange(item) {
-				this.selectLabel = item.name
+			handleChange(a) {
+				this.selectLabel = a.name
 				this.showOptions = false
 				this.emitComponentUpdate({
 					label: this.selectLabel,
-					id: item.id,
+					id: a.id,
 				})
+				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach(item => {
+					GoldChart.instance.updateComponent(item, {
+						data: {
+							label: a.name,
+							title: a.name,
+							image: a.name,
+							stationId: a.id,
+						},
+					});
+				});
+				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach(item => {
+					GoldChart.instance.updateComponent(item, {
+						params: {
+							id:a.id,
+						},
+					});
+				});
 			}
 		},
 		created() {
