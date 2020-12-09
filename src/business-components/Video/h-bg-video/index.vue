@@ -32,8 +32,7 @@
 					loop: true,
 					sources: [
 						{
-							type: 'video/mp4',
-							src: '/cdn/videos/shouye.mp4'
+							src: '/cdn/videos/123.webm'
 						},
 					],
 				},
