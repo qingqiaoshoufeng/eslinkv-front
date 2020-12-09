@@ -39,13 +39,13 @@
 		}
 
 		&:after {
-			background-image: url('./img/top.svg');
+			background-image: url('img/top.svg');
 			right: -7px;
 			top: -7px;
 		}
 
 		&:before {
-			background-image: url('./img/bottom.svg');
+			background-image: url('img/bottom.svg');
 			left: -7px;
 			bottom: -7px;
 		}

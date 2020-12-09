@@ -1,5 +1,4 @@
 export default {
-	label: '标题1',
 	config: {
 		layout: {
 			size: {

@@ -12,19 +12,32 @@
           <div class="num">679</div>
         </div>
         <div class="legend-item">
-          <div class="color"></div>
+          <div class="color light"></div>
           <div class="label">实际销气</div>
           <div class="num">421</div>
         </div>
         <div class="legend-item">
-          <div class="color"></div>
+          <div class="percent-color">
+            <div class="percent-color-item"></div>
+            <div class="percent-color-item"></div>
+            <div class="percent-color-item"></div>
+          </div>
           <div class="label">计划完成率</div>
           <div class="num">76%</div>
         </div>
       </div>
-      <div class="rates"></div>
+      <div class="rates">
+        <div class="rate">
+          <div class="rate-num">+6%</div>
+          <div class="rate-txt">实际销气同比</div>
+        </div>
+        <div class="rate">
+          <div class="rate-num" :class="{down: true}">-6%</div>
+          <div class="rate-txt">实际销气同比</div>
+        </div>
+      </div>
     </div>
-    <p class="date"></p>
+    <p class="date">2020.09</p>
 	</div>
 </template>
 <script>
@@ -147,13 +160,75 @@
     }
   }
   .legend {
+    text-align: left;
     .legend-item{
+      display: flex;
+      align-items: center;
+      margin-top: 22px;
       .color {
         width: 16px;
         height: 16px;
         background: #0057A9;
+        &.light {
+          background: #00DDFF;
+        }
+      }
+      .label {
+        font-size: 18px;
+        color: #FFFFFF;
+        width: 97px;
+        margin-left: 4px;
+      }
+      .num {
+        font-weight: bold;
+        font-size: 24px;
+        color: #FFFFFF;
+        font-family: "font-num";
+      }
+      .percent-color {
+        width: 16px;
+        height: 16px;
+        .percent-color-item {
+          width: 16px;
+          height: 4px;
+          margin-bottom: 2px;
+          background: #00FFCF;
+        }
       }
     }
+  }
+  .rates {
+    margin-left: 53px;
+    .rate {
+      width: 132px;
+      height: 72px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 100%);
+      margin-bottom: 8px;
+      padding-top: 12px;
+      .rate-txt {
+        font-size: 18px;
+        line-height: 24px;
+        color: #FFFFFF;
+        margin-top: 4px;
+      }
+      .rate-num {
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 24px;
+        color: #E5615B;
+        font-family: "font-num";
+        &.down {
+          color: #00FFCF;
+        }
+      }
+    }
+  }
+  .date {
+    font-size: 18px;
+    line-height: 24px;
+    color: #00DDFF;
+    text-align: left;
+    padding-left: 65px;
   }
 </style>
 

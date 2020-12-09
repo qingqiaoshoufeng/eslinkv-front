@@ -13,7 +13,7 @@
       <div class="outside">
         <h5>{{curr.name}}外供量</h5>
         <div class="sub">
-          <div class="sub-item" v-for="(k, i) in (curr.children || [])">
+          <div class="sub-item" v-for="(k, i) in (curr.children || [])" :key="i">
             <div class="sub-item-rank font-num">{{ i + 1 }}</div>
             <div class="sub-detail">
               <div class="sub-title">{{ k.name }}</div>
@@ -273,6 +273,7 @@ export default {
           color: #F9F9F9;
           .sub-title {
             margin-bottom: 8px;
+            white-space: nowrap;
           }
           .sub-bar {
             width: 0;
