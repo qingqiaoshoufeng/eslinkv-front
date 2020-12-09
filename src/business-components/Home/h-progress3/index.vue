@@ -1,10 +1,11 @@
 <template>
 	<div class="widget-part" :style="styles" v-if="data">
-		<div v-for="(k, i) in data" class="item">
+		<div v-for="(k, i) in data" class="item" :key="i">
 			<img :src="k.icon">
 			<div class="gas-main">
 				<div class="gas-info">
 					<div class="gas-title">{{ k.name }}</div>
+          <div class="gas-percent font-num">{{k.percent}}%</div>
 					<div class="gas-num font-num"><em>{{ k.value / 10000 | toThousand }}</em> {{ config.config.unit }}
 					</div>
 				</div>
@@ -93,6 +94,16 @@
 				line-height: 24px;
 				color: #fff;
 			}
+
+      .gas-percent {
+        font-weight: bold;
+        font-size: 32px;
+        line-height: 32px;
+        color: #FFFFFF;
+        margin-left: 16px;
+        flex: 1;
+        text-align: left;
+      }
 
 			.gas-num {
 				font-size: 18px;
