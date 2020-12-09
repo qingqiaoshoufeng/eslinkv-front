@@ -23,15 +23,15 @@ export default {
 		return {
 			loaded: false,
 		};
-	},
+    },
 
 	computed: {
 		active() {
-			const active = this.$parent.currentName === this.name;
+            const active = this.$parent.currentName === this.name;
 			if (active) {
 				this.loaded = true;
 				this.$parent.activeTab = this.name;
-			}
+            }
 			return active;
 		},
 	},

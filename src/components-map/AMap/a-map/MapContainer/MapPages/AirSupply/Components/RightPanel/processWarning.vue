@@ -1,12 +1,5 @@
 <template>
 	<div class="process-warning">
-		<!-- <vue-seamless-scroll
-			:data="list || []"
-			class="list"
-			ref="bbb"
-			:class-option="classOption"
-			v-if="active && list.length"
-		> -->
 		<div
 			@click="handleClick(item, index, 'WarningList')"
 			v-for="(item, index) in list"
@@ -46,7 +39,6 @@
 				</div>
 			</div>
 		</div>
-		<!-- </vue-seamless-scroll> -->
 	</div>
 </template>
 
@@ -88,18 +80,6 @@ export default {
 		}, 120000);
 	},
 	computed: {
-		classOption() {
-			return {
-				step: 1, // 数值越大速度滚动越快
-				limitMoveNum: this.list?.length, // 开始无缝滚动的数据量
-				hoverStop: true, // 是否开启鼠标悬停stop
-				direction: 1, // 0向下 1向上 2向左 3向右
-				openWatch: true, // 开启数据实时监控刷新dom
-				singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
-				singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-				waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
-			};
-		},
 		active() {
 			return this.$parent.active;
 		},
@@ -118,9 +98,11 @@ export default {
 	},
 	methods: {
 		handleClick(listItem, index) {
-			console.log('suyan1111');
 			let { address, time } = listItem;
-			this.$emit('before-change', listItem, 'WarningList');
+			listItem.status = listItem.priority == '已处理' ? 0 : 1;
+			listItem.overlayType = 'WarningList';
+			this.$emit('change', listItem);
+			//实时报警弹出
 			// GoldChart.scene.createSceneInstance(
 			// 	AIRSUPPLY_WARN_MODEL_SCENEINDEX,
 			// 	'fadeIn',
@@ -138,9 +120,6 @@ export default {
 			// });
 			// setTimeout(() => {
 			// 	GoldChart.scene.destroyScene(AIRSUPPLY_WARN_MODEL_SCENEINDEX);
-			listItem.status = listItem.priority == '已处理' ? 0 : 1;
-			listItem.type = 'WarningList';
-			this.$emit('change', listItem, 'WarningList');
 			// }, 3000);
 		},
 		async getData() {
@@ -149,8 +128,8 @@ export default {
 		handleClick(item, index) {
 			this.activeIndex = index;
 			item.status = item.stateName == '处理完成' ? 0 : 1;
-			item.type = 'WARNEVENT';
-			this.$emit('change', item, 'WARNEVENT');
+			item.overlayType = 'WarningList';
+			this.$emit('change', item);
 		},
 	},
 	beforeDestroy() {
@@ -168,6 +147,9 @@ export default {
 	font-size: 16px;
 	height: 800px;
 	overflow-y: scroll;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 	.list-item {
 		padding: 20px 8px;
 		box-sizing: border-box;

@@ -31,7 +31,7 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			ref="OverlayDetail"
-			:detialBoxWidth="450"
+			:width="450"
 		>
 			<TipDetial :data="activeOverlay" :detailInfo="detailInfo" />
 		</OverlayDetail>

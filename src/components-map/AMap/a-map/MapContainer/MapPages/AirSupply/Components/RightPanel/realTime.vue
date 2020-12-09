@@ -1,64 +1,54 @@
 <template>
-	<div class="real-time">
-		<vue-seamless-scroll
-			:data="list"
-			class="event-warning"
-			ref="aaa"
-			v-if="active && list.length"
-			:class-option="classOption"
+	<div class="event-warning">
+		<div
+			@click="handleClick(item, index, 'WarningList')"
+			v-for="(item, index) in list"
+			:key="index"
+			class="list-item"
+			:class="{ active: activeIndex === index }"
 		>
-			<div
-				@click="handleClick(item, index, 'WarningList')"
-				v-for="(item, index) in list"
-				:key="index"
-				class="list-item"
-				:class="{ active: activeIndex === index }"
-			>
-				<div class="row">
-					<SvgIcon
-						:icon-name="
-							item.stateName == '处理完成'
-								? 'iconzhengchang'
-								: 'iconyichang'
-						"
-						class="panel-type-icon"
-					></SvgIcon>
-					<div class="content">
-						{{ item.repairContent }}
-					</div>
-					<div>
-						{{ item.callDate }}
-					</div>
+			<div class="row">
+				<SvgIcon
+					:icon-name="
+						item.stateName == '处理完成'
+							? 'iconzhengchang'
+							: 'iconyichang'
+					"
+					class="panel-type-icon"
+				></SvgIcon>
+				<div class="content">
+					{{ item.repairContent }}
 				</div>
-				<div class="row">
-					<div class="station-name">
-						{{ item.address }}
-					</div>
-					<div
-						:class="[
-							'status',
-							item.stateName == '处理完成'
-								? 'status-suc'
-								: 'status-err',
-						]"
-					>
-						{{ item.stateName }}
-					</div>
+				<div>
+					{{ item.callDate }}
 				</div>
 			</div>
-		</vue-seamless-scroll>
+			<div class="row">
+				<div class="station-name">
+					{{ item.address }}
+				</div>
+				<div
+					:class="[
+						'status',
+						item.stateName == '处理完成'
+							? 'status-suc'
+							: 'status-err',
+					]"
+				>
+					{{ item.stateName }}
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
 import { SvgIcon } from '../../../../../components/';
-import VueSeamLess from 'vue-seamless-scroll';
 
 export default {
 	name: 'HomeRealTimeList',
 	components: {
 		SvgIcon,
-		VueSeamLess,
 	},
 	data() {
 		return {
@@ -75,18 +65,6 @@ export default {
 		},
 	},
 	computed: {
-		classOption() {
-			return {
-				step: 1, // 数值越大速度滚动越快
-				limitMoveNum: this.list?.length, // 开始无缝滚动的数据量
-				hoverStop: true, // 是否开启鼠标悬停stop
-				direction: 1, // 0向下 1向上 2向左 3向右
-				openWatch: true, // 开启数据实时监控刷新dom
-				singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
-				singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-				waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
-			};
-		},
 		active() {
 			return this.$parent.active;
 		},
@@ -111,13 +89,13 @@ export default {
 	},
 	methods: {
 		async getData() {
-            this.list = await this.$sysApi.map.airSupply.getEventWarningList();
+			this.list = await this.$sysApi.map.airSupply.getEventWarningList();
 		},
 		handleClick(item, index) {
 			this.activeIndex = index;
 			item.status = item.stateName == '处理完成' ? 0 : 1;
-			item.type = 'WARNEVENT';
-			this.$emit('change', item, 'WARNEVENT');
+			item.overlayType = 'WARNEVENT';
+			this.$emit('change', item);
 		},
 	},
 	beforeDestroy() {
@@ -134,7 +112,10 @@ export default {
 	color: #fff;
 	font-size: 16px;
 	height: 800px;
-	overflow: hidden;
+	overflow-y: scroll;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 	.list-item {
 		// height: 96px;
 		padding: 20px 8px;

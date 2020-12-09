@@ -11,6 +11,8 @@ initAMapApiLoader({
 		'AMap.HeatMap',
 		'AMap.GeoJSON',
 		'AMap.MoveAnimation',
+		'AMap.Geocoder',
+		'AMap.HawkEye',
 	],
 	uiVersion: '1.1.1',
 	v: '2.0',
@@ -24,6 +26,16 @@ export default {
 			mapReady: false,
 			mapComponentName: 'AirSupplyHighPressure',
 			mapComponentNameBefore: '',
+			mapConfig: {
+				center: [120.131259, 30.263295],
+				zoomEnable: true,
+				doubleClickZoom: false,
+				dragEnable: true,
+				zoom: 10,
+				viewMode: '3D',
+				pitch: 10,
+				mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
+			},
 		}
 	},
 	computed: {
@@ -38,31 +50,42 @@ export default {
 			let sceneIndexMap = SCENEINDEXMAP
 			let { index } = e.detail
 			let pageName = sceneIndexMap[index] || ''
-            //无匹配pageName 则 不显示地图
-            console.log(index)
+			//无匹配pageName 则 不显示地图
 			this.showMap = !!pageName
-            let pageNameArr = pageName.split('-')
+			let pageNameArr = pageName.split('-')
 			if (pageNameArr[0] === 'unchange') {
 				if (pageNameArr[1]) {
 					this.mapComponentNameBefore = pageNameArr[1]
 				}
 				return false
-            }
+			}
 			this.changePageName(pageName)
 		},
 		changePageName(pageName) {
 			if (this.mapComponentNameBefore === 'routeplan') {
-                bus.$emit('clearRoutePlan');
-            }
+				bus.$emit('clearRoutePlan')
+			}
 			this.mapComponentNameBefore = this.mapComponentName
-            this.mapComponentName = pageName
-			this._provided.parentInfo.pageName = pageName;
+			this.mapComponentName = pageName
+			this._provided.parentInfo.pageName = pageName
 		},
 		mapInit() {
 			console.log('地图初始化完成！')
 			this.mapReady = true
 			window.sss = this.$refs.amap
 			this.$refs.amap.$amap.addControl(new AMap.MapType())
+			this.$refs.amap.$amap.addControl(
+				new AMap.HawkEye({
+					autoMove: true,
+					isOpen:true,
+					mapStyle: this.mapConfig.mapStyle,
+				})
+            )
+            // let originInstance = new AMap.TileLayer.Satellite({
+			// 	zIndex: 1,
+			// 	opacity:1,
+            // });
+            // this.$refs.amap.$amap.addLayer(originInstance);
 		},
 	},
 	mounted() {

@@ -96,7 +96,7 @@ let HighPressureHighPressureGasStation = {
     prop: "pressureRegulatingStation"
 }
 let HighPressureLineLength = {
-    label: '高压管线长度(m)',
+    label: '高压管线长度(km)',
     DW: '',
     prop: "pipelineLength"
 }
@@ -118,12 +118,12 @@ let HighPressurePreservationNumber = {
 }
 // 中低压数据配置
 let LowPressureMediumline = {
-    label: '中压管线(m)',
+    label: '中压管线(km)',
     DW: '',
     prop: "lowLength"
 }
 let LowPressureLowline = {
-    label: '低压管线(m)',
+    label: '低压管线(km)',
     DW: '',
     prop: "smallLength"
 }

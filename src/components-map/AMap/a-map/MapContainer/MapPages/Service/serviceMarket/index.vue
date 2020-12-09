@@ -73,7 +73,7 @@ export default {
 			legendMultiple: true,
 			showOverlayDetail: false,
 			activeOverlay: {},
-			center: [120.061259, 30.183295],
+			center: [120.131259, 30.263295],
 			zoom: 10,
 			allTypeStationList: {},
 			// swichBoxInfo: SWICHBOX,

@@ -69,6 +69,7 @@ export default {
 	mounted() {},
 	methods: {
 		mouseover(marker) {
+			if (this.mouseIn) return false;
 			this.mouseIn = true;
 			this.$emit(
 				'overlay-click',

@@ -9,7 +9,7 @@
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
 			:left="left"
-			:detialBoxWidth="400"
+			:width="400"
 		/>
 		<!-- 路线规划 -->
 		<RoutePlan :data="activeOverlay"></RoutePlan>
@@ -103,7 +103,7 @@ export default {
 	},
 	data() {
 		return {
-			center: [120.061259, 30.233295],
+			center: [120.131259, 30.263295],
 			zoom: 10.8,
 			activeOverlay: {},
 			showOverlayDetail: false,
@@ -123,7 +123,7 @@ export default {
 	},
 	methods: {
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
+			this.$refs.OverlayDetail.overlayTypeInfo.visibleMore = true;
 			let { lng, lat, address, time, index } = overlay;
 			overlay.overlayType = overlayType || overlay.overlayType;
 			overlay.name = overlay.address || overlay.name;
@@ -131,7 +131,6 @@ export default {
 			this.showOverlayDetail = true;
 			// 计算弹框偏移量
 			this.left = this.offset(overlayType);
-			console.log(overlay);
 			// 警报效果后门 后期修正
 			if (index === 3) {
 				GoldChart.scene.createSceneInstance(
@@ -197,7 +196,6 @@ export default {
 			if (overlayType === 'WARNEVENT') {
 				console.log('渲染路径，23');
 				this.showRoutePlan = true;
-				console.log(overlay);
 				let { content, address } = overlay;
 				//和场景进行交互
 

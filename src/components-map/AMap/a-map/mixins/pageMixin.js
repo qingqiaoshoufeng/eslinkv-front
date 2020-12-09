@@ -34,7 +34,8 @@ export default {
          * @param {Number} scaleRatio     缩放
          * @param {Number} offsetLeftRatio     距离左侧的比例
          */
-        mapFitView(topOffestRatio = 0, scaleRatio = 0, offsetLeftRatio = 0) {
+        mapFitView(topOffestRatio = 0, scaleRatio = 0, offsetLeftRatio = 0, isImmediately = true) {
+            // console.log(topOffestRatio, scaleRatio, offsetLeftRatio, isImmediately)
             let latDiff = 1.377759
             let topOffest = topOffestRatio * latDiff //上移经纬度
             let scale = (scaleRatio / 2) * latDiff //缩放
@@ -51,7 +52,7 @@ export default {
                         position: [120.721945, 30.496516 - topOffest - scale],
                     }),
                 ],
-                true,
+                false,
                 [paddingTop, paddingTop, 0, 0]
             )
             //x轴向偏移
@@ -60,7 +61,7 @@ export default {
                 let paddingRight =
                     3500 * screenScaleRatio * (1 - offsetLeftRatio) -
                     (3500 * screenScaleRatio - avaliableAreaWidth) / 2
-                this.$amap.panBy(-paddingRight, 0)
+                this.$amap.panBy(-paddingRight, 0, 0)
             }
         },
         handleOverlayClick(

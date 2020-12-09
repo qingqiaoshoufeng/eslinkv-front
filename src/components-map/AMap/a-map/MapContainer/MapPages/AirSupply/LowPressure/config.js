@@ -13,13 +13,13 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	MiddlePressureLine: {
 		label: '中压管网',
 		legendIcon: 'icontulizhongyaguanwang',
-		isShow: true,
+		visible: true,
 		tileQuery: [11, 12],
 	},
 	LowPressureLine: {
 		label: '低压管网',
 		legendIcon: 'icontulidiyaguanwang',
-		isShow: true,
+		visible: true,
 		tileQuery: [10],
 	},
 	PressureRegulatingStation: {
@@ -27,7 +27,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		legendIcon: 'icontulitiaoyazhan',
 		iconSize: 38,
 		tileQuery: [34],
-		isShow: false,
+		visible: false,
 	},
 	InspectionPerson: {
 		label: '巡检人员',
@@ -36,17 +36,17 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		icon: 'iconrenyuan',
 		component: 'InspectionPerson',
 		showOverlayName: false,
-		isShow: false,
+		visible: false,
 		dataProp: 'inspectionPersonList',
 	},
 	InspectionCar: {
 		label: '巡检车辆',
-		legendIcon: 'icontulicheliang',
+		legendIcon: 'icontulicheliang1',
 		iconSize: 38,
-		icon: 'iconcheliang',
+		icon: 'icondianweicheliang',
 		component: 'InspectionCar',
 		showOverlayName: false,
-		isShow: false,
+		visible: false,
 		dataProp: 'inspectionCarList',
 	},
 	// ServiceStation: {
@@ -54,7 +54,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	//     legendIcon: 'icontulizonghefuwuzhan1',
 	//     iconSize: 38,
 	//     component: 'ServiceStation',
-	//     isShow: true,
+	//     visible: true,
 	//     dataProp: 'serviceStationList',
 	//     // detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
 	// },
@@ -63,7 +63,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	//     legendIcon: 'icontuliqiyuanzhan',
 	//     iconSize: 38,
 	//     component: 'EmergencyAirSourceStation',
-	//     isShow: true,
+	//     visible: true,
 	//     dataProp: "pipeManageMentStationList"
 	// },
 	// UndergroundRepairStation: {
@@ -71,7 +71,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	//     legendIcon: 'icontulidixiaqiangxiudian',
 	//     iconSize: 38,
 	//     component: 'EmergencyAirSourceStation',
-	//     isShow: true,
+	//     visible: true,
 	//     dataProp: "undergroundRepairStationList"
 	// },
 	// OngroundRepairStation: {
@@ -79,7 +79,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	//     legendIcon: 'icontulidishangqiangxiudian',
 	//     iconSize: 38,
 	//     component: 'EmergencyAirSourceStation',
-	//     isShow: true,
+	//     visible: true,
 	//     dataProp: "OngroundRepairStationList"
 	// },
 	// GasStation: {
@@ -87,14 +87,14 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	//     legendIcon: 'icontulimenzhan',
 	// 	iconSize: 52,
 	//     component: 'GasStation',
-	//     isShow: false,
+	//     visible: false,
 	// },
 	// EmergencyAirSourceStation: {
 	//     label: '应急气源站',
 	//     legendIcon: 'icontuliqiyuanzhan',
 	// 	iconSize: 38,
 	//     component: 'EmergencyAirSourceStation',
-	//     isShow: false,
+	//     visible: false,
 	// },
 	// },
 	// GasStation: {
@@ -102,14 +102,14 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	//     legendIcon: 'icontulimenzhan',
 	// 	iconSize: 52,
 	//     component: 'GasStation',
-	//     isShow: false,
+	//     visible: false,
 	// },
 	// EmergencyAirSourceStation: {
 	//     label: '应急气源站',
 	//     legendIcon: 'icontuliqiyuanzhan',
 	// 	iconSize: 38,
 	//     component: 'EmergencyAirSourceStation',
-	//     isShow: false,
+	//     visible: false,
 	// },
 
 	// HighPressureLine_Process: {
@@ -117,42 +117,42 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	//     legendIcon: 'icontulizhongyaguanwang-progress',
 	// 	iconSize: 38,
 	//     component: 'HighPressureLine_Process',
-	//     isShow: false,
+	//     visible: false,
 	// },
 	// LNGStation: {
 	//     label: 'LNG站',
 	//     legendIcon: 'icontulilNG',
 	// 	iconSize: 38,
 	//     component: 'LNGStation',
-	//     isShow: false,
+	//     visible: false,
 	// },
 	// LiquefiedGasStation: {
 	//     label: '液化气站',
 	//     legendIcon: 'icontuliyehuaqi',
 	// 	iconSize: 38,
 	//     component: 'LiquefiedGasStation',
-	//     isShow: false,
+	//     visible: false,
 	// },
 	// NaturalGasStation: {
 	//     label: '加气站',
 	// 	iconSize: 38,
 	//     legendIcon: 'icontulijiaqizhan',
 	//     component: 'NaturalGasStation',
-	//     isShow: false,
+	//     visible: false,
 	// },
 	// DistributedEnergyResource: {
 	//     label: '分布式能源',
 	//     legendIcon: 'icontulinengyuanzhan',
 	// 	iconSize: 38,
 	//     component: 'DistributedEnergyResource',
-	//     isShow: false,
+	//     visible: false,
 	// },
 	// WarningList: {
 	// 	label: '告警',
 	// 	legendIcon: 'icontulinengyuanzhan',
 	// 	iconSize: 38,
 	// 	component: 'WarningList',
-	// 	isShow: true,
+	// 	visible: true,
 	// },
 }
 
@@ -212,7 +212,7 @@ export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
 			//     errColor: '#FF7217',
 			// },
 		},
-		isShowMore: true,
+		visibleMore: true,
 	},
 	WARNEVENT: {
 		fields: {
@@ -231,7 +231,7 @@ export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
 				errColor: '#fff',
 			},
 		},
-		isShowMore: true,
+		visibleMore: true,
 	},
 	WarningList: {
 		fields: {
@@ -250,7 +250,7 @@ export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
 				errColor: '#fff',
 			},
 		},
-		isShowMore: true,
+		visibleMore: true,
 	},
 	InspectionPerson: {
 		fields: {
@@ -262,7 +262,7 @@ export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
 				errColor: '#FFDC45',
 			},
 		},
-		isShowMore: false,
+		visibleMore: false,
 	},
 	InspectionCar: {
 		fields: {
@@ -274,7 +274,7 @@ export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
 				errColor: '#FFDC45',
 			},
 		},
-		isShowMore: false,
+		visibleMore: false,
 	},
 }
 // 中低压统计数据

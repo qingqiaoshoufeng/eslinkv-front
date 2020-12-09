@@ -4,24 +4,16 @@
 		:value="value"
 		@input="val => $emit('input', val)"
 	>
-		<!-- <TabPanel key="statAawareness" name="statAawareness" label="态势感知">
-			<statAawareness @change="handleClick" />
-		</TabPanel> -->
-		<!-- <TabPanel key="realTime" name="realTime" label="工艺报警" lazy>
-			<realTime @change="handleClick" />
-		</TabPanel> -->
 		<TabPanel
-			key="realTimeWithLevel"
-			name="realTimeWithLevel"
+			key="processWarning"
+			name="processWarning"
 			label="工艺报警"
 		>
-			<realTimeWithLevel @change="handleClick" />
+			<processWarning @change="handleClick" />
 		</TabPanel>
+
 		<TabPanel key="realTime" name="realTime" label="事件报警">
-			<realTime
-				@before-change="handleBeforeChange"
-				@change="handleClick"
-			/>
+			<realTime @change="handleClick" />
 		</TabPanel>
 
 		<TabPanel key="overlayList" name="overlayList" label="点位列表" lazy>
@@ -34,7 +26,7 @@
 import { Tabs, TabPanel } from '../../../../../components/Tabs/';
 import overlayList from './overlayList';
 import realTime from './realTime';
-import realTimeWithLevel from './realTimeWithLevel';
+import processWarning from './processWarning';
 import statAawareness from './statAawareness';
 
 export default {
@@ -48,7 +40,7 @@ export default {
 	props: {
 		value: {
 			type: String,
-			default: 'realTimeWithLevel',
+			default: 'processWarning',
 		},
 	},
 	components: {
@@ -56,32 +48,36 @@ export default {
 		TabPanel,
 		overlayList,
 		realTime,
-		realTimeWithLevel,
+		processWarning,
 		statAawareness,
 	},
 	mounted() {
 		this.ready = true;
 	},
-	watch: {
-		activeItem(val) {
-			if (JSON.stringify(val) == '{}') {
-				return (this.activeIndex = null);
-			}
-			let index = this.data.findIndex(item => {
-				let { id } = item;
-				return val.id === id;
-			});
-			this.activeIndex = index > -1 ? index : null;
-		},
-	},
 	methods: {
-		handleClick(item, overlayType) {
-            item.overlayType = overlayType;
-			this.$emit('overlay-click', item, overlayType || 'WarningList');
-		},
-		handleBeforeChange(item, overlayType) {
-			item.overlayType = overlayType;
-			this.$emit('before-overlay-change', item, overlayType || 'WarningList');
+		handleClick(item) {
+			this.geocoder = new AMap.Geocoder({
+				city: '330100', //杭州市范围内查询
+			});
+			//普通报警地点，调用高德地址查询地址
+			if (!item.lat) {
+				this.geocoder.getLocation(item.address, (status, result) => {
+					if (status === 'complete' && result.geocodes.length) {
+						var lnglat = result.geocodes[0].location;
+						let { lng, lat } = lnglat;
+						item.lat = lat;
+						item.lng = lng;
+						this.$emit('overlay-click', item);
+					} else {
+						//查询失败则默认杭然地址
+						item.lat = 30.273297;
+						item.lng = 120.151562;
+						console.log('根据地址查询位置失败');
+					}
+				});
+			} else {
+				this.$emit('overlay-click', item);
+			}
 		},
 	},
 };

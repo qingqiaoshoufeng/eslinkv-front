@@ -13,10 +13,7 @@
 		@mouseover="handleMouseover"
 		@mouseleave="handleMouseleave"
 	>
-     <template slot="icon">
-          aaaa
-     </template>
-    </BaseOverlay>
+	</BaseOverlay>
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index';
@@ -67,8 +64,7 @@ export default {
 			let res = await this.$sysApi.map.airSupply.getAllTypeStationList(
 				params
 			);
-            this.data = (res && res['inspectionCarList']) || [];
-            console.log('aaaa')
+			this.data = (res && res['inspectionCarList']) || [];
 			if (!this.ready) {
 				this.timer = setInterval(() => {
 					this.getData();
@@ -84,6 +80,7 @@ export default {
 	},
 };
 </script>
+
 
 
 

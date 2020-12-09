@@ -39,17 +39,20 @@
 			<div class="title-txt">杭燃体验</div>
 			<img src="/static/icons/right-icon.svg">
 		</section>
-		<section class="fans">
-			<div class="fans-top">
-				<div style="text-align: left">
-					<div class="fan-title">数媒粉丝日活(人)</div>
-					<div class="fan-num font-num">{{ data.fanDailyNum }}</div>
-				</div>
-				<div style="text-align: right">
-					<div class="fan-title">数媒粉丝总数(人)</div>
-					<div class="fan-num font-num">{{ data.fanTotalNum }}</div>
-				</div>
-			</div>
+		<section class="fans pos-r">
+			<video class="fans-video pos-a" autoplay="autoplay" loop="loop" src="./img/shouyetiyan.webm"></video>
+      <transition name="fade">
+        <div class="fans-top" :key="currFan.name">
+          <div style="text-align: left">
+            <div class="fan-title">{{currFan.name}}</div>
+            <div class="fan-num font-num">{{ currFan.fanDailyNum }}</div>
+          </div>
+          <div style="text-align: right">
+            <div class="fan-title">{{currFan.name}}</div>
+            <div class="fan-num font-num">{{ currFan.fanTotalNum }}</div>
+          </div>
+        </div>
+      </transition>
 		</section>
 	</div>
 </template>
@@ -79,8 +82,38 @@
 		},
 		api: {
 			data: {
-				fanDailyNum: 123,
-				fanTotalNum: 425673,
+				fans: [
+          {
+            name: '微信本月访问量(次)',
+            name2: '微信累计粉丝(人)',
+            fanDailyNum: 123,
+            fanTotalNum: 425673
+          },
+          {
+            name: '微博本月阅读量(次)',
+            name2: '微博累计粉丝(人)',
+            fanDailyNum: 666,
+            fanTotalNum: 354556
+          },
+          {
+            name: '网站本月访问量(次)',
+            name2: '网站累计访问量(次)',
+            fanDailyNum: 856,
+            fanTotalNum: 153332
+          },
+          {
+            name: '头条本月关注量(次)',
+            name2: '头条累计粉丝(人)',
+            fanDailyNum: 321,
+            fanTotalNum: 77554
+          },
+          {
+            name: '抖音本月访问量(次)',
+            name2: '抖音累计粉丝(人)',
+            fanDailyNum: 1234,
+            fanTotalNum: 965566
+          }
+        ],
 				building: [
 					{
 						name: '燃气报警系统',
@@ -151,14 +184,18 @@
 		data() {
 			return {
 				buildingTimer: null,
-				loopIndex: 1
+				loopIndex: 1,
+        fanIndex: 0
 			}
 		},
 		computed: {
 			currBuilding() {
 				const map = new Map([[1, 2], [2, 1], [3, 0], [4, 5], [5, 4], [0, 3]])
 				return this.data?.building[map.get(this.loopIndex % 6)] || {}
-			}
+			},
+      currFan () {
+			  return this.data ? this.data.fans[this.fanIndex] : {}
+      }
 		},
 		methods: {
 			getItemIndex(i) {
@@ -179,6 +216,11 @@
 			this.configValue = this.parseConfigValue(config, value)
 			this.buildingTimer = setInterval(() => {
 				this.loopIndex++
+        if (this.fanIndex === 5) {
+          this.fanIndex = 0
+        } else {
+          this.fanIndex++
+        }
 			}, 3000)
 		},
 		mounted() {
@@ -319,15 +361,23 @@
 			}
 		}
 	}
-
-	.fans {
+	.fans-video{
 		height: 412px;
-    background: #011B79 url("./img/expbg.svg") no-repeat center;
-		background-size: 94% 94%;
+		left: 50%;
+		transform: translateX(-50%);
+	}
+	.fans {
+    position: relative;
+    background: #011B79;
+		height: 412px;
 		border: 1px solid #00DDFF;
 		border-top-width: 0;
 
 		.fans-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
 			display: flex;
 			justify-content: space-between;
 			padding: 20px 16px 0;

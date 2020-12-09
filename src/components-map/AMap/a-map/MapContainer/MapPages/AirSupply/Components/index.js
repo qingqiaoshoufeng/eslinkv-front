@@ -21,3 +21,25 @@ export { default as WarnEvent } from './WarnEvent/index.vue'
 
 export { default as RightPanel } from './RightPanel/'
 export { default as RoutePlan } from './RoutePlan/'
+
+// let componentArr = [
+// 	'HighPressureLine',
+// 	'HighPressureLine_Process',
+// 	'GasStation',
+// 	'PressureRegulatingStation',
+// 	'EmergencyAirSourceStation',
+// 	'InspectionPerson',
+// 	'InspectionCar',
+//   'LowPressureLine',
+// 	'ComprehensiveServiceStation',
+// 	'LiquefiedGasStation',
+// 	'NaturalGasStation',
+// 	'DistributedEnergyResource',
+// 	'RightPanel',
+// 	'LNGStation',
+// 	'ServiceStation',
+// 	'PipeManageMentStation',
+// 	'UndergroundRepairStation',
+// 	'OngroundRepairStation',
+// 	'WarnEvent',
+// ];

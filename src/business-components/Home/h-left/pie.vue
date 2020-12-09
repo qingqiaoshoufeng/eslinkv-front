@@ -60,30 +60,29 @@
 						type: 'pie',
 						center: ['50%', '45%'],
 						radius: ['52%', '64%'],
-						avoidLabelOverlap: true,
-						minAngle: 24,
-						startAngle: 270,
+						avoidLabelOverlap: false,
+						minAngle: 30,
 						color: ['#db4f49', '#367cf6', '#84e4fc', '#f8cd47', '#fceb50', '#ed9144', '#5fcbb9'],
 						label: {
 							formatter: function (params) {
 								const percent = (params.value * 100 / total).toFixed(2)
-								return `{normal|${params.name}}\n{value|${Math.ceil(params.value / 10000)} ${percent}%}`
+								return `{normal|${params.name}} {value|${Math.ceil(params.value / 10000)} (${percent}%)}`
 							},
 							padding: [0, -100],
 							rich: {
 								normal: {
-									fontSize: 15,
+									fontSize: 14,
 									lineHeight: 14,
 									color: '#fff',
-									padding: [6, 0, 0, 0],
+									padding: [28, 0, 0, 0],
 									align: 'right'
 								},
 								value: {
 									align: 'left',
 									fontSize: 15,
-									lineHeight: 14,
+									lineHeight: 15,
 									color: '#fff',
-									padding: [-8, 0, 0, 0],
+									padding: [28, 16, 0, 0],
 								}
 							}
 						},

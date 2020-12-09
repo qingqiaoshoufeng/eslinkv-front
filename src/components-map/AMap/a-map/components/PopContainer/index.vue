@@ -14,7 +14,7 @@
 				width,
 			}"
 		>
-			<div class="close-btn" @click="$emit('input', false)">
+			<div class="close-btn" v-show="showPopCloseBtn" @click="$emit('input', false)">
 				<svg-icon icon-name="iconbaseline-close-px"></svg-icon>
 			</div>
 			<div class="triangle"></div>
@@ -50,6 +50,10 @@ export default {
             default(){
                 return {}
             }
+        },
+        showPopCloseBtn:{
+            type:Boolean,
+            default:false
         }
 	},
 	data() {

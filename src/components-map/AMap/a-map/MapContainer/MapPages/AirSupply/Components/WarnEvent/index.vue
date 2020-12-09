@@ -12,14 +12,15 @@
 			:visible="visible"
 			@click="handleWarnEventClick"
 		>
-			<!-- <video
+			<video
 				class="warning-videO"
 				src="@/assets/amap/images/warning-circle.webm"
 				controls="controls"
 				autoplay="autoplay"
 				muted="muted"
+				v-if="data.status"
 				loop
-			></video> -->
+			></video>
 		</Overlay>
 		<!-- 详情弹窗 -->
 		<OverlayDetail
@@ -28,8 +29,10 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
+			:showCloseBtn="true"
+			:showMore="showMore"
 			ref="OverlayDetail"
-			:detialBoxWidth="400"
+			:width="400"
 		>
 		</OverlayDetail>
 		<!-- 路线规划 -->
@@ -40,7 +43,7 @@
 import bus from '../../../../../utils/bus';
 import { Overlay, OverlayDetail } from '../../../../../components/index';
 import RoutePlan from '../RoutePlan';
-import GoldChart from '@/openApi'
+import GoldChart from '@/openApi';
 import {
 	INDEXSCENEMAP,
 	OVERLAYINFOMAP_AIRSUPPLY,
@@ -74,6 +77,7 @@ export default {
 			icon: 'iconshijian1',
 			showOverlayDetail: true,
 			showRoutePlan: false,
+			showMore: true,
 		};
 	},
 	computed: {
@@ -82,17 +86,19 @@ export default {
 				this.showOverlayDetail = false;
 				return false;
 			} else {
+				this.showMore = true;
 				this.showOverlayDetail = true;
 				return true;
 			}
 		},
+		//报警图标
 		overlayIcon() {
-			let { status, type } = this.data;
+			let { status, overlayType } = this.data;
 			let iconMap = {
 				WARNEVENT: 'iconshijian1',
 				WarningList: 'icongongyiyichang',
 			};
-			return iconMap[type] + (status === 0 ? '-suc' : '');
+			return iconMap[overlayType] + (status === 0 ? '-suc' : '');
 		},
 		pageName() {
 			let { pageName } = this.parentInfo;
@@ -114,6 +120,7 @@ export default {
 			GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
 			//更新数据
 			this.$nextTick(() => {
+				this.showMore = false;
 				AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
 					GoldChart.instance.updateComponent(i, {
 						data: {

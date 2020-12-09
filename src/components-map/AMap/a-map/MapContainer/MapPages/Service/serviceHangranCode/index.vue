@@ -34,7 +34,7 @@
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:detialBoxWidth="detialBoxWidth"
+			:width="detialBoxWidth"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			@view-detail="showOverlayDetail"
@@ -150,6 +150,12 @@ export default {
 			intervalId: null,
 			detialBoxWidth: 480, // 详情弹框宽度
 			detailComponentName: 'TipDetial',
+			params: [
+				[-0.3, 0.4, 0.2],
+				[-0.31, 0.4, 0.15],
+				[0.08, 0.4, 0.4],
+				[-0.34, 0.4, 0.13],
+			],
 		};
 	},
 	created() {
@@ -260,12 +266,13 @@ export default {
 		carouseComplBranchCompanyInfo() {
 			this.detailComponentName = 'TipDetial';
 			let index = 0;
-
+			let i = 0.3;
 			let length = this.allTypeStationList.branchCompanyList.length;
 			if (this.intervalId) {
 				this.clearInterval();
 			}
 			this.intervalId = setInterval(() => {
+				i += 0.5;
 				let currentIndex = index++ % length;
 				// let overlay =
 				this.activeOverlay = {
@@ -278,6 +285,8 @@ export default {
 				};
 				this.detailInfo = this.activeOverlay.gasCodeMapDetailInfoVO;
 				this.showOverlayDetail = true;
+
+				this.mapFitView(...this.params[currentIndex], false);
 			}, 3000);
 		},
 		// 关闭定时器

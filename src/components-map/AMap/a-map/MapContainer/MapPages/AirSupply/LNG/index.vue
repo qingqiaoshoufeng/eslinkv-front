@@ -12,9 +12,9 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
-				v-if="config.isShow && allTypeStationList[config.dataProp]"
+				v-if="config.visible && allTypeStationList[config.dataProp]"
 				:key="legend"
-				:visible="config.isShow"
+				:visible="config.visible"
 				:is="config.component"
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
 				:overlayType="legend"
@@ -37,7 +37,7 @@
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
-			:detialBoxWidth="400"
+			:width="400"
 		/>
 		<!-- 路线规划 -->
 		<!-- <RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan> -->
@@ -151,7 +151,7 @@ export default {
 		let { LNGStation } = AIRSUPPLY_LNG_LEGEND_MAP;
 		return {
 			overlayInfoConfigMap: Object.freeze(AIRSUPPLY_LNG_OVERLAY_MAP),
-			center: [120.061259, 30.233295],
+			center: [120.131259, 30.263295],
 			zoom: 10.7,
 			activeOverlay: {},
 			activeWarnData: {},
@@ -170,7 +170,6 @@ export default {
 	methods: {
 		setCenter(center) {
 			this.center = center || this.center;
-			console.log(this.center);
 		},
 		// 获取所有站点数据
 		async getAllTypeStationList() {

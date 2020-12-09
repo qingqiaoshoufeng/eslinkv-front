@@ -25,16 +25,15 @@ export default {
 			default: 'right',
 		},
 		dataStatisticsList: {
-			type: Array,
+			type: [Object,Array],
 			default() {
-				return [];
+				return {};
 			},
 		},
 		data: {
 			type: [Object, Array],
 			default() {
-				{
-				}
+                return {}
 			},
 		},
 	},
