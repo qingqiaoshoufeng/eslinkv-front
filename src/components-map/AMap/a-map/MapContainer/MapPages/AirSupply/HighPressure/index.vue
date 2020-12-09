@@ -316,6 +316,7 @@ export default {
 		this.getDataStatisticsInfo();
 		this.getHighPressurePipe();
 		window.setCenter = this.setCenter.bind(this);
+		console.log(this.$root);
 	},
 };
 </script>

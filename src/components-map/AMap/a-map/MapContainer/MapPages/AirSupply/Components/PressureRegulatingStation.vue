@@ -82,7 +82,7 @@ export default {
 					let propInner = prop + index;
 					dataComp[propInner] = {
 						name,
-						value: value.toFixed(2),
+						value,
 						dw,
 					};
 				});

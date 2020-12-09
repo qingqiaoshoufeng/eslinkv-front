@@ -13,7 +13,15 @@
 			>
 				<span class="label">{{ `${item.label}: ` }}</span>
 				<span class="value">{{
-					`${(detailInfo[item.prop] || item.defaultVal) + item.DW} `
+					`${
+						(detailInfo[item.prop] &&
+						isNumber(detailInfo[item.prop])
+							? parseFloat(
+									detailInfo[item.prop].toLocaleString()
+							  ).toFixed(item.Fixed || 0)
+							: detailInfo[item.prop] || item.defaultVal) +
+						item.DW
+					} `
 				}}</span>
 			</div>
 		</div>
@@ -23,6 +31,7 @@
 	</div>
 </template>
 <script>
+import { isNumber } from 'highcharts';
 export default {
 	name: 'TipDetial',
 	props: {
@@ -49,6 +58,9 @@ export default {
 	methods: {
 		handleViewDetail() {
 			this.$emit('view-detail');
+		},
+		isNumber(val) {
+			return typeof val === 'number' && !isNaN(val);
 		},
 	},
 	mounted() {},

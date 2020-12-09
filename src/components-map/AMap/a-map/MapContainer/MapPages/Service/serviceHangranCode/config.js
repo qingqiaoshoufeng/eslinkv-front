@@ -1,5 +1,5 @@
 // 引入详情字典
-import { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth } from "../../../../utils/dictionary"
+import { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth } from "./dictionary"
 // 覆盖物legend配置
 export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
     // Grouphall: {
