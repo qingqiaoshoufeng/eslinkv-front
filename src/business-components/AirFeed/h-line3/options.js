@@ -1,20 +1,21 @@
-
-
 export default function getOption(data, config) {
     const x = []
     const y1 = []
     const y2 = []
-    data.forEach(v => {
-        x.push(v.x)
-        y1.push(v.y1)
-        y2.push(v.y2)
-    })
-    let y1Max = Math.max(...y1)
-    let y1Min = Math.min(...y1)
-    let y2Max = Math.max(...y2)
-    let y2Min = Math.min(...y2)
-    const diff1 = (y1Max - y1Min) / 5
-    const diff2 = (y2Max - y2Min) / 5
+	let y1Max=0,y1Min=0,y2Max=0,y2Min=0,diff1=0,diff2=0
+	if( data instanceof Array){
+		data.forEach(v => {
+			x.push(v.x)
+			y1.push(v.y1)
+			y2.push(v.y2)
+		})
+		y1Max = Math.max(...y1)
+		y1Min = Math.min(...y1)
+		y2Max = Math.max(...y2)
+		y2Min = Math.min(...y2)
+		 diff1 = (y1Max - y1Min) / 5
+		 diff2 = (y2Max - y2Min) / 5
+	}
     const scale = 3
     y1Min = y1Min - diff1 * scale
     y1Max = y1Max + diff1 * scale

@@ -10,9 +10,9 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component
-				v-if="config.isShow && allTypeStationList[config.dataProp]"
+				v-if="config.visible && allTypeStationList[config.dataProp]"
 				:key="legend"
-				:visible="config.isShow"
+				:visible="config.visible"
 				:overlayIcon="config.legendIcon"
 				:iconSize="config.iconSize"
 				:overlayType="legend"

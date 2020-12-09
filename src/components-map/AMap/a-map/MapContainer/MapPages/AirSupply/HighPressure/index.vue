@@ -29,27 +29,13 @@
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
 			v-model="showOverlayDetail"
-			:data="activeOverlay"
-			:legendMap="legendMap"
-			:overlayInfoConfigMap="overlayInfoConfigMap"
-			:before-close="closeOverlayDetail"
+			v-bind="{
+				beforeClose: closeOverlayDetail,
+				...OverlayDetailProp,
+			}"
 			ref="OverlayDetail"
 			:width="400"
 		>
-			<!-- <div class="overlay-detail" v-if="activeOverlay.detail">
-				<div class="detail-name">{{ activeOverlay.name }}</div>
-				<div
-					class="fn-flex"
-					v-for="(item, prop) in activeOverlay.detail"
-					:key="prop"
-				>
-					<div class="detail-label">{{ item.name }}：</div>
-					<div class="detail-value">
-						{{ item.value }}{{ item.dw }}
-					</div>
-				</div>
-				<div class="btn" v-show="visibleMore">更多详情</div>
-			</div> -->
 		</OverlayDetail>
 		<portal to="destination">
 			<!-- 统计数据 -->
@@ -139,6 +125,28 @@ export default {
 			visibleMore: false,
 		};
 	},
+	computed: {
+		OverlayDetailProp() {
+			let { activeOverlay, overlayInfoConfigMap, legendMap } = this;
+			if (JSON.stringify(activeOverlay) !== '{}') {
+				let { overlayType } = activeOverlay;
+				//详情展示信息配置
+				let overlayDetailConfig =
+					overlayInfoConfigMap[overlayType] || {};
+				let legendConfig = legendMap[overlayType] || {};
+				//图标大小，是否显示关闭按钮
+				let iconSize = legendConfig.iconSize || 38;
+				let showCloseBtn = legendConfig.showPopCloseBtn;
+				return {
+					data: activeOverlay,
+					iconSize,
+					showCloseBtn,
+					overlayDetailConfig,
+					showMore: false,
+				};
+			}
+		},
+	},
 	methods: {
 		// 1.获取所有站点数据
 		async getAllTypeStationList() {
@@ -211,37 +219,8 @@ export default {
 <style lang="scss" scoped>
 .map-legend {
 	position: absolute;
-	bottom: 50px;
+	bottom: 40px;
 	left: 50%;
 	transform: translateX(-50%);
-}
-.overlay-detail {
-	.detail-name {
-		font-weight: 600;
-		font-size: 32px;
-		color: #ffdc45;
-	}
-	.detail-label {
-		font-size: 24px;
-		color: #fff;
-	}
-	.detail-value {
-		font-size: 24px;
-		color: #ffdc45;
-	}
-	.btn {
-		padding: 0px 8px;
-		line-height: 32px;
-		width: 80px;
-		height: 32px;
-		background: #0057a9;
-		border-radius: 4px;
-		display: inline-block;
-		cursor: pointer;
-		margin-top: 16px;
-		&:hover {
-			opacity: 0.8;
-		}
-	}
 }
 </style>

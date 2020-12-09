@@ -9,7 +9,7 @@ export const SERVICE_SERVICENINETEEN_LEGEND_MAP = {
         iconSize: 56,
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
-        isShow: true,
+        visible: true,
         dataProp: 'branchCompanyList',
         detailList: [monthAccpet, monthManage, monthManagePercent]
     },

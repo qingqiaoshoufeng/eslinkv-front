@@ -1,7 +1,7 @@
 <template>
 	<div class="widget-part" :style="styles">
 		<div class="h-title-5">
-			<p class="pos-r text-left">{{data&&data.title}}</p>
+			<p class="pos-r text-left">{{data&&data.title}}工艺图</p>
 		</div>
 	</div>
 </template>
@@ -21,15 +21,6 @@
 	}
 	export default {
 		mixins: [mixins],
-		watch: {
-			'config.api.params': {
-				handler(val) {
-					if (val){
-						this.config.api.data = JSON.stringify({title: `${val.label}工艺图`})
-					}
-				},
-			}
-		},
 		created() {
 			this.configSource = this.parseConfigSource(config)
 			this.configValue = this.parseConfigValue(config, value)

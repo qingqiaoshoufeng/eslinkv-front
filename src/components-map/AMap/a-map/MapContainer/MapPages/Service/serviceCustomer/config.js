@@ -19,7 +19,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         iconSize: 56,
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
-        isShow: true,
+        visible: true,
         dataProp: 'branchCompanyList',
         detailList: [citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial]
 
@@ -31,7 +31,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         iconSize: 38,
         icon: 'iconfuwuwangdian',
         component: 'ServiceNetworkStation',
-        isShow: false,
+        visible: false,
         dataProp: 'networkStationList',
         detailList: []
     },
@@ -41,7 +41,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         iconSize: 38,
         icon: 'iconsansheliandong',
         component: 'ThreeSocialLinkage',
-        isShow: true,
+        visible: true,
         dataProp: 'threeSocialLinkageList',
         detailList: []
     },
@@ -51,7 +51,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         iconSize: 38,
         icon: 'iconrenwugongdan',
         component: 'TaskList',
-        isShow: false,
+        visible: false,
         dataProp: 'TaskList',
         detailList: [serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus]
     },

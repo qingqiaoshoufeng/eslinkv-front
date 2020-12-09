@@ -132,7 +132,7 @@
 		height: 158px;
 		background-size: 272px 158px;
 		top: 426px;
-		background-image: url('./img/5.png');
+		background-image: url('img/5.png');
 		left: 260px;
 	}
 
@@ -145,17 +145,17 @@
 
 	.h-bg-54441-num-41 {
 		left: 594px;
-		background-image: url('./img/4-1.png');
+		background-image: url('img/4-1.png');
 	}
 
 	.h-bg-54441-num-42 {
 		left: 928px;
-		background-image: url('./img/4-2.png');
+		background-image: url('img/4-2.png');
 	}
 
 	.h-bg-54441-num-43 {
 		left: 1262px;
-		background-image: url('./img/4-3.png');
+		background-image: url('img/4-3.png');
 	}
 
 	.h-bg-54441-num-1 {
@@ -164,7 +164,7 @@
 		background-size: 272px 158px;
 		top: 426px;
 		left: 1600px;
-		background-image: url('./img/1.png');
+		background-image: url('img/1.png');
 	}
 
 	.h-bg-54441 {
@@ -202,7 +202,7 @@
 	}
 
 	.h-bg-54441-close {
-		background-image: url('./img/close.svg');
+		background-image: url('img/close.svg');
 		width: 32px;
 		height: 32px;
 		left: 50%;

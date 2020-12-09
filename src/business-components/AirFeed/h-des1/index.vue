@@ -1,11 +1,11 @@
 <template>
-	<div class="widget-part" :style="styles">
+	<div class="widget-part" :style="styles" v-if="data">
 		<div class="h-des-1 fn-flex flex-row">
 			<div class="fn-flex">
-				<img :src="config.config&&config.config.img" alt=""/>
+				<img :src="config.config.img" alt=""/>
 			</div>
-			<p class="pos-r text-left">{{config.config&&config.config.title}}</p>
-			<h2>{{data&&data.value}}</h2>
+			<p class="pos-r text-left">{{config.config.title}}</p>
+			<h2>{{data.value}}</h2>
 		</div>
 	</div>
 </template>
@@ -48,7 +48,7 @@
 		}
 	}
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	.h-des-1 {
 		background: linear-gradient(90deg, rgba(0, 87, 169, 0.5) 0%, rgba(0, 87, 169, 0) 100%);
 		height: 100%;
@@ -60,6 +60,7 @@
 			justify-content: center;
 			align-items: center;
 			margin-right: 16px;
+      background: rgba(0, 87, 169, 0.5);
 		}
 
 		p {

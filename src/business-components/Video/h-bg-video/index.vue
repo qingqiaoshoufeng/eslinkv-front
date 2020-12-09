@@ -1,7 +1,7 @@
 <template>
 	<div class="widget-part" :style="`${styles};z-index:19;`">
 		<div class="h-bg-video fn-flex flex-row pos-r">
-			<img class="h-bg-video-left" src="../h-bg/img/video-left.svg" alt=""/>
+			<img class="h-bg-video-left" src="../../More/h-bg/img/video-left.svg" alt=""/>
 			<video-player
 				class="video-player-box"
 				ref="videoPlayer"
@@ -9,7 +9,7 @@
 				:playsinline="true"
 				customEventName="customstatechangedeventname"
 			></video-player>
-			<img class="h-bg-video-right" src="../h-bg/img/video-right.svg" alt=""/>
+			<img class="h-bg-video-right" src="../../More/h-bg/img/video-right.svg" alt=""/>
 			<div class="h-bg-video-close pointer pos-a" @click="handleClose"></div>
 			<div class="h-bg-video-close1 pointer pos-a" @click="handleClose"></div>
 		</div>
@@ -78,7 +78,7 @@
 	}
 
 	.h-bg-video-close {
-		background-image: url('../h-bg/img/close.svg');
+		background-image: url('../../More/h-bg/img/close.svg');
 		width: 32px;
 		height: 32px;
 		left: 50%;

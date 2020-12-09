@@ -9,7 +9,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         iconSize: 38,
         icon: 'iconyongqidahu',
         component: 'MajorClient',
-        isShow: false,
+        visible: false,
         dataProp: 'majorClientList',
         detailList: [useNumberYestoday]
     },
@@ -17,7 +17,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
     useHotYear: {
         label: '年度热力',
         component: 'useHotYear',
-        isShow: true,
+        visible: true,
         dataProp: 'year',
     },
     BranchCompany: {
@@ -25,7 +25,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         legendIcon: 'icontulifengongsi',
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
-        isShow: true,
+        visible: true,
         dataProp: 'branchCompanyList',
         detailList: [ICcustomer, useNumberToday, useNumberYear, useNumberMonth,]
     },
@@ -35,7 +35,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         iconSize: 38,
         icon: 'iconyongqidahu2',
         component: 'WarningICcustomer',
-        isShow: true,
+        visible: true,
         dataProp: 'WarningICcustomerList',
         detailList: [useNumberToday, useNumberYear, useNumberMonth,]
     }

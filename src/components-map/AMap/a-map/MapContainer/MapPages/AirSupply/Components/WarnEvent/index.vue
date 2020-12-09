@@ -10,7 +10,6 @@
 				...data,
 			}"
 			:visible="visible"
-			@click="handleWarnEventClick"
 		>
 			<video
 				class="warning-videO"
@@ -25,12 +24,13 @@
 		<!-- 详情弹窗 -->
 		<OverlayDetail
 			v-model="showOverlayDetail"
-			:data="data"
-			:overlayInfoConfigMap="overlayInfoConfigMap"
+			v-bind="{
+				showMore,
+				data,
+				...OverlayDetailProp,
+			}"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
-			:showCloseBtn="true"
-			:showMore="showMore"
 			ref="OverlayDetail"
 			:width="400"
 		>
@@ -78,31 +78,39 @@ export default {
 			showOverlayDetail: true,
 			showRoutePlan: false,
 			showMore: true,
+            visible: false,
+            overlayIcon:'',
+            OverlayDetailProp:{}
 		};
 	},
-	computed: {
-		visible() {
-			if (JSON.stringify(this.data) == '{}') {
-				this.showOverlayDetail = false;
-				return false;
-			} else {
-				this.showMore = true;
+	watch: {
+		data(val) {
+			if (JSON.stringify(val) !== '{}') {
+				let { overlayType, status } = val;
+				let { overlayInfoConfigMap } = this;
+				let iconMap = {
+					WARNEVENT: 'iconshijian1',
+					WarningList: 'icongongyiyichang',
+				};
+				let overlayDetailConfig =
+					overlayInfoConfigMap[overlayType] || {};
+				//弹窗详情
+				this.OverlayDetailProp = {
+					iconSize: 38,
+					overlayDetailConfig,
+					showCloseBtn: true,
+				};
+				//报警图标
+				this.overlayIcon =
+					iconMap[overlayType] + (status === 0 ? '-suc' : '');
+				this.visible = true;
+				this.showMore = overlayType === 'WARNEVENT';
 				this.showOverlayDetail = true;
-				return true;
+			} else {
+				this.visible = false;
+				this.showOverlayDetail = false;
+				return {};
 			}
-		},
-		//报警图标
-		overlayIcon() {
-			let { status, overlayType } = this.data;
-			let iconMap = {
-				WARNEVENT: 'iconshijian1',
-				WarningList: 'icongongyiyichang',
-			};
-			return iconMap[overlayType] + (status === 0 ? '-suc' : '');
-		},
-		pageName() {
-			let { pageName } = this.parentInfo;
-			return pageName;
 		},
 	},
 	mounted() {
@@ -112,7 +120,6 @@ export default {
 		});
 	},
 	methods: {
-		handleWarnEventClick() {},
 		viewOverlayDetail() {
 			let { repairContent, address, callDate } = this.data;
 			this.showRoutePlan = true;
@@ -183,7 +190,9 @@ export default {
 		},
 		closeOverlayDetail(done) {
 			this.showRoutePlan = false;
-			GoldChart.scene.setSceneIndex(INDEXSCENEMAP[this.pageName]);
+			GoldChart.scene.setSceneIndex(
+				INDEXSCENEMAP[this.parentInfo.pageName]
+			);
 			this.$emit('close');
 			done && done();
 		},
@@ -222,8 +231,4 @@ video::-webkit-media-controls {
 	margin-top: -36px;
 	margin-left: 19px;
 }
-
-// img {
-// 	width: 100%;
-// }
 </style>

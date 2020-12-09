@@ -10,13 +10,13 @@
 		<template v-for="(config, legend) in overlayMap">
 			<component
 				v-if="
-					config.isShow &&
+					config.visible &&
 					allTypeStationList[config.dataProp] &&
 					allTypeStationList[config.dataProp].length &&
 					config.component
 				"
 				:key="config.component"
-				:visible="config.isShow"
+				:visible="config.visible"
 				:overlayIcon="config.legendIcon"
 				:iconSize="config.iconSize"
 				:overlayType="legend"

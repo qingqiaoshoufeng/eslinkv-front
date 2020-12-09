@@ -36,7 +36,7 @@ export const AIRSUPPLY_WARN__MODEL_COMPONENTINDEX = ['5twi4542r5i']
 
 // 供气工艺图场景
 export const AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX = 'zcklf7lfbq'
-export const AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1 = ['chx90ijycs9']
+export const AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1 = ['chx90ijycs9','59w3zaic3r7','vmuwvj985ff']
 export const AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2 = ['3om92oavtul','i7r0tng6ma','ysggte7pye']
 // 工商户警报
 export const ICcustomer_WARN__SCENEINDEX = '7gpqnjnklb4'

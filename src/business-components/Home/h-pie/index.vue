@@ -11,7 +11,7 @@
 <script>
 	import mixins from '../../mixins'
 	import {getInput} from "../../../../lib";
-	import pie from '../h-left/pie'
+	import pie from '../../More/h-left/pie'
 
 	const configSource = {
 		config: {

@@ -11,7 +11,7 @@
 					<div class="detail-item-icon" :style="`background-image: url(${currBuilding.icon1})`"></div>
 					<div>
 						<div class="detail-item-title">{{ currBuilding.desc1 }}</div>
-						<div class="detail-item-num">{{ currBuilding.value1 }} <span>{{ currBuilding.unit1 }}</span>
+						<div class="detail-item-num font-num">{{ currBuilding.value1| toThousand }} <span>{{ currBuilding.unit1 }}</span>
 						</div>
 					</div>
 				</div>
@@ -19,7 +19,7 @@
 					<div class="detail-item-icon money"></div>
 					<div>
 						<div class="detail-item-title">{{ currBuilding.desc2 }}</div>
-						<div class="detail-item-num">{{ currBuilding.value2/10000 | toThousand }} <span>万元</span></div>
+						<div class="detail-item-num font-num">{{ currBuilding.value2/10000 | toThousand }} <span>万元</span></div>
 					</div>
 				</div>
 			</section>
@@ -197,6 +197,22 @@
 			  return this.data ? this.data.fans[this.fanIndex] : {}
       }
 		},
+    watch: {
+      data: {
+        handler(val) {
+          this.buildingTimer = setInterval(() => {
+            this.loopIndex++
+            if (this.fanIndex === 5) {
+              this.fanIndex = 0
+            } else {
+              this.fanIndex++
+            }
+          }, 3000)
+        },
+        deep: true,
+        immediate: true,
+      },
+    },
 		methods: {
 			getItemIndex(i) {
 				const n = (i + this.loopIndex) % 6
@@ -214,14 +230,6 @@
 		created() {
 			this.configSource = this.parseConfigSource(config, configSource)
 			this.configValue = this.parseConfigValue(config, value)
-			this.buildingTimer = setInterval(() => {
-				this.loopIndex++
-        if (this.fanIndex === 5) {
-          this.fanIndex = 0
-        } else {
-          this.fanIndex++
-        }
-			}, 3000)
 		},
 		mounted() {
 			// setTimeout(()=>{
