@@ -2,27 +2,31 @@
 	<div class="widget-part pos-r" :style="styles">
 		<div class="a-inspectionConfig fn-flex flex-column">
 			<div class="video-box fn-flex flex-row">
-				<video
-					:src="config.config && config.config.videoUrl"
-					controls="controls"
-					autoplay="autoplay"
-					muted="muted"
-					loop
-				></video>
-				<div class="a-inspectionConfig-ratio-box pos-r">
-					<div class="a-inspectionConfig-ratio pos-a" :style="{height:`${ data&&data.ratio}%`}"></div>
-				</div>
-				<div class="a-inspectionConfig-title">
-					<h2 class="font-num">{{data&&data.ratio}}%</h2>
-					<p>在线率</p>
-				</div>
+				<div class="wrap">
+          <video
+              :src="config.config && config.config.videoUrl"
+              controls="controls"
+              autoplay="autoplay"
+              muted="muted"
+              loop
+          ></video>
+        </div>
+				<div class="wrap">
+          <div class="a-inspectionConfig-ratio-box pos-r">
+            <div class="a-inspectionConfig-ratio pos-a" :style="{height:`${ data&&data.ratio}%`}"></div>
+          </div>
+          <div class="a-inspectionConfig-title">
+            <h2 class="font-num">{{data&&data.ratio}}%</h2>
+            <p>在线率</p>
+          </div>
+        </div>
 			</div>
 			<div class="context fn-flex flex-row">
 				<div class="context-item fn-flex flex-column">
 					<div class="inspection-value font-num">
 						{{ data && data.value1 }}
 					</div>
-					<div class="inspection-desc">
+					<div class="inspection-desc" style="margin-left: 16px;">
 						{{ config.config && config.config.desc }}
 					</div>
 				</div>
@@ -114,7 +118,6 @@
 	.a-inspectionConfig-ratio-box {
 		width: 16px;
 		height: 84px;
-		margin-left: 33px;
 		border: 1px solid #00DDFF;
 		margin-right: 8px;
 		margin-top: 21px;
@@ -123,6 +126,11 @@
 	.a-inspectionConfig {
 		height: 200px;
 		width: 497px;
+
+    .wrap {
+      flex: 1;
+      display: flex;
+    }
 
 		video::-webkit-media-controls {
 			display: none !important;
@@ -136,7 +144,6 @@
 
 		.context-item {
 			flex: 1;
-			margin-left: 16px;
 
 			&:nth-child(2) {
 				.inspection-desc {
@@ -163,7 +170,6 @@
 			.inspection-desc {
 				margin-top: 8px;
 				width: 198px;
-				padding-left: 24px;
 				height: 24px;
 				font-size: 20px;
 				line-height: 24px;
