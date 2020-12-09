@@ -8,9 +8,10 @@ let legendMap = {
 		legendIcon: '图例图标',
 		icon: '地图上图标',
 		component: '覆盖物对应组件名称',
-        isShow: '是否默认开启（true/false)',
+        visible: '是否默认开启（true/false)',
         dataProp:'后端返回data中的数据',
         tileQuery:'gis切片需要的查询参数',
+        showOverlayName:'是否显示地图覆盖物名称'
 	},
 }
 ```
@@ -32,7 +33,7 @@ let overlayMap = {
 				},
 			},
 		},
-		isShowMore: false,  //是否显示查看详情
+		visibleMore: false,  //是否显示查看详情
 	},
 	WARNEVENT: {
 		fields: {
@@ -49,7 +50,7 @@ let overlayMap = {
 				errColor: '#FF7217',
 			},
 		},
-		isShowMore: true,
+		visibleMore: true,
 	},
 }
 ```

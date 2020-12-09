@@ -23,11 +23,11 @@
 						v-if="legend.legendIcon"
 						:icon-name="legend.legendIcon"
 						class="legend-icon"
-						:class="{ 'in-active': !legend.isShow }"
+						:class="{ 'in-active': !legend.visible }"
 					></SvgIcon>
 					<span
 						class="legend-label"
-						:class="{ 'in-active': !legend.isShow }"
+						:class="{ 'in-active': !legend.visible }"
 						>{{ legend.label }}</span
 					>
 				</div>
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import  SvgIcon  from '../SvgIcon/index';
+import SvgIcon from '../SvgIcon/index';
 export default {
 	name: 'Legend',
 	props: {
@@ -107,11 +107,11 @@ export default {
 			let { multiple } = this;
 			if (!multiple) {
 				Object.keys(this.data).forEach(legendKey => {
-					this.data[legendKey].isShow = false;
+					this.data[legendKey].visible = false;
 				});
-				this.data[prop].isShow = true;
+				this.data[prop].visible = true;
 			} else {
-				this.data[prop].isShow = !this.data[prop].isShow;
+				this.data[prop].visible = !this.data[prop].visible;
 			}
 			this.$emit('legend-click', prop);
 		},

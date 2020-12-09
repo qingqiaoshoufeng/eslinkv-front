@@ -29,8 +29,8 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
-			:showCloseBtn="showCloseBtn"
-            :showMore="showMore"
+			:showCloseBtn="true"
+			:showMore="showMore"
 			ref="OverlayDetail"
 			:width="400"
 		>
@@ -76,8 +76,8 @@ export default {
 		return {
 			icon: 'iconshijian1',
 			showOverlayDetail: true,
-            showRoutePlan: false,
-            showMore:true,
+			showRoutePlan: false,
+			showMore: true,
 		};
 	},
 	computed: {
@@ -86,12 +86,12 @@ export default {
 				this.showOverlayDetail = false;
 				return false;
 			} else {
-                this.showMore = true
+				this.showMore = true;
 				this.showOverlayDetail = true;
 				return true;
 			}
-        },
-        //报警图标
+		},
+		//报警图标
 		overlayIcon() {
 			let { status, overlayType } = this.data;
 			let iconMap = {
@@ -103,12 +103,7 @@ export default {
 		pageName() {
 			let { pageName } = this.parentInfo;
 			return pageName;
-        },
-        //是否弹窗显示关闭按钮
-		showCloseBtn() {
-            let { overlayType } = this.data;
-			return ['WARNEVENT'].includes(overlayType);
-        },
+		},
 	},
 	mounted() {
 		bus.$on('clearRoutePlan', () => {
@@ -125,7 +120,7 @@ export default {
 			GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
 			//更新数据
 			this.$nextTick(() => {
-                this.showMore = false
+				this.showMore = false;
 				AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
 					GoldChart.instance.updateComponent(i, {
 						data: {

@@ -27,7 +27,7 @@
 			<component
 				v-if="config.component"
 				:key="legend"
-				:visible="config.isShow"
+				:visible="config.visible"
 				:is="config.component"
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
 				:overlayType="legend"
@@ -200,22 +200,22 @@ export default {
 				PressureRegulatingStation,
 			} = this.legendMap;
 			const {
-				isShow: isShowM,
+				visible: visibleM,
 				tileQuery: tileQueryM,
 			} = MiddlePressureLine;
-			const { isShow: isShowL, tileQuery: tileQueryL } = LowPressureLine;
+			const { visible: visibleL, tileQuery: tileQueryL } = LowPressureLine;
 			const {
-				isShow: isShowP,
+				visible: visibleP,
 				tileQuery: tileQueryP,
 			} = PressureRegulatingStation;
 			let queryArr = [];
-			if (isShowM) {
+			if (visibleM) {
 				queryArr.push(tileQueryM);
 			}
-			if (isShowL) {
+			if (visibleL) {
 				queryArr.push(tileQueryL);
 			}
-			if (isShowP) {
+			if (visibleP) {
 				queryArr.push(tileQueryP);
 			}
 			//条件变化刷新地图
@@ -228,7 +228,6 @@ export default {
 	methods: {
 		setCenter(center) {
 			this.center = center || this.center;
-			console.log(this.center);
 		},
 		// 获取所有站点数据
 		async getAllTypeStationList() {

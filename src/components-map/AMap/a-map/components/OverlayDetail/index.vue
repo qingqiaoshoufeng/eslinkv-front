@@ -19,28 +19,53 @@
 			</div>
 			<div class="triangle"></div>
 			<slot>
-				<div
-					class="info-item"
-					v-for="(info, prop) in overlayTypeInfo.fields"
-					:style="{
-						...info.style,
-						color:
-							overlay.status == 1
-								? info.errColor
-								: info.style && info.style.color,
-					}"
-					:key="prop"
-				>
-					{{
-						info.formatter ? info.formatter(overlay) : overlay[prop]
-					}}
+				<div v-if="!overlay.detail">
+					<div
+						class="info-item"
+						v-for="(info, prop) in overlayTypeInfo.fields"
+						:style="{
+							...info.style,
+							color:
+								overlay.status == 1
+									? info.errColor
+									: info.style && info.style.color,
+						}"
+						:key="prop"
+					>
+						{{
+							info.formatter
+								? info.formatter(overlay)
+								: overlay[prop]
+						}}
+					</div>
+					<div
+						class="btn"
+						v-if="showMore && overlayTypeInfo.isShowMore === true"
+						@click="handleViewDetail(overlay)"
+					>
+						查看详情
+					</div>
 				</div>
-				<div
-					class="btn"
-					v-if="showMore && overlayTypeInfo.isShowMore === true"
-					@click="handleViewDetail(overlay)"
-				>
-					查看详情
+				<div v-else>
+					<div class="detail-name" v-if="overlay.name">
+						{{ overlay.name }}
+					</div>
+					<div
+						class="fn-flex"
+						v-for="(item, prop) in overlay.detail"
+						:key="prop"
+					>
+						<div class="detail-label">{{ item.name }}：</div>
+						<div class="detail-value">
+							{{ item.value }}{{ item.dw }}
+						</div>
+					</div>
+					<div
+						class="btn"
+						v-if="showMore && overlayTypeInfo.isShowMore === true"
+					>
+						更多详情
+					</div>
 				</div>
 			</slot>
 		</div>
@@ -86,14 +111,17 @@ export default {
 		width: {
 			type: Number,
 			default: 240,
-		},
+        },
+        //iconSize
 		iconSize: {
 			type: Number,
-		},
+        },
+        //关闭按钮
 		showCloseBtn: {
 			type: Boolean,
 			default: false,
-		},
+        },
+        //是否显示查看详情
 		showMore: {
 			type: Boolean,
 			type: true,
@@ -224,6 +252,20 @@ export default {
 			opacity: 0.8;
 		}
 	}
+}
+
+.detail-name {
+	font-weight: 600;
+	font-size: 32px;
+	color: #ffdc45;
+}
+.detail-label {
+	font-size: 24px;
+	color: #fff;
+}
+.detail-value {
+	font-size: 24px;
+	color: #ffdc45;
 }
 </style>
 

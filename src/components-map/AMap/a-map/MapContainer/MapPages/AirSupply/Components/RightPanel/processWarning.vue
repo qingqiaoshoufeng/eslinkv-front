@@ -100,8 +100,8 @@ export default {
 		handleClick(listItem, index) {
 			let { address, time } = listItem;
 			listItem.status = listItem.priority == '已处理' ? 0 : 1;
-			listItem.type = 'WarningList';
-			this.$emit('change', listItem, 'WarningList');
+			listItem.overlayType = 'WarningList';
+			this.$emit('change', listItem);
 			//实时报警弹出
 			// GoldChart.scene.createSceneInstance(
 			// 	AIRSUPPLY_WARN_MODEL_SCENEINDEX,

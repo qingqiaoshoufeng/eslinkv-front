@@ -12,9 +12,9 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
-				v-if="config.isShow && allTypeStationList[config.dataProp]"
+				v-if="config.visible && allTypeStationList[config.dataProp]"
 				:key="legend"
-				:visible="config.isShow"
+				:visible="config.visible"
 				:is="config.component"
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
 				:overlayType="legend"
@@ -170,7 +170,6 @@ export default {
 	methods: {
 		setCenter(center) {
 			this.center = center || this.center;
-			console.log(this.center);
 		},
 		// 获取所有站点数据
 		async getAllTypeStationList() {

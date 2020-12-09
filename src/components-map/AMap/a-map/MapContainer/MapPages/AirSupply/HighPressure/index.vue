@@ -13,19 +13,15 @@
 		<template v-for="(config, legend) in legendMap">
 			<component
 				:key="legend"
-                v-if="allTypeStationList[config.dataProp]"
-				:visible="config.isShow"
+				v-if="stationDataMap[config.dataProp]"
 				:is="config.component"
+				:visible="config.visible"
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
 				:overlayType="config.component"
 				:iconSize="config.iconSize"
-				:showOverlayName="
-					config.showOverlayName === false
-						? config.showOverlayName
-						: undefined
-				"
+				:showOverlayName="config.showOverlayName"
 				:detailList="config.detailList"
-				:data="allTypeStationList[config.dataProp]"
+				:data="stationDataMap[config.dataProp]"
 				@overlay-click="handleOverlayClick"
 				@close="closeOverlayDetail('', false)"
 			/>
@@ -40,7 +36,7 @@
 			ref="OverlayDetail"
 			:width="400"
 		>
-			<div class="overlay-detail" v-if="activeOverlay.detail">
+			<!-- <div class="overlay-detail" v-if="activeOverlay.detail">
 				<div class="detail-name">{{ activeOverlay.name }}</div>
 				<div
 					class="fn-flex"
@@ -52,15 +48,15 @@
 						{{ item.value }}{{ item.dw }}
 					</div>
 				</div>
-				<div class="btn" v-show="isShowMore">更多详情</div>
-			</div>
+				<div class="btn" v-show="visibleMore">更多详情</div>
+			</div> -->
 		</OverlayDetail>
 		<portal to="destination">
 			<!-- 统计数据 -->
 			<DataStatistics
 				:position="'right'"
-				:dataStatisticsList="dataStatisticsList"
-				:data="dataStatisticsInfo"
+				:dataStatisticsList="dataStatisticsConfigMap"
+				:data="dataStatisticsData"
 			/>
 			<!-- 图例 -->
 			<MapLegend :data="legendMap" class="map-legend" />
@@ -75,89 +71,55 @@
 </template>
 <script>
 //页面覆盖物组件
-import {
-	ComprehensiveServiceStation,
-	LiquefiedGasStation,
-	NaturalGasStation,
-	DistributedEnergyResource,
-	InspectionPerson,
-	InspectionCar,
-	RightPanel,
-	LNGStation,
-	HighPressureLine,
-	HighPressureLine_Process,
-	LowPressureLine,
-	GasStation,
-	PressureRegulatingStation,
-	EmergencyAirSourceStation,
-	ServiceStation,
-	PipeManageMentStation,
-	UndergroundRepairStation,
-	OngroundRepairStation,
-	WarnEvent,
-} from '../Components/index.js';
-
+let componentPageArr = [
+	//legend覆盖物
+	'HighPressureLine',
+	'HighPressureLine_Process',
+	'GasStation',
+	'PressureRegulatingStation',
+	'EmergencyAirSourceStation',
+	'InspectionPerson',
+	'InspectionCar',
+	//报警点位
+	'WarnEvent',
+	//右侧报警列表
+	'RightPanel',
+];
 //页面所需公共组件
-import {
-	DataStatistics,
-	RegionBoundary,
-	OverlayDetail,
-	MapLegend,
-} from '../../../../components';
-
-import {
-	INDEXSCENEMAP,
-	AIRSUPPLY_WARN_SCENEINDEX,
-	AIRSUPPLY_WARN_COMPONENTINDEX,
-	AIRSUPPLY_WARN_MODEL_SCENEINDEX,
-	AIRSUPPLY_WARN__MODEL_COMPONENTINDEX,
-	AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
-	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX,
-} from '../../../../config/scene';
-
+let componentCommonArr = [
+	'DataStatistics',
+	'RegionBoundary',
+	'OverlayDetail',
+	'MapLegend',
+];
+//异步加载组件函数
+let componentPageMap = {};
+let componentCommonMap = {};
+componentPageArr.map(componentName => {
+	componentPageMap[componentName] = () =>
+		import('../Components/' + componentName);
+});
+componentCommonArr.map(componentName => {
+	componentCommonMap[componentName] = () =>
+		import('../../../../components/' + componentName);
+});
+//页面所需配置项
 import {
 	AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
 	AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP,
-	DATASTATISTICSLIST,
+	DATA_STATISTICS_MAP,
 } from './config.js';
-import GoldChart from '@/openApi';
 
 export default {
-	name: 'AirSupplyHighPressure',
+	name: 'HighPressure',
 	inject: ['parentInfo'],
 	components: {
-		RegionBoundary,
-		OverlayDetail,
-		MapLegend,
-		ComprehensiveServiceStation,
-		LiquefiedGasStation,
-		NaturalGasStation,
-		DistributedEnergyResource,
-		InspectionPerson,
-		InspectionCar,
-		RightPanel,
-		LNGStation,
-		HighPressureLine,
-		HighPressureLine_Process,
-		LowPressureLine,
-		GasStation,
-		PressureRegulatingStation,
-		EmergencyAirSourceStation,
-		ServiceStation,
-		PipeManageMentStation,
-		UndergroundRepairStation,
-		OngroundRepairStation,
-		DataStatistics,
-		WarnEvent,
+		...componentPageMap,
+		...componentCommonMap,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.setZoomAndPanTo(...this.center, this.zoom);
-	},
-	watch: {
-		center(val) {
-			this.$amap.panTo(val, 100);
-		},
 	},
 	data() {
 		return {
@@ -168,21 +130,13 @@ export default {
 			),
 			legendMap: AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP,
 			activeTab: 'processWarning',
-			dataStatisticsList: DATASTATISTICSLIST,
+            dataStatisticsConfigMap: DATA_STATISTICS_MAP,
+			dataStatisticsData: {},
 			activeOverlay: {},
 			activeWarnData: {},
 			showOverlayDetail: false,
-			dataStatisticsInfo: {
-				GasStation: 5,
-				PressureRegulatingStation: 2,
-				HighPressureGasStation: 24,
-				HighPressureLineLength: 236,
-				CarNumber: 12,
-				InspectionNumber: 22,
-				PreservationNumber: 35,
-			},
-			allTypeStationList: {},
-			isShowMore: false,
+			stationDataMap: {},
+			visibleMore: false,
 		};
 	},
 	methods: {
@@ -198,19 +152,19 @@ export default {
 			let res = await this.$sysApi.map.airSupply.getAllTypeStationList(
 				params
 			);
-			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			this.stationDataMap = { ...this.stationDataMap, ...res };
 		},
 		// 2.获取高压统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
+			this.dataStatisticsData = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
 				{ type: 'HighPressure' }
 			);
 		},
 		// 3.获取高压管网，高压管网建设中数据
 		async getHighPressurePipe() {
 			let pipeData = await this.$sysApi.map.airSupply.getHighPressurePipe();
-			this.allTypeStationList = {
-				...this.allTypeStationList,
+			this.stationDataMap = {
+				...this.stationDataMap,
 				...pipeData,
 			};
 		},

@@ -70,7 +70,6 @@ export default {
 				name,
 				type,
 			});
-			console.log(data);
 			let dataComp = {};
 			Object.keys(data).forEach(prop => {
 				let dw = this.propDwMap[prop];

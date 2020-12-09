@@ -53,7 +53,7 @@ export default {
 		},
 	},
 	created() {
-		this.instanceArr = []
+		this.instanceArr = [] 
 		let fun = findAmapRoot.bind(this)
 		this.$amap = fun()
 		if (this.visible) {
