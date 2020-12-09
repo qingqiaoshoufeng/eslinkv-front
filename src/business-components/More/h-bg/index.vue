@@ -15,14 +15,14 @@
 			<div class="h-bg-right pos-a"></div>
 			<div @mouseover="hover54441=true"
 				 @mouseleave="hover54441=false">
-				<video class="h-bg-red1 pos-a pointer" src="img/dengleft.webm" @click="open54441" v-if="hover54441"
+				<video class="h-bg-red1 pos-a pointer" src="./img/dengleft.webm" @click="open54441" v-if="hover54441"
 					   autoplay="autoplay" loop="loop"></video>
 				<div class="h-bg-red1 pos-a pointer" :class="{active:status54441}" @click="open54441"
 					 v-else></div>
 			</div>
 			<div @mouseover="hoverVideo=true"
 				 @mouseleave="hoverVideo=false">
-				<video class="h-bg-red2 pos-a pointer" src="img/dengright.webm" @click="openVideo"
+				<video class="h-bg-red2 pos-a pointer" src="./img/dengright.webm" @click="openVideo"
 					   v-if="hoverVideo" autoplay="autoplay" loop="loop"></video>
 				<div class="h-bg-red2 pos-a pointer" :class="{active:statusVideo}" @click="openVideo"
 					 v-else></div>
@@ -33,34 +33,34 @@
 				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('nn16rowdl5r')"
 					@mouseover="hoverNav1=true"
 					@mouseleave="hoverNav1=false">
-					<video class="pos-a" src="img/nav-1.webm" v-if="hoverNav1" autoplay="autoplay"/>
-					<img class="pos-a" src="img/nav-1.svg" v-show="!hoverNav1"/>
+					<video class="pos-a" src="./img/nav-1.webm" v-if="hoverNav1" autoplay="autoplay"/>
+					<img class="pos-a" src="./img/nav-1.svg" v-show="!hoverNav1"/>
 					<span class="pos-a">杭燃供气</span>
 				</li>
 				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('6gouq223fze')"
 					@mouseover="hoverNav2=true"
 					@mouseleave="hoverNav2=false">
-					<video class="pos-a" src="img/nav-2.webm" v-if="hoverNav2" autoplay="autoplay"/>
-					<img class="pos-a" src="img/nav-2.svg" v-show="!hoverNav2"/>
+					<video class="pos-a" src="./img/nav-2.webm" v-if="hoverNav2" autoplay="autoplay"/>
+					<img class="pos-a" src="./img/nav-2.svg" v-show="!hoverNav2"/>
 					<span class="pos-a">杭燃服务</span>
 				</li>
 				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('o8tkm981qdh')"
 					@mouseover="hoverNav3=true"
 					@mouseleave="hoverNav3=false">
-					<video class="pos-a" src="img/nav-3.webm" v-if="hoverNav3" autoplay="autoplay"/>
-					<img class="pos-a" src="img/nav-3.svg" v-show="!hoverNav3"/>
+					<video class="pos-a" src="./img/nav-3.webm" v-if="hoverNav3" autoplay="autoplay"/>
+					<img class="pos-a" src="./img/nav-3.svg" v-show="!hoverNav3"/>
 					<span class="pos-a">杭燃优家</span>
 				</li>
 				<li class="pointer fn-flex flex-column pos-r" @click="handleClick('vxoiljh5my9')"
 					@mouseover="hoverNav4=true"
 					@mouseleave="hoverNav4=false">
-					<video class="pos-a" src="img/nav-4.webm" v-if="hoverNav4" autoplay="autoplay"/>
-					<img class="pos-a" src="img/nav-4.svg" v-show="!hoverNav4"/>
+					<video class="pos-a" src="./img/nav-4.webm" v-if="hoverNav4" autoplay="autoplay"/>
+					<img class="pos-a" src="./img/nav-4.svg" v-show="!hoverNav4"/>
 					<span class="pos-a">杭燃体验</span>
 				</li>
 			</ul>
 			<div class="h-bg-start1-box pos-a">
-				<video src="img/start1-active.webm" autoplay="autoplay" loop="loop"
+				<video src="./img/start1-active.webm" autoplay="autoplay" loop="loop"
 					   class="h-bg-start1-video pos-a pointer"
 					   @click="handleStart"></video>
 				<div class="h-bg-start1 pos-a pointer" @click="handleStart"></div>
@@ -204,7 +204,7 @@
 	.h-bg-start1 {
 		width: 72px;
 		height: 72px;
-		background-image: url('img/start1.svg');
+		background-image: url('./img/start1.svg');
 		left: 0;
 		bottom: 0;
 		opacity: 1;
@@ -311,7 +311,7 @@
 	}
 
 	div.h-bg-red1 {
-		background-image: url('img/red-1.png');
+		background-image: url('./img/red-1.png');
 		background-size: 257px 64px;
 		opacity: 0.6;
 
@@ -328,7 +328,7 @@
 	}
 
 	div.h-bg-red2 {
-		background-image: url('img/red-2.png');
+		background-image: url('./img/red-2.png');
 		background-size: 257px 64px;
 		opacity: 0.6;
 
@@ -345,7 +345,7 @@
 	}
 
 	.h-bg-back {
-		background-image: url('img/bg1.png');
+		background-image: url('./img/bg1.png');
 		width: 100%;
 		height: 100%;
 		top: 0;
@@ -353,7 +353,7 @@
 	}
 
 	.h-bg-top {
-		background-image: url('img/topyuan.svg');
+		background-image: url('./img/topyuan.svg');
 		width: 2275px;
 		height: 161px;
 		left: 50%;
@@ -363,7 +363,7 @@
 	}
 
 	.h-bg-5441 {
-		background: url("img/bg-54441.png") no-repeat;
+		background: url("./img/bg-54441.png") no-repeat;
 		background-size: 100% 100%;
 		height: 100%;
 		width: 100%;
@@ -385,7 +385,7 @@
 	}
 
 	.h-bg-left {
-		background-image: url('img/left.svg');
+		background-image: url('./img/left.svg');
 		width: 948px;
 		height: 1050px;
 		background-size: 948px 1050px;
@@ -394,7 +394,7 @@
 	}
 
 	.h-bg-right {
-		background-image: url('img/right.svg');
+		background-image: url('./img/right.svg');
 		width: 948px;
 		height: 1050px;
 		background-size: 948px 1050px;
@@ -403,13 +403,13 @@
 	}
 
 	.h-bg-right {
-		background-image: url('img/right.svg');
+		background-image: url('./img/right.svg');
 	}
 
 	.h-bg-center {
 		width: 1768px;
 		height: 584px;
-		background-image: url('img/center.svg');
+		background-image: url('./img/center.svg');
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: 1768px 584px;
@@ -421,7 +421,7 @@
 	}
 
 	.h-bg-control {
-		background-image: url('img/control.svg');
+		background-image: url('./img/control.svg');
 		background-repeat: no-repeat;
 		background-size: 2620px 498px;
 		width: 2620px;

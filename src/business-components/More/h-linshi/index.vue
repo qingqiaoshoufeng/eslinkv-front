@@ -7,7 +7,7 @@
 		</section>
 		<div class="container" style="padding-bottom: 10px;">
 			<section class="total">
-				<img src="img/air-bar.svg" class="total-icon">
+				<img src="./img/air-bar.svg" class="total-icon">
 				<div class="total-info">
 					<div class="total-title">年度累计供气量</div>
 					<div class="num font-num">{{ data.total | toThousand }} <span>m³</span></div>
@@ -111,7 +111,7 @@
 					</li>
 				</ul>
 				<div class="standard">
-					<img src="img/standard.svg">
+					<img src="./img/standard.svg">
 					<p>
 						一个工作日<br>
 						0份资料容缺受理<br>
@@ -359,7 +359,7 @@
 			color: #FFFFFF;
 			background-color: rgba(0, 87, 169, 0.5);
 			border-radius: 50%;
-			background-image: url("img/link-bg.svg");
+			background-image: url("./img/link-bg.svg");
 			background-repeat: no-repeat;
 			background-size: 0;
 			transition: all .3s;
