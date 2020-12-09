@@ -1,14 +1,5 @@
 <template>
 	<div class="widget-part h-tabs-circle" :style="styles" v-if="data">
-    <div class="develop">
-      <div class="develop-chart" ref="develop"></div>
-      <div class="develop-axis">
-        <div class="develop-axis-start">2011</div>
-        <div class="develop-axis-name">管线发展趋势</div>
-        <div class="develop-axis-end">2020</div>
-      </div>
-    </div>
-    <div class="dash"></div>
 		<h-vertical-tabs
 			class="h-tabs-circle__tabs"
 			:source="tabSource"
@@ -22,6 +13,7 @@
         <div class="circle-legend-color"></div>
         <div class="circle-legend-name">{{ k.name }}</div>
         <div class="circle-legend-num"><span class="font-num">{{ k.count | toThousand }}</span>{{ k.unit }}</div>
+        <div class="circle-legend-percent font-num">{{ k.percent }}%</div>
       </li>
     </ul>
 	</div>
@@ -38,8 +30,6 @@ const config = { animation: true };
 const value = {
 	api: {
 		data: JSON.stringify({
-      lineX: ['2001','2002','2003','2004','2005','2006','2020'],
-      lineY: [30,40,50,60,66,77,90],
       circle: [
         [
           {
@@ -174,7 +164,6 @@ const value = {
 export default {
 	name: 'h-tabs-circle',
 	components: {
-		HCvs,
 		HVerticalTabs,
 		pie,
 	},
@@ -204,7 +193,6 @@ export default {
       handler(val) {
         if (this.id) {
           this.$nextTick(() => {
-            this.$refs.develop && echarts.init(this.$refs.develop).setOption(getLineOption(this.data))
             this.$refs.circle && echarts.init(this.$refs.circle).setOption(getCircleOption(this.curr))
           })
         }
@@ -237,37 +225,11 @@ export default {
 .h-tabs-circle {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  .develop {
-    .develop-chart {
-      width: 317px;
-      height: 165px;
-    }
-    .develop-axis {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 18px;
-      color: #FFFFFF;
-      width: 270px;
-      margin-left: 27px;
-      .develop-axis-name {
-        width: 140px;
-        height: 24px;
-        background: #072e85;
-        border-radius: 12px;
-        color: #00DDFF;
-      }
-    }
-  }
-  .dash {
-    width: 0;
-    height: 192px;
-    border-right: 1px dashed rgba(255, 255, 255, 0.4);
-  }
+
   .chart-circle {
-    width: 200px;
+    width: 280px;
     height: 163px;
+    margin: 0 30px;
   }
   .circle-legend {
     li {
@@ -294,17 +256,25 @@ export default {
       &:nth-child(8) .circle-legend-color {border-color: #ed9144;}
       &:nth-child(9) .circle-legend-color {border-color: #5fcbb9;}
       .circle-legend-name {
-        width: 84px;
+        width: 238px;
         text-align: left;
       }
       .circle-legend-num {
         text-align: right;
-        width: 80px;
+        width: 100px;
         >span {
           font-weight: bold;
           font-size: 24px;
           margin-right: 8px;
         }
+      }
+      .circle-legend-percent {
+        width: 80px;
+        text-align: right;
+        font-weight: bold;
+        font-size: 24px;
+        line-height: 24px;
+        color: #FFFFFF;
       }
     }
   }

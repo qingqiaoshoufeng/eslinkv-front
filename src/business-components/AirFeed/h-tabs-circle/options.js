@@ -14,14 +14,14 @@ export function getCircleOption (data) {
         },
         legend: {
             orient: 'vertical',
-            left: '37%',
+            left: '26%',
             top: '-2%',
             textStyle: {
                 color: '#FFFFFF',
                 fontSize: 16
             },
             itemGap: 0,
-            itemWidth: 16,
+            itemWidth: 82,
             itemHeight: 1,
             data: xAxis
         },
@@ -30,7 +30,7 @@ export function getCircleOption (data) {
                 name: xAxis[0],
                 clockWise: false,
                 type: 'pie',
-                center: ['40%', '50%'],
+                center: [82, '50%'],
                 radius: ['86%', '96%'],
                 labelLine: {
                     normal: {
@@ -65,7 +65,7 @@ export function getCircleOption (data) {
                 name: xAxis[1],
                 clockWise: false,
                 type: 'pie',
-                center: ['40%', '50%'],
+                center: [82, '50%'],
                 radius: ['66%', '76%'],
                 labelLine: {
                     normal: {
@@ -101,7 +101,7 @@ export function getCircleOption (data) {
                 name: xAxis[2],
                 type: 'pie',
                 clockWise: false,
-                center: ['40%', '50%'],
+                center: [82, '50%'],
                 radius: ['46%', '56%'],
                 hoverAnimation: false,
                 label: {
