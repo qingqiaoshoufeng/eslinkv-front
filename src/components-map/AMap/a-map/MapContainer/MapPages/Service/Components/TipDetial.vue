@@ -19,8 +19,7 @@
 							? parseFloat(
 									detailInfo[item.prop].toLocaleString()
 							  ).toFixed(item.Fixed || 0)
-							: detailInfo[item.prop] || item.defaultVal) +
-						item.DW
+							: detailInfo[item.prop] || 0) + item.DW
 					} `
 				}}</span>
 			</div>
