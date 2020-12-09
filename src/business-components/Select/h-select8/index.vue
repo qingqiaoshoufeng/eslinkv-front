@@ -1,8 +1,8 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<ul class="h-select8 fn-flex flex-column pos-r">
-			<li class="pointer pos-r text-left" :class="{active:data.label===item.label}" v-for="item in list">
-				{{item.label}}
+			<li @click="handleChange(item)" class="pointer pos-r text-left" :class="{active:(selectLabel?selectLabel:data.label)===item.name}" v-for="item in list">
+				{{item.name}}
 			</li>
 		</ul>
 	</div>
@@ -27,16 +27,9 @@
 	export default {
 		data() {
 			return {
-				list:[
-					{"label": "江东门站", "value": "jiangdongmenzhan"},
-					{"label": "所前门站", "value": "suoqianmenzhan"},
-					{"label": "北门站", "value": "beimenzhan"},
-					{"label": "下沙门站", "value": "xiashamenzhan"},
-					{"label": "南门站", "value": "tianranqinanmenzhan"}
-				],
+				list:[],
 				showOptions: false,
-				selectLabel: '江东门站',
-				selectValue: 'jiangdongmenzhan'
+				selectLabel: '',
 			}
 		},
 		watch:{
@@ -53,8 +46,7 @@
 							this.selectValue=c.value
 							this.selectLabel=c.label
 							this.emitComponentUpdate({
-								id:val.stationId,
-								value: c.value,
+								id: val.stationId,
 								label: c.label,
 							})
 						}
@@ -66,25 +58,22 @@
 		},
 		mixins: [mixins],
 		methods: {
-			// handleChange(item) {
-			// 	// this.config.api.data .label = item.label
-			// 	this.selectValue = item.value
-			// 	this.selectLabel = item.label
-			// 	this.showOptions = false
-			// 	this.emitComponentUpdate({
-			// 		value: this.selectLabel,
-			// 		label: this.selectValue,
-			// 	})
-			// }
+			handleChange(item) {
+				this.selectLabel = item.name
+				this.showOptions = false
+				this.emitComponentUpdate({
+					label: this.selectLabel,
+					id: item.id,
+				})
+			}
 		},
 		created() {
 			this.configSource = this.parseConfigSource(config)
 			this.configValue = this.parseConfigValue(config, value)
 		},
 		mounted() {
-			this.emitComponentUpdate({
-				value: this.selectLabel,
-				label: this.selectValue,
+			this.$sysApi.map.airSupply.getAllTypeStationList({types:'GasStation'}).then(res=>{
+				this.list=res.gasStationList
 			})
 		}
 	}
