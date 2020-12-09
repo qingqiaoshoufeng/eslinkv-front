@@ -3,18 +3,18 @@
     <div class="main">
       <div class="chart" :id="id"/>
       <div class="percent">
-        <div class="percent-item" v-for="k in 24" :key="k"></div>
+        <div class="percent-item" v-for="k in ~~(24 * curr.percent / 100)" :key="k"></div>
       </div>
       <div class="legend">
         <div class="legend-item">
           <div class="color"></div>
           <div class="label">计划销气</div>
-          <div class="num">679</div>
+          <div class="num">{{ curr.plan }}</div>
         </div>
         <div class="legend-item">
           <div class="color light"></div>
           <div class="label">实际销气</div>
-          <div class="num">421</div>
+          <div class="num">{{ curr.actual }}</div>
         </div>
         <div class="legend-item">
           <div class="percent-color">
@@ -23,21 +23,21 @@
             <div class="percent-color-item"></div>
           </div>
           <div class="label">计划完成率</div>
-          <div class="num">76%</div>
+          <div class="num">{{curr.percent}}%</div>
         </div>
       </div>
       <div class="rates">
         <div class="rate">
-          <div class="rate-num">+6%</div>
+          <div class="rate-num" :class="{down: curr.rate1 < 0}">{{curr.rate1 < 0 ? '-' : '+'}}{{ curr.rate1 }}%</div>
           <div class="rate-txt">实际销气同比</div>
         </div>
         <div class="rate">
-          <div class="rate-num" :class="{down: true}">-6%</div>
+          <div class="rate-num" :class="{down: curr.rate2 < 0}">{{curr.rate2 < 0 ? '-' : '+'}}{{ curr.rate2 }}%</div>
           <div class="rate-txt">实际销气同比</div>
         </div>
       </div>
     </div>
-    <p class="date">2020.09</p>
+    <p class="date">{{curr.name}}</p>
 	</div>
 </template>
 <script>
@@ -58,7 +58,7 @@
             actual: 66,
             percent: 66,
             rate1: 5,
-            rate2: 6,
+            rate2: -6,
           },
           {
             name: '2020.07',
@@ -106,10 +106,58 @@
 	}
 	export default {
 		mixins: [mixins],
+    data () {
+		  return {
+        currIndex: 0,
+		    timer: null
+      }
+    },
 		methods: {
-			setOption(data) {
+			setOption() {
 				this.instance && this.instance.setOption(getOption(this.data.list))
-			}
+        this.instance.dispatchAction({
+          type: 'highlight',
+          seriesIndex: 0,
+          dataIndex: this.currIndex
+        })
+        this.instance.dispatchAction({
+          type: 'highlight',
+          seriesIndex: 1,
+          dataIndex: this.currIndex
+        })
+        this.animate()
+			},
+      animate () {
+			  clearInterval(this.timer)
+        this.timer = setInterval(() => {
+          if (!this.instance) return
+          this.instance.dispatchAction({
+            type: 'downplay',
+            seriesIndex: 0,
+            dataIndex: this.currIndex
+          })
+          this.instance.dispatchAction({
+            type: 'downplay',
+            seriesIndex: 1,
+            dataIndex: this.currIndex
+          })
+          if (this.currIndex === 5) {
+            this.currIndex = 0
+          } else {
+            this.currIndex++
+          }
+          this.instance.dispatchAction({
+            type: 'highlight',
+            seriesIndex: 0,
+            dataIndex: this.currIndex
+          })
+          this.instance.dispatchAction({
+            type: 'highlight',
+            seriesIndex: 1,
+            dataIndex: this.currIndex
+          })
+        }, 2000)
+      }
 		},
 		watch: {
 			data: {
@@ -125,11 +173,20 @@
 				immediate: true,
 			},
 		},
+    computed: {
+		  curr () {
+		    return this.data ? this.data.list[this.currIndex] : {}
+      }
+    },
 		created() {
 			this.configSource = this.parseConfigSource(config);
 			this.configValue = this.parseConfigValue(config, value);
 		},
-	};
+    beforeDestroy() {
+		  clearInterval(this.timer)
+      this.timer = null
+    }
+  };
 </script>
 <style lang="scss" scoped>
   .main {

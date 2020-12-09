@@ -197,6 +197,22 @@
 			  return this.data ? this.data.fans[this.fanIndex] : {}
       }
 		},
+    watch: {
+      data: {
+        handler(val) {
+          this.buildingTimer = setInterval(() => {
+            this.loopIndex++
+            if (this.fanIndex === 5) {
+              this.fanIndex = 0
+            } else {
+              this.fanIndex++
+            }
+          }, 3000)
+        },
+        deep: true,
+        immediate: true,
+      },
+    },
 		methods: {
 			getItemIndex(i) {
 				const n = (i + this.loopIndex) % 6
@@ -214,14 +230,6 @@
 		created() {
 			this.configSource = this.parseConfigSource(config, configSource)
 			this.configValue = this.parseConfigValue(config, value)
-			this.buildingTimer = setInterval(() => {
-				this.loopIndex++
-        if (this.fanIndex === 5) {
-          this.fanIndex = 0
-        } else {
-          this.fanIndex++
-        }
-			}, 3000)
 		},
 		mounted() {
 			// setTimeout(()=>{
