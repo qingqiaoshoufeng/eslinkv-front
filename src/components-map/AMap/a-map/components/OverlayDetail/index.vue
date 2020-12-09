@@ -14,7 +14,7 @@
 				width: width + 'px',
 			}"
 		>
-			<div class="close-btn" v-show="showCloseBtnInner" @click="closePop">
+			<div class="close-btn" v-show="showCloseBtn" @click="closePop">
 				<svg-icon icon-name="iconbaseline-close-px"></svg-icon>
 			</div>
 			<div class="triangle"></div>
@@ -22,7 +22,7 @@
 				<div v-if="!overlay.detail">
 					<div
 						class="info-item"
-						v-for="(info, prop) in overlayTypeInfo.fields"
+						v-for="(info, prop) in overlayDetailConfig.fields"
 						:style="{
 							...info.style,
 							color:
@@ -38,14 +38,8 @@
 								: overlay[prop]
 						}}
 					</div>
-					<div
-						class="btn"
-						v-if="showMore && overlayTypeInfo.isShowMore === true"
-						@click="handleViewDetail(overlay)"
-					>
-						查看详情
-					</div>
 				</div>
+				<!-- 门站调压站，返回数据不固定，遍历显示 -->
 				<div v-else>
 					<div class="detail-name" v-if="overlay.name">
 						{{ overlay.name }}
@@ -55,17 +49,17 @@
 						v-for="(item, prop) in overlay.detail"
 						:key="prop"
 					>
-						<div class="detail-label">{{ item.name }}：</div>
+						<div class="detail-label">{{ item.label }}：</div>
 						<div class="detail-value">
 							{{ item.value }}{{ item.dw }}
 						</div>
 					</div>
-					<div
-						class="btn"
-						v-if="showMore && overlayTypeInfo.isShowMore === true"
-					>
-						更多详情
-					</div>
+				</div>
+				<div
+					class="btn"
+					v-if="showMore && overlayDetailConfig.isShowMore === true"
+				>
+					更多详情
 				</div>
 			</slot>
 		</div>
@@ -85,55 +79,49 @@ export default {
 		SvgIcon,
 	},
 	props: {
+		value: {
+			type: Boolean,
+			default: false,
+		},
 		data: {
 			type: Object,
 			default() {
 				return {};
 			},
 		},
-		value: {
-			type: Boolean,
-			default: false,
-		},
-		overlayInfoConfigMap: {
+		overlayDetailConfig: {
 			type: Object,
 			default() {
 				return {};
 			},
 		},
-		legendMap: {
-			type: Object,
-			default() {
-				return {};
-			},
-		},
-		beforeClose: Function,
+		//容器宽度
 		width: {
 			type: Number,
 			default: 240,
-        },
-        //iconSize
+		},
+		//iconSize 用于计算需要偏移的位置
 		iconSize: {
 			type: Number,
-        },
-        //关闭按钮
+		},
+		//关闭按钮
 		showCloseBtn: {
 			type: Boolean,
 			default: false,
-        },
-        //是否显示查看详情
+		},
+		//是否显示查看详情
 		showMore: {
 			type: Boolean,
 			type: true,
 		},
+		//关闭弹窗之前的事件
+		beforeClose: Function,
 	},
 	data() {
 		return {
-			overlayTypeInfo: {},
 			overlay: {},
 			rendered: false,
 			marginBottom: 19,
-			showCloseBtnInner: undefined,
 		};
 	},
 	watch: {
@@ -141,16 +129,10 @@ export default {
 			if (val) {
 				if (JSON.stringify(val) !== '{}') {
 					let { overlayType } = val;
-					this.overlayTypeInfo =
-						this.overlayInfoConfigMap[overlayType] || {};
 					this.overlay = {
 						...val,
 					};
-					let legendConfig = this.legendMap[overlayType] || {};
-					let marginBottom =
-						this.iconSize || legendConfig.iconSize || 38;
-					this.showCloseBtnInner =
-						!!legendConfig.showPopCloseBtn || this.showCloseBtn;
+					let marginBottom = this.iconSize || 38;
 					this.marginBottom = marginBottom / 2;
 					if (!this.rendered) {
 						this.rendered = true;
@@ -184,7 +166,6 @@ export default {
 		},
 		translateX() {
 			let { scaleRatio } = this;
-			console.log(scaleRatio, 'scaleRatio');
 			return `-${((1 - scaleRatio) / scaleRatio + 1) * 50}%`;
 		},
 		translateY() {

@@ -10,7 +10,6 @@
 				...data,
 			}"
 			:visible="visible"
-			@click="handleWarnEventClick"
 		>
 			<video
 				class="warning-videO"
@@ -25,12 +24,9 @@
 		<!-- 详情弹窗 -->
 		<OverlayDetail
 			v-model="showOverlayDetail"
-			:data="data"
-			:overlayInfoConfigMap="overlayInfoConfigMap"
+			v-bind="OverlayDetailProp"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
-			:showCloseBtn="true"
-			:showMore="showMore"
 			ref="OverlayDetail"
 			:width="400"
 		>
@@ -82,14 +78,7 @@ export default {
 	},
 	computed: {
 		visible() {
-			if (JSON.stringify(this.data) == '{}') {
-				this.showOverlayDetail = false;
-				return false;
-			} else {
-				this.showMore = true;
-				this.showOverlayDetail = true;
-				return true;
-			}
+			return JSON.stringify(this.data) !== '{}';
 		},
 		//报警图标
 		overlayIcon() {
@@ -100,9 +89,25 @@ export default {
 			};
 			return iconMap[overlayType] + (status === 0 ? '-suc' : '');
 		},
-		pageName() {
-			let { pageName } = this.parentInfo;
-			return pageName;
+		OverlayDetailProp() {
+			let { data, overlayInfoConfigMap, showMore, legendMap } = this;
+			if (JSON.stringify(data) !== '{}') {
+				let { overlayType } = data;
+				//详情展示信息配置
+				let overlayDetailConfig =
+					overlayInfoConfigMap[overlayType] || {};
+				this.showOverlayDetail = true;
+				return {
+					data,
+					iconSize: 38,
+					overlayDetailConfig,
+					showMore: true,
+					showCloseBtn: true,
+				};
+			} else {
+				this.showOverlayDetail = false;
+				return {};
+			}
 		},
 	},
 	mounted() {
@@ -112,7 +117,6 @@ export default {
 		});
 	},
 	methods: {
-		handleWarnEventClick() {},
 		viewOverlayDetail() {
 			let { repairContent, address, callDate } = this.data;
 			this.showRoutePlan = true;
@@ -183,7 +187,9 @@ export default {
 		},
 		closeOverlayDetail(done) {
 			this.showRoutePlan = false;
-			GoldChart.scene.setSceneIndex(INDEXSCENEMAP[this.pageName]);
+			GoldChart.scene.setSceneIndex(
+				INDEXSCENEMAP[this.parentInfo.pageName]
+			);
 			this.$emit('close');
 			done && done();
 		},

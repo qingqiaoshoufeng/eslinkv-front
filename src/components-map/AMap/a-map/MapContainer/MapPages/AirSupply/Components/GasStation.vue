@@ -27,7 +27,7 @@
 import {
 	AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
 	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
-	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2
+	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
 } from '../../../../config/scene';
 import { BaseOverlay } from '../../../../components/index';
 import GoldChart from '@/openApi';
@@ -101,7 +101,7 @@ export default {
 					let { name, value } = item;
 					let propInner = prop + index;
 					dataComp[propInner] = {
-						name,
+						label: name,
 						value: value,
 						dw,
 					};
@@ -134,9 +134,9 @@ export default {
 				});
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach(item => {
 					GoldChart.instance.updateComponent(item, {
-						params:{
-							id
-						}
+						params: {
+							id,
+						},
 					});
 				});
 			});
