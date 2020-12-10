@@ -29,7 +29,40 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		tileQuery: [34],
 		visible: false,
 	},
-	InspectionPerson: {
+	// UndergroundRepairStation: {
+	//     label: '地下抢修点',
+	//     legendIcon: 'icontulidixiaqiangxiudian',
+	//     iconSize: 38,
+	//     component: 'EmergencyAirSourceStation',
+	//     visible: true,
+	//     dataProp: "undergroundRepairStationList"
+	// },
+	// OngroundRepairStation: {
+	//     label: '地上抢修点',
+	//     legendIcon: 'icontulidishangqiangxiudian',
+	//     iconSize: 38,
+	//     component: 'EmergencyAirSourceStation',
+	//     visible: true,
+	//     dataProp: "OngroundRepairStationList"
+    // },
+    // 	ServiceStation: {
+	//     label: '综合服务站',
+	//     legendIcon: 'icontulizonghefuwuzhan1',
+	//     iconSize: 38,
+	//     component: 'ServiceStation',
+	//     visible: true,
+	//     dataProp: 'serviceStationList',
+	//     // detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
+	// },
+	// PipeManageMentStation: {
+	//     label: '管网运行管理站',
+	//     legendIcon: 'icontuliqiyuanzhan',
+	//     iconSize: 38,
+	//     component: 'EmergencyAirSourceStation',
+	//     visible: true,
+	//     dataProp: "pipeManageMentStationList"
+	// },
+    InspectionPerson: {
 		label: '巡检人员',
 		legendIcon: 'iconrenyuan1',
 		iconSize: 38,
@@ -49,39 +82,6 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		visible: false,
 		dataProp: 'inspectionCarList',
 	},
-	// ServiceStation: {
-	//     label: '综合服务站',
-	//     legendIcon: 'icontulizonghefuwuzhan1',
-	//     iconSize: 38,
-	//     component: 'ServiceStation',
-	//     visible: true,
-	//     dataProp: 'serviceStationList',
-	//     // detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
-	// },
-	// PipeManageMentStation: {
-	//     label: '管网运行管理站',
-	//     legendIcon: 'icontuliqiyuanzhan',
-	//     iconSize: 38,
-	//     component: 'EmergencyAirSourceStation',
-	//     visible: true,
-	//     dataProp: "pipeManageMentStationList"
-	// },
-	// UndergroundRepairStation: {
-	//     label: '地下抢修点',
-	//     legendIcon: 'icontulidixiaqiangxiudian',
-	//     iconSize: 38,
-	//     component: 'EmergencyAirSourceStation',
-	//     visible: true,
-	//     dataProp: "undergroundRepairStationList"
-	// },
-	// OngroundRepairStation: {
-	//     label: '地上抢修点',
-	//     legendIcon: 'icontulidishangqiangxiudian',
-	//     iconSize: 38,
-	//     component: 'EmergencyAirSourceStation',
-	//     visible: true,
-	//     dataProp: "OngroundRepairStationList"
-	// },
 	// GasStation: {
 	//     label: '门站',
 	//     legendIcon: 'icontulimenzhan',
