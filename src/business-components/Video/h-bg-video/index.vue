@@ -32,7 +32,7 @@
 					loop: true,
 					sources: [
 						{
-							src: '/cdn/videos/123.webm'
+							src: '/cdn/videos/shouye.webm'
 						},
 					],
 				},
