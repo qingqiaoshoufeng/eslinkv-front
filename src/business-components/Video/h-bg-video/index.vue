@@ -28,7 +28,7 @@
 					muted: true,
 					language: 'en',
 					playbackRates: [0.7, 1.0, 1.5, 2.0],
-					autoplay: true,
+					autoplay: false,
 					loop: true,
 					sources: [
 						{

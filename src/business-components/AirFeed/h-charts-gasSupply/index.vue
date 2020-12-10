@@ -82,19 +82,19 @@
 					selectValue = format(new Date(item.time), 'yyyy.MM.dd')
 				}
 
-				if (this.config.config.sceneId) {
-					GoldChart.scene.createSceneInstance(this.config.config.sceneId, 'slideRight')
-					if (this.config.config.componentId) {
-						this.$nextTick(() => {
-							GoldChart.instance.updateComponent(this.config.config.componentId, {
-								data: {
-									selectType,
-									selectValue
-								}
-							})
-						})
-					}
-				}
+				// if (this.config.config.sceneId) {
+				// 	GoldChart.scene.createSceneInstance(this.config.config.sceneId, 'slideRight')
+				// 	if (this.config.config.componentId) {
+				// 		this.$nextTick(() => {
+				// 			GoldChart.instance.updateComponent(this.config.config.componentId, {
+				// 				data: {
+				// 					selectType,
+				// 					selectValue
+				// 				}
+				// 			})
+				// 		})
+				// 	}
+				// }
 			}
 		},
 		watch: {
