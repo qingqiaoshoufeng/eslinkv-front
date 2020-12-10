@@ -17,7 +17,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
     useHotYear: {
         label: '年度热力',
         component: 'useHotYear',
-        visible: true,
+        visible: false,
         dataProp: 'year',
     },
     BranchCompany: {
@@ -60,5 +60,5 @@ export const SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP = {
 export const DATASTATISTICSLIST = [ICcustomer, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal]
 // SwitchBox配置
 export const SWICHBOX = [
-    { label: '年度销售气量热力', value: true, type: 'useHotYear' },
+    { label: '年度销售气量热力', value: false, type: 'useHotYear' },
 ]

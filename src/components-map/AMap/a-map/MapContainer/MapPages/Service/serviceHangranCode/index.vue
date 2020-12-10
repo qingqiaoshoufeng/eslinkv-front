@@ -261,8 +261,8 @@ export default {
 			}
 			this.swichBoxInfo = data;
 			let [{ value: value1 }, { value: value2 }] = this.swichBoxInfo;
-			this.overlayMap.CouplingHot.isShow = value1;
-			this.overlayMap.OperationHot.isShow = value2;
+			this.overlayMap.CouplingHot.visible = value1;
+			this.overlayMap.OperationHot.visible = value2;
 		},
 		// 开启定时器 展示公司详情
 		carouseComplBranchCompanyInfo() {

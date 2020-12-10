@@ -1,6 +1,6 @@
 
 // 引入详情字典
-import { citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus } from "./dictionary"
+import { citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus, activity, community, households, } from "./dictionary"
 
 
 // 覆盖物legend配置
@@ -92,4 +92,10 @@ export const SERVICE_SERVICECUSTOMER_OVERLAY_MAP = {
     },
 }
 // 客户服务页面统计数据
-export const DATASTATISTICSLIST = [citizenNumber, publicBuildNumber, industryNumber, businessServe]
+export const DATASTATISTICSLIST = [citizenNumber, publicBuildNumber, industryNumber, businessServe, activity, community, households,]
+
+
+// SwitchBox配置
+export const SWICHBOX = [
+    { label: '客户分布热力', value: true, type: 'customer' },
+]

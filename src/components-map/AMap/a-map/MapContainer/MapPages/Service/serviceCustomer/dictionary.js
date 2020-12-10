@@ -58,6 +58,26 @@ let monthFireDetial = {
     Fixed: 0
 }
 
+
+let activity = {
+    label: '三社联动活动次数',
+    DW: '户',
+    prop: "activity",
+    Fixed: 0
+}
+let community = {
+    label: '三社联动社区总数',
+    DW: '户',
+    prop: "community",
+    Fixed: 0
+}
+let households = {
+    label: '三社联动社入户数',
+    DW: '户',
+    prop: "households",
+    Fixed: 0
+}
+
 // 客户服务任务工单详情
 let serviceCustomerPipeline = {
     label: '渠道',
@@ -80,5 +100,5 @@ let serviceCustomerStatus = {
     prop: "statusText",
 }
 export {
-    citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus
+    citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, activity, community, households, serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus
 }
