@@ -131,7 +131,7 @@ export default {
 			// this.handleOverlayClick(params);
 		},
 		async handleOverlayClick(overlay, overlayType, isCenter = true) {
-			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
+			// this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat, name } = overlay;
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
