@@ -9,8 +9,7 @@
 			...$attrs,
 			data: dataInner,
 		}"
-		@mouseover="handleMouseover"
-		@mouseleave="handleMouseleave"
+		@click="handleClick"
 	/>
 </template>
 <script>
@@ -79,11 +78,11 @@ export default {
 		},
 	},
 	methods: {
-		async handleMouseover(marker) {
-			if (this.mouseIn) {
-				return false;
-			}
-			this.mouseIn = true;
+		async handleClick(marker) {
+			// if (this.mouseIn) {
+			// 	return false;
+			// }
+			// this.mouseIn = true;
 			let { id, name, type } = marker;
 			let data = await this.$sysApi.map.airSupply.getStationRealTimeInfo({
 				id,
@@ -106,18 +105,14 @@ export default {
 					};
 				});
 			});
-			if (this.mouseIn) {
-				this.$emit(
-					'overlay-click',
-					{ ...marker, detail: dataComp },
-					'PressureRegulatingStation',
-					false
-				);
-			}
-		},
-		handleMouseleave() {
-			this.mouseIn = false;
-			this.$emit('close');
+			// if (this.mouseIn) {
+			this.$emit(
+				'overlay-click',
+				{ ...marker, detail: dataComp },
+				'PressureRegulatingStation',
+				false
+			);
+			// }
 		},
 	},
 };

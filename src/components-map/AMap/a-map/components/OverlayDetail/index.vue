@@ -108,12 +108,12 @@ export default {
 		//关闭按钮
 		showCloseBtn: {
 			type: Boolean,
-			default: false,
+			default: true,
 		},
 		//是否显示查看详情
 		showMore: {
 			type: Boolean,
-			type: true,
+			type: false,
 		},
 		//关闭弹窗之前的事件
 		beforeClose: Function,
