@@ -55,14 +55,14 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         dataProp: 'TaskList',
         detailList: [serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus]
     },
-    CustomerHot: {
-        label: '客户分布热力',
-        visible: true,
-        component: 'CustomerHot',
-        visible: true,
-        dataProp: 'CustomerHotList',
-        detailList: []
-    }
+    // CustomerHot: {
+    //     label: '客户分布热力',
+    //     visible: true,
+    //     component: 'CustomerHot',
+    //     visible: true,
+    //     dataProp: 'CustomerHotList',
+    //     detailList: []
+    // }
     // ClickTaskList: {
     //     label: '任务工单',
     //     legendIcon: 'iconrenwugongdan',

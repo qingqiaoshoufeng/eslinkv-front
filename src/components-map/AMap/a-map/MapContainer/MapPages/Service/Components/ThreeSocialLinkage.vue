@@ -9,9 +9,7 @@
 			...$attrs,
 			data,
 		}"
-		@mouseover="mouseover"
 		@click="mouseover"
-		@mouseleave="handleMouseleave"
 	/>
 </template>
 <script>

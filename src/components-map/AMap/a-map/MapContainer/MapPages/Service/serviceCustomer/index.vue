@@ -33,8 +33,11 @@
 			@close="closeOverlayDetail('')"
 		/>
 		<CustomerHot
-			:visible="true"
-			:activeIndex="activeIndex"
+			v-if="
+				allTypeStationList.CustomerHotList &&
+				allTypeStationList.CustomerHotList.length
+			"
+			:visible="visible"
 			:data="allTypeStationList.CustomerHotList"
 			ref="OverlayDetail"
 		/>
@@ -161,6 +164,7 @@ export default {
 			isShowMore: false,
 			activeIndex: null,
 			swichBoxInfo: SWICHBOX,
+			visible: true,
 		};
 	},
 
@@ -182,7 +186,8 @@ export default {
 		switchChange(data, type) {
 			this.swichBoxInfo = data;
 			let [{ value }] = this.swichBoxInfo;
-			this.overlayMap.useHotYear.visible = value;
+			// debugger;
+			this.visible = value;
 		},
 		showMoreDetail() {
 			this.showThreeSocialLinkageDetail();

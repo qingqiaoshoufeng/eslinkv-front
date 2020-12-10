@@ -25,7 +25,7 @@ export default {
 			default: 'right',
 		},
 		dataStatisticsList: {
-			type: [Object,Array],
+			type: [Object, Array],
 			default() {
 				return {};
 			},
@@ -33,7 +33,7 @@ export default {
 		data: {
 			type: [Object, Array],
 			default() {
-                return {}
+				return {};
 			},
 		},
 	},
@@ -63,7 +63,7 @@ export default {
 		display: flex;
 		flex-direction: column;
 		&:not(:first-child) {
-			margin-top: 36px;
+			margin-top: 30px;
 		}
 		.value {
 			height: 48px;

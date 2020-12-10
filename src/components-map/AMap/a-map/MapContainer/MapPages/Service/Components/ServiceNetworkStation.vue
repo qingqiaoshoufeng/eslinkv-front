@@ -7,8 +7,7 @@
 			visible,
 			apiFun,
 		}"
-		@mouseover="mouseover"
-		@mouseleave="handleMouseleave"
+		@click="mouseover"
 	>
 	</BaseOverlay>
 </template>

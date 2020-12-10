@@ -9,8 +9,7 @@
 				...$attrs,
 			}"
 			:visible="true"
-			@mouseover="mouseover(item)"
-			@click="handleOverlayClick"
+			@click="mouseover(item)"
 			@mouseleave="mouseleave"
 		>
 			<video
