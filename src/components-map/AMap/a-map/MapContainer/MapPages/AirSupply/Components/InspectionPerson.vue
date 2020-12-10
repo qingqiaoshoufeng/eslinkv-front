@@ -52,12 +52,15 @@ export default {
 	},
 	methods: {
 		handleMouseover(marker) {
-			let { id, name, type } = marker;
-			this.$emit('overlay-click', marker, 'InspectionPerson', false);
+			// let { id, name, type } = marker;
+			// this.$emit('overlay-click', marker, 'InspectionPerson', false);
 		},
-		handleOverlayClick(marker) {},
+		handleOverlayClick(marker) {
+            let { id, name, type } = marker;
+			this.$emit('overlay-click', marker, 'InspectionPerson', false);
+        },
 		handleMouseleave() {
-			this.$emit('close');
+			// this.$emit('close');
 		},
 		async getData() {
 			let params = {
