@@ -65,9 +65,9 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 	},
 	InspectionPerson: {
 		label: '巡检人员',
-		legendIcon: 'icontulirenyuan',
+		legendIcon: 'iconrenyuan1',
 		iconSize: 38,
-		icon: 'iconrenyuan',
+		icon: 'iconrenyuan1',
 		component: 'InspectionPerson',
 		showOverlayName: false,
 		visible: false,
@@ -75,9 +75,9 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 	},
 	InspectionCar: {
 		label: '巡检车辆',
-		legendIcon: 'icontulicheliang1',
+		legendIcon: 'iconcheliang1',
 		iconSize: 38,
-		icon: 'icondianweicheliang',
+		icon: 'iconcheliang1',
 		component: 'InspectionCar',
 		showOverlayName: false,
 		visible: false,

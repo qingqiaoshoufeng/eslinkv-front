@@ -60,7 +60,7 @@ export default {
                 let paddingRight =
                     3500 * screenScaleRatio * (1 - offsetLeftRatio) -
                     (3500 * screenScaleRatio - avaliableAreaWidth) / 2
-                this.$amap.panBy(-paddingRight, 0)
+                this.$amap.panBy(-paddingRight,0,0)
             }
         },
         handleOverlayClick(

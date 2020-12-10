@@ -81,7 +81,12 @@ export default {
 			// 	return statusName !== '已处理';
 			// });
 		} else {
-			this.list = await this.$sysApi.map.airSupply.getEventWarningList();
+			this.list = await this.$sysApi.map.airSupply.getEventWarningList({
+                currentPage:1,
+                pageSize:0,
+                repairType:'维修',
+                repairState:'all',
+            });
 		}
 	},
 };

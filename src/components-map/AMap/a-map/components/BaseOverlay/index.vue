@@ -23,7 +23,7 @@
 				<!-- 默认显示图标的名字 -->
 				<div
 					class="sample-name"
-					:style="nameStyle"
+					:style="sampleNamePoseMap[item.pose || 'right'] || {}"
 					v-if="showOverlayName"
 				>
 					{{ item[overlayName] }}
@@ -56,12 +56,6 @@ export default {
 		overlayName: {
 			type: String,
 			default: 'name',
-		},
-		nameStyle: {
-			type: Object,
-			default: function () {
-				return {};
-			},
 		},
 		iconSize: {
 			type: Number,
@@ -108,7 +102,17 @@ export default {
 	data() {
 		return {
 			list: [],
+			position: 'bottom',
 			isRendered: false,
+			sampleNamePoseMap: {
+				top: {
+					top: `-${this.iconSize}px`,
+				},
+				right: {
+					left: '100%',
+					transform: `translateY(calc(-50% - ${this.iconSize / 2}px)`,
+				},
+			},
 		};
 	},
 	methods: {

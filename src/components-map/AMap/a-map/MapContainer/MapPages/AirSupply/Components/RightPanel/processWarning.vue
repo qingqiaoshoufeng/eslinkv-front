@@ -194,7 +194,7 @@ export default {
 			.station-name {
 				font-size: 18px;
 				flex: 1;
-				color: rgba(255, 255, 255, 0.75);
+				color: rgba(255, 255, 255, 0.8);
 				margin-left: 36px;
 			}
 		}
