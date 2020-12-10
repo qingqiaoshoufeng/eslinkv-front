@@ -120,7 +120,7 @@
 				</div>
 			</section>
 			<section class="links">
-				<div class="link" :class="{active: animateActiveIndex === 0}">最多跑<br/>一次4.0</div>
+				<div class="link" :class="{active: animateActiveIndex === 0}">最多跑<br/>一次</div>
 				<div class="link" :class="{active: animateActiveIndex === 1}">三社联动<br/>安心安居</div>
 				<div class="link" :class="{active: animateActiveIndex === 2}">31个<br/>服务网点</div>
 				<div class="link" :class="{active: animateActiveIndex === 3}">网上19<br/>营业厅</div>

@@ -34,7 +34,6 @@
 		computed: {
 			ratio1() {
 				if (this.data) {
-					console.log(this.data.onBusy,this.data.onFree,this.data.onBusy / (this.data.onBusy + this.data.onFree))
 					const ratio = this.data.onBusy / (Number(this.data.onBusy) + Number(this.data.onFree)) * 100
 					if (ratio < 3)
 						return `calc(3% - 2px)`
