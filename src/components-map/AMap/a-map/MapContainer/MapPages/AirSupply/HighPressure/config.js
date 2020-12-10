@@ -17,9 +17,9 @@ export const DATA_STATISTICS_MAP = {
 	emergencyAirSourceStation,
 	HighPressureHighPressureGasStation,
 	HighPressureLineLength,
-	HighPressureCarNumber,
-	HighPressureInspectionNumber,
-	HighPressurePreservationNumber,
+	// HighPressureCarNumber,
+	// HighPressureInspectionNumber,
+	// HighPressurePreservationNumber,
 }
 
 // 覆盖物legend配置

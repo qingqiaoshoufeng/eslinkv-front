@@ -48,7 +48,7 @@ export default {
 							let instance = new window.AMap.Polygon({
 								path: bounds[i],
 								strokeWeight: 1,
-								fillOpacity: 0.6,
+								fillOpacity: 0.5,
 								fillColor: '#0054B7',
 								strokeOpacity: '1',
 								strokeStyle: 'dashed',

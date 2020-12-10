@@ -23,7 +23,7 @@
 				<!-- 默认显示图标的名字 -->
 				<div
 					class="sample-name"
-					:style="sampleNamePoseMap[item.pose || 'right'] || {}"
+					:style="sampleNamePoseMap[item.pose] || {}"
 					v-if="showOverlayName"
 				>
 					{{ item[overlayName] }}

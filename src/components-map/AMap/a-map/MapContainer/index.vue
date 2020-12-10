@@ -44,8 +44,8 @@ export default {
 	provide() {
 		return {
 			parentInfo: {
-				scaleRatio: this.scaleRatio,
-				pageName: this.pageName,
+                scaleRatio: this.scaleRatio,
+                pageName:this.pageName
 			},
 		};
 	},
