@@ -12,7 +12,8 @@ initAMapApiLoader({
 		'AMap.GeoJSON',
 		'AMap.MoveAnimation',
 		'AMap.Geocoder',
-		'AMap.HawkEye',
+        'AMap.HawkEye',
+        'AMap.ToolBar'
 	],
 	uiVersion: '1.1.1',
 	v: '2.0',
@@ -33,7 +34,8 @@ export default {
 				dragEnable: true,
 				zoom: 10,
 				viewMode: '3D',
-				pitch: 10,
+                pitch: 10,
+                // zooms:[11,19],
 				mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
 			},
 		}
@@ -73,14 +75,23 @@ export default {
 			console.log('地图初始化完成！')
 			this.mapReady = true
 			window.sss = this.$refs.amap
-			this.$refs.amap.$amap.addControl(new AMap.MapType())
-			this.$refs.amap.$amap.addControl(
-				new AMap.HawkEye({
-					autoMove: true,
-					isOpen:true,
-					mapStyle: this.mapConfig.mapStyle,
-				})
-            )
+			// this.$refs.amap.$amap.addControl(new AMap.MapType())
+			// this.$refs.amap.$amap.addControl(
+			// 	new AMap.HawkEye({
+			// 		autoMove: true,
+			// 		isOpen:true,
+			// 		mapStyle: this.mapConfig.mapStyle,
+			// 	})
+            // )
+            // this.$refs.amap.$amap.addControl(
+            //     new AMap.ToolBar({
+            //         position: {
+            //             top: '110px',
+            //             right: '40px'
+            //         }
+            //     })
+            // )
+            window.suyanaaa = this.$refs.amap.$amap
             // let originInstance = new AMap.TileLayer.Satellite({
 			// 	zIndex: 1,
 			// 	opacity:1,

@@ -54,7 +54,7 @@ export default {
 			this.originInstance = new AMap.TileLayer({
 				zIndex: zIndexInner,
 				opacity,
-				getTileUrl: getTileUrl,
+                getTileUrl: getTileUrl
 			});
 			this.$amap.addLayer(this.originInstance);
 		},
