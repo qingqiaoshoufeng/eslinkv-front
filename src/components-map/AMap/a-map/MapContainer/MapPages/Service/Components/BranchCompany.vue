@@ -11,7 +11,7 @@
 			nameStyle,
 			overlayName: 'colName',
 		}"
-		@mouseover="mouseover"
+		@click="mouseover"
 		@mouseleave="mouseleave"
 	/>
 </template>
@@ -63,13 +63,14 @@ export default {
 			nameStyle: {
 				fontSize: '24px',
 			},
-			mouseIn: false,
+			// mouseIn: false,
+			mouseIn: true,
 		};
 	},
 	mounted() {},
 	methods: {
 		mouseover(marker) {
-			if (this.mouseIn) return false;
+			// if (this.mouseIn) return false;
 			this.mouseIn = true;
 			this.$emit(
 				'overlay-click',
@@ -82,8 +83,8 @@ export default {
 			);
 		},
 		mouseleave() {
-			this.mouseIn = false;
-			this.$emit('close');
+			// this.mouseIn = false;
+			// this.$emit('close');
 		},
 	},
 };

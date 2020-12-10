@@ -86,7 +86,12 @@ export default {
 				component: overlayType,
 			} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP['WarningICcustomer'];
 
-			this.$emit('change', { ...item, detailList, overlayType });
+			this.$emit('change', {
+				...item,
+				detailList,
+				overlayType,
+				activeIndex: this.activeIndex,
+			});
 		},
 	},
 };

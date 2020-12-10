@@ -21,6 +21,7 @@
 				:detailList="config.detailList"
 				:data="allTypeStationList[config.dataProp]"
 				:ref="config.component"
+				@close="closeOverlayDetail"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->
@@ -96,7 +97,7 @@ export default {
 			activeOverlay: {},
 			showOverlayDetail: false,
 			zoom: 10,
-			center: [120.90522766, 30.33199066],
+			center: [120.75522766, 30.33199066],
 			activeArea: '杭州钱江燃气有限公司',
 			allTypeStationList: {},
 			detailInfo: {},

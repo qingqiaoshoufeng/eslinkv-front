@@ -32,6 +32,15 @@
 			ref="OverlayDetail"
 			@close="closeOverlayDetail('')"
 		/>
+		<CustomerHot
+			v-if="
+				allTypeStationList.CustomerHotList &&
+				allTypeStationList.CustomerHotList.length
+			"
+			:visible="visible"
+			:data="allTypeStationList.CustomerHotList"
+			ref="OverlayDetail"
+		/>
 
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
@@ -52,6 +61,12 @@
 			/>
 		</OverlayDetail>
 		<portal to="destination">
+			<!-- 选择器盒子 -->
+			<i-switchBox
+				@switch-change="switchChange"
+				:data="swichBoxInfo"
+				:className="{ left: true }"
+			/>
 			<!-- 图例 -->
 			<MapLegend
 				:data="legendMap"
@@ -83,6 +98,8 @@ import {
 	TipDetial,
 	TaskList,
 	ClickTaskList,
+	CustomerHot,
+	SwitchBox,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -100,6 +117,7 @@ import {
 import GoldChart from '@/openApi';
 import {
 	DATASTATISTICSLIST,
+	SWICHBOX,
 	SERVICE_SERVICECUSTOMER_LEGEND_MAP,
 	SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
 } from './config.js';
@@ -119,6 +137,8 @@ export default {
 		TipDetial,
 		TaskList,
 		ClickTaskList,
+		CustomerHot,
+		iSwitchBox: SwitchBox,
 	},
 	data() {
 		return {
@@ -143,6 +163,8 @@ export default {
 			detailInfo: {},
 			isShowMore: false,
 			activeIndex: null,
+			swichBoxInfo: SWICHBOX,
+			visible: true,
 		};
 	},
 
@@ -160,8 +182,20 @@ export default {
 		setCenter(center) {
 			this.center = center || this.center;
 		},
+		// 切换热力图显示隐藏
+		switchChange(data, type) {
+			this.swichBoxInfo = data;
+			let [{ value }] = this.swichBoxInfo;
+			// debugger;
+			this.visible = value;
+		},
 		showMoreDetail() {
 			this.showThreeSocialLinkageDetail();
+		},
+		async getThreeSocialLinkagecustmerHot() {
+			let res = await this.$sysApi.map.serve.getThreeSocialLinkagecustmerHot();
+			// console.log(res);
+			this.allTypeStationList.CustomerHotList = res.customer;
 		},
 		async handleOverlayClick(overlay, overlayType1, isCenter = false) {
 			let { lng, lat, type, name, id, overlayType } = overlay;
@@ -181,9 +215,9 @@ export default {
 				return;
 			}
 			this.activeOverlay = overlay;
-			console.log(overlayType);
+			// console.log(overlayType);
 
-			console.log(this.$refs);
+			// console.log(this.$refs);
 			// console.log(this.$refs.overlayType, '余志强');
 			this.showOverlayDetail = this.$refs[overlayType][0].mouseIn;
 			// console.log(this.$refs.overlayType.mouseIn);
@@ -281,6 +315,7 @@ export default {
 		this.getDataStatisticsList();
 		this.getAllTypeStationList();
 		this.getTasklist();
+		this.getThreeSocialLinkagecustmerHot();
 		window.setCenter = this.setCenter.bind(this);
 	},
 };

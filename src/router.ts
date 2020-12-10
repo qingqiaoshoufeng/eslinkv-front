@@ -13,6 +13,10 @@ Vue.use(VueRouter)
 const router: VueRouter = new VueRouter({
 	routes: [
 		...routes,
+		{
+			path: '/tee',
+			component: () => import('@/components/LiveVideo/index.vue')
+		}
 	]
 })
 

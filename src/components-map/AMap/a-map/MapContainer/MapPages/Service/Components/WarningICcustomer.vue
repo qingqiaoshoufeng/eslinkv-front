@@ -8,9 +8,8 @@
 				...item,
 				...$attrs,
 			}"
-			:visible="true"
-			@mouseover="mouseover(item)"
-			@click="handleOverlayClick"
+			:visible="activeIndex === index"
+			@click="mouseover(item)"
 			@mouseleave="mouseleave"
 		>
 			<video
@@ -50,6 +49,10 @@ export default {
 			default() {
 				return [];
 			},
+		},
+		activeIndex: {
+			type: Number,
+			default: -1,
 		},
 	},
 	data() {
