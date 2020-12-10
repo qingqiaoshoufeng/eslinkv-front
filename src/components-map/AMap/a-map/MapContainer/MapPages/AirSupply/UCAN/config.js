@@ -64,8 +64,8 @@ export const AIRSUPPLY_UCAN_LEGEND_MAP = {
     // },
     // InspectionPerson: {
     //     label: '巡检人员',
-    //     legendIcon: 'icontulirenyuan',
-    //     icon: 'iconrenyuan',
+    //     legendIcon: 'iconrenyuan1',
+    //     icon: 'iconrenyuan1',
     //     iconSize: 38,
     //     component: 'InspectionPerson',
     //     showOverlayName: false,
@@ -73,8 +73,8 @@ export const AIRSUPPLY_UCAN_LEGEND_MAP = {
     // },
     // InspectionCar: {
     //     label: '巡检车辆',
-    //     legendIcon: 'icontulicheliang1',
-    //     icon: 'icondianweicheliang',
+    //     legendIcon: 'iconcheliang1',
+    //     icon: 'iconcheliang1',
     //     iconSize: 38,
     //     component: 'InspectionCar',
     //     showOverlayName: false,

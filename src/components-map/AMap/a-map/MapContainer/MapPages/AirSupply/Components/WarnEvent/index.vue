@@ -41,8 +41,6 @@
 </template>
 <script>
 import bus from '../../../../../utils/bus';
-import { Overlay, OverlayDetail } from '../../../../../components/index';
-import RoutePlan from '../RoutePlan';
 import GoldChart from '@/openApi';
 import {
 	INDEXSCENEMAP,
@@ -54,9 +52,9 @@ export default {
 	name: 'WarnEvent',
 	inject: ['parentInfo'],
 	components: {
-		Overlay,
-		OverlayDetail,
-		RoutePlan,
+		Overlay: () => import('../../../../../components/Overlay'),
+		OverlayDetail: () => import('../../../../../components/OverlayDetail'),
+		RoutePlan: () => import('../RoutePlan'),
 	},
 	props: {
 		data: {
@@ -78,9 +76,9 @@ export default {
 			showOverlayDetail: true,
 			showRoutePlan: false,
 			showMore: true,
-            visible: false,
-            overlayIcon:'',
-            OverlayDetailProp:{}
+			visible: false,
+			overlayIcon: '',
+			OverlayDetailProp: {},
 		};
 	},
 	watch: {

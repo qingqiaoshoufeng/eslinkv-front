@@ -61,7 +61,7 @@ export function getProcessWarningList(data) {
 //高中压事件报警
 export function getEventWarningList(data) {
 	return request({
-		url: HANGRANURL + '/situationAwareness/list',
+		url: HANGRANURL + '/situationAwareness/caseList',
 		method: 'get',
 		params: data,
 		headers: {

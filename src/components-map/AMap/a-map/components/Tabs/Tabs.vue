@@ -56,7 +56,6 @@ export default {
 
 	render(h) {
 		let { panes, handleTabClick, activeTab } = this;
-        console.log('bbb')
 		const navData = {
 			props: {
 				panes,
