@@ -35,7 +35,7 @@ export default {
 				zoom: 10,
 				viewMode: '3D',
                 pitch: 10,
-                zooms:[11,19],
+                // zooms:[11,19],
 				mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
 			},
 		}
@@ -83,14 +83,14 @@ export default {
 			// 		mapStyle: this.mapConfig.mapStyle,
 			// 	})
             // )
-            this.$refs.amap.$amap.addControl(
-                new AMap.ToolBar({
-                    position: {
-                        top: '110px',
-                        right: '40px'
-                    }
-                })
-            )
+            // this.$refs.amap.$amap.addControl(
+            //     new AMap.ToolBar({
+            //         position: {
+            //             top: '110px',
+            //             right: '40px'
+            //         }
+            //     })
+            // )
             window.suyanaaa = this.$refs.amap.$amap
             // let originInstance = new AMap.TileLayer.Satellite({
 			// 	zIndex: 1,
