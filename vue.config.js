@@ -115,11 +115,11 @@ module.exports = {
             }
         ]
         config.plugins.push(
-            new webpack.ProvidePlugin({
-                $: 'jquery',
-                jQuery: 'jquery',
-                'windows.jQuery': 'jquery'
-            })
+            // new webpack.ProvidePlugin({
+            //     $: 'jquery',
+            //     jQuery: 'jquery',
+            //     'windows.jQuery': 'jquery'
+            // })
         )
     },
     chainWebpack: config => {
