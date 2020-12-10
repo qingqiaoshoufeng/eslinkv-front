@@ -7,7 +7,7 @@
 			visible,
 			apiFun,
 			...$attrs,
-			data,
+			data: dataInner,
 		}"
 		@mouseover="handleMouseover"
 		@mouseleave="handleMouseleave"
@@ -57,6 +57,26 @@ export default {
 			},
 			mouseIn: false,
 		};
+	},
+	computed: {
+		dataInner() {
+			let { data = [] } = this;
+			let stationPoseMap = {
+				临平调压站: 'right',
+				半山调压站: 'right',
+				'320阀室': 'top',
+				良渚调压站: 'top',
+				西部应急气源站: 'left',
+				东部应急气源站: 'top',
+				西部应急气源站: 'left',
+				苏嘉路阀室: 'right',
+				之江调压站: 'right',
+			};
+			return this.data.map(item => {
+				item.pose = stationPoseMap[item.name];
+				return item;
+			});
+		},
 	},
 	methods: {
 		async handleMouseover(marker) {

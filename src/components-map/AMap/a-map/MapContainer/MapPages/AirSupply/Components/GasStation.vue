@@ -119,7 +119,6 @@ export default {
 		},
 		handleOverlayClick(marker) {
 			let { name, id } = marker;
-			// debugger;
 			GoldChart.scene.createSceneInstance(
 				AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
 				'slideRight'

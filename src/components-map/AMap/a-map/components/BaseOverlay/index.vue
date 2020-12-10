@@ -85,7 +85,6 @@ export default {
 				let { isRendered } = this;
 				if (val && !isRendered) {
 					await this.getData(this.query);
-					console.log(this.list);
 					this.isRendered = true;
 					this.$nextTick(() => {
 						this.$emit('initComplete');
@@ -106,11 +105,17 @@ export default {
 			isRendered: false,
 			sampleNamePoseMap: {
 				top: {
-					top: `-${this.iconSize}px`,
+					top: `-30px`,
 				},
 				right: {
-					left: '100%',
-					transform: `translateY(calc(-50% - ${this.iconSize / 2}px)`,
+					transform: `translate(${
+						this.iconSize / 2 + 4
+					}px,calc(-50% - ${this.iconSize / 2}px)`,
+				},
+				left: {
+					transform: `translate(calc(-100% - ${
+						this.iconSize / 2 + 4
+					}px),calc(-50% - ${this.iconSize / 2}px)`,
 				},
 			},
 		};

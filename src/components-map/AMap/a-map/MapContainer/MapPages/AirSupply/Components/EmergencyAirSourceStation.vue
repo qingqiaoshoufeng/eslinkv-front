@@ -7,7 +7,7 @@
 			visible,
 			apiFun,
 			...$attrs,
-			data,
+			data: dataInner,
 		}"
 		@click="
 			marker =>
@@ -43,6 +43,20 @@ export default {
 			default() {
 				return [];
 			},
+		},
+	},
+	computed: {
+		dataInner() {
+			let { data = [] } = this;
+			let stationPoseMap = {
+				西部应急气源站: 'left',
+				东部应急气源站: 'top',
+				西部应急气源站: 'left',
+			};
+			return this.data.map(item => {
+				item.pose = stationPoseMap[item.name];
+				return item;
+			});
 		},
 	},
 	data() {
