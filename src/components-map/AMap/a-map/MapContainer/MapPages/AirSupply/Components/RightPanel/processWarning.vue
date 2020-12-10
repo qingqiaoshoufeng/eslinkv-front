@@ -1,49 +1,47 @@
 <template>
 	<div class="process-warning">
 		<div class="filter-box">
-			<div class="filter-level">
-				<i-select
-					class="filter-select"
-					v-model="currentLevel"
-					:style="{
-						width: '72px',
-						height: '32px',
-					}"
-				>
-					<i-option
-						:style="{
-							padding: '0,10px',
-							width: '72px',
-							height: '32px',
-							fontFamily: 'PingFang SC',
-							fontWeight: 600,
-							fontSize: '20px',
-							lineHeight: '32px',
-							color: '#fff',
-							backgroundColor: '#0057A9',
-						}"
-						class="option"
-						v-for="item in levelList"
-						:value="item.value"
-						:key="item.value"
+			<div class="fn-flex filter-bar">
+				<div class="fitler-item">
+					<i-select
+						class="filter-select"
+						v-model="currentLevel"
+						style="width: 72px"
 					>
-						{{ item.label }}
-					</i-option>
-				</i-select>
-			</div>
-
-			<div class="repair-state">
-				<div
-					:class="repairState === '处理完成' ? 'active' : ''"
-					@click="changeRepairState('处理完成')"
-				>
-					已处理
+						<i-option
+							:style="{
+								padding: '0,10px',
+								width: '72px',
+								height: '32px',
+								fontFamily: 'PingFang SC',
+								fontWeight: 600,
+								fontSize: '20px',
+								lineHeight: '32px',
+								color: '#fff',
+								backgroundColor: '#0057A9',
+							}"
+							class="option"
+							v-for="item in levelList"
+							:value="item.value"
+							:key="item.value"
+						>
+							{{ item.label }}
+						</i-option>
+					</i-select>
 				</div>
-				<div
-					:class="repairState === '未处理' ? 'active' : ''"
-					@click="changeRepairState('未处理')"
-				>
-					未处理
+				<div class="fitler-item repair-state">
+					<div
+						:class="repairState === '处理完成' ? 'active' : ''"
+						@click="changeRepairState('处理完成')"
+					>
+						已处理
+					</div>
+					<div
+						:class="repairState === '未处理' ? 'active' : ''"
+						@click="changeRepairState('未处理')"
+					>
+						未处理
+					</div>
 				</div>
 			</div>
 		</div>
@@ -113,10 +111,10 @@ export default {
 			currentLevel: 1,
 			repairState: '处理完成',
 			levelList: [
-				{ value: 1, label: '一级' },
-				{ value: 2, label: '二级' },
-				{ value: 3, label: '三级' },
-				{ value: 4, label: '四级' },
+				{ value: 0, label: '一级' },
+				{ value: 1, label: '二级' },
+				{ value: 2, label: '三级' },
+				{ value: 3, label: '四级' },
 				{ value: 5, label: '五级' },
 			],
 		};
@@ -209,25 +207,33 @@ export default {
 	&::-webkit-scrollbar {
 		display: none;
 	}
-
-	.filter-box {
-		width: 100%;
-		height: 50px;
-		display: flex;
-		align-items: center;
-		border-bottom: 1px solid #0057a9;
-		justify-content: space-between !important;
-		/deep/.ivu-select-dropdown {
-			top: 32px !important;
-			background: #0057a9;
+	.filter-bar {
+		justify-content: space-between;
+		color: #00ddff;
+		font-size: 20px;
+		padding: 8px 2px 7px 2px;
+		border-bottom: 1px solid #00ddff;
+		line-height: 38px;
+		user-select: none;
+		.fitler-item {
+			display: flex;
+			> div {
+				padding: 0 8px;
+				cursor: pointer;
+			}
+			> div:not(:last-child) {
+				margin-right: 16px;
+			}
 		}
-		/deep/.ivu-select-selection {
-			color: #fff;
-			background: #0057a9;
+		.repair-type {
+			.active {
+				color: #fff;
+				background: #0057a9;
+				border: 1px solid #00ddff;
+				border-radius: 4px;
+			}
 		}
 		.repair-state {
-			display: flex;
-			margin-right: 0 16px;
 			.active {
 				color: #fff;
 				&::after {
@@ -244,7 +250,6 @@ export default {
 			> div {
 				position: relative;
 				padding-left: 20px;
-				margin-right: 0 16px;
 				&::before {
 					content: ' ';
 					display: inline-block;
@@ -257,22 +262,21 @@ export default {
 				}
 			}
 		}
-		.filter-select {
-			margin-right: 16px;
-		}
-		// justify-content: center;
-		span {
-			width: 72px !important;
-			height: 32px !important;
-			line-height: 32px !important;
-			background: rgba(0, 221, 255, 0.3) !important;
-			font-family: PingFang SC !important;
-			font-weight: 600 !important;
-			font-size: 20px !important;
-			line-height: 32px !important;
-			color: #fff !important;
-		}
 	}
+	/deep/.ivu-select-dropdown {
+		top: 32px !important;
+		background: #0057a9;
+	}
+	/deep/.ivu-select-selection {
+		color: #fff;
+		background: #0057a9;
+	}
+	/deep/.ivu-select {
+		padding: 0 !important;
+		// width: 72px;
+		// height: 32px;
+	}
+
 	.list-item {
 		padding: 20px 8px;
 		box-sizing: border-box;

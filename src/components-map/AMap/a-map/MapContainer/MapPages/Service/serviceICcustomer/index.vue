@@ -214,7 +214,7 @@ export default {
 		switchChange(data, type) {
 			this.swichBoxInfo = data;
 			let [{ value }] = this.swichBoxInfo;
-			this.overlayMap.useHotYear.isShow = value;
+			this.overlayMap.useHotYear.visible = value;
 		},
 		closeOverlayDetail(done) {
 			// debugger;

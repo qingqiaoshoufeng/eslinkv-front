@@ -4,12 +4,12 @@
 			<div class="row">
 				<img :src="config.config.img1" alt="">
 				<span class="row-txt">{{ config.config.desc1 }}</span>
-				<span class="row-num font-num">{{ data.value2 }}</span>
+				<span class="row-num font-num">{{ data.value2 | toThousand }}</span>
 			</div>
 			<div class="row">
 				<img :src="config.config.img2" alt="">
 				<span class="row-txt">{{ config.config.desc2 }}</span>
-				<span class="row-num font-num">{{ data.value1 }}</span>
+				<span class="row-num font-num">{{ data.value1 | toThousand }}</span>
 			</div>
 		</div>
 		<div class="chart-wrap">
