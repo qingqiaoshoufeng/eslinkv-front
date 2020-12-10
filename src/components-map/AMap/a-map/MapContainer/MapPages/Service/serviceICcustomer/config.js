@@ -11,7 +11,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         component: 'MajorClient',
         visible: false,
         dataProp: 'majorClientList',
-        detailList: [useNumberYestoday]
+        detailList: [useNumberToday]
     },
 
     useHotYear: {

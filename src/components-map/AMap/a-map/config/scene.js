@@ -36,11 +36,11 @@ export const AIRSUPPLY_WARN__MODEL_COMPONENTINDEX = ['5twi4542r5i']
 
 // 供气工艺图场景
 export const AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX = 'zcklf7lfbq'
-export const AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1 = ['chx90ijycs9','59w3zaic3r7','vmuwvj985ff']
-export const AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2 = ['3om92oavtul','i7r0tng6ma','ysggte7pye']
+export const AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1 = ['chx90ijycs9', '59w3zaic3r7', 'vmuwvj985ff']
+export const AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2 = ['3om92oavtul', 'i7r0tng6ma', 'ysggte7pye']
 // 工商户警报
 export const ICcustomer_WARN__SCENEINDEX = '7gpqnjnklb4'
-export const ICcustomer_WARN__COMPONENTINDEX = ['qxy0rmgc2zg', 'qxy0rmgc2zg', , 'ucodxj4case', 'v05qrzfpet9', 'hxxs8j4tw0v', 'jjt38a1zdh']
+export const ICcustomer_WARN__COMPONENTINDEX = ['qxy0rmgc2zg', 'rfb2bd41oiq', 'ucodxj4case', 'ai3sf900cwu', 'v05qrzfpet9', 'hxxs8j4tw0v', 'jjt38a1zdh']
 // { 'tkxadgbmu0k': 'tkxadgbmu0k', 'ttek9npf3vb': 'ttek9npf3vb', 'nhgqy71gr3b': 'nhgqy71gr3b', 'd72fx6tk8a7': 'd72fx6tk8a7', 'pujdkocv3tm': 'pujdkocv3tm', 'pxlyqnfzs8i': 'pxlyqnfzs8i', 'z4ur1tcmbgm': 'z4ur1tcmbgm' }
 //
 

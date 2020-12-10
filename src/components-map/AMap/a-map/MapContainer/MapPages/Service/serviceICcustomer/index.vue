@@ -23,6 +23,7 @@
 				:detailList="config.detailList"
 				:data="allTypeStationList[config.dataProp]"
 				@close="closeOverlayDetail('')"
+				:activeIndex="activeIndex"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->
@@ -138,6 +139,7 @@ export default {
 			activeArea: '杭州钱江燃气有限公司',
 			swichBoxInfo: SWICHBOX,
 			WarningDetialInfo: {},
+			activeIndex: null,
 		};
 	},
 	created() {
@@ -159,6 +161,7 @@ export default {
 			let { address, content, status, id } =
 				activeOverlay || this.activeOverlay;
 			let { useNumberYestoday } = this.detailInfo;
+			console.log(this.detailInfo);
 
 			let params = {};
 
@@ -171,16 +174,17 @@ export default {
 			params[ICcustomer_WARN__COMPONENTINDEX[2]] = {
 				value: useNumberYestoday,
 			};
-			let {
-				total,
-				instant,
-				pressure,
-				temperature,
-			} = await this.getICcustomerWarningDetialInfo(id);
-			params[ICcustomer_WARN__COMPONENTINDEX[3]] = total;
-			params[ICcustomer_WARN__COMPONENTINDEX[4]] = instant;
-			params[ICcustomer_WARN__COMPONENTINDEX[5]] = pressure;
-			params[ICcustomer_WARN__COMPONENTINDEX[7]] = temperature;
+			// let {
+			// 	total,
+			// 	instant,
+			// 	pressure,
+			// 	temperature,
+			// } = await this.getICcustomerWarningDetialInfo(id);
+			// params[ICcustomer_WARN__COMPONENTINDEX[3]] = total;
+			// params[ICcustomer_WARN__COMPONENTINDEX[4]] = instant;
+			// params[ICcustomer_WARN__COMPONENTINDEX[5]] = pressure;
+			// params[ICcustomer_WARN__COMPONENTINDEX[7]] = temperature;
+
 			GoldChart.scene.createSceneInstance(
 				ICcustomer_WARN__SCENEINDEX,
 				'slideRight'
@@ -234,6 +238,7 @@ export default {
 				detailList,
 				name,
 				status,
+				activeIndex,
 			} = overlay;
 			let params = {
 				name,
@@ -243,9 +248,13 @@ export default {
 			};
 			this.activeArea = name;
 			this.activeOverlay = overlay;
+			console.log(activeIndex);
+			this.activeIndex = activeIndex || this.activeIndex;
+			console.log(activeIndex);
 			this.getDetailInfo(params, status);
 
 			this.isShowMore = ['WarningICcustomer'].includes(type);
+			this.isShowMore = status == 1;
 		},
 		// 请求用气大户，子公司，综合服务站数据列表
 		async getAllTypeStationList() {

@@ -8,7 +8,7 @@
 				...item,
 				...$attrs,
 			}"
-			:visible="true"
+			:visible="activeIndex === index"
 			@click="mouseover(item)"
 			@mouseleave="mouseleave"
 		>
@@ -49,6 +49,10 @@ export default {
 			default() {
 				return [];
 			},
+		},
+		activeIndex: {
+			type: Number,
+			default: -1,
 		},
 	},
 	data() {
