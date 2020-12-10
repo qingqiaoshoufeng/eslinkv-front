@@ -5,7 +5,7 @@
 			<div class="h-hot-call-analysis-content fn-flex flex-row">
 				<div class="h-hot-call-analysis-call-block"></div>
 				<div class="h-hot-call-analysis-call-title">忙碌</div>
-				<div class="h-hot-call-analysis-call-num font-num">{{data&&data.onCall}}</div>
+				<div class="h-hot-call-analysis-call-num font-num">{{data&&data.onBusy}}</div>
 				<div class="h-hot-call-analysis-free-block"></div>
 				<div class="h-hot-call-analysis-free-title">空闲</div>
 				<div class="h-hot-call-analysis-free-num">{{data&&data.onFree}}</div>
@@ -24,7 +24,7 @@
 	const value = {
 		api: {
 			data: JSON.stringify({
-				onCall: 32,
+				onBusy: 32,
 				onFree: 11
 			})
 		}
@@ -34,7 +34,8 @@
 		computed: {
 			ratio1() {
 				if (this.data) {
-					const ratio = this.data.onCall / (this.data.onCall + this.data.onFree) * 100
+					console.log(this.data.onBusy,this.data.onFree,this.data.onBusy / (this.data.onBusy + this.data.onFree))
+					const ratio = this.data.onBusy / (Number(this.data.onBusy) + Number(this.data.onFree)) * 100
 					if (ratio < 3)
 						return `calc(3% - 2px)`
 					if (ratio > 97)
@@ -45,7 +46,7 @@
 			},
 			ratio2() {
 				if (this.data) {
-					const ratio = this.data.onFree / (this.data.onCall + this.data.onFree) * 100
+					const ratio = this.data.onFree / (Number(this.data.onBusy) + Number(this.data.onFree)) * 100
 					if (ratio < 3)
 						return `calc(3% - 2px)`
 					if (ratio > 97)
