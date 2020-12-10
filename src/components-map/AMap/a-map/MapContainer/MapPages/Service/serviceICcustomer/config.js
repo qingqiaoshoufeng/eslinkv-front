@@ -1,6 +1,6 @@
 
 // 引入详情字典
-import { ICcustomer, useNumberYestoday, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, ICcustomerStatus } from "../../../../utils/dictionary"
+import { ICcustomer, useNumberYestoday, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, ICcustomerStatus, useNumberToday, useNumberYear, useNumberMonth, } from "./dictionary"
 // 覆盖物legend配置
 export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
     MajorClient: {
@@ -9,7 +9,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         iconSize: 38,
         icon: 'iconyongqidahu',
         component: 'MajorClient',
-        isShow: false,
+        visible: false,
         dataProp: 'majorClientList',
         detailList: [useNumberYestoday]
     },
@@ -17,7 +17,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
     useHotYear: {
         label: '年度热力',
         component: 'useHotYear',
-        isShow: true,
+        visible: true,
         dataProp: 'year',
     },
     BranchCompany: {
@@ -25,9 +25,9 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         legendIcon: 'icontulifengongsi',
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
-        isShow: true,
+        visible: true,
         dataProp: 'branchCompanyList',
-        detailList: [ICcustomer, useNumberYestoday, warningYestoday]
+        detailList: [ICcustomer, useNumberToday, useNumberYear, useNumberMonth,]
     },
     WarningICcustomer: {
         label: '报警',
@@ -35,9 +35,9 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         iconSize: 38,
         icon: 'iconyongqidahu2',
         component: 'WarningICcustomer',
-        isShow: true,
+        visible: true,
         dataProp: 'WarningICcustomerList',
-        detailList: [useNumberYestoday, ICcustomerStatus]
+        detailList: [useNumberToday, useNumberYear, useNumberMonth,]
     }
 }
 
@@ -57,7 +57,7 @@ export const SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP = {
 }
 
 // 工商户统计数据
-export const DATASTATISTICSLIST = [FTPNumber, warningYestodayTotal, warningYestodayMetersTotal]
+export const DATASTATISTICSLIST = [ICcustomer, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal]
 // SwitchBox配置
 export const SWICHBOX = [
     { label: '年度销售气量热力', value: true, type: 'useHotYear' },

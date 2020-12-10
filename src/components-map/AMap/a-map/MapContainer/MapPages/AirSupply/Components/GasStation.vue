@@ -1,3 +1,4 @@
+<!-- 门站 -->
 <template>
 	<BaseOverlay
 		v-bind="{
@@ -128,6 +129,8 @@ export default {
 					GoldChart.instance.updateComponent(item, {
 						data: {
 							label: name,
+							title: name,
+							image: name,
 							stationId: id,
 						},
 					});

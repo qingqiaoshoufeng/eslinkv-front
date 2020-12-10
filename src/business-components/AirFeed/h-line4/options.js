@@ -1,5 +1,3 @@
-
-
 export default function getOption(data, config) {
     return {
         textStyle: {
@@ -27,7 +25,7 @@ export default function getOption(data, config) {
                 interval: 0
             },
             offset: 5,
-            data: data.map(v => v.x)
+            data: data instanceof Array?data.map(v => v.x):[]
         }],
         yAxis: [
             {
@@ -89,7 +87,7 @@ export default function getOption(data, config) {
                 itemStyle: {
                     color: "#FB592C",
                 },
-                data: data.map(v => v.y),
+                data:data instanceof Array? data.map(v => v.y):[],
                 markPoint: {
                     symbol: 'circle',
                     symbolSize: 8,

@@ -8,7 +8,7 @@
 				@on-change="change(item.type)"
 				true-color="#0057A9"
 				false-color="#0057A9"
-			/>{{ item.value ? 'on' : 'off' }}
+			/>{{ item.value ? 'ON' : 'OFF' }}
 		</div>
 	</div>
 </template>
@@ -37,9 +37,7 @@ export default {
 			this.$emit('switch-change', this.data, type);
 		},
 	},
-	mounted() {
-
-	},
+	mounted() {},
 };
 </script>
 <style lang="scss" scoped>

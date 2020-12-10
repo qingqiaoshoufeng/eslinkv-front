@@ -11,7 +11,7 @@
 		<template v-for="(config, legend) in legendMap">
 			<component
 				:key="legend"
-				:visible="config.isShow"
+				:visible="config.visible"
 				:overlayIcon="config.legendIcon"
 				:iconSize="config.iconSize"
 				:overlayType="legend"

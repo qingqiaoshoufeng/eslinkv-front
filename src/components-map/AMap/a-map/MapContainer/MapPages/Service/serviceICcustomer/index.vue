@@ -10,9 +10,9 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in overlayMap">
 			<component
-				v-if="config.isShow && allTypeStationList[config.dataProp]"
+				v-if="config.visible && allTypeStationList[config.dataProp]"
 				:key="legend"
-				:visible="config.isShow"
+				:visible="config.visible"
 				:overlayIcon="config.legendIcon"
 				:iconSize="config.iconSize"
 				:overlayType="legend"
@@ -56,7 +56,7 @@
 			<RightPanelWithServiceICcustomer
 				class="right-panel"
 				@list-click="handleListClick"
-				@overlay-click="handleOverlayClick"
+				@overlay-click="handleListClick"
 			/>
 			<!-- 选择器盒子 -->
 			<i-switchBox
@@ -294,7 +294,12 @@ export default {
 				WarningICcustomerList,
 			};
 		},
-		handleListClick(item) {},
+		handleListClick(item) {
+			this.$refs.WarningICcustomer[0].mouseIn = true;
+			this.activeOverlay = item;
+			console.log(item);
+			this.handleOverlayClick(item);
+		},
 		// 查看态势感知详情列表
 		getICcustomerWarningDetialInfo(id) {
 			let params = {

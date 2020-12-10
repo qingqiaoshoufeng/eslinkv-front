@@ -1,5 +1,5 @@
 // 引入详情字典
-import { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth } from "../../../../utils/dictionary"
+import { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth } from "./dictionary"
 // 覆盖物legend配置
 export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
     // Grouphall: {
@@ -8,7 +8,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
     //     iconSize: 56,
     //     icon: 'iconjituandating',
     //     component: 'Grouphall',
-    //     isShow: true,
+    //     visible: true,
     //     dataProp: 'grouphallList',
 
     //     detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
@@ -19,7 +19,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         iconSize: 56,
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
-        isShow: true,
+        visible: true,
 
         dataProp: 'branchCompanyList',
 
@@ -34,7 +34,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
     //     iconSize: 38,
     //     icon: 'iconzonghefuwuzhan1',
     //     component: 'ServiceStation',
-    //     isShow: true,
+    //     visible: true,
     //     dataProp: 'comprehensiveServiceStationList',
 
     //     detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
@@ -44,7 +44,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         legendIcon: 'icontulixiaoqireli',
 
         component: 'CouplingHot',
-        isShow: true,
+        visible: true,
 
         dataProp: 'total'
 
@@ -54,7 +54,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         legendIcon: 'icontulifengongsi',
         icon: 'iconfengongsi',
         component: 'OperationHot',
-        isShow: false,
+        visible: false,
         dataProp: 'month'
 
     },

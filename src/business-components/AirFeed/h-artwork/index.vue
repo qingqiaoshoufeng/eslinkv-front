@@ -25,15 +25,6 @@
 		components: {
 			ImageView
 		},
-		watch: {
-			'config.api.params': {
-				handler(val) {
-					if (val){
-						this.config.api.data = JSON.stringify({image: val.value})
-					}
-				},
-			}
-		},
 		data() {
 			return {
 				option: {

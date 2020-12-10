@@ -39,12 +39,13 @@ let couplingIncreaseMonth = {
     DW: '',
     prop: "lastMonth"
 }
+// 工商户详情
 let ICcustomer = {
     label: '工商户',
     DW: '户',
     prop: "iCcustomer"
 }
-// 工商户详情
+
 let useNumberYestoday = {
     label: '昨日用气量',
     DW: 'm³',

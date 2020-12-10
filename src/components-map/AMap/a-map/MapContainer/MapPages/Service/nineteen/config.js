@@ -1,6 +1,6 @@
 
 // 引入详情字典
-import { OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent } from "../../../../utils/dictionary"
+import { OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent } from "./dictionary"
 // 覆盖物legend配置
 export const SERVICE_SERVICENINETEEN_LEGEND_MAP = {
     BranchCompany: {
@@ -9,7 +9,7 @@ export const SERVICE_SERVICENINETEEN_LEGEND_MAP = {
         iconSize: 56,
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
-        isShow: true,
+        visible: true,
         dataProp: 'branchCompanyList',
         detailList: [monthAccpet, monthManage, monthManagePercent]
     },

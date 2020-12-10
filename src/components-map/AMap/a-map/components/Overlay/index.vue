@@ -19,7 +19,7 @@
 		</div>
 	</AMapMarker>
 </template>
-  
+
 <script>
 import SvgIcon from '../SvgIcon';
 import { AMapMarker } from '../../lib';

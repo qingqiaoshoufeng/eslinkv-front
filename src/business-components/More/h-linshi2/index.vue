@@ -45,11 +45,11 @@
         <div class="fans-top" :key="currFan.name">
           <div style="text-align: left">
             <div class="fan-title">{{currFan.name}}</div>
-            <div class="fan-num font-num">{{ currFan.fanDailyNum }}</div>
+            <div class="fan-num font-num">{{ currFan.fanDailyNum| toThousand }}</div>
           </div>
           <div style="text-align: right">
             <div class="fan-title">{{currFan.name}}</div>
-            <div class="fan-num font-num">{{ currFan.fanTotalNum }}</div>
+            <div class="fan-num font-num">{{ currFan.fanTotalNum| toThousand }}</div>
           </div>
         </div>
       </transition>
@@ -197,6 +197,22 @@
 			  return this.data ? this.data.fans[this.fanIndex] : {}
       }
 		},
+    watch: {
+      data: {
+        handler(val) {
+          this.buildingTimer = setInterval(() => {
+            this.loopIndex++
+            if (this.fanIndex === 5) {
+              this.fanIndex = 0
+            } else {
+              this.fanIndex++
+            }
+          }, 3000)
+        },
+        deep: true,
+        immediate: true,
+      },
+    },
 		methods: {
 			getItemIndex(i) {
 				const n = (i + this.loopIndex) % 6
@@ -214,14 +230,6 @@
 		created() {
 			this.configSource = this.parseConfigSource(config, configSource)
 			this.configValue = this.parseConfigValue(config, value)
-			this.buildingTimer = setInterval(() => {
-				this.loopIndex++
-        if (this.fanIndex === 5) {
-          this.fanIndex = 0
-        } else {
-          this.fanIndex++
-        }
-			}, 3000)
 		},
 		mounted() {
 			// setTimeout(()=>{

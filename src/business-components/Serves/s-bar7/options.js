@@ -30,6 +30,11 @@ export default function (data) {
             itemStyle: {
                 color: 'rgba(0,221,255,0.3)'
             },
+            emphasis: {
+                itemStyle: {
+                    color: '#00DDFF'
+                }
+            },
             data: data.map(v => v.actual)
         },
             { //背景条
@@ -38,6 +43,11 @@ export default function (data) {
                 type: "bar",
                 itemStyle: {
                     color: 'rgba(0,87,169,0.5)'
+                },
+                emphasis: {
+                    itemStyle: {
+                        color: 'rgba(0,87,169, 1)'
+                    }
                 },
                 barWidth: 12,
                 barGap: "-150%",

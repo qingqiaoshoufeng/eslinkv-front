@@ -84,7 +84,9 @@ export default {
 	},
 	data() {
 		return {
-			overlayInfoConfigMap: Object.freeze(OVERLAYINFOMAP_SERVICE_CUSTOMER),
+			overlayInfoConfigMap: Object.freeze(
+				OVERLAYINFOMAP_SERVICE_CUSTOMER
+			),
 			dataStatisticsList: [],
 			OverlayDetail: null,
 			// legendMap1: SERVICELEGENDCUSTOMERMAP,

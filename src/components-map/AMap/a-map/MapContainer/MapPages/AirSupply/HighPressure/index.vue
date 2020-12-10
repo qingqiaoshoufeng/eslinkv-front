@@ -211,6 +211,8 @@ export default {
 		this.getAllTypeStationList();
 		this.getDataStatisticsInfo();
 		this.getHighPressurePipe();
+		// window.setCenter = this.setCenter.bind(this);
+		console.log(this.$root);
 	},
 };
 </script>
