@@ -105,7 +105,7 @@ import {
 import { AMapTile } from '../../../../lib';
 
 //页面所需公共组件
-import { OverlayDetail, MapLegend } from '../../../../components/index.js';
+import { OverlayDetail, MapLegend,RegionBoundary } from '../../../../components/index.js';
 import { DataStatistics } from '../../../../components';
 
 import {
@@ -148,7 +148,7 @@ export default {
 		OngroundRepairStation,
 		DataStatistics,
 		WarningList,
-		WarnEvent,
+        WarnEvent,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;

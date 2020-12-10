@@ -14,6 +14,7 @@
 			<component
 				:key="legend"
 				v-if="stationDataMap[config.dataProp]"
+				:ref="legend"
 				:is="config.component"
 				:visible="config.visible"
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
@@ -33,6 +34,7 @@
 				beforeClose: closeOverlayDetail,
 				...OverlayDetailProp,
 			}"
+			@view-detail="viewDetail"
 			ref="OverlayDetail"
 			:width="400"
 		>
@@ -134,15 +136,18 @@ export default {
 				let overlayDetailConfig =
 					overlayInfoConfigMap[overlayType] || {};
 				let legendConfig = legendMap[overlayType] || {};
-				//图标大小，是否显示关闭按钮
-				let iconSize = legendConfig.iconSize || 38;
-				let showCloseBtn = legendConfig.showPopCloseBtn;
+				//图标大小，是否显示关闭按钮，是否显示查看详情
+				let {
+					iconSize = 38,
+					showPopCloseBtn: showCloseBtn,
+					showMore,
+				} = legendConfig;
 				return {
 					data: activeOverlay,
 					iconSize,
 					showCloseBtn,
 					overlayDetailConfig,
-					showMore: false,
+					showMore,
 				};
 			}
 		},
@@ -205,6 +210,13 @@ export default {
 		closeWarnEventDetail() {
 			this.activeWarnData = {};
 			this.setZoomAndPanTo(...this.center, this.zoom);
+		},
+		//查看详情调用组件内部的方法
+		viewDetail() {
+			let { overlayType } = this.activeOverlay;
+			if (this.$refs[overlayType]) {
+				this.$refs[overlayType][0].viewDetail(this.activeOverlay);
+			}
 		},
 	},
 	mounted() {

@@ -10,8 +10,6 @@
 			data,
 		}"
 		@click="handleOverlayClick"
-		@mouseover="handleMouseover"
-		@mouseleave="handleMouseleave"
 	>
 		<template slot-scope="{ data }">
 			<div :class="[{ active: active }, data.inletDirection]">
@@ -81,11 +79,11 @@ export default {
 		};
 	},
 	methods: {
-		async handleMouseover(marker) {
-			if (this.mouseIn) {
-				return false;
-			}
-			this.mouseIn = true;
+		async handleOverlayClick(marker) {
+			// if (this.mouseIn) {
+			// 	return false;
+			// }
+			// this.mouseIn = true;
 			let { id, name, type } = marker;
 			let data = await this.$sysApi.map.airSupply.getStationRealTimeInfo({
 				id,
@@ -108,16 +106,16 @@ export default {
 					};
 				});
 			});
-			if (this.mouseIn) {
-				this.$emit(
-					'overlay-click',
-					{ ...marker, detail: dataComp },
-					'GasStation',
-					false
-				);
-			}
+			// if (this.mouseIn) {
+			this.$emit(
+				'overlay-click',
+				{ ...marker, detail: dataComp },
+				'GasStation',
+				false
+			);
+			// }
 		},
-		handleOverlayClick(marker) {
+		viewDetail(marker) {
 			let { name, id } = marker;
 			GoldChart.scene.createSceneInstance(
 				AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
@@ -142,12 +140,12 @@ export default {
 					});
 				});
 			});
-			this.$emit('close');
 		},
-		handleMouseleave() {
-			this.mouseIn = false;
-			this.$emit('close');
-		},
+		// handleMouseover() {},
+		// handleMouseleave() {
+		// 	this.mouseIn = false;
+		// 	this.$emit('close');
+		// },
 	},
 };
 </script>

@@ -53,16 +53,13 @@ export default {
         },
         showPopCloseBtn:{
             type:Boolean,
-            default:false
+            default:true
         }
 	},
 	data() {
 		return {
 			ready: false,
 		};
-    },
-    created(){
-        console.log(this.parentInfo)
     },
 	computed: {
 		scaleRatio() {
