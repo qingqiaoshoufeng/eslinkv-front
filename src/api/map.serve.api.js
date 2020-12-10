@@ -243,6 +243,17 @@ export function getBranchCompanyList(data) {
         },
     })
 }
+// 三社联动 客户分布热力
+export function getThreeSocialLinkagecustmerHot(data) {
+    return request({
+        url: HANGRANURL + '/threeSocial/heatCount',
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
 // 服务网点
 export function getServiceNetworkStationList(data) {
     return request({
@@ -265,6 +276,8 @@ export function getThreeSocialLinkageList(data) {
         },
     })
 }
+
+
 // 销气热力
 export function getHeatMapList(data) {
     return request({

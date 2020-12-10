@@ -10,7 +10,7 @@
 			data,
 		}"
 		@mouseover="mouseover"
-		@click="handleOverlayClick"
+		@click="mouseover"
 		@mouseleave="handleMouseleave"
 	/>
 </template>
@@ -72,8 +72,8 @@ export default {
 			);
 		},
 		handleMouseleave() {
-			this.mouseIn = false;
-			this.$emit('close');
+			// this.mouseIn = false;
+			// this.$emit('close');
 		},
 	},
 };

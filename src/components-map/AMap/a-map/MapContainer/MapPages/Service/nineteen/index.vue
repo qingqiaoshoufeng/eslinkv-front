@@ -21,6 +21,7 @@
 				:detailList="config.detailList"
 				:data="allTypeStationList[config.dataProp]"
 				:ref="config.component"
+				@close="closeOverlayDetail"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->

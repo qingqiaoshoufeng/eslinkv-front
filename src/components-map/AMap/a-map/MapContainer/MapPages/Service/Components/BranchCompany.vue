@@ -11,6 +11,7 @@
 			nameStyle,
 			overlayName: 'colName',
 		}"
+		@click="mouseover"
 		@mouseover="mouseover"
 		@mouseleave="mouseleave"
 	/>
