@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import { Message, Modal, Switch, DropdownMenu, DropdownItem } from 'view-design'
+import { Message, Modal, Switch, Select, Option } from 'view-design'
 import 'view-design/dist/styles/iview.css'
 import './scss/reset.scss'
 import './scss/index.scss'
@@ -21,8 +21,8 @@ import '@babel/polyfill'
 Vue.use(PortalVue)
 Vue.use(VueVideoPlayer)
 Vue.component('iSwitch', Switch);
-Vue.component('DropdownMenu', DropdownMenu);
-Vue.component('DropdownItem', DropdownItem);
+Vue.component('iSelect', Select);
+Vue.component('iOption', Option);
 Vue.prototype.$debug = debug
 Vue.prototype.$Message = Message
 Vue.prototype.$Modal = Modal

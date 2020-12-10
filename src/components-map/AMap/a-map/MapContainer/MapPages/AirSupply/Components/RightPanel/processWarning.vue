@@ -1,27 +1,37 @@
 <template>
 	<div class="process-warning">
 		<div class="filter-box">
-			<Select
-				v-model="model1"
-				style="
-					'width': '72px';
-					'height': '32px';
-					'fontFamily': 'PingFang SC';
-					'fontWeight': 600;
-					'fontSize': '20px';
-					'lineHeight': '32px';
-					'color': '#fff';
-					'backgroundColor': '#0057A9';
-				"
-			>
-				<Option
-					class="option"
-					v-for="item in levelList"
-					:value="item.value"
-					:key="item.value"
-					>{{ item.label }}</Option
+			<div class="filter-level">
+				<i-select
+					class="filter-select"
+					v-model="currentLevel"
+					:style="{
+						width: '72px',
+						height: '32px',
+					}"
 				>
-			</Select>
+					<i-option
+						:style="{
+							padding: '0,10px',
+							width: '72px',
+							height: '32px',
+							fontFamily: 'PingFang SC',
+							fontWeight: 600,
+							fontSize: '20px',
+							lineHeight: '32px',
+							color: '#fff',
+							backgroundColor: '#0057A9',
+						}"
+						class="option"
+						v-for="item in levelList"
+						:value="item.value"
+						:key="item.value"
+					>
+						{{ item.label }}
+					</i-option>
+				</i-select>
+			</div>
+
 			<div class="repair-state">
 				<div
 					:class="repairState === '处理完成' ? 'active' : ''"
@@ -199,15 +209,25 @@ export default {
 	&::-webkit-scrollbar {
 		display: none;
 	}
+
 	.filter-box {
 		width: 100%;
 		height: 50px;
 		display: flex;
 		align-items: center;
 		border-bottom: 1px solid #0057a9;
+		justify-content: space-between !important;
+		/deep/.ivu-select-dropdown {
+			top: 32px !important;
+			background: #0057a9;
+		}
+		/deep/.ivu-select-selection {
+			color: #fff;
+			background: #0057a9;
+		}
 		.repair-state {
 			display: flex;
-			float: right;
+			margin-right: 0 16px;
 			.active {
 				color: #fff;
 				&::after {
@@ -224,6 +244,7 @@ export default {
 			> div {
 				position: relative;
 				padding-left: 20px;
+				margin-right: 0 16px;
 				&::before {
 					content: ' ';
 					display: inline-block;
@@ -236,8 +257,11 @@ export default {
 				}
 			}
 		}
+		.filter-select {
+			margin-right: 16px;
+		}
 		// justify-content: center;
-		.option {
+		span {
 			width: 72px !important;
 			height: 32px !important;
 			line-height: 32px !important;
