@@ -136,7 +136,7 @@ export default {
 			detailInfo: {},
 			ICcustomerDetailInfo: {},
 			isShowMore: false,
-			activeArea: '杭州钱江燃气有限公司',
+			activeArea: '',
 			swichBoxInfo: SWICHBOX,
 			WarningDetialInfo: {},
 			activeIndex: null,
@@ -246,6 +246,7 @@ export default {
 				type,
 				params: 'useNumberYestoday',
 			};
+			console.log(name);
 			this.activeArea = name;
 			this.activeOverlay = overlay;
 			console.log(activeIndex);
@@ -254,7 +255,10 @@ export default {
 			this.getDetailInfo(params, status);
 
 			this.isShowMore = ['WarningICcustomer'].includes(type);
-			this.isShowMore = status == 1;
+			if (['WarningICcustomer', 'MajorClient'].includes(type)) {
+				this.$amap.panTo([lng, lat], 100);
+			}
+			// this.isShowMore = status == 1;
 		},
 		// 请求用气大户，子公司，综合服务站数据列表
 		async getAllTypeStationList() {

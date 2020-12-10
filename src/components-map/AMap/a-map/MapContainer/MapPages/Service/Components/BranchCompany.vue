@@ -12,7 +12,6 @@
 			overlayName: 'colName',
 		}"
 		@click="mouseover"
-		@mouseleave="mouseleave"
 	/>
 </template>
 <script>
