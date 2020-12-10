@@ -1,5 +1,42 @@
 <template>
 	<div class="process-warning">
+		<div class="filter-box">
+			<Select
+				v-model="model1"
+				style="
+					'width': '72px';
+					'height': '32px';
+					'fontFamily': 'PingFang SC';
+					'fontWeight': 600;
+					'fontSize': '20px';
+					'lineHeight': '32px';
+					'color': '#fff';
+					'backgroundColor': '#0057A9';
+				"
+			>
+				<Option
+					class="option"
+					v-for="item in levelList"
+					:value="item.value"
+					:key="item.value"
+					>{{ item.label }}</Option
+				>
+			</Select>
+			<div class="repair-state">
+				<div
+					:class="repairState === '处理完成' ? 'active' : ''"
+					@click="changeRepairState('处理完成')"
+				>
+					已处理
+				</div>
+				<div
+					:class="repairState === '未处理' ? 'active' : ''"
+					@click="changeRepairState('未处理')"
+				>
+					未处理
+				</div>
+			</div>
+		</div>
 		<div
 			@click="handleClick(item, index, 'WarningList')"
 			v-for="(item, index) in list"
@@ -63,6 +100,15 @@ export default {
 		return {
 			activeIndex: null,
 			list: [],
+			currentLevel: 1,
+			repairState: '处理完成',
+			levelList: [
+				{ value: 1, label: '一级' },
+				{ value: 2, label: '二级' },
+				{ value: 3, label: '三级' },
+				{ value: 4, label: '四级' },
+				{ value: 5, label: '五级' },
+			],
 		};
 	},
 	props: {
@@ -97,6 +143,9 @@ export default {
 		},
 	},
 	methods: {
+		changeRepairState(val) {
+			this.repairState = val;
+		},
 		handleClick(listItem, index) {
 			let { address, time } = listItem;
 			listItem.status = listItem.priority == '已处理' ? 0 : 1;
@@ -149,6 +198,56 @@ export default {
 	overflow-y: scroll;
 	&::-webkit-scrollbar {
 		display: none;
+	}
+	.filter-box {
+		width: 100%;
+		height: 50px;
+		display: flex;
+		align-items: center;
+		border-bottom: 1px solid #0057a9;
+		.repair-state {
+			display: flex;
+			float: right;
+			.active {
+				color: #fff;
+				&::after {
+					content: ' ';
+					display: inline-block;
+					position: absolute;
+					width: 0px;
+					height: 0px;
+					left: 4px;
+					top: calc(50% - 4px);
+					border: 4px solid #fff;
+				}
+			}
+			> div {
+				position: relative;
+				padding-left: 20px;
+				&::before {
+					content: ' ';
+					display: inline-block;
+					position: absolute;
+					width: 16px;
+					height: 16px;
+					left: 0px;
+					top: calc(50% - 8px);
+					border: 2px solid #00ddff;
+				}
+			}
+		}
+		// justify-content: center;
+		.option {
+			width: 72px !important;
+			height: 32px !important;
+			line-height: 32px !important;
+			background: rgba(0, 221, 255, 0.3) !important;
+			font-family: PingFang SC !important;
+			font-weight: 600 !important;
+			font-size: 20px !important;
+			line-height: 32px !important;
+			color: #fff !important;
+		}
 	}
 	.list-item {
 		padding: 20px 8px;
