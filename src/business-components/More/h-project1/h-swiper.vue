@@ -77,7 +77,6 @@
 					loop: true,
 					sources: [
 						{
-							type: 'video/mp4',
 							src: '/cdn/videos/sanshe.MOV',
 						},
 					],

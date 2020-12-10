@@ -45,11 +45,11 @@
         <div class="fans-top" :key="currFan.name">
           <div style="text-align: left">
             <div class="fan-title">{{currFan.name}}</div>
-            <div class="fan-num font-num">{{ currFan.fanDailyNum }}</div>
+            <div class="fan-num font-num">{{ currFan.fanDailyNum| toThousand }}</div>
           </div>
           <div style="text-align: right">
             <div class="fan-title">{{currFan.name}}</div>
-            <div class="fan-num font-num">{{ currFan.fanTotalNum }}</div>
+            <div class="fan-num font-num">{{ currFan.fanTotalNum| toThousand }}</div>
           </div>
         </div>
       </transition>
