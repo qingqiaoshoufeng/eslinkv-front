@@ -159,7 +159,7 @@ export default {
 
 <style lang="scss" scoped>
 .event-warning {
-    height:800px;
+	height: 800px;
 	.filter-bar {
 		justify-content: space-between;
 		color: #00ddff;
@@ -217,7 +217,7 @@ export default {
 		}
 	}
 	.event-warning-list {
-        height:744px;
+		height: 744px;
 		color: #fff;
 		font-size: 16px;
 		overflow-y: scroll;

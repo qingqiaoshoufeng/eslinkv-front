@@ -8,7 +8,7 @@
 						v-for="(item,index) in data?data.value:[]"
 						:class="{active:animateActiveIndex===index}"
 						:key="item.name">
-						<span class="pos-a font-num">{{item.ratio}}%</span>
+						<span class="pos-a font-num">{{(item.ratio*100).toFixed(2)}}%</span>
 						<i class="pos-a"/>
 						<h2 class="pos-a">{{item.name}}</h2>
 					</li>
@@ -19,7 +19,7 @@
 							<i class="pos-a" :style="{height:height}"></i>
 						</div>
 						<div class="fn-flex flex-column text-left">
-							<h2 class="font-num">{{data&&data.value[animateActiveIndex].total}}</h2>
+							<h2 class="font-num">{{data&&data.value[animateActiveIndex].total|toThousand}}</h2>
 							<p>月度接纳(万m³)</p>
 						</div>
 					</div>
@@ -40,11 +40,11 @@
 			<div class="h-project-2-right text-left">
 				<h1>{{data&&data.value[animateActiveIndex].name}}</h1>
 				<div>
-					<h2 class="font-num">{{data&&data.value[animateActiveIndex].today}}</h2>
+					<h2 class="font-num">{{data&&data.value[animateActiveIndex].today.toFixed(2)|toThousand}}</h2>
 					<p>今日接纳量(万m³)</p>
 				</div>
 				<div>
-					<h2 class="font-num">{{data&&data.value[animateActiveIndex].quick}}</h2>
+					<h2 class="font-num">{{data&&data.value[animateActiveIndex].quick.toFixed(2)|toThousand}}</h2>
 					<p>瞬时接纳量(m³/h)</p>
 				</div>
 			</div>

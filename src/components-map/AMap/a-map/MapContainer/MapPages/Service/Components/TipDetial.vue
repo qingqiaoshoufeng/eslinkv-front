@@ -17,8 +17,10 @@
 						detailInfo[item.prop] !== 0 &&
 						isNumber(detailInfo[item.prop])
 							? parseFloat(
-									detailInfo[item.prop].toLocaleString()
-							  ).toFixed(item.Fixed || 0)
+									detailInfo[item.prop].toFixed(
+										item.Fixed || 0
+									)
+							  ).toLocaleString()
 							: detailInfo[item.prop] || 0) + item.DW
 					} `
 				}}</span>
