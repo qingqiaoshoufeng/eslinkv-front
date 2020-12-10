@@ -202,7 +202,7 @@
         handler(val) {
           this.buildingTimer = setInterval(() => {
             this.loopIndex++
-            if (this.fanIndex === 5) {
+            if (this.fanIndex === 4) {
               this.fanIndex = 0
             } else {
               this.fanIndex++
