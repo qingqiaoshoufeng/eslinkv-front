@@ -258,18 +258,6 @@ export default {
 				minGD,
 				maxGD,
 			} = getHangZhouGasGISPosition(x, y, zoom);
-			// isPointInRing
-			let { lng: lngMin, lat: latMin } = minGD;
-            let { lng: lngMax, lat: latMax } = maxGD;
-            console.log(lngMax,latMax)
-			if (lngMax < 118.344933 && latMax > 30.566516) {
-				console.log('xy');
-				return null;
-			}
-			if (lngMin > 120.721945 && latMin < 29.188757) {
-				console.log('xy');
-				return null;
-			}
 			return `${window.api.MAP_GIS_URL}/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
