@@ -32,7 +32,7 @@
 			ref="OverlayDetail"
 			@close="closeOverlayDetail('')"
 		/>
-		<CustomerHot
+		<!-- <CustomerHot
 			v-if="
 				allTypeStationList.CustomerHotList &&
 				allTypeStationList.CustomerHotList.length
@@ -40,7 +40,7 @@
 			:visible="visible"
 			:data="allTypeStationList.CustomerHotList"
 			ref="OverlayDetail"
-		/>
+		/> -->
 
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
