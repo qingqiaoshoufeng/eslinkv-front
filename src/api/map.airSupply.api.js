@@ -50,7 +50,7 @@ export function getStationRealTimeInfo(data) {
 //高中压工艺报警
 export function getProcessWarningList(data) {
     return request({
-        url: HANGRANURL + '/highMidPressure/detail',
+        url: HANGRANURL + '/highMidPressure/list',
         method: 'get',
         params: data,
         headers: {

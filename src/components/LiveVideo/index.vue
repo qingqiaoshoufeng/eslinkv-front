@@ -830,7 +830,9 @@ export default {
         }
         pulist = onlineCameras.concat(offlineCameras);
 
-        this.pu = pulist.find(v => v.name === '5G应急车' && v.online == '1')
+        // todo
+        // this.pu = pulist.find(v => v.name === '5G应急车' && v.online == '1')
+        this.pu = pulist[0]
 
         var rv = P_LY.ForkResource(connectId, P_LY.Enum.ForkResourceLevel.nppForkOnePUInfo, 0, 0, null, {PUID: this.pu.puid});
         this.videoList = rv.response.childResource.filter(v => v.type == P_LY.Enum.PuResourceType.VideoIn)
@@ -952,11 +954,14 @@ export default {
       P_LY.UnLoad();
       //初始化插件,插件初始化失败给出提示
       try {
+      	console.log('live video step1')
         var rv = P_LY.Init(new P_LY.Struct.InitParamStruct(true, function (msg) {
+			console.log('live video step2')
               log(JSON.stringify(msg));
             }
         ));
         if (rv.rv != 0) {
+			console.log('live video step step3')
           if (rv.rv == "777") {
             //插件没有安装，或者安装后没有加载成功
             log("没有检测到插件，可能插件没有安装，或者安装失败")
@@ -966,10 +971,12 @@ export default {
           }
           return false;
         }
+		  console.log('live video step step4')
         this.connect()
         // 加载默认的连接参数
         return true;
       } catch (e) {
+		  console.log('live video step error')
         $("#msg_bar").html(e.name + "," + e.message);
         return false;
       }

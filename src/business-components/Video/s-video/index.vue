@@ -16,7 +16,8 @@
 	const value = {
 		api: {
 			data: JSON.stringify({
-				videoSrc: '/cdn/videos/sanshe.MOV'
+				videoSrc: '/cdn/videos/sanshe.MOV',
+				poster: '/static/images/hangranma-bg.png',
 			}),
 		},
 	};
@@ -44,6 +45,7 @@
 			data: {
 				handler(val) {
 					this.playerOptions.sources[0].src=val?.videoSrc
+					this.playerOptions.poster=val?.poster
 				},
 				deep: true,
 				immediate: true
