@@ -19,7 +19,7 @@
     <div id="windowtitle" style="display: none"></div>
 
     <!--      console控制台-->
-    <div id="msg_bar" style="display: none;width: 300px;height: 300px;"></div>
+    <div id="msg_bar" style="display: block;background: #5E87C4;width: 300px;height: 300px;"></div>
   </div>
 </template>
 
@@ -705,7 +705,7 @@ export default {
   },
   methods: {
     connect() {
-      console.warn('ccccccccccccc')
+      console.warn('------开始连接------')
 
       //创建连接,并记录在P_LY.Connections中
       var ip = _cf.connParams.ip;
@@ -725,6 +725,7 @@ export default {
       if (conn.rv == P_Error.SUCCESS) {
         connectId = conn.response;// 连接成功，返回connectId，此参数很重要，后面很多操作都需要
         log("连接成功:connectId=" + connectId);
+        console.warn('------连接成功------')
         $('#connect_btn').hide();
         $('#disconnect_btn').show();
 
@@ -829,12 +830,12 @@ export default {
         }
         pulist = onlineCameras.concat(offlineCameras);
 
-        // todo
-        var rv = P_LY.ForkResource(connectId, P_LY.Enum.ForkResourceLevel.nppForkOnePUInfo, 0, 0, null, {PUID: pulist[0].puid});
+        this.pu = pulist.find(v => v.name === '5G应急车' && v.online == '1')
 
+        var rv = P_LY.ForkResource(connectId, P_LY.Enum.ForkResourceLevel.nppForkOnePUInfo, 0, 0, null, {PUID: this.pu.puid});
         this.videoList = rv.response.childResource.filter(v => v.type == P_LY.Enum.PuResourceType.VideoIn)
-        this.pu = pulist[0]
-        console.warn('----this.videoList----')
+        console.warn('----获取到以下设备----')
+        console.log(pulist)
         console.log(this.videoList)
 
 
@@ -951,9 +952,7 @@ export default {
       P_LY.UnLoad();
       //初始化插件,插件初始化失败给出提示
       try {
-        var rv = P_LY.Init(new P_LY.Struct.InitParamStruct(
-            true,
-            function (msg) {
+        var rv = P_LY.Init(new P_LY.Struct.InitParamStruct(true, function (msg) {
               log(JSON.stringify(msg));
             }
         ));
