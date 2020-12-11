@@ -28,7 +28,7 @@ export default GoldChart
 export {store, mutations}
 
 // if (process.env.NODE_ENV !== 'production')
-	window.GoldChart = GoldChart
+	// window.GoldChart = GoldChart
 // document.addEventListener('GoldChartReady', function (e) {
 // 	console.log(e.detail)
 // }, false)

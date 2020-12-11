@@ -77,8 +77,8 @@ export default {
 			const { width, height } = this.kanboardSize;
 			let ratio = Math.min(clientWidth / width, clientHeight / height);
 			ratio = ratio < 1 ? ratio : 1;
-			// this.reverseScaleRatio = 1 / ratio;
-			// this._provided.parentInfo.scaleRatio = ratio;
+			this.reverseScaleRatio = 1 / ratio;
+			this._provided.parentInfo.scaleRatio = ratio;
 			// this.reverseScaleRatio = 1
 		},
 	},
