@@ -43,7 +43,7 @@
 			<!-- 统计数据 -->
 			<DataStatistics
 				:position="'right'"
-				:dataStatisticsList="dataStatisticsConfigMap"
+				:dataStatisticsConfigMap="dataStatisticsConfigMap"
 				:data="dataStatisticsData"
 			/>
 			<!-- 图例 -->
@@ -203,6 +203,10 @@ export default {
 			}
 		},
 		handleListClick(overlay) {
+            if(this.showOverlayDetail){
+                this.showOverlayDetail = false
+                this.activeOverlay = {}
+            }
 			let { lng, lat } = overlay;
 			this.activeWarnData = overlay;
 			this.setZoomAndPanTo(lng, lat);

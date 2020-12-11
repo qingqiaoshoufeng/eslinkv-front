@@ -50,7 +50,8 @@ export default {
 	methods: {
 		handleSceneChange(e) {
 			let sceneIndexMap = SCENEINDEXMAP
-			let { index } = e.detail
+            let { index } = e.detail
+            console.log(index,'index')
 			let pageName = sceneIndexMap[index] || ''
 			//无匹配pageName 则 不显示地图
 			this.showMap = !!pageName
