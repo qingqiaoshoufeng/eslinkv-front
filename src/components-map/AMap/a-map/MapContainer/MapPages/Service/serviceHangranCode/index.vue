@@ -219,10 +219,7 @@ export default {
 			};
 
 			this.detialBoxWidth = 450;
-			let res = await this.$sysApi.map.serve.getHangranCodeList(params);
-			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-
-			this.carouseComplBranchCompanyInfo();
+			return this.$sysApi.map.serve.getHangranCodeList(params);
 		},
 		// 获取热力图信息
 		async getAllHotList() {
@@ -324,10 +321,23 @@ export default {
 			this.intervalId = null;
 		},
 	},
-	mounted() {
+	watch: {
+		'allTypeStationList.branchCompanyList': {
+			handler(val) {
+				if (val.length) {
+					this.carouseComplBranchCompanyInfo();
+				}
+			},
+			deep: true,
+			immediate: true,
+		},
+	},
+	async mounted() {
+		let res = await this.getAllTypeStationList();
+		this.allTypeStationList = { ...this.allTypeStationList, ...res };
+
 		this.getAllHotList();
 		this.getDataStatisticsList();
-		this.getAllTypeStationList();
 	},
 	beforeDestroy() {
 		this.clearInterval();

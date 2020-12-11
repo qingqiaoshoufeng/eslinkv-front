@@ -183,8 +183,9 @@ export default {
 				currentPage: 1,
 				pageSize: 500,
 				priority: this.currentLevel,
-				status: this.repairState,
+				status: this.repairState === '已处理' ? 0 : 1,
 			});
+			console.log(this.list, '余志强');
 		},
 		// handleClick(item, index) {
 		// 	this.activeIndex = index;
