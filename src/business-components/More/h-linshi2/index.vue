@@ -35,8 +35,8 @@
 				</div>
 			</section>
       <section class="year">
-        <label>年度总产值</label>
-        <span class="year-num">{{ data.yearData | toThousand }}</span>
+        <label>优家年度总产值</label>
+        <span class="year-num">{{ data.yearData | toThousand }}<em>元</em></span>
       </section>
 		</div>
 		<section class="title">
@@ -206,6 +206,7 @@
     watch: {
       data: {
         handler(val) {
+          clearInterval(this.buildingTimer)
           this.buildingTimer = setInterval(() => {
             this.loopIndex++
             if (this.fanIndex === 4) {
@@ -284,16 +285,18 @@
   .year {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 360px;
+    justify-content: space-between;
+    width: 460px;
     height: 48px;
+    padding: 0 8px;
+    background: url("./img/border-you.svg") no-repeat;
+    background-size: 100% 100%;
     position: relative;
-    background: rgba(0, 221, 255, 0.3);
     margin: 0 auto;
     label {
       font-size: 24px;
       line-height: 24px;
-      color: #FFFFFF;
+      color: #5EE2FD;
     }
     .year-num {
       font-weight: bold;
@@ -302,16 +305,13 @@
       color: #FFFFFF;
       font-family: font-num;
       margin-left: 16px;
-    }
-    &:before {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 3px;
-      left: -2px;
-      width: 2px;
-      height: 40px;
-      background: #00DDFF;
+      em {
+        font-size: 24px;
+        line-height: 24px;
+        font-weight: normal;
+        font-style: normal;
+        color: #FFFFFF;
+      }
     }
   }
 
