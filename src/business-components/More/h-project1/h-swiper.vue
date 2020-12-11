@@ -4,13 +4,14 @@
 		<div class="swiper-Part" v-if="[7,8].includes(step)">
 			<!-- 视频区域 -->
 			<div class="left">
-				<video-player
-					class="video-player-box"
-					ref="videoPlayer"
-					:options="playerOptions"
-					:playsinline="true"
-					customEventName="customstatechangedeventname"
-				></video-player>
+<!--				<video-player-->
+<!--					class="video-player-box"-->
+<!--					ref="videoPlayer"-->
+<!--					:options="playerOptions"-->
+<!--					:playsinline="true"-->
+<!--					customEventName="customstatechangedeventname"-->
+<!--				></video-player>-->
+        <live-video></live-video>
 			</div>
 			<!-- 轮播图区域 -->
 			<div class="right">
@@ -41,8 +42,10 @@
 <script>
 	import Swiper from 'swiper';
 	import 'swiper/css/swiper.min.css';
+	import LiveVideo from '@/components/LiveVideo'
 
 	export default {
+	  components: { LiveVideo },
 		props: {
 			swiperinfo: {
 				type: Object,
@@ -157,7 +160,6 @@
 			.left {
 				width: 640px;
 				height: 400px;
-				background-color: #fff;
 
 				.video-player-box {
 					width: 640px;
@@ -173,6 +175,7 @@
 			.right {
 				width: 340px;
 				height: 400px;
+        padding-top: 44px;
 
 				.swiper-area {
 					width: 340px;

@@ -9,6 +9,10 @@
       >{{ k.name }}</li>
     </ul>
     <div class="video-wrap">
+      <div class="mask">
+        <img src="./img/carwifi.svg">
+        <div class="enter" @click="changeChannel(currIndex)">进入直播</div>
+      </div>
       <div id="windowbox"></div>
     </div>
     <!--    视频信息展示-->
@@ -696,7 +700,7 @@ export default {
     return {
       videoList: [],
       pu: null,
-      currIndex: -1
+      currIndex: 0
     }
   },
   methods: {
@@ -870,7 +874,6 @@ export default {
               switch (key) {
                 case "stopvideo":
                   stop();
-                  that.currIndex = -1
                   break;
                 case "playaudio":
                   playaudio();
@@ -991,6 +994,7 @@ export default {
 
 <style lang="scss" scoped>
 .video-wrap{
+  position: relative;
   width: 640px;
   height: 400px;
   background: url("./img/shipk.svg") no-repeat;
@@ -998,11 +1002,33 @@ export default {
   #windowbox {
     width: 100%;
     height: 100%;
+    background: #000;
+  }
+  .mask {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    padding-top: 130px;
+    text-align: center;
+    .enter {
+      cursor: pointer;
+      width: 112px;
+      height: 40px;
+      background: #0057A9;
+      border-radius: 4px;
+      font-size: 24px;
+      line-height: 40px;
+      color: #FFFFFF;
+      margin: 24px auto 0;
+    }
   }
 }
 .video-list {
   margin-bottom: 12px;
   display: flex;
+  height: 32px;
   li {
     width: 165px;
     height: 32px;
