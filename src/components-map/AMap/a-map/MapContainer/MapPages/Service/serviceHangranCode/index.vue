@@ -273,8 +273,13 @@ export default {
 			if (this.intervalId || this.intervalId == 0) {
 				this.clearInterval();
 			}
-
+			if (!this.intervalId) {
+			}
+			window.arrr = [];
 			this.intervalId = setInterval(() => {
+				// if (this.intervalId || this.intervalId == 0) {
+				// 	this.clearInterval();
+				// }
 				let currentIndex = index++ % length;
 				console.log(this.intervalId);
 				// let overlay =
@@ -310,6 +315,8 @@ export default {
 
 				// this.$amap.panTo([121.26159668, 30.52559623], 100);
 			}, 3000);
+			arrr.push(this.intervalId);
+			console.log(arrr);
 		},
 		// 关闭定时器
 		clearInterval() {
