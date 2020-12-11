@@ -56,7 +56,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	},
 	PipeManageMentStation: {
 	    label: '管网运行管理站',
-	    legendIcon: 'icontuliqiyuanzhan',
+	    legendIcon: 'icontuliguanwangyunhangguanlizhan',
 	    iconSize: 38,
 	    component: 'EmergencyAirSourceStation',
 	    visible: true,

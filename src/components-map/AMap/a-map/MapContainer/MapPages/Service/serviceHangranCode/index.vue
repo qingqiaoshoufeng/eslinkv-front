@@ -270,7 +270,7 @@ export default {
 			let index = 0;
 
 			let length = this.allTypeStationList.branchCompanyList.length;
-			if (this.intervalId && this.intervalId == 0) {
+			if (this.intervalId) {
 				this.clearInterval();
 			}
 
