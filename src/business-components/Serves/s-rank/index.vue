@@ -1,11 +1,11 @@
 <template>
 	<div class="widget-part" :style="styles" v-if="data">
-		<ul>
-      <li v-for="(k, i) in data">
-        <img class="rank-icon" src="./img/rank1.svg" v-if="i === 0">
-        <img class="rank-icon" src="./img/rank2.svg" v-else-if="i === 1">
-        <img class="rank-icon" src="./img/rank3.svg" v-else-if="i === 2">
-        <div class="rank" v-else>{{ i + 1 }}</div>
+		<ul @mouseenter="isStop = true" @mouseleave="isStop = false">
+      <li v-for="(k, i) in curr" :key="i">
+        <img class="rank-icon" src="./img/rank1.svg" v-if="getIndex(i) === 1">
+        <img class="rank-icon" src="./img/rank2.svg" v-else-if="getIndex(i) === 2">
+        <img class="rank-icon" src="./img/rank3.svg" v-else-if="getIndex(i) === 3">
+        <div class="rank" v-else>{{ getIndex(i) }}</div>
         <div class="txt">{{ k.name }}</div>
         <div class="num font-num">{{ k.num | toThousand }}m³</div>
         <img class="arrow" src="/static/icons/arrow-up.svg" v-if="k.isUp"/>
@@ -16,7 +16,6 @@
 </template>
 <script>
 import mixins from '../../mixins';
-import { getInput } from '../../../../lib';
 
 const config = {
 	animation: true
@@ -48,16 +47,76 @@ const value = {
         name: '余明机械制造有限公司',
         num: '783',
         isUp: true
+      },
+      {
+        name: '余明机械制造有限公司',
+        num: '783',
+        isUp: true
+      },
+      {
+        name: '余明机械制造有限公司',
+        num: '783',
+        isUp: true
+      },
+      {
+        name: '余明机械制造有限公司',
+        num: '783',
+        isUp: true
+      },
+      {
+        name: '余明机械制造有限公司',
+        num: '783',
+        isUp: true
       }
     ])
 	}
 };
+const SIZE = 5
 export default {
 	mixins: [mixins],
+  data() {
+    return {
+      timer: null,
+      loop: 0,
+      isStop: false
+    }
+  },
+  watch: {
+    data: {
+      handler(val) {
+        clearInterval(this.timer)
+        this.timer = setInterval(() => {
+          if (this.isStop) return
+          if (this.loop === Math.ceil(val.length / SIZE)- 1) {
+            this.loop = 0
+          } else {
+            this.loop++
+          }
+        }, 2000)
+      },
+      deep: true,
+      immediate: true
+    },
+  },
+  computed: {
+    curr () {
+      if (!this.data) return []
+      return this.data.slice(this.loop * SIZE, (this.loop + 1) * SIZE)
+    }
+  },
+  methods: {
+    getIndex (n) {
+      return n + 1 + this.loop * SIZE
+    }
+  },
 	created() {
 		this.configSource = this.parseConfigSource(config);
 		this.configValue = this.parseConfigValue(config, value);
 	},
+  beforeDestroy() {
+    clearInterval(this.timer)
+    this.timer = null
+  }
 };
 </script>
 <style lang="scss" scoped>

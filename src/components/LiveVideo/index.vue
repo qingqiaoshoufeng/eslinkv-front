@@ -19,7 +19,7 @@
     <div id="windowtitle" style="display: none"></div>
 
     <!--      console控制台-->
-    <div id="msg_bar" style="display: block;background: #5E87C4;width: 300px;height: 300px;"></div>
+    <div id="msg_bar" style="display: none;background: #5E87C4;width: 300px;height: 300px;"></div>
   </div>
 </template>
 

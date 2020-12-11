@@ -1,5 +1,5 @@
 <template>
-	<div class="widget-part" :style="styles">
+	<div class="widget-part" :style="styles" v-if="data">
 		<ul class="title">
 			<li></li>
 			<li>标题</li>
@@ -7,30 +7,23 @@
 			<li>收藏</li>
 			<li>分享</li>
 		</ul>
-		<div class="content" v-if="data">
-			<vue-seamless-scroll
-				:data="data.list || []"
-				class="content__seamless-warp1"
-				:class-option="classOption"
-			>
-				<ul
-					class="content__row1"
-					v-for="(k, index) in data.list"
-					:key="index"
-				>
-					<li class="font-num">0{{ index + 1 }}</li>
-					<li>{{ k.v1 }}</li>
-					<li>{{ k.v2 | toThousand }}</li>
-					<li>{{ k.v3 | toThousand }}</li>
-					<li>{{ k.v4 | toThousand }}</li>
-				</ul>
-			</vue-seamless-scroll>
+		<div class="content" @mouseenter="isStop = true" @mouseleave="isStop = false">
+      <ul
+          class="content__row1"
+          v-for="(k, index) in curr"
+          :key="index"
+      >
+        <li class="font-num" :class="{first: getIndex(index) === '01'}">{{ getIndex(index) }}</li>
+        <li>{{ k.v1 }}</li>
+        <li>{{ k.v2 | toThousand }}</li>
+        <li>{{ k.v3 | toThousand }}</li>
+        <li>{{ k.v4 | toThousand }}</li>
+      </ul>
 		</div>
 	</div>
 </template>
 <script>
 	import mixins from '../../mixins';
-	import VueSeamLess from 'vue-seamless-scroll';
 
 	const config = {animation: true};
 	const value = {
@@ -83,30 +76,53 @@
 			}),
 		},
 	};
+  const SIZE = 6
 	export default {
 		mixins: [mixins],
-		components: {
-			VueSeamLess,
-		},
-		methods: {},
-		computed: {
-			classOption() {
-				return {
-					step: 0.2, // 数值越大速度滚动越快
-					limitMoveNum: this.data?.list?.length, // 开始无缝滚动的数据量
-					hoverStop: true, // 是否开启鼠标悬停stop
-					direction: 1, // 0向下 1向上 2向左 3向右
-					openWatch: true, // 开启数据实时监控刷新dom
-					singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
-					singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-					waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
-				};
-			},
-		},
+    data() {
+      return {
+        timer: null,
+        loop: 0,
+        isStop: false
+      }
+    },
+    watch: {
+      data: {
+        handler(val) {
+          clearInterval(this.timer)
+          this.timer = setInterval(() => {
+            if (this.isStop) return
+            if (this.loop === Math.ceil(val.list.length / SIZE)- 1) {
+              this.loop = 0
+            } else {
+              this.loop++
+            }
+          }, 2000)
+        },
+        deep: true,
+        immediate: true
+      },
+    },
+    computed: {
+      curr () {
+        if (!this.data) return []
+        return this.data.list.slice(this.loop * SIZE, (this.loop + 1) * SIZE)
+      }
+    },
+    methods: {
+		  getIndex (n) {
+		    const num = n + 1 + this.loop * SIZE
+        return num < 10 ? '0' + num : num
+      }
+    },
 		created() {
 			this.configSource = this.parseConfigSource(config);
 			this.configValue = this.parseConfigValue(config, value);
 		},
+    beforeDestroy() {
+      clearInterval(this.timer)
+      this.timer = null
+    }
 	};
 </script>
 <style lang="scss" scoped>
@@ -166,7 +182,7 @@
 				padding-left: 8px;
 				box-sizing: border-box;
 
-        &:first-child>li:first-child{
+        &:first-child>li.first{
           background: #FF7217;
         }
 				& > li {
