@@ -127,7 +127,7 @@ export default function (xData, barData, lineData, dashLineData) {
 			"name": "供气量",
 			"type": "bar",
 			"stack": "总量",
-			barWidth: 17,
+			barWidth: 12,
 			"itemStyle": {
 				"normal": {
 					"color": {

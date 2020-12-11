@@ -11,7 +11,7 @@ export default {
 		},
 		value: {
 			type: String,
-			default: '杭州钱江燃气有限公司',
+			default: '',
 		},
 	},
 	watch: {

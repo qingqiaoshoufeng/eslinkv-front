@@ -26,8 +26,7 @@
 		},
 		methods: {
 			handleClick() {
-				// GoldChart.scene.changeShowMainScene(false)
-				GoldChart.scene.setSceneIndex('tbc8uqyrkze')
+				location.reload()
 			}
 		}
 	}
