@@ -5,7 +5,7 @@ const request = axios.create()
 
 request.defaults.baseURL =
     process.env.NODE_ENV !== 'production' ? '/' : '/'
-request.defaults.timeout = 10000
+request.defaults.timeout = 30000
 request.interceptors.request.use(
     function (config) {
         return config
