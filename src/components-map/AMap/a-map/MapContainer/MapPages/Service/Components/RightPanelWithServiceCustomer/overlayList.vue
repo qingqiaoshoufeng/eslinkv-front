@@ -121,7 +121,7 @@ export default {
 	font-size: 16px;
 	.list-item {
 		// height: 96px;
-		padding: 20px 8px;
+		padding: 16px 8px;
 		box-sizing: border-box;
 		cursor: pointer;
 		&:hover,
@@ -152,9 +152,9 @@ export default {
 				}
 			}
 			.station-name {
-				font-size: 18px;
+				font-size:20px;
 				flex: 1;
-				color: rgba(255, 255, 255, 0.75);
+				color: rgba(255, 255, 255, 0.8);
 				margin-left: 36px;
 			}
 		}

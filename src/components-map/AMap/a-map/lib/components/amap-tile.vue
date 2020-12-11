@@ -68,7 +68,6 @@ export default {
 		},
 		handleMapZoomChangeStart() {
             this.originInstance.hide();
-                console.log('start')
 		},
 		handleMapZoomChangeEnd() {
             if(this.timerZoomEnd){
@@ -77,7 +76,6 @@ export default {
 			this.timerZoomEnd = setTimeout(() => {
 				this.originInstance.show();
                 this.reload();
-                console.log('end')
 			}, 0);
 		},
 	},

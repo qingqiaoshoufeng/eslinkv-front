@@ -1,5 +1,5 @@
 export const SCENEINDEXMAP = {
-	'8iyxp8u3gtu': 'AirSupplyLowPressure', //供气-管网
+	'n1o68ddzgif': 'AirSupplyLowPressure', //供气-管网
 	// tbc8uqyrkze: 'airsupply', //供气-管网
 	'9n1zur7e4l': 'AirSupplyUCAN', //供气-泛能
 	nn16rowdl5r: 'AirSupplyHighPressure', //供气-场站
@@ -15,7 +15,7 @@ export const SCENEINDEXMAP = {
 	phugmfxir4d: 'unchange',
 }
 export const INDEXSCENEMAP = {
-	AirSupplyLowPressure: '8iyxp8u3gtu', //供气-管网
+	AirSupplyLowPressure: 'n1o68ddzgif', //供气-管网
 	AirSupplyUCAN: '9n1zur7e4l', //供气-泛能
 	AirSupplyHighPressure: 'nn16rowdl5r', //供气-场站
 	AirSupplyLNG: 'p2wovclspks', //供气-lng

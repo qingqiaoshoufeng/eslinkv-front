@@ -23,10 +23,10 @@ function bd_2_HZGAS(x, b, k) {
  * @returns {{leftBottomX: *, leftBottomY: *, rightTopX: *, rightTopY: *, width: number, height: number}}
  */
 export default function getPosition(x, y, zoom) {
-	let minGD = TransformClassSlippy.pixelToLnglat(null, null, x, y, zoom)
-	let min = coordinateTransform.GCJ2BD(minGD.lng, minGD.lat)
-	let maxGD = TransformClassSlippy.pixelToLnglat(null, null, x + 1, y + 1, zoom)
-	let max = coordinateTransform.GCJ2BD(maxGD.lng, maxGD.lat)
+	let min = TransformClassSlippy.pixelToLnglat(null, null, x, y, zoom)
+	min = coordinateTransform.GCJ2BD(min.lng, min.lat)
+	let max = TransformClassSlippy.pixelToLnglat(null, null, x + 1, y + 1, zoom)
+	max = coordinateTransform.GCJ2BD(max.lng, max.lat)
 
 	const leftBottomX = bd_2_HZGAS(min[0], XB, XK)
 	const leftBottomY = bd_2_HZGAS(min[1], YB, YK)
@@ -40,7 +40,5 @@ export default function getPosition(x, y, zoom) {
 		rightTopY,
 		width: TILE_WIDTH,
 		height: TILE_WIDTH,
-		minGD,
-		maxGD,
 	}
 }

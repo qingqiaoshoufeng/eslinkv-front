@@ -89,7 +89,7 @@ export default {
     height: 85px;
     background: linear-gradient(180deg, rgba(0, 221, 255, 0.3) 0%, rgba(0, 221, 255, 0) 100%);
     border-radius: 8px;
-    padding: 20px 8px;
+    padding: 16px 8px;
     .change-num {
       font-weight: bold;
       font-size: 32px;
