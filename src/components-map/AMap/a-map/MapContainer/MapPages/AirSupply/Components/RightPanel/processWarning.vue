@@ -1,50 +1,49 @@
 <template>
 	<div class="process-warning">
-		<div class="filter-box">
-			<div class="fn-flex filter-bar">
-				<div class="fitler-item">
-					<i-select
-						class="filter-select"
-						v-model="currentLevel"
-						style="width: 72px"
+		<div class="fn-flex filter-bar">
+			<div class="fitler-item">
+				<i-select
+					class="filter-select"
+					v-model="currentLevel"
+					style="width: 72px"
+				>
+					<i-option
+						:style="{
+							padding: '0,10px',
+							width: '72px',
+							height: '32px',
+							fontFamily: 'PingFang SC',
+							fontWeight: 600,
+							fontSize: '20px',
+							lineHeight: '32px',
+							color: '#fff',
+							backgroundColor: '#0057A9',
+						}"
+						class="option"
+						v-for="item in levelList"
+						:value="item.value"
+						:key="item.value"
 					>
-						<i-option
-							:style="{
-								padding: '0,10px',
-								width: '72px',
-								height: '32px',
-								fontFamily: 'PingFang SC',
-								fontWeight: 600,
-								fontSize: '20px',
-								lineHeight: '32px',
-								color: '#fff',
-								backgroundColor: '#0057A9',
-							}"
-							class="option"
-							v-for="item in levelList"
-							:value="item.value"
-							:key="item.value"
-						>
-							{{ item.label }}
-						</i-option>
-					</i-select>
+						{{ item.label }}
+					</i-option>
+				</i-select>
+			</div>
+			<div class="fitler-item repair-state">
+				<div
+					:class="repairState === '处理完成' ? 'active' : ''"
+					@click="changeRepairState('处理完成')"
+				>
+					已处理
 				</div>
-				<div class="fitler-item repair-state">
-					<div
-						:class="repairState === '处理完成' ? 'active' : ''"
-						@click="changeRepairState('处理完成')"
-					>
-						已处理
-					</div>
-					<div
-						:class="repairState === '未处理' ? 'active' : ''"
-						@click="changeRepairState('未处理')"
-					>
-						未处理
-					</div>
+				<div
+					:class="repairState === '未处理' ? 'active' : ''"
+					@click="changeRepairState('未处理')"
+				>
+					未处理
 				</div>
 			</div>
 		</div>
+
 		<div
 			@click="handleClick(item, index, 'WarningList')"
 			v-for="(item, index) in list"
@@ -208,10 +207,14 @@ export default {
 		display: none;
 	}
 	.filter-bar {
+		background: #000866;
+		width: 100%;
+		position: absolute;
 		justify-content: space-between;
 		color: #00ddff;
 		font-size: 20px;
 		padding: 8px 2px 7px 2px;
+		// height: 56px;
 		border-bottom: 1px solid #00ddff;
 		line-height: 38px;
 		user-select: none;

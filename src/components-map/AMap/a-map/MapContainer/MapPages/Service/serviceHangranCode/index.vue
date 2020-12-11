@@ -144,7 +144,7 @@ export default {
 			allTypeStationList: {},
 			detailInfo: {},
 			couplingIncreaseInfo: {},
-			activeArea: '杭州钱江燃气有限公司',
+			activeArea: '',
 			left: 10,
 			swichBoxInfo: SWICHBOX,
 			intervalId: null,

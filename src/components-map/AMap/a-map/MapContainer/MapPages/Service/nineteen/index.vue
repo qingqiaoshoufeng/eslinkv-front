@@ -98,7 +98,7 @@ export default {
 			showOverlayDetail: false,
 			zoom: 10,
 			center: [120.75522766, 30.33199066],
-			activeArea: '杭州钱江燃气有限公司',
+			activeArea: '',
 			allTypeStationList: {},
 			detailInfo: {},
 		};
@@ -165,10 +165,15 @@ export default {
 			let params = {
 				types: ['BranchCompany'].toString(),
 			};
-
+			debugger;
 			let res = await this.$sysApi.map.serve.getICcustomerStationList(
 				params
 			);
+			res.branchCompanyList = res.branchCompanyList.filter(
+				item => !item.name.includes('大江东')
+			);
+			console.log(res);
+
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
 		},
 		// 请求详情数据

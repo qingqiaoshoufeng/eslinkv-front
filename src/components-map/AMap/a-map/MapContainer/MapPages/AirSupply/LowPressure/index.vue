@@ -105,7 +105,11 @@ import {
 import { AMapTile } from '../../../../lib';
 
 //页面所需公共组件
-import { OverlayDetail, MapLegend,RegionBoundary } from '../../../../components/index.js';
+import {
+	OverlayDetail,
+	MapLegend,
+	RegionBoundary,
+} from '../../../../components/index.js';
 import { DataStatistics } from '../../../../components';
 
 import {
@@ -148,7 +152,7 @@ export default {
 		OngroundRepairStation,
 		DataStatistics,
 		WarningList,
-        WarnEvent,
+		WarnEvent,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
@@ -203,7 +207,10 @@ export default {
 				visible: visibleM,
 				tileQuery: tileQueryM,
 			} = MiddlePressureLine;
-			const { visible: visibleL, tileQuery: tileQueryL } = LowPressureLine;
+			const {
+				visible: visibleL,
+				tileQuery: tileQueryL,
+			} = LowPressureLine;
 			const {
 				visible: visibleP,
 				tileQuery: tileQueryP,
@@ -275,7 +282,7 @@ export default {
 			let { lng, lat } = overlay;
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
-            this.showOverlayDetail = true;
+			this.showOverlayDetail = true;
 			// if (isCenter) {
 			// 	this.setZoomAndPanTo(lng, lat + 0.005);
 			// }
@@ -293,7 +300,7 @@ export default {
 			// this.$amap.setZoom(11, 100);
 			this.$amap.setZoom(this.zoom, 100);
 			this.$amap.setCenter(this.center, 100);
-            done && done();
+			done && done();
 		},
 		viewOverlayDetail(overlay) {
 			let { overlayType } = overlay;
