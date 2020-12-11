@@ -56,7 +56,7 @@
 			.title {
 				font-size: 20px;
 				line-height: 24px;
-				color: #fff;
+				color: rgba(255,255,255,0.8);
 			}
 
 			.num {

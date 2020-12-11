@@ -150,7 +150,7 @@
 
 			& > li {
 				font-size: 18px;
-				color: #00CBF4;
+				color: rgba(255,255,255,0.8);
 				text-align: left;
 				flex: none;
 

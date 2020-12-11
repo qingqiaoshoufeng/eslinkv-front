@@ -830,7 +830,8 @@ export default {
         }
         pulist = onlineCameras.concat(offlineCameras);
 
-        this.pu = pulist.find(v => v.name === '5G应急车' && v.online == '1')
+        // this.pu = pulist.find(v => v.name === '5G应急车' && v.online == '1')
+        this.pu = pulist[0]
 
         var rv = P_LY.ForkResource(connectId, P_LY.Enum.ForkResourceLevel.nppForkOnePUInfo, 0, 0, null, {PUID: this.pu.puid});
         this.videoList = rv.response.childResource.filter(v => v.type == P_LY.Enum.PuResourceType.VideoIn)
