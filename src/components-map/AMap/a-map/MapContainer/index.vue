@@ -1,20 +1,27 @@
 <template>
 	<div class="map-container">
-		<el-amap
-			vid="overviewMap"
-			ref="amap"
-			class="hr-map"
+		<div
 			:style="`transform: scale(${reverseScaleRatio}); overflow: hidden;width:${kanboardSize.width}px;height:${kanboardSize.height}px`"
-			:events="{
-				init: mapInit,
-			}"
-			v-bind="mapConfig"
 		>
-			<!-- 页面 -->
-			<template v-if="showMapPage">
-				<component :scaleRatio="scaleRatio" :is="mapComponentName" />
-			</template>
-		</el-amap>
+			<el-amap
+				vid="overviewMap"
+				ref="amap"
+				class="hr-map"
+				:events="{
+					init: mapInit,
+				}"
+				v-bind="mapConfig"
+			>
+				<!-- 页面 -->
+				<template v-if="showMapPage">
+					<component
+						:scaleRatio="scaleRatio"
+						:is="mapComponentName"
+					/>
+				</template>
+			</el-amap>
+		</div>
+
 		<!-- 地图类型 -->
 		<MapTypeLegend />
 		<!-- 传送门的出口 -->
@@ -44,8 +51,8 @@ export default {
 	provide() {
 		return {
 			parentInfo: {
-                scaleRatio: this.scaleRatio,
-                pageName:this.pageName
+				scaleRatio: this.scaleRatio,
+				pageName: this.pageName,
 			},
 		};
 	},

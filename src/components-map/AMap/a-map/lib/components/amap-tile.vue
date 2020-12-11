@@ -58,7 +58,8 @@ export default {
 				opacity,
 				getTileUrl: getTileUrl,
 			});
-			this.$amap.addLayer(this.originInstance);
+            this.$amap.addLayer(this.originInstance);
+            window.suyan = this.originInstance
 		},
 		reload() {
 			this.$nextTick(() => {
@@ -66,16 +67,18 @@ export default {
 			});
 		},
 		handleMapZoomChangeStart() {
-			this.originInstance.setzIndex(-1);
+            this.originInstance.hide();
+                console.log('start')
 		},
 		handleMapZoomChangeEnd() {
             if(this.timerZoomEnd){
                 clearTimeout(this.timerZoomEnd)
             }
 			this.timerZoomEnd = setTimeout(() => {
-				this.originInstance.setzIndex(this.zIndex);
-				this.reload();
-			}, 200);
+				this.originInstance.show();
+                this.reload();
+                console.log('end')
+			}, 0);
 		},
 	},
 	beforeDestroy() {

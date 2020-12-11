@@ -20,7 +20,7 @@
 						</div>
 						<div class="fn-flex flex-column text-left">
 							<h2 class="font-num">{{data&&data.value[animateActiveIndex].total|toThousand}}</h2>
-							<p>月度接纳(万m³)</p>
+							<p>月度接纳(m³)</p>
 						</div>
 					</div>
 					<div class="h-project-2-curve pos-r">
@@ -41,7 +41,7 @@
 				<h1>{{data&&data.value[animateActiveIndex].name}}</h1>
 				<div>
 					<h2 class="font-num">{{data&&data.value[animateActiveIndex].today.toFixed(2)|toThousand}}</h2>
-					<p>今日接纳量(万m³)</p>
+					<p>今日接纳量(m³)</p>
 				</div>
 				<div>
 					<h2 class="font-num">{{data&&data.value[animateActiveIndex].quick.toFixed(2)|toThousand}}</h2>

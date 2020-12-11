@@ -61,6 +61,7 @@ export default function (data, config) {
                 type: "bar",
                 stack: "总量",
                 barMaxWidth: 8,
+				barMinHeight:10,
                 barGap: "10%",
                 itemStyle: {
                     color: config.color1
@@ -71,6 +72,7 @@ export default function (data, config) {
                 type: "bar",
                 stack: "总量",
                 barMaxWidth: 8,
+				barMinHeight:10,
                 barGap: "10%",
                 itemStyle: {
                     color: config.color2
@@ -81,6 +83,7 @@ export default function (data, config) {
                 type: "bar",
                 stack: "总量",
                 barMaxWidth: 8,
+				barMinHeight:10,
                 barGap: "10%",
                 itemStyle: {
                     color: config.color3

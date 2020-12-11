@@ -270,11 +270,13 @@ export default {
 			let index = 0;
 
 			let length = this.allTypeStationList.branchCompanyList.length;
-			if (this.intervalId) {
+			if (this.intervalId && this.intervalId == 0) {
 				this.clearInterval();
 			}
+
 			this.intervalId = setInterval(() => {
 				let currentIndex = index++ % length;
+				console.log(this.intervalId);
 				// let overlay =
 				this.activeOverlay = {
 					...this.allTypeStationList.branchCompanyList[currentIndex],

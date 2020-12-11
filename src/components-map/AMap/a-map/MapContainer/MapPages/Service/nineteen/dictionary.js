@@ -21,6 +21,11 @@ let TodayPass = {
     DW: '',
     prop: "accept_nbr",
 }
+let TodayUnPass = {
+    label: '今日审核未通过',
+    DW: '',
+    prop: "TodayUnPass",
+}
 let TodayProvingTo2 = {
     label: '今日2小时审核率',
     DW: '',
@@ -45,4 +50,4 @@ let monthManagePercent = {
     prop: "finished_m_rate",
     defaultVal: 0
 }
-export { OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent }
+export { OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayUnPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent }

@@ -29,10 +29,15 @@
 						class="item"
 						:class="[getItemIndex(i)]"
 						v-for="(k, i) in data.building"
+            :key="i"
 					>{{k.name}}
 					</div>
 				</div>
 			</section>
+      <section class="year">
+        <label>年度总产值</label>
+        <span class="year-num">{{ data.yearData | toThousand }}</span>
+      </section>
 		</div>
 		<section class="title">
 			<img src="/static/icons/left-icon.svg">
@@ -175,7 +180,8 @@
 						unit2: '元',
 						icon1: '/static/images/home/home-u-6.svg'
 					},
-				]
+				],
+        yearData: 53269871
 			}
 		}
 	}
@@ -275,10 +281,44 @@
     background: #011B79;
 	}
 
+  .year {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 360px;
+    height: 48px;
+    position: relative;
+    background: rgba(0, 221, 255, 0.3);
+    margin: 0 auto;
+    label {
+      font-size: 24px;
+      line-height: 24px;
+      color: #FFFFFF;
+    }
+    .year-num {
+      font-weight: bold;
+      font-size: 40px;
+      line-height: 48px;
+      color: #FFFFFF;
+      font-family: font-num;
+      margin-left: 16px;
+    }
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 3px;
+      left: -2px;
+      width: 2px;
+      height: 40px;
+      background: #00DDFF;
+    }
+  }
+
 	.detail {
 		display: flex;
 		align-items: center;
-		margin-bottom: 40px;
+		margin-bottom: 10px;
 
 		.detail-item {
 			flex: 1;

@@ -12,7 +12,7 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
-				v-if="config.visible && allTypeStationList[config.dataProp]"
+				v-if="config.visible && stationDataMap[config.dataProp]"
 				:key="legend"
 				:visible="config.visible"
 				:is="config.component"
@@ -21,7 +21,7 @@
 				:iconSize="config.iconSize"
 				@overlay-click="handleOverlayClick"
 				:detailList="config.detailList"
-				:data="allTypeStationList[config.dataProp]"
+				:data="stationDataMap[config.dataProp]"
 				@close="closeOverlayDetail('', false)"
 			/>
 		</template>
@@ -42,7 +42,7 @@
 			<!-- 统计数据 -->
 			<DataStatistics
 				:position="'right'"
-				:dataStatisticsList="dataStatisticsList"
+				:dataStatisticsConfigMap="dataStatisticsConfigMap"
 				:data="dataStatisticsInfo"
 			/>
 			<!-- 图例 -->
@@ -168,12 +168,12 @@ export default {
 				DistributedEnergyResource,
 			},
 			overlayMap: AIRSUPPLY_UCAN_LEGEND_MAP,
-			dataStatisticsList: DATASTATISTICSLIST,
+			dataStatisticsConfigMap: DATASTATISTICSLIST,
 			dataStatisticsInfo: {
 				commonUseNumber: 21742,
 				registerNumber: 44579,
 			},
-			allTypeStationList: {},
+			stationDataMap: {},
 		};
 	},
 	methods: {
@@ -203,7 +203,7 @@ export default {
 			let res = await this.$sysApi.map.airSupply.getAllTypeStationList(
 				params
 			);
-			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			this.stationDataMap = { ...this.stationDataMap, ...res };
 		},
 		// 获取统计数据
 		async getDataStatisticsInfo() {

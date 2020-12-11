@@ -30,16 +30,16 @@
 			</div>
 			<div class="fitler-item repair-state">
 				<div
-					:class="repairState === '处理完成' ? 'active' : ''"
-					@click="changeRepairState('处理完成')"
-				>
-					已处理
-				</div>
-				<div
 					:class="repairState === '未处理' ? 'active' : ''"
 					@click="changeRepairState('未处理')"
 				>
 					未处理
+				</div>
+				<div
+					:class="repairState === '处理完成' ? 'active' : ''"
+					@click="changeRepairState('处理完成')"
+				>
+					已处理
 				</div>
 			</div>
 		</div>
@@ -108,13 +108,12 @@ export default {
 			activeIndex: null,
 			list: [],
 			currentLevel: 1,
-			repairState: '处理完成',
+			repairState: '未处理',
 			levelList: [
-				{ value: 0, label: '一级' },
-				{ value: 1, label: '二级' },
-				{ value: 2, label: '三级' },
-				{ value: 3, label: '四级' },
-				{ value: 5, label: '五级' },
+				// { value: 0, label: ''' },
+				{ value: 1, label: '一级' },
+				{ value: 2, label: '二级' },
+				{ value: 3, label: '三级' },
 			],
 		};
 	},
@@ -155,6 +154,7 @@ export default {
 		},
 		handleClick(listItem, index) {
 			let { address, time } = listItem;
+			this.activeIndex = index;
 			listItem.status = listItem.priority == '已处理' ? 0 : 1;
 			listItem.overlayType = 'WarningList';
 			this.$emit('change', listItem);
@@ -179,14 +179,19 @@ export default {
 			// }, 3000);
 		},
 		async getData() {
-			this.list = await this.$sysApi.map.airSupply.getProcessWarningList();
+			this.list = await this.$sysApi.map.airSupply.getProcessWarningList({
+				currentPage: 1,
+				pageSize: 500,
+				priority: this.currentLevel,
+				status: this.repairState,
+			});
 		},
-		handleClick(item, index) {
-			this.activeIndex = index;
-			item.status = item.stateName == '处理完成' ? 0 : 1;
-			item.overlayType = 'WarningList';
-			this.$emit('change', item);
-		},
+		// handleClick(item, index) {
+		// 	this.activeIndex = index;
+		// 	item.status = item.stateName == '处理完成' ? 0 : 1;
+		// 	item.overlayType = 'WarningList';
+		// 	this.$emit('change', item);
+		// },
 	},
 	beforeDestroy() {
 		if (this.timer) {
@@ -276,6 +281,7 @@ export default {
 	}
 	/deep/.ivu-select {
 		padding: 0 !important;
+		height: 40px;
 		// width: 72px;
 		// height: 32px;
 	}

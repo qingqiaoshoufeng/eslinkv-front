@@ -3,30 +3,30 @@
 		<div class="fn-flex filter-bar">
 			<div class="fitler-item repair-type">
 				<div
-					:class="repairType === '维修' ? 'active' : ''"
-					@click="changeRepairType('维修')"
-				>
-					维修
-				</div>
-				<div
 					:class="repairType === '抢修' ? 'active' : ''"
 					@click="changeRepairType('抢修')"
 				>
 					抢修
 				</div>
+				<div
+					:class="repairType === '维修' ? 'active' : ''"
+					@click="changeRepairType('维修')"
+				>
+					维修
+				</div>
 			</div>
 			<div class="fitler-item repair-state">
-				<div
-					:class="repairState === '处理完成' ? 'active' : ''"
-					@click="changeRepairState('处理完成')"
-				>
-					已处理
-				</div>
 				<div
 					:class="repairState === '未处理' ? 'active' : ''"
 					@click="changeRepairState('未处理')"
 				>
 					未处理
+				</div>
+				<div
+					:class="repairState === '处理完成' ? 'active' : ''"
+					@click="changeRepairState('处理完成')"
+				>
+					已处理
 				</div>
 			</div>
 		</div>
@@ -86,7 +86,7 @@ export default {
 		return {
 			activeIndex: null,
 			list: [],
-			repairType: '维修',
+			repairType: '抢修',
 			repairState: '未处理',
 		};
 	},

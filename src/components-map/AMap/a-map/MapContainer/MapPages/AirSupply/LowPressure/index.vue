@@ -1,15 +1,6 @@
 <template>
 	<div>
 		<!-- 1.legend不控制显隐的覆盖物 -->
-		<!-- 1.1 报警点位-->
-		<!-- <WarningList
-			:visible="true"
-			type="事件"
-			overlayIcon="icontulinengyuanzhan"
-			:iconSize="38"
-			@overlay-click="handleOverlayClick"
-			:apiFun="$sysApi.map.airSupply.getEventWarningList"
-		/> -->
 		<!-- 报警点位 -->
 		<WarnEvent
 			:data="activeWarnData"
@@ -25,29 +16,23 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
-				v-if="config.component"
 				:key="legend"
-				:visible="config.visible"
+				v-if="stationDataMap[config.dataProp]"
+				:ref="legend"
 				:is="config.component"
+				:visible="config.visible"
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
-				:overlayType="legend"
+				:overlayType="config.component"
 				:iconSize="config.iconSize"
-				:showOverlayName="
-					config.showOverlayName === false
-						? config.showOverlayName
-						: undefined
-				"
-				:data="allTypeStationList[config.dataProp]"
-				@overlay-click="handleOverlayClick"
+				:showOverlayName="config.showOverlayName"
 				:detailList="config.detailList"
+				:data="stationDataMap[config.dataProp]"
+				@overlay-click="handleOverlayClick"
 				@close="closeOverlayDetail('', false)"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
-			:iconSize="
-				activeOverlay.overlayType === 'WarningList' ? 38 : undefined
-			"
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
@@ -57,14 +42,12 @@
 			ref="OverlayDetail"
 			:width="400"
 		/>
-		<!-- 路线规划 -->
-		<RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan>
 		<portal to="destination">
 			<!-- 统计数据 -->
 			<DataStatistics
 				:position="'right'"
-				:dataStatisticsList="dataStatisticsList"
-				:data="dataStatisticsInfo"
+				:dataStatisticsConfigMap="dataStatisticsConfigMap"
+				:data="dataStatisticsData"
 			/>
 			<!-- 图例 -->
 			<MapLegend :data="legendMap" class="map-legend" />
@@ -134,8 +117,6 @@ export default {
 		DistributedEnergyResource,
 		EmergencyAirSourceStation,
 		GasStation,
-		// HighPressureLine,
-		// HighPressureLine_Process,
 		InspectionCar,
 		InspectionPerson,
 		LiquefiedGasStation,
@@ -179,12 +160,11 @@ export default {
 			center: [120.151562, 30.273297],
 			zoom: 18,
 			showOverlayDetail: false,
-			showRoutePlan: false,
 			activeTab: 'realTime',
 			legendMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 			overlayMap: AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP,
-			dataStatisticsList: DATASTATISTICSLIST,
-			dataStatisticsInfo: {
+			dataStatisticsConfigMap: DATASTATISTICSLIST,
+			dataStatisticsData: {
 				Mediumline: 2627,
 				Lowline: 4652,
 				GreenServeStation: 5,
@@ -192,7 +172,7 @@ export default {
 				OnNumber: 12,
 				UnderNumber: 12,
 			},
-			allTypeStationList: {},
+			stationDataMap: {},
 			dataReady: false,
 		};
 	},
@@ -258,11 +238,11 @@ export default {
 			let res = await this.$sysApi.map.airSupply.getAllTypeStationList(
 				params
 			);
-			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			this.stationDataMap = { ...this.stationDataMap, ...res };
 		},
 		// 获取统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
+			this.dataStatisticsData = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
 				{ type: 'LowPressure' }
 			);
 		},
@@ -275,7 +255,21 @@ export default {
 				rightTopY,
 				width,
 				height,
+				minGD,
+				maxGD,
 			} = getHangZhouGasGISPosition(x, y, zoom);
+			// isPointInRing
+			let { lng: lngMin, lat: latMin } = minGD;
+			let { lng: lngMax, lat: latMax } = maxGD;
+			console.log(lngMax, latMax);
+			if (lngMax < 118.344933 && latMax > 30.566516) {
+				console.log('xy');
+				return null;
+			}
+			if (lngMin > 120.721945 && latMin < 29.188757) {
+				console.log('xy');
+				return null;
+			}
 			return `${window.api.MAP_GIS_URL}/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
@@ -283,21 +277,11 @@ export default {
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
-			// if (isCenter) {
-			// 	this.setZoomAndPanTo(lng, lat + 0.005);
-			// }
 		},
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
-			// if (overlayType === 'WARNEVENT') {
-			// 	GoldChart.scene.setSceneIndex(
-			// 		INDEXSCENEMAP['AirSupplyLowPressure']
-			// 	);
-			// 	this.showRoutePlan = false;
-			// }
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-			// this.$amap.setZoom(11, 100);
 			this.$amap.setZoom(this.zoom, 100);
 			this.$amap.setCenter(this.center, 100);
 			done && done();
@@ -311,9 +295,12 @@ export default {
 				this.$amap.panTo([lng, lat], 100);
 			});
 		},
-		handleListClick(overlay, overlayType) {
-			let { lng, lat, address, time, index } = overlay;
-			overlay.overlayType = overlayType || overlay.overlayType;
+		handleListClick(overlay) {
+			if (this.showOverlayDetail) {
+				this.showOverlayDetail = false;
+				this.activeOverlay = {};
+			}
+			let { lng, lat } = overlay;
 			this.activeWarnData = overlay;
 			this.setZoomAndPanTo(lng, lat);
 		},
