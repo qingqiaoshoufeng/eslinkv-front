@@ -1,7 +1,7 @@
 <template>
 	<div class="wrap">
 		<div class="chart" ref="chart"></div>
-		<div class="unit">单位：{{ unit }}</div>
+		<div class="unit">单位：万m³</div>
 	</div>
 </template>
 
@@ -38,7 +38,11 @@
 		},
 		methods: {
 			getOption() {
-				const total = this.data.reduce((p, n) => p + n.value, 0)
+				const total = this.data.reduce((p, n) => {
+					console.log(p,n)
+					return (Number(p)||0) + Number(n.value)
+				})
+				const _self=this
 				return {
 					title: {
 						text: this.text,
@@ -60,14 +64,16 @@
 						type: 'pie',
 						center: ['50%', '45%'],
 						radius: ['52%', '64%'],
-						avoidLabelOverlap: true,
+						avoidLabelOverlap: false,
 						minAngle: 24,
 						startAngle: 270,
 						color: ['#db4f49', '#367cf6', '#84e4fc', '#f8cd47', '#fceb50', '#ed9144', '#5fcbb9'],
 						label: {
 							formatter: function (params) {
 								const percent = (params.value * 100 / total).toFixed(2)
-								return `{normal|${params.name} ${percent}%} \n {value|${Math.ceil(params.value / 10000)}}`
+								if(_self.unit==='万m³')
+								return `{normal|${params.name} ${percent}%} \n {value|${Math.ceil(params.value / 10000).toLocaleString()}}`
+								return `{normal|${params.name} ${percent}%} \n {value|${Math.ceil(params.value).toLocaleString()}}`
 							},
 							padding: [0, -100],
 							rich: {
