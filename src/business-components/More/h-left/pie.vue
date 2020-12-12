@@ -1,7 +1,7 @@
 <template>
 	<div class="wrap">
 		<div class="chart" ref="chart"></div>
-		<div class="unit">单位：万m³</div>
+		<div class="unit">单位：{{unit}}</div>
 	</div>
 </template>
 
