@@ -16,7 +16,7 @@
 	const value = {
 		api: {
 			data: JSON.stringify({
-				image: 'beimenzhan'
+				image: '北门站'
 			})
 		}
 	}
