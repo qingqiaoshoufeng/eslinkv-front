@@ -137,11 +137,11 @@
 		computed: {
 			height() {
 				if (this.data) {
-					const ratio = this.data.value[this.animateActiveIndex].ratio
+					const ratio = this.data.value[this.animateActiveIndex].ratio*100
 					if (ratio >= 100) {
 						return 'calc(100% - 5px)'
 					}
-					return `calc((100% - 5px)/100*${this.data.value[this.animateActiveIndex].ratio})`
+					return `calc((100% - 5px)/100*${ratio})`
 				}
 				return 0
 			},

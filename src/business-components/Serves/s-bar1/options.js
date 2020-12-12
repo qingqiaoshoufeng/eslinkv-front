@@ -1,6 +1,6 @@
 export default {
 	grid: {
-		left: 55,
+		left: 65,
 		right: 30,
 		top: 45,
 		bottom: 40
@@ -14,9 +14,9 @@ export default {
 			show: false,
 		},
 		axisLabel: {
-			textStyle: {
-				color: '#fff',
-			}
+			color: "#fff",
+			fontSize: 16,
+			lineHeight: 16
 		},
 	}],
 	yAxis: [{
@@ -35,9 +35,9 @@ export default {
 			}
 		},
 		axisLabel: {
-			textStyle: {
-				color: '#fff',
-			}
+			color: "#fff",
+			fontSize: 16,
+			lineHeight: 16
 		},
 		axisLine: {
 			show: false,

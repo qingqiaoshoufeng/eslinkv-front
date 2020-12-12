@@ -20,8 +20,10 @@
 
 	const config = {
 	  animation: true,
-    desc1: true,
-    desc2: true
+		config:{
+			desc1: true,
+			desc2: true
+		}
 	}
 	const value = {
 		api: {
