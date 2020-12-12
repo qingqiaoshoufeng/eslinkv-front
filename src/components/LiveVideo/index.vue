@@ -9,11 +9,11 @@
       >{{ k.Name }}</li>
     </ul>
     <div class="video-wrap">
-      <div class="mask">
+      <div class="mask" v-if="!isPlaying">
         <img src="./img/carwifi.svg">
         <div class="enter" @click="changeChannel(currIndex)">进入直播</div>
       </div>
-      <div id="windowbox" @dblclick="videofullscreen('windowbox')">
+      <div class="windowbox" @dblclick="videofullscreen">
         <video ref="live" class="video-js" style="width:100%;height:100%;background-color:black;object-fit:fill" @timeupdate="progress($event)"></video>
       </div>
     </div>
@@ -147,22 +147,6 @@ function pausevideo() {
   }
 }
 
-//开始云抓拍
-function startmanual() {
-  let self = this;
-  var camera = get_select_node();
-  if (!camera) return;
-
-  requestPost('CSS/C_CSS_StartManualSnapshot?token=' + token, {
-    puid: camera.puid,
-    idx: camera.idx,
-    stream: 0
-  }, rv => {
-    var respJSON = rv.responseJSON;
-    pictureId = respJSON.ID;
-  });
-}
-
 //开始对讲
 function starttalk() {
   var camera = get_select_node();
@@ -186,7 +170,8 @@ export default {
     return {
       videoList: [],
       pu: null,
-      currIndex: 0
+      currIndex: 0,
+      isPlaying: false
     }
   },
   methods: {
@@ -323,10 +308,10 @@ export default {
     playvideo(puid, idx) {
       //播视频接口
       let url = host + "stream.flv?puid=" + puid + "&idx=" + idx + "&stream=0&token=" + token;
+      this.isPlaying = true
 
       if (flvjs.isSupported()) {
         var videoElement = "";
-        // todo
         videoElement = this.$refs.live
 
 
@@ -411,7 +396,7 @@ export default {
   height: 400px;
   background: url("./img/shipk.svg") no-repeat;
   padding: 4px;
-  #windowbox {
+  .windowbox {
     width: 100%;
     height: 100%;
     background: #000;
@@ -424,6 +409,7 @@ export default {
     bottom: 4px;
     padding-top: 130px;
     text-align: center;
+    z-index: 1;
     .enter {
       cursor: pointer;
       width: 112px;
