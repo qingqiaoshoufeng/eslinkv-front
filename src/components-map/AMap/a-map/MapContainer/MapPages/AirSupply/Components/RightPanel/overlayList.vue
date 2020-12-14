@@ -186,7 +186,7 @@ export default {
 	}
 }
 .list {
-	height: 800px;
+	height: 744px;
 	overflow-y: scroll;
 	&::-webkit-scrollbar {
 		display: none;

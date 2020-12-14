@@ -197,6 +197,39 @@ export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
             },
         },
     },
+    PipeManageMentStation: {
+        fields: {
+            name: {
+                style: {
+                    fontSize: '32px',
+                    color: '#FFDC45',
+                },
+                errColor: '#FFDC45',
+            },
+        },
+    },
+    UndergroundRepairStation: {
+        fields: {
+            name: {
+                style: {
+                    fontSize: '32px',
+                    color: '#FFDC45',
+                },
+                errColor: '#FFDC45',
+            },
+        },
+    },
+    OngroundRepairStation: {
+        fields: {
+            name: {
+                style: {
+                    fontSize: '32px',
+                    color: '#FFDC45',
+                },
+                errColor: '#FFDC45',
+            },
+        },
+    },
     // LiquefiedGasStation: {
     //     fields: {
     //         name: {},

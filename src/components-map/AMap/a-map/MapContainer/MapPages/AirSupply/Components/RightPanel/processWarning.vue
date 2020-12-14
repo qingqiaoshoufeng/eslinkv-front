@@ -197,7 +197,7 @@ export default {
 				currentPage: 1,
 				pageSize: 500,
 				priority: this.currentLevel,
-				status: this.repairState === '已处理' ? 0 : 1,
+				status: this.repairState === '未处理' ? 0 : 1,
 			});
 			// setTimeout(() => {
 			this.isShow = false;

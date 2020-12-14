@@ -287,7 +287,7 @@ export default {
 			console.log(activeIndex);
 			this.getDetailInfo(params, status);
 
-			this.isShowMore = ['WarningICcustomer'].includes(type);
+			this.isShowMore = [''].includes(type);
 			if (['WarningICcustomer', 'MajorClient'].includes(type)) {
 				this.$amap.setZoom(14, 100);
 				this.$amap.panTo([lng, lat], 100);
@@ -303,6 +303,7 @@ export default {
 				params
 			);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+			console.log(this.allTypeStationList);
 		},
 
 		// 联码新增统计数据

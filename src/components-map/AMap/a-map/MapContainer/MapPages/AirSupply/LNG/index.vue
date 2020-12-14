@@ -9,6 +9,11 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
 		></WarnEvent>
+		<StationList
+			:data="stationListData"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
+			@close="closeStationListDetail"
+		></StationList>
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
@@ -56,6 +61,7 @@
 				v-model="activeTab"
 				@overlay-click="handleListClick"
 				:stationList="stationList"
+				ref="RightPanel"
 			></RightPanel>
 		</portal>
 	</div>
@@ -84,6 +90,7 @@ import {
 	OngroundRepairStation,
 	WarningList,
 	WarnEvent,
+	StationList,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -132,6 +139,7 @@ export default {
 		DataStatistics,
 		WarningList,
 		WarnEvent,
+		StationList,
 	},
 	watch: {
 		center(val) {
@@ -167,9 +175,18 @@ export default {
 			},
 			stationDataMap: {},
 			stationList: [],
+			stationListData: {},
 		};
 	},
 	methods: {
+		closeStationListDetail() {
+			this.StationListData = {};
+			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
+			this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
+			this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
+			this.$amap.setZoom(this.zoom, 100);
+			this.$amap.setCenter(this.center, 100);
+		},
 		setCenter(center) {
 			this.center = center || this.center;
 		},
@@ -233,10 +250,18 @@ export default {
 				this.$amap.panTo([lng, lat], 100);
 			});
 		},
-		handleListClick(overlay, overlayType) {
-			let { lng, lat, address, time, index } = overlay;
-			overlay.overlayType = overlayType || overlay.overlayType;
-			this.activeWarnData = overlay;
+		handleListClick(overlay, eventType) {
+			console.log(overlay);
+			if (this.showOverlayDetail) {
+				this.showOverlayDetail = false;
+				this.activeOverlay = {};
+			}
+			let { lng, lat } = overlay;
+			if (eventType) {
+				this.stationListData = overlay;
+			} else {
+				this.activeWarnData = overlay;
+			}
 			this.setZoomAndPanTo(lng, lat);
 		},
 		closeWarnEventDetail() {
