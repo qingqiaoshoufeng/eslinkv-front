@@ -1,6 +1,6 @@
 // 19厅数统计数据
 let OnlineType = {
-    label: '线上业务服务类型',
+    label: '线上业务类型数量',
     DW: '',
     prop: "busi_type",
 }

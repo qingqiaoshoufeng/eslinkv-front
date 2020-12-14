@@ -18,24 +18,14 @@ export default {
 	data() {
 		return {
 			icon: 'iconbaoguanshijian',
+			isExecuteFlag: false,
 		};
 	},
 	props: {
 		data: {
 			type: Object,
 			default() {
-				return {
-					content: '改装工单',
-					address: '龙湖天街滨江店',
-					id: 10,
-					status: 1,
-					timeInSeconds: 1,
-					statusText: '待处理',
-					lng: 120.288668,
-					lat: 30.316372,
-					eventType: 1,
-					time: '11-03 08: 32: 15',
-				};
+				return {};
 			},
 		},
 	},
@@ -43,66 +33,16 @@ export default {
 		data: {
 			handler(val) {
 				this.reset();
-				setTimeout(async () => {
-					let { data } = this;
-					let {
-						lat: endLat,
-						lng: endLng,
-						employeeName,
-						callDate,
-						arrivalTime,
-					} = data;
-					//渲染一次后，需手动调整位置
-					if (this.$refs.marker) {
-						this.$refs.marker.$amapComponent.setPosition(
-							new window.AMap.LngLat(endLat, endLat)
-						);
-					}
-					if (!employeeName || !callDate) {
-						console.error('还没有接单或者派人');
-						return false;
-					}
-					let passedPathData = await this.$sysApi.map.airSupply.getEmployeeGpsTrack(
-						{ employeeName, callDate, arrivalTime }
-					);
-					if (!passedPathData) {
-						console.error('无人员位置信息');
-						return false;
-					}
-					//arrivalTime ？ '已到达'：'规划路线'
-					if (arrivalTime) {
-						this.drawLine(passedPathData);
-					} else {
-						let [startLng, startLat] = passedPathData[
-							passedPathData.length - 1
-						];
-						//构造路线导航类
-						if (!this.driving) {
-							this.driving = new AMap.Driving({
-								hideMarkers: true,
-								showTraffic: false,
-								isOutline: false,
-								autoFitView: true,
-							});
-						}
-						this.driving.search(
-							new AMap.LngLat(startLng, startLat),
-							new AMap.LngLat(endLng, endLat),
-							(status, result) => {
-								if (status === 'complete') {
-									const { routes = [] } = result;
-									const { steps = [] } = routes[0];
-									var planPathData = [];
-									steps.forEach(i => {
-										let pathArr = i.path;
-										pathArr.forEach(({ lng, lat }) => {
-											planPathData.push([lng, lat]);
-										});
-									});
-									this.drawLine(passedPathData, planPathData);
-								}
-							}
-						);
+				//数据返回延迟，防止多次点击
+				if (this.timer) {
+					clearInterval(this.timer);
+					this.timer = null;
+				}
+				this.timer = setInterval(() => {
+					if (!this.isExecuteFlag) {
+						this.getData();
+						clearInterval(this.timer);
+						this.timer = null;
 					}
 				}, 1000);
 			},
@@ -114,6 +54,70 @@ export default {
 		this.map = fun();
 	},
 	methods: {
+		async getData() {
+			let { data } = this;
+			let {
+				lat: endLat,
+				lng: endLng,
+				employeeName,
+				callDate,
+				arrivalTime,
+			} = data;
+			this.isExecuteFlag = true;
+			//渲染一次后，需手动调整位置
+			if (this.$refs.marker) {
+				this.$refs.marker.$amapComponent.setPosition(
+					new window.AMap.LngLat(endLat, endLat)
+				);
+			}
+			if (!employeeName || !callDate) {
+				console.error('还没有接单或者派人');
+				return false;
+			}
+			let passedPathData = await this.$sysApi.map.airSupply.getEmployeeGpsTrack(
+				{ employeeName, callDate, arrivalTime }
+			);
+			if (!passedPathData) {
+				console.error('无人员位置信息');
+				return false;
+			}
+			//arrivalTime ？ '已到达'：'规划路线'
+			if (arrivalTime) {
+				this.drawLine(passedPathData);
+			} else {
+				let [startLng, startLat] = passedPathData[
+					passedPathData.length - 1
+				];
+				//构造路线导航类
+				if (!this.driving) {
+					this.driving = new AMap.Driving({
+						hideMarkers: true,
+						showTraffic: false,
+						isOutline: false,
+						autoFitView: true,
+					});
+				}
+				this.driving.search(
+					new AMap.LngLat(startLng, startLat),
+					new AMap.LngLat(endLng, endLat),
+					(status, result) => {
+						if (status === 'complete') {
+							const { routes = [] } = result;
+							const { steps = [] } = routes[0];
+							var planPathData = [];
+							steps.forEach(i => {
+								let pathArr = i.path;
+								pathArr.forEach(({ lng, lat }) => {
+									planPathData.push([lng, lat]);
+								});
+							});
+							this.drawLine(passedPathData, planPathData);
+						}
+						this.isExecuteFlag = false;
+					}
+				);
+			}
+		},
 		drawLine(passedPathData = [], planPathData = []) {
 			let map = this.map;
 			// 1.已行驶路径 + 预测轨迹
@@ -157,13 +161,13 @@ export default {
 				startAnimation();
 			}
 			let { scaleRatio } = this.parentInfo;
-			let paddingTop = (1050 - 1050 * scaleRatio) / 2;
-			let paddingRight = (3500 - ((3500 * scaleRatio) / 2.6) * 1.6) / 2;
+			let paddingH = 1050 - 1050 * scaleRatio;
+			let paddingW = 3500 - 3500 * scaleRatio;
 			this.map.setFitView(this.pathAll, false, [
-				paddingTop + 80,
-				paddingTop + 40,
-				paddingRight,
-				paddingRight,
+				paddingH * 0.5 + 80,
+				paddingH * 0.5 + 40,
+				paddingW * 0.55,
+				paddingW * 0.45,
 			]);
 		},
 		reset() {
@@ -176,7 +180,7 @@ export default {
 	},
 	beforeDestroy() {
 		this.reset();
-    }
+	},
 };
 </script>
 
