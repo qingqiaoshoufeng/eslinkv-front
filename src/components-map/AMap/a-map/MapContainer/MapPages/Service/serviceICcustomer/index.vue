@@ -247,7 +247,6 @@ export default {
 			this.overlayMap.useHotYear.visible = value;
 		},
 		closeOverlayDetail(done) {
-			// debugger;
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
 			this.detailInfo = {};
@@ -261,7 +260,7 @@ export default {
 			this.activeOverlay = {};
 			this.detailInfo = {};
 			this.showOverlayDetail = false;
-			// debugger;
+
 			overlay.overlayType = overlayType || overlay.overlayType;
 			let {
 				lng,

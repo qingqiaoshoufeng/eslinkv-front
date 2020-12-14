@@ -13,12 +13,12 @@
 		v-model="currentTab"
 	>
 		<TabPanel
-			key="realTime"
-			name="realTime"
+			key="ICCustomerList"
+			name="ICCustomerList"
 			label="昨日工商用户用气排行TOP20"
 			lazy
 		>
-			<realTime @change="handleClick" />
+			<ICCustomerList @change="handleClick" />
 		</TabPanel>
 		<!-- <TabPanel
 				key="overlayList"
@@ -36,21 +36,23 @@ import { DashboardPanel } from '../../../../../components/';
 import { Tabs, TabPanel } from '../../../../../components/Tabs/';
 // import tabsTitle from '../tabsTitle';
 // import overlayList from './overlayList';
-import realTime from './realTime';
+// import realTime from './realTime';
+import ICCustomerList from './ICCustomerList';
 export default {
 	name: 'RightlistPanel',
 	data() {
 		return {
 			activeIndex: null,
 			ready: false,
-			currentTab: 'realTime',
+			currentTab: 'ICCustomerList',
 		};
 	},
 	components: {
 		Tabs,
 		TabPanel,
-		realTime,
-		DashboardPanel,
+		// realTime,
+		// DashboardPanel,
+		ICCustomerList,
 		// tabsTitle,
 	},
 	mounted() {

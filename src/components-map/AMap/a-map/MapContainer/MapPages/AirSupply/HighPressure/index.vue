@@ -215,7 +215,7 @@ export default {
 		},
 		closeOverlayDetail(done, isZoom = true) {
 			// console.log(11111);
-			// debugger;
+
 			let { overlayType } = this.activeOverlay;
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
@@ -251,7 +251,6 @@ export default {
 			this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		closeStationListDetail() {
-			// debugger;
 			this.StationListData = {};
 			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
 			this.$refs.RightPanel.$refs.realTime.activeIndex = -1;

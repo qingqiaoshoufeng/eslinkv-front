@@ -199,7 +199,7 @@ export default {
 			let params = {
 				types: ['BranchCompany'].toString(),
 			};
-			// debugger;
+
 			let res = await this.$sysApi.map.serve.getICcustomerStationList(
 				params
 			);

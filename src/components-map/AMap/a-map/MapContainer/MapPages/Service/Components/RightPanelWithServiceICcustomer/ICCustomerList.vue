@@ -11,37 +11,35 @@
 				<img
 					:src="iconList[index]"
 					alt=""
-					v-if="index > 2"
+					v-if="index < 3"
 					class="panel-type-icon"
 				/>
-				<div class="panel-type-desc">
+				<div class="panel-type-desc" v-else>
 					{{ index + 1 }}
 				</div>
-				<!-- <SvgIcon
-					:icon-name="
-						item.status == 0 ? 'iconzhengchang' : 'iconyichang'
-					"
-					class="panel-type-icon"
-				></SvgIcon> -->
 				<div class="content">
 					{{ item.content }}
 				</div>
 				<div>
-					{{ item.time }}
+					<img
+						:src="iconList[index]"
+						alt=""
+						class="panel-type-icon"
+					/>
 				</div>
 			</div>
 			<div class="row">
 				<div class="station-name">
 					{{ item.address }}
 				</div>
-				<div
+				<!-- <div
 					:class="[
 						'status',
 						item.status == 0 ? 'status-suc' : 'status-err',
 					]"
 				>
 					{{ item.statusText }}
-				</div>
+				</div> -->
 			</div>
 		</div>
 	</div>
@@ -50,9 +48,9 @@
 <script>
 import { SvgIcon } from '../../../../../components/';
 import { SERVICE_SERVICEICCUSTOMER_LEGEND_MAP } from '../../serviceICcustomer/config';
-import first from '/static/images/amap/first.svg';
-import second from '/static/images/amap/second.svg';
-import third from '/static/images/amap/third.svg';
+// import first from '/static/images/amap/first.svg';
+// import second from '/static/images/amap/second.svg';
+// import third from '/static/images/amap/third.svg';
 
 export default {
 	name: 'HomeRealTimeList',
@@ -60,11 +58,21 @@ export default {
 		SvgIcon,
 	},
 	data() {
-		let iconList = [first, second, third];
+		let iconList = [
+			'/static/images/amap/first.svg',
+			'/static/images/amap/second.svg',
+			'/static/images/amap/third.svg',
+		];
+		let statusList = {
+			up: 'up',
+			down: 'down',
+			keep: 'keep',
+		};
 		return {
 			activeIndex: null,
 			list: [],
 			iconList,
+			statusList,
 		};
 	},
 	props: {
@@ -117,8 +125,10 @@ export default {
 	font-size: 16px;
 	.list-item {
 		// height: 96px;
+		// display: flex;
 		padding: 16px 8px;
 		box-sizing: border-box;
+		// justify-content: space-between;
 		cursor: pointer;
 		&:hover,
 		&.active {
@@ -137,9 +147,8 @@ export default {
 			font-weight: normal;
 			font-size: 20px;
 			line-height: 24px;
-
 			text-align: center;
-
+			background: #0057a9;
 			color: #ffffff;
 		}
 		.row {

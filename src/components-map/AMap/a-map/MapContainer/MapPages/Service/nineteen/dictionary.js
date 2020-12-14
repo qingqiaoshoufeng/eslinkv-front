@@ -46,8 +46,9 @@ let monthManage = {
 }
 let monthManagePercent = {
     label: '本月办结率',
-    DW: '单',
+    DW: '%',
     prop: "finished_m_rate",
+    Fixed: 2,
     defaultVal: 0
 }
 export { OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayUnPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent }
