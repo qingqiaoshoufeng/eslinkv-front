@@ -14,7 +14,7 @@
         <div class="enter" @click="changeChannel(currIndex)">进入直播</div>
       </div>
       <div class="windowbox" @dblclick="videofullscreen">
-        <video ref="live" class="video-js" style="width:100%;height:100%;background-color:black;object-fit:fill" @timeupdate="progress($event)"></video>
+        <video id="liveVideoShow" ref="live" class="video-js" style="width:100%;height:100%;background-color:black;object-fit:fill" @timeupdate="progress($event)"></video>
       </div>
     </div>
   </div>
