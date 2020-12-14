@@ -355,6 +355,9 @@ export default {
 		this.getTasklist();
 		this.getThreeSocialLinkagecustmerHot();
 		window.setCenter = this.setCenter.bind(this);
+		let [{ value }] = this.swichBoxInfo;
+
+		this.visible = value;
 	},
 };
 </script>

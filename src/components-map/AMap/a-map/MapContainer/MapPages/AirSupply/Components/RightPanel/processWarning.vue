@@ -5,13 +5,13 @@
 				<i-select
 					class="filter-select"
 					v-model="currentLevel"
-					style="width: 72px"
+					style="width: 80px"
 					@on-change="getData"
 				>
 					<i-option
 						:style="{
 							padding: '0,10px',
-							width: '72px',
+							width: '80px',
 							height: '32px',
 							fontFamily: 'PingFang SC',
 							fontWeight: 600,
@@ -331,11 +331,9 @@ export default {
 		font-style: normal !important;
 		font-weight: 600 !important;
 		font-size: 20px !important;
-		// padding-left: 10px !important;
-		// width: 72px;
-		// height: 32px;
 	}
 	/deep/.ivu-select-item {
+		font-size: 20px !important;
 		line-height: 32px;
 		line-height: 20px !important;
 	}
@@ -344,6 +342,7 @@ export default {
 	}
 	/deep/.ivu-select-selected-value {
 		padding-left: 13px;
+		font-size: 20px !important;
 	}
 	/deep/.ivu-icon-ios-arrow-down:before {
 		font-size: 20px;
