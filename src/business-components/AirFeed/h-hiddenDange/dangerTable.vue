@@ -4,54 +4,75 @@
 			<li></li>
 			<li>隐患排行</li>
 			<li>设备类型</li>
-			<li>数量(件)</li>
-			<li>已处理(件)</li>
-			<li>未处理(件)</li>
+			<li>隐患数</li>
+			<li>处理中</li>
+			<li>待处理</li>
+			<li>已完成</li>
 		</ul>
 		<div class="content" v-if="data">
-			<vue-seamless-scroll
-				:data="data || []"
-				class="content-warp"
-				:class-option="classOption"
-			>
-				<ul
-					class="content-row"
-					v-for="(item, index) in data"
-					:key="index"
-				>
-					<li class="font-num">0{{ index + 1 }}</li>
-					<li>{{ item.name }}</li>
-					<li>{{ item.type }}</li>
-					<li>{{ item.total }}</li>
-					<li>{{ item.handled }}</li>
-					<li>{{ item.unhandled }}</li>
-				</ul>
-			</vue-seamless-scroll>
+      <ul
+          class="content-row"
+          v-for="(item, index) in curr"
+          :key="index"
+          @mouseenter="isStop = true"
+          @mouseleave="isStop = false"
+      >
+        <li class="font-num" :class="{first: getIndex(index) === '01', second: getIndex(index) === '02' || getIndex(index) === '03'}">{{ getIndex(index) }}</li>
+        <li>{{ item.name }}</li>
+        <li>{{ item.type }}</li>
+        <li>{{ item.total }}</li>
+        <li>{{ item.handling }}</li>
+        <li>{{ item.waitHandle }}</li>
+        <li>{{ item.finish }}</li>
+      </ul>
 		</div>
 	</div>
 </template>
 <script>
-	import VueSeamLess from 'vue-seamless-scroll';
 
+  const SIZE = 5
 	export default {
-		components: {
-			VueSeamLess,
-		},
 		props: ['data'],
-		computed: {
-			classOption() {
-				return {
-					step: 0.2, // 数值越大速度滚动越快
-					limitMoveNum: this.data?.length, // 开始无缝滚动的数据量
-					hoverStop: true, // 是否开启鼠标悬停stop
-					direction: 1, // 0向下 1向上 2向左 3向右
-					openWatch: true, // 开启数据实时监控刷新dom
-					singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
-					singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-					waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
-				};
-			},
-		}
+    data() {
+      return {
+        timer: null,
+        loop: 0,
+        isStop: false
+      }
+    },
+    watch: {
+      data: {
+        handler(val) {
+          clearInterval(this.timer)
+          this.timer = setInterval(() => {
+            if (this.isStop) return
+            if (this.loop === Math.ceil(val.length / SIZE)- 1) {
+              this.loop = 0
+            } else {
+              this.loop++
+            }
+          }, 2000)
+        },
+        deep: true,
+        immediate: true
+      },
+    },
+    computed: {
+      curr () {
+        if (!this.data) return []
+        return this.data.slice(this.loop * SIZE, (this.loop + 1) * SIZE)
+      }
+    },
+    methods: {
+      getIndex (n) {
+        const num = n + 1 + this.loop * SIZE
+        return num < 10 ? '0' + num : num
+      }
+    },
+    beforeDestroy() {
+      clearInterval(this.timer)
+      this.timer = null
+    }
 	};
 </script>
 <style lang="scss" scoped>
@@ -72,7 +93,6 @@
 				font-size: 18px;
 				color: #00CBF4;
 				text-align: left;
-				margin-right: 24px;
 				flex: none;
 
 				&:nth-child(1) {
@@ -89,15 +109,15 @@
 				}
 
 				&:nth-child(4) {
-					width: 84px;
+					width: 90px;
 				}
 
 				&:nth-child(5) {
-					width: 84px;
+					width: 90px;
 				}
 
 				&:nth-child(6) {
-					width: 84px;
+					width: 90px;
 				}
 			}
 		}
@@ -117,24 +137,19 @@
 				box-sizing: border-box;
 				margin-top: 8px;
 
-				&:nth-child(1) > li:nth-child(1) {
-					background: #FF7217;
-				}
-
-				&:nth-child(2) > li:nth-child(1) {
-					background: #0057A9;
-				}
-
-				&:nth-child(3) > li:nth-child(1) {
-					background: #0057A9;
-				}
-
 				& > li {
 					font-size: 18px;
 					color: #fff;
 					text-align: left;
-					margin-right: 24px;
 					flex: none;
+
+          &.first {
+            background: #FF7217!important;
+          }
+
+          &.second {
+            background: #0057A9!important;
+          }
 
 					&:nth-child(1) {
 						width: 24px;
@@ -154,18 +169,22 @@
 					}
 
 					&:nth-child(4) {
-						width: 84px;
+						width: 90px;
 					}
 
 					&:nth-child(5) {
-						width: 84px;
-						color: #00FFCF;
+						width: 90px;
 					}
 
 					&:nth-child(6) {
-						width: 84px;
-						color: #FF7217;
+						width: 90px;
+            color: #FFDC45;
 					}
+
+					&:nth-child(7) {
+						width: 90px;
+            color: #00FFCF;
+          }
 				}
 			}
 		}
