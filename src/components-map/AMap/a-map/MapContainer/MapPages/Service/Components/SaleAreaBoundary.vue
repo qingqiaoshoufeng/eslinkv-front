@@ -20,18 +20,16 @@ export default {
 				if (val === valOld) {
 					return false;
 				}
-				if (valOld) {
-					let instanceIndexOld = this._instanceMap[valOld];
+				let instanceIndexOld = this._instanceMap[valOld];
+				instanceIndexOld &&
 					this.instanceArr[instanceIndexOld].setOptions({
 						fillOpacity: 0,
 					});
-				}
-				if (val) {
-					let instanceIndex = this._instanceMap[val];
+				let instanceIndex = this._instanceMap[val];
+				instanceIndex &&
 					this.instanceArr[instanceIndex].setOptions({
 						fillOpacity: 0.6,
 					});
-				}
 			},
 		},
 	},
@@ -60,15 +58,15 @@ export default {
 						},
 					});
 					// if (this.selectAreaChange) {
-					instance.on('mouseover', e => {
-						let areaData = e.target._opts.extData || {};
-						let { area } = areaData;
-						if (this.value !== area) {
-							instance.setOptions({
-								fillOpacity: 0.6,
-							});
-						}
-					});
+					// instance.on('mouseover', e => {
+					// 	let areaData = e.target._opts.extData || {};
+					// 	let { area } = areaData;
+					// 	if (this.value !== area) {
+					// 		instance.setOptions({
+					// 			fillOpacity: 0.6,
+					// 		});
+					// 	}
+					// });
 					instance.on('click', e => {
 						let areaData = e.target._opts.extData || {};
 						let { area } = areaData;

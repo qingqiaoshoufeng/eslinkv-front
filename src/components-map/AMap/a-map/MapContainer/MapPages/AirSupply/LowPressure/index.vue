@@ -46,7 +46,7 @@
 			<!-- 统计数据 -->
 			<DataStatistics
 				:position="'right'"
-				:dataStatisticsConfigMap="dataStatisticsConfigMap"
+				:dataStatisticsList="dataStatisticsConfigMap"
 				:data="dataStatisticsData"
 			/>
 			<!-- 图例 -->
@@ -56,6 +56,7 @@
 				class="right-panel"
 				v-model="activeTab"
 				@overlay-click="handleListClick"
+				:stationList="stationList"
 			></RightPanel>
 		</portal>
 	</div>
@@ -174,6 +175,7 @@ export default {
 			},
 			stationDataMap: {},
 			dataReady: false,
+			stationList: [],
 		};
 	},
 	computed: {
@@ -239,6 +241,18 @@ export default {
 				params
 			);
 			this.stationDataMap = { ...this.stationDataMap, ...res };
+			let {
+				serviceStationList,
+				pipeManageMentStationList,
+				undergroundRepairStationList,
+				ongroundRepairStationList,
+			} = res;
+			this.stationList = [
+				...serviceStationList,
+				...pipeManageMentStationList,
+				...undergroundRepairStationList,
+				...ongroundRepairStationList,
+			];
 		},
 		// 获取统计数据
 		async getDataStatisticsInfo() {

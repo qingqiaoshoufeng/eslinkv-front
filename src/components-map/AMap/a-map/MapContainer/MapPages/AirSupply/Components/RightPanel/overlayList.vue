@@ -1,129 +1,230 @@
 <template>
-  <div class="list">
-    <div
-      @click="handleClick(item, index)"
-      v-for="(item, index) in list"
-      :key="index"
-      class="list-item"
-      :class="{ active: activeIndex === index }"
-    >
-      <div class="row">
-        <SvgIcon
-          v-if="item.icon"
-          :icon-name="item.icon"
-          class="panel-type-icon"
-        ></SvgIcon>
-        <div class="content">
-          {{ item.name }}
-        </div>
-      </div>
-      <div class="row">
-        <div class="station-name">
-          {{ item.address }}
-        </div>
-        <div
-          :class="['status', item.status == 0 ? 'status-suc' : 'status-err']"
-        >
-          {{ item.statusText }}
-        </div>
-      </div>
-    </div>
-  </div>
+	<div>
+		<div class="search">
+			<input
+				type="text"
+				placeholder="输入关键词搜索点位"
+				v-model="searchName"
+			/>
+			<SvgIcon :icon-name="'iconsearch'" class="search-btn" />
+		</div>
+		<div class="list">
+			<div
+				@click="handleClick(item, index)"
+				v-for="(item, index) in showStationList"
+				:key="index"
+				class="list-item"
+				:class="{ active: activeIndex === index }"
+			>
+				<div class="row">
+					<SvgIcon
+						:icon-name="iconList[item.type]"
+						class="panel-type-icon"
+					></SvgIcon>
+					<div class="content">
+						{{ item.name }}
+					</div>
+				</div>
+				<div class="row">
+					<div class="station-name">
+						{{ item.address }}
+					</div>
+					<div
+						:class="[
+							'status',
+							item.status == 0 ? 'status-suc' : 'status-err',
+						]"
+					>
+						{{ item.statusText }}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>
-import { SvgIcon } from "../../../../../components/";
+import { SvgIcon } from '../../../../../components/';
 // import {
 //     AIRSUPPLYOVERLAYCONFIGMAP,
 // } from '../../../../../config/index';
 export default {
-  name: "HomeRealTimeList",
-  components: {
-    SvgIcon,
-  },
-  data() {
-    return {
-      activeIndex: null,
-      list:[]
-    };
-  },
-  props: {
-    activeItem: {
-      type: Object,
-      default() {
-        return {};
-      },
-    },
-  },
-   created(){
-       this.getData()
-  },
-  watch: {
-    activeItem(val) {
-      if (JSON.stringify(val) == "{}") {
-        return (this.activeIndex = null);
-      }
-      let index = this.list.findIndex((item) => {
-        let { id } = item;
-        return val.id === id;
-      });
-      this.activeIndex = index > -1 ? index : null;
-    },
-  },
-  methods: {
-    async getData(){
-      let list =  await this.$sysApi.map.home.getAllTypeStationList()
-      this.list = list.map(item=>{
-          let {stationType} = item
-        //   let config = AIRSUPPLYOVERLAYCONFIGMAP[stationType] 
-        //   if(config){
-        //       item.icon = config.legendIcon
-        //   }
-          return item
-      })
-    },
-    handleClick(item, index) {
-      this.activeIndex = index;
-      this.$emit("change", item,'WARN');
-    },
-  },
+	name: 'HomeRealTimeList',
+	components: {
+		SvgIcon,
+	},
+	data() {
+		let iconList = {
+			GasStation: 'icontulimenzhan', // '门站',
+			PressureRegulatingStation: 'icontulitiaoyazhan', // '调压站',
+			EmergencyAirSourceStation: 'icontuliqiyuanzhan', // '应急气源站',
+			ServiceStation: 'icontulizonghefuwuzhan1', // '综合服务站',
+			PipeManageMentStation: 'icontuliguanwangyunhangguanlizhan', // '管网运行管理站',
+			UndergroundRepairStation: 'icontulidixiaqiangxiudian', // '地下抢修点',
+			OngroundRepairStation: 'icontulidishangqiangxiudian', // '地上抢修点',
+			LNGStation: 'icontulilNG', // 'LNG站',
+			LiquefiedGasStation: 'icontuliyehuaqi', // '液化气站',
+			NaturalGasStation: 'icontulijiaqizhan', // '加气站',
+			DistributedEnergyResource: 'icontulinengyuanzhan', // '分布式能源',
+		};
+
+		return {
+			activeIndex: null,
+			list: [],
+			iconList,
+			searchName: '',
+		};
+	},
+	props: {
+		activeItem: {
+			type: Object,
+			default() {
+				return {};
+			},
+		},
+		stationList: {
+			type: Array,
+			default() {
+				return [];
+			},
+		},
+	},
+	created() {
+		this.getData();
+	},
+	mounted() {
+		console.log(this.showStationList, 'this.showStationList');
+		console.log(this.stationList, 'this.stationList');
+	},
+	computed: {
+		showStationList() {
+			if (this.searchName) {
+				return this.stationList.filter(item =>
+					item.name.includes(this.searchName)
+				);
+			}
+			return this.stationList;
+		},
+	},
+	watch: {
+		activeItem(val) {
+			if (JSON.stringify(val) == '{}') {
+				return (this.activeIndex = null);
+			}
+			let index = this.list.findIndex(item => {
+				let { id } = item;
+				return val.id === id;
+			});
+			this.activeIndex = index > -1 ? index : null;
+		},
+	},
+	methods: {
+		async getData() {
+			let params = {
+				// searchName,
+				types: '',
+			};
+			let list = await this.$sysApi.map.home.getAllTypeStationList();
+			this.list = list.map(item => {
+				let { stationType } = item;
+				//   let config = AIRSUPPLYOVERLAYCONFIGMAP[stationType]
+				//   if(config){
+				//       item.icon = config.legendIcon
+				//   }
+				return item;
+			});
+		},
+		handleClick(item, index) {
+			this.activeIndex = index;
+			this.$emit('change', item, 'StationList');
+		},
+	},
 };
 </script>
 
 <style lang="scss" scoped>
+.search {
+	margin-top: 6px;
+	width: 100%;
+	height: 40px;
+	border: 1px solid #0057a9;
+	box-sizing: border-box;
+	border-radius: 4px;
+	display: flex;
+	font-family: PingFang SC;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 20px;
+	line-height: 24px;
+	input {
+		display: block;
+		background-color: transparent;
+		color: #fff;
+		height: 100%;
+		flex: 1;
+		padding-left: 16px;
+		font-family: PingFang SC;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 20px;
+	}
+	::-webkit-input-placeholder {
+		color: #fff;
+		font-family: PingFang SC;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 20px;
+	}
+	.search-btn {
+		background: #0057a9;
+		width: 40px;
+		height: 40px;
+	}
+}
 .list {
-  color: #fff;
-  font-size: 16px;
-  .list-item {
-    height: 96px;
-    padding: 16px 8px;
-    box-sizing: border-box;
-    cursor: pointer;
-    &:hover,
-    &.active {
-      background: rgba(23, 115, 201, 0.4);
-    }
-    .panel-type-icon {
-      width: 24px;
-      height: 24px;
-    }
-    .row {
-      display: flex;
-      align-items: center;
-      .content {
-        flex: 1;
-        font-size: 24px;
-        display: flex;
-        align-items: center;
-        margin-left: 12px;
-      }
-      .station-name {
-        font-size: 20px;
-        flex: 1;
-        color: rgba(255, 255, 255, 0.8);
-        margin-left: 36px;
-      }
-    }
-  }
+	height: 800px;
+	overflow-y: scroll;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+	color: #fff;
+	font-size: 16px;
+	.list-item {
+		height: 96px;
+		padding: 16px 8px;
+		box-sizing: border-box;
+		cursor: pointer;
+		&:hover,
+		&.active {
+			background: rgba(23, 115, 201, 0.4);
+		}
+		.panel-type-icon {
+			width: 24px;
+			height: 24px;
+		}
+		.row {
+			display: flex;
+			align-items: center;
+			.status-err {
+				color: #ffdc45;
+			}
+			.status-suc {
+				color: #00ddff;
+			}
+			.content {
+				flex: 1;
+				font-size: 24px;
+				display: flex;
+				align-items: center;
+				margin-left: 12px;
+			}
+			.station-name {
+				font-size: 20px;
+				flex: 1;
+				color: rgba(255, 255, 255, 0.8);
+				margin-left: 36px;
+			}
+		}
+	}
 }
 </style>

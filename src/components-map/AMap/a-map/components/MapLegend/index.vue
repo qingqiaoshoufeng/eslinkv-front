@@ -59,7 +59,7 @@ export default {
 		},
 		maxWidth: {
 			type: Number,
-			default: 1260,
+			default: 1360,
 		},
 		multiple: {
 			type: Boolean,

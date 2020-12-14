@@ -24,8 +24,25 @@ export default {
 			}
 		},
 	},
+	mounted() {
+		console.log(this.$amap, 'this.$amap');
+		this.$amap.on('zoomstart', this.handleMapZoomChangeStart);
+		this.$amap.on('zoomend', this.handleMapZoomChangeEnd);
+		window.bbb = this.init;
+		window.ccc = this._instance;
+		let zoom = this.$amap.getZoom();
+		console.log(zoom);
+	},
 	methods: {
-		async init() {
+		handleMapZoomChangeStart() {},
+		handleMapZoomChangeEnd() {
+			let zoom = this.$amap.getZoom();
+			console.log(zoom);
+			this._instance.setOptions({
+				// radius: 8,
+			});
+		},
+		async init(max = 6000) {
 			// debugger;
 			if (!this._heatMapData) {
 				this._heatMapData = this.data;
@@ -40,7 +57,7 @@ export default {
 			});
 			this._instance.setDataSet({
 				data: this._heatMapData,
-				max: 6000,
+				max,
 			});
 		},
 	},
@@ -48,13 +65,12 @@ export default {
 		return null;
 	},
 	beforeDestroy() {
+		this.$amap.off('zoomstart', this.handleMapZoomChangeStart);
+		this.$amap.off('zoomend', this.handleMapZoomChangeEnd);
 		if (this._instance) {
 			this._instance.removeFromMap();
 			this._instance = null;
 		}
-	},
-	mounted() {
-		console.log(this.data);
 	},
 };
 </script>

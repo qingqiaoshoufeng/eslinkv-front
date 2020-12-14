@@ -21,6 +21,7 @@ export { default as WarnEvent } from './WarnEvent/index.vue'
 
 export { default as RightPanel } from './RightPanel/'
 export { default as RoutePlan } from './RoutePlan/'
+export { default as StationList } from './StationList/'
 
 // let componentArr = [
 // 	'HighPressureLine',

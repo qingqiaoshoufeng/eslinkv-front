@@ -45,16 +45,16 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         dataProp: 'threeSocialLinkageList',
         detailList: []
     },
-    TaskList: {
-        label: '任务工单',
-        legendIcon: 'iconrenwugongdan',
-        iconSize: 38,
-        icon: 'iconrenwugongdan',
-        component: 'TaskList',
-        visible: false,
-        dataProp: 'TaskList',
-        detailList: [serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus]
-    },
+    // TaskList: {
+    //     label: '任务工单',
+    //     legendIcon: 'iconrenwugongdan',
+    //     iconSize: 38,
+    //     icon: 'iconrenwugongdan',
+    //     component: 'TaskList',
+    //     visible: false,
+    //     dataProp: 'TaskList',
+    //     detailList: [serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus]
+    // },
     // CustomerHot: {
     //     label: '客户分布热力',
     //     visible: true,
@@ -74,7 +74,18 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
     //     detailList: []
     // }
 }
-
+export const SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP = {
+    TaskList: {
+        label: '任务工单',
+        legendIcon: 'iconrenwugongdan',
+        iconSize: 38,
+        icon: 'iconrenwugongdan',
+        component: 'TaskList',
+        visible: false,
+        dataProp: 'TaskList',
+        detailList: [serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus]
+    },
+}
 //覆盖物详情
 export const SERVICE_SERVICECUSTOMER_OVERLAY_MAP = {
     // BranchCompany: {

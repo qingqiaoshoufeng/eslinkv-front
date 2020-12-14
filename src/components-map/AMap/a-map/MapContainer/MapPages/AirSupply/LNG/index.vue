@@ -45,7 +45,7 @@
 			<!-- 统计数据 -->
 			<DataStatistics
 				:position="'right'"
-				:dataStatisticsConfigMap="dataStatisticsConfigMap"
+				:dataStatisticsList="dataStatisticsConfigMap"
 				:data="dataStatisticsInfo"
 			/>
 			<!-- 图例 -->
@@ -55,6 +55,7 @@
 				class="right-panel"
 				v-model="activeTab"
 				@overlay-click="handleListClick"
+				:stationList="stationList"
 			></RightPanel>
 		</portal>
 	</div>
@@ -165,6 +166,7 @@ export default {
 				stationNumber: 8,
 			},
 			stationDataMap: {},
+			stationList: [],
 		};
 	},
 	methods: {
@@ -193,6 +195,8 @@ export default {
 				params
 			);
 			this.stationDataMap = { ...this.stationDataMap, ...res };
+			let { lNGStationList } = res;
+			this.stationList = [...lNGStationList];
 		},
 		// 获取统计数据
 		async getDataStatisticsInfo() {
@@ -222,8 +226,7 @@ export default {
 			this.$amap.setCenter(this.center, 100);
 			done && done();
 		},
-		viewOverlayDetail(overlay) {
-		},
+		viewOverlayDetail(overlay) {},
 		setZoomAndPanTo(lng, lat) {
 			this.$amap.setZoom(14, 100);
 			this.$nextTick(() => {

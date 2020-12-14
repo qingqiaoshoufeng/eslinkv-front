@@ -9,6 +9,7 @@
 				class="item"
 				v-for="(item, index) in data.detailList || []"
 				:key="index"
+				v-show="detailInfo[item.prop]"
 			>
 				<span class="label">{{ `${item.label}: ` }}</span>
 				<span class="value">{{

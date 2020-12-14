@@ -33,10 +33,11 @@
 		<OverlayDetail
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
-			:data="activeOverlay"
 			:width="detialBoxWidth"
-			:overlayInfoConfigMap="overlayInfoConfigMap"
-			:before-close="closeOverlayDetail"
+			v-bind="{
+				beforeClose: closeOverlayDetail,
+				...OverlayDetailProp,
+			}"
 			@view-detail="showOverlayDetail"
 			ref="OverlayDetail"
 			:left="left"
@@ -158,6 +159,31 @@ export default {
 			],
 		};
 	},
+	computed: {
+		OverlayDetailProp() {
+			let { activeOverlay, overlayInfoConfigMap, legendMap } = this;
+			if (JSON.stringify(activeOverlay) !== '{}') {
+				let { overlayType } = activeOverlay;
+				//详情展示信息配置
+				let overlayDetailConfig =
+					overlayInfoConfigMap[overlayType] || {};
+				let legendConfig = legendMap[overlayType] || {};
+				//图标大小，是否显示关闭按钮，是否显示查看详情
+				let {
+					iconSize = 38,
+					showPopCloseBtn: showCloseBtn,
+					showMore,
+				} = legendConfig;
+				return {
+					data: activeOverlay,
+					iconSize,
+					showCloseBtn,
+					overlayDetailConfig,
+					showMore,
+				};
+			}
+		},
+	},
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$nextTick(() => {
@@ -185,12 +211,16 @@ export default {
 			let { overlayType } = this.activeOverlay;
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
+			this.detailInfo = {};
 			this.carouseComplBranchCompanyInfo();
 			this.activeArea = '';
 			done && done();
 		},
 		// 点击地图marker
 		async handleOverlayClick(overlay, overlayType, isCenter = false) {
+			this.activeOverlay = {};
+			this.detailInfo = {};
+			this.showOverlayDetail = false;
 			this.detailComponentName = 'ClickTipDetial';
 			this.clearInterval();
 			let { lng, lat, id, overlayType: type, detailList, name } = overlay;
@@ -324,7 +354,7 @@ export default {
 	watch: {
 		'allTypeStationList.branchCompanyList': {
 			handler(val) {
-				if (val.length) {
+				if (val && val.length) {
 					this.carouseComplBranchCompanyInfo();
 				}
 			},

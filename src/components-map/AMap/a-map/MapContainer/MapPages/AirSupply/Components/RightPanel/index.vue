@@ -4,20 +4,20 @@
 		:value="value"
 		@input="val => $emit('input', val)"
 	>
-		<TabPanel
-			key="processWarning"
-			name="processWarning"
-			label="工艺报警"
-		>
-			<processWarning @change="handleClick" />
+		<TabPanel key="processWarning" name="processWarning" label="工艺报警">
+			<processWarning @change="handleClick" ref="processWarning" />
 		</TabPanel>
 
 		<TabPanel key="realTime" name="realTime" label="事件报警">
-			<realTime @change="handleClick" />
+			<realTime @change="handleClick" ref="realTime" />
 		</TabPanel>
 
 		<TabPanel key="overlayList" name="overlayList" label="点位列表" lazy>
-			<overlayList @change="handleClick" />
+			<overlayList
+				@change="handleClick"
+				ref="overlayList"
+				:stationList="stationList"
+			/>
 		</TabPanel>
 	</Tabs>
 </template>
@@ -42,6 +42,12 @@ export default {
 			type: String,
 			default: 'processWarning',
 		},
+		stationList: {
+			type: Array,
+			default() {
+				return [];
+			},
+		},
 	},
 	components: {
 		Tabs,
@@ -55,7 +61,7 @@ export default {
 		this.ready = true;
 	},
 	methods: {
-		handleClick(item) {
+		handleClick(item, eventType) {
 			this.geocoder = new AMap.Geocoder({
 				city: '330100', //杭州市范围内查询
 			});
@@ -76,7 +82,7 @@ export default {
 					}
 				});
 			} else {
-				this.$emit('overlay-click', item);
+				this.$emit('overlay-click', item, eventType);
 			}
 		},
 	},

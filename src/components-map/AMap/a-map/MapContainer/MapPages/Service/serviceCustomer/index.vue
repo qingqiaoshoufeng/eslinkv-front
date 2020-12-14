@@ -32,7 +32,7 @@
 			ref="OverlayDetail"
 			@close="closeOverlayDetail('')"
 		/>
-		<!-- <CustomerHot
+		<CustomerHot
 			v-if="
 				allTypeStationList.CustomerHotList &&
 				allTypeStationList.CustomerHotList.length
@@ -40,17 +40,18 @@
 			:visible="visible"
 			:data="allTypeStationList.CustomerHotList"
 			ref="OverlayDetail"
-		/> -->
+		/>
 
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
-			:data="activeOverlay"
 			:width="450"
-			:overlayInfoConfigMap="overlayInfoConfigMap"
-			:before-close="closeOverlayDetail"
 			@view-detail="showMoreDetail"
+			v-bind="{
+				beforeClose: closeOverlayDetail,
+				...OverlayDetailProp,
+			}"
 			ref="OverlayDetail"
 		>
 			<TipDetial
@@ -120,6 +121,7 @@ import {
 	SWICHBOX,
 	SERVICE_SERVICECUSTOMER_LEGEND_MAP,
 	SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
+	SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP,
 } from './config.js';
 
 export default {
@@ -173,6 +175,31 @@ export default {
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.setCenter(this.center, 100);
 	},
+	computed: {
+		OverlayDetailProp() {
+			let { activeOverlay, overlayInfoConfigMap, legendMap } = this;
+			if (JSON.stringify(activeOverlay) !== '{}') {
+				let { overlayType } = activeOverlay;
+				//详情展示信息配置
+				let overlayDetailConfig =
+					overlayInfoConfigMap[overlayType] || {};
+				let legendConfig = legendMap[overlayType] || {};
+				//图标大小，是否显示关闭按钮，是否显示查看详情
+				let {
+					iconSize = 38,
+					showPopCloseBtn: showCloseBtn,
+					showMore,
+				} = legendConfig;
+				return {
+					data: activeOverlay,
+					iconSize,
+					showCloseBtn,
+					overlayDetailConfig,
+					showMore,
+				};
+			}
+		},
+	},
 	watch: {
 		center(val) {
 			this.$amap.panTo(val, 100);
@@ -198,6 +225,9 @@ export default {
 			this.allTypeStationList.CustomerHotList = res.customer;
 		},
 		async handleOverlayClick(overlay, overlayType1, isCenter = false) {
+			this.activeOverlay = {};
+			this.detailInfo = {};
+			this.showOverlayDetail = false;
 			let { lng, lat, type, name, id, overlayType } = overlay;
 			let params = {
 				name,
@@ -210,6 +240,7 @@ export default {
 				overlay.activeIndex = this.allTypeStationList.TaskList.findIndex(
 					item => item.id === overlay.id
 				);
+				debugger;
 
 				this.handleListClick(overlay);
 				return;
@@ -222,10 +253,18 @@ export default {
 			this.showOverlayDetail = this.$refs[overlayType][0].mouseIn;
 			// console.log(this.$refs.overlayType.mouseIn);
 			this.isShowMore = ['ThreeSocialLinkage'].includes(overlayType);
+			if (['ThreeSocialLinkage', 'TaskList'].includes(overlayType)) {
+				// debugger;
+				this.$amap.setZoom(14, 100);
+				this.$amap.panTo([lng, lat], 100);
+			}
 		},
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
 			this.showOverlayDetail = false;
+			this.detailInfo = {};
+			this.$amap.setZoom(this.zoom, 100);
+			this.$amap.panTo(this.center, 100);
 			// this.activeOverlay = {};
 			done && done();
 		},
@@ -246,7 +285,7 @@ export default {
 		},
 		handleListClick(item) {
 			// debugger;
-			let { name, time, activeIndex, overlayType } = item;
+			let { name, time, activeIndex, overlayType, lng, lat } = item;
 			if (overlayType === 'ThreeSocialLinkage') {
 				this.$refs.ThreeSocialLinkage[0].mouseIn = true;
 				this.handleOverlayClick(item);
@@ -256,11 +295,12 @@ export default {
 			this.activeOverlay = {
 				...item,
 				detailList:
-					SERVICE_SERVICECUSTOMER_LEGEND_MAP.TaskList.detailList,
+					SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP.TaskList.detailList,
 			};
 
 			this.detailInfo = item;
-
+			this.$amap.setZoom(14, 100);
+			this.$amap.panTo([lng, lat], 100);
 			this.showOverlayDetail = true;
 		},
 		showThreeSocialLinkageDetail() {

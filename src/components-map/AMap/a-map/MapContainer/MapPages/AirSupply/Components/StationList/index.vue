@@ -2,8 +2,8 @@
 	<div>
 		<!-- 图标 -->
 		<Overlay
-			key="WarnEvent"
-			ref="WarnEvent"
+			key="StationList"
+			ref="StationList"
 			:marker="{
 				icon: overlayIcon,
 				iconSize: 38,
@@ -11,7 +11,7 @@
 			}"
 			:visible="visible"
 		>
-			<video
+			<!-- <video
 				class="warning-videO"
 				src="@/assets/amap/images/warning-circle.webm"
 				controls="controls"
@@ -19,7 +19,7 @@
 				muted="muted"
 				v-if="data.status"
 				loop
-			></video>
+			></video> -->
 		</Overlay>
 		<!-- 详情弹窗 -->
 		<OverlayDetail
@@ -36,11 +36,11 @@
 		>
 		</OverlayDetail>
 		<!-- 路线规划 -->
-		<RoutePlan
+		<!-- <RoutePlan
 			:data="data"
 			v-if="showRoutePlan"
 			ref="RoutePlan"
-		></RoutePlan>
+		></RoutePlan> -->
 	</div>
 </template>
 <script>
@@ -53,7 +53,7 @@ import {
 	AIRSUPPLY_WARN_COMPONENTINDEX,
 } from '../../../../../config';
 export default {
-	name: 'WarnEvent',
+	name: 'StationList',
 	inject: ['parentInfo'],
 	components: {
 		Overlay: () => import('../../../../../components/Overlay'),
@@ -75,6 +75,19 @@ export default {
 		},
 	},
 	data() {
+		let iconList = {
+			GasStation: 'icontulimenzhan', // '门站',
+			PressureRegulatingStation: 'icontulitiaoyazhan', // '调压站',
+			EmergencyAirSourceStation: 'icontuliqiyuanzhan', // '应急气源站',
+			ServiceStation: 'icontulizonghefuwuzhan1', // '综合服务站',
+			PipeManageMentStation: 'icontuliguanwangyunhangguanlizhan', // '管网运行管理站',
+			UndergroundRepairStation: 'icontulidixiaqiangxiudian', // '地下抢修点',
+			OngroundRepairStation: 'icontulidishangqiangxiudian', // '地上抢修点',
+			LNGStation: 'icontulilNG', // 'LNG站',
+			LiquefiedGasStation: 'icontuliyehuaqi', // '液化气站',
+			NaturalGasStation: 'icontulijiaqizhan', // '加气站',
+			DistributedEnergyResource: 'icontulinengyuanzhan', // '分布式能源',
+		};
 		return {
 			icon: 'iconshijian1',
 			showOverlayDetail: true,
@@ -119,6 +132,7 @@ export default {
 		bus.$on('clearRoutePlan', () => {
 			this.showRoutePlan = false;
 			this.$emit('close');
+			console.log(this.data);
 		});
 	},
 	methods: {

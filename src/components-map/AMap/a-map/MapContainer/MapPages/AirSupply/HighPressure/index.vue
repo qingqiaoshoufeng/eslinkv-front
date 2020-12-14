@@ -7,6 +7,12 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
 		></WarnEvent>
+		<StationList
+			:data="stationListData"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
+			@close="closeStationListDetail"
+		></StationList>
+
 		<!-- 行政区域覆盖物 -->
 		<RegionBoundary />
 		<!-- 2.legend控制显隐 -->
@@ -43,7 +49,7 @@
 			<!-- 统计数据 -->
 			<DataStatistics
 				:position="'right'"
-				:dataStatisticsConfigMap="dataStatisticsConfigMap"
+				:dataStatisticsList="dataStatisticsConfigMap"
 				:data="dataStatisticsData"
 			/>
 			<!-- 图例 -->
@@ -53,6 +59,8 @@
 				class="right-panel"
 				v-model="activeTab"
 				@overlay-click="handleListClick"
+				:stationList="stationList"
+				ref="RightPanel"
 			></RightPanel>
 		</portal>
 	</div>
@@ -72,6 +80,7 @@ let componentPageArr = [
 	'WarnEvent',
 	//右侧报警列表
 	'RightPanel',
+	'StationList',
 ];
 //页面所需公共组件
 let componentCommonArr = [
@@ -122,9 +131,11 @@ export default {
 			dataStatisticsData: {},
 			activeOverlay: {},
 			activeWarnData: {},
+			stationListData: {},
 			showOverlayDetail: false,
 			stationDataMap: {},
 			visibleMore: false,
+			stationList: [],
 		};
 	},
 	computed: {
@@ -166,6 +177,17 @@ export default {
 				params
 			);
 			this.stationDataMap = { ...this.stationDataMap, ...res };
+			let {
+				gasStationList,
+				pressureRegulatingStationList,
+				emergencyAirSourceStationList,
+			} = res;
+			this.stationList = [
+				...gasStationList,
+				...pressureRegulatingStationList,
+				...emergencyAirSourceStationList,
+			];
+			console.log(this.stationList, 'this.stationList111');
 		},
 		// 2.获取高压统计数据
 		async getDataStatisticsInfo() {
@@ -192,27 +214,47 @@ export default {
 			this.showOverlayDetail = true;
 		},
 		closeOverlayDetail(done, isZoom = true) {
+			// console.log(11111);
+			// debugger;
 			let { overlayType } = this.activeOverlay;
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
+
 			if (isZoom) {
 				this.setZoomAndPanTo(...this.center, this.zoom);
+
+				console.log(this.$refs.RightPanel.refs.processWarning);
 			}
 			if (done) {
 				done();
 			}
 		},
-		handleListClick(overlay) {
-            if(this.showOverlayDetail){
-                this.showOverlayDetail = false
-                this.activeOverlay = {}
-            }
+		handleListClick(overlay, eventType) {
+			console.log(overlay);
+			if (this.showOverlayDetail) {
+				this.showOverlayDetail = false;
+				this.activeOverlay = {};
+			}
 			let { lng, lat } = overlay;
-			this.activeWarnData = overlay;
+			if (eventType) {
+				this.stationListData = overlay;
+			} else {
+				this.activeWarnData = overlay;
+			}
 			this.setZoomAndPanTo(lng, lat);
 		},
 		closeWarnEventDetail() {
 			this.activeWarnData = {};
+			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
+			this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
+			this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
+			this.setZoomAndPanTo(...this.center, this.zoom);
+		},
+		closeStationListDetail() {
+			this.StationListData = {};
+			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
+			this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
+			this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
 			this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		//查看详情调用组件内部的方法

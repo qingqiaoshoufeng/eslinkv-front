@@ -30,10 +30,11 @@
 		<OverlayDetail
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
-			:data="activeOverlay"
 			:width="450"
-			:overlayInfoConfigMap="overlayInfoConfigMap"
-			:before-close="closeOverlayDetail"
+			v-bind="{
+				beforeClose: closeOverlayDetail,
+				...OverlayDetailProp,
+			}"
 			@view-detail="showMoreDetail()"
 			ref="OverlayDetail"
 		>
@@ -142,6 +143,31 @@ export default {
 			activeIndex: null,
 		};
 	},
+	computed: {
+		OverlayDetailProp() {
+			let { activeOverlay, overlayInfoConfigMap, legendMap } = this;
+			if (JSON.stringify(activeOverlay) !== '{}') {
+				let { overlayType } = activeOverlay;
+				//详情展示信息配置
+				let overlayDetailConfig =
+					overlayInfoConfigMap[overlayType] || {};
+				let legendConfig = legendMap[overlayType] || {};
+				//图标大小，是否显示关闭按钮，是否显示查看详情
+				let {
+					iconSize = 38,
+					showPopCloseBtn: showCloseBtn,
+					showMore,
+				} = legendConfig;
+				return {
+					data: activeOverlay,
+					iconSize,
+					showCloseBtn,
+					overlayDetailConfig,
+					showMore,
+				};
+			}
+		},
+	},
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
@@ -223,11 +249,18 @@ export default {
 		closeOverlayDetail(done) {
 			// debugger;
 			this.showOverlayDetail = false;
-			// this.activeOverlay = {};
+			this.activeOverlay = {};
+			this.detailInfo = {};
+
+			this.$amap.setZoom(this.zoom, 100);
+			this.$amap.panTo(this.center, 100);
 			done && done();
 		},
 		// 点击地图marker
 		handleOverlayClick(overlay, overlayType, isCenter = false) {
+			this.activeOverlay = {};
+			this.detailInfo = {};
+			this.showOverlayDetail = false;
 			// debugger;
 			overlay.overlayType = overlayType || overlay.overlayType;
 			let {
@@ -256,6 +289,7 @@ export default {
 
 			this.isShowMore = ['WarningICcustomer'].includes(type);
 			if (['WarningICcustomer', 'MajorClient'].includes(type)) {
+				this.$amap.setZoom(14, 100);
 				this.$amap.panTo([lng, lat], 100);
 			}
 			// this.isShowMore = status == 1;
@@ -263,7 +297,7 @@ export default {
 		// 请求用气大户，子公司，综合服务站数据列表
 		async getAllTypeStationList() {
 			let params = {
-				types: ['MajorClient', 'BranchCompany'].toString(),
+				types: ['ICcustomer', 'BranchCompany'].toString(),
 			};
 			let res = await this.$sysApi.map.serve.getICcustomerStationList(
 				params

@@ -42,7 +42,7 @@
 			<!-- 统计数据 -->
 			<DataStatistics
 				:position="'right'"
-				:dataStatisticsConfigMap="dataStatisticsConfigMap"
+				:dataStatisticsList="dataStatisticsConfigMap"
 				:data="dataStatisticsInfo"
 			/>
 			<!-- 图例 -->
@@ -52,6 +52,7 @@
 				class="right-panel"
 				v-model="activeTab"
 				@overlay-click="handleListClick"
+				:stationList="stationList"
 			></RightPanel>
 		</portal>
 	</div>
@@ -157,7 +158,7 @@ export default {
 			overlayInfoConfigMap: Object.freeze(AIRSUPPLY_UCAN_OVERLAY_MAP),
 			activeOverlay: {},
 			activeWarnData: {},
-            center: [120.131259, 30.263295],
+			center: [120.131259, 30.263295],
 			zoom: 10.7,
 			showOverlayDetail: false,
 			showRoutePlan: false,
@@ -174,6 +175,7 @@ export default {
 				registerNumber: 44579,
 			},
 			stationDataMap: {},
+			stationList: [],
 		};
 	},
 	methods: {
@@ -190,10 +192,10 @@ export default {
 					// 'GasStation', // '门站',
 					// 'PressureRegulatingStation', // '调压站',
 					// 'EmergencyAirSourceStation', // '应急气源站',
-					'ServiceStation', // '综合服务站',
+					// 'ServiceStation', // '综合服务站',
 					// 'PipeManageMentStation', // '管网运行管理站',
 					// 'UndergroundRepairStation', // '地下抢修点',
-					'OngroundRepairStation', // '地上抢修点',
+					// 'OngroundRepairStation', // '地上抢修点',
 					// 'LNGStation', // 'LNG站',
 					'LiquefiedGasStation', // '液化气站',
 					'NaturalGasStation', // '加气站',
@@ -204,6 +206,16 @@ export default {
 				params
 			);
 			this.stationDataMap = { ...this.stationDataMap, ...res };
+			let {
+				liquefiedGasStationList,
+				naturalGasStationList,
+				distributedEnergyResourceList,
+			} = res;
+			this.stationList = [
+				...liquefiedGasStationList,
+				...naturalGasStationList,
+				...distributedEnergyResourceList,
+			];
 		},
 		// 获取统计数据
 		async getDataStatisticsInfo() {

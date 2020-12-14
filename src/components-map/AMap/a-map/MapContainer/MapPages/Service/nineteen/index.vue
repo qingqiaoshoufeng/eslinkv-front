@@ -28,13 +28,18 @@
 		<OverlayDetail
 			:legendMap="legendMap"
 			v-model="showOverlayDetail"
-			:data="activeOverlay"
-			:overlayInfoConfigMap="overlayInfoConfigMap"
-			:before-close="closeOverlayDetail"
+			v-bind="{
+				beforeClose: closeOverlayDetail,
+				...OverlayDetailProp,
+			}"
 			ref="OverlayDetail"
 			:width="450"
 		>
-			<TipDetial :data="activeOverlay" :detailInfo="detailInfo" />
+			<TipDetial
+				:data="activeOverlay"
+				:detailInfo="detailInfo"
+				v-show="showOverlayDetail"
+			/>
 		</OverlayDetail>
 		<!-- 统计数据 -->
 		<portal to="destination">
@@ -103,6 +108,31 @@ export default {
 			detailInfo: {},
 		};
 	},
+	computed: {
+		OverlayDetailProp() {
+			let { activeOverlay, overlayInfoConfigMap, legendMap } = this;
+			if (JSON.stringify(activeOverlay) !== '{}') {
+				let { overlayType } = activeOverlay;
+				//详情展示信息配置
+				let overlayDetailConfig =
+					overlayInfoConfigMap[overlayType] || {};
+				let legendConfig = legendMap[overlayType] || {};
+				//图标大小，是否显示关闭按钮，是否显示查看详情
+				let {
+					iconSize = 38,
+					showPopCloseBtn: showCloseBtn,
+					showMore,
+				} = legendConfig;
+				return {
+					data: activeOverlay,
+					iconSize,
+					showCloseBtn,
+					overlayDetailConfig,
+					showMore,
+				};
+			}
+		},
+	},
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
@@ -132,6 +162,9 @@ export default {
 			// this.handleOverlayClick(params);
 		},
 		async handleOverlayClick(overlay, overlayType, isCenter = true) {
+			this.activeOverlay = {};
+			this.detailInfo = {};
+			this.showOverlayDetail = false;
 			// this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
 			let { lng, lat, name } = overlay;
 			overlay.overlayType = overlayType;
@@ -156,6 +189,7 @@ export default {
 		closeOverlayDetail(done) {
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
+			this.detailInfo = {};
 			this.$emit('close');
 			// this.$amap.setZoom(11, 100);
 			done && done();

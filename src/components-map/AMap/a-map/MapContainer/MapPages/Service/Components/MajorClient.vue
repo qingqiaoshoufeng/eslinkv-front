@@ -9,8 +9,6 @@
 			apiFun,
 			detailList,
 		}"
-		@mouseover="mouseover"
-		@mouseleave="mouseleave"
 		@click="
 			marker =>
 				$emit('overlay-click', { detailList, ...marker }, overlayType)

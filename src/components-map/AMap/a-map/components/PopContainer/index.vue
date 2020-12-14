@@ -14,7 +14,7 @@
 				width,
 			}"
 		>
-			<div class="close-btn" v-show="showPopCloseBtn" @click="$emit('input', false)">
+			<div class="close-btn" @click="$emit('input', false)">
 				<svg-icon icon-name="iconbaseline-close-px"></svg-icon>
 			</div>
 			<div class="triangle"></div>
@@ -44,36 +44,37 @@ export default {
 		bottom: {
 			type: Number,
 			default: 19,
-        },
-        parentInfo:{
-            type:Object,
-            default(){
-                return {}
-            }
-        },
-        showPopCloseBtn:{
-            type:Boolean,
-            default:true
-        }
+		},
+		parentInfo: {
+			type: Object,
+			default() {
+				return {};
+			},
+		},
 	},
 	data() {
 		return {
 			ready: false,
 		};
-    },
+	},
+	created() {
+		// console.log(this.parentInfo)
+	},
 	computed: {
 		scaleRatio() {
 			return (this.parentInfo && this.parentInfo.scaleRatio) || 1;
 		},
 		translateX() {
-            let { scaleRatio } = this;
-            console.log(scaleRatio,'scaleRatio')
+			let { scaleRatio } = this;
+			// console.log(scaleRatio,'scaleRatio')
 			return `-${((1 - scaleRatio) / scaleRatio + 1) * 50}%`;
 		},
 		translateY() {
-            let { scaleRatio,bottom } = this;
-            let marginBottom = bottom + 14
-			return `-${(1 - scaleRatio)/scaleRatio*50 + 100}% - ${marginBottom}px`;
+			let { scaleRatio, bottom } = this;
+			let marginBottom = bottom + 14;
+			return `-${
+				((1 - scaleRatio) / scaleRatio) * 50 + 100
+			}% - ${marginBottom}px`;
 		},
 	},
 	mounted() {

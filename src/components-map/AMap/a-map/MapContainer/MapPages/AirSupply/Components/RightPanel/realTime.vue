@@ -30,13 +30,21 @@
 				</div>
 			</div>
 		</div>
+
 		<div class="event-warning-list">
+			<i-icon
+				type="ios-loading"
+				size="54"
+				class="demo-spin-icon-load"
+				v-show="isShow"
+			></i-icon>
 			<div
 				@click="handleClick(item, index, 'WarningList')"
 				v-for="(item, index) in list"
 				:key="index"
 				class="list-item"
 				:class="{ active: activeIndex === index }"
+				v-show="!isShow"
 			>
 				<div class="row">
 					<SvgIcon
@@ -88,6 +96,7 @@ export default {
 			list: [],
 			repairType: '抢修',
 			repairState: '未处理',
+			isShow: false,
 		};
 	},
 	props: {
@@ -131,6 +140,7 @@ export default {
 			this.getData();
 		},
 		async getData() {
+			this.isShow = true;
 			let { list } = await this.$sysApi.map.airSupply.getEventWarningList(
 				{
 					currentPage: 1,
@@ -140,6 +150,9 @@ export default {
 				}
 			);
 			this.list = list;
+			// setTimeout(() => {
+			this.isShow = false;
+			// }, 30000);
 		},
 		handleClick(item, index) {
 			this.activeIndex = index;
@@ -254,12 +267,35 @@ export default {
 				}
 			}
 		}
+		.status-err {
+			color: #ffdc45;
+		}
 		.status-suc {
 			color: #00ddff;
 		}
-		.status-err {
-			color: #ff7217;
+	}
+	/deep/.demo-spin-icon-load {
+		animation: ani-demo-spin 1s linear infinite;
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%);
+	}
+	@keyframes ani-demo-spin {
+		from {
+			transform: rotate(0deg);
 		}
+		50% {
+			transform: rotate(180deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+	/deep/.demo-spin-col {
+		height: 100px;
+		position: relative;
+		border: 1px solid #eee;
 	}
 }
 </style>

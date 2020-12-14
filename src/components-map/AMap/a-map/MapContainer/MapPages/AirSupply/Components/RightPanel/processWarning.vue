@@ -6,6 +6,7 @@
 					class="filter-select"
 					v-model="currentLevel"
 					style="width: 72px"
+					@on-change="getData"
 				>
 					<i-option
 						:style="{
@@ -43,43 +44,51 @@
 				</div>
 			</div>
 		</div>
-
-		<div
-			@click="handleClick(item, index, 'WarningList')"
-			v-for="(item, index) in list"
-			:key="index"
-			class="list-item"
-			:class="{ active: activeIndex === index }"
-		>
-			<div class="row">
-				<SvgIcon
-					:icon-name="
-						item.priority == '已处理'
-							? 'iconzhengchang'
-							: 'iconyichang'
-					"
-					class="panel-type-icon"
-				></SvgIcon>
-				<div class="content">
-					{{ item.description }}
-					<div
-						class="level"
-						:class="{
-							first: item.level === 1,
-							second: item.level === 2,
-							third: item.level === 3,
-						}"
-					>
-						{{ item.level }}
+		<div class="event-warning-list">
+			<i-icon
+				type="ios-loading"
+				size="54"
+				class="demo-spin-icon-load"
+				v-show="isShow"
+			></i-icon>
+			<div
+				@click="handleClick(item, index, 'WarningList')"
+				v-for="(item, index) in list"
+				:key="index"
+				class="list-item"
+				:class="{ active: activeIndex === index }"
+				v-show="!isShow"
+			>
+				<div class="row">
+					<SvgIcon
+						:icon-name="
+							item.priority == '已处理'
+								? 'iconzhengchang'
+								: 'iconyichang'
+						"
+						class="panel-type-icon"
+					></SvgIcon>
+					<div class="content">
+						{{ item.description }}
+						<div
+							class="level"
+							:class="{
+								first: item.level === 1,
+								second: item.level === 2,
+								third: item.level === 3,
+							}"
+						>
+							{{ item.level }}
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="station-name">
-					{{ item.address }}
-				</div>
-				<div>
-					{{ item.alarmTime }}
+				<div class="row">
+					<div class="station-name">
+						{{ item.address }}
+					</div>
+					<div>
+						{{ item.alarmTime }}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -107,6 +116,7 @@ export default {
 		return {
 			activeIndex: null,
 			list: [],
+			isShow: false,
 			currentLevel: 1,
 			repairState: '未处理',
 			levelList: [
@@ -127,6 +137,7 @@ export default {
 	},
 	async created() {
 		this.getData();
+
 		this.timer = setInterval(() => {
 			this.getData();
 		}, 120000);
@@ -151,11 +162,12 @@ export default {
 	methods: {
 		changeRepairState(val) {
 			this.repairState = val;
+			this.getData();
 		},
 		handleClick(listItem, index) {
 			let { address, time } = listItem;
 			this.activeIndex = index;
-			listItem.status = listItem.priority == '已处理' ? 0 : 1;
+			listItem.status = listItem.status == '1' ? 1 : 0;
 			listItem.overlayType = 'WarningList';
 			this.$emit('change', listItem);
 			//实时报警弹出
@@ -179,13 +191,17 @@ export default {
 			// }, 3000);
 		},
 		async getData() {
+			console.log(this.currentLevel);
+			this.isShow = true;
 			this.list = await this.$sysApi.map.airSupply.getProcessWarningList({
 				currentPage: 1,
 				pageSize: 500,
 				priority: this.currentLevel,
 				status: this.repairState === '已处理' ? 0 : 1,
 			});
-			console.log(this.list, '余志强');
+			// setTimeout(() => {
+			this.isShow = false;
+			// }, 30000);
 		},
 		// handleClick(item, index) {
 		// 	this.activeIndex = index;
@@ -208,14 +224,12 @@ export default {
 	color: #fff;
 	font-size: 16px;
 	height: 800px;
-	overflow-y: scroll;
-	&::-webkit-scrollbar {
-		display: none;
-	}
+
 	.filter-bar {
+		position: sticky;
 		background: #000866;
 		width: 100%;
-		position: absolute;
+		position: sticky;
 		justify-content: space-between;
 		color: #00ddff;
 		font-size: 20px;
@@ -272,8 +286,40 @@ export default {
 			}
 		}
 	}
+	.event-warning-list {
+		height: 744px;
+		overflow-y: scroll;
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+	/deep/.demo-spin-icon-load {
+		animation: ani-demo-spin 1s linear infinite;
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%);
+	}
+	@keyframes ani-demo-spin {
+		from {
+			transform: rotate(0deg);
+		}
+		50% {
+			transform: rotate(180deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+	/deep/.demo-spin-col {
+		height: 100px;
+		position: relative;
+		border: 1px solid #eee;
+	}
 	/deep/.ivu-select-dropdown {
-		top: 32px !important;
+		// top: 32px !important;
+		margin-top: 18px !important;
+
 		background: #0057a9;
 	}
 	/deep/.ivu-select-selection {
@@ -282,11 +328,30 @@ export default {
 	}
 	/deep/.ivu-select {
 		padding: 0 !important;
-		height: 40px;
+		height: 40px !important;
+		font-family: PingFang SC !important;
+		font-style: normal !important;
+		font-weight: 600 !important;
+		font-size: 20px !important;
+		// padding-left: 10px !important;
 		// width: 72px;
 		// height: 32px;
 	}
-
+	/deep/.ivu-select-item {
+		line-height: 32px;
+		line-height: 20px !important;
+	}
+	/deep/.ivu-select-item:hover {
+		background: rgba(0, 221, 255, 0.3) !important;
+	}
+	/deep/.ivu-select-selected-value {
+		padding-left: 13px;
+	}
+	/deep/.ivu-icon-ios-arrow-down:before {
+		font-size: 20px;
+		font-weight: 700;
+		color: #fff;
+	}
 	.list-item {
 		padding: 16px 8px;
 		box-sizing: border-box;
@@ -336,11 +401,11 @@ export default {
 			}
 		}
 	}
+	.status-err {
+		color: #ffdc45;
+	}
 	.status-suc {
 		color: #00ddff;
-	}
-	.status-err {
-		color: #ff7217;
 	}
 }
 </style>

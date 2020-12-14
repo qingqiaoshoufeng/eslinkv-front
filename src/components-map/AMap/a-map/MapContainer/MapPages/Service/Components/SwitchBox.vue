@@ -42,10 +42,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .hangrancode_switch_Box {
-	padding: 8px 16px;
+	padding: 4px 16px;
 	position: fixed;
-	// width: 251px;
-	// height: 88px;
 	left: 32px;
 	bottom: 32px;
 	z-index: 99999;
@@ -53,6 +51,9 @@ export default {
 	flex-direction: column;
 	border: 1px solid #00ddff;
 	border-radius: 8px;
+	.item {
+		margin-top: 1px;
+	}
 	.label {
 		display: inline-block;
 		width: 145px;

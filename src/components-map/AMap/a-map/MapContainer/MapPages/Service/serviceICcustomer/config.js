@@ -10,7 +10,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         icon: 'iconyongqidahu',
         component: 'MajorClient',
         visible: false,
-        dataProp: 'majorClientList',
+        dataProp: 'iCcustomerList',
         detailList: [useNumberToday]
     },
 

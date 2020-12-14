@@ -96,7 +96,7 @@ let HighPressureHighPressureGasStation = {
     prop: "pressureRegulatingStation"
 }
 let HighPressureLineLength = {
-    label: '高压管线长度(km)',
+    label: '高压管线长度(m)',
     DW: '',
     prop: "pipelineLength"
 }
@@ -118,12 +118,12 @@ let HighPressurePreservationNumber = {
 }
 // 中低压数据配置
 let LowPressureMediumline = {
-    label: '中压管线(km)',
+    label: '中压管线(m)',
     DW: '',
     prop: "lowLength"
 }
 let LowPressureLowline = {
-    label: '低压管线(km)',
+    label: '低压管线(m)',
     DW: '',
     prop: "smallLength"
 }
@@ -241,62 +241,4 @@ let serviceCustomerStatus = {
     prop: "statusText",
 }
 
-
-// 19厅数统计数据
-let OnlineType = {
-    label: '线上业务服务类型',
-    DW: '',
-    prop: "busi_type",
-}
-
-let TodayApplication = {
-    label: '今日业务申请',
-    DW: '',
-    prop: "apply_nbr",
-}
-
-let TodayUnproving = {
-    label: '今日待审核',
-    DW: '',
-    prop: "pending_nbr",
-}
-let TodayPass = {
-    label: '今日审核通过',
-    DW: '',
-    prop: "accept_nbr",
-}
-let TodayProvingTo2 = {
-    label: '今日2小时审核率',
-    DW: '',
-    prop: "accept_2hour_rate",
-}
-// 19厅详情接口
-let monthAccpet = {
-    label: '本月已受理',
-    DW: '单',
-    prop: "accept_m_nbr",
-    defaultVal: 0
-}
-let monthManage = {
-    label: '本月已办结',
-    DW: '单',
-    prop: "finished_m_nbr",
-    defaultVal: 0
-}
-let monthManagePercent = {
-    label: '本月办结率',
-    DW: '单',
-    prop: "finished_m_rate",
-    defaultVal: 0
-}
-
-
-// accept_2hour_rate: 0
-// accept_nbr: "150"
-// apply_all_nbr: "55694"
-// apply_nbr: "295"
-// busi_type: "5"
-// pending_nbr: "105"
-
-
-export { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, ICcustomer, useNumberYestoday, ICcustomerStatus, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, HighPressureGasStation, emergencyAirSourceStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber, LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber, LNGstationNumber, commonUseNumber, registerNumber, citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent, serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus }
+export { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, ICcustomer, useNumberYestoday, ICcustomerStatus, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, HighPressureGasStation, emergencyAirSourceStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber, LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber, LNGstationNumber, commonUseNumber, registerNumber, citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus }
