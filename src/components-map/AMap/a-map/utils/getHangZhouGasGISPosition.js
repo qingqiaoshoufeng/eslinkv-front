@@ -1,7 +1,7 @@
 import CoordinateTransform from './CoordinateTransform'
 import TransformClassSlippy from './TransformClassSlippy'
 
-const TILE_WIDTH = 512
+const TILE_WIDTH = 256
 
 const XB = 119.3414085
 const XK = 96366.23457
