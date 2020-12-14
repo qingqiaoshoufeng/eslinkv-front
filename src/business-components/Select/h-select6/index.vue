@@ -25,7 +25,7 @@
 	export default {
 		data() {
 			return {
-				selectValue: 'month'
+				selectValue: 'year'
 			}
 		},
 		mixins: [mixins],
