@@ -148,8 +148,10 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
         fields: {
             name: {
                 style: {
-                    fontSize: '24px',
+                    fontSize: '32px',
+                    color: '#FFDC45',
                 },
+                errColor: '#FFDC45',
             },
         },
     },

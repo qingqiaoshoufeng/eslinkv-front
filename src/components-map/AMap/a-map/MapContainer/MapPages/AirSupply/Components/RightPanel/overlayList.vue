@@ -136,7 +136,11 @@ export default {
 		},
 		handleClick(item, index) {
 			this.activeIndex = index;
-			this.$emit('change', item, 'StationList');
+			this.$emit(
+				'change',
+				{ ...item, overlayType: item.type },
+				'StationList'
+			);
 		},
 	},
 };

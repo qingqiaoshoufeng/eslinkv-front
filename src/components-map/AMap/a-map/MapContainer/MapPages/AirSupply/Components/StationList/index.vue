@@ -109,6 +109,7 @@ export default {
 				};
 				let overlayDetailConfig =
 					overlayInfoConfigMap[overlayType] || {};
+				console.log(overlayType, 'overlayType');
 				//弹窗详情
 				this.OverlayDetailProp = {
 					iconSize: 38,
