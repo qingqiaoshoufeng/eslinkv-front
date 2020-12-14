@@ -6,7 +6,7 @@
 				<div class="gas-info">
 					<div class="gas-title">{{ k.name }}</div>
           <div class="gas-percent font-num">{{ (k.percent).toFixed(2) }}%</div>
-					<div class="gas-num font-num"><em>{{ k.value / 10000 | toThousand }}</em> {{ config.config.unit }}
+					<div class="gas-num font-num"><em>{{ k.value | toThousand }}</em> {{ config.config.unit }}
 					</div>
 				</div>
 				<div class="gas-progress">
