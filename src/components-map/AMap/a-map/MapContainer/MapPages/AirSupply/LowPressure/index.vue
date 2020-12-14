@@ -38,15 +38,15 @@
 		</template>
 		<!-- 覆盖物详情 -->
 		<OverlayDetail
-			:legendMap="legendMap"
 			v-model="showOverlayDetail"
-			:data="activeOverlay"
-			:overlayInfoConfigMap="overlayInfoConfigMap"
-			:before-close="closeOverlayDetail"
-			@view-detail="viewOverlayDetail"
+			v-bind="{
+				beforeClose: closeOverlayDetail,
+				...OverlayDetailProp,
+			}"
 			ref="OverlayDetail"
 			:width="400"
-		/>
+		>
+		</OverlayDetail>
 		<portal to="destination">
 			<!-- 统计数据 -->
 			<DataStatistics
@@ -221,6 +221,29 @@ export default {
 				this.$refs.mapTile.reload();
 			}
 			return queryArr;
+		},
+		OverlayDetailProp() {
+			let { activeOverlay, overlayInfoConfigMap, legendMap } = this;
+			if (JSON.stringify(activeOverlay) !== '{}') {
+				let { overlayType } = activeOverlay;
+				//详情展示信息配置
+				let overlayDetailConfig =
+					overlayInfoConfigMap[overlayType] || {};
+				let legendConfig = legendMap[overlayType] || {};
+				//图标大小，是否显示关闭按钮，是否显示查看详情
+				let {
+					iconSize = 38,
+					showPopCloseBtn: showCloseBtn,
+					showMore,
+				} = legendConfig;
+				return {
+					data: activeOverlay,
+					iconSize,
+					showCloseBtn,
+					overlayDetailConfig,
+					showMore,
+				};
+			}
 		},
 	},
 	methods: {

@@ -202,44 +202,6 @@ export const AIRSUPPLY_UCAN_OVERLAY_MAP = {
             // },
         },
         visibleMore: false,
-    },
-    WARNEVENT: {
-        fields: {
-            content: {
-                style: {
-                    fontSize: '32px',
-                    color: '#FFDC45'
-                },
-                errColor: '#FFDC45'
-            },
-            address: {
-                style: {
-                    fontSize: '24px',
-                    color: '#fff',
-                },
-                errColor: '#fff',
-            },
-        },
-        visibleMore: true,
-    },
-    WarningList: {
-        fields: {
-            content: {
-                style: {
-                    fontSize: '32px',
-                    color: '#FFDC45'
-                },
-                errColor: '#FFDC45'
-            },
-            address: {
-                style: {
-                    fontSize: '24px',
-                    color: '#fff',
-                },
-                errColor: '#fff',
-            },
-        },
-        visibleMore: true,
     }
 }
 // 中低压统计数据

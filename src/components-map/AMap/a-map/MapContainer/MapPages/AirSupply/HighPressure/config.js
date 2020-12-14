@@ -177,25 +177,6 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
             },
         },
     },
-    WARNEVENT: {
-        fields: {
-            repairContent: {
-                style: {
-                    fontSize: '32px',
-                    color: '#FFDC45',
-                },
-                errColor: '#FFDC45',
-            },
-            address: {
-                style: {
-                    fontSize: '24px',
-                    color: '#fff',
-                },
-                errColor: '#fff',
-            },
-        },
-        visibleMore: true,
-    },
     StationList: {
         fields: {
             name: {
@@ -214,24 +195,6 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
             },
         },
         visibleMore: true,
-    },
-    WarningList: {
-        fields: {
-            description: {
-                style: {
-                    fontSize: '32px',
-                    color: '#FFDC45',
-                },
-                errColor: '#FFDC45',
-            },
-            address: {
-                style: {
-                    fontSize: '24px',
-                    color: '#fff',
-                },
-                errColor: '#fff',
-            },
-        },
     },
     InspectionPerson: {
         fields: {
@@ -254,5 +217,5 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
                 errColor: '#FFDC45',
             },
         },
-    },
+    }
 }

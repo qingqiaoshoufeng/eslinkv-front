@@ -252,10 +252,6 @@ export default {
 		},
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
-			if (overlayType === 'WARNEVENT') {
-				GoldChart.scene.setSceneIndex(INDEXSCENEMAP['AirSupplyUCAN']);
-				this.showRoutePlan = false;
-			}
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
 			// this.$amap.setZoom(11, 100);

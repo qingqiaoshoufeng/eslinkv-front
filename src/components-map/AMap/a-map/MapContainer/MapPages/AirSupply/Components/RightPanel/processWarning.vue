@@ -86,7 +86,7 @@
 					<div class="station-name">
 						{{ item.address }}
 					</div>
-					<div>
+					<div class="time">
 						{{ item.alarmTime }}
 					</div>
 				</div>
@@ -220,9 +220,8 @@ export default {
 <style lang="scss" scoped>
 .process-warning {
 	color: #fff;
-	font-size: 16px;
+	font-size: 20px;
 	height: 800px;
-
 	.filter-bar {
 		position: sticky;
 		background: #000866;
@@ -396,6 +395,9 @@ export default {
 				flex: 1;
 				color: rgba(255, 255, 255, 0.8);
 				margin-left: 36px;
+			}
+			.time {
+				color: rgba(255, 255, 255, 0.8);
 			}
 		}
 	}
