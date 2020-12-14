@@ -1,8 +1,8 @@
 <template>
-	<div class="widget-part" :style="styles">
+	<div class="widget-part" :style="styles" v-if="data">
 		<div class="carout-bg">
 			<video
-				:src="config.config&&config.config.background"
+				:src="config.config.background"
 				controls="controls"
 				autoplay="autoplay"
 				muted="muted"
@@ -20,9 +20,9 @@
 					<div class="carout_point"></div>
 				</div>
 				<div class="context">
-					<div class="value font-num">{{data&&data.value1}}</div>
+					<div class="value font-num">{{data.value1}}%</div>
 					<div class="desc1 text-center">{{desc1}}</div>
-					<div class="desc2 text-center">{{config.config&&config.config.desc2}}</div>
+					<div class="desc2 text-center">{{config.config.desc2}}</div>
 				</div>
 			</div>
 		</div>

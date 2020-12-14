@@ -3,6 +3,7 @@
 		<pie
 			class="pie"
 			:data="data"
+			:unit="config.config.unit"
 			:text="config.config.title1"
 			:subtext="config.config.title2"
 		></pie>

@@ -79,9 +79,10 @@ export default {
 				if (JSON.stringify(val) === '{}') {
 					return false;
 				}
-				this.$nextTick(() => {
+				setTimeout(() => {
 					//计算是否需要展开
-					let contentDom = this.$refs.content;
+                    let contentDom = this.$refs.content;
+                    window.bbb = this.$refs.content
 					let contentHeight = contentDom.offsetHeight;
 					let contentWidth = contentDom.offsetWidth;
 					if (
@@ -94,7 +95,7 @@ export default {
 						this.heightAuto = contentHeight + 'px';
 					}
 					this.isExpend = false;
-				});
+				},100);
 			},
 			immediate: true,
 		},

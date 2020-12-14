@@ -32,6 +32,11 @@ export default function (data, config) {
             axisLine: {
                 show: false
             },
+			axisLabel: {
+				color: "#fff",
+				fontSize: 16,
+				lineHeight: 16
+			},
             axisTick: {
                 show: false
             },
@@ -46,6 +51,11 @@ export default function (data, config) {
             axisTick: {
                 show: false
             },
+			axisLabel: {
+				color: "#fff",
+				fontSize: 16,
+				lineHeight: 16
+			},
             axisLine: {
                 show: false
             },

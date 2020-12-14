@@ -9,11 +9,6 @@
     <link rel="stylesheet" href="/static/css/font.css" />
     <link rel="stylesheet" href="/static/css/font-awesome-v5.14.0.css" />
 
-    <link rel="stylesheet" href="/static/css/animate.min.css" />
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <script src="./APIConfig.js"></script>
-</head>
-
 <body>
     <noscript>
         <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't
@@ -28,13 +23,17 @@
     <script src="/static/js/echarts.min.js"></script>
     <script src="//at.alicdn.com/t/font_2145957_4kf8b7u6ig8.js"></script>
 
-
-    <script src="/static/js/lib/plugin.iface.js?v=22111111" type="text/javascript"></script>
-    <script src="/static/js/lib/plugin.layer.js?v=33111111" type="text/javascript"></script>
-
-    <script src="/static/js/utility/json2.js" type="text/javascript"></script>
-    <script src="/static/js/utility/mini-easyui/jquery.min.js" type="text/javascript"></script>
-    <script src="/static/js/utility/mini-easyui/jquery.easyui.min.js" type="text/javascript"></script>
+    <script defer src="/static/js/live/utility/json2.js"></script>
+    <script src="/static/js/live/utility/easyui/jquery.min.js"></script>
+    <script defer src="/static/js/live/utility/easyui/jquery.easyui.min.js"></script>
+    <script defer src="/static/js/live/utility/easyui/jquery.xml2json.js"></script>
+    <script defer src="/static/js/live/utility/easyui/locale/easyui-lang-zh_CN.js"></script>
+    <script defer src="/static/js/live/utility/jquery.fullscreen-min.js"></script>
+    <script defer src="/static/js/live/utility/video/videojs-ie8.min.js"></script>
+    <script defer src="/static/js/live/utility/video/video.min.js"></script>
+    <script defer src="/static/js/live/utility/video/videojs-flash.min.js"></script>
+    <script defer src="https://cdn.bootcss.com/flv.js/1.5.0/flv.min.js"></script>
+    <script defer src="/static/js/live/utility/talk.js"></script>
 </body>
 
 </html>

@@ -62,6 +62,23 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         visible: true,
         dataProp: "pipeManageMentStationList"
     },
+    ServiceStation: {
+        label: '综合服务站',
+        legendIcon: 'icontulizonghefuwuzhan1',
+        iconSize: 38,
+        component: 'ServiceStation',
+        visible: true,
+        dataProp: 'serviceStationList',
+        // detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
+    },
+    PipeManageMentStation: {
+        label: '管网运行管理站',
+        legendIcon: 'icontuliguanwangyunhangguanlizhan',
+        iconSize: 38,
+        component: 'EmergencyAirSourceStation',
+        visible: true,
+        dataProp: "pipeManageMentStationList"
+    },
     InspectionPerson: {
         label: '巡检人员',
         legendIcon: 'iconrenyuan1',

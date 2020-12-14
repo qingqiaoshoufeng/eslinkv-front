@@ -6,7 +6,7 @@
           fontSize: config.config.numFontSize,
           color: config.config.numColor,
         }"
-		>{{ data.value }}
+		>{{ data.value | toThousand }}
 		</div>
 		<div
 			class="num-desc"

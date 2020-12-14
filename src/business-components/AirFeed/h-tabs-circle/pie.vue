@@ -30,36 +30,15 @@ export default {
         series: [{
           type: 'pie',
           center: ['50%', '50%'],
-          radius: ['45%', '55%'],
+          radius: ['73%', '90%'],
           avoidLabelOverlap: false,
           startAngle: 270,
           color: ['#2c99ff', '#18CEB9', '#db4f49', '#367cf6', '#84e4fc', '#f8cd47', '#fceb50', '#ed9144', '#5fcbb9'],
           label: {
-            formatter: function(params) {
-              const percent = ~~(params.value * 100 / total)
-              return `{normal|${params.name}}\n{value|${params.value} ${percent}%}`
-            },
-            padding: [0, -100],
-            rich: {
-              normal: {
-                fontSize: 12,
-                lineHeight: 24,
-                color: '#fff',
-                padding: [0, 11, 0, 10],
-                align: 'left'
-              },
-              value: {
-                align: 'left',
-                fontSize: 12,
-                lineHeight: 24,
-                color: '#fff',
-                padding: [0, 0, 0, 0],
-              }
-            }
+            show: false
           },
           labelLine: {
-            length: 10,
-            length2: 80
+            show: false
           },
           data: list
         }]
@@ -73,5 +52,7 @@ export default {
   .chart {
     width: 100%;
     height: 100%;
+    background: url("./img/fire.svg") no-repeat center;
+    background-size: 100px 100px;
   }
 </style>

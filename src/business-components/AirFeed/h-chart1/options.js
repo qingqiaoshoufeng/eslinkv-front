@@ -8,7 +8,7 @@ export default function getOption(data, config) {
 		},
 		grid: {
 			top: 40,
-			left: 40,
+			left: 60,
 			bottom: 30,
 			right: 40
 		},

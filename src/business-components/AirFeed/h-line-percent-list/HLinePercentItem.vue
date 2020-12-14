@@ -12,7 +12,7 @@
 					{{ value.name }}
 				</div>
 				<div class="h-line-percent__right__top__amount">
-					{{ value.amount }}
+					{{ value.amount | toThousand }}
 				</div>
 			</div>
 			<div class="h-line-percent__right__bottom">

@@ -1,5 +1,5 @@
 <template>
-	<div class="h-table-status widget-part" :style="styles">
+	<div class="h-table-status widget-part" :style="styles" v-if="data">
 		<ul class="h-table-status__title" >
 			<li>时间</li>
       <li>业务类型</li>
@@ -9,28 +9,24 @@
 		</ul>
 		<div
 			class="h-table-status__content"
-			v-if="!!data">
-			<vue-seamless-scroll
-			:data="data || []"
-			class="h-table-status__content__seamless-warp"
-			:class-option="classOption">
-				<ul
-					class="h-table-status__content__row"
-					v-for="(item, index) in data"
-					:key="index">
-					<li>{{item.time || ''}}</li>
-          <li>{{item.businessType || ''}}</li>
-          <li>{{item.channel || ''}}</li>
-					<li>{{item.customer || ''}}</li>
-					<li :class="{active: item.statusDesc === '已处理'}">{{item.statusDesc || ''}}</li>
-				</ul>
-			</vue-seamless-scroll>
+      @mouseenter="isStop = true"
+      @mouseleave="isStop = false"
+    >
+      <ul
+          class="h-table-status__content__row"
+          v-for="(item, index) in curr"
+          :key="index">
+        <li>{{item.time || ''}}</li>
+        <li>{{item.businessType || ''}}</li>
+        <li>{{item.channel || ''}}</li>
+        <li>{{item.customer || ''}}</li>
+        <li :class="{active: item.statusDesc === '已处理'}">{{item.statusDesc || ''}}</li>
+      </ul>
 		</div>
 	</div>
 </template>
 <script>
 	import mixins from '../../mixins';
-	import VueSeamLess from 'vue-seamless-scroll'
 	const config = {animation: true}
 	const value = {
 		api: {
@@ -80,37 +76,47 @@
 			])
 		}
 	}
+	const SIZE = 4
 	export default {
 		mixins: [mixins],
-		components: {
-			VueSeamLess
-		},
-		methods: {
-
-		},
-		computed: {
-			rulerWidth(){
-				// 比例根据视觉稿来的
-				const rate =  388 / 4500;
-				return (this.data?.amount * rate ?? 0 ) + 'px';
-			},
-			classOption () {
-				return {
-					step: 0.2, // 数值越大速度滚动越快
-					limitMoveNum: this.data?.length, // 开始无缝滚动的数据量
-					hoverStop: true, // 是否开启鼠标悬停stop
-					direction: 1, // 0向下 1向上 2向左 3向右
-					openWatch: true, // 开启数据实时监控刷新dom
-					singleHeight: 0, // 单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
-					singleWidth: 0, // 单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-					waitTime: 1000 // 单步运动停止的时间(默认值1000ms)
-				}
-       		}
-		},
+    data() {
+      return {
+        timer: null,
+        loop: 0,
+        isStop: false
+      }
+    },
+    watch: {
+      data: {
+        handler(val) {
+          clearInterval(this.timer)
+          this.timer = setInterval(() => {
+            if (this.isStop) return
+            if (this.loop === Math.ceil(val.length / SIZE)- 1) {
+              this.loop = 0
+            } else {
+              this.loop++
+            }
+          }, 2000)
+        },
+        deep: true,
+        immediate: true
+      },
+    },
+    computed: {
+      curr () {
+        if (!this.data) return []
+        return this.data.slice(this.loop * SIZE, (this.loop + 1) * SIZE)
+      }
+    },
 		created() {
 			this.configSource = this.parseConfigSource(config);
 			this.configValue = this.parseConfigValue(config, value);
 		},
+    beforeDestroy() {
+      clearInterval(this.timer)
+      this.timer = null
+    }
 	}
 </script>
 <style lang="scss">
