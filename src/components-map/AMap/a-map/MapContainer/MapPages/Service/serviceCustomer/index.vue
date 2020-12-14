@@ -152,8 +152,8 @@ export default {
 			OverlayDetail: null,
 			legendMap: SERVICE_SERVICECUSTOMER_LEGEND_MAP,
 			legendMultiple: true,
-			center: [120.131259, 30.263295],
-			zoom: 10,
+			center: [120.080259, 30.263295],
+			zoom: 11,
 			allTypeStationList: {},
 			dataStatisticsList: DATASTATISTICSLIST,
 			dataStatisticsInfo: {

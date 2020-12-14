@@ -38,6 +38,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
     ThreeSocialLinkage: {
         label: '三社联动',
         legendIcon: 'icontulisansheliandong',
+        showOverlayName: false,
         iconSize: 38,
         icon: 'iconsansheliandong',
         component: 'ThreeSocialLinkage',
