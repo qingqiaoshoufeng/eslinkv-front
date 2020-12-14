@@ -22,8 +22,14 @@
 </template>
 <script>
 	import mixins from '../../mixins';
+  import {getInput} from "@lib/views/core/widgets/parts/lib/config-tools";
 
-	const config = {animation: true};
+	const config = {
+	  animation: true,
+    config: {
+	    size: true
+    }
+	};
 	const value = {
 		api: {
 			data: JSON.stringify({
@@ -99,8 +105,17 @@
 				activeStatus: '已办结'
 			}),
 		},
-	};
-	const SIZE = 9
+    config: {
+      size: 4
+    }
+	}
+  const configSource = {
+    config: {
+      fields: {
+        size: getInput('size', '每页数量'),
+      }
+    },
+  }
 	export default {
 		mixins: [mixins],
     data() {
@@ -116,7 +131,7 @@
           clearInterval(this.timer)
           this.timer = setInterval(() => {
             if (this.isStop) return
-            if (this.loop === Math.ceil(val.list.length / SIZE)- 1) {
+            if (this.loop === Math.ceil(val.list.length / this.config.config.size)- 1) {
               this.loop = 0
             } else {
               this.loop++
@@ -130,11 +145,11 @@
     computed: {
       curr () {
         if (!this.data) return []
-        return this.data.list.slice(this.loop * SIZE, (this.loop + 1) * SIZE)
+        return this.data.list.slice(this.loop * this.config.config.size, (this.loop + 1) * this.config.config.size)
       }
     },
 		created() {
-			this.configSource = this.parseConfigSource(config);
+			this.configSource = this.parseConfigSource(config, configSource);
 			this.configValue = this.parseConfigValue(config, value);
 		},
     beforeDestroy() {
