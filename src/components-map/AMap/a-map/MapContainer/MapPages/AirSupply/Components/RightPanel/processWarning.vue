@@ -31,14 +31,14 @@
 			</div>
 			<div class="fitler-item repair-state">
 				<div
-					:class="repairState === '未处理' ? 'active' : ''"
-					@click="changeRepairState('未处理')"
+					:class="repairState === 1 ? 'active' : ''"
+					@click="changeRepairState(1)"
 				>
 					未处理
 				</div>
 				<div
-					:class="repairState === '处理完成' ? 'active' : ''"
-					@click="changeRepairState('处理完成')"
+					:class="repairState === 0 ? 'active' : ''"
+					@click="changeRepairState(0)"
 				>
 					已处理
 				</div>
@@ -62,7 +62,7 @@
 				<div class="row">
 					<SvgIcon
 						:icon-name="
-							item.priority == '已处理'
+							item.status == '0'
 								? 'iconzhengchang'
 								: 'iconyichang'
 						"
@@ -118,7 +118,7 @@ export default {
 			list: [],
 			isShow: false,
 			currentLevel: 1,
-			repairState: '未处理',
+			repairState: 1,
 			levelList: [
 				// { value: 0, label: ''' },
 				{ value: 1, label: '一级' },
@@ -137,7 +137,6 @@ export default {
 	},
 	async created() {
 		this.getData();
-
 		this.timer = setInterval(() => {
 			this.getData();
 		}, 120000);
@@ -191,13 +190,12 @@ export default {
 			// }, 3000);
 		},
 		async getData() {
-			console.log(this.currentLevel);
 			this.isShow = true;
 			this.list = await this.$sysApi.map.airSupply.getProcessWarningList({
 				currentPage: 1,
 				pageSize: 500,
 				priority: this.currentLevel,
-				status: this.repairState === '已处理' ? 0 : 1,
+				status: this.repairState,
 			});
 			// setTimeout(() => {
 			this.isShow = false;
@@ -280,7 +278,7 @@ export default {
 					width: 16px;
 					height: 16px;
 					left: 0px;
-					top: calc(50% - 8px);
+					top: calc(50% - 9px);
 					border: 2px solid #00ddff;
 				}
 			}
@@ -325,11 +323,11 @@ export default {
 	/deep/.ivu-select-selection {
 		color: #fff;
 		background: #0057a9;
+		border: 1px solid #57a3f3 !important;
 	}
 	/deep/.ivu-select {
 		padding: 0 !important;
 		height: 40px !important;
-		font-family: PingFang SC !important;
 		font-style: normal !important;
 		font-weight: 600 !important;
 		font-size: 20px !important;

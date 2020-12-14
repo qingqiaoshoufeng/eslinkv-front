@@ -92,10 +92,6 @@ export default {
 	created() {
 		this.getData();
 	},
-	mounted() {
-		console.log(this.showStationList, 'this.showStationList');
-		console.log(this.stationList, 'this.stationList');
-	},
 	computed: {
 		showStationList() {
 			if (this.searchName) {
