@@ -5,7 +5,7 @@
 				<img :src="config.config.img" alt=""/>
 			</div>
 			<p class="pos-r text-left">{{config.config.title}}</p>
-			<h2>{{data.value}}</h2>
+			<h2 class="font-num">{{data.value |toThousand}}</h2>
 		</div>
 	</div>
 </template>

@@ -34,16 +34,16 @@ export default {
 		console.log(zoom);
 	},
 	methods: {
-		handleMapZoomChangeStart() {},
-		handleMapZoomChangeEnd() {
-			let zoom = this.$amap.getZoom();
-			console.log(zoom);
-			this._instance.setOptions({
-				// radius: 8,
-			});
-		},
-		async init(max = 6000) {
-			// debugger;
+		// handleMapZoomChangeStart() {},
+		// handleMapZoomChangeEnd() {
+		// 	let zoom = this.$amap.getZoom();
+		// 	console.log(zoom);
+		// 	this._instance &&
+		// 		this._instance.setOptions({
+		// 			// radius: 8,
+		// 		});
+		// },
+		async init(max = 3000) {
 			if (!this._heatMapData) {
 				this._heatMapData = this.data;
 				// this._heatMapData = await this.$sysApi.map.serve.getHeatMapList();
@@ -54,6 +54,13 @@ export default {
 			this._instance = new AMap.HeatMap(this.$amap, {
 				radius: 8, //给定半径
 				opacity: [0, 0.8],
+				// gradient: {
+				// 	0.8: '#00D1FF',
+				// 	0.65: 'rgb(117,211,248)',
+				// 	0.7: 'rgb(0, 255, 0)',
+				// 	0.9: '#ffea00',
+				// 	1.0: 'red',
+				// },
 			});
 			this._instance.setDataSet({
 				data: this._heatMapData,

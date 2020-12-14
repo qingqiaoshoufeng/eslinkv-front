@@ -38,6 +38,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
     ThreeSocialLinkage: {
         label: '三社联动',
         legendIcon: 'icontulisansheliandong',
+        showOverlayName: false,
         iconSize: 38,
         icon: 'iconsansheliandong',
         component: 'ThreeSocialLinkage',
@@ -116,5 +117,5 @@ export const DATASTATISTICSLIST = [citizenNumber, publicBuildNumber, industryNum
 
 // SwitchBox配置
 export const SWICHBOX = [
-    { label: '客户分布热力', value: true, type: 'customer' },
+    { label: '客户分布热力', value: false, type: 'customer' },
 ]

@@ -1,21 +1,47 @@
-let OperationToday = {
-    label: '今日扫码',
-    DW: '次',
-    prop: "operationToday",
-    Fixed: 0
-};
-let OperationWeek = {
-    label: '本周扫码',
-    DW: '次',
-    prop: "operationWeek",
-    Fixed: 0
-}
 let CouplingNumber = {
     label: '联码户数',
     DW: '户',
     prop: "couplingNumber",
     Fixed: 0
 }
+let operationYesterday = {
+    label: '昨日扫码',
+    DW: '次',
+    prop: "operationYesterday",
+    Fixed: 0
+}
+
+let OperationWeek = {
+    label: '本周扫码',
+    DW: '次',
+    prop: "operationWeek",
+    Fixed: 0
+}
+let operationLastWeek = {
+    label: '上周扫码',
+    DW: '次',
+    prop: "operationLastWeek",
+    Fixed: 0
+}
+let operationMonth = {
+    label: '本月扫码',
+    DW: '次',
+    prop: "operationMonth",
+    Fixed: 0
+}
+let operationLastMonth = {
+    label: '上月扫码',
+    DW: '次',
+    prop: "operationLastMonth",
+    Fixed: 0
+}
+let operationYear = {
+    label: '年度扫码',
+    DW: '次',
+    prop: "operationYear",
+    Fixed: 0
+}
+
 let CouplingPercent = {
     label: '联码率',
     DW: '%',
@@ -48,5 +74,5 @@ let ICcustomer = {
 }
 
 export {
-    OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth
+    CouplingNumber, operationYesterday, OperationWeek, operationLastWeek, operationMonth, operationLastMonth, operationYear, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth
 }

@@ -6,7 +6,12 @@
 				placeholder="输入关键词搜索点位"
 				v-model="searchName"
 			/>
-			<SvgIcon :icon-name="'iconsearch'" class="search-btn" />
+			<div class="search-btn">
+				<SvgIcon
+					:icon-name="'iconsearch'"
+					:style="{ fontSize: '24px' }"
+				/>
+			</div>
 		</div>
 		<div class="list">
 			<div
@@ -26,7 +31,11 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="station-name">
+					<SvgIcon
+						:icon-name="'iconarrow'"
+						:style="{ fontSize: '24px' }"
+					/>
+					<!-- <div class="station-name">
 						{{ item.address }}
 					</div>
 					<div
@@ -36,7 +45,7 @@
 						]"
 					>
 						{{ item.statusText }}
-					</div>
+					</div> -->
 				</div>
 			</div>
 		</div>
@@ -167,6 +176,7 @@ export default {
 		font-style: normal;
 		font-weight: normal;
 		font-size: 20px;
+		border: 1px solid #0057a9;
 	}
 	::-webkit-input-placeholder {
 		color: #fff;
@@ -176,9 +186,13 @@ export default {
 		font-size: 20px;
 	}
 	.search-btn {
+		display: flex;
 		background: #0057a9;
 		width: 40px;
 		height: 40px;
+		font-size: 14px;
+		justify-content: center;
+		align-items: center;
 	}
 }
 .list {
@@ -190,8 +204,9 @@ export default {
 	color: #fff;
 	font-size: 16px;
 	.list-item {
-		height: 96px;
-		padding: 16px 8px;
+		display: flex;
+		justify-content: space-between;
+		padding: 24px 16px 24px 8px;
 		box-sizing: border-box;
 		cursor: pointer;
 		&:hover,

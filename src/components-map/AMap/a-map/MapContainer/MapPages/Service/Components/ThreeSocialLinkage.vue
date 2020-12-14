@@ -8,6 +8,7 @@
 			apiFun,
 			...$attrs,
 			data,
+			showOverlayName: false,
 		}"
 		@click="mouseover"
 	/>

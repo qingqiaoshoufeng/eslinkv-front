@@ -1,11 +1,12 @@
 <template>
 	<div class="widget-part pos-r" :style="styles" v-if="data">
 		<div class="analysis-box">
-			<div class="h-line-1" :id="id" />
+			<div class="s-analysis" :id="id" />
 			<div class="context">
 				<div v-for="(item,index) in data.dataList" :key="index" class="context-item">
 					<div class="item-name">{{item.name}}</div>
-					<div class="item-value">{{item.value | toThousand }}</div>
+					<div class="item-value font-num">{{item.value | toThousand }}</div>
+					<div class="ratio-value font-num">{{(item.value/total*100).toFixed(2) }}%</div>
 				</div>
 			</div>
 		</div>
@@ -56,6 +57,18 @@ export default {
 			this.instance && this.instance.setOption(getOption(this.data));
 		},
 	},
+	computed:{
+		total(){
+			if(this.data){
+				let total =0
+				this.data.dataList.forEach(item=>{
+					total+= Number(item.value)
+				})
+				return total
+			}
+			return 0
+		}
+	},
 	watch: {
 		data: {
 			handler(val) {
@@ -82,41 +95,46 @@ export default {
 <style lang="scss" scoped>
 .analysis-box {
 	display: flex;
-	.h-line-1 {
+	.s-analysis {
 		height: 240px;
-		width: 300px;
+		width: 250px;
 	}
 	.context {
 		display: flex;
-        width: 170px;
 		flex-direction: column;
         justify-content: center;
+		margin-left: 20px;
 		.context-item {
 			display: flex;
             height: 24px;
             margin-top: 11px;
 			.item-name {
-				//styleName: 文字/18;
-				font-family: PingFang SC;
 				font-size: 18px;
 				font-style: normal;
 				font-weight: 400;
 				line-height: 24px;
-				letter-spacing: 0px;
+				letter-spacing: 0;
 				text-align: right;
-                font-size: 18px;
 				color: #00ddff;
 			}
 			.item-value {
-				//styleName: 数字/24;
-				font-family: DIN Alternate;
-                margin-left: 35px;
+                margin-left: 25px;
 				font-size: 24px;
 				font-style: normal;
 				font-weight: 700;
 				line-height: 24px;
 				text-align: left;
-                color:#fff
+                color:#fff;
+				min-width: 52px;
+			}
+			.ratio-value{
+				margin-left: 25px;
+				font-size: 24px;
+				font-style: normal;
+				font-weight: 700;
+				line-height: 24px;
+				text-align: left;
+				color:#fff;
 			}
 		}
 	}

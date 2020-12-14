@@ -152,8 +152,8 @@ export default {
 			OverlayDetail: null,
 			legendMap: SERVICE_SERVICECUSTOMER_LEGEND_MAP,
 			legendMultiple: true,
-			center: [120.131259, 30.263295],
-			zoom: 10,
+			center: [120.080259, 30.263295],
+			zoom: 11,
 			allTypeStationList: {},
 			dataStatisticsList: DATASTATISTICSLIST,
 			dataStatisticsInfo: {
@@ -166,7 +166,7 @@ export default {
 			isShowMore: false,
 			activeIndex: null,
 			swichBoxInfo: SWICHBOX,
-			visible: true,
+			visible: false,
 		};
 	},
 
@@ -213,7 +213,7 @@ export default {
 		switchChange(data, type) {
 			this.swichBoxInfo = data;
 			let [{ value }] = this.swichBoxInfo;
-			// debugger;
+
 			this.visible = value;
 		},
 		showMoreDetail() {
@@ -240,8 +240,7 @@ export default {
 				overlay.activeIndex = this.allTypeStationList.TaskList.findIndex(
 					item => item.id === overlay.id
 				);
-				debugger;
-
+				this.isShowMore = false;
 				this.handleListClick(overlay);
 				return;
 			}
@@ -254,7 +253,6 @@ export default {
 			// console.log(this.$refs.overlayType.mouseIn);
 			this.isShowMore = ['ThreeSocialLinkage'].includes(overlayType);
 			if (['ThreeSocialLinkage', 'TaskList'].includes(overlayType)) {
-				// debugger;
 				this.$amap.setZoom(14, 100);
 				this.$amap.panTo([lng, lat], 100);
 			}
@@ -284,7 +282,6 @@ export default {
 			}
 		},
 		handleListClick(item) {
-			// debugger;
 			let { name, time, activeIndex, overlayType, lng, lat } = item;
 			if (overlayType === 'ThreeSocialLinkage') {
 				this.$refs.ThreeSocialLinkage[0].mouseIn = true;
@@ -305,6 +302,7 @@ export default {
 		},
 		showThreeSocialLinkageDetail() {
 			let { id } = this.activeOverlay;
+			console.log(this.activeOverlay);
 			console.log(id);
 			//打开三社联动的弹框
 			GoldChart.scene.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX);
@@ -357,6 +355,9 @@ export default {
 		this.getTasklist();
 		this.getThreeSocialLinkagecustmerHot();
 		window.setCenter = this.setCenter.bind(this);
+		let [{ value }] = this.swichBoxInfo;
+
+		this.visible = value;
 	},
 };
 </script>

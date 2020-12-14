@@ -79,7 +79,7 @@ export default {
 		font-style: normal;
 		font-weight: normal;
 		font-size: 32px;
-		line-height: 24px;
+		line-height: 1em;
 		color: #ffd200;
 	}
 	.accept,

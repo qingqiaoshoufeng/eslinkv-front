@@ -24,7 +24,6 @@ export default {
 	},
 	methods: {
 		async init() {
-			// debugger;
 			if (!this._heatMapData) {
 				this._heatMapData = this.data;
 				// this._heatMapData = await this.$sysApi.map.serve.getHeatMapList();

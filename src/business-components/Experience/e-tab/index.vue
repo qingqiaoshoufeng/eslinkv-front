@@ -1,24 +1,8 @@
 <template>
 	<div class="widget-part" :style="styles" v-if="data">
-    <div class="item" :class="{active:item.index.indexOf(store.scene.index)!==-1}" @click="switchTab" v-for="item in data?data.value:[]">
-      <img src="./img/icon1.svg">
-      <span>微信</span>
-    </div>
-    <div class="item" :class="{active: data.index===index}" @click="switchTab">
-      <img src="./img/icon2.svg">
-      <span>微博</span>
-    </div>
-    <div class="item" :class="{active: data.index===index}" @click="switchTab">
-      <img src="./img/icon3.svg">
-      <span>网站</span>
-    </div>
-    <div class="item" :class="{active: data.index===index}" @click="switchTab">
-      <img src="./img/icon4.svg">
-      <span>头条</span>
-    </div>
-    <div class="item" :class="{active: data.index===index}" @click="switchTab">
-      <img src="./img/icon5.svg">
-      <span>抖音</span>
+    <div class="item" :class="{active:item.index.indexOf(store.scene.index)!==-1}" @click="switchTab(item.index[0])" v-for="item in data?data.value:[]">
+      <img :src="item.img">
+      <span>{{item.title}}</span>
     </div>
 	</div>
 </template>
@@ -31,11 +15,11 @@ const config = {
 const value = {
 	api: {
 		data: JSON.stringify({value:[
-			{title: '微信', index: ['nn16rowdl5r', 'p2wovclspks'],img:'./img/icon1.svg'},
-			{title: '微博', index: ['nn16rowdl5r', 'p2wovclspks'],img:'./img/icon2.svg'},
-			{title: '网站', index: ['nn16rowdl5r', 'p2wovclspks'],img:'./img/icon3.svg'},
-			{title: '头条', index: ['nn16rowdl5r', 'p2wovclspks'],img:'./img/icon4.svg'},
-			{title: '抖音', index: ['nn16rowdl5r', 'p2wovclspks'],img:'./img/icon5.svg'},
+			{title: '微信', index: ['nn16rowdl5r', 'p2wovclspks'],img:'/static/images/e-tab/icon1.svg'},
+			{title: '微博', index: ['nn16rowdl5r', 'p2wovclspks'],img:'/static/images/e-tab/icon2.svg'},
+			{title: '网站', index: ['nn16rowdl5r', 'p2wovclspks'],img:'/static/images/e-tab/icon3.svg'},
+			{title: '头条', index: ['nn16rowdl5r', 'p2wovclspks'],img:'/static/images/e-tab/icon4.svg'},
+			{title: '抖音', index: ['nn16rowdl5r', 'p2wovclspks'],img:'/static/images/e-tab/icon5.svg'},
 		]}),
 	}
 };
@@ -48,8 +32,7 @@ export default {
 	},
   methods: {
     switchTab (n) {
-      this.index!==this.data
-		GoldChart.scene.setSceneIndex(index)
+		GoldChart.scene.setSceneIndex(n)
     }
   },
 	created() {

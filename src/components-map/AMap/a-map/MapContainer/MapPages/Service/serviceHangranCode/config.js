@@ -1,5 +1,5 @@
 // 引入详情字典
-import { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth } from "./dictionary"
+import { operationYesterday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, operationLastWeek, operationMonth, operationLastMonth, operationYear, } from "./dictionary"
 // 覆盖物legend配置
 export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
     // Grouphall: {
@@ -11,7 +11,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
     //     visible: true,
     //     dataProp: 'grouphallList',
 
-    //     detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
+    //     detailList: [operationYesterday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
     // },
     BranchCompany: {
         label: '子公司',
@@ -23,7 +23,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
 
         dataProp: 'branchCompanyList',
 
-        detailList: [OperationToday, OperationWeek, CouplingNumber,
+        detailList: [CouplingNumber, operationYesterday, OperationWeek, operationLastWeek, operationMonth, operationLastMonth, operationYear,
             //  CouplingPercent,
             //  NewCouplingNumber
         ]
@@ -37,7 +37,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
     //     visible: true,
     //     dataProp: 'comprehensiveServiceStationList',
 
-    //     detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
+    //     detailList: [operationYesterday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
     // },
     CouplingHot: {
         label: '联码数量热力',

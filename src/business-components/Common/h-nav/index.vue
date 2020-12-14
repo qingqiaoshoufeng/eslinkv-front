@@ -3,8 +3,8 @@
 		<ul class="h-nav fn-flex flex-row">
 			<li class="pos-r pointer fn-flex"
 				v-for="item in data?data.value:[]"
-				:class="{active:item.index.indexOf(store.scene.index)!==-1}"
-				@click="changeScene(item.index[0])">
+				:class="{active:item.index.indexOf(store.scene.index)!==-1,disabled:data.disabled?data.disabled.indexOf(item.title)!==-1:false}"
+				@click="changeScene(item.title,item.index[0])">
 				{{item.title}}
 			</li>
 		</ul>
@@ -27,7 +27,8 @@
 					{title: '服务', index: ['g199smrdh4r']},
 					{title: '优家', index: ['o8tkm981qdh']},
 					{title: '体验', index: ['vxoiljh5my9']},
-				]
+				],
+				disabled:['']
 			})
 		}
 	}
@@ -39,8 +40,16 @@
 		},
 		mixins: [mixins],
 		methods: {
-			changeScene(index) {
-				GoldChart.scene.setSceneIndex(index)
+			changeScene(title,index) {
+				if(this.data.disabled){
+					if(this.data.disabled.indexOf(title)!==-1){
+						return false
+					}else{
+						GoldChart.scene.setSceneIndex(index)
+					}
+				}else{
+					GoldChart.scene.setSceneIndex(index)
+				}
 			}
 		},
 		created() {
@@ -79,6 +88,9 @@
 					left: 50%;
 					transform: translateX(-50%);
 				}
+			}
+			&.disabled{
+				color: rgba(255,255,255,.3)
 			}
 		}
 	}

@@ -3,22 +3,23 @@
 import { ICcustomer, useNumberYestoday, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, ICcustomerStatus, useNumberToday, useNumberYear, useNumberMonth, } from "./dictionary"
 // 覆盖物legend配置
 export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
-    MajorClient: {
-        label: '工商户',
-        legendIcon: 'icontuliyongqidahu',
-        iconSize: 38,
-        icon: 'iconyongqidahu',
-        component: 'MajorClient',
-        visible: false,
-        dataProp: 'iCcustomerList',
-        detailList: [useNumberToday]
-    },
+    // MajorClient: {
+    //     label: '工商户',
+    //     legendIcon: 'icontuliyongqidahu',
+    //     iconSize: 38,
+    //     icon: 'iconyongqidahu',
+    //     component: 'MajorClient',
+    //     visible: false,
+    //     dataProp: 'iCcustomerList',
+    //     detailList: [useNumberToday]
+    // },
 
     useHotYear: {
         label: '年度热力',
         component: 'useHotYear',
         visible: false,
         dataProp: 'year',
+        legendIcon: '',
     },
     BranchCompany: {
         label: '子公司',

@@ -8,7 +8,7 @@ let ICcustomer = {
 let useNumberToday = {
     label: '今日用气量',
     DW: 'm³',
-    prop: "useNumberToday",
+    prop: "operationYesterday ",
     Fixed: 2
 }
 let useNumberYear = {
@@ -37,7 +37,7 @@ let warningYestoday = {
     Fixed: 0
 }
 let FTPNumber = {
-    label: '工商户远传流量计',
+    label: '远传表(台)',
     DW: '次',
     prop: "longPass"
 }

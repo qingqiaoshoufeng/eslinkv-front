@@ -3,48 +3,48 @@
 		<div class="left-circle"></div>
 		<div class="main">
 			<div class="main-lt">
-				<div class="title">{{ data && data.title }}</div>
+				<div class="title">{{ data.name }}</div>
 				<div class="base-info">
 					<div class="base-info-item fn-flex flex-row">
 						<label>开始时间</label>
-						<span>{{ data && data.startTime }}</span>
+						<span>{{ data.startTime }}</span>
 					</div>
 					<div class="base-info-item fn-flex flex-row">
 						<label>结束时间</label>
-						<span>{{ data && data.endTime }}</span>
+						<span>{{ data.endTime }}</span>
 					</div>
 					<div class="base-info-item fn-flex flex-row">
 						<label>活动地点</label>
-						<span>{{ data && data.place }}</span>
+						<span>{{ data.place }}</span>
 					</div>
 					<div class="base-info-item fn-flex flex-row">
 						<label>人员组成</label>
-						<span>{{ data && data.people }}</span>
+						<span>{{ data.people }}</span>
 					</div>
 					<div class="base-info-item fn-flex flex-row">
 						<label>参加人数</label>
-						<span>{{ data && data.peopleNum }}人</span>
+						<span>{{ data.peopleNum }}人</span>
 					</div>
 					<div class="base-info-item fn-flex flex-row">
 						<label>计划服务用户数量</label>
-						<span>{{ data && data.planNum }}户</span>
+						<span>{{ data.planNum }}户</span>
 					</div>
 				</div>
 				<div class="detail-title">
 					<div class="detail-title-logo">
-						<img src="img/detail-title.svg" alt="" />
+						<img src="./img/detail-title.svg" alt="" />
 					</div>
 					<span>活动详情</span>
 				</div>
 				<div class="content-wrap">
-					<div class="content">{{ data && data.content }}</div>
+					<div class="content">{{ data.content }}</div>
 				</div>
 				<div class="quota">
 					<div class="chart">
 						<div class="chart-main" :id="id"></div>
 						<div class="chart__desc">
 							<div class="chart__desc__rate font-num">
-								{{ data && data.securityCheckRate }}%
+								{{ data.securityCheckRate }}%
 							</div>
 							<div class="chart__desc__font">安检率</div>
 						</div>
@@ -53,7 +53,7 @@
 						<div class="quota-row">
 							<div class="quota-row-head">
 								<div class="quota-row-head-num font-num">
-									{{ data && data.planCheckNum }}
+									{{ data.planCheckNum }}
 								</div>
 								<div class="quota-row-head-txt">
 									计划安检数(户)
@@ -61,22 +61,22 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="img/quota1.svg" />
+									<img src="./img/quota1.svg" />
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
-										{{ data && data.brochuresNum }}
+										{{ data.brochuresNum }}
 									</div>
 									<div class="quota-item-txt">宣传册发放</div>
 								</div>
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="img/quota2.svg" />
+									<img src="./img/quota2.svg" />
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
-										{{ data && data.uSaleNum }}
+										{{ data.uSaleNum }}
 									</div>
 									<div class="quota-item-txt">
 										优家销量(台)
@@ -85,11 +85,11 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="img/quota3.svg" />
+									<img src="./img/quota3.svg" />
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
-										{{ data && data.uSaleMoney }}
+										{{ data.uSaleMoney }}
 									</div>
 									<div class="quota-item-txt">
 										优家销售额(元)
@@ -100,7 +100,7 @@
 						<div class="quota-row">
 							<div class="quota-row-head">
 								<div class="quota-row-head-num font-num">
-									{{ data && data.actualCheckNum }}
+									{{ data.actualCheckNum }}
 								</div>
 								<div class="quota-row-head-txt">
 									实际安检数(户)
@@ -108,22 +108,22 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="img/quota4.svg" />
+									<img src="./img/quota4.svg" />
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
-										{{ data && data.installNum }}
+										{{ data.installNum }}
 									</div>
 									<div class="quota-item-txt">现场安装数</div>
 								</div>
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="img/quota5.svg" />
+									<img src="./img/quota5.svg" />
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
-										{{ data && data.repairNum }}
+										{{ data.repairNum }}
 									</div>
 									<div class="quota-item-txt">现场维修数</div>
 								</div>
@@ -170,7 +170,7 @@ const config = { animation: true };
 const value = {
 	api: {
 		data: JSON.stringify({
-			title: '桂花城紫云苑-杭燃服务进社区活动',
+			name: '桂花城紫云苑-杭燃服务进社区活动',
 			startTime: '2020/10/01  08:30',
 			endTime: '2020/10/01  08:30',
 			place: '桂花城紫云苑',
