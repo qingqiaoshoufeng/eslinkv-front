@@ -12,7 +12,12 @@
 		class="tabs-container-ic animate__animated animate__fadeInRight"
 		v-model="currentTab"
 	>
-		<TabPanel key="realTime" name="realTime" label="态势感知" lazy>
+		<TabPanel
+			key="realTime"
+			name="realTime"
+			label="昨日工商用户用气排行TOP20"
+			lazy
+		>
 			<realTime @change="handleClick" />
 		</TabPanel>
 		<!-- <TabPanel

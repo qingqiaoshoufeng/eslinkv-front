@@ -7,6 +7,11 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
 		></WarnEvent>
+		<StationList
+			:data="stationListData"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
+			@close="closeStationListDetail"
+		></StationList>
 		<!-- 特殊 中低压管网需要legend控制显隐 -->
 		<AMapTile
 			ref="mapTile"
@@ -57,6 +62,7 @@
 				v-model="activeTab"
 				@overlay-click="handleListClick"
 				:stationList="stationList"
+				ref="RightPanel1"
 			></RightPanel>
 		</portal>
 	</div>
@@ -72,6 +78,7 @@ import {
 	LNGStation,
 	InspectionPerson,
 	GasStation,
+	StationList,
 	// HighPressureLine,
 	// HighPressureLine_Process,
 	// PressureRegulatingStation,
@@ -135,6 +142,7 @@ export default {
 		DataStatistics,
 		WarningList,
 		WarnEvent,
+		StationList,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
@@ -176,6 +184,7 @@ export default {
 			stationDataMap: {},
 			dataReady: false,
 			stationList: [],
+			stationListData: {},
 		};
 	},
 	computed: {
@@ -215,6 +224,16 @@ export default {
 		},
 	},
 	methods: {
+		closeStationListDetail(done) {
+			this.StationListData = {};
+			this.$refs.RightPanel1.$refs.processWarning.activeIndex = -1;
+			this.$refs.RightPanel1.$refs.realTime.activeIndex = -1;
+			this.$refs.RightPanel1.$refs.overlayList.activeIndex = -1;
+
+			this.$amap.setZoom(this.zoom, 100);
+			this.$amap.setCenter(this.center, 100);
+			done && done();
+		},
 		setCenter(center) {
 			this.center = center || this.center;
 		},
@@ -272,7 +291,10 @@ export default {
 				minGD,
 				maxGD,
 			} = getHangZhouGasGISPosition(x, y, zoom);
-			return `${window.api.MAP_GIS_URL}/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
+			return `${
+				(window.api && window.api.MAP_GIS_URL) ||
+				'http://192.168.1.104:6080'
+			}/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat } = overlay;
@@ -297,13 +319,18 @@ export default {
 				this.$amap.panTo([lng, lat], 100);
 			});
 		},
-		handleListClick(overlay) {
+		handleListClick(overlay, eventType) {
+			console.log(overlay);
 			if (this.showOverlayDetail) {
 				this.showOverlayDetail = false;
 				this.activeOverlay = {};
 			}
 			let { lng, lat } = overlay;
-			this.activeWarnData = overlay;
+			if (eventType) {
+				this.stationListData = overlay;
+			} else {
+				this.activeWarnData = overlay;
+			}
 			this.setZoomAndPanTo(lng, lat);
 		},
 		closeWarnEventDetail() {

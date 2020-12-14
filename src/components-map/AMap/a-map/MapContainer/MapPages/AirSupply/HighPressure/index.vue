@@ -251,6 +251,7 @@ export default {
 			this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		closeStationListDetail() {
+			// debugger;
 			this.StationListData = {};
 			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
 			this.$refs.RightPanel.$refs.realTime.activeIndex = -1;

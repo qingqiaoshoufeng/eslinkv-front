@@ -189,7 +189,7 @@ export default {
 					width: 0px;
 					height: 0px;
 					left: 4px;
-					top: calc(50% - 4px);
+					top: calc(50% - 5px);
 					border: 4px solid #fff;
 				}
 			}
