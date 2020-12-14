@@ -80,17 +80,18 @@ export default {
 	},
 	methods: {
 		async handleOverlayClick(marker) {
-			// if (this.mouseIn) {
-			// 	return false;
-			// }
-			// this.mouseIn = true;
 			let { id, name, type } = marker;
-			let data = await this.$sysApi.map.airSupply.getStationRealTimeInfo({
-				id,
-				name,
-				type,
-			});
+			let data = {};
 			let dataComp = {};
+			try {
+				data = await this.$sysApi.map.airSupply.getStationRealTimeInfo({
+					id,
+					name,
+					type,
+				});
+			} catch (error) {
+				console.error(error, '接口报错');
+			}
 			Object.keys(data).forEach(prop => {
 				let dw = this.propDwMap[prop];
 				if (typeof data[prop] !== 'object') {
@@ -106,14 +107,12 @@ export default {
 					};
 				});
 			});
-			// if (this.mouseIn) {
 			this.$emit(
 				'overlay-click',
 				{ ...marker, detail: dataComp },
 				'GasStation',
 				false
 			);
-			// }
 		},
 		viewDetail(marker) {
 			let { name, id } = marker;
@@ -141,11 +140,6 @@ export default {
 				});
 			});
 		},
-		// handleMouseover() {},
-		// handleMouseleave() {
-		// 	this.mouseIn = false;
-		// 	this.$emit('close');
-		// },
 	},
 };
 </script>

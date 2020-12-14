@@ -17,14 +17,14 @@
 			</div>
 			<div class="fitler-item repair-state">
 				<div
-					:class="repairState === '未处理' ? 'active' : ''"
-					@click="changeRepairState('未处理')"
+					:class="repairState === 1 ? 'active' : ''"
+					@click="changeRepairState(1)"
 				>
 					未处理
 				</div>
 				<div
-					:class="repairState === '处理完成' ? 'active' : ''"
-					@click="changeRepairState('处理完成')"
+					:class="repairState === 0 ? 'active' : ''"
+					@click="changeRepairState(0)"
 				>
 					已处理
 				</div>
@@ -95,17 +95,9 @@ export default {
 			activeIndex: null,
 			list: [],
 			repairType: '抢修',
-			repairState: '未处理',
+			repairState: 1,
 			isShow: false,
 		};
-	},
-	props: {
-		activeItem: {
-			type: Object,
-			default() {
-				return {};
-			},
-		},
 	},
 	computed: {
 		active() {
@@ -118,18 +110,6 @@ export default {
 			this.getData();
 		}, 120000);
 	},
-	watch: {
-		activeItem(val) {
-			if (JSON.stringify(val) == '{}') {
-				return (this.activeIndex = null);
-			}
-			let index = this.list.findIndex(item => {
-				let { id } = item;
-				return val.id === id;
-			});
-			this.activeIndex = index > -1 ? index : null;
-		},
-	},
 	methods: {
 		changeRepairState(repairState) {
 			this.repairState = repairState;
@@ -141,15 +121,15 @@ export default {
 		},
 		async getData() {
 			this.isShow = true;
-			let { list } = await this.$sysApi.map.airSupply.getEventWarningList(
+			let data = await this.$sysApi.map.airSupply.getEventWarningList(
 				{
 					currentPage: 1,
 					pageSize: 500,
 					repairType: this.repairType,
 					repairState: this.repairState,
 				}
-			);
-			this.list = list;
+            );
+			this.list = data;
 			// setTimeout(() => {
 			this.isShow = false;
 			// }, 30000);
@@ -209,7 +189,7 @@ export default {
 					width: 0px;
 					height: 0px;
 					left: 4px;
-					top: calc(50% - 4px);
+					top: calc(50% - 5px);
 					border: 4px solid #fff;
 				}
 			}
@@ -223,7 +203,7 @@ export default {
 					width: 16px;
 					height: 16px;
 					left: 0px;
-					top: calc(50% - 8px);
+					top: calc(50% - 9px);
 					border: 2px solid #00ddff;
 				}
 			}

@@ -59,9 +59,19 @@ export function getProcessWarningList(data) {
     })
 }
 //高中压事件报警
+// export function getEventWarningList(data) {
+//     return request({
+//         url: HANGRANURL + '/situationAwareness/caseList',
+//         method: 'get',
+//         params: data,
+//         headers: {
+//             'Content-Type': 'application/x-www-form-urlencoded',
+//         },
+//     })
+// }
 export function getEventWarningList(data) {
     return request({
-        url: HANGRANURL + '/situationAwareness/caseList',
+        url: HANGRANURL + '/situationAwareness/caseList2',
         method: 'get',
         params: data,
         headers: {

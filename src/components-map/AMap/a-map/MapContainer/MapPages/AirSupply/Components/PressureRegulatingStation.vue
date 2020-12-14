@@ -79,17 +79,18 @@ export default {
 	},
 	methods: {
 		async handleClick(marker) {
-			// if (this.mouseIn) {
-			// 	return false;
-			// }
-			// this.mouseIn = true;
 			let { id, name, type } = marker;
-			let data = await this.$sysApi.map.airSupply.getStationRealTimeInfo({
-				id,
-				name,
-				type,
-			});
+			let data = {};
 			let dataComp = {};
+			try {
+				data = await this.$sysApi.map.airSupply.getStationRealTimeInfo({
+					id,
+					name,
+					type,
+				});
+			} catch (error) {
+                console.log(error,'接口出错')
+            }
 			Object.keys(data).forEach(prop => {
 				let dw = this.propDwMap[prop];
 				if (typeof data[prop] !== 'object') {
@@ -105,14 +106,12 @@ export default {
 					};
 				});
 			});
-			// if (this.mouseIn) {
 			this.$emit(
 				'overlay-click',
 				{ ...marker, detail: dataComp },
 				'PressureRegulatingStation',
 				false
 			);
-			// }
 		},
 	},
 };

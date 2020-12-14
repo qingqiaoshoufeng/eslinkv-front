@@ -15,16 +15,25 @@
 	import addMonths from 'date-fns/addMonths'
 	import isSameMonth from 'date-fns/isSameMonth'
 	import format from 'date-fns/format'
+	import {getInput} from "../../../../lib";
+	const config = {config:{
+			links:true
+		},animation: true}
 
-	const config = {animation: true}
-
+	const configSource = {
+		config: {
+			fields: {
+				links: getInput('links', '关联组件'),
+			}
+		}
+	}
 	const value = {
 		api: {
 			bind: {
 				enable: true,
 				role: ['provider']
 			}
-		}
+		},
 	}
 	export default {
 		data() {
@@ -56,11 +65,29 @@
 			},
 		},
 		created() {
-			this.configSource = this.parseConfigSource(config)
+			this.configSource = this.parseConfigSource(config,configSource)
 			this.configValue = this.parseConfigValue(config, value)
 		},
 		mounted() {
 			this.emitComponentUpdate({month: format(this.selectValue, 'yyyy-MM')})
+			if(this.config.config.links){
+				const links = JSON.parse(this.config.config.links)
+				links.forEach(ref => {
+					let dom
+					if(this.kanboardEditor.$refs[ref]){
+						dom = this.kanboardEditor.$refs[ref][0].$refs.widgets
+					}else{
+						if(store.instance.createKanboard){
+							if(store.instance.createKanboard.$refs[ref]){
+								dom =store.instance.createKanboard.$refs[ref][0].$refs.widgets
+							}
+						}
+					}
+					if (typeof dom.updateComponent === 'function')
+						dom.updateComponent({month: format(this.selectValue, 'yyyy-MM')})
+					dom.updateAjax({month: format(this.selectValue, 'yyyy-MM')})
+				})
+			}
 		}
 	}
 </script>

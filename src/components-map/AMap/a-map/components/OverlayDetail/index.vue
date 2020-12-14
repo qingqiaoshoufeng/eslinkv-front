@@ -178,7 +178,6 @@ export default {
 		},
 	},
 	mounted() {
-		console.log(this.beforeClose, '於志强');
 	},
 };
 </script>

@@ -12,7 +12,8 @@ export const SCENEINDEXMAP = {
 	e40ml4vtfa6: 'serviceICcustomer',
 	zciq8u7tmpl: 'unchange-routeplan', //unchang代表地图不进行切换
 	ahais9szswu: 'unchange',
-	phugmfxir4d: 'unchange',
+    phugmfxir4d: 'unchange',
+    '8iyxp8u3gtu':'unchange',  //巡检动态
 }
 export const INDEXSCENEMAP = {
 	AirSupplyLowPressure: 'n1o68ddzgif', //供气-管网

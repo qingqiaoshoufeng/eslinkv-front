@@ -25,7 +25,7 @@
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			v-bind="{
-				showMore,
+				showMore:!showRoutePlan,
 				data,
 				...OverlayDetailProp,
 			}"
@@ -79,7 +79,6 @@ export default {
 			icon: 'iconshijian1',
 			showOverlayDetail: true,
 			showRoutePlan: false,
-			showMore: true,
 			visible: false,
 			overlayIcon: '',
 			OverlayDetailProp: {},
@@ -106,7 +105,6 @@ export default {
 				this.overlayIcon =
 					iconMap[overlayType] + (status === 0 ? '-suc' : '');
 				this.visible = true;
-				this.showMore = overlayType === 'WARNEVENT';
 				this.showOverlayDetail = true;
 			} else {
 				this.visible = false;
@@ -129,7 +127,6 @@ export default {
 			GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
 			//更新数据
 			this.$nextTick(() => {
-				this.showMore = false;
 				AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
 					GoldChart.instance.updateComponent(i, {
 						data: {
