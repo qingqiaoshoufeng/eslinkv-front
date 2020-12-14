@@ -14,7 +14,7 @@
 		</li>
 		<li>
 			<div class="title">处理完成率</div>
-			<div class="num font-num">{{ data.finishRate }}%</div>
+			<div class="num font-num finish">{{ data.finishRate }}%</div>
 		</li>
 	</ul>
 </template>
@@ -65,6 +65,9 @@
 				line-height: 32px;
 				color: #FFFFFF;
 				margin-top: 40px;
+        &.finish {
+          color: #00FFCF;
+        }
 			}
 		}
 	}

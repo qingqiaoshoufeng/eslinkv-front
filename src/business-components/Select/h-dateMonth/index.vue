@@ -62,6 +62,24 @@
 				}
 				this.selectValue = addMonths(this.selectValue, index)
 				this.emitComponentUpdate({month: format(this.selectValue, 'yyyy-MM')})
+				if(this.config.config.links){
+					const links = JSON.parse(this.config.config.links)
+					links.forEach(ref => {
+						let dom
+						if(this.kanboardEditor.$refs[ref]){
+							dom = this.kanboardEditor.$refs[ref][0].$refs.widgets
+						}else{
+							if(store.instance.createKanboard){
+								if(store.instance.createKanboard.$refs[ref]){
+									dom =store.instance.createKanboard.$refs[ref][0].$refs.widgets
+								}
+							}
+						}
+						if (typeof dom.updateComponent === 'function')
+							dom.updateComponent({month: format(this.selectValue, 'yyyy-MM')})
+						dom.updateAjax({month: format(this.selectValue, 'yyyy-MM')})
+					})
+				}
 			},
 		},
 		created() {
