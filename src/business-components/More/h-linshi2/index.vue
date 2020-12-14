@@ -36,7 +36,7 @@
 			</section>
       <section class="year">
         <label>优家年度总产值</label>
-        <span class="year-num">{{ data.yearData | toThousand }}<em>元</em></span>
+        <span class="year-num">{{ data.yearData/10000 | toThousand }}<em>万元</em></span>
       </section>
 		</div>
 		<section class="title">

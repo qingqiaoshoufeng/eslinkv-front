@@ -122,10 +122,27 @@
 			}
 		},
 		watch: {
+			'config.api.params':{
+				handler(val){
+					if(val.compareType==='year'){
+						this.config.config.lineName1=new Date().getFullYear()
+						this.config.config.lineName2=new Date().getFullYear()-1
+					}
+					if(val.compareType==='month'){
+						this.config.config.lineName1=`${new Date().getMonth()+1}月`
+						this.config.config.lineName2=`${new Date().getMonth()}月`
+					}
+					if(val.compareType==='day'){
+						this.config.config.lineName1=`${new Date().getMonth()+1}.${new Date().getDate()}`
+						this.config.config.lineName2=`${new Date().getMonth()+1}.${new Date().getDate()-1}`
+					}
+				},
+				deep: true,
+				immediate: true,
+			},
 			data: {
 				handler(val) {
 					if (this.id) {
-						console.log(val)
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
 							this.setOption(val.data)

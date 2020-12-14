@@ -70,19 +70,19 @@ export default  {
 			symbol: 'none',
 			itemStyle: {
 				normal: {
-					color: '#00DDFF',
+					color: '#00FFCF',
 					lineStyle: {
-						width: 1
+						width: 2
 					}
 				}
 			},
 			areaStyle: {
 				color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
 					offset: 1,
-					color: 'rgba(0, 221, 255, 0.0001)'
+					color: 'rgba(0, 255, 207, 0.3)'
 				}, {
 					offset: 0,
-					color: 'rgba(0, 221, 255, 0.5)'
+					color: 'rgba(0, 255, 207, 0.3)'
 				}])
 			},
 			data: []

@@ -13,10 +13,10 @@
         </div>
 				<div class="wrap">
           <div class="a-inspectionConfig-ratio-box pos-r">
-            <div class="a-inspectionConfig-ratio pos-a" :style="{height:`${ data&&data.ratio}%`}"></div>
+            <div class="a-inspectionConfig-ratio pos-a" :style="{height:`${ data&&data.ratio}`}"></div>
           </div>
           <div class="a-inspectionConfig-title">
-            <h2 class="font-num">{{data&&data.ratio}}%</h2>
+            <h2 class="font-num">{{data&&data.ratio}}</h2>
             <p>在线率</p>
           </div>
         </div>

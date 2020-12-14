@@ -13,7 +13,7 @@
           :key="index"
       >
         <li>{{ item.time || '' }}</li>
-        <li>{{ item.channel || '' }}</li>
+        <li>{{ item.channel || '暂无姓名' }}</li>
         <li>{{ item.businessType || '' }}</li>
         <li :class="{closed: item.statusDesc === data.activeStatus }">{{ item.statusDesc || '' }}</li>
       </ul>
