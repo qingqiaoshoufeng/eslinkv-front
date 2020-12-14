@@ -52,5 +52,7 @@ export default {
   .chart {
     width: 100%;
     height: 100%;
+    background: url("./img/fire.svg") no-repeat center;
+    background-size: 100px 100px;
   }
 </style>
