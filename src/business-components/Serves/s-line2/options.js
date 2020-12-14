@@ -4,7 +4,7 @@ export default function (data, config) {
 	return {
 		grid: {
 			top: '20%',
-			left: '6%',
+			left: '8%',
 			right: '4%',
 			bottom: '20%',
 		},
