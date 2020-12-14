@@ -24,7 +24,7 @@ let TodayPass = {
 let TodayUnPass = {
     label: '今日审核未通过',
     DW: '',
-    prop: "TodayUnPass",
+    prop: "accept_not_nbr",
 }
 let TodayProvingTo2 = {
     label: '今日2小时审核率',

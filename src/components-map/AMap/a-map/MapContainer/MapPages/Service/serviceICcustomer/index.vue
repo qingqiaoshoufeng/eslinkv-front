@@ -57,7 +57,6 @@
 			/>
 			<RightPanelWithServiceICcustomer
 				class="right-panel"
-				@list-click="handleListClick"
 				@overlay-click="handleListClick"
 			/>
 			<!-- 选择器盒子 -->
@@ -127,7 +126,7 @@ export default {
 			),
 			dataStatisticsList: DATASTATISTICSLIST,
 			overlayMap: SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
-			legendMap: { MajorClient, BranchCompany },
+			legendMap: { BranchCompany },
 			legendMultiple: true,
 			showOverlayDetail: false,
 			activeOverlay: {},
@@ -271,19 +270,17 @@ export default {
 				name,
 				status,
 				activeIndex,
+				type: stationType,
 			} = overlay;
 			let params = {
+				stationType,
 				name,
 				id,
-				type,
-				params: 'useNumberYestoday',
+				stationType,
 			};
-			console.log(name);
 			this.activeArea = name;
 			this.activeOverlay = overlay;
-			console.log(activeIndex);
 			this.activeIndex = activeIndex || this.activeIndex;
-			console.log(activeIndex);
 			this.getDetailInfo(params, status);
 
 			this.isShowMore = [''].includes(type);
@@ -317,6 +314,7 @@ export default {
 		},
 		//获取站点详情
 		async getDetailInfo(params, status) {
+			console.log(params, 'params');
 			this.detailInfo = await this.$sysApi.map.serve.getICcustomerDetailInfo(
 				params
 			);

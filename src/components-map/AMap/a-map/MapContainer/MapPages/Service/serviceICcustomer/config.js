@@ -19,6 +19,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         component: 'useHotYear',
         visible: false,
         dataProp: 'year',
+        legendIcon: '',
     },
     BranchCompany: {
         label: '子公司',

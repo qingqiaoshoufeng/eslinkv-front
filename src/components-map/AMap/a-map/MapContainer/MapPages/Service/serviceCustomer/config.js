@@ -117,5 +117,5 @@ export const DATASTATISTICSLIST = [citizenNumber, publicBuildNumber, industryNum
 
 // SwitchBox配置
 export const SWICHBOX = [
-    { label: '客户分布热力', value: true, type: 'customer' },
+    { label: '客户分布热力', value: false, type: 'customer' },
 ]

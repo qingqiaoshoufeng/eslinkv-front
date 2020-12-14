@@ -248,7 +248,7 @@ export default {
 				].toString(),
 			};
 
-			this.detialBoxWidth = 450;
+			this.detialBoxWidth = 480;
 			return this.$sysApi.map.serve.getHangranCodeList(params);
 		},
 		// 获取热力图信息
@@ -358,7 +358,7 @@ export default {
 					this.carouseComplBranchCompanyInfo();
 				}
 			},
-			deep: true,
+			// deep: true,
 			immediate: true,
 		},
 	},

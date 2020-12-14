@@ -29,6 +29,15 @@ export default {
 			},
 		},
 	},
+	watch: {
+		data: {
+			handler(val) {
+				this.data = val;
+			},
+			deep: true,
+			immediate: true,
+		},
+	},
 	data() {
 		return {};
 	},
@@ -37,7 +46,9 @@ export default {
 			this.$emit('switch-change', this.data, type);
 		},
 	},
-	mounted() {},
+	mounted() {
+		console.log(this.data);
+	},
 };
 </script>
 <style lang="scss" scoped>
@@ -58,10 +69,17 @@ export default {
 		display: inline-block;
 		width: 145px;
 	}
-	.ivu-switch-checked:after {
+
+	.ivu-switch-default:after {
 		background-color: rgba(255, 255, 255, 0.4) !important;
 		.ivu-switch-inner:after {
 			background-color: rgba(255, 255, 255, 0.4) !important;
+		}
+	}
+	.ivu-switch-checked:after {
+		background-color: rgba(255, 255, 255, 1) !important;
+		.ivu-switch-inner:after {
+			background-color: rgba(255, 255, 255, 1) !important;
 		}
 	}
 	div {

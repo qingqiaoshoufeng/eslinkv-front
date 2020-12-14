@@ -166,7 +166,7 @@ export default {
 			isShowMore: false,
 			activeIndex: null,
 			swichBoxInfo: SWICHBOX,
-			visible: true,
+			visible: false,
 		};
 	},
 
@@ -240,7 +240,7 @@ export default {
 				overlay.activeIndex = this.allTypeStationList.TaskList.findIndex(
 					item => item.id === overlay.id
 				);
-
+				this.isShowMore = false;
 				this.handleListClick(overlay);
 				return;
 			}
