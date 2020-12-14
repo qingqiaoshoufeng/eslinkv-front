@@ -3,7 +3,7 @@
 		<div class="left-circle"></div>
 		<div class="main">
 			<div class="main-lt">
-				<div class="title">{{ data && data.title }}</div>
+				<div class="title">{{ data && data.name }}</div>
 				<div class="base-info">
 					<div class="base-info-item fn-flex flex-row">
 						<label>开始时间</label>
@@ -32,7 +32,7 @@
 				</div>
 				<div class="detail-title">
 					<div class="detail-title-logo">
-						<img src="img/detail-title.svg" alt="" />
+						<img src="./img/detail-title.svg" alt="" />
 					</div>
 					<span>活动详情</span>
 				</div>
@@ -61,7 +61,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="img/quota1.svg" />
+									<img src="./img/quota1.svg" />
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
@@ -72,7 +72,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="img/quota2.svg" />
+									<img src="./img/quota2.svg" />
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
@@ -85,7 +85,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="img/quota3.svg" />
+									<img src="./img/quota3.svg" />
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
@@ -108,7 +108,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="img/quota4.svg" />
+									<img src="./img/quota4.svg" />
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
@@ -119,7 +119,7 @@
 							</div>
 							<div class="quota-item">
 								<div class="quota-item-logo">
-									<img src="img/quota5.svg" />
+									<img src="./img/quota5.svg" />
 								</div>
 								<div>
 									<div class="quota-item-num font-num">
@@ -170,7 +170,7 @@ const config = { animation: true };
 const value = {
 	api: {
 		data: JSON.stringify({
-			title: '桂花城紫云苑-杭燃服务进社区活动',
+			name: '桂花城紫云苑-杭燃服务进社区活动',
 			startTime: '2020/10/01  08:30',
 			endTime: '2020/10/01  08:30',
 			place: '桂花城紫云苑',
