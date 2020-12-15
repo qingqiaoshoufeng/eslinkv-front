@@ -197,6 +197,8 @@ export default {
 					overlayDetailConfig,
 					showMore,
 				};
+			} else {
+				return {};
 			}
 		},
 	},
@@ -282,12 +284,26 @@ export default {
 			}
 		},
 		handleListClick(item) {
-			let { name, time, activeIndex, overlayType, lng, lat } = item;
+			let {
+				name,
+				time,
+				activeIndex,
+				overlayType,
+				lng,
+				lat,
+				address,
+			} = item;
 			if (overlayType === 'ThreeSocialLinkage') {
 				this.$refs.ThreeSocialLinkage[0].mouseIn = true;
 				this.handleOverlayClick(item);
 				return;
 			}
+			// 更新任务工单位置
+			this.allTypeStationList.TaskList[activeIndex] = {
+				...this.allTypeStationList.TaskList[activeIndex],
+				lng,
+				lat,
+			};
 			this.activeIndex = activeIndex;
 			this.activeOverlay = {
 				...item,
@@ -343,6 +359,7 @@ export default {
 				...this.allTypeStationList,
 				TaskList,
 			};
+			console.log(TaskList, 'TaskList');
 		},
 		// 查看详情接口
 		getDetailInfo(params) {

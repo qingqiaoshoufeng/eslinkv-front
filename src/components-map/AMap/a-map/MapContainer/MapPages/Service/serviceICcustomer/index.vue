@@ -164,6 +164,8 @@ export default {
 					overlayDetailConfig,
 					showMore,
 				};
+			} else {
+				return {};
 			}
 		},
 	},
@@ -283,7 +285,7 @@ export default {
 			this.activeIndex = activeIndex || this.activeIndex;
 			this.getDetailInfo(params, status);
 
-			this.isShowMore = [''].includes(type);
+			this.isShowMore = ['WarningICcustomer'].includes(type);
 			if (['WarningICcustomer', 'MajorClient'].includes(type)) {
 				this.$amap.setZoom(14, 100);
 				this.$amap.panTo([lng, lat], 100);
@@ -328,6 +330,7 @@ export default {
 				this.activeOverlay.overlayType
 			][0].mouseIn;
 			console.log(this.activeOverlay);
+			console.log(this.detailInfo);
 		},
 		// 获取右侧table列表报警信息
 		async getWarningList(params) {

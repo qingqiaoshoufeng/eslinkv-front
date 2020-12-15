@@ -18,19 +18,23 @@
 					{{ index + 1 }}
 				</div>
 				<div class="content">
-					{{ item.content }}
+					{{ item.name }}
 				</div>
 				<div>
-					<img
-						:src="iconList[index]"
+					<SvgIcon
+						:icon-name="statusList[item.isUp]"
+						class="panel-type-icon"
+					></SvgIcon>
+					<!-- <img
+						:src="statusList[item.isUp]"
 						alt=""
 						class="panel-type-icon"
-					/>
+					/> -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="station-name">
-					{{ item.address }}
+					{{ item.num }}
 				</div>
 				<!-- <div
 					:class="[
@@ -64,9 +68,9 @@ export default {
 			'/static/images/amap/third.svg',
 		];
 		let statusList = {
-			up: 'up',
-			down: 'down',
-			keep: 'keep',
+			up: 'iconup',
+			down: 'icondown',
+			parallel: 'iconkeep',
 		};
 		return {
 			activeIndex: null,
@@ -110,6 +114,7 @@ export default {
 			console.log(item, 'item');
 			this.$emit('change', {
 				...item,
+				type: 'ICcustomer',
 				detailList,
 				overlayType,
 				activeIndex: this.activeIndex,
@@ -123,6 +128,11 @@ export default {
 .list {
 	color: #fff;
 	font-size: 16px;
+	height: 799px;
+	overflow-y: scroll;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 	.list-item {
 		// height: 96px;
 		// display: flex;

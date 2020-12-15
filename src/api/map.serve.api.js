@@ -114,10 +114,10 @@ export function getICcustomerHotInfo(data) {
         },
     })
 }
-// 态势感知列表
+// 工商户前二十
 export function getICcustomerSituationAwareness(data) {
     return request({
-        url: `${HANGRANURL}/businessAnalysis/situationAwareness`,
+        url: `${HANGRANURL}/businessAnalysis/yesterdayUseOrder`,
         method: 'get',
         params: data,
         headers: {

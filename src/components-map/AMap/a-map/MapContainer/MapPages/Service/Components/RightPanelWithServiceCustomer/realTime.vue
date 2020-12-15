@@ -91,6 +91,11 @@ export default {
 
 <style lang="scss" scoped>
 .list {
+	height: 799px;
+	overflow-y: scroll;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 	color: #fff;
 	font-size: 16px;
 	.list-item {

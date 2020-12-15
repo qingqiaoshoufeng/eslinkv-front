@@ -25,16 +25,16 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
 
 
     },
-    ServiceNetworkStation: {
-        label: '服务网点',
-        legendIcon: 'icontulifuwuwangdian',
-        iconSize: 38,
-        icon: 'iconfuwuwangdian',
-        component: 'ServiceNetworkStation',
-        visible: false,
-        dataProp: 'networkStationList',
-        detailList: []
-    },
+    // ServiceNetworkStation: {
+    //     label: '服务网点',
+    //     legendIcon: 'icontulifuwuwangdian',
+    //     iconSize: 38,
+    //     icon: 'iconfuwuwangdian',
+    //     component: 'ServiceNetworkStation',
+    //     visible: false,
+    //     dataProp: 'networkStationList',
+    //     detailList: []
+    // },
     ThreeSocialLinkage: {
         label: '三社联动',
         legendIcon: 'icontulisansheliandong',
@@ -94,11 +94,11 @@ export const SERVICE_SERVICECUSTOMER_OVERLAY_MAP = {
     //         name: {},
     //     },
     // },
-    ServiceNetworkStation: {
-        fields: {
-            name: {},
-        },
-    },
+    // ServiceNetworkStation: {
+    //     fields: {
+    //         name: {},
+    //     },
+    // },
     ThreeSocialLinkage: {
         fields: {
             name: {},

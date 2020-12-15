@@ -117,6 +117,11 @@ export default {
 
 <style lang="scss" scoped>
 .list {
+	height: 799px;
+	overflow-y: scroll;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 	color: #fff;
 	font-size: 16px;
 	.list-item {
@@ -152,7 +157,7 @@ export default {
 				}
 			}
 			.station-name {
-				font-size:20px;
+				font-size: 20px;
 				flex: 1;
 				color: rgba(255, 255, 255, 0.8);
 				margin-left: 36px;
