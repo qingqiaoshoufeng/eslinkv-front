@@ -1,11 +1,12 @@
 const DEFAULT_AMP_CONFIG = {
     key: null,
-    v: '2.0',
+    v: '1.4.15',
     protocol: 'https',
     hostAndPath: 'webapi.amap.com/maps',
     plugin: [],
-    callback: 'amapInitComponent',
-}
+    callback: 'amapInitComponent'
+  };
+  
 
 export default class AMapAPILoader {
     /**

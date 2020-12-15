@@ -15,45 +15,27 @@ export default {
 	watch: {
 		visible(val) {
 			if (val) {
-				this.init();
+				this._instance.show();
 			} else {
 				if (this._instance) {
-					this._instance.removeFromMap();
-					this._instance = null;
+					this._instance.hide();
 				}
 			}
 		},
 	},
 	mounted() {
 		console.log(this.$amap, 'this.$amap');
-		this.$amap.on('zoomstart', this.handleMapZoomChangeStart);
-		this.$amap.on('zoomend', this.handleMapZoomChangeEnd);
-		window.bbb = this.init;
-		window.ccc = this._instance;
 		let zoom = this.$amap.getZoom();
-		console.log(zoom);
 	},
 	methods: {
-		// handleMapZoomChangeStart() {},
-		// handleMapZoomChangeEnd() {
-		// 	let zoom = this.$amap.getZoom();
-		// 	console.log(zoom);
-		// 	this._instance &&
-		// 		this._instance.setOptions({
-		// 			// radius: 8,
-		// 		});
-		// },
 		async init(max = 3000) {
 			if (!this._heatMapData) {
 				this._heatMapData = this.data;
-				// this._heatMapData = await this.$sysApi.map.serve.getHeatMapList();
-				// console.log(this._heatMapData, 5555);
-				// this._heatMapData = this._heatMapData.slice(0, 180);
 			}
-			// console.log(this._heatMapData, 6666);
-			this._instance = new AMap.HeatMap(this.$amap, {
-				radius: 8, //给定半径
-				opacity: [0, 0.8],
+			this._instance = new AMap.Heatmap(this.$amap, {
+                radius: 20, //给定半径
+                opacity: [0, 0.8],
+                zIndex:1000,
 				// gradient: {
 				// 	0.8: '#00D1FF',
 				// 	0.65: 'rgb(117,211,248)',
@@ -61,10 +43,11 @@ export default {
 				// 	0.9: '#ffea00',
 				// 	1.0: 'red',
 				// },
-			});
+            });
+            window.ccc = this._instance
 			this._instance.setDataSet({
 				data: this._heatMapData,
-				max,
+				max:9000,
 			});
 		},
 	},
@@ -72,10 +55,8 @@ export default {
 		return null;
 	},
 	beforeDestroy() {
-		this.$amap.off('zoomstart', this.handleMapZoomChangeStart);
-		this.$amap.off('zoomend', this.handleMapZoomChangeEnd);
 		if (this._instance) {
-			this._instance.removeFromMap();
+			this._instance.setMap(null);
 			this._instance = null;
 		}
 	},

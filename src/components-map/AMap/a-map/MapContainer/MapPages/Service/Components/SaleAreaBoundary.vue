@@ -72,16 +72,16 @@ export default {
 					// 	let { area } = areaData;
 					// 	this.$emit('input', area);
 					// });
-					instance.on('mouseout', e => {
-						let areaData = e.target._opts.extData || {};
-						let { area } = areaData;
-						if (this.value !== area) {
-							instance.setOptions({
-								fillOpacity: 0,
-							});
-						}
-						this.$emit('mouseout');
-					});
+					// instance.on('mouseout', e => {
+					// 	let areaData = e.target._opts.extData || {};
+					// 	let { area } = areaData;
+					// 	if (this.value !== area) {
+					// 		instance.setOptions({
+					// 			fillOpacity: 0,
+					// 		});
+					// 	}
+					// 	this.$emit('mouseout');
+					// });
 					this.instanceArr.push(instance);
 					//默认选中
 					if (this.value) {

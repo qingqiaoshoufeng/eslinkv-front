@@ -78,7 +78,7 @@ export default {
 				label(options) {
 					const { content = '', offset = [0, 0] } = options;
 					return {
-						content: content,
+                        content: content,
 						offset: toPixel(offset),
 					};
 				},
@@ -125,11 +125,14 @@ export default {
 			}
 			let compOffset = offset || [0, 0];
 			let [offsetX, offsetY] = compOffset;
-			compOffset = [offsetX * scaleRatio, offsetY * scaleRatio];
-
+            compOffset = toPixel(compOffset) 
+            // new AMap.Pixel(
+			// 	offsetX * scaleRatio,
+			// 	offsetY * scaleRatio
+			// );
 			this.$amapComponent = new AMap.Marker({
-				...options,
-				offset: offset,
+                ...options,
+				offset: compOffset,
 			});
 		},
 

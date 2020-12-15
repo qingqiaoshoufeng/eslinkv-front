@@ -28,7 +28,7 @@ export default {
 			})
 		}
 		let fun = findAmapRoot.bind(this)
-		this.$amap = fun()
+        this.$amap = fun()
 		if (this.$amap) {
 			this.register()
 		} else {

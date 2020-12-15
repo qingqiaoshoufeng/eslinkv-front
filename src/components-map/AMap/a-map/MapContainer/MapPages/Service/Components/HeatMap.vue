@@ -11,14 +11,15 @@ export default {
 		async init() {
 			let data = await this.$sysApi.map.serve.getHeatMapList();
 			// let data = [];
-			let instance = new AMap.HeatMap(this.$amap, {
-				radius: 15, //给定半径
-				opacity: [0, 0.8],
+			let instance = new AMap.Heatmap(this.$amap, {
+				radius: 100, //给定半径
+                opacity: [0, 0.8],
+                zIndex:1000
 			});
 
 			instance.setDataSet({
 				data: data,
-				max: 4000,
+				max: 12000,
 			});
 
 			if (this.instanceArr) {

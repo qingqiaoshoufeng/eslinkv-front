@@ -15,11 +15,10 @@ export default {
 	watch: {
 		visible(val) {
 			if (val) {
-				this.init();
+				this._instance.show();
 			} else {
 				if (this._instance) {
-					this._instance.removeFromMap();
-					this._instance = null;
+					this._instance.hide();
 				}
 			}
 		},
@@ -33,9 +32,10 @@ export default {
 				// this._heatMapData = this._heatMapData.slice(0, 180);
 			}
 			// console.log(this._heatMapData, 6666);
-			this._instance = new AMap.HeatMap(this.$amap, {
+			this._instance = new AMap.Heatmap(this.$amap, {
 				radius: 10, //给定半径
-				opacity: [0, 0.8],
+                opacity: [0, 0.8],
+                zIndex:1000
 			});
 			this._instance.setDataSet({
 				data: this._heatMapData,
@@ -48,7 +48,7 @@ export default {
 	},
 	beforeDestroy() {
 		if (this._instance) {
-			this._instance.removeFromMap();
+			this._instance.setMap(null);
 			this._instance = null;
 		}
 	},
