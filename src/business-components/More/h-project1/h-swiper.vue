@@ -1,7 +1,7 @@
 <template>
 	<div class="swiper-box1">
 		<!-- 轮播视频部分 -->
-		<div class="swiper-Part" v-if="[7,8].includes(step)">
+		<div class="swiper-Part" v-if="![7,8].includes(step)">
 			<!-- 视频区域 -->
 			<div class="left pos-r">
         <live-video></live-video>
@@ -11,12 +11,15 @@
 				<div class="swiper-area">
 					<div class="swiper-container gallery-thumbs swiper-swiper">
 						<div class="swiper-wrapper" ref="backTop">
-							<div
-								class="swiper-slide"
-								v-for="(item,index) in swiperinfo.imgList"
-								:key="index"
-								:style="{backgroundImage:'url('+item+')'}"
-							></div>
+							<div class="swiper-slide">
+                <img src="./img/fixing-1.png">
+              </div>
+							<div class="swiper-slide">
+                <img src="./img/fixing-2.png">
+              </div>
+							<div class="swiper-slide">
+                <img src="./img/fixing-3.png">
+              </div>
 						</div>
 						<div class="swiper-pagination"></div>
 					</div>
@@ -39,18 +42,6 @@
 	export default {
 	  components: { LiveVideo },
 		props: {
-			swiperinfo: {
-				type: Object,
-				default() {
-					return {
-						imgList: [
-							'/static/images/project/01.png',
-							'/static/images/project/02.jpg',
-						],
-						videoList: ['/cdn/videos/sanshe.MOV',],
-					};
-				},
-			},
 			step: {
 				type: Number,
 				default: 0,
@@ -77,7 +68,7 @@
 						clickable: true,
 						renderBullet: function (index, className) {
 							return `<span class="${className}" style="height:${
-							400 / (_this.swiperinfo.imgList.length - 1)
+							400 / 2
 								}px"></span>`;
 						},
 					},
@@ -92,16 +83,6 @@
 				};
 				return new Swiper(`${tag}`, options);
 			},
-		},
-		watch: {
-			swiperinfo: {
-				handler(val) {
-					if (val) {
-            this.$refs.videoPlayer && this.$refs.videoPlayer.player.src(val.videoList[0])
-					}
-				},
-				deep: true
-			}
 		},
 		mounted() {
 			this.swiper = this.swiperInit(
@@ -123,6 +104,10 @@
 
 		.swiper-slide {
 			background-size: cover;
+      img {
+        width: 100%;
+        height: 100%;
+      }
 		}
 
 		.swiper-Part {

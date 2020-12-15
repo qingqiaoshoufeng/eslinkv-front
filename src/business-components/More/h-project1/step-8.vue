@@ -2,15 +2,6 @@
 	<div class="h-project-1-step-8" :style="{left:`${left}%`}">
 		<div class="h-project-1-step-icon fn-flex">
 			<img :src="icon8" alt=""/>
-<!--			<div class="h-project-1-step-8__vertical-line"></div>-->
-<!--			<div class="h-project-1-step-8__horizontal-line">-->
-<!--				<div  class="h-project-1-step-8__horizontal-line__desc">-->
-<!--					<div class="h-project-1-step-8__horizontal-line__desc__title">{{step8.title}}：</div>-->
-<!--					<p class="h-project-1-step-8__horizontal-line__desc__words">-->
-<!--						{{step8.content}}-->
-<!--					</p>-->
-<!--				</div>-->
-<!--			</div>-->
 		</div>
 		<h2 class="pos-a text-center">抢修结束</h2>
 		<h3 class="pos-a text-center">{{formatTime(step8.time)}}</h3>
