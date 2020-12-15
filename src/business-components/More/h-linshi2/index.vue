@@ -53,7 +53,7 @@
             <div class="fan-num font-num">{{ currFan.fanDailyNum| toThousand }}</div>
           </div>
           <div style="text-align: right">
-            <div class="fan-title">{{currFan.name}}</div>
+            <div class="fan-title">{{currFan.name2}}</div>
             <div class="fan-num font-num">{{ currFan.fanTotalNum| toThousand }}</div>
           </div>
         </div>
