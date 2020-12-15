@@ -222,8 +222,6 @@ export default {
 
 			if (isZoom) {
 				this.setZoomAndPanTo(...this.center, this.zoom);
-
-				console.log(this.$refs.RightPanel.refs.processWarning);
 			}
 			if (done) {
 				done();
@@ -245,16 +243,10 @@ export default {
 		},
 		closeWarnEventDetail() {
 			this.activeWarnData = {};
-			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
-			this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
-			this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
 			this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		closeStationListDetail() {
 			this.StationListData = {};
-			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
-			this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
-			this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
 			this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		//查看详情调用组件内部的方法

@@ -8,7 +8,7 @@ initAMapApiLoader({
 		'AMap.MapType',
 		'AMap.DistrictSearch',
 		'AMap.Driving',
-		'AMap.HeatMap',
+		'AMap.Heatmap',
 		'AMap.GeoJSON',
 		'AMap.MoveAnimation',
 		'AMap.Geocoder',

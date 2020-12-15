@@ -52,7 +52,6 @@ export default {
 								fillColor: '#0054B7',
 								strokeOpacity: '1',
 								strokeStyle: 'dashed',
-								// strokeColor: '#FFDC45',
 								strokeColor: '#509CE1',
 								strokeDasharray: [3, 6],
 								extData: {
@@ -76,8 +75,6 @@ export default {
 										});
 									});
                                 }
-                                console.log(instance.getBounds())
-                                instance.on('click',(e)=>{console.log(e)})
 								map.add(instance);
 								this.instanceArr.push(instance);
 							}

@@ -342,7 +342,6 @@ export default {
 		handleListClick(item) {
 			this.$refs.WarningICcustomer[0].mouseIn = true;
 			this.activeOverlay = item;
-			console.log(item);
 			this.handleOverlayClick(item);
 		},
 		// 查看态势感知详情列表
