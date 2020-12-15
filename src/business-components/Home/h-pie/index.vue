@@ -6,6 +6,7 @@
 			:unit="config.config.unit"
 			:text="config.config.title1"
 			:subtext="config.config.title2"
+			:startAngle="config.config.startAngle"
 		></pie>
 	</div>
 </template>
@@ -20,6 +21,7 @@
 				unit: getInput('unit', '单位'),
 				title1: getInput('title1', '标题1'),
 				title2: getInput('title2', '标题2'),
+				startAngle: getInput('startAngle', '起始角度'),
 			}
 		}
 	}
@@ -28,6 +30,7 @@
 		config: {
 			unit: true,
 			title1: true,
+			startAngle: true,
 			title2: true,
 		}
 	}
@@ -51,7 +54,8 @@
 		config: {
 			unit: '万m³',
 			title1: '区域',
-			title2: '销售气量'
+			title2: '销售气量',
+			startAngle: 270,
 		}
 	}
 	export default {
