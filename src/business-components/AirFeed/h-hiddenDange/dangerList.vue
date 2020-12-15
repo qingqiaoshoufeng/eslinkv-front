@@ -4,13 +4,13 @@
 			<div class="title">隐患数量</div>
 			<div class="num font-num">{{ data.dangerNum }}</div>
 		</li>
+    <li>
+      <div class="title">待处理</div>
+      <div class="num font-num">{{ data.waitNum }}</div>
+    </li>
 		<li>
 			<div class="title">处理中</div>
 			<div class="num font-num">{{ data.handlingNum }}</div>
-		</li>
-		<li>
-			<div class="title">待处理</div>
-			<div class="num font-num">{{ data.waitNum }}</div>
 		</li>
 		<li>
 			<div class="title">已完成</div>

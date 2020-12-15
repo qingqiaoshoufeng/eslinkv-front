@@ -6,12 +6,12 @@
 				:key="i"
 				:class="{active: i === index}"
 			>
-        <div class="li-progress" :style="{right: `${100-k.percent}%`}"></div>
-        <div class="li-main">
-          <div class="li-name">{{ k.name }}</div>
-          <div class="li-percent">{{ k.percent }}%</div>
-          <img src="/static/icons/arrow-right.svg">
-        </div>
+				<div class="li-progress" :style="{right: `${100-k.percent}%`}"></div>
+				<div class="li-main">
+					<div class="li-name">{{ k.name }}</div>
+					<div class="li-percent">{{ k.percent }}%</div>
+					<img src="/static/icons/arrow-right.svg">
+				</div>
 			</li>
 		</ul>
 		<div class="rows">
@@ -19,7 +19,7 @@
 				<div class="info">
 					<img :src="config.config.img1" alt="">
 					<span class="info-txt">{{config.config.desc1}}</span>
-					<span class="info-num font-num">{{ activeItem.num1 }}</span>
+					<span class="info-num font-num">{{ activeItem.num1 | toThousand}}</span>
 				</div>
 				<div class="progress">
 					<div class="progress-line" :style="{width: 468 * activeItem.rate1 + 'px' }">
@@ -31,7 +31,7 @@
 				<div class="info">
 					<img :src="config.config.img2" alt="">
 					<span class="info-txt">{{config.config.desc2}}</span>
-					<span class="info-num font-num">{{ activeItem.num2 }}</span>
+					<span class="info-num font-num">{{ activeItem.num2 | toThousand}}</span>
 				</div>
 				<div class="progress">
 					<div class="progress-line" :style="{width: 468 * activeItem.rate2 + 'px' }">
@@ -44,7 +44,7 @@
 			<div class="chart" :id="id"/>
 			<div class="chart-info">
 				<div class="chart-info-num font-num">{{ activeItem.finishRate }}%</div>
-				<div class="chart-info-txt">抄表率</div>
+				<div class="chart-info-txt">{{config.config.desc}}</div>
 			</div>
 		</div>
 	</div>
@@ -60,6 +60,7 @@
 				desc1: getInput('desc1', '描述1'),
 				img1: getSelect('img1', '图片1地址', ['/static/icons/s-meter-1.svg', '/static/icons/s-meter-2.svg', '/static/icons/s-meter-3.svg', '/static/icons/s-meter-4.svg']),
 				desc2: getInput('desc2', '描述2'),
+				desc: getInput('desc', '描述'),
 				img2: getSelect('img2', '图片2地址', ['/static/icons/s-meter-1.svg', '/static/icons/s-meter-2.svg', '/static/icons/s-meter-3.svg', '/static/icons/s-meter-4.svg']),
 			}
 		},
@@ -68,6 +69,7 @@
 	const config = {
 		animation: true,
 		config: {
+			desc: true,
 			desc1: true,
 			desc2: true,
 			img1: true,
@@ -84,7 +86,7 @@
 					num1: 674,
 					num2: 236,
 					percent: 36,
-          finishRate: 56
+					finishRate: 56
 				},
 				{
 					name: '维修工单',
@@ -93,29 +95,30 @@
 					num1: 674,
 					num2: 653,
 					percent: 44,
-          finishRate: 32
+					finishRate: 32
 				},
 				{
-          name: '通气点火',
+					name: '通气点火',
 					rate1: 0.9,
 					rate2: 0.7,
 					num1: 674,
 					num2: 234,
 					percent: 19,
-          finishRate: 66
+					finishRate: 66
 				},
 				{
-          name: '拆迁改工单',
+					name: '拆迁改工单',
 					rate1: 0.2,
 					rate2: 0.5,
 					num1: 674,
 					num2: 236,
 					percent: 1,
-          finishRate: 84
-        }
+					finishRate: 84
+				}
 			])
 		},
 		config: {
+			desc: '抄表率',
 			desc1: '计划抄表数',
 			desc2: '实际抄表数',
 			img1: '/static/icons/s-meter-1.svg',
@@ -182,57 +185,57 @@
 		align-items: center;
 
 		.list {
-      flex: none;
+			flex: none;
 			display: flex;
-      margin-right: 68px;
+			margin-right: 68px;
 			flex-direction: column;
 			justify-content: space-around;
 
 			li {
-        width: 200px;
-        height: 40px;
+				width: 200px;
+				height: 40px;
 				position: relative;
 				font-size: 18px;
-        margin-bottom: 8px;
+				margin-bottom: 8px;
 				color: rgba(255, 255, 255, 0.75);
-        background: rgba(0, 31, 109, 0.5);
+				background: rgba(0, 31, 109, 0.5);
 
-        &.active {
-          color: #fff;
-          border: 1px solid #00DDFF;
-          .li-progress {
-            background: rgba(0, 221, 255, 0.5);
-          }
-        }
+				&.active {
+					color: #fff;
+					border: 1px solid #00DDFF;
+					.li-progress {
+						background: rgba(0, 221, 255, 0.5);
+					}
+				}
 
 				.li-progress {
-          position: absolute;
-          left: 0;
-          right: 30%;
-          top: 0;
-          bottom: 0;
-          z-index: 5;
-          background: #0057A9;
-        }
-        .li-main {
-          position: absolute;
-          left: 0;
-          right: 0;
-          top: 0;
-          bottom: 0;
-          z-index: 6;
-          padding: 0 12px;
-          display: flex;
-          align-items: center;
-          text-align: left;
-          .li-name {
-            width: 100px;
-          }
-          .li-percent {
-            width: 30px;
-            margin-right: 30px;
-          }
-        }
+					position: absolute;
+					left: 0;
+					right: 30%;
+					top: 0;
+					bottom: 0;
+					z-index: 5;
+					background: #0057A9;
+				}
+				.li-main {
+					position: absolute;
+					left: 0;
+					right: 0;
+					top: 0;
+					bottom: 0;
+					z-index: 6;
+					padding: 0 12px;
+					display: flex;
+					align-items: center;
+					text-align: left;
+					.li-name {
+						width: 100px;
+					}
+					.li-percent {
+						width: 30px;
+						margin-right: 30px;
+					}
+				}
 			}
 		}
 

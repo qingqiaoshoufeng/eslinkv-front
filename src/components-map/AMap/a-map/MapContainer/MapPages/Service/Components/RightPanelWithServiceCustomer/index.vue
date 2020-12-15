@@ -58,9 +58,36 @@ export default {
 	},
 	methods: {
 		handleClick(item, index) {
-			this.activeIndex = index;
-
-			this.$emit('list-click', item);
+			// debugger;
+			this.geocoder = new AMap.Geocoder({
+				city: '330100', //杭州市范围内查询
+			});
+			console.log(item.lat);
+			if (!item.lat) {
+				this.geocoder.getLocation(item.address, (status, result) => {
+					if (status === 'complete' && result.geocodes.length) {
+						var lnglat = result.geocodes[0].location;
+						let { lng, lat } = lnglat;
+						item.lat = lat;
+						item.lng = lng;
+						// this.$emit('overlay-click', item);
+						console.log(lat, lng);
+						this.activeIndex = index;
+						this.$emit('list-click', item);
+					} else {
+						//查询失败则默认杭然地址
+						item.lat = 30.273297;
+						item.lng = 120.151562;
+						this.activeIndex = index;
+						this.$emit('list-click', item);
+						// console.log('根据地址查询位置失败');
+						// this.handleClick(item, index);
+						// console.log(item, index);
+					}
+				});
+			} else {
+				this.$emit('list-click', item);
+			}
 		},
 	},
 };

@@ -117,6 +117,11 @@ export default {
 
 <style lang="scss" scoped>
 .list {
+	height: 799px;
+	overflow-y: scroll;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 	color: #fff;
 	font-size: 16px;
 	.list-item {
@@ -146,13 +151,16 @@ export default {
 					font-family: PingFang SC;
 					font-style: normal;
 					font-weight: normal;
-					font-size: 16px;
+					font-size: 20px;
 					line-height: 16px;
 					color: #fff;
 				}
 			}
+			.status {
+				font-size: 20px;
+			}
 			.station-name {
-				font-size:20px;
+				font-size: 20px;
 				flex: 1;
 				color: rgba(255, 255, 255, 0.8);
 				margin-left: 36px;

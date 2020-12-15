@@ -79,6 +79,6 @@ export const DATASTATISTICSLIST = [couplingIncreaseToday, couplingIncreaseWeek, 
 
 // SwitchBox配置
 export const SWICHBOX = [
-    { label: '累计联码数量热力', value: true, type: 'coupling' },
-    { label: '月操作数量热力', value: false, type: 'operation' }
+    { label: '累计联码热力', value: true, type: 'coupling' },
+    { label: '月扫码热力', value: false, type: 'operation' }
 ]

@@ -88,6 +88,7 @@ import {
 	MapLegend,
 } from '../../../../components/index.js';
 import { DataStatistics } from '../../../../components';
+import GoldChart from '@/openApi';
 import {
 	SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
 	SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP,
@@ -164,6 +165,8 @@ export default {
 					overlayDetailConfig,
 					showMore,
 				};
+			} else {
+				return {};
 			}
 		},
 	},
@@ -186,8 +189,6 @@ export default {
 			let { address, content, status, id } =
 				activeOverlay || this.activeOverlay;
 			let { useNumberYestoday } = this.detailInfo;
-			console.log(this.detailInfo);
-
 			let params = {};
 
 			params[ICcustomer_WARN__COMPONENTINDEX[0]] = {
@@ -283,7 +284,7 @@ export default {
 			this.activeIndex = activeIndex || this.activeIndex;
 			this.getDetailInfo(params, status);
 
-			this.isShowMore = [''].includes(type);
+			this.isShowMore = ['WarningICcustomer'].includes(type);
 			if (['WarningICcustomer', 'MajorClient'].includes(type)) {
 				this.$amap.setZoom(14, 100);
 				this.$amap.panTo([lng, lat], 100);
@@ -299,7 +300,6 @@ export default {
 				params
 			);
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-			console.log(this.allTypeStationList);
 		},
 
 		// 联码新增统计数据
@@ -314,7 +314,6 @@ export default {
 		},
 		//获取站点详情
 		async getDetailInfo(params, status) {
-			console.log(params, 'params');
 			this.detailInfo = await this.$sysApi.map.serve.getICcustomerDetailInfo(
 				params
 			);
@@ -323,11 +322,10 @@ export default {
 			} else if (status && status === '1') {
 				this.detailInfo.ICcustomerStatus = '待处理';
 			}
-			console.log();
+
 			this.showOverlayDetail = this.$refs[
 				this.activeOverlay.overlayType
 			][0].mouseIn;
-			console.log(this.activeOverlay);
 		},
 		// 获取右侧table列表报警信息
 		async getWarningList(params) {

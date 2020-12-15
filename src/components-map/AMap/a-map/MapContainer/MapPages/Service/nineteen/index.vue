@@ -165,13 +165,11 @@ export default {
 			this.activeOverlay = {};
 			this.detailInfo = {};
 			this.showOverlayDetail = false;
-			// this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true;
+
 			let { lng, lat, name } = overlay;
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
-			// []
-			this.activeArea = name;
-			console.log(name);
+
 			this.getDetialInfo(name);
 		},
 		async getDataStatisticsList() {
@@ -206,7 +204,6 @@ export default {
 			res.branchCompanyList = res.branchCompanyList.filter(
 				item => !item.name.includes('大江东')
 			);
-			console.log(res);
 
 			this.allTypeStationList = { ...this.allTypeStationList, ...res };
 		},

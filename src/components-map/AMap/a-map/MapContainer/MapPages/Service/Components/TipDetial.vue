@@ -75,17 +75,17 @@ export default {
 	min-width: 300px;
 	text-align: left;
 	.companyName {
-		font-family: PingFang SC;
+		// font-family: PingFang SC;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 32px;
-		line-height: 1em;
+		line-height: 1.5em;
 		color: #ffd200;
 	}
 	.accept,
 	.complete,
 	.percentage {
-		font-family: PingFang SC;
+		// font-family: PingFang SC;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 24px;
@@ -99,7 +99,7 @@ export default {
 		.item {
 			min-width: 50%;
 			display: inline-block;
-			font-family: PingFang SC;
+			// font-family: PingFang SC;
 			font-style: normal;
 			font-weight: normal;
 			font-size: 24px;

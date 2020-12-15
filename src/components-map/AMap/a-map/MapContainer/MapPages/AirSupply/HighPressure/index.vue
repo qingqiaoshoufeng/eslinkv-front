@@ -187,7 +187,6 @@ export default {
 				...pressureRegulatingStationList,
 				...emergencyAirSourceStationList,
 			];
-			console.log(this.stationList, 'this.stationList111');
 		},
 		// 2.获取高压统计数据
 		async getDataStatisticsInfo() {
@@ -214,8 +213,6 @@ export default {
 			this.showOverlayDetail = true;
 		},
 		closeOverlayDetail(done, isZoom = true) {
-			// console.log(11111);
-
 			let { overlayType } = this.activeOverlay;
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
@@ -228,7 +225,6 @@ export default {
 			}
 		},
 		handleListClick(overlay, eventType) {
-			console.log(overlay);
 			if (this.showOverlayDetail) {
 				this.showOverlayDetail = false;
 				this.activeOverlay = {};
@@ -262,7 +258,6 @@ export default {
 		this.getDataStatisticsInfo();
 		this.getHighPressurePipe();
 		// window.setCenter = this.setCenter.bind(this);
-		console.log(this.$root);
 	},
 };
 </script>

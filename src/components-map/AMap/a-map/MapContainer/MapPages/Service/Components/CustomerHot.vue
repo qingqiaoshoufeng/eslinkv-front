@@ -33,8 +33,9 @@ export default {
 				this._heatMapData = this.data;
 			}
 			this._instance = new AMap.Heatmap(this.$amap, {
-				radius: 20, //给定半径
-				opacity: [0, 0.8],
+                radius: 20, //给定半径
+                opacity: [0, 0.8],
+                zIndex:1000,
 				// gradient: {
 				// 	0.8: '#00D1FF',
 				// 	0.65: 'rgb(117,211,248)',
@@ -42,10 +43,11 @@ export default {
 				// 	0.9: '#ffea00',
 				// 	1.0: 'red',
 				// },
-			});
+            });
+            window.ccc = this._instance
 			this._instance.setDataSet({
 				data: this._heatMapData,
-				max:5000,
+				max:9000,
 			});
 		},
 	},

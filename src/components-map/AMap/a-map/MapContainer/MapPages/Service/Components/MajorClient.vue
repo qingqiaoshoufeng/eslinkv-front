@@ -8,6 +8,7 @@
 			data,
 			apiFun,
 			detailList,
+			showOverlayName: false,
 		}"
 		@click="
 			marker =>

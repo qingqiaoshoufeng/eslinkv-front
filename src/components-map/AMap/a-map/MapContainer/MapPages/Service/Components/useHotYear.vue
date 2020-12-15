@@ -34,7 +34,8 @@ export default {
 			// console.log(this._heatMapData, 6666);
 			this._instance = new AMap.Heatmap(this.$amap, {
 				radius: 10, //给定半径
-				opacity: [0, 0.8],
+                opacity: [0, 0.8],
+                zIndex:1000
 			});
 			this._instance.setDataSet({
 				data: this._heatMapData,

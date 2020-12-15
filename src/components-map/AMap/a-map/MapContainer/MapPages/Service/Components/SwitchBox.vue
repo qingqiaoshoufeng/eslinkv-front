@@ -46,9 +46,7 @@ export default {
 			this.$emit('switch-change', this.data, type);
 		},
 	},
-	mounted() {
-		console.log(this.data);
-	},
+	mounted() {},
 };
 </script>
 <style lang="scss" scoped>

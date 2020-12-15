@@ -66,13 +66,13 @@ let activity = {
     Fixed: 0
 }
 let community = {
-    label: '三社联动社区总数',
+    label: '三社联动参加人员',
     DW: '户',
     prop: "community",
     Fixed: 0
 }
 let households = {
-    label: '三社联动社入户数',
+    label: '三社联动入户数',
     DW: '户',
     prop: "households",
     Fixed: 0
