@@ -182,6 +182,7 @@ export default {
 					showMore,
 				};
 			}
+			return null;
 		},
 	},
 	created() {
@@ -190,7 +191,6 @@ export default {
 			this.mapFitView(-0.3, 0.4, 0.2);
 		});
 		window.mapFitView = this.mapFitView.bind(this);
-		console.log(this.$amap);
 	},
 	methods: {
 		// 销售区域变化
@@ -224,7 +224,7 @@ export default {
 			this.detailComponentName = 'ClickTipDetial';
 			this.clearInterval();
 			let { lng, lat, id, overlayType: type, detailList, name } = overlay;
-			this.activeArea = name;
+			// this.activeArea = name;
 			let params = {
 				name,
 			};
@@ -308,8 +308,7 @@ export default {
 				// 	this.clearInterval();
 				// }
 				let currentIndex = index++ % length;
-				console.log(this.intervalId);
-				// let overlay =
+
 				this.activeOverlay = {
 					...this.allTypeStationList.branchCompanyList[currentIndex],
 					type: 'BranchCompany',
@@ -319,7 +318,7 @@ export default {
 							.detailList,
 				};
 				let { name } = this.activeOverlay;
-				console.log(name);
+
 				let address = {
 					杭州天然气有限公司: { value: [120.99105835, 30.29227485] },
 					杭州钱江燃气有限公司: {
@@ -343,7 +342,6 @@ export default {
 				// this.$amap.panTo([121.26159668, 30.52559623], 100);
 			}, 5000);
 			arrr.push(this.intervalId);
-			console.log(arrr);
 		},
 		// 关闭定时器
 		clearInterval() {

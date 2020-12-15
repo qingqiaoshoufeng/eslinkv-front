@@ -111,7 +111,7 @@ export default {
 				detailList,
 				component: overlayType,
 			} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP['WarningICcustomer'];
-			console.log(item, 'item');
+
 			this.$emit('change', {
 				...item,
 				type: 'ICcustomer',

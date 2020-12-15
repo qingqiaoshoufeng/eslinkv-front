@@ -223,7 +223,7 @@ export default {
 		},
 		async getThreeSocialLinkagecustmerHot() {
 			let res = await this.$sysApi.map.serve.getThreeSocialLinkagecustmerHot();
-			// console.log(res);
+
 			this.allTypeStationList.CustomerHotList = res.customer;
 		},
 		async handleOverlayClick(overlay, overlayType1, isCenter = false) {
@@ -236,11 +236,10 @@ export default {
 				id,
 				type,
 			};
-			console.log(overlay);
+
 			if (['BranchCompany'].includes(overlayType)) {
 				this.detailInfo = await this.getDetailInfo(params);
 			} else if (overlayType === 'TaskList') {
-				console.log(overlay);
 				overlay.activeIndex = this.allTypeStationList.TaskList.findIndex(
 					item => item.id === overlay.id
 				);
@@ -249,12 +248,9 @@ export default {
 				return;
 			}
 			this.activeOverlay = overlay;
-			// console.log(overlayType);
 
-			// console.log(this.$refs);
-			// console.log(this.$refs.overlayType, '余志强');
 			this.showOverlayDetail = this.$refs[overlayType][0].mouseIn;
-			// console.log(this.$refs.overlayType.mouseIn);
+
 			this.isShowMore = ['ThreeSocialLinkage'].includes(overlayType);
 			if (['ThreeSocialLinkage', 'TaskList'].includes(overlayType)) {
 				this.$amap.setZoom(14, 100);
@@ -321,8 +317,7 @@ export default {
 		},
 		showThreeSocialLinkageDetail() {
 			let { id } = this.activeOverlay;
-			console.log(this.activeOverlay);
-			console.log(id);
+
 			//打开三社联动的弹框
 			GoldChart.scene.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX);
 			this.$nextTick(() => {
@@ -362,7 +357,6 @@ export default {
 				...this.allTypeStationList,
 				TaskList,
 			};
-			console.log(TaskList, 'TaskList');
 		},
 		// 查看详情接口
 		getDetailInfo(params) {

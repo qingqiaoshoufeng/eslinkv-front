@@ -251,7 +251,6 @@ export default {
 			});
 		},
 		handleListClick(overlay, eventType) {
-			console.log(overlay);
 			if (this.showOverlayDetail) {
 				this.showOverlayDetail = false;
 				this.activeOverlay = {};

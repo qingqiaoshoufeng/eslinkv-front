@@ -198,7 +198,6 @@ export default {
 		},
 		setCenter(center) {
 			this.center = center || this.center;
-			console.log(this.center);
 		},
 		// 获取所有站点数据
 		async getAllTypeStationList() {
@@ -269,7 +268,6 @@ export default {
 			});
 		},
 		handleListClick(overlay, eventType) {
-			console.log(overlay);
 			if (this.showOverlayDetail) {
 				this.showOverlayDetail = false;
 				this.activeOverlay = {};
