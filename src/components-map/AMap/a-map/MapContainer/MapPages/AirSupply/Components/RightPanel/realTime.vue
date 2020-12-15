@@ -43,7 +43,7 @@
 				v-for="(item, index) in list"
 				:key="index"
 				class="list-item"
-				:class="{ active: activeIndex === index }"
+				:class="{ active: activeItem === item }"
 				v-show="!isShow"
 			>
 				<div class="row">
@@ -92,12 +92,19 @@ export default {
 	},
 	data() {
 		return {
-			activeIndex: null,
 			list: [],
 			repairType: '抢修',
 			repairState: 1,
 			isShow: false,
 		};
+	},
+	props: {
+		activeItem: {
+			type: Object,
+			default() {
+				return {};
+			},
+		},
 	},
 	computed: {
 		active() {
@@ -121,21 +128,18 @@ export default {
 		},
 		async getData() {
 			this.isShow = true;
-			let data = await this.$sysApi.map.airSupply.getEventWarningList(
-				{
-					currentPage: 1,
-					pageSize: 500,
-					repairType: this.repairType,
-					repairState: this.repairState,
-				}
-            );
+			let data = await this.$sysApi.map.airSupply.getEventWarningList({
+				currentPage: 1,
+				pageSize: 500,
+				repairType: this.repairType,
+				repairState: this.repairState,
+			});
 			this.list = data;
 			// setTimeout(() => {
 			this.isShow = false;
 			// }, 30000);
 		},
-		handleClick(item, index) {
-			this.activeIndex = index;
+		handleClick(item) {
 			item.status = item.stateName == '处理完成' ? 0 : 1;
 			item.overlayType = 'WARNEVENT';
 			this.$emit('change', item);
@@ -152,8 +156,8 @@ export default {
 
 <style lang="scss" scoped>
 .event-warning {
-    height: 800px;
-    font-size:20px;
+	height: 800px;
+	font-size: 20px;
 	.filter-bar {
 		justify-content: space-between;
 		color: #00ddff;

@@ -7,11 +7,6 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
 		></WarnEvent>
-		<!-- <StationList
-			:data="activeStationData"
-			:overlayInfoConfigMap="overlayInfoConfigMap"
-			@close="closeStationListDetail"
-		></StationList> -->
 
 		<!-- 行政区域覆盖物 -->
 		<RegionBoundary />
@@ -39,6 +34,7 @@
 			v-model="showOverlayDetail"
 			v-bind="{
 				beforeClose: closeOverlayDetail,
+				position: overlayDetailPosition,
 				...overlayDetailProp,
 			}"
 			@view-detail="viewDetail"
@@ -60,7 +56,10 @@
 				class="right-panel"
 				v-model="activeTab"
 				@overlay-click="handleListClick"
-				:stationList="stationList"
+				v-bind="{
+					stationList,
+					rightListActiveItemMap,
+				}"
 				ref="RightPanel"
 			></RightPanel>
 		</portal>
@@ -81,7 +80,6 @@ let componentPageArr = [
 	'WarnEvent',
 	//右侧报警列表
 	'RightPanel',
-	'StationList',
 ];
 //页面所需公共组件
 let componentCommonArr = [
@@ -136,6 +134,7 @@ export default {
 			showOverlayDetail: false,
 			stationDataMap: {},
 			visibleMore: false,
+			overlayDetailPosition: '',
 			stationList: [],
 		};
 	},
@@ -164,6 +163,7 @@ export default {
 				};
 			}
 		},
+		//点击右侧点位列表，从overlay组件内部触发click事件
 		activeOverlayMap() {
 			let { activeStationData } = this;
 			if (JSON.stringify(activeStationData) === '{}') {
@@ -174,6 +174,14 @@ export default {
 					[overlayType]: activeStationData,
 				};
 			}
+		},
+		rightListActiveItemMap() {
+			let { activeWarnData, activeStationData } = this;
+			return {
+				processWarning: activeWarnData,
+				realTime: activeWarnData,
+				overlayList: activeStationData,
+			};
 		},
 	},
 	methods: {
@@ -218,6 +226,7 @@ export default {
 		setZoomAndPanTo(lng, lat, zoom = 14) {
 			this.$amap.setZoom(zoom, 100);
 			this.$amap.panTo([lng, lat], 100);
+			this.overlayDetailPosition = zoom == 14 ? 'top' : '';
 		},
 		handleOverlayClick(overlay, overlayType) {
 			overlay.overlayType = overlayType || overlay.overlayType;
@@ -226,8 +235,8 @@ export default {
 		},
 		closeOverlayDetail(done, isZoom = true) {
 			this.showOverlayDetail = false;
-            this.activeOverlay = {};
-            this.activeStationData = {}
+			this.activeOverlay = {};
+			this.activeStationData = {};
 			if (isZoom) {
 				this.setZoomAndPanTo(...this.center, this.zoom);
 			}
@@ -248,23 +257,16 @@ export default {
 					break;
 				default:
 					this.activeWarnData = overlay;
+					this.overlayDetailPosition = 'top';
 			}
-			this.setZoomAndPanTo(lng, lat);
+			this.setZoomAndPanTo(lng, lat + 0.006);
 		},
 		closeWarnEventDetail() {
-			// this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
-			// this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
-			// this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
-            this.activeWarnData = {};
-            this.activeStationData = {};
+			this.activeWarnData = {};
+			this.activeStationData = {};
 			this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		closeStationListDetail() {
-			// this.activeStationData = {};
-			// this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
-			// this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
-			// this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
-			// this.$refs.RightPanel.$refs.overlayList.searchName = '';
 			this.activeStationData = {};
 			this.setZoomAndPanTo(...this.center, this.zoom);
 		},

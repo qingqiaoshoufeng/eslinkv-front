@@ -56,7 +56,7 @@
 				v-for="(item, index) in list"
 				:key="index"
 				class="list-item"
-				:class="{ active: activeIndex === index }"
+				:class="{ active: activeItem === item }"
 				v-show="!isShow"
 			>
 				<div class="row">
@@ -144,18 +144,6 @@ export default {
 	computed: {
 		active() {
 			return this.$parent.active;
-		},
-	},
-	watch: {
-		activeItem(val) {
-			if (JSON.stringify(val) == '{}') {
-				return (this.activeIndex = null);
-			}
-			let index = this.list.findIndex(item => {
-				let { id } = item;
-				return val.id === id;
-			});
-			this.activeIndex = index > -1 ? index : null;
 		},
 	},
 	methods: {

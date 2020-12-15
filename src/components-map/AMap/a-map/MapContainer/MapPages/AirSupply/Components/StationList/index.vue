@@ -11,15 +11,6 @@
 			}"
 			:visible="visible"
 		>
-			<!-- <video
-				class="warning-videO"
-				src="@/assets/amap/images/warning-circle.webm"
-				controls="controls"
-				autoplay="autoplay"
-				muted="muted"
-				v-if="data.status"
-				loop
-			></video> -->
 		</Overlay>
 		<!-- 详情弹窗 -->
 		<OverlayDetail
@@ -35,12 +26,6 @@
 			:width="400"
 		>
 		</OverlayDetail>
-		<!-- 路线规划 -->
-		<!-- <RoutePlan
-			:data="data"
-			v-if="showRoutePlan"
-			ref="RoutePlan"
-		></RoutePlan> -->
 	</div>
 </template>
 <script>
@@ -139,71 +124,6 @@ export default {
 	methods: {
 		viewOverlayDetail() {
 			let { repairContent, address, callDate } = this.data;
-			this.showRoutePlan = true;
-			//和场景进行交互
-			GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
-			//更新数据
-			this.$nextTick(() => {
-				this.showMore = false;
-				AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
-					GoldChart.instance.updateComponent(i, {
-						data: {
-							step: 8,
-							value: {
-								step1: {
-									time: new Date(callDate) * 1,
-									des: repairContent,
-									name: '王磊',
-									title: '报警人',
-									address: address,
-								},
-								step2: {
-									time: new Date('2020-10-30 22:21') * 1,
-									name: '秦芳芳',
-									title: '客服部',
-								},
-								step3: {
-									time: new Date('2020-10-30 22:31') * 1,
-									name: '林自原',
-									title: '维修部',
-								},
-								step4: {
-									time: new Date('2020-10-30 22:48') * 1,
-								},
-								step5: {
-									time: new Date('2020-10-30 23:13') * 1,
-								},
-								step6: {
-									time: new Date('2020-10-30 23:50') * 1,
-								},
-								step7: {
-									time: new Date('2020-10-31 11:21') * 1,
-								},
-								step8: {
-									time: new Date('2020-10-31 12:57') * 1,
-									title: '维修处置内容',
-									content:
-										'部分管道老旧破损严重导致燃气泄漏，关闭上游阀门后更换泄漏段管道，已恢复供气。',
-								},
-							},
-							videoInfo1: {
-								imgList: [
-									'/static/images/project/01.png',
-									'/static/images/project/02.jpg',
-								],
-								videoList: ['/cdn/videos/test.mov'],
-							},
-							videoInfo2: {
-								imgList: [
-									'/static/images/project/01.png',
-									'/static/images/project/02.jpg',
-								],
-								videoList: ['/cdn/videos/test.mov'],
-							},
-						},
-					});
-				});
-			});
 		},
 		closeOverlayDetail(done) {
 			// this.$refs.RightPanel1.$refs.overlayList.searchName = '';

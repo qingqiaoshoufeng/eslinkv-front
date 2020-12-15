@@ -10,14 +10,14 @@
 		<div
 			class="pop-content"
 			:style="{
-				transform: `translate(${translateX}, calc(${translateY})`,
+				transform: `translate(calc(${translateX}), calc(${translateY})`,
 				width: width + 'px',
 			}"
 		>
 			<div class="close-btn" v-show="showCloseBtn" @click="closePop">
 				<svg-icon icon-name="iconbaseline-close-px"></svg-icon>
 			</div>
-			<div class="triangle"></div>
+			<div class="triangle" :class="'triangle-' + positionInner"></div>
 			<slot>
 				<div v-if="!overlay.detail">
 					<div
@@ -117,11 +117,14 @@ export default {
 		},
 		//关闭弹窗之前的事件
 		beforeClose: Function,
+		//弹窗位置 默认为bottom
+		position: String,
 	},
 	data() {
 		return {
 			overlay: {},
 			rendered: false,
+			showTriangle: true,
 			marginBottom: 19,
 		};
 	},
@@ -162,23 +165,52 @@ export default {
 		},
 	},
 	computed: {
+		//1..外部传入position 2.detail的条数大于2显示与头部
+		positionInner() {
+			let { detail } = this.overlay;
+			if (this.position) {
+				return this.position;
+			}
+			if (detail && Object.keys(detail).length > 2) {
+				return 'bottom';
+			} else {
+				return 'top';
+			}
+		},
 		scaleRatio() {
 			return (this.parentInfo && this.parentInfo.scaleRatio) || 1;
 		},
 		translateX() {
-			let { scaleRatio } = this;
-			return `-${((1 - scaleRatio) / scaleRatio + 1) * 50}%`;
+			let { positionInner, scaleRatio, marginBottom } = this;
+			switch (positionInner) {
+				case 'top':
+					this.showTriangle = true;
+					return `-${((1 - scaleRatio) / scaleRatio + 1) * 50}%`;
+				case 'bottom':
+					this.showTriangle = false;
+					return `-${((1 - scaleRatio) / scaleRatio) * 50}% + ${
+						marginBottom + 20
+					}px`;
+			}
 		},
 		translateY() {
-			let { scaleRatio, marginBottom } = this;
+			let { positionInner, scaleRatio, marginBottom } = this;
 			marginBottom = marginBottom + 14;
-			return `-${
-				((1 - scaleRatio) / scaleRatio) * 50 + 100
-			}% - ${marginBottom}px`;
+			switch (positionInner) {
+				case 'top':
+					this.showTriangle = true;
+					return `-${
+						((1 - scaleRatio) / scaleRatio) * 50 + 100
+					}% - ${marginBottom}px`;
+				case 'bottom':
+					this.showTriangle = false;
+					return `-${
+						((1 - scaleRatio) / scaleRatio) * 50
+					}% - ${marginBottom}px`;
+			}
 		},
 	},
-	mounted() {
-	},
+	mounted() {},
 };
 </script>
 
@@ -218,6 +250,11 @@ export default {
 		border-left: solid 15px transparent;
 		border-right: solid 15px transparent;
 		border-top: solid 15px #00ddff;
+	}
+	.triangle-bottom {
+		transform: rotate(90deg);
+		top: 24px;
+		left: -24px;
 	}
 	.close-btn {
 		background: #0057a9;

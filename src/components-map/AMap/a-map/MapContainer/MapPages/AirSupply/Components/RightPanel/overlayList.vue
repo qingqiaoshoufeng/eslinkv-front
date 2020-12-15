@@ -19,7 +19,7 @@
 				v-for="(item, index) in showStationList"
 				:key="index"
 				class="list-item"
-				:class="{ active: activeIndex === index }"
+				:class="{ active: activeItem === item }"
 			>
 				<div class="row">
 					<SvgIcon
@@ -35,17 +35,6 @@
 						:icon-name="'iconarrow'"
 						:style="{ fontSize: '24px' }"
 					/>
-					<!-- <div class="station-name">
-						{{ item.address }}
-					</div>
-					<div
-						:class="[
-							'status',
-							item.status == 0 ? 'status-suc' : 'status-err',
-						]"
-					>
-						{{ item.statusText }}
-					</div> -->
 				</div>
 			</div>
 		</div>
@@ -78,7 +67,6 @@ export default {
 		};
 
 		return {
-			activeIndex: null,
 			list: [],
 			iconList,
 			searchName: '',
@@ -108,24 +96,11 @@ export default {
 			return this.stationList;
 		},
 	},
-	watch: {
-		activeItem(val) {
-			if (JSON.stringify(val) == '{}') {
-				return (this.activeIndex = null);
-			}
-			let index = this.list.findIndex(item => {
-				let { id } = item;
-				return val.id === id;
-			});
-			this.activeIndex = index > -1 ? index : null;
-		},
-	},
 	methods: {
 		clearSearch() {
 			this.searchName = '';
 		},
 		handleClick(item, index) {
-			this.activeIndex = index;
 			this.$emit(
 				'change',
 				{ ...item, overlayType: item.type },

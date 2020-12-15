@@ -5,15 +5,24 @@
 		@input="val => $emit('input', val)"
 	>
 		<TabPanel key="processWarning" name="processWarning" label="工艺报警">
-			<processWarning @change="handleClick" ref="processWarning" />
+			<processWarning
+				:activeItem="rightListActiveItemMap['processWarning'] || {}"
+				@change="handleClick"
+				ref="processWarning"
+			/>
 		</TabPanel>
 
 		<TabPanel key="realTime" name="realTime" label="事件报警">
-			<realTime @change="handleClick" ref="realTime" />
+			<realTime
+				:activeItem="rightListActiveItemMap['realTime'] || {}"
+				@change="handleClick"
+				ref="realTime"
+			/>
 		</TabPanel>
 
 		<TabPanel key="overlayList" name="overlayList" label="点位列表" lazy>
 			<overlayList
+				:activeItem="rightListActiveItemMap['overlayList'] || {}"
 				@change="handleClick"
 				ref="overlayList"
 				:stationList="stationList"
@@ -33,7 +42,6 @@ export default {
 	name: 'RightlistPanel',
 	data() {
 		return {
-			activeIndex: null,
 			ready: false,
 		};
 	},
@@ -46,6 +54,12 @@ export default {
 			type: Array,
 			default() {
 				return [];
+			},
+		},
+		rightListActiveItemMap: {
+			type: Object,
+			defaut() {
+				return {};
 			},
 		},
 	},
