@@ -67,11 +67,11 @@ export default {
 					// 		});
 					// 	}
 					// });
-					instance.on('click', e => {
-						let areaData = e.target._opts.extData || {};
-						let { area } = areaData;
-						this.$emit('input', area);
-					});
+					// instance.on('click', e => {
+					// 	let areaData = e.target._opts.extData || {};
+					// 	let { area } = areaData;
+					// 	this.$emit('input', area);
+					// });
 					instance.on('mouseout', e => {
 						let areaData = e.target._opts.extData || {};
 						let { area } = areaData;
