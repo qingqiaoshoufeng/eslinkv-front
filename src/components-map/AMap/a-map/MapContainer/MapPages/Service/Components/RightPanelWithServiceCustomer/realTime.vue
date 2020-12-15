@@ -5,7 +5,11 @@
 			v-for="(item, index) in list"
 			:key="index"
 			class="list-item"
-			:class="{ active: activeIndex === index }"
+			:class="{
+				active:
+					activeIndex === index &&
+					activeOverlay.activeIndex === index,
+			}"
 		>
 			<div class="row">
 				<SvgIcon
@@ -56,6 +60,12 @@ export default {
 	},
 	props: {
 		activeItem: {
+			type: Object,
+			default() {
+				return {};
+			},
+		},
+		activeOverlay: {
 			type: Object,
 			default() {
 				return {};

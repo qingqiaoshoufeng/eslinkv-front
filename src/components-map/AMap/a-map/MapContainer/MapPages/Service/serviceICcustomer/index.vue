@@ -58,6 +58,7 @@
 			<RightPanelWithServiceICcustomer
 				class="right-panel"
 				@overlay-click="handleListClick"
+				:activeOverlay="activeOverlay"
 			/>
 			<!-- 选择器盒子 -->
 			<i-switchBox

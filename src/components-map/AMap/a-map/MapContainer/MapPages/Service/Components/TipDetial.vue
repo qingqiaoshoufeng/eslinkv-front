@@ -94,10 +94,11 @@ export default {
 		color: #ffffff;
 	}
 	.detial_info_list {
-		width: 450px;
+		// width: 450px;
+		width: 100%;
 		margin-top: 16px;
 		.item {
-			min-width: 60%;
+			min-width: 45%;
 			display: inline-block;
 			// font-family: PingFang SC;
 			font-style: normal;
