@@ -5,8 +5,8 @@
 			<li>隐患排行</li>
 			<li>设备类型</li>
 			<li>隐患数</li>
-			<li>处理中</li>
-			<li>待处理</li>
+      <li>待处理</li>
+      <li>处理中</li>
 			<li>已完成</li>
 		</ul>
 		<div class="content" v-if="data">
@@ -21,8 +21,8 @@
         <li>{{ item.name }}</li>
         <li>{{ item.type }}</li>
         <li>{{ item.total }}</li>
-        <li>{{ item.handling }}</li>
         <li>{{ item.waitHandle }}</li>
+        <li>{{ item.handling }}</li>
         <li>{{ item.finish }}</li>
       </ul>
 		</div>
