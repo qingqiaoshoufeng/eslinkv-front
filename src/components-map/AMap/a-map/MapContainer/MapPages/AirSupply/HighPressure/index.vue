@@ -238,10 +238,18 @@ export default {
 			this.setZoomAndPanTo(lng, lat);
 		},
 		closeWarnEventDetail() {
+			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
+			this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
+			this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
 			this.activeWarnData = {};
 			this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		closeStationListDetail() {
+			this.StationListData = {};
+			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
+			this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
+			this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
+			this.$refs.RightPanel.$refs.overlayList.searchName = '';
 			this.StationListData = {};
 			this.setZoomAndPanTo(...this.center, this.zoom);
 		},
