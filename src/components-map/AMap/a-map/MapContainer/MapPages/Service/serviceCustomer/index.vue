@@ -236,9 +236,11 @@ export default {
 				id,
 				type,
 			};
+			console.log(overlay);
 			if (['BranchCompany'].includes(overlayType)) {
 				this.detailInfo = await this.getDetailInfo(params);
 			} else if (overlayType === 'TaskList') {
+				console.log(overlay);
 				overlay.activeIndex = this.allTypeStationList.TaskList.findIndex(
 					item => item.id === overlay.id
 				);
@@ -304,6 +306,7 @@ export default {
 				lng,
 				lat,
 			};
+			this.isShowMore = false;
 			this.activeIndex = activeIndex;
 			this.activeOverlay = {
 				...item,

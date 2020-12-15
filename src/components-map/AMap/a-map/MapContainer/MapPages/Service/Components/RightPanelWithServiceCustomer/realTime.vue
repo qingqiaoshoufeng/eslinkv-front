@@ -17,7 +17,7 @@
 				<div class="content">
 					{{ item.content }}
 				</div>
-				<div>
+				<div class="time">
 					{{ item.time }}
 				</div>
 			</div>
@@ -114,6 +114,9 @@ export default {
 		.row {
 			display: flex;
 			align-items: center;
+			.status {
+				font-size: 20px;
+			}
 			.status-err {
 				color: #ffdc45;
 			}
@@ -126,6 +129,9 @@ export default {
 				display: flex;
 				align-items: center;
 				margin-left: 12px;
+			}
+			.time {
+				font-size: 20px;
 			}
 			.station-name {
 				font-size: 20px;

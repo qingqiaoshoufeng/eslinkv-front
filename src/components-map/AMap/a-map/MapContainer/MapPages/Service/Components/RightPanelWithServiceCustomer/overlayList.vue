@@ -151,10 +151,13 @@ export default {
 					font-family: PingFang SC;
 					font-style: normal;
 					font-weight: normal;
-					font-size: 16px;
+					font-size: 20px;
 					line-height: 16px;
 					color: #fff;
 				}
+			}
+			.status {
+				font-size: 20px;
 			}
 			.station-name {
 				font-size: 20px;

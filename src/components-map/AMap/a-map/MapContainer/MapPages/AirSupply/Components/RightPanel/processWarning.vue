@@ -331,6 +331,9 @@ export default {
 		font-weight: 600 !important;
 		font-size: 20px !important;
 	}
+	// /deep/.ivu-icon {
+	// 	left: 56px !important;
+	// }
 	/deep/.ivu-select-item {
 		font-size: 20px !important;
 		line-height: 32px;

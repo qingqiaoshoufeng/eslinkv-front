@@ -341,7 +341,7 @@ export default {
 				// this.$amap.panTo([120.57769775, 29.75007093], 100);
 
 				// this.$amap.panTo([121.26159668, 30.52559623], 100);
-			}, 3000);
+			}, 5000);
 			arrr.push(this.intervalId);
 			console.log(arrr);
 		},

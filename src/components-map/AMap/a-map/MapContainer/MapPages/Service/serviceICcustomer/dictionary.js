@@ -8,7 +8,7 @@ let ICcustomer = {
 let useNumberYesterday = {
     label: '昨日用气量',
     DW: 'm³',
-    prop: "useNumberYesterday ",
+    prop: "useNumberYesterday",
     Fixed: 2
 }
 let useNumberMonth = {
