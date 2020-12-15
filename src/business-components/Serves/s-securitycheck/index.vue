@@ -5,12 +5,12 @@
 				<div class="plan">
 					<img :src="data&&data.planTip" alt/>
 					<div class="desc">{{data&&data.planDesc}}</div>
-					<div class="value font-num">{{data&&data.planValue}}</div>
+					<div class="value font-num">{{data&&data.planValue |toThousand}}</div>
 				</div>
 				<div class="reality">
 					<img :src="data&&data.realTip" alt/>
 					<div class="desc">{{data&&data.realDesc}}</div>
-					<div class="value font-num">{{data&&data.realValue}}</div>
+					<div class="value font-num">{{data&&data.realValue|toThousand}}</div>
 				</div>
 			</div>
 			<div class="right">
