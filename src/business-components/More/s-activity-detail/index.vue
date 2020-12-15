@@ -5,25 +5,19 @@
 			<div class="main-lt">
 				<div class="title">{{ data.name }}</div>
 				<div class="base-info">
-          <div class="base-info-item fn-flex flex-row">
+          <div class="base-info-item">
             <label>开始时间</label>
             <span>{{ data.startTime }}</span>
           </div>
-          <div class="base-info-item fn-flex flex-row">
-            <label>结束时间</label>
-            <span>{{ data.endTime }}</span>
-          </div>
-          <div class="base-info-item fn-flex flex-row">
+          <div class="base-info-item">
             <label>活动地点</label>
             <span>{{ data.place }}</span>
           </div>
-				</div>
-        <div class="base-info">
-          <div class="base-info-item fn-flex flex-row">
+          <div class="base-info-item">
             <label>人员组成</label>
             <span>{{ data.people }}</span>
           </div>
-        </div>
+				</div>
 
 
 				<div class="detail-title">
@@ -370,17 +364,24 @@ export default {
 		.base-info {
 			display: flex;
       justify-content: space-between;
-      flex-wrap: wrap;
 			margin-top: 16px;
 
 			.base-info-item {
+        width: 280px;
+        height: 80px;
+        background: linear-gradient(90deg, rgba(0, 221, 255, 0.2) 0%, rgba(0, 221, 255, 0) 100%);
+        border-left: 4px solid rgba(0, 221, 255, 0.6);
+        padding: 10px 0 0 12px;
+        text-align: left;
 
 				label {
+          display: block;
 					font-size: 18px;
 					line-height: 24px;
 					color: #00ddff;
 					margin-right: 16px;
           flex: none;
+          margin-bottom: 12px;
 				}
 
 				> span {
@@ -469,7 +470,8 @@ export default {
         width: 264px;
         height: 214px;
         margin-right: 32px;
-        background: rgba(0, 87, 169, 0.5);
+        background: url("./img/anjiandi.svg") no-repeat;
+        background-size: 100% 100%;
         padding-top: 12px;
         .qua-left-top {
           display: flex;
