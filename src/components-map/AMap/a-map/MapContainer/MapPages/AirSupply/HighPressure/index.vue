@@ -8,7 +8,7 @@
 			@close="closeWarnEventDetail"
 		></WarnEvent>
 		<StationList
-			:data="stationListData"
+			:data="activeStationData"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeStationListDetail"
 		></StationList>
@@ -131,7 +131,7 @@ export default {
 			dataStatisticsData: {},
 			activeOverlay: {},
 			activeWarnData: {},
-			stationListData: {},
+			activeStationData: {},
 			showOverlayDetail: false,
 			stationDataMap: {},
 			visibleMore: false,
@@ -207,16 +207,13 @@ export default {
 			this.$amap.panTo([lng, lat], 100);
 		},
 		handleOverlayClick(overlay, overlayType) {
-			let { lng, lat, address, time, index } = overlay;
 			overlay.overlayType = overlayType || overlay.overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
 		},
 		closeOverlayDetail(done, isZoom = true) {
-			let { overlayType } = this.activeOverlay;
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-
 			if (isZoom) {
 				this.setZoomAndPanTo(...this.center, this.zoom);
 			}
@@ -224,33 +221,36 @@ export default {
 				done();
 			}
 		},
-		handleListClick(overlay, eventType) {
+		handleListClick(overlay, listType) {
+			let { lng, lat } = overlay;
+			//关闭站点详情弹窗
 			if (this.showOverlayDetail) {
 				this.showOverlayDetail = false;
 				this.activeOverlay = {};
 			}
-			let { lng, lat } = overlay;
-			if (eventType) {
-				this.stationListData = overlay;
-			} else {
-				this.activeWarnData = overlay;
+			switch (listType) {
+				case 'StationList':
+					this.activeStationData = overlay;
+					break;
+				default:
+					this.activeWarnData = overlay;
 			}
 			this.setZoomAndPanTo(lng, lat);
 		},
 		closeWarnEventDetail() {
-			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
-			this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
-			this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
+			// this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
+			// this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
+			// this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
 			this.activeWarnData = {};
 			this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		closeStationListDetail() {
-			this.StationListData = {};
-			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
-			this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
-			this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
-			this.$refs.RightPanel.$refs.overlayList.searchName = '';
-			this.StationListData = {};
+			this.activeStationData = {};
+			// this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
+			// this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
+			// this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
+			// this.$refs.RightPanel.$refs.overlayList.searchName = '';
+			this.activeStationData = {};
 			this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		//查看详情调用组件内部的方法

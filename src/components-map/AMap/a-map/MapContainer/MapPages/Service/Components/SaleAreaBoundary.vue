@@ -14,25 +14,25 @@ export default {
 			default: '',
 		},
 	},
-	watch: {
-		value: {
-			handler(val, valOld) {
-				if (val === valOld) {
-					return false;
-				}
-				let instanceIndexOld = this._instanceMap[valOld];
-				instanceIndexOld &&
-					this.instanceArr[instanceIndexOld].setOptions({
-						fillOpacity: 0,
-					});
-				let instanceIndex = this._instanceMap[val];
-				instanceIndex &&
-					this.instanceArr[instanceIndex].setOptions({
-						fillOpacity: 0.6,
-					});
-			},
-		},
-	},
+	// watch: {
+	// 	value: {
+	// 		handler(val, valOld) {
+	// 			if (val === valOld) {
+	// 				return false;
+	// 			}
+	// 			let instanceIndexOld = this._instanceMap[valOld];
+	// 			instanceIndexOld &&
+	// 				this.instanceArr[instanceIndexOld].setOptions({
+	// 					fillOpacity: 0,
+	// 				});
+	// 			let instanceIndex = this._instanceMap[val];
+	// 			instanceIndex &&
+	// 				this.instanceArr[instanceIndex].setOptions({
+	// 					fillOpacity: 0.6,
+	// 				});
+	// 		},
+	// 	},
+	// },
 	methods: {
 		init() {
 			this.drawSaleAreaBoundary(this.$amap);
@@ -82,7 +82,9 @@ export default {
 					// 	}
 					// 	this.$emit('mouseout');
 					// });
-					this.instanceArr.push(instance);
+					if (this.instanceArr) {
+						this.instanceArr.push(instance);
+					}
 					//默认选中
 					if (this.value) {
 						let instanceIndex = this._instanceMap[this.value];

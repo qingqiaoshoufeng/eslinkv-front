@@ -57,9 +57,8 @@ export default function (percent) {
                             labelLine: {
                                 show: false
                             },
-                            color: "rgba(74,74,74,1)",
+                            color: "rgba(0, 87, 169, 0.5)",
                             borderWidth: 0,
-                            opacity: 0.5
                         }
                     },
                 ]
@@ -106,7 +105,7 @@ export default function (percent) {
                             labelLine: {
                                 show: false
                             },
-                            color: "rgba(74,74,74,1)",
+                            color: "rgba(0, 255, 207, 0.2)",
                             borderWidth: 0,
                         }
                     },
