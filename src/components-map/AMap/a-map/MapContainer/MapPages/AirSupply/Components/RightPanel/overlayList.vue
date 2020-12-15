@@ -14,12 +14,17 @@
 			</div>
 		</div>
 		<div class="list">
+			<div class="no_model_box" v-show="!showStationList.length">
+				<img src="/static/images/amap/noModel.svg" alt="" />
+				<div>暂无数据</div>
+			</div>
 			<div
 				@click="handleClick(item, index)"
 				v-for="(item, index) in showStationList"
 				:key="index"
 				class="list-item"
 				:class="{ active: activeIndex === index }"
+				v-show="showStationList.length"
 			>
 				<div class="row">
 					<SvgIcon
@@ -206,6 +211,18 @@ export default {
 	}
 	color: #fff;
 	font-size: 16px;
+	.no_model_box {
+		display: flex;
+		flex-direction: column;
+		position: absolute;
+		top: 35%;
+		left: 50%;
+		transform: translate(-50%);
+		div {
+			margin-top: 20px;
+			font-size: 20px;
+		}
+	}
 	.list-item {
 		display: flex;
 		justify-content: space-between;

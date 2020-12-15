@@ -4,6 +4,8 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
+		<!-- 2.销售区域 -->
+		<SaleAreaBoundary v-model="activeArea" />
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
@@ -102,6 +104,7 @@ import {
 	ClickTaskList,
 	CustomerHot,
 	SwitchBox,
+	SaleAreaBoundary,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -142,6 +145,7 @@ export default {
 		ClickTaskList,
 		CustomerHot,
 		iSwitchBox: SwitchBox,
+		SaleAreaBoundary,
 	},
 	data() {
 		return {
@@ -163,6 +167,7 @@ export default {
 				industryNumber: 0,
 				businessServe: 0,
 			},
+			activeArea: '',
 			detailInfo: {},
 			isShowMore: false,
 			activeIndex: null,
@@ -369,6 +374,9 @@ export default {
 		},
 	},
 	mounted() {
+		document.addEventListener('DestroyScene', () => {
+			this.closeOverlayDetail('');
+		});
 		this.getDataStatisticsList();
 		this.getAllTypeStationList();
 		this.getTasklist();

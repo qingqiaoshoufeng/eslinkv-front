@@ -38,7 +38,7 @@
 			</div>
 			<div class="row">
 				<div class="station-name">
-					{{ `${item.num.toLocaleString()}m3` }}
+					{{ `${item.num.toLocaleString()}m³` }}
 				</div>
 				<!-- <div
 					:class="[

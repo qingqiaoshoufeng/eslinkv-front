@@ -25,7 +25,7 @@
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			v-bind="{
-				showMore:showMore,
+				showMore: showMore,
 				data,
 				...OverlayDetailProp,
 			}"
@@ -52,7 +52,7 @@ import {
 	AIRSUPPLY_WARN_SCENEINDEX,
 	AIRSUPPLY_WARN_COMPONENTINDEX,
 } from '../../../../../config';
-import {WARNING_OVERLAY_MAP} from './config.js'
+import { WARNING_OVERLAY_MAP } from './config.js';
 export default {
 	name: 'WarnEvent',
 	inject: ['parentInfo'],
@@ -67,25 +67,25 @@ export default {
 			default() {
 				return {};
 			},
-		}
+		},
 	},
 	data() {
 		return {
 			icon: 'iconshijian1',
 			showOverlayDetail: true,
-            showRoutePlan: false,
+			showRoutePlan: false,
 			visible: false,
 			overlayIcon: '',
-            OverlayDetailProp: {},
-            overlayInfoConfigMap:Object.freeze(WARNING_OVERLAY_MAP)
+			OverlayDetailProp: {},
+			overlayInfoConfigMap: Object.freeze(WARNING_OVERLAY_MAP),
 		};
-    },
-    computed:{
-        showMore(){
-            let {data,showRoutePlan} = this
-            return !showRoutePlan && data.overlayType === 'WARNEVENT'
-        }
-    },
+	},
+	computed: {
+		showMore() {
+			let { data, showRoutePlan } = this;
+			return !showRoutePlan && data.overlayType === 'WARNEVENT';
+		},
+	},
 	watch: {
 		data(val) {
 			if (JSON.stringify(val) !== '{}') {

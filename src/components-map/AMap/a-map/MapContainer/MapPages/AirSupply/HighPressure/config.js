@@ -84,6 +84,16 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
         visible: false,
         dataProp: 'inspectionCarList',
     },
+    WarningStations: {
+        label: '高中压预警点',
+        legendIcon: 'iconzhongdiyayujing',
+        iconSize: 38,
+        icon: 'iconzhongdiyayujing',
+        component: 'WarningStations',
+        showOverlayName: false,
+        visible: true,
+        dataProp: 'WarningStationsList',
+    }
     // ServiceStation: {
     //     label: '综合服务站',
     //     legendIcon: 'icontulizonghefuwuzhan1',

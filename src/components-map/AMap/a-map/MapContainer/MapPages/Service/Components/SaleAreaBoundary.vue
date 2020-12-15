@@ -56,6 +56,7 @@ export default {
 						extData: {
 							area: area,
 						},
+						strokeDasharray: [5, 2],
 					});
 					// if (this.selectAreaChange) {
 					// instance.on('mouseover', e => {

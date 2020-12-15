@@ -12,6 +12,15 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeStationListDetail"
 		></StationList>
+		<StationList
+			:data="activeStationData"
+			:overlayInfoConfigMap="overlayInfoConfigMap"
+			@close="closeStationListDetail"
+		></StationList>
+		<!-- 2.legend不控制显隐 -->
+		<WarningStations
+			:overlayInfoConfigMap="overlayInfoConfigMap"
+		></WarningStations>
 
 		<!-- 行政区域覆盖物 -->
 		<RegionBoundary />
@@ -81,6 +90,7 @@ let componentPageArr = [
 	//右侧报警列表
 	'RightPanel',
 	'StationList',
+	'WarningStations',
 ];
 //页面所需公共组件
 let componentCommonArr = [
