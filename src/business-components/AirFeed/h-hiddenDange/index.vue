@@ -22,8 +22,9 @@ const value = {
 		data: JSON.stringify({
       data1: {
         dangerNum: 32,
-        handleDangerNum: 9,
-        unhandleDangerNum: 23,
+        handlingNum: 9,
+        waitNum: 23,
+        finishNum: 11,
         finishRate: 78,
       },
       data2: [

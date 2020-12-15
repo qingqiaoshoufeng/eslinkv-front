@@ -8,6 +8,8 @@ function findAmapRoot() {
 		return fun();
 	}
 }
+import CoordinateTransform from '../../../../../utils/CoordinateTransform';
+const coordinateTransform = new CoordinateTransform();
 import { Overlay } from '../../../../../components/index';
 export default {
 	name: 'RoutePlan',
@@ -18,7 +20,8 @@ export default {
 	data() {
 		return {
 			icon: 'iconbaoguanshijian',
-			isExecuteFlag: false,
+			isExecuteFlag: false, //是否正在请求数据
+			drawLineIndex: 0, //当前请求的index
 		};
 	},
 	props: {
@@ -32,17 +35,22 @@ export default {
 	watch: {
 		data: {
 			handler(val) {
-				this.reset();
 				//数据返回延迟，防止多次点击
+				this.drawLineIndex++;
 				if (this.timer) {
 					clearInterval(this.timer);
 					this.timer = null;
 				}
 				this.timer = setInterval(() => {
 					if (!this.isExecuteFlag) {
-						this.getData();
+						this.reset();
+						setTimeout(() => {
+							this.getData(this.drawLineIndex);
+						}, 1000);
 						clearInterval(this.timer);
 						this.timer = null;
+					} else {
+						console.log('在请求中');
 					}
 				}, 1000);
 			},
@@ -54,7 +62,7 @@ export default {
 		this.map = fun();
 	},
 	methods: {
-		async getData() {
+		async getData(drawLineIndex) {
 			let { data } = this;
 			let {
 				lat: endLat,
@@ -77,6 +85,14 @@ export default {
 			let passedPathData = await this.$sysApi.map.airSupply.getEmployeeGpsTrack(
 				{ employeeName, callDate, arrivalTime }
 			);
+            this.isExecuteFlag = false;
+            console.log(this.isExecuteFlag,'aaa')
+            if(this.drawLineIndex !== drawLineIndex){
+                return false 
+            }
+			passedPathData = passedPathData.map(item => {
+				return coordinateTransform.WGS2GCJ(...item);
+			});
 			if (!passedPathData) {
 				console.error('无人员位置信息');
 				return false;
@@ -111,9 +127,10 @@ export default {
 									planPathData.push([lng, lat]);
 								});
 							});
-							this.drawLine(passedPathData, planPathData);
+							if (this.drawLineIndex === drawLineIndex) {
+								this.drawLine(passedPathData, planPathData);
+							}
 						}
-						this.isExecuteFlag = false;
 					}
 				);
 			}

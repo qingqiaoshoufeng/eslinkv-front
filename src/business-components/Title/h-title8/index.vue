@@ -2,7 +2,7 @@
 	<div class="widget-part" :style="styles">
 		<div class="h-title-8 fn-flex flex-row">
 			<h2>{{config.config&&config.config.title}}</h2>
-			<p class="font-num">{{data&&data.value}}</p>
+			<p class="font-num">{{data&&data.value|toThousand}}</p>
 		</div>
 	</div>
 </template>

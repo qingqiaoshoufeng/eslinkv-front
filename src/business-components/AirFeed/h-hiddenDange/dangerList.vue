@@ -5,12 +5,16 @@
 			<div class="num font-num">{{ data.dangerNum }}</div>
 		</li>
 		<li>
-			<div class="title">处理隐患</div>
-			<div class="num font-num">{{ data.handleDangerNum }}</div>
+			<div class="title">处理中</div>
+			<div class="num font-num">{{ data.handlingNum }}</div>
 		</li>
 		<li>
-			<div class="title">未处理</div>
-			<div class="num font-num">{{ data.unhandleDangerNum }}</div>
+			<div class="title">待处理</div>
+			<div class="num font-num">{{ data.waitNum }}</div>
+		</li>
+		<li>
+			<div class="title">已完成</div>
+			<div class="num font-num">{{ data.finishNum }}</div>
 		</li>
 		<li>
 			<div class="title">处理完成率</div>
@@ -32,7 +36,7 @@
 		justify-content: space-between;
 
 		li {
-			width: 144px;
+			width: 118px;
 			height: 187px;
 			background-size: 100% 100%;
 			padding-top: 16px;
@@ -51,6 +55,10 @@
 
 			&:nth-child(4) {
 				background-image: url("./img/list-bg4.svg")
+			}
+
+			&:nth-child(5) {
+				background-image: url("./img/list-bg5.svg")
 			}
 
 			.title {
