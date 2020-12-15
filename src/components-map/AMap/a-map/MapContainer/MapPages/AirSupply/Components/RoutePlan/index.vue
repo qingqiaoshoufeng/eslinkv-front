@@ -8,8 +8,8 @@ function findAmapRoot() {
 		return fun();
 	}
 }
-import CoordinateTransform from '../../../../../utils/CoordinateTransform';
-const coordinateTransform = new CoordinateTransform();
+// import CoordinateTransform from '../../../../../utils/CoordinateTransform';
+// const coordinateTransform = new CoordinateTransform();
 import { Overlay } from '../../../../../components/index';
 export default {
 	name: 'RoutePlan',
@@ -75,7 +75,7 @@ export default {
 			//渲染一次后，需手动调整位置
 			if (this.$refs.marker) {
 				this.$refs.marker.$amapComponent.setPosition(
-					new window.AMap.LngLat(endLat, endLat)
+					new AMap.LngLat(endLat, endLat)
 				);
 			}
 			if (!employeeName || !callDate) {
@@ -86,13 +86,12 @@ export default {
 				{ employeeName, callDate, arrivalTime }
 			);
             this.isExecuteFlag = false;
-            console.log(this.isExecuteFlag,'aaa')
             if(this.drawLineIndex !== drawLineIndex){
                 return false 
             }
-			passedPathData = passedPathData.map(item => {
-				return coordinateTransform.WGS2GCJ(...item);
-			});
+			// passedPathData = passedPathData.map(item => {
+			// 	return coordinateTransform.WGS2GCJ(...item);
+			// });
 			if (!passedPathData) {
 				console.error('无人员位置信息');
 				return false;
@@ -112,7 +111,7 @@ export default {
 						isOutline: false,
 						autoFitView: true,
 					});
-				}
+                }
 				this.driving.search(
 					new AMap.LngLat(startLng, startLat),
 					new AMap.LngLat(endLng, endLat),
