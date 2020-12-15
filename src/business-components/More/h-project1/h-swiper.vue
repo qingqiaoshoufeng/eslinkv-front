@@ -1,7 +1,7 @@
 <template>
 	<div class="swiper-box1">
 		<!-- 轮播视频部分 -->
-		<div class="swiper-Part" v-if="![7,8].includes(step)">
+		<div class="swiper-Part" v-if="[7,8].includes(step)">
 			<!-- 视频区域 -->
 			<div class="left pos-r">
         <live-video></live-video>
