@@ -19,7 +19,7 @@ export default function (value1, value2, config) {
                         label: {
                             formatter: function(params) {
                                 const percent = ~~(params.value * 100 / total)
-                                return `{normal|${config.desc1}}{value|${params.value}}\n{unit|${percent}%}`
+                                return `{normal|${config.desc1}}{value|${Number(params.value).toLocaleString()}}\n{unit|${percent}%}`
                             },
                             padding: [0, -100],
                             rich: {
@@ -35,6 +35,7 @@ export default function (value1, value2, config) {
                                     fontSize: 24,
                                     lineHeight: 24,
                                     color: '#00FFCF',
+									fontFamily: 'font-num',
                                     padding: [0, 0, -6, 0],
                                 },
                                 unit: {
@@ -42,6 +43,7 @@ export default function (value1, value2, config) {
                                     fontSize: 18,
                                     lineHeight: 24,
                                     color: '#fff',
+									fontFamily: 'font-num',
                                     padding: [-6, 0, 0, 0],
                                 }
                             }
@@ -106,7 +108,7 @@ export default function (value1, value2, config) {
                         label: {
                             formatter: function(params) {
                                 const percent = ~~(params.value * 100 / total)
-                                return `{normal|${config.desc2}}{value|${params.value}}\n{unit|${percent}%}`
+                                return `{normal|${config.desc2}}{value|${Number(params.value).toLocaleString()}}\n{unit|${percent}%}`
                             },
                             padding: [0, -100],
                             rich: {
