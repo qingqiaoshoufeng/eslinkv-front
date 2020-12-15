@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ul class="video-list">
+    <ul class="video-list fn-flex pos-a">
       <li
           v-for="(k, i) in videoList"
           :key="i"
@@ -25,7 +25,7 @@
 var _cf = {
   ver: 'debug',
   q2httpServer: {
-    host: "localhost",
+    host: "36.134.113.152",
     port: 9585,
     sslPort: 443,
     secure: false
@@ -277,8 +277,8 @@ export default {
 
         console.warn('------获取到以下设备---------')
         console.log(device_list)
-        this.pu = device_list[0] // todo
-        // this.pu = pulist.find(v => v.name === '5G应急车' && v.online == '1')
+        // this.pu = device_list[0] // todo
+        this.pu = device_list.find(v => v.Name === '5G应急车')
 
         requestPost('C_CAS_QueryPUIDRes?token=' + token, { puid: [this.pu.$] }, rv => {
           // 过滤直播资源
@@ -425,8 +425,8 @@ export default {
 }
 .video-list {
   margin-bottom: 12px;
-  display: flex;
   height: 32px;
+	top: -42px;
   li {
     width: 165px;
     height: 32px;

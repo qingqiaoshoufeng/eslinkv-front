@@ -3,14 +3,7 @@
 		<!-- 轮播视频部分 -->
 		<div class="swiper-Part" v-if="[7,8].includes(step)">
 			<!-- 视频区域 -->
-			<div class="left">
-<!--				<video-player-->
-<!--					class="video-player-box"-->
-<!--					ref="videoPlayer"-->
-<!--					:options="playerOptions"-->
-<!--					:playsinline="true"-->
-<!--					customEventName="customstatechangedeventname"-->
-<!--				></video-player>-->
+			<div class="left pos-r">
         <live-video></live-video>
 			</div>
 			<!-- 轮播图区域 -->
@@ -23,7 +16,6 @@
 								v-for="(item,index) in swiperinfo.imgList"
 								:key="index"
 								:style="{backgroundImage:'url('+item+')'}"
-								@click="toggerVideo(index)"
 							></div>
 						</div>
 						<div class="swiper-pagination"></div>
@@ -69,21 +61,6 @@
 				swiper: null,
 				galleryThumbs: null,
 				galleryThumbs1: null,
-				playerOptions: {
-					width: 1352,
-					height: 760,
-					muted: true,
-					language: 'en',
-					playbackRates: [0.7, 1.0, 1.5, 2.0],
-					// autoplay: true,
-					poster: '/static/images/video-bg.png',
-					loop: true,
-					sources: [
-						{
-							src: '/cdn/videos/sanshe.MOV',
-						},
-					],
-				},
 			};
 		},
 		methods: {
@@ -114,9 +91,6 @@
 					},
 				};
 				return new Swiper(`${tag}`, options);
-			},
-			toggerVideo(index) {
-				this.playerOptions.sources[0].src = this.swiperinfo.videoList[index];
 			},
 		},
 		watch: {
@@ -175,7 +149,6 @@
 			.right {
 				width: 340px;
 				height: 400px;
-        padding-top: 44px;
 
 				.swiper-area {
 					width: 340px;
