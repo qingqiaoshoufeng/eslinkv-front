@@ -10,7 +10,6 @@
 			}"
 			:visible="activeIndex === index"
 			@click="mouseover(item)"
-			@mouseleave="mouseleave"
 		>
 			<video
 				class="warning-videO"

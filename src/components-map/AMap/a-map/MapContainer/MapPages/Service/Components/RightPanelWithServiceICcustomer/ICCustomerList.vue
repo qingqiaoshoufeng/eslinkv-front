@@ -5,7 +5,11 @@
 			v-for="(item, index) in list"
 			:key="index"
 			class="list-item"
-			:class="{ active: activeIndex === index }"
+			:class="{
+				active:
+					activeIndex === index &&
+					activeOverlay.activeIndex === index,
+			}"
 		>
 			<div class="row">
 				<img
@@ -34,7 +38,7 @@
 			</div>
 			<div class="row">
 				<div class="station-name">
-					{{ item.num }}
+					{{ `${item.num.toLocaleString()}m3` }}
 				</div>
 				<!-- <div
 					:class="[
@@ -81,6 +85,12 @@ export default {
 	},
 	props: {
 		activeItem: {
+			type: Object,
+			default() {
+				return {};
+			},
+		},
+		activeOverlay: {
 			type: Object,
 			default() {
 				return {};

@@ -18,7 +18,10 @@
 			label="昨日工商用户用气排行TOP20"
 			lazy
 		>
-			<ICCustomerList @change="handleClick" />
+			<ICCustomerList
+				@change="handleClick"
+				:activeOverlay="activeOverlay"
+			/>
 		</TabPanel>
 		<!-- <TabPanel
 				key="overlayList"
@@ -47,6 +50,14 @@ export default {
 			currentTab: 'ICCustomerList',
 		};
 	},
+	props: {
+		activeOverlay: {
+			type: Object,
+			default() {
+				return {};
+			},
+		},
+	},
 	components: {
 		Tabs,
 		TabPanel,
@@ -68,6 +79,9 @@ export default {
 				return val.id === id;
 			});
 			this.activeIndex = index > -1 ? index : null;
+		},
+		activeOverlay(val) {
+			console.log(val);
 		},
 	},
 	methods: {

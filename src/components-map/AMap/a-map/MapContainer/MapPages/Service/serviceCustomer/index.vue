@@ -84,6 +84,7 @@
 			<RightPanelWithServiceCustomer
 				class="right-panel"
 				@list-click="handleListClick"
+				:activeOverlay="activeOverlay"
 			></RightPanelWithServiceCustomer>
 		</portal>
 	</div>
@@ -260,9 +261,11 @@ export default {
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
 			this.showOverlayDetail = false;
+			this.activeOverlay = {};
 			this.detailInfo = {};
 			this.$amap.setZoom(this.zoom, 100);
 			this.$amap.panTo(this.center, 100);
+			this.activeIndex = -1;
 			// this.activeOverlay = {};
 			done && done();
 		},
@@ -304,6 +307,8 @@ export default {
 			};
 			this.isShowMore = false;
 			this.activeIndex = activeIndex;
+			this.activeOverlay.activeIndex = activeIndex;
+			console.log(this.activeIndex, this.activeOverlay);
 			this.activeOverlay = {
 				...item,
 				detailList:

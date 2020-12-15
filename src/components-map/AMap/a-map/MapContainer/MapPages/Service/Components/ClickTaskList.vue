@@ -9,14 +9,13 @@
 				...$attrs,
 			}"
 			:visible="activeIndex === index"
-			@mouseover="
+			@click="
 				$emit('overlay-click', {
 					overlayType: 'TaskList',
 					...item,
 					detailList,
 				})
 			"
-			@mouseleave="handleMouseleave"
 		>
 			<!-- <video
 				class="warning-videO"

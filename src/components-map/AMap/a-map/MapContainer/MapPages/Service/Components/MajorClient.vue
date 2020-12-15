@@ -53,7 +53,7 @@ export default {
 	data() {
 		return {
 			apiFun: this.$sysApi.map.serve.getGrouphallList,
-			mouseIn: false,
+			mouseIn: true,
 		};
 	},
 	methods: {
@@ -70,7 +70,7 @@ export default {
 			);
 		},
 		mouseleave() {
-			this.mouseIn = false;
+			this.mouseIn = true;
 			this.$emit('close');
 		},
 	},

@@ -52,7 +52,7 @@ import { SvgIcon } from '../../../../../components/';
 import { SERVICE_SERVICEICCUSTOMER_LEGEND_MAP } from '../../serviceICcustomer/config';
 
 export default {
-	name: 'HomeRealTimeList',
+	name: 'overlayList',
 	components: {
 		SvgIcon,
 	},
@@ -65,6 +65,12 @@ export default {
 	},
 	props: {
 		activeItem: {
+			type: Object,
+			default() {
+				return {};
+			},
+		},
+		activeOverlay: {
 			type: Object,
 			default() {
 				return {};

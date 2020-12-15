@@ -12,10 +12,10 @@
 		v-model="currentTab"
 	>
 		<TabPanel key="realTime" name="realTime" label="任务工单" lazy>
-			<realTime @change="handleClick" />
+			<realTime @change="handleClick" :activeOverlay="activeOverlay" />
 		</TabPanel>
 		<TabPanel key="overlayList" name="overlayList" label="三社联动" lazy>
-			<overlayList @change="handleClick" />
+			<overlayList @change="handleClick" :activeOverlay="activeOverlay" />
 		</TabPanel>
 	</Tabs>
 </template>
@@ -29,10 +29,18 @@ export default {
 	name: 'RightlistPanel',
 	data() {
 		return {
-			activeIndex: null,
+			// activeIndex: null,
 			ready: false,
 			currentTab: 'realTime',
 		};
+	},
+	props: {
+		activeOverlay: {
+			Type: Object,
+			default() {
+				return {};
+			},
+		},
 	},
 	components: {
 		Tabs,

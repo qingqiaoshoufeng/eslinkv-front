@@ -5,7 +5,11 @@
 			v-for="(item, index) in list"
 			:key="index"
 			class="list-item"
-			:class="{ active: activeIndex === index }"
+			:class="{
+				active:
+					activeIndex === index &&
+					activeOverlay.activeIndex === index,
+			}"
 		>
 			<div class="row">
 				<SvgIcon
@@ -63,6 +67,12 @@ export default {
 				return {};
 			},
 		},
+		activeOverlay: {
+			type: Object,
+			default() {
+				return {};
+			},
+		},
 	},
 	created() {
 		this.getData();
@@ -77,6 +87,9 @@ export default {
 				return val.id === id;
 			});
 			this.activeIndex = index > -1 ? index : null;
+		},
+		activeOverlay(val) {
+			console.log(val, 'val');
 		},
 	},
 	methods: {
@@ -109,7 +122,7 @@ export default {
 		handleClick(item, index) {
 			this.activeIndex = index;
 			item.overlayType = 'ThreeSocialLinkage';
-			this.$emit('change', item);
+			this.$emit('change', { ...item, activeIndex: index });
 		},
 	},
 };
