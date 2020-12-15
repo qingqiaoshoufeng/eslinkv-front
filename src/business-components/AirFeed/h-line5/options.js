@@ -78,7 +78,6 @@ export default function getOption (data, config) {
 			offset: 5
 		}],
 		series: [{
-			name: "机构登录数",
 			type: "line",
 			symbolSize: 16,
 			symbol: 'image://' + config.icon,

@@ -6,7 +6,7 @@
 			</ul>
 			<div class="h-project-1-ratio pos-a" :style="{width:`${ratio}%`}"></div>
 		</div>
-    <div class="step8-info" v-if="data.value.step8 && data.value.step8.title" @click="isShowContent = true">
+    <div class="step8-info" v-if="data.value.step8 && data.value.step8.content" @click="isShowContent = true">
       <span>{{ data.value.step8.title }} ></span>
     </div>
     <div class="step8-info-content" v-if="isShowContent">
@@ -19,7 +19,7 @@
 			v-if="data.step>=2"
 			v-bind="data.value"
 			class="h-project-1-step-box pos-a"
-			:class="data.step===2?'h-project-1-step-box-bottom':'h-project-1-step-box-top'"
+			:class="'h-project-1-step-box-top'"
 			:step="data.step"
 			:left="ratio2"
 		/>
@@ -27,7 +27,7 @@
 			v-if="data.step>=3"
 			v-bind="data.value"
 			class="h-project-1-step-box pos-a"
-			:class="data.step===3?'h-project-1-step-box-bottom':'h-project-1-step-box-top'"
+			:class="'h-project-1-step-box-top'"
 			:step="data.step"
 			:left="ratio3"
 		/>
@@ -46,26 +46,13 @@
 			:step="data.step"
 			:left="ratio5"
 		/>
-		<step6
-			v-if="data.step>=6"
-			v-bind="data.value"
-			class="h-project-1-step-box pos-a h-project-1-step-box-bottom"
-			:step="data.step"
-			:left="ratio6"
-		/>
-		<step7
-			v-if="data.step===7"
-			v-bind="data.value"
-			class="h-project-1-step-box pos-a h-project-1-step-box-bottom"
-			:left="ratioEnd"
-		/>
 		<step8
 			v-if="data.step>=8"
 			v-bind="data.value"
 			class="h-project-1-step-box pos-a h-project-1-step-box-top"
 			:left="ratioEnd"
 		/>
-		<hswiper :swiperinfo="swiperInfo" :step="data.step"/>
+		<hswiper :step="data.step"/>
 	</div>
 </template>
 <script>
@@ -75,10 +62,68 @@
 	import step3 from './step-3';
 	import step4 from './step-4';
 	import step5 from './step-5';
-	import step6 from './step-6';
-	import step7 from './step-7';
 	import step8 from './step-8';
 	import hswiper from './h-swiper';
+
+  // function a () {
+  //   let data = {
+  //     employeeName: '',
+  //     callDate: '',
+  //     address: '',
+  //     repairContent: '',
+  //     createTime: '',
+  //     overTime: '',
+  //     propResult: '',
+  //     userName: '',
+  //     carStartTime: '',
+  //     carArrivalTime: '',
+  //   }
+  //   // 数据加工
+  //   if (!data) return null
+  //   let step
+  //   if (data.overTime) {
+  //     step = 8
+  //   } else if (data.carArrivalTime) {
+  //     step = 5
+  //   } else if (data.carStartTime) {
+  //     step = 4
+  //   } else {
+  //     step = 3
+  //   }
+  //   return {
+  //     step: step,
+  //     value: {
+  //       step1: {
+  //         time: new Date(data.createTime) * 1,
+  //         des: data.repairContent,
+  //         name: data.userName,
+  //         title: '报警人',
+  //         address: data.address,
+  //       },
+  //       step2: {
+  //         time: new Date(data.callDate) * 1,
+  //         name: '秦芳芳',
+  //         title: '客服部',
+  //       },
+  //       step3: {
+  //         time: new Date(data.callDate) * 1,
+  //         name: data.employeeName,
+  //         title: '维修部',
+  //       },
+  //       step4: {
+  //         time: new Date(data.carStartTime) * 1,
+  //       },
+  //       step5: {
+  //         time: new Date(data.carArrivalTime) * 1,
+  //       },
+  //       step8: {
+  //         time: new Date(data.overTime) * 1,
+  //         title: '维修处置内容',
+  //         content: data.propResult
+  //       },
+  //     },
+  //   }
+  // }
 
 	const config = {animation: true};
 	const value = {
@@ -120,15 +165,7 @@
 						title: '维修处置内容',
 						content: '部分管道老旧破损严重导致燃气泄漏，关闭上游阀门后更换泄漏段管道，已恢复供气。'
 					},
-				},
-				videoInfo1: {
-					imgList: ['/static/images/project/01.png', '/static/images/project/02.jpg',],
-					videoList: ['/cdn/videos/sanshe.MOV',],
-				},
-				videoInfo2: {
-					imgList: ['/static/images/project/01.png', '/static/images/project/02.jpg',],
-					videoList: ['/cdn/videos/sanshe.MOV',],
-				},
+				}
 			}),
 		},
 	};
@@ -141,8 +178,6 @@
 			step3,
 			step4,
 			step5,
-			step6,
-			step7,
 			step8,
 			hswiper,
 		},
@@ -267,11 +302,6 @@
 					}
 				}
 				return 0;
-			},
-			swiperInfo() {
-				if (this.data)
-					return this.data.step === 7 ? this.data.videoInfo1 : this.data.videoInfo2
-				return {}
 			}
 		},
 		created() {
