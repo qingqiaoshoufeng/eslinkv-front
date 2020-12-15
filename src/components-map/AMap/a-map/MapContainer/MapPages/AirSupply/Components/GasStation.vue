@@ -80,7 +80,7 @@ export default {
 	},
 	methods: {
 		async handleOverlayClick(marker) {
-			let { id, name, type } = marker;
+			let { id = '', name='', type='' } = marker;
 			let data = {};
 			let dataComp = {};
 			try {

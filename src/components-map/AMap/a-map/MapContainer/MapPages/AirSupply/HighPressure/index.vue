@@ -7,11 +7,11 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
 		></WarnEvent>
-		<StationList
+		<!-- <StationList
 			:data="activeStationData"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeStationListDetail"
-		></StationList>
+		></StationList> -->
 
 		<!-- 行政区域覆盖物 -->
 		<RegionBoundary />
@@ -21,6 +21,7 @@
 				:key="legend"
 				v-if="stationDataMap[config.dataProp]"
 				:ref="legend"
+				:activeItem="activeOverlayMap[legend] || undefined"
 				:is="config.component"
 				:visible="config.visible"
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
@@ -38,7 +39,7 @@
 			v-model="showOverlayDetail"
 			v-bind="{
 				beforeClose: closeOverlayDetail,
-				...OverlayDetailProp,
+				...overlayDetailProp,
 			}"
 			@view-detail="viewDetail"
 			ref="OverlayDetail"
@@ -139,7 +140,8 @@ export default {
 		};
 	},
 	computed: {
-		OverlayDetailProp() {
+		//详情弹窗所需props
+		overlayDetailProp() {
 			let { activeOverlay, overlayInfoConfigMap, legendMap } = this;
 			if (JSON.stringify(activeOverlay) !== '{}') {
 				let { overlayType } = activeOverlay;
@@ -159,6 +161,17 @@ export default {
 					showCloseBtn,
 					overlayDetailConfig,
 					showMore,
+				};
+			}
+		},
+		activeOverlayMap() {
+			let { activeStationData } = this;
+			if (JSON.stringify(activeStationData) === '{}') {
+				return {};
+			} else {
+				let { overlayType } = activeStationData;
+				return {
+					[overlayType]: activeStationData,
 				};
 			}
 		},
@@ -213,7 +226,8 @@ export default {
 		},
 		closeOverlayDetail(done, isZoom = true) {
 			this.showOverlayDetail = false;
-			this.activeOverlay = {};
+            this.activeOverlay = {};
+            this.activeStationData = {}
 			if (isZoom) {
 				this.setZoomAndPanTo(...this.center, this.zoom);
 			}
@@ -241,11 +255,12 @@ export default {
 			// this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
 			// this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
 			// this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
-			this.activeWarnData = {};
+            this.activeWarnData = {};
+            this.activeStationData = {};
 			this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		closeStationListDetail() {
-			this.activeStationData = {};
+			// this.activeStationData = {};
 			// this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
 			// this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
 			// this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;

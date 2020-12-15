@@ -98,9 +98,6 @@ export default {
 			},
 		},
 	},
-	created() {
-		this.getData();
-	},
 	computed: {
 		showStationList() {
 			if (this.searchName) {
@@ -126,21 +123,6 @@ export default {
 	methods: {
 		clearSearch() {
 			this.searchName = '';
-		},
-		async getData() {
-			let params = {
-				// searchName,
-				types: '',
-			};
-			let list = await this.$sysApi.map.home.getAllTypeStationList();
-			this.list = list.map(item => {
-				let { stationType } = item;
-				//   let config = AIRSUPPLYOVERLAYCONFIGMAP[stationType]
-				//   if(config){
-				//       item.icon = config.legendIcon
-				//   }
-				return item;
-			});
 		},
 		handleClick(item, index) {
 			this.activeIndex = index;

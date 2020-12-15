@@ -84,7 +84,6 @@ export default {
 	},
 	mounted() {
 		this.updateKanboardSize();
-		console.log('yuzhiqiang ');
 	},
 };
 </script>
