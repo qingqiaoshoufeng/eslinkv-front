@@ -50,9 +50,6 @@
 <script>
 import { SvgIcon } from '../../../../../components/';
 import { SERVICE_SERVICEICCUSTOMER_LEGEND_MAP } from '../../serviceICcustomer/config';
-import first from '/static/images/amap/first.svg';
-import second from '/static/images/amap/second.svg';
-import third from '/static/images/amap/third.svg';
 
 export default {
 	name: 'HomeRealTimeList',
@@ -60,7 +57,6 @@ export default {
 		SvgIcon,
 	},
 	data() {
-		let iconList = [first, second, third];
 		return {
 			activeIndex: null,
 			list: [],

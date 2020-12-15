@@ -68,7 +68,7 @@ let activity = {
 let community = {
     label: '三社联动参加人员',
     DW: '户',
-    prop: "community",
+    prop: "joinNumber",
     Fixed: 0
 }
 let households = {

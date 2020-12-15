@@ -6,11 +6,7 @@ const placeHolderStyle = {
         labelLine: {
             show: false
         },
-        color: "rgba(0,0,0,0)",
-        borderWidth: 0
-    },
-    emphasis: {
-        color: "rgba(0,0,0,0)",
+        color: "rgba(0,0,0,0.3)",
         borderWidth: 0
     }
 };
@@ -54,7 +50,17 @@ export default function (percent) {
                     },
                     {
                         value: 100 - percent,
-                        itemStyle: placeHolderStyle
+                        itemStyle: {
+                            label: {
+                                show: false
+                            },
+                            labelLine: {
+                                show: false
+                            },
+                            color: "rgba(74,74,74,1)",
+                            borderWidth: 0,
+                            opacity: 0.5
+                        }
                     },
                 ]
             },
@@ -93,7 +99,16 @@ export default function (percent) {
                     },
                     {
                         value: 100 - percent,
-                        itemStyle: placeHolderStyle
+                        itemStyle: {
+                            label: {
+                                show: false
+                            },
+                            labelLine: {
+                                show: false
+                            },
+                            color: "rgba(74,74,74,1)",
+                            borderWidth: 0,
+                        }
                     },
                 ]
             },
