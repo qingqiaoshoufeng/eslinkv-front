@@ -206,6 +206,7 @@ export default {
 			});
 		},
 		closeOverlayDetail(done) {
+			// this.$refs.RightPanel1.$refs.overlayList.searchName = '';
 			this.showRoutePlan = false;
 			GoldChart.scene.setSceneIndex(
 				INDEXSCENEMAP[this.parentInfo.pageName]

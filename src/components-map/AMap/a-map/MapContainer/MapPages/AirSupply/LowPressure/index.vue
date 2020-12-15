@@ -252,6 +252,7 @@ export default {
 			this.$refs.RightPanel1.$refs.processWarning.activeIndex = -1;
 			this.$refs.RightPanel1.$refs.realTime.activeIndex = -1;
 			this.$refs.RightPanel1.$refs.overlayList.activeIndex = -1;
+			this.$refs.RightPanel1.$refs.overlayList.searchName = '';
 
 			this.$amap.setZoom(this.zoom, 100);
 			this.$amap.setCenter(this.center, 100);
@@ -343,7 +344,6 @@ export default {
 			});
 		},
 		handleListClick(overlay, eventType) {
-			console.log(overlay);
 			if (this.showOverlayDetail) {
 				this.showOverlayDetail = false;
 				this.activeOverlay = {};

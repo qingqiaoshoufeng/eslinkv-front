@@ -124,6 +124,9 @@ export default {
 		},
 	},
 	methods: {
+		clearSearch() {
+			this.searchName = '';
+		},
 		async getData() {
 			let params = {
 				// searchName,

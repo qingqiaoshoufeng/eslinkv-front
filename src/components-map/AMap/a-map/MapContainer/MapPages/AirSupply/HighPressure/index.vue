@@ -249,6 +249,7 @@ export default {
 			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
 			this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
 			this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
+			this.$refs.RightPanel.$refs.overlayList.searchName = '';
 			this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		//查看详情调用组件内部的方法
