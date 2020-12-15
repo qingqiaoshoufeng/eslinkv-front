@@ -8,7 +8,8 @@
 				@on-change="change(item.type)"
 				true-color="#0057A9"
 				false-color="#0057A9"
-			/>{{ item.value ? 'ON' : 'OFF' }}
+			/>
+			<div class="desc">{{ item.value ? 'ON' : 'OFF' }}</div>
 		</div>
 	</div>
 </template>
@@ -79,6 +80,9 @@ export default {
 		.ivu-switch-inner:after {
 			background-color: rgba(255, 255, 255, 1) !important;
 		}
+	}
+	.desc {
+		width: 40px;
 	}
 	div {
 		display: flex;

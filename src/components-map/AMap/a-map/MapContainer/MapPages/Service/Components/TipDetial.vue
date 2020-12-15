@@ -97,7 +97,7 @@ export default {
 		width: 450px;
 		margin-top: 16px;
 		.item {
-			min-width: 50%;
+			min-width: 60%;
 			display: inline-block;
 			// font-family: PingFang SC;
 			font-style: normal;
