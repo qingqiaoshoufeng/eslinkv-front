@@ -43,7 +43,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         iconSize: 38,
         component: 'OngroundRepairStation',
         visible: true,
-        dataProp: 'OngroundRepairStationList',
+        dataProp: 'ongroundRepairStationList',
     },
     ServiceStation: {
         label: '综合服务站',

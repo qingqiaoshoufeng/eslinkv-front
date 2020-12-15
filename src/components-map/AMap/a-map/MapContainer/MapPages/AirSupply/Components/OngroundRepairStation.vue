@@ -7,9 +7,10 @@
 			visible,
 			apiFun,
 			...$attrs,
+			data,
 		}"
 		@click="
-			marker => $emit('overlay-click', marker, 'UndergroundRepairStation')
+			marker => $emit('overlay-click', marker, 'OngroundRepairStation')
 		"
 	/>
 </template>
@@ -33,12 +34,24 @@ export default {
 			type: String,
 			default: '',
 		},
+		data: {
+			type: Array,
+		},
+		detailList: {
+			type: Array,
+			default() {
+				return [];
+			},
+		},
 	},
 	data() {
 		let apiFun = this.$sysApi.map.home.getUndergroundRepairStationList;
 		return {
 			apiFun: apiFun,
 		};
+	},
+	mounted() {
+		console.log(this.data, 'this.data');
 	},
 };
 </script>
