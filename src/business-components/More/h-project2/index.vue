@@ -20,19 +20,19 @@
 						</div>
 						<div class="fn-flex flex-column text-left">
 							<h2 class="font-num">{{data&&data.value[animateActiveIndex].total|toThousand}}</h2>
-							<p>月度接纳(m³)</p>
+							<p>月度接纳(万m³)</p>
 						</div>
 					</div>
 					<div class="h-project-2-curve pos-r">
 						<div class="h-project-2-curve-chart" :id="id"></div>
 						<p class="pos-a text-center">月度接纳趋势</p>
 					</div>
-					<div class="h-project-2-month1 pos-r">
-						<h2 class="font-num">{{data&&data.value[animateActiveIndex].month1}}</h2>
+					<div class="h-project-2-month1 pos-r" :class="{active:data.value[animateActiveIndex].month1>0}">
+						<h2 class="font-num">{{data.value[animateActiveIndex].month1>0?'+':''}}{{data.value[animateActiveIndex].month1}}%</h2>
 						<p class="pos-a text-center">月度同比</p>
 					</div>
-					<div class="h-project-2-month2 pos-r">
-						<h2 class="font-num">{{data&&data.value[animateActiveIndex].month2}}</h2>
+					<div class="h-project-2-month2 pos-r" :class="{active:data.value[animateActiveIndex].month2>0}">
+						<h2 class="font-num">{{data.value[animateActiveIndex].month2>0?'+':''}}{{data.value[animateActiveIndex].month2}}%</h2>
 						<p class="pos-a text-center">月度环比</p>
 					</div>
 				</div>
@@ -237,7 +237,7 @@
 			height: 12px;
 			margin-right: 32px;
 			transition: all .3s;
-      		min-width: 80px;
+			min-width: 80px;
 
 			&:last-child {
 				margin-right: 0 !important;
@@ -383,15 +383,14 @@
 		}
 	}
 
-	.h-project-2-month1 {
-		h2 {
-			color: #E5615B;
-		}
-	}
-
-	.h-project-2-month2 {
+	.h-project-2-month1,.h-project-2-month2{
 		h2 {
 			color: #00FFCF;
+		}
+		&.active{
+			h2 {
+				color: #E5615B;
+			}
 		}
 	}
 </style>
