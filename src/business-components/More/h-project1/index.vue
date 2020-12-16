@@ -282,7 +282,7 @@
 						const current =
 							this.data.value.step5.time - this.data.value.step1.time;
 						const total =
-							this.data.value.step6.time - this.data.value.step1.time;
+							this.data.value.step8.time - this.data.value.step1.time;
 						let diff = current / total;
 						if (current / total > 0.7) {
 							diff = 0.7;
@@ -302,7 +302,7 @@
 						return this.ratioCenter;
 					} else {
 						const current =
-							this.data.value.step6.time - this.data.value.step1.time;
+							this.data.value.step5.time - this.data.value.step1.time;
 						const total =
 							this.data.value.step8.time - this.data.value.step1.time;
 						let diff = current / total;
