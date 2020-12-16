@@ -18,6 +18,7 @@ export { default as OngroundRepairStation } from './OngroundRepairStation'
 export { default as ServiceStation } from './ServiceStation'
 export { default as WarningList } from './WarningList'
 export { default as WarnEvent } from './WarnEvent/index.vue'
+export { default as WarningStations } from './WarningStations/index.vue'
 
 export { default as RightPanel } from './RightPanel/'
 export { default as RoutePlan } from './RoutePlan/'

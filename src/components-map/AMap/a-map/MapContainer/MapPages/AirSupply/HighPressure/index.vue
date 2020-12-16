@@ -7,7 +7,9 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
 		></WarnEvent>
-
+		<!-- <WarningStations
+			:overlayInfoConfigMap="overlayInfoConfigMap"
+		></WarningStations> -->
 		<!-- 行政区域覆盖物 -->
 		<RegionBoundary />
 		<!-- 2.legend控制显隐 -->
@@ -80,6 +82,8 @@ let componentPageArr = [
 	'WarnEvent',
 	//右侧报警列表
 	'RightPanel',
+	// 'StationList',
+	'WarningStations',
 ];
 //页面所需公共组件
 let componentCommonArr = [

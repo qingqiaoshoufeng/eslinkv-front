@@ -18,7 +18,7 @@
 					class="panel-type-icon"
 				></SvgIcon>
 				<div class="content">
-					<div>
+					<div class="name">
 						{{ item.name }}
 					</div>
 
@@ -160,8 +160,15 @@ export default {
 				align-items: center;
 				margin-left: 12px;
 				justify-content: space-between;
+				.name {
+					width: 320px;
+					white-space: nowrap;
+
+					overflow: hidden;
+
+					text-overflow: ellipsis;
+				}
 				.time {
-					font-family: PingFang SC;
 					font-style: normal;
 					font-weight: normal;
 					font-size: 20px;

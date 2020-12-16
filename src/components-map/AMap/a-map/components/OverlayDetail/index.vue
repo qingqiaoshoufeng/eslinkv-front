@@ -68,14 +68,13 @@
 </template>
 <script>
 import { AMapMarker } from '../../lib';
-import PopContainer from '../PopContainer';
+// import PopContainer from '../PopContainer';
 import SvgIcon from '../SvgIcon/index';
 
 export default {
 	name: 'OverlayDetail',
 	inject: ['parentInfo'],
 	components: {
-		PopContainer,
 		ElAmapMarker: AMapMarker,
 		SvgIcon,
 	},

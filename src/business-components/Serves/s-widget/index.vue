@@ -62,10 +62,11 @@
       },
       getIndexClass (n) {
         let res = ''
-        switch (n) {
-          case 0:
-          case 1:
-          case 2:
+        let num = this.getIndex(n)
+        switch (num) {
+          case '01':
+          case '02':
+          case '03':
             res = 'top'
             break
           default:
