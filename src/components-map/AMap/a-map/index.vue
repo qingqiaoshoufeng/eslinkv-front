@@ -36,9 +36,9 @@ export default {
 		},
 	},
 	mounted() {
-		// setTimeout(() => {
+		setTimeout(() => {
 			this.ready = true;
-		// }, 2000);
+		}, 2000);
 		window.resetMap = this.resetMap.bind(this);
 	},
 };
