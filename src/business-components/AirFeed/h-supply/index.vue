@@ -13,8 +13,8 @@
       <div class="outside">
         <h5>{{curr.name}}外供量</h5>
         <div class="sub">
-          <div class="sub-item" v-for="(k, i) in (curr.children || [])" :key="i">
-            <div class="sub-item-rank font-num">{{ i + 1 }}</div>
+          <div class="sub-item" v-for="(k, i) in (subItem || curr.children || [])" :key="i">
+            <div class="sub-item-rank font-num">{{ getIndex(i) }}</div>
             <div class="sub-detail">
               <div class="sub-title">{{ k.name }}</div>
               <div class="sub-num">{{ k.value | toThousand }}</div>
@@ -133,6 +133,9 @@ const value = {
     ])
 	}
 }
+
+let inside = 0
+const SIZE = 12
 export default {
 	mixins: [mixins],
   data () {
@@ -140,11 +143,34 @@ export default {
 	    index: 0,
       timer: null,
       restartTimer: null,
+      subItem: null
     }
   },
   computed: {
 	  curr () {
-	    return this.data ? this.data[this.index] : {}
+	    if (!this.data) return {}
+	    return this.data[this.index]
+    }
+  },
+  watch: {
+    data: {
+      handler(val) {
+        this.subItem = val[0].children.slice(0, SIZE)
+      },
+      deep: true,
+      immediate: true
+    },
+    index: {
+      handler(val) {
+        if (!this.data) return
+        this.subItem = this.data[val].children.slice(0, SIZE)
+        if (this.data[val].children.length > SIZE) {
+          inside = 1
+        } else {
+          inside = 0
+        }
+      },
+      immediate: true
     }
   },
   methods: {
@@ -160,16 +186,28 @@ export default {
       this.index = n
       this.restartTimer = setTimeout(() => {
         this.startInterval()
-      }, 2000)
+      }, 3000)
+    },
+    getIndex (n) {
+      return inside === 0 ? n + 1 : n + 1 + (inside - 1) * SIZE
     },
     startInterval () {
       this.timer = setInterval(() => {
+        if (inside) {
+          if (inside === Math.ceil(this.data[this.index].children.length / SIZE)) {
+            inside = 0
+          } else {
+            inside++
+            this.subItem = this.data[this.index].children.slice(SIZE * (inside - 1), SIZE * inside)
+            return
+          }
+        }
         if (this.index === this.data.length - 1) {
           this.index = 0
         } else {
           this.index++
         }
-      }, 2000)
+      }, 3000)
     }
   },
 	created() {
@@ -270,11 +308,10 @@ export default {
         .sub-detail {
           text-align: left;
           font-size: 18px;
-          line-height: 24px;
           color: #F9F9F9;
           .sub-title {
-            margin-bottom: 8px;
-            white-space: nowrap;
+            height: 33px;
+            margin-bottom: 4px;
           }
           .sub-bar {
             width: 0;
