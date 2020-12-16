@@ -37,7 +37,6 @@ export default {
 	},
 	mounted() {
 		window.resetMap = this.resetMap.bind(this);
-		this.resetMap();
 	},
 };
 </script>
