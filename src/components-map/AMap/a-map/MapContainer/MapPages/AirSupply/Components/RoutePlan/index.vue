@@ -87,7 +87,7 @@ export default {
 			let passedPathData = [];
 			try {
 				passedPathData = await this.$sysApi.map.airSupply.getEmployeeGpsTrack(
-					{ employeeName, callDate, arrivalTime }
+					{ employeeName, callDate, arriveDate: arrivalTime }
 				);
 			} catch (error) {
 				console.log('error', error);
