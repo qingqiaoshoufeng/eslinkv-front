@@ -46,6 +46,13 @@
 			:step="data.step"
 			:left="ratio5"
 		/>
+    <step6
+        v-if="data.step===6"
+        v-bind="data.value"
+        class="h-project-1-step-box pos-a h-project-1-step-box-bottom"
+        :step="data.step"
+        :left="ratio6"
+    />
 		<step8
 			v-if="data.step>=8"
 			v-bind="data.value"
@@ -62,6 +69,7 @@
 	import step3 from './step-3';
 	import step4 from './step-4';
 	import step5 from './step-5';
+	import step6 from './step-6';
 	import step8 from './step-8';
 	import hswiper from './h-swiper';
 
@@ -71,7 +79,7 @@
   //     callDate: '',
   //     address: '',
   //     repairContent: '',
-  //     createTime: '',
+  //     createDate: '',
   //     overTime: '',
   //     propResult: '',
   //     userName: '',
@@ -84,17 +92,17 @@
   //   if (data.overTime) {
   //     step = 8
   //   } else if (data.carArrivalTime) {
-  //     step = 5
+  //     step = 6
   //   } else if (data.carStartTime) {
-  //     step = 4
+  //     step = 5
   //   } else {
-  //     step = 3
+  //     step = 4
   //   }
   //   return {
   //     step: step,
   //     value: {
   //       step1: {
-  //         time: new Date(data.createTime) * 1,
+  //         time: new Date(data.createDate) * 1,
   //         des: data.repairContent,
   //         name: data.userName,
   //         title: '报警人',
@@ -178,6 +186,7 @@
 			step3,
 			step4,
 			step5,
+      step6,
 			step8,
 			hswiper,
 		},
@@ -207,7 +216,7 @@
 							this.data.value.step3.time - this.data.value.step1.time;
 						let diff = current / total;
 						if (current / total > 0.7) {
-							diff = 0.7;
+							diff = 0.5;
 						}
 						if (this.ratio3 * diff < this.ratioMin)
 							return this.ratioMin;
@@ -230,6 +239,9 @@
 						let diff = current / total;
 						if (current / total > 0.7) {
 							diff = 0.7;
+						}
+						if (current / total < 0.4) {
+							diff = 0.4;
 						}
 						if (this.ratio4 * diff < this.ratioMin * 2)
 							return this.ratioMin * 2;
@@ -270,7 +282,7 @@
 						const current =
 							this.data.value.step5.time - this.data.value.step1.time;
 						const total =
-							this.data.value.step6.time - this.data.value.step1.time;
+							this.data.value.step8.time - this.data.value.step1.time;
 						let diff = current / total;
 						if (current / total > 0.7) {
 							diff = 0.7;
@@ -290,7 +302,7 @@
 						return this.ratioCenter;
 					} else {
 						const current =
-							this.data.value.step6.time - this.data.value.step1.time;
+							this.data.value.step5.time - this.data.value.step1.time;
 						const total =
 							this.data.value.step8.time - this.data.value.step1.time;
 						let diff = current / total;

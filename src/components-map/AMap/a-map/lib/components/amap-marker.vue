@@ -126,10 +126,6 @@ export default {
 			let compOffset = offset || [0, 0];
 			let [offsetX, offsetY] = compOffset;
             compOffset = toPixel(compOffset) 
-            // new AMap.Pixel(
-			// 	offsetX * scaleRatio,
-			// 	offsetY * scaleRatio
-			// );
 			this.$amapComponent = new AMap.Marker({
                 ...options,
 				offset: compOffset,

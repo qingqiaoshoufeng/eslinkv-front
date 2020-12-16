@@ -1,6 +1,6 @@
 <template>
 	<div class="map-box">
-		<template v-if="inPreview">
+		<template v-if="ready && inPreview">
 			<MapContainer />
 		</template>
 		<template v-else>
@@ -30,15 +30,16 @@ export default {
 	methods: {
 		resetMap() {
 			this.ready = false;
-
 			setTimeout(() => {
 				this.ready = true;
 			}, 5000);
 		},
 	},
 	mounted() {
+		setTimeout(() => {
+			this.ready = true;
+		}, 2000);
 		window.resetMap = this.resetMap.bind(this);
-		this.resetMap();
 	},
 };
 </script>

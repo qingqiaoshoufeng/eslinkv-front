@@ -1,7 +1,7 @@
 <template>
 	<div class="swiper-box1">
 		<!-- 轮播视频部分 -->
-		<div class="swiper-Part" v-if="[7,8].includes(step)">
+		<div class="swiper-Part">
 			<!-- 视频区域 -->
 			<div class="left pos-r">
         <live-video></live-video>
@@ -27,11 +27,11 @@
 			</div>
 		</div>
 		<!-- 出车抢修部分 -->
-		<div class="carout-Part" v-if="[5].includes(step)">
-			<video src="/static/images/airfeed/carout03.webm" controls="controls" autoplay="autoplay" muted="muted"
-				   loop>
-			</video>
-		</div>
+<!--		<div class="carout-Part" v-if="[5].includes(step)">-->
+<!--			<video src="/static/images/airfeed/carout03.webm" controls="controls" autoplay="autoplay" muted="muted"-->
+<!--				   loop>-->
+<!--			</video>-->
+<!--		</div>-->
 	</div>
 </template>
 <script>

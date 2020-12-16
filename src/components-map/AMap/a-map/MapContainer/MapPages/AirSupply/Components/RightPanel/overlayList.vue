@@ -23,7 +23,7 @@
 				v-for="(item, index) in showStationList"
 				:key="index"
 				class="list-item"
-				:class="{ active: activeItem === item }"
+				:class="{ active: activeItem.name === item.name }"
 			>
 				<div class="row">
 					<SvgIcon

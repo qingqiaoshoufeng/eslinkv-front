@@ -10,8 +10,6 @@
 		}"
 		v-if="ready"
 		@click="handleOverlayClick"
-		@mouseover="handleMouseover"
-		@mouseleave="handleMouseleave"
 	>
 	</BaseOverlay>
 </template>
@@ -55,7 +53,7 @@ export default {
 		},
 		handleOverlayClick(marker) {
             let { id='', name='', type='' } = marker;
-			this.$emit('overlay-click', marker, 'InspectionPerson', false);
+			this.$emit('overlay-click', marker, 'InspectionCar', false);
         },
 		handleMouseleave() {
 			// this.$emit('close');

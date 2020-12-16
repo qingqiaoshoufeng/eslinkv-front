@@ -17,7 +17,7 @@
 					<component
 						:scaleRatio="scaleRatio"
 						:is="mapComponentName"
-					/>
+					/>   
 				</template>
 			</el-amap>
 		</div>

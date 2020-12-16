@@ -15,7 +15,7 @@ initAMapApiLoader({
         'AMap.HawkEye',
         'AMap.ToolBar'
 	],
-	v: '1.4.15',
+	v: '1.4.4',
 	key: '8081bdaac8258a8a4a6244bf16084fed',
 })
 
