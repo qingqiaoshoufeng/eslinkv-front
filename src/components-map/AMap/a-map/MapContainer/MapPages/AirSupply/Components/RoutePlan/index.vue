@@ -21,8 +21,8 @@ export default {
 		return {
 			icon: 'iconbaoguanshijian',
 			isExecuteFlag: false, //是否正在请求数据
-            drawLineIndex: 0, //当前请求的index
-            duration:6    //6秒内播放完毕
+			drawLineIndex: 0, //当前请求的index
+			duration: 6, //6秒内播放完毕
 		};
 	},
 	props: {
@@ -41,8 +41,8 @@ export default {
 				if (this.timer) {
 					clearInterval(this.timer);
 					this.timer = null;
-                }
-                this.$emit('view-detail')
+				}
+				this.$emit('view-detail');
 				this.timer = setInterval(() => {
 					if (!this.isExecuteFlag) {
 						this.reset();
@@ -73,7 +73,6 @@ export default {
 				callDate,
 				arrivalTime,
 			} = data;
-			this.isExecuteFlag = true;
 			//渲染一次后，需手动调整位置
 			if (this.$refs.marker) {
 				this.$refs.marker.$amapComponent.setPosition(
@@ -84,17 +83,26 @@ export default {
 				console.error('还没有接单或者派人');
 				return false;
 			}
-			let passedPathData = await this.$sysApi.map.airSupply.getEmployeeGpsTrack(
-				{ employeeName, callDate, arrivalTime }
-			);
-			this.isExecuteFlag = false;
+			this.isExecuteFlag = true;
+			let passedPathData = [];
+			try {
+				passedPathData = await this.$sysApi.map.airSupply.getEmployeeGpsTrack(
+					{ employeeName, callDate, arrivalTime }
+				);
+			} catch (error) {
+				console.log('error', error);
+				this.isExecuteFlag = false;
+			}
+
 			if (this.drawLineIndex !== drawLineIndex) {
+				this.isExecuteFlag = false;
 				return false;
 			}
 			// passedPathData = passedPathData.map(item => {
 			// 	return coordinateTransform.WGS2GCJ(...item);
 			// });
 			if (!passedPathData) {
+				this.isExecuteFlag = false;
 				console.error('无人员位置信息');
 				return false;
 			}
@@ -131,15 +139,17 @@ export default {
 							if (this.drawLineIndex === drawLineIndex) {
 								this.drawLine(passedPathData, planPathData);
 							}
+							this.isExecuteFlag = false;
 						}
 					}
 				);
 			}
 		},
 		drawLine(passedPathData = [], planPathData = []) {
+			this.isExecuteFlag = false;
 			let map = this.map;
-            // 1.已行驶路径 + 预测轨迹
-            let pathDataAll = [...passedPathData, ...planPathData];
+			// 1.已行驶路径 + 预测轨迹
+			let pathDataAll = [...passedPathData, ...planPathData];
 			this.pathAll = new AMap.Polyline({
 				map: map,
 				path: pathDataAll,
@@ -153,17 +163,17 @@ export default {
 			let markerPose = passedPathData[0];
 			this.marker = new AMap.Marker({
 				map: map,
-				position:markerPose,
+				position: markerPose,
 				icon: '/static/amap/car-1.png',
-                offset: new AMap.Pixel(-8, -8),
-                autoRotation:true,
-                //   angle:90,
-            });
+				offset: new AMap.Pixel(-8, -8),
+				autoRotation: true,
+				//   angle:90,
+			});
 			// 3.轨迹回放
 			if (passedPathData.length > 1) {
 				this.passedPolyline = new AMap.Polyline({
 					map: map,
-                    zIndex: 1500,
+					zIndex: 1500,
 					strokeColor: '#BDBDBD', //线颜色
 					fillColor: '#BDBDBD', //线颜色
 					strokeWeight: 6, //线宽
@@ -174,10 +184,12 @@ export default {
 					this.passedPolyline.setPath(e.passedPath);
 				});
 				let startAnimation = () => {
-                    //计算速度
-                    let totalDistance = AMap.GeometryUtil.distanceOfLine(passedPathData)
-                    let speed =  totalDistance/1000/(this.duration/60/60)
-                    console.log(speed,'speed')
+					//计算速度
+					let totalDistance = AMap.GeometryUtil.distanceOfLine(
+						passedPathData
+					);
+					let speed =
+						totalDistance / 1000 / (this.duration / 60 / 60);
 					this.marker.moveAlong(passedPathData, speed);
 				};
 				startAnimation();
