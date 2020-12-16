@@ -114,6 +114,10 @@ export default {
 				this.showOverlayDetail = false;
 				return {};
 			}
+        },
+        //路径规划时隐藏管线，legend
+		showRoutePlan(val) {
+            this.$parent.showRoutePlan = val;
 		},
 	},
 	mounted() {

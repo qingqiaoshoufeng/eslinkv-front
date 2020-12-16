@@ -6,6 +6,7 @@
 			:data="activeWarnData"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
+			ref="WarnEvent"
 		></WarnEvent>
 		<!-- <StationList
 			:data="activeStationData"
@@ -15,7 +16,7 @@
 		<!-- 特殊 中低压管网需要legend控制显隐 -->
 		<AMapTile
 			ref="mapTile"
-			:visible="!!tilesQuery.length"
+			:visible="!!tilesQuery.length && !showRoutePlan"
 			:getTileUrl="getTileUrl"
 		/>
 		<!-- 2.legend控制显隐 -->
@@ -56,7 +57,11 @@
 				:data="dataStatisticsData"
 			/>
 			<!-- 图例 -->
-			<MapLegend :data="legendMap" class="map-legend" />
+			<MapLegend
+				v-if="!showRoutePlan"
+				:data="legendMap"
+				class="map-legend"
+			/>
 			<!-- 右侧列表 -->
 			<RightPanel
 				class="right-panel"
@@ -119,7 +124,9 @@ import {
 	AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 } from './config.js';
 import GoldChart from '@/openApi';
-import getHangZhouGasGISPosition from '../../../../utils/getHangZhouGasGISPosition';
+import getHangZhouGasGISPosition, {
+	getPositionByLatLng,
+} from '../../../../utils/getHangZhouGasGISPosition';
 
 export default {
 	name: 'LowPressure',
@@ -152,11 +159,11 @@ export default {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.setCenter(this.center, 100);
+		// this.$amap.on('zoomend', this.handleMapZoomChangeEnd);
 	},
 	mounted() {
 		this.getAllTypeStationList();
 		this.getDataStatisticsInfo();
-		window.setCenter = this.setCenter.bind(this);
 	},
 	watch: {
 		center(val) {
@@ -173,6 +180,7 @@ export default {
 			center: [120.151562, 30.283297],
 			zoom: 12.5,
 			showOverlayDetail: false,
+			showRoutePlan: false,
 			activeTab: 'realTime',
 			legendMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 			overlayMap: AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP,
@@ -271,6 +279,37 @@ export default {
 		},
 	},
 	methods: {
+		// handleMapZoomChangeEnd() {
+		// 	let { northeast, southwest } = this.$amap.getBounds();
+		// 	let { lat: latM, lng: lngM } = northeast;
+		// 	let { lat: latE, lng: lngE } = southwest;
+		// 	const tilesQuery = String(this.tilesQuery);
+		// 	if (this.imageLayer) {
+		//         this.imageLayer.setMap(null);
+		//         window.aaa = this.imageLayer
+		// 	}
+		// 	const {
+		// 		leftBottomX,
+		// 		leftBottomY,
+		// 		rightTopX,
+		// 		rightTopY,
+		// 		width,
+		// 		height,
+		// 	} = getPositionByLatLng(
+		// 		{ lat: latM, lng: lngE },
+		// 		{ lat: latE, lng: lngM }
+		// 	);
+		// 	let url = `${
+		// 		(window.api && window.api.MAP_GIS_URL) ||
+		// 		'http://192.168.1.104:6080'
+		// 	}/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
+		// 	this.imageLayer = new AMap.ImageLayer({
+		// 		url: url,
+		// 		zIndex: 2000,
+		// 		bounds: new AMap.Bounds([lngE, latM], [lngM, latE]),
+		// 	});
+		// 	this.imageLayer.setMap(this.$amap);
+		// },
 		closeStationListDetail(done) {
 			this.activeStationData = {};
 			this.$refs.RightPanel1.$refs.processWarning.activeIndex = -1;
@@ -281,9 +320,6 @@ export default {
 			this.$amap.setZoom(this.zoom, 100);
 			this.$amap.setCenter(this.center, 100);
 			done && done();
-		},
-		setCenter(center) {
-			this.center = center || this.center;
 		},
 		// 获取所有站点数据
 		async getAllTypeStationList() {

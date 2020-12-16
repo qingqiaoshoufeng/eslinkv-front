@@ -51,7 +51,7 @@ export default function (data, config) {
 				show: true
 			},
 			nameTextStyle: {
-				padding: [0, 20, 0, 0]
+				padding: [0, 30, 0, 0]
 			},
 			splitLine: {
 				show: true,

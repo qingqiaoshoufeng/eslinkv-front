@@ -28,18 +28,19 @@ export default {
 			type: Function,
 		},
 	},
-	computed: {
-		zIndexInner() {
-			return this.visible ? this.zIndex : 0;
-		},
-	},
-	watch: {
-		visible: {
-			handler(val) {
-				this.originInstance.setzIndex(this.zIndexInner);
-			},
-		},
-	},
+    watch:{
+        visible(val){
+            if(!this.originInstance){
+                return false
+            }
+            if(val){
+                this.originInstance.show()
+            }else{
+                this.originInstance.hide()
+            }
+        }
+    },
+    
 	created() {
 		let fun = findAmapRoot.bind(this);
 		this.$amap = fun();
@@ -49,18 +50,16 @@ export default {
 	},
 	methods: {
 		load() {
-			const { BMap, opacity, zIndexInner, getTileUrl } = this;
+			const { BMap, opacity, zIndex, getTileUrl } = this;
 			if (!getTileUrl) {
 				return false;
 			}
 			this.originInstance = new AMap.TileLayer({
-				zIndex: zIndexInner,
+				zIndex: zIndex,
 				opacity,
                 getTileUrl: getTileUrl,
                 map:this.$amap
 			});
-            // this.$amap.addLayer(this.originInstance);
-            window.suyan = this.originInstance
 		},
 		reload() {
 			this.$nextTick(() => {
