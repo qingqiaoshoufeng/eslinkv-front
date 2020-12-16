@@ -28,6 +28,7 @@
 				:detailList="config.detailList"
 				:data="stationDataMap[config.dataProp]"
 				:showOverlayDetail="showOverlayDetail"
+				@moveto="handlerMoveto"
 				@overlay-click="handleOverlayClick"
 				@close="closeOverlayDetail('', false)"
 			/>
@@ -168,6 +169,7 @@ export default {
 				};
 			}
 		},
+
 		//点击右侧点位列表，从overlay组件内部触发click事件
 		activeOverlayMap() {
 			let { activeStationData } = this;
@@ -190,6 +192,21 @@ export default {
 		},
 	},
 	methods: {
+		handlerMoveto({ type }) {
+			console.log('WarningStations');
+			if (type === 'WarningStations') {
+				this.$amap.panTo([120.131259, 30.363295], 100);
+				this.closeOverlayDetail('', false);
+			} else {
+				this.$amap.panTo(this.center, 100);
+
+				this.closeWarnEventDetail();
+			}
+		},
+		// handlerMove() {
+		// 	console.log(111111111111);
+		// 	this.$amap.panTo(this.center, 100);
+		// },
 		// 1.获取所有站点数据
 		async getAllTypeStationList() {
 			let params = {
@@ -235,6 +252,12 @@ export default {
 			this.overlayDetailPosition = zoom == 14 ? 'top' : '';
 		},
 		handleOverlayClick(overlay, overlayType) {
+			// if ((overlay.type = 'WarningStations')) {
+			// 	this.$amap.panTo([120.131259, 30.363295], 100);
+			// 	return;
+			// } else {
+			// 	this.$amap.panTo(this.center, 100);
+			// }
 			this.closeWarnEventDetail();
 			overlay.overlayType = overlayType || overlay.overlayType;
 			this.activeOverlay = overlay;
@@ -242,6 +265,7 @@ export default {
 			console.log(this.showOverlayDetail);
 		},
 		closeOverlayDetail(done, isZoom = true) {
+			console.log(1111111111);
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
 			this.activeStationData = {};
@@ -254,6 +278,7 @@ export default {
 		},
 		handleListClick(overlay, listType) {
 			this.closeWarnEventDetail();
+
 			let { lng, lat } = overlay;
 			//关闭站点详情弹窗
 			if (this.showOverlayDetail) {
@@ -270,7 +295,7 @@ export default {
 			}
 			this.setZoomAndPanTo(lng, lat + 0.006);
 		},
-		closeWarnEventDetail() {
+		closeWarnEventDetail(val) {
 			this.activeWarnData = {};
 			this.activeStationData = {};
 			this.setZoomAndPanTo(...this.center, this.zoom);

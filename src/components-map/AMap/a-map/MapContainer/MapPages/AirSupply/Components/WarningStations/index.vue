@@ -117,6 +117,7 @@ export default {
 		viewOverlayDetail() {},
 		closeOverlayDetail(done) {
 			this.isShowDetial = false;
+			this.$emit('moveto', { type: 'center' });
 			// done && done();
 		},
 		handlerClick(item, index) {
@@ -125,8 +126,10 @@ export default {
 			this.padding = index ? 0 : 16;
 			this.width = index ? 880 : 680;
 			this.isShowDetial = true;
+			this.$emit('close');
 			console.log(item);
 			this.activeIndex = index;
+			this.$emit('moveto', { type: 'WarningStations' });
 
 			console.log(this.detailShowList);
 		},
