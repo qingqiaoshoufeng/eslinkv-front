@@ -4,7 +4,6 @@
 			<img :src="icon6" alt=""/>
 		</div>
 		<h2 class="pos-a text-center">等待抢修</h2>
-		<h3 v-if="step>6" class="pos-a text-center">{{formatTime(step6.time)}}</h3>
 	</div>
 </template>
 <script>
