@@ -28,6 +28,7 @@
 				:detailList="config.detailList"
 				:data="stationDataMap[config.dataProp]"
 				:showOverlayDetail="showOverlayDetail"
+				@moveto="handlerMoveto"
 				@overlay-click="handleOverlayClick"
 				@close="closeOverlayDetail('', false)"
 			/>
@@ -168,6 +169,7 @@ export default {
 				};
 			}
 		},
+
 		//点击右侧点位列表，从overlay组件内部触发click事件
 		activeOverlayMap() {
 			let { activeStationData } = this;
@@ -190,6 +192,21 @@ export default {
 		},
 	},
 	methods: {
+		handlerMoveto({ type }) {
+			console.log('WarningStations');
+			if (type === 'WarningStations') {
+				this.$amap.panTo([120.131259, 30.363295], 100);
+				this.closeOverlayDetail('', false);
+			} else {
+				this.$amap.panTo(this.center, 100);
+
+				this.closeWarnEventDetail();
+			}
+		},
+		// handlerMove() {
+		// 	console.log(111111111111);
+		// 	this.$amap.panTo(this.center, 100);
+		// },
 		// 1.获取所有站点数据
 		async getAllTypeStationList() {
 			let params = {
@@ -241,6 +258,7 @@ export default {
 			this.showOverlayDetail = true;
 		},
 		closeOverlayDetail(done, isZoom = true) {
+			console.log(1111111111);
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
 			this.activeStationData = {};
@@ -269,7 +287,7 @@ export default {
 			}
 			this.setZoomAndPanTo(lng, lat + 0.006);
 		},
-		closeWarnEventDetail(isZoom = true) {
+		closeWarnEventDetail(isZoom=true) {
 			this.activeWarnData = {};
 			this.activeStationData = {};
 			isZoom && this.setZoomAndPanTo(...this.center, this.zoom);
