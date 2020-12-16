@@ -25,7 +25,7 @@
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
-			:width="580"
+			:width="width"
 			:padding="padding"
 		>
 			<TipDetial
@@ -74,6 +74,7 @@ export default {
 			detailInfo: {},
 			padding: 16,
 			isShowDetial: false,
+			width: 880,
 		};
 	},
 	watch: {
@@ -122,6 +123,7 @@ export default {
 			// debugger;
 			this.activeOverlay = this.list[index];
 			this.padding = index ? 0 : 16;
+			this.width = index ? 880 : 680;
 			this.isShowDetial = true;
 			console.log(item);
 			this.activeIndex = index;
@@ -131,14 +133,12 @@ export default {
 		handlerChange(item, index) {
 			this.getDetailInfo(item, item.middleId);
 		},
-		async getDetailInfo(item, id) {
-			let params = {
-				id,
-			};
-			this.detailInfo = await this.$sysApi.map.airSupply.getLowMidDevice(
-				params
-			);
-		},
+		// async getDetailInfo(item, id) {
+		// 	let params = {
+		// 		id,
+		// 	};
+
+		// },
 	},
 	beforeDestroy() {},
 };

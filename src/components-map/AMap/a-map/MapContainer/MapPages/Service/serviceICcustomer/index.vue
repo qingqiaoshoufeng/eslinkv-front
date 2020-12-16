@@ -128,7 +128,7 @@ export default {
 			),
 			dataStatisticsList: DATASTATISTICSLIST,
 			overlayMap: SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
-			legendMap: { BranchCompany },
+			legendMap: { MajorClient, BranchCompany },
 			legendMultiple: true,
 			showOverlayDetail: false,
 			activeOverlay: {},
@@ -289,7 +289,7 @@ export default {
 			if (['MajorClient', 'WarningICcustomer'].includes(type)) {
 				this.$amap.setZoom(14, 100);
 				this.$amap.panTo([lng, lat], 100);
-            }
+			}
 
 			// this.isShowMore = status == 1;
 		},

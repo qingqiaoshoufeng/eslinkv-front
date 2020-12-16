@@ -4,7 +4,7 @@ import { ICcustomer, useNumberYestoday, warningYestoday, FTPNumber, warningYesto
 // 覆盖物legend配置
 export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
     MajorClient: {
-        label: '工商户',
+        label: '非居民',
         legendIcon: 'icontuliyongqidahu',
         iconSize: 38,
         icon: 'iconyongqidahu',
