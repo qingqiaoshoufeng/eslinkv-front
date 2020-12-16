@@ -84,7 +84,17 @@ table{
     line-height: 24px;
     color: #FFFFFF;
     height: 40px;
+    &:nth-child(1) {
+      width: 20%;
+    }
+    &:nth-child(2) {
+      width: 35%;
+    }
+    &:nth-child(3) {
+      width: 25%;
+    }
     &:nth-child(4) {
+      width: 20%;
       color: #FFDC45;
     }
     &:nth-child(5) {
