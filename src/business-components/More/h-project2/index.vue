@@ -28,11 +28,11 @@
 						<p class="pos-a text-center">月度接纳趋势</p>
 					</div>
 					<div class="h-project-2-month1 pos-r" :class="{active:data.value[animateActiveIndex].month1>0}">
-						<h2 class="font-num">{{data.value[animateActiveIndex].month1}}%</h2>
+						<h2 class="font-num">{{data.value[animateActiveIndex].month1>0?'+':''}}{{data.value[animateActiveIndex].month1}}%</h2>
 						<p class="pos-a text-center">月度同比</p>
 					</div>
 					<div class="h-project-2-month2 pos-r" :class="{active:data.value[animateActiveIndex].month2>0}">
-						<h2 class="font-num">{{data.value[animateActiveIndex].month2}}%</h2>
+						<h2 class="font-num">{{data.value[animateActiveIndex].month2>0?'+':''}}{{data.value[animateActiveIndex].month2}}%</h2>
 						<p class="pos-a text-center">月度环比</p>
 					</div>
 				</div>
