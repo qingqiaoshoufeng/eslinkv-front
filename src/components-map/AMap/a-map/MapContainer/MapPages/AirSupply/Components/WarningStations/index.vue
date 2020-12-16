@@ -28,6 +28,7 @@
 			:padding="padding"
 		>
 			<TipDetial
+				@change="handlerChange"
 				:isShowList="activeIndex"
 				:detailShowList="detailShowList"
 			/>
@@ -58,7 +59,7 @@ export default {
 			visible: true,
 			overlayIcon: 'iconzhongdiyayujing',
 			activeOverlay: {},
-			activeIndex: 0,
+			activeIndex: null,
 			detailInfo: {},
 			padding: 16,
 		};
@@ -66,6 +67,7 @@ export default {
 	computed: {
 		detailShowList() {
 			let { activeIndex } = this;
+			if (!activeIndex && activeIndex !== 0) return [];
 			if (activeIndex == 0) {
 				return this.data.filter(
 					item => item.name === '棋院6159燃气球阀-切断装置'
@@ -102,6 +104,17 @@ export default {
 			this.activeIndex = index;
 			this.activeOverlay = this.list[index];
 			console.log(this.detailShowList);
+		},
+		handlerChange(item, index) {
+			this.getDetailInfo(item, item.middleId);
+		},
+		async getDetailInfo(item, id) {
+			let params = {
+				id,
+			};
+			this.detailInfo = await this.$sysApi.map.airSupply.getLowMidDevice(
+				params
+			);
 		},
 	},
 	beforeDestroy() {},

@@ -30,6 +30,7 @@
 					:style="{
 						minWidth: detailShowList.length > 1 ? '60%' : '45%',
 					}"
+					v-show="detailInfo[item.prop]"
 				>
 					<!-- v-show="detailInfo[item.prop]" -->
 					<span class="label">{{ `${item.label}: ` }}</span>
@@ -89,22 +90,19 @@ export default {
 	watch: {
 		detailShowList: {
 			handler(val) {
-				this.getDetailInfo(val[0].middleId);
+				if (val.length === 1) {
+					this.getDetailInfo(val[0].middleId);
+				} else {
+					this.getDetailInfo(val[this.activeIndex].middleId);
+				}
+
+				// this.$emit('change', val[0], 0);
 			},
 			immediate: true,
 		},
 	},
 	data() {
 		return {
-			stationList: [
-				{ name: '奥体中心1519燃气球阀' },
-				{ name: '奥体中心1519燃气球阀' },
-				{ name: '奥体中心1519燃气球阀' },
-				{ name: '奥体中心1519燃气球阀' },
-				{ name: '奥体中心1519燃气球阀' },
-				{ name: '奥体中心1519燃气球阀' },
-				{ name: '奥体中心1519燃气球阀' },
-			],
 			detailList: DETAILLIST,
 			activeIndex: 0,
 			detailInfo: {},
@@ -118,6 +116,12 @@ export default {
 		isNumber(val) {
 			return typeof val === 'number' && !isNaN(val);
 		},
+		handlerClick(item, index) {
+			this.detailInfo = {};
+			console.log(item);
+			this.activeIndex = index;
+			this.getDetailInfo(item.middleId);
+		},
 		async getDetailInfo(id) {
 			let params = {
 				id,
@@ -125,11 +129,6 @@ export default {
 			this.detailInfo = await this.$sysApi.map.airSupply.getLowMidDevice(
 				params
 			);
-		},
-		handlerClick(item, index) {
-			this.activeIndex = index;
-
-			this.getDetailInfo(item.middleId);
 		},
 	},
 	mounted() {},
