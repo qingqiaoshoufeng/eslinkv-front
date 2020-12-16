@@ -1,5 +1,5 @@
 <template>
-	<div class="widget-part" :style="styles">
+	<div class="widget-part" :style="styles" v-if="data">
 		<div class="fn-flex flex-row">
 			<div class="h-project-2-left fn-flex flex-column">
 				<ul class="h-project-2-line fn-flex flex-row">
@@ -40,11 +40,11 @@
 			<div class="h-project-2-right text-left">
 				<h1>{{data&&data.value[animateActiveIndex].name}}</h1>
 				<div>
-					<h2 class="font-num">{{data&&data.value[animateActiveIndex].today?data.value[animateActiveIndex].today.toFixed(2)|toThousand:''}}</h2>
+					<h2 class="font-num">{{data.value[animateActiveIndex].today?data.value[animateActiveIndex].today.toFixed(2):'' |toThousand}}</h2>
 					<p>今日接纳量(m³)</p>
 				</div>
 				<div>
-					<h2 class="font-num">{{data&&data.value[animateActiveIndex].quick?data.value[animateActiveIndex].quick.toFixed(2)|toThousand:'0'}}</h2>
+					<h2 class="font-num">{{data.value[animateActiveIndex].quick?data.value[animateActiveIndex].quick.toFixed(2):'0' |toThousand}}</h2>
 					<p>瞬时接纳量(m³/h)</p>
 				</div>
 			</div>
