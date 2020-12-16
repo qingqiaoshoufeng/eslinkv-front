@@ -17,7 +17,7 @@
 			<component
 				:key="legend"
 				v-if="stationDataMap[config.dataProp]"
-				:ref="legend"
+				:ref="config.component"
 				:activeItem="activeOverlayMap[legend] || undefined"
 				:is="config.component"
 				:visible="config.visible"
@@ -27,6 +27,7 @@
 				:showOverlayName="config.showOverlayName"
 				:detailList="config.detailList"
 				:data="stationDataMap[config.dataProp]"
+				:showOverlayDetail="showOverlayDetail"
 				@overlay-click="handleOverlayClick"
 				@close="closeOverlayDetail('', false)"
 			/>
@@ -234,9 +235,11 @@ export default {
 			this.overlayDetailPosition = zoom == 14 ? 'top' : '';
 		},
 		handleOverlayClick(overlay, overlayType) {
+			this.closeWarnEventDetail();
 			overlay.overlayType = overlayType || overlay.overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
+			console.log(this.showOverlayDetail);
 		},
 		closeOverlayDetail(done, isZoom = true) {
 			this.showOverlayDetail = false;
@@ -250,6 +253,7 @@ export default {
 			}
 		},
 		handleListClick(overlay, listType) {
+			this.closeWarnEventDetail();
 			let { lng, lat } = overlay;
 			//关闭站点详情弹窗
 			if (this.showOverlayDetail) {
