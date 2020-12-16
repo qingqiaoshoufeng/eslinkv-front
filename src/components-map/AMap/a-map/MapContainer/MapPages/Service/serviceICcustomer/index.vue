@@ -286,10 +286,11 @@ export default {
 			this.getDetailInfo(params, status);
 
 			this.isShowMore = [''].includes(type);
-			if (['', ''].includes(type)) {
+			if (['MajorClient', 'WarningICcustomer'].includes(type)) {
 				this.$amap.setZoom(14, 100);
 				this.$amap.panTo([lng, lat], 100);
-			}
+            }
+
 			// this.isShowMore = status == 1;
 		},
 		// 请求用气大户，子公司，综合服务站数据列表
