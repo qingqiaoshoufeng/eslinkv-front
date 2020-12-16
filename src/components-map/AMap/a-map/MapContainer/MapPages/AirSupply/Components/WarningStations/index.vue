@@ -17,7 +17,7 @@
 		</Overlay>
 		<!-- 详情弹窗 -->
 		<OverlayDetail
-			v-model="showOverlayDetail"
+			:value="isShowDetial"
 			v-bind="{
 				data: activeOverlay,
 				...OverlayDetailProp,
@@ -25,7 +25,7 @@
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
-			:width="580"
+			:width="width"
 			:padding="padding"
 		>
 			<TipDetial
@@ -58,17 +58,32 @@ export default {
 				return true;
 			},
 		},
+		showOverlayDetail: {
+			type: Boolean,
+			default() {
+				return true;
+			},
+		},
 	},
 	data() {
 		return {
 			OverlayDetailProp: {},
-			showOverlayDetail: true,
 			overlayIcon: 'iconzhongdiyayujing',
 			activeOverlay: {},
 			activeIndex: null,
 			detailInfo: {},
 			padding: 16,
+			isShowDetial: false,
+			width: 880,
 		};
+	},
+	watch: {
+		showOverlayDetail: {
+			handler(val) {
+				val && (this.isShowDetial = !val);
+			},
+			immediate: true,
+		},
 	},
 	computed: {
 		detailShowList() {
@@ -101,27 +116,29 @@ export default {
 	methods: {
 		viewOverlayDetail() {},
 		closeOverlayDetail(done) {
-			done && done();
+			this.isShowDetial = false;
+			// done && done();
 		},
 		handlerClick(item, index) {
+			// debugger;
+			this.activeOverlay = this.list[index];
 			this.padding = index ? 0 : 16;
-			this.showOverlayDetail = true;
+			this.width = index ? 880 : 680;
+			this.isShowDetial = true;
 			console.log(item);
 			this.activeIndex = index;
-			this.activeOverlay = this.list[index];
+
 			console.log(this.detailShowList);
 		},
 		handlerChange(item, index) {
 			this.getDetailInfo(item, item.middleId);
 		},
-		async getDetailInfo(item, id) {
-			let params = {
-				id,
-			};
-			this.detailInfo = await this.$sysApi.map.airSupply.getLowMidDevice(
-				params
-			);
-		},
+		// async getDetailInfo(item, id) {
+		// 	let params = {
+		// 		id,
+		// 	};
+
+		// },
 	},
 	beforeDestroy() {},
 };

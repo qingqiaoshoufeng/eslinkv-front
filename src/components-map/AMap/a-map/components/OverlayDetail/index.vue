@@ -14,6 +14,7 @@
 				width: width + 'px',
 				padding: padding + 'px',
 			}"
+			v-show="value"
 		>
 			<div class="close-btn" v-show="showCloseBtn" @click="closePop">
 				<svg-icon icon-name="iconbaseline-close-px"></svg-icon>
@@ -117,12 +118,16 @@ export default {
 		//是否显示查看详情
 		showMore: {
 			type: Boolean,
-			type: false,
+			default: false,
 		},
 		//关闭弹窗之前的事件
 		beforeClose: Function,
 		//弹窗位置 默认为bottom
 		position: String,
+		// showOverlayDetail: {
+		// 	type: Boolean,
+		// 	default: true,
+		// },
 	},
 	data() {
 		return {

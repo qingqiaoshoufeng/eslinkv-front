@@ -114,7 +114,7 @@
 		data() {
 			return {
 				showSize: 9,
-				tabActived: 2,
+				tabActived: 0,
 			}
 		},
 		computed: {
@@ -238,10 +238,12 @@
 		display: flex;
 		justify-content: space-between;
 		flex-wrap: wrap;
-		width: 476px;
+		width: 570px;
 		transition: all .3s;
 
 		li {
+			width: 40%;
+			margin-left: 5%;
 			align-items: center;
 			min-width: 132px;
 			padding: 3px 8px;

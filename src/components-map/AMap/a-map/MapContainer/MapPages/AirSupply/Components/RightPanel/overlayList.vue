@@ -119,7 +119,7 @@ export default {
 .search {
 	margin-top: 6px;
 	width: 100%;
-	height: 40px;
+	height: 48px;
 	border: 1px solid #0057a9;
 	box-sizing: border-box;
 	border-radius: 4px;
@@ -153,7 +153,7 @@ export default {
 		display: flex;
 		background: #0057a9;
 		width: 40px;
-		height: 40px;
+		height: 100%;
 		font-size: 14px;
 		justify-content: center;
 		align-items: center;

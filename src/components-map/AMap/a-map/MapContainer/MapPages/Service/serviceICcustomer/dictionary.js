@@ -1,5 +1,5 @@
 let ICcustomer = {
-    label: '工商户',
+    label: '非居民',
     DW: '户',
     prop: "iCcustomer",
     Fixed: 0

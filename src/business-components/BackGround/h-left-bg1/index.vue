@@ -25,7 +25,7 @@
 				rgba(0, 4, 98, 0),
 				rgba(0, 4, 98, 1)
 		);
-		width: 1128px;
+		width: 100%;
 		height: 1050px;
 		transform: rotateY(180deg);
 
