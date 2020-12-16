@@ -100,7 +100,7 @@
 		mixins: [mixins],
 		computed: {
 			statisticalVal() {
-				if (this.data) return this.data.yearData.toLocaleString().split('');
+				if (this.data) return Number(this.data.yearData).toLocaleString().split('');
 				return [];
 			},
 			timeDesc() {
@@ -126,7 +126,7 @@
 			},
 			setNumberTransform() {
 				if (this.data) {
-					const numberArr = this.data.yearData.toLocaleString().split('');
+					const numberArr = Number(this.data.yearData).toLocaleString().split('');
 					this.transform = numberArr.map(item => item * 10);
 				}
 			},
@@ -244,7 +244,6 @@
 		}
 
 		.right-more {
-			min-width: 160px;
 			height: 80px;
 			background: linear-gradient(180deg, rgba(0, 87, 169, 0) 0%, rgba(0, 87, 169, 0.5) 100%);
 			border: 1px solid rgba(0, 221, 255, 0.5);
@@ -261,6 +260,7 @@
 			}
 
 			.right-more-des {
+				min-width: 160px;
 				color: #00DDFF;
 				font-weight: 600;
 			}

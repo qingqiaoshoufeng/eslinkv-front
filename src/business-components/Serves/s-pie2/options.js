@@ -6,6 +6,7 @@ export default function getOption (data, config) {
 				center: ['50%', '50%'],
 				type: 'pie',
 				radius: ['45%', '57%'],
+				minAngle: 10,
 				label: {
 					show: false,
 				},
