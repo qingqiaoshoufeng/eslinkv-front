@@ -6,8 +6,8 @@
 				<div class="title">{{ data.name }}</div>
 				<div class="base-info">
           <div class="base-info-item">
-            <label>开始时间</label>
-            <span>{{ data.startTime }}</span>
+            <label>活动时间</label>
+            <span>{{ data.startTime.match(/\S+/)[0] }}</span>
           </div>
           <div class="base-info-item">
             <label>活动地点</label>
