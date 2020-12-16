@@ -21,7 +21,8 @@ export default {
 		return {
 			icon: 'iconbaoguanshijian',
 			isExecuteFlag: false, //是否正在请求数据
-			drawLineIndex: 0, //当前请求的index
+            drawLineIndex: 0, //当前请求的index
+            duration:5    //5秒内播放完毕
 		};
 	},
 	props: {
@@ -173,8 +174,10 @@ export default {
 				});
 				let startAnimation = () => {
                     //计算速度
-                    // let speed =  
-					this.marker.moveAlong(passedPathData, 1000);
+                    let totalDistance = AMap.GeometryUtil.distanceOfLine(passedPathData)
+                    let speed =  totalDistance/1000/(this.duration/60/60)
+                    console.log(speed,'speed')
+					this.marker.moveAlong(passedPathData, speed);
 				};
 				startAnimation();
 			}
