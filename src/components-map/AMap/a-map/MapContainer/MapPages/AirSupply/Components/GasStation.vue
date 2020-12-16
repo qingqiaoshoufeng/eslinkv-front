@@ -137,7 +137,10 @@ export default {
 							id,
 						},
 					});
-				});
+                });
+                setTimeout(()=>{
+                    this.$emit('close')
+                },2000)
 			});
 		},
 	},

@@ -271,7 +271,8 @@ export default {
 			this.activeStationData = {};
 			if (isZoom) {
 				this.setZoomAndPanTo(...this.center, this.zoom);
-			}
+            }
+            console.log(isZoom,'isZoom')
 			if (done) {
 				done();
 			}

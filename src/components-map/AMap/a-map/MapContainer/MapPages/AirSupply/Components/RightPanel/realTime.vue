@@ -128,12 +128,23 @@ export default {
 		},
 		async getData() {
 			this.isShow = true;
-			let data = await this.$sysApi.map.airSupply.getEventWarningList({
-				currentPage: 1,
-				pageSize: 500,
-				repairType: this.repairType,
-				repairState: this.repairState,
-			});
+			let data = [];
+			try {
+				data = await this.$sysApi.map.airSupply.getEventWarningList({
+					currentPage: 1,
+					pageSize: 500,
+					repairType: this.repairType,
+					repairState: this.repairState,
+				});
+			} catch (error) {
+				data = await this.$sysApi.map.airSupply.getEventWarningListOld({
+					currentPage: 1,
+					pageSize: 500,
+					repairType: this.repairType,
+					repairState: this.repairState,
+                });
+                data = data.list
+			}
 			this.list = data;
 			// setTimeout(() => {
 			this.isShow = false;

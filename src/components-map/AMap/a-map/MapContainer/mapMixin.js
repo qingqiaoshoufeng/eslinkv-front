@@ -15,7 +15,7 @@ initAMapApiLoader({
         'AMap.HawkEye',
         'AMap.ToolBar'
 	],
-	v: '1.4.4',
+	v: '1.4.15',
 	key: '8081bdaac8258a8a4a6244bf16084fed',
 })
 
@@ -28,8 +28,9 @@ export default {
 			mapComponentNameBefore: '',
 			mapConfig: {
 				center: [120.131259, 30.263295],
-				zoomEnable: true,
-				doubleClickZoom: false,
+                zoomEnable: true,
+                doubleClickZoom: false,
+                touchZoom:false,
 				dragEnable: true,
 				zoom: 10,
 				viewMode: '2D',
