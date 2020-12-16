@@ -5,7 +5,12 @@
 		v-if="isExternal"
 		v-on="$listeners"
 	/>
-	<svg :class="svgClass" aria-hidden="true" v-else>
+	<svg
+		:class="svgClass"
+		aria-hidden="true"
+		:style="{ backfaceVisibility: 'hidden' }"
+		v-else
+	>
 		<use :xlink:href="iconNameComputed" />
 	</svg>
 </template>

@@ -12,7 +12,10 @@
 				<SvgIcon
 					class="sample-icon"
 					:iconName="marker.icon"
-					:style="{ fontSize: (marker.iconSize || 38) + 'px' }"
+					:style="{
+						fontSize: (marker.iconSize || 38) + 'px',
+						backfaceVisibility: 'hidden',
+					}"
 				></SvgIcon>
 			</slot>
 			<slot></slot>
