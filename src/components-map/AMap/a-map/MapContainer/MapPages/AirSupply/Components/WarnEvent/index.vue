@@ -38,6 +38,7 @@
 		<!-- 路线规划 -->
 		<RoutePlan
 			:data="data"
+			@view-detail="viewOverlayDetail"
 			v-if="showRoutePlan"
 			ref="RoutePlan"
 		></RoutePlan>

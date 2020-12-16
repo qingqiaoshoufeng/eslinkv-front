@@ -22,7 +22,7 @@ export default {
 			icon: 'iconbaoguanshijian',
 			isExecuteFlag: false, //是否正在请求数据
             drawLineIndex: 0, //当前请求的index
-            duration:5    //5秒内播放完毕
+            duration:6    //6秒内播放完毕
 		};
 	},
 	props: {
@@ -41,7 +41,8 @@ export default {
 				if (this.timer) {
 					clearInterval(this.timer);
 					this.timer = null;
-				}
+                }
+                this.$emit('view-detail')
 				this.timer = setInterval(() => {
 					if (!this.isExecuteFlag) {
 						this.reset();
