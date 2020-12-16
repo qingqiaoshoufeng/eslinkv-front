@@ -112,6 +112,7 @@ export default {
 						autoFitView: true,
 					});
                 }
+                return false
 				this.driving.search(
 					new AMap.LngLat(startLng, startLat),
 					new AMap.LngLat(endLng, endLat),

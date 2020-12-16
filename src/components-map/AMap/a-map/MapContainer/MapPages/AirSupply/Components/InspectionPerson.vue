@@ -10,8 +10,6 @@
 		}"
 		v-if="ready"
 		@click="handleOverlayClick"
-		@mouseover="handleMouseover"
-		@mouseleave="handleMouseleave"
 	/>
 </template>
 <script>
