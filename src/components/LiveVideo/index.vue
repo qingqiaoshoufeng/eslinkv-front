@@ -278,7 +278,7 @@ export default {
         console.warn('------获取到以下设备---------')
         console.log(device_list)
         // this.pu = device_list[0] // todo
-        this.pu = device_list.find(v => v.Name === '5G应急车' && v.OnlineFlag==='1')
+        this.pu = device_list.find(v => v.OnlineFlag==='1')
 
         requestPost('C_CAS_QueryPUIDRes?token=' + token, { puid: [this.pu.$] }, rv => {
           // 过滤直播资源
