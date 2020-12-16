@@ -100,7 +100,7 @@
 		mixins: [mixins],
 		computed: {
 			statisticalVal() {
-				if (this.data) return this.data.yearData.toLocaleString().split('');
+				if (this.data) return Number(this.data.yearData).toLocaleString().split('');
 				return [];
 			},
 			timeDesc() {
@@ -126,7 +126,7 @@
 			},
 			setNumberTransform() {
 				if (this.data) {
-					const numberArr = this.data.yearData.toLocaleString().split('');
+					const numberArr = Number(this.data.yearData).toLocaleString().split('');
 					this.transform = numberArr.map(item => item * 10);
 				}
 			},
