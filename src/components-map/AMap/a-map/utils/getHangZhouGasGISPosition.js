@@ -40,6 +40,8 @@ export default function getPosition(x, y, zoom) {
 		rightTopY,
 		width: TILE_WIDTH,
 		height: TILE_WIDTH,
+		max,
+		min,
 	}
 }
 

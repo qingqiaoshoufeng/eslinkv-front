@@ -130,6 +130,7 @@ import getHangZhouGasGISPosition, {
 
 export default {
 	name: 'LowPressure',
+	inject: ['parentInfo'],
 	components: {
 		OverlayDetail,
 		ComprehensiveServiceStation,
@@ -170,6 +171,9 @@ export default {
 			this.$amap.panTo(val, 100);
 		},
 	},
+	beforeDestroy() {
+		// this.$amap.off('zoomend', this.handleMapZoomChangeEnd);
+	},
 	data() {
 		return {
 			overlayInfoConfigMap: Object.freeze(
@@ -177,7 +181,7 @@ export default {
 			),
 			activeOverlay: {},
 			activeWarnData: {},
-			center: [120.151562, 30.283297],
+			center: [120.151562, 30.293297],
 			zoom: 12.5,
 			showOverlayDetail: false,
 			showRoutePlan: false,
@@ -285,8 +289,8 @@ export default {
 		// 	let { lat: latE, lng: lngE } = southwest;
 		// 	const tilesQuery = String(this.tilesQuery);
 		// 	if (this.imageLayer) {
-		//         this.imageLayer.setMap(null);
-		//         window.aaa = this.imageLayer
+		// 		this.imageLayer.setMap(null);
+		// 		window.aaa = this.imageLayer;
 		// 	}
 		// 	const {
 		// 		leftBottomX,
@@ -343,13 +347,37 @@ export default {
 			let res = await this.$sysApi.map.airSupply.getAllTypeStationList(
 				params
 			);
-			this.stationDataMap = { ...this.stationDataMap, ...res };
 			let {
 				serviceStationList,
 				pipeManageMentStationList,
 				undergroundRepairStationList,
 				ongroundRepairStationList,
 			} = res;
+			//数据为防止重叠特殊处理
+			ongroundRepairStationList = ongroundRepairStationList.map(item => {
+				let { lat } = item;
+				return {
+					...item,
+					lat: lat - 0.003,
+				};
+			});
+			undergroundRepairStationList = ongroundRepairStationList.map(
+				item => {
+					let { lat } = item;
+					return {
+						...item,
+						lat: lat - 0.003,
+					};
+				}
+			);
+			//数据为防止重叠特殊处理
+			this.stationDataMap = {
+				...this.stationDataMap,
+				serviceStationList,
+				pipeManageMentStationList,
+				undergroundRepairStationList,
+				ongroundRepairStationList,
+			};
 			this.stationList = [
 				...serviceStationList,
 				...pipeManageMentStationList,
@@ -372,13 +400,47 @@ export default {
 				rightTopY,
 				width,
 				height,
-				minGD,
-				maxGD,
+				min,
+				max,
 			} = getHangZhouGasGISPosition(x, y, zoom);
-			return `${
-				(window.api && window.api.MAP_GIS_URL) ||
-				'http://192.168.1.104:6080'
-			}/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
+			//判断是否是可视区内
+			// window.suyan = this.$amap;
+			// let { northeast, southwest } = this.$amap.getBounds();
+			// let scaleRatio = this.parentInfo.scaleRatio;
+			// let diffLat = min.lat - max.lat;
+			// let diffLng = max.lng - min.lng;
+			// let center = this.$amap.getCenter();
+			// let visAreaNorthWest = {
+			// 	lat: center.lat + (diffLat * scaleRatio) / 2,
+			// 	lng: center.lng - (diffLng * scaleRatio) / 2,
+			// };
+			// let visAreaSouthEast = {
+			// 	lat: center.lat - (diffLat * scaleRatio) / 2,
+			// 	lng: center.lng + (diffLng * scaleRatio) / 2,
+			// };
+			// let isInArea = false;
+			// if (
+			// 	max.lat < visAreaNorthWest.lat &&
+			// 	max.lat > visAreaSouthEast.lat &&
+			// 	max.lng > visAreaNorthWest.lng &&
+			// 	min.lng < visAreaSouthEast.lng
+			// ) {
+			// 	isInArea = true;
+			// }
+			// if (
+			// 	min.lat < visAreaNorthWest.lat &&
+			// 	min.lat > visAreaSouthEast.lat &&
+			// 	min.lng > visAreaNorthWest.lng &&
+			// 	min.lng < visAreaSouthEast.lng
+			// ) {
+			// 	isInArea = true;
+			// }
+			// if (isInArea) {
+				return `${
+					(window.api && window.api.MAP_GIS_URL) ||
+					'http://192.168.1.104:6080'
+				}/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
+			// }
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat } = overlay;
@@ -390,8 +452,8 @@ export default {
 			let { overlayType } = this.activeOverlay;
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.setCenter(this.center, 100);
+			// this.$amap.setZoom(this.zoom, 100);
+			// this.$amap.setCenter(this.center, 100);
 			done && done();
 		},
 		viewOverlayDetail(overlay) {

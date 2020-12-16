@@ -28,25 +28,27 @@ export default {
 			type: Function,
 		},
 	},
-    watch:{
-        visible(val){
-            if(!this.originInstance){
-                return false
-            }
-            if(val){
-                this.originInstance.show()
-            }else{
-                this.originInstance.hide()
-            }
-        }
-    },
-    
-	created() {
-		let fun = findAmapRoot.bind(this);
-		this.$amap = fun();
-		this.load();
-		this.$amap.on('zoomstart', this.handleMapZoomChangeStart);
-		this.$amap.on('zoomend', this.handleMapZoomChangeEnd);
+	watch: {
+		visible(val) {
+			if (!this.originInstance) {
+				return false;
+			}
+			if (val) {
+				this.originInstance.show();
+			} else {
+				this.originInstance.hide();
+			}
+		},
+	},
+
+	mounted() {
+		setTimeout(() => {
+			let fun = findAmapRoot.bind(this);
+			this.$amap = fun();
+			this.load();
+			this.$amap.on('zoomstart', this.handleMapZoomChangeStart);
+			this.$amap.on('zoomend', this.handleMapZoomChangeEnd);
+		}, 300);
 	},
 	methods: {
 		load() {
@@ -57,8 +59,8 @@ export default {
 			this.originInstance = new AMap.TileLayer({
 				zIndex: zIndex,
 				opacity,
-                getTileUrl: getTileUrl,
-                map:this.$amap
+				getTileUrl: getTileUrl,
+				map: this.$amap,
 			});
 		},
 		reload() {
@@ -67,15 +69,15 @@ export default {
 			});
 		},
 		handleMapZoomChangeStart() {
-            this.originInstance.hide();
+			this.originInstance.hide();
 		},
 		handleMapZoomChangeEnd() {
-            if(this.timerZoomEnd){
-                clearTimeout(this.timerZoomEnd)
-            }
+			if (this.timerZoomEnd) {
+				clearTimeout(this.timerZoomEnd);
+			}
 			this.timerZoomEnd = setTimeout(() => {
 				this.originInstance.show();
-                this.reload();
+				this.reload();
 			}, 0);
 		},
 	},

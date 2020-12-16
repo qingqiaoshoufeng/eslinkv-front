@@ -1,6 +1,6 @@
 const DEFAULT_AMP_CONFIG = {
     key: null,
-    v: '1.4.4',
+    v: '1.4.15',
     protocol: 'https',
     hostAndPath: 'webapi.amap.com/maps',
     plugin: [],
