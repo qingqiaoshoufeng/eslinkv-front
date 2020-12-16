@@ -1,5 +1,11 @@
 <template>
 	<div class="list">
+		<i-icon
+			type="ios-loading"
+			size="54"
+			class="demo-spin-icon-load"
+			v-show="isShow"
+		></i-icon>
 		<div
 			@click="handleClick(item, index)"
 			v-for="(item, index) in list"
@@ -10,6 +16,7 @@
 					activeIndex === index &&
 					activeOverlay.activeIndex === index,
 			}"
+			v-show="!isShow"
 		>
 			<div class="row">
 				<img
@@ -81,6 +88,7 @@ export default {
 			list: [],
 			iconList,
 			statusList,
+			isShow: true,
 		};
 	},
 	props: {
@@ -99,7 +107,9 @@ export default {
 	},
 	async created() {
 		try {
+			this.isShow = true;
 			this.list = await this.$sysApi.map.serve.getICcustomerSituationAwareness();
+			this.isShow = false;
 		} catch (error) {}
 	},
 	watch: {
@@ -135,6 +145,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+/deep/.demo-spin-icon-load {
+	animation: ani-demo-spin 1s linear infinite;
+	position: absolute;
+	top: 40%;
+	left: 50%;
+	transform: translate(-50%);
+}
+@keyframes ani-demo-spin {
+	from {
+		transform: rotate(0deg);
+	}
+	50% {
+		transform: rotate(180deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
 .list {
 	color: #fff;
 	font-size: 16px;
