@@ -85,10 +85,10 @@ export default {
 			let passedPathData = await this.$sysApi.map.airSupply.getEmployeeGpsTrack(
 				{ employeeName, callDate, arrivalTime }
 			);
-            this.isExecuteFlag = false;
-            if(this.drawLineIndex !== drawLineIndex){
-                return false 
-            }
+			this.isExecuteFlag = false;
+			if (this.drawLineIndex !== drawLineIndex) {
+				return false;
+			}
 			// passedPathData = passedPathData.map(item => {
 			// 	return coordinateTransform.WGS2GCJ(...item);
 			// });
@@ -111,8 +111,7 @@ export default {
 						isOutline: false,
 						autoFitView: true,
 					});
-                }
-                return false
+				}
 				this.driving.search(
 					new AMap.LngLat(startLng, startLat),
 					new AMap.LngLat(endLng, endLat),
@@ -137,8 +136,8 @@ export default {
 		},
 		drawLine(passedPathData = [], planPathData = []) {
 			let map = this.map;
-			// 1.已行驶路径 + 预测轨迹
-			let pathDataAll = [...passedPathData, ...planPathData];
+            // 1.已行驶路径 + 预测轨迹
+            let pathDataAll = [...passedPathData, ...planPathData];
 			this.pathAll = new AMap.Polyline({
 				map: map,
 				path: pathDataAll,
@@ -149,31 +148,33 @@ export default {
 				strokeWeight: 6, //线宽
 			});
 			// 2.车辆位置
-			let markerPose = passedPathData[passedPathData.length - 1];
+			let markerPose = passedPathData[0];
 			this.marker = new AMap.Marker({
 				map: map,
-				position: AMap.LngLat(...markerPose),
-				icon: '/static/amap/car.png',
-				offset: new AMap.Pixel(-8, -8),
-			});
+				position:markerPose,
+				icon: '/static/amap/car-1.png',
+                offset: new AMap.Pixel(-8, -8),
+                autoRotation:true,
+                //   angle:90,
+            });
 			// 3.轨迹回放
 			if (passedPathData.length > 1) {
 				this.passedPolyline = new AMap.Polyline({
 					map: map,
-					zIndex: 1500,
+                    zIndex: 1500,
 					strokeColor: '#BDBDBD', //线颜色
 					fillColor: '#BDBDBD', //线颜色
 					strokeWeight: 6, //线宽
 					strokeOpacity: 1, //线透明度
 				});
+
 				this.marker.on('moving', e => {
 					this.passedPolyline.setPath(e.passedPath);
 				});
 				let startAnimation = () => {
-					this.marker.moveAlong(passedPathData, {
-						duration: 100,
-						// autoRotation: false,
-					});
+                    //计算速度
+                    // let speed =  
+					this.marker.moveAlong(passedPathData, 1000);
 				};
 				startAnimation();
 			}
@@ -204,10 +205,10 @@ export default {
 
 <style lang="scss">
 .amap-icon {
-	width: 16px !important;
-	height: 32px !important;
+	width: 32px !important;
+	height: 16px !important;
 	> img {
-		width: 16px !important;
+		width: 32px !important;
 	}
 }
 .warnoverlay-gif {
