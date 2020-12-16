@@ -91,7 +91,9 @@ export default {
             //         }
             //     })
             // )
-            window.suyanaaa = this.$refs.amap.$amap
+            // this.$refs.amap.$amap.addControl(new AMap.ToolBar({
+            //     offset:AMap.Pixel(100,100)
+            // }));
             // let originInstance = new AMap.TileLayer.Satellite({
 			// 	zIndex: 1,
 			// 	opacity:1,

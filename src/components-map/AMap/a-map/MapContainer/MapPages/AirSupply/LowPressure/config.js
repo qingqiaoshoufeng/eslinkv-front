@@ -251,19 +251,12 @@ export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
                     fontSize: '32px',
                     color: '#FFDC45',
                 },
-                errColor: '#FFDC45',
             },
-        },
-        visibleMore: false,
-    },
-    InspectionCar: {
-        fields: {
-            name: {
+            carPlateNo: {
                 style: {
-                    fontSize: '32px',
-                    color: '#FFDC45',
+                    fontSize: '24px',
+                    color: '#fff',
                 },
-                errColor: '#FFDC45',
             },
         },
     },

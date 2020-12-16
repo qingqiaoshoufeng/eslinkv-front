@@ -101,7 +101,7 @@ export default {
 					let propInner = prop + index;
 					dataComp[propInner] = {
 						label: name,
-						value: value.toFixed(2),
+						value: value, //.toFixed(2),
 						dw,
 					};
 				});
