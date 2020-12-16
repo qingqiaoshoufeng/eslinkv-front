@@ -258,7 +258,6 @@ export default {
 			this.showOverlayDetail = true;
 		},
 		closeOverlayDetail(done, isZoom = true) {
-			console.log(1111111111);
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
 			this.activeStationData = {};
