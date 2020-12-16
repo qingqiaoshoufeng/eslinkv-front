@@ -121,27 +121,9 @@ function createPlayer() {
 
 function pausevideo() {
   if (flvjs.isSupported()) {
-    // //去掉空播放对象
-    flvPlayerList.forEach(function (item, index) {
-      if (!item) {
-        flvPlayerList.splice(index, 1);
-      }
-    });
-    if (chooseplaysite && flvPlayerList && flvPlayerList.length) {
-      for (let v of flvPlayerList) {
-        if (v.key == chooseplaysite) {
-          if (v.value) {
-            v.value.unload();
-            v.value.detachMediaElement();
-            v.value.destroy();
-            v.value = "";
-          }
-        }
-      }
-
-    } else {
-      alert("请选择要视频窗口");
-    }
+    flvPlayer.unload();
+    flvPlayer.detachMediaElement();
+    flvPlayer.destroy();
   } else {
     myPlayer.reset();
   }
@@ -380,10 +362,19 @@ export default {
     changeChannel (n) {
       this.currIndex = n
       this.playvideo(this.pu.$, this.videoList[this.currIndex].Idx)
+    },
+    handleSceneChange () {
+      pausevideo()
     }
   },
   created() {
     this.connect()
+  },
+  mounted() {
+    document.addEventListener('SceneIndex', this.handleSceneChange)
+  },
+  beforeDestroy() {
+    document.removeEventListener('SceneIndex', this.handleSceneChange)
   }
 }
 

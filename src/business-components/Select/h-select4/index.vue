@@ -1,12 +1,12 @@
 <template>
-	<div class="widget-part pos-r" :style="styles">
+	<div class="widget-part pos-r" :style="styles" v-if="data">
 		<div class="h-select4 fn-flex flex-row pos-r">
 			<h3 class="fn-flex flex-row" @click="openLeft">
-				<span>{{data&&data.selectType}}</span>
+				<span>{{data.selectType}}</span>
 				<img src="/static/icons/h-select-1.svg" :class="{active:showLOptions}"/>
 			</h3>
 			<h2 class="fn-flex flex-row" @click="openRight">
-				<span>{{data&&data.selectValue}}</span>
+				<span>{{data.selectValue}}</span>
 				<img src="/static/icons/h-select-1.svg" :class="{active:showROptions}"/>
 			</h2>
 			<ul class="pos-a h-select4-right-options" :class="{active:showROptions}" v-if="data">
