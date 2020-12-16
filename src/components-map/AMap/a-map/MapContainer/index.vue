@@ -13,12 +13,12 @@
 				v-bind="mapConfig"
 			>
 				<!-- 页面 -->
-				<template v-if="showMapPage">
+				<!-- <template v-if="showMapPage">
 					<component
 						:scaleRatio="scaleRatio"
 						:is="mapComponentName"
 					/>
-				</template>
+				</template> -->
 			</el-amap>
 		</div>
 
@@ -34,16 +34,16 @@ import { AMap } from '../lib';
 import MapTypeLegend from './MapTypeLegend';
 import mapMixin from './mapMixin.js';
 //引入页面
-const files = require.context('./MapPages/', true, /page\.js$/);
-const mapPages = {};
-const path = require('path');
-files.keys().forEach(key => {
-	let pageModule = files(key).default || files(key);
-	const pageName = path.dirname(key).slice(2);
-	Object.keys(pageModule).forEach(subPageName => {
-		mapPages[pageName + subPageName] = pageModule[subPageName];
-	});
-});
+// const files = require.context('./MapPages/', true, /page\.js$/);
+// const mapPages = {};
+// const path = require('path');
+// files.keys().forEach(key => {
+// 	let pageModule = files(key).default || files(key);
+// 	const pageName = path.dirname(key).slice(2);
+// 	Object.keys(pageModule).forEach(subPageName => {
+// 		mapPages[pageName + subPageName] = pageModule[subPageName];
+// 	});
+// });
 
 export default {
 	name: 'MainMap',
@@ -59,7 +59,7 @@ export default {
 	components: {
 		ElAmap: AMap,
 		MapTypeLegend,
-		...mapPages,
+		// ...mapPages,
 	},
 	data() {
 		return {
