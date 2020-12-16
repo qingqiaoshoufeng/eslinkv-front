@@ -257,6 +257,7 @@ export default {
           margin-bottom: 0;
         }
         .sub-item-rank {
+          flex: none;
           background: #2194FF;
           width: 24px;
           height: 24px;
