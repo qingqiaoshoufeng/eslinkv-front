@@ -24,7 +24,7 @@ export default {
 	},
 	data() {
 		return {
-			ready: true,
+			ready: false,
 		};
 	},
 	methods: {
@@ -36,6 +36,7 @@ export default {
 		},
 	},
 	mounted() {
+        this.ready = true;
 		window.resetMap = this.resetMap.bind(this);
 	},
 };
