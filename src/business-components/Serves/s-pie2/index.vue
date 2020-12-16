@@ -242,6 +242,7 @@
 		transition: all .3s;
 
 		li {
+      width: 218px;
 			align-items: center;
 			min-width: 132px;
 			padding: 3px 8px;
