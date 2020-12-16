@@ -235,11 +235,10 @@ export default {
 			this.overlayDetailPosition = zoom == 14 ? 'top' : '';
 		},
 		handleOverlayClick(overlay, overlayType) {
-			this.closeWarnEventDetail();
+			this.closeWarnEventDetail(false);
 			overlay.overlayType = overlayType || overlay.overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
-			console.log(this.showOverlayDetail);
 		},
 		closeOverlayDetail(done, isZoom = true) {
 			this.showOverlayDetail = false;
@@ -247,14 +246,13 @@ export default {
 			this.activeStationData = {};
 			if (isZoom) {
 				this.setZoomAndPanTo(...this.center, this.zoom);
-            }
-            console.log(isZoom,'isZoom')
+			}
 			if (done) {
 				done();
 			}
 		},
 		handleListClick(overlay, listType) {
-			this.closeWarnEventDetail();
+			this.closeStationListDetail(false)
 			let { lng, lat } = overlay;
 			//关闭站点详情弹窗
 			if (this.showOverlayDetail) {
@@ -271,14 +269,14 @@ export default {
 			}
 			this.setZoomAndPanTo(lng, lat + 0.006);
 		},
-		closeWarnEventDetail() {
+		closeWarnEventDetail(isZoom = true) {
 			this.activeWarnData = {};
 			this.activeStationData = {};
-			this.setZoomAndPanTo(...this.center, this.zoom);
+			isZoom && this.setZoomAndPanTo(...this.center, this.zoom);
 		},
-		closeStationListDetail() {
+		closeStationListDetail(isZoom = true) {
 			this.activeStationData = {};
-			this.setZoomAndPanTo(...this.center, this.zoom);
+			isZoom && this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		//查看详情调用组件内部的方法
 		viewDetail() {

@@ -4,14 +4,16 @@ import { ICcustomer, useNumberYestoday, warningYestoday, FTPNumber, warningYesto
 // 覆盖物legend配置
 export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
     MajorClient: {
-        label: '非居民',
+        label: '工商户',
         legendIcon: 'icontuliyongqidahu',
         iconSize: 38,
         icon: 'iconyongqidahu',
         component: 'MajorClient',
         visible: true,
         dataProp: 'iCcustomerList',
-        detailList: [useNumberYesterday, useNumberMonth, useNumberLastMonth, useNumberYear,]
+        detailList: [
+            // useNumberYesterday, useNumberMonth,
+             useNumberLastMonth, useNumberYear,]
     },
 
     useHotYear: {

@@ -104,6 +104,7 @@ export default {
 	transform: scale(1.2);
 }
 .sample-name {
+    backface-visibility: hidden;
 	font-size: 18px;
 	color: #fff;
 	position: absolute;

@@ -163,6 +163,7 @@ export default {
 
 <style lang="scss" scoped>
 .sample-name {
+    backface-visibility: hidden;
 	font-size: 20px;
 	color: #fff;
 	position: absolute;

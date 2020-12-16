@@ -15,7 +15,7 @@
 		<TabPanel
 			key="ICCustomerList"
 			name="ICCustomerList"
-			label="昨日非居民用户用气排行TOP20"
+			label="上月工商户用户用气排行TOP20"
 			lazy
 		>
 			<ICCustomerList
