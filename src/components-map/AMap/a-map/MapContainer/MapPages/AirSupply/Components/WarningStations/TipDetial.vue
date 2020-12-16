@@ -90,6 +90,7 @@ export default {
 	watch: {
 		detailShowList: {
 			handler(val) {
+				this.detailInfo = {};
 				if (val.length === 1) {
 					this.getDetailInfo(val[0].middleId);
 				} else {

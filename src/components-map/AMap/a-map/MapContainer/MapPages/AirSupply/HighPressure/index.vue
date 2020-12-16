@@ -7,9 +7,9 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
 		></WarnEvent>
-		<WarningStations
+		<!-- <WarningStations
 			:data="stationDataMap.middleAndLowPressureValveList"
-		></WarningStations>
+		></WarningStations> -->
 		<!-- 行政区域覆盖物 -->
 		<RegionBoundary />
 		<!-- 2.legend控制显隐 -->

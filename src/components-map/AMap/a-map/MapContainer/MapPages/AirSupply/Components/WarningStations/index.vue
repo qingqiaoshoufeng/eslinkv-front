@@ -51,12 +51,17 @@ export default {
 				return [];
 			},
 		},
+		visible: {
+			type: Boolean,
+			default() {
+				return true;
+			},
+		},
 	},
 	data() {
 		return {
 			OverlayDetailProp: {},
 			showOverlayDetail: true,
-			visible: true,
 			overlayIcon: 'iconzhongdiyayujing',
 			activeOverlay: {},
 			activeIndex: null,
