@@ -3,14 +3,7 @@
 		<!-- 轮播视频部分 -->
 		<div class="swiper-Part" v-if="[7,8].includes(step)">
 			<!-- 视频区域 -->
-			<div class="left">
-<!--				<video-player-->
-<!--					class="video-player-box"-->
-<!--					ref="videoPlayer"-->
-<!--					:options="playerOptions"-->
-<!--					:playsinline="true"-->
-<!--					customEventName="customstatechangedeventname"-->
-<!--				></video-player>-->
+			<div class="left pos-r">
         <live-video></live-video>
 			</div>
 			<!-- 轮播图区域 -->
@@ -18,13 +11,15 @@
 				<div class="swiper-area">
 					<div class="swiper-container gallery-thumbs swiper-swiper">
 						<div class="swiper-wrapper" ref="backTop">
-							<div
-								class="swiper-slide"
-								v-for="(item,index) in swiperinfo.imgList"
-								:key="index"
-								:style="{backgroundImage:'url('+item+')'}"
-								@click="toggerVideo(index)"
-							></div>
+							<div class="swiper-slide">
+                <img src="./img/fixing-1.png">
+              </div>
+							<div class="swiper-slide">
+                <img src="./img/fixing-2.png">
+              </div>
+							<div class="swiper-slide">
+                <img src="./img/fixing-3.png">
+              </div>
 						</div>
 						<div class="swiper-pagination"></div>
 					</div>
@@ -47,18 +42,6 @@
 	export default {
 	  components: { LiveVideo },
 		props: {
-			swiperinfo: {
-				type: Object,
-				default() {
-					return {
-						imgList: [
-							'/static/images/project/01.png',
-							'/static/images/project/02.jpg',
-						],
-						videoList: ['/cdn/videos/sanshe.MOV',],
-					};
-				},
-			},
 			step: {
 				type: Number,
 				default: 0,
@@ -69,21 +52,6 @@
 				swiper: null,
 				galleryThumbs: null,
 				galleryThumbs1: null,
-				playerOptions: {
-					width: 1352,
-					height: 760,
-					muted: true,
-					language: 'en',
-					playbackRates: [0.7, 1.0, 1.5, 2.0],
-					// autoplay: true,
-					poster: '/static/images/video-bg.png',
-					loop: true,
-					sources: [
-						{
-							src: '/cdn/videos/sanshe.MOV',
-						},
-					],
-				},
 			};
 		},
 		methods: {
@@ -100,7 +68,7 @@
 						clickable: true,
 						renderBullet: function (index, className) {
 							return `<span class="${className}" style="height:${
-							400 / (_this.swiperinfo.imgList.length - 1)
+							400 / 2
 								}px"></span>`;
 						},
 					},
@@ -115,19 +83,6 @@
 				};
 				return new Swiper(`${tag}`, options);
 			},
-			toggerVideo(index) {
-				this.playerOptions.sources[0].src = this.swiperinfo.videoList[index];
-			},
-		},
-		watch: {
-			swiperinfo: {
-				handler(val) {
-					if (val) {
-            this.$refs.videoPlayer && this.$refs.videoPlayer.player.src(val.videoList[0])
-					}
-				},
-				deep: true
-			}
 		},
 		mounted() {
 			this.swiper = this.swiperInit(
@@ -149,6 +104,10 @@
 
 		.swiper-slide {
 			background-size: cover;
+      img {
+        width: 100%;
+        height: 100%;
+      }
 		}
 
 		.swiper-Part {
@@ -175,7 +134,6 @@
 			.right {
 				width: 340px;
 				height: 400px;
-        padding-top: 44px;
 
 				.swiper-area {
 					width: 340px;

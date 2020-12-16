@@ -50,11 +50,11 @@ export default {
 	},
 	methods: {
 		handleMouseover(marker) {
-			// let { id, name, type } = marker;
+			// let { id='', name='', type='' } = marker;
 			// this.$emit('overlay-click', marker, 'InspectionCar', false);
 		},
 		handleOverlayClick(marker) {
-            let { id, name, type } = marker;
+            let { id='', name='', type='' } = marker;
 			this.$emit('overlay-click', marker, 'InspectionPerson', false);
         },
 		handleMouseleave() {

@@ -23,8 +23,7 @@
 				v-for="(item, index) in showStationList"
 				:key="index"
 				class="list-item"
-				:class="{ active: activeIndex === index }"
-				v-show="showStationList.length"
+				:class="{ active: activeItem === item }"
 			>
 				<div class="row">
 					<SvgIcon
@@ -40,17 +39,6 @@
 						:icon-name="'iconarrow'"
 						:style="{ fontSize: '24px' }"
 					/>
-					<!-- <div class="station-name">
-						{{ item.address }}
-					</div>
-					<div
-						:class="[
-							'status',
-							item.status == 0 ? 'status-suc' : 'status-err',
-						]"
-					>
-						{{ item.statusText }}
-					</div> -->
 				</div>
 			</div>
 		</div>
@@ -83,7 +71,6 @@ export default {
 		};
 
 		return {
-			activeIndex: null,
 			list: [],
 			iconList,
 			searchName: '',
@@ -103,9 +90,6 @@ export default {
 			},
 		},
 	},
-	created() {
-		this.getData();
-	},
 	computed: {
 		showStationList() {
 			if (this.searchName) {
@@ -116,39 +100,11 @@ export default {
 			return this.stationList;
 		},
 	},
-	watch: {
-		activeItem(val) {
-			if (JSON.stringify(val) == '{}') {
-				return (this.activeIndex = null);
-			}
-			let index = this.list.findIndex(item => {
-				let { id } = item;
-				return val.id === id;
-			});
-			this.activeIndex = index > -1 ? index : null;
-		},
-	},
 	methods: {
 		clearSearch() {
 			this.searchName = '';
 		},
-		async getData() {
-			let params = {
-				// searchName,
-				types: '',
-			};
-			let list = await this.$sysApi.map.home.getAllTypeStationList();
-			this.list = list.map(item => {
-				let { stationType } = item;
-				//   let config = AIRSUPPLYOVERLAYCONFIGMAP[stationType]
-				//   if(config){
-				//       item.icon = config.legendIcon
-				//   }
-				return item;
-			});
-		},
 		handleClick(item, index) {
-			this.activeIndex = index;
 			this.$emit(
 				'change',
 				{ ...item, overlayType: item.type },

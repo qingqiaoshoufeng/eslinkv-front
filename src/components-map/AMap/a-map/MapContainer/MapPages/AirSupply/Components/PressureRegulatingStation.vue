@@ -79,7 +79,7 @@ export default {
 	},
 	methods: {
 		async handleClick(marker) {
-			let { id, name, type } = marker;
+			let { id='', name='', type='' } = marker;
 			let data = {};
 			let dataComp = {};
 			try {

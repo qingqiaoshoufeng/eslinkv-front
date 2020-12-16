@@ -7,21 +7,9 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
 		></WarnEvent>
-		<StationList
-			:data="activeStationData"
+		<!-- <WarningStations
 			:overlayInfoConfigMap="overlayInfoConfigMap"
-			@close="closeStationListDetail"
-		></StationList>
-		<StationList
-			:data="activeStationData"
-			:overlayInfoConfigMap="overlayInfoConfigMap"
-			@close="closeStationListDetail"
-		></StationList>
-		<!-- 2.legend不控制显隐 -->
-		<WarningStations
-			:overlayInfoConfigMap="overlayInfoConfigMap"
-		></WarningStations>
-
+		></WarningStations> -->
 		<!-- 行政区域覆盖物 -->
 		<RegionBoundary />
 		<!-- 2.legend控制显隐 -->
@@ -30,6 +18,7 @@
 				:key="legend"
 				v-if="stationDataMap[config.dataProp]"
 				:ref="legend"
+				:activeItem="activeOverlayMap[legend] || undefined"
 				:is="config.component"
 				:visible="config.visible"
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
@@ -47,7 +36,8 @@
 			v-model="showOverlayDetail"
 			v-bind="{
 				beforeClose: closeOverlayDetail,
-				...OverlayDetailProp,
+				position: overlayDetailPosition,
+				...overlayDetailProp,
 			}"
 			@view-detail="viewDetail"
 			ref="OverlayDetail"
@@ -68,7 +58,10 @@
 				class="right-panel"
 				v-model="activeTab"
 				@overlay-click="handleListClick"
-				:stationList="stationList"
+				v-bind="{
+					stationList,
+					rightListActiveItemMap,
+				}"
 				ref="RightPanel"
 			></RightPanel>
 		</portal>
@@ -89,7 +82,7 @@ let componentPageArr = [
 	'WarnEvent',
 	//右侧报警列表
 	'RightPanel',
-	'StationList',
+	// 'StationList',
 	'WarningStations',
 ];
 //页面所需公共组件
@@ -145,11 +138,13 @@ export default {
 			showOverlayDetail: false,
 			stationDataMap: {},
 			visibleMore: false,
+			overlayDetailPosition: '',
 			stationList: [],
 		};
 	},
 	computed: {
-		OverlayDetailProp() {
+		//详情弹窗所需props
+		overlayDetailProp() {
 			let { activeOverlay, overlayInfoConfigMap, legendMap } = this;
 			if (JSON.stringify(activeOverlay) !== '{}') {
 				let { overlayType } = activeOverlay;
@@ -171,6 +166,26 @@ export default {
 					showMore,
 				};
 			}
+		},
+		//点击右侧点位列表，从overlay组件内部触发click事件
+		activeOverlayMap() {
+			let { activeStationData } = this;
+			if (JSON.stringify(activeStationData) === '{}') {
+				return {};
+			} else {
+				let { overlayType } = activeStationData;
+				return {
+					[overlayType]: activeStationData,
+				};
+			}
+		},
+		rightListActiveItemMap() {
+			let { activeWarnData, activeStationData } = this;
+			return {
+				processWarning: activeWarnData,
+				realTime: activeWarnData,
+				overlayList: activeStationData,
+			};
 		},
 	},
 	methods: {
@@ -215,6 +230,7 @@ export default {
 		setZoomAndPanTo(lng, lat, zoom = 14) {
 			this.$amap.setZoom(zoom, 100);
 			this.$amap.panTo([lng, lat], 100);
+			this.overlayDetailPosition = zoom == 14 ? 'top' : '';
 		},
 		handleOverlayClick(overlay, overlayType) {
 			overlay.overlayType = overlayType || overlay.overlayType;
@@ -224,6 +240,7 @@ export default {
 		closeOverlayDetail(done, isZoom = true) {
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
+			this.activeStationData = {};
 			if (isZoom) {
 				this.setZoomAndPanTo(...this.center, this.zoom);
 			}
@@ -244,22 +261,16 @@ export default {
 					break;
 				default:
 					this.activeWarnData = overlay;
+					this.overlayDetailPosition = 'top';
 			}
-			this.setZoomAndPanTo(lng, lat);
+			this.setZoomAndPanTo(lng, lat + 0.006);
 		},
 		closeWarnEventDetail() {
-			// this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
-			// this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
-			// this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
 			this.activeWarnData = {};
+			this.activeStationData = {};
 			this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		closeStationListDetail() {
-			this.activeStationData = {};
-			// this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
-			// this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
-			// this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
-			// this.$refs.RightPanel.$refs.overlayList.searchName = '';
 			this.activeStationData = {};
 			this.setZoomAndPanTo(...this.center, this.zoom);
 		},

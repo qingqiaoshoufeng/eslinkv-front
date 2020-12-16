@@ -7,11 +7,11 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
 		></WarnEvent>
-		<StationList
-			:data="stationListData"
+		<!-- <StationList
+			:data="activeStationData"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeStationListDetail"
-		></StationList>
+		></StationList> -->
 		<!-- 特殊 中低压管网需要legend控制显隐 -->
 		<AMapTile
 			ref="mapTile"
@@ -23,6 +23,7 @@
 			<component
 				:key="legend"
 				v-if="stationDataMap[config.dataProp]"
+				:activeItem="activeOverlayMap[legend] || undefined"
 				:ref="legend"
 				:is="config.component"
 				:visible="config.visible"
@@ -61,7 +62,10 @@
 				class="right-panel"
 				v-model="activeTab"
 				@overlay-click="handleListClick"
-				:stationList="stationList"
+				v-bind="{
+					stationList,
+					rightListActiveItemMap,
+				}"
 				ref="RightPanel1"
 			></RightPanel>
 		</portal>
@@ -78,7 +82,7 @@ import {
 	LNGStation,
 	InspectionPerson,
 	GasStation,
-	StationList,
+	// StationList,
 	// HighPressureLine,
 	// HighPressureLine_Process,
 	// PressureRegulatingStation,
@@ -142,7 +146,7 @@ export default {
 		DataStatistics,
 		WarningList,
 		WarnEvent,
-		StationList,
+		// StationList,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
@@ -166,8 +170,8 @@ export default {
 			),
 			activeOverlay: {},
 			activeWarnData: {},
-			center: [120.151562, 30.273297],
-			zoom: 18,
+			center: [120.151562, 30.283297],
+			zoom: 12.5,
 			showOverlayDetail: false,
 			activeTab: 'realTime',
 			legendMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
@@ -184,7 +188,7 @@ export default {
 			stationDataMap: {},
 			dataReady: false,
 			stationList: [],
-			stationListData: {},
+			activeStationData: {},
 		};
 	},
 	computed: {
@@ -222,6 +226,18 @@ export default {
 			}
 			return queryArr;
 		},
+		//点击右侧点位列表，从overlay组件内部触发click事件
+		activeOverlayMap() {
+			let { activeStationData } = this;
+			if (JSON.stringify(activeStationData) === '{}') {
+				return {};
+			} else {
+				let { overlayType } = activeStationData;
+				return {
+					[overlayType]: activeStationData,
+				};
+			}
+		},
 		OverlayDetailProp() {
 			let { activeOverlay, overlayInfoConfigMap, legendMap } = this;
 			if (JSON.stringify(activeOverlay) !== '{}') {
@@ -245,10 +261,18 @@ export default {
 				};
 			}
 		},
+		rightListActiveItemMap() {
+			let { activeWarnData, activeStationData } = this;
+			return {
+				processWarning: activeWarnData,
+				realTime: activeWarnData,
+				overlayList: activeStationData,
+			};
+		},
 	},
 	methods: {
 		closeStationListDetail(done) {
-			this.StationListData = {};
+			this.activeStationData = {};
 			this.$refs.RightPanel1.$refs.processWarning.activeIndex = -1;
 			this.$refs.RightPanel1.$refs.realTime.activeIndex = -1;
 			this.$refs.RightPanel1.$refs.overlayList.activeIndex = -1;
@@ -343,18 +367,22 @@ export default {
 				this.$amap.panTo([lng, lat], 100);
 			});
 		},
-		handleListClick(overlay, eventType) {
+		handleListClick(overlay, listType) {
+			let { lng, lat } = overlay;
+			//关闭站点详情弹窗
 			if (this.showOverlayDetail) {
 				this.showOverlayDetail = false;
 				this.activeOverlay = {};
 			}
-			let { lng, lat } = overlay;
-			if (eventType) {
-				this.stationListData = overlay;
-			} else {
-				this.activeWarnData = overlay;
+			switch (listType) {
+				case 'StationList':
+					this.activeStationData = overlay;
+					break;
+				default:
+					this.activeWarnData = overlay;
+					this.overlayDetailPosition = 'top';
 			}
-			this.setZoomAndPanTo(lng, lat);
+			this.setZoomAndPanTo(lng, lat + 0.006);
 		},
 		closeWarnEventDetail() {
 			this.activeWarnData = {};

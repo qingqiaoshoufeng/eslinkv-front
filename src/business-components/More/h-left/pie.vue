@@ -23,6 +23,9 @@
 			unit: {
 				type: String,
 				default: '万m³'
+			},
+			startAngle:{
+				default :270
 			}
 		},
 		watch: {
@@ -39,7 +42,6 @@
 		methods: {
 			getOption() {
 				const total = this.data.reduce((p, n) => {
-					console.log(p,n)
 					return (Number(p)||0) + Number(n.value)
 				})
 				const _self=this
@@ -66,7 +68,7 @@
 						radius: ['52%', '64%'],
 						avoidLabelOverlap: false,
 						minAngle: 24,
-						startAngle: 270,
+						startAngle: _self.startAngle,
 						color: ['#db4f49', '#367cf6', '#84e4fc', '#f8cd47', '#fceb50', '#ed9144', '#5fcbb9'],
 						label: {
 							formatter: function (params) {

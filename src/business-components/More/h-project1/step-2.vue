@@ -3,8 +3,8 @@
 		<div class="h-project-1-step-icon fn-flex">
 			<img :src="icon2" alt=""/>
 		</div>
-		<h2 class="pos-a text-center">{{step===2?'等待受理':'受理'}}</h2>
-		<h3 v-if="step>2" class="pos-a text-center">{{formatTime(step2.time)}}</h3>
+		<h2 class="pos-a text-center">受理</h2>
+		<h3 class="pos-a text-center">{{formatTime(step2.time)}}</h3>
 	</div>
 </template>
 <script>

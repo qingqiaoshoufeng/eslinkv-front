@@ -9,34 +9,10 @@
 				{{ item.name }}
 			</div>
 		</div>
-		<!-- <div class="detial_info_list">
-			<div
-				class="item"
-				v-for="(item, index) in data.detailList || []"
-				:key="index"
-				v-show="detailInfo[item.prop]"
-			>
-				<span class="label">{{ `${item.label}: ` }}</span>
-				<span class="value">{{
-					`${
-						(detailInfo[item.prop] &&
-						detailInfo[item.prop] !== 0 &&
-						isNumber(detailInfo[item.prop])
-							? parseFloat(
-									detailInfo[item.prop].toFixed(
-										item.Fixed || 0
-									)
-							  ).toLocaleString()
-							: detailInfo[item.prop] || 0) + item.DW
-					} `
-				}}</span>
-			</div>
-		</div> -->
 		<div class="btn" v-if="true" @click="handleViewDetail()">查看详情</div>
 	</div>
 </template>
 <script>
-import { isNumber } from 'highcharts';
 export default {
 	name: 'TipDetial',
 	props: {

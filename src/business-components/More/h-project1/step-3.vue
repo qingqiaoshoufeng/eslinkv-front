@@ -10,8 +10,8 @@
 				</div>
 			</div>
 		</div>
-		<h2 class="pos-a text-center">{{step===3?'等待接单':'接单'}}</h2>
-		<h3 v-if="step>3" class="pos-a text-center">{{formatTime(step3.time)}}</h3>
+		<h2 class="pos-a text-center">接单</h2>
+		<h3 class="pos-a text-center">{{formatTime(step3.time)}}</h3>
 	</div>
 </template>
 <script>

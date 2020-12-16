@@ -18,7 +18,7 @@
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			v-bind="{
-				data: data1[0],
+				data: data1,
 				...OverlayDetailProp,
 			}"
 			:before-close="closeOverlayDetail"
@@ -26,7 +26,6 @@
 			ref="OverlayDetail"
 			:width="400"
 		>
-			<TipDetial />
 		</OverlayDetail>
 	</div>
 </template>
@@ -63,17 +62,7 @@ export default {
 			showOverlayDetail: true,
 			visible: true,
 			overlayIcon: 'iconzhongdiyayujing',
-			data1: [
-				{
-					name: '浙江省杭州市西湖区庆丰新村',
-					id: 1,
-					lat: 30.270097732543945,
-					lng: 120.12751770019531,
-					name: '庆丰新村社区',
-					stationType: 'ThreeSocialLinkage',
-					type: 'WarningStations',
-				},
-			],
+			data1: {},
 		};
 	},
 	computed: {},
@@ -84,6 +73,7 @@ export default {
 		closeOverlayDetail() {},
 		handlerClick() {
 			this.showOverlayDetail = true;
+			this.data1 = this.data[0];
 		},
 	},
 	beforeDestroy() {},

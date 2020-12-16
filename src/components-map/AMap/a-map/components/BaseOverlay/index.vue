@@ -9,7 +9,7 @@
 				iconSize,
 			}"
 			:active="item.active"
-			:visible="visible"
+			:visible="visible || activeItemName === item[overlayName]"
 			@click="handleClick(item)"
 			@mouseover="handleMouseOver(item)"
 			@mouseleave="handleMouseLeave(item)"
@@ -78,6 +78,12 @@ export default {
 			type: Boolean,
 			default: true,
 		},
+		activeItem: {
+			type: Object,
+			defaut() {
+				return {};
+			},
+		},
 	},
 	watch: {
 		visible: {
@@ -93,6 +99,15 @@ export default {
 			},
 			immediate: true,
 		},
+		//外部传入需要 activeItem  监听active自动触发click事件, 如果legend隐藏了覆盖物设置activeItemName 显示单个active的覆盖物
+		activeItem(val) {
+			if (val && JSON.stringify(val) !== '{}') {
+				this.activeItemName = val[this.overlayName];
+				this.handleClick(val);
+			} else {
+				this.activeItemName = '';
+			}
+		},
 	},
 	created() {
 		let fun = findAmapRoot.bind(this);
@@ -103,6 +118,7 @@ export default {
 			list: [],
 			position: 'bottom',
 			isRendered: false,
+			activeItemName: '',
 			sampleNamePoseMap: {
 				top: {
 					top: `-30px`,

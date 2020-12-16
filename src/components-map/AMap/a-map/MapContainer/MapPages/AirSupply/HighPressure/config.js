@@ -6,9 +6,6 @@ import {
     emergencyAirSourceStation,
     HighPressureHighPressureGasStation,
     HighPressureLineLength,
-    HighPressureCarNumber,
-    HighPressureInspectionNumber,
-    HighPressurePreservationNumber,
 } from '../../../../utils/dictionary'
 
 // 高压统计数据配置
@@ -17,13 +14,20 @@ export const DATA_STATISTICS_MAP = {
     emergencyAirSourceStation,
     HighPressureHighPressureGasStation,
     HighPressureLineLength,
-    // HighPressureCarNumber,
-    // HighPressureInspectionNumber,
-    // HighPressurePreservationNumber,
 }
 
 // 覆盖物legend配置
 export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
+    WarningStations: {
+        label: '高中压预警点',
+        legendIcon: 'iconzhongdiyayujing',
+        iconSize: 38,
+        icon: 'iconzhongdiyayujing',
+        component: 'WarningStations',
+        showOverlayName: false,
+        visible: true,
+        dataProp: 'WarningStationsList',
+    },
     HighPressureLine: {
         label: '高压管网',
         legendIcon: 'icontuligaoyaguanwang',
@@ -84,73 +88,6 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
         visible: false,
         dataProp: 'inspectionCarList',
     },
-    WarningStations: {
-        label: '高中压预警点',
-        legendIcon: 'iconzhongdiyayujing',
-        iconSize: 38,
-        icon: 'iconzhongdiyayujing',
-        component: 'WarningStations',
-        showOverlayName: false,
-        visible: true,
-        dataProp: 'WarningStationsList',
-    }
-    // ServiceStation: {
-    //     label: '综合服务站',
-    //     legendIcon: 'icontulizonghefuwuzhan1',
-    //     iconSize: 38,
-    //     component: 'ServiceStation',
-    //     visible: true,
-    //     dataProp: 'comprehensiveServiceStationList',
-    //  detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
-    // },
-    // PipeManageMentStation: {
-    //     label: '管网运行管理站',
-    //     legendIcon: 'icontuliqiyuanzhan',
-    //     iconSize: 38,
-    //     component: 'EmergencyAirSourceStation',
-    //     visible: false,
-    //     dataProp: "pipeManageMentStationList"
-    // },
-    // UndergroundRepairStation: {
-    //     label: '地下抢修点',
-    //     legendIcon: 'tulidixiaqiangxiudian',
-    //     iconSize: 38,
-    //     component: 'EmergencyAirSourceStation',
-    //     visible: false,
-    //     dataProp: "undergroundRepairStationList"
-    // },
-    // LNGStation: {
-    //     label: 'LNG站',
-    //     legendIcon: 'icontulilNG',
-    //     iconSize: 38,
-    //     component: 'LNGStation',
-    //     visible: false,
-    //     dataProp: "lngstationlist"
-    // },
-    // LiquefiedGasStation: {
-    //     label: '液化气站',
-    //     legendIcon: 'icontuliyehuaqi',
-    //     iconSize: 38,
-    //     component: 'LiquefiedGasStation',
-    //     visible: false,
-    //     dataProp: "liquefiedGasStationList"
-    // },
-    // NaturalGasStation: {
-    //     label: '加气站',
-    //     iconSize: 38,
-    //     legendIcon: 'icontulijiaqizhan',
-    //     component: 'NaturalGasStation',
-    //     visible: false,
-    //     dataProp: "naturalGasStationList"
-    // },
-    // DistributedEnergyResource: {
-    //     label: '分布式能源',
-    //     legendIcon: 'icontulinengyuanzhan',
-    //     iconSize: 38,
-    //     component: 'DistributedEnergyResource',
-    //     visible: false,
-    //     dataProp: ""
-    // }
 }
 // hover覆盖物详情
 export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
@@ -224,8 +161,13 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
                     fontSize: '32px',
                     color: '#FFDC45',
                 },
-                errColor: '#FFDC45',
+            },
+            carPlateNo: {
+                style: {
+                    fontSize: '24px',
+                    color: '#fff',
+                },
             },
         },
-    }
+    },
 }
