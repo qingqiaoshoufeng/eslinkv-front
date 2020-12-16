@@ -58,6 +58,19 @@ export function getProcessWarningList(data) {
         },
     })
 }
+
+//
+//中低压阀门详情
+export function getLowMidDevice(data) {
+    return request({
+        url: HANGRANURL + '/situationAwareness/lowMidDevice',
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
 //高中压事件报警
 // export function getEventWarningList(data) {
 //     return request({

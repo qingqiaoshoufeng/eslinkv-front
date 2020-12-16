@@ -12,6 +12,7 @@
 			:style="{
 				transform: `translate(calc(${translateX}), calc(${translateY})`,
 				width: width + 'px',
+				padding: padding + 'px',
 			}"
 		>
 			<div class="close-btn" v-show="showCloseBtn" @click="closePop">
@@ -99,6 +100,10 @@ export default {
 		width: {
 			type: Number,
 			default: 240,
+		},
+		padding: {
+			type: Number,
+			default: 16,
 		},
 		//iconSize 用于计算需要偏移的位置
 		iconSize: {

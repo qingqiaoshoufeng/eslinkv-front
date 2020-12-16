@@ -2,7 +2,7 @@
 	<div>
 		<!-- 图标 -->
 		<Overlay
-			v-for="(item, index) in data"
+			v-for="(item, index) in list"
 			:key="index"
 			:ref="'WarnEvent' + index"
 			:marker="{
@@ -11,26 +11,31 @@
 				...item,
 			}"
 			:visible="visible"
-			@click="handlerClick"
+			@click="handlerClick(item, index)"
 		>
 		</Overlay>
 		<!-- 详情弹窗 -->
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			v-bind="{
-				data: data1,
+				data: activeOverlay,
 				...OverlayDetailProp,
 			}"
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
-			:width="400"
+			:width="580"
+			:padding="padding"
 		>
+			<TipDetial
+				:isShowList="activeIndex"
+				:detailShowList="detailShowList"
+			/>
 		</OverlayDetail>
 	</div>
 </template>
 <script>
-// import { WARNSTATIONS_OVER_LAY } from './config';
+import { DETAILLIST } from './config';
 export default {
 	name: 'WarningStations',
 	components: {
@@ -42,17 +47,7 @@ export default {
 		data: {
 			type: Array,
 			default() {
-				return [
-					{
-						name: '浙江省杭州市西湖区庆丰新村',
-						id: 1,
-						lat: 30.270097732543945,
-						lng: 120.12751770019531,
-						name: '庆丰新村社区',
-						stationType: 'ThreeSocialLinkage',
-						type: 'WarningStations',
-					},
-				];
+				return [];
 			},
 		},
 	},
@@ -62,18 +57,51 @@ export default {
 			showOverlayDetail: true,
 			visible: true,
 			overlayIcon: 'iconzhongdiyayujing',
-			data1: {},
+			activeOverlay: {},
+			activeIndex: 0,
+			detailInfo: {},
+			padding: 16,
 		};
 	},
-	computed: {},
+	computed: {
+		detailShowList() {
+			let { activeIndex } = this;
+			if (activeIndex == 0) {
+				return this.data.filter(
+					item => item.name === '棋院6159燃气球阀-切断装置'
+				);
+			}
+
+			return this.data.filter(
+				item => item.name !== '棋院6159燃气球阀-切断装置'
+			);
+		},
+		list() {
+			let list = [];
+			list[0] = this.data.find(
+				item => item.name === '棋院6159燃气球阀-切断装置'
+			);
+			list[1] = this.data.find(
+				item => item.name !== '棋院6159燃气球阀-切断装置'
+			);
+			return list;
+		},
+	},
 
 	mounted() {},
+
 	methods: {
 		viewOverlayDetail() {},
-		closeOverlayDetail() {},
-		handlerClick() {
+		closeOverlayDetail(done) {
+			done && done();
+		},
+		handlerClick(item, index) {
+			this.padding = index ? 0 : 16;
 			this.showOverlayDetail = true;
-			this.data1 = this.data[0];
+			console.log(item);
+			this.activeIndex = index;
+			this.activeOverlay = this.list[index];
+			console.log(this.detailShowList);
 		},
 	},
 	beforeDestroy() {},
@@ -82,4 +110,7 @@ export default {
 
 
 <style lang="scss" scoped>
+/deep/.pop-content {
+	padding: 0px !important;
+}
 </style>
