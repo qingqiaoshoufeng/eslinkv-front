@@ -18,15 +18,16 @@ export const DATA_STATISTICS_MAP = {
 
 // 覆盖物legend配置
 export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
+
     WarningStations: {
-        label: '高中压预警点',
+        label: '中低压预警点',
         legendIcon: 'iconzhongdiyayujing',
         iconSize: 38,
         icon: 'iconzhongdiyayujing',
         component: 'WarningStations',
         showOverlayName: false,
         visible: true,
-        dataProp: 'WarningStationsList',
+        dataProp: 'middleAndLowPressureValveList',
     },
     HighPressureLine: {
         label: '高压管网',

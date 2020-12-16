@@ -1,14 +1,14 @@
 <template>
-	<div class="h-hot-call-number widget-part" :style="styles">
+	<div class="h-hot-call-number widget-part" :style="styles" v-if="data">
 		<video
-			class="h-hot-call-number__bg"
-			src="/static/images/hot-call-number.webm"
+			class="video"
+			src="/static/images/serves/hot-call-number.webm"
 			loop
 			muted
 			autoplay></video>
 		<div class="h-hot-call-number__oncall">
 			<div class="h-hot-call-number__oncall__num font-num">
-				{{ data && data.onCall ||0}}
+				{{ data.onCall || 0}}
 			</div>
 			<div class="h-hot-call-number__oncall__desc">
 				通话中
@@ -16,7 +16,7 @@
 		</div>
 		<div class="h-hot-call-number__onwait">
 			<div class="h-hot-call-number__onwait__num font-num">
-				{{ data && data.onWait ||0}}
+				{{ data.onWait || 0}}
 			</div>
 			<div class="h-hot-call-number__onwait__desc font-num">
 				等待中
@@ -46,12 +46,12 @@
 		},
 	}
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	.h-hot-call-number {
-		&__bg {
-			width: 100%;
-			height: 100%;
-		}
+		.video {
+      width: 100%;
+      height: 100%;
+    }
 
 		.oncall-onwait-common {
 			position: absolute;
@@ -77,8 +77,8 @@
 
 		&__oncall {
 			@extend .oncall-onwait-common;
-			left: 29px;
-			top: 55px;
+			left: 240px;
+			top: 45px;
 
 			&__num {
 				@extend .num-common;
@@ -92,8 +92,8 @@
 
 		&__onwait {
 			@extend .oncall-onwait-common;
-			right: 21px;
-			top: 55px;
+			right: 36px;
+			top: 45px;
 
 			&__num {
 				@extend .num-common;

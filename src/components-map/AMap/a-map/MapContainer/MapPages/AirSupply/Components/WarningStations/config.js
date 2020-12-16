@@ -1,3 +1,4 @@
+import { DevicedId, deviceType, inletPressure, outletPressure, inletTemperature, outletTemperature, h2S, ch4 } from './dictionary'
 export const WARNSTATIONS_OVER_LAY = {
     WarningStations: {
         fields: {
@@ -11,3 +12,5 @@ export const WARNSTATIONS_OVER_LAY = {
         },
     },
 }
+
+export const DETAILLIST = [DevicedId, deviceType, inletPressure, outletPressure, inletTemperature, outletTemperature, h2S, ch4]

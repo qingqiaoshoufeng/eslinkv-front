@@ -285,8 +285,8 @@ export default {
 			this.activeIndex = activeIndex || this.activeIndex;
 			this.getDetailInfo(params, status);
 
-			this.isShowMore = ['WarningICcustomer'].includes(type);
-			if (['WarningICcustomer', 'MajorClient'].includes(type)) {
+			this.isShowMore = [''].includes(type);
+			if (['', ''].includes(type)) {
 				this.$amap.setZoom(14, 100);
 				this.$amap.panTo([lng, lat], 100);
 			}

@@ -66,7 +66,7 @@ export default {
 	}
 	.label {
 		display: inline-block;
-		width: 145px;
+		min-width: 145px;
 	}
 
 	.ivu-switch-default:after {

@@ -88,7 +88,7 @@
 		},
 		mounted() {
 			this.emitComponentUpdate({month: format(this.selectValue, 'yyyy-MM')})
-			if(this.config.config.links){
+			if(this.config?.config?.links){
 				const links = JSON.parse(this.config.config.links)
 				links.forEach(ref => {
 					let dom

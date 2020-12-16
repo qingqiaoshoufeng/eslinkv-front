@@ -8,7 +8,7 @@
 			@close="closeWarnEventDetail"
 		></WarnEvent>
 		<!-- <WarningStations
-			:overlayInfoConfigMap="overlayInfoConfigMap"
+			:data="stationDataMap.middleAndLowPressureValveList"
 		></WarningStations> -->
 		<!-- 行政区域覆盖物 -->
 		<RegionBoundary />
@@ -196,6 +196,7 @@ export default {
 					'GasStation', // '门站',
 					'PressureRegulatingStation', // '调压站',
 					'EmergencyAirSourceStation', // '应急气源站',
+					'MiddleAndLowPressureValve', // 中低压阀门
 				].toString(),
 			};
 			let res = await this.$sysApi.map.airSupply.getAllTypeStationList(

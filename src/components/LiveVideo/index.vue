@@ -51,7 +51,7 @@ var ws = null;
 var token = "";
 var device_list = [];
 var myPlayer = "";
-var presetPos = new Array();
+var ponBusyPos = new Array();
 var pictureId = "";
 var storageId = "";
 var videoelem = "";
@@ -120,28 +120,11 @@ function createPlayer() {
 }
 
 function pausevideo() {
+  if (!flvPlayer) return
   if (flvjs.isSupported()) {
-    // //去掉空播放对象
-    flvPlayerList.forEach(function (item, index) {
-      if (!item) {
-        flvPlayerList.splice(index, 1);
-      }
-    });
-    if (chooseplaysite && flvPlayerList && flvPlayerList.length) {
-      for (let v of flvPlayerList) {
-        if (v.key == chooseplaysite) {
-          if (v.value) {
-            v.value.unload();
-            v.value.detachMediaElement();
-            v.value.destroy();
-            v.value = "";
-          }
-        }
-      }
-
-    } else {
-      alert("请选择要视频窗口");
-    }
+    flvPlayer.unload();
+    flvPlayer.detachMediaElement();
+    flvPlayer.destroy();
   } else {
     myPlayer.reset();
   }
@@ -306,6 +289,7 @@ export default {
       $(p).fullScreen(false);
     },
     playvideo(puid, idx) {
+      pausevideo()
       //播视频接口
       let url = host + "stream.flv?puid=" + puid + "&idx=" + idx + "&stream=0&token=" + token;
       this.isPlaying = true
@@ -313,30 +297,6 @@ export default {
       if (flvjs.isSupported()) {
         var videoElement = "";
         videoElement = this.$refs.live
-
-
-        //选择具体某个视频窗口播放视频时触发
-        if (videoelem && chooseplaysite) {
-          //去掉空播放对象
-          flvPlayerList.forEach(function (item, index) {
-            if (!item) {
-              flvPlayerList.splice(index, 1);
-            }
-          });
-          if (flvPlayerList.length > 0) {
-            for (let v of flvPlayerList) {
-              if (v.key == chooseplaysite) {
-                if (v.value) {
-                  v.value.unload();
-                  v.value.detachMediaElement();
-                  v.value.destroy();
-                  v.value = "";
-                }
-              }
-            }
-          }
-          videoElement = videoelem;
-        }
 
         videoElement.controls = false;
         flvPlayer = flvjs.createPlayer({
@@ -380,10 +340,19 @@ export default {
     changeChannel (n) {
       this.currIndex = n
       this.playvideo(this.pu.$, this.videoList[this.currIndex].Idx)
+    },
+    handleSceneChange () {
+      pausevideo()
     }
   },
   created() {
     this.connect()
+  },
+  mounted() {
+    document.addEventListener('SceneIndex', this.handleSceneChange)
+  },
+  beforeDestroy() {
+    document.removeEventListener('SceneIndex', this.handleSceneChange)
   }
 }
 
