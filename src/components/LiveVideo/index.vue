@@ -120,7 +120,7 @@ function createPlayer() {
 }
 
 function pausevideo() {
-  if (!flvPlayer) return
+  if (!flvPlayer?._emitter) return
   if (flvjs.isSupported()) {
     flvPlayer.unload();
     flvPlayer.detachMediaElement();
