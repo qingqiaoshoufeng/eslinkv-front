@@ -70,6 +70,7 @@ export default {
 	}
 }
 .amap-marker {
+    backface-visibility: hidden;
 	pointer-events: none !important;
 	> div {
 		> div {
