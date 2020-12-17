@@ -17,5 +17,5 @@ export const WARNSTATIONS_OVER_LAY = {
 }
 
 export const DETAILLIST = [ValveOpenFinish, time,
-    DevicedId, DeviceName, DeviceLocation, F_BatteryVoltage, SolarCell, GatewaySingal, deviceType, inletPressure, outletPressure, MC, TEMP, inletTemperature, outletTemperature, h2S, ch4
+    DevicedId, DeviceName, DeviceLocation, F_BatteryVoltage, SolarCell, GatewaySingal, deviceType, inletPressure, outletPressure, inletTemperature, outletTemperature, h2S, ch4, MC, TEMP,
 ]
