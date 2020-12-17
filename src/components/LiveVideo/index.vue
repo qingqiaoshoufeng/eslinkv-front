@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import GoldChart from '@/openApi'
 
 var _cf = {
   ver: 'debug',
@@ -50,12 +51,10 @@ var url = "";
 var ws = null;
 var token = "";
 var device_list = [];
-var myPlayer = "";
 var ponBusyPos = new Array();
 var pictureId = "";
 var storageId = "";
 var videoelem = "";
-var flvPlayer = "";
 var flvPlayerList = [];
 var replay = 0;
 var chooseplaysite = 0; //选中的第几窗口,默认为0代表没有选择
@@ -98,7 +97,7 @@ function createPlayer() {
   if (videoelem) {
     videoElement = videoelem;
   }
-  myPlayer = new videojs('videoElement', {
+  GoldChart.liveVideo.myPlayer = new videojs('videoElement', {
     "techOrder": ["html5", "flash"],
     preload: 'auto',
     posterImage: false,
@@ -117,17 +116,6 @@ function createPlayer() {
       LiveDisplay: true
     }
   });
-}
-
-function pausevideo() {
-  if (!flvPlayer) return
-  if (flvjs.isSupported()) {
-    flvPlayer.unload();
-    flvPlayer.detachMediaElement();
-    flvPlayer.destroy();
-  } else {
-    myPlayer.reset();
-  }
 }
 
 //开始对讲
@@ -265,7 +253,9 @@ export default {
 
         requestPost('C_CAS_QueryPUIDRes?token=' + token, { puid: [this.pu.$] }, rv => {
           // 过滤直播资源
-          this.videoList = rv.responseJSON.Res.filter(v => v.Type === 'IV')
+			console.log(rv)
+          // this.videoList = rv.responseJSON.Res.filter(v => v.Type === 'IV'||v.Type === 'ST')
+          this.videoList = rv.responseJSON.Res
           console.warn('------获取到以下子设备---------')
           console.log(this.videoList)
         })
@@ -289,7 +279,7 @@ export default {
       $(p).fullScreen(false);
     },
     playvideo(puid, idx) {
-      pausevideo()
+      GoldChart.liveVideo.pausevideo()
       //播视频接口
       let url = host + "stream.flv?puid=" + puid + "&idx=" + idx + "&stream=0&token=" + token;
       this.isPlaying = true
@@ -299,7 +289,7 @@ export default {
         videoElement = this.$refs.live
 
         videoElement.controls = false;
-        flvPlayer = flvjs.createPlayer({
+        GoldChart.liveVideo.flvPlayer = flvjs.createPlayer({
           type: 'flv',
           url: url,
           isLive: true,
@@ -311,28 +301,28 @@ export default {
           stashInitialSize: 128, // 减少首桢显示等待时长
           statisticsInfoReportInterval: 600
         });
-        flvPlayer.attachMediaElement(videoElement);
-        flvPlayer.load();
+        GoldChart.liveVideo.flvPlayer.attachMediaElement(videoElement);
+        GoldChart.liveVideo.flvPlayer.load();
 
         setTimeout(function () {
-          flvPlayer.play();
+          GoldChart.liveVideo.flvPlayer.play();
         }, 100);
 
       } else {
         createPlayer();
-        myPlayer.src(url);
-        myPlayer.on("error", e => {
+        GoldChart.liveVideo.myPlayer.src(url);
+        GoldChart.liveVideo.myPlayer.on("error", e => {
           setTimeout(e => {
-            myPlayer.src(url);
-            myPlayer.load(url);
-            myPlayer.play();
+            GoldChart.liveVideo.myPlayer.src(url);
+            GoldChart.liveVideo.myPlayer.load(url);
+            GoldChart.liveVideo.myPlayer.play();
           }, 1000);
         });
-        myPlayer.on("ended", e => {
+        GoldChart.liveVideo.myPlayer.on("ended", e => {
           setTimeout((e) => {
-            myPlayer.src(url);
-            myPlayer.load(url);
-            myPlayer.play();
+            GoldChart.liveVideo.myPlayer.src(url);
+            GoldChart.liveVideo.myPlayer.load(url);
+            GoldChart.liveVideo.myPlayer.play();
           }, 1000);
         })
       }
@@ -342,7 +332,7 @@ export default {
       this.playvideo(this.pu.$, this.videoList[this.currIndex].Idx)
     },
     handleSceneChange () {
-      pausevideo()
+      GoldChart.liveVideo.pausevideo()
     }
   },
   created() {

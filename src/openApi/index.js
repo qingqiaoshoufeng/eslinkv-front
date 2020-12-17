@@ -21,7 +21,21 @@ const GoldChart = {
 			}
 		},
 	},
-	store
+	store,
+	liveVideo: {
+		flvPlayer: null,
+		myPlayer: null,
+		pausevideo: () => {
+			if (!GoldChart.liveVideo.flvPlayer?._emitter) return
+			if (flvjs.isSupported()) {
+				GoldChart.liveVideo.flvPlayer.unload();
+				GoldChart.liveVideo.flvPlayer.detachMediaElement();
+				GoldChart.liveVideo.flvPlayer.destroy();
+			} else {
+				GoldChart.liveVideo.myPlayer.reset();
+			}
+		}
+	}
 }
 
 export default GoldChart
