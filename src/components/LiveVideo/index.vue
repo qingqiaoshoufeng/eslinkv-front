@@ -265,7 +265,9 @@ export default {
 
         requestPost('C_CAS_QueryPUIDRes?token=' + token, { puid: [this.pu.$] }, rv => {
           // 过滤直播资源
-          this.videoList = rv.responseJSON.Res.filter(v => v.Type === 'IV')
+			console.log(rv)
+          // this.videoList = rv.responseJSON.Res.filter(v => v.Type === 'IV'||v.Type === 'ST')
+          this.videoList = rv.responseJSON.Res
           console.warn('------获取到以下子设备---------')
           console.log(this.videoList)
         })
