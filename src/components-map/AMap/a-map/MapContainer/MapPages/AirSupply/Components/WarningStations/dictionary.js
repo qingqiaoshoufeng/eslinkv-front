@@ -32,18 +32,18 @@ let DeviceLocation = {
     prop: "deviceLocation",
 }
 let F_BatteryVoltage = {
-    label: '电池电压（V）',
-    DW: '',
+    label: '电池电压',
+    DW: 'V',
     prop: "f_batteryVoltage",
 }
 let SolarCell = {
-    label: '太阳能电压(V)',
-    DW: '',
+    label: '太阳能电压',
+    DW: 'V',
     prop: "solarCell",
 }
 let GatewaySingal = {
-    label: '信号强度（dBm）',
-    DW: '',
+    label: '信号强度',
+    DW: 'dBm',
     prop: "gatewaySingal",
 }
 let deviceType = {
@@ -65,12 +65,12 @@ let outletPressure = {
 }
 let MC = {
     label: '井盖状态',
-    DW: 'kPa',
+    DW: '',
     prop: "mc",
 }
 let TEMP = {
-    label: '温度(℃)',
-    DW: 'kPa',
+    label: '温度',
+    DW: '°C',
     prop: "temp",
     Fixed: 2
 }
@@ -101,5 +101,5 @@ let ch4 = {
 
 export {
     ValveOpenFinish, time,
-    DevicedId, DeviceName, DeviceLocation, F_BatteryVoltage, SolarCell, GatewaySingal, deviceType, inletPressure, outletPressure, MC, TEMP, inletTemperature, outletTemperature, h2S, ch4
+    DevicedId, DeviceName, DeviceLocation, F_BatteryVoltage, SolarCell, GatewaySingal, deviceType, inletPressure, outletPressure, inletTemperature, outletTemperature, MC, TEMP, h2S, ch4
 }
