@@ -25,7 +25,7 @@ const GoldChart = {
 	liveVideo: {
 		flvPlayer: null,
 		myPlayer: null,
-		pausevideo: () => {
+		pauseVideo: () => {
 			if (!GoldChart.liveVideo.flvPlayer?._emitter) return
 			if (flvjs.isSupported()) {
 				GoldChart.liveVideo.flvPlayer.unload();

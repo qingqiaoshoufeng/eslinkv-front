@@ -290,7 +290,7 @@ export default {
       $(p).fullScreen(false);
     },
     playvideo(puid, idx) {
-      GoldChart.liveVideo.pausevideo()
+      GoldChart.liveVideo.pauseVideo()
       //播视频接口
       let url = host + "stream.flv?puid=" + puid + "&idx=" + idx + "&stream=0&token=" + token;
       this.isPlaying = true
@@ -304,7 +304,6 @@ export default {
           type: 'flv',
           url: url,
           isLive: true,
-          hasAudio: false
         }, {
           enableWorker: false,
           autoCleanupSourceBuffer: true, //清理缓冲区
@@ -343,7 +342,7 @@ export default {
       this.playvideo(this.pu.$, this.videoList[this.currIndex].Idx)
     },
     handleSceneChange () {
-      GoldChart.liveVideo.pausevideo()
+      GoldChart.liveVideo.pauseVideo()
     }
   },
   created() {
