@@ -36,7 +36,9 @@ export default {
 			if (val) {
 				this.originInstance.show();
 			} else {
-				this.originInstance.hide();
+				setTimeout(() => {
+					this.originInstance.hide();
+				}, 1000);
 			}
 		},
 	},
@@ -69,15 +71,19 @@ export default {
 			});
 		},
 		handleMapZoomChangeStart() {
-			this.originInstance.hide();
+			if (this.visible) {
+				this.originInstance.hide();
+			}
 		},
 		handleMapZoomChangeEnd() {
 			if (this.timerZoomEnd) {
 				clearTimeout(this.timerZoomEnd);
 			}
 			this.timerZoomEnd = setTimeout(() => {
-				this.originInstance.show();
-				this.reload();
+				if (this.visible) {
+                    this.originInstance.show();
+				    this.reload();
+				}
 			}, 0);
 		},
 	},
