@@ -9,13 +9,13 @@
 			<!-- 轮播图区域 -->
 			<div class="right">
         <div class="select" v-if="deviceList.length">
-          <div class="current" @click="isShowDevice = !isShowDevice">
+          <div class="current ellipsis" @click="isShowDevice = !isShowDevice">
             <span>{{ deviceList[deviceIndex].Name }}</span>
             <img src="./img/arrow-down.svg">
           </div>
           <div class="options" v-show="isShowDevice">
             <div
-                class="option"
+                class="option ellipsis"
                 v-for="(k, i) in deviceList"
                 :key="i"
                 :class="{active: i === deviceIndex}"
