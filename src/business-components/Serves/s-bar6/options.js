@@ -19,6 +19,7 @@ export default function (data, config) {
                 fontSize: 16
             }
         },
+        tooltip: {},
         grid: {
             top: '20%',
             bottom: '4%',
