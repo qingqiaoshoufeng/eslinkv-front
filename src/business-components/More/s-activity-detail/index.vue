@@ -7,7 +7,7 @@
 				<div class="base-info">
           <div class="base-info-item">
             <label>活动时间</label>
-            <span>{{ data.startTime.match(/\S+/)[0] }}</span>
+            <span>{{ data.startTime && data.startTime.match(/\S+/)[0] }}</span>
           </div>
           <div class="base-info-item">
             <label>活动地点</label>
@@ -272,12 +272,12 @@ export default {
 			handler(val) {
 				if (this.id) {
 					this.$nextTick(() => {
-						this.instance = echarts.init(
-							document.getElementById(this.id)
-						);
-						this.setOption(val);
-						this.playerOptions.sources[0].src = val.video;
-					});
+					  const ref = document.getElementById(this.id)
+            if (!ref) return
+						this.instance = echarts.init(ref)
+						this.setOption(val)
+						this.playerOptions.sources[0].src = val.video
+					})
 				}
 			},
 			deep: true,
