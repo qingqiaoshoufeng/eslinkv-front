@@ -18,8 +18,6 @@
             <span>{{ data.people }}</span>
           </div>
 				</div>
-
-
 				<div class="detail-title">
 					<div class="detail-title-logo">
 						<img src="./img/detail-title.svg" alt="" />
@@ -210,7 +208,7 @@ const value = {
       "startTime":"2020-11-01 22:30:00",
       "taskRate":54.04,
       "totalTaskNum":433,
-      "video":"/cdn/videos/sanshe.MOV"
+      "video":"/cdn/videos/sanshe.webm"
     }),
 	},
 };

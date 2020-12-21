@@ -46,7 +46,10 @@
 		mixins: [mixins],
 		methods: {
 			setOption(data) {
-				this.instance && this.instance.setOption(getOption(this.data.value1, this.data.value2, this.config.config))
+				const total = Number(this.data.value1) + Number(this.data.value2)
+				const percent1 = ~~(this.data.value1 * 100 / total)
+				const percent2 = 100-percent1
+				this.instance && this.instance.setOption(getOption(this.data.value1, this.data.value2, this.config.config,percent1,percent2))
 			}
 		},
 		watch: {
