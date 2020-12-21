@@ -78,19 +78,19 @@
 					</div>
 				</div>
 			</div>
-			<NoData :show="!list.length &&!isShow" />
+			<NoData :show="!isShow && !list.length" />
 		</div>
 	</div>
 </template>
 
 <script>
-import { SvgIcon,NoData } from '../../../../../components/';
+import { SvgIcon, NoData } from '../../../../../components/';
 
 export default {
 	name: 'HomeRealTimeList',
 	components: {
-        SvgIcon,
-        NoData
+		SvgIcon,
+		NoData,
 	},
 	data() {
 		return {

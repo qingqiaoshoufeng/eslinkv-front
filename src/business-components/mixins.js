@@ -41,9 +41,11 @@ export default {
 							}
 						}
 					}
-					if (typeof dom.updateComponent === 'function')
-						dom.updateComponent(data)
-					dom.updateAjax(data)
+					if(dom){
+						if (typeof dom.updateComponent === 'function')
+							dom.updateComponent(data)
+						dom.updateAjax(data)
+					}
 				})
 			}
 		},

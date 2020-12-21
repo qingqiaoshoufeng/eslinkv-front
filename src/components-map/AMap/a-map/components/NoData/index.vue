@@ -32,5 +32,8 @@ export default {
 		margin-top: 20px;
 		font-size: 20px;
 	}
+    img{
+        width: 80px;
+    }
 }
 </style>
