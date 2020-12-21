@@ -12,6 +12,7 @@ export default function getOption (data, config) {
 		},
 		tooltip: {
 			trigger: "axis",
+			triggerOn: 'mousemove|click',
 			axisPointer: {
 				lineStyle: {
 					color: {

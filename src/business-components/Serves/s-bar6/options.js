@@ -20,7 +20,9 @@ export default function (data, config) {
                 fontSize: 16
             }
         },
-        tooltip: {},
+        tooltip: {
+            triggerOn: 'mousemove|click'
+        },
         grid: {
             top: '20%',
             bottom: '4%',

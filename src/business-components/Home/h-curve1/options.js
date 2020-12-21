@@ -20,7 +20,8 @@ export default  {
 			}
 		},
 		axisLabel: {
-			interval: 0,
+			showMaxLabel: true,
+			showMinLabel: true,
 			textStyle: {
 				color: "rgba(255, 255, 255, 1)",
 				fontSize: 16,

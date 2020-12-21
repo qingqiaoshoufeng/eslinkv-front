@@ -11,6 +11,7 @@ export default {
 		borderWidth: 1,
 		borderColor: '#00DDFF',
 		padding: 8,
+		triggerOn: 'mousemove|click',
 		axisPointer: {
 			type: 'shadow'
 		},

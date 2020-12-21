@@ -5,7 +5,9 @@ export default {
 		top: 45,
 		bottom: 40
 	},
-	tooltip: {},
+	tooltip: {
+		triggerOn: 'mousemove|click',
+	},
 	xAxis: [{
 		type: 'category',
 		axisTick: {
