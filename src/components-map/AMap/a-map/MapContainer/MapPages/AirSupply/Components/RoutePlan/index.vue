@@ -1,4 +1,5 @@
-<template></template>
+<template>
+</template>
 <script>
 function findAmapRoot() {
 	if (this.$amap) return this.$amap;
@@ -8,8 +9,6 @@ function findAmapRoot() {
 		return fun();
 	}
 }
-// import CoordinateTransform from '../../../../../utils/CoordinateTransform';
-// const coordinateTransform = new CoordinateTransform();
 import { Overlay } from '../../../../../components/index';
 export default {
 	name: 'RoutePlan',
@@ -32,7 +31,7 @@ export default {
 				return {};
 			},
 		},
-	},
+    },
 	watch: {
 		data: {
 			handler(val) {
@@ -98,9 +97,6 @@ export default {
 				this.isExecuteFlag = false;
 				return false;
 			}
-			// passedPathData = passedPathData.map(item => {
-			// 	return coordinateTransform.WGS2GCJ(...item);
-			// });
 			if (!passedPathData) {
 				this.isExecuteFlag = false;
 				console.error('无人员位置信息');
@@ -196,8 +192,9 @@ export default {
 			}
 			let { scaleRatio } = this.parentInfo;
 			let paddingH = 1050 - 1050 * scaleRatio;
-			let paddingW = 3500 - 3500 * scaleRatio;
-			this.map.setFitView(this.pathAll, false, [
+            let paddingW = 3500 - 3500 * scaleRatio;
+            let otherInstance = this.$parent.getDetailOverlayInstance()
+			this.map.setFitView([this.pathAll,otherInstance], false, [
 				paddingH * 0.5 + 80,
 				paddingH * 0.5 + 40,
 				paddingW * 0.55,
