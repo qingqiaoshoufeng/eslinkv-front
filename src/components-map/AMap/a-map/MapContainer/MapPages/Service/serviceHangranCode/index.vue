@@ -140,7 +140,7 @@ export default {
 			showOverlayDetail: false,
 			// 120.12039185； 纬度：30.17273413
 			// center: [120.80971, 30.102216],
-			center: [120.90522766, 30.53565084],
+			center: [120.90522766, 30.74965084],
 			zoom: 10,
 			allTypeStationList: {},
 			detailInfo: {},
@@ -188,7 +188,7 @@ export default {
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$nextTick(() => {
-			this.mapFitView(-0.3, 0.4, 0.2);
+			this.mapFitView(-0.3, 0.4, 0.35);
 		});
 		window.mapFitView = this.mapFitView.bind(this);
 	},
@@ -320,15 +320,15 @@ export default {
 				let { name } = this.activeOverlay;
 
 				let address = {
-					杭州天然气有限公司: { value: [120.99105835, 30.39227485] },
+					杭州天然气有限公司: { value: [121.99105835, 30.49227485] },
 					杭州钱江燃气有限公司: {
-						value: [121.09405518, 30.39419946],
+						value: [122.09405518, 30.39419946],
 					},
 					桐庐杭燃燃气有限公司: {
-						value: [120.57769775, 29.85007093],
+						value: [121.57769775, 29.85007093],
 					},
 					海宁星港燃气有限公司: {
-						value: [121.26159668, 30.43559623],
+						value: [122.26159668, 30.43559623],
 					},
 				};
 				this.detailInfo = this.activeOverlay.gasCodeMapDetailInfoVO;
