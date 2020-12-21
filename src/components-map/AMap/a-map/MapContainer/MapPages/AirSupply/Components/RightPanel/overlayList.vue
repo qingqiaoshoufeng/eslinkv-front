@@ -14,10 +14,7 @@
 			</div>
 		</div>
 		<div class="list">
-			<div class="no_model_box" v-show="!showStationList.length">
-				<img src="/static/images/amap/noModel.svg" alt="" />
-				<div>暂无数据</div>
-			</div>
+			<NoData  :show="!showStationList.length"/>
 			<div
 				@click="handleClick(item, index)"
 				v-for="(item, index) in showStationList"
@@ -46,7 +43,7 @@
 </template>
 
 <script>
-import { SvgIcon } from '../../../../../components/';
+import { SvgIcon, NoData } from '../../../../../components/';
 // import {
 //     AIRSUPPLYOVERLAYCONFIGMAP,
 // } from '../../../../../config/index';
@@ -54,6 +51,7 @@ export default {
 	name: 'HomeRealTimeList',
 	components: {
 		SvgIcon,
+		NoData,
 	},
 	data() {
 		let iconList = {
@@ -124,7 +122,6 @@ export default {
 	box-sizing: border-box;
 	border-radius: 4px;
 	display: flex;
-	font-family: PingFang SC;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 20px;
@@ -137,7 +134,6 @@ export default {
 		height: 100%;
 		flex: 1;
 		padding-left: 16px;
-		font-family: PingFang SC;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 20px;
@@ -145,7 +141,6 @@ export default {
 	}
 	::-webkit-input-placeholder {
 		color: #fff;
-		font-family: PingFang SC;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 20px;
@@ -168,18 +163,6 @@ export default {
 	}
 	color: #fff;
 	font-size: 16px;
-	.no_model_box {
-		display: flex;
-		flex-direction: column;
-		position: absolute;
-		top: 35%;
-		left: 50%;
-		transform: translate(-50%);
-		div {
-			margin-top: 20px;
-			font-size: 20px;
-		}
-	}
 	.list-item {
 		display: flex;
 		justify-content: space-between;

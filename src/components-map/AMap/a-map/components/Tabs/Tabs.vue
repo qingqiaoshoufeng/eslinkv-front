@@ -144,7 +144,7 @@ export default {
 			content: ' ';
 			display: block;
 			position: absolute;
-			top: 50%;
+			top: 23px;
 			transform: translateY(-50%);
 			background: #1773c9;
 			height: 24px;

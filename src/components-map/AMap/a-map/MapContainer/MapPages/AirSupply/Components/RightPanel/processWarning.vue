@@ -91,13 +91,13 @@
 					</div>
 				</div>
 			</div>
+			<NoData :show="!list.length" />
 		</div>
 	</div>
 </template>
 
 <script>
-import { SvgIcon } from '../../../../../components/';
-import VueSeamLess from 'vue-seamless-scroll';
+import { SvgIcon, NoData } from '../../../../../components/';
 import GoldChart from '@/openApi';
 import {
 	INDEXSCENEMAP,
@@ -110,7 +110,7 @@ export default {
 	name: 'ProcessWarningList',
 	components: {
 		SvgIcon,
-		VueSeamLess,
+		NoData,
 	},
 	data() {
 		return {

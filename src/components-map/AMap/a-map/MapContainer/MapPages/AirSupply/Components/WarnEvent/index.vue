@@ -140,7 +140,8 @@ export default {
 							id: this.data.id,
 						},
 					});
-				});
+                });
+			    GoldChart.liveVideo.pauseVideo();
 			});
 		},
 		closeOverlayDetail(done) {

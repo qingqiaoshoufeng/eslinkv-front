@@ -50,14 +50,12 @@
 				justify-content: space-between;
 				align-items: center;
 				span:nth-child(1){
-					font-family: PingFang SC;
 					font-style: normal;
 					font-weight: normal;
 					font-size: 18px;
 					color: rgba(254, 255, 255, 0.6);
 				}
 				span:nth-child(2){
-					font-family: PingFang SC;
 					font-style: normal;
 					font-weight: normal;
 					font-size: 24px;

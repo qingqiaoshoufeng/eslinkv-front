@@ -79,7 +79,6 @@
 			box-sizing: border-box;
 
 			& > li {
-				font-family: PingFang SC;
 				font-size: 18px;
 				line-height: 24px;
 				color: #00CBF4;
@@ -130,7 +129,6 @@
         }
 				& > li {
 					text-align: left;
-					font-family: PingFang SC;
 					font-size: 18px;
 					line-height: 24px;
 					color: #FFFFFF;

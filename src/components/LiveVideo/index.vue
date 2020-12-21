@@ -140,6 +140,7 @@ export default {
   data() {
     return {
       videoList: [],
+      puList: [],
       pu: null,
       currIndex: 0,
       isPlaying: false
@@ -234,6 +235,16 @@ export default {
         }
       })
     },
+    updateDevice (index) {
+      this.pu = this.puList[index]
+
+      requestPost('C_CAS_QueryPUIDRes?token=' + token, { puid: [this.pu.$] }, rv => {
+        // 过滤直播资源
+        this.videoList = rv.responseJSON.Res.filter(v => v.Type === 'IV'||v.Type === 'ST')
+        console.warn('------获取到以下子设备---------')
+        console.log(this.videoList)
+      })
+    },
     fetch_device() {
       var self = this;
 
@@ -249,18 +260,18 @@ export default {
         console.warn('------获取到以下设备---------')
         console.log(device_list)
         // this.pu = device_list[0] // todo
-        this.pu = device_list.find(v => v.OnlineFlag==='1')
+        this.puList = device_list.filter(v => v.OnlineFlag==='1')
+        this.$emit('getPuList', this.puList)
+        this.pu = this.puList[0]
 
         requestPost('C_CAS_QueryPUIDRes?token=' + token, { puid: [this.pu.$] }, rv => {
           // 过滤直播资源
-			console.log(rv)
-          // this.videoList = rv.responseJSON.Res.filter(v => v.Type === 'IV'||v.Type === 'ST')
-          this.videoList = rv.responseJSON.Res
+          console.log(rv)
+          this.videoList = rv.responseJSON.Res.filter(v => v.Type === 'IV'||v.Type === 'ST')
           console.warn('------获取到以下子设备---------')
           console.log(this.videoList)
         })
       })
-
     },
     progress(e) {
       var bf = e.srcElement.buffered;
@@ -279,7 +290,7 @@ export default {
       $(p).fullScreen(false);
     },
     playvideo(puid, idx) {
-      GoldChart.liveVideo.pausevideo()
+      GoldChart.liveVideo.pauseVideo()
       //播视频接口
       let url = host + "stream.flv?puid=" + puid + "&idx=" + idx + "&stream=0&token=" + token;
       this.isPlaying = true
@@ -293,7 +304,6 @@ export default {
           type: 'flv',
           url: url,
           isLive: true,
-          hasAudio: false
         }, {
           enableWorker: false,
           autoCleanupSourceBuffer: true, //清理缓冲区
@@ -332,7 +342,7 @@ export default {
       this.playvideo(this.pu.$, this.videoList[this.currIndex].Idx)
     },
     handleSceneChange () {
-      GoldChart.liveVideo.pausevideo()
+      GoldChart.liveVideo.pauseVideo()
     }
   },
   created() {
@@ -387,11 +397,10 @@ export default {
   height: 32px;
 	top: -42px;
   li {
-    width: 165px;
-    height: 32px;
+    padding: 4px 8px;
     font-size: 18px;
     border-radius: 4px;
-    margin-right: 16px;
+    margin-right: 8px;
     background: rgba(0, 87, 169, 0.5);
     color: rgba(255, 255, 255, 0.75);
     display: flex;

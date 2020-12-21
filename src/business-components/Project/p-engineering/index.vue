@@ -74,7 +74,6 @@ export default {
 		color: #fff;
 	}
 	.engineering-desc {
-		font-family: PingFang SC;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 20px;

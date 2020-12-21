@@ -80,13 +80,11 @@ export default {
 			display: flex;
 			justify-content: space-between;
 			&__name {
-				font-family: PingFang SC;
 				font-size: 16px;
 				line-height: 16px;
 				color: #ffffff;
 			}
 			&__amount {
-				font-family: PingFang SC;
 				font-size: 16px;
 				line-height: 16px;
 				color: #ffffff;
