@@ -15,7 +15,12 @@
         <li>{{ item.time || '' }}</li>
         <li>{{ item.channel || '暂无姓名' }}</li>
         <li>{{ item.businessType || '' }}</li>
-        <li :class="{closed: item.statusDesc === data.activeStatus }">{{ item.statusDesc || '' }}</li>
+        <li
+            :class="{
+          closed: item.statusDesc === '未通过',
+          passed: item.statusDesc === '已受理',
+        }"
+        >{{ item.statusDesc || '' }}</li>
       </ul>
 		</div>
 	</div>
@@ -44,7 +49,7 @@
 						time: '06/03 09:11',
 						channel: '李萌萌',
 						businessType: '安装',
-						statusDesc: '审核中',
+						statusDesc: '已受理',
 					},
 					{
 						time: '06/03 09:11',
@@ -62,7 +67,7 @@
 						time: '06/03 09:11',
 						channel: '李萌萌',
 						businessType: '安装',
-						statusDesc: '审核中',
+						statusDesc: '未通过',
 					},
 					{
 						time: '06/03 09:11',
@@ -236,7 +241,11 @@
 						color: #00DDFF;
 
 						&.closed {
-							color: #FFD200;
+              color: #E5615B;
+						}
+
+						&.passed {
+              color: #00FFCF;
 						}
 					}
 				}

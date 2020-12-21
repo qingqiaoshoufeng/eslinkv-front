@@ -5,6 +5,7 @@ export default {
 		top: 45,
 		bottom: 40
 	},
+	tooltip: {},
 	xAxis: [{
 		type: 'category',
 		axisTick: {

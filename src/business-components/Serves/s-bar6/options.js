@@ -6,6 +6,7 @@ export default function (data, config) {
             color: '#FFF'
         },
         legend: {
+            show: false,
             icon: 'rect',
             orient: 'horizontal',
             align: 'left',
@@ -19,6 +20,7 @@ export default function (data, config) {
                 fontSize: 16
             }
         },
+        tooltip: {},
         grid: {
             top: '20%',
             bottom: '4%',
@@ -69,37 +71,38 @@ export default function (data, config) {
             {
                 name: config.desc1,
                 type: "bar",
-                stack: "总量",
-                barMaxWidth: 8,
-				barMinHeight:10,
-                barGap: "10%",
+                barGap: '-75%',
+                barWidth: 16,
                 itemStyle: {
-                    color: config.color1
+                    color: 'transparent',
+                    borderColor: config.color1,
+                    borderWidth: 2,
                 },
-                data: data.map(v => v.a)
+                data: data.map(v => v.a),
+                zlevel: 1
             }, {
                 name: config.desc2,
                 type: "bar",
                 stack: "总量",
                 barMaxWidth: 8,
 				barMinHeight:10,
-                barGap: "10%",
                 itemStyle: {
                     color: config.color2
                 },
-                data: data.map(v => v.b)
+                data: data.map(v => v.b),
+                zlevel: 2
             }, {
                 name: config.desc3,
                 type: "bar",
                 stack: "总量",
                 barMaxWidth: 8,
 				barMinHeight:10,
-                barGap: "10%",
                 itemStyle: {
                     color: config.color3
                 },
 
-                data: data.map(v => v.c)
+                data: data.map(v => v.c),
+                zlevel: 2
             }]
     }
 }

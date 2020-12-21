@@ -6,6 +6,7 @@ export default function getOption(data, config) {
             top: 45,
             bottom: 40
         },
+        tooltip: {},
         xAxis: {
             type: 'category',
             axisTick: {

@@ -65,13 +65,13 @@
 	export default {
 		mixins: [mixins],
 		methods: {
-			setOption(data) {
+			setOption() {
 				this.instance && this.instance.setOption(getOption(this.data, this.config.config))
 			}
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler() {
 					if (this.id) {
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
