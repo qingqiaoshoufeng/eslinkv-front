@@ -178,7 +178,6 @@
 			.desc2,
 			.desc3 {
 				margin-left: 5px;
-				font-family: PingFang SC;
 				font-size: 16px;
 				font-style: normal;
 				font-weight: 400;

@@ -42,7 +42,6 @@
 					width: 112px;
 					height: 16px;
 					align-self: flex-start;
-					font-family: PingFang SC;
 					font-style: normal;
 					font-weight: normal;
 					font-size: 16px;
@@ -55,7 +54,6 @@
 					width: 405px;
 					position: absolute;
 					width: 405px;
-					font-family: PingFang SC;
 					font-style: normal;
 					font-weight: normal;
 					font-size: 16px;

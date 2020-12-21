@@ -61,7 +61,6 @@
 				align-items: flex-end;
 
 				&__desc {
-					font-family: PingFang SC;
 					font-style: normal;
 					font-weight: 600;
 					font-size: 32px;
@@ -77,7 +76,6 @@
 					min-width: 160px;
 
 					span:nth-child(1) {
-						font-family: PingFang SC;
 						font-style: normal;
 						font-weight: normal;
 						font-size: 18px;
@@ -85,7 +83,6 @@
 					}
 
 					span:nth-child(2) {
-						font-family: PingFang SC;
 						font-style: normal;
 						font-weight: normal;
 						font-size: 24px;
@@ -107,7 +104,6 @@
 				position: absolute;
 				top: 57px;
 				left: 16px;
-				font-family: PingFang SC;
 				font-style: normal;
 				font-weight: normal;
 				font-size: 20px;

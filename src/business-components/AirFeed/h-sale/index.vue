@@ -431,7 +431,6 @@ export default {
 	width: 82px;
 	flex: none;
 	>div {
-		font-family: PingFang SC;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 20px;

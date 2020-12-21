@@ -130,7 +130,6 @@ export default {
 				border-left: 4px solid #00DDFF;
 			}
 			&__name {
-				font-family: PingFang SC;
 				font-size: 18px;
 				line-height: 24px;
 				color: #FFFFFF;

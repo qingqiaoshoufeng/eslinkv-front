@@ -134,7 +134,6 @@ export default {
 			width: 24px;
 			height: 24px;
 			border-radius: 50%;
-			font-family: PingFang SC;
 			font-style: normal;
 			font-weight: normal;
 			font-size: 20px;
