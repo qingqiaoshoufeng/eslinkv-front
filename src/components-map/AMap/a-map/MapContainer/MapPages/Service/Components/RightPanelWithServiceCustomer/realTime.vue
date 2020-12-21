@@ -1,6 +1,6 @@
 <template>
 	<div class="list">
-		<NoData :show="!list.length" />
+		<NoData :show="!list.length && !isShow" />
 		<i-icon
 			type="ios-loading"
 			size="54"

@@ -78,7 +78,7 @@
 					</div>
 				</div>
 			</div>
-			<NoData :show="!list.length" />
+			<NoData :show="!list.length &&!isShow" />
 		</div>
 	</div>
 </template>
