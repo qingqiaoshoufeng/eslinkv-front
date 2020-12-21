@@ -14,7 +14,7 @@
 			</div>
 		</div>
 		<div class="list">
-			<NoData  :show="!showStationList.length"/>
+			<NoData :show="!showStationList.length" />
 			<div
 				@click="handleClick(item, index)"
 				v-for="(item, index) in showStationList"

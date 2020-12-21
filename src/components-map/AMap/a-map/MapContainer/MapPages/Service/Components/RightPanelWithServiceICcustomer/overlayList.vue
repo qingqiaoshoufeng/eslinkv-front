@@ -1,5 +1,6 @@
 <template>
 	<div class="list">
+		<NoData :show="!list.length" />
 		<div
 			@click="handleClick(item, index)"
 			v-for="(item, index) in list"

@@ -93,6 +93,7 @@ export default function (data) {
 		},
 		tooltip: {
 			trigger: "axis",
+			triggerOn: 'mousemove|click',
 			axisPointer: {
 				lineStyle: {
 					color: {

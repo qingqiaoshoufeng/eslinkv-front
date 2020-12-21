@@ -1,5 +1,6 @@
 <template>
 	<div class="list">
+		<NoData :show="!list.length" />
 		<div
 			@click="handleClick(item, index)"
 			v-for="(item, index) in list"
@@ -47,12 +48,13 @@
 </template>
 
 <script>
-import { SvgIcon } from '../../../../../components/';
+import { SvgIcon, NoData } from '../../../../../components/';
 import { SERVICE_SERVICECUSTOMER_LEGEND_MAP } from '../../serviceCustomer/config';
 export default {
 	name: 'HomeRealTimeList',
 	components: {
 		SvgIcon,
+		NoData,
 	},
 	data() {
 		return {

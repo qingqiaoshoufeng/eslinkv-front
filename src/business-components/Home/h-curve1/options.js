@@ -3,7 +3,7 @@ export default  {
 		top: 40,
 		left: 60,
 		bottom: 30,
-		right: 0
+		right: 20
 	},
 	xAxis: {
 		type: 'category',
@@ -20,18 +20,14 @@ export default  {
 			}
 		},
 		axisLabel: {
-			interval: 0,
+			showMaxLabel: true,
+			showMinLabel: true,
+			interval: 2,
 			textStyle: {
 				color: "rgba(255, 255, 255, 1)",
 				fontSize: 16,
 				lineHeight: 16
-			},
-			formatter:function (value, index) {
-				if (index%3===0)
-					return value
-				return ''
 			}
-
 		}
 	},
 	yAxis: {

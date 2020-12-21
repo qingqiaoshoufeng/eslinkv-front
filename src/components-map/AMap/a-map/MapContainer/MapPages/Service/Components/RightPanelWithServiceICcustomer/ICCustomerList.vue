@@ -1,5 +1,6 @@
 <template>
 	<div class="list">
+		<NoData :show="!list.length && !isShow" />
 		<i-icon
 			type="ios-loading"
 			size="54"
@@ -61,7 +62,7 @@
 </template>
 
 <script>
-import { SvgIcon } from '../../../../../components/';
+import { SvgIcon, NoData } from '../../../../../components/';
 import { SERVICE_SERVICEICCUSTOMER_LEGEND_MAP } from '../../serviceICcustomer/config';
 // import first from '/static/images/amap/first.svg';
 // import second from '/static/images/amap/second.svg';
@@ -71,6 +72,7 @@ export default {
 	name: 'HomeRealTimeList',
 	components: {
 		SvgIcon,
+		NoData,
 	},
 	data() {
 		let iconList = [

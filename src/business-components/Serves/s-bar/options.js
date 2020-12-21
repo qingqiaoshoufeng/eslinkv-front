@@ -6,7 +6,9 @@ export default function getOption(data, config) {
             top: 45,
             bottom: 40
         },
-        tooltip: {},
+        tooltip: {
+            triggerOn: 'mousemove|click',
+        },
         xAxis: {
             type: 'category',
             axisTick: {

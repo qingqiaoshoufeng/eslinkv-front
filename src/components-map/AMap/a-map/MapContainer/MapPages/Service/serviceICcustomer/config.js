@@ -13,7 +13,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         dataProp: 'iCcustomerList',
         detailList: [
             // useNumberYesterday, useNumberMonth,
-             useNumberLastMonth, useNumberYear,]
+            useNumberLastMonth, useNumberYear,]
     },
 
     useHotYear: {
@@ -30,7 +30,10 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         component: 'BranchCompany',
         visible: true,
         dataProp: 'branchCompanyList',
-        detailList: [ICcustomer, useNumberYesterday, useNumberMonth, useNumberLastMonth, useNumberYear,]
+        detailList: [ICcustomer,
+            //  useNumberYesterday,
+            //   useNumberMonth,
+            useNumberLastMonth, useNumberYear,]
     },
     WarningICcustomer: {
         label: '报警',
@@ -40,7 +43,10 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         component: 'WarningICcustomer',
         visible: true,
         dataProp: 'WarningICcustomerList',
-        detailList: [useNumberYesterday, useNumberMonth, useNumberLastMonth, useNumberYear,]
+        detailList: [
+            // useNumberYesterday,
+            //  useNumberMonth,
+            useNumberLastMonth, useNumberYear,]
     }
 }
 

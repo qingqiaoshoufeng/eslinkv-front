@@ -27,7 +27,7 @@ let TodayUnPass = {
     prop: "accept_not_nbr",
 }
 let TodayProvingTo2 = {
-    label: '今日2小时审核率',
+    label: '昨日审核率',
     DW: '',
     prop: "accept_2hour_rate",
 }
