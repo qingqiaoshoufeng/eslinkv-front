@@ -1,5 +1,6 @@
 <template>
 	<div class="list">
+		<NoData :show="!list.length" />
 		<i-icon
 			type="ios-loading"
 			size="54"
@@ -51,12 +52,13 @@
 
 <script>
 import { TaskList } from '..';
-import { SvgIcon } from '../../../../../components/';
+import { SvgIcon, NoData } from '../../../../../components/';
 
 export default {
 	name: 'HomeRealTimeList',
 	components: {
 		SvgIcon,
+		NoData,
 	},
 	data() {
 		return {
