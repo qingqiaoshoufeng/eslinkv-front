@@ -78,17 +78,19 @@
 					</div>
 				</div>
 			</div>
+			<NoData :show="!list.length" />
 		</div>
 	</div>
 </template>
 
 <script>
-import { SvgIcon } from '../../../../../components/';
+import { SvgIcon,NoData } from '../../../../../components/';
 
 export default {
 	name: 'HomeRealTimeList',
 	components: {
-		SvgIcon,
+        SvgIcon,
+        NoData
 	},
 	data() {
 		return {
@@ -142,8 +144,8 @@ export default {
 					pageSize: 500,
 					repairType: this.repairType,
 					repairState: this.repairState,
-                });
-                data = data.list
+				});
+				data = data.list;
 			}
 			this.list = data;
 			// setTimeout(() => {
