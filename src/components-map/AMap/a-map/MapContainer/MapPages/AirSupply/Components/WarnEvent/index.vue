@@ -151,7 +151,10 @@ export default {
 			);
 			this.$emit('close');
 			done && done();
-		},
+        },
+        getDetailOverlayInstance(){
+            return this.$refs.OverlayDetail.getInstance()
+        }
 	},
 	beforeDestroy() {
 		bus.$off(['clearRoutePlan']);

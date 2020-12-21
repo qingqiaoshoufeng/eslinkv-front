@@ -171,7 +171,10 @@ export default {
 		},
 		handleViewDetail(overlay) {
 			this.$emit('view-detail', overlay);
-		},
+        },
+        getInstance(){
+            return this.$refs.overlayDetailMarker.$amapComponent
+        }
 	},
 	computed: {
 		//1..外部传入position 2.detail的条数大于2显示与头部

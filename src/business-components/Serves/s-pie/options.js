@@ -1,7 +1,6 @@
 import { hexToRgba } from '@/utils/index'
 
-export default function (value1, value2, config) {
-    const total = Number(value1) + Number(value2)
+export default function (value1, value2, config,percent1,percent2) {
     return {
         series: [
             // 主要展示层的
@@ -18,8 +17,7 @@ export default function (value1, value2, config) {
                         },
                         label: {
                             formatter: function(params) {
-                                const percent = ~~(params.value * 100 / total)
-                                return `{normal|${config.desc1}}{value|${Number(params.value).toLocaleString()}}\n{unit|${percent}%}`
+                                return `{normal|${config.desc1}}{value|${Number(params.value).toLocaleString()}}\n{unit|${percent1}%}`
                             },
                             padding: [0, -100],
                             rich: {
@@ -107,8 +105,7 @@ export default function (value1, value2, config) {
                         },
                         label: {
                             formatter: function(params) {
-                                const percent = ~~(params.value * 100 / total)
-                                return `{normal|${config.desc2}}{value|${Number(params.value).toLocaleString()}}\n{unit|${percent}%}`
+                                return `{normal|${config.desc2}}{value|${Number(params.value).toLocaleString()}}\n{unit|${percent2}%}`
                             },
                             padding: [0, -100],
                             rich: {
