@@ -22,8 +22,6 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         visible: true,
         dataProp: 'branchCompanyList',
         detailList: [citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial]
-
-
     },
     // ServiceNetworkStation: {
     //     label: '服务网点',

@@ -142,8 +142,8 @@ export default {
 					pageSize: 500,
 					repairType: this.repairType,
 					repairState: this.repairState,
-                });
-                data = data.list
+				});
+				data = data.list;
 			}
 			this.list = data;
 			// setTimeout(() => {
