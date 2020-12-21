@@ -64,36 +64,38 @@ export default {
   watch: {
     data: {
       handler(val) {
-        let that = this
-        this.$nextTick(() => {
-          $('.magazine').turn({
-            width: 1035,
-            height: 696,
-            elevation: 50,
-            duration: 1000,
-            pages: val.list[this.tab].pageNumber,
-            page: 2,
-            gradients: true,
-            autoCenter: true,
-            when: {
-              missing: function (e, pages) {
-                for (let i = 0; i < pages.length; i++) {
-                  that.addPage(pages[i], $(this))
-                }
-              },
-              last: e => {
-                this.isEnd = true
-              },
-              start: e => {
-                this.isEnd = false
-                this.isStart = false
-              },
-              first: e => {
-                this.isStart = true
-              }
-            }
-          })
-        })
+      	if(val){
+			let that = this
+			this.$nextTick(() => {
+				$('.magazine').turn({
+					width: 1035,
+					height: 696,
+					elevation: 50,
+					duration: 1000,
+					pages: val.list[this.tab].pageNumber,
+					page: 2,
+					gradients: true,
+					autoCenter: true,
+					when: {
+						missing: function (e, pages) {
+							for (let i = 0; i < pages.length; i++) {
+								that.addPage(pages[i], $(this))
+							}
+						},
+						last: e => {
+							this.isEnd = true
+						},
+						start: e => {
+							this.isEnd = false
+							this.isStart = false
+						},
+						first: e => {
+							this.isStart = true
+						}
+					}
+				})
+			})
+		}
       },
       deep: true,
       immediate: true,
@@ -148,7 +150,6 @@ export default {
     }
   },
 	created() {
-	  console.log($)
 		this.configSource = this.parseConfigSource(config);
 		this.configValue = this.parseConfigValue(config, value);
 	}
