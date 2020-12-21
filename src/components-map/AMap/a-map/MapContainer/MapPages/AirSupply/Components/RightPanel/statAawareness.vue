@@ -118,7 +118,6 @@ export default {
 				margin-left: 12px;
 				font-size: 24px;
 				.type {
-					font-family: PingFang SC;
 					font-style: normal;
 					font-weight: normal;
 					font-size: 16px;

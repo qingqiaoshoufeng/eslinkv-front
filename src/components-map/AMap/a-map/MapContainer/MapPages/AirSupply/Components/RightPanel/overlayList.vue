@@ -122,7 +122,6 @@ export default {
 	box-sizing: border-box;
 	border-radius: 4px;
 	display: flex;
-	font-family: PingFang SC;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 20px;
@@ -135,7 +134,6 @@ export default {
 		height: 100%;
 		flex: 1;
 		padding-left: 16px;
-		font-family: PingFang SC;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 20px;
@@ -143,7 +141,6 @@ export default {
 	}
 	::-webkit-input-placeholder {
 		color: #fff;
-		font-family: PingFang SC;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 20px;

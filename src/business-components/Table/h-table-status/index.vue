@@ -130,7 +130,6 @@
 		padding: 8px;
 		box-sizing: border-box;
 		& > li {
-			font-family: PingFang SC;
 			font-size: 16px;
 			line-height: 16px;
 			color: #00CBF4;
@@ -170,7 +169,6 @@
 			margin-top: 16px;
 			& > li {
 				text-align: left;
-				font-family: PingFang SC;
 				font-size: 16px;
 				line-height: 16px;
 				color: #FFFFFF;

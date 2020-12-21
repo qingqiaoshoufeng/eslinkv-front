@@ -90,7 +90,6 @@ export default {
 		line-height: 44px;
 		justify-items: center;
 		align-items: center;
-		font-family: PingFang SC;
 		font-style: normal;
 		font-weight: normal;
 		font-size: 18px;

@@ -263,7 +263,6 @@
 				.percentage-desc {
 					font-size: 18px;
 					color: #fff;
-					font-family: PingFang SC;
 					font-style: normal;
 					font-weight: 400;
 					line-height: 25px;
