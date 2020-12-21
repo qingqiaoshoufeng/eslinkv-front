@@ -125,15 +125,15 @@ export default {
 		this.$amap = this.$parent.$amap;
 		let fitMapPositionArr = [
 			{
-				lng: 120.160893,
-				lat: 30.392991,
+				lng: 120.248177,
+				lat: 30.426391,
 			},
 			{
-				lng: 120.495206,
-				lat: 30.19923,
+				lng: 119.920883,
+				lat: 30.106665,
 			},
 			{
-				lng: 119.80885,
+				lng: 119.90885,
 				lat: 30.141069,
 			},
 		];
