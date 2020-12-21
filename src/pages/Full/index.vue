@@ -1,10 +1,10 @@
 <template>
-	<div class="full-container">
+	<div class="detail-container">
 		<full/>
 	</div>
 </template>
 <style lang="scss">
-	.full-container {
+	.detail-container {
 		height: 100%;
 	}
 </style>
