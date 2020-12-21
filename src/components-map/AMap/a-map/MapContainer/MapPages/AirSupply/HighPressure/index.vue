@@ -111,17 +111,33 @@ import {
 	AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP,
 	DATA_STATISTICS_MAP,
 } from './config.js';
+import pageMixin from '../../../../mixins/pageMixin';
 
 export default {
 	name: 'HighPressure',
 	inject: ['parentInfo'],
+	mixins: [pageMixin],
 	components: {
 		...componentPageMap,
 		...componentCommonMap,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
-		this.setZoomAndPanTo(...this.center, this.zoom);
+		let fitMapPositionArr = [
+			{
+				lng: 120.160893,
+				lat: 30.392991,
+			},
+			{
+				lng: 120.495206,
+				lat: 30.19923,
+			},
+			{
+				lng: 119.80885,
+				lat: 30.141069,
+			},
+		];
+		this.mapFitView2(fitMapPositionArr);
 	},
 	data() {
 		return {
@@ -269,7 +285,7 @@ export default {
 			}
 		},
 		handleListClick(overlay, listType) {
-			this.closeStationListDetail(false)
+			this.closeStationListDetail(false);
 			let { lng, lat } = overlay;
 			//关闭站点详情弹窗
 			if (this.showOverlayDetail) {
@@ -286,7 +302,7 @@ export default {
 			}
 			this.setZoomAndPanTo(lng, lat + 0.006);
 		},
-		closeWarnEventDetail(isZoom=true) {
+		closeWarnEventDetail(isZoom = true) {
 			this.activeWarnData = {};
 			this.activeStationData = {};
 			isZoom && this.setZoomAndPanTo(...this.center, this.zoom);

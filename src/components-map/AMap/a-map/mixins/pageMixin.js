@@ -16,9 +16,9 @@ export default {
 	},
 	created() {
 		this.$amap = this.$parent.$amap
-		this.$nextTick(() => {
-			this.mapFitView(-0.2, 0.4)
-		})
+		// this.$nextTick(() => {
+		// 	this.mapFitView(-0.2, 0.4)
+		// })
 	},
 	watch: {
 		activeItem(val) {
@@ -57,8 +57,8 @@ export default {
 						position: [120.721945, 30.496516 - topOffest - scale],
 					}),
 				],
-				true,
-				[paddingTop, paddingTop, 0, 0]
+				true
+				// [paddingTop, paddingTop, 0, 0]
 			)
 			//x轴向偏移
 			if (offsetLeftRatio) {
@@ -68,6 +68,28 @@ export default {
 					(3500 * screenScaleRatio - avaliableAreaWidth) / 2
 				this.$amap.panBy(-paddingRight, 0, 0)
 			}
+		},
+		/**
+		 *
+		 * @param {Number} topOffestRatio 上移动百分比
+		 * @param {Number} scaleRatio     缩放
+		 * @param {Number} offsetLeftRatio     距离左侧的比例
+		 */
+		mapFitView2(arr = []) {
+			if (!arr.length) {
+				return false
+			}
+			let markers = arr.map((item) => {
+				return new AMap.Marker({
+					position: [item.lng, item.lat],
+				})
+			})
+            this.$amap.setFitView(markers, true)
+            //覆盖zoom 和 center
+			setTimeout(() => {
+				this.zoom = this.$amap.getZoom()
+				this.center = this.$amap.getCenter()
+			}, 1000)
 		},
 		handleOverlayClick(
 			overlay,

@@ -1,5 +1,4 @@
-<template>
-</template>
+<template></template>
 <script>
 function findAmapRoot() {
 	if (this.$amap) return this.$amap;
@@ -31,7 +30,7 @@ export default {
 				return {};
 			},
 		},
-    },
+	},
 	watch: {
 		data: {
 			handler(val) {
@@ -192,13 +191,13 @@ export default {
 			}
 			let { scaleRatio } = this.parentInfo;
 			let paddingH = 1050 - 1050 * scaleRatio;
-            let paddingW = 3500 - 3500 * scaleRatio;
-            let otherInstance = this.$parent.getDetailOverlayInstance()
-			this.map.setFitView([this.pathAll,otherInstance], false, [
-				paddingH * 0.5 + 80,
-				paddingH * 0.5 + 40,
-				paddingW * 0.55,
-				paddingW * 0.45,
+			let paddingW = (window.innerWidth * (1 - scaleRatio)) ;
+			let otherInstance = this.$parent.getDetailOverlayInstance();
+			this.map.setFitView([this.pathAll, otherInstance], false, [
+				80,
+				10,
+				paddingW * 0.6,
+				paddingW * 0.4,
 			]);
 		},
 		reset() {
