@@ -94,11 +94,14 @@ let componentPageMap = {};
 let componentCommonMap = {};
 componentPageArr.map(componentName => {
 	componentPageMap[componentName] = () =>
-		import('../Components/' + componentName);
+		import(/*webpackInclude:/\.(vue)$/ */ '../Components/' + componentName);
 });
 componentCommonArr.map(componentName => {
 	componentCommonMap[componentName] = () =>
-		import('../../../../components/' + componentName);
+		import(
+			/*webpackInclude:/\.(vue)$/ */ '../../../../components/' +
+				componentName
+		);
 });
 
 //页面覆盖物组件
@@ -282,8 +285,8 @@ export default {
 				pipeManageMentStationList,
 				undergroundRepairStationList,
 				ongroundRepairStationList,
-            };
-            //右侧点位列表数据
+			};
+			//右侧点位列表数据
 			this.stationList = [
 				...serviceStationList,
 				...pipeManageMentStationList,
@@ -296,8 +299,8 @@ export default {
 			this.dataStatisticsData = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
 				{ type: 'LowPressure' }
 			);
-        },
-        //获取瓦片函数
+		},
+		//获取瓦片函数
 		getTileUrl(x, y, zoom) {
 			const tilesQuery = String(this.tilesQuery);
 			const {

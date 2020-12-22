@@ -114,7 +114,6 @@ export default {
 		},
 		handlerClick(item, index) {
 			this.detailInfo = {};
-			console.log(item);
 			this.activeIndex = index;
 			this.getDetailInfo(item.middleId);
 		},
@@ -123,7 +122,6 @@ export default {
 				id,
 			};
 			let res = await this.$sysApi.map.airSupply.getLowMidDevice(params);
-			console.log(res.valveOpenFinish);
 			res.valveOpenFinish =
 				res.valveOpenFinish === 'true' ? '开启' : '关闭';
 			res.mc = res.mc ? '异常' : '正常';
