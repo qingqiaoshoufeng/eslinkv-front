@@ -26,11 +26,6 @@ export const SERVICE_SERVICEMARKET_LEGEND_MAP = {
 
 //覆盖物详情
 export const SERVICE_SERVICEMARKET_OVERLAY_MAP = {
-    // Grouphall: {
-    //     fields: {
-    //         name: {},
-    //     },
-    // },
 
     BranchCompany: {
         fields: {

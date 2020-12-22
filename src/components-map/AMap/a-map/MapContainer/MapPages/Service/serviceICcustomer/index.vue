@@ -186,61 +186,38 @@ export default {
 			this.center = center || this.center;
 		},
 		// 查看详情，弹出详情场景
-		async showMoreDetail(activeOverlay) {
-			let { address, content, status, id } =
-				activeOverlay || this.activeOverlay;
-			let { useNumberYestoday } = this.detailInfo;
-			let params = {};
+		// async showMoreDetail(activeOverlay) {
+		// 	let { address, content, status, id } =
+		// 		activeOverlay || this.activeOverlay;
+		// 	let { useNumberYestoday } = this.detailInfo;
+		// 	let params = {};
 
-			params[ICcustomer_WARN__COMPONENTINDEX[0]] = {
-				title: address,
-			};
-			params[ICcustomer_WARN__COMPONENTINDEX[1]] = {
-				value: `${content}(${status === '1' ? '待处理' : '已处理'})`,
-			};
-			params[ICcustomer_WARN__COMPONENTINDEX[2]] = {
-				value: useNumberYestoday,
-			};
-			// let {
-			// 	total,
-			// 	instant,
-			// 	pressure,
-			// 	temperature,
-			// } = await this.getICcustomerWarningDetialInfo(id);
-			// params[ICcustomer_WARN__COMPONENTINDEX[3]] = total;
-			// params[ICcustomer_WARN__COMPONENTINDEX[4]] = instant;
-			// params[ICcustomer_WARN__COMPONENTINDEX[5]] = pressure;
-			// params[ICcustomer_WARN__COMPONENTINDEX[7]] = temperature;
+		// 	params[ICcustomer_WARN__COMPONENTINDEX[0]] = {
+		// 		title: address,
+		// 	};
+		// 	params[ICcustomer_WARN__COMPONENTINDEX[1]] = {
+		// 		value: `${content}(${status === '1' ? '待处理' : '已处理'})`,
+		// 	};
+		// 	params[ICcustomer_WARN__COMPONENTINDEX[2]] = {
+		// 		value: useNumberYestoday,
+		// 	};
 
-			GoldChart.scene.createSceneInstance(
-				ICcustomer_WARN__SCENEINDEX,
-				'slideRight'
-			);
-			this.$nextTick(() => {
-				ICcustomer_WARN__COMPONENTINDEX.forEach(item => {
-					GoldChart.instance.updateComponent(item, {
-						data: params[item],
-					});
-				});
-			});
+		// 	GoldChart.scene.createSceneInstance(
+		// 		ICcustomer_WARN__SCENEINDEX,
+		// 		'slideRight'
+		// 	);
+		// 	this.$nextTick(() => {
+		// 		ICcustomer_WARN__COMPONENTINDEX.forEach(item => {
+		// 			GoldChart.instance.updateComponent(item, {
+		// 				data: params[item],
+		// 			});
+		// 		});
+		// 	});
 
-			// params.
-		},
+		// 	// params.
+		// },
 		// 板块图变化
-		saleAreaChange(val) {
-			// let params = this.allTypeStationList.branchCompanyList.find(
-			// 	item => item.name === val
-			// );
-			// this.$refs.BranchCompany[0].mouseIn = true;
-			// params = {
-			// 	overlayType: 'BranchCompany',
-			// 	...params,
-			// 	detailList:
-			// 		SERVICE_SERVICEICCUSTOMER_LEGEND_MAP.BranchCompany
-			// 			.detailList,
-			// };
-			// this.handleOverlayClick(params);
-		},
+		saleAreaChange(val) {},
 		// 切换热力图显示隐藏
 		switchChange(data, type) {
 			this.swichBoxInfo = data;
@@ -290,8 +267,6 @@ export default {
 				this.$amap.setZoom(14, 100);
 				this.$amap.panTo([lng, lat], 100);
 			}
-
-			// this.isShowMore = status == 1;
 		},
 		// 请求用气大户，子公司，综合服务站数据列表
 		async getAllTypeStationList() {
