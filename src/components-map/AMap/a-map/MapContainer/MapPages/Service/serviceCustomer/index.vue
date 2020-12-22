@@ -214,9 +214,6 @@ export default {
 		},
 	},
 	methods: {
-		setCenter(center) {
-			this.center = center || this.center;
-		},
 		// 切换热力图显示隐藏
 		switchChange(data, type) {
 			this.swichBoxInfo = data;
@@ -381,7 +378,6 @@ export default {
 		this.getAllTypeStationList();
 		this.getTasklist();
 		this.getThreeSocialLinkagecustmerHot();
-		window.setCenter = this.setCenter.bind(this);
 		let [{ value }] = this.swichBoxInfo;
 
 		this.visible = value;
