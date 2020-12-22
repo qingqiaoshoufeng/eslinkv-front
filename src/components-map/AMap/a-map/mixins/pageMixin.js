@@ -81,11 +81,12 @@ export default {
 					position: [item.lng, item.lat],
 				})
 			})
-            this.$amap.setFitView(markers, true)
-            //覆盖zoom 和 center
+			this.$amap.setFitView(markers, true)
+			//覆盖zoom 和 center
 			setTimeout(() => {
+				let { lat, lng } = this.$amap.getCenter()
 				this.zoom = this.$amap.getZoom()
-				this.center = this.$amap.getCenter()
+				this.center = [lng, lat]
 			}, 1000)
 		},
 		handleOverlayClick(
