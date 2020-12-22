@@ -304,15 +304,15 @@ export default {
 				let { name } = this.activeOverlay;
 				console.log('');
 				let address = {
-					杭州天然气有限公司: { value: [121.99105835, 30.49227485] },
+					杭州天然气有限公司: { value: [121.39105835, 30.49227485] },
 					杭州钱江燃气有限公司: {
-						value: [122.09405518, 30.39419946],
+						value: [121.49405518, 30.39419946],
 					},
 					桐庐杭燃燃气有限公司: {
-						value: [121.57769775, 29.85007093],
+						value: [120.87769775, 29.85007093],
 					},
 					海宁星港燃气有限公司: {
-						value: [122.26159668, 30.43559623],
+						value: [121.56159668, 30.43559623],
 					},
 				};
 				this.detailInfo = this.activeOverlay.gasCodeMapDetailInfoVO;
