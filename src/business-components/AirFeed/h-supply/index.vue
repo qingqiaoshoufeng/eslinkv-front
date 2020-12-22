@@ -157,8 +157,11 @@
 		watch: {
 			data: {
 				handler(val) {
-					if (val)
-						this.subItem = val[0].children.slice(0, SIZE)
+					if (val){
+						if(val.length){
+							this.subItem = val[0].children.slice(0, SIZE)
+						}
+					}
 				},
 				deep: true,
 				immediate: true

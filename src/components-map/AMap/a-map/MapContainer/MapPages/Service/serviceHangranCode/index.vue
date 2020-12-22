@@ -129,9 +129,7 @@ export default {
 			dataStatisticsList: DATASTATISTICSLIST,
 			overlayMap: SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
 			legendMap: {
-				// Grouphall,
 				BranchCompany,
-				//  ServiceStation
 			},
 
 			mapLegendStyle: { left: '18%' },
@@ -194,18 +192,7 @@ export default {
 	},
 	methods: {
 		// 销售区域变化
-		saleAreaChange(val) {
-			// let params = this.allTypeStationList.branchCompanyList.find(
-			// 	item => item.name === val
-			// );
-			// params = {
-			// 	...params,
-			// 	detailList:
-			// 		SERVICE_SERVICEHANGRANCODE_LEGEND_MAP.BranchCompany
-			// 			.detailList,
-			// };
-			// this.handleOverlayClick(params);
-		},
+		saleAreaChange(val) {},
 		// 关闭详情
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
@@ -304,9 +291,6 @@ export default {
 			}
 			window.arrr = [];
 			this.intervalId = setInterval(() => {
-				// if (this.intervalId || this.intervalId == 0) {
-				// 	this.clearInterval();
-				// }
 				let currentIndex = index++ % length;
 
 				this.activeOverlay = {
@@ -320,26 +304,20 @@ export default {
 				let { name } = this.activeOverlay;
 				console.log('');
 				let address = {
-					杭州天然气有限公司: { value: [121.99105835, 30.49227485] },
+					杭州天然气有限公司: { value: [121.39105835, 30.49227485] },
 					杭州钱江燃气有限公司: {
-						value: [122.09405518, 30.39419946],
+						value: [121.49405518, 30.39419946],
 					},
 					桐庐杭燃燃气有限公司: {
-						value: [121.57769775, 29.85007093],
+						value: [120.87769775, 29.85007093],
 					},
 					海宁星港燃气有限公司: {
-						value: [122.26159668, 30.43559623],
+						value: [121.56159668, 30.43559623],
 					},
 				};
 				this.detailInfo = this.activeOverlay.gasCodeMapDetailInfoVO;
 				this.showOverlayDetail = true;
 				this.$amap.panTo(address[name].value, 100);
-				// this.$amap.panTo([120.99105835, 30.29227485], 100);
-
-				// this.$amap.panTo([121.09405518, 30.39419946], 100);
-				// this.$amap.panTo([120.57769775, 29.75007093], 100);
-
-				// this.$amap.panTo([121.26159668, 30.52559623], 100);
 			}, 5000);
 			arrr.push(this.intervalId);
 		},
@@ -356,7 +334,6 @@ export default {
 					this.carouseComplBranchCompanyInfo();
 				}
 			},
-			// deep: true,
 			immediate: true,
 		},
 	},

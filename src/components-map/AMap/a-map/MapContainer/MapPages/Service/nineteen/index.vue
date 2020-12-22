@@ -131,6 +131,7 @@ export default {
 					showMore,
 				};
 			}
+			return {};
 		},
 	},
 	created() {
@@ -148,19 +149,7 @@ export default {
 			this.center = center || this.center;
 		},
 		// 板块图变化
-		saleAreaChange(val) {
-			// this.$refs.BranchCompany[0].mouseIn = true;
-			// let params = this.allTypeStationList.branchCompanyList.find(
-			// 	item => item.name === val
-			// );
-			// params = {
-			// 	overlayType: 'BranchCompany',
-			// 	...params,
-			// 	detailList:
-			// 		SERVICE_SERVICENINETEEN_LEGEND_MAP.BranchCompany.detailList,
-			// };
-			// this.handleOverlayClick(params);
-		},
+		saleAreaChange(val) {},
 		async handleOverlayClick(overlay, overlayType, isCenter = true) {
 			this.activeOverlay = {};
 			this.detailInfo = {};

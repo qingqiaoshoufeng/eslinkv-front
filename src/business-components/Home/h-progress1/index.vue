@@ -1,13 +1,13 @@
 <template>
-	<div class="widget-part" :style="styles">
+	<div class="widget-part" :style="styles" v-if="data">
 		<div class="fn-flex flex-row h-progress-1">
 			<div class="fn-flex flex-column">
-				<h2>{{config.config&&config.config.title}}</h2>
-				<h3>{{config.config&&config.config.subTitle}}</h3>
+				<h2>{{config.config.title}}</h2>
+				<h3>{{data.value | toThousand }}<span class="unit">{{config.config.unit}}</span></h3>
 			</div>
-			<p class="font-num">{{data&&data.value}}%</p>
+			<p class="font-num">{{data.percent}}%</p>
 			<div class="pos-a h-progress-1-ratio">
-				<i class="pos-a" :style="{width:`${data&&data.value}%`}"></i>
+				<i class="pos-a" :style="{width:`${data.percent}%`}"></i>
 			</div>
 		</div>
 	</div>
@@ -20,7 +20,7 @@
 		config: {
 			fields: {
 				title: getInput('title', '标题'),
-				subTitle: getInput('subTitle', '副标题'),
+        unit: getInput('unit', '单位'),
 			}
 		}
 	}
@@ -28,18 +28,19 @@
 		animation: true,
 		config: {
 			title: true,
-			subTitle: true,
+      unit: true,
 		}
 	}
 	const value = {
 		api: {
 			data: JSON.stringify({
-				value: 10
+				value: 2345,
+        percent: 88
 			})
 		},
 		config: {
 			title: '标题',
-			subTitle: '副标题',
+      unit: '单',
 		}
 	}
 
@@ -80,18 +81,31 @@
 	.h-progress-1 {
 		padding-bottom: 8px;
 
-		h2, h3 {
-			font-size: 18px;
-			color: rgba(255, 255, 255, 0.75);
-			font-weight: normal;
-			line-height: 18px;
-			text-align: left;
-			word-wrap: break-word;
-			white-space: nowrap;
-		}
+    h2 {
+      font-size: 18px;
+      line-height: 24px;
+      color: #00DDFF;
+      text-align: left;
+      word-wrap: break-word;
+      white-space: nowrap;
+    }
 
 		h3 {
-			margin-top: 12px;
+      font-family: font-num;
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 24px;
+      color: #FFFFFF;
+			margin-top: 4px;
+      text-align: left;
+      word-wrap: break-word;
+      white-space: nowrap;
+      .unit {
+        font-family: inherit;
+        font-size: 16px;
+        line-height: 16px;
+        color: rgba(255, 255, 255, 0.75);
+      }
 		}
 
 		p {

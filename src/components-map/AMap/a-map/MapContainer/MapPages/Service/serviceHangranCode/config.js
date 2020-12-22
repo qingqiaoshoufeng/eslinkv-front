@@ -20,9 +20,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
         visible: true,
-
         dataProp: 'branchCompanyList',
-
         detailList: [CouplingNumber, operationYesterday, OperationWeek, operationLastWeek, operationMonth, operationLastMonth, operationYear,
             //  CouplingPercent,
             //  NewCouplingNumber
