@@ -5,6 +5,10 @@ export default  {
 		bottom: 30,
 		right: 20
 	},
+	tooltip: {
+		trigger: 'axis',
+		triggerOn: 'mousemove|click'
+	},
 	xAxis: {
 		type: 'category',
 		axisTick: {
