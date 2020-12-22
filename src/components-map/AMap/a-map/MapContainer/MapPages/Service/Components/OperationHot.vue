@@ -42,7 +42,7 @@ export default {
 			});
 			this._instance.setDataSet({
 				data: this._heatMapData,
-				max: 16000,
+				max: 12000,
 			});
 		},
 	},
