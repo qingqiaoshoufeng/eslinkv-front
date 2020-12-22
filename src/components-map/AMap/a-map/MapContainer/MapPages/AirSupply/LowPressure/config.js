@@ -42,7 +42,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         label: '管网运行管理站',
         legendIcon: 'icontuliguanwangyunhangguanlizhan',
         iconSize: 38,
-        component: 'EmergencyAirSourceStation',
+        component: 'PipeManageMentStation',
         visible: true,
         dataProp: 'pipeManageMentStationList',
     },
@@ -50,7 +50,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         label: '地下抢修点',
         legendIcon: 'icontulidixiaqiangxiudian',
         iconSize: 38,
-        component: 'EmergencyAirSourceStation',
+        component: 'UndergroundRepairStation',
         visible: true,
         dataProp: 'undergroundRepairStationList',
     },
@@ -234,7 +234,6 @@ export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
                 errColor: '#FFDC45',
             },
         },
-        visibleMore: false,
     },
     InspectionCar: {
         fields: {
