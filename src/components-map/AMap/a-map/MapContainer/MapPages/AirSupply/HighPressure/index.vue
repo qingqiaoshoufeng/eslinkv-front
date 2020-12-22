@@ -219,10 +219,6 @@ export default {
 				this.closeWarnEventDetail();
 			}
 		},
-		// handlerMove() {
-		// 	console.log(111111111111);
-		// 	this.$amap.panTo(this.center, 100);
-		// },
 		// 1.获取所有站点数据
 		async getAllTypeStationList() {
 			let params = {

@@ -8,11 +8,6 @@
 			@close="closeWarnEventDetail"
 			ref="WarnEvent"
 		></WarnEvent>
-		<!-- <StationList
-			:data="activeStationData"
-			:overlayInfoConfigMap="overlayInfoConfigMap"
-			@close="closeStationListDetail"
-		></StationList> -->
 		<!-- 特殊 中低压管网需要legend控制显隐 -->
 		<AMapTile
 			ref="mapTile"
@@ -78,38 +73,40 @@
 </template>
 <script>
 //页面覆盖物组件
-import {
-	InspectionCar,
-	ComprehensiveServiceStation,
-	LiquefiedGasStation,
-	NaturalGasStation,
-	DistributedEnergyResource,
-	LNGStation,
-	InspectionPerson,
-	GasStation,
-	// StationList,
-	// HighPressureLine,
-	// HighPressureLine_Process,
-	// PressureRegulatingStation,
-	EmergencyAirSourceStation,
-	PipeManageMentStation,
-	UndergroundRepairStation,
-	OngroundRepairStation,
-	ServiceStation,
-	RightPanel,
-	RoutePlan, //规划路线
-	ListOverlay,
-	WarningList,
-	WarnEvent,
-} from '../Components/index.js';
+let componentPageArr = [
+	//legend覆盖物
+	'ServiceStation',
+	'PipeManageMentStation',
+	'UndergroundRepairStation',
+	'OngroundRepairStation',
+	'InspectionPerson',
+	'InspectionCar',
+	//报警点位
+	'WarnEvent',
+	//右侧报警列表
+	'RightPanel',
+	'WarningStations',
+];
+//页面所需公共组件
+let componentCommonArr = ['DataStatistics', 'OverlayDetail', 'MapLegend'];
+//异步加载组件函数
+let componentPageMap = {};
+let componentCommonMap = {};
+componentPageArr.map(componentName => {
+	componentPageMap[componentName] = () =>
+		import('../Components/' + componentName);
+});
+componentCommonArr.map(componentName => {
+	componentCommonMap[componentName] = () =>
+		import('../../../../components/' + componentName);
+});
+
+//页面覆盖物组件
+import {} from '../Components/index.js';
 import { AMapTile } from '../../../../lib';
 
 //页面所需公共组件
-import {
-	OverlayDetail,
-	MapLegend,
-	RegionBoundary,
-} from '../../../../components/index.js';
+import { OverlayDetail, MapLegend } from '../../../../components/index.js';
 import { DataStatistics } from '../../../../components';
 
 import {
@@ -132,35 +129,14 @@ export default {
 	name: 'LowPressure',
 	inject: ['parentInfo'],
 	components: {
-		OverlayDetail,
-		ComprehensiveServiceStation,
-		DistributedEnergyResource,
-		EmergencyAirSourceStation,
-		GasStation,
-		InspectionCar,
-		InspectionPerson,
-		LiquefiedGasStation,
-		ListOverlay,
-		LNGStation,
-		NaturalGasStation,
-		PipeManageMentStation,
-		UndergroundRepairStation,
-		ServiceStation,
-		RightPanel,
-		RoutePlan,
-		MapLegend,
 		AMapTile,
-		OngroundRepairStation,
-		DataStatistics,
-		WarningList,
-		WarnEvent,
-		// StationList,
+		...componentPageMap,
+		...componentCommonMap,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.setCenter(this.center, 100);
-		// this.$amap.on('zoomend', this.handleMapZoomChangeEnd);
 	},
 	mounted() {
 		this.getAllTypeStationList();
@@ -170,9 +146,6 @@ export default {
 		center(val) {
 			this.$amap.panTo(val, 100);
 		},
-	},
-	beforeDestroy() {
-		// this.$amap.off('zoomend', this.handleMapZoomChangeEnd);
 	},
 	data() {
 		return {
@@ -283,37 +256,6 @@ export default {
 		},
 	},
 	methods: {
-		// handleMapZoomChangeEnd() {
-		// 	let { northeast, southwest } = this.$amap.getBounds();
-		// 	let { lat: latM, lng: lngM } = northeast;
-		// 	let { lat: latE, lng: lngE } = southwest;
-		// 	const tilesQuery = String(this.tilesQuery);
-		// 	if (this.imageLayer) {
-		// 		this.imageLayer.setMap(null);
-		// 		window.aaa = this.imageLayer;
-		// 	}
-		// 	const {
-		// 		leftBottomX,
-		// 		leftBottomY,
-		// 		rightTopX,
-		// 		rightTopY,
-		// 		width,
-		// 		height,
-		// 	} = getPositionByLatLng(
-		// 		{ lat: latM, lng: lngE },
-		// 		{ lat: latE, lng: lngM }
-		// 	);
-		// 	let url = `${
-		// 		(window.api && window.api.MAP_GIS_URL) ||
-		// 		'http://192.168.1.104:6080'
-		// 	}/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
-		// 	this.imageLayer = new AMap.ImageLayer({
-		// 		url: url,
-		// 		zIndex: 2000,
-		// 		bounds: new AMap.Bounds([lngE, latM], [lngM, latE]),
-		// 	});
-		// 	this.imageLayer.setMap(this.$amap);
-		// },
 		closeStationListDetail(done) {
 			this.activeStationData = {};
 			this.$refs.RightPanel1.$refs.processWarning.activeIndex = -1;
@@ -329,19 +271,10 @@ export default {
 		async getAllTypeStationList() {
 			let params = {
 				types: [
-					// 'InspectionPerson', // '巡检人员',
-					// 'InspectionCar', // '巡检车辆',
-					// 'GasStation', // '门站',
-					// 'PressureRegulatingStation', // '调压站',
-					// 'EmergencyAirSourceStation', // '应急气源站',
 					'ServiceStation', // '综合服务站',
 					'PipeManageMentStation', // '管网运行管理站',
 					'UndergroundRepairStation', // '地下抢修点',
 					'OngroundRepairStation', // '地上抢修点',
-					// 'LNGStation', // 'LNG站',
-					// 'LiquefiedGasStation', // '液化气站',
-					// 'NaturalGasStation', // '加气站',
-					// 'DistributedEnergyResource', // '分布式能源',
 				].toString(),
 			};
 			let res = await this.$sysApi.map.airSupply.getAllTypeStationList(
@@ -354,14 +287,14 @@ export default {
 				ongroundRepairStationList,
 			} = res;
 			//数据为防止重叠特殊处理
-			ongroundRepairStationList = ongroundRepairStationList.map(item => {
+			pipeManageMentStationList = pipeManageMentStationList.map(item => {
 				let { lat } = item;
 				return {
 					...item,
-					lat: lat - 0.003,
+					lat: lat + 0.003,
 				};
 			});
-			undergroundRepairStationList = ongroundRepairStationList.map(
+			undergroundRepairStationList = undergroundRepairStationList.map(
 				item => {
 					let { lat } = item;
 					return {
@@ -372,7 +305,8 @@ export default {
 			);
 			//数据为防止重叠特殊处理
 			this.stationDataMap = {
-				...this.stationDataMap,
+                ...this.stationDataMap,
+                ...res,
 				serviceStationList,
 				pipeManageMentStationList,
 				undergroundRepairStationList,
@@ -403,44 +337,10 @@ export default {
 				min,
 				max,
 			} = getHangZhouGasGISPosition(x, y, zoom);
-			//判断是否是可视区内
-			// window.suyan = this.$amap;
-			// let { northeast, southwest } = this.$amap.getBounds();
-			// let scaleRatio = this.parentInfo.scaleRatio;
-			// let diffLat = min.lat - max.lat;
-			// let diffLng = max.lng - min.lng;
-			// let center = this.$amap.getCenter();
-			// let visAreaNorthWest = {
-			// 	lat: center.lat + (diffLat * scaleRatio) / 2,
-			// 	lng: center.lng - (diffLng * scaleRatio) / 2,
-			// };
-			// let visAreaSouthEast = {
-			// 	lat: center.lat - (diffLat * scaleRatio) / 2,
-			// 	lng: center.lng + (diffLng * scaleRatio) / 2,
-			// };
-			// let isInArea = false;
-			// if (
-			// 	max.lat < visAreaNorthWest.lat &&
-			// 	max.lat > visAreaSouthEast.lat &&
-			// 	max.lng > visAreaNorthWest.lng &&
-			// 	min.lng < visAreaSouthEast.lng
-			// ) {
-			// 	isInArea = true;
-			// }
-			// if (
-			// 	min.lat < visAreaNorthWest.lat &&
-			// 	min.lat > visAreaSouthEast.lat &&
-			// 	min.lng > visAreaNorthWest.lng &&
-			// 	min.lng < visAreaSouthEast.lng
-			// ) {
-			// 	isInArea = true;
-			// }
-			// if (isInArea) {
-				return `${
-					(window.api && window.api.MAP_GIS_URL) ||
-					'http://192.168.1.104:6080'
-				}/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
-			// }
+			return `${
+				(window.api && window.api.MAP_GIS_URL) ||
+				'http://192.168.1.104:6080'
+			}/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat } = overlay;
@@ -452,8 +352,6 @@ export default {
 			let { overlayType } = this.activeOverlay;
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
-			// this.$amap.setZoom(this.zoom, 100);
-			// this.$amap.setCenter(this.center, 100);
 			done && done();
 		},
 		viewOverlayDetail(overlay) {

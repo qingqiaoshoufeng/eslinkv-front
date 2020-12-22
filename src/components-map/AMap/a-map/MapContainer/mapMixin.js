@@ -75,7 +75,6 @@ export default {
 		mapInit() {
 			console.log('地图初始化完成！')
 			this.mapReady = true
-			window.sss = this.$refs.amap
 			// this.$refs.amap.$amap.addControl(new AMap.MapType())
 			// this.$refs.amap.$amap.addControl(
 			// 	new AMap.HawkEye({

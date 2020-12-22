@@ -46,7 +46,7 @@ export default {
 	},
 	async created() {
 		await this.getData();
-		this.ready = true;
+        this.ready = true;
 	},
 	methods: {
 		handleMouseover(marker) {
