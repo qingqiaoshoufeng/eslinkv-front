@@ -12,6 +12,10 @@ export default function getOption(data, config) {
 			bottom: 30,
 			right: 40
 		},
+		tooltip: {
+			trigger: 'axis',
+			triggerOn: 'mousemove|click'
+		},
 		legend: {
 			icon: 'rect',
 			orient: 'horizontal',
