@@ -30,19 +30,19 @@ export default {
 
 			this._instance = new AMap.Heatmap(this.$amap, {
 				radius: 10, //给定半径
-				opacity: [0, 0.8],
+				// opacity: [0, 0.8],
 				zIndex: 1000,
 				'3d': {
 					//热度转高度的曲线控制参数，可以利用左侧的控制面板获取
 					heightBezier: [0, 0, 0, 0],
 					//取样精度，值越小，曲面效果越精细，但同时性能消耗越大
-					gridSize: 2,
+					// gridSize: 2,
 					heightScale: 0,
 				},
 			});
 			this._instance.setDataSet({
 				data: this._heatMapData,
-				max: 8000,
+				max: 16000,
 			});
 		},
 	},

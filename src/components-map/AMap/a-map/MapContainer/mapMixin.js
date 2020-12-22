@@ -34,7 +34,7 @@ export default {
                 dragEnable: true,
                 zoom: 10,
                 viewMode: '3D',
-                pitch: 0,
+                pitch: 10,
                 // zooms:[11,19],
                 mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
             },
