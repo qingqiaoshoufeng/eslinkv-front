@@ -293,7 +293,6 @@ export default {
 
 			this.intervalId = setInterval(() => {
 				let currentIndex = index++ % length;
-
 				this.activeOverlay = {
 					...this.allTypeStationList.branchCompanyList[currentIndex],
 					type: 'BranchCompany',

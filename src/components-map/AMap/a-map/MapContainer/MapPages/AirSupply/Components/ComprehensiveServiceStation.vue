@@ -12,7 +12,6 @@
 				$emit('overlay-click', marker, 'ComprehensiveServiceStation')
 		"
 	>
-		<!-- <div class="sample-name" :slot-scope="{ data }">{{ data.name }}</div> -->
 	</BaseOverlay>
 </template>
 <script>

@@ -1,13 +1,4 @@
 <template>
-	<!-- <DashboardPanel
-		:delay="300"
-		:show="ready"
-		:speed="300"
-		:transition="true"
-		class="right-panel"
-		enter="animate__animated animate__fadeInRight"
-	> -->
-	<!-- <tabsTitle /> -->
 	<Tabs
 		class="tabs-container-ic animate__animated animate__fadeInRight"
 		v-model="currentTab"
@@ -23,23 +14,11 @@
 				:activeOverlay="activeOverlay"
 			/>
 		</TabPanel>
-		<!-- <TabPanel
-				key="overlayList"
-				name="overlayList"
-				label="三社联动"
-				lazy
-			>
-				<overlayList @change="handleClick" />
-			</TabPanel> -->
 	</Tabs>
-	<!-- </DashboardPanel> -->
 </template>
 <script>
 import { DashboardPanel } from '../../../../../components/';
 import { Tabs, TabPanel } from '../../../../../components/Tabs/';
-// import tabsTitle from '../tabsTitle';
-// import overlayList from './overlayList';
-// import realTime from './realTime';
 import ICCustomerList from './ICCustomerList';
 export default {
 	name: 'RightlistPanel',
@@ -80,9 +59,6 @@ export default {
 			});
 			this.activeIndex = index > -1 ? index : null;
 		},
-		activeOverlay(val) {
-			console.log(val);
-		},
 	},
 	methods: {
 		handleClick(item, index) {
@@ -94,15 +70,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// .tabs-container-ic {
-// 	/deep/ .tabs__header {
-// 		display: none !important;
-// 	}
-// }
-// /deep/ .tabs-container-ic {
-// 	padding-top: 0px !important;
-// }
-
 .right-panel {
 	position: absolute;
 	right: 32px;

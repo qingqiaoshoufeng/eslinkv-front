@@ -2,17 +2,6 @@
 import { operationYesterday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, operationLastWeek, operationMonth, operationLastMonth, operationYear, } from "./dictionary"
 // 覆盖物legend配置
 export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
-    // Grouphall: {
-    //     label: '集团大厅',
-    //     legendIcon: 'icontulijituandating',
-    //     iconSize: 56,
-    //     icon: 'iconjituandating',
-    //     component: 'Grouphall',
-    //     visible: true,
-    //     dataProp: 'grouphallList',
-
-    //     detailList: [operationYesterday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
-    // },
     BranchCompany: {
         label: '子公司',
         legendIcon: 'icontulifengongsi',
@@ -26,17 +15,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
             //  NewCouplingNumber
         ]
     },
-    // ServiceStation: {
-    //     label: '综合服务站',
-    //     legendIcon: 'icontulizonghefuwuzhan1',
-    //     iconSize: 38,
-    //     icon: 'iconzonghefuwuzhan1',
-    //     component: 'ServiceStation',
-    //     visible: true,
-    //     dataProp: 'comprehensiveServiceStationList',
 
-    //     detailList: [operationYesterday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
-    // },
     CouplingHot: {
         label: '联码数量热力',
         legendIcon: 'icontulixiaoqireli',

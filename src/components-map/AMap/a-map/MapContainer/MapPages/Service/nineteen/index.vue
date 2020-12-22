@@ -144,11 +144,6 @@ export default {
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.setCenter(this.center, 100);
 	},
-	watch: {
-		center(val) {
-			this.$amap.panTo(val, 100);
-		},
-	},
 	methods: {
 		// 板块图变化
 		saleAreaChange(val) {},

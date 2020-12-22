@@ -19,7 +19,6 @@
 				:is="config.component"
 				@overlay-click="handleOverlayClick"
 				:ref="config.component"
-				@view-detail="showMoreDetail"
 				:detailList="config.detailList"
 				:data="allTypeStationList[config.dataProp]"
 				@close="closeOverlayDetail('')"
@@ -35,14 +34,12 @@
 				beforeClose: closeOverlayDetail,
 				...OverlayDetailProp,
 			}"
-			@view-detail="showMoreDetail()"
 			ref="OverlayDetail"
 		>
 			<TipDetial
 				:data="activeOverlay"
 				:detailInfo="detailInfo"
 				:isShowMore="isShowMore"
-				@view-detail="showMoreDetail()"
 			/>
 		</OverlayDetail>
 		<portal to="destination">
@@ -93,11 +90,14 @@ let componentPageMap = {};
 let componentCommonMap = {};
 componentPageArr.map(componentName => {
 	componentPageMap[componentName] = () =>
-		import(/*webpackInclude:/\.(vue)$/ */  '../Components/' + componentName);
+		import(/*webpackInclude:/\.(vue)$/ */ '../Components/' + componentName);
 });
 componentCommonArr.map(componentName => {
 	componentCommonMap[componentName] = () =>
-import(/*webpackInclude:/\.(vue)$/ */ '../../../../components/' + componentName);
+		import(
+			/*webpackInclude:/\.(vue)$/ */ '../../../../components/' +
+				componentName
+		);
 });
 
 import GoldChart from '@/openApi';
@@ -178,11 +178,7 @@ export default {
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.panTo(this.center, 100);
 	},
-	watch: {
-		center(val) {
-			this.$amap.panTo(val, 100);
-		},
-	},
+
 	methods: {
 		showMoreDetail() {},
 		// 板块图变化

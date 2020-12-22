@@ -5,14 +5,7 @@ import { citizenNumber, publicBuildNumber, industryNumber, businessServe, citize
 
 // 覆盖物legend配置
 export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
-    // Grouphall: {
-    //     label: '集团大厅',
-    //     legendIcon: 'icontulijituandating',
-    //     iconSize:56,
-    //     icon:'iconjituandating',
-    //     component: 'Grouphall',
-    //     isShow: true,
-    // },
+
     BranchCompany: {
         label: '子公司',
         legendIcon: 'icontulifengongsi',
@@ -44,34 +37,6 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         dataProp: 'threeSocialLinkageList',
         detailList: []
     },
-    // TaskList: {
-    //     label: '任务工单',
-    //     legendIcon: 'iconrenwugongdan',
-    //     iconSize: 38,
-    //     icon: 'iconrenwugongdan',
-    //     component: 'TaskList',
-    //     visible: false,
-    //     dataProp: 'TaskList',
-    //     detailList: [serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus]
-    // },
-    // CustomerHot: {
-    //     label: '客户分布热力',
-    //     visible: true,
-    //     component: 'CustomerHot',
-    //     visible: true,
-    //     dataProp: 'CustomerHotList',
-    //     detailList: []
-    // }
-    // ClickTaskList: {
-    //     label: '任务工单',
-    //     legendIcon: 'iconrenwugongdan',
-    //     iconSize: 38,
-    //     icon: 'iconrenwugongdan',
-    //     component: 'ClickTaskList',
-    //     isShow: true,
-    //     dataProp: 'ClickTaskList',
-    //     detailList: []
-    // }
 }
 export const SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP = {
     TaskList: {
@@ -87,16 +52,7 @@ export const SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP = {
 }
 //覆盖物详情
 export const SERVICE_SERVICECUSTOMER_OVERLAY_MAP = {
-    // BranchCompany: {
-    //     fields: {
-    //         name: {},
-    //     },
-    // },
-    // ServiceNetworkStation: {
-    //     fields: {
-    //         name: {},
-    //     },
-    // },
+
     ThreeSocialLinkage: {
         fields: {
             name: {},

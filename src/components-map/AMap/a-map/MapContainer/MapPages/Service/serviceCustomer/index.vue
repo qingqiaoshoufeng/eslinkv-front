@@ -208,11 +208,7 @@ export default {
 			}
 		},
 	},
-	watch: {
-		center(val) {
-			this.$amap.panTo(val, 100);
-		},
-	},
+
 	methods: {
 		// 切换热力图显示隐藏
 		switchChange(data, type) {
@@ -253,7 +249,7 @@ export default {
 			this.activeOverlay = overlay;
 
 			this.showOverlayDetail = this.$refs[overlayType][0].mouseIn;
-
+			// 判断是否展示更多详情按钮
 			this.isShowMore = ['ThreeSocialLinkage'].includes(overlayType);
 			if (['ThreeSocialLinkage', 'TaskList'].includes(overlayType)) {
 				this.$amap.setZoom(14, 100);
@@ -310,7 +306,6 @@ export default {
 			this.isShowMore = false;
 			this.activeIndex = activeIndex;
 			this.activeOverlay.activeIndex = activeIndex;
-			console.log(this.activeIndex, this.activeOverlay);
 			this.activeOverlay = {
 				...item,
 				detailList:

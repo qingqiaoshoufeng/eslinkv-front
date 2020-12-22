@@ -90,9 +90,6 @@ export default {
 			});
 			this.activeIndex = index > -1 ? index : null;
 		},
-		activeOverlay(val) {
-			console.log(val, 'val');
-		},
 	},
 	methods: {
 		async getData() {

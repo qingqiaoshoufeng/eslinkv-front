@@ -37,25 +37,12 @@
 						:icon-name="statusList[item.isUp]"
 						class="panel-type-icon"
 					></SvgIcon>
-					<!-- <img
-						:src="statusList[item.isUp]"
-						alt=""
-						class="panel-type-icon"
-					/> -->
 				</div>
 			</div>
 			<div class="row">
 				<div class="station-name">
 					{{ `${item.num.toLocaleString()}m³` }}
 				</div>
-				<!-- <div
-					:class="[
-						'status',
-						item.status == 0 ? 'status-suc' : 'status-err',
-					]"
-				>
-					{{ item.statusText }}
-				</div> -->
 			</div>
 		</div>
 	</div>
@@ -64,9 +51,6 @@
 <script>
 import { SvgIcon, NoData } from '../../../../../components/';
 import { SERVICE_SERVICEICCUSTOMER_LEGEND_MAP } from '../../serviceICcustomer/config';
-// import first from '/static/images/amap/first.svg';
-// import second from '/static/images/amap/second.svg';
-// import third from '/static/images/amap/third.svg';
 
 export default {
 	name: 'HomeRealTimeList',

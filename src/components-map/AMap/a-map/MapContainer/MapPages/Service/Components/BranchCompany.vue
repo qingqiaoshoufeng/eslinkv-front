@@ -81,10 +81,7 @@ export default {
 				this.overlayType
 			);
 		},
-		mouseleave() {
-			// this.mouseIn = false;
-			// this.$emit('close');
-		},
+		mouseleave() {},
 	},
 };
 </script>
