@@ -30,7 +30,7 @@ export default {
 			}
 
 			this._instance = new AMap.Heatmap(this.$amap, {
-				radius: 5, //给定半径
+				radius: 2, //给定半径
 				opacity: [0, 0.8],
 				zIndex: 1000,
 			});

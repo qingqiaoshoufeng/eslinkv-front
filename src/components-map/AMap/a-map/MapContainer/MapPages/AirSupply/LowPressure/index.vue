@@ -305,8 +305,8 @@ export default {
 			);
 			//数据为防止重叠特殊处理
 			this.stationDataMap = {
-                ...this.stationDataMap,
-                ...res,
+				...this.stationDataMap,
+				...res,
 				serviceStationList,
 				pipeManageMentStationList,
 				undergroundRepairStationList,
