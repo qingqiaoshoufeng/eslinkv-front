@@ -124,10 +124,6 @@ export default {
 		beforeClose: Function,
 		//弹窗位置 默认为bottom
 		position: String,
-		// showOverlayDetail: {
-		// 	type: Boolean,
-		// 	default: true,
-		// },
 	},
 	data() {
 		return {

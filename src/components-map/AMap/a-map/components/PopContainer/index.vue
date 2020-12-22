@@ -57,16 +57,12 @@ export default {
 			ready: false,
 		};
 	},
-	created() {
-		// console.log(this.parentInfo)
-	},
 	computed: {
 		scaleRatio() {
 			return (this.parentInfo && this.parentInfo.scaleRatio) || 1;
 		},
 		translateX() {
 			let { scaleRatio } = this;
-			// console.log(scaleRatio,'scaleRatio')
 			return `-${((1 - scaleRatio) / scaleRatio + 1) * 50}%`;
 		},
 		translateY() {

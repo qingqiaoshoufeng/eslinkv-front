@@ -118,11 +118,11 @@ let componentPageMap = {};
 let componentCommonMap = {};
 componentPageArr.map(componentName => {
 	componentPageMap[componentName] = () =>
-		import('../Components/' + componentName);
+		import(/*webpackInclude:/\.(vue)$/ */  '../Components/' + componentName);
 });
 componentCommonArr.map(componentName => {
 	componentCommonMap[componentName] = () =>
-		import('../../../../components/' + componentName);
+import(/*webpackInclude:/\.(vue)$/ */ '../../../../components/' + componentName);
 });
 
 import {

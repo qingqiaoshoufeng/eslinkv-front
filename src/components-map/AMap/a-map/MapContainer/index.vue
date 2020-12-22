@@ -45,7 +45,7 @@ files.keys().forEach(key => {
 	Object.keys(pageModule).forEach(componentName => {
 		let subPageName = pageModule[componentName];
 		mapPages[pageName + componentName] = () =>
-			import('./MapPages/' + pageName + '/' + subPageName);
+			import(/*webpackInclude:/\.(vue)$/ */ './MapPages/' + pageName + '/' + subPageName);
 	});
 });
 
