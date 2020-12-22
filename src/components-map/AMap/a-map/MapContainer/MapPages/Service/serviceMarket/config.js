@@ -1,13 +1,6 @@
 // 覆盖物legend配置
 export const SERVICE_SERVICEMARKET_LEGEND_MAP = {
-    // Grouphall: {
-    //     label: '集团大厅',
-    //     legendIcon: 'icontulijituandating',
-    //     iconSize:38,
-    //     icon:'iconjituandating',
-    //     component: 'Grouphall',
-    //     isShow: true,
-    // },
+
     BranchCompany: {
         label: '子公司',
         legendIcon: 'icontulifengongsi',

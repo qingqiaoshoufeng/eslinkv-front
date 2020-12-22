@@ -249,7 +249,7 @@ export default {
 			this.activeOverlay = overlay;
 
 			this.showOverlayDetail = this.$refs[overlayType][0].mouseIn;
-
+			// 判断是否展示更多详情按钮
 			this.isShowMore = ['ThreeSocialLinkage'].includes(overlayType);
 			if (['ThreeSocialLinkage', 'TaskList'].includes(overlayType)) {
 				this.$amap.setZoom(14, 100);

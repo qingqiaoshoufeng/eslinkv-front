@@ -31,8 +31,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         visible: true,
         dataProp: 'branchCompanyList',
         detailList: [ICcustomer,
-            //  useNumberYesterday,
-            //   useNumberMonth,
+
             useNumberLastMonth, useNumberYear,]
     },
     WarningICcustomer: {
@@ -44,19 +43,14 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         visible: true,
         dataProp: 'WarningICcustomerList',
         detailList: [
-            // useNumberYesterday,
-            //  useNumberMonth,
+
             useNumberLastMonth, useNumberYear,]
     }
 }
 
 //覆盖物详情
 export const SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP = {
-    // BranchCompany: {
-    //     fields: {
-    //         name: {},
-    //     },
-    // },
+
     BranchCompany: {
         fields: {
             name: {},
