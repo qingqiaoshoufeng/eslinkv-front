@@ -130,27 +130,14 @@ export default {
 		},
 		async getData() {
 			this.isShow = true;
-			let data = [];
-			try {
-				data = await this.$sysApi.map.airSupply.getEventWarningList({
-					currentPage: 1,
-					pageSize: 500,
-					repairType: this.repairType,
-					repairState: this.repairState,
-				});
-			} catch (error) {
-				data = await this.$sysApi.map.airSupply.getEventWarningListOld({
-					currentPage: 1,
-					pageSize: 500,
-					repairType: this.repairType,
-					repairState: this.repairState,
-				});
-				data = data.list;
-			}
+			let data = await this.$sysApi.map.airSupply.getEventWarningList({
+				currentPage: 1,
+				pageSize: 500,
+				repairType: this.repairType,
+				repairState: this.repairState,
+			});
 			this.list = data;
-			// setTimeout(() => {
 			this.isShow = false;
-			// }, 30000);
 		},
 		handleClick(item) {
 			item.status = item.stateName == '处理完成' ? 0 : 1;
@@ -289,11 +276,6 @@ export default {
 		to {
 			transform: rotate(360deg);
 		}
-	}
-	/deep/.demo-spin-col {
-		height: 100px;
-		position: relative;
-		border: 1px solid #eee;
-	}
+    }
 }
 </style>

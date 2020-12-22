@@ -54,3 +54,17 @@ let overlayMap = {
 	},
 }
 ```
+
+
+#### page.js文件导出所写页面，地图主页会自动引入
+#### 地图 legend 配置
+
+```js
+export default {
+	HighPressure: 'HighPressure',
+	LowPressure: 'LowPressure',
+	LNG: 'LNG',
+	UCAN: 'UCAN',
+}
+// 规则:key:组件名  value 组件路径
+```

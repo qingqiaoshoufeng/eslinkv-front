@@ -1,7 +1,9 @@
 <template>
 	<div class="map-container">
 		<div
-			:style="`transform: scale(${reverseScaleRatio});transform-origin:top left; overflow: hidden;width:${kanboardSize.width/reverseScaleRatio}px;height:${kanboardSize.height/reverseScaleRatio}px`"
+			:style="`transform: scale(${reverseScaleRatio});transform-origin:top left; overflow: hidden;width:${
+				kanboardSize.width / reverseScaleRatio
+			}px;height:${kanboardSize.height / reverseScaleRatio}px`"
 		>
 			<el-amap
 				vid="overviewMap"
@@ -17,7 +19,7 @@
 					<component
 						:scaleRatio="scaleRatio"
 						:is="mapComponentName"
-					/>   
+					/>
 				</template>
 			</el-amap>
 		</div>
@@ -33,15 +35,17 @@
 import { AMap } from '../lib';
 import MapTypeLegend from './MapTypeLegend';
 import mapMixin from './mapMixin.js';
-//引入页面
+//动态引入页面
 const files = require.context('./MapPages/', true, /page\.js$/);
 const mapPages = {};
 const path = require('path');
 files.keys().forEach(key => {
 	let pageModule = files(key).default || files(key);
 	const pageName = path.dirname(key).slice(2);
-	Object.keys(pageModule).forEach(subPageName => {
-		mapPages[pageName + subPageName] = pageModule[subPageName];
+	Object.keys(pageModule).forEach(componentName => {
+		let subPageName = pageModule[componentName];
+		mapPages[pageName + componentName] = () =>
+			import('./MapPages/' + pageName + '/' + subPageName);
 	});
 });
 
@@ -79,7 +83,6 @@ export default {
 			ratio = ratio < 1 ? ratio : 1;
 			this.reverseScaleRatio = 1 / ratio;
 			this._provided.parentInfo.scaleRatio = ratio;
-			// this.reverseScaleRatio = 1
 		},
 	},
 	mounted() {

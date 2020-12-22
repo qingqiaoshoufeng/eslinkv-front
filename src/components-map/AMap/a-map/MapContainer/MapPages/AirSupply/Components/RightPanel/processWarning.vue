@@ -120,7 +120,6 @@ export default {
 			currentLevel: 1,
 			repairState: 1,
 			levelList: [
-				// { value: 0, label: ''' },
 				{ value: 1, label: '一级' },
 				{ value: 2, label: '二级' },
 				{ value: 3, label: '三级' },
@@ -135,6 +134,7 @@ export default {
 			},
 		},
 	},
+	//定时刷新数据
 	async created() {
 		this.getData();
 		this.timer = setInterval(() => {
@@ -180,21 +180,11 @@ export default {
 		async getData() {
 			this.isShow = true;
 			this.list = await this.$sysApi.map.airSupply.getProcessWarningList({
-				currentPage: 1,
-				pageSize: 500,
 				priority: this.currentLevel,
 				status: this.repairState,
 			});
-			// setTimeout(() => {
 			this.isShow = false;
-			// }, 30000);
 		},
-		// handleClick(item, index) {
-		// 	this.activeIndex = index;
-		// 	item.status = item.stateName == '处理完成' ? 0 : 1;
-		// 	item.overlayType = 'WarningList';
-		// 	this.$emit('change', item);
-		// },
 	},
 	beforeDestroy() {
 		if (this.timer) {
@@ -212,14 +202,12 @@ export default {
 	height: 800px;
 	.filter-bar {
 		position: sticky;
-		background: #000866;
 		width: 100%;
 		position: sticky;
 		justify-content: space-between;
 		color: #00ddff;
 		font-size: 20px;
 		padding: 8px 2px 7px 2px;
-		// height: 56px;
 		border-bottom: 1px solid #00ddff;
 		line-height: 38px;
 		user-select: none;
@@ -278,7 +266,7 @@ export default {
 			display: none;
 		}
 	}
-	/deep/.demo-spin-icon-load {
+	.demo-spin-icon-load {
 		animation: ani-demo-spin 1s linear infinite;
 		position: absolute;
 		top: 40%;
@@ -296,49 +284,46 @@ export default {
 			transform: rotate(360deg);
 		}
 	}
-	/deep/.demo-spin-col {
-		height: 100px;
-		position: relative;
-		border: 1px solid #eee;
-	}
-	/deep/.ivu-select-dropdown {
-		// top: 32px !important;
-		margin-top: 18px !important;
+	/deep/ {
+		.ivu-select-dropdown {
+			margin-top: 18px !important;
 
-		background: #0057a9;
+			background: #0057a9;
+		}
+		.ivu-select-selection {
+			color: #fff;
+			background: #0057a9;
+			border: 1px solid #57a3f3 !important;
+		}
+		.ivu-select {
+			padding: 0 !important;
+			height: 40px !important;
+			font-style: normal !important;
+			font-weight: 600 !important;
+			font-size: 20px !important;
+		}
+		.ivu-icon-ios-arrow-down:before {
+			margin: 0px -6px;
+		}
+		.ivu-select-item {
+			font-size: 20px !important;
+			line-height: 32px;
+			line-height: 20px !important;
+		}
+		.ivu-select-item:hover {
+			background: rgba(0, 221, 255, 0.3) !important;
+		}
+		.ivu-select-selected-value {
+			padding-left: 13px;
+			font-size: 20px !important;
+		}
+		.ivu-icon-ios-arrow-down:before {
+			font-size: 20px;
+			font-weight: 700;
+			color: #fff;
+		}
 	}
-	/deep/.ivu-select-selection {
-		color: #fff;
-		background: #0057a9;
-		border: 1px solid #57a3f3 !important;
-	}
-	/deep/.ivu-select {
-		padding: 0 !important;
-		height: 40px !important;
-		font-style: normal !important;
-		font-weight: 600 !important;
-		font-size: 20px !important;
-	}
-	/deep/.ivu-icon-ios-arrow-down:before {
-		margin: 0px -6px;
-	}
-	/deep/.ivu-select-item {
-		font-size: 20px !important;
-		line-height: 32px;
-		line-height: 20px !important;
-	}
-	/deep/.ivu-select-item:hover {
-		background: rgba(0, 221, 255, 0.3) !important;
-	}
-	/deep/.ivu-select-selected-value {
-		padding-left: 13px;
-		font-size: 20px !important;
-	}
-	/deep/.ivu-icon-ios-arrow-down:before {
-		font-size: 20px;
-		font-weight: 700;
-		color: #fff;
-	}
+
 	.list-item {
 		padding: 16px 8px;
 		box-sizing: border-box;

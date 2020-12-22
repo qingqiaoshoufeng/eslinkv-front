@@ -121,4 +121,4 @@ function _Math_sinh(x) {
 // uglifyJS时保持字段名称
 export default new TransformClassSlippy(1,19)
 
-  
+window.sss = new TransformClassSlippy(1,19)

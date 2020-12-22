@@ -44,19 +44,3 @@ export default function getPosition(x, y, zoom) {
 		min,
 	}
 }
-
-export function getPositionByLatLng(min, max) {
-	const leftBottomX = bd_2_HZGAS(min.lng, XB, XK)
-	const leftBottomY = bd_2_HZGAS(min.lat, YB, YK)
-	const rightTopX = bd_2_HZGAS(max.lng, XB, XK)
-	const rightTopY = bd_2_HZGAS(max.lat, YB, YK)
-
-	return {
-		leftBottomX,
-		leftBottomY,
-		rightTopX,
-		rightTopY,
-		width: 3500,
-		height: 1050,
-	}
-}

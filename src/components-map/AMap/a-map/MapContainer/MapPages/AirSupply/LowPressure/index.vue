@@ -120,14 +120,10 @@ import {
 	AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP,
 	AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 } from './config.js';
-import GoldChart from '@/openApi';
-import getHangZhouGasGISPosition, {
-	getPositionByLatLng,
-} from '../../../../utils/getHangZhouGasGISPosition';
+import getHangZhouGasGISPosition from '../../../../utils/getHangZhouGasGISPosition';
 
 export default {
 	name: 'LowPressure',
-	inject: ['parentInfo'],
 	components: {
 		AMapTile,
 		...componentPageMap,
@@ -141,11 +137,6 @@ export default {
 	mounted() {
 		this.getAllTypeStationList();
 		this.getDataStatisticsInfo();
-	},
-	watch: {
-		center(val) {
-			this.$amap.panTo(val, 100);
-		},
 	},
 	data() {
 		return {
@@ -162,14 +153,7 @@ export default {
 			legendMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 			overlayMap: AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP,
 			dataStatisticsConfigMap: DATASTATISTICSLIST,
-			dataStatisticsData: {
-				Mediumline: 2627,
-				Lowline: 4652,
-				GreenServeStation: 5,
-				ManageStation: 5,
-				OnNumber: 12,
-				UnderNumber: 12,
-			},
+			dataStatisticsData: {},
 			stationDataMap: {},
 			dataReady: false,
 			stationList: [],
@@ -256,17 +240,6 @@ export default {
 		},
 	},
 	methods: {
-		closeStationListDetail(done) {
-			this.activeStationData = {};
-			this.$refs.RightPanel1.$refs.processWarning.activeIndex = -1;
-			this.$refs.RightPanel1.$refs.realTime.activeIndex = -1;
-			this.$refs.RightPanel1.$refs.overlayList.activeIndex = -1;
-			this.$refs.RightPanel1.$refs.overlayList.searchName = '';
-
-			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.setCenter(this.center, 100);
-			done && done();
-		},
 		// 获取所有站点数据
 		async getAllTypeStationList() {
 			let params = {
@@ -286,7 +259,7 @@ export default {
 				undergroundRepairStationList,
 				ongroundRepairStationList,
 			} = res;
-			//数据为防止重叠特殊处理
+			//数据为防止重叠特殊处理---开始
 			pipeManageMentStationList = pipeManageMentStationList.map(item => {
 				let { lat } = item;
 				return {
@@ -294,24 +267,23 @@ export default {
 					lat: lat + 0.003,
 				};
 			});
-			undergroundRepairStationList = undergroundRepairStationList.map(
-				item => {
-					let { lat } = item;
-					return {
-						...item,
-						lat: lat - 0.003,
-					};
-				}
-			);
-			//数据为防止重叠特殊处理
+			ongroundRepairStationList = ongroundRepairStationList.map(item => {
+				let { lat } = item;
+				return {
+					...item,
+					lat: lat - 0.003,
+				};
+			});
+			//数据为防止重叠特殊处理---结束
 			this.stationDataMap = {
-                ...this.stationDataMap,
-                ...res,
+				...this.stationDataMap,
+				...res,
 				serviceStationList,
 				pipeManageMentStationList,
 				undergroundRepairStationList,
 				ongroundRepairStationList,
-			};
+            };
+            //右侧点位列表数据
 			this.stationList = [
 				...serviceStationList,
 				...pipeManageMentStationList,
@@ -324,7 +296,8 @@ export default {
 			this.dataStatisticsData = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
 				{ type: 'LowPressure' }
 			);
-		},
+        },
+        //获取瓦片函数
 		getTileUrl(x, y, zoom) {
 			const tilesQuery = String(this.tilesQuery);
 			const {
@@ -353,9 +326,6 @@ export default {
 			this.showOverlayDetail = false;
 			this.activeOverlay = {};
 			done && done();
-		},
-		viewOverlayDetail(overlay) {
-			let { overlayType } = overlay;
 		},
 		setZoomAndPanTo(lng, lat) {
 			this.$amap.setZoom(14, 100);

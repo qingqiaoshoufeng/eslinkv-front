@@ -7,9 +7,6 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
 		></WarnEvent>
-		<!-- <WarningStations
-			:data="stationDataMap.middleAndLowPressureValveList"
-		></WarningStations> -->
 		<!-- 行政区域覆盖物 -->
 		<RegionBoundary />
 		<!-- 2.legend控制显隐 -->
@@ -80,12 +77,11 @@ let componentPageArr = [
 	'EmergencyAirSourceStation',
 	'InspectionPerson',
 	'InspectionCar',
+	'WarningStations',
 	//报警点位
 	'WarnEvent',
 	//右侧报警列表
 	'RightPanel',
-	// 'StationList',
-	'WarningStations',
 ];
 //页面所需公共组件
 let componentCommonArr = [
@@ -123,6 +119,7 @@ export default {
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
+		//选取几个点位，在可视范围内以适当zoom显示
 		let fitMapPositionArr = [
 			{
 				lng: 120.248177,
@@ -137,7 +134,12 @@ export default {
 				lat: 30.141069,
 			},
 		];
-		this.mapFitView2(fitMapPositionArr);
+        this.mapFitView2(fitMapPositionArr);
+	},
+	mounted() {
+		this.getAllTypeStationList();
+		this.getDataStatisticsInfo();
+		this.getHighPressurePipe();
 	},
 	data() {
 		return {
@@ -209,7 +211,6 @@ export default {
 	},
 	methods: {
 		handlerMoveto({ type }) {
-			console.log('WarningStations');
 			if (type === 'WarningStations') {
 				this.$amap.panTo([120.131259, 30.363295], 100);
 				this.closeOverlayDetail('', false);
@@ -288,6 +289,7 @@ export default {
 				this.showOverlayDetail = false;
 				this.activeOverlay = {};
 			}
+			//点位列表 和 事件报警做区分
 			switch (listType) {
 				case 'StationList':
 					this.activeStationData = overlay;
@@ -300,8 +302,8 @@ export default {
 		},
 		closeWarnEventDetail(isZoom = true) {
 			this.activeWarnData = {};
-            this.activeStationData = {};
-            window.aaa = this
+			this.activeStationData = {};
+			window.aaa = this;
 			isZoom && this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		closeStationListDetail(isZoom = true) {
@@ -315,11 +317,6 @@ export default {
 				this.$refs[overlayType][0].viewDetail(this.activeOverlay);
 			}
 		},
-	},
-	mounted() {
-		this.getAllTypeStationList();
-		this.getDataStatisticsInfo();
-		this.getHighPressurePipe();
 	},
 };
 </script>

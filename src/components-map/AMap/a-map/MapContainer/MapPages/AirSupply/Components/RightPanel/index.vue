@@ -36,7 +36,6 @@ import { Tabs, TabPanel } from '../../../../../components/Tabs/';
 import overlayList from './overlayList';
 import realTime from './realTime';
 import processWarning from './processWarning';
-import statAawareness from './statAawareness';
 
 export default {
 	name: 'RightlistPanel',
@@ -69,7 +68,6 @@ export default {
 		overlayList,
 		realTime,
 		processWarning,
-		statAawareness,
 	},
 	mounted() {
 		this.ready = true;
