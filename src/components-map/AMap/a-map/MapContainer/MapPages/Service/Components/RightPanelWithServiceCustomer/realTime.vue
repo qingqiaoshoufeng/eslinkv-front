@@ -83,7 +83,6 @@ export default {
 		},
 	},
 	async created() {
-		// this.list = await this.$sysApi.map.home.getWarningList();
 		this.isShow = true;
 		this.list = await this.$sysApi.map.serve.getServiceCustomerTaskList();
 		this.isShow = false;

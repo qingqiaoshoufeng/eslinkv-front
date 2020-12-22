@@ -145,9 +145,6 @@ export default {
 		},
 	},
 	methods: {
-		setCenter(center) {
-			this.center = center || this.center;
-		},
 		// 板块图变化
 		saleAreaChange(val) {},
 		async handleOverlayClick(overlay, overlayType, isCenter = true) {
@@ -217,7 +214,6 @@ export default {
 	mounted() {
 		this.getAllTypeStationList();
 		this.getDataStatisticsList();
-		window.setCenter = this.setCenter.bind(this);
 	},
 };
 </script>

@@ -14,25 +14,7 @@ export default {
 			default: '',
 		},
 	},
-	// watch: {
-	// 	value: {
-	// 		handler(val, valOld) {
-	// 			if (val === valOld) {
-	// 				return false;
-	// 			}
-	// 			let instanceIndexOld = this._instanceMap[valOld];
-	// 			instanceIndexOld &&
-	// 				this.instanceArr[instanceIndexOld].setOptions({
-	// 					fillOpacity: 0,
-	// 				});
-	// 			let instanceIndex = this._instanceMap[val];
-	// 			instanceIndex &&
-	// 				this.instanceArr[instanceIndex].setOptions({
-	// 					fillOpacity: 0.6,
-	// 				});
-	// 		},
-	// 	},
-	// },
+
 	methods: {
 		init() {
 			this.drawSaleAreaBoundary(this.$amap);

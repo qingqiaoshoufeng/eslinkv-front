@@ -70,10 +70,7 @@ export default {
 				this.overlayType
 			);
 		},
-		handleMouseleave() {
-			// this.mouseIn = false;
-			// this.$emit('close');
-		},
+		handleMouseleave() {},
 	},
 };
 </script>

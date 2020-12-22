@@ -247,7 +247,6 @@ export default {
 			try {
 				res = await this.$sysApi.map.serve.getHangranCodeHotList();
 			} catch (error) {
-				// res = { total: [], month: [] };
 				res = {};
 			}
 
