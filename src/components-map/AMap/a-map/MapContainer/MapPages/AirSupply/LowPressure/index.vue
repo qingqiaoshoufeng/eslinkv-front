@@ -327,7 +327,8 @@ export default {
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
 			this.showOverlayDetail = false;
-			this.activeOverlay = {};
+            this.activeOverlay = {};
+            this.activeStationData = {}
 			done && done();
 		},
 		setZoomAndPanTo(lng, lat) {

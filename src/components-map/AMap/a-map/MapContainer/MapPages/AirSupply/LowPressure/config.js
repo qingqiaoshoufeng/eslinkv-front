@@ -24,7 +24,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
     },
     PressureRegulatingStation: {
         label: '调压站',
-        legendIcon: 'icontulitiaoyazhan',
+        legendIcon: 'icondiyatiaoyanzhan',
         iconSize: 38,
         tileQuery: [34],
         visible: false,

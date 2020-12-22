@@ -26,7 +26,7 @@ module.exports = {
                 target: 'http://ebp-pc.hzrq.local:15003',
                 changeOrigin: true,
                 headers: {
-                    Cookie: 'SESSION=6d1c669f-b073-45eb-83cf-a81852f384af'
+                    Cookie: 'SESSION=e27f5a06-e5f2-4af8-aa52-0fcf051f912b'
                 },
                 pathRewrite: {
                     '^/hangran': '/'
@@ -36,7 +36,7 @@ module.exports = {
                 target: 'http://ebp-pc.hzrq.local:15003',
                 changeOrigin: true,
                 headers: {
-                    Cookie: 'SESSION=6d1c669f-b073-45eb-83cf-a81852f384af'
+                    Cookie: 'SESSION=e27f5a06-e5f2-4af8-aa52-0fcf051f912b'
                 },
                 pathRewrite: {
                     '^/api': '/'
