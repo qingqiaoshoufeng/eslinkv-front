@@ -304,7 +304,8 @@ export default {
 		},
 		closeWarnEventDetail(isZoom = true) {
 			this.activeWarnData = {};
-			this.activeStationData = {};
+            this.activeStationData = {};
+            window.aaa = this
 			isZoom && this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		closeStationListDetail(isZoom = true) {
@@ -323,7 +324,6 @@ export default {
 		this.getAllTypeStationList();
 		this.getDataStatisticsInfo();
 		this.getHighPressurePipe();
-		// window.setCenter = this.setCenter.bind(this);
 	},
 };
 </script>

@@ -21,6 +21,8 @@ export default {
 			isExecuteFlag: false, //是否正在请求数据
 			drawLineIndex: 0, //当前请求的index
 			duration: 6, //6秒内播放完毕
+			planPathData: [],
+			passedPathData: [],
 		};
 	},
 	props: {
@@ -34,27 +36,19 @@ export default {
 	watch: {
 		data: {
 			handler(val) {
-				//数据返回延迟，防止多次点击
+				//记录当前数据变更次数
 				this.drawLineIndex++;
-				if (this.timer) {
-					clearInterval(this.timer);
-					this.timer = null;
-				}
 				this.$emit('view-detail');
-				this.timer = setInterval(() => {
-					if (!this.isExecuteFlag) {
-						this.reset();
-						setTimeout(() => {
-							this.getData(this.drawLineIndex);
-						}, 1000);
-						clearInterval(this.timer);
-						this.timer = null;
-					} else {
-						console.log('在请求中');
-					}
-				}, 1000);
+				this.getData(this.drawLineIndex);
 			},
 			immediate: true,
+		},
+		passedPathData(val) {
+			this.reset();
+			clearTimeout(this.timer);
+			this.timer = setTimeout(() => {
+				this.drawLine(this.passedPathData, this.planPathData);
+			}, 1000);
 		},
 	},
 	created() {
@@ -81,7 +75,6 @@ export default {
 				console.error('还没有接单或者派人');
 				return false;
 			}
-			this.isExecuteFlag = true;
 			let passedPathData = [];
 			try {
 				passedPathData = await this.$sysApi.map.airSupply.getEmployeeGpsTrack(
@@ -89,21 +82,20 @@ export default {
 				);
 			} catch (error) {
 				console.log('error', error);
-				this.isExecuteFlag = false;
-			}
-
-			if (this.drawLineIndex !== drawLineIndex) {
-				this.isExecuteFlag = false;
 				return false;
 			}
-			if (!passedPathData) {
-				this.isExecuteFlag = false;
+			//判断接口返回数据是否为最新
+			if (this.drawLineIndex !== drawLineIndex) {
+				return false;
+			}
+			if (!passedPathData || !passedPathData.length) {
 				console.error('无人员位置信息');
 				return false;
 			}
 			//arrivalTime ？ '已到达'：'规划路线'
 			if (arrivalTime) {
-				this.drawLine(passedPathData);
+				this.planPathData = [];
+				this.passedPathData = passedPathData;
 			} else {
 				let [startLng, startLat] = passedPathData[
 					passedPathData.length - 1
@@ -131,17 +123,17 @@ export default {
 									planPathData.push([lng, lat]);
 								});
 							});
+							//有异步数据，需重新判断下
 							if (this.drawLineIndex === drawLineIndex) {
-								this.drawLine(passedPathData, planPathData);
+								this.planPathData = planPathData;
+								this.passedPathData = passedPathData;
 							}
-							this.isExecuteFlag = false;
 						}
 					}
 				);
 			}
 		},
 		drawLine(passedPathData = [], planPathData = []) {
-			this.isExecuteFlag = false;
 			let map = this.map;
 			// 1.已行驶路径 + 预测轨迹
 			let pathDataAll = [...passedPathData, ...planPathData];
@@ -191,7 +183,7 @@ export default {
 			}
 			let { scaleRatio } = this.parentInfo;
 			let paddingH = 1050 - 1050 * scaleRatio;
-			let paddingW = (window.innerWidth * (1 - scaleRatio)) ;
+			let paddingW = window.innerWidth * (1 - scaleRatio);
 			let otherInstance = this.$parent.getDetailOverlayInstance();
 			this.map.setFitView([this.pathAll, otherInstance], false, [
 				80,
