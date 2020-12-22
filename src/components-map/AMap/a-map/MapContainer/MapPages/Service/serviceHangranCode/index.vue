@@ -289,7 +289,7 @@ export default {
 			}
 			if (!this.intervalId) {
 			}
-			window.arrr = [];
+
 			this.intervalId = setInterval(() => {
 				let currentIndex = index++ % length;
 
@@ -302,7 +302,7 @@ export default {
 							.detailList,
 				};
 				let { name } = this.activeOverlay;
-				console.log('');
+
 				let address = {
 					杭州天然气有限公司: { value: [121.39105835, 30.49227485] },
 					杭州钱江燃气有限公司: {
