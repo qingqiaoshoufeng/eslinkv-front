@@ -126,21 +126,12 @@ export default {
 			this.padding = index ? 0 : 16;
 			this.width = index ? 880 : 680;
 			this.isShowDetial = true;
-			console.log(item);
 			this.activeIndex = index;
 			this.$emit('moveto', { type: 'WarningStations' });
-
-			console.log(this.detailShowList);
 		},
 		handlerChange(item, index) {
 			this.getDetailInfo(item, item.middleId);
 		},
-		// async getDetailInfo(item, id) {
-		// 	let params = {
-		// 		id,
-		// 	};
-
-		// },
 	},
 	beforeDestroy() {},
 };

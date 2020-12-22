@@ -94,7 +94,6 @@ export default {
 				};
 				let overlayDetailConfig =
 					overlayInfoConfigMap[overlayType] || {};
-				console.log(overlayType, 'overlayType');
 				//弹窗详情
 				this.OverlayDetailProp = {
 					iconSize: 38,
@@ -118,7 +117,6 @@ export default {
 		bus.$on('clearRoutePlan', () => {
 			this.showRoutePlan = false;
 			this.$emit('close');
-			console.log(this.data);
 		});
 	},
 	methods: {
