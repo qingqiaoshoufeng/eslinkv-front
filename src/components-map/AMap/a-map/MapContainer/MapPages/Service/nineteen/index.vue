@@ -82,21 +82,7 @@ componentCommonArr.map(componentName => {
 	componentCommonMap[componentName] = () =>
 		import('../../../../components/' + componentName);
 });
-// //页面覆盖物组件
-// import {
-// 	BranchCompany,
-// 	TipDetial,
-// 	SaleAreaBoundary,
-// } from '../Components/index.js';
-// //页面所需公共组件
-// import {
-// 	RegionBoundary,
-// 	OverlayDetail,
-// 	MapLegend,
-// } from '../../../../components/index.js';
-// // 页面配置项
 
-// import { DataStatistics } from '../../../../components';
 import {
 	SERVICE_SERVICENINETEEN_LEGEND_MAP,
 	SERVICE_SERVICENINETEEN_OVERLAY_MAP,
