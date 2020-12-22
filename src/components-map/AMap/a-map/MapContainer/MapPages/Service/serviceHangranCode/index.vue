@@ -96,11 +96,14 @@ let componentPageMap = {};
 let componentCommonMap = {};
 componentPageArr.map(componentName => {
 	componentPageMap[componentName] = () =>
-		import(/*webpackInclude:/\.(vue)$/ */  '../Components/' + componentName);
+		import(/*webpackInclude:/\.(vue)$/ */ '../Components/' + componentName);
 });
 componentCommonArr.map(componentName => {
 	componentCommonMap[componentName] = () =>
-import(/*webpackInclude:/\.(vue)$/ */ '../../../../components/' + componentName);
+		import(
+			/*webpackInclude:/\.(vue)$/ */ '../../../../components/' +
+				componentName
+		);
 });
 
 import pageMixin from '../../../../mixins/pageMixin';
@@ -138,8 +141,6 @@ export default {
 			activeOverlay: {},
 			legendMultiple: true,
 			showOverlayDetail: false,
-			// 120.12039185； 纬度：30.17273413
-			// center: [120.80971, 30.102216],
 			center: [120.90522766, 30.74965084],
 			zoom: 10,
 			allTypeStationList: {},
