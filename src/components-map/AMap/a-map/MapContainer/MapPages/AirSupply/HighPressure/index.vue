@@ -184,6 +184,7 @@ export default {
 					showMore,
 				};
 			}
+			return {};
 		},
 
 		//点击右侧点位列表，从overlay组件内部触发click事件
@@ -300,8 +301,8 @@ export default {
 		},
 		closeWarnEventDetail(isZoom = true) {
 			this.activeWarnData = {};
-            this.activeStationData = {};
-            window.aaa = this
+			this.activeStationData = {};
+			window.aaa = this;
 			isZoom && this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		closeStationListDetail(isZoom = true) {
