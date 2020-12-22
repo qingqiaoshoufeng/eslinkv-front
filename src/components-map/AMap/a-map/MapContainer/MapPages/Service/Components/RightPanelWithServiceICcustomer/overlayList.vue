@@ -18,12 +18,7 @@
 				<div class="panel-type-desc">
 					{{ index + 1 }}
 				</div>
-				<!-- <SvgIcon
-					:icon-name="
-						item.status == 0 ? 'iconzhengchang' : 'iconyichang'
-					"
-					class="panel-type-icon"
-				></SvgIcon> -->
+
 				<div class="content">
 					{{ item.content }}
 				</div>

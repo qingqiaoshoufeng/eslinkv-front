@@ -71,24 +71,35 @@
 </template>
 <script>
 //页面覆盖物组件
-import {
-	// ICcustomer,
-	RightPanelWithServiceICcustomer,
-	BranchCompany,
-	MajorClient,
-	WarningICcustomer,
-	TipDetial,
-	SaleAreaBoundary,
-	SwitchBox,
-	useHotYear,
-} from '../Components/index.js';
+let componentPageArr = [
+	'RightPanelWithServiceICcustomer',
+	'BranchCompany',
+	'MajorClient',
+	'WarningICcustomer',
+	'TipDetial',
+	'SaleAreaBoundary',
+	'SwitchBox',
+	'useHotYear',
+];
 //页面所需公共组件
-import {
-	RegionBoundary,
-	OverlayDetail,
-	MapLegend,
-} from '../../../../components/index.js';
-import { DataStatistics } from '../../../../components';
+let componentCommonArr = [
+	'DataStatistics',
+	'RegionBoundary',
+	'OverlayDetail',
+	'MapLegend',
+];
+//异步加载组件函数
+let componentPageMap = {};
+let componentCommonMap = {};
+componentPageArr.map(componentName => {
+	componentPageMap[componentName] = () =>
+		import('../Components/' + componentName);
+});
+componentCommonArr.map(componentName => {
+	componentCommonMap[componentName] = () =>
+		import('../../../../components/' + componentName);
+});
+
 import GoldChart from '@/openApi';
 import {
 	SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
@@ -103,18 +114,9 @@ import {
 export default {
 	name: 'serviceICcustomer',
 	components: {
-		RegionBoundary,
-		OverlayDetail,
-		DataStatistics,
-		RightPanelWithServiceICcustomer,
-		MapLegend,
-		BranchCompany,
-		MajorClient,
-		TipDetial,
-		WarningICcustomer,
-		SaleAreaBoundary,
-		iSwitchBox: SwitchBox,
-		useHotYear,
+		...componentPageMap,
+		...componentCommonMap,
+		iSwitchBox: componentPageMap.SwitchBox,
 	},
 	data() {
 		let {
@@ -182,40 +184,7 @@ export default {
 		},
 	},
 	methods: {
-		setCenter(center) {
-			this.center = center || this.center;
-		},
-		// 查看详情，弹出详情场景
-		// async showMoreDetail(activeOverlay) {
-		// 	let { address, content, status, id } =
-		// 		activeOverlay || this.activeOverlay;
-		// 	let { useNumberYestoday } = this.detailInfo;
-		// 	let params = {};
-
-		// 	params[ICcustomer_WARN__COMPONENTINDEX[0]] = {
-		// 		title: address,
-		// 	};
-		// 	params[ICcustomer_WARN__COMPONENTINDEX[1]] = {
-		// 		value: `${content}(${status === '1' ? '待处理' : '已处理'})`,
-		// 	};
-		// 	params[ICcustomer_WARN__COMPONENTINDEX[2]] = {
-		// 		value: useNumberYestoday,
-		// 	};
-
-		// 	GoldChart.scene.createSceneInstance(
-		// 		ICcustomer_WARN__SCENEINDEX,
-		// 		'slideRight'
-		// 	);
-		// 	this.$nextTick(() => {
-		// 		ICcustomer_WARN__COMPONENTINDEX.forEach(item => {
-		// 			GoldChart.instance.updateComponent(item, {
-		// 				data: params[item],
-		// 			});
-		// 		});
-		// 	});
-
-		// 	// params.
-		// },
+		showMoreDetail() {},
 		// 板块图变化
 		saleAreaChange(val) {},
 		// 切换热力图显示隐藏
@@ -326,26 +295,12 @@ export default {
 			};
 			return this.$sysApi.map.serve.getICcustomerWarningDetialInfo();
 		},
-		// viewOverlayDetail(overlay) {
-		// 	let { overlayType } = overlay;
-		// 	//和场景进行交互
-		// 	GoldChart.scene.setSceneIndex(
-		// 		SERVICE_SERVICEHANGRANCODE_LEGEND_MAP
-		// 	);
-		// 	//更新数据
-		// 	this.$nextTick(() => {
-		// 		AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
-		// 			GoldChart.instance.updateComponent(i);
-		// 		});
-		// 	});
-		// },
 	},
 	mounted() {
 		this.getDataStatisticsList();
 		this.getAllTypeStationList();
 		this.getWarningList();
 		this.getAllHotList();
-		window.setCenter = this.setCenter.bind(this);
 	},
 };
 </script>

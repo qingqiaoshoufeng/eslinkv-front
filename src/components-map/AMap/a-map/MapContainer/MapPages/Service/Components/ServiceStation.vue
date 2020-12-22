@@ -5,7 +5,7 @@
 			overlayIcon,
 			overlayType,
 			visible,
-			apiFun,
+
 			...$attrs,
 			data,
 		}"
@@ -53,9 +53,7 @@ export default {
 		},
 	},
 	data() {
-		return {
-			apiFun: this.$sysApi.map.serve.getServiceNetworkStationList,
-		};
+		return {};
 	},
 	mounted() {},
 };

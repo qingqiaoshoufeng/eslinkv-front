@@ -73,23 +73,36 @@
 </template>
 <script>
 //页面覆盖物组件
-import {
-	CouplingHot,
-	OperationHot,
-	SwitchBox,
-	Grouphall,
-	BranchCompany,
-	ServiceStation,
-	TipDetial,
-	ClickTipDetial,
-	SaleAreaBoundary,
-} from '../Components/index.js';
+let componentPageArr = [
+	'CouplingHot',
+	'OperationHot',
+	'SwitchBox',
+	'Grouphall',
+	'BranchCompany',
+	'ServiceStation',
+	'TipDetial',
+	'ClickTipDetial',
+	'SaleAreaBoundary',
+];
 //页面所需公共组件
-import {
-	RegionBoundary,
-	OverlayDetail,
-	MapLegend,
-} from '../../../../components/index.js';
+let componentCommonArr = [
+	'DataStatistics',
+	'RegionBoundary',
+	'OverlayDetail',
+	'MapLegend',
+];
+//异步加载组件函数
+let componentPageMap = {};
+let componentCommonMap = {};
+componentPageArr.map(componentName => {
+	componentPageMap[componentName] = () =>
+		import('../Components/' + componentName);
+});
+componentCommonArr.map(componentName => {
+	componentCommonMap[componentName] = () =>
+		import('../../../../components/' + componentName);
+});
+
 import pageMixin from '../../../../mixins/pageMixin';
 import {
 	SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
@@ -97,24 +110,13 @@ import {
 	DATASTATISTICSLIST,
 	SWICHBOX,
 } from './config';
-import { DataStatistics } from '../../../../components';
 export default {
 	name: 'hangranCode',
 	mixins: [pageMixin],
 	components: {
-		RegionBoundary,
-		CouplingHot,
-		OperationHot,
-		DataStatistics,
-		MapLegend,
-		iSwitchBox: SwitchBox,
-		Grouphall,
-		BranchCompany,
-		ServiceStation,
-		OverlayDetail,
-		TipDetial,
-		ClickTipDetial,
-		SaleAreaBoundary,
+		...componentPageMap,
+		...componentCommonMap,
+		iSwitchBox: componentPageMap.SwitchBox,
 	},
 	data() {
 		let {
@@ -247,7 +249,6 @@ export default {
 			try {
 				res = await this.$sysApi.map.serve.getHangranCodeHotList();
 			} catch (error) {
-				// res = { total: [], month: [] };
 				res = {};
 			}
 
@@ -289,7 +290,7 @@ export default {
 			}
 			if (!this.intervalId) {
 			}
-			window.arrr = [];
+
 			this.intervalId = setInterval(() => {
 				let currentIndex = index++ % length;
 
@@ -302,7 +303,7 @@ export default {
 							.detailList,
 				};
 				let { name } = this.activeOverlay;
-				console.log('');
+
 				let address = {
 					杭州天然气有限公司: { value: [121.39105835, 30.49227485] },
 					杭州钱江燃气有限公司: {
@@ -319,7 +320,6 @@ export default {
 				this.showOverlayDetail = true;
 				this.$amap.panTo(address[name].value, 100);
 			}, 5000);
-			arrr.push(this.intervalId);
 		},
 		// 关闭定时器
 		clearInterval() {

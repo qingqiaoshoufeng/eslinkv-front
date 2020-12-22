@@ -17,15 +17,6 @@
 				})
 			"
 		>
-			<!-- <video
-				class="warning-videO"
-				src="@/assets/amap/images/warning-circle.webm"
-				controls="controls"
-				autoplay="autoplay"
-				muted="muted"
-				loop
-				v-if="item.status === '1'"
-			></video> -->
 		</Overlay>
 	</div>
 </template>
@@ -66,12 +57,7 @@ export default {
 
 	async created() {
 		this.map = this.$parent.$amap;
-
 		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
-
-		// console.log(res);
-		// this.list = res.filter(item => item.status);
-		// console.log(this.list, 1111);
 	},
 	mounted() {},
 };

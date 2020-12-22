@@ -93,26 +93,38 @@
 </template>
 <script>
 //页面覆盖物组件
-import {
-	ThreeSocialLinkage,
-	ServiceNetworkStation,
-	Grouphall,
-	BranchCompany,
-	RightPanelWithServiceCustomer,
-	TipDetial,
-	TaskList,
-	ClickTaskList,
-	CustomerHot,
-	SwitchBox,
-	SaleAreaBoundary,
-} from '../Components/index.js';
+let componentPageArr = [
+	'ThreeSocialLinkage',
+	'ServiceNetworkStation',
+	'Grouphall',
+	'BranchCompany',
+	'RightPanelWithServiceCustomer',
+	'TipDetial',
+	'TaskList',
+	'ClickTaskList',
+	'CustomerHot',
+	'SwitchBox',
+	'SaleAreaBoundary',
+];
 //页面所需公共组件
-import {
-	RegionBoundary,
-	OverlayDetail,
-	MapLegend,
-} from '../../../../components/index.js';
-import { DataStatistics } from '../../../../components';
+let componentCommonArr = [
+	'DataStatistics',
+	'RegionBoundary',
+	'OverlayDetail',
+	'MapLegend',
+];
+//异步加载组件函数
+let componentPageMap = {};
+let componentCommonMap = {};
+componentPageArr.map(componentName => {
+	componentPageMap[componentName] = () =>
+		import('../Components/' + componentName);
+});
+componentCommonArr.map(componentName => {
+	componentCommonMap[componentName] = () =>
+		import('../../../../components/' + componentName);
+});
+
 import {
 	INDEXSCENEMAP,
 	THREESOCIALLINKAGE_SCENEINDEX,
@@ -131,21 +143,9 @@ import {
 export default {
 	name: 'ServiceCustomer',
 	components: {
-		ThreeSocialLinkage,
-		ServiceNetworkStation,
-		RegionBoundary,
-		OverlayDetail,
-		Grouphall,
-		BranchCompany,
-		DataStatistics,
-		RightPanelWithServiceCustomer,
-		MapLegend,
-		TipDetial,
-		TaskList,
-		ClickTaskList,
-		CustomerHot,
-		iSwitchBox: SwitchBox,
-		SaleAreaBoundary,
+		...componentPageMap,
+		...componentCommonMap,
+		iSwitchBox: componentPageMap.SwitchBox,
 	},
 	data() {
 		return {
@@ -157,7 +157,7 @@ export default {
 			OverlayDetail: null,
 			legendMap: SERVICE_SERVICECUSTOMER_LEGEND_MAP,
 			legendMultiple: true,
-            center: [120.22476196, 30.30531764],
+			center: [120.22476196, 30.30531764],
 			zoom: 11,
 			allTypeStationList: {},
 			dataStatisticsList: DATASTATISTICSLIST,
@@ -214,9 +214,6 @@ export default {
 		},
 	},
 	methods: {
-		setCenter(center) {
-			this.center = center || this.center;
-		},
 		// 切换热力图显示隐藏
 		switchChange(data, type) {
 			this.swichBoxInfo = data;
@@ -381,7 +378,6 @@ export default {
 		this.getAllTypeStationList();
 		this.getTasklist();
 		this.getThreeSocialLinkagecustmerHot();
-		window.setCenter = this.setCenter.bind(this);
 		let [{ value }] = this.swichBoxInfo;
 
 		this.visible = value;

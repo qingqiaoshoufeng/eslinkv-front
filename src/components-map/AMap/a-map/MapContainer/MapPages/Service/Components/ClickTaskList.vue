@@ -77,13 +77,6 @@ export default {
 	},
 	async created() {
 		this.map = this.$parent.$amap;
-
-		// this.list = await this.$sysApi.map.airSupply.getEventWarningList();
-		// console.log(this.list);
-
-		// console.log(res);
-		// this.list = res.filter(item => item.status);
-		// console.log(this.list, 1111);
 	},
 	mounted() {},
 	methods: {

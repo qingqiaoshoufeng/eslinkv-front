@@ -58,21 +58,31 @@
 	</div>
 </template>
 <script>
-//页面覆盖物组件
-import {
-	BranchCompany,
-	TipDetial,
-	SaleAreaBoundary,
-} from '../Components/index.js';
+let componentPageArr = [
+	//legend覆盖物
+	'BranchCompany',
+	'TipDetial',
+	'SaleAreaBoundary',
+];
 //页面所需公共组件
-import {
-	RegionBoundary,
-	OverlayDetail,
-	MapLegend,
-} from '../../../../components/index.js';
-// 页面配置项
+let componentCommonArr = [
+	'DataStatistics',
+	'RegionBoundary',
+	'OverlayDetail',
+	'MapLegend',
+];
+//异步加载组件函数
+let componentPageMap = {};
+let componentCommonMap = {};
+componentPageArr.map(componentName => {
+	componentPageMap[componentName] = () =>
+		import('../Components/' + componentName);
+});
+componentCommonArr.map(componentName => {
+	componentCommonMap[componentName] = () =>
+		import('../../../../components/' + componentName);
+});
 
-import { DataStatistics } from '../../../../components';
 import {
 	SERVICE_SERVICENINETEEN_LEGEND_MAP,
 	SERVICE_SERVICENINETEEN_OVERLAY_MAP,
@@ -81,13 +91,8 @@ import {
 export default {
 	name: 'service19',
 	components: {
-		RegionBoundary,
-		OverlayDetail,
-		BranchCompany,
-		DataStatistics,
-		TipDetial,
-		MapLegend,
-		SaleAreaBoundary,
+		...componentPageMap,
+		...componentCommonMap,
 	},
 	data() {
 		return {
@@ -145,9 +150,6 @@ export default {
 		},
 	},
 	methods: {
-		setCenter(center) {
-			this.center = center || this.center;
-		},
 		// 板块图变化
 		saleAreaChange(val) {},
 		async handleOverlayClick(overlay, overlayType, isCenter = true) {
@@ -217,7 +219,6 @@ export default {
 	mounted() {
 		this.getAllTypeStationList();
 		this.getDataStatisticsList();
-		window.setCenter = this.setCenter.bind(this);
 	},
 };
 </script>

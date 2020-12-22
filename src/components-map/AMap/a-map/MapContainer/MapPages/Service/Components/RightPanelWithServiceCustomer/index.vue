@@ -89,8 +89,6 @@ export default {
 						this.activeIndex = index;
 						this.$emit('list-click', item);
 						// console.log('根据地址查询位置失败');
-						// this.handleClick(item, index);
-						// console.log(item, index);
 					}
 				});
 			} else {

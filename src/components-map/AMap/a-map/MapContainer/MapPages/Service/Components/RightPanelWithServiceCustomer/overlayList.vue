@@ -99,27 +99,12 @@ export default {
 			let res = await this.$sysApi.map.serve.getServiceCustomerThreeSocialList();
 			this.list = res.map(item => {
 				let { stationType } = item;
-
 				let config = SERVICE_SERVICECUSTOMER_LEGEND_MAP[stationType];
 				if (config) {
 					item.icon = config.legendIcon;
 				}
 				return item;
 			});
-
-			// let list = await this.$sysApi.map.serve.getAllTypeStationList();
-			// this.list = list
-			// 	.map(item => {
-			// 		let { stationType } = item;
-			// 		console.log(stationType);
-			// 		let config =
-			// 			SERVICE_SERVICECUSTOMER_LEGEND_MAP[stationType];
-			// 		if (config) {
-			// 			item.icon = config.legendIcon;
-			// 		}
-			// 		return item;
-			// 	})
-			// 	.filter(itm => 'ThreeSocialLinkage' === itm.stationType);
 		},
 		handleClick(item, index) {
 			this.activeIndex = index;
