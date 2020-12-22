@@ -17,15 +17,6 @@
 				})
 			"
 		>
-			<!-- <video
-				class="warning-videO"
-				src="@/assets/amap/images/warning-circle.webm"
-				controls="controls"
-				autoplay="autoplay"
-				muted="muted"
-				loop
-				v-if="item.status === '1'"
-			></video> -->
 		</Overlay>
 	</div>
 </template>

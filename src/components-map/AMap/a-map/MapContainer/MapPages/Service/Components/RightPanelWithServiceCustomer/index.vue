@@ -1,12 +1,4 @@
 <template>
-	<!-- <DashboardPanel
-		:delay="300"
-		:show="ready"
-		:speed="300"
-		:transition="true"
-		class="right-panel"
-		enter="animate__animated animate__fadeInRight"
-	> -->
 	<Tabs
 		class="tabs-container animate__animated animate__fadeInRight"
 		v-model="currentTab"
@@ -70,7 +62,7 @@ export default {
 			this.geocoder = new AMap.Geocoder({
 				city: '330100', //杭州市范围内查询
 			});
-			console.log(item.lat);
+			// console.log(item.lat);
 			if (!item.lat) {
 				this.geocoder.getLocation(item.address, (status, result) => {
 					if (status === 'complete' && result.geocodes.length) {
@@ -78,7 +70,7 @@ export default {
 						let { lng, lat } = lnglat;
 						item.lat = lat;
 						item.lng = lng;
-						// this.$emit('overlay-click', item);
+
 						console.log(lat, lng);
 						this.activeIndex = index;
 						this.$emit('list-click', item);
@@ -88,7 +80,6 @@ export default {
 						item.lng = 120.151562;
 						this.activeIndex = index;
 						this.$emit('list-click', item);
-						// console.log('根据地址查询位置失败');
 					}
 				});
 			} else {

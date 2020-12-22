@@ -50,10 +50,6 @@ export default {
 	data() {
 		return {};
 	},
-	mounted() {
-		console.log(this.data);
-		console.log(this.dataStatisticsList);
-	},
 };
 </script>
  <style lang="scss" scoped>

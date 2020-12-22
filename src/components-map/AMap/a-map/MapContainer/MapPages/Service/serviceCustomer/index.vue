@@ -208,11 +208,7 @@ export default {
 			}
 		},
 	},
-	watch: {
-		center(val) {
-			this.$amap.panTo(val, 100);
-		},
-	},
+
 	methods: {
 		// 切换热力图显示隐藏
 		switchChange(data, type) {
@@ -310,7 +306,6 @@ export default {
 			this.isShowMore = false;
 			this.activeIndex = activeIndex;
 			this.activeOverlay.activeIndex = activeIndex;
-			console.log(this.activeIndex, this.activeOverlay);
 			this.activeOverlay = {
 				...item,
 				detailList:
