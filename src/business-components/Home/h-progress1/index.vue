@@ -82,6 +82,7 @@
 		padding-bottom: 8px;
 
     h2 {
+      font-weight: normal;
       font-size: 18px;
       line-height: 24px;
       color: #00DDFF;
