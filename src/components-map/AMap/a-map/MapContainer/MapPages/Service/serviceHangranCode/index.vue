@@ -243,9 +243,6 @@ export default {
 		},
 		// 获取热力图信息
 		async getAllHotList() {
-			let params = {
-				type: ['total', 'month'],
-			};
 			let res;
 			try {
 				res = await this.$sysApi.map.serve.getHangranCodeHotList();

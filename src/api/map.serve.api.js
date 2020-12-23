@@ -2,7 +2,13 @@ import request from './request'
 import qs from 'qs'
 const HANGRANURL = '/server'
 const DATAURL = '/data'
-// 获取杭燃码地图部分数据 子公司、集团大厅、综合服务站
+
+/**
+ * 获取杭燃码地图部分数据子公司列表
+ * @params {Object} data eg:{types: [
+        'BranchCompany', // 子公司
+    ].toString()}
+ */
 export function getHangranCodeList(data) {
     return request({
         url: `${HANGRANURL}/gasCode/mapDataResult`,
@@ -13,7 +19,11 @@ export function getHangranCodeList(data) {
         },
     })
 }
-// 获取杭燃码地图热力图部分数据
+
+/**
+ * 获取杭燃码地图热力图数据列表
+ * @params {null}
+ */
 export function getHangranCodeHotList(data) {
     return request({
         url: `${HANGRANURL}/gasCode/heatCount`,
@@ -24,7 +34,10 @@ export function getHangranCodeHotList(data) {
         },
     })
 }
-// 获取杭燃码门站详情
+/**
+ * 获取杭燃码门站详情
+ * @params {null}
+ */
 export function getHangranCodeDetailInfo(data) {
     return request({
         url: `${HANGRANURL}/gasCode/mapDetailInfo`,

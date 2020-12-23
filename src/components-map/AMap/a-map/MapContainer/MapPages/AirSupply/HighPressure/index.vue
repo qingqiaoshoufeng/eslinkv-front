@@ -63,6 +63,8 @@
 				}"
 				ref="RightPanel"
 			></RightPanel>
+			<!-- 卫星切换组件 -->
+			<SatelliteMap />
 		</portal>
 	</div>
 </template>
@@ -82,6 +84,7 @@ let componentPageArr = [
 	'WarnEvent',
 	//右侧报警列表
 	'RightPanel',
+	'SatelliteMap',
 ];
 //页面所需公共组件
 let componentCommonArr = [
@@ -95,11 +98,14 @@ let componentPageMap = {};
 let componentCommonMap = {};
 componentPageArr.map(componentName => {
 	componentPageMap[componentName] = () =>
-		import(/*webpackInclude:/\.(vue)$/ */  '../Components/' + componentName);
+		import(/*webpackInclude:/\.(vue)$/ */ '../Components/' + componentName);
 });
 componentCommonArr.map(componentName => {
 	componentCommonMap[componentName] = () =>
-import(/*webpackInclude:/\.(vue)$/ */ '../../../../components/' + componentName);
+		import(
+			/*webpackInclude:/\.(vue)$/ */ '../../../../components/' +
+				componentName
+		);
 });
 //页面所需配置项
 import {
@@ -134,7 +140,7 @@ export default {
 				lat: 30.141069,
 			},
 		];
-        this.mapFitView2(fitMapPositionArr);
+		this.mapFitView2(fitMapPositionArr);
 	},
 	mounted() {
 		this.getAllTypeStationList();
