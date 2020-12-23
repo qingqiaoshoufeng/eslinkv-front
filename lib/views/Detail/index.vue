@@ -56,6 +56,7 @@
 						this.refill(value)
 						mutations.initScene(value.scene)
 						mutations.listToObj(value)
+						mutations.setKanboard(value)
 					})
 				} else {
 					const {params: {id}} = this.$route
@@ -65,6 +66,7 @@
 						this.refill(value)
 						mutations.initScene(value.scene)
 						mutations.listToObj(value)
+						mutations.setKanboard(value)
 					})
 				}
 				if (getQueryString('scene')) {

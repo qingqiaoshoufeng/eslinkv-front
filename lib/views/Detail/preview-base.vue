@@ -95,7 +95,8 @@
 				})
 				return [...providers, ...responders]
 			},
-			refillConfig({kanboard, widgets, grids, apis}) {
+			refillConfig() {
+			  const {kanboard, widgets, grids, apis} = store.kanboard.data
 				this.querying = false
 				this.apis = apis
 				return new Promise(resolve => {
