@@ -43,6 +43,8 @@
 			:width="400"
 		>
 		</OverlayDetail>
+		<!-- 卫星切换组件 -->
+		<SatelliteMap />
 		<portal to="destination">
 			<!-- 统计数据 -->
 			<DataStatistics
@@ -63,8 +65,6 @@
 				}"
 				ref="RightPanel"
 			></RightPanel>
-			<!-- 卫星切换组件 -->
-			<SatelliteMap />
 		</portal>
 	</div>
 </template>

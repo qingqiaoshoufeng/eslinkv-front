@@ -1,11 +1,10 @@
 import request from './request'
 import qs from 'qs'
 const HANGRANURL = '/server'
-const DATAURL = '/data'
 
 /**
  * 获取杭燃码地图部分数据子公司列表
- * @params {Object} data eg:{types: [
+ * @param {Object} data eg:{types: [
         'BranchCompany', // 子公司
     ].toString()}
  */
@@ -76,7 +75,7 @@ export function getCouplingIncreaseInfo(data) {
 
 /**
  * 获取杭燃码、19厅地图部分数据子公司列表
- * @params {Object} data eg:{types: [
+ * @param {Object} data eg:{types: [
         'BranchCompany', // 子公司
         'MajorClient'    // 工商户
     ].toString()}
@@ -93,7 +92,7 @@ export function getICcustomerStationList(data) {
 }
 /**
  * 获取工商户门站详情
- * @params {Object} data eg:{
+ * @param {Object} data eg:{
         name:'工商户名称',
         id:'工商户id',
         stationType:'工商户节点类型',
@@ -157,7 +156,7 @@ export function getICcustomerSituationAwareness(data) {
 // 19厅模块
 /**
  * 查询19厅统计数据（数仓接口所以以下参数固定写死）
- * @params {Object} data eg:{
+ * @param {Object} data eg:{
         projectId: 20,
         queryId: 898,
         params: '',
@@ -177,7 +176,7 @@ export function getNineteenStatisticsInfo(data) {
 
 /**
  * 查询19厅站点详情
- * @params {Object} data eg:{
+ * @param {Object} data eg:{
         chartQueryType: 0,
         dataAnalyseId: 901,
         dataType: 0,
@@ -200,7 +199,7 @@ export function getNineteenStationDetailInfo(data) {
 // 客户服务模块
 /**
  * 查询客户服务站点列表
- * @params {Object} data eg:{
+ * @param {Object} data eg:{
         types: [
             'NetworkStation',      // 服务网点（暂时移除后续补充）
             'BranchCompany',       // 子公司
@@ -236,7 +235,7 @@ export function getServiceCustomerStatisticsInfo(data) {
 
 /**
  * 查询客户服务站点详情
- * @params {Object} data eg:{
+ * @param {Object} data eg:{
         name：'站点名称',
         id：'站点id',
         type:'站点类型',
@@ -298,118 +297,7 @@ export function getThreeSocialLinkagecustmerHot(data) {
     })
 }
 
-// 服务网点
-export function getServiceNetworkStationList(data) {
-    return request({
-        url: DATAURL + '/map/serve/getServiceNetworkStationList',
-        method: 'get',
-        data: qs.stringify(data),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    })
-}
-// 三社联动
-export function getThreeSocialLinkageList(data) {
-    return request({
-        url: DATAURL + '/map/serve/getThreeSocialLinkageList',
-        method: 'get',
-        data: qs.stringify(data),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    })
-}
 
 
-// 销气热力
-export function getHeatMapList(data) {
-    return request({
-        url: DATAURL + '/map/serve/getHeatMapList',
-        method: 'get',
-        data: qs.stringify(data),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    })
-}
-
-// 获取统计数据列表
-export function getDataStatisticsList(data) {
-    return request({
-        url: DATAURL + '/map/serve/getDataStatisticsList',
-        method: 'get',
-        data: qs.stringify(data),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    })
-}
-// 获取工商户列表
-export function getICcustomerList(data) {
-    return request({
-        url: DATAURL + '/map/serve/getICcustomerList',
-        method: 'get',
-        data: qs.stringify(data),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    })
-}
-
-// 以下均为数据模拟接口
-export function getAllTypeStationList(data) {
-    return request({
-        url: DATAURL + '/map/serve/getAllTypeStationList',
-        method: 'get',
-        data: qs.stringify(data),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    })
-}
-export function getBranchCompanyWithDetialInfoList(data) {
-    return request({
-        url: DATAURL + '/map/serve/getBranchCompanyWithDetialInfoList',
-        method: 'get',
-        data: qs.stringify(data),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    })
-}
-
-export function getStateList(data) {
-    return request({
-        url: DATAURL + '/map/serve/getStateList',
-        method: 'get',
-        data: qs.stringify(data),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    })
-}
 
 
-// 集团大厅站点
-export function getGrouphallList(data) {
-    return request({
-        url: DATAURL + '/map/serve/getGrouphallList',
-        method: 'get',
-        data: qs.stringify(data),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    })
-}
-// 子公司
-export function getBranchCompanyList(data) {
-    return request({
-        url: DATAURL + '/map/serve/getBranchCompanyList',
-        method: 'get',
-        data: qs.stringify(data),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-    })
-}

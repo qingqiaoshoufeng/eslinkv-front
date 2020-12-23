@@ -58,7 +58,7 @@ export default {
 	},
 	data() {
 		return {
-			apiFun: this.$sysApi.map.serve.getBranchCompanyList,
+			apiFun: this.$sysApi.map.mock.getBranchCompanyList,
 			nameStyle: {
 				fontSize: '24px',
 			},
