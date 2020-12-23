@@ -13,7 +13,9 @@
 								<div v-for="(widget, index) in widgets" :key="widget.label"
 									 class="widget-item-wrapper pos-r">
 									<i class="pos-a" style="left:0;top:0;font-size: 12px;">{{widget.type}}</i>
-									<parts
+									<vue-lazy-component>
+										<div slot="skeleton">加载中...</div>
+										<parts
 										:type="widget.type"
 										:style="transform(widget)"
 										:classification="tab.name"
@@ -24,6 +26,7 @@
 										@dragstart.native="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)"
 										@widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)"
 									/>
+									</vue-lazy-component>
 								</div>
 							</template>
 						</Panel>
@@ -43,10 +46,11 @@
 	import other from './other'
 	import {Collapse, TabPane, Tabs, Panel} from 'view-design'
 	import {store} from '../../../../store'
+	import { component as VueLazyComponent } from '@xunlei/vue-lazy-component'
 
 	export default {
 		components: {
-			parts, Collapse, TabPane, Tabs, Panel
+			parts, Collapse, TabPane, Tabs, Panel, VueLazyComponent
 		},
 		data() {
 			let custom = {}
