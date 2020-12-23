@@ -408,6 +408,7 @@ export default {
     justify-content: center;
     cursor: pointer;
     &.active {
+		  color: #fff;
       background: #0057A9;
       border: 1px solid #00DDFF;
     }
