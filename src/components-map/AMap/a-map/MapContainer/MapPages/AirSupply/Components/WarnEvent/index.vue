@@ -111,7 +111,8 @@ export default {
 				this.showOverlayDetail = true;
 			} else {
 				this.visible = false;
-				this.showOverlayDetail = false;
+                this.showOverlayDetail = false;
+                this.showRoutePlan = false;
 				return {};
 			}
         },
@@ -145,7 +146,7 @@ export default {
 			});
 		},
 		closeOverlayDetail(done) {
-			this.showRoutePlan = false;
+            this.showRoutePlan = false;
 			GoldChart.scene.setSceneIndex(
 				INDEXSCENEMAP[this.parentInfo.pageName]
 			);

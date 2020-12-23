@@ -43,7 +43,7 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.home.getNaturalGasStationList;
+		let apiFun = this.$sysApi.map.mock.getNaturalGasStationList;
 		return {
 			apiFun: apiFun,
 		};

@@ -217,13 +217,20 @@ export default {
 		},
 	},
 	methods: {
+		resetActiveOverlay(activeItem) {
+			let arr = ['activeOverlay', 'activeWarnData', 'activeStationData'];
+			arr.forEach(item => {
+				if (item !== activeItem) {
+					this[item] = {};
+				}
+			});
+		},
 		handlerMoveto({ type }) {
 			if (type === 'WarningStations') {
 				this.$amap.panTo([120.131259, 30.363295], 100);
 				this.closeOverlayDetail('', false);
 			} else {
 				this.$amap.panTo(this.center, 100);
-
 				this.closeWarnEventDetail();
 			}
 		},
@@ -254,7 +261,7 @@ export default {
 		},
 		// 2.获取高压统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsData = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
+			this.dataStatisticsData = await this.$sysApi.map.airSupply.getStatisticsInfo(
 				{ type: 'HighPressure' }
 			);
 		},
@@ -272,7 +279,7 @@ export default {
 			this.overlayDetailPosition = zoom == 14 ? 'top' : '';
 		},
 		handleOverlayClick(overlay, overlayType) {
-			this.closeWarnEventDetail(false);
+			// this.closeWarnEventDetail(false);
 			overlay.overlayType = overlayType || overlay.overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
@@ -289,7 +296,6 @@ export default {
 			}
 		},
 		handleListClick(overlay, listType) {
-			this.closeStationListDetail(false);
 			let { lng, lat } = overlay;
 			//关闭站点详情弹窗
 			if (this.showOverlayDetail) {
@@ -299,9 +305,11 @@ export default {
 			//点位列表 和 事件报警做区分
 			switch (listType) {
 				case 'StationList':
+					this.resetActiveOverlay('activeStationData');
 					this.activeStationData = overlay;
 					break;
 				default:
+					this.resetActiveOverlay('activeWarnData');
 					this.activeWarnData = overlay;
 					this.overlayDetailPosition = 'top';
 			}
@@ -309,12 +317,11 @@ export default {
 		},
 		closeWarnEventDetail(isZoom = true) {
 			this.activeWarnData = {};
-			this.activeStationData = {};
-			window.aaa = this;
 			isZoom && this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		closeStationListDetail(isZoom = true) {
 			this.activeStationData = {};
+			console.log('closeStationListDetail');
 			isZoom && this.setZoomAndPanTo(...this.center, this.zoom);
 		},
 		//查看详情调用组件内部的方法

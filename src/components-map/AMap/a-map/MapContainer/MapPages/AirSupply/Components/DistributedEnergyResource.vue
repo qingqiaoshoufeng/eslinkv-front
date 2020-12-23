@@ -35,7 +35,7 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.home.getDistributedEnergyResourceList;
+		let apiFun = this.$sysApi.map.mock.getDistributedEnergyResourceList;
 		return {
 			apiFun: apiFun,
 		};

@@ -43,7 +43,7 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.home.getPressureRegulatingStationList;
+		let apiFun = this.$sysApi.map.mock.getPressureRegulatingStationList;
 		return {
 			apiFun: apiFun,
 			propDwMap: {
@@ -79,7 +79,7 @@ export default {
 	},
 	methods: {
 		async handleClick(marker) {
-			let { id='', name='', type='' } = marker;
+			let { id = '', name = '', type = '' } = marker;
 			let data = {};
 			let dataComp = {};
 			try {
@@ -89,8 +89,8 @@ export default {
 					type,
 				});
 			} catch (error) {
-                console.log(error,'接口出错')
-            }
+				console.log(error, '接口出错');
+			}
 			Object.keys(data).forEach(prop => {
 				let dw = this.propDwMap[prop];
 				if (typeof data[prop] !== 'object') {

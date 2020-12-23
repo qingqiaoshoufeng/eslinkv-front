@@ -42,7 +42,7 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.home.getLNGStationList;
+		let apiFun = this.$sysApi.map.mock.getLNGStationList;
 		return {
 			apiFun: apiFun,
 		};

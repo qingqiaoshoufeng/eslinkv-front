@@ -131,8 +131,6 @@ export default {
 		async getData() {
 			this.isShow = true;
 			let data = await this.$sysApi.map.airSupply.getEventWarningList({
-				currentPage: 1,
-				pageSize: 500,
 				repairType: this.repairType,
 				repairState: this.repairState,
 			});
@@ -276,6 +274,6 @@ export default {
 		to {
 			transform: rotate(360deg);
 		}
-    }
+	}
 }
 </style>

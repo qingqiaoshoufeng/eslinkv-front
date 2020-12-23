@@ -60,7 +60,7 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.home.getEmergencyAirSourceStationList;
+		let apiFun = this.$sysApi.map.mock.getEmergencyAirSourceStationList;
 		return {
 			apiFun: apiFun,
 		};

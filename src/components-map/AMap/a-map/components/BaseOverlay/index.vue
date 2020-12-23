@@ -100,9 +100,13 @@ export default {
 			immediate: true,
 		},
 		//外部传入需要 activeItem  监听active自动触发click事件, 如果legend隐藏了覆盖物设置activeItemName 显示单个active的覆盖物
-		activeItem(val) {
+		async activeItem(val) {
 			if (val && JSON.stringify(val) !== '{}') {
 				this.activeItemName = val[this.overlayName];
+				if (!this.isRendered) {
+					await this.getData(this.query);
+                    this.isRendered = true;
+                }
 				this.handleClick(val);
 			} else {
 				this.activeItemName = '';
@@ -149,6 +153,7 @@ export default {
 			}
 		},
 		handleClick(item) {
+                    console.log(item,'item')
 			this.$emit('click', item);
 		},
 		handleMouseOver(item) {
@@ -163,7 +168,7 @@ export default {
 
 <style lang="scss" scoped>
 .sample-name {
-    backface-visibility: hidden;
+	backface-visibility: hidden;
 	font-size: 20px;
 	color: #fff;
 	position: absolute;

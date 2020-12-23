@@ -217,7 +217,7 @@ export default {
 		},
 		// 获取统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
+			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getStatisticsInfo(
 				{ type: 'LNG' }
 			);
 		},

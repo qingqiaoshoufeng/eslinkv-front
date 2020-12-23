@@ -293,7 +293,6 @@ export default {
 	width: 3500px;
 	height: 1050px;
 	display: flex;
-	align-items: center;
 	justify-content: space-between;
 	background: url('img/activity-service-bg.png') no-repeat;
 	background-size: 100% 100%;
@@ -301,14 +300,12 @@ export default {
 
 	.left-circle {
 		background: url('/static/images/serves/left-circle.svg') no-repeat;
-		background-size: 100% 100%;
 		width: 220px;
 		height: 100%;
 	}
 
 	.right-circle {
 		background: url('/static/images/serves/right-circle.svg') no-repeat;
-		background-size: 100% 100%;
 		width: 220px;
 		height: 100%;
 	}
@@ -318,6 +315,7 @@ export default {
 	flex: 1;
 	display: flex;
 	justify-content: space-between;
+	margin-top: 150px;
 
 	.main-lt {
 		width: 992px;
