@@ -15,7 +15,7 @@ function findAmapRoot() {
 }
 export default {
 	data() {
-		sateLayer: null;
+		return { sateLayer: null };
 	},
 	created() {},
 	mounted() {
