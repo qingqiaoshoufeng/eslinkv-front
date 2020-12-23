@@ -45,7 +45,7 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.home.getPipeManageMentStationList;
+		let apiFun = this.$sysApi.map.mock.getPipeManageMentStationList;
 		return {
 			apiFun: apiFun,
 		};

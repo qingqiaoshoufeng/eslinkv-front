@@ -29,7 +29,7 @@ export default {
 				1: 'iconxieloushijian',
 			};
 			return new Promise(async (resolve, reject) => {
-				let list = await this.$sysApi.map.home.getWarningList();
+				let list = await this.$sysApi.map.mock.getWarningList();
 				//根据事件类型，判断图标，根据状态，显示图标颜色
 				list = list.map(item => {
 					let { status, eventType } = item;
@@ -63,7 +63,7 @@ export default {
 		font-size: 48px;
 	}
 	.warnoverlay-gif {
-      transform:translateX(-50%);
+		transform: translateX(-50%);
 		position: absolute;
 		display: block;
 		width: 100px;

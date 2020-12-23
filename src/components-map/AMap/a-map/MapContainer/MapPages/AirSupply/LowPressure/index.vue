@@ -296,7 +296,7 @@ export default {
 		},
 		// 获取统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsData = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
+			this.dataStatisticsData = await this.$sysApi.map.airSupply.getStatisticsInfo(
 				{ type: 'LowPressure' }
 			);
 		},
@@ -313,10 +313,8 @@ export default {
 				min,
 				max,
 			} = getHangZhouGasGISPosition(x, y, zoom);
-			return `${
-				(window.api && window.api.MAP_GIS_URL) ||
-				'http://192.168.1.104:6080'
-			}/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
+			return `${(window.api && window.api.MAP_GIS_URL) ||
+				'http://192.168.1.104:6080'}/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			let { lng, lat } = overlay;
@@ -327,8 +325,8 @@ export default {
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
 			this.showOverlayDetail = false;
-            this.activeOverlay = {};
-            this.activeStationData = {}
+			this.activeOverlay = {};
+			this.activeStationData = {};
 			done && done();
 		},
 		setZoomAndPanTo(lng, lat) {

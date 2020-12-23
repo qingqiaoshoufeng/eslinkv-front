@@ -35,7 +35,7 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.home.getInspectionCarList;
+		let apiFun = this.$sysApi.map.mock.getInspectionCarList;
 		return {
 			apiFun: apiFun,
 			data: [],
@@ -43,14 +43,14 @@ export default {
 		};
 	},
 	async created() {
-        await this.getData();
+		await this.getData();
 		this.ready = true;
 	},
 	methods: {
 		handleOverlayClick(marker) {
-            let { id='', name='', type='' } = marker;
+			let { id = '', name = '', type = '' } = marker;
 			this.$emit('overlay-click', marker, 'InspectionCar', false);
-        },
+		},
 		async getData() {
 			let params = {
 				types: ['InspectionCar'].toString(),

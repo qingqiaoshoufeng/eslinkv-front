@@ -14,7 +14,7 @@ export default {
 			if (this.data) {
 				data = this.data;
 			} else {
-				data = await this.$sysApi.map.home.getHighPressureLineProcess();
+				data = await this.$sysApi.map.mock.getHighPressureLineProcess();
 			}
 			data.forEach(line => {
 				let polyLine = new AMap.Polyline({

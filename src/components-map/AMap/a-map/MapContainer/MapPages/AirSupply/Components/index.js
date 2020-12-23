@@ -16,32 +16,9 @@ export { default as PressureRegulatingStation } from './PressureRegulatingStatio
 export { default as UndergroundRepairStation } from './UndergroundRepairStation'
 export { default as OngroundRepairStation } from './OngroundRepairStation'
 export { default as ServiceStation } from './ServiceStation'
-export { default as WarningList } from './WarningList'
 export { default as WarnEvent } from './WarnEvent/index.vue'
 export { default as WarningStations } from './WarningStations/index.vue'
 
 export { default as RightPanel } from './RightPanel/'
 export { default as RoutePlan } from './RoutePlan/'
 export { default as StationList } from './StationList/'
-
-// let componentArr = [
-// 	'HighPressureLine',
-// 	'HighPressureLine_Process',
-// 	'GasStation',
-// 	'PressureRegulatingStation',
-// 	'EmergencyAirSourceStation',
-// 	'InspectionPerson',
-// 	'InspectionCar',
-//   'LowPressureLine',
-// 	'ComprehensiveServiceStation',
-// 	'LiquefiedGasStation',
-// 	'NaturalGasStation',
-// 	'DistributedEnergyResource',
-// 	'RightPanel',
-// 	'LNGStation',
-// 	'ServiceStation',
-// 	'PipeManageMentStation',
-// 	'UndergroundRepairStation',
-// 	'OngroundRepairStation',
-// 	'WarnEvent',
-// ];

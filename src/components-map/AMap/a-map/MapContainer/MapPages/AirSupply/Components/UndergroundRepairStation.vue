@@ -45,7 +45,7 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.home.getUndergroundRepairStationList;
+		let apiFun = this.$sysApi.map.mock.getUndergroundRepairStationList;
 		return {
 			apiFun: apiFun,
 		};

@@ -37,7 +37,7 @@ export default {
 		// },
 	},
 	data() {
-		let apiFun = this.$sysApi.map.home.getInspectionPersonList;
+		let apiFun = this.$sysApi.map.mock.getInspectionPersonList;
 		return {
 			apiFun: apiFun,
 			ready: false,
@@ -46,7 +46,7 @@ export default {
 	},
 	async created() {
 		await this.getData();
-        this.ready = true;
+		this.ready = true;
 	},
 	methods: {
 		handleMouseover(marker) {
@@ -54,9 +54,9 @@ export default {
 			// this.$emit('overlay-click', marker, 'InspectionPerson', false);
 		},
 		handleOverlayClick(marker) {
-            let { id='', name='', type='' } = marker;
+			let { id = '', name = '', type = '' } = marker;
 			this.$emit('overlay-click', marker, 'InspectionPerson', false);
-        },
+		},
 		handleMouseleave() {
 			// this.$emit('close');
 		},

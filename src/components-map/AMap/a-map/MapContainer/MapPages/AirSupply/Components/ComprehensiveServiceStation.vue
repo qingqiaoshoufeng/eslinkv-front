@@ -36,7 +36,7 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.home.getComprehensiveServiceStationList;
+		let apiFun = this.$sysApi.map.mock.getComprehensiveServiceStationList;
 		return {
 			apiFun: apiFun,
 		};

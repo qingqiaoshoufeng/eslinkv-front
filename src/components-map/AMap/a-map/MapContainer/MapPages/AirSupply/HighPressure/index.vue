@@ -258,7 +258,7 @@ export default {
 		},
 		// 2.获取高压统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsData = await this.$sysApi.map.airSupply.getHighPressureStatisticsInfo(
+			this.dataStatisticsData = await this.$sysApi.map.airSupply.getStatisticsInfo(
 				{ type: 'HighPressure' }
 			);
 		},
@@ -302,11 +302,11 @@ export default {
 			//点位列表 和 事件报警做区分
 			switch (listType) {
 				case 'StationList':
-                    this.resetActiveOverlay('activeStationData')
-                    this.activeStationData = overlay;
+					this.resetActiveOverlay('activeStationData');
+					this.activeStationData = overlay;
 					break;
 				default:
-                    this.resetActiveOverlay('activeWarnData')
+					this.resetActiveOverlay('activeWarnData');
 					this.activeWarnData = overlay;
 					this.overlayDetailPosition = 'top';
 			}

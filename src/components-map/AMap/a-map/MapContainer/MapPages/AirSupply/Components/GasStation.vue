@@ -64,7 +64,7 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.home.getGasStationList;
+		let apiFun = this.$sysApi.map.mock.getGasStationList;
 		return {
 			apiFun: apiFun,
 			propDwMap: {
@@ -80,7 +80,7 @@ export default {
 	},
 	methods: {
 		async handleOverlayClick(marker) {
-			let { id = '', name='', type='' } = marker;
+			let { id = '', name = '', type = '' } = marker;
 			let data = {};
 			let dataComp = {};
 			try {
@@ -137,10 +137,10 @@ export default {
 							id,
 						},
 					});
-                });
-                setTimeout(()=>{
-                    this.$emit('close')
-                },2000)
+				});
+				setTimeout(() => {
+					this.$emit('close');
+				}, 2000);
 			});
 		},
 	},
