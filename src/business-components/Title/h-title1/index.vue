@@ -1,13 +1,13 @@
-<template>
-	<div class="widget-part" :style="styles">
-		<div class="fn-flex flex-row h-title-1">
-			<div class="h-title-1-icon"/>
-			<h2>{{data&&data.title}}</h2>
-		</div>
-	</div>
+<template lang="pug">
+	.widget-part(:style="styles")
+		.fn-flex.flex-row.h-title-1
+			.h-title-1-icon
+			h2 {{data&&data.title}}
 </template>
-<script>
-	import mixins from '../../mixins'
+<script lang="ts">
+	import mx from '../../mixins'
+	import {Component} from 'vue-property-decorator'
+	import {mixins} from 'vue-class-component'
 
 	const config = {animation: true}
 	const value = {
@@ -17,13 +17,15 @@
 			})
 		}
 	}
-	export default {
-		mixins: [mixins],
+
+	@Component
+	class HTitle1 extends mixins(mx) {
 		created() {
 			this.configSource = this.parseConfigSource(config)
 			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
+	export default HTitle1
 </script>
 <style lang="scss">
 	.h-title-1-icon {

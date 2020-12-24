@@ -1,14 +1,14 @@
-<template>
-	<div class="widget-part" :style="styles">
-		<div class="fn-flex flex-column h-title-2">
-			<h2>{{data&&data.value}}</h2>
-			<p>{{config.config&&config.config.title}}</p>
-		</div>
-	</div>
+<template lang="pug">
+	.widget-part(:style="styles")
+		.fn-flex.flex-column.h-title-2
+			h2 {{data&&data.value}}
+			p {{config.config&&config.config.title}}
 </template>
-<script>
-	import mixins from '../../mixins'
-	import {getInput} from "../../../../lib";
+<script lang="ts">
+	import mx from '../../mixins'
+	import {Component} from 'vue-property-decorator'
+	import {mixins} from 'vue-class-component'
+	import {getInput} from "../../../../lib"
 
 	const configSource = {
 		config: {
@@ -33,14 +33,14 @@
 			title: '标题'
 		}
 	}
-
-	export default {
-		mixins: [mixins],
+	@Component
+	class HTitle2 extends mixins(mx) {
 		created() {
-			this.configSource = this.parseConfigSource(config, configSource)
+			this.configSource = this.parseConfigSource(config,configSource)
 			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
+	export default HTitle2
 </script>
 <style lang="scss">
 	.h-title-2 {

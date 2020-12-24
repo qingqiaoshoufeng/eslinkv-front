@@ -43,13 +43,6 @@ export {store, mutations}
 
 // if (process.env.NODE_ENV !== 'production')
 	// window.GoldChart = GoldChart
-// document.addEventListener('GoldChartReady', function (e) {
-// 	console.log(e.detail)
-// }, false)
-//
-
-// const event = new CustomEvent('GoldChartReady', {detail: {GoldChart}})
-// document.dispatchEvent(event)
 
 
 

@@ -4,7 +4,7 @@
 	</div>
 </template>
 <style lang="scss">
-	.viewer-backdrop{
-		background: transparent!important;
+	.viewer-backdrop {
+		background: transparent !important;
 	}
-	</style>
+</style>

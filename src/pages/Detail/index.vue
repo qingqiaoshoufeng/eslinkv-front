@@ -1,10 +1,9 @@
-<template>
-	<div class="detail-container">
-		<detail />
-	</div>
+<template lang="pug">
+	.detail-container
+		detail
 </template>
 <style lang="scss">
-.detail-container {
-	height: 100%;
-}
+	.detail-container {
+		height: 100%;
+	}
 </style>
