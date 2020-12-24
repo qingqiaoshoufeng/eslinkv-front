@@ -13,7 +13,7 @@
 		>
 			<video
 				class="warning-videO"
-				src="@/assets/amap/images/warning-circle.webm"
+				src="@/assets/amap/warning-circle.webm"
 				controls="controls"
 				autoplay="autoplay"
 				muted="muted"

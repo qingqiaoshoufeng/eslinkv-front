@@ -187,7 +187,7 @@ export default {
 			let { activeWarnData, activeStationData } = this;
 			return {
 				processWarning: activeWarnData,
-				eventWarning:activeWarnData,
+				eventWarning: activeWarnData,
 				overlayList: activeStationData,
 			};
 		},

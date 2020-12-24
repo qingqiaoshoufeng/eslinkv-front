@@ -13,7 +13,7 @@
 		>
 			<video
 				class="warning-videO"
-				src="@/assets/amap/images/warning-circle.webm"
+				src="@/assets/amap/warning-circle.webm"
 				controls="controls"
 				autoplay="autoplay"
 				muted="muted"
@@ -111,14 +111,14 @@ export default {
 				this.showOverlayDetail = true;
 			} else {
 				this.visible = false;
-                this.showOverlayDetail = false;
-                this.showRoutePlan = false;
+				this.showOverlayDetail = false;
+				this.showRoutePlan = false;
 				return {};
 			}
-        },
-        //路径规划时隐藏管线，legend
+		},
+		//路径规划时隐藏管线，legend
 		showRoutePlan(val) {
-            this.$parent.showRoutePlan = val;
+			this.$parent.showRoutePlan = val;
 		},
 	},
 	mounted() {
@@ -141,21 +141,21 @@ export default {
 							id: this.data.id,
 						},
 					});
-                });
-			    GoldChart.liveVideo.pauseVideo();
+				});
+				GoldChart.liveVideo.pauseVideo();
 			});
 		},
 		closeOverlayDetail(done) {
-            this.showRoutePlan = false;
+			this.showRoutePlan = false;
 			GoldChart.scene.setSceneIndex(
 				INDEXSCENEMAP[this.parentInfo.pageName]
 			);
 			this.$emit('close');
 			done && done();
-        },
-        getDetailOverlayInstance(){
-            return this.$refs.OverlayDetail.getInstance()
-        }
+		},
+		getDetailOverlayInstance() {
+			return this.$refs.OverlayDetail.getInstance();
+		},
 	},
 	beforeDestroy() {
 		bus.$off(['clearRoutePlan']);

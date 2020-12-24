@@ -44,8 +44,6 @@
 			ref="OverlayDetail"
 			:width="400"
 		/>
-		<!-- 路线规划 -->
-		<!-- <RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan> -->
 		<portal to="destination">
 			<!-- 统计数据 -->
 			<DataStatistics
@@ -90,7 +88,6 @@ import {
 	OngroundRepairStation,
 	WarningList,
 	WarnEvent,
-	StationList,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -139,7 +136,6 @@ export default {
 		DataStatistics,
 		WarningList,
 		WarnEvent,
-		StationList,
 	},
 	watch: {
 		center(val) {
