@@ -54,7 +54,7 @@ export default {
 	},
 	data() {
 		return {
-			apiFun: this.$sysApi.map.serve.getGrouphallList,
+			apiFun: this.$sysApi.map.mock.getGrouphallList,
 			nameStyle: {
 				fontSize: '24px',
 			},

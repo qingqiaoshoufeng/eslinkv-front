@@ -44,8 +44,6 @@
 			ref="OverlayDetail"
 			:width="400"
 		/>
-		<!-- 路线规划 -->
-		<!-- <RoutePlan :data="activeOverlay" v-if="showRoutePlan"></RoutePlan> -->
 		<portal to="destination">
 			<!-- 统计数据 -->
 			<DataStatistics
@@ -90,7 +88,6 @@ import {
 	OngroundRepairStation,
 	WarningList,
 	WarnEvent,
-	StationList,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -139,7 +136,6 @@ export default {
 		DataStatistics,
 		WarningList,
 		WarnEvent,
-		StationList,
 	},
 	watch: {
 		center(val) {
@@ -166,7 +162,7 @@ export default {
 			activeWarnData: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'realTime',
+			activeTab: 'eventWarning',
 			legendMap: { LNGStation },
 			overlayMap: AIRSUPPLY_LNG_LEGEND_MAP,
 			dataStatisticsConfigMap: DATASTATISTICSLIST,
@@ -182,7 +178,7 @@ export default {
 		closeStationListDetail() {
 			this.StationListData = {};
 			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
-			this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
+			this.$refs.RightPanel.$refs.eventWarning.activeIndex = -1;
 			this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
 			this.$amap.setZoom(this.zoom, 100);
 			this.$amap.setCenter(this.center, 100);

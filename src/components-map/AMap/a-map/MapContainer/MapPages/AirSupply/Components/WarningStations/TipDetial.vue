@@ -180,6 +180,7 @@ export default {
 	.right {
 		margin: 15px 0;
 		overflow-y: scroll;
+		height: 288px;
 		&::-webkit-scrollbar {
 			display: none;
 		}

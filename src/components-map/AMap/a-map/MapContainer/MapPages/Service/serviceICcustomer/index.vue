@@ -220,7 +220,6 @@ export default {
 				stationType,
 				name,
 				id,
-				stationType,
 			};
 			this.activeArea = name;
 			this.activeOverlay = overlay;
@@ -233,7 +232,7 @@ export default {
 				this.$amap.panTo([lng, lat], 100);
 			}
 		},
-		// 请求用气大户，子公司，综合服务站数据列表
+		// 请求子公司数据列表
 		async getAllTypeStationList() {
 			let params = {
 				types: ['ICcustomer', 'BranchCompany'].toString(),
@@ -283,13 +282,6 @@ export default {
 			this.$refs.WarningICcustomer[0].mouseIn = true;
 			this.activeOverlay = item;
 			this.handleOverlayClick(item);
-		},
-		// 查看态势感知详情列表
-		getICcustomerWarningDetialInfo(id) {
-			let params = {
-				id,
-			};
-			return this.$sysApi.map.serve.getICcustomerWarningDetialInfo();
 		},
 	},
 	mounted() {

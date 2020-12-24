@@ -44,7 +44,7 @@ export default {
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.serve.getICcustomerList;
+		let apiFun = this.$sysApi.map.mock.getICcustomerList;
 		return {
 			apiFun: apiFun,
 		};
