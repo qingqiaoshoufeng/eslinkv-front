@@ -50,6 +50,7 @@
 			},
 			clickHandle() {
 				this.sceneModal = !this.sceneModal
+        this.$emit('show')
 			},
 			createScene() {
 				mutations.createScene()
