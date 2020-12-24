@@ -8,7 +8,7 @@
 						  :stroke-color="['#108ee9', '#87d068']"/>
 			</div>
 		</div>
-		<template v-for="item in widgetsAdded">
+		<template v-for="item in widgetAdded">
 			<template v-if="!item.config.widget.combinationTo">
 				<parts v-if="showParts(item)" :key="item.id" :type="item.type" :config="item.config"
 					   :ref="item.id"
@@ -66,20 +66,20 @@
 			return {
 				store,
 				querying: true,
-				widgetsAdded: {},
 				refilling: false,
 				refillPercent: 0,
 				canvasConfigValue: {},
 				time: Date.now()
 			}
 		},
+    computed: {
+      widgetAdded () {
+        return store.kanboard.widgetAdded
+      }
+    },
 		methods: {
 			initWidgetConfig(id, type, config, scene) {
-				this.$set(this.widgetsAdded, id, {
-					id,
-					type,
-					config, scene
-				})
+        mutations.setWidgetsAddedItem(id, type, config, scene)
 			},
 			sortWidgets: function (widgets) {
 				const providers = []

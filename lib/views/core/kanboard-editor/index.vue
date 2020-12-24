@@ -60,7 +60,7 @@
 				<!-- 小工具清单 -->
 				<template v-for="item in ordinaryWidgets">
 					<vdr
-						v-if="showParts(item)"
+						v-if="showParts(item) && sizeMap[item.id]"
 						:key="item.id"
 						:ref="`widget_${item.id}`"
 						:parent="true"
@@ -116,7 +116,7 @@
 							<template v-if="shouldBeShow(item)">
 								<template v-for="child in getItemChildren(item, 'widget')">
 									<vdr
-										v-if="showParts(child)"
+										v-if="showParts(child) && sizeMap[item.id]"
 										:key="child.id"
 										:ref="`widget_${child.id}`"
 										:parent="true"
@@ -383,7 +383,6 @@
 		},
 		data() {
 			return {
-				widgetsAdded: {},
 				hideEditTools: false,
 			}
 		},
@@ -395,7 +394,7 @@
 				if (!this.rightMenuGrid) {
 					const id = this.rightMenuBindWidgetId
 					if (!id) return
-					const widget = this.widgetsAdded[id].config.widget
+					const widget = this.widgetAdded[id].config.widget
 					widget.locked = !widget.locked
 					this.deactivateWidget(id)
 				} else {
@@ -421,7 +420,7 @@
 			hideWidget() {
 				const id = this.rightMenuBindWidgetId
 				if (!id) return
-				const widget = this.widgetsAdded[id].config.widget
+				const widget = this.widgetAdded[id].config.widget
 				widget.hide = !widget.hide
 				this.deactivateWidget(id)
 			},
@@ -433,7 +432,7 @@
 						if (!this.rightMenuGrid) {
 							const id = this.rightMenuBindWidgetId
 							this.removeCombinationChild(id)
-							this.$delete(this.widgetsAdded, id)
+							this.$delete(this.widgetAdded, id)
 							this.$delete(this.zIndexMap, id)
 							this.$delete(this.sizeMap, id)
 							this.$delete(this.positionMap, id)
@@ -461,6 +460,9 @@
 			}
 		},
 		computed: {
+      widgetAdded () {
+        return store.kanboard.widgetAdded
+      },
 			showParts() {
 				return (item) => {
 					if (item.scene === 0 && store.scene.showMainScene) {
@@ -474,12 +476,12 @@
 			isWidgetLocked() {
 				if (this.rightMenuGrid) return this.rightMenuGrid.config.widget.locked
 				const id = this.rightMenuBindWidgetId
-				return id && this.widgetsAdded[id] && this.widgetsAdded[id].config.widget.locked
+				return id && this.widgetAdded[id] && this.widgetAdded[id].config.widget.locked
 			},
 			ordinaryWidgets() {
 				const ordinaryWidgets = {}
-				Object.keys(this.widgetsAdded).forEach(id => {
-					const widget = this.widgetsAdded[id]
+				Object.keys(this.widgetAdded).forEach(id => {
+					const widget = this.widgetAdded[id]
 					if (widget.type && !widget.config.widget.combinationTo) ordinaryWidgets[id] = widget
 				})
 				return ordinaryWidgets
@@ -492,7 +494,7 @@
 			hideEditTools() {
 				this.activatedWidgetId && this.deactivateWidget(this.activatedWidgetId)
 			},
-			widgetsAdded() {
+			widgetAdded() {
 				if (this.refilling) return
 				this.$emit('kanboard-edited')
 			},
