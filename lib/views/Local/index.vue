@@ -1,23 +1,21 @@
-<template>
-	<div ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen }" class="preview-wrapper">
-		<kanban-preview @mounted="updateKanboardSize" ref="previewContainer"
-						:style="`transform: scale(${scaleRatio}) translate3d(0, 0, 0); overflow: hidden;`"/>
-		<!--<div class="action-bar">
-			<div v-if="actualScaleRatio < 1" class="action fit-screen" @click="fitScreen = !fitScreen">
-				{{ fitScreen ? '原始大小' : '适应窗口' }}
-			</div>
-		</div>-->
-	</div>
+<template lang="pug">
+	.preview-wrapper(ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen }")
+		kanban-preview(@mounted="updateKanboardSize" ref="previewContainer" :style="`transform: scale(${scaleRatio},${scale}) translate3d(0, 0, 0); overflow: hidden;`")
+		Form
+			FormItem
+				label.style-file-input(for="originFile") 第一次请选择本地文件
+				input.fn-hide#originFile(type="file" accept="application/json" @change="handleFile")
 </template>
 
 <script>
 	import kanbanPreview from './preview-base.vue'
 	import {mutations} from '../../store'
-	import {getQueryString} from '../../utils'
+	import {getQueryString,setDefault} from '../../utils'
+	import {Input, Modal, Form, FormItem} from 'view-design'
 
 	export default {
 		components: {
-			kanbanPreview,
+			kanbanPreview, Input, Modal, Form, FormItem
 		},
 		provide() {
 			return {kanboard: this}
@@ -34,6 +32,7 @@
 					width: 1920,
 					height: 1080
 				},
+				scale: undefined,
 				actualScaleRatio: 1
 			}
 		},
@@ -49,29 +48,29 @@
 				this.screenSize.height = clientHeight
 				this.actualScaleRatio = Math.min(clientWidth / w, clientHeight / h)
 			},
-			queryKanboard() {
-				if (this.$route.name === 'HangRan') {
-					this.$api.board.hangran().then(res => {
-						const value = JSON.parse(res.attribute)
-						mutations.setKanboard(value)
-						this.refill(value)
-						mutations.initScene(value.scene)
-						mutations.listToObj(value)
-					})
-				} else {
-					const {params: {id}} = this.$route
-					const dataBoardId = id
-					this.$api.board.detail({dataBoardId}).then(res => {
-						const value = JSON.parse(res.attribute)
-						mutations.setKanboard(value)
-						this.refill(value)
-						mutations.initScene(value.scene)
-						mutations.listToObj(value)
-					})
+			handleFile(e) {
+				const file = e.target.files[0]
+				const reader = new FileReader()
+				reader.onload = (e) => {
+					try {
+						const result = JSON.parse(e.target.result)
+						const {data} = result
+						data.widgets.forEach(v => {
+							setDefault(v.value)
+						})
+						mutations.setKanboard(data)
+						mutations.initScene(data.scene)
+						mutations.listToObj(data)
+						this.refill(data)
+						localStorage.setItem('dvdp_local',JSON.stringify(data))
+					} catch (e) {
+						this.$Message.error('配置文件识别失败')
+					}
 				}
-				if (getQueryString('scene')) {
-					mutations.setSceneIndex(getQueryString('scene'))
+				reader.onerror = () => {
+					this.$Message.error('配置文件识别失败')
 				}
+				reader.readAsText(file)
 			},
 			refill(value) {
 				this.$refs.previewContainer.refillConfig(value).then(() => {
@@ -87,7 +86,17 @@
 			}
 		},
 		mounted() {
-			this.queryKanboard()
+			if(getQueryString('scale'))
+				if(!isNaN(getQueryString('scale')))
+					this.scale=Number(getQueryString('scale'))
+			let data = localStorage.getItem('dvdp_local')
+			if(data){
+				data=JSON.parse(data)
+				mutations.setKanboard(data)
+				mutations.initScene(data.scene)
+				mutations.listToObj(data)
+				this.refill(data)
+			}
 		}
 	}
 </script>

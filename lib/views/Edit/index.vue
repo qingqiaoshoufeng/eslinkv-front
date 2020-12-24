@@ -188,7 +188,7 @@
 					mutations.initScene(value.scene)
 				}
 				this.querying = false
-        mutations.setKanboard(value)
+				mutations.setKanboard(value)
 				this.$refs.kanboardEditor.refillConfig()
 			},
 			// 修改看板

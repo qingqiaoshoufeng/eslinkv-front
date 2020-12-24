@@ -1,5 +1,5 @@
 export default {
-	path: '/full/:id',
-	name: 'full',
+	path: '/local',
+	name: 'local',
 	component: () => import('./index.vue'),
 }

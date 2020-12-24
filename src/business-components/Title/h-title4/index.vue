@@ -1,13 +1,13 @@
-<template>
-	<div class="widget-part" :style="styles">
-		<div class="h-title-4 text-center">
-			<h2 class="font-num">{{data&&data.value.toLocaleString()}}</h2>
-			<p>{{config.config&&config.config.title}}</p>
-		</div>
-	</div>
+<template lang="pug">
+	.widget-part(:style="styles")
+		.h-title-4.text-center
+			h2.font-num {{data&&data.value.toLocaleString()}}
+			p {{config.config&&config.config.title}}
 </template>
 <script>
-	import mixins from '../../mixins'
+	import mx from '../../mixins'
+	import {Component} from 'vue-property-decorator'
+	import {mixins} from 'vue-class-component'
 	import {getInput} from "@lib"
 
 	const config = {
@@ -35,13 +35,14 @@
 			title: '标题'
 		}
 	}
-	export default {
-		mixins: [mixins],
+	@Component
+	class HTitle4 extends mixins(mx) {
 		created() {
-			this.configSource = this.parseConfigSource(config, configSource)
+			this.configSource = this.parseConfigSource(config,configSource)
 			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
+	export default HTitle4
 </script>
 <style lang="scss">
 	.h-title-4 {
