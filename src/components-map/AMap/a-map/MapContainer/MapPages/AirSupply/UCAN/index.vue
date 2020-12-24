@@ -87,7 +87,6 @@ import {
 	OngroundRepairStation,
 	WarningList,
 	WarnEvent,
-	StationList,
 } from '../Components/index.js';
 //页面所需公共组件
 import {
@@ -139,7 +138,6 @@ export default {
 		WarningList,
 		DataStatistics,
 		WarnEvent,
-		StationList,
 	},
 	created() {
 		this.$amap = this.$parent.$amap;
