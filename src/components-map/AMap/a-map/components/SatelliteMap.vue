@@ -23,9 +23,9 @@ export default {
 	watch: {
 		value: {
 			handler(val) {
-				toggerMapStyle(val);
+				this.toggerMapStyle(val);
 			},
-			immediate: true,
+			// immediate: true,
 		},
 	},
 	created() {},
@@ -67,7 +67,7 @@ export default {
 	right: 32px;
 	z-index: 10000000;
 	display: flex;
-	transform: scale(0.4);
+	// transform: scale(0.4);
 	.three-button {
 		width: 110px;
 		height: 30px;

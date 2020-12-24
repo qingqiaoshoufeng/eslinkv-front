@@ -8,7 +8,7 @@
 			@close="closeWarnEventDetail"
 		></WarnEvent>
 		<!-- 行政区域覆盖物 -->
-		<RegionBoundary />
+		<RegionBoundary v-if="!isShowSatellite" />
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
@@ -44,7 +44,7 @@
 		>
 		</OverlayDetail>
 		<!-- 卫星切换组件 -->
-		<SatelliteMap />
+		<SatelliteMap v-model="isShowSatellite" />
 		<portal to="destination">
 			<!-- 统计数据 -->
 			<DataStatistics
@@ -65,6 +65,7 @@
 				}"
 				ref="RightPanel"
 			></RightPanel>
+			<SatelliteMapControl v-model="isShowSatellite" />
 		</portal>
 	</div>
 </template>
@@ -92,6 +93,8 @@ let componentCommonArr = [
 	'RegionBoundary',
 	'OverlayDetail',
 	'MapLegend',
+	'SatelliteMap',
+	'SatelliteMapControl',
 ];
 //异步加载组件函数
 let componentPageMap = {};
@@ -142,6 +145,7 @@ export default {
 			visibleMore: false,
 			overlayDetailPosition: '',
 			stationList: [],
+			isShowSatellite: false,
 		};
 	},
 	computed: {
