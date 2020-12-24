@@ -1,73 +1,50 @@
-<template>
-	<div ref="kanboardWrapper" class="preview-wrapper">
-		<div class="scene-menu">
-			<div
-				v-for="(scene, sceneIndex) in sceneMap"
-				:key="sceneIndex"
-				@click="changeScene(sceneIndex)"
-			>
-				{{ scene }}
-			</div>
-		</div>
-		<!-- <amap class="amap-wrapper" /> -->
-		<amap
-			class="amap-wrapper"
-			:style="`transform:scale(${actualScaleRatio});overflow: hidden;`"
-		/>
-	</div>
+<template lang="pug">
+	.preview-wrapper(ref="kanboardWrapper")
+		.scene-menu
+			div(v-for="(scene, sceneIndex) in sceneMap" :key="sceneIndex" @click="changeScene(sceneIndex)") {{ scene }}
+		amap.amap-wrapper(:style="`transform:scale(${actualScaleRatio});overflow: hidden;`")
 </template>
+<script lang="ts">
+	import {Vue, Component} from 'vue-property-decorator'
+	import amap from '@/components-map/AMap/a-map/MapContainer/index.vue'
+	@Component({
+		components:{amap}
+	})
+	class Map extends Vue {
+		kanboardSize:Object<any>= {
+			width: 3500,
+			height: 1050,
+		}
+		sceneMap:Object<any>= {
+			'8iyxp8u3gtu': 'AirSupplyLowPressure', //供气-管网
+			'9n1zur7e4l': 'AirSupplyUCAN', //供气-泛能
+			'nn16rowdl5r': 'AirSupplyHighPressure', //供气-场站
+			'p2wovclspks': 'AirSupplyLNG', //供气-场站
+			'6gouq223fze': 'ServiceCustomer',
+			'a70wh40bnz9': 'ServiceNineteen',
+			'6u1qhjs14ws': 'ServiceMarket',
+			'bavv56kietf': 'ServiceHangranCode',
+			'e40ml4vtfa6': 'serviceICcustomer',
+		}
+		actualScaleRatio: Number = 1
 
-<script>
-import amap from '@/components-map/AMap/a-map/MapContainer';
-export default {
-	components: {
-		amap,
-	},
-	data() {
-		return {
-			sceneMap: {
-				'8iyxp8u3gtu': 'AirSupplyLowPressure', //供气-管网
-				'9n1zur7e4l': 'AirSupplyUCAN', //供气-泛能
-				nn16rowdl5r: 'AirSupplyHighPressure', //供气-场站
-				p2wovclspks: 'AirSupplyLNG', //供气-场站
-				'6gouq223fze': 'ServiceCustomer',
-				a70wh40bnz9: 'ServiceNineteen',
-				'6u1qhjs14ws': 'ServiceMarket',
-				bavv56kietf: 'ServiceHangranCode',
-				e40ml4vtfa6: 'serviceICcustomer',
-			},
-			kanboardSize: {
-				width: 3500,
-				height: 1050,
-			},
-			actualScaleRatio: 1,
-		};
-	},
-	methods: {
 		changeScene(sceneIndex) {
 			let event = new CustomEvent('SceneIndex', {
 				detail: { index: sceneIndex },
 			});
 			document.dispatchEvent(event);
-		},
+		}
 		updateKanboardSize(val) {
 			const { clientWidth, clientHeight } = document.body;
 			const { width, height } = this.kanboardSize;
 			let ratio = Math.min(clientWidth / width, clientHeight / height);
 			this.actualScaleRatio = ratio < 1 ? ratio : 1;
-		},
-	},
-	computed: {
-		scaleRatio() {
-			if (!this.fitScreen) return 1;
-			const ratio = this.actualScaleRatio;
-			return ratio < 1 ? ratio : 1;
-		},
-	},
-	mounted() {
-		this.updateKanboardSize();
-	},
-};
+		}
+		mounted() {
+			this.updateKanboardSize()
+		}
+	}
+	export default Map
 </script>
 
 <style lang="scss" scoped>

@@ -1,7 +1,6 @@
-<template>
-	<div class="home-container">
-		<edit/>
-	</div>
+<template lang="pug">
+	.home-container
+		edit
 </template>
 <style lang="scss">
 	.home-container {

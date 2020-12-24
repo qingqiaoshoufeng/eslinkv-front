@@ -1,44 +1,17 @@
-<template>
-	<Card class="list-item-card pos-r">
-		<div class="avatar" :style="{backgroundImage:`url(${snapshot})`}" v-if="snapshot"/>
-		<empty-image class="avatar" v-if="!snapshot"/>
-		<h2 class="ellipsis">{{name}}</h2>
-		<div class="fn-flex flex-row list-item-card-time-box">
-			<p>{{createTime}}</p>
-		</div>
-		<div>
-			<Button :type="status?'success':'warning'" size="small">{{statusStr}}</Button>
-			<Button v-if="status"
-					icon="ios-link"
-					:style="{marginLeft:'10px'}"
-					type="info"
-					size="small"
-			>分享链接
-			</Button>
-		</div>
-		<div class="pos-a list-item-card-mask fn-flex flex-column">
-			<Button
-				icon="ios-create-outline"
-				size="small"
-				@click="handleEdit"
-			>编辑
-			</Button>
-			<Button v-if="status"
-					icon="ios-link"
-					:style="{marginTop:'10px'}"
-					size="small"
-					@click="handleLink"
-			>打开
-			</Button>
-			<Button v-else
-					icon="ios-cloud-upload-outline"
-					:style="{marginTop:'10px'}"
-					size="small"
-					@click="handlePublish"
-			>发布
-			</Button>
-		</div>
-	</Card>
+<template lang="pug">
+	Card.list-item-card.pos-r
+		.avatar(:style="{backgroundImage:`url(${snapshot})`}" v-if="snapshot")
+		empty-image.avatar(v-if="!snapshot")
+		h2.ellipsis {{name}}
+		.fn-flex.flex-row.list-item-card-time-box
+			p {{createTime}}
+		div
+			Button(:type="status?'success':'warning'" size="small") {{statusStr}}
+			Button(v-if="status" icon="ios-link" :style="{marginLeft:'10px'}" type="info" size="small") 分享链接
+		.pos-a.list-item-card-mask.fn-flex.flex-column
+			Button(icon="ios-create-outline" size="small" @click="handleEdit") 编辑
+			Button(v-if="status" icon="ios-link" :style="{marginTop:'10px'}" size="small" @click="handleLink") 打开
+			Button(v-else icon="ios-cloud-upload-outline" :style="{marginTop:'10px'}" size="small" @click="handlePublish") 发布
 </template>
 <script lang="ts">
 	import {Card, Tag, Button} from 'view-design'
@@ -80,7 +53,6 @@
 			})
 		}
 	}
-
 	export default ItemCard
 </script>
 <style lang="scss">

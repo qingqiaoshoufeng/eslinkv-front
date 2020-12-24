@@ -1,7 +1,6 @@
-<template>
-	<div class="local-container">
-		<full/>
-	</div>
+<template lang="pug">
+	.local-container
+		full
 </template>
 <style lang="scss">
 	.local-container {

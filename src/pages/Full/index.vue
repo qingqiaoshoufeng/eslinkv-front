@@ -1,7 +1,6 @@
-<template>
-	<div class="detail-container">
-		<full/>
-	</div>
+<template lang="pug">
+	.detail-container
+		full
 </template>
 <style lang="scss">
 	.detail-container {

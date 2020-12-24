@@ -1,11 +1,6 @@
 import {styleParser, widgetMixin} from '../../lib'
-import {store} from '../openApi';
-import GoldChart from '../openApi';
-import axios from 'axios'
+import {store} from '../openApi'
 
-const request = axios.create({
-	withCredentials: false
-})
 export default {
 	data() {
 		return {

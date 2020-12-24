@@ -1,7 +1,6 @@
-<template>
-	<div class="home-container">
-		<new/>
-	</div>
+<template lang="pug">
+	.home-container
+		new
 </template>
 <style lang="scss">
 	.home-container {

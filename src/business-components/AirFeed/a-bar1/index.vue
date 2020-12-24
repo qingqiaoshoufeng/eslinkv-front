@@ -17,13 +17,9 @@
 					></div>
 					<div class="desc2">{{ descList[1] }}</div>
 				</div>
-				<!-- <div class="legend2">
-                     <div class="bgc3" :style="`backgroundColor:${data&&data.color3};}`"></div>
-                    <div class="desc3">{{data&&data.desc3}}</div>
-                </div> -->
 			</div>
 		</div>
-		<div class="h-line-1" :id="id"/>
+		<div class="a-bar1" :id="id"/>
 	</div>
 </template>
 <script>
@@ -93,9 +89,6 @@
 				options.xAxis[0].data = data.xValue;
 				options.series[0].data = data.yValue;
 				options.series[1].data = data.yValue1;
-				// options.series[2].data = yValue2
-				console.log(yValue2);
-				// options.series[0].itemStyle.normal.color = data.color1;
 				options.series[1].itemStyle.normal.color = data.color2;
 				this.instance && this.instance.setOption(options);
 			},
@@ -123,8 +116,8 @@
 		},
 	};
 </script>
-<style lang="scss" scope>
-	.h-line-1 {
+<style lang="scss" scoped>
+	.a-bar1 {
 		height: 100%;
 	}
 

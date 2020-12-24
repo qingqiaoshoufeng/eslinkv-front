@@ -53,18 +53,20 @@
 				if (this.$route.name === 'HangRan') {
 					this.$api.board.hangran().then(res => {
 						const value = JSON.parse(res.attribute)
-						this.refill(value)
-						mutations.initScene(value.scene)
-						mutations.listToObj(value)
+            mutations.setKanboard(value)
+            this.refill(value)
+            mutations.initScene(value.scene)
+            mutations.listToObj(value)
 					})
 				} else {
 					const {params: {id}} = this.$route
 					const dataBoardId = id
 					this.$api.board.detail({dataBoardId}).then(res => {
 						const value = JSON.parse(res.attribute)
-						this.refill(value)
-						mutations.initScene(value.scene)
-						mutations.listToObj(value)
+            mutations.setKanboard(value)
+            this.refill(value)
+            mutations.initScene(value.scene)
+            mutations.listToObj(value)
 					})
 				}
 				if (getQueryString('scene')) {

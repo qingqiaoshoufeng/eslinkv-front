@@ -1,13 +1,16 @@
-<template>
-	<div class="pos-r" :style="{marginTop:'50px'}">
-		<live-video/>
-	</div>
+<template lang="pug">
+	.pos-r(:style="{marginTop:'50px'}")
+		live-video
 </template>
-<script>
-	import LiveVideo from '../../components/LiveVideo'
-	export default {
-		components:{
-			LiveVideo
-		}
+<script lang="ts">
+	import {Vue, Component} from 'vue-property-decorator'
+	import LiveVideo from '../../components/LiveVideo/index.vue'
+
+	@Component({
+		components:{LiveVideo}
+	})
+	class Alive extends Vue {
+
 	}
-	</script>
+	export default Alive
+</script>
