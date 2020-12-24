@@ -21,4 +21,3 @@ export { default as WarningStations } from './WarningStations/index.vue'
 
 export { default as RightPanel } from './RightPanel/'
 export { default as RoutePlan } from './RoutePlan/'
-export { default as StationList } from './StationList/'

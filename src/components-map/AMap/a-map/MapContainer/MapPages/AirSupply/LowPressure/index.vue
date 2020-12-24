@@ -152,7 +152,7 @@ export default {
 			zoom: 12.5,
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'realTime',
+			activeTab: 'eventWarning',
 			legendMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 			overlayMap: AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP,
 			dataStatisticsConfigMap: DATASTATISTICSLIST,
@@ -237,7 +237,7 @@ export default {
 			let { activeWarnData, activeStationData } = this;
 			return {
 				processWarning: activeWarnData,
-				realTime: activeWarnData,
+				eventWarning: activeWarnData,
 				overlayList: activeStationData,
 			};
 		},

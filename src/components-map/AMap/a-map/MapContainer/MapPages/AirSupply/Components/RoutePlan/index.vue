@@ -224,8 +224,4 @@ export default {
 	margin-top: -14px;
 	margin-left: 19px;
 }
-
-// img {
-// 	width: 100%;
-// }
 </style>

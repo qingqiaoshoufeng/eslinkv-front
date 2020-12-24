@@ -12,11 +12,11 @@
 			/>
 		</TabPanel>
 
-		<TabPanel key="realTime" name="realTime" label="事件报警">
-			<realTime
-				:activeItem="rightListActiveItemMap['realTime'] || {}"
+		<TabPanel key="eventWarning" name="eventWarning" label="事件报警">
+			<eventWarning
+				:activeItem="rightListActiveItemMap['eventWarning'] || {}"
 				@change="handleClick"
-				ref="realTime"
+				ref="eventWarning"
 			/>
 		</TabPanel>
 
@@ -34,7 +34,7 @@
 <script>
 import { Tabs, TabPanel } from '../../../../../components/Tabs/';
 import overlayList from './overlayList';
-import realTime from './realTime';
+import eventWarning from './eventWarning';
 import processWarning from './processWarning';
 
 export default {
@@ -66,7 +66,7 @@ export default {
 		Tabs,
 		TabPanel,
 		overlayList,
-		realTime,
+		eventWarning,
 		processWarning,
 	},
 	mounted() {

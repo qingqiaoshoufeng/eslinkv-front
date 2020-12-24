@@ -120,30 +120,6 @@ export default {
 		...componentPageMap,
 		...componentCommonMap,
 	},
-	created() {
-		this.$amap = this.$parent.$amap;
-		//选取几个点位，在可视范围内以适当zoom显示
-		let fitMapPositionArr = [
-			{
-				lng: 120.248177,
-				lat: 30.426391,
-			},
-			{
-				lng: 119.920883,
-				lat: 30.106665,
-			},
-			{
-				lng: 119.90885,
-				lat: 30.141069,
-			},
-		];
-		this.mapFitView2(fitMapPositionArr);
-	},
-	mounted() {
-		this.getAllTypeStationList();
-		this.getDataStatisticsInfo();
-		this.getHighPressurePipe();
-	},
 	data() {
 		return {
 			center: [120.131259, 30.263295],
@@ -208,29 +184,36 @@ export default {
 			let { activeWarnData, activeStationData } = this;
 			return {
 				processWarning: activeWarnData,
-				realTime: activeWarnData,
+				eventWarning:activeWarnData,
 				overlayList: activeStationData,
 			};
 		},
 	},
+	created() {
+		this.$amap = this.$parent.$amap;
+		//选取几个点位，在可视范围内以适当zoom显示
+		let fitMapPositionArr = [
+			{
+				lng: 120.248177,
+				lat: 30.426391,
+			},
+			{
+				lng: 119.920883,
+				lat: 30.106665,
+			},
+			{
+				lng: 119.90885,
+				lat: 30.141069,
+			},
+		];
+		this.mapFitView2(fitMapPositionArr);
+	},
+	mounted() {
+		this.getAllTypeStationList();
+		this.getDataStatisticsInfo();
+		this.getHighPressurePipe();
+	},
 	methods: {
-		resetActiveOverlay(activeItem) {
-			let arr = ['activeOverlay', 'activeWarnData', 'activeStationData'];
-			arr.forEach(item => {
-				if (item !== activeItem) {
-					this[item] = {};
-				}
-			});
-		},
-		handlerMoveto({ type }) {
-			if (type === 'WarningStations') {
-				this.$amap.panTo([120.131259, 30.363295], 100);
-				this.closeOverlayDetail('', false);
-			} else {
-				this.$amap.panTo(this.center, 100);
-				this.closeWarnEventDetail();
-			}
-		},
 		// 1.获取所有站点数据
 		async getAllTypeStationList() {
 			let params = {
@@ -269,6 +252,23 @@ export default {
 				...this.stationDataMap,
 				...pipeData,
 			};
+		},
+		resetActiveOverlay(activeItem) {
+			let arr = ['activeOverlay', 'activeWarnData', 'activeStationData'];
+			arr.forEach(item => {
+				if (item !== activeItem) {
+					this[item] = {};
+				}
+			});
+		},
+		handlerMoveto({ type }) {
+			if (type === 'WarningStations') {
+				this.$amap.panTo([120.131259, 30.363295], 100);
+				this.closeOverlayDetail('', false);
+			} else {
+				this.$amap.panTo(this.center, 100);
+				this.closeWarnEventDetail();
+			}
 		},
 		setZoomAndPanTo(lng, lat, zoom = 14) {
 			this.$amap.setZoom(zoom, 100);

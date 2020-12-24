@@ -100,9 +100,6 @@
 import { SvgIcon, NoData } from '../../../../../components/';
 import GoldChart from '@/openApi';
 import {
-	INDEXSCENEMAP,
-	AIRSUPPLY_WARN_SCENEINDEX,
-	AIRSUPPLY_WARN_COMPONENTINDEX,
 	AIRSUPPLY_WARN_MODEL_SCENEINDEX,
 	AIRSUPPLY_WARN__MODEL_COMPONENTINDEX,
 } from '../../../../../config/scene';

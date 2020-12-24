@@ -166,7 +166,7 @@ export default {
 			activeWarnData: {},
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'realTime',
+			activeTab: 'eventWarning',
 			legendMap: { LNGStation },
 			overlayMap: AIRSUPPLY_LNG_LEGEND_MAP,
 			dataStatisticsConfigMap: DATASTATISTICSLIST,
@@ -182,7 +182,7 @@ export default {
 		closeStationListDetail() {
 			this.StationListData = {};
 			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
-			this.$refs.RightPanel.$refs.realTime.activeIndex = -1;
+			this.$refs.RightPanel.$refs.eventWarning.activeIndex = -1;
 			this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
 			this.$amap.setZoom(this.zoom, 100);
 			this.$amap.setCenter(this.center, 100);
