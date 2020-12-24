@@ -93,11 +93,17 @@ export default {
 			// this.$refs.amap.$amap.addControl(new AMap.ToolBar({
 			//     offset:AMap.Pixel(100,100)
 			// }));
+
 			// let originInstance = new AMap.TileLayer.Satellite({
 			// 	zIndex: 1,
-			// 	opacity:1,
+			// 	opacity: 1,
 			// });
-			// this.$refs.amap.$amap.addLayer(originInstance);
+			// window.sy111 = this.$refs.amap.$amap
+			// sy111.getLayers().forEach(item => {
+			// 	item.mapName = 'sy'
+			// 	item.hide()
+			// })
+			// this.$refs.amap.$amap.add(originInstance);
 		},
 	},
 	mounted() {

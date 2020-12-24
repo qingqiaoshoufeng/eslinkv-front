@@ -9,11 +9,6 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
 		></WarnEvent>
-		<StationList
-			:data="stationListData"
-			:overlayInfoConfigMap="overlayInfoConfigMap"
-			@close="closeStationListDetail"
-		></StationList>
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
@@ -58,7 +53,10 @@
 				class="right-panel"
 				v-model="activeTab"
 				@overlay-click="handleListClick"
-				:stationList="stationList"
+				v-bind="{
+					stationList,
+					rightListActiveItemMap,
+				}"
 				ref="RightPanel"
 			></RightPanel>
 		</portal>
@@ -67,7 +65,6 @@
 <script>
 //页面覆盖物组件
 import {
-	ComprehensiveServiceStation,
 	LiquefiedGasStation,
 	NaturalGasStation,
 	DistributedEnergyResource,
@@ -146,6 +143,16 @@ export default {
 		this.$amap = this.$parent.$amap;
 		this.$amap.setZoom(this.zoom, 100);
 		this.$amap.setCenter(this.center, 100);
+	},
+	computed: {
+		rightListActiveItemMap() {
+			let { activeWarnData, activeStationData } = this;
+			return {
+				processWarning: activeWarnData,
+				eventWarning: activeWarnData,
+				overlayList: activeStationData,
+			};
+		},
 	},
 	mounted() {
 		this.getAllTypeStationList();

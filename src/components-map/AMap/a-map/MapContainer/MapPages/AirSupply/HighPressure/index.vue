@@ -44,7 +44,7 @@
 		>
 		</OverlayDetail>
 		<!-- 卫星地图图层 -->
-		<SatelliteMap v-model="isShowSatellite" />
+		<!-- <SatelliteMap v-model="isShowSatellite" /> -->
 		<portal to="destination">
 			<!-- 统计数据 -->
 			<DataStatistics
@@ -66,7 +66,7 @@
 				ref="RightPanel"
 			></RightPanel>
 			<!-- 卫星地图图层切换组件 -->
-			<SatelliteMapControl v-model="isShowSatellite" />
+			<!-- <SatelliteMapControl v-model="isShowSatellite" /> -->
 		</portal>
 	</div>
 </template>

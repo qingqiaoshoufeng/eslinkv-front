@@ -9,15 +9,11 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
 		></WarnEvent>
-		<StationList
-			:data="stationListData"
-			:overlayInfoConfigMap="overlayInfoConfigMap"
-			@close="closeStationListDetail"
-		></StationList>
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
 				v-if="config.visible && stationDataMap[config.dataProp]"
+				:ref="config.component"
 				:key="legend"
 				:visible="config.visible"
 				:is="config.component"
@@ -57,7 +53,10 @@
 				class="right-panel"
 				v-model="activeTab"
 				@overlay-click="handleListClick"
-				:stationList="stationList"
+				v-bind="{
+					stationList,
+					rightListActiveItemMap,
+				}"
 				ref="RightPanel"
 			></RightPanel>
 		</portal>
@@ -185,12 +184,22 @@ export default {
 			stationListData: {},
 		};
 	},
+	computed: {
+		rightListActiveItemMap() {
+			let { activeWarnData, activeStationData } = this;
+			return {
+				processWarning: activeWarnData,
+				eventWarning: activeWarnData,
+				overlayList: activeStationData,
+			};
+		},
+	},
 	methods: {
 		closeStationListDetail() {
-			this.StationListData = {};
-			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
-			this.$refs.RightPanel.$refs.eventWarning.activeIndex = -1;
-			this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
+			// this.StationListData = {};
+			// this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
+			// this.$refs.RightPanel.$refs.eventWarning.activeIndex = -1;
+			// this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
 			this.$amap.setZoom(this.zoom, 100);
 			this.$amap.setCenter(this.center, 100);
 		},
@@ -201,16 +210,6 @@ export default {
 		async getAllTypeStationList() {
 			let params = {
 				types: [
-					// 'InspectionPerson', // '巡检人员',
-					// 'InspectionCar', // '巡检车辆',
-					// 'GasStation', // '门站',
-					// 'PressureRegulatingStation', // '调压站',
-					// 'EmergencyAirSourceStation', // '应急气源站',
-					// 'ServiceStation', // '综合服务站',
-					// 'PipeManageMentStation', // '管网运行管理站',
-					// 'UndergroundRepairStation', // '地下抢修点',
-					// 'OngroundRepairStation', // '地上抢修点',
-					// 'LNGStation', // 'LNG站',
 					'LiquefiedGasStation', // '液化气站',
 					'NaturalGasStation', // '加气站',
 					'DistributedEnergyResource', // '分布式能源',
@@ -242,10 +241,6 @@ export default {
 			overlay.overlayType = overlayType;
 			this.activeOverlay = overlay;
 			this.showOverlayDetail = true;
-			// this.$amap.setZoom(14, 100);
-			// if (isCenter) {
-			// 	this.setZoomAndPanTo(lng, lat + 0.005);
-			// }
 		},
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;

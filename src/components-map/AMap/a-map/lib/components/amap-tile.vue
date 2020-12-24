@@ -1,15 +1,8 @@
+<template></template>
 <script>
-function findAmapRoot() {
-	if (this.$amap) return this.$amap;
-	let parent = this.$parent;
-	if (parent) {
-		let fun = findAmapRoot.bind(parent);
-		return fun();
-	}
-}
 export default {
 	name: 'amap-tile',
-	render(h) {},
+	inject: ['getMap'],
 	props: {
 		opacity: {
 			type: Number,
@@ -45,8 +38,7 @@ export default {
 
 	mounted() {
 		setTimeout(() => {
-			let fun = findAmapRoot.bind(this);
-			this.$amap = fun();
+			this.$amap = this.getMap();
 			this.load();
 			this.$amap.on('zoomstart', this.handleMapZoomChangeStart);
 			this.$amap.on('zoomend', this.handleMapZoomChangeEnd);
@@ -81,8 +73,8 @@ export default {
 			}
 			this.timerZoomEnd = setTimeout(() => {
 				if (this.visible) {
-                    this.originInstance.show();
-				    this.reload();
+					this.originInstance.show();
+					this.reload();
 				}
 			}, 0);
 		},

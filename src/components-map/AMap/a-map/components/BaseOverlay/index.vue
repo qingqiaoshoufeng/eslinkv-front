@@ -35,17 +35,18 @@
 <script>
 import overlayMixin from '../../mixins/overlayMixin.js';
 import Overlay from '../Overlay/';
-function findAmapRoot() {
-	if (this.$amap) return this.$amap;
-	let parent = this.$parent;
-	if (parent) {
-		let fun = findAmapRoot.bind(parent);
-		return fun();
-	}
-}
+// function findAmapRoot() {
+// 	if (this.$amap) return this.$amap;
+// 	let parent = this.$parent;
+// 	if (parent) {
+// 		let fun = findAmapRoot.bind(parent);
+// 		return fun();
+// 	}
+// }
 export default {
 	name: 'BaseOverlay',
 	mixins: [overlayMixin],
+	inject: ['getMap'],
 	components: {
 		Overlay,
 	},
@@ -68,7 +69,7 @@ export default {
 		},
 		query: {
 			type: Object,
-			default: function () {
+			default: function() {
 				return {};
 			},
 		},
@@ -105,8 +106,8 @@ export default {
 				this.activeItemName = val[this.overlayName];
 				if (!this.isRendered) {
 					await this.getData(this.query);
-                    this.isRendered = true;
-                }
+					this.isRendered = true;
+				}
 				this.handleClick(val);
 			} else {
 				this.activeItemName = '';
@@ -114,8 +115,8 @@ export default {
 		},
 	},
 	created() {
-		let fun = findAmapRoot.bind(this);
-		this.$amap = fun();
+		// let fun = findAmapRoot.bind(this);
+		this.$amap = this.getMap(); // fun();
 	},
 	data() {
 		return {
@@ -128,14 +129,12 @@ export default {
 					top: `-30px`,
 				},
 				right: {
-					transform: `translate(${
-						this.iconSize / 2 + 4
-					}px,calc(-50% - ${this.iconSize / 2}px)`,
+					transform: `translate(${this.iconSize / 2 +
+						4}px,calc(-50% - ${this.iconSize / 2}px)`,
 				},
 				left: {
-					transform: `translate(calc(-100% - ${
-						this.iconSize / 2 + 4
-					}px),calc(-50% - ${this.iconSize / 2}px)`,
+					transform: `translate(calc(-100% - ${this.iconSize / 2 +
+						4}px),calc(-50% - ${this.iconSize / 2}px)`,
 				},
 			},
 		};
@@ -153,7 +152,6 @@ export default {
 			}
 		},
 		handleClick(item) {
-                    console.log(item,'item')
 			this.$emit('click', item);
 		},
 		handleMouseOver(item) {
