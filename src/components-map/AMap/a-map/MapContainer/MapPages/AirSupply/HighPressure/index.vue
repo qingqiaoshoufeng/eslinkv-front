@@ -43,6 +43,8 @@
 			:width="400"
 		>
 		</OverlayDetail>
+		<!-- 卫星切换组件 -->
+		<SatelliteMap />
 		<portal to="destination">
 			<!-- 统计数据 -->
 			<DataStatistics
@@ -82,6 +84,7 @@ let componentPageArr = [
 	'WarnEvent',
 	//右侧报警列表
 	'RightPanel',
+	'SatelliteMap',
 ];
 //页面所需公共组件
 let componentCommonArr = [

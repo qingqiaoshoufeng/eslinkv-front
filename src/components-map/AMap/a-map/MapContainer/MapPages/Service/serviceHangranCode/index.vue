@@ -96,14 +96,18 @@ let componentPageMap = {};
 let componentCommonMap = {};
 componentPageArr.map(componentName => {
 	componentPageMap[componentName] = () =>
-		import(/*webpackInclude:/\.(vue)$/ */  '../Components/' + componentName);
+		import(/*webpackInclude:/\.(vue)$/ */ '../Components/' + componentName);
 });
 componentCommonArr.map(componentName => {
 	componentCommonMap[componentName] = () =>
-import(/*webpackInclude:/\.(vue)$/ */ '../../../../components/' + componentName);
+		import(
+			/*webpackInclude:/\.(vue)$/ */ '../../../../components/' +
+				componentName
+		);
 });
 
 import pageMixin from '../../../../mixins/pageMixin';
+import { lnglat2container } from '../../../../utils/latlngtopx';
 import {
 	SERVICE_SERVICEHANGRANCODE_LEGEND_MAP,
 	SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP,
@@ -138,8 +142,6 @@ export default {
 			activeOverlay: {},
 			legendMultiple: true,
 			showOverlayDetail: false,
-			// 120.12039185； 纬度：30.17273413
-			// center: [120.80971, 30.102216],
 			center: [120.90522766, 30.74965084],
 			zoom: 10,
 			allTypeStationList: {},
@@ -242,9 +244,6 @@ export default {
 		},
 		// 获取热力图信息
 		async getAllHotList() {
-			let params = {
-				type: ['total', 'month'],
-			};
 			let res;
 			try {
 				res = await this.$sysApi.map.serve.getHangranCodeHotList();
@@ -290,7 +289,20 @@ export default {
 			}
 			if (!this.intervalId) {
 			}
-
+			this.allTypeStationList.branchCompanyList.map(item => {
+				let { lat, lng } = item;
+				let { x, y } = lnglat2container(
+					this.center,
+					[lng, lat],
+					this.$amap
+				);
+				item.x = x;
+				item.y = y;
+				console.log(x, y);
+				return { ...item, x: x, y: y };
+			});
+			debugger;
+			console.log(this.allTypeStationList.branchCompanyList);
 			this.intervalId = setInterval(() => {
 				let currentIndex = index++ % length;
 				this.activeOverlay = {
@@ -301,23 +313,39 @@ export default {
 						SERVICE_SERVICEHANGRANCODE_LEGEND_MAP['BranchCompany']
 							.detailList,
 				};
-				let { name } = this.activeOverlay;
 
-				let address = {
-					杭州天然气有限公司: { value: [121.39105835, 30.49227485] },
-					杭州钱江燃气有限公司: {
-						value: [121.49405518, 30.39419946],
-					},
-					桐庐杭燃燃气有限公司: {
-						value: [120.87769775, 29.85007093],
-					},
-					海宁星港燃气有限公司: {
-						value: [121.56159668, 30.43559623],
-					},
-				};
+				// let { name } = this.activeOverlay;
+
+				// let address = {
+				// 	杭州天然气有限公司: { value: [121.39105835, 30.49227485] },
+				// 	杭州钱江燃气有限公司: {
+				// 		value: [121.49405518, 30.39419946],
+				// 	},
+				// 	桐庐杭燃燃气有限公司: {
+				// 		value: [120.87769775, 29.85007093],
+				// 	},
+				// 	海宁星港燃气有限公司: {
+				// 		value: [121.56159668, 30.43559623],
+				// 	},
+				// };
+
+				// let address = {
+				// 	杭州天然气有限公司: { value: [121.39105835, 30.49227485] },
+				// 	杭州钱江燃气有限公司: {
+				// 		value: [121.49405518, 30.39419946],
+				// 	},
+				// 	桐庐杭燃燃气有限公司: {
+				// 		value: [120.87769775, 29.85007093],
+				// 	},
+				// 	海宁星港燃气有限公司: {
+				// 		value: [121.56159668, 30.43559623],
+				// 	},
+				// };
 				this.detailInfo = this.activeOverlay.gasCodeMapDetailInfoVO;
 				this.showOverlayDetail = true;
-				this.$amap.panTo(address[name].value, 100);
+				// let a = 69;
+				console.log(this.activeOverlay);
+				this.$amap.panBy(this.activeOverlay.x, this.activeOverlay.y);
 			}, 5000);
 		},
 		// 关闭定时器

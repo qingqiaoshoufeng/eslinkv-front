@@ -2,7 +2,7 @@ export default {
 	config: {
 		layout: {
 			size: {
-				width: 1000,
+				width: 992,
 				height: 950
 			},
 			position: {

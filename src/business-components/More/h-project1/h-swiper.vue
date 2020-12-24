@@ -124,7 +124,7 @@
 </script>
 <style lang="scss">
 	.swiper-box1 {
-		width: 1000px;
+		width: 992px;
 		height: 400px;
 		margin-top: 390px;
 		background-color: rgba(1, 1, 1, 0);

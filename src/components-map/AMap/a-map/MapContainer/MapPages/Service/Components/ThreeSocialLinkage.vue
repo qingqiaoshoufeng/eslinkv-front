@@ -48,7 +48,7 @@ export default {
 	},
 	data() {
 		return {
-			apiFun: this.$sysApi.map.serve.getThreeSocialLinkageList,
+			apiFun: this.$sysApi.map.mock.getThreeSocialLinkageList,
 		};
 	},
 	methods: {

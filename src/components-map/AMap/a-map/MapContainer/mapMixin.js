@@ -32,14 +32,15 @@ export default {
 				touchZoom: false,
 				dragEnable: true,
 				zoom: 10,
-				viewMode: '3D',
-				pitch: 10,
+				viewMode: '2D',
+				// pitch: 10,
+				// zooms:[11,19],
 				mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
 			},
 		}
 	},
 	computed: {
-		//是否显示地图页面
+		//是否显示地图
 		showMapPage() {
 			let { mapReady, showMap, mapComponentName } = this
 			return mapReady && showMap && mapComponentName
@@ -73,7 +74,6 @@ export default {
 		mapInit() {
 			console.log('地图初始化完成！')
 			this.mapReady = true
-			window.sss = this.$refs.amap.$amap
 			// this.$refs.amap.$amap.addControl(new AMap.MapType())
 			// this.$refs.amap.$amap.addControl(
 			// 	new AMap.HawkEye({

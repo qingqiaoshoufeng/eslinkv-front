@@ -131,7 +131,7 @@ export default {
 	},
 
 	mounted() {
-        this.createMap();
+		this.createMap();
 	},
 
 	addEvents() {
@@ -162,7 +162,7 @@ export default {
 			if (!this.plugins || !this.plugins.length) return;
 
 			//  store plugin instances
-            this.$plugins = this.$plugins || {};
+			this.$plugins = this.$plugins || {};
 
 			this.plugins.forEach(_plugin => {
 				const realPluginOptions = this.convertAMapPluginProps(_plugin);
@@ -222,11 +222,11 @@ export default {
 			this._loadPromise.then(() => {
 				let mapElement = this.$el.querySelector('.el-vue-amap');
 				const elementID = this.vid;
-                mapElement.id = elementID;
+				mapElement.id = elementID;
 				this.$amap = this.$amapComponent = new AMap.Map(
 					elementID,
 					this.convertProps()
-                );
+				);
 				if (this.amapManager) this.amapManager.setMap(this.$amap);
 				this.$emit(CONST.AMAP_READY_EVENT, this.$amap);
 				this.$children.forEach(component => {
@@ -234,7 +234,7 @@ export default {
 				});
 				if (this.plugins && this.plugins.length) {
 					this.addPlugins();
-                }
+				}
 			});
 		},
 		$$getCenter() {

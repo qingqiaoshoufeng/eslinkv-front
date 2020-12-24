@@ -6,7 +6,12 @@
 			</ul>
 			<div class="h-project-1-ratio pos-a" :style="{width:`${ratio}%`}"></div>
 		</div>
-    <div class="step8-info" v-if="data.value.step8 && data.value.step8.content" @click="isShowContent = true">
+    <div
+        class="step8-info"
+        v-if="data.value.step8 && data.value.step8.content"
+        @click="isShowContent = true"
+        :class="{ active: isShowContent }"
+    >
       <span>{{ data.value.step8.title }} ></span>
     </div>
     <div class="step8-info-content" v-if="isShowContent">
@@ -411,7 +416,7 @@
       position: absolute;
       top: 20px;
       right: 5px;
-      background: #0057A9;
+      background: #001A77;
       border: 1px solid #00DDFF;
       box-sizing: border-box;
       border-radius: 16px;
@@ -419,6 +424,9 @@
       color: #FFFFFF;
       padding: 4px 8px;
       cursor: pointer;
+      &.active, &:hover {
+        background: #0057A9;
+      }
     }
 
     .step8-info-content {
