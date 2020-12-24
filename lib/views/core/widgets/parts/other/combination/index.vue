@@ -132,7 +132,7 @@ export default {
     isWidgetLocked () {
       if (this.rightMenuGrid) return this.rightMenuGrid.config.widget.locked
       const id = this.rightMenuBindWidgetId
-      return id && this.widgetsAdded[id] && this.widgetsAdded[id].config.widget.locked
+      return id && this.widgetAdded[id] && this.widgetAdded[id].config.widget.locked
     },
     wrapperStyle () {
       const { font, padding, ...styleSet } = this.config.layout

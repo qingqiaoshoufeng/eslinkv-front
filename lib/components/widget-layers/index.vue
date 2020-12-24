@@ -58,7 +58,7 @@
 			config() {
 				return (id) => {
 					if (this.kanboardEditor) {
-						const data = this.kanboardEditor.widgetsAdded
+						const data = this.kanboardEditor.widgetAdded
 						const item = data[id]
 						return item.config
 					}

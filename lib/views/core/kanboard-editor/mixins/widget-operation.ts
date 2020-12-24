@@ -39,7 +39,7 @@ class Mixins extends Vue {
 	updateWidget(value) {
 		if (this.widgetMoving || !value || !value.widget) return
 		const id = value.widget.id
-		const currentWidget = this.widgetsAdded[id]
+		const currentWidget = this.widgetAdded[id]
 		if (!id || !currentWidget) return
 		this.zIndexMap[id] = value.layout.zIndex
 
@@ -95,11 +95,7 @@ class Mixins extends Vue {
 	}
 
 	initWidgetConfig(id, type, scene) {
-		this.$set(this.widgetsAdded, id, {
-			id,
-			type,
-			scene
-		})
+		mutations.setWidgetsAddedItem(id, type, null, scene)
 	}
 
 	// 小工具放置到画布
@@ -178,7 +174,7 @@ class Mixins extends Vue {
 			layout.position.left += 10
 			layout.position.top += 10
 		}
-		this.$set(this.widgetsAdded, id, widget)
+		mutations.setWidgetsAddedItem(id, widget.type, widget.config, widget.scene)
 		this.$set(this.zIndexMap, id, layout.zIndex)
 		const {width, height} = layout.size
 		const {left, top} = layout.position
@@ -191,7 +187,7 @@ class Mixins extends Vue {
 	 */
 	copyTargetWidget() {
 		const copyId = this.rightMenuBindWidgetId
-		const widget = this.widgetsAdded[copyId]
+		const widget = this.widgetAdded[copyId]
 		if (!widget) return
 		const copiedWidget = copy(widget)
 		const id = uuid()
@@ -215,7 +211,7 @@ class Mixins extends Vue {
 	 */
 	updateWidgetZIndex(type) {
 		const id = this.rightMenuBindWidgetId
-		const widget = this.widgetsAdded[id]
+		const widget = this.widgetAdded[id]
 		if (!widget) return
 		const zIndexes = this.zIndexMap
 		const layout = widget.config.layout
@@ -245,7 +241,7 @@ class Mixins extends Vue {
 		const zIndexes = this.zIndexMap
 		const currentMin = Math.min(...Object.values(zIndexes))
 		if (currentMin > 0) return 0
-		const widgets = this.widgetsAdded
+		const widgets = this.widgetAdded
 		Object.keys(zIndexes).forEach(key => {
 			zIndexes[key]++
 			widgets[key].config.layout.zIndex++
