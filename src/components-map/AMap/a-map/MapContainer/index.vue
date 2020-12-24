@@ -1,9 +1,11 @@
 <template>
 	<div class="map-container">
 		<div
-			:style="`transform: scale(${reverseScaleRatio});transform-origin:top left; overflow: hidden;width:${
-				kanboardSize.width / reverseScaleRatio
-			}px;height:${kanboardSize.height / reverseScaleRatio}px`"
+			:style="
+				`transform: scale(${reverseScaleRatio});transform-origin:top left; overflow: hidden;width:${kanboardSize.width /
+					reverseScaleRatio}px;height:${kanboardSize.height /
+					reverseScaleRatio}px`
+			"
 		>
 			<el-amap
 				vid="overviewMap"
@@ -45,7 +47,12 @@ files.keys().forEach(key => {
 	Object.keys(pageModule).forEach(componentName => {
 		let subPageName = pageModule[componentName];
 		mapPages[pageName + componentName] = () =>
-			import(/*webpackInclude:/\.(vue)$/ */ './MapPages/' + pageName + '/' + subPageName);
+			import(
+				/*webpackInclude:/\.(vue)$/ */ './MapPages/' +
+					pageName +
+					'/' +
+					subPageName
+			);
 	});
 });
 
@@ -111,4 +118,10 @@ export default {
 }
 </style>
 
+
+<style lang="scss">
+.amap-logo {
+	opacity: 0 !important;
+}
+</style>
 

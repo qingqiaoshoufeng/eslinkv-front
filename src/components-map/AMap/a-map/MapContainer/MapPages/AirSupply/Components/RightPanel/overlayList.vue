@@ -44,9 +44,6 @@
 
 <script>
 import { SvgIcon, NoData } from '../../../../../components/';
-// import {
-//     AIRSUPPLYOVERLAYCONFIGMAP,
-// } from '../../../../../config/index';
 export default {
 	name: 'HomeRealTimeList',
 	components: {

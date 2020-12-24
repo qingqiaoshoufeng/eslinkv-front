@@ -8,10 +8,7 @@
 		@click="handleOverlayClick"
 	>
 		<template slot-scope="{ data }">
-			<img
-				src="@/assets/amap/images/qiangxiu.gif"
-				class="warnoverlay-gif"
-			/>
+			<img src="@/assets/amap/qiangxiu.gif" class="warnoverlay-gif" />
 		</template>
 	</BaseOverlay>
 </template>

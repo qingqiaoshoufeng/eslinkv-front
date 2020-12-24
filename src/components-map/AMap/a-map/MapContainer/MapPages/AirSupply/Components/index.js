@@ -23,4 +23,3 @@ export { default as SatelliteMap } from './SatelliteMap.vue'
 
 export { default as RightPanel } from './RightPanel/'
 export { default as RoutePlan } from './RoutePlan/'
-export { default as StationList } from './StationList/'

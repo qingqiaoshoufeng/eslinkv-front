@@ -151,7 +151,7 @@ export default {
 			this.marker = new AMap.Marker({
 				map: map,
 				position: markerPose,
-				icon: '/static/amap/car-1.png',
+				icon: require('@/assets/amap/car.png'),
 				offset: new AMap.Pixel(-8, -8),
 				autoRotation: true,
 				//   angle:90,
@@ -224,8 +224,4 @@ export default {
 	margin-top: -14px;
 	margin-left: 19px;
 }
-
-// img {
-// 	width: 100%;
-// }
 </style>
