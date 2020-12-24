@@ -1,21 +1,54 @@
 <template>
 	<div class="sidebar-tools" @click.stop>
 		<!-- 画布全屏 -->
-		<div :title="!isFullscreen ? '进入全屏' : '退出全屏'" class="editor-action request-fullscreen"
-			 @click="kanboardEditor.toggleFullscreen">
-			<img :src="`./static/images/${isFullscreen ? 'exit-' : ''}fullscreen.svg`"
-				 :alt="!isFullscreen ? '进入全屏' : '退出全屏'"/>
-		</div>
+    <div
+        :title="!isFullscreen ? '进入全屏' : '退出全屏'"
+        class="editor-action request-fullscreen"
+        @click="kanboardEditor.toggleFullscreen"
+    >
+      <img
+          :src="`./static/images/${isFullscreen ? 'exit-' : ''}fullscreen.svg`"
+          :alt="!isFullscreen ? '进入全屏' : '退出全屏'"/>
+    </div>
 		<!-- 素材管理按钮 -->
 		<div
 			:class="{ active: showMaterialManage }"
 			class="editor-action open-material-manage"
 			title="素材管理"
-			@click="showMaterialManage = true"
+			@click="toggleSidebarTool('showMaterialManage')"
 		>
 			<img :src="`./static/images/material-manage.svg`"/>
 		</div>
-		<d-scene/>
+    <!-- 场景 -->
+    <d-scene @show="toggleSidebarTool('sceneShow')" ref="scene"/>
+    <!-- parseConfigValue -->
+    <div
+        :class="{ active: showLayers }"
+        class="editor-action toggle-layers"
+        title="小工具清单"
+        @click="toggleSidebarTool('showLayers')"
+    >
+      <img :src="`./static/images/layers.svg`"/>
+    </div>
+    <!-- 全局接口配置 -->
+    <div
+        :class="{ active: showGlobalApi }"
+        class="editor-action global-api"
+        title="全局数据源配置"
+        @click="toggleSidebarTool('showGlobalApi')"
+    >
+      <img :src="`./static/images/interface.svg`"/>
+    </div>
+    <!-- 外部脚本嵌入管理 -->
+    <div
+        :class="{ active: showScriptInject }"
+        class="editor-action script-inject hide"
+        title="脚本嵌入管理"
+        @click="toggleSidebarTool('showScriptInject')"
+    >
+      <img :src="`./static/images/script.svg`"/>
+    </div>
+
 		<!-- 素材管理 -->
 		<material-manage :showModal="showMaterialManage" @close="showMaterialManage = false"/>
 		<!-- 布局格子按钮 -->
@@ -33,15 +66,6 @@
 		<transition name="layer-fade-right">
 			<layout-grid v-show="showLayoutGrid"></layout-grid>
 		</transition>
-		<!-- parseConfigValue -->
-		<div
-			:class="{ active: showLayers }"
-			class="editor-action toggle-layers"
-			title="小工具清单"
-			@click="showLayers = !showLayers"
-		>
-			<img :src="`./static/images/layers.svg`"/>
-		</div>
 		<transition name="layer-fade-right">
 			<widget-layers
 				v-show="showLayers"
@@ -59,31 +83,18 @@
         "
 			></widget-layers>
 		</transition>
-		<!-- 全局接口配置 -->
-		<div
-			:class="{ active: showGlobalApi }"
-			class="editor-action global-api"
-			title="全局数据源配置"
-			@click="showGlobalApi = !showGlobalApi"
-		>
-			<img :src="`./static/images/interface.svg`"/>
-		</div>
 		<transition name="layer-fade-right">
-			<global-api-panel v-show="showGlobalApi" ref="globalApiPanel"
-							  @global-api-update="kanboardEditor.handleGlobalApiUpdate"/>
+			<global-api-panel
+          v-show="showGlobalApi"
+          ref="globalApiPanel"
+          @global-api-update="kanboardEditor.handleGlobalApiUpdate"
+      />
 		</transition>
-		<!-- 外部脚本嵌入管理 -->
-		<div
-			:class="{ active: showScriptInject }"
-			class="editor-action script-inject hide"
-			title="脚本嵌入管理"
-			@click="showScriptInject = !showScriptInject"
-		>
-			<img :src="`./static/images/script.svg`"/>
-		</div>
 		<transition name="layer-fade-right">
-			<script-inject-panel v-show="showScriptInject"
-								 @script-inject-update="kanboardEditor.handleGlobalApiUpdate"/>
+			<script-inject-panel
+          v-show="showScriptInject"
+          @script-inject-update="kanboardEditor.handleGlobalApiUpdate"
+      />
 		</transition>
 	</div>
 </template>
@@ -140,7 +151,20 @@
 				this.showLayers = false
 				this.showGlobalApi = false
 				this.showScriptInject = false
-			}
+			},
+      toggleSidebarTool (key) {
+        const arr = ['showMaterialManage', 'showLayoutGrid', 'showLayers', 'showGlobalApi', 'showScriptInject']
+        if (key !== 'sceneShow') {
+          this.$refs.scene.sceneModal = false
+        }
+        arr.forEach(v => {
+          if (v === key) {
+            this[key] = !this[key]
+          } else {
+            this[v] = false
+          }
+        })
+      }
 		},
 		computed: {
 			hideSubPanels(e) {
