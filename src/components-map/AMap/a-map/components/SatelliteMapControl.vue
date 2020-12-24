@@ -1,16 +1,23 @@
 <template>
 	<div class="map_button_box">
-		<div class="three-button" @click="$emit('input', false)">3D地图</div>
+		<div class="three-button" @click="$emit('input', false)">
+			<SvgIcon :icon-name="'icon3dmap'"></SvgIcon>
+			<span>3D地图</span>
+		</div>
 		<div class="satellite-button" @click="$emit('input', true)">
-			卫星地图
+			<SvgIcon :icon-name="'iconSatellitemap'"></SvgIcon>
+
+			<span>卫星地图</span>
 		</div>
 	</div>
 </template>
 <script>
+import SvgIcon from './SvgIcon/index.vue';
 export default {
 	data() {
 		return { sateLayer: null };
 	},
+	components: { SvgIcon },
 	props: ['value'],
 	watch: {
 		value: {
@@ -39,6 +46,11 @@ export default {
 		box-sizing: border-box;
 		line-height: 30px;
 		text-align: center;
+		color: #fff;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 16px;
 	}
 	.satellite-button {
 		width: 110px;
@@ -48,6 +60,11 @@ export default {
 		color: #fff;
 		line-height: 30px;
 		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 16px;
+		margin-left: 8px;
 	}
 }
 </style>

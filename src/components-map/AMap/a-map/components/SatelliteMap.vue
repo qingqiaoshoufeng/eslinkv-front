@@ -30,13 +30,10 @@ export default {
 	},
 	created() {},
 	mounted() {
-		setTimeout(() => {
-			let fun = findAmapRoot.bind(this);
-			this.$amap = fun();
-			// this.load();
-			// this.$amap.on('zoomstart', this.handleMapZoomChangeStart);
-			// this.$amap.on('zoomend', this.handleMapZoomChangeEnd);
-		}, 300);
+		// setTimeout(() => {
+		let fun = findAmapRoot.bind(this);
+		this.$amap = fun();
+		// }, 300);
 		this.createdSatellite();
 	},
 	methods: {

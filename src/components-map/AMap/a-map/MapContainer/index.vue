@@ -1,11 +1,9 @@
 <template>
 	<div class="map-container">
 		<div
-			:style="
-				`transform: scale(${reverseScaleRatio});transform-origin:top left; overflow: hidden;width:${kanboardSize.width /
-					reverseScaleRatio}px;height:${kanboardSize.height /
-					reverseScaleRatio}px`
-			"
+			:style="`transform: scale(${reverseScaleRatio});transform-origin:top left; overflow: hidden;width:${
+				kanboardSize.width / reverseScaleRatio
+			}px;height:${kanboardSize.height / reverseScaleRatio}px`"
 		>
 			<el-amap
 				vid="overviewMap"
