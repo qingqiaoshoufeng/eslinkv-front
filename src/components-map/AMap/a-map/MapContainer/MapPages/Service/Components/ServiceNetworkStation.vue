@@ -34,7 +34,7 @@ export default {
 	},
 	data() {
 		return {
-			apiFun: this.$sysApi.map.serve.getServiceNetworkStationList,
+			apiFun: this.$sysApi.map.mock.getServiceNetworkStationList,
 		};
 	},
 	methods: {

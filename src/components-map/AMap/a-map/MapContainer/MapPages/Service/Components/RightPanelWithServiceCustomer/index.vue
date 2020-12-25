@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import { DashboardPanel } from '../../../../../components/';
 import { Tabs, TabPanel } from '../../../../../components/Tabs/';
 import overlayList from './overlayList';
 import realTime from './realTime';
@@ -39,7 +38,6 @@ export default {
 		TabPanel,
 		overlayList,
 		realTime,
-		DashboardPanel,
 	},
 	mounted() {
 		this.ready = true;

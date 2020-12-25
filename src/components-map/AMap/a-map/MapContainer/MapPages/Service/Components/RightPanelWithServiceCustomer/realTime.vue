@@ -55,7 +55,7 @@ import { TaskList } from '..';
 import { SvgIcon, NoData } from '../../../../../components/';
 
 export default {
-	name: 'HomeRealTimeList',
+	name: 'realTime',
 	components: {
 		SvgIcon,
 		NoData,

@@ -17,7 +17,6 @@
 	</Tabs>
 </template>
 <script>
-import { DashboardPanel } from '../../../../../components/';
 import { Tabs, TabPanel } from '../../../../../components/Tabs/';
 import ICCustomerList from './ICCustomerList';
 export default {
@@ -40,10 +39,7 @@ export default {
 	components: {
 		Tabs,
 		TabPanel,
-		// realTime,
-		// DashboardPanel,
 		ICCustomerList,
-		// tabsTitle,
 	},
 	mounted() {
 		this.ready = true;

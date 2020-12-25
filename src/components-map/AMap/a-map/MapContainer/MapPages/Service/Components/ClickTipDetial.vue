@@ -1,3 +1,4 @@
+	<!-- 点击展示单个详情 -->
 <template>
 	<div class="TipDetial">
 		<div class="companyName">{{ data.name || data.address }}</div>

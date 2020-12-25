@@ -5,7 +5,7 @@
 		<!-- 区域 -->
 		<RegionBoundary />
 		<!-- 2.销售区域 -->
-		<SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" />
+		<SaleAreaBoundary v-model="activeArea" />
 
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
@@ -76,11 +76,14 @@ let componentPageMap = {};
 let componentCommonMap = {};
 componentPageArr.map(componentName => {
 	componentPageMap[componentName] = () =>
-		import(/*webpackInclude:/\.(vue)$/ */  '../Components/' + componentName);
+		import(/*webpackInclude:/\.(vue)$/ */ '../Components/' + componentName);
 });
 componentCommonArr.map(componentName => {
 	componentCommonMap[componentName] = () =>
-import(/*webpackInclude:/\.(vue)$/ */ '../../../../components/' + componentName);
+		import(
+			/*webpackInclude:/\.(vue)$/ */ '../../../../components/' +
+				componentName
+		);
 });
 
 import {
@@ -112,6 +115,12 @@ export default {
 			allTypeStationList: {},
 			detailInfo: {},
 		};
+	},
+	watch: {
+		// 每隔两分钟请求一次统计数据信息
+		dataStatisticsInfo(val) {
+			setTimeout(this.getDataStatisticsList, 120000);
+		},
 	},
 	computed: {
 		OverlayDetailProp() {
@@ -158,6 +167,7 @@ export default {
 
 			this.getDetialInfo(name);
 		},
+		// 获取详情统计数据
 		async getDataStatisticsList() {
 			let params = {
 				projectId: 20,

@@ -62,14 +62,12 @@ export default {
 			nameStyle: {
 				fontSize: '24px',
 			},
-			// mouseIn: false,
 			mouseIn: true,
 		};
 	},
 	mounted() {},
 	methods: {
 		mouseover(marker) {
-			// if (this.mouseIn) return false;
 			this.mouseIn = true;
 			this.$emit(
 				'overlay-click',

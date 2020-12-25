@@ -43,7 +43,7 @@
 </template>
 <script>
 //页面覆盖物组件
-import { Grouphall, BranchCompany, HeatMap } from '../Components/index.js';
+import { BranchCompany, HeatMap } from '../Components/index.js';
 //页面所需公共组件
 import {
 	RegionBoundary,
@@ -59,7 +59,7 @@ export default {
 	components: {
 		RegionBoundary,
 		OverlayDetail,
-		Grouphall,
+
 		BranchCompany,
 		HeatMap,
 		MapLegend,

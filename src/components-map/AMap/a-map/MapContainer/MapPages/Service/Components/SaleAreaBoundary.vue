@@ -40,6 +40,7 @@ export default {
 						},
 						strokeDasharray: [5, 2],
 					});
+					// 移入移出暂时取消，后续需要该效果可以再提供
 					// if (this.selectAreaChange) {
 					// instance.on('mouseover', e => {
 					// 	let areaData = e.target._opts.extData || {};
