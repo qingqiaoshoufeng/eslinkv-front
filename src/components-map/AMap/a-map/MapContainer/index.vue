@@ -25,7 +25,11 @@
 			</el-amap>
 		</div>
 		<SatelliteMap v-if="showMapPage" v-model="isShowSatellite" :map="map" />
-		<SatelliteMapControl v-if="showMapPage" v-model="isShowSatellite" />
+		<SatelliteMapControl
+			v-if="showMapPage"
+			v-model="isShowSatellite"
+			:sateMapCtrPos="sateMapCtrPos"
+		/>
 
 		<!-- 地图类型 -->
 		<MapTypeLegend />

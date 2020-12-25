@@ -1,5 +1,5 @@
 <template>
-	<div class="map_button_box">
+	<div class="map_button_box" :class="'SatelliteMap' + sateMapCtrPos">
 		<div class="three-button" @click="$emit('input', false)">
 			<SvgIcon :icon-name="'icon3dmap'"></SvgIcon>
 			<span>3D地图</span>
@@ -18,7 +18,7 @@ export default {
 		return { sateLayer: null };
 	},
 	components: { SvgIcon },
-	props: ['value'],
+	props: ['value', 'sateMapCtrPos'],
 	watch: {
 		value: {
 			handler(val) {
@@ -66,5 +66,8 @@ export default {
 		font-size: 16px;
 		margin-left: 8px;
 	}
+}
+.SatelliteMapleft {
+	right: 2100px !important;
 }
 </style>

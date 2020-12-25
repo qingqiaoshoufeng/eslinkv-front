@@ -36,6 +36,8 @@ export default {
                 // pitch: 10,
                 // zooms:[11,19],
                 mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
+                senceName: null,
+                sateMapCtrPos: null,  // 卫星地图控制器位置
             },
             map: null
         }
@@ -71,6 +73,7 @@ export default {
             this.mapComponentNameBefore = this.mapComponentName
             this.mapComponentName = pageName
             this._provided.parentInfo.pageName = pageName
+            this.sateMapCtrPos = ['ServiceNineteen', 'ServiceHangranCode'].includes(pageName) ? 'left' : null
         },
         mapInit() {
             console.log('地图初始化完成！')

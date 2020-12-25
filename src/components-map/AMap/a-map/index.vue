@@ -70,7 +70,7 @@ export default {
 	}
 }
 .amap-marker {
-    backface-visibility: hidden;
+	backface-visibility: hidden;
 	pointer-events: none !important;
 	> div {
 		> div {
@@ -82,6 +82,9 @@ export default {
 	z-index: 1100 !important;
 }
 .amap-logo {
+	display: none !important;
+}
+.amap-copyright {
 	display: none !important;
 }
 </style>
