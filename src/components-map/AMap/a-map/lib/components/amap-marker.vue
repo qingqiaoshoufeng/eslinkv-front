@@ -91,6 +91,7 @@ export default {
 					flag === false ? this.hide() : this.show();
 				},
 				position(lnglat) {
+					console.log(lnglat, 'lnglat');
 					this.setPosition(new AMap.LngLat(...lnglat));
 				},
 			},
