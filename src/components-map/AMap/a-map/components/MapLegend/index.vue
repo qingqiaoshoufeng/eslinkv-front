@@ -82,7 +82,6 @@ export default {
 				setTimeout(() => {
 					//计算是否需要展开
 					let contentDom = this.$refs.content;
-					window.bbb = this.$refs.content;
 					let contentHeight = contentDom.offsetHeight;
 					let contentWidth = contentDom.offsetWidth;
 					if (

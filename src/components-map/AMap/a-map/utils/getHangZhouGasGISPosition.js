@@ -45,8 +45,4 @@ export default function getPosition(x, y, zoom) {
     }
 }
 
-function lnglat2container(inputVal) {
-    var lnglat = new AMap.LngLat(inputVal[0], inputVal[1]);
-    var pixel = sss.lngLatToContainer(lnglat);
-    console.log(pixel.round())
-}
+

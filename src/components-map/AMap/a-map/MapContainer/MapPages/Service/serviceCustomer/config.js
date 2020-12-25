@@ -59,11 +59,6 @@ export const SERVICE_SERVICECUSTOMER_OVERLAY_MAP = {
         },
         isShowMore: true,
     },
-    Grouphall: {
-        fields: {
-            name: {},
-        },
-    },
 }
 // 客户服务页面统计数据
 export const DATASTATISTICSLIST = [citizenNumber, publicBuildNumber, industryNumber, businessServe, activity, community, households,]

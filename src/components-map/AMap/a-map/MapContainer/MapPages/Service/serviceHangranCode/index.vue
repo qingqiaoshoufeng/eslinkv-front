@@ -77,7 +77,6 @@ let componentPageArr = [
 	'CouplingHot',
 	'OperationHot',
 	'SwitchBox',
-	'Grouphall',
 	'BranchCompany',
 	'ServiceStation',
 	'TipDetial',
@@ -124,7 +123,6 @@ export default {
 	},
 	data() {
 		let {
-			Grouphall,
 			BranchCompany,
 			ServiceStation,
 		} = SERVICE_SERVICEHANGRANCODE_LEGEND_MAP;
@@ -233,7 +231,6 @@ export default {
 		async getAllTypeStationList() {
 			let params = {
 				types: [
-					'Grouphall',
 					'BranchCompany',
 					'ComprehensiveServiceStation',
 				].toString(),

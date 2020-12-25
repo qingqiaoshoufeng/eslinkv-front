@@ -37,7 +37,6 @@ export default {
 				opacity: [0, 0.8],
 				zIndex: 1000,
 			});
-			window.ccc = this._instance;
 			this._instance.setDataSet({
 				data: this._heatMapData,
 				max: 9000,

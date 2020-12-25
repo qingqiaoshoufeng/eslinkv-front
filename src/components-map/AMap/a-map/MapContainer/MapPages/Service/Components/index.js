@@ -1,7 +1,6 @@
 //页面内所需组件
 export { default as ThreeSocialLinkage } from './ThreeSocialLinkage'   // 三社联动
 export { default as ServiceNetworkStation } from './ServiceNetworkStation' // 服务网点
-export { default as Grouphall } from './Grouphall'  // 集团大厅
 export { default as BranchCompany } from './BranchCompany' // 子公司
 export { default as RightPanelWithServiceCustomer } from './RightPanelWithServiceCustomer' // 客户服务右侧table
 export { default as CouplingHot } from './CouplingHot' // 联动数量热力
