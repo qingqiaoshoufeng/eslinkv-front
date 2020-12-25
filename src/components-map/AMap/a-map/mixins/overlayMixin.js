@@ -1,11 +1,3 @@
-// function findAmapRoot() {
-//     if (this.$amap) return this.$amap
-//     let parent = this.$parent
-//     if (parent) {
-//         let fun = findAmapRoot.bind(parent)
-//         return fun()
-//     }
-// }
 export default {
 	inject: ['getMap'],
 	props: {
@@ -55,8 +47,7 @@ export default {
 	},
 	created() {
 		this.instanceArr = []
-		// let fun = findAmapRoot.bind(this)
-		this.$amap = this.getMap() //fun()
+		this.$amap = this.getMap()
 		if (this.visible) {
 			this.initData()
 		}
@@ -82,5 +73,6 @@ export default {
 	},
 	beforeDestroy() {
 		this.clearInstance()
+		this.$amap = null
 	},
 }

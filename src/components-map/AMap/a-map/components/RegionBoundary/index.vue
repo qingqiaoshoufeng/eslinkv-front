@@ -15,14 +15,14 @@ export default {
 	},
 	methods: {
 		init() {
-			this.drawRegionBoundary(this.$amap);
+			this.drawRegionBoundary();
 		},
-		drawRegionBoundary(map) {
+		drawRegionBoundary() {
 			var district = new window.AMap.DistrictSearch({
 					extensions: 'all',
 					subdistrict: 0,
-                    level: 'city',
-                    showbiz:false,
+					level: 'city',
+					showbiz: false,
 				}),
 				districts = [
 					'杭州市',
@@ -36,13 +36,13 @@ export default {
 					// '富阳区',
 					// '临安区',
 					// '桐庐县',
-					// '淳安县',  
-					// '建德市',  
+					// '淳安县',
+					// '建德市',
 				];
-            this.instanceArr = [];
+			this.instanceArr = [];
 			districts.forEach(area => {
 				district.search(area, (status, result) => {
-                    var bounds = result.districtList[0].boundaries;
+					var bounds = result.districtList[0].boundaries;
 					if (bounds) {
 						for (var i = 0, l = bounds.length; i < l; i++) {
 							let instance = new window.AMap.Polygon({
@@ -57,9 +57,9 @@ export default {
 								extData: {
 									area: area,
 								},
-                            });
+							});
 							if (this.instanceArr) {
-                                //选中区域
+								//选中区域
 								if (this.selectAreaChange) {
 									instance.on('mouseover', e => {
 										let areaData = e.target._opts.extData;
@@ -74,8 +74,8 @@ export default {
 											fillColor: '#0054B7',
 										});
 									});
-                                }
-								map.add(instance);
+								}
+								this.$amap.add(instance);
 								this.instanceArr.push(instance);
 							}
 						}
