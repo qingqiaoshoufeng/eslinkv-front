@@ -5,7 +5,7 @@
 		<!-- 区域 -->
 		<RegionBoundary />
 		<!-- 2.销售区域 -->
-		<SaleAreaBoundary v-model="activeArea" @input="saleAreaChange" />
+		<SaleAreaBoundary v-model="activeArea" />
 
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
@@ -116,6 +116,12 @@ export default {
 			detailInfo: {},
 		};
 	},
+	watch: {
+		// 每隔两分钟请求一次统计数据信息
+		dataStatisticsInfo(val) {
+			setTimeout(this.getDataStatisticsList, 120000);
+		},
+	},
 	computed: {
 		OverlayDetailProp() {
 			let { activeOverlay, overlayInfoConfigMap, legendMap } = this;
@@ -161,6 +167,7 @@ export default {
 
 			this.getDetialInfo(name);
 		},
+		// 获取详情统计数据
 		async getDataStatisticsList() {
 			let params = {
 				projectId: 20,

@@ -193,8 +193,6 @@ export default {
 		window.mapFitView = this.mapFitView.bind(this);
 	},
 	methods: {
-		// 销售区域变化
-		saleAreaChange(val) {},
 		// 关闭详情
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
@@ -213,7 +211,6 @@ export default {
 			this.detailComponentName = 'ClickTipDetial';
 			this.clearInterval();
 			let { lng, lat, id, overlayType: type, detailList, name } = overlay;
-			// this.activeArea = name;
 			let params = {
 				name,
 			};
@@ -308,6 +305,7 @@ export default {
 		},
 	},
 	watch: {
+		// 监听三社联动处理切换场景后产生多余定时器bug
 		'allTypeStationList.branchCompanyList': {
 			handler(val) {
 				if (val && val.length) {
@@ -320,7 +318,6 @@ export default {
 	async mounted() {
 		let res = await this.getAllTypeStationList();
 		this.allTypeStationList = { ...this.allTypeStationList, ...res };
-
 		this.getAllHotList();
 		this.getDataStatisticsList();
 	},
