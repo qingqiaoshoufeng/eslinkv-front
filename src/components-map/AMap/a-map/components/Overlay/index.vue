@@ -2,7 +2,7 @@
 	<AMapMarker
 		:visible="visible"
 		:offset="offset"
-		v-if="verifyLngLat"
+		v-if="checkLngLat"
 		:position="[marker.lng, marker.lat]"
 		:vid="marker.name"
 		ref="marker"
@@ -54,20 +54,22 @@ export default {
 			iconSize = iconSize || 38;
 			return [-iconSize / 2, -iconSize / 2];
 		},
-		verifyLngLat() {
+		//判断经纬度的有效性
+		checkLngLat() {
 			let { lng, lat } = this.marker;
 			return typeof lng === 'number' && typeof lat === 'number';
 		},
 	},
-	watch: {
-		marker(val) {
-			let { lng, lat } = val;
-			let instance = this.getInstance();
-			if (instance && lng) {
-				instance.setPosition(new AMap.LngLat(lng, lat));
-			}
-		},
-	},
+	// watch: {
+	// 	//更新位置
+	// 	// marker(val) {
+	// 	// 	let { lng, lat } = val;
+	// 	// 	let instance = this.getInstance();
+	// 	// 	if (instance && lng) {
+	// 	// 		instance.setPosition(new AMap.LngLat(lng, lat));
+	// 	// 	}
+	// 	// },
+	// },
 	methods: {
 		getInstance() {
 			return this.$refs.marker && this.$refs.marker.$amapComponent;
@@ -104,7 +106,7 @@ export default {
 	transform: scale(1.2);
 }
 .sample-name {
-    backface-visibility: hidden;
+	backface-visibility: hidden;
 	font-size: 18px;
 	color: #fff;
 	position: absolute;
