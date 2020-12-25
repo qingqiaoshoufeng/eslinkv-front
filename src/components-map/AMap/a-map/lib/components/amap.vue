@@ -2,7 +2,7 @@
 	<div class="el-vue-amap-container">
 		<div class="el-vue-amap"></div>
 		<slot></slot>
-		<SatelliteMap />
+		<!-- <slot name="SatelliteMap" v-if="$amap"></slot> -->
 	</div>
 </template>
 <script>
@@ -10,11 +10,11 @@ import CONST from '../utils/constant';
 import { toLngLat, toPixel } from '../utils/convert-helper';
 import registerMixin from '../mixins/register-component';
 import { lazyAMapApiLoaderInstance } from '../services/injected-amap-api-instance';
-import SatelliteMap from '../../components/SatelliteMap';
+
 export default {
 	name: 'el-amap',
 	mixins: [registerMixin],
-	components: { SatelliteMap },
+
 	props: [
 		//  add v1.4.0 new feature
 		'viewMode',

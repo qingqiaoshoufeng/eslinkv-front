@@ -18,7 +18,7 @@ export { default as OngroundRepairStation } from './OngroundRepairStation'
 export { default as ServiceStation } from './ServiceStation'
 export { default as WarnEvent } from './WarnEvent/index.vue'
 export { default as WarningStations } from './WarningStations/index.vue'
-export { default as SatelliteMap } from './SatelliteMap.vue'
+
 
 
 export { default as RightPanel } from './RightPanel/'

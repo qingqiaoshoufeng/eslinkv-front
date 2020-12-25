@@ -21,8 +21,11 @@
 						:is="mapComponentName"
 					/>
 				</template>
+				<!-- <template v-slot:SatelliteMap> </template> -->
 			</el-amap>
 		</div>
+		<SatelliteMap v-if="showMapPage" v-model="isShowSatellite" :map="map" />
+		<SatelliteMapControl v-if="showMapPage" v-model="isShowSatellite" />
 
 		<!-- 地图类型 -->
 		<MapTypeLegend />
@@ -34,6 +37,7 @@
 <script>
 import { AMap } from '../lib';
 import MapTypeLegend from './MapTypeLegend';
+import { SatelliteMap, SatelliteMapControl } from '../components';
 import mapMixin from './mapMixin.js';
 //动态引入页面
 const files = require.context('./MapPages/', true, /page\.js$/);
@@ -68,6 +72,8 @@ export default {
 	components: {
 		ElAmap: AMap,
 		MapTypeLegend,
+		SatelliteMap,
+		SatelliteMapControl,
 		...mapPages,
 	},
 	data() {
@@ -78,6 +84,7 @@ export default {
 			},
 			scaleRatio: 1,
 			reverseScaleRatio: 1,
+			isShowSatellite: false,
 		};
 	},
 	methods: {

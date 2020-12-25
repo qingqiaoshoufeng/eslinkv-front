@@ -1,55 +1,49 @@
-<template>
-	<div class="map_button_box">
-		<!-- <div class="three-button" @click="toggerMapStyle('3d')">3D地图</div>
-		<div class="satellite-button" @click="toggerMapStyle('Satellite')">
-			卫星地图
-		</div> -->
-	</div>
-</template>
+<template></template>
 <script>
-function findAmapRoot() {
-	if (this.$amap) return this.$amap;
-	let parent = this.$parent;
-	if (parent) {
-		let fun = findAmapRoot.bind(parent);
-		return fun();
-	}
-}
 export default {
 	data() {
-		return { sateLayer: null };
+		return { sateLayer: null, count: 0 };
 	},
-	props: ['value'],
+	props: {
+		value: { type: Boolean, default: false },
+		map: {
+			type: [Object, null],
+			default: null,
+		},
+	},
 	watch: {
 		value: {
 			handler(val) {
+				console.log(this.map);
+
 				this.toggerMapStyle(val);
 			},
 			// immediate: true,
 		},
 	},
-	created() {},
 	mounted() {
-		// setTimeout(() => {
-		let fun = findAmapRoot.bind(this);
-		this.$amap = fun();
-		// }, 300);
 		this.createdSatellite();
 	},
 	methods: {
 		createdSatellite() {
-			this.sateLayer = new AMap.TileLayer.Satellite();
-			console.log(AMap.TileLayer.Satellite);
-			console.log(this.sateLayer);
+			// this.sateLayer = new AMap.TileLayer.Satellite();
+			AMap.plugin(['AMap.MapType'], () => {
+				this.map.addControl(
+					new AMap.MapType({
+						defaultType: 0, //使用2D地图
+					})
+				);
+			});
 		},
 		toggerMapStyle(val) {
-			console.log(this.$amap);
-			console.log(this.sateLayer);
+			if (!this.map) return;
+			var btn = document.querySelector('.amap-maptype-title');
+			this.count++;
+			console.log(this.count);
 			if (val) {
-				this.$amap.add(this.sateLayer); //添加图层到地图
-				this.sateLayer.show();
+				btn.click();
 			} else {
-				this.sateLayer.hide();
+				btn.click();
 			}
 		},
 	},
