@@ -78,7 +78,7 @@ export default {
 				label(options) {
 					const { content = '', offset = [0, 0] } = options;
 					return {
-                        content: content,
+						content: content,
 						offset: toPixel(offset),
 					};
 				},
@@ -89,6 +89,9 @@ export default {
 				},
 				visible(flag) {
 					flag === false ? this.hide() : this.show();
+				},
+				position(lnglat) {
+					this.setPosition(new AMap.LngLat(...lnglat));
 				},
 			},
 		};
@@ -125,9 +128,9 @@ export default {
 			}
 			let compOffset = offset || [0, 0];
 			let [offsetX, offsetY] = compOffset;
-            compOffset = toPixel(compOffset) 
+			compOffset = toPixel(compOffset);
 			this.$amapComponent = new AMap.Marker({
-                ...options,
+				...options,
 				offset: compOffset,
 			});
 		},

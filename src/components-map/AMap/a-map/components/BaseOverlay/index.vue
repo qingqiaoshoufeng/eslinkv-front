@@ -15,7 +15,6 @@
 			@mouseleave="handleMouseLeave(item)"
 		>
 			<!-- 默认显示配置的icon -->
-
 			<template slot="icon">
 				<slot name="icon"></slot>
 			</template>
@@ -35,18 +34,9 @@
 <script>
 import overlayMixin from '../../mixins/overlayMixin.js';
 import Overlay from '../Overlay/';
-// function findAmapRoot() {
-// 	if (this.$amap) return this.$amap;
-// 	let parent = this.$parent;
-// 	if (parent) {
-// 		let fun = findAmapRoot.bind(parent);
-// 		return fun();
-// 	}
-// }
 export default {
 	name: 'BaseOverlay',
 	mixins: [overlayMixin],
-	inject: ['getMap'],
 	components: {
 		Overlay,
 	},
@@ -113,10 +103,6 @@ export default {
 				this.activeItemName = '';
 			}
 		},
-	},
-	created() {
-		// let fun = findAmapRoot.bind(this);
-		this.$amap = this.getMap(); // fun();
 	},
 	data() {
 		return {

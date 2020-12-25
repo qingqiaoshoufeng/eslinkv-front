@@ -9,7 +9,6 @@ import CONST from '../utils/constant';
 import { toLngLat, toPixel } from '../utils/convert-helper';
 import registerMixin from '../mixins/register-component';
 import { lazyAMapApiLoaderInstance } from '../services/injected-amap-api-instance';
-// import SatelliteMap from '../../components/SatelliteMap';
 export default {
 	name: 'el-amap',
 	mixins: [registerMixin],
@@ -18,7 +17,6 @@ export default {
 			getMap: this.getMap,
 		};
 	},
-	// components: { SatelliteMap },
 	props: [
 		//  add v1.4.0 new feature
 		'viewMode',

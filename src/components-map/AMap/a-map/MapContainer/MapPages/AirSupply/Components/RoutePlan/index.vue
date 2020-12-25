@@ -59,7 +59,7 @@ export default {
 			//渲染一次后，需手动调整位置
 			if (this.$refs.marker) {
 				this.$refs.marker.$amapComponent.setPosition(
-					new AMap.LngLat(endLat, endLat)
+					new AMap.LngLat(enƒdLat, endLat)
 				);
 			}
 			if (!employeeName || !callDate) {
@@ -125,6 +125,9 @@ export default {
 			}
 		},
 		drawLine(passedPathData = [], planPathData = []) {
+			if (!this.map) {
+				return false;
+			}
 			let map = this.map;
 			// 1.已行驶路径 + 预测轨迹
 			let pathDataAll = [...passedPathData, ...planPathData];
@@ -145,7 +148,6 @@ export default {
 				icon: require('@/assets/amap/car.png'),
 				offset: new AMap.Pixel(-8, -8),
 				autoRotation: true,
-				//   angle:90,
 			});
 			// 3.轨迹回放
 			if (passedPathData.length > 1) {
@@ -193,6 +195,7 @@ export default {
 	},
 	beforeDestroy() {
 		this.reset();
+		this.map = null;
 	},
 };
 </script>
