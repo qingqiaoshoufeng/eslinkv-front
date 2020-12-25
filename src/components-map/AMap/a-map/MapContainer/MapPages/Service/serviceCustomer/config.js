@@ -16,6 +16,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         dataProp: 'branchCompanyList',
         detailList: [citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial]
     },
+    // 服务网点暂时保留 后续功能使用
     // ServiceNetworkStation: {
     //     label: '服务网点',
     //     legendIcon: 'icontulifuwuwangdian',

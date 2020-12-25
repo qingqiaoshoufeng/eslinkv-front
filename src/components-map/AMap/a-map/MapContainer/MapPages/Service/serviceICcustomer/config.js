@@ -48,7 +48,6 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
 
 //覆盖物详情
 export const SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP = {
-
     BranchCompany: {
         fields: {
             name: {},
