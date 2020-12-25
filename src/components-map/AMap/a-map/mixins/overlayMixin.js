@@ -73,6 +73,8 @@ export default {
 	},
 	beforeDestroy() {
 		this.clearInstance()
-		this.$amap = null
 	},
+	destroyed() {
+		this.map = null
+	}
 }

@@ -4,8 +4,8 @@ import overlayMixin from '../../mixins/overlayMixin.js';
 export default {
 	name: 'RegionBoundary',
 	mixins: [overlayMixin],
-	created() {
-		//根据缩放比例控制显示隐藏
+	mounted() {
+		console.log(this.$amap, 'amap');
 		this.$amap.on('zoomend', this.handleMapZoomChange);
 	},
 	props: {
