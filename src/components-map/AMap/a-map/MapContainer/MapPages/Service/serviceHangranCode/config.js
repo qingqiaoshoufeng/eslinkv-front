@@ -1,5 +1,5 @@
 // 引入详情字典
-import { operationYesterday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, operationLastWeek, operationMonth, operationLastMonth, operationYear, } from "./dictionary"
+import { operationYesterday, OperationWeek, CouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, operationLastWeek, operationMonth, operationLastMonth, operationYear, } from "./dictionary"
 // 覆盖物legend配置
 export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
     BranchCompany: {
@@ -11,8 +11,6 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         visible: true,
         dataProp: 'branchCompanyList',
         detailList: [CouplingNumber, operationYesterday, OperationWeek, operationLastWeek, operationMonth, operationLastMonth, operationYear,
-            //  CouplingPercent,
-            //  NewCouplingNumber
         ]
     },
 

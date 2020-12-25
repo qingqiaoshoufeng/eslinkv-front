@@ -96,7 +96,6 @@
 let componentPageArr = [
 	'ThreeSocialLinkage',
 	'ServiceNetworkStation',
-
 	'BranchCompany',
 	'RightPanelWithServiceCustomer',
 	'TipDetial',
