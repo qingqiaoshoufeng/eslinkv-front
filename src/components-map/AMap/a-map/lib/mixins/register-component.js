@@ -20,7 +20,7 @@ export default {
 		}
 	},
 
-	mounted() {
+	async mounted() {
 		if (lazyAMapApiLoaderInstance) {
 			lazyAMapApiLoaderInstance.load().then(() => {
 				this.__contextReady &&
@@ -28,7 +28,7 @@ export default {
 			})
 		}
 		let fun = findAmapRoot.bind(this)
-        this.$amap = fun()
+		this.$amap = fun()
 		if (this.$amap) {
 			this.register()
 		} else {
@@ -90,7 +90,7 @@ export default {
 
 					type = componentConfig.props[key].$type
 					converter = commonConvertMap[type]
-				} catch (e) {}
+				} catch (e) { }
 			}
 
 			if (type && converter) {

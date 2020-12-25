@@ -2,11 +2,6 @@
 	<div ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen }" class="preview-wrapper">
 		<kanban-preview @mounted="updateKanboardSize" ref="previewContainer"
 						:style="`transform: scale(${scaleRatio},${scale}) translate3d(0, 0, 0); overflow: hidden;`"/>
-		<!--<div class="action-bar">
-			<div v-if="actualScaleRatio < 1" class="action fit-screen" @click="fitScreen = !fitScreen">
-				{{ fitScreen ? '原始大小' : '适应窗口' }}
-			</div>
-		</div>-->
 	</div>
 </template>
 
@@ -34,7 +29,7 @@
 					width: 1920,
 					height: 1080
 				},
-				scale:1,
+				scale: 1,
 				actualScaleRatio: 1
 			}
 		},
@@ -54,6 +49,7 @@
 				if (this.$route.name === 'HangRan') {
 					this.$api.board.hangran().then(res => {
 						const value = JSON.parse(res.attribute)
+						mutations.setKanboard(value)
 						this.refill(value)
 						mutations.initScene(value.scene)
 						mutations.listToObj(value)
@@ -63,6 +59,7 @@
 					const dataBoardId = id
 					this.$api.board.detail({dataBoardId}).then(res => {
 						const value = JSON.parse(res.attribute)
+						mutations.setKanboard(value)
 						this.refill(value)
 						mutations.initScene(value.scene)
 						mutations.listToObj(value)
@@ -77,9 +74,9 @@
 				/**
 				 * @description 适配
 				 */
-				if(getQueryString('scale'))
-					if(!isNaN(getQueryString('scale')))
-						this.scale=Number(getQueryString('scale'))
+				if (getQueryString('scale'))
+					if (!isNaN(getQueryString('scale')))
+						this.scale = Number(getQueryString('scale'))
 			},
 			refill(value) {
 				this.$refs.previewContainer.refillConfig(value).then(() => {

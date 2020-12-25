@@ -1,16 +1,14 @@
-<template>
-	<div class="widget-part" :style="styles">
-		<div class="fn-flex flex-row h-title-6">
-			<div class="h-title-6-icon"/>
-			<h2 class="pos-r pointer" v-for="item in data?data:[]"
-				:class="{active:store.scene.index===item.sceneId}"
-				@click="handleClick(item.sceneId)">{{item.title}}</h2>
-		</div>
-	</div>
+<template lang="pug">
+	.widget-part(:style="styles")
+		.fn-flex.flex-row.h-title-6
+			.h-title-6-icon
+			h2.pos-r.pointer(v-for="item in data?data:[]" :class="{active:store.scene.index===item.sceneId}" @click="handleClick(item.sceneId)") {{item.title}}
 </template>
-<script>
-	import mixins from '../../mixins'
+<script lang="ts">
 	import GoldChart, {store} from '../../../openApi'
+	import mx from '../../mixins'
+	import {Component} from 'vue-property-decorator'
+	import {mixins} from 'vue-class-component'
 
 	const config = {animation: true}
 	const value = {
@@ -27,23 +25,22 @@
 			])
 		}
 	}
-	export default {
-		data() {
-			return {
-				store
-			}
-		},
-		mixins: [mixins],
-		methods: {
-			handleClick(index) {
+
+	@Component
+	class HTitle6 extends mixins(mx) {
+		store:Any=store
+
+		handleClick(index) {
+			if(index){
 				GoldChart.scene.setSceneIndex(index)
 			}
-		},
+		}
 		created() {
 			this.configSource = this.parseConfigSource(config)
 			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
+	export default HTitle6
 </script>
 <style lang="scss">
 	.h-title-6-icon {
@@ -78,6 +75,5 @@
 			}
 		}
 	}
-
 </style>
 

@@ -1,9 +1,11 @@
 <template>
 	<div class="map-container">
 		<div
-			:style="`transform: scale(${reverseScaleRatio});transform-origin:top left; overflow: hidden;width:${
-				kanboardSize.width / reverseScaleRatio
-			}px;height:${kanboardSize.height / reverseScaleRatio}px`"
+			:style="
+				`transform: scale(${reverseScaleRatio});transform-origin:top left; overflow: hidden;width:${kanboardSize.width /
+					reverseScaleRatio}px;height:${kanboardSize.height /
+					reverseScaleRatio}px`
+			"
 		>
 			<el-amap
 				vid="overviewMap"
@@ -131,6 +133,11 @@ export default {
 <style lang="scss">
 .amap-logo {
 	opacity: 0 !important;
+	pointer-events: none;
+}
+.amap-copyright {
+	opacity: 0 !important;
+	pointer-events: none;
 }
 </style>
 

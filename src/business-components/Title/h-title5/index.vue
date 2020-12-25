@@ -1,12 +1,12 @@
-<template>
-	<div class="widget-part" :style="styles">
-		<div class="h-title-5">
-			<p class="pos-r text-left">{{data&&data.title}}</p>
-		</div>
-	</div>
+<template lang="pug">
+	.widget-part(:style="styles")
+		.h-title-5
+			p.pos-r.text-left {{data&&data.title}}
 </template>
 <script>
-	import mixins from '../../mixins'
+	import mx from '../../mixins'
+	import {Component} from 'vue-property-decorator'
+	import {mixins} from 'vue-class-component'
 
 	const config = {
 		animation: true,
@@ -19,13 +19,14 @@
 			})
 		}
 	}
-	export default {
-		mixins: [mixins],
+	@Component
+	class HTitle5 extends mixins(mx) {
 		created() {
 			this.configSource = this.parseConfigSource(config)
 			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
+	export default HTitle5
 </script>
 <style lang="scss">
 	.h-title-5 {

@@ -1,17 +1,9 @@
 <template></template>
 <script>
-function findAmapRoot() {
-	if (this.$amap) return this.$amap;
-	let parent = this.$parent;
-	if (parent) {
-		let fun = findAmapRoot.bind(parent);
-		return fun();
-	}
-}
 import { Overlay } from '../../../../../components/index';
 export default {
 	name: 'RoutePlan',
-	inject: ['parentInfo'],
+	inject: ['parentInfo', 'getMap'],
 	components: {
 		Overlay,
 	},
@@ -52,8 +44,7 @@ export default {
 		},
 	},
 	created() {
-		let fun = findAmapRoot.bind(this);
-		this.map = fun();
+		this.map = this.getMap();
 	},
 	methods: {
 		async getData(drawLineIndex) {

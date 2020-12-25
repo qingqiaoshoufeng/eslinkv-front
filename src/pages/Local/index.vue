@@ -1,9 +1,9 @@
 <template lang="pug">
-	.local-container
-		full
+	.detail-container
+		local
 </template>
 <style lang="scss">
-	.local-container {
+	.detail-container {
 		height: 100%;
 	}
 </style>

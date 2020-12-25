@@ -36,10 +36,7 @@ export default {
                 // pitch: 10,
                 // zooms:[11,19],
                 mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
-                senceName: null,
-                sateMapCtrPos: null,  // 卫星地图控制器位置
             },
-            map: null
         }
     },
     computed: {
@@ -99,11 +96,17 @@ export default {
             // this.$refs.amap.$amap.addControl(new AMap.ToolBar({
             //     offset:AMap.Pixel(100,100)
             // }));
+
             // let originInstance = new AMap.TileLayer.Satellite({
             // 	zIndex: 1,
-            // 	opacity:1,
+            // 	opacity: 1,
             // });
-            // this.$refs.amap.$amap.addLayer(originInstance);
+            // window.sy111 = this.$refs.amap.$amap
+            // sy111.getLayers().forEach(item => {
+            // 	item.mapName = 'sy'
+            // 	item.hide()
+            // })
+            // this.$refs.amap.$amap.add(originInstance);
         },
     },
     mounted() {
