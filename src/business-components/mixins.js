@@ -27,40 +27,16 @@ export default {
 			if(this.configValue){
 				this.configValue.api.bind.refIds.forEach(ref => {
 					let dom
-					if(this.kanboardEditor.$refs[ref]){
+					if (this.kanboardEditor.$refs[ref]) {
 						dom = this.kanboardEditor.$refs[ref][0].$refs.widgets
-					}else{
-						if(store.instance.createKanboard){
-							if(store.instance.createKanboard.$refs[ref]){
-								dom =store.instance.createKanboard.$refs[ref][0].$refs.widgets
-							}
-						}
+					} else if(store.instance.createKanboard?.$refs[ref]){
+						dom =store.instance.createKanboard.$refs[ref][0].$refs.widgets
 					}
-					if(dom){
-						if (typeof dom.updateComponent === 'function')
-							dom.updateComponent(data)
-						dom.updateAjax(data)
-					}
+					if(!dom) return
+					if (typeof dom.updateComponent === 'function') dom.updateComponent(data)
+					dom.updateAjax(data)
 				})
 			}
-		},
-		/**
-		 * @description 外部更新组件
-		 */
-		updateComponentFormOutSide({data, url, path, method, params}) {
-			if (params){
-				this.config.api.params = JSON.stringify(params)
-			}
-			if (data){
-				this.config.api.data = JSON.stringify(data)
-			}
-
-			if (url)
-				this.config.api.url = url
-			if (path)
-				this.config.api.path = path
-			if (method)
-				this.config.api.method = method
 		},
 		/**
 		 * @description 组件间联动后的 ajax 数据重新请求
