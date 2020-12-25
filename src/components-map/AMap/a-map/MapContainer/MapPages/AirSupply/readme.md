@@ -1,4 +1,5 @@
-### config.js 
+### config.js
+
 #### 地图 legend 配置
 
 ```js
@@ -8,10 +9,10 @@ let legendMap = {
 		legendIcon: '图例图标',
 		icon: '地图上图标',
 		component: '覆盖物对应组件名称',
-        visible: '是否默认开启（true/false)',
-        dataProp:'后端返回data中的数据',
-        tileQuery:'gis切片需要的查询参数',
-        showOverlayName:'是否显示地图覆盖物名称'
+		visible: '是否默认开启（true/false)',
+		dataProp: '后端返回data中的数据',
+		tileQuery: 'gis切片需要的查询参数',
+		showOverlayName: '是否显示地图覆盖物名称',
 	},
 }
 ```
@@ -20,8 +21,10 @@ let legendMap = {
 
 ```js
 let overlayMap = {
-	GasStation: {   //key值:覆盖物类型 对应 legend组件的key值
-		fields: {   //弹窗显示的字段  
+	GasStation: {
+		//key值:覆盖物类型 对应 legend组件的key值
+		fields: {
+			//弹窗显示的字段
 			name: {
 				style: {
 					fontSize: '24px',
@@ -33,7 +36,7 @@ let overlayMap = {
 				},
 			},
 		},
-		visibleMore: false,  //是否显示查看详情
+		visibleMore: false, //是否显示查看详情
 	},
 	WARNEVENT: {
 		fields: {
@@ -55,8 +58,8 @@ let overlayMap = {
 }
 ```
 
+#### page.js 文件导出所写页面，地图主页会自动引入
 
-#### page.js文件导出所写页面，地图主页会自动引入
 #### 地图 legend 配置
 
 ```js

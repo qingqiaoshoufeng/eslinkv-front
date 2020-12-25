@@ -23,7 +23,6 @@
 						:is="mapComponentName"
 					/>
 				</template>
-				<!-- <template v-slot:SatelliteMap> </template> -->
 			</el-amap>
 		</div>
 		<SatelliteMap v-if="showMapPage" v-model="isShowSatellite" :map="map" />
