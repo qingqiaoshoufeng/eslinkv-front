@@ -126,7 +126,6 @@ componentCommonArr.map(componentName => {
 				componentName
 		);
 });
-
 import {
 	INDEXSCENEMAP,
 	THREESOCIALLINKAGE_SCENEINDEX,
@@ -219,14 +218,17 @@ export default {
 
 			this.visible = value;
 		},
+		// 详情弹框展示更多详情
 		showMoreDetail() {
 			this.showThreeSocialLinkageDetail();
 		},
+		// 获取三社联动热力数据信息
 		async getThreeSocialLinkagecustmerHot() {
 			let res = await this.$sysApi.map.serve.getThreeSocialLinkagecustmerHot();
 
 			this.allTypeStationList.CustomerHotList = res.customer;
 		},
+		// 点击覆盖物icon
 		async handleOverlayClick(overlay, overlayType1, isCenter = false) {
 			this.activeOverlay = {};
 			this.detailInfo = {};
@@ -237,14 +239,16 @@ export default {
 				id,
 				type,
 			};
-
+			// 如果点击到分公司覆盖物 请求覆盖物详情
 			if (['BranchCompany'].includes(overlayType)) {
 				this.detailInfo = await this.getDetailInfo(params);
+				// 如果点击到任务工单覆盖物 直接过滤该条工单数据不必请求
 			} else if (overlayType === 'TaskList') {
 				overlay.activeIndex = this.allTypeStationList.TaskList.findIndex(
 					item => item.id === overlay.id
 				);
 				this.isShowMore = false;
+				// 触发点击右侧栏相同效果
 				this.handleListClick(overlay);
 				return;
 			}
@@ -258,6 +262,7 @@ export default {
 				this.$amap.panTo([lng, lat], 100);
 			}
 		},
+		// 关闭详情
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
 			this.showOverlayDetail = false;
@@ -266,24 +271,9 @@ export default {
 			this.$amap.setZoom(this.zoom, 100);
 			this.$amap.panTo(this.center, 100);
 			this.activeIndex = -1;
-			// this.activeOverlay = {};
 			done && done();
 		},
-		viewOverlayDetail(overlay) {
-			let { overlayType } = overlay;
-		},
-
-		toViewOverlayDetail(overlay) {
-			let { overlayType } = overlay;
-			this.OverlayDetail = overlay;
-			let viewOverlayHandlerMap = {
-				ThreeSocialLinkage: 'showThreeSocialLinkageDetail',
-			};
-			let handler = viewOverlayHandlerMap[overlayType];
-			if (handler) {
-				this[handler](overlay);
-			}
-		},
+		// 点击右侧栏
 		handleListClick(item) {
 			let {
 				name,
@@ -319,9 +309,9 @@ export default {
 			this.$amap.panTo([lng, lat], 100);
 			this.showOverlayDetail = true;
 		},
+		// 打开三社联动更多详情场景
 		showThreeSocialLinkageDetail() {
 			let { id } = this.activeOverlay;
-
 			//打开三社联动的弹框
 			GoldChart.scene.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX);
 			this.$nextTick(() => {

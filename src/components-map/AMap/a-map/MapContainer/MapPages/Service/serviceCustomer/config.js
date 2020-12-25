@@ -53,7 +53,6 @@ export const SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP = {
 }
 //覆盖物详情
 export const SERVICE_SERVICECUSTOMER_OVERLAY_MAP = {
-
     ThreeSocialLinkage: {
         fields: {
             name: {},
