@@ -1,7 +1,7 @@
 <template>
 	<div class="TipDetial">
 		<div class="companyName">
-			<!-- {{ data.name || data.context || data.address }} -->
+			<!-- 为了兼容不同页面展示的详情名称按此优先级处理 -->
 			{{ data.name || data.context || data.address }}
 		</div>
 		<div class="detial_info_list">

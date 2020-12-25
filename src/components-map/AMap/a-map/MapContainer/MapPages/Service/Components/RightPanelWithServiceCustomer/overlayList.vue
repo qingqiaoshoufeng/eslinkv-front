@@ -51,7 +51,7 @@
 import { SvgIcon, NoData } from '../../../../../components/';
 import { SERVICE_SERVICECUSTOMER_LEGEND_MAP } from '../../serviceCustomer/config';
 export default {
-	name: 'HomeRealTimeList',
+	name: 'overlayList',
 	components: {
 		SvgIcon,
 		NoData,
