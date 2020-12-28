@@ -1,10 +1,10 @@
 <template>
-	<div class="widget-part pos-r" :style="styles">
+	<div class="widget-part pos-r" :style="styles" v-if="data">
 		<div class="statistical2-box">
 			<div class="left fn-flex flex-column">
-				<div class="time">{{ year }}{{config.config && config.config.timeDesc}}</div>
+				<div class="time">{{ time }}{{config.config.timeDesc}}</div>
 				<div class="decs">
-					{{ config.config && config.config.desc }}
+					{{ config.config.desc }}
 				</div>
 			</div>
 			<div class="right">
@@ -38,9 +38,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="right-more pos-r" @click="handleClick" :class="{pointer:config.config&&config.config.sceneId}">
-				<div class="right-more-total font-num">{{data&&data.todayData |toThousand}}</div>
-				<div class="right-more-des">{{config.config && config.config.rightDesc}}</div>
+			<div class="right-more pos-r" @click="handleClick" :class="{pointer:config.config.sceneId}">
+				<div class="right-more-total font-num">{{data.todayData |toThousand}}</div>
+				<div class="right-more-des">{{config.config.rightDesc}}</div>
 			</div>
 		</div>
 	</div>
@@ -90,9 +90,7 @@
 	};
 	export default {
 		data() {
-			const year = format(new Date(), 'yyyy')
 			return {
-				year,
 				scrollList: new Int8Array(10),
 				transform: new Int8Array(9),
 			};
@@ -157,6 +155,7 @@
 		width: 100%;
 		height: 100%;
 		display: flex;
+    justify-content: center;
 
 		.left {
 			min-width: 180px;
@@ -189,7 +188,6 @@
 		}
 
 		.right {
-			flex: 1;
 
 			.value {
 				width: 100%;

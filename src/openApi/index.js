@@ -10,15 +10,21 @@ const GoldChart = {
 		changeShowMainScene: mutations.changeShowMainScene,
 	},
 	instance: {
-		updateComponent: (id, data) => {
-			if (store.instance.kanboard.$refs[id]) {
-				store.instance.kanboard.$refs[id][0].$refs.widgets.updateComponentFormOutSide(data)
+		updateComponent: (id, config) => {
+			const widgetConfig = store.kanboard.widgetAdded[id].config.api
+			if (config.params){
+				widgetConfig.params = JSON.stringify(config.params)
 			}
-			if (store.instance.createKanboard) {
-				if (store.instance.createKanboard.$refs[id]) {
-					store.instance.createKanboard.$refs[id][0].$refs.widgets.updateComponentFormOutSide(data)
-				}
+			if (config.data){
+				widgetConfig.data = JSON.stringify(config.data)
 			}
+
+			if (config.url)
+				widgetConfig.url = config.url
+			if (config.path)
+				widgetConfig.path = config.path
+			if (config.method)
+				widgetConfig.method = config.method
 		},
 	},
 	store,
