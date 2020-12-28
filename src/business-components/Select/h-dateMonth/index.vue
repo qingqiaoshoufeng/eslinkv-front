@@ -13,7 +13,7 @@
 	import addMonths from 'date-fns/addMonths'
 	import isSameMonth from 'date-fns/isSameMonth'
 	import format from 'date-fns/format'
-	import {getInput} from '@lib'
+	import {getInput} from '../../../../lib'
 	import {store} from '../../../openApi'
 
 	const config = {

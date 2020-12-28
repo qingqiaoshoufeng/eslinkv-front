@@ -7,7 +7,7 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import {getInput} from "@lib"
+	import {getInput} from '../../../../lib'
 
 	const config = {
 		animation: true,

@@ -44,7 +44,6 @@
 <script>
 	import mixins from '../../mixins';
 	import {getInput} from '../../../../lib';
-	import format from 'date-fns/format'
 
 	const config = {
 		animation: true,

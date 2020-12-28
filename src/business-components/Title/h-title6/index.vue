@@ -28,7 +28,7 @@
 
 	@Component
 	class HTitle6 extends mixins(mx) {
-		store:Any=store
+		store: any=store
 
 		handleClick(index) {
 			if(index){

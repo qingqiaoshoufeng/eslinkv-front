@@ -15,7 +15,7 @@
 	import mx from '../../mixins'
 	import {Component} from 'vue-property-decorator'
 	import {mixins} from 'vue-class-component'
-	import {getInput, getSelect} from "@lib"
+	import {getInput, getSelect} from "../../../../lib"
 
 	const configSource = {
 		config: {

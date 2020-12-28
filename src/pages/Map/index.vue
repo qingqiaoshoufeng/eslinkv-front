@@ -11,11 +11,11 @@
 		components:{amap}
 	})
 	class Map extends Vue {
-		kanboardSize:Object<any>= {
+		kanboardSize:any= {
 			width: 3500,
 			height: 1050,
 		}
-		sceneMap:Object<any>= {
+		sceneMap: any= {
 			'8iyxp8u3gtu': 'AirSupplyLowPressure', //供气-管网
 			'9n1zur7e4l': 'AirSupplyUCAN', //供气-泛能
 			'nn16rowdl5r': 'AirSupplyHighPressure', //供气-场站
@@ -34,7 +34,7 @@
 			});
 			document.dispatchEvent(event);
 		}
-		updateKanboardSize(val) {
+		updateKanboardSize() {
 			const { clientWidth, clientHeight } = document.body;
 			const { width, height } = this.kanboardSize;
 			let ratio = Math.min(clientWidth / width, clientHeight / height);
