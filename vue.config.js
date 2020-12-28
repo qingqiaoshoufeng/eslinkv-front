@@ -15,7 +15,7 @@ module.exports = {
     transpileDependencies: ['@simonwep', 'vue-draggable-resizable-gorkys2', 'swiper', 'dom7'],
     assetsDir: 'static',
     productionSourceMap: false,
-    lintOnSave: true,
+    lintOnSave: false,
     devServer: {
         port: 3000,
         hot: true,
