@@ -74,7 +74,11 @@
 	};
 	export default {
 		data() {
-			const year = format(new Date(), 'yyyy')
+      let year
+      const now = new Date()
+      year = now.getFullYear()
+      const end = new Date(`${year} 12-26 08:00`)
+      if (now > end) year++
 			return {
 				year,
 				scrollList: new Int8Array(10),
