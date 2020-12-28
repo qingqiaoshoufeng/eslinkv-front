@@ -82,5 +82,3 @@ export default {
 	font-size: 44px;
 }
 </style>
-
-

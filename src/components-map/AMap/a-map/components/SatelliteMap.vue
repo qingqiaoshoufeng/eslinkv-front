@@ -14,8 +14,6 @@ export default {
 	watch: {
 		value: {
 			handler(val) {
-				console.log(this.map);
-
 				this.toggerMapStyle(val);
 			},
 			// immediate: true,

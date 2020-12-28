@@ -157,7 +157,6 @@ export default {
 	mounted() {
 		this.getAllTypeStationList();
 		this.getDataStatisticsInfo();
-		window.setCenter = this.setCenter.bind(this);
 	},
 	data() {
 		let { LNGStation } = AIRSUPPLY_LNG_LEGEND_MAP;

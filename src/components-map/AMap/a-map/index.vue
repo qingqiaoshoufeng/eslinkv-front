@@ -38,7 +38,8 @@ export default {
 	mounted() {
 		setTimeout(() => {
 			this.ready = true;
-		}, 2000);
+        }, 2000);
+        //以防地图加载不出hock处理
 		window.resetMap = this.resetMap.bind(this);
 	},
 };

@@ -9,14 +9,11 @@
 			...$attrs,
 		}"
 		:showOverlayName="false"
-		@click="
-			marker =>
-				$emit('overlay-click', { detailList, ...marker }, 'ICcustomer')
-		"
+		@click="handleOverlayClick"
 	/>
 </template>
 <script>
-import { BaseOverlay } from '../../../../components/index';
+import { BaseOverlay } from '../../../../components/index'
 
 export default {
 	name: 'ICcustomer',
@@ -39,18 +36,21 @@ export default {
 		detailList: {
 			type: Array,
 			default() {
-				return [];
+				return []
 			},
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.mock.getICcustomerList;
+		let apiFun = this.$sysApi.map.mock.getICcustomerList
 		return {
 			apiFun: apiFun,
-		};
+		}
 	},
-};
+	methods: {
+		handleOverlayClick(marker) {
+            marker.detailList = this.detailList
+			$emit('overlay-click', this.marker, this.overlayIcon)
+		},
+	},
+}
 </script>
-
-
-

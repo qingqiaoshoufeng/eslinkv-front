@@ -10,14 +10,11 @@
 			detailList,
 			showOverlayName: false,
 		}"
-		@click="
-			marker =>
-				$emit('overlay-click', { detailList, ...marker }, overlayType)
-		"
+		@click="handleOverlayClick"
 	/>
 </template>
 <script>
-import { BaseOverlay } from '../../../../components/index';
+import { BaseOverlay } from '../../../../components/index'
 
 export default {
 	name: 'MajorClient',
@@ -40,13 +37,13 @@ export default {
 		data: {
 			type: Array,
 			default() {
-				return [];
+				return []
 			},
 		},
 		detailList: {
 			type: Array,
 			default() {
-				return [];
+				return []
 			},
 		},
 	},
@@ -54,28 +51,24 @@ export default {
 		return {
 			apiFun: this.$sysApi.map.mock.getGrouphallList,
 			mouseIn: true,
-		};
+		}
 	},
 	methods: {
 		mouseover(marker) {
-			this.mouseIn = true;
-			this.$emit(
-				'overlay-click',
-				{
-					detailList: this.detailList,
-					...marker,
-					overlayType: this.overlayType,
-				},
-				this.overlayType
-			);
+			this.mouseIn = true
+			marker.detailList = this.detailList
+			marker.overlayType = this.overlayType
+			this.$emit('overlay-click', marker, this.overlayType)
 		},
 		mouseleave() {
-			this.mouseIn = true;
-			this.$emit('close');
+			this.mouseIn = true
+			this.$emit('close')
+		},
+		handleOverlayClick(marker) {
+			marker.detailList = this.detailList
+			marker.overlayType = this.overlayType
+			$emit('overlay-click', marker, this.overlayType)
 		},
 	},
-};
+}
 </script>
-
-
-

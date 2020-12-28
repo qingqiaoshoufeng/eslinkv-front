@@ -1,30 +1,26 @@
 <template>
 	<div v-if="isRendered">
-		<Overlay
-			v-for="(item, index) in list"
-			:key="overlayType + index"
-			:marker="{
+		<Overlay v-for="(item, index) in list"
+				 :key="overlayType + index"
+				 :marker="{
 				icon: overlayIcon,
 				...item,
 				iconSize,
 			}"
-			:active="item.active"
-			:visible="visible || activeItemName === item[overlayName]"
-			@click="handleClick(item)"
-			@mouseover="handleMouseOver(item)"
-			@mouseleave="handleMouseLeave(item)"
-		>
+				 :active="item.active"
+				 :visible="visible || activeItemName === item[overlayName]"
+				 @click="handleClick(item)"
+				 @mouseover="handleMouseOver(item)"
+				 @mouseleave="handleMouseLeave(item)">
 			<!-- 默认显示配置的icon -->
 			<template slot="icon">
 				<slot name="icon"></slot>
 			</template>
 			<slot :data="item">
 				<!-- 默认显示图标的名字 -->
-				<div
-					class="sample-name"
-					:style="sampleNamePoseMap[item.pose] || {}"
-					v-if="showOverlayName"
-				>
+				<div class="sample-name"
+					 :style="sampleNamePoseMap[item.pose] || {}"
+					 v-if="showOverlayName">
 					{{ item[overlayName] }}
 				</div>
 			</slot>
@@ -59,7 +55,7 @@ export default {
 		},
 		query: {
 			type: Object,
-			default: function() {
+			default: function () {
 				return {};
 			},
 		},
@@ -79,6 +75,7 @@ export default {
 	watch: {
 		visible: {
 			async handler(val) {
+                var a 
 				let { isRendered } = this;
 				if (val && !isRendered) {
 					await this.getData(this.query);
@@ -115,12 +112,14 @@ export default {
 					top: `-30px`,
 				},
 				right: {
-					transform: `translate(${this.iconSize / 2 +
-						4}px,calc(-50% - ${this.iconSize / 2}px)`,
+					transform: `translate(${
+						this.iconSize / 2 + 4
+					}px,calc(-50% - ${this.iconSize / 2}px)`,
 				},
 				left: {
-					transform: `translate(calc(-100% - ${this.iconSize / 2 +
-						4}px),calc(-50% - ${this.iconSize / 2}px)`,
+					transform: `translate(calc(-100% - ${
+						this.iconSize / 2 + 4
+					}px),calc(-50% - ${this.iconSize / 2}px)`,
 				},
 			},
 		};

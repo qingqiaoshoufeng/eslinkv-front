@@ -13,7 +13,6 @@
 							padding: '0,10px',
 							width: '80px',
 							height: '32px',
-							fontFamily: 'PingFang SC',
 							fontWeight: 600,
 							fontSize: '20px',
 							lineHeight: '32px',
@@ -49,60 +48,62 @@
 				type="ios-loading"
 				size="54"
 				class="demo-spin-icon-load"
-				v-show="isShow"
+				v-show="loading"
 			></i-icon>
-			<div
-				@click="handleClick(item, index, 'WarningList')"
-				v-for="(item, index) in list"
-				:key="index"
-				class="list-item"
-				:class="{ active: activeItem === item }"
-				v-show="!isShow"
-			>
-				<div class="row">
-					<SvgIcon
-						:icon-name="
-							item.status == '0'
-								? 'iconzhengchang'
-								: 'iconyichang'
-						"
-						class="panel-type-icon"
-					></SvgIcon>
-					<div class="content">
-						{{ item.description }}
-						<div
-							class="level"
-							:class="{
-								first: item.level === 1,
-								second: item.level === 2,
-								third: item.level === 3,
-							}"
-						>
-							{{ item.level }}
+			<NoData :show="!loading && !list.length" />
+			<template v-if="!loading">
+				<div
+					@click="handleClick(item, index, 'WarningList')"
+					v-for="(item, index) in list"
+					:key="index"
+					class="list-item"
+					:class="{ active: activeItem === item }"
+					v-show="!loading"
+				>
+					<div class="row">
+						<SvgIcon
+							:icon-name="
+								item.status == '0'
+									? 'iconzhengchang'
+									: 'iconyichang'
+							"
+							class="panel-type-icon"
+						></SvgIcon>
+						<div class="content">
+							{{ item.description }}
+							<div
+								class="level"
+								:class="{
+									first: item.level === 1,
+									second: item.level === 2,
+									third: item.level === 3,
+								}"
+							>
+								{{ item.level }}
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="station-name">
+							{{ item.address }}
+						</div>
+						<div class="time">
+							{{ item.alarmTime }}
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="station-name">
-						{{ item.address }}
-					</div>
-					<div class="time">
-						{{ item.alarmTime }}
-					</div>
-				</div>
-			</div>
-			<NoData :show="!isShow && !list.length" />
+			</template>
 		</div>
 	</div>
 </template>
 
 <script>
-import { SvgIcon, NoData } from '../../../../../components/';
-import GoldChart from '@/openApi';
+import { SvgIcon, NoData } from '../../../../../components/'
+import GoldChart from '@/openApi'
 import {
 	AIRSUPPLY_WARN_MODEL_SCENEINDEX,
 	AIRSUPPLY_WARN__MODEL_COMPONENTINDEX,
-} from '../../../../../config/scene';
+} from '../../../../../config/scene'
 export default {
 	name: 'ProcessWarningList',
 	components: {
@@ -113,7 +114,8 @@ export default {
 		return {
 			activeIndex: null,
 			list: [],
-			isShow: false,
+			loading: false,
+			loaded: false,
 			currentLevel: 1,
 			repairState: 1,
 			levelList: [
@@ -121,39 +123,39 @@ export default {
 				{ value: 2, label: '二级' },
 				{ value: 3, label: '三级' },
 			],
-		};
+		}
 	},
 	props: {
 		activeItem: {
 			type: Object,
 			default() {
-				return {};
+				return {}
 			},
 		},
 	},
 	//定时刷新数据
 	async created() {
-		this.getData();
+		this.getData()
 		this.timer = setInterval(() => {
-			this.getData();
-		}, 120000);
+			this.getData()
+		}, 60000)
 	},
 	computed: {
 		active() {
-			return this.$parent.active;
+			return this.$parent.active
 		},
 	},
 	methods: {
 		changeRepairState(val) {
-			this.repairState = val;
-			this.getData();
+			this.repairState = val
+			this.getData()
 		},
 		handleClick(listItem, index) {
-			let { address, time } = listItem;
-			this.activeIndex = index;
-			listItem.status = listItem.status == '1' ? 1 : 0;
-			listItem.overlayType = 'WarningList';
-			this.$emit('change', listItem);
+			let { address, time } = listItem
+			this.activeIndex = index
+			listItem.status = listItem.status == '1' ? 1 : 0
+			listItem.overlayType = 'WarningList'
+			this.$emit('change', listItem)
 			//实时报警弹出
 			// GoldChart.scene.createSceneInstance(
 			// 	AIRSUPPLY_WARN_MODEL_SCENEINDEX,
@@ -175,21 +177,25 @@ export default {
 			// }, 3000);
 		},
 		async getData() {
-			this.isShow = true;
+			//除第一次需要loading外，其余需要无感刷新
+			if (!this.loaded) {
+				this.loading = true
+			}
 			this.list = await this.$sysApi.map.airSupply.getProcessWarningList({
 				priority: this.currentLevel,
 				status: this.repairState,
-			});
-			this.isShow = false;
+			})
+			this.loading = false
+			this.loaded = true
 		},
 	},
 	beforeDestroy() {
 		if (this.timer) {
-			clearInterval(this.timer);
-			this.timer = null;
+			clearInterval(this.timer)
+			this.timer = null
 		}
 	},
-};
+}
 </script>
 
 <style lang="scss" scoped>

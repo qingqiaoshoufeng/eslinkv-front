@@ -45,15 +45,15 @@
 	</div>
 </template>
 <script>
-import bus from '../../../../../utils/bus';
-import GoldChart from '@/openApi';
+import bus from '../../../../../utils/bus'
+import GoldChart from '@/openApi'
 import {
 	INDEXSCENEMAP,
 	OVERLAYINFOMAP_AIRSUPPLY,
 	AIRSUPPLY_WARN_SCENEINDEX,
 	AIRSUPPLY_WARN_COMPONENTINDEX,
-} from '../../../../../config';
-import { WARNING_OVERLAY_MAP } from './config.js';
+} from '../../../../../config'
+import { WARNING_OVERLAY_MAP } from './config.js'
 export default {
 	name: 'WarnEvent',
 	inject: ['parentInfo'],
@@ -66,7 +66,7 @@ export default {
 		data: {
 			type: Object,
 			default() {
-				return {};
+				return {}
 			},
 		},
 	},
@@ -79,90 +79,89 @@ export default {
 			overlayIcon: '',
 			OverlayDetailProp: {},
 			overlayInfoConfigMap: Object.freeze(WARNING_OVERLAY_MAP),
-		};
+		}
 	},
 	computed: {
 		showMore() {
-			let { data, showRoutePlan } = this;
-			return !showRoutePlan && data.overlayType === 'WARNEVENT';
+			let { data, showRoutePlan } = this
+			return !showRoutePlan && data.overlayType === 'WARNEVENT'
 		},
 	},
 	watch: {
 		data(val) {
 			if (JSON.stringify(val) !== '{}') {
-				let { overlayType, status } = val;
-				let { overlayInfoConfigMap } = this;
+				let { overlayType, status } = val
+				let { overlayInfoConfigMap } = this
 				let iconMap = {
 					WARNEVENT: 'iconshijian1',
 					WarningList: 'icongongyiyichang',
-				};
+				}
 				let overlayDetailConfig =
-					overlayInfoConfigMap[overlayType] || {};
+					overlayInfoConfigMap[overlayType] || {}
 				//弹窗详情
 				this.OverlayDetailProp = {
 					iconSize: 38,
 					overlayDetailConfig,
 					showCloseBtn: true,
-				};
+				}
 				//报警图标
 				this.overlayIcon =
-					iconMap[overlayType] + (status === 0 ? '-suc' : '');
-				this.visible = true;
-				this.showOverlayDetail = true;
+					iconMap[overlayType] + (status === 0 ? '-suc' : '')
+				this.visible = true
+				this.showOverlayDetail = true
 			} else {
-				this.visible = false;
-				this.showOverlayDetail = false;
-				this.showRoutePlan = false;
-				return {};
+				this.visible = false
+				this.showOverlayDetail = false
+				this.showRoutePlan = false
+				return {}
 			}
 		},
 		//路径规划时隐藏管线，legend
 		showRoutePlan(val) {
-			this.$parent.showRoutePlan = val;
+			this.$parent.showRoutePlan = val
 		},
 	},
 	mounted() {
 		bus.$on('clearRoutePlan', () => {
-			this.showRoutePlan = false;
-			this.$emit('close');
-		});
+			this.showRoutePlan = false
+			this.$emit('close')
+		})
 	},
 	methods: {
 		viewOverlayDetail() {
-			let { repairContent, address, callDate } = this.data;
-			this.showRoutePlan = true;
+			let { repairContent, address, callDate } = this.data
+			this.showRoutePlan = true
 			//和场景进行交互
-			GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX);
+			GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX)
 			//更新数据
 			this.$nextTick(() => {
-				AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
+				AIRSUPPLY_WARN_COMPONENTINDEX.forEach((i) => {
 					GoldChart.instance.updateComponent(i, {
 						params: {
 							id: this.data.id,
 						},
-					});
-				});
-				GoldChart.liveVideo.pauseVideo();
-			});
+					})
+				})
+				GoldChart.liveVideo.pauseVideo()
+			})
 		},
 		closeOverlayDetail(done) {
-			this.showRoutePlan = false;
+			this.showRoutePlan = false
 			GoldChart.scene.setSceneIndex(
 				INDEXSCENEMAP[this.parentInfo.pageName]
-			);
-			this.$emit('close');
-			done && done();
+			)
+			this.$emit('close')
+			done && done()
 		},
 		getDetailOverlayInstance() {
-			return this.$refs.OverlayDetail.getInstance();
+			return this.$refs.OverlayDetail.getInstance()
 		},
 	},
 	beforeDestroy() {
-		bus.$off(['clearRoutePlan']);
+		bus.$off(['clearRoutePlan'])
 	},
-};
+}
 </script>
-
 
 <style lang="scss" scoped>
 video::-webkit-media-controls {

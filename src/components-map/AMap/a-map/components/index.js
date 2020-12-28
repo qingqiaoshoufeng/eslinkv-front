@@ -1,4 +1,3 @@
-export { default as DashboardPanel } from './DashboardPanel'
 export { default as SvgIcon } from './SvgIcon'
 export { default as DataStatistics } from './DataStatistics'
 export { default as RegionBoundary } from './RegionBoundary'

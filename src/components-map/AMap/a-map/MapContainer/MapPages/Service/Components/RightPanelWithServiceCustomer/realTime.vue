@@ -1,11 +1,11 @@
 <template>
 	<div class="list">
-		<NoData :show="!list.length && !isShow" />
+		<NoData :show="!list.length && !loading" />
 		<i-icon
 			type="ios-loading"
 			size="54"
 			class="demo-spin-icon-load"
-			v-show="isShow"
+			v-show="loading"
 		></i-icon>
 		<div
 			@click="handleClick(item, index)"
@@ -17,7 +17,7 @@
 					activeIndex === index &&
 					activeOverlay.activeIndex === index,
 			}"
-			v-show="!isShow"
+			v-show="!loading"
 		>
 			<div class="row">
 				<SvgIcon
@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import { TaskList } from '..';
 import { SvgIcon, NoData } from '../../../../../components/';
 
 export default {
@@ -65,7 +64,8 @@ export default {
 			activeIndex: null,
 			list: [],
 			clickNumber: 0,
-			isShow: true,
+            loading: true,
+            loaded:false,
 		};
 	},
 	props: {
@@ -83,9 +83,10 @@ export default {
 		},
 	},
 	async created() {
-		this.isShow = true;
-		this.list = await this.$sysApi.map.serve.getServiceCustomerTaskList();
-		this.isShow = false;
+        this.getData();
+		this.timer = setInterval(() => {
+			this.getData();
+		}, 60000);
 	},
 	watch: {
 		activeItem(val) {
@@ -100,12 +101,28 @@ export default {
 		},
 	},
 	methods: {
+        async getData(){
+            //除第一次需要loading外，其余需要无感刷新
+            if(!this.loaded){    
+                this.loading = true
+            } 
+			let data = await  this.$sysApi.map.serve.getServiceCustomerTaskList()
+			this.list = data;
+            this.loading = false;
+            this.loaded=true;
+        },
 		handleClick(item, index) {
 			item.activeIndex = index;
 			this.activeIndex = index;
 			item.overlayType = 'TaskList';
 			this.$emit('change', item);
 		},
+    },
+    beforeDestroy() {
+		if (this.timer) {
+			clearInterval(this.timer);
+			this.timer = null;
+		}
 	},
 };
 </script>

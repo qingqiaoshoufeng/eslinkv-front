@@ -56,7 +56,7 @@ export default {
 .data_statistics_box {
 	width: 280px;
 	position: fixed;
-	left: 2681px;
+	right: 530px;
 	top: 148px;
 	z-index: 9999;
 	.data_statistics_item {

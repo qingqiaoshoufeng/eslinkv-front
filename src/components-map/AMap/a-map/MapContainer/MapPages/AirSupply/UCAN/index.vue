@@ -146,8 +146,7 @@ export default {
 	mounted() {
 		this.getAllTypeStationList();
 		this.getDataStatisticsInfo();
-		window.setCenter = this.setCenter.bind(this);
-	},
+0	},
 	watch: {
 		center(val) {
 			this.$amap.panTo(val, 100);

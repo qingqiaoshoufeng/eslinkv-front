@@ -56,11 +56,9 @@ export default {
 	},
 	methods: {
 		handleClick(item, index) {
-			// debugger;
 			this.geocoder = new AMap.Geocoder({
 				city: '330100', //杭州市范围内查询
 			});
-			// console.log(item.lat);
 			if (!item.lat) {
 				this.geocoder.getLocation(item.address, (status, result) => {
 					if (status === 'complete' && result.geocodes.length) {

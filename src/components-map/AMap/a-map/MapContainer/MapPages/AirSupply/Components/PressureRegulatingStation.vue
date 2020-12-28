@@ -13,7 +13,7 @@
 	/>
 </template>
 <script>
-import { BaseOverlay } from '../../../../components/index';
+import { BaseOverlay } from '../../../../components/index'
 export default {
 	name: 'PressurereGulatingStation',
 	components: {
@@ -38,12 +38,12 @@ export default {
 		detailList: {
 			type: Array,
 			default() {
-				return [];
+				return []
 			},
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.mock.getPressureRegulatingStationList;
+		let apiFun = this.$sysApi.map.mock.getPressureRegulatingStationList
 		return {
 			apiFun: apiFun,
 			propDwMap: {
@@ -55,11 +55,11 @@ export default {
 				todayAirFeed: 'm³',
 			},
 			mouseIn: false,
-		};
+		}
 	},
 	computed: {
 		dataInner() {
-			let { data = [] } = this;
+			let { data = [] } = this
 			let stationPoseMap = {
 				临平调压站: 'right',
 				半山调压站: 'right',
@@ -70,52 +70,54 @@ export default {
 				西部应急气源站: 'left',
 				苏嘉路阀室: 'right',
 				之江调压站: 'right',
-			};
-			return this.data.map(item => {
-				item.pose = stationPoseMap[item.name];
-				return item;
-			});
+			}
+			return this.data.map((item) => {
+				item.pose = stationPoseMap[item.name]
+				return item
+			})
 		},
 	},
 	methods: {
 		async handleClick(marker) {
-			let { id = '', name = '', type = '' } = marker;
-			let data = {};
-			let dataComp = {};
-			try {
-				data = await this.$sysApi.map.airSupply.getStationRealTimeInfo({
-					id,
-					name,
-					type,
-				});
-			} catch (error) {
-				console.log(error, '接口出错');
-			}
-			Object.keys(data).forEach(prop => {
-				let dw = this.propDwMap[prop];
-				if (typeof data[prop] !== 'object') {
-					return false;
+			if (!marker.detail) {
+				let { id = '', name = '', type = '' } = marker
+				let data = {}
+				let dataComp = {}
+				try {
+					data = await this.$sysApi.map.airSupply.getStationRealTimeInfo(
+						{
+							id,
+							name,
+							type,
+						}
+					)
+				} catch (error) {
+					console.log(error, '接口出错')
 				}
-				data[prop].forEach((item, index) => {
-					let { name, value } = item;
-					let propInner = prop + index;
-					dataComp[propInner] = {
-						label: name,
-						value: value, //.toFixed(2),
-						dw,
-					};
-				});
-			});
+				Object.keys(data).forEach((prop) => {
+					let dw = this.propDwMap[prop]
+					if (typeof data[prop] !== 'object') {
+						return false
+					}
+					data[prop].forEach((item, index) => {
+						let { name, value } = item
+						let propInner = prop + index
+						dataComp[propInner] = {
+							label: name,
+							value: value, //.toFixed(2),
+							dw,
+						}
+					})
+				})
+				marker.detail = dataComp
+			}
 			this.$emit(
 				'overlay-click',
-				{ ...marker, detail: dataComp },
+				marker,
 				'PressureRegulatingStation',
 				false
-			);
+			)
 		},
 	},
-};
+}
 </script>
-
-
-

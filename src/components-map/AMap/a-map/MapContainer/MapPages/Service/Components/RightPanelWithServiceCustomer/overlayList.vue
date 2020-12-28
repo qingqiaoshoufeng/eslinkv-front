@@ -1,6 +1,12 @@
 <template>
 	<div class="list">
-		<NoData :show="!list.length" />
+		<i-icon
+			type="ios-loading"
+			size="54"
+			class="demo-spin-icon-load"
+			v-show="loading"
+		></i-icon>
+		<NoData :show="!loading && !list.length" />
 		<div
 			@click="handleClick(item, index)"
 			v-for="(item, index) in list"
@@ -48,8 +54,8 @@
 </template>
 
 <script>
-import { SvgIcon, NoData } from '../../../../../components/';
-import { SERVICE_SERVICECUSTOMER_LEGEND_MAP } from '../../serviceCustomer/config';
+import { SvgIcon, NoData } from '../../../../../components/'
+import { SERVICE_SERVICECUSTOMER_LEGEND_MAP } from '../../serviceCustomer/config'
 export default {
 	name: 'overlayList',
 	components: {
@@ -60,56 +66,73 @@ export default {
 		return {
 			activeIndex: null,
 			list: [],
-		};
+			loading: false,
+			loaded: false,
+		}
 	},
 	props: {
 		activeItem: {
 			type: Object,
 			default() {
-				return {};
+				return {}
 			},
 		},
 		activeOverlay: {
 			type: Object,
 			default() {
-				return {};
+				return {}
 			},
 		},
 	},
 	created() {
-		this.getData();
+		this.getData()
+		this.timer = setInterval(() => {
+			this.getData()
+		}, 60000)
 	},
 	watch: {
 		activeItem(val) {
 			if (JSON.stringify(val) == '{}') {
-				return (this.activeIndex = null);
+				return (this.activeIndex = null)
 			}
-			let index = this.list.findIndex(item => {
-				let { id } = item;
-				return val.id === id;
-			});
-			this.activeIndex = index > -1 ? index : null;
+			let index = this.list.findIndex((item) => {
+				let { id } = item
+				return val.id === id
+			})
+			this.activeIndex = index > -1 ? index : null
 		},
 	},
 	methods: {
 		async getData() {
-			let res = await this.$sysApi.map.serve.getServiceCustomerThreeSocialList();
-			this.list = res.map(item => {
-				let { stationType } = item;
-				let config = SERVICE_SERVICECUSTOMER_LEGEND_MAP[stationType];
+            //除第一次需要loading外，其余需要无感刷新
+            if(!this.loaded){    
+                this.loading = true
+            } 
+			let res = await this.$sysApi.map.serve.getServiceCustomerThreeSocialList()
+			this.list = res.map((item) => {
+				let { stationType } = item
+				let config = SERVICE_SERVICECUSTOMER_LEGEND_MAP[stationType]
 				if (config) {
-					item.icon = config.legendIcon;
+					item.icon = config.legendIcon
 				}
-				return item;
-			});
+				return item
+            })
+            this.loading = false;
+            this.loaded=true;
 		},
 		handleClick(item, index) {
-			this.activeIndex = index;
-			item.overlayType = 'ThreeSocialLinkage';
-			this.$emit('change', { ...item, activeIndex: index });
+			this.activeIndex = index
+			item.overlayType = 'ThreeSocialLinkage'
+			this.$emit('change', { ...item, activeIndex: index })
 		},
 	},
-};
+	beforeDestroy() {
+		if (this.timer) {
+			clearInterval(this.timer)
+			this.timer = null
+		}
+	},
+}
 </script>
 
 <style lang="scss" scoped>
@@ -169,6 +192,24 @@ export default {
 				color: rgba(255, 255, 255, 0.8);
 				margin-left: 36px;
 			}
+		}
+	}
+	/deep/.demo-spin-icon-load {
+		animation: ani-demo-spin 1s linear infinite;
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%);
+	}
+	@keyframes ani-demo-spin {
+		from {
+			transform: rotate(0deg);
+		}
+		50% {
+			transform: rotate(180deg);
+		}
+		to {
+			transform: rotate(360deg);
 		}
 	}
 }

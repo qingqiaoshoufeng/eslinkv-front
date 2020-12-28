@@ -37,7 +37,7 @@
 		<CustomerHot
 			v-if="
 				allTypeStationList.CustomerHotList &&
-				allTypeStationList.CustomerHotList.length
+					allTypeStationList.CustomerHotList.length
 			"
 			:visible="visible"
 			:data="allTypeStationList.CustomerHotList"

@@ -85,13 +85,13 @@ export default {
 						let { lng, lat } = lnglat;
 						item.lat = lat;
 						item.lng = lng;
-						this.$emit('overlay-click', item);
 					} else {
 						//查询失败则默认杭然地址
 						item.lat = 30.273297;
 						item.lng = 120.151562;
 						console.log('根据地址查询位置失败');
-					}
+                    }
+                    this.$emit('overlay-click', item);
 				});
 			} else {
 				this.$emit('overlay-click', item, eventType);

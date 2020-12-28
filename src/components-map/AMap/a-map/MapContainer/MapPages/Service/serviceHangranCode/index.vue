@@ -190,7 +190,6 @@ export default {
 		this.$nextTick(() => {
 			this.mapFitView(-0.3, 0.4, 0.35);
 		});
-		window.mapFitView = this.mapFitView.bind(this);
 	},
 	methods: {
 		// 关闭详情

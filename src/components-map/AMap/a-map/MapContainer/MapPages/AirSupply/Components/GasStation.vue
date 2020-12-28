@@ -27,9 +27,9 @@ import {
 	AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
 	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
 	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
-} from '../../../../config/scene';
-import { BaseOverlay } from '../../../../components/index';
-import GoldChart from '@/openApi';
+} from '../../../../config/scene'
+import { BaseOverlay } from '../../../../components/index'
+import GoldChart from '@/openApi'
 
 export default {
 	name: 'GasStation',
@@ -59,12 +59,12 @@ export default {
 		detailList: {
 			type: Array,
 			default() {
-				return [];
+				return []
 			},
 		},
 	},
 	data() {
-		let apiFun = this.$sysApi.map.mock.getGasStationList;
+		let apiFun = this.$sysApi.map.mock.getGasStationList
 		return {
 			apiFun: apiFun,
 			propDwMap: {
@@ -76,52 +76,52 @@ export default {
 				todayAirFeed: 'm³',
 			},
 			mouseIn: false,
-		};
+		}
 	},
 	methods: {
 		async handleOverlayClick(marker) {
-			let { id = '', name = '', type = '' } = marker;
-			let data = {};
-			let dataComp = {};
-			try {
-				data = await this.$sysApi.map.airSupply.getStationRealTimeInfo({
-					id,
-					name,
-					type,
-				});
-			} catch (error) {
-				console.error(error, '接口报错');
-			}
-			Object.keys(data).forEach(prop => {
-				let dw = this.propDwMap[prop];
-				if (typeof data[prop] !== 'object') {
-					return false;
+			if (!marker.detail) {
+				let { id = '', name = '', type = '' } = marker
+				let data = {}
+				let dataComp = {}
+				try {
+					data = await this.$sysApi.map.airSupply.getStationRealTimeInfo(
+						{
+							id,
+							name,
+							type,
+						}
+					)
+				} catch (error) {
+					console.error(error, '接口报错')
 				}
-				data[prop].forEach((item, index) => {
-					let { name, value } = item;
-					let propInner = prop + index;
-					dataComp[propInner] = {
-						label: name,
-						value: value,
-						dw,
-					};
-				});
-			});
-			this.$emit(
-				'overlay-click',
-				{ ...marker, detail: dataComp },
-				'GasStation',
-				false
-			);
+				Object.keys(data).forEach((prop) => {
+					let dw = this.propDwMap[prop]
+					if (typeof data[prop] !== 'object') {
+						return false
+					}
+					data[prop].forEach((item, index) => {
+						let { name, value } = item
+						let propInner = prop + index
+						dataComp[propInner] = {
+							label: name,
+							value: value,
+							dw,
+						}
+					})
+				})
+				marker.detail = dataComp
+			}
+			this.$emit('overlay-click', marker, 'GasStation', false)
 		},
 		viewDetail(marker) {
-			let { name, id } = marker;
+			let { name, id } = marker
 			GoldChart.scene.createSceneInstance(
 				AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
 				'slideRight'
-			);
+			)
 			this.$nextTick(() => {
-				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach(item => {
+				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach((item) => {
 					GoldChart.instance.updateComponent(item, {
 						data: {
 							label: name,
@@ -129,22 +129,22 @@ export default {
 							image: name,
 							stationId: id,
 						},
-					});
-				});
-				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach(item => {
+					})
+				})
+				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach((item) => {
 					GoldChart.instance.updateComponent(item, {
 						params: {
 							id,
 						},
-					});
-				});
+					})
+				})
 				setTimeout(() => {
-					this.$emit('close');
-				}, 2000);
-			});
+					this.$emit('close')
+				}, 2000)
+			})
 		},
 	},
-};
+}
 </script>
 <style lang="scss" scoped>
 img {
@@ -342,5 +342,3 @@ img {
 	}
 }
 </style>
-
-

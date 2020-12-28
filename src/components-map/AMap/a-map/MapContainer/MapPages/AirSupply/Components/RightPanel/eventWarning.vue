@@ -36,55 +36,56 @@
 				type="ios-loading"
 				size="54"
 				class="demo-spin-icon-load"
-				v-show="isShow"
+				v-show="loading"
 			></i-icon>
-			<div
-				@click="handleClick(item, index, 'WarningList')"
-				v-for="(item, index) in list"
-				:key="index"
-				class="list-item"
-				:class="{ active: activeItem === item }"
-				v-show="!isShow"
-			>
-				<div class="row">
-					<SvgIcon
-						:icon-name="
-							item.stateName == '处理完成'
-								? 'iconzhengchang'
-								: 'iconyichang'
-						"
-						class="panel-type-icon"
-					></SvgIcon>
-					<div class="content">
-						{{ item.repairContent || '其他' }}
+			<NoData :show="!loading && !list.length" />
+			<template v-if="!loading">
+				<div
+					@click="handleClick(item, index, 'WarningList')"
+					v-for="(item, index) in list"
+					:key="index"
+					class="list-item"
+					:class="{ active: activeItem === item }"
+				>
+					<div class="row">
+						<SvgIcon
+							:icon-name="
+								item.stateName == '处理完成'
+									? 'iconzhengchang'
+									: 'iconyichang'
+							"
+							class="panel-type-icon"
+						></SvgIcon>
+						<div class="content">
+							{{ item.repairContent || '其他' }}
+						</div>
+						<div>
+							{{ item.callDate }}
+						</div>
 					</div>
-					<div>
-						{{ item.callDate }}
+					<div class="row">
+						<div class="station-name">
+							{{ item.address }}
+						</div>
+						<div
+							:class="[
+								'status',
+								item.stateName == '处理完成'
+									? 'status-suc'
+									: 'status-err',
+							]"
+						>
+							{{ item.stateName }}
+						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="station-name">
-						{{ item.address }}
-					</div>
-					<div
-						:class="[
-							'status',
-							item.stateName == '处理完成'
-								? 'status-suc'
-								: 'status-err',
-						]"
-					>
-						{{ item.stateName }}
-					</div>
-				</div>
-			</div>
-			<NoData :show="!isShow && !list.length" />
+			</template>
 		</div>
 	</div>
 </template>
 
 <script>
-import { SvgIcon, NoData } from '../../../../../components/';
+import { SvgIcon, NoData } from '../../../../../components/'
 
 export default {
 	name: 'HomeRealTimeList',
@@ -97,59 +98,64 @@ export default {
 			list: [],
 			repairType: '抢修',
 			repairState: 1,
-			isShow: false,
-		};
+			loading: false,
+			loaded: false,
+		}
 	},
 	props: {
 		activeItem: {
 			type: Object,
 			default() {
-				return {};
+				return {}
 			},
 		},
 	},
 	computed: {
 		active() {
-			return this.$parent.active;
+			return this.$parent.active
 		},
 	},
 	async created() {
-		this.getData();
+		this.getData()
 		this.timer = setInterval(() => {
-			this.getData();
-		}, 120000);
+			this.getData()
+		}, 60000)
 	},
 	methods: {
 		changeRepairState(repairState) {
-			this.repairState = repairState;
-			this.getData();
+			this.repairState = repairState
+			this.getData()
 		},
 		changeRepairType(repairType) {
-			this.repairType = repairType;
-			this.getData();
+			this.repairType = repairType
+			this.getData()
 		},
 		async getData() {
-			this.isShow = true;
+			//除第一次需要loading外，其余需要无感刷新
+			if (!this.loaded) {
+				this.loading = true
+			}
 			let data = await this.$sysApi.map.airSupply.getEventWarningList({
 				repairType: this.repairType,
 				repairState: this.repairState,
-			});
-			this.list = data;
-			this.isShow = false;
+			})
+			this.list = data
+			this.loading = false
+			this.loaded = true
 		},
 		handleClick(item) {
-			item.status = item.stateName == '处理完成' ? 0 : 1;
-			item.overlayType = 'WARNEVENT';
-			this.$emit('change', item);
+			item.status = item.stateName == '处理完成' ? 0 : 1
+			item.overlayType = 'WARNEVENT'
+			this.$emit('change', item)
 		},
 	},
 	beforeDestroy() {
 		if (this.timer) {
-			clearInterval(this.timer);
-			this.timer = null;
+			clearInterval(this.timer)
+			this.timer = null
 		}
 	},
-};
+}
 </script>
 
 <style lang="scss" scoped>

@@ -25,12 +25,12 @@
 				</template>
 			</el-amap>
 		</div>
-		<SatelliteMap v-if="showMapPage" v-model="isShowSatellite" :map="map" />
-		<SatelliteMapControl
+		<!-- <SatelliteMap v-if="showMapPage" v-model="isShowSatellite" :map="map" /> -->
+		<!-- <SatelliteMapControl
 			v-if="showMapPage"
 			v-model="isShowSatellite"
 			:sateMapCtrPos="sateMapCtrPos"
-		/>
+		/> -->
 
 		<!-- 地图类型 -->
 		<MapTypeLegend />
@@ -40,28 +40,28 @@
 </template>
 
 <script>
-import { AMap } from '../lib';
-import MapTypeLegend from './MapTypeLegend';
-import { SatelliteMap, SatelliteMapControl } from '../components';
-import mapMixin from './mapMixin.js';
+import { AMap } from '../lib'
+import MapTypeLegend from './MapTypeLegend'
+import { SatelliteMap, SatelliteMapControl } from '../components'
+import mapMixin from './mapMixin.js'
 //动态引入页面
-const files = require.context('./MapPages/', true, /page\.js$/);
-const mapPages = {};
-const path = require('path');
-files.keys().forEach(key => {
-	let pageModule = files(key).default || files(key);
-	const pageName = path.dirname(key).slice(2);
-	Object.keys(pageModule).forEach(componentName => {
-		let subPageName = pageModule[componentName];
+const files = require.context('./MapPages/', true, /page\.js$/)
+const mapPages = {}
+const path = require('path')
+files.keys().forEach((key) => {
+	let pageModule = files(key).default || files(key)
+	const pageName = path.dirname(key).slice(2)
+	Object.keys(pageModule).forEach((componentName) => {
+		let subPageName = pageModule[componentName]
 		mapPages[pageName + componentName] = () =>
 			import(
 				/*webpackInclude:/\.(vue)$/ */ './MapPages/' +
 					pageName +
 					'/' +
 					subPageName
-			);
-	});
-});
+			)
+	})
+})
 
 export default {
 	name: 'MainMap',
@@ -72,7 +72,7 @@ export default {
 				scaleRatio: this.scaleRatio,
 				pageName: this.pageName,
 			},
-		};
+		}
 	},
 	components: {
 		ElAmap: AMap,
@@ -90,24 +90,24 @@ export default {
 			scaleRatio: 1,
 			reverseScaleRatio: 1,
 			isShowSatellite: false,
-		};
+		}
 	},
 	methods: {
 		updateKanboardSize() {
-			const { clientWidth, clientHeight } = document.body;
-			const { width, height } = this.kanboardSize;
-			let ratio = Math.min(clientWidth / width, clientHeight / height);
-			ratio = ratio < 1 ? ratio : 1;
-			this.reverseScaleRatio = 1 / ratio;
-			this._provided.parentInfo.scaleRatio = ratio;
+			const { clientWidth, clientHeight } = document.body
+			const { width, height } = this.kanboardSize
+			let ratio = Math.min(clientWidth / width, clientHeight / height)
+			ratio = ratio < 1 ? ratio : 1
+			this.reverseScaleRatio = 1 / ratio
+			this._provided.parentInfo.scaleRatio = ratio
 		},
 	},
 	mounted() {
-		this.updateKanboardSize();
+		this.updateKanboardSize()
 	},
-};
+}
 </script>
- <style lang="scss" scoped>
+<style lang="scss" scoped>
 .vue-portal-target {
 	z-index: 99;
 }
@@ -128,7 +128,6 @@ export default {
 }
 </style>
 
-
 <style lang="scss">
 .amap-logo {
 	opacity: 0 !important;
@@ -139,4 +138,3 @@ export default {
 	pointer-events: none;
 }
 </style>
-

@@ -21,7 +21,7 @@ initAMapApiLoader({
 export default {
     data() {
         return {
-            showMap: false,
+            showMap: true,
             mapReady: false,
             mapComponentName: 'AirSupplyHighPressure',
             mapComponentNameBefore: '',
@@ -67,10 +67,16 @@ export default {
             if (this.mapComponentNameBefore === 'routeplan') {
                 bus.$emit('clearRoutePlan')
             }
-            this.mapComponentNameBefore = this.mapComponentName
-            this.mapComponentName = pageName
-            this._provided.parentInfo.pageName = pageName
-            this.sateMapCtrPos = ['ServiceNineteen', 'ServiceHangranCode'].includes(pageName) ? 'left' : null
+            // if(this.map){
+            //     this.map.clearMap()
+            // }
+            this.$nextTick(()=>{
+                this.mapComponentNameBefore = this.mapComponentName
+                this.mapComponentName = pageName
+                this._provided.parentInfo.pageName = pageName
+                this.sateMapCtrPos = ['ServiceNineteen', 'ServiceHangranCode'].includes(pageName) ? 'left' : null
+            })
+           
         },
         mapInit() {
             console.log('地图初始化完成！')
@@ -101,7 +107,6 @@ export default {
             // 	zIndex: 1,
             // 	opacity: 1,
             // });
-            // window.sy111 = this.$refs.amap.$amap
             // sy111.getLayers().forEach(item => {
             // 	item.mapName = 'sy'
             // 	item.hide()
@@ -109,7 +114,7 @@ export default {
             // this.$refs.amap.$amap.add(originInstance);
         },
     },
-    mounted() {
+    created() {
         document.addEventListener('SceneIndex', this.handleSceneChange)
     },
     beforeDestroy() {
