@@ -15,8 +15,8 @@ module.exports = {
 		echarts: true
 	},
 	rules: {
-		'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-		'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
+		'no-console': process.env.NODE_ENV === 'production' ? 'off' : 'off',
+		'no-debugger': process.env.NODE_ENV === 'production' ? 'off' : 'off',
 		'no-tabs': 0,
 		'no-mixed-spaces-and-tabs': 0,
 		'indent': ['off', 'tab'],
