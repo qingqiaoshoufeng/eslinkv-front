@@ -32,7 +32,7 @@
 					width: 1920,
 					height: 1080
 				},
-				scale: undefined,
+				scale: 1,
 				actualScaleRatio: 1
 			}
 		},

@@ -1,24 +1,26 @@
-<template>
-	<div class="widget-part pos-r" :style="styles">
-		<div class="h-dateMonth fn-flex flex-row pos-r">
-			<h2 class="fn-flex flex-row">
-				<div class="h-dateMonth-left" @click="handleChange(-1)"/>
-				<span>{{now}}</span>
-				<div :class="{disabled}" class="h-dateMonth-right"
-					 @click="handleChange(1)"/>
-			</h2>
-		</div>
-	</div>
+<template lang="pug">
+	.widget-part.pos-r(:style="styles")
+		.h-dateMonth.fn-flex.flex-row.pos-r
+			h2.fn-flex.flex-row
+				.h-dateMonth-left(@click="handleChange(-1)")
+				span {{now}}
+				.h-dateMonth-right(:class="{disabled}" @click="handleChange(1)")
 </template>
-<script>
-	import mixins from '../../mixins'
+<script lang="ts">
+	import mx from '../../mixins'
+	import {Component,Watch} from 'vue-property-decorator'
+	import {mixins} from 'vue-class-component'
 	import addMonths from 'date-fns/addMonths'
 	import isSameMonth from 'date-fns/isSameMonth'
 	import format from 'date-fns/format'
-	import {getInput} from "../../../../lib";
-	const config = {config:{
-			links:true
-		},animation: true}
+	import {getInput} from '@lib'
+	import {store} from '../../../openApi'
+
+	const config = {
+		config: {
+			links: true
+		}, animation: true
+	}
 
 	const configSource = {
 		config: {
@@ -35,69 +37,50 @@
 			}
 		},
 	}
-	export default {
-		data() {
-			return {
-				showOptions: false,
-				selectValue: addMonths(new Date(), -1)
+
+	@Component
+	class HDateMonth extends mixins(mx) {
+
+		lastDay:Date = new Date()
+		showOptions:Boolean = false
+		selectValue:Date = addMonths(new Date(), -1)
+
+		@Watch('data', { immediate: true, deep: true })
+		onDataChange(val) {
+			if(val){
+				this.lastDay= new Date(val[0].month_id)
+				this.selectValue=new Date(val[0].month_id)
 			}
-		},
-		computed: {
-			disabled() {
-				if (new Date().getDate() === 1)
-					return true
-				return isSameMonth(new Date(), this.selectValue)
-			},
-			now() {
-				return format(this.selectValue, 'yyyy.MM')
+		}
+
+		get disabled() {
+			if (new Date().getDate() === 1)
+				return true
+			return isSameMonth(this.lastDay, this.selectValue)
+		}
+
+		get now() {
+			return format(this.selectValue, 'yyyy.MM')
+		}
+
+		handleChange(index) {
+			if (index > 0) {
+				if (isSameMonth(new Date(this.lastDay), this.selectValue)) {
+					return
+				}
 			}
-		},
-		mixins: [mixins],
-		methods: {
-			handleChange(index) {
-				if (index > 0) {
-					if (isSameMonth(new Date(), this.selectValue)) {
-						return
-					}
-				}
-				this.selectValue = addMonths(this.selectValue, index)
-				this.emitComponentUpdate({month: format(this.selectValue, 'yyyy-MM')})
-				if(this.config.config.links){
-					const links = JSON.parse(this.config.config.links)
-					links.forEach(ref => {
-						let dom
-						if(this.kanboardEditor.$refs[ref]){
-							dom = this.kanboardEditor.$refs[ref][0].$refs.widgets
-						}else{
-							if(store.instance.createKanboard){
-								if(store.instance.createKanboard.$refs[ref]){
-									dom =store.instance.createKanboard.$refs[ref][0].$refs.widgets
-								}
-							}
-						}
-						if (typeof dom.updateComponent === 'function')
-							dom.updateComponent({month: format(this.selectValue, 'yyyy-MM')})
-						dom.updateAjax({month: format(this.selectValue, 'yyyy-MM')})
-					})
-				}
-			},
-		},
-		created() {
-			this.configSource = this.parseConfigSource(config,configSource)
-			this.configValue = this.parseConfigValue(config, value)
-		},
-		mounted() {
+			this.selectValue = addMonths(this.selectValue, index)
 			this.emitComponentUpdate({month: format(this.selectValue, 'yyyy-MM')})
-			if(this.config?.config?.links){
+			if (this.config.config.links) {
 				const links = JSON.parse(this.config.config.links)
 				links.forEach(ref => {
 					let dom
-					if(this.kanboardEditor.$refs[ref]){
+					if (this.kanboardEditor.$refs[ref]) {
 						dom = this.kanboardEditor.$refs[ref][0].$refs.widgets
-					}else{
-						if(store.instance.createKanboard){
-							if(store.instance.createKanboard.$refs[ref]){
-								dom =store.instance.createKanboard.$refs[ref][0].$refs.widgets
+					} else {
+						if (store.instance.createKanboard) {
+							if (store.instance.createKanboard.$refs[ref]) {
+								dom = store.instance.createKanboard.$refs[ref][0].$refs.widgets
 							}
 						}
 					}
@@ -107,7 +90,37 @@
 				})
 			}
 		}
+
+		created() {
+			this.configSource = this.parseConfigSource(config, configSource)
+			this.configValue = this.parseConfigValue(config, value)
+		}
+
+		mounted() {
+			this.emitComponentUpdate({month: format(this.selectValue, 'yyyy-MM')})
+			if (this.config?.config?.links) {
+				const links = JSON.parse(this.config.config.links)
+				links.forEach(ref => {
+					let dom
+					if (this.kanboardEditor.$refs[ref]) {
+						dom = this.kanboardEditor.$refs[ref][0].$refs.widgets
+					} else {
+						if (store.instance.createKanboard) {
+							if (store.instance.createKanboard.$refs[ref]) {
+								dom = store.instance.createKanboard.$refs[ref][0].$refs.widgets
+							}
+						}
+					}
+					if (typeof dom.updateComponent === 'function')
+						dom.updateComponent({month: format(this.selectValue, 'yyyy-MM')})
+					dom.updateAjax({month: format(this.selectValue, 'yyyy-MM')})
+				})
+			}
+		}
+
 	}
+
+	export default HDateMonth
 </script>
 <style lang="scss" scoped>
 	.h-dateMonth-left {
@@ -118,7 +131,8 @@
 		background-repeat: no-repeat;
 		background-position: center;
 		cursor: pointer;
-		&:hover{
+
+		&:hover {
 			opacity: 1;
 		}
 	}
@@ -132,7 +146,8 @@
 		background-repeat: no-repeat;
 		background-position: center;
 		cursor: pointer;
-		&:hover{
+
+		&:hover {
 			opacity: 1;
 		}
 

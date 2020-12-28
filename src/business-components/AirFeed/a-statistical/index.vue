@@ -2,7 +2,7 @@
 	<div class="widget-part pos-r" :style="styles" v-if="data">
 		<div class="statistical-box">
 			<div class="left fn-flex flex-column">
-				<div class="time">{{ data.year }}{{config.config.timeDesc}}</div>
+				<div class="time">{{ year }}{{config.config.timeDesc}}</div>
 				<div class="decs">
 					{{ config.config.desc }}
 				</div>
@@ -65,7 +65,6 @@
 		api: {
 			data: JSON.stringify({
 				value: 375321809,
-        year: 2021
 			}),
 		},
 		config: {
@@ -76,6 +75,7 @@
 	export default {
 		data() {
 			return {
+				year: new Date().getFullYear(),
 				scrollList: new Int8Array(10),
 				transform: new Int8Array(9),
 			};
@@ -111,8 +111,11 @@
 		},
 		mounted() {
 			setTimeout(() => {
-				this.setNumberTransform();
-			}, 500);
+				this.setNumberTransform()
+			}, 500)
+			this.$sysApi.bussiness.year().then(res => {
+				this.year = res
+			})
 		},
 	};
 </script>
@@ -183,7 +186,7 @@
 								background-image: url('/static/images/airfeed/statistical.svg');
 								line-height: 80px;
 								background-repeat: no-repeat;
-                background-size: 100% 100%;
+								background-size: 100% 100%;
 								text-align: center;
 								font-size: 48px;
 								font-style: normal;

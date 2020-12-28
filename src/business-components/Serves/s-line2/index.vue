@@ -40,8 +40,8 @@
 		config: {
 			color1: true,
 			color2: true,
-			lineName1: true,
-			lineName2: true,
+			// lineName1: true,
+			// lineName2: true,
 			unit: true
 		},
 	};
@@ -49,14 +49,16 @@
 		api: {
 			data: JSON.stringify(
 				{
-					data: test
+					data: test,
+					lastTime:2020,
+					nowTime:2021,
 				})
 		},
 		config: {
 			color1: '#2C99FF',
 			color2: '#E5615B',
-			lineName1: '今年',
-			lineName2: '去年',
+			// lineName1: '今年',
+			// lineName2: '去年',
 			unit: '单'
 		}
 	}
@@ -65,8 +67,8 @@
 			fields: {
 				color1: getInput('color1', '折线1颜色'),
 				color2: getInput('color2', '折线2颜色'),
-				lineName1: getInput('lineName1', '折线1名称'),
-				lineName2: getInput('lineName2', '折线2名称'),
+				// lineName1: getInput('lineName1', '折线1名称'),
+				// lineName2: getInput('lineName2', '折线2名称'),
 				unit: getInput('unit', '单位')
 			}
 		},
@@ -147,7 +149,7 @@
 					if (this.id) {
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
-							this.setOption(val.data)
+							this.setOption(val)
 						});
 					}
 				},

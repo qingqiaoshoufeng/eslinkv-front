@@ -2,7 +2,7 @@
 	<div class="widget-part pos-r" :style="styles" v-if="data">
 		<div class="statistical2-box">
 			<div class="left fn-flex flex-column">
-				<div class="time">{{ time }}{{config.config.timeDesc}}</div>
+				<div class="time">{{ year }}{{config.config.timeDesc}}</div>
 				<div class="decs">
 					{{ config.config.desc }}
 				</div>
@@ -76,7 +76,6 @@
 		api: {
 			data: JSON.stringify({
 				todayData: 964383,
-				time: 2020,
 				yearData: 375321809,
 			}),
 		},
@@ -91,6 +90,7 @@
 	export default {
 		data() {
 			return {
+				year:new Date().getFullYear(),
 				scrollList: new Int8Array(10),
 				transform: new Int8Array(9),
 			};
@@ -145,8 +145,11 @@
 		},
 		mounted() {
 			setTimeout(() => {
-				this.setNumberTransform();
-			}, 500);
+				this.setNumberTransform()
+			}, 500)
+			this.$sysApi.bussiness.year().then(res => {
+				this.year = res
+			})
 		},
 	};
 </script>

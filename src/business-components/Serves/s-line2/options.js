@@ -28,7 +28,7 @@ export default function (data, config) {
 		},
 		xAxis: [{
 			type: 'category',
-			data: data.map(v => v.x),
+			data: data.data.map(v => v.x),
 			axisLabel: {
 				show: true
 			},
@@ -70,9 +70,9 @@ export default function (data, config) {
 			}
 		}],
 		series: [{
-			name: config.lineName1,
+			name: data.nowTime,
 			type: 'line',
-			data: data.map(v => v.y1),
+			data: data.data.map(v => v.y1),
 			lineStyle: {
 				color: config.color1
 			},
@@ -97,9 +97,9 @@ export default function (data, config) {
 			smooth: true
 		},
 			{
-				name: config.lineName2,
+				name: data.lastTime,
 				type: 'line',
-				data: data.map(v => v.y2),
+				data: data.data.map(v => v.y2),
 				lineStyle: {
 					color: config.color2,
 				},

@@ -14,6 +14,8 @@
 									 class="widget-item-wrapper pos-r">
 									<i class="pos-a" style="left:0;top:0;font-size: 12px;">{{widget.type}}</i>
 									<vue-lazy-component>
+<!--										<div draggable="true" @widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)"-->
+<!--											 @dragstart="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)">加载中...</div>-->
 										<div slot="skeleton">加载中...</div>
 										<parts
 										:type="widget.type"
@@ -127,6 +129,7 @@
 				})
 			},
 			setWidgetConfig(currentValue = {}, index, prefix) {
+				console.log('setWidgetConfig',currentValue,index,prefix)
 				const configMap = this.widgetConfigMap
 				const key = prefix + '-' + index
 				const currentConfig = configMap[key]
@@ -156,6 +159,7 @@
 				const widgetConfig = this.widgetConfigMap[configKey]
 				if (!widgetConfig || !type) return
 				const {config} = widgetConfig
+				console.log(widgetConfig)
 				e.dataTransfer.setData('widget-config', JSON.stringify({
 					type,
 					config,

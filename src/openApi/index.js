@@ -47,7 +47,7 @@ const GoldChart = {
 export default GoldChart
 export {store, mutations}
 
-// window.store = store
+window.store = store
 // if (process.env.NODE_ENV !== 'production')
 	// window.GoldChart = GoldChart
 

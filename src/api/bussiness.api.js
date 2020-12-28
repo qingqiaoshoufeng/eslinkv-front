@@ -12,3 +12,15 @@ export function businessAnalysisType(data) {
 		},
 	})
 }
+
+// 获取杭燃当前时间
+export function year(data) {
+	return request({
+		url: HANGRANURL + '/businessAnalysis/year',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
