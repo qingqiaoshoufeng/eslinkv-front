@@ -1,10 +1,10 @@
 <template>
-	<div class="widget-part pos-r" :style="styles">
+	<div class="widget-part pos-r" :style="styles" v-if="data">
 		<div class="statistical-box">
 			<div class="left fn-flex flex-column">
-				<div class="time">{{ year }}{{config.config && config.config.timeDesc}}</div>
+				<div class="time">{{ data.year }}{{config.config.timeDesc}}</div>
 				<div class="decs">
-					{{ config.config && config.config.desc }}
+					{{ config.config.desc }}
 				</div>
 			</div>
 			<div class="right">
@@ -65,6 +65,7 @@
 		api: {
 			data: JSON.stringify({
 				value: 375321809,
+        year: 2021
 			}),
 		},
 		config: {
@@ -74,13 +75,7 @@
 	};
 	export default {
 		data() {
-      let year
-      const now = new Date()
-      year = now.getFullYear()
-      const end = new Date(`${year} 12-26 08:00`)
-      if (now > end) year++
 			return {
-				year,
 				scrollList: new Int8Array(10),
 				transform: new Int8Array(9),
 			};

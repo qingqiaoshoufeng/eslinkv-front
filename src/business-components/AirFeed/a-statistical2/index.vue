@@ -2,7 +2,7 @@
 	<div class="widget-part pos-r" :style="styles" v-if="data">
 		<div class="statistical2-box">
 			<div class="left fn-flex flex-column">
-				<div class="time">{{ year }}{{config.config.timeDesc}}</div>
+				<div class="time">{{ time }}{{config.config.timeDesc}}</div>
 				<div class="decs">
 					{{ config.config.desc }}
 				</div>
@@ -90,13 +90,7 @@
 	};
 	export default {
 		data() {
-			let year
-      const now = new Date()
-      year = now.getFullYear()
-      const end = new Date(`${year} 12-26 08:00`)
-      if (now > end) year++
 			return {
-				year,
 				scrollList: new Int8Array(10),
 				transform: new Int8Array(9),
 			};
