@@ -62,17 +62,32 @@
 			return {
 				store,
 				panelFixed: false,
-				tabs: {
+				// tabs: {
+				// 	...custom,
+				// 	decoration,
+				// 	dvChart,
+				// 	eChart,
+				// 	other,
+				// },
+				widgetListActiveMap: {},
+				widgetConfigMap: {},
+				widgetListToggleTimer: {},
+				panelStatic: {} // 记录当前打开关闭状态
+			}
+		},
+		computed: {
+			tabs() {
+				let custom = {}
+				store.custom.widgets.map(item => {
+					custom[item.name] = item
+				})
+				return {
 					...custom,
 					decoration,
 					dvChart,
 					eChart,
 					other,
-				},
-				widgetListActiveMap: {},
-				widgetConfigMap: {},
-				widgetListToggleTimer: {},
-				panelStatic: {} // 记录当前打开关闭状态
+				}
 			}
 		},
 		methods: {

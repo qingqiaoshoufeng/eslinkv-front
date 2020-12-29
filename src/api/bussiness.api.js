@@ -37,9 +37,21 @@ export async function getCompList (data) {
 	})
 	res.forEach(v => {
 		v.label = v.name
+		v.type = ''
 		v.widgets.forEach(w => {
 			w.label = w.title
 			w.type = w.componentId
+			w.config =  {
+				layout: {
+					size: {
+						width: 480,
+						height: 226
+					},
+					position: {
+						value: 'relative'
+					}
+				}
+			}
 		})
 	})
 	return res

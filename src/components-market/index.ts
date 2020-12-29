@@ -2,13 +2,7 @@ import {mutations} from '../../lib'
 import { getCompList } from '@/api/bussiness.api'
 import Vue from 'vue'
 
-const array: Array<any> = [
-	{
-		img: '',
-		jsUrl: 'https://cdn.shenzhepei.com/test/app.818b53c3.js',
-		type: 'm-test'
-	}
-]
+
 
 const promises: Array<any> = []
 
@@ -21,6 +15,7 @@ getCompList({typeId: 2}).then(res => {
 				let script = document.createElement('script')
 				script.onload = (a) => {
 					Vue.component(item.type, window.GoldChart[item.type].component)
+					resolve(1)
 				}
 				script.src = item.jsUrl
 				document.head.appendChild(script)
@@ -28,12 +23,11 @@ getCompList({typeId: 2}).then(res => {
 		})
 	})
 	widgetsArray = res
-})
-
-Promise.all(promises).then(() => {
-	mutations.setCustomWidgets({
-		label: '组件市场',
-		widgets: widgetsArray
+	Promise.all(promises).then(() => {
+		mutations.setCustomWidgets({
+			label: '组件市场',
+			widgets: widgetsArray
+		})
 	})
 })
 
