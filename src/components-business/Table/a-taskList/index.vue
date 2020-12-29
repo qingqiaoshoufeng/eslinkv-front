@@ -94,6 +94,7 @@
       data: {
         handler(val) {
           clearInterval(this.timer)
+			this.loop = 0
           this.timer = setInterval(() => {
             if (this.isStop) return
             if (this.loop === Math.ceil(val.length / SIZE)- 1) {
