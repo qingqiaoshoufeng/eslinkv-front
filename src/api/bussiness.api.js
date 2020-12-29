@@ -24,3 +24,15 @@ export function year(data) {
 		},
 	})
 }
+
+// 获取组件列表
+export function getCompList (data) {
+	return request({
+		url: 'http://10.20.9.40:7001/compType/list',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
