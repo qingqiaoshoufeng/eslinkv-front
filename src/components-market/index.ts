@@ -4,7 +4,7 @@ import Vue from 'vue'
 const array: Array<any> = [
 	{
 		img: '',
-		jsUrl: 'https://cdn.shenzhepei.com/test/app.00481127.js',
+		jsUrl: 'https://cdn.shenzhepei.com/test/app.818b53c3.js',
 		type: 'm-test'
 	}
 ]

@@ -102,7 +102,7 @@
 		},
 		computed: {
 			currentComponent() {
-				if(this.componentList[cssStyle2DomStyle(this.type)])
+				if (this.componentList[cssStyle2DomStyle(this.type)] || store.custom.components[this.type])
 					return this.componentList[cssStyle2DomStyle(this.type)]
 				return this.type
 			},
