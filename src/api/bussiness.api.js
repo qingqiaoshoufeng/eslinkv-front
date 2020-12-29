@@ -26,8 +26,8 @@ export function year(data) {
 }
 
 // 获取组件列表
-export function getCompList (data) {
-	return request({
+export async function getCompList (data) {
+	const res = await request({
 		url: 'http://10.20.9.40:7001/compType/list',
 		method: 'get',
 		params: data,
@@ -35,4 +35,12 @@ export function getCompList (data) {
 			'Content-Type': 'application/x-www-form-urlencoded',
 		},
 	})
+	res.forEach(v => {
+		v.label = v.name
+		v.widgets.forEach(w => {
+			w.label = w.title
+			w.type = w.componentId
+		})
+	})
+	return res
 }
