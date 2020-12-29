@@ -59,7 +59,6 @@
 			store.custom.widgets.map(item => {
 				custom[item.name] = item
             })
-            console.log(custom)
 			return {
 				store,
 				panelFixed: false,
@@ -129,7 +128,7 @@
 				})
 			},
 			setWidgetConfig(currentValue = {}, index, prefix) {
-				console.log('setWidgetConfig',currentValue,index,prefix)
+				// console.log('setWidgetConfig',currentValue,index,prefix)
 				const configMap = this.widgetConfigMap
 				const key = prefix + '-' + index
 				const currentConfig = configMap[key]
@@ -159,7 +158,6 @@
 				const widgetConfig = this.widgetConfigMap[configKey]
 				if (!widgetConfig || !type) return
 				const {config} = widgetConfig
-				console.log(widgetConfig)
 				e.dataTransfer.setData('widget-config', JSON.stringify({
 					type,
 					config,

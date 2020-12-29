@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import dvdp, {mutations} from '../../lib'
 
-let components = {}
-const widgetsArray = [], widgetsObject = {}
+let components: any = {}
+const widgetsArray: Array<any> = [], widgetsObject: any = {}
 const conf = require.context('./', true, /\.(component.js)$/)
 const component = require.context('./', true, /index\.(vue)$/)
 component.keys().forEach(name => {

@@ -16,3 +16,10 @@ declare module 'vue/types/vue' {
 	}
 }
 
+
+declare global {
+	interface Window {
+		GoldChart: any
+	}
+}
+

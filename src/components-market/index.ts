@@ -1,10 +1,28 @@
 import {mutations} from '../../lib'
+import Vue from 'vue'
 
-let components: any = {
-	'm-test': {
-		'name': 'm-test'
+const array: Array<any> = [
+	{
+		img: '',
+		jsUrl: 'https://cdn.shenzhepei.com/test/app.00481127.js',
+		type: 'm-test'
 	}
-}
+]
+
+const promises: Array<any> = []
+
+array.forEach(item => {
+	promises.push(new Promise(function (resolve, reject) {
+		let script = document.createElement('script')
+		script.onload = (a) => {
+			Vue.component(item.type, window.GoldChart[item.type].component)
+		}
+		script.src = item.jsUrl
+		document.head.appendChild(script)
+	}))
+})
+Promise.all(promises).then(() => {
+})
 
 const widgetsArray: Array<any> = [{
 	label: '分类1',
@@ -27,7 +45,7 @@ const widgetsArray: Array<any> = [{
 		}
 	]
 }]
-mutations.setCustomComponents(components)
+
 mutations.setCustomWidgets({
 	label: '组件市场',
 	widgets: widgetsArray

@@ -8,6 +8,29 @@ export default function (data, config) {
 			right: '4%',
 			bottom: '20%',
 		},
+		tooltip: {
+			trigger: "axis",
+			triggerOn: 'mousemove|click',
+			axisPointer: {
+				lineStyle: {
+					color: {
+						type: "linear",
+						x: 0,
+						y: 0,
+						x2: 0,
+						y2: 1,
+						colorStops: [{
+							offset: 0,
+							color: "rgba(0, 255, 207, 0.5)"
+						}, {
+							offset: 1,
+							color: "rgba(0, 255, 207, 0)"
+						}],
+						global: false
+					}
+				}
+			}
+		},
 		legend: {
 			icon: 'rect',
 			orient: 'horizontal',

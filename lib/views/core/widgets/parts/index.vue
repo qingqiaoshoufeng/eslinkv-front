@@ -102,7 +102,9 @@
 		},
 		computed: {
 			currentComponent() {
-				return this.componentList[cssStyle2DomStyle(this.type)]
+				if(this.componentList[cssStyle2DomStyle(this.type)])
+					return this.componentList[cssStyle2DomStyle(this.type)]
+				return this.type
 			},
 			animation() {
 				return this.config.animation || {}
@@ -171,9 +173,7 @@
 		},
 		mounted() {
 			if (store.custom.components) {
-				for (let key in store.custom.components) {
-					this.$set(componentList, cssStyle2DomStyle(key), store.custom.components[key])
-				}
+				this.$set(componentList, cssStyle2DomStyle(this.type), store.custom.components[this.type])
 			}
 			this.$debug('component', '加载当前组件')
 			this.$el.addEventListener('animationend', this.handleAnimationEnd)

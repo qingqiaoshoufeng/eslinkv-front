@@ -1,15 +1,6 @@
 const path = require('path');
-const webpack = require('webpack')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
-// 引入等比适配插件
-// const px2rem = require('postcss-px2rem-include');
-// 配置基本大小
-// const postcss = px2rem({
-//     // 基准大小 baseSize，需要和rem.js中相同
-//     remUnit: 16,
-//     include: 'src/pages/Map'
-// });
 const needReport = false
 module.exports = {
     transpileDependencies: ['@simonwep', 'vue-draggable-resizable-gorkys2', 'swiper', 'dom7'],
@@ -69,11 +60,6 @@ module.exports = {
         extract: false,
         sourceMap: false,
         modules: false,
-        // loaderOptions: {
-        //     postcss: {
-        //         plugins: [postcss],
-        //     },
-        // },
     },
     configureWebpack: config => {
         if (isProduction) {
@@ -84,58 +70,23 @@ module.exports = {
                 threshold: 10240,
                 minRatio: 0.8
             }))
-            // config.optimization = {
-            //     runtimeChunk: 'single',
-            //     splitChunks: {
-            //         chunks: 'all',
-            //         maxInitialRequests: Infinity,
-            //         minSize: 20000,
-            //         cacheGroups: {
-            //             vendor: {
-            //                 test: /[\\/]node_modules[\\/]/,
-            //                 name(module) {
-            //                     // get the name. E.g. node_modules/packageName/not/this/part.js
-            //                     // or node_modules/packageName
-            //                     const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1]
-            //                     // npm package names are URL-safe, but some servers don't like @ symbols
-            //                     return `npm.${packageName.replace('@', '')}`
-            //                 }
-            //             }
-            //         }
-            //     }
-            // }
         }
-        // config.entry.app = ["babel-polyfill", "./src/main.ts"];
         config.resolve.extensions = [".js", ".vue", ".json", ".ts", ".tsx"]
         config.externals = [
             {
                 'vue': 'Vue',
                 'vue-router': 'VueRouter',
+                'vue-class-component': 'VueClassComponent',
                 'echarts': 'echarts'
             }
         ]
-        config.plugins.push(
-            // new webpack.ProvidePlugin({
-            //     $: 'jquery',
-            //     jQuery: 'jquery',
-            //     'windows.jQuery': 'jquery'
-            // })
-        )
     },
     chainWebpack: config => {
-        // config.entry.app = ["babel-polyfill", "./src/main.ts"];
-
         config.module
             .rule('vue')
             .use('iview')
             .loader('iview-loader')
             .options({ prefix: false })
-        // config.module
-        //     .rule("view-design")  //  我目前用的是新版本的iview ,旧版本的iview，用iview代替view-design
-        //     .test(/view-design.src.*?js$/)
-        //     .use("babel")
-        //     .loader("babel-loader")
-        //     .end()
         config.resolve.alias
             .set('@lib', path.resolve(__dirname, './lib'));
         if (isProduction) {
@@ -149,8 +100,6 @@ module.exports = {
         } else {
             config.resolve.symlinks(true)
         }
-
-
         config.module
             .rule("view-design")  //  我目前用的是新版本的iview ,旧版本的iview，用iview代替view-design
             .test(/view-design.src.*?js$/)
