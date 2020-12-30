@@ -1,12 +1,17 @@
 import {mutations} from '../../lib'
-import { getCompList } from '@/api/bussiness.api'
+import { getCompList,getLevel0 } from '@/api/bussiness.api'
 import Vue from 'vue'
-
-
 
 const promises: Array<any> = []
 
 let widgetsArray: Array<any> = []
+
+getLevel0().then(res=>{
+	console.log(res)
+	res.forEch(item=>{
+		console.log(item)
+	})
+})
 
 getCompList({typeId: 2}).then(res => {
 	res.forEach(list => {
@@ -30,30 +35,3 @@ getCompList({typeId: 2}).then(res => {
 		})
 	})
 })
-
-// const widgetsArray: Array<any> = [{
-// 	label: '分类1',
-// 	type: '分类1',
-// 	widgets: [
-// 		{
-// 			label: 'm-test',
-// 			type: 'm-test',
-// 			config: {
-// 				layout: {
-// 					size: {
-// 						width: 480,
-// 						height: 226
-// 					},
-// 					position: {
-// 						value: 'relative'
-// 					}
-// 				}
-// 			}
-// 		}
-// 	]
-// }]
-//
-// mutations.setCustomWidgets({
-// 	label: '组件市场',
-// 	widgets: widgetsArray
-// })

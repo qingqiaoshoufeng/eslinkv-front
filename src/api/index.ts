@@ -1,7 +1,8 @@
 // eg 文件名  map.mock.js  调用  this.$sysApi.map.mock.xxx函数
 import Vue from 'vue'
+
 const context = require.context('/', false, /\.(api.js)$/)
-const apis = {}
+const apis: any = {}
 context.keys().forEach((name) => {
 	let key = name.replace(/^\.\//, '').replace(/\.(api.js)$/, '')
 	let keyArr = key.split('.')

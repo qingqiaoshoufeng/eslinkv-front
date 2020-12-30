@@ -1,10 +1,12 @@
 import request from './request'
+
 const HANGRANURL = '/server'
+const DATAURL = '/data'
 
 // 获取行业用气量对比类型
 export function businessAnalysisType(data) {
 	return request({
-		url: HANGRANURL + '/businessAnalysis/type',
+		url:  `${HANGRANURL}/businessAnalysis/type`,
 		method: 'get',
 		params: data,
 		headers: {
@@ -16,7 +18,7 @@ export function businessAnalysisType(data) {
 // 获取杭燃当前时间
 export function year(data) {
 	return request({
-		url: HANGRANURL + '/businessAnalysis/year',
+		url: `${HANGRANURL}/businessAnalysis/year`,
 		method: 'get',
 		params: data,
 		headers: {
@@ -25,10 +27,21 @@ export function year(data) {
 	})
 }
 
+// 获取一级分类列表
+export function getLevel0() {
+	return request({
+		url:`${DATAURL}/compType/getLevel0`,
+		method: 'get',
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
 // 获取组件列表
-export async function getCompList (data) {
+export async function getCompList(data) {
 	const res = await request({
-		url: 'http://10.20.9.40:7001/compType/list',
+		url: `${DATAURL}/compType/list`,
 		method: 'get',
 		params: data,
 		headers: {
@@ -37,7 +50,7 @@ export async function getCompList (data) {
 	})
 	res.forEach(v => {
 		v.label = v.name
-		v.type = '0'
+		v.type = v.name
 		v.widgets.forEach(w => {
 			w.label = w.title
 			w.type = w.componentId

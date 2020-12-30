@@ -13,11 +13,9 @@ import directives from '../lib/directives'
 import * as filters from '@/utils/filter'
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
-import './api/index.js'
+import './api'
 import PortalVue from 'portal-vue'
 import '@babel/polyfill'
-
-
 
 Vue.use(PortalVue)
 Vue.use(VueVideoPlayer)

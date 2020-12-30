@@ -55,20 +55,9 @@
 			parts, Collapse, TabPane, Tabs, Panel, VueLazyComponent
 		},
 		data() {
-			let custom = {}
-			store.custom.widgets.map(item => {
-				custom[item.name] = item
-            })
 			return {
 				store,
 				panelFixed: false,
-				// tabs: {
-				// 	...custom,
-				// 	decoration,
-				// 	dvChart,
-				// 	eChart,
-				// 	other,
-				// },
 				widgetListActiveMap: {},
 				widgetConfigMap: {},
 				widgetListToggleTimer: {},
@@ -192,8 +181,6 @@
 					startY: e.offsetY,
 				}))
 			}
-		},
-		created() {
 		},
 	}
 </script>
