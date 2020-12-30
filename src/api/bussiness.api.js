@@ -38,6 +38,18 @@ export function getLevel0() {
 	})
 }
 
+// 获取所有组件列表
+export function getCompListAll(data) {
+	return request({
+		url:`${DATAURL}/comp/list`,
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
 // 获取组件列表
 export async function getCompList(data) {
 	const res = await request({

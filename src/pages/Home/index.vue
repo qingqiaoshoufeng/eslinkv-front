@@ -2,6 +2,7 @@
 	.list-container
 		div
 			Button(type="primary" @click="handleNew") 新建看板
+			Button.ml20(type="primary" @click="handleMarket") 查看组建市场
 		ul.fn-flex.flex-row.list-item-card-box
 			item-card(v-for="item in list" v-bind="item" :key="item.id" @init="init")
 		Page(:total="total" :show-sizer="true" :show-elevator="true" :show-total="true" @on-change="handleChange" @on-page-size-change="handlePageSize")
@@ -22,6 +23,9 @@
 
 		handleNew() {
 			this.$router.push('/new')
+		}
+		handleMarket() {
+			this.$router.push('/market')
 		}
 		handleChange(pageNum) {
 			this.pageNum = pageNum
@@ -48,6 +52,9 @@
 		height: 100%;
 		padding: 15px;
 		min-width: 930px;
+		.ml20 {
+			margin-left: 20px;
+		}
 	}
 
 	.list-item-card-box {
