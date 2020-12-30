@@ -1,8 +1,7 @@
 import {mutations, store} from '../../lib/store'
 import mixins from '../components-business/mixins'
-import {obj} from '../../lib/views/core/widgets/parts/lib/widget-mixin'
 
-const GoldChart = {
+const GoldChart: any = {
 	scene: {
 		initScene: mutations.initScene,
 		setSceneIndex: mutations.setSceneIndex,
@@ -36,7 +35,7 @@ const GoldChart = {
 		myPlayer: null,
 		pauseVideo: () => {
 			if (!GoldChart.liveVideo.flvPlayer?._emitter) return
-			if (flvjs.isSupported()) {
+			if (window.flvjs.isSupported()) {
 				GoldChart.liveVideo.flvPlayer.unload();
 				GoldChart.liveVideo.flvPlayer.detachMediaElement();
 				GoldChart.liveVideo.flvPlayer.destroy();
@@ -48,8 +47,6 @@ const GoldChart = {
 	components: {},
 	mixins,
 	methods: {
-		parseConfigSource: obj.parseConfigSource,
-		parseConfigValue: obj.parseConfigValue,
 	}
 }
 

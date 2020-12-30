@@ -30,7 +30,7 @@ export function year(data) {
 // 获取一级分类列表
 export function getLevel0() {
 	return request({
-		url:`${DATAURL}/compType/getLevel0`,
+		url:`${DATAURL}/componentType/getLevel0`,
 		method: 'get',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
@@ -41,7 +41,7 @@ export function getLevel0() {
 // 获取组件列表
 export async function getCompList(data) {
 	const res = await request({
-		url: `${DATAURL}/compType/list`,
+		url: `${DATAURL}/componentType/list`,
 		method: 'get',
 		params: data,
 		headers: {
@@ -49,11 +49,11 @@ export async function getCompList(data) {
 		},
 	})
 	res.forEach(v => {
-		v.label = v.name
-		v.type = v.name
+		v.label = v.componentTypeName
+		v.type = v.componentTypeEnName
 		v.widgets.forEach(w => {
-			w.label = w.title
-			w.type = w.componentId
+			w.label = w.componentTitle
+			w.type = w.componentEnTitle
 			w.config =  {
 				layout: {
 					size: {

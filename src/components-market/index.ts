@@ -7,16 +7,16 @@ let widgetsArray: Array<any> = []
 
 getLevel0().then(res => {
 	res.forEach(child => {
-		getCompList({typeId: child.id}).then(res => {
+		getCompList({componentTypeId: child.componentTypeId}).then(res => {
 			res.forEach(list => {
 				list.widgets.forEach(item => {
 					promises.push(new Promise(function (resolve, reject) {
 						let script = document.createElement('script')
 						script.onload = (a) => {
-							Vue.component(item.type, window.GoldChart.components[item.type].component)
+							Vue.component(item.componentEnTitle, window.GoldChart.components[item.componentEnTitle].component)
 							resolve(1)
 						}
-						script.src = item.jsUrl
+						script.src = item.componentJsUrl
 						document.head.appendChild(script)
 					}))
 				})
@@ -24,7 +24,7 @@ getLevel0().then(res => {
 			widgetsArray = res
 			Promise.all(promises).then(() => {
 				window.GoldChart.mutations.setCustomWidgets({
-					label: child.name,
+					label: child.componentTypeName,
 					widgets: widgetsArray
 				})
 			})
