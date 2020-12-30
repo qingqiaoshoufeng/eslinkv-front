@@ -58,7 +58,7 @@ export default {
 	position: fixed;
 	right: 530px;
 	top: 148px;
-	z-index: 9999;
+	z-index: 100;
 	.data_statistics_item {
 		display: flex;
 		flex-direction: column;
