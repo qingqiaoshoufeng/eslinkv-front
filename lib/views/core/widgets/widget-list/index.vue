@@ -10,7 +10,7 @@
 							   v-for="{ label, type, widgets } in tab.widgets">
 							{{ label }}
 							<template v-if="widgetListActiveMap[`${tab.name}-${format(type)}`]" slot="content">
-								<div v-for="(widget, index) in widgets" :key="widget.label"
+								<div v-for="(widget, index) in widgets" :key="index"
 									 class="widget-item-wrapper pos-r">
 									<i class="pos-a" style="left:0;top:0;font-size: 12px;">{{widget.type}}</i>
 									<vue-lazy-component>
@@ -88,6 +88,18 @@
 					eChart,
 					other,
 				}
+			}
+		},
+		watch: {
+			tabs: {
+				handler () {
+					this.initWidgetConfigMap()
+					Object.keys(this.tabs).map(key => {
+						this.$set(this.panelStatic, key, [])
+					})
+				},
+				immediate: true,
+				deep: true
 			}
 		},
 		methods: {
@@ -182,10 +194,6 @@
 			}
 		},
 		created() {
-			this.initWidgetConfigMap()
-			Object.keys(this.tabs).map(key => {
-				this.$set(this.panelStatic, key, [])
-			})
 		},
 	}
 </script>

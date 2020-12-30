@@ -37,7 +37,7 @@ export async function getCompList (data) {
 	})
 	res.forEach(v => {
 		v.label = v.name
-		v.type = ''
+		v.type = '0'
 		v.widgets.forEach(w => {
 			w.label = w.title
 			w.type = w.componentId
