@@ -2,7 +2,7 @@
 	.container
 		iTable(:columns="columns" :data="tableData")
 			template(#image="{ row }")
-				img.avatar(:src="row.image")
+				ImageView.avatar(:images="[row.image]")
 		.page
 			page(:total="total" show-elevator show-total :page-size="pageSize" :current="pageNum" @on-change="pageChange")
 
@@ -12,8 +12,9 @@
 import {Vue, Component} from 'vue-property-decorator'
 import { Table, Page } from 'view-design'
 import { getCompListAll } from '@/api/bussiness.api'
+import ImageView from '@/components/ImageView/index.vue'
 
-@Component({ components: { iTable: Table, Page } })
+@Component({ components: { iTable: Table, Page, ImageView } })
 class Market extends Vue {
 	tableData = []
 	columns = [
