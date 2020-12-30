@@ -14,7 +14,7 @@ getLevel0().then(res => {
 					promises.push(new Promise(function (resolve, reject) {
 						let script = document.createElement('script')
 						script.onload = (a) => {
-							Vue.component(item.type, window.GoldChart[item.type].component)
+							Vue.component(item.type, window.GoldChart.components[item.type].component)
 							resolve(1)
 						}
 						script.src = item.jsUrl

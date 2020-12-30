@@ -1,4 +1,5 @@
 import {mutations, store} from '../../lib/store'
+
 const GoldChart = {
 	scene: {
 		initScene: mutations.initScene,
@@ -11,10 +12,10 @@ const GoldChart = {
 	instance: {
 		updateComponent: (id, config) => {
 			const widgetConfig = store.kanboard.widgetAdded[id].config.api
-			if (config.params){
+			if (config.params) {
 				widgetConfig.params = JSON.stringify(config.params)
 			}
-			if (config.data){
+			if (config.data) {
 				widgetConfig.data = JSON.stringify(config.data)
 			}
 
@@ -46,9 +47,11 @@ const GoldChart = {
 export default GoldChart
 export {store, mutations}
 
-// window.store = store
-// if (process.env.NODE_ENV !== 'production')
-// window.GoldChart = GoldChart
+if (!window.GoldChart) {
+	window.GoldChart = {}
+}
+
+window.GoldChart = {...window.GoldChart, ...GoldChart}
 
 
 
