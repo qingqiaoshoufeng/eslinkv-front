@@ -90,7 +90,7 @@ export default {
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
 			if (overlayType === 'WARNEVENT') {
-				GoldChart.scene.setSceneIndex(INDEXSCENEMAP['ServiceMarket']);
+				window.GoldChart.scene.setSceneIndex(INDEXSCENEMAP['ServiceMarket']);
 				this.showRoutePlan = false;
 			}
 			this.showOverlayDetail = false;

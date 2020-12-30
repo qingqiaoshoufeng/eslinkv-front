@@ -10,7 +10,6 @@
 <script>
 	import mixins from '../../mixins'
 	import {getSelect, getInput} from "../../../../lib";
-	import GoldChart from '../../../openApi'
 
 	const configSource = {
 		config: {
@@ -40,7 +39,7 @@
 		mixins: [mixins],
 		methods: {
 			handleClick() {
-				GoldChart.scene.destroyScene(this.config.config.index)
+				window.GoldChart.scene.destroyScene(this.config.config.index)
 			}
 		},
 		created() {

@@ -2,17 +2,11 @@
 	<div ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen }" class="preview-wrapper">
 		<kanban-preview @mounted="updateKanboardSize" ref="previewContainer"
 						:style="`transform: scale(${scaleRatio}) translate3d(0, 0, 0); overflow: hidden;`"/>
-		<!--<div class="action-bar">
-			<div v-if="actualScaleRatio < 1" class="action fit-screen" @click="fitScreen = !fitScreen">
-				{{ fitScreen ? '原始大小' : '适应窗口' }}
-			</div>
-		</div>-->
 	</div>
 </template>
 
 <script>
 	import kanbanPreview from './preview-base.vue'
-	import {mutations} from '../../store'
 	import {getQueryString} from '../../utils'
 
 	export default {
@@ -53,24 +47,24 @@
 				if (this.$route.name === 'HangRan') {
 					this.$api.board.hangran().then(res => {
 						const value = JSON.parse(res.attribute)
-						mutations.setKanboard(value)
+						window.GoldChart.mutations.setKanboard(value)
 						this.refill(value)
-						mutations.initScene(value.scene)
-						mutations.listToObj(value)
+						window.GoldChart.mutations.initScene(value.scene)
+						window.GoldChart.mutations.listToObj(value)
 					})
 				} else {
 					const {params: {id}} = this.$route
 					const dataBoardId = id
 					this.$api.board.detail({dataBoardId}).then(res => {
 						const value = JSON.parse(res.attribute)
-						mutations.setKanboard(value)
+						window.GoldChart.mutations.setKanboard(value)
 						this.refill(value)
-						mutations.initScene(value.scene)
-						mutations.listToObj(value)
+						window.GoldChart.mutations.initScene(value.scene)
+						window.GoldChart.mutations.listToObj(value)
 					})
 				}
 				if (getQueryString('scene')) {
-					mutations.setSceneIndex(getQueryString('scene'))
+					window.GoldChart.mutations.setSceneIndex(getQueryString('scene'))
 				}
 			},
 			refill(value) {

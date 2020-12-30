@@ -1,5 +1,3 @@
-import {mutations} from '../../lib'
-
 let components:any = {}
 const widgetsArray:Array<any> = [], widgetsObject:any = {}
 const conf = require.context('./', true, /\.(component.js)$/)
@@ -24,8 +22,8 @@ for (let key in widgetsObject) {
 	widgetsArray.push(widgetsObject[key])
 }
 
-mutations.setCustomComponents(components)
-mutations.setCustomWidgets({
+window.GoldChart.mutations.setCustomComponents(components)
+window.GoldChart.mutations.setCustomWidgets({
 	label: '地图',
 	widgets: widgetsArray
 })

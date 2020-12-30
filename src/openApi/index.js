@@ -1,4 +1,6 @@
 import {mutations, store} from '../../lib/store'
+import mixins from '../components-business/mixins'
+import {obj} from '../../lib/views/core/widgets/parts/lib/widget-mixin'
 
 const GoldChart = {
 	scene: {
@@ -28,6 +30,7 @@ const GoldChart = {
 		},
 	},
 	store,
+	mutations,
 	liveVideo: {
 		flvPlayer: null,
 		myPlayer: null,
@@ -43,11 +46,12 @@ const GoldChart = {
 		}
 	},
 	components: {},
-	methods: {}
+	mixins,
+	methods: {
+		parseConfigSource: obj.parseConfigSource,
+		parseConfigValue: obj.parseConfigValue,
+	}
 }
-
-export default GoldChart
-export {store, mutations}
 
 if (!window.GoldChart) {
 	window.GoldChart = {}

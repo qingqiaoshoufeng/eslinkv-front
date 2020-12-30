@@ -11,7 +11,6 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import GoldChart, {store} from '../../../openApi'
 
 	const config = {animation: true}
 	const value = {
@@ -22,27 +21,27 @@
 					{title: '管网', index: ['8iyxp8u3gtu', 'phugmfxir4d']},
 					{title: '泛能', index: ['9n1zur7e4l', 'j2nq2ycw0er']}
 				],
-				disabled:['']
+				disabled: ['']
 			})
 		}
 	}
 	export default {
 		data() {
 			return {
-				store
+				store: window.GoldChart.store
 			}
 		},
 		mixins: [mixins],
 		methods: {
-			changeScene(title,index) {
-				if(this.data.disabled){
-					if(this.data.disabled.indexOf(title)!==-1){
+			changeScene(title, index) {
+				if (this.data.disabled) {
+					if (this.data.disabled.indexOf(title) !== -1) {
 						return false
-					}else{
-						GoldChart.scene.setSceneIndex(index)
+					} else {
+						window.GoldChart.scene.setSceneIndex(index)
 					}
-				}else{
-					GoldChart.scene.setSceneIndex(index)
+				} else {
+					window.GoldChart.scene.setSceneIndex(index)
 				}
 			}
 		},
@@ -69,9 +68,10 @@
 				color: #FEFFFF;
 				background: #0057A9;
 			}
-			&.disabled{
+
+			&.disabled {
 				border: 1px solid #0057A9;
-				color: rgba(255,255,255,0.3);
+				color: rgba(255, 255, 255, 0.3);
 				background: #001F6D;
 				cursor: inherit;
 			}

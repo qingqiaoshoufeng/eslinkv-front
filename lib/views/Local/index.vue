@@ -9,7 +9,6 @@
 
 <script>
 	import kanbanPreview from './preview-base.vue'
-	import {mutations} from '../../store'
 	import {getQueryString,setDefault} from '../../utils'
 	import {Input, Modal, Form, FormItem} from 'view-design'
 
@@ -58,9 +57,9 @@
 						data.widgets.forEach(v => {
 							setDefault(v.value)
 						})
-						mutations.setKanboard(data)
-						mutations.initScene(data.scene)
-						mutations.listToObj(data)
+						window.GoldChart.mutations.setKanboard(data)
+						window.GoldChart.mutations.initScene(data.scene)
+						window.GoldChart.mutations.listToObj(data)
 						this.refill(data)
 						localStorage.setItem('dvdp_local',JSON.stringify(data))
 					} catch (e) {
@@ -92,9 +91,9 @@
 			let data = localStorage.getItem('dvdp_local')
 			if(data){
 				data=JSON.parse(data)
-				mutations.setKanboard(data)
-				mutations.initScene(data.scene)
-				mutations.listToObj(data)
+				window.GoldChart.mutations.setKanboard(data)
+				window.GoldChart.mutations.initScene(data.scene)
+				window.GoldChart.mutations.listToObj(data)
 				this.refill(data)
 			}
 		}

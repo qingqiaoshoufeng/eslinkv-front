@@ -107,7 +107,6 @@ import {
 	AIRSUPPLY_UCAN_OVERLAY_MAP,
 	DATASTATISTICSLIST,
 } from './config.js';
-import GoldChart from '@/openApi';
 
 export default {
 	name: 'AirSupplyHighPressure',

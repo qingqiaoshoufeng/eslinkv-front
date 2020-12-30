@@ -13,7 +13,6 @@
 		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
 		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
 	} from '../../../components-map/AMap/a-map/config/scene'
-	import GoldChart from '../../../openApi'
 	const config = {animation: true}
 
 	const value = {
@@ -65,7 +64,7 @@
 					id: a.id,
 				})
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach(item => {
-					GoldChart.instance.updateComponent(item, {
+					window.GoldChart.instance.updateComponent(item, {
 						data: {
 							label: a.name,
 							title: a.name,
@@ -75,7 +74,7 @@
 					});
 				});
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach(item => {
-					GoldChart.instance.updateComponent(item, {
+					window.GoldChart.instance.updateComponent(item, {
 						params: {
 							id:a.id,
 						},

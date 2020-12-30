@@ -1,12 +1,9 @@
-<template>
-	<div class="widget-part pos-r" :style="`${styles};top:0;}`">
-		<div class="h-bg3">
-		</div>
-	</div>
+<template lang="pug">
+	.widget-part.pos-r(:style="`${styles};top:0;}`")
+		.h-bg3
 </template>
 <script>
 	import mixins from '../../mixins'
-	import GoldChart from '../../../openApi'
 
 	const config = {animation: true}
 	export default {

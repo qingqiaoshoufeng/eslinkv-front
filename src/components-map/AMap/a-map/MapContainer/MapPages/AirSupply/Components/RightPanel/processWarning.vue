@@ -99,11 +99,6 @@
 
 <script>
 import { SvgIcon, NoData } from '../../../../../components/'
-import GoldChart from '@/openApi'
-import {
-	AIRSUPPLY_WARN_MODEL_SCENEINDEX,
-	AIRSUPPLY_WARN__MODEL_COMPONENTINDEX,
-} from '../../../../../config/scene'
 export default {
 	name: 'ProcessWarningList',
 	components: {
@@ -156,25 +151,6 @@ export default {
 			listItem.status = listItem.status == '1' ? 1 : 0
 			listItem.overlayType = 'WarningList'
 			this.$emit('change', listItem)
-			//实时报警弹出
-			// GoldChart.scene.createSceneInstance(
-			// 	AIRSUPPLY_WARN_MODEL_SCENEINDEX,
-			// 	'fadeIn',
-			// 	'none'
-			// );
-			// this.$nextTick(() => {
-			// 	AIRSUPPLY_WARN__MODEL_COMPONENTINDEX.forEach(item => {
-			// 		GoldChart.instance.updateComponent(item, {
-			// 			data: {
-			// 				time: time,
-			// 				title: address,
-			// 			},
-			// 		});
-			// 	});
-			// });
-			// setTimeout(() => {
-			// 	GoldChart.scene.destroyScene(AIRSUPPLY_WARN_MODEL_SCENEINDEX);
-			// }, 3000);
 		},
 		async getData() {
 			//除第一次需要loading外，其余需要无感刷新

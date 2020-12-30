@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import dvdp, {mutations} from '../../lib'
+import dvdp from '../../lib'
 
 let components: any = {}
 const widgetsArray: Array<any> = [], widgetsObject: any = {}
@@ -25,8 +25,8 @@ for (let key in widgetsObject) {
 	widgetsArray.push(widgetsObject[key])
 }
 
-mutations.setCustomComponents(components)
-mutations.setCustomWidgets({
+window.GoldChart.mutations.setCustomComponents(components)
+window.GoldChart.mutations.setCustomWidgets({
 	label: '杭燃样式',
 	widgets: widgetsArray
 })

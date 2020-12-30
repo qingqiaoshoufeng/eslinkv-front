@@ -319,7 +319,6 @@
 	</div>
 </template>
 <script>
-	import {mutations, store} from '../../../store'
 	import rightMenu from '../../../components/right-menu'
 	import rulerCanvas from '../ruler-canvas/ruler-canvas.vue'
 	import configPanel from '../config-panel'
@@ -460,14 +459,14 @@
 			}
 		},
 		computed: {
-      widgetAdded () {
-        return store.kanboard.widgetAdded
-      },
+			widgetAdded() {
+				return window.GoldChart.store.kanboard.widgetAdded
+			},
 			showParts() {
 				return (item) => {
-					if (item.scene === 0 && store.scene.showMainScene) {
+					if (item.scene === 0 && window.GoldChart.store.scene.showMainScene) {
 						return true
-					} else if (item.scene === store.scene.index) {
+					} else if (item.scene === window.GoldChart.store.scene.index) {
 						return true
 					}
 					return false
@@ -504,8 +503,8 @@
 			}
 		},
 		mounted() {
-			mutations.setInstance('kanboard', this)
-			mutations.setStatus('inEdit')
+			window.GoldChart.mutations.setInstance('kanboard', this)
+			window.GoldChart.mutations.setStatus('inEdit')
 		}
 	}
 </script>

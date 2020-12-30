@@ -106,8 +106,6 @@ import {
 	AIRSUPPLY_LNG_OVERLAY_MAP,
 	AIRSUPPLY_LNG_LEGEND_MAP,
 } from './config.js';
-//系统公共api
-import GoldChart from '@/openApi';
 
 export default {
 	name: 'LNG',
@@ -235,7 +233,7 @@ export default {
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
 			if (overlayType === 'WARNEVENT') {
-				GoldChart.scene.setSceneIndex(INDEXSCENEMAP['AirSupplyLNG']);
+				window.GoldChart.scene.setSceneIndex(INDEXSCENEMAP['AirSupplyLNG']);
 				this.showRoutePlan = false;
 			}
 			this.showOverlayDetail = false;

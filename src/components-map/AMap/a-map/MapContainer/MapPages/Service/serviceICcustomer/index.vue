@@ -100,7 +100,6 @@ componentCommonArr.map(componentName => {
 		);
 });
 
-import GoldChart from '@/openApi';
 import {
 	SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
 	SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP,

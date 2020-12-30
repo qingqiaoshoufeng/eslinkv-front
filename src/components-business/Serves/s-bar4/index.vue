@@ -20,7 +20,6 @@
 <script>
 	import mixins from '../../mixins';
 	import getOption from './options';
-	import GoldChart from '../../../openApi'
 
 	const config = {
 		animation: true
@@ -101,7 +100,7 @@
 		mixins: [mixins],
 		methods: {
 			clickHandle() {
-				GoldChart.scene.createSceneInstance('qdj532f41re')
+				window.GoldChart.scene.createSceneInstance('qdj532f41re')
 			},
 			setOption(data) {
 				if (this.instance) {

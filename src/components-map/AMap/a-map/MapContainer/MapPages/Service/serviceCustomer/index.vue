@@ -132,7 +132,6 @@ import {
 	THREESOCIALLINKAGE_COMPONENTINDEX,
 } from '../../../../config';
 
-import GoldChart from '@/openApi';
 import {
 	DATASTATISTICSLIST,
 	SWICHBOX,
@@ -313,10 +312,10 @@ export default {
 		showThreeSocialLinkageDetail() {
 			let { id } = this.activeOverlay;
 			//打开三社联动的弹框
-			GoldChart.scene.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX);
+			window.GoldChart.scene.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX);
 			this.$nextTick(() => {
 				THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
-					GoldChart.instance.updateComponent(i, {
+					window.GoldChart.instance.updateComponent(i, {
 						params: {
 							id,
 						},

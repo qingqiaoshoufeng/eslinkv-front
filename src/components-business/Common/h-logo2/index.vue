@@ -15,7 +15,6 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import GoldChart from '../../../openApi'
 
 	const config = {animation: true}
 	export default {

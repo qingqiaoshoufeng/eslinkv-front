@@ -48,7 +48,6 @@
 <script>
 	import mixins from '../../mixins'
 	import {getInput} from '../../../../lib'
-	import GoldChart from '../../../openApi'
 	import format from 'date-fns/format'
 
 	const config = {
@@ -109,10 +108,10 @@
 		methods: {
 			handleClick() {
 				if (this.config.config.sceneId) {
-					GoldChart.scene.createSceneInstance(this.config.config.sceneId, 'slideRight')
+					window.GoldChart.scene.createSceneInstance(this.config.config.sceneId, 'slideRight')
 					if (this.config.config.componentId) {
 						this.$nextTick(() => {
-							GoldChart.instance.updateComponent(this.config.config.componentId, {
+							window.GoldChart.instance.updateComponent(this.config.config.componentId, {
 								data: {
 									selectType: '日',
 									selectValue: format(new Date(), 'yyyy.MM.dd')

@@ -16,7 +16,6 @@
 	</div>
 </template>
 <script>
-	import GoldChart from '../../../openApi'
 	import mixins from '../../mixins'
 
 	export default {
@@ -41,7 +40,7 @@
 		mixins: [mixins],
 		methods: {
 			handleClose() {
-				GoldChart.scene.destroyScene('grdnn9tiey')
+				window.GoldChart.scene.destroyScene('grdnn9tiey')
 			}
 		},
 		props: {

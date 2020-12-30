@@ -68,7 +68,6 @@ import dFooter from '../../components/d-footer/index';
 import * as widgetBindManager from '../mixins/widget-bind-manage';
 import { Button, Input, Modal, Form, FormItem } from 'view-design';
 import downloadFile from '../../vendor/download-file';
-import { mutations } from '../../store';
 
 export default {
 	name: 'New',
@@ -137,8 +136,7 @@ export default {
 				value = attribute;
 			}
 			if (value.scene) {
-				console.log(1);
-				mutations.initScene(value.scene);
+				window.GoldChart.mutations.initScene(value.scene);
 			}
 			this.querying = false;
 			this.$refs.kanboardEditor.refillConfig(value);

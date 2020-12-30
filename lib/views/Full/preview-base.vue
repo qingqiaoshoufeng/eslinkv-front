@@ -50,7 +50,6 @@
 	import crossFrameMessageParamBind from '../core/kanboard-editor/mixins/cross-frame-message-param-bind'
 	import * as widgetBindManager from '../mixins/widget-bind-manage'
 	import loadMask from '../../components/load-mask'
-	import {store, mutations} from '../../store'
 
 	export default {
 		name: 'kanboard-editor',
@@ -64,7 +63,7 @@
 		},
 		data() {
 			return {
-				store,
+				store: window.GoldChart.store,
 				querying: true,
 				refilling: false,
 				refillPercent: 0,
@@ -72,15 +71,15 @@
 				time: Date.now()
 			}
 		},
-    computed: {
-      widgetAdded () {
-        return store.kanboard.widgetAdded
-      }
-    },
+		computed: {
+			widgetAdded() {
+				return window.GoldChart.store.kanboard.widgetAdded
+			}
+		},
 		methods: {
 			initWidgetConfig(id, type, config, scene) {
-        mutations.setWidgetsAddedItem(id, type, config, scene)
-      },
+				window.GoldChart.mutations.setWidgetsAddedItem(id, type, config, scene)
+			},
 			sortWidgets: function (widgets) {
 				const providers = []
 				const responders = []
@@ -96,9 +95,9 @@
 				return [...providers, ...responders]
 			},
 			refillConfig() {
-        const {kanboard, widgets, grids, apis} = store.kanboard.data
+				const {kanboard, widgets, grids, apis} = window.GoldChart.store.kanboard.data
 
-        this.querying = false
+				this.querying = false
 				this.apis = apis
 				return new Promise(resolve => {
 					this.refilling = true
@@ -144,8 +143,8 @@
 			},
 		},
 		mounted() {
-			mutations.setInstance('kanboard', this)
-			mutations.setStatus('inPreview')
+			window.GoldChart.mutations.setInstance('kanboard', this)
+			window.GoldChart.mutations.setStatus('inPreview')
 		}
 	}
 </script>

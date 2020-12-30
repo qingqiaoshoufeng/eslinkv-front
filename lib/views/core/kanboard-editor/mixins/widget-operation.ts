@@ -1,7 +1,6 @@
 import copy from 'fast-copy'
 import {uuid} from '../../../../utils'
 import {Vue, Component, Watch} from 'vue-property-decorator'
-import {store, mutations} from '../../../../store'
 
 @Component
 class Mixins extends Vue {
@@ -95,7 +94,7 @@ class Mixins extends Vue {
 	}
 
 	initWidgetConfig(id, type, scene) {
-		mutations.setWidgetsAddedItem(id, type, null, scene)
+		window.GoldChart.mutations.setWidgetsAddedItem(id, type, null, scene)
 	}
 
 	// 小工具放置到画布
@@ -122,7 +121,7 @@ class Mixins extends Vue {
 		this.sizeMap[id] = {w: width, h: height}
 		this.positionMap[id] = {x: left, y: top}
 		const value = {layout, widget, config, api}
-		this.initWidgetConfig(id, type, store.scene.index)
+		this.initWidgetConfig(id, type, window.GoldChart.store.scene.index)
 		this.updateWidget(value)
 		this.currentWidgetType = type
 		this.$debug('component', '小工具放置到画布')
@@ -174,7 +173,7 @@ class Mixins extends Vue {
 			layout.position.left += 10
 			layout.position.top += 10
 		}
-		mutations.setWidgetsAddedItem(id, widget.type, widget.config, widget.scene)
+		window.GoldChart.mutations.setWidgetsAddedItem(id, widget.type, widget.config, widget.scene)
 		this.$set(this.zIndexMap, id, layout.zIndex)
 		const {width, height} = layout.size
 		const {left, top} = layout.position
@@ -290,7 +289,7 @@ class Mixins extends Vue {
 		/**
 		 * @description 事件收集
 		 */
-		mutations.setEvent({widgetUnActived: this.widgetUnActived})
+		window.GoldChart.mutations.setEvent({widgetUnActived: this.widgetUnActived})
 	}
 }
 

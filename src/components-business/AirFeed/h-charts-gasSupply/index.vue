@@ -21,7 +21,6 @@
 	import mixins from '../../mixins';
 	import getOptions, {data} from './options'
 	import {getInput} from '../../../../lib'
-	import GoldChart from '../../../openApi'
 	import format from 'date-fns/format'
 
 	const configSource = {
@@ -81,20 +80,6 @@
 				} else {
 					selectValue = format(new Date(item.time), 'yyyy.MM.dd')
 				}
-
-				// if (this.config.config.sceneId) {
-				// 	GoldChart.scene.createSceneInstance(this.config.config.sceneId, 'slideRight')
-				// 	if (this.config.config.componentId) {
-				// 		this.$nextTick(() => {
-				// 			GoldChart.instance.updateComponent(this.config.config.componentId, {
-				// 				data: {
-				// 					selectType,
-				// 					selectValue
-				// 				}
-				// 			})
-				// 		})
-				// 	}
-				// }
 			}
 		},
 		watch: {

@@ -1,11 +1,9 @@
-<template>
-	<div class="widget-part" :style="styles">
-		<img src="./close.svg" @click="back" class="img pointer"/>
-	</div>
+<template lang="pug">
+	.widget-part(:style="styles")
+		img.img.pointer(src="./close.svg" @click="back")
 </template>
 <script>
 	import mixins from '../../mixins'
-	import GoldChart from '../../../openApi'
 
 	const config = {animation: true}
 	const value = {
@@ -25,7 +23,7 @@
 		methods: {
 			back() {
 				if (!this.data.sceneId) return
-				GoldChart.scene.setSceneIndex(this.data.sceneId)
+				window.GoldChart.scene.setSceneIndex(this.data.sceneId)
 			}
 		}
 	}

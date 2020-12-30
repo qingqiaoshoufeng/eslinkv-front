@@ -7,7 +7,6 @@
 
 <script>
 	import kanbanPreview from './preview-base.vue'
-	import {mutations} from '../../store'
 	import {getQueryString} from '../../utils'
 
 	export default {
@@ -49,27 +48,27 @@
 				if (this.$route.name === 'HangRan') {
 					this.$api.board.hangran().then(res => {
 						const value = JSON.parse(res.attribute)
-						mutations.setKanboard(value)
+						window.GoldChart.mutations.setKanboard(value)
 						this.refill(value)
-						mutations.initScene(value.scene)
-						mutations.listToObj(value)
+						window.GoldChart.mutations.initScene(value.scene)
+						window.GoldChart.mutations.listToObj(value)
 					})
 				} else {
 					const {params: {id}} = this.$route
 					const dataBoardId = id
 					this.$api.board.detail({dataBoardId}).then(res => {
 						const value = JSON.parse(res.attribute)
-						mutations.setKanboard(value)
+						window.GoldChart.mutations.setKanboard(value)
 						this.refill(value)
-						mutations.initScene(value.scene)
-						mutations.listToObj(value)
+						window.GoldChart.mutations.initScene(value.scene)
+						window.GoldChart.mutations.listToObj(value)
 					})
 				}
 				/**
 				 * @description 默认场景
 				 */
 				if (getQueryString('scene')) {
-					mutations.setSceneIndex(getQueryString('scene'))
+					window.GoldChart.mutations.setSceneIndex(getQueryString('scene'))
 				}
 				/**
 				 * @description 适配

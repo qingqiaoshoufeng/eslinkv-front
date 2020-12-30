@@ -10,7 +10,6 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import GoldChart, {store} from '../../../openApi'
 
 	const config = {animation: true}
 	const value = {
@@ -26,13 +25,13 @@
 	export default {
 		data() {
 			return {
-				store
+				store: window.GoldChart.store
 			}
 		},
 		mixins: [mixins],
 		methods: {
 			changeScene(index) {
-				GoldChart.scene.setSceneIndex(index)
+				window.GoldChart.scene.setSceneIndex(index)
 			}
 		},
 		created() {

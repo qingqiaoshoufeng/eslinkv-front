@@ -4,12 +4,10 @@
 			<img src="/static/icons/back.svg"/>
 			<div class="txt">返回</div>
 		</div>
-
 	</div>
 </template>
 <script>
 	import mixins from '../../mixins'
-	import GoldChart from '../../../openApi'
 
 	const config = {animation: true}
 	const value = {
@@ -29,7 +27,7 @@
 		methods: {
 			back() {
 				if (!this.data.sceneId) return
-				GoldChart.scene.destroyScene(this.data.sceneId)
+				window.GoldChart.scene.destroyScene(this.data.sceneId)
 			}
 		}
 	}

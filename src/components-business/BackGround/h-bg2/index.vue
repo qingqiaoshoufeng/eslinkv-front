@@ -6,7 +6,6 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import GoldChart from '../../../openApi'
 
 	const config = {animation: true}
 	const value = {
@@ -25,7 +24,7 @@
 		methods: {
 			handleClick() {
 				if (this.data.sceneId)
-					GoldChart.scene.destroyScene(this.data.sceneId)
+					window.GoldChart.scene.destroyScene(this.data.sceneId)
 			}
 		}
 	}

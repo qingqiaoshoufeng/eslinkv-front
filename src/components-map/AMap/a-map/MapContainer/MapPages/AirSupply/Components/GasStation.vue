@@ -29,7 +29,6 @@ import {
 	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
 } from '../../../../config/scene'
 import { BaseOverlay } from '../../../../components/index'
-import GoldChart from '@/openApi'
 
 export default {
 	name: 'GasStation',
@@ -116,13 +115,13 @@ export default {
 		},
 		viewDetail(marker) {
 			let { name, id } = marker
-			GoldChart.scene.createSceneInstance(
+			window.GoldChart.scene.createSceneInstance(
 				AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
 				'slideRight'
 			)
 			this.$nextTick(() => {
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach((item) => {
-					GoldChart.instance.updateComponent(item, {
+					window.GoldChart.instance.updateComponent(item, {
 						data: {
 							label: name,
 							title: name,
@@ -132,7 +131,7 @@ export default {
 					})
 				})
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach((item) => {
-					GoldChart.instance.updateComponent(item, {
+					window.GoldChart.instance.updateComponent(item, {
 						params: {
 							id,
 						},

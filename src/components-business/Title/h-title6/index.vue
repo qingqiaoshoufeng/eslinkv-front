@@ -5,7 +5,6 @@
 			h2.pos-r.pointer(v-for="item in data?data:[]" :class="{active:store.scene.index===item.sceneId}" @click="handleClick(item.sceneId)") {{item.title}}
 </template>
 <script lang="ts">
-	import GoldChart, {store} from '../../../openApi'
 	import mx from '../../mixins'
 	import {Component} from 'vue-property-decorator'
 	import {mixins} from 'vue-class-component'
@@ -28,18 +27,20 @@
 
 	@Component
 	class HTitle6 extends mixins(mx) {
-		store: any=store
+		store: any = window.GoldChart.store
 
 		handleClick(index) {
-			if(index){
-				GoldChart.scene.setSceneIndex(index)
+			if (index) {
+				window.GoldChart.scene.setSceneIndex(index)
 			}
 		}
+
 		created() {
 			this.configSource = this.parseConfigSource(config)
 			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
+
 	export default HTitle6
 </script>
 <style lang="scss">
@@ -63,6 +64,7 @@
 
 			&.active {
 				color: rgba(255, 255, 255, 1);
+
 				&:before {
 					position: absolute;
 					content: '';

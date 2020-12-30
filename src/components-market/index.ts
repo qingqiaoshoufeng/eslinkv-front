@@ -1,4 +1,3 @@
-import {mutations} from '../../lib'
 import {getCompList, getLevel0} from '@/api/bussiness.api'
 import Vue from 'vue'
 
@@ -24,7 +23,7 @@ getLevel0().then(res => {
 			})
 			widgetsArray = res
 			Promise.all(promises).then(() => {
-				mutations.setCustomWidgets({
+				window.GoldChart.mutations.setCustomWidgets({
 					label: child.name,
 					widgets: widgetsArray
 				})

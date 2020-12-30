@@ -40,7 +40,6 @@
 	import * as widgetBindManager from '../mixins/widget-bind-manage'
 	import dFooter from '../../components/d-footer'
 	import {Button, Input, Modal, Form, FormItem} from 'view-design'
-	import {mutations} from '../../store'
 	import downloadFile from '../../vendor/download-file'
 
 	export default {
@@ -185,10 +184,10 @@
 					value = attribute
 				}
 				if (value.scene) {
-					mutations.initScene(value.scene)
+					window.GoldChart.mutations.initScene(value.scene)
 				}
 				this.querying = false
-				mutations.setKanboard(value)
+				window.GoldChart.mutations.setKanboard(value)
 				this.$refs.kanboardEditor.refillConfig()
 			},
 			// 修改看板

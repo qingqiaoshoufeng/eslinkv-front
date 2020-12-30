@@ -12,7 +12,6 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import GoldChart, {store} from '../../../openApi'
 
 	const config = {animation: true}
 	const value = {
@@ -28,27 +27,27 @@
 					{title: '优家', index: ['o8tkm981qdh']},
 					{title: '体验', index: ['vxoiljh5my9']},
 				],
-				disabled:['']
+				disabled: ['']
 			})
 		}
 	}
 	export default {
 		data() {
 			return {
-				store
+				store: window.GoldChart.store
 			}
 		},
 		mixins: [mixins],
 		methods: {
-			changeScene(title,index) {
-				if(this.data.disabled){
-					if(this.data.disabled.indexOf(title)!==-1){
+			changeScene(title, index) {
+				if (this.data.disabled) {
+					if (this.data.disabled.indexOf(title) !== -1) {
 						return false
-					}else{
-						GoldChart.scene.setSceneIndex(index)
+					} else {
+						window.GoldChart.scene.setSceneIndex(index)
 					}
-				}else{
-					GoldChart.scene.setSceneIndex(index)
+				} else {
+					window.GoldChart.scene.setSceneIndex(index)
 				}
 			}
 		},
@@ -89,8 +88,9 @@
 					transform: translateX(-50%);
 				}
 			}
-			&.disabled{
-				color: rgba(255,255,255,.3)
+
+			&.disabled {
+				color: rgba(255, 255, 255, .3)
 			}
 		}
 	}

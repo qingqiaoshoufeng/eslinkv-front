@@ -46,7 +46,6 @@
 </template>
 <script>
 import bus from '../../../../../utils/bus'
-import GoldChart from '@/openApi'
 import {
 	INDEXSCENEMAP,
 	OVERLAYINFOMAP_AIRSUPPLY,
@@ -132,22 +131,22 @@ export default {
 			let { repairContent, address, callDate } = this.data
 			this.showRoutePlan = true
 			//和场景进行交互
-			GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX)
+			window.GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX)
 			//更新数据
 			this.$nextTick(() => {
 				AIRSUPPLY_WARN_COMPONENTINDEX.forEach((i) => {
-					GoldChart.instance.updateComponent(i, {
+					window.GoldChart.instance.updateComponent(i, {
 						params: {
 							id: this.data.id,
 						},
 					})
 				})
-				GoldChart.liveVideo.pauseVideo()
+				window.GoldChart.liveVideo.pauseVideo()
 			})
 		},
 		closeOverlayDetail(done) {
 			this.showRoutePlan = false
-			GoldChart.scene.setSceneIndex(
+			window.GoldChart.scene.setSceneIndex(
 				INDEXSCENEMAP[this.parentInfo.pageName]
 			)
 			this.$emit('close')

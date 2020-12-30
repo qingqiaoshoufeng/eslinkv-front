@@ -29,7 +29,6 @@
 	import widget from './widget.vue'
 	import widgetsTypes from '../../views/core/widgets/widget-type-list'
 	import {Select, Option, Button, Icon} from 'view-design'
-	import {store} from '../../store'
 
 	export default {
 		components: {widget, Select, Option, Button, Icon},
@@ -44,7 +43,7 @@
 		},
 		data() {
 			return {
-				store,
+				store: window.GoldChart.store,
 				widgetsTypes: Object.keys(widgetsTypes).map(type => {
 					return {
 						type,

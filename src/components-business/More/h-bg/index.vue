@@ -71,7 +71,6 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import GoldChart from '../../../openApi'
 	import hBg54441 from './h-bg-54441'
 	import {getInput} from '../../../../lib'
 
@@ -123,7 +122,7 @@
 		mounted() {
 			if (this.inPreview) {
 				if (this.config.config.sceneId) {
-					GoldChart.scene.createSceneInstance(JSON.parse(this.config.config.sceneId)[0], 'fadeIn', 'none')
+					window.GoldChart.scene.createSceneInstance(JSON.parse(this.config.config.sceneId)[0], 'fadeIn', 'none')
 				}
 			}
 		},
@@ -134,23 +133,12 @@
 			},
 			handleStart() {
 				if (this.config.config.sceneId) {
-					// if (this.statusStart) {
-					// 	GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[1])
-					// 	GoldChart.scene.createSceneInstance(JSON.parse(this.config.config.sceneId)[0], 'fadeIn', 'none')
-					// } else {
-					// 	GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[0])
-					GoldChart.scene.createSceneInstance(JSON.parse(this.config.config.sceneId)[1], 'fadeIn')
-					// }
-					// this.statusStart = !this.statusStart
+					window.GoldChart.scene.createSceneInstance(JSON.parse(this.config.config.sceneId)[1], 'fadeIn')
 				}
 			},
 			handleClick(index) {
-				GoldChart.scene.setSceneIndex(index)
-				// if (this.statusStart) {
-				// 	GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[1])
-				// } else {
-				GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[0])
-				// }
+				window.GoldChart.scene.setSceneIndex(index)
+				window.GoldChart.scene.destroyScene(JSON.parse(this.config.config.sceneId)[0])
 				this.status54441 = false
 				this.statusVideo = false
 			},
@@ -161,7 +149,7 @@
 			openVideo() {
 				this.statusVideo = true
 				this.hoverVideo = false
-				GoldChart.scene.createSceneInstance('grdnn9tiey', 'slideUp')
+				window.GoldChart.scene.createSceneInstance('grdnn9tiey', 'slideUp')
 			},
 			close54441() {
 				this.video1Ended = false

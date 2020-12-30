@@ -27,7 +27,6 @@
 	</div>
 </template>
 <script>
-	import {store, mutations} from '../../store'
 	import {Icon} from 'view-design'
 
 	export default {
@@ -36,24 +35,24 @@
 		},
 		data() {
 			return {
-				store,
+				store: window.GoldChart.store,
 				sceneModal: false
 			}
 		},
 		methods: {
 			handleSceneName(key, e) {
-				mutations.setSceneName(key, e.target.value)
+				window.GoldChart.mutations.setSceneName(key, e.target.value)
 			},
 			changeScene(index) {
-				mutations.setSceneIndex(index)
+				window.GoldChart.mutations.setSceneIndex(index)
 				this.store.events.list.widgetUnActived()
 			},
 			clickHandle() {
 				this.sceneModal = !this.sceneModal
-        this.$emit('show')
+				this.$emit('show')
 			},
 			createScene() {
-				mutations.createScene()
+				window.GoldChart.mutations.createScene()
 			},
 			destroyScene(e, index) {
 				e.stopPropagation()
@@ -61,10 +60,10 @@
 					title: '提示',
 					content: '是否删除当前场景？',
 					onOk: () => {
-						if (store.scene.index === store.scene.list[index]) {
-							mutations.setSceneIndex(store.scene.list[0])
+						if (window.GoldChart.store.scene.index === window.GoldChart.store.scene.list[index]) {
+							window.GoldChart.mutations.setSceneIndex(window.GoldChart.store.scene.list[0])
 						}
-						mutations.deleteScene(index)
+						window.GoldChart.mutations.deleteScene(index)
 					}
 				})
 			}
@@ -114,10 +113,12 @@
 			right: 40px;
 			opacity: 1;
 		}
-		ul{
+
+		ul {
 			height: calc(100% - 42px);
 			overflow-y: auto;
 		}
+
 		header {
 			width: 100%;
 			height: 42px;
