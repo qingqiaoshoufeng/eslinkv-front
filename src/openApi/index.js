@@ -41,7 +41,9 @@ const GoldChart = {
 				GoldChart.liveVideo.myPlayer.reset();
 			}
 		}
-	}
+	},
+	components: {},
+	methods: {}
 }
 
 export default GoldChart
