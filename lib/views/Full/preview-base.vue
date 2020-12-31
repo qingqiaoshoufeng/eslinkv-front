@@ -11,13 +11,13 @@
 		<template v-for="item in widgetAdded">
 			<template v-if="!item.config.widget.combinationTo">
 				<parts v-if="showParts(item)" :key="item.id" :type="item.type" :config="item.config"
-					   :ref="item.id"
+					   :ref="item.id" :market="item.market"
 					   :style="item.config.widget.hide ? 'display: none' : ''" readonly>
 					<template v-if="shouldBeShow(item)">
 						<template v-for="child in getItemChildren(item, 'widget')">
 							<parts
 								v-if="showParts(child)"
-								:key="child.id"
+								:key="child.id" :market="item.market"
 								:ref="child.id"
 								:class="[
 								  `group-item group-item-${child.id}`,
@@ -77,8 +77,8 @@
 			}
 		},
 		methods: {
-			initWidgetConfig(id, type, config, scene) {
-				window.GoldChart.mutations.setWidgetsAddedItem(id, type, config, scene)
+			initWidgetConfig(id, type, config, scene, market) {
+				window.GoldChart.mutations.setWidgetsAddedItem(id, type, config, scene, market)
 			},
 			sortWidgets: function (widgets) {
 				const providers = []
@@ -105,8 +105,8 @@
 					const widgetsArray = this.sortWidgets(Object.values(widgets))
 					const length = widgetsArray.length
 					// 小工具初始化需要时间，此处进行延时逐个回填
-					const reDrawWidget = ({id, type, value, scene = 0}) => {
-						this.initWidgetConfig(id, type, value, scene)
+					const reDrawWidget = ({id, type, value, scene = 0, market = false}) => {
+						this.initWidgetConfig(id, type, value, scene, market)
 						const currentLength = widgetsArray.length
 						if (currentLength) {
 							this.refillPercent = (length - currentLength) / length * 100 | 0

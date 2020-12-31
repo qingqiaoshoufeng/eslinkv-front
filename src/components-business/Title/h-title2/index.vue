@@ -23,23 +23,33 @@
 			title: true,
 		}
 	}
+	const data = {
+		value: 0
+	}
 	const value = {
-		api: {
-			data: JSON.stringify({
-				value: 0
-			})
+		layout: {
+			size: {
+				width: 132,
+				height: 132
+			},
+			position: {
+				value: 'relative'
+			}
 		},
 		config: {
 			title: '标题'
 		}
 	}
+
 	@Component
 	class HTitle2 extends mixins(mx) {
 		created() {
-			this.configSource = this.parseConfigSource(config,configSource)
+			this.defaultData = data
+			this.configSource = this.parseConfigSource(config, configSource)
 			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
+
 	export default HTitle2
 </script>
 <style lang="scss">

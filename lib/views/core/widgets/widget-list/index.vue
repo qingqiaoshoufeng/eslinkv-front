@@ -12,22 +12,27 @@
 							<template v-if="widgetListActiveMap[`${tab.name}-${format(type)}`]" slot="content">
 								<div v-for="(widget, index) in widgets" :key="index"
 									 class="widget-item-wrapper pos-r">
-									<i class="pos-a" style="left:0;top:0;font-size: 12px;">{{widget.type}}</i>
+									<i class="pos-a"
+									   style="left:0;top:0;font-size: 12px;z-index: 9;">{{widget.type}}</i>
 									<vue-lazy-component>
-<!--										<div draggable="true" @widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)"-->
-<!--											 @dragstart="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)">加载中...</div>-->
+										<div draggable="true"
+											 @widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)"
+											 @dragstart="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)">
+											<img :src="widget.componentImage"/>
+										</div>
 										<div slot="skeleton">加载中...</div>
-										<parts
-										:type="widget.type"
-										:style="transform(widget)"
-										:classification="tab.name"
-										:config="widgetConfigMap[`${tab.name}-${format(type)}-${index}`].config"
-										draggable="true"
-										readonly
-										no-bind-params
-										@dragstart.native="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)"
-										@widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)"
-									/>
+										<!--										<parts-->
+										<!--											v-if="!widget.market"-->
+										<!--											:type="widget.type"-->
+										<!--											:style="transform(widget)"-->
+										<!--											:classification="tab.name"-->
+										<!--											:config="widgetConfigMap[`${tab.name}-${format(type)}-${index}`].config"-->
+										<!--											draggable="true"-->
+										<!--											readonly-->
+										<!--											no-bind-params-->
+										<!--											@dragstart.native="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)"-->
+										<!--											@widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)"-->
+										<!--										/>-->
 									</vue-lazy-component>
 								</div>
 							</template>
@@ -48,7 +53,7 @@
 	import other from './other'
 	import {Collapse, TabPane, Tabs, Panel} from 'view-design'
 	import {store} from '../../../../store'
-	import { component as VueLazyComponent } from '@xunlei/vue-lazy-component'
+	import {component as VueLazyComponent} from '@xunlei/vue-lazy-component'
 
 	export default {
 		components: {
@@ -81,7 +86,7 @@
 		},
 		watch: {
 			tabs: {
-				handler () {
+				handler() {
 					this.initWidgetConfigMap()
 					Object.keys(this.tabs).map(key => {
 						this.$set(this.panelStatic, key, [])
@@ -170,13 +175,14 @@
 			/**
 			 * @description h5 原生拖拽事件
 			 */
-			dragstart(e, configKey, {type}) {
+			dragstart(e, configKey, {type, market}) {
 				const widgetConfig = this.widgetConfigMap[configKey]
 				if (!widgetConfig || !type) return
 				const {config} = widgetConfig
 				e.dataTransfer.setData('widget-config', JSON.stringify({
 					type,
 					config,
+					market,
 					startX: e.offsetX,
 					startY: e.offsetY,
 				}))

@@ -93,14 +93,14 @@ class Mixins extends Vue {
 		this.isWidgetProcessing = true
 	}
 
-	initWidgetConfig(id, type, scene) {
-		window.GoldChart.mutations.setWidgetsAddedItem(id, type, null, scene)
+	initWidgetConfig(id, type, scene, market) {
+		window.GoldChart.mutations.setWidgetsAddedItem(id, type, null, scene, market)
 	}
 
 	// 小工具放置到画布
 	handleWidgetDrop(e, data) {
 		const {clientX, clientY, offsetX, offsetY} = e
-		const {type, config: inputConfig, startX, startY} = JSON.parse(data)
+		const {type, config: inputConfig, startX, startY, market = false} = JSON.parse(data)
 		const {layout = {}, config = {}, widget = {}, api} = inputConfig || {}
 		if (!layout.size) layout.size = {}
 		if (!layout.position) layout.position = {}
@@ -121,10 +121,9 @@ class Mixins extends Vue {
 		this.sizeMap[id] = {w: width, h: height}
 		this.positionMap[id] = {x: left, y: top}
 		const value = {layout, widget, config, api}
-		this.initWidgetConfig(id, type, window.GoldChart.store.scene.index)
+		this.initWidgetConfig(id, type, window.GoldChart.store.scene.index, market)
 		this.updateWidget(value)
 		this.currentWidgetType = type
-		this.$debug('component', '小工具放置到画布')
 		return id
 	}
 
@@ -145,12 +144,10 @@ class Mixins extends Vue {
 		setTimeout(() => {
 			this.widgetActivating = false
 		}, 300)
-		this.$debug('component', '激活看板')
 	}
 
 	handleDeactivated(item) {
 		if (!this.widgetEditable(item)) this.activatedWidgetId = null
-		this.$debug('component', '取消看板')
 	}
 
 	/**

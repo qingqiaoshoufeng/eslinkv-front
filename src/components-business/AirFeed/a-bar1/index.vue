@@ -1,184 +1,192 @@
 <template>
-	<div class="widget-part pos-r" :style="styles">
-		<div class="a-legend-box">
-			<div class="unit">{{ title && title }}</div>
-			<div class="legend">
-				<div class="legend1">
-					<div
-						class="bgc1"
-						:style="`backgroundColor:${colorList[0]};}`"
-					></div>
-					<div class="desc1">{{ descList[0] }}</div>
-				</div>
-				<div class="legend2">
-					<div
-						class="bgc2"
-						:style="`backgroundColor:${colorList[1]};}`"
-					></div>
-					<div class="desc2">{{ descList[1] }}</div>
-				</div>
-			</div>
-		</div>
-		<div class="a-bar1" :id="id"/>
-	</div>
+    <div class="widget-part pos-r" :style="styles">
+        <div class="a-legend-box">
+            <div class="unit">{{ title && title }}</div>
+            <div class="legend">
+                <div class="legend1">
+                    <div
+                            class="bgc1"
+                            :style="`backgroundColor:${colorList[0]};}`"
+                    ></div>
+                    <div class="desc1">{{ descList[0] }}</div>
+                </div>
+                <div class="legend2">
+                    <div
+                            class="bgc2"
+                            :style="`backgroundColor:${colorList[1]};}`"
+                    ></div>
+                    <div class="desc2">{{ descList[1] }}</div>
+                </div>
+            </div>
+        </div>
+        <div class="a-bar1" :id="id"/>
+    </div>
 </template>
 <script>
-	import mixins from '../../mixins';
-	import options from './options';
-	import {getInput} from '../../../../lib';
+    import mixins from '../../mixins';
+    import options from './options';
+    import {getInput} from '../../../../lib';
 
-	const config = {
-		animation: true,
-		config: {
-			color1: true,
-			color2: true,
-			desc1: true,
-			desc2: true,
-			title: true,
-		},
-	};
-	const configSource = {
-		config: {
-			fields: {
-				color1: getInput('color1', '条形图颜色'),
-				color2: getInput('color2', '折线图颜色'),
-				desc1: getInput('desc1', '条形图名称'),
-				desc2: getInput('desc2', '折线图名称'),
-				title: getInput('title', '条形图单位'),
-			},
-		},
-	};
-	const value = {
-		api: {
-			data: JSON.stringify({
-				yValue: [120, 200, 150, 80, 70, 110, 130],
-				yValue1: [30, 60, 100, 70, 40, 10, 60],
-				xValue: ['5月', '6月', '7月', '8月', '9月', '10月', '11月'],
-			}),
-		},
-		config: {
-			color1: '#00DDFF',
-			color2: 'rgba(1,253,210,1)',
-			desc1: '第三方破坏',
-			desc2: '同比',
-			title: '次',
-		},
-	};
-	export default {
-		mixins: [mixins],
-		computed: {
-			colorList() {
-				if (!this.data) return ['#00DDFF', 'rgba(1,253,210,1)'];
-				return [this.config.config.color1, this.config.config.color2];
-			},
-			descList() {
-				if (!this.data) return ['第三方破坏', '同比'];
-				return [this.config.config.desc1, this.config.config.desc2];
-			},
-			title() {
-				if (!this.data) return '';
-				return this.config.config.title;
-			},
-		},
-		methods: {
-			setOption(data) {
-				let yValue2 = this.data.yValue.map(
-					(item, index) =>
-						(this.data.yValue[index] / this.data.yValue1[index]) * 100
-				);
-				options.xAxis[0].data = data.xValue;
-				options.series[0].data = data.yValue;
-				options.series[1].data = data.yValue1;
-				options.series[1].itemStyle.normal.color = data.color2;
-				this.instance && this.instance.setOption(options);
-			},
-		},
-		watch: {
-			data: {
-				handler(val) {
-					if (this.id) {
-						const data = {...val};
-						this.$nextTick(() => {
-							this.instance = echarts.init(
-								document.getElementById(this.id)
-							);
-							this.setOption(data);
-						});
-					}
-				},
-				deep: true,
-				immediate: true,
-			},
-		},
-		created() {
-			this.configSource = this.parseConfigSource(config, configSource);
-			this.configValue = this.parseConfigValue(config, value);
-		},
-	};
+    const config = {
+        animation: true,
+        config: {
+            color1: true,
+            color2: true,
+            desc1: true,
+            desc2: true,
+            title: true,
+        },
+    };
+    const configSource = {
+        config: {
+            fields: {
+                color1: getInput('color1', '条形图颜色'),
+                color2: getInput('color2', '折线图颜色'),
+                desc1: getInput('desc1', '条形图名称'),
+                desc2: getInput('desc2', '折线图名称'),
+                title: getInput('title', '条形图单位'),
+            },
+        },
+    };
+    const data = {
+        yValue: [120, 200, 150, 80, 70, 110, 130],
+        yValue1: [30, 60, 100, 70, 40, 10, 60],
+        xValue: ['5月', '6月', '7月', '8月', '9月', '10月', '11月'],
+    }
+    const value = {
+        layout: {
+            size: {
+                width: 480,
+                height: 226
+            },
+            position: {
+                value: 'relative'
+            }
+        },
+        config: {
+            color1: '#00DDFF',
+            color2: 'rgba(1,253,210,1)',
+            desc1: '第三方破坏',
+            desc2: '同比',
+            title: '次',
+        },
+    };
+    export default {
+        mixins: [mixins],
+        computed: {
+            colorList() {
+                if (!this.data) return ['#00DDFF', 'rgba(1,253,210,1)'];
+                return [this.config.config.color1, this.config.config.color2];
+            },
+            descList() {
+                if (!this.data) return ['第三方破坏', '同比'];
+                return [this.config.config.desc1, this.config.config.desc2];
+            },
+            title() {
+                if (!this.data) return '';
+                return this.config.config.title;
+            },
+        },
+        methods: {
+            setOption(data) {
+                let yValue2 = this.data.yValue.map(
+                    (item, index) =>
+                        (this.data.yValue[index] / this.data.yValue1[index]) * 100
+                );
+                options.xAxis[0].data = data.xValue;
+                options.series[0].data = data.yValue;
+                options.series[1].data = data.yValue1;
+                options.series[1].itemStyle.normal.color = data.color2;
+                this.instance && this.instance.setOption(options);
+            },
+        },
+        watch: {
+            data: {
+                handler(val) {
+                    if (this.id) {
+                        const data = {...val};
+                        this.$nextTick(() => {
+                            this.instance = echarts.init(
+                                document.getElementById(this.id)
+                            );
+                            this.setOption(data);
+                        });
+                    }
+                },
+                deep: true,
+                immediate: true,
+            },
+        },
+        created() {
+            this.defaultData = data
+            this.configSource = this.parseConfigSource(config, configSource);
+            this.configValue = this.parseConfigValue(config, value);
+        },
+    };
 </script>
 <style lang="scss" scoped>
-	.a-bar1 {
-		height: 100%;
-	}
+    .a-bar1 {
+        height: 100%;
+    }
 
-	.a-legend-box {
-		width: 100%;
-		height: 20px;
-		display: flex;
-		align-items: center;
-		position: absolute;
-		top: 10px;
-		left: 0;
+    .a-legend-box {
+        width: 100%;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        position: absolute;
+        top: 10px;
+        left: 0;
 
-		.unit {
-			width: 30px;
-			text-align: right;
-			color: #fff;
-			font-size: 16px;
-			font-style: normal;
-			font-weight: 400;
-			line-height: 16px;
-			letter-spacing: 0px;
-		}
+        .unit {
+            width: 30px;
+            text-align: right;
+            color: #fff;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 16px;
+            letter-spacing: 0px;
+        }
 
-		.legend {
-			display: flex;
-			position: absolute;
-			left: 0;
-			width: 100%;
-			align-items: center;
-			justify-content: center;
+        .legend {
+            display: flex;
+            position: absolute;
+            left: 0;
+            width: 100%;
+            align-items: center;
+            justify-content: center;
 
-			.legend1,
-			.legend2 {
-				display: flex;
-				align-items: center;
-				margin-left: 20px;
-			}
+            .legend1,
+            .legend2 {
+                display: flex;
+                align-items: center;
+                margin-left: 20px;
+            }
 
-			.bgc1,
-			.bgc2,
-			.bgc3 {
-				width: 16px;
-				height: 8px;
-			}
+            .bgc1,
+            .bgc2,
+            .bgc3 {
+                width: 16px;
+                height: 8px;
+            }
 
-			.bgc2 {
-				height: 2px;
-			}
+            .bgc2 {
+                height: 2px;
+            }
 
-			.desc1,
-			.desc2,
-			.desc3 {
-				margin-left: 5px;
-				font-size: 16px;
-				font-style: normal;
-				font-weight: 400;
-				line-height: 16px;
-				letter-spacing: 0px;
-				color: #fff;
-			}
-		}
-	}
+            .desc1,
+            .desc2,
+            .desc3 {
+                margin-left: 5px;
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 16px;
+                letter-spacing: 0px;
+                color: #fff;
+            }
+        }
+    }
 </style>
 

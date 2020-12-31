@@ -9,7 +9,6 @@ import './openApi'
 import './components-business'
 import './components-map'
 import './components-market'
-import { debug } from '../plugins'
 import directives from '../lib/directives'
 import * as filters from '@/utils/filter'
 import VueVideoPlayer from 'vue-video-player'
@@ -25,7 +24,6 @@ Vue.component('iSelect', Select);
 Vue.component('iOption', Option);
 Vue.component('iIcon', Icon);
 
-Vue.prototype.$debug = debug
 Vue.prototype.$Message = Message
 Vue.prototype.$Modal = Modal
 Vue.config.productionTip = false

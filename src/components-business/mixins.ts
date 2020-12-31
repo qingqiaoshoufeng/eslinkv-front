@@ -7,6 +7,7 @@ export default {
 			animateTimer: null,
 			animateActiveIndex: -1,
 			output: null,
+			defaultData: {},
 			inPreview: window.GoldChart.store.scene.status === 'inPreview',
 		}
 	},
@@ -81,4 +82,10 @@ export default {
 			}
 		}
 	},
+	mounted(){
+		setTimeout(() => {
+			if (!this.inPreview && !this.data)
+				window.GoldChart.mutations.updateApiData(this.config.widget.id, this.defaultData)
+		})
+	}
 }

@@ -109,6 +109,7 @@
 							:ref="item.id"
 							:type="item.type"
 							:config="item.config"
+							:market="item.market"
 							@combination-drop="handleCombinationDrop"
 							@widget-config-update="(data) => handleWidgetConfig(data, item)"
 						>
@@ -163,6 +164,7 @@
 										@contextmenu.native.prevent="item.config.widget.innerEditing && showRightMenu($event, child)"
 									>
 										<parts
+											:market="item.market"
 											:ref="child.id" :type="child.type" :config="child.config"
 											@widget-config-update="(data) => handleWidgetConfig(data, child)"/>
 

@@ -10,21 +10,30 @@
 	import {mixins} from 'vue-class-component'
 
 	const config = {animation: true}
+	const data = {
+		title: '标题'
+	}
 	const value = {
-		api: {
-			data: JSON.stringify({
-				title: '标题'
-			})
+		layout: {
+			size: {
+				width: 480,
+				height: 43
+			},
+			position: {
+				value: 'relative'
+			}
 		}
 	}
 
 	@Component
 	class HTitle1 extends mixins(mx) {
 		created() {
+			this.defaultData = data
 			this.configSource = this.parseConfigSource(config)
 			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
+
 	export default HTitle1
 </script>
 <style lang="scss">

@@ -14,7 +14,6 @@
 	import isSameMonth from 'date-fns/isSameMonth'
 	import format from 'date-fns/format'
 	import {getInput} from '../../../../lib'
-	import {store} from '../../../openApi'
 
 	const config = {
 		config: {
@@ -30,12 +29,15 @@
 		}
 	}
 	const value = {
-		api: {
-			bind: {
-				enable: true,
-				role: ['provider']
-			}
-		},
+        layout: {
+            size: {
+                width: 127,
+                height: 32
+            },
+            position: {
+                value: 'relative'
+            }
+        }
 	}
 
 	@Component
@@ -78,9 +80,9 @@
 					if (this.kanboardEditor.$refs[ref]) {
 						dom = this.kanboardEditor.$refs[ref][0].$refs.widgets
 					} else {
-						if (store.instance.createKanboard) {
-							if (store.instance.createKanboard.$refs[ref]) {
-								dom = store.instance.createKanboard.$refs[ref][0].$refs.widgets
+						if (window.GoldChart.store.instance.createKanboard) {
+							if (window.GoldChart.store.instance.createKanboard.$refs[ref]) {
+								dom = window.GoldChart.store.instance.createKanboard.$refs[ref][0].$refs.widgets
 							}
 						}
 					}
@@ -97,6 +99,7 @@
 		}
 
 		mounted() {
+		    window.GoldChart.mutations.updateApiBind(this.config.widget.id)
 			this.emitComponentUpdate({month: format(this.selectValue, 'yyyy-MM')})
 			if (this.config?.config?.links) {
 				const links = JSON.parse(this.config.config.links)
@@ -105,9 +108,9 @@
 					if (this.kanboardEditor.$refs[ref]) {
 						dom = this.kanboardEditor.$refs[ref][0].$refs.widgets
 					} else {
-						if (store.instance.createKanboard) {
-							if (store.instance.createKanboard.$refs[ref]) {
-								dom = store.instance.createKanboard.$refs[ref][0].$refs.widgets
+						if (window.GoldChart.store.instance.createKanboard) {
+							if (window.GoldChart.store.instance.createKanboard.$refs[ref]) {
+								dom = window.GoldChart.store.instance.createKanboard.$refs[ref][0].$refs.widgets
 							}
 						}
 					}
@@ -117,7 +120,6 @@
 				})
 			}
 		}
-
 	}
 
 	export default HDateMonth

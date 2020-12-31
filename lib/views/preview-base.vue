@@ -10,13 +10,13 @@
 		</div>
 		<template v-for="item in widgetAdded">
 			<template v-if="!item.config.widget.combinationTo">
-				<parts v-if="showParts(item)" :key="item.id" :type="item.type" :config="item.config"
+				<parts v-if="showParts(item)" :market="item.market" :key="item.id" :type="item.type" :config="item.config"
 					   :style="item.config.widget.hide ? 'display: none' : ''" readonly>
 					<template v-if="shouldBeShow(item)">
 						<template v-for="child in getItemChildren(item, 'widget')">
 							<parts
 								v-if="showParts(child)"
-								:key="child.id"
+								:key="child.id" :market="item.market"
 								:class="[
                   `group-item group-item-${child.id}`,
                   {
@@ -77,9 +77,9 @@
 			}
 		},
 		methods: {
-			initWidgetConfig(id, type, config, scene) {
-        mutations.setWidgetsAddedItem(id, type, config, scene)
-      },
+			initWidgetConfig(id, type, config, scene, market) {
+				mutations.setWidgetsAddedItem(id, type, config, scene, market)
+			},
 			sortWidgets: function (widgets) {
 				const providers = []
 				const responders = []
@@ -95,9 +95,9 @@
 				return [...providers, ...responders]
 			},
 			refillConfig() {
-        const {kanboard, widgets, grids, apis} = store.kanboard.data
+				const {kanboard, widgets, grids, apis} = store.kanboard.data
 
-        this.querying = false
+				this.querying = false
 				this.apis = apis
 				return new Promise(resolve => {
 					this.refilling = true
@@ -105,8 +105,8 @@
 					const widgetsArray = this.sortWidgets(Object.values(widgets))
 					const length = widgetsArray.length
 					// 小工具初始化需要时间，此处进行延时逐个回填
-					const reDrawWidget = ({id, type, value, scene = 0}) => {
-						this.initWidgetConfig(id, type, value, scene)
+					const reDrawWidget = ({id, type, value, scene = 0, market = false}) => {
+						this.initWidgetConfig(id, type, value, scene, market)
 						const currentLength = widgetsArray.length
 						if (currentLength) {
 							this.refillPercent = (length - currentLength) / length * 100 | 0
@@ -142,9 +142,9 @@
 			canvasStyle() {
 				return styleParser(this.canvasConfigValue, this.time)
 			},
-      widgetAdded () {
-        return store.kanboard.widgetAdded
-      }
+			widgetAdded() {
+				return store.kanboard.widgetAdded
+			}
 		},
 	}
 </script>

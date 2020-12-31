@@ -7,7 +7,7 @@ const DATAURL = '/data'
 // 获取行业用气量对比类型
 export function businessAnalysisType(data) {
 	return request({
-		url:  `${HANGRANURL}/businessAnalysis/type`,
+		url: `${HANGRANURL}/businessAnalysis/type`,
 		method: 'get',
 		params: data,
 		headers: {
@@ -29,9 +29,21 @@ export function year(data) {
 }
 
 // 获取一级分类列表
+export function detailMarket(data) {
+	return request({
+		url: `${DATAURL}/component/detailByEnTitle`,
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+// 获取一级分类列表
 export function getLevel0() {
 	return request({
-		url:`${DATAURL}/componentType/getLevel0`,
+		url: `${DATAURL}/componentType/getLevel0`,
 		method: 'get',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
@@ -78,54 +90,8 @@ export async function getCompList(data) {
 		v.widgets.forEach(w => {
 			w.label = w.componentTitle
 			w.type = w.componentEnTitle
-			w.config =  {
-				layout: {
-					size: {
-						width: 480,
-						height: 226
-					},
-					position: {
-						value: 'relative'
-					}
-				}
-			}
+			w.market = true
 		})
 	})
 	return res
-}
-
-// 删除组件
-export function destroyComponent(data) {
-	return request({
-		url:`${DATAURL}/component/destroy`,
-		method: 'post',
-		data: qs.stringify(data),
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-		},
-	})
-}
-
-// 新增组件
-export function createComponent(data) {
-	return request({
-		url:`${DATAURL}/component/create`,
-		method: 'post',
-		data: qs.stringify(data),
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-		},
-	})
-}
-
-// 修改组件
-export function updateComponent(data) {
-	return request({
-		url:`${DATAURL}/component/update`,
-		method: 'post',
-		data: qs.stringify(data),
-		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-		},
-	})
 }
