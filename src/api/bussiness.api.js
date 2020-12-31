@@ -1,4 +1,5 @@
 import request from './request'
+import qs from "qs";
 
 const HANGRANURL = '/server'
 const DATAURL = '/data'
@@ -41,9 +42,20 @@ export function getLevel0() {
 // 获取所有组件列表
 export function getCompListAll(data) {
 	return request({
-		url:`${DATAURL}/comp/list`,
+		url:`${DATAURL}/component/list`,
 		method: 'get',
 		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+// 获取所有组件分类
+export function getAllComponentType() {
+	return request({
+		url:`${DATAURL}/componentType/getAllComponentType`,
+		method: 'get',
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 		},
@@ -80,4 +92,40 @@ export async function getCompList(data) {
 		})
 	})
 	return res
+}
+
+// 删除组件
+export function destroyComponent(data) {
+	return request({
+		url:`${DATAURL}/component/destroy`,
+		method: 'post',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+// 新增组件
+export function createComponent(data) {
+	return request({
+		url:`${DATAURL}/component/create`,
+		method: 'post',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+// 修改组件
+export function updateComponent(data) {
+	return request({
+		url:`${DATAURL}/component/update`,
+		method: 'post',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
 }
