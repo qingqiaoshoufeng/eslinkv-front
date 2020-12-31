@@ -29,6 +29,12 @@
 		}
 	}
 	const value = {
+		api: {
+			bind: {
+				enable: true,
+				role: ['provider']
+			}
+		},
         layout: {
             size: {
                 width: 127,
@@ -99,7 +105,6 @@
 		}
 
 		mounted() {
-		    window.GoldChart.mutations.updateApiBind(this.config.widget.id)
 			this.emitComponentUpdate({month: format(this.selectValue, 'yyyy-MM')})
 			if (this.config?.config?.links) {
 				const links = JSON.parse(this.config.config.links)

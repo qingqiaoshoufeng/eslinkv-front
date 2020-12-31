@@ -149,7 +149,7 @@
 				})
 			},
 			setWidgetConfig(currentValue = {}, index, prefix) {
-				// console.log('setWidgetConfig',currentValue,index,prefix)
+				console.log('setWidgetConfig',currentValue,index,prefix)
 				const configMap = this.widgetConfigMap
 				const key = prefix + '-' + index
 				const currentConfig = configMap[key]
@@ -176,9 +176,18 @@
 			 * @description h5 原生拖拽事件
 			 */
 			dragstart(e, configKey, {type, market}) {
+				console.log(configKey)
+				console.log(this.widgetConfigMap[configKey])
 				const widgetConfig = this.widgetConfigMap[configKey]
 				if (!widgetConfig || !type) return
 				const {config} = widgetConfig
+				console.log({
+					type,
+					config,
+					market,
+					startX: e.offsetX,
+					startY: e.offsetY,
+				})
 				e.dataTransfer.setData('widget-config', JSON.stringify({
 					type,
 					config,

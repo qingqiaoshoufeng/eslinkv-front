@@ -84,8 +84,11 @@ export default {
 	},
 	mounted(){
 		setTimeout(() => {
-			if (!this.inPreview && !this.data)
-				window.GoldChart.mutations.updateApiData(this.config.widget.id, this.defaultData)
+			if (!this.inPreview && !this.data) {
+				this.u
+			}
+				// window.GoldChart.mutations.updateApiData(this.config.widget.id, this.defaultData)
+
 		})
 	}
 }

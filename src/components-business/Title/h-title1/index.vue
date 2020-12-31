@@ -14,6 +14,9 @@
 		title: '标题'
 	}
 	const value = {
+		api: {
+			data: JSON.stringify({title: '标题'})
+		},
 		layout: {
 			size: {
 				width: 480,
@@ -29,8 +32,10 @@
 	class HTitle1 extends mixins(mx) {
 		created() {
 			this.defaultData = data
-			this.configSource = this.parseConfigSource(config)
-			this.configValue = this.parseConfigValue(config, value)
+			setTimeout(() => {
+				this.configSource = this.parseConfigSource(config)
+				this.configValue = this.parseConfigValue(config, value)
+			}, 1000)
 		}
 	}
 
