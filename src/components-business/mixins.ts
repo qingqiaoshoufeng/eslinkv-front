@@ -7,7 +7,6 @@ export default {
 			animateTimer: null,
 			animateActiveIndex: -1,
 			output: null,
-			defaultData: {},
 			inPreview: window.GoldChart.store.scene.status === 'inPreview',
 		}
 	},

@@ -7,19 +7,8 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import {getInput} from '../../../../lib'
+	import {config, value} from './index.component'
 
-	const config = {
-		animation: true,
-	}
-
-	const value = {
-		api: {
-			data: JSON.stringify({
-				value: '用气过载(已处理)'
-			})
-		}
-	}
 	export default {
 		mixins: [mixins],
 		created() {

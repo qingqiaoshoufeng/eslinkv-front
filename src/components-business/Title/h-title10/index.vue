@@ -9,36 +9,8 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import {getInput} from '../../../../lib'
+	import {config, configSource, value} from './index.component'
 
-	const config = {
-		animation: true,
-		config: {
-			suffix: true,
-			title: true
-		}
-	}
-
-	const configSource = {
-		config: {
-			fields: {
-				title: getInput('title', '标题'),
-				suffix: getInput('suffix', '后缀'),
-			}
-		},
-	}
-
-	const value = {
-		config: {
-			title: '昨日用气量：',
-			suffix: 'm³',
-		},
-		api: {
-			data: JSON.stringify({
-				value: 3320
-			})
-		}
-	}
 	export default {
 		mixins: [mixins],
 		created() {

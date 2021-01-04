@@ -8,33 +8,8 @@
 	import mx from '../../mixins'
 	import {Component} from 'vue-property-decorator'
 	import {mixins} from 'vue-class-component'
-	import {getInput} from '../../../../lib'
+    import {config, configSource, value} from './index.component'
 
-	const config = {
-		animation: true,
-		config: {
-			title: true
-		}
-	}
-
-	const configSource = {
-		config: {
-			fields: {
-				title: getInput('title', '标题'),
-			}
-		},
-	}
-
-	const value = {
-		api: {
-			data: JSON.stringify({
-				value: 99999
-			})
-		},
-		config: {
-			title: '标题'
-		}
-	}
 	@Component
 	class HTitle4 extends mixins(mx) {
 		created() {

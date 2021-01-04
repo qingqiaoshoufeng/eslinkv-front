@@ -8,33 +8,8 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import {getInput} from '../../../../lib'
+	import {config, configSource, value} from './index.component'
 
-	const config = {
-		animation: true,
-		config: {
-			title: true
-		}
-	}
-
-	const configSource = {
-		config: {
-			fields: {
-				title: getInput('title', '标题'),
-			}
-		},
-	}
-
-	const value = {
-		api: {
-			data: JSON.stringify({
-				value: 34345
-			})
-		},
-		config: {
-			title: '标题'
-		}
-	}
 	export default {
 		mixins: [mixins],
 		created() {

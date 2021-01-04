@@ -7,18 +7,8 @@
 	import mx from '../../mixins'
 	import {Component} from 'vue-property-decorator'
 	import {mixins} from 'vue-class-component'
+    import {config, value} from './index.component'
 
-	const config = {
-		animation: true,
-	}
-
-	const value = {
-		api: {
-			data:JSON.stringify({
-				title: '标题'
-			})
-		}
-	}
 	@Component
 	class HTitle5 extends mixins(mx) {
 		created() {
