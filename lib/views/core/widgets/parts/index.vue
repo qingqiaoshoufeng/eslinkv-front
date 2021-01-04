@@ -103,11 +103,15 @@
         },
         computed: {
             currentComponent() {
-                if (this.componentList[cssStyle2DomStyle(this.type)]) {
+                if (this.componentList[cssStyle2DomStyle(this.type)])
                     return this.componentList[cssStyle2DomStyle(this.type)]
+
+                if (this.ready) {
+                    if (this.market)
+                        return `market-${this.type}`
+                    return `dvdp-${this.type}`
                 }
-                if (this.ready)
-                    return this.type
+
                 return null
             },
             animation() {
@@ -173,7 +177,9 @@
             }
         },
         mounted() {
-            if (!this.componentList[cssStyle2DomStyle(this.type)]) {
+            if (this.componentList[cssStyle2DomStyle(this.type)]) {
+                this.ready = true
+            } else {
                 if (this.market) {
                     if (window.GoldChart.components[this.type]) {
                         this.ready = true
@@ -181,7 +187,7 @@
                         this.$sysApi.bussiness.detailMarket({componentEnTitle: this.type}).then(res => {
                             let script = document.createElement('script')
                             script.onload = () => {
-                                Vue.component(res.componentEnTitle, window.GoldChart.components[res.componentEnTitle].component)
+                                Vue.component(`market-${res.componentEnTitle}`, window.GoldChart.components[res.componentEnTitle].component)
                                 this.ready = true
                             }
                             script.src = res.componentJsUrl
@@ -189,16 +195,14 @@
                         })
                     }
                 } else {
-                    if (window.GoldChart.components[this.type]) {
+                    if (window.GoldChart.components[`dvdp-${this.type}`]) {
                         this.ready = true
                     } else {
-                        Vue.component(this.type, store.custom.components[this.type])
-                        window.GoldChart.components[this.type] = store.custom.components[this.type]
+                        Vue.component(`dvdp-${this.type}`, store.custom.components[this.type])
+                        window.GoldChart.components[`dvdp-${this.type}`] = store.custom.components[this.type]
                         this.ready = true
                     }
                 }
-            } else {
-                this.ready = true
             }
             this.$el.addEventListener('animationend', this.handleAnimationEnd)
         },

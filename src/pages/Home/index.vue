@@ -2,7 +2,7 @@
 	.list-container
 		div
 			Button(type="primary" @click="handleNew") 新建看板
-			Button.ml20(type="primary" @click="handleMarket") 查看组建市场
+			Button.ml20(type="primary" @click="handleMarket") 组件市场
 		ul.fn-flex.flex-row.list-item-card-box
 			item-card(v-for="item in list" v-bind="item" :key="item.id" @init="init")
 		Page(:total="total" :show-sizer="true" :show-elevator="true" :show-total="true" @on-change="handleChange" @on-page-size-change="handlePageSize")
@@ -16,10 +16,10 @@
 		components:{itemCard, Page, Button}
 	})
 	class Home extends Vue {
-		list: Array<any> = []
-		total: Number = 0
-		pageNum: Number = 1
-		pageSize: Number = 10
+		list: any[] = []
+		total: number = 0
+		pageNum: number = 1
+		pageSize: number = 10
 
 		handleNew() {
 			this.$router.push('/new')

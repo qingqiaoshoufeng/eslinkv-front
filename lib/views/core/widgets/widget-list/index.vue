@@ -16,7 +16,6 @@
 									   style="left:0;top:0;font-size: 12px;z-index: 9;">{{widget.type}}</i>
 									<vue-lazy-component>
 										<div draggable="true"
-											 @widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)"
 											 @dragstart="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)">
 											<img :src="widget.componentImage"/>
 										</div>

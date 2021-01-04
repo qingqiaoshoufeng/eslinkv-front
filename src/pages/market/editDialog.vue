@@ -24,7 +24,7 @@
 import {Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import { Modal, Form, FormItem, Input, Button, Upload, Icon } from 'view-design'
 import { createComponent, updateComponent, getAllComponentType } from '@/api/bussiness.api'
-import Treeselect from '@riophae/vue-treeselect'
+import TreeSelect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
 @Component({
@@ -35,7 +35,7 @@ import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 		Icon,
 		Form,
 		FormItem,
-		Treeselect,
+        TreeSelect,
 		Input
 	}
 })
