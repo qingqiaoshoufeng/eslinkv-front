@@ -15,18 +15,8 @@
 </template>
 <script>
 	import mixins from '../../mixins'
+	import { config, value } from './index.component'
 
-	const config = {animation: true}
-
-	const value = {
-		api: {
-			data: JSON.stringify([{"label": "点火数", "value": "点火数"}]),
-			bind: {
-				enable: true,
-				role: ['provider']
-			}
-		}
-	}
 	export default {
 		data() {
 			return {

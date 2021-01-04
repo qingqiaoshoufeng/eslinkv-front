@@ -1,13 +1,17 @@
-export default {
-	config: {
-		layout: {
-			size: {
-				width: 480,
-				height: 176
-			},
-			position: {
-				value: 'relative'
-			}
+export const config = {animation: true};
+export const value = {
+	api: {
+		data: JSON.stringify({
+			value: 111
+		}),
+	},
+	layout: {
+		size: {
+			width: 480,
+			height: 176
+		},
+		position: {
+			value: 'relative'
 		}
 	}
-}
+};

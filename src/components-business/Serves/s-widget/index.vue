@@ -19,21 +19,8 @@
 </template>
 <script>
 	import mixins from '../../mixins';
+	import { config, value } from './index.component'
 
-	const config = {
-		animation: true,
-	};
-	const value = {
-		api: {
-			data: JSON.stringify({
-				list: Array(22).fill({
-          name: '安装',
-          num: 1231,
-          percent: 60
-        })
-			})
-		},
-	};
 	const SIZE = 8
 	export default {
 		mixins: [mixins],

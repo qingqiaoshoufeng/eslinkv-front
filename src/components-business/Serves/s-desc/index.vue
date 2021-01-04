@@ -6,34 +6,8 @@
 </template>
 <script>
 import mixins from '../../mixins';
-import {getInput} from "@lib/views/core/widgets/parts/lib/config-tools";
+import { config, configSource, value } from './index.component'
 
-const config = {
-  animation: true,
-  config: {
-    title: true,
-    numColor: true
-  },
-};
-const value = {
-	api: {
-		data: JSON.stringify({
-      num: 0
-    })
-	},
-  config: {
-    title: '通讯异常',
-    numColor: '#fff'
-  }
-}
-const configSource = {
-  config: {
-    fields: {
-      title: getInput('title', '标题'),
-      numColor: getInput('numColor', '数字颜色')
-    }
-  }
-}
 export default {
 	mixins: [mixins],
 	created() {

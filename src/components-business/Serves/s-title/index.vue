@@ -7,34 +7,8 @@
 </template>
 <script>
 	import mixins from '../../mixins';
-	import {getInput, getSelect} from '../../../../lib';
+	import { config, configSource, value } from './index.component'
 
-	const configSource = {
-		config: {
-			fields: {
-				desc: getInput('desc', '描述'),
-				img: getSelect('img', '图片', ['/static/icons/s-title-1.svg', '/static/icons/s-title-2.svg']),
-			},
-		},
-	};
-	const config = {
-		animation: true,
-		config: {
-			desc: true,
-			img: true,
-		},
-	};
-	const value = {
-		api: {
-			data: JSON.stringify({
-				value: 391218,
-			})
-		},
-		config: {
-			desc: '累计受理业务(单)',
-			img: '/static/icons/s-title-1.svg',
-		},
-	};
 	export default {
 		mixins: [mixins],
 		created() {

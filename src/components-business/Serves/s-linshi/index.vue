@@ -9,32 +9,8 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import {getSelect, getInput} from "../../../../lib";
+	import { config, configSource, value } from './index.component'
 
-	const configSource = {
-		config: {
-			fields: {
-				img: getSelect('img', '图片', ['/static/icons/数据下钻.png', '/static/icons/工商户点位弹窗.png']),
-				index: getInput('index', '场景ID'),
-				left: getInput('left', '位移'),
-			}
-		}
-	}
-	const config = {
-		animation: true,
-		config: {
-			img: true,
-			index: true,
-			left: true,
-		}
-	}
-	const value = {
-		config: {
-			img: '/static/icons/数据下钻.png',
-			index: '',
-			left: 0
-		}
-	}
 	export default {
 		mixins: [mixins],
 		methods: {

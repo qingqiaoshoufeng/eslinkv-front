@@ -25,39 +25,8 @@
 <script>
 	import mixins from '../../mixins';
 	import VueSeamLess from 'vue-seamless-scroll'
+	import { config, value } from './index.component'
 
-	const config = {animation: true}
-	const value = {
-		api: {
-			data: JSON.stringify([
-				{
-					title: '钱塘新区',
-					value: 2321343,
-					suffix: 'm³'
-				},
-				{
-					title: '滨江区',
-					value: 2301232,
-					suffix: 'm³'
-				},
-				{
-					title: '萧山区',
-					value: 1254321,
-					suffix: 'm³'
-				},
-				{
-					title: '余杭区',
-					value: 1932315,
-					suffix: 'm³'
-				},
-				{
-					title: '下城区区',
-					value: 1221342,
-					suffix: 'm³'
-				},
-			])
-		}
-	}
 	export default {
 		data() {
 			return {

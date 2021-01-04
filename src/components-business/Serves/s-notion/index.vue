@@ -16,20 +16,8 @@
 <script>
 import mixins from '../../mixins';
 import MarqueeText from 'vue-marquee-text-component'
+import { config, value } from './index.component'
 
-const config = {
-	animation: true
-};
-const value = {
-	api: {
-		data: JSON.stringify([
-      {
-        txt: '李先生上报亲亲家园小区发, 生燃气泄露事故冯方法。',
-        time: '13:24:51'
-      }
-    ]),
-	}
-};
 export default {
 	mixins: [mixins],
   components: { MarqueeText },

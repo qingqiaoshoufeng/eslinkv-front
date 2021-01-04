@@ -32,21 +32,8 @@
 <script>
 import mixins from '../../mixins';
 import options from './options';
+import { config, value } from './index.component'
 
-const config = { animation: true };
-const value = {
-	api: {
-		data: JSON.stringify({
-			planTip: 'static/images/serves/securitycheck-plan.svg',
-			planValue: 96,
-			planDesc: '本月安检计划量',
-			realValue: 96,
-			realDesc: '本月实际入户数',
-			realTip: 'static/images/serves/securitycheck-reality.svg',
-			percentage: 56,
-		}),
-	},
-};
 export default {
 	mixins: [mixins],
 	created() {

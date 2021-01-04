@@ -13,39 +13,9 @@
 </template>
 <script>
 	import mixins from '../../mixins';
-	import {getInput, getSelect} from '../../../../lib';
 	import getOption from "./options";
+	import { config, configSource, value } from './index.component'
 
-	const configSource = {
-		config: {
-			fields: {
-				desc: getInput('desc', '描述'),
-				desc2: getInput('desc2', '描述2'),
-				logo: getSelect('logo', '图片logo', ['/static/images/serves/s-tag1-logo1.svg', '/static/images/serves/s-tag1-logo2.svg']),
-			},
-		},
-	};
-	const config = {
-		animation: true,
-		config: {
-			desc: true,
-			desc2: true,
-			logo: true,
-		},
-	};
-	const value = {
-		api: {
-			data: JSON.stringify({
-				value: 22326,
-				percent: 74.8,
-			}),
-		},
-		config: {
-			desc: '热线服务话务量(次)',
-			desc2: '接通率',
-			logo: '/static/images/serves/s-tag1-logo1.svg'
-		},
-	};
 	export default {
 		mixins: [mixins],
 		watch: {

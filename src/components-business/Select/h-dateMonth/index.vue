@@ -13,38 +13,7 @@
 	import addMonths from 'date-fns/addMonths'
 	import isSameMonth from 'date-fns/isSameMonth'
 	import format from 'date-fns/format'
-	import {getInput} from '../../../../lib'
-
-	const config = {
-		config: {
-			links: true
-		}, animation: true
-	}
-
-	const configSource = {
-		config: {
-			fields: {
-				links: getInput('links', '关联组件'),
-			}
-		}
-	}
-	const value = {
-		api: {
-			bind: {
-				enable: true,
-				role: ['provider']
-			}
-		},
-        layout: {
-            size: {
-                width: 127,
-                height: 32
-            },
-            position: {
-                value: 'relative'
-            }
-        }
-	}
+	import { config, configSource, value } from './index.component'
 
 	@Component
 	class HDateMonth extends mixins(mx) {

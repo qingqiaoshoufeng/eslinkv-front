@@ -6,31 +6,8 @@
 </template>
 <script>
 import mixins from '../../mixins';
-import { getInput } from '../../../../lib';
+import { config, configSource, value } from './index.component'
 
-const configSource = {
-	config: {
-		fields: {
-			desc: getInput('desc', '描述'),
-		},
-	},
-};
-const config = {
-	animation: true,
-	config: {
-		desc: true,
-	},
-};
-const value = {
-	api: {
-		data: JSON.stringify({
-			value: 24,
-		}),
-	},
-	config: {
-		desc: '标题',
-	},
-};
 export default {
 	mixins: [mixins],
 	created() {

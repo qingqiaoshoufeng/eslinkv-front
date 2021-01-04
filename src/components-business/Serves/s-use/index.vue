@@ -33,22 +33,8 @@
 </template>
 <script>
 	import mixins from '../../mixins';
-	import {getInput} from '../../../../lib';
+	import { config, value } from './index.component'
 
-	const config = {
-		animation: true,
-	};
-	const value = {
-		api: {
-			data: JSON.stringify({
-				total: 1317190,
-				yesterday: 1190,
-				yesterdayType: 'up',
-				lastWeek: 1190,
-				lastWeekType: 'down'
-			}),
-		}
-	};
 	export default {
 		mixins: [mixins],
 		created() {

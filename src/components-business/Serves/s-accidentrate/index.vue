@@ -21,17 +21,8 @@
 </template>
 <script>
 import mixins from '../../mixins';
-// import options from './options'
+import { config, value } from './index.component'
 
-const config = { animation: true };
-const value = {
-	api: {
-		data: JSON.stringify({
-			desc: '客户事故数(件)',
-			value: 298,
-		}),
-	},
-};
 export default {
 	mixins: [mixins],
 	methods: {},

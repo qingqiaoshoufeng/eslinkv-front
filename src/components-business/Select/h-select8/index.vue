@@ -13,20 +13,8 @@
 		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
 		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
 	} from '../../../components-map/AMap/a-map/config/scene'
-	const config = {animation: true}
+	import { config, value } from './index.component'
 
-	const value = {
-		api: {
-			data: JSON.stringify({
-				label: '江东门站',
-				stationId: null
-			}),
-			bind: {
-				enable: true,
-				role: ['provider']
-			}
-		}
-	}
 	export default {
 		data() {
 			return {

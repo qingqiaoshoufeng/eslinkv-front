@@ -32,21 +32,8 @@
 	import addDays from 'date-fns/addDays'
 	import addMonths from 'date-fns/addMonths'
 	import addYears from 'date-fns/addYears'
+	import { config, value } from './index.component'
 
-	const config = {animation: true}
-
-	const value = {
-		api: {
-			data: {
-				selectType: '日',
-				selectValue: format(new Date(), 'yyyy.MM.dd'),
-			},
-			bind: {
-				enable: true,
-				role: ['provider']
-			}
-		}
-	}
 	export default {
 		data() {
 			return {
