@@ -48,12 +48,15 @@
             },
         },
     };
-    const data = {
-        yValue: [120, 200, 150, 80, 70, 110, 130],
-        yValue1: [30, 60, 100, 70, 40, 10, 60],
-        xValue: ['5月', '6月', '7月', '8月', '9月', '10月', '11月'],
-    }
     const value = {
+        api:{
+            data:JSON.stringify({
+                    yValue: [120, 200, 150, 80, 70, 110, 130],
+                    yValue1: [30, 60, 100, 70, 40, 10, 60],
+                    xValue: ['5月', '6月', '7月', '8月', '9月', '10月', '11月'],
+                }
+            )
+        },
         layout: {
             size: {
                 width: 480,
@@ -118,7 +121,6 @@
             },
         },
         created() {
-            this.defaultData = data
             this.configSource = this.parseConfigSource(config, configSource);
             this.configValue = this.parseConfigValue(config, value);
         },
