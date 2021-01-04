@@ -14,20 +14,24 @@ module.exports = {
         disableHostCheck: true,
         proxy: {
             '^/hangran': {
-                target: 'http://ebp-pc.hzrq.local:15003',
+                target: 'http://ebp-pc.hw-qa.eslink.net.cn',
+                // target: 'http://ebp-pc.hzrq.local:15003',
                 changeOrigin: true,
                 headers: {
-                    Cookie: 'SESSION=e27f5a06-e5f2-4af8-aa52-0fcf051f912b'
+                    Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
+                    // Cookie: 'SESSION=e27f5a06-e5f2-4af8-aa52-0fcf051f912b'
                 },
                 pathRewrite: {
                     '^/hangran': '/'
                 }
             },
             '^/api': {
-                target: 'http://ebp-pc.hzrq.local:15003',
+                target: 'http://ebp-pc.hw-qa.eslink.net.cn',
+                // target: 'http://ebp-pc.hzrq.local:15003',
                 changeOrigin: true,
                 headers: {
-                    Cookie: 'SESSION=e27f5a06-e5f2-4af8-aa52-0fcf051f912b'
+                    Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
+                    // Cookie: 'SESSION=e27f5a06-e5f2-4af8-aa52-0fcf051f912b'
                 },
                 pathRewrite: {
                     '^/api': '/'
@@ -108,6 +112,3 @@ module.exports = {
             .end()
     },
 }
-
-
-

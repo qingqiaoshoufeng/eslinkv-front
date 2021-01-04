@@ -15,24 +15,23 @@
 									<i class="pos-a"
 									   style="left:0;top:0;font-size: 12px;z-index: 9;">{{widget.type}}</i>
 									<vue-lazy-component>
-										<div draggable="true"
-											 @widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)"
-											 @dragstart="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)">
-											<img :src="widget.componentImage"/>
-										</div>
+<!--										<div draggable="true"-->
+<!--											 @widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)"-->
+<!--											 @dragstart="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)">-->
+<!--											<img :src="widget.componentImage"/>-->
+<!--										</div>-->
 										<div slot="skeleton">加载中...</div>
-										<!--										<parts-->
-										<!--											v-if="!widget.market"-->
-										<!--											:type="widget.type"-->
-										<!--											:style="transform(widget)"-->
-										<!--											:classification="tab.name"-->
-										<!--											:config="widgetConfigMap[`${tab.name}-${format(type)}-${index}`].config"-->
-										<!--											draggable="true"-->
-										<!--											readonly-->
-										<!--											no-bind-params-->
-										<!--											@dragstart.native="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)"-->
-										<!--											@widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)"-->
-										<!--										/>-->
+										<parts
+											:type="widget.type"
+											:style="transform(widget)"
+											:classification="tab.name"
+											:config="widgetConfigMap[`${tab.name}-${format(type)}-${index}`].config"
+											draggable="true"
+											readonly
+											no-bind-params
+											@dragstart.native="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)"
+											@widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)"
+										/>
 									</vue-lazy-component>
 								</div>
 							</template>
