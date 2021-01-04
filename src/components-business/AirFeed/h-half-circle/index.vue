@@ -6,46 +6,8 @@
 <script>
 import mixins from '../../mixins';
 import getOption from './options';
-import {getInput} from "@lib/views/core/widgets/parts/lib/config-tools";
+import { config, configSource, value } from './index.component'
 
-const config = {
-  animation: true,
-  config: {
-    title: true,
-    mainColor: true,
-    bgColor: true,
-    titleColor: true,
-    subTitleColor: true,
-    pointerColor: true,
-  },
-};
-const value = {
-	api: {
-		data: JSON.stringify({
-      percent: 30
-		})
-	},
-  config: {
-    title: '巡检完成率',
-    mainColor: '#00DDFF',
-    bgColor: 'rgba(0, 87, 169, 0.5)',
-    pointerColor: '#00FFCF',
-    titleColor: '#fff',
-    subTitleColor: '#00DDFF',
-  }
-}
-const configSource = {
-  config: {
-    fields: {
-      title: getInput('title', '标题'),
-      mainColor: getInput('mainColor', '环形主颜色'),
-      bgColor: getInput('bgColor', '环形背景色'),
-      pointerColor: getInput('pointerColor', '圆点颜色'),
-      titleColor: getInput('titleColor', '标题颜色（百分比）'),
-      subTitleColor: getInput('subTitleColor', '副标题颜色（文字）'),
-    }
-  },
-}
 export default {
 	mixins: [mixins],
 	methods: {

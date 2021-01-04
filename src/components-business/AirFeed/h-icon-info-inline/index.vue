@@ -12,36 +12,8 @@
 </template>
 <script>
 import mixins from '../../mixins';
-import { getInput, getSelect } from '../../../../lib';
+import { config, configSource, value } from './index.component'
 
-const config = {
-	animation: true,
-	config: {
-		text: true,
-		icon: true,
-	},
-};
-const configSource = {
-	config: {
-		fields: {
-			text: getInput('text', '描述'),
-			icon: getSelect('icon', 'icon', [
-				'/static/icons/h-inline-logo1.svg',
-			]),
-		},
-	},
-};
-const value = {
-	api: {
-		data: JSON.stringify({
-			count: 123458,
-		}),
-	},
-	config: {
-		icon: '/static/icons/h-inline-logo1.svg',
-		text: '',
-	},
-};
 export default {
 	mixins: [mixins],
 	methods: {},

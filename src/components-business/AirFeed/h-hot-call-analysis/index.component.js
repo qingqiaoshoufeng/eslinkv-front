@@ -1,14 +1,18 @@
-export default {
-	label: '热线号码及数量展示',
-	config: {
-		layout: {
-			size: {
-				width: 480,
-				height: 139
-			},
-			position: {
-				value: 'relative'
-			}
+export const config = {animation: true}
+export const value = {
+	api: {
+		data: JSON.stringify({
+			onBusy: 32,
+			onFree: 11
+		})
+	},
+	layout: {
+		size: {
+			width: 480,
+			height: 139
+		},
+		position: {
+			value: 'relative'
 		}
 	}
 }

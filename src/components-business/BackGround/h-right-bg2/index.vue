@@ -15,14 +15,13 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-
-	const config = {animation: true}
+	import { config, value } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		created() {
 			this.configSource = this.parseConfigSource(config)
-			this.configValue = this.parseConfigValue(config)
+			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
 </script>

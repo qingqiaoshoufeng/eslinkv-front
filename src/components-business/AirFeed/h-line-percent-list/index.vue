@@ -10,51 +10,10 @@
 	</div>
 </template>
 <script>
-	import JSONStringify from '../../../../lib/vendor/JSONStringify';
 	import mixins from '../../mixins';
 	import HLinePercentItem from './HLinePercentItem';
+	import { config, value } from './index.component'
 
-	const config = {animation: true};
-	const value = {
-		api: {
-			data: JSONStringify({
-				list: [
-					{
-						name: '开户',
-						amount: 4500,
-					},
-					{
-						name: '开户',
-						amount: 4500,
-					},
-					{
-						name: '开户',
-						amount: 14500,
-					},
-					{
-						name: '开户',
-						amount: 4500,
-					},
-					{
-						name: '开户',
-						amount: 4500,
-					},
-					{
-						name: '开户',
-						amount: 4500,
-					},
-					{
-						name: '开户',
-						amount: 4500,
-					},
-					{
-						name: '开户',
-						amount: 4500,
-					},
-				],
-			}),
-		},
-	};
 	export default {
 		mixins: [mixins],
 		components: {

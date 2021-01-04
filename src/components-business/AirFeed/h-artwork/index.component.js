@@ -1,14 +1,20 @@
-export default {
-	label: '图标文案展示',
-	config: {
-		layout: {
-			size: {
-				width: 1888,
-				height: 605
-			},
-			position: {
-				value: 'relative'
-			}
+
+export const value = {
+	api: {
+		data: JSON.stringify({
+			image: '北门站'
+		})
+	},
+	layout: {
+		size: {
+			width: 1888,
+			height: 605
+		},
+		position: {
+			value: 'relative'
 		}
 	}
+}
+export const config = {
+	animation: true
 }

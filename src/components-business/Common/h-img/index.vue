@@ -7,28 +7,8 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import {getSelect} from '../../../../lib'
+	import { config, configSource, value } from './index.component'
 
-	const configSource = {
-		config: {
-			fields: {
-				img: getSelect('img', '图片', ['/static/mock/test1.png', '/static/mock/test2.png', '/static/mock/test3.png']),
-			}
-		}
-	}
-
-	const config = {
-		animation: true,
-		config: {
-			img: true
-		}
-	}
-
-	const value = {
-		config: {
-			img: '/static/mock/test1.png'
-		}
-	}
 	export default {
 		mixins: [mixins],
 		created() {

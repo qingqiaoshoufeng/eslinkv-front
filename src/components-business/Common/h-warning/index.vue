@@ -18,21 +18,13 @@
 </template>
 <script>
 	import mixins from '../../mixins'
+	import { config, value } from './index.component'
 
-	const config = {animation: true}
-	const value = {
-		api: {
-			data: JSON.stringify({
-				time: '12:32:56',
-				title: '三里亭社区燃气泄漏'
-			}),
-		},
-	};
 	export default {
 		mixins: [mixins],
 		created() {
 			this.configSource = this.parseConfigSource(config)
-			this.configValue = this.parseConfigValue(config)
+			this.configValue = this.parseConfigValue(config, value)
 		}
 	}
 </script>

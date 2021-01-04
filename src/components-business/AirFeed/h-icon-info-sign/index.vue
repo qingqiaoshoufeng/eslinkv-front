@@ -9,17 +9,8 @@
 </template>
 <script>
 	import mixins from '../../mixins';
+	import { config, value } from './index.component'
 
-	const config = {animation: true}
-	const value = {
-		api: {
-			data: JSON.stringify({
-				count: 123456,
-				icon: '/static/icons/h-inline-logo1.svg',
-				text: '居民户',
-			})
-		}
-	}
 	export default {
 		mixins: [mixins],
 		methods: {},

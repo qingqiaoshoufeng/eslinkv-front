@@ -37,20 +37,10 @@ import highcharts3d from 'highcharts/highcharts-3d';
 import lottie from 'lottie-web';
 import pieBgBtnJson from '@/animationJson/yuan1.json';
 import pieTopBg from '@/animationJson/yuan2.json';
+import { config, value } from './index.component'
 highcharts3d(highcharts);
 import mixins from '../../mixins';
-const config = {animation: true};
-const value = {
-	api: {
-		data: JSON.stringify([
-			{ typeName: '工业生产', percent: 57.0 },
-			{ typeName: '福利采暖', percent: 3.0 },
-			{ typeName: '商业大灶', percent: 9.0 },
-			{ typeName: '商业采暖', percent: 2.0 },
-			{ typeName: '福利', percent: 11.0 },
-		]),
-	},
-};
+
 export default {
 	name: 'baoji-big-screen-wrap',
 	data() {

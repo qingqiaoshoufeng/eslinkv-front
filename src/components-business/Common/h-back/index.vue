@@ -8,15 +8,7 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-
-	const config = {animation: true}
-	const value = {
-		api: {
-			data: JSON.stringify({
-				sceneId: ''
-			})
-		}
-	}
+	import { config, value } from './index.component'
 
 	export default {
 		mixins: [mixins],

@@ -9,17 +9,8 @@
 <script>
 	import ImageView from '@/components/ImageView'
 	import mixins from '../../mixins';
+	import { config, value } from './index.component'
 
-	const config = {
-		animation: true
-	}
-	const value = {
-		api: {
-			data: JSON.stringify({
-				image: '北门站'
-			})
-		}
-	}
 	export default {
 		mixins: [mixins],
 		components: {

@@ -18,37 +18,8 @@
 </template>
 <script>
 import mixins from '../../mixins';
-import { getInput, getSelect } from '../../../../lib';
+import { config, configSource, value } from './index.component'
 
-const config = {
-	animation: true,
-	config: {
-		text: true,
-		icon: true,
-	},
-};
-const configSource = {
-	config: {
-		fields: {
-			text: getInput('text', '描述'),
-			icon: getSelect('icon', 'icon', [
-				'/static/icons/h-call-count-statistics-1.svg',
-			]),
-		},
-	},
-};
-const value = {
-	api: {
-		data: JSON.stringify({
-			icon: '/static/icons/phone-border.svg',
-			minutes: 680230,
-		}),
-	},
-	config: {
-		icon: '/static/icons/phone-border.svg',
-		text: '累计通话时长:',
-	},
-};
 export default {
 	mixins: [mixins],
 	methods: {},

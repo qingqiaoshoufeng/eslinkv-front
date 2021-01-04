@@ -19,34 +19,10 @@
 </template>
 <script>
 	import mixins from '../../mixins';
-	import getOptions, {data} from './options'
-	import {getInput} from '../../../../lib'
+	import getOptions from './options'
 	import format from 'date-fns/format'
+	import { config, configSource, value } from './index.component'
 
-	const configSource = {
-		config: {
-			fields: {
-				sceneId: getInput('sceneId', '场景id'),
-				componentId: getInput('componentId', '组件id'),
-			},
-		},
-	};
-	const config = {
-		animation: true,
-		config: {
-			sceneId: true,
-			componentId: true,
-		},
-	};
-	const value = {
-		api: {
-			data: JSON.stringify(data),
-		},
-		config: {
-			sceneId: '',
-			componentId: '',
-		},
-	};
 	export default {
 		mixins: [mixins],
 		computed: {},

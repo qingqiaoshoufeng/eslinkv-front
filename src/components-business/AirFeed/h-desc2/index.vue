@@ -10,39 +10,8 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import {getInput} from "@lib"
+	import { config, configSource, value } from './index.component'
 
-	const config = {
-		animation: true,
-		config: {
-      unit: true,
-			title1: true,
-			title2: true,
-		}
-	}
-
-	const configSource = {
-		config: {
-			fields: {
-				title1: getInput('title1', '标题1'),
-				title2: getInput('title2', '标题2'),
-        unit: getInput('unit', '单位'),
-			}
-		},
-	}
-
-	const value = {
-		api: {
-			data: JSON.stringify({
-				value: 34325
-			}),
-		},
-		config: {
-			unit: '万m³',
-			title1: '门站月度',
-      title2: '累计接纳量'
-		}
-	}
 	export default {
 		mixins: [mixins],
 		created() {

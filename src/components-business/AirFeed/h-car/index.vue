@@ -51,26 +51,11 @@
 <script>
 	import mixins from '../../mixins'
 	import Ring from '@/components/Ring/ring'
+	import { config, value } from './index.component'
 
-	const config = {
-		animation: true
-	}
-
-	const value = {
-		api: {
-			data: JSON.stringify({
-				start1: 73,
-				end1: 73,
-				start2: 73,
-				end2: 73,
-				start3: 73,
-				end3: 73,
-			}),
-		}
-	}
 	export default {
 		mixins: [mixins],
-    components: { Ring },
+    	components: { Ring },
 		created() {
 			this.configSource = this.parseConfigSource(config)
 			this.configValue = this.parseConfigValue(config, value)

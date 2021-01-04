@@ -10,29 +10,8 @@
 </template>
 <script>
 	import mixins from '../../mixins';
-	import {getInput} from "@lib/views/core/widgets/parts/lib/config-tools";
+	import { config, configSource, value } from './index.component'
 
-	const config = {
-		animation: true,
-		config: {
-			title: true
-		},
-	};
-	const value = {
-		api: {
-			data: JSON.stringify({})
-		},
-		config: {
-			title: '供气量'
-		}
-	}
-	const configSource = {
-		config: {
-			fields: {
-				title: getInput('title', '标题')
-			}
-		}
-	}
 	export default {
 		mixins: [mixins],
 		created() {

@@ -5,17 +5,9 @@
 </template>
 <script>
 	import mixins from '../../mixins';
-	import getOptions, { barData, dashLineData } from './options'
+	import getOptions from './options'
+	import { config, value } from './index.component'
 
-	const config = {animation: true}
-	const value = {
-		api: {
-			data: JSON.stringify({
-				barData: barData,
-				dashLineData: dashLineData
-			})
-		}
-	}
 	export default {
 		mixins: [mixins],
 		computed: {

@@ -1,13 +1,32 @@
-export default {
+import {getInput} from "@lib/views/core/widgets/parts/lib/config-tools";
+
+export const config = {
+	animation: true,
 	config: {
-		layout: {
-			size: {
-				width: 820,
-				height: 862
-			},
-			position: {
-				value: 'relative'
-			}
+		title: true
+	},
+};
+export const value = {
+	layout: {
+		size: {
+			width: 820,
+			height: 862
+		},
+		position: {
+			value: 'relative'
+		}
+	},
+	api: {
+		data: JSON.stringify({})
+	},
+	config: {
+		title: '供气量'
+	}
+}
+export const configSource = {
+	config: {
+		fields: {
+			title: getInput('title', '标题')
 		}
 	}
 }

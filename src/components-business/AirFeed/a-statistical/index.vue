@@ -43,34 +43,8 @@
 </template>
 <script>
 	import mixins from '../../mixins';
-	import {getInput} from '../../../../lib';
+	import { config, configSource, value } from './index.component'
 
-	const config = {
-		animation: true,
-		config: {
-			desc: true,
-			timeDesc: true,
-		},
-	};
-	const configSource = {
-		config: {
-			fields: {
-				desc: getInput('desc', '描述'),
-				timeDesc: getInput('timeDesc', '时间'),
-			},
-		},
-	};
-	const value = {
-		api: {
-			data: JSON.stringify({
-				value: 375321809,
-			}),
-		},
-		config: {
-			timeDesc: '年度',
-			desc: '累计接纳量(m³)',
-		},
-	};
 	export default {
 		data() {
 			return {

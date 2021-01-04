@@ -11,35 +11,8 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import {getInput, getSelect} from "@lib"
+	import { config, configSource, value } from './index.component'
 
-	const config = {
-		animation: true,
-		config: {
-			title: true, img: true
-		}
-	}
-
-	const configSource = {
-		config: {
-			fields: {
-				title: getInput('title', '标题'),
-				img: getSelect('img', '图形', ['/static/icons/h-des1-1.svg', '/static/icons/h-des1-2.svg', '/static/icons/h-des1-3.svg']),
-			}
-		},
-	}
-
-	const value = {
-		api: {
-			data: JSON.stringify({
-				value: 73
-			}),
-		},
-		config: {
-			title: '巡检点数(点)',
-			img: '/static/icons/h-des1-1.svg'
-		}
-	}
 	export default {
 		mixins: [mixins],
 		created() {

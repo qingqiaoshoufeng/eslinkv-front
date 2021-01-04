@@ -19,16 +19,8 @@
 </template>
 <script>
 	import mixins from '../../mixins';
+	import { config, value } from './index.component'
 
-	const config = {animation: true}
-	const value = {
-		api: {
-			data: JSON.stringify({
-				onBusy: 32,
-				onFree: 11
-			})
-		}
-	}
 	export default {
 		mixins: [mixins],
 		computed: {

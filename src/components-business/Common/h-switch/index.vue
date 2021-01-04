@@ -10,18 +10,8 @@
 </template>
 <script>
 	import mixins from '../../mixins'
+	import { config, value } from './index.component'
 
-	const config = {animation: true}
-	const value = {
-		api: {
-			data: JSON.stringify({
-				value: [
-					['nn16rowdl5r'],
-					['p2wovclspks'],
-				]
-			})
-		}
-	}
 	export default {
 		data() {
 			return {

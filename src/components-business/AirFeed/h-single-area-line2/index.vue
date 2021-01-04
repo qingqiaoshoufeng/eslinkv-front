@@ -6,57 +6,8 @@
 <script>
 	import mixins from '../../mixins';
 	import options from './options'
-	import {getInput} from '../../../../lib';
+	import { config, configSource, value } from './index.component'
 
-	const configSource = {
-		config: {
-			fields: {
-				title: getInput('title', '标题'),
-			}
-		}
-	}
-
-	const config = {
-		animation: true,
-		config: {
-			title: true
-		}
-	}
-	const value = {
-		api: {
-			data: JSON.stringify({
-				data: [
-					{
-						name: "1月",
-						value: 10
-					},
-					{
-						name: "2月",
-						value: 40
-					},
-					{
-						name: "3",
-						value: 30
-					},
-					{
-						name: "4月",
-						value: 20
-					},
-					{
-						name: "5月",
-						value: 10
-					},
-					{
-						name: "6月",
-						value: 50
-					}
-				]
-			})
-		},
-		config: {
-			title: '%'
-		}
-	}
 	export default {
 		mixins: [mixins],
 		computed: {},

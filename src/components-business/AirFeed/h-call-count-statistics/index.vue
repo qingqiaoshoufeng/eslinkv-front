@@ -35,19 +35,8 @@
 <script>
 import mixins from '../../mixins';
 import options from './options';
-// 需要修改
-const config = { animation: true };
-const value = {
-	api: {
-		data: JSON.stringify({
-			telAmount: '9,999,9',
-			value: 90,
-			icon: '/static/icons/h-call-count-statistics-1.svg',
-			centerTitle: '热线服务话务量(次)',
-			graphTitle: '接通率',
-		}),
-	},
-};
+import { config, value } from './index.component'
+
 export default {
 	mixins: [mixins],
 	computed: {},

@@ -14,34 +14,8 @@
 </template>
 <script>
 import mixins from '../../mixins';
-import { getInput, getSelect } from '../../../../lib';
-const config = {
-	animation: true,
-	config: {
-		icon: true,
-		desc: true,
-	},
-};
-const configSource = {
-	config: {
-		fields: {
-			icon: getSelect('icon', 'icon', [
-				'/static/icons/phone-border.svg',
-				'/static/icons/h-icon-info-desc-1.svg',
-			]),
-			desc: getInput('desc', '描述'),
-		},
-	},
-};
-const value = {
-	// api: {
-	// 	data: JSON.stringify({}),
-	// },
-	config: {
-		icon: '/static/icons/h-icon-info-desc-1.svg',
-		desc: '热线服务业务受理分析(次)',
-	},
-};
+import { config, configSource, value } from './index.component'
+
 export default {
 	mixins: [mixins],
 	created() {
