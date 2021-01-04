@@ -1,77 +1,62 @@
 <template>
-	<div class="widget-part" :style="styles" v-if="data">
-		<div class="item" :class="{active:item.index.indexOf(store.scene.index)!==-1}" @click="switchTab(item.index[0])"
-			 v-for="item in data?data.value:[]">
-			<img :src="item.img">
-			<span>{{item.title}}</span>
-		</div>
-	</div>
+    <div class="widget-part" :style="styles" v-if="data">
+        <div class="item" :class="{active:item.index.indexOf(store.scene.index)!==-1}" @click="switchTab(item.index[0])"
+             v-for="item in data?data.value:[]">
+            <img :src="item.img">
+            <span>{{item.title}}</span>
+        </div>
+    </div>
 </template>
 <script>
-	import mixins from '../../mixins';
+    import mixins from '../../mixins'
+    import {config, value} from './index.component'
 
-	const config = {
-		animation: true
-	};
-	const value = {
-		api: {
-			data: JSON.stringify({
-				value: [
-					{title: '微信', index: ['nn16rowdl5r', 'p2wovclspks'], img: '/static/images/e-tab/icon1.svg'},
-					{title: '微博', index: ['nn16rowdl5r', 'p2wovclspks'], img: '/static/images/e-tab/icon2.svg'},
-					{title: '网站', index: ['nn16rowdl5r', 'p2wovclspks'], img: '/static/images/e-tab/icon3.svg'},
-					{title: '头条', index: ['nn16rowdl5r', 'p2wovclspks'], img: '/static/images/e-tab/icon4.svg'},
-					{title: '抖音', index: ['nn16rowdl5r', 'p2wovclspks'], img: '/static/images/e-tab/icon5.svg'},
-				]
-			}),
-		}
-	};
-	export default {
-		mixins: [mixins],
-		data() {
-			return {
-				store: window.GoldChart.store
-			}
-		},
-		methods: {
-			switchTab(n) {
-				window.GoldChart.scene.setSceneIndex(n)
-			}
-		},
-		created() {
-			this.configSource = this.parseConfigSource(config);
-			this.configValue = this.parseConfigValue(config, value);
-		},
-	};
+    export default {
+        mixins: [mixins],
+        data() {
+            return {
+                store: window.GoldChart.store
+            }
+        },
+        methods: {
+            switchTab(n) {
+                window.GoldChart.scene.setSceneIndex(n)
+            }
+        },
+        created() {
+            this.configSource = this.parseConfigSource(config)
+            this.configValue = this.parseConfigValue(config, value)
+        },
+    };
 </script>
 <style lang="scss" scoped>
-	.widget-part {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+    .widget-part {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-		.item {
-			width: 198px;
-			height: 80px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font-weight: 600;
-			font-size: 24px;
-			line-height: 24px;
-			color: #FFFFFF;
+        .item {
+            width: 198px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 24px;
+            color: #FFFFFF;
 
-			&.active {
-				border-top: 2px solid #00DDFF;
-				background: linear-gradient(180deg, rgba(0, 87, 169, 0) 0%, rgba(0, 87, 169, 0.5) 100%);
-			}
+            &.active {
+                border-top: 2px solid #00DDFF;
+                background: linear-gradient(180deg, rgba(0, 87, 169, 0) 0%, rgba(0, 87, 169, 0.5) 100%);
+            }
 
-			> img {
-				width: 48px;
-				height: 48px;
-				margin-right: 16px;
-			}
-		}
-	}
+            > img {
+                width: 48px;
+                height: 48px;
+                margin-right: 16px;
+            }
+        }
+    }
 </style>
 
