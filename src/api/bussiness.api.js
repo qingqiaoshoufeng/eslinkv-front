@@ -95,3 +95,39 @@ export async function getCompList(data) {
 	})
 	return res
 }
+
+// 删除组件
+export function destroyComponent(data) {
+	return request({
+		url:`${DATAURL}/component/destroy`,
+		method: 'post',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+// 新增组件
+export function createComponent(data) {
+	return request({
+		url:`${DATAURL}/component/create`,
+		method: 'post',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+// 修改组件
+export function updateComponent(data) {
+	return request({
+		url:`${DATAURL}/component/update`,
+		method: 'post',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
