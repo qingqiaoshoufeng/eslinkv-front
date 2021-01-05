@@ -17,10 +17,6 @@
 					></div>
 					<div class="desc2">{{ descList[1] }}</div>
 				</div>
-				<!-- <div class="legend2">
-                     <div class="bgc3" :style="`backgroundColor:${data&&data.color3};}`"></div>
-                    <div class="desc3">{{data&&data.desc3}}</div>
-                </div> -->
 			</div>
 		</div>
 		<div class="h-line-1" :id="id" />

@@ -3,30 +3,32 @@ import dvdp from '../../lib'
 
 let components: any = {}
 const widgetsArray: Array<any> = [], widgetsObject: any = {}
-// const conf = require.context('./', true, /\.(component.js)$/)
+const conf = require.context('./', true, /\.(component.ts)$/)
 const component = require.context('./', true, /index\.(vue)$/)
 component.keys().forEach(name => {
-	const type = name.split('/')[1]
-	const title = name.split('/')[2]
-	components[title] = component(name).default
-	if (widgetsObject[type]) {
-		widgetsObject[type].widgets.push({type: title, label: title, componentImage: 'https://via.placeholder.com/390x100'})
-	} else {
-		widgetsObject[type] = {
-			type,
-			label: type,
-			widgets: [{type: title, label: title, componentImage: 'https://via.placeholder.com/390x100'}],
-		}
-	}
+    const type = name.split('/')[1]
+    const title = name.split('/')[2]
+    components[title] = component(name).default
+})
+conf.keys().forEach(name => {
+    const type = name.split('/')[1]
+    const title = name.split('/')[2]
+    const obj = {config: {layout: conf(name).value ? conf(name).value.layout : {}}}
+    if (obj) {
+        if (widgetsObject[type]) {
+            widgetsObject[type].widgets.push({...obj, type: title, label: title})
+        } else {
+            widgetsObject[type] = {type, label: type, widgets: [{...obj, type: title, label: title}]}
+        }
+    }
 })
 for (let key in widgetsObject) {
-	widgetsArray.push(widgetsObject[key])
+    widgetsArray.push(widgetsObject[key])
 }
-
 window.GoldChart.mutations.setCustomComponents(components)
 window.GoldChart.mutations.setCustomWidgets({
-	label: '杭燃样式',
-	widgets: widgetsArray
+    label: '杭燃样式',
+    widgets: widgetsArray
 })
 Vue.component('new', dvdp.new)
 Vue.component('edit', dvdp.edit)

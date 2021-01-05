@@ -73,12 +73,11 @@
 			width: 30px;
 			text-align: right;
 			color: #fff;
-			//styleName: 文字/16;
 			font-size: 16px;
 			font-style: normal;
 			font-weight: 400;
 			line-height: 16px;
-			letter-spacing: 0px;
+			letter-spacing: 0;
 		}
 
 		.legend {
@@ -102,14 +101,12 @@
 
 			.desc1, .desc2, .desc3 {
 				margin-left: 5px;
-				font-family: PingFang SC;
 				font-size: 16px;
 				font-style: normal;
 				font-weight: 400;
 				line-height: 16px;
-				letter-spacing: 0px;
+				letter-spacing: 0;
 				color: #fff;
-
 			}
 		}
 

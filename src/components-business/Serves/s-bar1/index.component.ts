@@ -1,4 +1,4 @@
-import {getInput, getBooleanInput} from "@lib";
+import {getInput, getBooleanInput} from '../../../../lib'
 
 export const configSource = {
 	config: {

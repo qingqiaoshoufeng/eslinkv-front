@@ -35,7 +35,6 @@ import mixins from '../../mixins';
 import options from './options';
 import { config, configSource, value } from './index.component'
 
-
 export default {
 	mixins: [mixins],
 	created() {

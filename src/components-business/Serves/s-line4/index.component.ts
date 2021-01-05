@@ -1,4 +1,4 @@
-import {getInput, getBooleanInput} from "@lib/views/core/widgets/parts/lib/config-tools";
+import {getInput, getBooleanInput} from '../../../../lib'
 
 export const config = {
 	animation: true,

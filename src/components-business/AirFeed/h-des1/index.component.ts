@@ -1,4 +1,4 @@
-import {getInput, getSelect} from "@lib"
+import {getInput, getSelect} from '../../../../lib'
 
 export const config = {
 	animation: true,

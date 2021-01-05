@@ -1,4 +1,4 @@
-import {getSelect} from "@lib/views/core/widgets/parts/lib/config-tools";
+import {getSelect} from '../../../../lib'
 
 export const configSource = {
 	config: {

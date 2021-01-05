@@ -1,4 +1,4 @@
-import {getInput} from "@lib/views/core/widgets/parts/lib/config-tools";
+import {getInput} from '../../../../lib'
 
 const test = [{"x": "1月", "y1": 10, "y2": 23}, {"x": "2月", "y1": 18, "y2": 60}, {
 	"x": "3月",

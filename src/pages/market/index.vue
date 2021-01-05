@@ -1,18 +1,18 @@
 <template lang="pug">
     .container
         .new
-            iButton(type="primary" size="small" @click="create") 新增
-        iTable(:columns="columns" :data="tableData")
+            Button(type="primary" @click="create") 新增
+        Table(:columns="columns" :data="tableData")
             template(#createTime="{ row }")
                 span {{$format(new Date(row.createTime),'yyyy-MM-dd HH:mm:ss')}}
             template(#componentImage="{ row }")
                 ImageView.avatar(:images="[row.componentImage]")
             template(#action="{ row }")
-                iButton.mr10(type="primary" size="small" @click="edit(row)") 编辑
-                iButton(type="error" size="small" @click="remove(row)") 删除
+                Button.mr10(type="primary" size="small" @click="edit(row)") 编辑
+                Button(type="error" size="small" @click="remove(row)") 删除
         .page
             page(:total="total" show-elevator show-total :page-size="pageSize" :current="pageNum" @on-change="pageChange")
-
+        
         editDialog(v-model="editDialogShow" :detail="currentRow" @reload="reload")
 </template>
 <script lang="ts">
@@ -24,8 +24,8 @@
 
     @Component({
         components: {
-            iTable: Table,
-            iButton: Button,
+            Table,
+            Button,
             Page,
             editDialog,
             ImageView
@@ -117,7 +117,6 @@
     }
 
     export default Market
-
 </script>
 <style lang="scss">
     .viewer-canvas {
@@ -125,29 +124,28 @@
     }
 </style>
 <style lang="scss" scoped>
-
     .container {
         width: 100vw;
         height: 100vh;
         background: #fff;
         padding: 15px;
-
+        
         .new {
             text-align: right;
             padding: 10px;
         }
-
+        
         .page {
             text-align: center;
             margin-top: 10px;
         }
-
+        
         .avatar {
             width: 100px;
             height: 60px;
             vertical-align: middle;
         }
-
+        
         .mr10 {
             margin-right: 10px;
         }

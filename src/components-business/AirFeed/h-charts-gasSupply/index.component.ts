@@ -1,4 +1,4 @@
-import {getInput} from "@lib/views/core/widgets/parts/lib/config-tools";
+import {getInput} from '../../../../lib'
 import {data} from "./options";
 
 export const configSource = {

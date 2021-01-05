@@ -1,4 +1,4 @@
-import {getInput} from "@lib/views/core/widgets/parts/lib/config-tools";
+import {getInput} from '../../../../lib'
 export const config = {
 	animation: true,
 	config: {
