@@ -25,6 +25,7 @@ conf.keys().forEach(name => {
 for (let key in widgetsObject) {
     widgetsArray.push(widgetsObject[key])
 }
+
 window.GoldChart.mutations.setCustomComponents(components)
 window.GoldChart.mutations.setCustomWidgets({
     label: '杭燃样式',
