@@ -67,7 +67,7 @@ export default {
 		handleOverlayClick(marker) {
 			marker.detailList = this.detailList
 			marker.overlayType = this.overlayType
-			$emit('overlay-click', marker, this.overlayType)
+			this.$emit('overlay-click', marker, this.overlayType)
 		},
 	},
 }
