@@ -73,7 +73,6 @@ export default function (data, config) {
 					lineHeight: 16
 				}
 			},
-			interval: 25,
 			axisLine: {
 				show: false,
 			}

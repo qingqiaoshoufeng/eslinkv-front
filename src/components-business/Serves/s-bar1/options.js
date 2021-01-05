@@ -71,7 +71,6 @@ export default {
 				color: '#fff',
 			}
 		},
-		interval: 25,
 		axisLine: {
 			show: false,
 		}

@@ -16,6 +16,7 @@ import 'video.js/dist/video-js.css'
 import './api'
 import PortalVue from 'portal-vue'
 import '@babel/polyfill'
+import format from 'date-fns/format'
 
 Vue.use(PortalVue)
 Vue.use(VueVideoPlayer)
@@ -24,6 +25,7 @@ Vue.component('iSelect', Select);
 Vue.component('iOption', Option);
 Vue.component('iIcon', Icon);
 
+Vue.prototype.$format = format
 Vue.prototype.$Message = Message
 Vue.prototype.$Modal = Modal
 Vue.config.productionTip = false

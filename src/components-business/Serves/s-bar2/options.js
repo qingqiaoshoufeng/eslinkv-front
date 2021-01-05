@@ -53,7 +53,6 @@ export default function getOption (data, config) {
                     color: '#fff',
                 }
             },
-            interval: 25,
             axisLine: {
                 show: true,
             }

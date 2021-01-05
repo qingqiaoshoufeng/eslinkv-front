@@ -71,7 +71,6 @@ export default {
 				lineHeight: 16
 			}
 		},
-		interval: 25,
 		axisLine: {
 			show: true,
 		}

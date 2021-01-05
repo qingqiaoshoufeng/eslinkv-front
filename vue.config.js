@@ -14,24 +14,24 @@ module.exports = {
         disableHostCheck: true,
         proxy: {
             '^/hangran': {
-                target: 'http://ebp-pc.hw-qa.eslink.net.cn',
-                // target: 'http://ebp-pc.hzrq.local:15003',
+                // target: 'http://ebp-pc.hw-qa.eslink.net.cn',
+                target: 'http://ebp-pc.hzrq.local:15003',
                 changeOrigin: true,
                 headers: {
-                    Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
-                    // Cookie: 'SESSION=e77a4956-0cec-452e-a066-acc9dbf0667b'
+                    // Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
+                    Cookie: 'SESSION=e77a4956-0cec-452e-a066-acc9dbf0667b'
                 },
                 pathRewrite: {
                     '^/hangran': '/'
                 }
             },
             '^/api': {
-                target: 'http://ebp-pc.hw-qa.eslink.net.cn',
-                // target: 'http://ebp-pc.hzrq.local:15003',
+                // target: 'http://ebp-pc.hw-qa.eslink.net.cn',
+                target: 'http://ebp-pc.hzrq.local:15003',
                 changeOrigin: true,
                 headers: {
-                    Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
-                    // Cookie: 'SESSION=e77a4956-0cec-452e-a066-acc9dbf0667b'
+                    // Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
+                    Cookie: 'SESSION=e77a4956-0cec-452e-a066-acc9dbf0667b'
                 },
                 pathRewrite: {
                     '^/api': '/'
