@@ -76,6 +76,7 @@ class MarketEditDialog extends Vue {
 	@Watch('detail')
 	onDetailChange (val) {
 		this.form = {
+			componentId: val.componentId,
 			componentTitle: val.componentTitle,
 			componentImage: val.componentImage,
 			componentJsUrl: val.componentJsUrl,
