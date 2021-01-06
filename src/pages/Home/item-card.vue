@@ -12,6 +12,7 @@
 			Button(icon="ios-create-outline" size="small" @click="handleEdit") 编辑
 			Button(v-if="status" icon="ios-link" :style="{marginTop:'10px'}" size="small" @click="handleLink") 打开
 			Button(v-else icon="ios-cloud-upload-outline" :style="{marginTop:'10px'}" size="small" @click="handlePublish") 发布
+			Button(icon="ios-link" :style="{marginTop:'10px'}" type="error" size="small" @click="handleRemove") 删除
 </template>
 <script lang="ts">
 	import {Card, Tag, Button} from 'view-design'
@@ -36,6 +37,21 @@
 
 		handleLink() {
 			window.open(`${location.origin}${location.pathname}#/detail/${this.id}`)
+		}
+
+		handleRemove () {
+			this.$Modal.confirm({
+				title: '提示',
+				content: '确认删除吗？',
+				loading: true,
+				onOk: () => {
+					this.$api.board.remove({dataBoardId: this.id}).then(() => {
+						this.$Message.success('删除成功')
+						this.$Modal.remove()
+						this.$emit('init')
+					})
+				}
+			})
 		}
 
 		handlePublish() {
