@@ -6,23 +6,23 @@ let OnlineType = {
 }
 
 let TodayApplication = {
-    label: '今日业务申请',
+    label: '昨日业务申请',
     DW: '',
     prop: "apply_nbr",
 }
 
 let TodayUnproving = {
-    label: '今日待审核',
+    label: '昨日待审核',
     DW: '',
     prop: "pending_nbr",
 }
 let TodayPass = {
-    label: '今日审核通过',
+    label: '昨日审核通过',
     DW: '',
     prop: "accept_nbr",
 }
 let TodayUnPass = {
-    label: '今日审核未通过',
+    label: '昨日审核未通过',
     DW: '',
     prop: "accept_not_nbr",
 }
