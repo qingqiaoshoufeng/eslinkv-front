@@ -21,7 +21,7 @@
 </template>
 <script>
     import mixins from '../../mixins';
-    import '../../../../plugins/turn.min'
+    import './turn.min'
     import {value, config} from './index.component'
 
     export default {

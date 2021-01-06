@@ -3,8 +3,6 @@
         Submenu(name="1")
             template(slot="title") 组件市场
             MenuItem(name="HowToUseMarket") 如何开发
-        Submenu(name="2")
-            template(slot="title") 组件市场
             MenuItem(name="HowToPutMarket") 如何上架
 </template>
 <script lang="ts">
