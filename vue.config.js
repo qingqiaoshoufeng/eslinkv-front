@@ -1,10 +1,14 @@
 const path = require('path');
+const package = require('./package.json')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
+
 const isProduction = process.env.NODE_ENV === 'production'
 const needReport = false
+
 module.exports = {
     transpileDependencies: ['@simonwep', 'vue-draggable-resizable-gorkys2', 'swiper', 'dom7'],
     assetsDir: 'static',
+	outputDir: 'dist/' + package.version,
     productionSourceMap: false,
     lintOnSave: false,
     devServer: {
