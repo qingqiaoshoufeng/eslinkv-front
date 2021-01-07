@@ -1,5 +1,6 @@
 const path = require('path');
 const package = require('./package.json')
+const webpack = require('webpack')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
 const needReport = false
@@ -7,7 +8,9 @@ const needReport = false
 module.exports = {
     transpileDependencies: ['@simonwep', 'vue-draggable-resizable-gorkys2', 'swiper', 'dom7'],
     assetsDir: 'static',
+	publicPath: isProduction ? `./${package.version}` : './',
 	outputDir: 'dist/' + package.version,
+	indexPath: '../index.html',
     productionSourceMap: false,
     lintOnSave: false,
     devServer: {
@@ -87,6 +90,9 @@ module.exports = {
                 'echarts': 'echarts'
             }
         ]
+		config.plugins.push(new webpack.DefinePlugin({
+			'process.env.staticPath': JSON.stringify(isProduction ? `/${package.version}` : '')
+		}))
     },
     chainWebpack: config => {
         config.module
