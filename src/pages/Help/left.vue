@@ -4,6 +4,7 @@
             template(slot="title") 组件市场
             MenuItem(name="HowToUseMarket") 如何开发
             MenuItem(name="HowToPutMarket") 如何上架
+            MenuItem(name="HowToLoadMarket") 如何加载
 </template>
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator'

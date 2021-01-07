@@ -93,3 +93,11 @@ const value = {
 
 export {config, value}
 ```
+
+## 如何通信
+主要是通过window.GoldChart进行数据通信
+
+window.GoldChart.components 预先暴露组件，便于平台注册组件
+
+window.GoldChart.mixins 平台暴露的mixins，便于迭代更新
+

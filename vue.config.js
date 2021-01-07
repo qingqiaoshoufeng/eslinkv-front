@@ -1,5 +1,5 @@
 const path = require('path');
-const package = require('./package.json')
+const pkg = require('./package.json')
 const webpack = require('webpack')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
@@ -8,8 +8,8 @@ const needReport = false
 module.exports = {
     transpileDependencies: ['@simonwep', 'vue-draggable-resizable-gorkys2', 'swiper', 'dom7'],
     assetsDir: 'static',
-	publicPath: isProduction ? `./${package.version}` : './',
-	outputDir: 'dist/' + package.version,
+	publicPath: isProduction ? `./${pkg.version}` : './',
+	outputDir: `dist/${pkg.version}`,
 	indexPath: '../index.html',
     productionSourceMap: false,
     lintOnSave: false,
@@ -91,7 +91,7 @@ module.exports = {
             }
         ]
 		config.plugins.push(new webpack.DefinePlugin({
-			'process.env.staticPath': JSON.stringify(isProduction ? `/${package.version}` : '')
+			'process.env.staticPath': JSON.stringify(isProduction ? `/${pkg.version}` : '')
 		}))
     },
     chainWebpack: config => {
@@ -99,7 +99,7 @@ module.exports = {
             .rule('vue')
             .use('iview')
             .loader('iview-loader')
-            .options({ prefix: false })
+            .options({prefix: false})
         config.resolve.alias
             .set('@lib', path.resolve(__dirname, './lib'));
         if (isProduction) {
