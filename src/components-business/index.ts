@@ -1,12 +1,11 @@
 import Vue from 'vue'
 import dvdp from '../../lib'
 
-let components: any = {}
-const widgetsArray: Array<any> = [], widgetsObject: any = {}
+let components: Components = {}
+const widgetsArray: ComponentsWidgetsArray = [], widgetsObject: ComponentsWidgetsObject = {}
 const conf = require.context('./', true, /\.(component.ts)$/)
 const component = require.context('./', true, /index\.(vue)$/)
 component.keys().forEach(name => {
-    const type = name.split('/')[1]
     const title = name.split('/')[2]
     components[title] = component(name).default
 })

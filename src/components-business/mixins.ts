@@ -1,6 +1,6 @@
 import {styleParser, widgetMixin} from '../../lib'
 
-export default {
+const mx: any = {
     data() {
         return {
             instance: null,
@@ -70,7 +70,7 @@ export default {
             return {...this.config.config}
         },
         id() {
-			const now: number = new Date().getTime()
+            const now: number = new Date().getTime()
             if (this.config) {
                 if (this.config.widget) {
                     return `widget-part-${this.config.widget.id ? this.config.widget.id : ''}${now}`
@@ -82,3 +82,5 @@ export default {
         }
     }
 }
+
+export default mx

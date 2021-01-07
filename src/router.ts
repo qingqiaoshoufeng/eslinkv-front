@@ -1,19 +1,19 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import VueRouter, {RouterOptions} from 'vue-router'
 
 const routes: Array<any> = []
 const context = require.context('./pages', true, /\.(route.js)$/)
 
 context.keys().forEach(name => {
-	routes.push(context(name).default)
+    routes.push(context(name).default)
 })
 
 Vue.use(VueRouter)
 
-const router: VueRouter = new VueRouter({
-	routes: [
-		...routes
-	]
+const router: RouterOptions = new VueRouter({
+    routes: [
+        ...routes
+    ]
 })
 
 export default router

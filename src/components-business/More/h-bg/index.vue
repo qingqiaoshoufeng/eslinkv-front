@@ -4,7 +4,8 @@
             <div class="h-bg-back pos-a"></div>
             <div class="h-bg-5441 pos-a" v-if="status54441"></div>
             <template v-if="!status54441">
-                <video class="pos-a bg-video" src="/static/videos/bg1.webm" autoplay="autoplay" @ended="end" ref="video"
+                <video id="video" class="pos-a bg-video" src="/static/videos/bg1.webm" autoplay="autoplay" @ended="end"
+                       ref="video"
                        v-show="!video1Ended"></video>
                 <video class="pos-a bg-video" src="/static/videos/bg2.webm" autoplay="autoplay" loop ref="video2"
                        v-show="video1Ended"></video>
@@ -107,6 +108,10 @@
                     window.GoldChart.scene.createSceneInstance(JSON.parse(this.config.config.sceneId)[0], 'fadeIn', 'none')
                 }
             }
+            const video = document.getElementById('video')
+            if (video.paused) {
+                video.play()
+            }
         },
         methods: {
             end() {
@@ -142,7 +147,7 @@
                     this.statusVideo = false
                 }
             }
-        }
+        },
     }
 </script>
 <style lang="scss" scoped>
@@ -150,18 +155,18 @@
         left: 50%;
         bottom: 27px;
         margin-left: 540px;
-
+        
         &:hover {
             .h-bg-start1-video {
                 opacity: 1;
             }
-
+            
             .h-bg-start1 {
                 opacity: 0;
             }
         }
     }
-
+    
     .h-bg-start1-video {
         width: 72px;
         height: 72px;
@@ -170,7 +175,7 @@
         opacity: 0;
         transition: all .3s;
     }
-
+    
     .h-bg-start1 {
         width: 72px;
         height: 72px;
@@ -180,12 +185,12 @@
         opacity: 1;
         transition: all .3s;
     }
-
+    
     .h-bg-nav {
         bottom: 27px;
         left: 50%;
         transform: translateX(-50%);
-
+        
         li {
             color: rgba(255, 255, 255, 0.75);
             font-weight: normal;
@@ -194,48 +199,48 @@
             transition: all .3s;
             width: 160px;
             height: 160px;
-
+            
             span {
                 font-size: 40px;
                 line-height: 40px;
                 top: 107px;
             }
-
+            
             video {
                 left: 50%;
                 transform: translateX(-50%);
             }
-
+            
             img {
                 top: 0;
                 left: 50%;
                 transform: translateX(-50%);
             }
-
+            
             &:nth-child(1) {
                 video {
                     top: -6px;
                 }
             }
-
+            
             &:nth-child(2) {
                 video {
                     top: -12px;
                 }
             }
-
+            
             &:nth-child(3) {
                 video {
                     top: -6px;
                 }
             }
-
+            
             &:nth-child(4) {
                 video {
                     top: -14px;
                 }
             }
-
+            
             &:before {
                 content: '';
                 position: absolute;
@@ -246,7 +251,7 @@
                 width: 160px;
                 height: 180px;
             }
-
+            
             &:after {
                 content: '';
                 position: absolute;
@@ -258,62 +263,62 @@
                 bottom: -27px;
                 transition: all .3s;
             }
-
+            
             &:hover {
                 font-weight: bold;
                 color: rgba(255, 255, 255, 1);
-
+                
                 &:before {
                     opacity: 1;
                     background: linear-gradient(180deg, rgba(0, 87, 169, 0) 0%, rgba(0, 87, 169, 0.3) 100%);
                 }
-
+                
                 &:after {
                     opacity: 1;
                     background: #00DDFF;
                 }
             }
-
+            
             &:last-child {
                 margin-right: 0;
             }
         }
     }
-
+    
     div.h-bg-red1 {
         background-image: url('./img/red-1.png');
         background-size: 257px 64px;
         opacity: 0.6;
-
+        
         &.active {
             opacity: 1;
         }
     }
-
+    
     .h-bg-red1 {
         width: 257px;
         height: 64px;
         left: 738px;
         bottom: 60px;
     }
-
+    
     div.h-bg-red2 {
         background-image: url('./img/red-2.png');
         background-size: 257px 64px;
         opacity: 0.6;
-
+        
         &.active {
             opacity: 1;
         }
     }
-
+    
     .h-bg-red2 {
         width: 257px;
         height: 64px;
         right: 738px;
         bottom: 60px;
     }
-
+    
     .h-bg-back {
         background-image: url('./img/bg1.png');
         width: 100%;
@@ -321,7 +326,7 @@
         top: 0;
         left: 0;
     }
-
+    
     .h-bg-top {
         background-image: url('./img/topyuan.svg');
         width: 2275px;
@@ -331,21 +336,21 @@
         margin-left: -1137.5px;
         background-size: 2275px 161px;
     }
-
+    
     .h-bg-5441 {
         background: url("./img/bg-54441.png") no-repeat;
         background-size: 100% 100%;
         height: 100%;
         width: 100%;
     }
-
+    
     .h-bg {
         height: 100%;
         background-size: 3500px 1050px;
         background-repeat: no-repeat;
         overflow: hidden;
         top: 0;
-
+        
         .bg-video {
             height: 100%;
             width: 100%;
@@ -353,7 +358,7 @@
             top: 0;
         }
     }
-
+    
     .h-bg-left {
         background-image: url('./img/left.svg');
         width: 948px;
@@ -362,7 +367,7 @@
         left: 0;
         top: 0;
     }
-
+    
     .h-bg-right {
         background-image: url('./img/right.svg');
         width: 948px;
@@ -371,11 +376,11 @@
         right: 0;
         top: 0;
     }
-
+    
     .h-bg-right {
         background-image: url('./img/right.svg');
     }
-
+    
     .h-bg-center {
         width: 1768px;
         height: 584px;
@@ -389,7 +394,7 @@
         margin-top: -292px;
         pointer-events: none;
     }
-
+    
     .h-bg-control {
         background-image: url('./img/control.svg');
         background-repeat: no-repeat;
