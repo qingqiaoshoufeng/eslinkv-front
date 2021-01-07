@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "serve": "vue-cli-service serve",
+        "local-build": "vue-cli-service build --no-clean",
         "build": "npm version patch && vue-cli-service build --no-clean",
         "lint": "vue-cli-service lint",
         "fix": "eslint --fix --ext .js --ext .jsx --ext .vue src/"
