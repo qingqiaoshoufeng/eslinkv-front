@@ -67,6 +67,14 @@ export default function getOption(data, config) {
                 barBorderRadius: config.barBorderRadius
             },
             data: data.map(item => item.yValue2)
+        }, {
+            type: 'bar',
+            showBackground: config.showBackground,
+            itemStyle: {
+                color: config.color3,
+                barBorderRadius: config.barBorderRadius
+            },
+            data: data.map(item => item.yValue3)
         }]
     }
 }

@@ -145,6 +145,33 @@ export default function (data, config) {
 					color: config.color2
 				},
 				smooth: true
+			},
+			{
+				name: data.lastLastTime,
+				type: 'line',
+				data: data.data.map(v => v.y3),
+				lineStyle: {
+					color: config.color3,
+				},
+				areaStyle: {
+					normal: {
+						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+							offset: 0,
+							color: hexToRgba(config.color3, 0.6)
+						},
+							{
+								offset: 1,
+								color: hexToRgba(config.color3, 0)
+							}
+						], false)
+					}
+				},
+				symbol: 'emptyCircle',
+				showSymbol: false,
+				itemStyle: {
+					color: config.color3
+				},
+				smooth: true
 			}
 		]
 	}
