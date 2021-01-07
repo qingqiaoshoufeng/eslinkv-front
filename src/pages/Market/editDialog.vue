@@ -53,7 +53,7 @@
             }
         }
 
-        form = {
+        form:any = {
             componentTitle: '',
             componentImage: '',
             componentJsUrl: '',

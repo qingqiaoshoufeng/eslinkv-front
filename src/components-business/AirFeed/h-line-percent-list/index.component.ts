@@ -1,5 +1,3 @@
-import JSONStringify from "@lib/vendor/JSONStringify";
-
 export const config = {animation: true};
 export const value = {
 	layout: {
@@ -12,7 +10,7 @@ export const value = {
 		}
 	},
 	api: {
-		data: JSONStringify({
+		data: JSON.stringify({
 			list: [
 				{
 					name: '开户',

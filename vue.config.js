@@ -114,7 +114,7 @@ module.exports = {
             config.resolve.symlinks(true)
         }
         config.module
-            .rule("view-design")  //  我目前用的是新版本的iview ,旧版本的iview，用iview代替view-design
+            .rule("view-design")
             .test(/view-design.src.*?js$/)
             .use("babel")
             .loader("babel-loader")

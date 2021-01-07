@@ -1,6 +1,6 @@
 import {getCompList, getLevel0} from '@/api/bussiness.api'
 
-let widgetsArray: Array<any> = []
+let widgetsArray: ComponentsWidgetsArray = []
 
 getLevel0().then(res => {
 	res.forEach(child => {
