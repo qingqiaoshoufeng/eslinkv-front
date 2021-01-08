@@ -1,19 +1,20 @@
 <template lang="pug">
     .container
-        .new
-            Button(type="primary" @click="create") 新增
         Table(:columns="columns" :data="tableData")
             template(#createTime="{ row }")
                 span {{$format(new Date(row.createTime),'yyyy-MM-dd HH:mm:ss')}}
             template(#componentImage="{ row }")
                 ImageView.avatar(:images="[row.componentImage]")
             template(#action="{ row }")
+                Button.mr10(type="primary" size="small" @click="changeVersion(row)" style="margin-bottom: 4px;") 切换版本
                 Button.mr10(type="primary" size="small" @click="edit(row)") 编辑
                 Button(type="error" size="small" @click="remove(row)") 删除
         .page
             page(:total="total" show-elevator show-total :page-size="pageSize" :current="pageNum" @on-change="pageChange")
-        
+
         editDialog(v-model="editDialogShow" :detail="currentRow" @reload="reload")
+        versionDialog(v-model="versionDialogShow" :detail="currentRow" @reload="reload")
+
 </template>
 <script lang="ts">
     import {Vue, Component} from 'vue-property-decorator'
@@ -21,12 +22,14 @@
     import {getCompListAll, destroyComponent} from '@/api/bussiness.api'
     import ImageView from '@/components/ImageView/index.vue'
     import editDialog from './editDialog.vue'
+    import versionDialog from './versionDialog.vue'
 
     @Component({
         components: {
             Table,
             Button,
             Page,
+			versionDialog,
             editDialog,
             ImageView
         }
@@ -41,6 +44,10 @@
             {
                 title: '组件英文名',
                 key: 'componentEnTitle'
+            },
+            {
+                title: '当前版本号',
+                key: 'componentVersion'
             },
             {
                 title: '略缩图',
@@ -60,7 +67,8 @@
         total: number = 0
         pageNum: number = 1
         pageSize: number = 10
-        editDialogShow = false
+        editDialogShow: boolean = false
+		versionDialogShow: boolean = false
         currentRow: any = null
 
         async search() {
@@ -87,6 +95,11 @@
                     this.reload()
                 }
             })
+        }
+
+		changeVersion(row) {
+            this.currentRow = row
+            this.versionDialogShow = true
         }
 
         edit(row) {
@@ -129,23 +142,23 @@
         height: 100vh;
         background: #fff;
         padding: 15px;
-        
+
         .new {
             text-align: right;
             padding: 10px;
         }
-        
+
         .page {
             text-align: center;
             margin-top: 10px;
         }
-        
+
         .avatar {
             width: 100px;
             height: 60px;
             vertical-align: middle;
         }
-        
+
         .mr10 {
             margin-right: 10px;
         }

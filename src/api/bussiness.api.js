@@ -131,3 +131,39 @@ export function updateComponent(data) {
 		},
 	})
 }
+
+// 新增组件版本
+export function addComponentVersion(data) {
+	return request({
+		url:`${DATAURL}/component/addVersion`,
+		method: 'post',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+// 切换版本
+export function changeComponentVersion(data) {
+	return request({
+		url:`${DATAURL}/component/changeVersion`,
+		method: 'post',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+// 获取所有版本
+export function getVersionList(data) {
+	return request({
+		url:`${DATAURL}/component/getVersionList`,
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}

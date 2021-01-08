@@ -174,11 +174,15 @@
             /**
              * @description h5 原生拖拽事件
              */
-            dragstart(e, configKey, {type, market}) {
+            dragstart(e, configKey, {type, market, version}) {
                 const widgetConfig = this.widgetConfigMap[configKey]
                 if (!widgetConfig || !type) return
                 const {config} = widgetConfig
-                e.dataTransfer.setData('widget-config', JSON.stringify({
+				if (version) {
+					config.widget.version = version // todo: 确认下这里能不能取到version
+				}
+
+				e.dataTransfer.setData('widget-config', JSON.stringify({
                     type,
                     config,
                     market,
@@ -204,25 +208,25 @@
         overflow: hidden;
         background: rgba(0, 0, 0, 0.5);
         max-height: 100px;
-        
+
         &:last-child {
             margin-bottom: 0;
         }
-        
+
         &:hover {
             opacity: 1;
         }
-        
+
         /deep/ {
             & > .widget-part {
                 cursor: grab;
                 outline: transparent dotted 1px;
                 transition: outline-color 0.2s;
-                
+
                 &:hover {
                     outline-color: #44ffcd;
                 }
-                
+
                 & > div,
                 & > label,
                 & > form,
@@ -232,7 +236,7 @@
             }
         }
     }
-    
+
     .widgets-panel {
         position: absolute;
         left: 0;
@@ -245,7 +249,7 @@
         transform: translateX(-100%);
         z-index: 2;
         transition: 0.3s 0.5s;
-        
+
         &:after {
             content: '小工具';
             position: absolute;
@@ -262,29 +266,29 @@
             z-index: -1;
             transition: 0.3s 0.5s;
         }
-        
+
         /deep/ .ivu-tabs-card {
             padding: 10px;
             background-color: white;
             height: 100%;
         }
-        
+
         &:hover,
         &.fixed {
             transition: 0.3s;
             transform: translateX(0);
             filter: drop-shadow(0 2px 5px #2d8bf083);
-            
+
             &:not(.fixed):after {
                 transition: 0.3s;
                 opacity: 1;
                 filter: drop-shadow(0 2px 5px #2d8bf083);
             }
         }
-        
+
         &.fixed {
             filter: drop-shadow(0 2px 5px #2d8bf000);
-            
+
             &:after {
                 transition: 0.3s;
                 opacity: 0;
@@ -292,7 +296,7 @@
             }
         }
     }
-    
+
     .fixed-toggle {
         position: absolute;
         bottom: 5px;
@@ -309,11 +313,11 @@
         opacity: 0.3;
         transition: 0.2s;
         cursor: pointer;
-        
+
         &:hover {
             opacity: 0.5;
         }
-        
+
         &.active {
             background-image: url('../../icons/pin.png');
             transform: rotate(-45deg);
@@ -321,30 +325,30 @@
             opacity: 1;
         }
     }
-    
+
     /deep/ {
         .ivu-tabs-bar {
             margin-bottom: 10px;
         }
-        
+
         .ivu-tabs-content {
             height: calc(100% - 42px);
-            
+
             .ivu-tabs-tabpane {
                 height: 100%;
                 overflow: hidden;
                 overflow-y: auto;
             }
         }
-        
+
         .ivu-collapse-header {
             padding-left: 7px !important;
-            
+
             &:hover {
                 background-color: rgba(0, 0, 0, 0.036);
             }
         }
-        
+
         .ivu-collapse > .ivu-collapse-item.ivu-collapse-item-active > .ivu-collapse-header {
             padding-left: 7px !important;
             position: sticky;
@@ -352,7 +356,7 @@
             z-index: 999;
             background-color: white;
         }
-        
+
         .ivu-collapse-content {
             padding: 0;
         }
