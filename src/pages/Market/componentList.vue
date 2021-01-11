@@ -6,27 +6,31 @@
             template(#componentImage="{ row }")
                 ImageView.avatar(:images="[row.componentImage]")
             template(#action="{ row }")
+                Button.mr10(type="primary" size="small" @click="changeVersion(row)" style="margin-bottom: 4px;") 切换版本
                 Button.mr10(type="primary" size="small" @click="edit(row)") 编辑
                 Button(type="error" size="small" @click="remove(row)") 删除
         .page
             page(:total="total" show-elevator show-total :page-size="pageSize" :current="pageNum" @on-change="pageChange")
         
-        editDialog(v-model="editDialogShow" :detail="currentRow" @reload="reload")
+        dialogEdit(v-model="dialogEditShow" :detail="currentRow" @reload="reload")
+        dialogVersion(v-model="dialogEditVersionShow" :detail="currentRow" @reload="reload")
 </template>
 <script lang="ts">
     import {Vue, Component} from 'vue-property-decorator'
     import {Table, Page, Button} from 'view-design'
     import {getCompListAll, destroyComponent} from '@/api/bussiness.api'
     import ImageView from '@/components/ImageView/index.vue'
-    import editDialog from './editDialog.vue'
+    import dialogEdit from './dialogEditComponent.vue'
+    import dialogVersion from './dialogEditComponentVersion.vue'
 
     @Component({
         components: {
             Table,
             Button,
             Page,
-            editDialog,
-            ImageView
+            dialogEdit,
+            ImageView,
+            dialogVersion
         }
     })
     class Market extends Vue {
@@ -58,7 +62,8 @@
         total: number = 0
         pageNum: number = 1
         pageSize: number = 10
-        editDialogShow = false
+        dialogEditShow: boolean = false
+        dialogEditVersionShow: boolean = false
         currentRow: any = null
 
         async search() {
@@ -87,9 +92,14 @@
             })
         }
 
+        changeVersion(row) {
+            this.currentRow = row
+            this.dialogEditVersionShow = true
+        }
+
         edit(row) {
             this.currentRow = row
-            this.editDialogShow = true
+            this.dialogEditShow = true
         }
 
         create() {
@@ -101,7 +111,7 @@
                 componentTypeId: '',
                 sort: ''
             }
-            this.editDialogShow = true
+            this.dialogEditShow = true
         }
 
         pageChange(page) {
