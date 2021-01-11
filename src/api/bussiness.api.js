@@ -28,10 +28,10 @@ export function year(data) {
 	})
 }
 
-// 获取一级分类列表
+// 获取组件详情
 export function detailMarket(data) {
 	return request({
-		url: `${DATAURL}/component/detailByEnTitle`,
+		url: `${DATAURL}/component/getComponentDetail`,
 		method: 'get',
 		params: data,
 		headers: {
