@@ -174,18 +174,16 @@
             /**
              * @description h5 原生拖拽事件
              */
-            dragstart(e, configKey, {type, market, version}) {
+            dragstart(e, configKey, {type, market, componentVersion}) {
                 const widgetConfig = this.widgetConfigMap[configKey]
                 if (!widgetConfig || !type) return
                 const {config} = widgetConfig
-				if (version) {
-					config.widget.version = version // todo: 确认下这里能不能取到version
-				}
 
 				e.dataTransfer.setData('widget-config', JSON.stringify({
                     type,
                     config,
                     market,
+					componentVersion,
                     startX: e.offsetX,
                     startY: e.offsetY,
                 }))
