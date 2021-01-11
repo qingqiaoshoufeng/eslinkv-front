@@ -33,10 +33,10 @@ const testData = [
     }
 ]
 
-const config = {
+export const config: ComponentConfig = {
     animation: true
 };
-const value = {
+export const value: ComponentValue = {
     layout: {
         size: {
             width: 1536,
@@ -57,5 +57,3 @@ const value = {
         })
     }
 }
-
-export {config, value}

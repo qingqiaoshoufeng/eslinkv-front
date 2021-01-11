@@ -13,7 +13,7 @@
                 Input(v-model="form.sort" number)
             FormItem(label="类型" prop="componentTypeId")
                 TreeSelect(v-model="form.componentTypeId" :options="componentTypeList" :normalizer="normalizer")
-            FormItem(label="略缩图" prop="componentImage")
+            FormItem(label="缩略图" prop="componentImage")
                 Upload(action="/data/saveImage" :on-success="handleUploadSuccess" :show-upload-list="false")
                     .img-wrap
                         img.upload-img(:src="form.componentImage" v-if="form.componentImage")

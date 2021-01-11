@@ -2,9 +2,8 @@
     Menu.fn-fl.help-left(:open-names="['1']" @on-select="handleSelect" :active-name="leftName")
         Submenu(name="1")
             template(slot="title") 组件市场
-            MenuItem(name="HowToUseMarket") 如何开发
-            MenuItem(name="HowToPutMarket") 如何上架
-            MenuItem(name="HowToLoadMarket") 如何加载
+            MenuItem(name="componentList") 组件列表
+            MenuItem(name="typeList") 分类列表
 </template>
 <script lang="ts">
     import {Component, Vue} from 'vue-property-decorator'
@@ -23,7 +22,7 @@
 
         handleSelect(name) {
             const currentHash = decodeURIComponent(location.hash.replace('#', ''));
-            const nowHash = `/help/${name}`
+            const nowHash = `/market/${name}`
             if (encodeURIComponent(currentHash.replace(/\s+/g, '')) !== encodeURIComponent(nowHash.replace(/\s+/g, ''))) {
                 this.$router.push(nowHash)
                 this.leftName = name

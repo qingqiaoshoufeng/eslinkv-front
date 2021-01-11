@@ -47,7 +47,7 @@
 			this.$router.push('/new')
 		}
 		handleMarket() {
-			this.$router.push('/market')
+			this.$router.push('/market/componentList')
 		}
 		handleChange(pageNum) {
 			this.pageNum = pageNum
