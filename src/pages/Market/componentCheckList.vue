@@ -1,35 +1,26 @@
 <template lang="pug">
     .container
         .btn-box
-            Button.mr10(type="primary" @click="changeVersion" :disabled="!selectOne") 切换版本
-            Button.mr10(type="primary" @click="edit" :disabled="!selectOne") 编辑
-            Button(type="error" @click="remove" :disabled="!selectOne") 删除
+            Button.mr10(type="primary" @click="check" :disabled="!selectOne") 审核
         Table(:columns="columns" :data="tableData" @on-selection-change="selectHandle")
             template(#createTime="{ row }")
                 span {{$format(new Date(row.createTime),'yyyy-MM-dd HH:mm:ss')}}
-            template(#componentImage="{ row }")
-                ImageView.avatar(:images="[row.componentImage]")
         .page
             page(:total="total" show-elevator show-total :page-size="pageSize" :current="pageNum" @on-change="pageChange")
-        dialogEdit(v-model="dialogEditShow" :detail="currentRow" @reload="reload")
-        dialogVersion(v-model="dialogEditVersionShow" :detail="currentRow" @reload="reload")
+        dialogCheck(v-model="dialogCheckShow" :detail="currentRow" @reload="reload")
 </template>
 <script lang="ts">
     import {Vue, Component} from 'vue-property-decorator'
     import {Table, Page, Button} from 'view-design'
-    import {getCompListAll, destroyComponent} from '@/api/bussiness.api'
-    import ImageView from '@/components/ImageView/index.vue'
-    import dialogEdit from './dialogEditComponent.vue'
-    import dialogVersion from './dialogEditComponentVersion.vue'
+    import {getWaitAuditList} from '@/api/bussiness.api'
+    import dialogCheck from './dialogCheckComponent.vue'
 
     @Component({
         components: {
             Table,
             Button,
             Page,
-            dialogEdit,
-            ImageView,
-            dialogVersion
+            dialogCheck
         }
     })
     class Market extends Vue {
@@ -49,8 +40,8 @@
                 key: 'componentEnTitle'
             },
             {
-                title: '略缩图',
-                slot: 'componentImage'
+                title: '组件版本号',
+                key: 'componentVersion'
             },
             {
                 title: '创建时间',
@@ -60,14 +51,13 @@
         total: number = 0
         pageNum: number = 1
         pageSize: number = 10
-        dialogEditShow: boolean = false
-        dialogEditVersionShow: boolean = false
+        dialogCheckShow: boolean = false
         currentRow: any = null
         selectMore: any = false
         selectOne: any = false
 
         async search() {
-            const res = await getCompListAll({
+            const res = await getWaitAuditList({
                 pageNum: this.pageNum,
                 pageSize: this.pageSize,
             })
@@ -94,37 +84,9 @@
             this.search()
         }
 
-        remove() {
-            this.$Modal.confirm({
-                title: '确定删除吗',
-                onOk: async () => {
-                    await destroyComponent({componentId: this.selectOne.componentId})
-                    this.$Message.success('操作成功')
-                    this.reload()
-                }
-            })
-        }
-
-        changeVersion() {
+        check() {
             this.currentRow = this.selectOne
-            this.dialogEditVersionShow = true
-        }
-
-        edit() {
-            this.currentRow = this.selectOne
-            this.dialogEditShow = true
-        }
-
-        create() {
-            this.currentRow = {
-                componentTitle: '',
-                componentImage: '',
-                componentJsUrl: '',
-                componentEnTitle: '',
-                componentTypeId: '',
-                sort: ''
-            }
-            this.dialogEditShow = true
+            this.dialogCheckShow = true
         }
 
         pageChange(page) {
