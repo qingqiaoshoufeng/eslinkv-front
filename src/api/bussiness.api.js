@@ -64,6 +64,18 @@ export function getCompListAll(data) {
 }
 
 // 获取所有组件分类
+export function getWaitAuditList(data) {
+	return request({
+		url:`${DATAURL}/component/waitAuditList`,
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+// 获取所有组件分类
 export function getAllComponentType() {
 	return request({
 		url:`${DATAURL}/componentType/getAllComponentType`,
