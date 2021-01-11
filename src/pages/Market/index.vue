@@ -54,6 +54,10 @@
                 slot: 'componentImage'
             },
             {
+                title: 'js地址',
+				key: 'componentJsUrl'
+            },
+            {
                 title: '创建时间',
                 slot: 'createTime'
             },
