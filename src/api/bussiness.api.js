@@ -28,10 +28,10 @@ export function year(data) {
 	})
 }
 
-// 获取一级分类列表
+// 获取组件详情
 export function detailMarket(data) {
 	return request({
-		url: `${DATAURL}/component/detailByEnTitle`,
+		url: `${DATAURL}/component/getComponentDetail`,
 		method: 'get',
 		params: data,
 		headers: {
@@ -126,6 +126,42 @@ export function updateComponent(data) {
 		url:`${DATAURL}/component/update`,
 		method: 'post',
 		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+// 新增组件版本
+export function addComponentVersion(data) {
+	return request({
+		url:`${DATAURL}/component/addVersion`,
+		method: 'post',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+// 切换版本
+export function changeComponentVersion(data) {
+	return request({
+		url:`${DATAURL}/component/changeVersion`,
+		method: 'post',
+		data: qs.stringify(data),
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+// 获取所有版本
+export function getVersionList(data) {
+	return request({
+		url:`${DATAURL}/component/getVersionList`,
+		method: 'get',
+		params: data,
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 		},

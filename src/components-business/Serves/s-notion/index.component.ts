@@ -1,7 +1,7 @@
-const config = {
+export const config = {
 	animation: true
 };
-const value = {
+export const value = {
 	api: {
 		data: JSON.stringify([
 			{

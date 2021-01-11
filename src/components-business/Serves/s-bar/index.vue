@@ -11,6 +11,10 @@
 					<div class="bgc2" :style="`backgroundColor:${config.config.color2};}`"></div>
 					<div class="desc2">{{data.legend2 || config.config.desc2}}</div>
 				</div>
+				<div class="legend2" v-if="data.legend3">
+					<div class="bgc2" :style="`backgroundColor:${config.config.color3};}`"></div>
+					<div class="desc2">{{data.legend3 || config.config.desc3}}</div>
+				</div>
 			</div>
 		</div>
 		<div class="h-line-1" :id="id"/>

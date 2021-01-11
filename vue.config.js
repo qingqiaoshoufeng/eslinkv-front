@@ -1,10 +1,16 @@
 const path = require('path');
+const pkg = require('./package.json')
+const webpack = require('webpack')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
 const needReport = false
+
 module.exports = {
     transpileDependencies: ['@simonwep', 'vue-draggable-resizable-gorkys2', 'swiper', 'dom7'],
     assetsDir: 'static',
+	publicPath: isProduction ? `./${pkg.version}` : './',
+	outputDir: `dist/${pkg.version}`,
+	indexPath: '../index.html',
     productionSourceMap: false,
     lintOnSave: false,
     devServer: {
@@ -84,13 +90,16 @@ module.exports = {
                 'echarts': 'echarts'
             }
         ]
+		config.plugins.push(new webpack.DefinePlugin({
+			'process.env.staticPath': JSON.stringify(isProduction ? `/${pkg.version}` : '')
+		}))
     },
     chainWebpack: config => {
         config.module
             .rule('vue')
             .use('iview')
             .loader('iview-loader')
-            .options({ prefix: false })
+            .options({prefix: false})
         config.resolve.alias
             .set('@lib', path.resolve(__dirname, './lib'));
         if (isProduction) {
@@ -105,7 +114,7 @@ module.exports = {
             config.resolve.symlinks(true)
         }
         config.module
-            .rule("view-design")  //  我目前用的是新版本的iview ,旧版本的iview，用iview代替view-design
+            .rule("view-design")
             .test(/view-design.src.*?js$/)
             .use("babel")
             .loader("babel-loader")

@@ -11,6 +11,8 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "typeRoots": ["./node_modules/@types/", "./types/"],
+    "noImplicitAny": false,
     "types": [
       "webpack-env"
     ],
@@ -31,7 +33,9 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx", "src/components-map/AMap/a-map/MapContainer/MapPages/AirSupply/index.js"
+    "tests/**/*.tsx",
+    "src/components-map/AMap/a-map/MapContainer/MapPages/AirSupply/index.js",
+    "types/index.d.ts"
   ],
   "exclude": [
     "node_modules"

@@ -184,7 +184,7 @@
                     if (window.GoldChart.components[this.type]) {
                         this.ready = true
                     } else {
-                        this.$sysApi.bussiness.detailMarket({componentEnTitle: this.type}).then(res => {
+                        this.$sysApi.bussiness.detailMarket({componentEnTitle: this.type, componentVersion: this.config.widget.componentVersion}).then(res => {
                             let script = document.createElement('script')
                             script.onload = () => {
                                 Vue.component(`market-${res.componentEnTitle}`, window.GoldChart.components[res.componentEnTitle].component)
