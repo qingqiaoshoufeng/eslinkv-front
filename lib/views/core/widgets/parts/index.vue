@@ -92,6 +92,7 @@
         },
         data() {
             return {
+				componentVersion: '',
                 querying: false,
                 queryFailed: false,
                 replayAnimation: false,
@@ -108,7 +109,7 @@
 
                 if (this.ready) {
                     if (this.market)
-                        return `market-${this.type}`
+                        return `market-${this.type}-${this.componentVersion}`
                     return `dvdp-${this.type}`
                 }
 
@@ -186,8 +187,11 @@
                     } else {
                         this.$sysApi.bussiness.detailMarket({componentEnTitle: this.type, componentVersion: this.config.widget.componentVersion}).then(res => {
                             let script = document.createElement('script')
-                            script.onload = () => {
-                                Vue.component(`market-${res.componentEnTitle}`, window.GoldChart.components[res.componentEnTitle].component)
+                            this.componentVersion = this.config.widget.componentVersion
+							script.onload = () => {
+                                Vue.component(
+                                	`market-${res.componentEnTitle}-${this.config.widget.componentVersion}`,
+									window.GoldChart.components[`${res.componentEnTitle}-${this.config.widget.componentVersion}`].component)
                                 this.ready = true
                             }
                             script.src = res.componentJsUrl
