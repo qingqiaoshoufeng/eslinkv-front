@@ -182,12 +182,12 @@
                 this.ready = true
             } else {
                 if (this.market) {
-                    if (window.GoldChart.components[this.type]) {
+					this.componentVersion = this.config.widget.componentVersion
+					if (window.GoldChart.components[`${this.type}-${this.componentVersion}`]) {
                         this.ready = true
                     } else {
                         this.$sysApi.bussiness.detailMarket({componentEnTitle: this.type, componentVersion: this.config.widget.componentVersion}).then(res => {
                             let script = document.createElement('script')
-                            this.componentVersion = this.config.widget.componentVersion
 							script.onload = () => {
                                 Vue.component(
                                 	`market-${res.componentEnTitle}-${this.config.widget.componentVersion}`,
