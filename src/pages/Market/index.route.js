@@ -1,5 +1,5 @@
 export default {
-	path: '/market',
+	path: '/market/:name',
 	name: 'market',
 	component: () => import('./index.vue'),
 }

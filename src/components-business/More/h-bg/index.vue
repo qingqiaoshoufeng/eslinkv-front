@@ -109,8 +109,10 @@
                 }
             }
             const video = document.getElementById('video')
-            if (video.paused) {
-                video.play()
+            if (video) {
+                if (video.paused) {
+                    video.play()
+                }
             }
         },
         methods: {

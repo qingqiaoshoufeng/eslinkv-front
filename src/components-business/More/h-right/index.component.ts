@@ -1,6 +1,6 @@
 import {getInput} from '../../../../lib'
 
-const configSource = {
+export const configSource: ComponentConfigSource = {
     config: {
         fields: {
             transform: getInput('transform', '旋转角度'),
@@ -8,23 +8,23 @@ const configSource = {
         }
     }
 }
-const config = {
+export const config: ComponentConfig = {
     animation: true,
     config: {
         transform: true,
         left: true,
     }
 }
-const value = {
-	layout: {
-		size: {
-			width: 600,
-			height: 954
-		},
-		position: {
-			value: 'relative'
-		}
-	},
+export const value: ComponentValue = {
+    layout: {
+        size: {
+            width: 600,
+            height: 954
+        },
+        position: {
+            value: 'relative'
+        }
+    },
     api: {
         data: {
             barCharts: [
@@ -68,5 +68,3 @@ const value = {
         left: 100,
     }
 }
-
-export {config, configSource, value}
