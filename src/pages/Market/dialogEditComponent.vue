@@ -25,7 +25,7 @@
 <script lang="ts">
     import {Vue, Component, Prop, Watch} from 'vue-property-decorator'
     import {Modal, Form, FormItem, Input, Button, Upload, Icon} from 'view-design'
-    import {createComponent, updateComponent, getAllComponentType, addComponentVersion} from '@/api/bussiness.api'
+    import {createComponent, updateComponent, getAllComponentType} from '@/api/bussiness.api'
     import TreeSelect from '@riophae/vue-treeselect'
     import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
@@ -41,7 +41,7 @@
             Input
         }
     })
-    class MarketEditDialog extends Vue {
+    export default class MarketEditDialog extends Vue {
         @Prop(Boolean) value!: boolean
         @Prop(Object) detail: any
         modalShow = false
@@ -59,9 +59,9 @@
             componentTitle: '',
             componentImage: '',
             componentJsUrl: '',
-			componentZipUrl: '',
+            componentZipUrl: '',
             componentEnTitle: '',
-			componentVersion: '',
+            componentVersion: '',
             componentTypeId: '',
             sort: ''
         }
@@ -70,8 +70,8 @@
             componentTitle: {required: true, message: '请填写组件名', trigger: 'blur'},
             componentEnTitle: {required: true, message: '请填写组件英文名', trigger: 'blur'},
             componentJsUrl: {required: true, message: '请填写js地址', trigger: 'blur'},
-			componentZipUrl: {required: true, message: '请填写zip地址', trigger: 'blur'},
-			componentVersion: {required: true, message: '请填写版本号', trigger: 'blur'},
+            componentZipUrl: {required: true, message: '请填写zip地址', trigger: 'blur'},
+            componentVersion: {required: true, message: '请填写版本号', trigger: 'blur'},
             componentImage: {required: true, message: '请上传略缩图', trigger: 'blur'},
             componentTypeId: {required: true, type: 'number', message: '请填选择组件类型', trigger: 'blur'},
             sort: {required: true, type: 'number', message: '请填写排序', trigger: 'blur'},
@@ -89,9 +89,9 @@
                 componentTitle: val.componentTitle,
                 componentImage: val.componentImage,
                 componentJsUrl: val.componentJsUrl,
-				componentZipUrl: val.componentZipUrl,
+                componentZipUrl: val.componentZipUrl,
                 componentEnTitle: val.componentEnTitle,
-				componentVersion: val.componentVersion,
+                componentVersion: val.componentVersion,
                 componentTypeId: val.componentTypeId,
                 sort: val.sort,
             }
@@ -105,7 +105,7 @@
         submit() {
             (this.$refs.form as any).validate((valid) => {
                 if (!valid) return false
-				if (this.detail?.componentId) {
+                if (this.detail?.componentId) {
                     updateComponent(this.form).then(() => {
                         this.$emit('reload')
                     })
@@ -129,9 +129,6 @@
             })
         }
     }
-
-    export default MarketEditDialog
-
 </script>
 <style lang="scss" scoped>
     .img-wrap {
@@ -142,7 +139,7 @@
         border-radius: 4px;
         text-align: center;
         cursor: pointer;
-
+        
         .upload-img {
             width: 100%;
             height: 100%;

@@ -45,16 +45,18 @@
             },
             queryKanboard() {
                 const {params: {id}} = this.$route
-                const dataBoardId = id
-                this.$api.board.detail({dataBoardId}).then(res => {
-                    const value = JSON.parse(res.attribute)
-                    window.GoldChart.mutations.setKanboard(value)
-                    this.refill(value)
-                    window.GoldChart.mutations.initScene(value.scene)
-                    window.GoldChart.mutations.listToObj(value)
-                })
-                if (getQueryString('scene')) {
-                    window.GoldChart.mutations.setSceneIndex(getQueryString('scene'))
+                if (id) {
+                    const dataBoardId = id
+                    this.$api.board.detail({dataBoardId}).then(res => {
+                        const value = JSON.parse(res.attribute)
+                        window.GoldChart.mutations.setKanboard(value)
+                        this.refill(value)
+                        window.GoldChart.mutations.initScene(value.scene)
+                        window.GoldChart.mutations.listToObj(value)
+                    })
+                    if (getQueryString('scene')) {
+                        window.GoldChart.mutations.setSceneIndex(getQueryString('scene'))
+                    }
                 }
             },
             refill(value) {
@@ -87,16 +89,16 @@
         background: #0f3b69;
         z-index: 99999;
         display: flex;
-
+        
         &.active {
             overflow: auto;
         }
-
+        
         &::-webkit-scrollbar {
             width: 0;
             height: 0;
         }
-
+        
         /deep/ {
             #kanban {
                 position: relative;
@@ -106,21 +108,21 @@
                 /*margin: auto;*/
             }
         }
-
+        
         &.fit-mode {
             justify-content: center;
             align-items: center;
             overflow: hidden;
         }
     }
-
+    
     .action-bar {
         position: fixed;
         right: 15px;
         bottom: 15px;
         display: flex;
         z-index: 100000;
-
+        
         .action {
             padding: 10px 18px;
             color: white;
@@ -128,11 +130,11 @@
             opacity: 0.5;
             background-color: rgba(0, 0, 0, 0.4);
             cursor: pointer;
-
+            
             &:hover {
                 opacity: 0.8;
             }
-
+            
             &:not(:first-child) {
                 margin-left: 10px;
             }

@@ -1,12 +1,14 @@
 <template lang="pug">
-    component(:is="currentComponent")
+    #example
+        component(:is="currentComponent")
 </template>
 <script lang="ts">
-    import {Vue, Prop} from 'vue-property-decorator'
+    import {Component, Vue, Prop} from 'vue-property-decorator'
 
-    class MarketPreview extends Vue {
-        @Prop() type: string
-        @Prop() version: string
+    @Component
+    export default class MarketPreview extends Vue {
+        @Prop(String) type: string
+        @Prop(String) version: string
         ready: boolean = false
 
         get currentComponent() {
@@ -37,6 +39,4 @@
             }
         }
     }
-
-    export default MarketPreview
 </script>

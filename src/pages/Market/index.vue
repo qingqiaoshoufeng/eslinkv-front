@@ -18,7 +18,7 @@
             Left
         }
     })
-    class Market extends Vue {
+    export default class Market extends Vue {
         currentComponent: any = null
 
         @Watch('$route')
@@ -29,16 +29,13 @@
         init() {
             let {name} = this.$route.params
             name = name.replace(/%20/g, '')
-            const content = () => import(`./${name}.vue`)
-            this.currentComponent = content
+            this.currentComponent = () => import(`./${name}.vue`)
         }
 
         mounted() {
             this.init()
         }
     }
-
-    export default Market
 </script>
 <style lang="scss">
     .market-content {

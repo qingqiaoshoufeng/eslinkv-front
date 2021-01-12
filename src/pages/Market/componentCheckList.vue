@@ -3,6 +3,8 @@
         .btn-box
             Button.mr10(type="primary" @click="check" :disabled="!selectOne") 审核
         Table(:columns="columns" :data="tableData" @on-selection-change="selectHandle")
+            template(#status="{ row }")
+                span {{status[row.status]}}
             template(#createTime="{ row }")
                 span {{$format(new Date(row.createTime),'yyyy-MM-dd HH:mm:ss')}}
         .page
@@ -23,7 +25,7 @@
             dialogCheck
         }
     })
-    class Market extends Vue {
+    export default class Market extends Vue {
         tableData = []
         columns = [
             {
@@ -44,6 +46,10 @@
                 key: 'componentVersion'
             },
             {
+                title: '审核状态',
+                slot: 'status'
+            },
+            {
                 title: '创建时间',
                 slot: 'createTime'
             },
@@ -55,6 +61,11 @@
         currentRow: any = null
         selectMore: any = false
         selectOne: any = false
+        status: any = {
+            error: '审核失败',
+            pending: '待审核',
+            success: '审核通过',
+        }
 
         async search() {
             const res = await getWaitAuditList({
@@ -98,8 +109,6 @@
             this.search()
         }
     }
-
-    export default Market
 </script>
 <style lang="scss">
     .viewer-canvas {
