@@ -178,7 +178,6 @@
                 const widgetConfig = this.widgetConfigMap[configKey]
                 if (!widgetConfig || !type) return
                 const {config} = widgetConfig
-
 				e.dataTransfer.setData('widget-config', JSON.stringify({
                     type,
                     config,

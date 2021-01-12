@@ -7,7 +7,7 @@
             MenuItem(name="typeList") 分类列表
 </template>
 <script lang="ts">
-    import {Component, Vue} from 'vue-property-decorator'
+    import {Component, Vue, Watch} from 'vue-property-decorator'
     import {Menu, Submenu, MenuItem} from 'view-design'
 
     @Component({
@@ -18,8 +18,14 @@
         }
     })
 
-    class Left extends Vue {
+    export default class Left extends Vue {
         leftName: string = ''
+
+        @Watch('$route')
+        handleRouter() {
+            const {name} = this.$route.params
+            this.leftName = name
+        }
 
         handleSelect(name) {
             const currentHash = decodeURIComponent(location.hash.replace('#', ''));
@@ -36,8 +42,6 @@
             this.leftName = name
         }
     }
-
-    export default Left
 </script>
 <style lang="scss">
     .vf-help-left {

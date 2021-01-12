@@ -32,7 +32,7 @@
             dialogVersion
         }
     })
-    class Market extends Vue {
+    export default class Market extends Vue {
         tableData = []
         columns = [
             {
@@ -136,8 +136,6 @@
             this.search()
         }
     }
-
-    export default Market
 </script>
 <style lang="scss">
     .viewer-canvas {
