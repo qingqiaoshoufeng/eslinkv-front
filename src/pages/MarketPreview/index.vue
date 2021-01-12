@@ -1,5 +1,5 @@
 <template lang="pug">
-    #example
+    #example.text-center
         component(:is="currentComponent")
 </template>
 <script lang="ts">

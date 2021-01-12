@@ -74,7 +74,7 @@
             componentVersion: {required: true, message: '请填写版本号', trigger: 'blur'},
             componentImage: {required: true, message: '请上传略缩图', trigger: 'blur'},
             componentTypeId: {required: true, type: 'number', message: '请填选择组件类型', trigger: 'blur'},
-            sort: {required: true, type: 'number', message: '请填写排序', trigger: 'blur'},
+            sort: {type: 'number', message: '请填写排序', trigger: 'blur'},
         }
 
         @Watch('value')
