@@ -41,6 +41,7 @@
 	import dFooter from '../../components/d-footer'
 	import {Button, Input, Modal, Form, FormItem} from 'view-design'
 	import downloadFile from '../../vendor/download-file'
+	import '@/components-market'
 
 	export default {
 		name: 'Edit',
