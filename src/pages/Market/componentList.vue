@@ -49,6 +49,10 @@
                 key: 'componentEnTitle'
             },
             {
+                title: '组件版本号',
+                key: 'componentVersion'
+            },
+            {
                 title: '略缩图',
                 slot: 'componentImage'
             },

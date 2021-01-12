@@ -46,6 +46,10 @@
                 key: 'componentVersion'
             },
             {
+                title: '当前版本号',
+                key: 'currentVersion'
+            },
+            {
                 title: '审核状态',
                 slot: 'status'
             },
