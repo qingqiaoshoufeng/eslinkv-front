@@ -1,7 +1,19 @@
 <template>
-    <div ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen }" class="preview-wrapper">
-        <kanban-preview @mounted="updateKanboardSize" ref="previewContainer"
-                        :style="`transform: scale(${scaleRatio}) translate3d(0, 0, 0); overflow: hidden;`"/>
+    <div ref="kanboardWrapper"
+		 :class="{ active: ready, 'fit-mode': fitScreen, mobile: isMobile }"
+		 class="preview-wrapper"
+	>
+        <div :style="{height: mobileWrapHeight + 'px'}" class="mobile-wrap" v-if="isMobile">
+			<kanban-preview @mounted="updateKanboardSize"
+							ref="previewContainer"
+							:style="`transform: scale(${scaleRatio}) translate3d(0, 0, 0); overflow: hidden;`"
+			/>
+		</div>
+		<kanban-preview @mounted="updateKanboardSize"
+						ref="previewContainer"
+						v-else
+						:style="`transform: scale(${scaleRatio}) translate3d(0, 0, 0); overflow: hidden;`"
+		/>
     </div>
 </template>
 
@@ -18,8 +30,10 @@
         },
         data() {
             return {
+            	isMobile: /android|iphone/i.test(navigator.userAgent),
                 ready: false,
                 fitScreen: true,
+                mobileWrapHeight: 0,
                 kanboardSize: {
                     width: 1920,
                     height: 1080
@@ -41,8 +55,9 @@
                 const {clientWidth, clientHeight} = document.body
                 this.screenSize.width = clientWidth
                 this.screenSize.height = clientHeight
-                this.actualScaleRatio = Math.min(clientWidth / w, clientHeight / h)
-            },
+                this.actualScaleRatio = this.isMobile ? clientWidth / w : Math.min(clientWidth / w, clientHeight / h)
+				this.mobileWrapHeight = h * this.actualScaleRatio
+			},
             queryKanboard() {
                 const {params: {id}} = this.$route
                 if (id) {
@@ -114,6 +129,18 @@
             align-items: center;
             overflow: hidden;
         }
+
+		&.mobile {
+			align-items: unset;
+			overflow: auto;
+			#kanban {
+				transform-origin: 0 0;
+			}
+		}
+		.mobile-wrap {
+			position: relative;
+			overflow: hidden;
+		}
     }
     
     .action-bar {
