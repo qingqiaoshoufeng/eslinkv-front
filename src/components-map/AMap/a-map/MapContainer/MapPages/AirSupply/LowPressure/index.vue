@@ -86,44 +86,44 @@ let componentPageArr = [
 	//右侧报警列表
 	'RightPanel',
 	'WarningStations',
-];
+]
 //页面所需公共组件
-let componentCommonArr = ['DataStatistics', 'OverlayDetail', 'MapLegend'];
+let componentCommonArr = ['DataStatistics', 'OverlayDetail', 'MapLegend']
 //异步加载组件函数
-let componentPageMap = {};
-let componentCommonMap = {};
-componentPageArr.map(componentName => {
+let componentPageMap = {}
+let componentCommonMap = {}
+componentPageArr.map((componentName) => {
 	componentPageMap[componentName] = () =>
-		import(/*webpackInclude:/\.(vue)$/ */ '../Components/' + componentName);
-});
-componentCommonArr.map(componentName => {
+		import(/*webpackInclude:/\.(vue)$/ */ '../Components/' + componentName)
+})
+componentCommonArr.map((componentName) => {
 	componentCommonMap[componentName] = () =>
 		import(
 			/*webpackInclude:/\.(vue)$/ */ '../../../../components/' +
 				componentName
-		);
-});
+		)
+})
 
 //页面覆盖物组件
-import {} from '../Components/index.js';
-import { AMapTile } from '../../../../lib';
+import {} from '../Components/index.js'
+import { AMapTile } from '../../../../lib'
 
 //页面所需公共组件
-import { OverlayDetail, MapLegend } from '../../../../components/index.js';
-import { DataStatistics } from '../../../../components';
+import { OverlayDetail, MapLegend } from '../../../../components/index.js'
+import { DataStatistics } from '../../../../components'
 
 import {
 	INDEXSCENEMAP,
 	OVERLAYINFOMAP_AIRSUPPLY,
 	AIRSUPPLY_WARN_SCENEINDEX,
 	AIRSUPPLY_WARN_COMPONENTINDEX,
-} from '../../../../config';
+} from '../../../../config'
 import {
 	DATASTATISTICSLIST,
 	AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP,
 	AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
-} from './config.js';
-import getHangZhouGasGISPosition from '../../../../utils/getHangZhouGasGISPosition';
+} from './config.js'
+import getHangZhouGasGISPosition from '../../../../utils/getHangZhouGasGISPosition'
 
 export default {
 	name: 'LowPressure',
@@ -133,13 +133,13 @@ export default {
 		...componentCommonMap,
 	},
 	created() {
-		this.$amap = this.$parent.$amap;
-		this.$amap.setZoom(this.zoom, 100);
-		this.$amap.setCenter(this.center, 100);
+		this.$amap = this.$parent.$amap
+		this.$amap.setZoom(this.zoom, 100)
+		this.$amap.setCenter(this.center, 100)
 	},
 	mounted() {
-		this.getAllTypeStationList();
-		this.getDataStatisticsInfo();
+		this.getAllTypeStationList()
+		this.getDataStatisticsInfo()
 	},
 	data() {
 		return {
@@ -161,7 +161,7 @@ export default {
 			dataReady: false,
 			stationList: [],
 			activeStationData: {},
-		};
+		}
 	},
 	computed: {
 		tilesQuery() {
@@ -169,77 +169,74 @@ export default {
 				MiddlePressureLine,
 				LowPressureLine,
 				PressureRegulatingStation,
-			} = this.legendMap;
+			} = this.legendMap
 			const {
 				visible: visibleM,
 				tileQuery: tileQueryM,
-			} = MiddlePressureLine;
-			const {
-				visible: visibleL,
-				tileQuery: tileQueryL,
-			} = LowPressureLine;
+			} = MiddlePressureLine
+			const { visible: visibleL, tileQuery: tileQueryL } = LowPressureLine
 			const {
 				visible: visibleP,
 				tileQuery: tileQueryP,
-			} = PressureRegulatingStation;
-			let queryArr = [];
+			} = PressureRegulatingStation
+			let queryArr = []
 			if (visibleM) {
-				queryArr.push(tileQueryM);
+				queryArr.push(tileQueryM)
 			}
 			if (visibleL) {
-				queryArr.push(tileQueryL);
+				queryArr.push(tileQueryL)
 			}
 			if (visibleP) {
-				queryArr.push(tileQueryP);
+				queryArr.push(tileQueryP)
 			}
 			//条件变化刷新地图
 			if (queryArr.length && this.$refs.mapTile) {
-				this.$refs.mapTile.reload();
+				this.$refs.mapTile.reload()
 			}
-			return queryArr;
+			return queryArr
 		},
 		//点击右侧点位列表，从overlay组件内部触发click事件
 		activeOverlayMap() {
-			let { activeStationData } = this;
+			let { activeStationData } = this
 			if (JSON.stringify(activeStationData) === '{}') {
-				return {};
+				return {}
 			} else {
-				let { overlayType } = activeStationData;
+				let { overlayType } = activeStationData
 				return {
 					[overlayType]: activeStationData,
-				};
+				}
 			}
 		},
 		OverlayDetailProp() {
-			let { activeOverlay, overlayInfoConfigMap, legendMap } = this;
+			let { activeOverlay, overlayInfoConfigMap, legendMap } = this
 			if (JSON.stringify(activeOverlay) !== '{}') {
-				let { overlayType } = activeOverlay;
+				let { overlayType } = activeOverlay
 				//详情展示信息配置
 				let overlayDetailConfig =
-					overlayInfoConfigMap[overlayType] || {};
-				let legendConfig = legendMap[overlayType] || {};
+					overlayInfoConfigMap[overlayType] || {}
+				let legendConfig = legendMap[overlayType] || {}
 				//图标大小，是否显示关闭按钮，是否显示查看详情
 				let {
 					iconSize = 38,
 					showPopCloseBtn: showCloseBtn,
 					showMore,
-				} = legendConfig;
+				} = legendConfig
 				return {
 					data: activeOverlay,
 					iconSize,
 					showCloseBtn,
 					overlayDetailConfig,
 					showMore,
-				};
+				}
 			}
 		},
 		rightListActiveItemMap() {
-			let { activeWarnData, activeStationData } = this;
+			let { activeWarnData, activeStationData } = this
 			return {
 				processWarning: activeWarnData,
 				eventWarning: activeWarnData,
 				overlayList: activeStationData,
-			};
+			}
 		},
 	},
 	methods: {
@@ -252,31 +249,35 @@ export default {
 					'UndergroundRepairStation', // '地下抢修点',
 					'OngroundRepairStation', // '地上抢修点',
 				].toString(),
-			};
+			}
 			let res = await this.$sysApi.map.airSupply.getAllTypeStationList(
 				params
-			);
+			)
 			let {
 				serviceStationList,
 				pipeManageMentStationList,
 				undergroundRepairStationList,
 				ongroundRepairStationList,
-			} = res;
+			} = res
 			//数据为防止重叠特殊处理---开始
-			pipeManageMentStationList = pipeManageMentStationList.map(item => {
-				let { lat } = item;
-				return {
-					...item,
-					lat: lat + 0.003,
-				};
-			});
-			ongroundRepairStationList = ongroundRepairStationList.map(item => {
-				let { lat } = item;
-				return {
-					...item,
-					lat: lat - 0.003,
-				};
-			});
+			pipeManageMentStationList = pipeManageMentStationList.map(
+				(item) => {
+					let { lat } = item
+					return {
+						...item,
+						lat: lat + 0.003,
+					}
+				}
+			)
+			ongroundRepairStationList = ongroundRepairStationList.map(
+				(item) => {
+					let { lat } = item
+					return {
+						...item,
+						lat: lat - 0.003,
+					}
+				}
+			)
 			//数据为防止重叠特殊处理---结束
 			this.stationDataMap = {
 				...this.stationDataMap,
@@ -285,24 +286,24 @@ export default {
 				pipeManageMentStationList,
 				undergroundRepairStationList,
 				ongroundRepairStationList,
-			};
+			}
 			//右侧点位列表数据
 			this.stationList = [
 				...serviceStationList,
 				...pipeManageMentStationList,
 				...undergroundRepairStationList,
 				...ongroundRepairStationList,
-			];
+			]
 		},
 		// 获取统计数据
 		async getDataStatisticsInfo() {
 			this.dataStatisticsData = await this.$sysApi.map.airSupply.getStatisticsInfo(
 				{ type: 'LowPressure' }
-			);
+			)
 		},
 		//获取瓦片函数
 		getTileUrl(x, y, zoom) {
-			const tilesQuery = String(this.tilesQuery);
+			const tilesQuery = String(this.tilesQuery)
 			const {
 				leftBottomX,
 				leftBottomY,
@@ -312,53 +313,52 @@ export default {
 				height,
 				min,
 				max,
-			} = getHangZhouGasGISPosition(x, y, zoom);
-			return `${(window.api && window.api.MAP_GIS_URL) ||
-				'http://192.168.1.104:6080'}/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`;
+			} = getHangZhouGasGISPosition(x, y, zoom)
+			return `/pipenetwork/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			let { lng, lat } = overlay;
-			overlay.overlayType = overlayType;
-			this.activeOverlay = overlay;
-			this.showOverlayDetail = true;
+			let { lng, lat } = overlay
+			overlay.overlayType = overlayType
+			this.activeOverlay = overlay
+			this.showOverlayDetail = true
 		},
 		closeOverlayDetail(done) {
-			let { overlayType } = this.activeOverlay;
-			this.showOverlayDetail = false;
-			this.activeOverlay = {};
-			this.activeStationData = {};
-			done && done();
+			let { overlayType } = this.activeOverlay
+			this.showOverlayDetail = false
+			this.activeOverlay = {}
+			this.activeStationData = {}
+			done && done()
 		},
 		setZoomAndPanTo(lng, lat) {
-			this.$amap.setZoom(14, 100);
+			this.$amap.setZoom(14, 100)
 			this.$nextTick(() => {
-				this.$amap.panTo([lng, lat], 100);
-			});
+				this.$amap.panTo([lng, lat], 100)
+			})
 		},
 		handleListClick(overlay, listType) {
-			let { lng, lat } = overlay;
+			let { lng, lat } = overlay
 			//关闭站点详情弹窗
 			if (this.showOverlayDetail) {
-				this.showOverlayDetail = false;
-				this.activeOverlay = {};
+				this.showOverlayDetail = false
+				this.activeOverlay = {}
 			}
 			switch (listType) {
 				case 'StationList':
-					this.activeStationData = overlay;
-					break;
+					this.activeStationData = overlay
+					break
 				default:
-					this.activeWarnData = overlay;
-					this.overlayDetailPosition = 'top';
+					this.activeWarnData = overlay
+					this.overlayDetailPosition = 'top'
 			}
-			this.setZoomAndPanTo(lng, lat + 0.006);
+			this.setZoomAndPanTo(lng, lat + 0.006)
 		},
 		closeWarnEventDetail() {
-			this.activeWarnData = {};
-			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.setCenter(this.center, 100);
+			this.activeWarnData = {}
+			this.$amap.setZoom(this.zoom, 100)
+			this.$amap.setCenter(this.center, 100)
 		},
 	},
-};
+}
 </script>
 <style lang="scss" scoped>
 .map-legend {
