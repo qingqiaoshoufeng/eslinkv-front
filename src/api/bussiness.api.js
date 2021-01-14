@@ -63,10 +63,23 @@ export function getCompListAll(data) {
     })
 }
 
-// 获取所有组件分类
-export function getWaitAuditList(data) {
+
+// 获取审核历史
+export function getCheckHistoryList(data) {
     return request({
-        url: `${DATAURL}/component/waitAuditList`,
+        url: `${DATAURL}/component/checkHistoryList`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+
+// 获取未审核列表
+export function getWaitCheckList(data) {
+    return request({
+        url: `${DATAURL}/component/waitCheckList`,
         method: 'get',
         params: data,
         headers: {

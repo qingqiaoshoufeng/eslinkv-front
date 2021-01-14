@@ -4,6 +4,7 @@
             template(slot="title") 组件市场
             MenuItem(name="componentList") 组件列表
             MenuItem(name="componentCheckList") 组件审核
+            MenuItem(name="componentCheckHistory") 审核历史
             MenuItem(name="typeList") 分类列表
 </template>
 <script lang="ts">
