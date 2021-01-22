@@ -19,10 +19,6 @@
 							  @hook:updated="toggleCurrentPanel(panel.enable, panel.label)"
 						  />
 						  {{ panel.label }}
-						  <a v-if="panel.help" class="doc-link" :href="panel.help.url" target="_blank"
-							 :title="panel.help.title || '参考文档'">
-							<Icon type="md-help-circle"/>
-						  </a>
 						</span>
 						<template v-if="panel.enable !== false">
 							<config-panel
