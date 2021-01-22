@@ -106,9 +106,8 @@ module.exports = {
 		]
 		config.plugins.push(
 			new webpack.DefinePlugin({
-				'process.env.staticPath': JSON.stringify(
-					isProduction ? `/${pkg.version}` : ''
-				),
+				'process.env.staticPath': JSON.stringify(isProduction ? `/${pkg.version}` : ''),
+				'process.env.staticVuePath': JSON.stringify(isProduction ? 'vue.min.js' : 'vue.js')
 			})
 		)
 	},
@@ -117,7 +116,7 @@ module.exports = {
 			.rule('vue')
 			.use('iview')
 			.loader('iview-loader')
-			.options({ prefix: false })
+			.options({prefix: false})
 		config.resolve.alias.set('@lib', path.resolve(__dirname, './lib'))
 		if (isProduction) {
 			if (needReport) {
