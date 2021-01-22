@@ -30,7 +30,7 @@ module.exports = {
 				changeOrigin: true,
 				headers: {
 					// Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
-					Cookie: 'SESSION=e77a4956-0cec-452e-a066-acc9dbf0667b',
+					Cookie: 'SESSION=951dde65-40c7-4afc-ad9e-f28a68a0dcac',
 				},
 				pathRewrite: {
 					'^/hangran': '/',
@@ -42,7 +42,7 @@ module.exports = {
 				changeOrigin: true,
 				headers: {
 					// Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
-					Cookie: 'SESSION=e77a4956-0cec-452e-a066-acc9dbf0667b',
+					Cookie: 'SESSION=951dde65-40c7-4afc-ad9e-f28a68a0dcac',
 				},
 				pathRewrite: {
 					'^/api': '/',
