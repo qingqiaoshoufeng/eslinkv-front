@@ -11,7 +11,7 @@
     import {config, value} from './index.component'
 
     @Component
-    class HTitle1 extends mixins(mx) {
+	export default class extends mixins(mx) {
         created() {
             setTimeout(() => {
                 this.configSource = this.parseConfigSource(config)
@@ -19,8 +19,6 @@
             }, 1000)
         }
     }
-
-    export default HTitle1
 </script>
 <style lang="scss">
     .h-title-1-icon {

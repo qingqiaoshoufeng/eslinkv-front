@@ -1,30 +1,19 @@
-<template>
-	<div class="d-scene-box pos-a">
-		<div class="d-scene pos-a">
-			<img :src="`./static/images/layout-grid.svg`" title="场景切换" @click="clickHandle"/>
-		</div>
-		<div class="d-scene-modal pos-a" :class="[{active:sceneModal}]">
-			<header>场景切换<span>当前：场景{{store.scene.index}}</span></header>
-			<ul>
-				<li @click="changeScene(0)"
-					class="pointer fn-flex pos-r flex-row"
-					:class="[{active:store.scene.index===0}]">
-					<span>主场景</span>
-					<p>ID：0</p>
-				</li>
-				<li v-for="(item,index) in store.scene.list"
-					class="pointer fn-flex pos-r flex-row"
-					:class="[{active:store.scene.index===item}]"
-					@click="changeScene(item)"
-					:key="item">
-					<input @input="e=>handleSceneName(item,e)" :value="store.scene.obj[item].name"/>
-					<p>ID：{{item}}</p>
-					<Icon class="destroy" type="ios-trash-outline" @click="e=>destroyScene(e,index)"/>
-				</li>
-				<li class="pointer create fn-flex" @click="createScene">+</li>
-			</ul>
-		</div>
-	</div>
+<template lang="pug">
+	.d-scene-box.pos-a
+		.d-scene.pos-a.pointer
+			Icon(type="logo-buffer" title="场景切换" @click="handleClick" size="28" :class="[{active:sceneModal}]")
+		.d-scene-modal.pos-a(:class="[{active:sceneModal}]")
+			header
+				span 场景切换
+				span 当前：场景{{store.scene.index}}
+			ul
+				li.pointer.fn-flex.pos-r.flex-row(@click="changeScene(0)" :class="[{active:store.scene.index===0}]")
+					span 主场景
+					p ID：0
+				li.pointer.fn-flex.pos-r.flex-row(v-for="(item,index) in store.scene.list" :class="[{active:store.scene.index===item}]" @click="changeScene(item)" :key="item")
+					input(@input="e=>handleSceneName(item,e)" :value="store.scene.obj[item].name")
+					p ID：{{item}}
+					Icon.destroy(type="ios-trash-outline" @click="e=>destroyScene(e,index)")
 </template>
 <script>
 	import {Icon} from 'view-design'
@@ -47,7 +36,7 @@
 				window.GoldChart.mutations.setSceneIndex(index)
 				this.store.events.list.widgetUnActived()
 			},
-			clickHandle() {
+			handleClick() {
 				this.sceneModal = !this.sceneModal
 				this.$emit('show')
 			},
@@ -70,7 +59,7 @@
 		}
 	}
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	.d-scene-box {
 		width: 24px;
 		height: 24px;
@@ -81,16 +70,16 @@
 	.d-scene {
 		right: 0;
 		top: 0;
-		opacity: 0.4;
 		z-index: 2;
 		width: 24px;
 		height: 24px;
-		cursor: pointer;
-		mix-blend-mode: exclusion;
 
-		img {
-			width: 26px;
-			height: 26px;
+		.ivu-icon {
+			opacity: .6;
+
+			&:hover, &.active {
+				opacity: 1;
+			}
 		}
 	}
 
