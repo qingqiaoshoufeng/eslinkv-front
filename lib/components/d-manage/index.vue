@@ -3,25 +3,41 @@
 		.d-manage.pos-a.pointer
 			Icon(type="ios-construct" title="组件配置" @click="handleClick" size="28" :class="[{active:manageModal}]")
 		.d-manage-modal.pos-a(:class="[{active:manageModal}]")
-			//div {{store.kanboard.widgetAdded[store.kanboard.chooseId]}}
-			input(v-model="store.kanboard.widgetAdded[store.kanboard.chooseId]&&store.kanboard.widgetAdded[store.kanboard.chooseId].config.api.data")
+			.d-manage-modal-tab.fn-flex.flex-row
+				h2.pointer(v-for="(item,index) in list" :class="tabIndex===index?'active':''" @click="handleChangeTab(index)") {{item.title}}
+			template(v-for="(item,index) in list")
+				itemList(:list="item.list" v-if="tabIndex===index")
 </template>
 <script lang="ts">
 	import {Icon} from 'view-design'
 	import {Component, Vue} from 'vue-property-decorator'
+	import itemList from './item-list.vue'
 
 	@Component({
 		components: {
-			Icon
+			Icon, itemList
 		},
 	})
 	export default class extends Vue {
 		manageModal: boolean = false
-		store:any= window.GoldChart.store
+		tabIndex: number = 0
+		list: any = [
+			{
+				title: '基础配置', list: ['id','type']
+			},
+			{
+				title: '数据配置', list: []
+			}
+		]
 
 		handleClick() {
 			this.manageModal = !this.manageModal
 			this.$emit('show')
+		}
+
+		handleChangeTab(index) {
+			if (this.tabIndex !== index)
+				this.tabIndex = index
 		}
 	}
 </script>
@@ -63,11 +79,26 @@
 		visibility: hidden;
 		opacity: 0;
 		overflow-y: auto;
+		padding: 10px;
 
 		&.active {
 			visibility: inherit;
 			right: 40px;
 			opacity: 1;
+		}
+	}
+
+	.d-manage-modal-tab {
+		h2 {
+			font-size: 16px;
+			height: 40px;
+			margin-right: 10px;
+			color: rgba(0, 0, 0, .3);
+			user-select: none;
+
+			&:hover, &.active {
+				color: rgba(0, 0, 0, .65);
+			}
 		}
 	}
 </style>
