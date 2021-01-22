@@ -8,7 +8,8 @@
         "build": "vue-cli-service build --no-clean",
         "update": "auto-vers -t",
         "lint": "vue-cli-service lint",
-        "fix": "eslint --fix --ext .js --ext .jsx --ext .vue src/"
+        "fix": "eslint --fix --ext .js --ext .jsx --ext .vue src/",
+        "commit": "git add .&&git cz"
     },
     "dependencies": {
         "@babel/polyfill": "^7.12.1",

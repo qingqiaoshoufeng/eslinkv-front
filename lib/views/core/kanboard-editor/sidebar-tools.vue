@@ -1,15 +1,15 @@
 <template>
 	<div class="sidebar-tools" @click.stop>
 		<!-- 画布全屏 -->
-    <div
-        :title="!isFullscreen ? '进入全屏' : '退出全屏'"
-        class="editor-action request-fullscreen"
-        @click="kanboardEditor.toggleFullscreen"
-    >
-      <img
-          :src="`./static/images/${isFullscreen ? 'exit-' : ''}fullscreen.svg`"
-          :alt="!isFullscreen ? '进入全屏' : '退出全屏'"/>
-    </div>
+		<div
+			:title="!isFullscreen ? '进入全屏' : '退出全屏'"
+			class="editor-action request-fullscreen"
+			@click="kanboardEditor.toggleFullscreen"
+		>
+			<img
+				:src="`./static/images/${isFullscreen ? 'exit-' : ''}fullscreen.svg`"
+				:alt="!isFullscreen ? '进入全屏' : '退出全屏'"/>
+		</div>
 		<!-- 素材管理按钮 -->
 		<div
 			:class="{ active: showMaterialManage }"
@@ -19,35 +19,38 @@
 		>
 			<img :src="`./static/images/material-manage.svg`"/>
 		</div>
-    <!-- 场景 -->
-    <d-scene @show="toggleSidebarTool('sceneShow')" ref="scene"/>
-    <!-- parseConfigValue -->
-    <div
-        :class="{ active: showLayers }"
-        class="editor-action toggle-layers"
-        title="小工具清单"
-        @click="toggleSidebarTool('showLayers')"
-    >
-      <img :src="`./static/images/layers.svg`"/>
-    </div>
-    <!-- 全局接口配置 -->
-    <div
-        :class="{ active: showGlobalApi }"
-        class="editor-action global-api"
-        title="全局数据源配置"
-        @click="toggleSidebarTool('showGlobalApi')"
-    >
-      <img :src="`./static/images/interface.svg`"/>
-    </div>
-    <!-- 外部脚本嵌入管理 -->
-    <div
-        :class="{ active: showScriptInject }"
-        class="editor-action script-inject hide"
-        title="脚本嵌入管理"
-        @click="toggleSidebarTool('showScriptInject')"
-    >
-      <img :src="`./static/images/script.svg`"/>
-    </div>
+		<!-- 场景 -->
+		<d-scene @show="toggleSidebarTool('sceneShow')" ref="scene"/>
+		<!-- 组件配置 -->
+		<d-manage @show="toggleSidebarTool('manageShow')" ref="manage"/>
+		<!-- 小工具清单 -->
+		<Icon type="ios-apps" class="editor-icon" size="28" title="小工具清单" @click="toggleSidebarTool('showLayers')" :class="{ active: showLayers }"/>
+		<!--    <div-->
+		<!--        -->
+		<!--       -->
+		<!--        -->
+		<!--        -->
+		<!--    >-->
+		<!--      <img :src="`./static/images/layers.svg`"/>-->
+		<!--    </div>-->
+		<!-- 全局接口配置 -->
+		<div
+			:class="{ active: showGlobalApi }"
+			class="editor-action global-api"
+			title="全局数据源配置"
+			@click="toggleSidebarTool('showGlobalApi')"
+		>
+			<img :src="`./static/images/interface.svg`"/>
+		</div>
+		<!-- 外部脚本嵌入管理 -->
+		<div
+			:class="{ active: showScriptInject }"
+			class="editor-action script-inject hide"
+			title="脚本嵌入管理"
+			@click="toggleSidebarTool('showScriptInject')"
+		>
+			<img :src="`./static/images/script.svg`"/>
+		</div>
 
 		<!-- 素材管理 -->
 		<material-manage :showModal="showMaterialManage" @close="showMaterialManage = false"/>
@@ -85,16 +88,16 @@
 		</transition>
 		<transition name="layer-fade-right">
 			<global-api-panel
-          v-show="showGlobalApi"
-          ref="globalApiPanel"
-          @global-api-update="kanboardEditor.handleGlobalApiUpdate"
-      />
+				v-show="showGlobalApi"
+				ref="globalApiPanel"
+				@global-api-update="kanboardEditor.handleGlobalApiUpdate"
+			/>
 		</transition>
 		<transition name="layer-fade-right">
 			<script-inject-panel
-          v-show="showScriptInject"
-          @script-inject-update="kanboardEditor.handleGlobalApiUpdate"
-      />
+				v-show="showScriptInject"
+				@script-inject-update="kanboardEditor.handleGlobalApiUpdate"
+			/>
 		</transition>
 	</div>
 </template>
@@ -105,6 +108,8 @@
 	import globalApiPanel from './global-api/index.vue'
 	import scriptInjectPanel from './script-inject/index.vue'
 	import dScene from '../../../components/d-scene'
+	import dManage from '../../../components/d-manage'
+	import {Icon} from 'view-design'
 
 	export default {
 		name: 'sidebar-tools',
@@ -114,7 +119,9 @@
 			widgetLayers,
 			globalApiPanel,
 			scriptInjectPanel,
-			dScene
+			Icon,
+			dScene,
+			dManage
 		},
 		props: {
 			isFullscreen: {
@@ -152,19 +159,22 @@
 				this.showGlobalApi = false
 				this.showScriptInject = false
 			},
-      toggleSidebarTool (key) {
-        const arr = ['showMaterialManage', 'showLayoutGrid', 'showLayers', 'showGlobalApi', 'showScriptInject']
-        if (key !== 'sceneShow') {
-          this.$refs.scene.sceneModal = false
-        }
-        arr.forEach(v => {
-          if (v === key) {
-            this[key] = !this[key]
-          } else {
-            this[v] = false
-          }
-        })
-      }
+			toggleSidebarTool(key) {
+				const arr = ['showMaterialManage', 'showLayoutGrid', 'showLayers', 'showGlobalApi', 'showScriptInject']
+				if (key !== 'sceneShow') {
+					this.$refs.scene.sceneModal = false
+				}
+				if (key !== 'manageShow') {
+					this.$refs.manage.manageModal = false
+				}
+				arr.forEach(v => {
+					if (v === key) {
+						this[key] = !this[key]
+					} else {
+						this[v] = false
+					}
+				})
+			}
 		},
 		computed: {
 			hideSubPanels(e) {
@@ -178,6 +188,30 @@
 </script>
 
 <style lang="scss" scoped>
+	.editor-icon {
+		position: absolute;
+		right: 15px;
+		opacity: 0.6;
+		z-index: 2;
+		width: 24px;
+		height: 24px;
+		cursor: pointer;
+		top: 142px;
+		font-size: 32px;
+		line-height: 24px;
+		justify-content: center;
+		padding-left: 1px;
+
+		.ivu-icon {
+			width: 100%;
+			height: 100%;
+		}
+
+		&:hover, &.active {
+			opacity: 1;
+		}
+	}
+
 	.editor-action {
 		position: absolute;
 		right: 15px;

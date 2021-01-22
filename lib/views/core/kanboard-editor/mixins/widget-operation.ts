@@ -1,6 +1,7 @@
 import copy from 'fast-copy'
 import {uuid} from '../../../../utils'
 import {Vue, Component, Watch} from 'vue-property-decorator'
+import {mutations} from "../../../../store";
 
 @Component
 class Mixins extends Vue {
@@ -129,6 +130,7 @@ class Mixins extends Vue {
         if (!activeAllowed || config.widget.locked) {
             return this.deactivateWidget(id)
         }
+        window.GoldChart.mutations.chooseComponent(id)
         if (this.widgetActivating) return
         this.widgetActivating = true
         this.rightMenuGrid = null
