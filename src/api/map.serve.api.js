@@ -1,5 +1,6 @@
 import request from './request'
 import qs from 'qs'
+
 const HANGRANURL = '/server'
 
 /**
@@ -33,6 +34,7 @@ export function getHangranCodeHotList(data) {
         },
     })
 }
+
 /**
  * 获取杭燃码门站详情
  * @params {null}
@@ -47,6 +49,7 @@ export function getHangranCodeDetailInfo(data) {
         },
     })
 }
+
 // 点击查询杭燃码下服务厅详情
 export function clickGetBranchCompanyDetialInfo(data) {
     return request({
@@ -58,6 +61,7 @@ export function clickGetBranchCompanyDetialInfo(data) {
         },
     })
 }
+
 /**
  * 联码新增统计数据
  * @params {null}
@@ -90,6 +94,7 @@ export function getICcustomerStationList(data) {
         },
     })
 }
+
 /**
  * 获取工商户门站详情
  * @param {Object} data eg:{
@@ -138,6 +143,7 @@ export function getICcustomerHotInfo(data) {
         },
     })
 }
+
 /**
  * 工商户前二十（右侧及页面）
  * @params {null}
@@ -281,6 +287,22 @@ export function getServiceCustomerThreeSocialList(data) {
         },
     })
 }
+
+/**
+ * 客户服务三社联动信息
+ * @params {null}
+ */
+export function getServiceCustomerThreeSocialDetail(data) {
+    return request({
+        url: `${HANGRANURL}/threeSocial/eventDetail`,
+        method: 'get',
+        params: data,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+    })
+}
+
 
 /**
  * 三社联动 客户分布热力列表

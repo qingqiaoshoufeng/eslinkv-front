@@ -1,13 +1,13 @@
 import {mutations, store} from '../../lib/store'
 import mixins from '../components-business/mixins'
 import {
-	getInput,
-	getInputNumber,
-	getSelect,
-	getArrayGroup,
-	getColors,
-	getAnimationCurve,
-	getBooleanInput, getBackground, getColor, getFile
+    getInput,
+    getInputNumber,
+    getSelect,
+    getArrayGroup,
+    getColors,
+    getAnimationCurve,
+    getBooleanInput, getBackground, getColor, getFile
 } from '../../lib/views/core/widgets/parts/lib/config-tools'
 
 const GoldChart: any = {
@@ -24,7 +24,7 @@ const GoldChart: any = {
         updateComponent: (id, config) => {
             const widgetConfig = store.kanboard.widgetAdded[id].config.api
             if (config.params) {
-                widgetConfig.params = JSON.stringify(config.params)
+                widgetConfig.params = config.params
             }
             if (config.data) {
                 widgetConfig.data = JSON.stringify(config.data)
@@ -35,6 +35,14 @@ const GoldChart: any = {
                 widgetConfig.path = config.path
             if (config.method)
                 widgetConfig.method = config.method
+            for (let item in store.scene.sceneObj[store.kanboard.widgetAdded[id].scene].list) {
+                if (store.scene.sceneObj[store.kanboard.widgetAdded[id].scene].list[item].id === id) {
+                    if (config.data) {
+                        console.log(store.scene.sceneObj[store.kanboard.widgetAdded[id].scene].list[item])
+                        store.scene.sceneObj[store.kanboard.widgetAdded[id].scene].list[item].value.api.data = JSON.stringify(config.data)
+                    }
+                }
+            }
         },
     },
     store,
@@ -55,16 +63,16 @@ const GoldChart: any = {
     },
     components: {},
     mixins,
-	getInput,
-	getInputNumber,
-	getSelect,
-	getArrayGroup,
-	getColors,
-	getAnimationCurve,
-	getBooleanInput,
-	getBackground,
-	getColor,
-	getFile,
+    getInput,
+    getInputNumber,
+    getSelect,
+    getArrayGroup,
+    getColors,
+    getAnimationCurve,
+    getBooleanInput,
+    getBackground,
+    getColor,
+    getFile,
     methods: {},
 }
 
