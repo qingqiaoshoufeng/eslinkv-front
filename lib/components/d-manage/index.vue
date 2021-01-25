@@ -1,38 +1,40 @@
 <template lang="pug">
-	.d-manage-box.pos-a
-		.d-manage.pos-a.pointer
-			Icon(type="ios-construct" title="组件配置" @click="handleClick" size="28" :class="[{active:manageModal}]")
-		.d-manage-modal.pos-a(:class="[{active:manageModal}]")
-			.d-manage-modal-tab.fn-flex.flex-row
-				h2.pointer(v-for="(item,index) in list" :class="tabIndex===index?'active':''" @click="handleChangeTab(index)") {{item.title}}
-			template(v-for="(item,index) in list")
-				itemList(:list="item.list" v-if="tabIndex===index")
+	d-right-modal.d-manage-modal(title="组件配置" ref="modal")
+		.d-manage-modal-tab.fn-flex.flex-row
+			h2.pointer(v-for="(item,index) in list" :class="tabIndex===index?'active':''" @click="handleChangeTab(index)") {{item.title}}
+			h2.pointer(:class="tabIndex===list.length?'active':''" @click="handleChangeTab(list.length)") 看板配置
+		template(v-for="(item,index) in list")
+			itemList(:list="item.list" v-if="tabIndex===index")
 </template>
 <script lang="ts">
-	import {Icon} from 'view-design'
 	import {Component, Vue} from 'vue-property-decorator'
 	import itemList from './item-list.vue'
+	import dRightModal from '../d-right-modal'
 
 	@Component({
 		components: {
-			Icon, itemList
+			itemList, dRightModal
 		},
 	})
 	export default class extends Vue {
-		manageModal: boolean = false
 		tabIndex: number = 0
 		list: any = [
 			{
-				title: '基础配置', list: ['id','type']
+				title: '基础配置', list: ['id', 'type']
+			},
+			{
+				title: '样式配置', list: []
 			},
 			{
 				title: '数据配置', list: []
-			}
+			},
+			{
+				title: '自定义配置', list: []
+			},
 		]
 
-		handleClick() {
-			this.manageModal = !this.manageModal
-			this.$emit('show')
+		handleClose() {
+			this.$refs.modal.rightModal = false
 		}
 
 		handleChangeTab(index) {
@@ -41,50 +43,21 @@
 		}
 	}
 </script>
-<style lang="scss" scoped>
-	.d-manage-box {
-		width: 24px;
-		height: 24px;
-		right: 15px;
-		top: 253px;
-	}
-
-	.d-manage {
-		right: 0;
-		top: 0;
-		z-index: 2;
-		width: 24px;
-		height: 24px;
-
-		.ivu-icon {
-			opacity: .6;
-
-			&:hover, &.active {
-				opacity: 1;
-			}
+<style lang="scss">
+	.d-manage-modal-control {
+		> label {
+			display: block;
+			font-size: 14px;
+			margin-bottom: 10px;
 		}
-	}
 
-	.d-manage-modal {
-		right: -380px;
-		top: -218px;
-		width: 360px;
-		background-color: white;
-		border-radius: 5px;
-		overflow: hidden;
-		z-index: 3;
-		letter-spacing: 0;
-		height: calc(100vh - 140px);
-		transition: all .3s;
-		visibility: hidden;
-		opacity: 0;
-		overflow-y: auto;
-		padding: 10px;
+		.ivu-input-wrapper, .ivu-select {
+			margin-bottom: 10px;
+		}
 
-		&.active {
-			visibility: inherit;
-			right: 40px;
-			opacity: 1;
+		.ivu-radio-group-button {
+			display: block;
+			margin-bottom: 10px;
 		}
 	}
 
@@ -98,6 +71,10 @@
 
 			&:hover, &.active {
 				color: rgba(0, 0, 0, .65);
+			}
+
+			&:last-child {
+				margin-right: 0;
 			}
 		}
 	}

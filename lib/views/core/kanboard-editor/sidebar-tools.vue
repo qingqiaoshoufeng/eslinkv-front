@@ -162,10 +162,10 @@
 			toggleSidebarTool(key) {
 				const arr = ['showMaterialManage', 'showLayoutGrid', 'showLayers', 'showGlobalApi', 'showScriptInject']
 				if (key !== 'sceneShow') {
-					this.$refs.scene.sceneModal = false
+					this.$refs.scene.handleClose()
 				}
 				if (key !== 'manageShow') {
-					this.$refs.manage.manageModal = false
+					this.$refs.manage.handleClose()
 				}
 				arr.forEach(v => {
 					if (v === key) {
