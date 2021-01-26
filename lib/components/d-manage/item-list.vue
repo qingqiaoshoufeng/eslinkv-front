@@ -1,7 +1,7 @@
 <template lang="pug">
 	div
-		template(v-for="child in list")
-			component(:key="child" :is="currentComponent[child]" v-if="item.changeList.indexOf(child)!==-1")
+		template(v-for="(child, i) in list")
+			component(:key="i" :is="currentComponent[child.type]" :config="child" v-if="filterComponent(child)")
 		//input(v-model="store.kanboard.widgetAdded[store.kanboard.chooseId]&&store.kanboard.widgetAdded[store.kanboard.chooseId].config.api.data")
 </template>
 <script lang="ts">
@@ -9,7 +9,7 @@
 
 	@Component
 	export default class extends Vue {
-		@Prop(Array) list: array[]
+		@Prop(Array) list: any[]
 
 		store: any = window.GoldChart.store
 		currentComponent: any = {}
@@ -20,6 +20,10 @@
 			} else {
 				return {changeList: []}
 			}
+		}
+		
+		filterComponent (obj) {
+			return this.item.changeList.includes(obj.prop)
 		}
 		
 		mounted() {
