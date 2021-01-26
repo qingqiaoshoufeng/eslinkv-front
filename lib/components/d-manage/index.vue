@@ -20,7 +20,19 @@
 		tabIndex: number = 0
 		list: any = [
 			{
-				title: '基础配置', list: ['id', 'type']
+				title: '基础配置', list: [
+					{
+						prop: 'id',
+						label: '组件id',
+						type: 'func-input',
+						disabled: true
+					}, {
+						prop: 'type',
+						label: '组件类型',
+						type: 'func-input',
+						disabled: true
+					}
+				]
 			},
 			{
 				title: '样式配置', list: []
