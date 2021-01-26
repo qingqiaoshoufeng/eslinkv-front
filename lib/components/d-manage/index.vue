@@ -16,7 +16,7 @@
 			itemList, dRightModal
 		},
 	})
-	export default class extends Vue {
+	export default class DManage extends Vue {
 		tabIndex: number = 0
 		list: any = [
 			{
@@ -50,8 +50,7 @@
 		}
 
 		handleChangeTab(index) {
-			if (this.tabIndex !== index)
-				this.tabIndex = index
+			this.tabIndex = index
 		}
 	}
 </script>
