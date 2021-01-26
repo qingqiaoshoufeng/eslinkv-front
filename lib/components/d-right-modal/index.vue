@@ -14,7 +14,7 @@
 			Icon
 		},
 	})
-	export default class extends Vue {
+	export default class DRightModal extends Vue {
 		rightModal: boolean = false
 		@Prop({default: 396}) width: number
 		@Prop({default: 'ios-construct'}) icon: string

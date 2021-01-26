@@ -8,7 +8,7 @@
 	import {Component, Vue, Prop} from 'vue-property-decorator'
 
 	@Component
-	export default class extends Vue {
+	export default class DManageItemList extends Vue {
 		@Prop(Array) list: any[]
 
 		store: any = window.GoldChart.store
