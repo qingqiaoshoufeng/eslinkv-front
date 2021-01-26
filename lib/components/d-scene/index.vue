@@ -1,5 +1,5 @@
 <template lang="pug">
-	d-right-modal.d-scene-modal(title="场景切换" ref="modal" :width="360" icon="logo-buffer" :top="105")
+	d-right-modal.d-scene-modal(title="场景切换" ref="modal" :width="360" icon="logo-buffer" :top="105" @show="$emit('show')")
 		header
 			span 场景切换
 			span 当前：场景{{store.scene.index}}
