@@ -1,5 +1,5 @@
 <template lang="pug">
-	d-right-modal.d-manage-modal(title="组件配置" ref="modal")
+	d-right-modal.d-manage-modal(title="组件配置" ref="modal" @show="$emit('show')")
 		.d-manage-modal-tab.fn-flex.flex-row
 			h2.pointer(v-for="(item,index) in list" :class="tabIndex===index?'active':''" @click="handleChangeTab(index)") {{item.title}}
 			h2.pointer(:class="tabIndex===list.length?'active':''" @click="handleChangeTab(list.length)") 看板配置
