@@ -130,9 +130,6 @@ class Mixins extends Vue {
 		if (!activeAllowed || config.widget.locked) {
 			return this.deactivateWidget(id)
 		}
-		if (!obj.changeList) {
-			obj.changeList = ['id', 'type']
-		}
 
 		// todo 选中之后要做什么
 		console.group(id)
