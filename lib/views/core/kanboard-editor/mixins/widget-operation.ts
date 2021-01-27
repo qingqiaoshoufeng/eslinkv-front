@@ -136,6 +136,7 @@ class Mixins extends Vue {
 		console.log(obj)
 		console.groupEnd()
 		window.GoldChart.mutations.chooseComponent(id)
+		window.GoldChart.mutations.setChooseWidgetConfig(config.customConfig)
 		if (this.widgetActivating) return
 		this.widgetActivating = true
 		this.rightMenuGrid = null

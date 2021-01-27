@@ -26,11 +26,22 @@
 						label: '组件id',
 						type: 'func-input',
 						disabled: true
-					}, {
+					},
+					{
 						prop: 'type',
 						label: '组件类型',
 						type: 'func-input',
 						disabled: true
+					},
+					{
+						prop: 'config.layout.size.width',
+						label: '宽',
+						type: 'func-input'
+					},
+					{
+						prop: 'config.layout.size.height',
+						label: '高',
+						type: 'func-input'
 					}
 				]
 			},
