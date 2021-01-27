@@ -14,8 +14,7 @@
     class HTitle2 extends mixins(mx) {
         created() {
             this.configSource = this.parseConfigSource(config, configSource)
-            this.configValue = this.parseConfigValue(config, value)
-			window.GoldChart.mutations.setChooseWidgetConfig(customConfig)
+            this.configValue = this.parseConfigValue(config, value, customConfig)
         }
     }
 
