@@ -1,7 +1,7 @@
 <template lang="pug">
 	.d-manage-modal-control
 		label {{config.label}}
-		Input(v-model="item[config.prop]" :disabled="config.disabled")
+		Input(v-model="obj[inputKey]" :disabled="config.disabled")
 </template>
 <script lang="ts">
 import func from './mixins'
@@ -10,6 +10,19 @@ import {Component} from 'vue-property-decorator'
 
 @Component
 export default class FuncInput extends mixins(func) {
-
+	get obj () {
+		let res = this.item
+		const props = this.config.prop.split('.')
+		props.length = props.length - 1
+		props.forEach(v => {
+			res = res[v]
+		})
+		return res
+	}
+	
+	get inputKey () {
+		const props = this.config.prop.split('.')
+		return props.reverse()[0]
+	}
 }
 </script>
