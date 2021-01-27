@@ -82,7 +82,7 @@
 
 		li {
 			padding: 10px;
-			margin: 10px;
+			margin: 10px 0;
 			border: 1px solid #ddd;
 			transition: all .3s;
 			height: 40px;
