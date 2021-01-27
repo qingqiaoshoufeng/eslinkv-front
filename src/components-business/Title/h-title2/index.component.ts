@@ -33,4 +33,12 @@ const value = {
     }
 }
 
-export {configSource, config, value}
+const customConfig = [
+	{
+		prop: 'config.config.title',
+		label: '标题',
+		type: 'func-input',
+	}
+]
+
+export {configSource, config, value, customConfig}

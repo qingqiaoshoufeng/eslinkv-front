@@ -51,6 +51,9 @@
 
 		handleChangeTab(index) {
 			this.tabIndex = index
+			if (index === 3) {
+				this.list[3].list = [...window.GoldChart.store.kanboard.chooseWidgetConfig]
+			}
 		}
 	}
 </script>
