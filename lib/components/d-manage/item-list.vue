@@ -1,8 +1,7 @@
 <template lang="pug">
 	div
 		template(v-for="(child, i) in list")
-			component(:key="i" :is="currentComponent[child.type]" :config="child" v-if="filterComponent(child)")
-		//input(v-model="store.kanboard.widgetAdded[store.kanboard.chooseId]&&store.kanboard.widgetAdded[store.kanboard.chooseId].config.api.data")
+			component(:key="i" :is="currentComponent[child.type]" :config="child")
 </template>
 <script lang="ts">
 	import {Component, Vue, Prop} from 'vue-property-decorator'
@@ -18,12 +17,8 @@
 			if (this.store.kanboard.widgetAdded[this.store.kanboard.chooseId]) {
 				return this.store.kanboard.widgetAdded[this.store.kanboard.chooseId]
 			} else {
-				return {changeList: []}
+				return {}
 			}
-		}
-		
-		filterComponent (obj) {
-			return this.item.changeList.includes(obj.prop)
 		}
 		
 		mounted() {
