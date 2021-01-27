@@ -1,7 +1,7 @@
 <template lang="pug">
 	.d-manage-modal-control
 		label {{config.label}}
-		Input(v-model="obj[inputKey]" :disabled="config.disabled")
+		Input(v-model="obj[inputKey]")
 </template>
 <script lang="ts">
 import func from './mixins'

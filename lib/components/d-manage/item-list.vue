@@ -14,8 +14,8 @@
 		currentComponent: any = {}
 
 		get item(){
-			if (this.store.kanboard.widgetAdded[this.store.kanboard.chooseId]) {
-				return this.store.kanboard.widgetAdded[this.store.kanboard.chooseId]
+			if (this.store.kanboard.widgetAdded[this.store.kanboard.chooseWidgetId]) {
+				return this.store.kanboard.widgetAdded[this.store.kanboard.chooseWidgetId]
 			} else {
 				return {}
 			}

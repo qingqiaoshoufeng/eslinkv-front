@@ -2,7 +2,6 @@
 	d-right-modal.d-manage-modal(title="组件配置" ref="modal" @show="$emit('show')")
 		.d-manage-modal-tab.fn-flex.flex-row
 			h2.pointer(v-for="(item,index) in list" :class="tabIndex===index?'active':''" @click="handleChangeTab(index)") {{item.title}}
-			h2.pointer(:class="tabIndex===list.length?'active':''" @click="handleChangeTab(list.length)") 看板配置
 		template(v-for="(item,index) in list")
 			itemList(:list="item.list" v-if="tabIndex===index")
 </template>
@@ -10,6 +9,7 @@
 	import {Component, Vue} from 'vue-property-decorator'
 	import itemList from './item-list.vue'
 	import dRightModal from '../d-right-modal'
+	import config from './config'
 
 	@Component({
 		components: {
@@ -24,15 +24,17 @@
 					{
 						prop: 'id',
 						label: '组件id',
-						type: 'func-input',
-						disabled: true
+						type: 'func-text',
 					},
 					{
 						prop: 'type',
 						label: '组件类型',
-						type: 'func-input',
-						disabled: true
+						type: 'func-text',
 					},
+				]
+			},
+			{
+				title: '样式配置', list: [
 					{
 						prop: 'config.layout.size.width',
 						label: '宽',
@@ -46,14 +48,14 @@
 				]
 			},
 			{
-				title: '样式配置', list: []
-			},
-			{
 				title: '数据配置', list: []
 			},
 			{
 				title: '自定义配置', list: []
 			},
+			{
+				title: '看板配置', list: config.config
+			}
 		]
 
 		handleClose() {
@@ -73,6 +75,11 @@
 		> label {
 			display: block;
 			font-size: 14px;
+			margin-bottom: 10px;
+		}
+
+		.ivu-input-number {
+			display: block;
 			margin-bottom: 10px;
 		}
 
