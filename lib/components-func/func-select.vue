@@ -1,8 +1,8 @@
 <template lang="pug">
     .d-manage-modal-control
         label {{config.label}}
-        Select(v-model="obj[inputKey]")
-            Option(v-for="(k, i) in config.options" :value="k.value" :key="i") {{k.label}}
+        i-select(v-model="obj[inputKey]")
+            i-option(v-for="(k, i) in config.options" :value="k.value" :key="i") {{k.label}}
 </template>
 <script lang="ts">
 import func from './mixins'
@@ -10,20 +10,6 @@ import {mixins} from 'vue-class-component'
 import {Component} from 'vue-property-decorator'
 
 @Component
-export default class FuncInput extends mixins(func) {
-    get obj () {
-        let res = this.item
-        const props = this.config.prop.split('.')
-        props.length = props.length - 1
-        props.forEach(v => {
-            res = res[v]
-        })
-        return res
-    }
-
-    get inputKey () {
-        const props = this.config.prop.split('.')
-        return props.reverse()[0]
-    }
+export default class FuncSelect extends mixins(func) {
 }
 </script>
