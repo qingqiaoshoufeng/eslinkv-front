@@ -63,6 +63,7 @@
 		visibility: hidden;
 		opacity: 0;
 		padding: 10px;
+        overflow-y: auto;
 
 		&.active {
 			visibility: inherit;
