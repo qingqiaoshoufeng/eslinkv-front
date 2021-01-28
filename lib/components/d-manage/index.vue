@@ -26,7 +26,44 @@
 				title: '样式配置', list: config.style
 			},
 			{
-				title: '数据配置', list: []
+				title: '数据配置', list: [
+					{
+						prop: 'config.api.url',
+						label: '接口地址',
+						type: 'func-input',
+					},
+					{
+						prop: 'config.api.method',
+						label: '请求方式',
+						type: 'func-select',
+						options: [
+							{
+								label: '默认',
+								value: ''
+							},
+							{
+								label: 'GET',
+								value: 'GET'
+							},
+							{
+								label: 'POST',
+								value: 'POST'
+							},
+							{
+								label: 'PUT',
+								value: 'PUT'
+							},
+							{
+								label: 'DELETE',
+								value: 'DELETE'
+							},
+							{
+								label: 'PATCH',
+								value: 'PATCH'
+							}
+						]
+					}
+				]
 			},
 			{
 				title: '自定义配置', list: []
