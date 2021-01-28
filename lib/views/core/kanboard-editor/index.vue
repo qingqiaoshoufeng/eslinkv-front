@@ -20,11 +20,12 @@
 		</div>
 		<!-- 底部信息栏 -->
 		<div v-show="!hideEditTools" :class="{ active: isCanvasConfigShow }" class="bottom-bar">
-			<label v-if="canvasConfigValue.info" :class="{ active: isCanvasConfigShow }" class="canvas-config-button"
+			<label v-if="platform.panelConfig.info" :class="{ active: isCanvasConfigShow }" class="canvas-config-button"
 				   @click.stop.self="toggleCanvasConfig($event)">
 				<Icon type="md-information-circle" size="20" style="margin-top: -4px"/>
-				{{ canvasConfigValue.info.name }} / {{ canvasConfigValue.size.width }}×{{ canvasConfigValue.size.height
-				}}{{ canvasConfigValue.size.unit }}
+				{{ platform.panelConfig.info.name }} / {{ platform.panelConfig.size.width }}×{{
+				platform.panelConfig.size.height
+				}}{{ platform.panelConfig.size.unit }}
 			</label>
 			<label ref="canvasConfigButton" :class="{ active: isCanvasConfigShow }" class="canvas-config-button"
 				   @click.stop.self="toggleCanvasConfig($event)">
@@ -290,7 +291,7 @@
 		<div ref="canvasConfigPanel" :class="{ active: isCanvasConfigShow }" class="canvas-config-wrapper" @click.stop
 			 @keyup.stop>
 			<div class="panel-body">
-				<config-panel v-model="canvasConfigValue" :source="layoutSource" class="canvas-config-panel"/>
+				<config-panel v-model="platform.panelConfig" :source="layoutSource" class="canvas-config-panel"/>
 			</div>
 			<div class="top-toolbar">
 				<div class="close-panel" @click="isCanvasConfigShow = false">&#10005;</div>
@@ -355,6 +356,7 @@
 	// config-panel 与 fields 互相引用，须提前注册为 Vue 组件
 	Vue.component('config-panel', configPanel)
 	Vue.component('fields', fields)
+	import platform from '../../../store/platform.store'
 
 	export default {
 		name: 'kanboard-editor',
@@ -384,6 +386,7 @@
 		},
 		data() {
 			return {
+				platform: platform.state,
 				hideEditTools: false,
 			}
 		},
@@ -462,7 +465,7 @@
 		},
 		computed: {
 			widgetAdded() {
-				return window.GoldChart.store.kanboard.widgetAdded
+				return this.platform.widgetAdded
 			},
 			showParts() {
 				return (item) => {

@@ -1,7 +1,7 @@
 import copy from 'fast-copy'
 import {uuid} from '../../../../utils'
 import {Vue, Component, Watch} from 'vue-property-decorator'
-import {mutations} from "../../../../store";
+import platform from '../../../../store/platform.store'
 
 @Component
 class Mixins extends Vue {
@@ -17,6 +17,7 @@ class Mixins extends Vue {
 	widgetActivating = false
 	widgetMoving = false
 	currentWidgetValue = null
+	platform = platform.state
 
 
 	handleWidgetConfig({source, value = {}}, item) {
@@ -91,7 +92,7 @@ class Mixins extends Vue {
 	}
 
 	initWidgetConfig(id, type, scene, market) {
-		window.GoldChart.mutations.setWidgetsAddedItem(id, type, null, scene, market)
+		platform.actions.setWidgetsAddedItem(id, type, null, scene, market)
 	}
 
 	// 小工具放置到画布
@@ -135,8 +136,8 @@ class Mixins extends Vue {
 		console.group(id)
 		console.log(obj)
 		console.groupEnd()
-		window.GoldChart.mutations.chooseComponent(id)
-		window.GoldChart.mutations.setChooseWidgetConfig(config.customConfig)
+		platform.actions.chooseWidget(id)
+		platform.actions.setChooseWidgetCustomConfig(config.customConfig)
 		if (this.widgetActivating) return
 		this.widgetActivating = true
 		this.rightMenuGrid = null
@@ -175,7 +176,7 @@ class Mixins extends Vue {
 			layout.position.left += 10
 			layout.position.top += 10
 		}
-		window.GoldChart.mutations.setWidgetsAddedItem(id, widget.type, widget.config, widget.scene)
+		platform.actions.setWidgetsAddedItem(id, widget.type, widget.config, widget.scene)
 		this.$set(this.zIndexMap, id, layout.zIndex)
 		const {width, height} = layout.size
 		const {left, top} = layout.position

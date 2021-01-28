@@ -1,7 +1,7 @@
 <template lang="pug">
 	.d-manage-modal-control
 		label {{config.label}}
-		i-input(v-model="objPanel[inputKeyPanel]")
+		i-colorPicker(:alpha="true" v-model="objPanel[inputKeyPanel]")
 </template>
 <script lang="ts">
 	import func from './mixins'
@@ -10,6 +10,17 @@
 
 	@Component
 	export default class FuncInputPanel extends mixins(func) {
-		
+
 	}
 </script>
+<style lang="scss" scoped>
+	.d-manage-modal-control{
+		/deep/ {
+			.ivu-color-picker-confirm {
+				.ivu-btn-default {
+					margin-right: 5px;
+				}
+			}
+		}
+	}
+</style>
