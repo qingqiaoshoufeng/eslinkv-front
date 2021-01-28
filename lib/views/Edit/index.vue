@@ -70,7 +70,6 @@
 				loading: false,
 				querying: true,
 				saving: false,
-				createTime: null,
 				kanboardName: '',
 				previewOpen: false,
 			};
@@ -83,8 +82,8 @@
 					try {
 						this.loading = true
 						const result = JSON.parse(e.target.result)
-						const {data, createTime, name} = result
-						this.renderByDetail({name, attribute: data, createTime})
+						const {data, name} = result
+						this.renderByDetail({name, attribute: data})
 						this.importModal = false
 						this.loading = false
 					} catch (e) {
@@ -159,7 +158,6 @@
 			submitKanboard(data) {
 				this.saving = true
 				const {params: {id}} = this.$route
-				data.createTime = this.createTime
 				data.type = 0 // 数据类型：0:看板, 1:小工具模板, 2:参考线模板
 				this.$api.board.update({...data, id}).then((res) => {
 					this.kanboardEdited = false
@@ -174,10 +172,9 @@
 				})
 			},
 			renderByDetail(res) {
-				const {attribute, createTime, name} = res
+				const {attribute, name} = res
 				this.kanboardName = name
 				document.title = `编辑 - ${name} - 数据看板`
-				this.createTime = createTime
 				let value
 				if (typeof attribute === 'string') {
 					value = JSON.parse(attribute)
