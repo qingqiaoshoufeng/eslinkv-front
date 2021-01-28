@@ -81,6 +81,15 @@
 						type: 'func-textarea',
 						rows: 5
 					},
+					{
+						label: '自动刷新',
+						type: 'func-collapse',
+						props: [{
+							prop: 'config.api.autoFetch.duration',
+							label: '刷新间隔',
+							type: 'func-input',
+						},]
+					}
 				]
 			},
 			{

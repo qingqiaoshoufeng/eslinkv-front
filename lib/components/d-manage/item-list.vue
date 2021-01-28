@@ -1,34 +1,20 @@
 <template lang="pug">
-	div
-		template(v-for="(child, i) in list")
-			component(:key="i" :is="currentComponent[child.type]" :config="child")
+	div.list
+		DManageItem(:config="child" v-for="(child, i) in list" :key="i")
 </template>
 <script lang="ts">
 	import {Component, Vue, Prop} from 'vue-property-decorator'
-	import platform from '../../store/platform.store'
+	import DManageItem from './item'
 
-	@Component
+	@Component({components: {DManageItem}})
 	export default class DManageItemList extends Vue {
 		@Prop(Array) list: any[]
-
-		store: any = window.GoldChart.store
-		currentComponent: any = {}
-		platform: any = platform.state
-
-		get item() {
-			if (this.platform.widgetAdded[this.platform.chooseWidgetId]) {
-				return this.platform.widgetAdded[this.platform.chooseWidgetId]
-			} else {
-				return {}
-			}
-		}
-
-		mounted() {
-			const components = require.context(`../../components-func`, true, /\.(vue)$/)
-			components.keys().forEach(child => {
-				const name = child.split('/')[1].replace('.vue', '')
-				this.currentComponent[name] = components(child).default
-			})
-		}
 	}
 </script>
+
+<style lang="scss">
+.list {
+	overflow: auto;
+	height: calc(100% - 40px);
+}
+</style>
