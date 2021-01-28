@@ -9,7 +9,7 @@
 	import {Component} from 'vue-property-decorator'
 
 	@Component
-	export default class FuncInputPanel extends mixins(func) {
+	export default class FuncTextPanel extends mixins(func) {
 		
 	}
 </script>

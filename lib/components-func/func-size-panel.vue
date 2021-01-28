@@ -43,7 +43,7 @@
 	import {Component} from 'vue-property-decorator'
 
 	@Component
-	export default class FuncInputPanel extends mixins(func) {
+	export default class FuncSizePanel extends mixins(func) {
 		sizeChange(value) {
 			if (value === undefined) return
 			if (value) {
