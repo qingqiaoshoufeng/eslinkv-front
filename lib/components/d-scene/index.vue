@@ -8,24 +8,24 @@
 				span 主场景
 				p ID：0
 			li.pointer.fn-flex.pos-r.flex-row(v-for="(item,index) in store.scene.list" :class="[{active:store.scene.index===item}]" @click="changeScene(item)" :key="item")
-				input(@input="e=>handleSceneName(item,e)" :value="store.scene.obj[item].name")
-				p ID：{{item}}
-				Icon.destroy(type="ios-trash-outline" @click="e=>destroyScene(e,index)")
+				i-input(v-if="store.scene.index===item" size="small" @on-change="e=>handleSceneName(item,e)" :value="store.scene.obj[item].name")
+				span(v-else) {{store.scene.obj[item].name}}
+				p(v-if="store.scene.index!==item") ID：{{item}}
+				i-icon.destroy(type="ios-trash-outline" @click="e=>destroyScene(e,index)")
 			li.pointer.create.fn-flex(@click="createScene") +
 </template>
 <script lang="ts">
 	import dRightModal from '../d-right-modal'
 	import {Component, Vue} from 'vue-property-decorator'
-	import {Icon} from 'view-design'
+	import {Icon, Input} from 'view-design'
 
 	@Component({
 		components: {
-			dRightModal, Icon
+			dRightModal, 'i-icon': Icon, 'i-input': Input
 		},
 	})
 	export default class extends Vue {
 		store: any = window.GoldChart.store
-		sceneModal: boolean = false
 
 		handleSceneName(key, e) {
 			window.GoldChart.mutations.setSceneName(key, e.target.value)
@@ -88,9 +88,12 @@
 			height: 40px;
 			align-items: center;
 			justify-content: center;
+			font-size: 12px;
 
-			input {
-				border: none;
+			/deep/ {
+				.ivu-input {
+					font-size: 12px;
+				}
 			}
 
 			p {
@@ -115,6 +118,10 @@
 			&.create {
 				font-size: 20px;
 				border-style: dashed;
+
+				&:hover {
+					color: #00CBF4;
+				}
 			}
 
 			&:hover {

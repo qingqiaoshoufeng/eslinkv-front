@@ -1,7 +1,7 @@
 <template lang="pug">
 	.d-right-modal-box.pos-a(:style="{top:`${top}px`}")
 		.d-right.pos-a.pointer
-			Icon(:type="icon" title="组件配置" @click="handleClick" size="28" :class="[{active:rightModal}]")
+			i-icon(:type="icon" title="组件配置" @click="handleClick" size="28" :class="[{active:rightModal}]")
 		.d-right-modal.pos-a(:class="[{active:rightModal}]" :style="{width:`${width}px`,top:`-${top-35}px`}")
 			slot
 </template>
@@ -11,7 +11,7 @@
 
 	@Component({
 		components: {
-			Icon
+			'i-icon': Icon
 		},
 	})
 	export default class DRightModal extends Vue {
@@ -29,7 +29,6 @@
 	}
 </script>
 <style lang="scss" scoped>
-
 	.d-right-modal-box {
 		width: 24px;
 		height: 24px;
@@ -63,7 +62,7 @@
 		visibility: hidden;
 		opacity: 0;
 		padding: 10px;
-        overflow-y: auto;
+		overflow-y: auto;
 
 		&.active {
 			visibility: inherit;
