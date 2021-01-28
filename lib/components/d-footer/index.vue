@@ -16,13 +16,11 @@
     @Component({
         components: {'i-icon': Icon},
     })
-    class DFooter extends Vue {
+	export default class DFooter extends Vue {
         handleClick() {
             window.open(`${location.origin}${location.pathname}#/help/HowToUseMarket`)
         }
     }
-
-    export default DFooter
 </script>
 <style lang="scss">
     .d-footer {
