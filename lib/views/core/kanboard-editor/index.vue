@@ -27,11 +27,6 @@
 				platform.panelConfig.size.height
 				}}{{ platform.panelConfig.size.unit }}
 			</label>
-			<label ref="canvasConfigButton" :class="{ active: isCanvasConfigShow }" class="canvas-config-button"
-				   @click.stop.self="toggleCanvasConfig($event)">
-				<Icon type="ios-cog" size="22" style="margin-top: -4px"/>
-				看板配置
-			</label>
 			<hot-keys/>
 			<label class="auto-align-guide-switcher">
 				<input type="checkbox" v-model="autoAlignGuide" checked style="vertical-align: text-top"/>
@@ -287,18 +282,6 @@
 				</div>
 			</div>
 		</transition>
-		<!-- 看板配置 -->
-		<div ref="canvasConfigPanel" :class="{ active: isCanvasConfigShow }" class="canvas-config-wrapper" @click.stop
-			 @keyup.stop>
-			<div class="panel-body">
-				<config-panel v-model="platform.panelConfig" :source="layoutSource" class="canvas-config-panel"/>
-			</div>
-			<div class="top-toolbar">
-				<div class="close-panel" @click="isCanvasConfigShow = false">&#10005;</div>
-				<div>看板配置</div>
-				<div class="fix-panel placeholder"></div>
-			</div>
-		</div>
 		<!-- 数仓配置面板 -->
 		<database-config
 			ref="dataBaseConfig"
