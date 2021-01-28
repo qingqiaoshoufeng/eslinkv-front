@@ -1,9 +1,8 @@
 <template lang="pug">
 	.d-manage-modal-control-size
-		.fn-flex.flex-row.d-manage-modal-control-3
-			.d-manage-modal-control
-				label 背景图片url地址
-				i-input(v-model="platform.panelConfig.background.url")
+		.d-manage-modal-control
+			label 背景图片url地址
+			i-input(v-model="platform.panelConfig.background.url")
 		.d-manage-modal-control
 			label 背景图片重复
 			i-select(v-model="platform.panelConfig.background.repeat")
