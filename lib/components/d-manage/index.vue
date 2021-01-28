@@ -62,7 +62,25 @@
 								value: 'PATCH'
 							}
 						]
-					}
+					},
+					{
+						prop: 'config.api.params',
+						label: '请求参数',
+						type: 'func-textarea',
+						rows: 5,
+						placeholder: '支持非严格模式的JSON格式\n例：a:1,b:2\n或：{a:1,b:2}\n或：{a:some string,b:2}\n或：[{a:1,b:2}]'
+					},
+					{
+						prop: 'config.api.path',
+						label: '数据路径',
+						type: 'func-input'
+					},
+					{
+						prop: 'config.api.data',
+						label: '数据测试',
+						type: 'func-textarea',
+						rows: 5
+					},
 				]
 			},
 			{
