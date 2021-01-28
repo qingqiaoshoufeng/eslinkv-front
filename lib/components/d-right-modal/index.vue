@@ -62,8 +62,6 @@
 		transition: all .3s;
 		visibility: hidden;
 		opacity: 0;
-		overflow-x: hidden;
-		overflow-y: auto;
 		padding: 10px;
 
 		&.active {

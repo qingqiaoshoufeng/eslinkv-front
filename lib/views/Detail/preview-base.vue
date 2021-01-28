@@ -50,6 +50,7 @@
 	import crossFrameMessageParamBind from '../core/kanboard-editor/mixins/cross-frame-message-param-bind'
 	import * as widgetBindManager from '../mixins/widget-bind-manage'
 	import loadMask from '../../components/load-mask'
+	import platform from '../../store/platform.store'
 
 	export default {
 		name: 'kanboard-editor',
@@ -63,17 +64,17 @@
 		},
 		data() {
 			return {
+				platform: platform.state,
 				store: window.GoldChart.store,
 				querying: true,
 				refilling: false,
 				refillPercent: 0,
-				canvasConfigValue: {},
 				time: Date.now()
 			}
 		},
 		computed: {
 			widgetAdded() {
-				return window.GoldChart.store.kanboard.widgetAdded
+				return this.platform.widgetAdded
 			}
 		},
 		methods: {
@@ -95,12 +96,11 @@
 				return [...providers, ...responders]
 			},
 			refillConfig() {
-				const {kanboard, widgets, grids, apis} = window.GoldChart.store.kanboard.data
+				const {widgets, apis} = window.GoldChart.store.kanboard.data
 				this.querying = false
 				this.apis = apis
 				return new Promise(resolve => {
 					this.refilling = true
-					this.canvasConfigValue = kanboard
 					const widgetsArray = this.sortWidgets(Object.values(widgets))
 					const length = widgetsArray.length
 					// 小工具初始化需要时间，此处进行延时逐个回填
@@ -126,7 +126,17 @@
 				})
 			},
 			canvasStyle() {
-				const val = styleParser(this.canvasConfigValue)
+				const val = styleParser(this.platform.panelConfig)
+				// const {width, height} = this.platform.panelConfig.size
+				// const {url, size, position, repeat, color} = this.platform.panelConfig.background
+				// const dom = this.$refs['canvas-wrapper']
+				// dom.style.style.width = `${width}${unit}`
+				// dom.style.style.height = `${height}${unit}`
+				// dom.style.style.backgroundImage = `url(${url})`
+				// dom.style.style.backgroundColor = `${color}`
+				// dom.style.style.backgroundPosition = `${position}`
+				// dom.style.style.backgroundRepeat = `${repeat}`
+				// dom.style.style.backgroundSzie = `${size}`
 				if (val) {
 					this.$emit('mounted', val)
 				}

@@ -10,7 +10,8 @@
 		</div>
 		<template v-for="item in widgetAdded">
 			<template v-if="!item.config.widget.combinationTo">
-				<parts v-if="showParts(item)" :market="item.market" :key="item.id" :type="item.type" :config="item.config"
+				<parts v-if="showParts(item)" :market="item.market" :key="item.id" :type="item.type"
+					   :config="item.config"
 					   :style="item.config.widget.hide ? 'display: none' : ''" readonly>
 					<template v-if="shouldBeShow(item)">
 						<template v-for="child in getItemChildren(item, 'widget')">
@@ -53,6 +54,7 @@
 	import * as widgetBindManager from './mixins/widget-bind-manage'
 	import loadMask from '../components/load-mask'
 	import {mutations, store} from '../store'
+	import platform from '../store/platform.store'
 
 	export default {
 		name: 'kanboard-editor',
@@ -67,6 +69,7 @@
 		},
 		data() {
 			return {
+				platform: platform.state,
 				store,
 				querying: true,
 				gridsAdded: {},
@@ -143,7 +146,7 @@
 				return styleParser(this.canvasConfigValue, this.time)
 			},
 			widgetAdded() {
-				return store.kanboard.widgetAdded
+				return this.platform.widgetAdded
 			}
 		},
 	}

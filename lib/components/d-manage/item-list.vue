@@ -5,6 +5,7 @@
 </template>
 <script lang="ts">
 	import {Component, Vue, Prop} from 'vue-property-decorator'
+	import platform from '../../store/platform.store'
 
 	@Component
 	export default class DManageItemList extends Vue {
@@ -12,15 +13,16 @@
 
 		store: any = window.GoldChart.store
 		currentComponent: any = {}
+		platform: any = platform.state
 
-		get item(){
-			if (this.store.kanboard.widgetAdded[this.store.kanboard.chooseWidgetId]) {
-				return this.store.kanboard.widgetAdded[this.store.kanboard.chooseWidgetId]
+		get item() {
+			if (this.platform.widgetAdded[this.platform.chooseWidgetId]) {
+				return this.platform.widgetAdded[this.platform.chooseWidgetId]
 			} else {
 				return {}
 			}
 		}
-		
+
 		mounted() {
 			const components = require.context(`../../components-func`, true, /\.(vue)$/)
 			components.keys().forEach(child => {

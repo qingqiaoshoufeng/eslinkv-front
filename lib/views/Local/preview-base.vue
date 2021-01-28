@@ -50,6 +50,7 @@
 	import crossFrameMessageParamBind from '../core/kanboard-editor/mixins/cross-frame-message-param-bind'
 	import * as widgetBindManager from '../mixins/widget-bind-manage'
 	import loadMask from '../../components/load-mask'
+	import platform from '../../store/platform.store'
 
 	export default {
 		name: 'kanboard-editor',
@@ -63,6 +64,7 @@
 		},
 		data() {
 			return {
+				platform: platform.state,
 				store: window.GoldChart.store,
 				querying: false,
 				refilling: false,
@@ -73,7 +75,7 @@
 		},
 		computed: {
 			widgetAdded() {
-				return window.GoldChart.store.kanboard.widgetAdded
+				return platform.state.widgetAdded
 			}
 		},
 		methods: {

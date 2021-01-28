@@ -9,6 +9,7 @@ import {
 	getAnimationCurve,
 	getBooleanInput, getBackground, getColor, getFile
 } from '../../lib/views/core/widgets/parts/lib/config-tools'
+import platform from '../../lib/store/platform.store'
 
 const GoldChart: any = {
     version: '0.0.1',
@@ -22,7 +23,7 @@ const GoldChart: any = {
     },
     instance: {
         updateComponent: (id, config) => {
-            const widgetConfig = store.kanboard.widgetAdded[id].config.api
+            const widgetConfig = platform.actions.widgetAdded[id].config.api
             if (config.params) {
                 widgetConfig.params = JSON.stringify(config.params)
             }
