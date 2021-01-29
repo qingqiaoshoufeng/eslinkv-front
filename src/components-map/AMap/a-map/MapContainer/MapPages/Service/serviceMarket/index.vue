@@ -54,6 +54,8 @@ import {
 	SERVICE_SERVICEMARKET_OVERLAY_MAP,
 	SERVICE_SERVICEMARKET_LEGEND_MAP,
 } from './config';
+
+import scene from '../../../../../../../../lib/store/scene.store'
 export default {
 	name: 'serviceMarket',
 	components: {
@@ -90,7 +92,7 @@ export default {
 		closeOverlayDetail(done) {
 			let { overlayType } = this.activeOverlay;
 			if (overlayType === 'WARNEVENT') {
-				window.GoldChart.scene.setSceneIndex(INDEXSCENEMAP['ServiceMarket']);
+				scene.actions.setSceneIndex(INDEXSCENEMAP['ServiceMarket']);
 				this.showRoutePlan = false;
 			}
 			this.showOverlayDetail = false;

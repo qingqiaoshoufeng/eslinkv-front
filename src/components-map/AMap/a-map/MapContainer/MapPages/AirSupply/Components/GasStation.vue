@@ -29,7 +29,7 @@ import {
 	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
 } from '../../../../config/scene'
 import { BaseOverlay } from '../../../../components/index'
-
+import scene from '../../../../../../../../lib/store/scene.store'
 export default {
 	name: 'GasStation',
 	components: {
@@ -115,7 +115,7 @@ export default {
 		},
 		viewDetail(marker) {
 			let { name, id } = marker
-			window.GoldChart.scene.createSceneInstance(
+			scene.actions.createSceneInstance(
 				AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
 				'slideRight'
 			)

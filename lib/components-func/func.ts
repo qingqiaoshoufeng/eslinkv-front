@@ -18,15 +18,14 @@ const editor = require('vue2-ace-editor')
 	},
 })
 export default class Func extends Vue {
-	store = window.GoldChart.store
 	platform = platform.state
 	@Prop() config
 
 	get item() {
-		if (platform.state.widgetAdded[this.platform.chooseWidgetId]) {
-			return platform.state.widgetAdded[this.platform.chooseWidgetId]
+		if (this.platform.widgetAdded[this.platform.chooseWidgetId]) {
+			return this.platform.widgetAdded[this.platform.chooseWidgetId]
 		} else {
-			return {}
+			return null
 		}
 	}
 

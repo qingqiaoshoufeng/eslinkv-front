@@ -1,13 +1,12 @@
 <template lang="pug">
-	div
+	.d-manage-modal-control-data
 		.fn-flex.flex-row.d-manage-modal-control-more
 			.d-manage-modal-control
 				label 接口地址
-				i-input(v-model="item.config.api.url")
+				i-input(v-model="item.config.api.url" :disabled="platform.chooseWidgetState")
 			.d-manage-modal-control
 				label 请求方式
-				i-select(v-model="item.config.api.method")
-					i-option(value="") 默认
+				i-select(v-model="item.config.api.method" :disabled="platform.chooseWidgetState")
 					i-option(value="GET") GET
 					i-option(value="POST") POST
 					i-option(value="PUT") PUT
@@ -15,7 +14,7 @@
 					i-option(value="PATCH") PATCH
 			.d-manage-modal-control
 				label 数据路径
-				i-input(v-model="item.config.api.path")
+				i-input(v-model="item.config.api.path" :disabled="platform.chooseWidgetState")
 		.d-manage-modal-control
 			label 请求参数
 			editor.d-manage-modal-control-editor(v-model="apiParams" @init="editorInit" lang="json" theme="chrome" height="100")
@@ -30,10 +29,10 @@
 			editor.d-manage-modal-control-editor(v-model="apiMethod" @init="editorInit" lang="javascript" theme="chrome" height="100")
 		.d-manage-modal-control
 			label 定时刷新
-			i-switch(v-model="item.config.api.autoFetch.enable")
+			i-switch(v-model="item.config.api.autoFetch.enable" :disabled="platform.chooseWidgetState")
 		.d-manage-modal-control(v-if="item.config.api.autoFetch.enable")
 			label 刷新间隔
-			i-inputNumber(:min="1" :step="1" v-model="item.config.api.autoFetch.duration")
+			i-inputNumber(:min="1" :step="1" v-model="item.config.api.autoFetch.duration" :disabled="platform.chooseWidgetState")
 </template>
 <script lang="ts">
 	import func from './func'

@@ -1,3 +1,5 @@
+import custom from '../../lib/store/custom.store'
+
 let components: Components = {}
 const widgetsArray: ComponentsWidgetsArray = [], widgetsObject: ComponentsWidgetsObject = {}
 const conf = require.context('./', true, /\.(component.js)$/)
@@ -22,8 +24,8 @@ for (let key in widgetsObject) {
     widgetsArray.push(widgetsObject[key])
 }
 
-window.GoldChart.mutations.setCustomComponents(components)
-window.GoldChart.mutations.setCustomWidgets({
+custom.actions.setCustomComponents(components)
+custom.actions.setCustomWidgets({
     label: '地图',
     widgets: widgetsArray
 })

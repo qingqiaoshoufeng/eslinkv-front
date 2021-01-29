@@ -2,6 +2,7 @@ import copy from 'fast-copy'
 import {uuid} from '../../../../utils'
 import {Vue, Component, Watch} from 'vue-property-decorator'
 import platform from '../../../../store/platform.store'
+import scene from '../../../../store/scene.store'
 
 @Component
 class Mixins extends Vue {
@@ -18,6 +19,7 @@ class Mixins extends Vue {
 	widgetMoving = false
 	currentWidgetValue = null
 	platform = platform.state
+	scene = scene.state
 
 
 	handleWidgetConfig({source, value = {}}, item) {
@@ -120,7 +122,7 @@ class Mixins extends Vue {
 		this.sizeMap[id] = {w: width, h: height}
 		this.positionMap[id] = {x: left, y: top}
 		const value = {layout, widget, config, api}
-		this.initWidgetConfig(id, type, window.GoldChart.store.scene.index, market)
+		this.initWidgetConfig(id, type, scene.index, market)
 		this.updateWidget(value)
 		this.currentWidgetType = type
 		return id
@@ -153,7 +155,10 @@ class Mixins extends Vue {
 	}
 
 	handleDeactivated(item) {
-		if (!this.widgetEditable(item)) this.activatedWidgetId = null
+		if (!this.widgetEditable(item)) {
+			this.activatedWidgetId = null
+			platform.actions.unChooseWidget()
+		}
 	}
 
 	/**
@@ -165,6 +170,7 @@ class Mixins extends Vue {
 			if (!widget || !widget[0]) return
 			widget[0].enabled = false
 			this.activatedWidgetId = null
+			platform.actions.unChooseWidget()
 		})
 	}
 
@@ -286,6 +292,7 @@ class Mixins extends Vue {
 
 	widgetUnActived() {
 		this.activatedWidgetId = null
+		platform.actions.unChooseWidget()
 	}
 
 	mounted() {
