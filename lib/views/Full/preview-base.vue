@@ -8,7 +8,7 @@
                           :stroke-color="['#108ee9', '#87d068']"/>
             </div>
         </div>
-        <template v-for="item in widgetAdded">
+        <template v-for="item in platform.widgetAdded">
             <template v-if="!item.config.widget.combinationTo">
                 <parts v-if="showParts(item)" :key="item.id" :type="item.type" :config="item.config"
                        :ref="item.id" :market="item.market"
@@ -70,11 +70,6 @@
                 refilling: false,
                 refillPercent: 0,
                 time: Date.now()
-            }
-        },
-        computed: {
-            widgetAdded() {
-                return this.platform.widgetAdded
             }
         },
         methods: {
