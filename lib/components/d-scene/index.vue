@@ -3,7 +3,7 @@
 		header
 			span 场景切换
 			span 当前：场景{{store.scene.index}}
-		ul
+		ul.d-scrollbar
 			li.pointer.fn-flex.pos-r.flex-row(@click="changeScene(0)" :class="[{active:store.scene.index===0}]")
 				span 主场景
 				p ID：0
