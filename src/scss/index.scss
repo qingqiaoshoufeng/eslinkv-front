@@ -114,18 +114,51 @@ body {
   -webkit-box-orient: vertical;
 }
 
+.d-scrollbar {
+  padding-right: 8px;
 
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 1px;
+    transition: all .3s;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(83, 83, 83, 0);
+    transition: all .3s;
+  }
+
+  &::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background: rgba(237, 237, 237, 0);
+    transition: all .3s;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background: rgba(83, 83, 83, 1);
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba(237, 237, 237, 1);
+    }
+  }
+}
 
 .fade-enter {
-  opacity:0;
+  opacity: 0;
 }
-.fade-leave{
+
+.fade-leave {
   opacity: 1;
 }
-.fade-enter-active{
+
+.fade-enter-active {
   transition: opacity .5s;
 }
-.fade-leave-active{
+
+.fade-leave-active {
   opacity: 0;
   transition: opacity .5s;
 }

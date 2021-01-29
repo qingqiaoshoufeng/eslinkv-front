@@ -19,20 +19,12 @@
 		>
 			<img :src="`./static/images/material-manage.svg`"/>
 		</div>
-		<!-- 场景 -->
+		<!-- 场景配置 -->
 		<d-scene @show="toggleSidebarTool('sceneShow')" ref="scene"/>
 		<!-- 组件配置 -->
 		<d-manage @show="toggleSidebarTool('manageShow')" ref="manage"/>
 		<!-- 小工具清单 -->
 		<Icon type="ios-apps" class="editor-icon" size="28" title="小工具清单" @click="toggleSidebarTool('showLayers')" :class="{ active: showLayers }"/>
-		<!--    <div-->
-		<!--        -->
-		<!--       -->
-		<!--        -->
-		<!--        -->
-		<!--    >-->
-		<!--      <img :src="`./static/images/layers.svg`"/>-->
-		<!--    </div>-->
 		<!-- 全局接口配置 -->
 		<div
 			:class="{ active: showGlobalApi }"
@@ -66,9 +58,9 @@
 		<!--    >-->
 		<!--      <img :src="`./static/images/layout-grid.svg`" />-->
 		<!--    </div>-->
-		<transition name="layer-fade-right">
-			<layout-grid v-show="showLayoutGrid"></layout-grid>
-		</transition>
+<!--		<transition name="layer-fade-right">-->
+<!--			<layout-grid v-show="showLayoutGrid"></layout-grid>-->
+<!--		</transition>-->
 		<transition name="layer-fade-right">
 			<widget-layers
 				v-show="showLayers"
