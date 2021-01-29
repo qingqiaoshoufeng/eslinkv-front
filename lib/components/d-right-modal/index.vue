@@ -16,7 +16,7 @@
 	})
 	export default class DRightModal extends Vue {
 		rightModal: boolean = false
-		@Prop({default: 396}) width: number
+		@Prop({default: 470}) width: number
 		@Prop({default: 'ios-construct'}) icon: string
 		@Prop({default: '标题'}) title: string
 		@Prop({default: 253}) top: number

@@ -3,7 +3,7 @@
 		.d-manage-modal-tab.fn-flex.flex-row
 			h2.pointer(v-for="(item,index) in list" :class="tabIndex===index?'active':''" @click="handleChangeTab(index)") {{item.title}}
 		template(v-for="(item,index) in list")
-			itemList(:list="item.key" v-if="tabIndex===index")
+			itemList(:list="item.key" v-if="tabIndex===index" :needChoose="item.needChoose")
 </template>
 <script lang="ts">
 	import {Component, Vue} from 'vue-property-decorator'
@@ -18,21 +18,25 @@
 	})
 	export default class DManage extends Vue {
 		tabIndex: number = 0
+		platform = platform.state
 		list: any = [
 			{
-				title: '基础配置', key: [{type: 'base'}]
+				title: '基础配置', key: [{type: 'base'}], needChoose: true
 			},
 			{
-				title: '样式配置', key: [{type: 'style'}]
+				title: '样式配置', key: [{type: 'style'}], needChoose: true
 			},
 			{
-				title: '数据配置', key: [{type: 'data'}]
+				title: '数据配置', key: [{type: 'data'}], needChoose: true
 			},
 			{
-				title: '自定义配置', key: []
+				title: '动画配置', key: [], needChoose: true
 			},
 			{
-				title: '看板配置', key: [{type: 'config'}]
+				title: '自定义配置', key: [], needChoose: true
+			},
+			{
+				title: '看板配置', key: [{type: 'config', needChoose: false}], needChoose: false
 			}
 		]
 
@@ -43,7 +47,7 @@
 		handleChangeTab(index) {
 			this.tabIndex = index
 			if (index === 3) {
-				this.list[3].key = [...platform.actions.chooseWidgetCustomConfig]
+				this.list[3].key = [...this.platform.chooseWidgetCustomConfig]
 			}
 		}
 	}

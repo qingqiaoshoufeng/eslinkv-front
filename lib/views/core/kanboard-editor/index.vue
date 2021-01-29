@@ -20,7 +20,8 @@
 		</div>
 		<!-- 底部信息栏 -->
 		<div v-show="!hideEditTools" :class="{ active: isCanvasConfigShow }" class="bottom-bar">
-			<label v-if="platform.panelConfig.info" :class="{ active: isCanvasConfigShow }" class="canvas-config-button">
+			<label v-if="platform.panelConfig.info" :class="{ active: isCanvasConfigShow }"
+				   class="canvas-config-button">
 				<Icon type="md-information-circle" size="20" style="margin-top: -4px"/>
 				{{ platform.panelConfig.info.name }} / {{ platform.panelConfig.size.width }}×{{
 				platform.panelConfig.size.height
@@ -418,6 +419,7 @@
 						if (!this.rightMenuGrid) {
 							const id = this.rightMenuBindWidgetId
 							this.removeCombinationChild(id)
+							platform.actions.unChooseWidget()
 							this.$delete(this.widgetAdded, id)
 							this.$delete(this.zIndexMap, id)
 							this.$delete(this.sizeMap, id)

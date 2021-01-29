@@ -11,6 +11,7 @@
 
 <script>
 	import MapContainer from './MapContainer/index';
+	import scene from '../../../../lib/store/scene.store'
 
 	export default {
 		name: 'HRMap',
@@ -19,7 +20,7 @@
 		},
 		computed: {
 			inPreview() {
-				return window.GoldChart.store.scene.status === 'inPreview';
+				return scene.state.status === 'inPreview';
 			},
 		},
 		data() {

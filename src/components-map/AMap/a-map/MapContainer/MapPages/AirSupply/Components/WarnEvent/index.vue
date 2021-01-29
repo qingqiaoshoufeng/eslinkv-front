@@ -46,6 +46,7 @@
 </template>
 <script>
 import bus from '../../../../../utils/bus'
+import scene from '../../../../../../../../../lib/store/scene.store'
 import {
 	INDEXSCENEMAP,
 	OVERLAYINFOMAP_AIRSUPPLY,
@@ -131,7 +132,7 @@ export default {
 			let { repairContent, address, callDate } = this.data
 			this.showRoutePlan = true
 			//和场景进行交互
-			window.GoldChart.scene.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX)
+			scene.actions.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX)
 			//更新数据
 			this.$nextTick(() => {
 				AIRSUPPLY_WARN_COMPONENTINDEX.forEach((i) => {
@@ -146,7 +147,7 @@ export default {
 		},
 		closeOverlayDetail(done) {
 			this.showRoutePlan = false
-			window.GoldChart.scene.setSceneIndex(
+			scene.actions.setSceneIndex(
 				INDEXSCENEMAP[this.parentInfo.pageName]
 			)
 			this.$emit('close')
