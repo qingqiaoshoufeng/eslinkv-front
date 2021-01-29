@@ -8,7 +8,7 @@
                           :stroke-color="['#108ee9', '#87d068']"/>
             </div>
         </div>
-        <template v-for="item in widgetAdded">
+        <template v-for="item in platform.widgetAdded">
             <template v-if="!item.config.widget.combinationTo">
                 <parts v-if="showParts(item)" :key="item.id" :type="item.type" :config="item.config"
                        :ref="item.id" :market="item.market"
@@ -72,14 +72,9 @@
                 time: Date.now()
             }
         },
-        computed: {
-            widgetAdded() {
-                return this.platform.widgetAdded
-            }
-        },
         methods: {
             initWidgetConfig(id, type, config, scene, market) {
-                window.GoldChart.mutations.setWidgetsAddedItem(id, type, config, scene, market)
+				platform.actions.setWidgetsAddedItem(id, type, config, scene, market)
             },
             sortWidgets: function (widgets) {
                 const providers = []

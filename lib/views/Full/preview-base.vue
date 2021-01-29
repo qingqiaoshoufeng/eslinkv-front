@@ -79,7 +79,7 @@
         },
         methods: {
             initWidgetConfig(id, type, config, scene, market) {
-                window.GoldChart.mutations.setWidgetsAddedItem(id, type, config, scene, market)
+				platform.actions.setWidgetsAddedItem(id, type, config, scene, market)
             },
             sortWidgets: function (widgets) {
                 const providers = []
