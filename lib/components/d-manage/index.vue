@@ -10,6 +10,7 @@
 	import itemList from './item-list.vue'
 	import dRightModal from '../d-right-modal'
 	import config from './config'
+	import platform from '../../store/platform.store'
 
 	@Component({
 		components: {
@@ -107,7 +108,7 @@
 		handleChangeTab(index) {
 			this.tabIndex = index
 			if (index === 3) {
-				this.list[3].list = [...window.GoldChart.store.kanboard.chooseWidgetCustomConfig]
+				this.list[3].list = [...platform.actions.chooseWidgetCustomConfig]
 			}
 		}
 	}

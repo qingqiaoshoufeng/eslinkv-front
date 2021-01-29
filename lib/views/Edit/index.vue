@@ -42,6 +42,7 @@
 	import {Button, Input, Modal, Form, FormItem} from 'view-design'
 	import downloadFile from '../../vendor/download-file'
 	import '@/components-market'
+	import platform from '../../store/platform.store'
 
 	export default {
 		name: 'Edit',
@@ -185,7 +186,7 @@
 					window.GoldChart.mutations.initScene(value.scene)
 				}
 				this.querying = false
-				window.GoldChart.mutations.setKanboard(value)
+				platform.actions.initPlatform(value)
 				this.$refs.kanboardEditor.refillConfig()
 			},
 			// 修改看板

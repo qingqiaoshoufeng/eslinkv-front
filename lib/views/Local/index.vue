@@ -9,8 +9,9 @@
 
 <script>
 	import kanbanPreview from './preview-base.vue'
-	import {getQueryString,setDefault} from '../../utils'
+	import {getQueryString, setDefault} from '../../utils'
 	import {Input, Modal, Form, FormItem} from 'view-design'
+	import platform from '../../store/platform.store'
 
 	export default {
 		components: {
@@ -57,11 +58,11 @@
 						data.widgets.forEach(v => {
 							setDefault(v.value)
 						})
-						window.GoldChart.mutations.setKanboard(data)
+						platform.actions.initPlatform(data)
 						window.GoldChart.mutations.initScene(data.scene)
 						window.GoldChart.mutations.listToObj(data)
 						this.refill(data)
-						localStorage.setItem('dvdp_local',JSON.stringify(data))
+						localStorage.setItem('dvdp_local', JSON.stringify(data))
 					} catch (e) {
 						this.$Message.error('配置文件识别失败')
 					}
@@ -85,13 +86,13 @@
 			}
 		},
 		mounted() {
-			if(getQueryString('scale'))
-				if(!isNaN(getQueryString('scale')))
-					this.scale=Number(getQueryString('scale'))
+			if (getQueryString('scale'))
+				if (!isNaN(getQueryString('scale')))
+					this.scale = Number(getQueryString('scale'))
 			let data = localStorage.getItem('dvdp_local')
-			if(data){
-				data=JSON.parse(data)
-				window.GoldChart.mutations.setKanboard(data)
+			if (data) {
+				data = JSON.parse(data)
+				platform.actions.initPlatform(data)
 				window.GoldChart.mutations.initScene(data.scene)
 				window.GoldChart.mutations.listToObj(data)
 				this.refill(data)
