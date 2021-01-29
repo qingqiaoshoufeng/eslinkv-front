@@ -20,8 +20,7 @@
 		</div>
 		<!-- 底部信息栏 -->
 		<div v-show="!hideEditTools" :class="{ active: isCanvasConfigShow }" class="bottom-bar">
-			<label v-if="platform.panelConfig.info" :class="{ active: isCanvasConfigShow }" class="canvas-config-button"
-				   @click.stop.self="toggleCanvasConfig($event)">
+			<label v-if="platform.panelConfig.info" :class="{ active: isCanvasConfigShow }" class="canvas-config-button">
 				<Icon type="md-information-circle" size="20" style="margin-top: -4px"/>
 				{{ platform.panelConfig.info.name }} / {{ platform.panelConfig.size.width }}×{{
 				platform.panelConfig.size.height
