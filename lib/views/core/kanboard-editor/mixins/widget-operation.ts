@@ -42,6 +42,7 @@ class Mixins extends Vue {
 	updateWidget(value) {
 		if (this.widgetMoving || !value || !value.widget) return
 		const id = value.widget.id
+		console.log(this.widgetAdded)
 		const currentWidget = this.widgetAdded[id]
 		if (!id || !currentWidget) return
 		this.zIndexMap[id] = value.layout.zIndex
@@ -122,7 +123,7 @@ class Mixins extends Vue {
 		this.sizeMap[id] = {w: width, h: height}
 		this.positionMap[id] = {x: left, y: top}
 		const value = {layout, widget, config, api}
-		this.initWidgetConfig(id, type, scene.index, market)
+		this.initWidgetConfig(id, type, this.scene.index, market)
 		this.updateWidget(value)
 		this.currentWidgetType = type
 		return id
