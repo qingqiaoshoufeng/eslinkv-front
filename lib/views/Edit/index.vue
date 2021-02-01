@@ -43,6 +43,7 @@
 	import downloadFile from '../../vendor/download-file'
 	import '@/components-market'
 	import platform from '../../store/platform.store'
+	import scene from '../../store/scene.store'
 
 	export default {
 		name: 'Edit',
@@ -73,6 +74,7 @@
 				saving: false,
 				kanboardName: '',
 				previewOpen: false,
+				platform: platform.state,
 			};
 		},
 		methods: {
@@ -183,7 +185,7 @@
 					value = attribute
 				}
 				if (value.scene) {
-					window.GoldChart.mutations.initScene(value.scene)
+					scene.actions.initScene(value)
 				}
 				this.querying = false
 				platform.actions.initPlatform(value)
@@ -214,6 +216,7 @@
 				this.ready = true
 				const {params: {id}} = this.$route
 				const dataBoardId = id
+				this.platform.panelConfig.id = id
 				this.$api.board.detail({dataBoardId}).then(res => {
 					this.renderByDetail(res)
 				})

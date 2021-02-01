@@ -24,7 +24,7 @@
 			dRightModal, 'i-icon': Icon, 'i-input': Input
 		},
 	})
-	export default class extends Vue {
+	export default class DScene extends Vue {
 		store: any = window.GoldChart.store
 
 		handleSceneName(key, e) {

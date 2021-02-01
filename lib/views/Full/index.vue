@@ -9,6 +9,7 @@
 	import kanbanPreview from './preview-base.vue'
 	import {getQueryString} from '../../utils'
 	import platform from '../../store/platform.store'
+	import scene from '../../store/scene.store'
 
 	export default {
 		components: {
@@ -52,8 +53,7 @@
 					const value = JSON.parse(res.attribute)
 					platform.actions.initPlatform(value)
 					this.refill(value)
-					window.GoldChart.mutations.initScene(value.scene)
-					window.GoldChart.mutations.listToObj(value)
+					scene.actions.initScene(value)
 				})
 				/**
 				 * @description 默认场景

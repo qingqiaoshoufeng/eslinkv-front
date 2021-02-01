@@ -2,7 +2,7 @@
 	<!-- 操作区 -->
 	<div
 		ref="canvas-wrapper"
-		:class="{ fullscreen: isFullscreen }"
+		:class="{ fullscreen: platform.fullscreen }"
 		class="center"
 		@click="hideSubPanels"
 		@mousemove.capture="setMousePosition"
@@ -293,7 +293,7 @@
 		<!-- 数据加工 js 编辑器 -->
 		<js-editor-modal ref="jsEditorModal" :showModal="showJsEditorModal" @close="showJsEditorModal = false"
 						 @update="updateProcessBody" @keyup.native.stop/>
-		<sidebar-tools ref="sidebarTools" :isFullscreen="isFullscreen" :layerWidgets="layerWidgets"/>
+		<sidebar-tools ref="sidebarTools" :layerWidgets="layerWidgets"/>
 		<!-- 小工具导入 -->
 		<transition name="fade">
 			<import-widgets v-if="showWidgetsImport" @close="showWidgetsImport = false"

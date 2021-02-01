@@ -12,6 +12,7 @@
 	import {getQueryString, setDefault} from '../../utils'
 	import {Input, Modal, Form, FormItem} from 'view-design'
 	import platform from '../../store/platform.store'
+	import scene from '../../store/scene.store'
 
 	export default {
 		components: {
@@ -59,8 +60,7 @@
 							setDefault(v.value)
 						})
 						platform.actions.initPlatform(data)
-						window.GoldChart.mutations.initScene(data.scene)
-						window.GoldChart.mutations.listToObj(data)
+						scene.actions.initScene(value)
 						this.refill(data)
 						localStorage.setItem('dvdp_local', JSON.stringify(data))
 					} catch (e) {
@@ -93,8 +93,7 @@
 			if (data) {
 				data = JSON.parse(data)
 				platform.actions.initPlatform(data)
-				window.GoldChart.mutations.initScene(data.scene)
-				window.GoldChart.mutations.listToObj(data)
+				scene.actions.initScene(value)
 				this.refill(data)
 			}
 		}
