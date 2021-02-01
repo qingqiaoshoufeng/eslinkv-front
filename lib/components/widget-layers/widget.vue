@@ -63,7 +63,13 @@
 		</div>
 	</div>
 </template>
-
+<script>
+	export default {
+		mounted() {
+			console.log(this.id)
+		}
+	}
+	</script>
 <style lang="scss">
 	.widget-layers-item {
 		line-height: 2;

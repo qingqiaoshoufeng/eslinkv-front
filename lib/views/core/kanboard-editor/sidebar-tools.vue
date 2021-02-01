@@ -1,51 +1,46 @@
 <template>
 	<div class="sidebar-tools" @click.stop>
 		<!-- 画布全屏 -->
-		<div
-			:title="!isFullscreen ? '进入全屏' : '退出全屏'"
-			class="editor-action request-fullscreen"
-			@click="kanboardEditor.toggleFullscreen"
-		>
-			<img
-				:src="`./static/images/${isFullscreen ? 'exit-' : ''}fullscreen.svg`"
-				:alt="!isFullscreen ? '进入全屏' : '退出全屏'"/>
-		</div>
+		<i-icon class="editor-action request-fullscreen pos-a pointer" 
+				:type="platform.fullscreen?'md-contract':'md-expand'" size="28" :title="platform.fullscreen ? '进入全屏' : '退出全屏'"
+				@click="toggleFullscreen"/>
 		<!-- 素材管理按钮 -->
-		<div
-			:class="{ active: showMaterialManage }"
-			class="editor-action open-material-manage"
-			title="素材管理"
-			@click="toggleSidebarTool('showMaterialManage')"
-		>
-			<img :src="`./static/images/material-manage.svg`"/>
-		</div>
+		<!--		<div-->
+		<!--			:class="{ active: showMaterialManage }"-->
+		<!--			class="editor-action open-material-manage"-->
+		<!--			title="素材管理"-->
+		<!--			@click="toggleSidebarTool('showMaterialManage')"-->
+		<!--		>-->
+		<!--			<img :src="`./static/images/material-manage.svg`"/>-->
+		<!--		</div>-->
 		<!-- 场景配置 -->
 		<d-scene @show="toggleSidebarTool('sceneShow')" ref="scene"/>
 		<!-- 组件配置 -->
 		<d-manage @show="toggleSidebarTool('manageShow')" ref="manage"/>
 		<!-- 小工具清单 -->
-		<Icon type="ios-apps" class="editor-icon" size="28" title="小工具清单" @click="toggleSidebarTool('showLayers')" :class="{ active: showLayers }"/>
+		<i-icon type="ios-apps" class="editor-icon pos-a pointer" size="28" title="小工具清单" @click="toggleSidebarTool('showLayers')"
+				:class="{ active: showLayers }"/>
 		<!-- 全局接口配置 -->
-		<div
-			:class="{ active: showGlobalApi }"
-			class="editor-action global-api"
-			title="全局数据源配置"
-			@click="toggleSidebarTool('showGlobalApi')"
-		>
-			<img :src="`./static/images/interface.svg`"/>
-		</div>
+		<!--		<div-->
+		<!--			:class="{ active: showGlobalApi }"-->
+		<!--			class="editor-action global-api"-->
+		<!--			title="全局数据源配置"-->
+		<!--			@click="toggleSidebarTool('showGlobalApi')"-->
+		<!--		>-->
+		<!--			<img :src="`./static/images/interface.svg`"/>-->
+		<!--		</div>-->
 		<!-- 外部脚本嵌入管理 -->
-		<div
-			:class="{ active: showScriptInject }"
-			class="editor-action script-inject hide"
-			title="脚本嵌入管理"
-			@click="toggleSidebarTool('showScriptInject')"
-		>
-			<img :src="`./static/images/script.svg`"/>
-		</div>
+		<!--		<div-->
+		<!--			:class="{ active: showScriptInject }"-->
+		<!--			class="editor-action script-inject hide"-->
+		<!--			title="脚本嵌入管理"-->
+		<!--			@click="toggleSidebarTool('showScriptInject')"-->
+		<!--		>-->
+		<!--			<img :src="`./static/images/script.svg`"/>-->
+		<!--		</div>-->
 
 		<!-- 素材管理 -->
-		<material-manage :showModal="showMaterialManage" @close="showMaterialManage = false"/>
+		<!--		<material-manage :showModal="showMaterialManage" @close="showMaterialManage = false"/>-->
 		<!-- 布局格子按钮 -->
 		<!--    <div-->
 		<!--      :class="{ active: showLayoutGrid }"-->
@@ -58,9 +53,9 @@
 		<!--    >-->
 		<!--      <img :src="`./static/images/layout-grid.svg`" />-->
 		<!--    </div>-->
-<!--		<transition name="layer-fade-right">-->
-<!--			<layout-grid v-show="showLayoutGrid"></layout-grid>-->
-<!--		</transition>-->
+		<!--		<transition name="layer-fade-right">-->
+		<!--			<layout-grid v-show="showLayoutGrid"></layout-grid>-->
+		<!--		</transition>-->
 		<transition name="layer-fade-right">
 			<widget-layers
 				v-show="showLayers"
@@ -78,19 +73,19 @@
         "
 			></widget-layers>
 		</transition>
-		<transition name="layer-fade-right">
-			<global-api-panel
-				v-show="showGlobalApi"
-				ref="globalApiPanel"
-				@global-api-update="kanboardEditor.handleGlobalApiUpdate"
-			/>
-		</transition>
-		<transition name="layer-fade-right">
-			<script-inject-panel
-				v-show="showScriptInject"
-				@script-inject-update="kanboardEditor.handleGlobalApiUpdate"
-			/>
-		</transition>
+		<!--		<transition name="layer-fade-right">-->
+		<!--			<global-api-panel-->
+		<!--				v-show="showGlobalApi"-->
+		<!--				ref="globalApiPanel"-->
+		<!--				@global-api-update="kanboardEditor.handleGlobalApiUpdate"-->
+		<!--			/>-->
+		<!--		</transition>-->
+		<!--		<transition name="layer-fade-right">-->
+		<!--			<script-inject-panel-->
+		<!--				v-show="showScriptInject"-->
+		<!--				@script-inject-update="kanboardEditor.handleGlobalApiUpdate"-->
+		<!--			/>-->
+		<!--		</transition>-->
 	</div>
 </template>
 <script>
@@ -102,6 +97,7 @@
 	import dScene from '../../../components/d-scene'
 	import dManage from '../../../components/d-manage'
 	import {Icon} from 'view-design'
+	import platform from '../../../store/platform.store'
 
 	export default {
 		name: 'sidebar-tools',
@@ -111,7 +107,7 @@
 			widgetLayers,
 			globalApiPanel,
 			scriptInjectPanel,
-			Icon,
+			'i-icon': Icon,
 			dScene,
 			dManage
 		},
@@ -132,10 +128,18 @@
 				showLayoutGrid: false,
 				showLayers: false,
 				showGlobalApi: false,
-				showScriptInject: false
+				showScriptInject: false,
+				platform: platform.state,
 			}
 		},
 		methods: {
+			toggleFullscreen() {
+				if (this.platform.fullscreen) {
+					document.exitFullscreen()
+				} else {
+					document.body.requestFullscreen()
+				}
+			},
 			hideSidebarTools(e) {
 				if (e) {
 					const classPath = e.path.map(ele => ele.className).join(',')
@@ -181,13 +185,11 @@
 
 <style lang="scss" scoped>
 	.editor-icon {
-		position: absolute;
 		right: 15px;
 		opacity: 0.6;
 		z-index: 2;
 		width: 24px;
 		height: 24px;
-		cursor: pointer;
 		top: 142px;
 		font-size: 32px;
 		line-height: 24px;
@@ -199,33 +201,24 @@
 			height: 100%;
 		}
 
-		&:hover, &.active {
-			opacity: 1;
-		}
+		
 	}
 
 	.editor-action {
-		position: absolute;
 		right: 15px;
 		top: 33px;
-		opacity: 0.4;
+		opacity: 0.6;
 		z-index: 2;
 		width: 24px;
 		height: 24px;
-		cursor: pointer;
-		mix-blend-mode: exclusion;
 
-		img {
+		.ivu-icon {
 			width: 100%;
 			height: 100%;
 		}
 
-		&:hover {
-			opacity: 0.8;
-		}
-
-		&.active {
-			opacity: 0.7;
+		&:hover, &.active {
+			opacity: 1;
 		}
 	}
 

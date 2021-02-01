@@ -23,7 +23,7 @@
 			editor.d-manage-modal-control-editor(v-model="apiData" @init="editorInit" lang="json" theme="chrome" height="100")
 		.d-manage-modal-control
 			label 数据加工
-			i-switch(v-model="item.config.api.process.enable")
+			i-switch(v-model="item.config.api.process.enable" :disabled="platform.chooseWidgetState")
 		.d-manage-modal-control(v-if="item.config.api.process.enable")
 			label 加工CODE
 			editor.d-manage-modal-control-editor(v-model="apiMethod" @init="editorInit" lang="javascript" theme="chrome" height="100")

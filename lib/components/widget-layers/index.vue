@@ -12,7 +12,7 @@
 		<div class="widget-list-wrapper pos-r">
 			<div class="widget-list pos-r" v-if="filteredWidgets.length">
 				<template v-for="widget in filteredWidgets">
-					<widget :key="widget.id" v-bind="widget" v-if="widget.scene===store.scene.index"
+					<widget :key="widget.id" v-bind="widget" v-if="widget.scene===scene.index"
 							:config="config(widget.id)">
 						<template v-if="widget.isCombinationWidget">
 							<widget v-for="child in widget.children" :key="child.id" v-bind="child"
@@ -27,8 +27,9 @@
 </template>
 <script>
 	import widget from './widget.vue'
-	import widgetsTypes from '../../views/core/widgets/widget-type-list'
 	import {Select, Option, Button, Icon} from 'view-design'
+	import scene from '../../store/scene.store'
+	import platform from '../../store/platform.store'
 
 	export default {
 		components: {widget, Select, Option, Button, Icon},
@@ -43,14 +44,8 @@
 		},
 		data() {
 			return {
-				store: window.GoldChart.store,
-				widgetsTypes: Object.keys(widgetsTypes).map(type => {
-					return {
-						type,
-						label: widgetsTypes[type]
-					}
-				}),
-				widgetType: null
+				scene: scene.state,
+				platform: platform.state,
 			}
 		},
 		computed: {
@@ -65,16 +60,7 @@
 				}
 			},
 			filteredWidgets() {
-				if (!this.widgetType) return this.widgets
-				return this.widgets.filter(widget => {
-					if (!widget.children) return widget.type === this.widgetType
-					const children = widget.children.filter(widget => widget.type === this.widgetType)
-					if (children.length) {
-						widget.children = children
-						return true
-					}
-					return false
-				})
+				return this.widgets
 			}
 		}
 	}
