@@ -1,4 +1,4 @@
-import {Input, InputNumber, Select, Option, Switch, ColorPicker, Collapse, Panel} from 'view-design'
+import {Input, InputNumber, Select, Option, Switch, ColorPicker, Collapse, Panel, Button } from 'view-design'
 import {Component, Vue, Prop} from 'vue-property-decorator'
 import platform from '../store/platform.store'
 
@@ -14,6 +14,7 @@ const editor = require('vue2-ace-editor')
 		'i-colorPicker': ColorPicker,
 		'i-collapse': Collapse,
 		'i-panel': Panel,
+		'i-button': Button,
 		editor
 	},
 })
