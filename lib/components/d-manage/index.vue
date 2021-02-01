@@ -30,7 +30,7 @@
 				title: '数据配置', key: [{type: 'data'}], needChoose: true
 			},
 			{
-				title: '动画配置', key: [], needChoose: true
+				title: '动画配置', key: [{type: 'animation'}], needChoose: true
 			},
 			{
 				title: '自定义配置', key: [], needChoose: true
@@ -46,8 +46,8 @@
 
 		handleChangeTab(index) {
 			this.tabIndex = index
-			if (index === 3) {
-				this.list[3].key = [...this.platform.chooseWidgetCustomConfig]
+			if (index === 4) {
+				this.list[4].key = [...this.platform.chooseWidgetCustomConfig]
 			}
 		}
 	}
