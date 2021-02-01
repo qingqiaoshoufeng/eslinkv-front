@@ -70,17 +70,23 @@
 			)
 		.d-manage-modal-control
 			label 组件关联
-			i-switch(v-model="item.config.api.bind.enable" :disabled="platform.chooseWidgetState")
+			i-switch(v-model="item.config.api.bind.enable" :disabled="platform.chooseWidgetState" @on-change="bindEnableChange")
+		.d-manage-modal-control(v-if="item.config.api.bind.enable")
+			checkbox-group(v-model="item.config.api.bind.refIds")
+				checkbox(:label="k.id" v-for="(k, i) in relateList" :key="i") {{k.name}}
+			
+
 </template>
 <script lang="ts">
 	import func from './func'
 	import {Component} from 'vue-property-decorator'
 	import databaseConfig from '../views/core/kanboard-editor/data-warehouse/index.vue'
-	import Style from "./style.vue";
+	import { getProviderList, getProviderParams } from '../views/mixins/widget-bind-manage'
 
-	@Component({components: {Style, databaseConfig}})
+	@Component({components: {databaseConfig}})
 	export default class FuncData extends func {
 		showDatabaseConfigModal: boolean = false
+		relateList: any[] = []
 		
 		get apiMethod(){
 			return this.getCode('config.api.process.methodBody')
@@ -121,6 +127,16 @@
 			}
 			this.showDatabaseConfigModal = true
 			this.$refs.dataBaseConfig.setQueryCond(value.api.system.params)
+		}
+
+		async bindEnableChange (value) {
+			setTimeout(async () => {
+				this.relateList = await getProviderList()
+			}, 500)
+		}
+		
+		async created () {
+			this.relateList = await getProviderList()
 		}
 	}
 </script>

@@ -1,4 +1,4 @@
-import {Input, InputNumber, Select, Option, Switch, ColorPicker, Collapse, Panel, Button } from 'view-design'
+import {Input, InputNumber, Select, Option, Switch, ColorPicker, Collapse, Panel, Button, CheckboxGroup, Checkbox  } from 'view-design'
 import {Component, Vue, Prop} from 'vue-property-decorator'
 import platform from '../store/platform.store'
 
@@ -15,6 +15,8 @@ const editor = require('vue2-ace-editor')
 		'i-collapse': Collapse,
 		'i-panel': Panel,
 		'i-button': Button,
+		CheckboxGroup,
+		Checkbox,
 		editor
 	},
 })
