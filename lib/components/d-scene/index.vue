@@ -60,6 +60,8 @@
 	}
 </script>
 <style lang="scss" scoped>
+	@import "../../../src/scss/conf";
+
 	.d-scene-modal {
 		ul {
 			height: calc(100% - 42px);
@@ -77,7 +79,7 @@
 			justify-content: space-between;
 			align-items: center;
 			padding: 0 10px;
-			border-bottom: 1px solid #e2e2e2;
+			border-bottom: 1px solid $borderColor;
 		}
 
 		li {
@@ -110,8 +112,8 @@
 			}
 
 			&.active {
-				border-color: #00CBF4;
-				background-color: #00CBF4;
+				border-color: $themeColor;
+				background-color: $themeColor;
 				color: #fff;
 			}
 
@@ -120,12 +122,12 @@
 				border-style: dashed;
 
 				&:hover {
-					color: #00CBF4;
+					color: $themeColor;
 				}
 			}
 
 			&:hover {
-				border-color: #00CBF4;
+				border-color: $themeColor;
 
 				.destroy {
 					width: 20px;
