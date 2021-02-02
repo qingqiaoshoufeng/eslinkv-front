@@ -1,5 +1,5 @@
 <template lang="pug">
-	d-right-modal.d-manage-modal(title="组件配置" ref="modal" @show="$emit('show')")
+	d-right-modal.d-manage-modal(title="组件配置" :top="144")
 		.d-manage-modal-tab.fn-flex.flex-row
 			h2.pointer(v-for="(item,index) in list" :class="tabIndex===index?'active':''" @click="handleChangeTab(index)") {{item.title}}
 		template(v-for="(item,index) in list")
@@ -40,10 +40,6 @@
 			}
 		]
 
-		handleClose() {
-			this.$refs.modal.rightModal = false
-		}
-
 		handleChangeTab(index) {
 			this.tabIndex = index
 			if (index === 4) {
@@ -53,7 +49,7 @@
 	}
 </script>
 <style lang="scss">
-
+	@import "../../../src/scss/conf";
 
 	.d-manage-modal-control-more {
 		.d-manage-modal-control {
@@ -112,7 +108,7 @@
 			user-select: none;
 
 			&:hover, &.active {
-				color: rgba(0, 0, 0, .65);
+				color: $themeColor;
 			}
 
 			&:last-child {

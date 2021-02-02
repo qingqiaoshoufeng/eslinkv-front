@@ -1,13 +1,14 @@
 <template lang="pug">
 	.d-right-modal-box.pos-a(:style="{top:`${top}px`}")
 		.d-right.pos-a.pointer
-			i-icon(:type="icon" title="组件配置" @click="handleClick" size="28" :class="[{active:rightModal}]")
-		.d-right-modal.pos-a(:class="[{active:rightModal}]" :style="{width:`${width}px`,top:`-${top-35}px`}")
+			i-icon(:type="icon" :title="title" @click="handleClick" size="28" :class="[{active:rightModal}]")
+		.d-right-modal.pos-a(:class="[{active:rightModal}]" :style="{width:`${width}px`,top:`-${top-35}px`}" v-if="needModel")
 			slot
 </template>
 <script lang="ts">
 	import {Icon} from 'view-design'
 	import {Component, Vue, Prop} from 'vue-property-decorator'
+	import {findComponentsDownward} from '../../utils'
 
 	@Component({
 		components: {
@@ -19,16 +20,29 @@
 		@Prop({default: 470}) width: number
 		@Prop({default: 'ios-construct'}) icon: string
 		@Prop({default: '标题'}) title: string
-		@Prop({default: 253}) top: number
+		@Prop({default: 33}) top: number
+		@Prop({default: true}) needModel: boolean
 
 
 		handleClick() {
-			this.rightModal = !this.rightModal
-			this.$emit('show')
+			if (this.needModel) {
+				if (this.rightModal) {
+					this.rightModal = false
+				} else {
+					const list = findComponentsDownward(this.$parent.$parent, 'DRightModal')
+					list.forEach(item => {
+						item.rightModal = false
+					})
+					this.rightModal = true
+				}
+			}
+			this.$emit('click')
 		}
 	}
 </script>
 <style lang="scss" scoped>
+	@import "../../../src/scss/conf";
+
 	.d-right-modal-box {
 		width: 24px;
 		height: 24px;
@@ -44,6 +58,7 @@
 
 		.ivu-icon {
 			opacity: .6;
+			color: $themeColor;
 
 			&:hover, &.active {
 				opacity: 1;

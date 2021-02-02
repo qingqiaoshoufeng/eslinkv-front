@@ -48,12 +48,13 @@
 <script>
 	import mixins from '../../mixins'
 	import format from 'date-fns/format'
-	import { config, configSource, value } from './index.component'
+	import {config, configSource, value} from './index.component'
+	import scene from '../../../../lib/store/scene.store'
 
 	export default {
 		data() {
 			return {
-				year:new Date().getFullYear(),
+				year: new Date().getFullYear(),
 				scrollList: new Int8Array(10),
 				transform: new Int8Array(9),
 			};
@@ -72,10 +73,10 @@
 		methods: {
 			handleClick() {
 				if (this.config.config.sceneId) {
-					window.GoldChart.scene.createSceneInstance(this.config.config.sceneId, 'slideRight')
+					scene.actions.createSceneInstance(this.config.config.sceneId, 'slideRight')
 					if (this.config.config.componentId) {
 						this.$nextTick(() => {
-							window.GoldChart.instance.updateComponent(this.config.config.componentId, {
+							scene.actions.updateComponent(this.config.config.componentId, {
 								data: {
 									selectType: '日',
 									selectValue: format(new Date(), 'yyyy.MM.dd')
@@ -121,7 +122,7 @@
 		width: 100%;
 		height: 100%;
 		display: flex;
-    justify-content: center;
+		justify-content: center;
 
 		.left {
 			min-width: 180px;

@@ -20,13 +20,14 @@
 <script>
 	import mixins from '../../mixins';
 	import getOption from './options';
-	import { config, value } from './index.component'
+	import {config, value} from './index.component'
+	import scene from '../../../../lib/store/scene.store'
 
 	export default {
 		mixins: [mixins],
 		methods: {
 			clickHandle() {
-				window.GoldChart.scene.createSceneInstance('qdj532f41re')
+				scene.actions.createSceneInstance('qdj532f41re')
 			},
 			setOption(data) {
 				if (this.instance) {
