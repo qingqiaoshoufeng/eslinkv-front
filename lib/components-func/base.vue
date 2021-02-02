@@ -22,8 +22,10 @@
 				i-switch(v-model="item.config.widget.hide")
 		.d-manage-modal-control
 			label 场景
-			i-input(v-model="item.scene" :disabled="true")
-
+			i-select(v-model="item.scene" :disabled="platform.chooseWidgetState")
+				i-option(:value="0") 主场景
+				i-option(:value="key" v-for="(item,key) in scene.obj" :key="key") {{item.name}}
+				i-option(:value="-1") 场景回收站
 </template>
 <script lang="ts">
 	import func from './func'

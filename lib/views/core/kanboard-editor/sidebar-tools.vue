@@ -2,8 +2,6 @@
 	<div class="sidebar-tools" @click.stop>
 		<!-- 画布全屏 -->
 		<d-right-full-screen/>
-		<!-- 场景配置 -->
-		<d-right-scene/>
 		<!-- 组件配置 -->
 		<d-right-manage/>
 		<!-- 小工具清单 -->
@@ -30,7 +28,6 @@
 </template>
 <script>
 	import widgetLayers from '../../../components/widget-layers'
-	import dRightScene from '../../../components/d-right-scene'
 	import dRightFullScreen from '../../../components/d-right-full-screen'
 	import dRightManage from '../../../components/d-right-manage'
 	import dRightWidget from '../../../components/d-right-widget'
@@ -42,7 +39,6 @@
 		components: {
 			widgetLayers,
 			'i-icon': Icon,
-			dRightScene,
 			dRightFullScreen,
 			dRightManage,
 			dRightWidget

@@ -1,5 +1,5 @@
 <template lang="pug">
-	d-right-modal.d-manage-modal(title="组件配置" :top="144")
+	d-right-modal.d-manage-modal(title="组件配置" :top="70")
 		.d-manage-modal-tab.fn-flex.flex-row
 			h2.pointer(v-for="(item,index) in list" :class="tabIndex===index?'active':''" @click="handleChangeTab(index)") {{item.title}}
 		template(v-for="(item,index) in list")

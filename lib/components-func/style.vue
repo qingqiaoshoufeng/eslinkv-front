@@ -52,7 +52,7 @@
 					i-option(value="vh") vh
 		.fn-flex.flex-row.d-manage-modal-control-more
 			.d-manage-modal-control
-				label 可见度
+				label 层级
 				i-inputNumber(:min="1" :step="1" v-model="item.config.layout.zIndex" :disabled="platform.chooseWidgetState")
 			.d-manage-modal-control
 				label 透明度
