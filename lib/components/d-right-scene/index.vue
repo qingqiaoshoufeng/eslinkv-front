@@ -26,7 +26,7 @@
 			dRightModal, 'i-icon': Icon, 'i-input': Input
 		},
 	})
-	export default class DScene extends Vue {
+	export default class DRightScene extends Vue {
 		scene: any = scene.state
 		platform: any = platform.state
 
