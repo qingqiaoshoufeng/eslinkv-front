@@ -5,8 +5,6 @@
 		:class="{ fullscreen: platform.fullscreen }"
 		class="center"
 		@click="hideSubPanels"
-		@mousemove.capture="setMousePosition"
-		@mouseleave.self="stopUpdateMousePosition"
 		@select.prevent.stop
 		@contextmenu.stop.prevent
 	>
@@ -76,12 +74,10 @@
 						@resizing="resizing"
 						@dragstop="(left, top) => {
               dragging(left, top)
-              updatePanelPosition()
               updatePosition(item.id)
             }"
 						@resizestop="(left, top) => {
               dragging(left, top)
-              updatePanelPosition()
               updatePosition(item.id)
               updateSize(item.id)
             }"
@@ -135,11 +131,9 @@
 										@dragging="dragging"
 										@resizing="resizing"
 										@dragstop="
-                      updatePanelPosition()
                       updatePosition(child.id)
                     "
 										@resizestop="
-                      updatePanelPosition()
                       updatePosition(child.id)
                       updateSize(child.id)
                     "
@@ -224,40 +218,6 @@
 			:deactivateWidget="deactivateWidget"
 			:activatedWidgetId="activatedWidgetId"
 			:deleteWidget="deleteWidget"/>
-		<!-- 小工具配置面板 -->
-		<transition name="fade">
-			<div
-				ref="configPanelWrapper"
-				id="tools-menu"
-				v-show="showConfigPanel"
-				:style="configPanelStyle"
-				class="config-panel-wrapper"
-				@keyup.stop
-				@contextmenu="(e) => {e.preventDefault();return false}"
-			>
-				<config-panel
-					v-show="widgetSource && !configPanelValueFreshing"
-					ref="configPanel"
-					v-model="currentWidgetValue"
-					:source="widgetSource"
-					:style="{pointerEvents: startPanelDrag ? 'none' : ''}"
-					@config-database="handleDatabaseConfig"
-					@config-process-body="handleProcessConfig"
-				/>
-				<div v-if="configPanelValueFreshing" class="config-value-updating">
-					<div class="dot"></div>
-				</div>
-				<div class="top-toolbar">
-					<div class="close-panel" @click="deactivateWidget(activatedWidgetId)">&#10005;</div>
-					<div class="drag-panel" @mousedown.stop.prevent="setPanelDrag"></div>
-					<div :class="{ active: fixPanelPosition }" class="fix-panel"
-						 @click="fixPanelPosition = !fixPanelPosition"></div>
-				</div>
-				<!-- todo 拖动修改配置面板尺寸 -->
-				<div class="resize-handle horizontal" @mousedown.self.stop="setPanelHorizontalResizeStart"></div>
-				<div class="resize-handle vertical" @mousedown.self.stop="setPanelVerticalResizeStart"></div>
-			</div>
-		</transition>
 		<!-- 布局格子配置面板 -->
 		<transition name="fade">
 			<div ref="gridConfigPanelWrapper" v-show="showGridConfigPanel" :style="gridConfigPanelStyle"
