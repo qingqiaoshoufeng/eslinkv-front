@@ -239,7 +239,7 @@
 		<!-- 数据加工 js 编辑器 -->
 		<js-editor-modal ref="jsEditorModal" :showModal="showJsEditorModal" @close="showJsEditorModal = false"
 						 @update="updateProcessBody" @keyup.native.stop/>
-		<sidebar-tools ref="sidebarTools" :layerWidgets="layerWidgets"/>
+		<sidebar-tools ref="sidebarTools" :layerWidgets="layerWidgets" @handleActivated="activatedFromSidebar"/>
 		<!-- 小工具导入 -->
 		<transition name="fade">
 			<import-widgets v-if="showWidgetsImport" @close="showWidgetsImport = false"

@@ -86,6 +86,7 @@
 
 		handleChoose(id) {
 			this.platform.chooseWidgetId = id
+			this.$emit('handleActivated', id)
 		}
 
 		handleDelete(id) {

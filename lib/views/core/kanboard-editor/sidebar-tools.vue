@@ -5,7 +5,7 @@
 		<!-- 组件配置 -->
 		<d-right-manage/>
 		<!-- 小工具清单 -->
-		<d-right-widget/>
+		<d-right-widget v-on="$listeners"/>
 		<!--		<i-icon type="ios-apps" class="editor-icon pos-a pointer" size="28" title="小工具清单"-->
 		<!--				@click="toggleSidebarTool('showLayers')"-->
 		<!--				:class="{ active: showLayers }"/>-->
@@ -57,6 +57,9 @@
 			}
 		},
 		methods: {
+			handleActivated (id) {
+				this.$emit('handleActivated', id)
+			},
 			hideSidebarTools(e) {
 				if (e) {
 					const classPath = e.path.map(ele => ele.className).join(',')
