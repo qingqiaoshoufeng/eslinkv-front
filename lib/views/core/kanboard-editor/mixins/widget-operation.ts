@@ -35,7 +35,6 @@ class Mixins extends Vue {
 		requestAnimationFrame(() => {
 			this.isWidgetProcessing = false
 			this.activatedWidgetId = item.id
-			this.updatePanelPosition()
 		})
 	}
 
@@ -114,8 +113,6 @@ class Mixins extends Vue {
 		this.showProcessing(top, left, width, height, widget)
 		const id = uuid()
 
-		// 初始化配置面板位置
-		this.initConfigPanelPosition(clientX, clientY, width, height, startX, startY)
 		if (layout.zIndex) layout.zIndex = 10
 		widget.id = id
 		widget.componentVersion = componentVersion
@@ -146,9 +143,6 @@ class Mixins extends Vue {
 		this.rightMenuGrid = null
 		this.currentWidgetType = type
 		this.activatedWidgetId = id
-		this.$nextTick(() => {
-			this.updatePanelPosition()
-		})
 		this.widgetActiveTimer = null
 		setTimeout(() => {
 			this.widgetActivating = false
