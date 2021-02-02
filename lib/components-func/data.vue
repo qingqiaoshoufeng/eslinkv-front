@@ -27,12 +27,13 @@
 		.d-manage-modal-control(v-if="item.config.api.process.enable")
 			label 加工CODE
 			editor.d-manage-modal-control-editor(v-model="apiMethod" @init="editorInit" lang="javascript" theme="chrome" height="100")
-		.d-manage-modal-control
-			label 定时刷新
-			i-switch(v-model="item.config.api.autoFetch.enable" :disabled="platform.chooseWidgetState")
-		.d-manage-modal-control(v-if="item.config.api.autoFetch.enable")
-			label 刷新间隔
-			i-inputNumber(:min="1" :step="1" v-model="item.config.api.autoFetch.duration" :disabled="platform.chooseWidgetState")
+		.fn-flex.flex-row.d-manage-modal-control-more
+			.d-manage-modal-control
+				label 定时刷新
+				i-switch(v-model="item.config.api.autoFetch.enable" :disabled="platform.chooseWidgetState")
+			.d-manage-modal-control(v-if="item.config.api.autoFetch.enable")
+				label 刷新间隔
+				i-inputNumber(:min="1" :step="1" v-model="item.config.api.autoFetch.duration" :disabled="platform.chooseWidgetState")
 		.d-manage-modal-control
 			label 数仓接口
 			.setting

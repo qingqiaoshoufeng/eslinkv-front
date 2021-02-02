@@ -19,34 +19,20 @@
 			</div>
 		</div>
 		<!-- 底部信息栏 -->
-		<div v-show="!hideEditTools" :class="{ active: isCanvasConfigShow }" class="bottom-bar">
-			<label v-if="platform.panelConfig.info" :class="{ active: isCanvasConfigShow }"
-				   class="canvas-config-button">
-				<Icon type="md-information-circle" size="20" style="margin-top: -4px"/>
-				{{ platform.panelConfig.info.name }} / {{ platform.panelConfig.size.width }}×{{
-				platform.panelConfig.size.height
-				}}{{ platform.panelConfig.size.unit }}
-			</label>
-			<hot-keys/>
-			<label class="auto-align-guide-switcher">
-				<input type="checkbox" v-model="autoAlignGuide" checked style="vertical-align: text-top"/>
-				自动贴靠参考线
-			</label>
-		</div>
+		<bottom-bar/>
 		<!-- 标尺容器 -->
 		<ruler-canvas
 			v-model="guides"
 			:guide-step="moveStep"
 			ref="rulerCanvas"
 			@zoom="handleZoomChange"
-			@update-tools-visible="(result) => (hideEditTools = !result)"
 			@content-move="(moving) => (rulerCanvasMoving = moving)"
 		>
 			<!-- 大屏 -->
 			<section
 				id="kanban"
 				:style="canvasStyle"
-				:class="['canvas-wrapper', { preview: hideEditTools }]"
+				:class="['canvas-wrapper', { preview: !platform.rulerVisible }]"
 				@dragenter="isDragIn = true"
 				@dragleave.self="isDragIn = false"
 				@drop="drop"
@@ -71,13 +57,13 @@
 						:x="positionMap[item.id].x"
 						:y="positionMap[item.id].y"
 						:z="item.config.layout.zIndex"
-						:snap="autoAlignGuide"
+						:snap="platform.autoAlignGuide"
 						:snap-tolerance="10"
 						:class="[{
               'no-pointer': (isDragIn && item.type !== 'combination') || rulerCanvasMoving,
               'content-moving': item.type === 'combination' && rulerCanvasMoving,
               locked: item.config.widget.locked,
-              preview: hideEditTools,
+              preview: !platform.rulerVisible,
               'widget-hide': item.config.widget.hide
             }, `widget-${item.id}`]"
 						:widget-info="`${item.id} ${item.config.widget.name || ''}`"
@@ -128,14 +114,14 @@
 										:x="positionMap[child.id].x"
 										:y="positionMap[child.id].y"
 										:z="child.config.layout.zIndex"
-										:snap="autoAlignGuide"
+										:snap="platform.autoAlignGuide"
 										:snap-tolerance="5"
 										:class="[
                       `group-item group-item-${child.id}`, `widget-${child.id}`,
                       {
                         'no-pointer': isDragIn || !item.config.widget.innerEditing,
                         locked: child.config.widget.locked,
-                        preview: hideEditTools,
+                        preview: !platform.rulerVisible,
                         'slide-hide': calcSlideHide(item.config, child.id),
                         'widget-hide': child.config.widget.hide
                       },
@@ -313,7 +299,7 @@
 	import vdr from 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable'
 	import 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable.css'
 	import parts from '../widgets/parts/index'
-	import hotKeys from '../../../components/hot-keys'
+	import bottomBar from '../../../components/bottom-bar'
 	import rulerGuides from './mixins/ruler-guides'
 	import widgetOperation from './mixins/widget-operation'
 	import panelOperation from './mixins/panel-operation'
@@ -357,7 +343,7 @@
 			rulerCanvas,
 			configPanel,
 			vdr,
-			hotKeys,
+			bottomBar,
 			databaseConfig,
 			jsEditorModal,
 			gridItem,
@@ -370,7 +356,6 @@
 		data() {
 			return {
 				platform: platform.state,
-				hideEditTools: false,
 			}
 		},
 		methods: {
@@ -443,7 +428,6 @@
 				}
 				this.$refs.rightMenu && this.$refs.rightMenu.$el.classList.remove('active')
 				this.activeGridId = null
-				this.isCanvasConfigShow = false
 				this.sidebarTools.hideSidebarTools()
 			}
 		},
@@ -479,9 +463,6 @@
 			}
 		},
 		watch: {
-			hideEditTools() {
-				this.activatedWidgetId && this.deactivateWidget(this.activatedWidgetId)
-			},
 			widgetAdded() {
 				if (this.refilling) return
 				this.$emit('kanboard-edited')

@@ -89,6 +89,7 @@
 
 		.ivu-switch {
 			margin-bottom: 10px;
+			margin-top: 5px;
 		}
 
 		.ivu-input-wrapper, .ivu-select {
