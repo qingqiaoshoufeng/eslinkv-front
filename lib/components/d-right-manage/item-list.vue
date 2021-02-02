@@ -14,7 +14,6 @@
 		@Prop(Boolean) needChoose: boolean
 	}
 </script>
-
 <style lang="scss" scoped>
 	.d-mange-list {
 		overflow: auto;

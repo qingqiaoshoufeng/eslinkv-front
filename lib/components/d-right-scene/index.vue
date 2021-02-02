@@ -1,16 +1,16 @@
 <template lang="pug">
-	d-right-modal.d-scene-modal(title="场景切换" ref="modal" :width="360" icon="logo-buffer" :top="105" @show="$emit('show')")
+	d-right-modal.d-scene-modal(title="场景切换" :width="360" icon="logo-buffer" :top="70")
 		header
 			span 场景切换
-			span 当前：场景{{store.scene.index}}
+			span 当前：场景{{scene.index}}
 		ul.d-scrollbar
-			li.pointer.fn-flex.pos-r.flex-row(@click="changeScene(0)" :class="[{active:store.scene.index===0}]")
+			li.pointer.fn-flex.pos-r.flex-row(@click="changeScene(0)" :class="[{active:scene.index===0}]")
 				span 主场景
 				p ID：0
-			li.pointer.fn-flex.pos-r.flex-row(v-for="(item,index) in store.scene.list" :class="[{active:store.scene.index===item}]" @click="changeScene(item)" :key="item")
-				i-input(v-if="store.scene.index===item" size="small" @on-change="e=>handleSceneName(item,e)" :value="store.scene.obj[item].name")
-				span(v-else) {{store.scene.obj[item].name}}
-				p(v-if="store.scene.index!==item") ID：{{item}}
+			li.pointer.fn-flex.pos-r.flex-row(v-for="(item,index) in scene.list" :class="[{active:scene.index===item}]" @click="changeScene(item)" :key="item")
+				i-input(v-if="scene.index===item" size="small" @on-change="e=>handleSceneName(item,e)" :value="scene.obj[item].name")
+				span(v-else) {{scene.obj[item].name}}
+				p(v-if="scene.index!==item") ID：{{item}}
 				i-icon.destroy(type="ios-trash-outline" @click="e=>destroyScene(e,index)")
 			li.pointer.create.fn-flex(@click="createScene") +
 </template>
@@ -18,6 +18,8 @@
 	import dRightModal from '../d-right-modal'
 	import {Component, Vue} from 'vue-property-decorator'
 	import {Icon, Input} from 'view-design'
+	import scene from '../../store/scene.store'
+	import platform from '../../store/platform.store'
 
 	@Component({
 		components: {
@@ -25,23 +27,20 @@
 		},
 	})
 	export default class DScene extends Vue {
-		store: any = window.GoldChart.store
+		scene: any = scene.state
+		platform: any = platform.state
 
 		handleSceneName(key, e) {
-			window.GoldChart.mutations.setSceneName(key, e.target.value)
+			scene.actions.setSceneName(key, e.target.value)
 		}
 
 		changeScene(index) {
-			window.GoldChart.mutations.setSceneIndex(index)
-			this.store.events.list.widgetUnActived()
-		}
-
-		handleClose() {
-			this.$refs.modal.rightModal = false
+			scene.actions.setSceneIndex(index)
+			this.platform.chooseWidgetId = null
 		}
 
 		createScene() {
-			window.GoldChart.mutations.createScene()
+			scene.actions.createScene()
 		}
 
 		destroyScene(e, index) {
@@ -50,10 +49,10 @@
 				title: '提示',
 				content: '是否删除当前场景？',
 				onOk: () => {
-					if (window.GoldChart.store.scene.index === window.GoldChart.store.scene.list[index]) {
-						window.GoldChart.mutations.setSceneIndex(window.GoldChart.store.scene.list[0])
+					if (this.scene.index === this.scene.list[index]) {
+						scene.actions.setSceneIndex(this.scene.list[0])
 					}
-					window.GoldChart.mutations.deleteScene(index)
+					scene.actions.deleteScene(index)
 				}
 			})
 		}

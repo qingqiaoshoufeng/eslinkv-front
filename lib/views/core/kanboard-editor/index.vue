@@ -19,7 +19,7 @@
 			</div>
 		</div>
 		<!-- 底部信息栏 -->
-		<bottom-bar/>
+		<d-bottom-bar/>
 		<!-- 标尺容器 -->
 		<ruler-canvas
 			v-model="guides"
@@ -299,7 +299,7 @@
 	import vdr from 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable'
 	import 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable.css'
 	import parts from '../widgets/parts/index'
-	import bottomBar from '../../../components/bottom-bar'
+	import dBottomBar from '../../../components/d-bottom-bar'
 	import rulerGuides from './mixins/ruler-guides'
 	import widgetOperation from './mixins/widget-operation'
 	import panelOperation from './mixins/panel-operation'
@@ -343,7 +343,7 @@
 			rulerCanvas,
 			configPanel,
 			vdr,
-			bottomBar,
+			dBottomBar,
 			databaseConfig,
 			jsEditorModal,
 			gridItem,

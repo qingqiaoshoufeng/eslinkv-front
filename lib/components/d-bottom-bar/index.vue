@@ -1,19 +1,19 @@
 <template lang="pug">
-	.bottom-bar.fn-flex.flex-row.pos-a(v-show="platform.rulerVisible")
-		label.bottom-info.fn-flex.flex-row(v-if="platform.panelConfig.info")
+	.d-bottom-bar.fn-flex.flex-row.pos-a(v-show="platform.rulerVisible")
+		label.d-bottom-info.fn-flex.flex-row(v-if="platform.panelConfig.info")
 			i-icon(type="md-information-circle" size="18")
 			span {{ platform.panelConfig.info.name }} / {{ platform.panelConfig.size.width}}×{{platform.panelConfig.size.height}}{{ platform.panelConfig.size.unit}}
-		label.bottom-hot-keys.pos-r
+		label.d-bottom-hot-keys.pos-r
 			span.pointer 快捷键
-			.bottom-hot-key-list.pos-a
+			.d-bottom-hot-key-list.pos-a
 				ul
 					li.fn-flex.flex-row(v-for="item in platform.hotKeys" :key="item.name")
-						label.name {{ item.name }}
-						.key-code.fn-flex.flex-row(v-for="child in item.key")
-							i.hot-key-text(v-if="child.type==='text'") {{ child.value }}
-							span.hot-key-item(v-if="child.type==='+'") +
-							img.hot-key-img(v-if="child.type==='img'" :src="child.value")
-		label.bottom-auto-align-guide.fn-flex.flex-row
+						label.d-bottom-name {{ item.name }}
+						.d-bottom-key-code.fn-flex.flex-row(v-for="child in item.key")
+							i.d-bottom-hot-key-text(v-if="child.type==='text'") {{ child.value }}
+							span.d-bottom-hot-key-item(v-if="child.type==='+'") +
+							img.d-bottom-hot-key-img(v-if="child.type==='img'" :src="child.value")
+		label.d-bottom-auto-align-guide.fn-flex.flex-row
 			i-checkbox(v-model="platform.autoAlignGuide")
 			span 自动贴靠参考线
 </template>
@@ -35,7 +35,7 @@
 <style lang="scss">
 	@import "../../../src/scss/conf";
 
-	.bottom-bar {
+	.d-bottom-bar {
 		align-items: center;
 		justify-content: center;
 		right: 15px;
@@ -54,19 +54,19 @@
 		}
 	}
 
-	.bottom-auto-align-guide, .bottom-hot-keys, .bottom-info {
+	.d-bottom-auto-align-guide, .d-bottom-hot-keys, .d-bottom-info {
 		align-items: center;
 		justify-content: center;
 	}
 
-	.bottom-info {
+	.d-bottom-info {
 		margin-right: 10px;
 	}
 
-	.bottom-hot-keys {
+	.d-bottom-hot-keys {
 		margin-right: 10px;
 
-		.bottom-hot-key-list {
+		.d-bottom-hot-key-list {
 			left: 50%;
 			bottom: 100%;
 			transform: translate3d(-50%, -20px, 0);
@@ -88,23 +88,23 @@
 					margin-right: auto;
 				}
 
-				.name {
+				.d-bottom-name {
 					text-align: right;
 					padding: 3px 10px;
 					letter-spacing: 0;
 				}
 
-				.key-code {
+				.d-bottom-key-code {
 					padding-right: 10px;
 				}
 
-				.hot-key-img {
+				.d-bottom-hot-key-img {
 					width: 22px;
 					padding: 0 2px;
 					text-align: center;
 				}
 
-				.hot-key-text {
+				.d-bottom-hot-key-text {
 					border: 1px solid #ddd;
 					min-width: 22px;
 					padding: 0 4px;
@@ -112,16 +112,13 @@
 					font-style: normal;
 					border-radius: 2px;
 				}
-
-				.hot-key-item {
-				}
 			}
 		}
 
 		&:hover {
 			color: $white;
 
-			.bottom-hot-key-list {
+			.d-bottom-hot-key-list {
 				opacity: 1;
 				transform: translate3d(-50%, -10px, 0);
 			}
