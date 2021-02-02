@@ -11,7 +11,7 @@
 			dRightModal
 		},
 	})
-	export default class DFullScene extends Vue {
+	export default class DRightFullScene extends Vue {
 		platform: any = platform.state
 		
 		handleFullscreen(){

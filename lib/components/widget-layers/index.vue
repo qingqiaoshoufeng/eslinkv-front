@@ -3,12 +3,7 @@
 		 @click.stop
 		 @keyup.46.stop
 		 @mouseleave="$emit('hover-widget', null)">
-		<header class="header text-center" @mousemove.stop>
-			小工具清单
-			<!--<div>-->
-			<!--<Button size="small" type="default" class="import" @click="$emit('import-widgets')">导入小工具</Button>-->
-			<!--</div>-->
-		</header>
+		<header class="header text-center">小工具清单</header>
 		<div class="widget-list-wrapper pos-r">
 			<div class="widget-list pos-r" v-if="filteredWidgets.length">
 				<template v-for="widget in filteredWidgets">

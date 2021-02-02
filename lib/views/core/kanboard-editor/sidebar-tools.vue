@@ -7,24 +7,25 @@
 		<!-- 组件配置 -->
 		<d-right-manage/>
 		<!-- 小工具清单 -->
-		<i-icon type="ios-apps" class="editor-icon pos-a pointer" size="28" title="小工具清单"
-				@click="toggleSidebarTool('showLayers')"
-				:class="{ active: showLayers }"/>
-		<widget-layers
-			v-show="showLayers"
-			:widgets="layerWidgets"
-			@lock-widget="kanboardEditor.handleLayerWidgetLock"
-			@delete-widget="kanboardEditor.handleLayerWidgetDelete"
-			@hide-widget="kanboardEditor.handleLayerWidgetHide"
-			@hover-widget="kanboardEditor.handleLayerWidgetHover"
-			@active-widget="kanboardEditor.handleLayerWidgetActive"
-			@update-widget-name="kanboardEditor.handleLayerWidgetNameUpdate"
-			@update-widget-z-index="kanboardEditor.handleLayerWidgetZIndexUpdate"
-			@import-widgets="
-          kanboardEditor.showWidgetsImport = true;
-          showLayers = false
-        "
-		></widget-layers>
+		<d-right-widget/>
+		<!--		<i-icon type="ios-apps" class="editor-icon pos-a pointer" size="28" title="小工具清单"-->
+		<!--				@click="toggleSidebarTool('showLayers')"-->
+		<!--				:class="{ active: showLayers }"/>-->
+		<!--		<widget-layers-->
+		<!--			v-show="showLayers"-->
+		<!--			:widgets="layerWidgets"-->
+		<!--			@lock-widget="kanboardEditor.handleLayerWidgetLock"-->
+		<!--			@delete-widget="kanboardEditor.handleLayerWidgetDelete"-->
+		<!--			@hide-widget="kanboardEditor.handleLayerWidgetHide"-->
+		<!--			@hover-widget="kanboardEditor.handleLayerWidgetHover"-->
+		<!--			@active-widget="kanboardEditor.handleLayerWidgetActive"-->
+		<!--			@update-widget-name="kanboardEditor.handleLayerWidgetNameUpdate"-->
+		<!--			@update-widget-z-index="kanboardEditor.handleLayerWidgetZIndexUpdate"-->
+		<!--			@import-widgets="-->
+		<!--          kanboardEditor.showWidgetsImport = true;-->
+		<!--          showLayers = false-->
+		<!--        "-->
+		<!--		></widget-layers>-->
 	</div>
 </template>
 <script>
@@ -32,6 +33,7 @@
 	import dRightScene from '../../../components/d-right-scene'
 	import dRightFullScreen from '../../../components/d-right-full-screen'
 	import dRightManage from '../../../components/d-right-manage'
+	import dRightWidget from '../../../components/d-right-widget'
 	import {Icon} from 'view-design'
 	import platform from '../../../store/platform.store'
 
@@ -42,7 +44,8 @@
 			'i-icon': Icon,
 			dRightScene,
 			dRightFullScreen,
-			dRightManage
+			dRightManage,
+			dRightWidget
 		},
 		props: {
 			layerWidgets: {

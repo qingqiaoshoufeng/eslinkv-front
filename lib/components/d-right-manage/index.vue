@@ -16,7 +16,7 @@
 			itemList, dRightModal
 		},
 	})
-	export default class DManage extends Vue {
+	export default class DRightManage extends Vue {
 		tabIndex: number = 0
 		platform = platform.state
 		list: any = [
