@@ -1,6 +1,7 @@
 import {Input, InputNumber, Select, Option, Switch, ColorPicker, Collapse, Panel, Button, CheckboxGroup, Checkbox  } from 'view-design'
 import {Component, Vue, Prop} from 'vue-property-decorator'
 import platform from '../store/platform.store'
+import scene from '../store/scene.store'
 
 const editor = require('vue2-ace-editor')
 
@@ -22,6 +23,7 @@ const editor = require('vue2-ace-editor')
 })
 export default class Func extends Vue {
 	platform = platform.state
+	scene = scene.state
 	@Prop() config
 
 	get item() {
