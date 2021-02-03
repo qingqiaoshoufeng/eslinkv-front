@@ -6,7 +6,7 @@
 </template>
 
 <script>
-	import kanbanPreview from './preview-base.vue'
+	import kanbanPreview from '../preview-base.vue'
 	import {getQueryString} from '../../utils'
 	import platform from '../../store/platform.store'
 	import scene from '../../store/scene.store'

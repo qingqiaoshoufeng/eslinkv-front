@@ -8,7 +8,7 @@
 </template>
 
 <script>
-	import kanbanPreview from './preview-base.vue'
+	import kanbanPreview from '../preview-base.vue'
 	import {getQueryString, setDefault} from '../../utils'
 	import {Input, Modal, Form, FormItem} from 'view-design'
 	import platform from '../../store/platform.store'
