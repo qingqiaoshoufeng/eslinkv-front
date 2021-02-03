@@ -1,25 +1,18 @@
-<template>
-	<ul class="right-menu pos-f" ref="rightMenu" @contextmenu.stop.prevent>
-		<li :class="{disabled: rightMenuGrid}">
-			层叠 <span class="suffix">当前 {{ zIndexMap[rightMenuBindWidgetId] }}</span>
-			<ul class="sub-menu pos-a">
-				<li @click="updateWidgetZIndex(1)">上移一层</li>
-				<li :class="{ disabled: zIndexMap[rightMenuBindWidgetId] === 0 }" @click="updateWidgetZIndex(-1)">下移一层
-				</li>
-				<li @click="updateWidgetZIndex('top')">置顶</li>
-				<li :class="{ disabled: zIndexMap[rightMenuBindWidgetId] === 0 }" @click="updateWidgetZIndex('bottom')">
-					置底
-				</li>
-			</ul>
-		</li>
-		<li @click="copyWidget">复制</li>
-		<li :class="{disabled: rightMenuBindWidgetId !== activatedWidgetId}"
-			@click="deactivateWidget(activatedWidgetId)">
-			取消选定
-		</li>
-		<li @click="toggleWidgetLock">{{ isWidgetLocked ? '解锁' : '锁定' }}</li>
-		<li :class="{disabled: rightMenuGrid}" @click="hideWidget">隐藏</li>
-		<li :class="{disabled: rightMenuBindWidgetId !== activatedWidgetId || rightMenuGrid}" @click="deleteWidget">删除</li>
+<template lang="pug">
+	ul.right-menu.pos-f(ref="rightMenu" @contextmenu.stop.prevent)
+		li(:class="{disabled: rightMenuGrid}")
+			span 层叠 
+			span.suffix 当前 {{ zIndexMap[rightMenuBindWidgetId] }}
+			ul.sub-menu.pos-a
+				li(@click="updateWidgetZIndex(1)") 上移一层
+				li(:class="{ disabled: zIndexMap[rightMenuBindWidgetId] === 0 }" @click="updateWidgetZIndex(-1)") 下移一层
+				li(@click="updateWidgetZIndex('top')") 置顶
+				li(:class="{ disabled: zIndexMap[rightMenuBindWidgetId] === 0 }" @click="updateWidgetZIndex('bottom')") 置底
+		li(@click="copyWidget") 复制
+		li(:class="{disabled: rightMenuBindWidgetId !== activatedWidgetId}" @click="deactivateWidget(activatedWidgetId)") 取消选定
+		li(@click="toggleWidgetLock") {{ isWidgetLocked ? '解锁' : '锁定' }}
+		li(:class="{disabled: rightMenuGrid}" @click="hideWidget") 隐藏
+		li(:class="{disabled: rightMenuBindWidgetId !== activatedWidgetId || rightMenuGrid}" @click="deleteWidget") 删除
 	</ul>
 </template>
 <script>

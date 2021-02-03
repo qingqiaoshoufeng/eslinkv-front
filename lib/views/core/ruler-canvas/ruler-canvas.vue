@@ -57,6 +57,7 @@
 	import contentDrag from './content-drag'
 	import guideDrag from './guide-drag'
 	import zoom from './zoom'
+	import platform from '../../../store/platform.store'
 
 	export default {
 		name: 'VRuler',
@@ -112,6 +113,7 @@
 		},
 		data() {
 			return {
+				platform: platform.state,
 				size: 18,
 				windowWidth: 0, // 窗口宽度
 				windowHeight: 0, // 窗口高度
@@ -133,7 +135,7 @@
 				let hCount = 0;
 				let vCount = 0;
 				const {left, top} = this.contentLayout
-				return this.value.map((item) => {
+				return this.platform.guideLines.map((item) => {
 					const isH = item.type === 'h'
 					const site = item.site
 					const value = site - (isH ? top : left)
