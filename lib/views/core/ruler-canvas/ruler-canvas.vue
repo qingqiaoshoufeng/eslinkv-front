@@ -6,7 +6,7 @@
 		 @dblclick="resetZoomAndMove">
 		<ruler
 			:locked="lockGuides"
-			:show="platform.rulerVisible"
+			:show="platform.ruler.rulerVisible"
 			:xScale="xScale"
 			:yScale="yScale"
 			:hrWidth="rulerRange * 1.5"
@@ -22,7 +22,7 @@
 			:zoom="zoom"
 		></ruler>
 		<guides
-			v-show="platform.rulerVisible"
+			v-show="platform.ruler.rulerVisible"
 			:vGuideTop="verticalDottedTop"
 			:hGuideLeft="horizontalDottedLeft"
 			:contentMove="contentMove"
@@ -45,8 +45,8 @@
 				<slot/>
 			</div>
 		</div>
-		<div v-show="platform.rulerVisible" class="zoom-tip">ZOOM: {{ zoom }}</div>
-		<div v-show="platform.rulerVisible" :class="{ active: lockGuides }" class="guides-locked">已锁定</div>
+		<div v-show="platform.ruler.rulerVisible" class="zoom-tip">ZOOM: {{ zoom }}</div>
+		<div v-show="platform.ruler.rulerVisible" :class="{ active: lockGuides }" class="guides-locked">已锁定</div>
 		<div v-show="isDrag" class="vue-ruler-content-mask"></div>
 	</div>
 </template>
@@ -135,7 +135,7 @@
 				let hCount = 0;
 				let vCount = 0;
 				const {left, top} = this.contentLayout
-				return this.platform.guideLines.map((item) => {
+				return this.platform.ruler.guideLines.map((item) => {
 					const isH = item.type === 'h'
 					const site = item.site
 					const value = site - (isH ? top : left)
