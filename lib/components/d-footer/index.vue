@@ -1,7 +1,7 @@
 <template lang="pug">
 	.d-footer.fn-flex
 		.d-footer-left.fn-flex
-			span.d-footer-title {{ platform.info.name }}
+			span.d-footer-title {{ platform.info ? platform.info.name : '' }}
 		.d-footer-right.fn-flex
 			span(style="padding-right: 25px")
 				a.doc-link.fn-flex.flex-row(title="使用文档" @click="handleClick")
@@ -10,30 +10,249 @@
 			i-button(@click="exit") 返回
 			i-button(@click="preview") 预览
 			i-button(type="primary" @click="editBoard" :loading="loading") 保存
-			i-button(@click="publishBoard" :loading="loading") 发布
+			i-button(@click="publishBoard" :loading="loading" v-if="!isNew") 发布
 			i-button(@click="exportKanboardData" :loading="loading") 导出
-			i-button(@click="showImportModal" :loading="loading") 导入
+			i-button(@click="importModal=true" :loading="loading") 导入
+		load-mask(:show="saving") 正在保存数据…
+		Modal(v-model="importModal")
+			Form
+				FormItem
+					label(for="originFile" class="style-file-input") 全覆盖导入
+					input(class="fn-hide" id="originFile" type="file" accept="application/json" @change="handleFile")
 </template>
 <script lang="ts">
-	import {Vue, Component} from 'vue-property-decorator'
-	import {Icon, Button} from 'view-design'
+	import {Vue, Component, Prop} from 'vue-property-decorator'
+	import {Icon, Button, Input, Modal, Form, FormItem} from 'view-design'
 	import platform from '../../store/platform.store'
 	import scene from '../../store/scene.store'
 	import commonConfigValue from '../../views/core/widgets/parts/lib/common-config-value'
 	import copy from 'fast-copy'
 	import format from 'date-fns/format'
 	import {isObjectString} from '../../utils'
+	import loadMask from '../load-mask'
+	import downloadFile from '../../vendor/download-file'
 
 	@Component({
-		components: {'i-icon': Icon},
-		components: {'i-button': Button},
+		components: {
+			'i-icon': Icon,
+			'i-button': Button,
+			loadMask,
+			Modal,
+			Form,
+			FormItem,
+		},
 	})
 	export default class DFooter extends Vue {
+		@Prop(Boolean) kanboardEdited: boolean
 		platform = platform.state
 		scene = scene.state
-
+		saving = false
+		loading = false
+		importModal = false
+		isNew = true
+		
 		handleClick() {
 			window.open(`${location.origin}${location.pathname}#/help/HowToUseMarket`)
+		}
+
+		handleFile(e) {
+			const file = e.target.files[0];
+			const reader = new FileReader();
+			reader.onload = e => {
+				try {
+					this.loading = true;
+					const result = JSON.parse(e.target.result);
+					const { data, createTime, name } = result;
+					this.$parent.renderByDetail({ name, attribute: data, createTime });
+					this.importModal = false
+					this.loading = false;
+				} catch (e) {
+					this.$Message.error('配置文件识别失败');
+				}
+			};
+			reader.onerror = () => {
+				this.$Message.error('配置文件识别失败');
+			};
+			reader.readAsText(file);
+		}
+
+		exportKanboardData() {
+			const data = this.$parent.$refs.kanboardEditor.prepareKanboardData()
+			let fileName = `${data.name}-${new Date() * 1}`
+			this.$Modal.confirm({
+				title: '看板导出',
+				components: {
+					'i-input': Input,
+				},
+				render: (h) => {
+					return h(
+						'div',
+						{
+							class: 'form-wrapper'
+						},
+						[
+							h(
+								'p',
+								'导出功能用于看板数据备份、迁移。'
+							),
+							h(
+								'div',
+								{
+									class: 'form-item'
+								},
+								[
+									h(
+										'label',
+										{
+											class: 'form-label text-right'
+										},
+										'文件名称'
+									),
+									h(
+										'span',
+										`${fileName}.json`
+									)
+								]
+							)
+						]
+					)
+				},
+				onOk: () => {
+					const config = {...data}
+					config.data = JSON.parse(config.attribute)
+					delete config.attribute
+					downloadFile(config, fileName, 'json')
+				},
+				onCancel: () => {
+				},
+				okText: '确定',
+				cancelText: '取消'
+			})
+		}
+
+		publishBoard () {
+			if (this.kanboardEdited) {
+				this.$Message.warning('请先保存看板！')
+				return
+			}
+			this.$Modal.confirm({
+				title: '提示',
+				content: '确认发布此看板吗？',
+				loading: true,
+				onOk: () => {
+					console.log(this.$parent)
+					this.$api.board.publish({ id: this.$parent.kanboardId }).then(res => {
+						if (res.responseCode == 100000) {
+							this.$Message.success('发布成功！')
+							this.$emit('update-kanboard-list')
+							this.exit()
+						}
+						this.$Modal.remove()
+					}).catch((err) => {
+						this.$Modal.remove()
+					});
+				}
+			})
+		}
+		
+		// 新建看板
+		saveBoard(data) {
+			this.loading = true;
+			this.$api.board
+				.add(data)
+				.then(res => {
+					this.kanboardEdited = false;
+					this.$Message.success('保存成功！');
+					this.loading = false;
+					this.$router.back();
+				})
+				.catch(() => {
+					this.loading = false;
+				});
+		}
+		
+		async addBoard() {
+			const data = this.$parent.$refs.kanboardEditor.prepareKanboardData()
+			// 数据类型：0:看板, 1:小工具模板, 2:参考线模板
+			data.type = 0;
+			this.$Modal.confirm({
+				title: '快照',
+				content: '是否创建看板快照？',
+				onOk: async () => {
+					const snapshot = await this.capture({
+						selector: '#kanban',
+					}).catch(e => {
+						console.warn('快照创建失败', e);
+					});
+					if (snapshot) data.snapshot = snapshot;
+					this.saveBoard(data);
+				},
+				onCancel: () => {
+					this.saveBoard(data);
+				},
+				okText: '创建',
+				cancelText: '跳过',
+			});
+		}
+
+		// 修改看板
+		editBoard() {
+			if (this.isNew) {
+				this.addBoard()
+				return
+			}
+			const data = this.$parent.$refs.kanboardEditor.prepareKanboardData()
+			this.$Modal.confirm({
+				title: '快照',
+				content: '是否更新看板快照？',
+				onOk: async () => {
+					const snapshot = await this.capture({selector: '#kanban'}).catch(e => {
+						console.warn('快照创建失败', e)
+					})
+					if (snapshot) data.snapshot = snapshot
+					this.submitKanboard(data)
+				},
+				onCancel: () => {
+					this.submitKanboard(data)
+				},
+				okText: '更新',
+				cancelText: '跳过'
+			})
+		}
+
+		submitKanboard(data) {
+			this.saving = true
+			const {params: {id}} = this.$route
+			data.type = 0 // 数据类型：0:看板, 1:小工具模板, 2:参考线模板
+			this.$api.board.update({...data, id}).then((res) => {
+				this.kanboardEdited = false
+				this.$Message.success('修改成功')
+				this.loading = false
+				this.saving = false
+			}).catch(() => {
+				this.loading = false
+				this.saving = false
+			})
+		}
+
+		preview() {
+			this.$emit('previewOpen')
+			const data = this.$parent.$refs.kanboardEditor.prepareKanboardData().attribute
+			this.$router.push({name: this.isNew ? 'big-data-new-preview' : 'big-data-edit-preview', params: {data}})
+		}
+
+		exit () {
+			if (this.kanboardEdited) {
+				this.$Modal.confirm({
+					title: '提示',
+					content: '看板已编辑，关闭窗口将丢失未保存的数据，确认关闭吗？',
+					onOk: () => {
+						this.$router.replace({ name: 'big-data-list' })
+					}
+				})
+				return
+			}
+			this.$router.go(-1)
 		}
 
 		getAttr(o, str) {
@@ -112,11 +331,9 @@
 
 		mounted() {
 			const {params: {id}} = this.$route
+			this.isNew = !id
 			// todo 通过name/id 判断是否是new/edit/local/full/detail 显示不同的button
-			console.log(id)
 		}
-
-
 	}
 </script>
 <style lang="scss" scoped>

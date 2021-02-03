@@ -4,27 +4,18 @@
 			<core v-if="ready" ref="kanboardEditor" :class="{ screenshot: screenshotCreating }"
 				  @kanboard-edited="kanboardEdited = true"/>
 			<load-mask :show="screenshotCreating || querying">{{ querying ? '请求看板数据…' : '正在生成快照…' }}</load-mask>
-			<load-mask :show="saving">正在保存数据…</load-mask>
 		</div>
-		<d-footer>
-			<span slot="left" class="d-footer-title">{{ kanboardName }}</span>
-			<div slot="right">
-				<Button type="default" @click="exit">返回</Button>
-				<Button type="default" @click="preview">预览</Button>
-				<Button type="primary" @click="editBoard" :loading="loading">保存</Button>
-				<Button type="default" @click="publishBoard" :loading="loading">发布</Button>
-				<Button type="default" @click="exportKanboardData" :loading="loading">导出</Button>
-				<Button type="default" @click="showImportModal" :loading="loading">导入</Button>
-			</div>
+		<d-footer :kanboardEdited="kanboardEdited" @previewOpen="previewOpen = true">
+<!--			<span slot="left" class="d-footer-title">{{ kanboardName }}</span>-->
+<!--			<div slot="right">-->
+<!--				<Button type="default" @click="exit">返回</Button>-->
+<!--				<Button type="default" @click="preview">预览</Button>-->
+<!--				<Button type="primary" @click="editBoard" :loading="loading">保存</Button>-->
+<!--				<Button type="default" @click="publishBoard" :loading="loading">发布</Button>-->
+<!--				<Button type="default" @click="exportKanboardData" :loading="loading">导出</Button>-->
+<!--				<Button type="default" @click="showImportModal" :loading="loading">导入</Button>-->
+<!--			</div>-->
 		</d-footer>
-		<Modal v-model="importModal">
-			<Form>
-				<FormItem>
-					<label for="originFile" class="style-file-input">全覆盖导入</label>
-					<input class="fn-hide" id="originFile" type="file" accept="application/json" @change="handleFile"/>
-				</FormItem>
-			</Form>
-		</Modal>
 		<transition name="preview-fade">
 			<div v-if="previewOpen" class="preview-wrapper">
 				<router-view @close="previewBack"></router-view>
@@ -40,7 +31,6 @@
 	import * as widgetBindManager from '../mixins/widget-bind-manage'
 	import dFooter from '../../components/d-footer'
 	import {Button, Input, Modal, Form, FormItem} from 'view-design'
-	import downloadFile from '../../vendor/download-file'
 	import '@/components-market'
 	import platform from '../../store/platform.store'
 	import scene from '../../store/scene.store'
@@ -67,112 +57,17 @@
 		},
 		data() {
 			return {
-				importModal: false,
 				ready: false,
-				loading: false,
 				querying: true,
-				saving: false,
 				kanboardName: '',
 				previewOpen: false,
 				platform: platform.state,
 			};
 		},
 		methods: {
-			handleFile(e) {
-				const file = e.target.files[0]
-				const reader = new FileReader()
-				reader.onload = (e) => {
-					try {
-						this.loading = true
-						const result = JSON.parse(e.target.result)
-						const {data, name} = result
-						this.renderByDetail({name, attribute: data})
-						this.importModal = false
-						this.loading = false
-					} catch (e) {
-						this.$Message.error('配置文件识别失败')
-					}
-				}
-				reader.onerror = () => {
-					this.$Message.error('配置文件识别失败')
-				}
-				reader.readAsText(file)
-			},
-			showImportModal() {
-				this.importModal = true
-			},
-			exportKanboardData() {
-				const data = this.$refs.kanboardEditor.prepareKanboardData()
-				let fileName = `${data.name}-${new Date() * 1}`
-				this.$Modal.confirm({
-					title: '看板导出',
-					components: {
-						'i-input': Input,
-					},
-					render: (h) => {
-						return h(
-							'div',
-							{
-								class: 'form-wrapper'
-							},
-							[
-								h(
-									'p',
-									'导出功能用于看板数据备份、迁移。'
-								),
-								h(
-									'div',
-									{
-										class: 'form-item'
-									},
-									[
-										h(
-											'label',
-											{
-												class: 'form-label text-right'
-											},
-											'文件名称'
-										),
-										h(
-											'span',
-											`${fileName}.json`
-										)
-									]
-								)
-							]
-						)
-					},
-					onOk: () => {
-						const config = {...data}
-						config.data = JSON.parse(config.attribute)
-						delete config.attribute
-						downloadFile(config, fileName, 'json')
-					},
-					onCancel: () => {
-					},
-					okText: '确定',
-					cancelText: '取消'
-				})
-			},
 			previewBack() {
 				this.previewOpen = false
 				this.$router.back()
-			},
-			submitKanboard(data) {
-				this.saving = true
-				const {params: {id}} = this.$route
-				data.type = 0 // 数据类型：0:看板, 1:小工具模板, 2:参考线模板
-				this.$api.board.update({...data, id}).then((res) => {
-					this.kanboardEdited = false
-					this.$Message.success('修改成功')
-					this.loading = false
-					this.showAddBoard = false
-					this.getKanboardList()
-					this.saving = false
-				}).catch(() => {
-					this.loading = false
-					this.saving = false
-				})
 			},
 			renderByDetail(res) {
 				const {attribute, name} = res
@@ -191,26 +86,6 @@
 				platform.actions.initPlatform(value)
 				this.$refs.kanboardEditor.refillConfig()
 			},
-			// 修改看板
-			editBoard() {
-				const data = this.$refs.kanboardEditor.prepareKanboardData()
-				this.$Modal.confirm({
-					title: '快照',
-					content: '是否更新看板快照？',
-					onOk: async () => {
-						const snapshot = await this.capture({selector: '#kanban'}).catch(e => {
-							console.warn('快照创建失败', e)
-						})
-						if (snapshot) data.snapshot = snapshot
-						this.submitKanboard(data)
-					},
-					onCancel: () => {
-						this.submitKanboard(data)
-					},
-					okText: '更新',
-					cancelText: '跳过'
-				})
-			},
 			init() {
 				const {params: {id}} = this.$route
 				this.querying = true
@@ -220,11 +95,6 @@
 					this.renderByDetail(res)
 				})
 			},
-			preview() {
-				this.previewOpen = true
-				const data = this.$refs.kanboardEditor.prepareKanboardData().attribute
-				this.$router.push({name: 'big-data-edit-preview', params: {data}})
-			}
 		},
 		watch: {
 			previewOpen(value) {
