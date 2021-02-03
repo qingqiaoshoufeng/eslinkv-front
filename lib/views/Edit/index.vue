@@ -209,15 +209,14 @@
 					},
 					okText: '更新',
 					cancelText: '跳过'
-				});
+				})
 			},
-			queryKanboard() {
+			init() {
+				const {params: {id}} = this.$route
 				this.querying = true
 				this.ready = true
-				const {params: {id}} = this.$route
-				const dataBoardId = id
-				this.platform.panelConfig.id = id
-				this.$api.board.detail({dataBoardId}).then(res => {
+				platform.actions.setId(id)
+				this.$api.board.detail({dataBoardId: id}).then(res => {
 					this.renderByDetail(res)
 				})
 			},
@@ -239,8 +238,7 @@
 			}
 		},
 		mounted() {
-			document.title = '编辑 - 数据看板'
-			this.queryKanboard()
+			this.init()
 		}
 	}
 </script>

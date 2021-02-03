@@ -63,8 +63,7 @@
 			queryKanboard() {
 				const {params: {id}} = this.$route
 				if (id) {
-					const dataBoardId = id
-					this.$api.board.detail({dataBoardId}).then(res => {
+					this.$api.board.detail({dataBoardId:id}).then(res => {
 						const value = JSON.parse(res.attribute)
 						platform.actions.initPlatform(value)
 						this.refill(value)

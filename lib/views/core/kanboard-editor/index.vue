@@ -218,16 +218,6 @@
 			:deactivateWidget="deactivateWidget"
 			:activatedWidgetId="activatedWidgetId"
 			:deleteWidget="deleteWidget"/>
-		<!-- 布局格子配置面板 -->
-		<transition name="fade">
-			<div ref="gridConfigPanelWrapper" v-show="showGridConfigPanel" :style="gridConfigPanelStyle"
-				 class="grid-config-panel-wrapper" @keyup.stop>
-				<config-panel ref="gridConfigPanel" v-model="currentGridValue" :source="gridConfigSource"/>
-				<div class="top-toolbar">
-					<div>{{ !isGridConfig ? '小工具配置' : '布局格子配置' }}</div>
-				</div>
-			</div>
-		</transition>
 		<!-- 数仓配置面板 -->
 		<database-config
 			ref="dataBaseConfig"
@@ -239,12 +229,12 @@
 		<!-- 数据加工 js 编辑器 -->
 		<js-editor-modal ref="jsEditorModal" :showModal="showJsEditorModal" @close="showJsEditorModal = false"
 						 @update="updateProcessBody" @keyup.native.stop/>
-		<sidebar-tools ref="sidebarTools" :layerWidgets="layerWidgets" @handleActivated="activatedFromSidebar"/>
-		<!-- 小工具导入 -->
-		<transition name="fade">
-			<import-widgets v-if="showWidgetsImport" @close="showWidgetsImport = false"
-							@import-widgets="handleImportWidgets"/>
-		</transition>
+		<!-- 画布全屏 -->
+		<d-right-full-screen/>
+		<!-- 组件配置 -->
+		<d-right-manage/>
+		<!-- 小工具清单 -->
+		<d-right-widget/>
 		<!-- 全局 api 执行器 -->
 		<api-executor v-for="api in apis" :key="api.variable" :api="api"
 					  @api-data-update="(data) => handleApiDataUpdate(api.variable, data)"/>
@@ -253,7 +243,6 @@
 <script>
 	import rightMenu from '../../../components/right-menu'
 	import rulerCanvas from '../ruler-canvas/ruler-canvas.vue'
-	import configPanel from '../config-panel'
 	import fields from '../config-panel/components/fields'
 	import Vue from 'vue'
 	import vdr from 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable'
@@ -276,14 +265,14 @@
 	import globalApi from './global-api/mixin'
 	import widgetShareData from './mixins/widget-share-data'
 	import crossFrameMessageParamBind from './mixins/cross-frame-message-param-bind'
-	import importWidgets from '../../../components/widget-layers/import-widgets'
 	import databaseConfig from './data-warehouse/index.vue'
 	import jsEditorModal from './js-editor-modal.vue'
 	import gridItem from './layout-grid/grid.vue'
-	import sidebarTools from './sidebar-tools.vue'
+	import dRightFullScreen from '../../../components/d-right-full-screen'
+	import dRightManage from '../../../components/d-right-manage'
+	import dRightWidget from '../../../components/d-right-widget'
 	import {Icon} from 'view-design'
 	// config-panel 与 fields 互相引用，须提前注册为 Vue 组件
-	Vue.component('config-panel', configPanel)
 	Vue.component('fields', fields)
 	import platform from '../../../store/platform.store'
 
@@ -295,19 +284,17 @@
 			configEventHandler, editorEventHandler, layoutGridMixin,
 			positionSize, layerOperation, globalApi,
 			widgetShareData, crossFrameMessageParamBind,
-			rulerGuides, combination, importWidgets
+			rulerGuides, combination
 		],
 		components: {
 			Icon,
 			parts,
 			rulerCanvas,
-			configPanel,
 			vdr,
-			dBottomBar,
 			databaseConfig,
 			jsEditorModal,
 			gridItem,
-			sidebarTools,
+			dRightFullScreen,dRightManage,dRightWidget,dBottomBar,
 			rightMenu
 		},
 		provide() {
@@ -388,7 +375,6 @@
 				}
 				this.$refs.rightMenu && this.$refs.rightMenu.$el.classList.remove('active')
 				this.activeGridId = null
-				this.sidebarTools.hideSidebarTools()
 			}
 		},
 		computed: {
