@@ -75,7 +75,7 @@
 				}
 			},
 			refill(value) {
-				this.$refs.previewContainer.refillConfig(value).then(() => {
+				this.$refs.previewContainer.refillConfig().then(() => {
 					this.ready = true
 				})
 			},
