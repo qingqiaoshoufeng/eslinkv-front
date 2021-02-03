@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import dSvg from '../components/d-icon/index.vue'
 
-// register globally
 Vue.component('d-svg', dSvg)
 
 const req = require.context('./svg', false, /\.svg$/)

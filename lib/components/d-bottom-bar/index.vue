@@ -3,8 +3,8 @@
 		label.d-bottom-info.fn-flex.flex-row(v-if="platform.panelConfig.info")
 			i-icon(type="md-information-circle" size="18")
 			span {{ platform.panelConfig.size.width}}×{{platform.panelConfig.size.height}}{{ platform.panelConfig.size.unit}}
-		label.d-bottom-hot-keys.pos-r
-			span.pointer 快捷键
+		label.d-bottom-hot-keys.pos-r.fn-flex.flex-row
+			d-svg.pointer(icon-class="keyboard" title="快捷键")
 			.d-bottom-hot-key-list.pos-a
 				ul
 					li.fn-flex.flex-row(v-for="item in platform.hotKeys" :key="item.name")
