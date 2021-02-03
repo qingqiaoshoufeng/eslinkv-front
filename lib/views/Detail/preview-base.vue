@@ -51,6 +51,7 @@
     import * as widgetBindManager from '../mixins/widget-bind-manage'
     import loadMask from '../../components/load-mask'
     import platform from '../../store/platform.store'
+    import scene from '../../store/scene.store'
 
     export default {
         name: 'kanboard-editor',
@@ -65,7 +66,7 @@
         data() {
             return {
                 platform: platform.state,
-                store: window.GoldChart.store,
+				scene: scene.state,
                 querying: true,
                 refilling: false,
                 refillPercent: 0,
@@ -123,25 +124,15 @@
             },
             canvasStyle() {
                 const val = styleParser(this.platform.panelConfig)
-                // const {width, height} = this.platform.panelConfig.size
-                // const {url, size, position, repeat, color} = this.platform.panelConfig.background
-                // const dom = this.$refs['canvas-wrapper']
-                // dom.style.style.width = `${width}${unit}`
-                // dom.style.style.height = `${height}${unit}`
-                // dom.style.style.backgroundImage = `url(${url})`
-                // dom.style.style.backgroundColor = `${color}`
-                // dom.style.style.backgroundPosition = `${position}`
-                // dom.style.style.backgroundRepeat = `${repeat}`
-                // dom.style.style.backgroundSzie = `${size}`
                 if (val) {
                     this.$emit('mounted', val)
                 }
                 return val
             },
             showParts(item) {
-                if (item.scene === 0 && this.store.scene.showMainScene) {
+                if (item.scene === 0 && this.scene.showMainScene) {
                     return true
-                } else if (item.scene === this.store.scene.index) {
+                } else if (item.scene === this.scene.index) {
                     return true
                 }
                 return false

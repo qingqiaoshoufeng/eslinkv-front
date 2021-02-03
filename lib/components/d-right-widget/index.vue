@@ -20,14 +20,22 @@
 						span 删除场景
 		ul.d-scrollbar.d-widget-list
 			li.pointer.pos-r(v-for="item in list" :class="[{active:platform.chooseWidgetId===item.id}]" :key="item.id" @click="handleChoose(item.id)")
-				.d-widget-line.fn-flex.flex-row
-					i-icon(:type="`md-eye${item.config.widget.hide ? '-off' : ''}`" :title="!item.config.widget.hide ? '隐藏' : '显示'" @click="handleTaggerHide(item.id)")
-					i-icon(:type="`md-${item.config.widget.locked ? '' : 'un'}lock`" :title="!item.config.widget.locked ? '锁定' : '解锁'" @click="handleTaggerLock(item.id)")
-					i-icon(type="md-trash" title="删除" @click="handleDelete(item.id)")
-					h3 TYPE: {{item.config.widget.name}}
-				.d-widget-line.fn-flex.flex-row
-					h2 {{item.type}}
-					p ID: {{item.id}}
+				.fn-flex.flex-row
+					.d-widget-left
+						.fn-flex.flex-column
+							.fn-flex-row
+								i-icon(:type="`md-eye${item.config.widget.hide ? '-off' : ''}`" :title="!item.config.widget.hide ? '隐藏' : '显示'" @click="handleTaggerHide(item.id)" @click.stop)
+								i-icon(:type="`md-${item.config.widget.locked ? '' : 'un'}lock`" :title="!item.config.widget.locked ? '锁定' : '解锁'" @click="handleTaggerLock(item.id)" @click.stop)
+								i-icon(type="md-trash" title="删除" @click="handleDelete(item.id)" @click.stop)
+							h2 {{item.type}}
+					.d-widget-middle
+						.fn-flex.flex-column
+							h3 TYPE: {{item.config.widget.name}}
+							p ID: {{item.id}}
+					.d-widget-right.fn-flex.flex-column
+						i-icon(type="ios-arrow-dropup" @click="handleUpZIndex(item.id)" @click.stop)
+						span {{item.config.layout.zIndex}}
+						i-icon(type="ios-arrow-dropdown" @click="handleDownZIndex(item.id)" @click.stop)
 </template>
 <script lang="ts">
 	import dRightModal from '../d-right-modal'
@@ -68,6 +76,14 @@
 			this.total = total
 			this.have = have
 			return list
+		}
+
+		handleUpZIndex(id) {
+			this.platform.widgetAdded[id].config.layout.zIndex++
+		}
+
+		handleDownZIndex(id) {
+			this.platform.widgetAdded[id].config.layout.zIndex--
 		}
 
 		handleSetScene(name) {
@@ -159,18 +175,8 @@
 				}
 			}
 
-			.ivu-icon {
-				font-size: 14px;
-				margin-right: 4px;
-
-				&:hover {
-					color: $themeColor;
-				}
-			}
-
 			h3, p {
 				font-weight: normal;
-				margin-left: auto;
 				font-size: 12px;
 			}
 
@@ -217,8 +223,27 @@
 			}
 		}
 
-		.d-widget-line {
+		.d-widget-left, .d-widget-middle, .d-widget-right {
 			align-items: center;
+		}
+
+		.d-widget-left {
+			width: 150px;
+
+			.ivu-icon {
+				font-size: 14px;
+				margin-right: 4px;
+
+				&:hover {
+					color: $themeColor;
+				}
+			}
+		}
+
+		.d-widget-right {
+			justify-content: center;
+			font-weight: bold;
+			margin-left: auto;
 		}
 	}
 </style>

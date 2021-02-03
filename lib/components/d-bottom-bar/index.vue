@@ -2,7 +2,7 @@
 	.d-bottom-bar.fn-flex.flex-row.pos-a(v-show="platform.rulerVisible")
 		label.d-bottom-info.fn-flex.flex-row(v-if="platform.panelConfig.info")
 			i-icon(type="md-information-circle" size="18")
-			span {{ platform.panelConfig.info.name }} / {{ platform.panelConfig.size.width}}×{{platform.panelConfig.size.height}}{{ platform.panelConfig.size.unit}}
+			span {{ platform.panelConfig.size.width}}×{{platform.panelConfig.size.height}}{{ platform.panelConfig.size.unit}}
 		label.d-bottom-hot-keys.pos-r
 			span.pointer 快捷键
 			.d-bottom-hot-key-list.pos-a

@@ -5,29 +5,10 @@
 		<!-- 组件配置 -->
 		<d-right-manage/>
 		<!-- 小工具清单 -->
-		<d-right-widget v-on="$listeners"/>
-		<!--		<i-icon type="ios-apps" class="editor-icon pos-a pointer" size="28" title="小工具清单"-->
-		<!--				@click="toggleSidebarTool('showLayers')"-->
-		<!--				:class="{ active: showLayers }"/>-->
-		<!--		<widget-layers-->
-		<!--			v-show="showLayers"-->
-		<!--			:widgets="layerWidgets"-->
-		<!--			@lock-widget="kanboardEditor.handleLayerWidgetLock"-->
-		<!--			@delete-widget="kanboardEditor.handleLayerWidgetDelete"-->
-		<!--			@hide-widget="kanboardEditor.handleLayerWidgetHide"-->
-		<!--			@hover-widget="kanboardEditor.handleLayerWidgetHover"-->
-		<!--			@active-widget="kanboardEditor.handleLayerWidgetActive"-->
-		<!--			@update-widget-name="kanboardEditor.handleLayerWidgetNameUpdate"-->
-		<!--			@update-widget-z-index="kanboardEditor.handleLayerWidgetZIndexUpdate"-->
-		<!--			@import-widgets="-->
-		<!--          kanboardEditor.showWidgetsImport = true;-->
-		<!--          showLayers = false-->
-		<!--        "-->
-		<!--		></widget-layers>-->
+		<d-right-widget/>
 	</div>
 </template>
 <script>
-	import widgetLayers from '../../../components/widget-layers'
 	import dRightFullScreen from '../../../components/d-right-full-screen'
 	import dRightManage from '../../../components/d-right-manage'
 	import dRightWidget from '../../../components/d-right-widget'
@@ -37,7 +18,6 @@
 	export default {
 		name: 'sidebar-tools',
 		components: {
-			widgetLayers,
 			'i-icon': Icon,
 			dRightFullScreen,
 			dRightManage,
