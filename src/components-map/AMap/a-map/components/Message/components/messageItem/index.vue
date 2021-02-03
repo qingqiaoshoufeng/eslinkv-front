@@ -43,6 +43,7 @@ class MessageItem extends Vue {
 	ependReply: Boolean = false
 	textExpend: Boolean = false
 	showTextExpend: Boolean = false
+	sending: Boolean = false
 	@Prop(Object) data: any
 	@Prop(Boolean) alwaysExpend: any
 	created() {
@@ -51,9 +52,13 @@ class MessageItem extends Vue {
 	}
 	@Emit('refresh')
 	handleReply() {
+		let { replyContent, data, sending } = this
+		let { messageId } = data
+		if (!replyContent || sending) {
+			return false
+		}
+		this.sending = true
 		return new Promise((resolve) => {
-			let { replyContent, data } = this
-			let { messageId } = data
 			this.$sysApi.message
 				.toReplyMessage({
 					messageId: messageId,
@@ -67,6 +72,7 @@ class MessageItem extends Vue {
 							interactionResult: replyContent,
 						})
 					}
+					this.sending = false
 				})
 		})
 	}
