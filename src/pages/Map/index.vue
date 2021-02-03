@@ -2,11 +2,11 @@
 	.preview-wrapper(ref="kanboardWrapper")
 		.scene-menu
 			div(v-for="(scene, sceneIndex) in sceneMap" :key="sceneIndex" @click="changeScene(sceneIndex)") {{ scene }}
-		amap.amap-wrapper(:style="`transform:scale(${actualScaleRatio});overflow: hidden;`")
+		amap.amap-wrapper(:preview="true" :style="`transform:scale(${actualScaleRatio});overflow: hidden;`")
 </template>
 <script lang="ts">
 	import {Vue, Component} from 'vue-property-decorator'
-	import amap from '@/components-map/AMap/a-map/MapContainer/index.vue'
+	import amap from '@/components-map/AMap/a-map/index.vue'
 
 	@Component({
 		components: {amap}

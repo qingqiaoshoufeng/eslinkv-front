@@ -1,100 +1,109 @@
 <template>
 	<div class="map-box">
+		<!-- 消息提醒 -->
 		<template v-if="ready && inPreview">
-			<MapContainer/>
+			<Message />
+			<MapContainer />
 		</template>
 		<template v-else>
-			<img class="placeholder-map" src="/static/amap/amap.jpg" alt=""/>
+			<img class="placeholder-map" src="/static/amap/amap.jpg" alt="" />
 		</template>
 	</div>
 </template>
 
 <script>
-	import MapContainer from './MapContainer/index';
+import MapContainer from './MapContainer/index'
+import Message from './components/Message/'
 
-	export default {
-		name: 'HRMap',
-		components: {
-			MapContainer,
+export default {
+	name: 'HRMap',
+	components: {
+		MapContainer,
+		Message,
+	},
+	props: {
+		preview: {
+			type: Boolean,
+			default: false,
 		},
-		computed: {
-			inPreview() {
-				return window.GoldChart.store.scene.status === 'inPreview';
-			},
+	},
+	computed: {
+		inPreview() {
+			return (
+				window.GoldChart.store.scene.status === 'inPreview' ||
+				this.preview
+			)
 		},
-		data() {
-			return {
-				ready: false,
-			};
-		},
-		methods: {
-			resetMap() {
-				this.ready = false;
-				setTimeout(() => {
-					this.ready = true;
-				}, 5000);
-			},
-		},
-		mounted() {
+	},
+	data() {
+		return {
+			ready: false,
+		}
+	},
+	methods: {
+		resetMap() {
+			this.ready = false
 			setTimeout(() => {
-				this.ready = true;
-			}, 2000);
-			//以防地图加载不出hock处理
-			window.resetMap = this.resetMap.bind(this);
+				this.ready = true
+			}, 5000)
 		},
-	};
+	},
+	mounted() {
+		setTimeout(() => {
+			this.ready = true
+		}, 2000)
+		//以防地图加载不出hock处理
+		window.resetMap = this.resetMap.bind(this)
+	},
+}
 </script>
 
-
 <style lang="scss" scoped>
-	.placeholder-map {
-		width: 100%;
-		height: 100%;
-	}
+.placeholder-map {
+	width: 100%;
+	height: 100%;
+}
 
-	.map-box {
-		position: relative;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		overflow: hidden;
-		width: 100%;
-		height: 100%;
-	}
+.map-box {
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	width: 100%;
+	height: 100%;
+}
 </style>
 
 <style lang="scss">
-	.amap-marker-content {
-		& > div {
-			& > div:not(.no-hover-effect):hover {
-				transform: scale(1.1);
-			}
+.amap-marker-content {
+	& > div {
+		& > div:not(.no-hover-effect):hover {
+			transform: scale(1.1);
 		}
 	}
+}
 
-	.amap-marker {
-		backface-visibility: hidden;
-		pointer-events: none !important;
+.amap-marker {
+	backface-visibility: hidden;
+	pointer-events: none !important;
 
+	> div {
 		> div {
-			> div {
-				pointer-events: all;
-			}
+			pointer-events: all;
 		}
 	}
+}
 
-	.amap-markers {
-		z-index: 1100 !important;
-	}
+.amap-markers {
+	z-index: 1100 !important;
+}
 
-	.amap-logo {
-		display: none !important;
-	}
+.amap-logo {
+	display: none !important;
+}
 
-	.amap-copyright {
-		display: none !important;
-	}
+.amap-copyright {
+	display: none !important;
+}
 </style>
-
-
-
