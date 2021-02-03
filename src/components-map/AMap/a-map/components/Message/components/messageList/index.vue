@@ -15,7 +15,7 @@
                             li.pointer(:class="selectedItem.value==item.value?'active':''" v-for="item in options" @click="handleChange(item)") {{item.label}}
                 //- 列表
                 .ms-list(v-if="data.length")
-                    ms-item.ms-item(@refresh="getData" :key="msItem.messageId" v-for="msItem in data" :data="msItem") 
+                    ms-item.ms-item(@refresh="refresh" :key="msItem.messageId" v-for="msItem in data" :data="msItem") 
                 no-data(:show="!loading && !data.length") 
                 Icon(type="ios-loading" size="54" class="spin-icon-load" v-show="loading")
 </template>
@@ -52,6 +52,10 @@ class MessageAlert extends Vue {
 		this.timer = setInterval(() => {
 			this.getData()
 		}, 10000)
+	}
+	refresh(val) {
+        if(val===false) return 
+		this.getData()
 	}
 	close() {
 		this.ready = false

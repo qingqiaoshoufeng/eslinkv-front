@@ -37,6 +37,7 @@ class MessageAlert extends Vue {
 		}, 300)
 	}
 	refresh(data) {
+		if (data === false) return
 		this.innerData = data
 	}
 	changeExpend(val) {
