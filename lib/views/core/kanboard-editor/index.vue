@@ -30,7 +30,7 @@
 			<section
 				id="kanban"
 				:style="canvasStyle"
-				:class="['canvas-wrapper', { preview: !platform.rulerVisible }]"
+				:class="['canvas-wrapper', { preview: !platform.ruler.rulerVisible }]"
 				@dragenter="isDragIn = true"
 				@dragleave.self="isDragIn = false"
 				@drop="drop"
@@ -61,7 +61,7 @@
               'no-pointer': (isDragIn && item.type !== 'combination') || rulerCanvasMoving,
               'content-moving': item.type === 'combination' && rulerCanvasMoving,
               locked: item.config.widget.locked,
-              preview: !platform.rulerVisible,
+              preview: !platform.ruler.rulerVisible,
               'widget-hide': item.config.widget.hide
             }, `widget-${item.id}`]"
 						:widget-info="`${item.id} ${item.config.widget.name || ''}`"
@@ -117,7 +117,7 @@
                       {
                         'no-pointer': isDragIn || !item.config.widget.innerEditing,
                         locked: child.config.widget.locked,
-                        preview: !platform.rulerVisible,
+                        preview: !platform.ruler.rulerVisible,
                         'slide-hide': calcSlideHide(item.config, child.id),
                         'widget-hide': child.config.widget.hide
                       },
@@ -231,10 +231,12 @@
 						 @update="updateProcessBody" @keyup.native.stop/>
 		<!-- 画布全屏 -->
 		<d-right-full-screen/>
-		<!-- 组件配置 -->
+		<!-- 看板配置 -->
 		<d-right-manage/>
 		<!-- 小工具清单 -->
 		<d-right-widget/>
+		<!-- 编辑器设置 -->
+		<d-right-setting/>
 		<!-- 全局 api 执行器 -->
 		<api-executor v-for="api in apis" :key="api.variable" :api="api"
 					  @api-data-update="(data) => handleApiDataUpdate(api.variable, data)"/>
@@ -271,6 +273,7 @@
 	import dRightFullScreen from '../../../components/d-right-full-screen'
 	import dRightManage from '../../../components/d-right-manage'
 	import dRightWidget from '../../../components/d-right-widget'
+	import dRightSetting from '../../../components/d-right-setting'
 	import {Icon} from 'view-design'
 	// config-panel 与 fields 互相引用，须提前注册为 Vue 组件
 	Vue.component('fields', fields)
@@ -294,7 +297,7 @@
 			databaseConfig,
 			jsEditorModal,
 			gridItem,
-			dRightFullScreen,dRightManage,dRightWidget,dBottomBar,
+			dRightFullScreen, dRightManage, dRightWidget, dBottomBar, dRightSetting,
 			rightMenu
 		},
 		provide() {

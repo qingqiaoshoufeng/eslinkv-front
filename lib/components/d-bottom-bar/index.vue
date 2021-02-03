@@ -1,7 +1,6 @@
 <template lang="pug">
-	.d-bottom-bar.fn-flex.flex-row.pos-a(v-show="platform.rulerVisible")
+	.d-bottom-bar.fn-flex.flex-row.pos-a(v-show="platform.ruler.rulerVisible")
 		label.d-bottom-info.fn-flex.flex-row(v-if="platform.panelConfig.info")
-			i-icon(type="md-information-circle" size="18")
 			span {{ platform.panelConfig.size.width}}×{{platform.panelConfig.size.height}}{{ platform.panelConfig.size.unit}}
 		label.d-bottom-hot-keys.pos-r.fn-flex.flex-row
 			d-svg.pointer(icon-class="keyboard" title="快捷键")
@@ -13,19 +12,15 @@
 							i.d-bottom-hot-key-text(v-if="child.type==='text'") {{ child.value }}
 							span.d-bottom-hot-key-item(v-if="child.type==='+'") +
 							img.d-bottom-hot-key-img(v-if="child.type==='img'" :src="child.value")
-		label.d-bottom-auto-align-guide.fn-flex.flex-row
-			i-checkbox(v-model="platform.autoAlignGuide")
-			span 自动贴靠参考线
 </template>
 <script lang="ts">
 	import {Vue, Component} from 'vue-property-decorator'
 	import platform from '../../store/platform.store'
-	import {Icon, Checkbox} from 'view-design'
+	import {Icon} from 'view-design'
 
 	@Component({
 		components: {
 			'i-icon': Icon,
-			'i-checkbox': Checkbox,
 		}
 	})
 	export default class bottomBar extends Vue {
@@ -64,10 +59,8 @@
 	}
 
 	.d-bottom-hot-keys {
-		margin-right: 10px;
 
 		.d-bottom-hot-key-list {
-			left: 50%;
 			bottom: 100%;
 			transform: translate3d(-50%, -20px, 0);
 			opacity: 0;
