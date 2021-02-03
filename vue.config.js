@@ -25,30 +25,26 @@ module.exports = {
 		disableHostCheck: true,
 		proxy: {
 			'^/hangran': {
-				// target: 'http://ebp-pc.hw-qa.eslink.net.cn',
-				// target: 'http://ebp-pc.hzrq.local:15003',
-				target: 'http://10.20.10.154:3000',
+				target: 'http://ebp-pc.hw-qa.eslink.net.cn',
+				target: 'http://ebp-pc.hzrq.local:15003',
 				changeOrigin: true,
 				headers: {
-					// Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
 					Cookie: 'SESSION=951dde65-40c7-4afc-ad9e-f28a68a0dcac',
 				},
-				// pathRewrite: {
-				// 	'^/hangran': '/',
-				// },
+				pathRewrite: {
+					'^/hangran': '/',
+				},
 			},
 			'^/api': {
-				// target: 'http://ebp-pc.hw-qa.eslink.net.cn',
-                // target: 'http://ebp-pc.hzrq.local:15003',
-				target: 'http://10.20.10.154:3000',
+				target: 'http://ebp-pc.hw-qa.eslink.net.cn',
+				target: 'http://ebp-pc.hzrq.local:15003',
 				changeOrigin: true,
 				headers: {
-					// Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
 					Cookie: 'SESSION=951dde65-40c7-4afc-ad9e-f28a68a0dcac',
 				},
-				// pathRewrite: {
-				// 	'^/api': '/',
-				// },
+				pathRewrite: {
+					'^/api': '/',
+				},
 			},
 			'^/data': {
 				target: 'http://127.0.0.1:7001',
@@ -65,20 +61,18 @@ module.exports = {
 				},
 			},
 			'^/server': {
-                // target: 'http://192.168.1.33:9082',
-                target: 'http://10.20.10.154:3000',
+				target: 'http://192.168.1.33:9082',
 				changeOrigin: true,
-				// pathRewrite: {
-				// 	'^/server': '/',
-				// },
+				pathRewrite: {
+					'^/server': '/',
+				},
 			},
 			'^/pipenetwork': {
-                // target: 'http://192.168.1.104:6080',
-                target: 'http://10.20.10.154:3000',
+				target: 'http://192.168.1.104:6080',
 				changeOrigin: true,
-				// pathRewrite: {
-				// 	'^/pipenetwork': '/',
-				// },
+				pathRewrite: {
+					'^/pipenetwork': '/',
+				},
 			},
 		},
 	},
