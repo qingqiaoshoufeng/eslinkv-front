@@ -7,7 +7,6 @@
             p {{createTime}}
         div
             Button(:type="status?'success':'warning'" size="small") {{statusStr}}
-            Button(v-if="status" icon="ios-link" :style="{marginLeft:'10px'}" type="info" size="small") 分享链接
         .pos-a.list-item-card-mask.fn-flex.flex-column
             Button(icon="ios-create-outline" @click="handleEdit") 编辑
             Button(v-if="status" icon="ios-link" :style="{marginTop:'10px'}" @click="handleLink") 打开

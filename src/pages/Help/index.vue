@@ -2,7 +2,7 @@
     <div>
         <div class="fn-clear">
             <left/>
-            <div class="help-content">
+            <div class="help-content d-scrollbar">
                 <div class="markdown-body" v-highlight>
                     <div v-html="help.helpContent"/>
                 </div>
@@ -20,7 +20,7 @@
             Left
         }
     })
-    class Help extends Vue {
+	export default class Help extends Vue {
         help: any = {
             helpContent: '',
             helpName: ''
@@ -34,7 +34,7 @@
         async init() {
             let {name} = this.$route.params
             name = name.replace(/%20/g, '')
-            const content = await import(`./${name}.md`)
+            const content = await import(`../../../docs/${name}.md`)
             this.help.helpName = name
             this.help.helpContent = content.default
         }
@@ -43,8 +43,6 @@
             this.init()
         }
     }
-
-    export default Help
 </script>
 <style lang="scss">
     .help-content {
