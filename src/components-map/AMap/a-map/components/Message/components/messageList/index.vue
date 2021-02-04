@@ -94,6 +94,10 @@ export default MessageAlert
 .ms-container {
 	pointer-events: auto;
 	position: fixed;
+    top:0;
+    right:0;
+    left:0;
+    bottom:0;
 	inset: 0px;
 	z-index: 99999;
 	justify-content: center;
