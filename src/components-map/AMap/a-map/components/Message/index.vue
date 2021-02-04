@@ -33,17 +33,17 @@ class AlertContent extends Vue {
 	}
 	getUnReadMessage() {
 		this.$sysApi.message.getUnReadMessage().then((data) => {
-			if (data && data.length > 0) {
+			if (data) {
 				this.unReadStatus = true
 				if (this.alertInstance) {
 					this.alertInstance.close()
 				}
 				setTimeout(() => {
 					this.alertInstance = MessageAlert({
-						data: data[0],
+						data: data,
 					})
 				}, 1000)
-				this.formatTime(data[0])
+				this.formatTime(data)
 			} else {
 				this.getData()
 				this.unReadStatus = false
