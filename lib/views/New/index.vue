@@ -64,7 +64,6 @@ export default {
 	methods: {
 		renderByDetail(res) {
 			const { attribute, createTime, name } = res;
-			this.kanboardName = name;
 			document.title = `编辑 - ${name} - 数据看板`;
 			this.createTime = createTime;
 			let value;

@@ -3,26 +3,22 @@
 		.d-footer-left.fn-flex
 			span.d-footer-title {{ platform.info ? platform.info.name : '' }}
 		.d-footer-right.fn-flex
-			span(style="padding-right: 25px")
-				a.doc-link.fn-flex.flex-row(title="使用文档" @click="handleClick")
-					span 使用文档
-					i-icon(type="md-help-circle")
 			i-button(@click="exit") 返回
 			i-button(@click="preview") 预览
 			i-button(type="primary" @click="editBoard" :loading="loading") 保存
 			i-button(@click="publishBoard" :loading="loading" v-if="!isNew") 发布
-			i-button(@click="exportKanboardData" :loading="loading") 导出
+			i-button(@click="handleExport" :loading="loading") 导出
 			i-button(@click="importModal=true" :loading="loading") 导入
 		load-mask(:show="saving") 正在保存数据…
 		Modal(v-model="importModal")
 			Form
 				FormItem
 					label(for="originFile" class="style-file-input") 全覆盖导入
-					input(class="fn-hide" id="originFile" type="file" accept="application/json" @change="handleFile")
+					input.fn-hide#originFile(type="file" accept="application/json" @change="handleFile")
 </template>
 <script lang="ts">
-	import {Vue, Component, Prop} from 'vue-property-decorator'
-	import {Icon, Button, Input, Modal, Form, FormItem} from 'view-design'
+	import { Component, Prop} from 'vue-property-decorator'
+	import {Icon, Button, Modal, Form, FormItem} from 'view-design'
 	import platform from '../../store/platform.store'
 	import scene from '../../store/scene.store'
 	import commonConfigValue from '../../views/core/widgets/parts/lib/common-config-value'
@@ -30,7 +26,9 @@
 	import format from 'date-fns/format'
 	import {isObjectString} from '../../utils'
 	import loadMask from '../load-mask'
-	import downloadFile from '../../vendor/download-file'
+	import exportMx from './export.mx'
+	import detailMx from './detail.mx'
+	import {mixins} from 'vue-class-component'
 
 	@Component({
 		components: {
@@ -42,18 +40,16 @@
 			FormItem,
 		},
 	})
-	export default class DFooter extends Vue {
+	export default class DFooter extends mixins(exportMx,detailMx) {
 		@Prop(Boolean) kanboardEdited: boolean
+		@Prop({default: true}) show: boolean  // detail,full,local 隐藏该模块
+
 		platform = platform.state
 		scene = scene.state
-		saving = false
+		importModal: boolean = false
+		saving: boolean = false
 		loading = false
-		importModal = false
 		isNew = true
-		
-		handleClick() {
-			window.open(`${location.origin}${location.pathname}#/help/HowToUseMarket`)
-		}
 
 		handleFile(e) {
 			const file = e.target.files[0];
@@ -62,8 +58,8 @@
 				try {
 					this.loading = true;
 					const result = JSON.parse(e.target.result);
-					const { data, createTime, name } = result;
-					this.$parent.renderByDetail({ name, attribute: data, createTime });
+					const {data, createTime, name} = result;
+					this.$parent.renderByDetail({name, attribute: data, createTime});
 					this.importModal = false
 					this.loading = false;
 				} catch (e) {
@@ -76,61 +72,7 @@
 			reader.readAsText(file);
 		}
 
-		exportKanboardData() {
-			const data = this.$parent.$refs.kanboardEditor.prepareKanboardData()
-			let fileName = `${data.name}-${new Date() * 1}`
-			this.$Modal.confirm({
-				title: '看板导出',
-				components: {
-					'i-input': Input,
-				},
-				render: (h) => {
-					return h(
-						'div',
-						{
-							class: 'form-wrapper'
-						},
-						[
-							h(
-								'p',
-								'导出功能用于看板数据备份、迁移。'
-							),
-							h(
-								'div',
-								{
-									class: 'form-item'
-								},
-								[
-									h(
-										'label',
-										{
-											class: 'form-label text-right'
-										},
-										'文件名称'
-									),
-									h(
-										'span',
-										`${fileName}.json`
-									)
-								]
-							)
-						]
-					)
-				},
-				onOk: () => {
-					const config = {...data}
-					config.data = JSON.parse(config.attribute)
-					delete config.attribute
-					downloadFile(config, fileName, 'json')
-				},
-				onCancel: () => {
-				},
-				okText: '确定',
-				cancelText: '取消'
-			})
-		}
-
-		publishBoard () {
+		publishBoard() {
 			if (this.kanboardEdited) {
 				this.$Message.warning('请先保存看板！')
 				return
@@ -141,7 +83,7 @@
 				loading: true,
 				onOk: () => {
 					console.log(this.$parent)
-					this.$api.board.publish({ id: this.$parent.kanboardId }).then(res => {
+					this.$api.board.publish({id: this.$parent.kanboardId}).then(res => {
 						if (res.responseCode == 100000) {
 							this.$Message.success('发布成功！')
 							this.$emit('update-kanboard-list')
@@ -154,7 +96,7 @@
 				}
 			})
 		}
-		
+
 		// 新建看板
 		saveBoard(data) {
 			this.loading = true;
@@ -170,9 +112,9 @@
 					this.loading = false;
 				});
 		}
-		
+
 		async addBoard() {
-			const data = this.$parent.$refs.kanboardEditor.prepareKanboardData()
+			const data = this.platFormData()
 			// 数据类型：0:看板, 1:小工具模板, 2:参考线模板
 			data.type = 0;
 			this.$Modal.confirm({
@@ -201,7 +143,7 @@
 				this.addBoard()
 				return
 			}
-			const data = this.$parent.$refs.kanboardEditor.prepareKanboardData()
+			const data = this.platFormData()
 			this.$Modal.confirm({
 				title: '快照',
 				content: '是否更新看板快照？',
@@ -237,17 +179,17 @@
 
 		preview() {
 			this.$emit('previewOpen')
-			const data = this.$parent.$refs.kanboardEditor.prepareKanboardData().attribute
+			const data = this.platFormData().attribute
 			this.$router.push({name: this.isNew ? 'big-data-new-preview' : 'big-data-edit-preview', params: {data}})
 		}
 
-		exit () {
+		exit() {
 			if (this.kanboardEdited) {
 				this.$Modal.confirm({
 					title: '提示',
 					content: '看板已编辑，关闭窗口将丢失未保存的数据，确认关闭吗？',
 					onOk: () => {
-						this.$router.replace({ name: 'big-data-list' })
+						this.$router.replace({name: 'big-data-list'})
 					}
 				})
 				return
@@ -310,7 +252,7 @@
 					value: {...config}
 				}
 			})
-			
+
 			// todo 参考线数据放入store，获取store中的数据
 			// const guides = this.guides
 			const guides = []
