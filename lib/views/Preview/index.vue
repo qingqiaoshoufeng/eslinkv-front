@@ -9,6 +9,7 @@
 	import kanbanPreview from '../preview-base.vue'
 
 	export default {
+		name: 'Preview',
 		components: {
 			kanbanPreview
 		},

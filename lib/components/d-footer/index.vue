@@ -2,7 +2,7 @@
 	.d-detail
 		.d-footer.fn-flex(v-if="show")
 			.d-footer-left.fn-flex
-				span.d-footer-title {{ platform.info ? platform.info.name : '' }}
+				span.d-footer-title {{ platform.panelConfig.info ? platform.panelConfig.info.name : '' }}
 			.d-footer-right.fn-flex
 				i-button(@click="exit") 返回
 				i-button(@click="preview") 预览
@@ -130,9 +130,8 @@
 				}
 			})
 
-			// todo 参考线数据放入store，获取store中的数据
-			// const guides = this.guides
-			const guides = []
+			// todo 参考线数据 存入另一个接口
+			const guides = this.platform.ruler.guideLines
 			return {
 				name,
 				remark,

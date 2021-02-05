@@ -1,7 +1,7 @@
 <template>
-  <div class="step kanboard-editer-box">
-    <widgets v-if="kanboardReady" ref="widgets" :class="{ 'canvas-fullscreen': isFullscreen }" @panel-fixed="handleWidgetsPanelFixed" />
-    <kanboard-editor ref="kanboardEditor" @fullscreenchange="handleFullscreenChange" @kanboard-edited="$emit('kanboard-edited')" @kanboard-ready="kanboardReady = true" />
+  <div class="step kanboard-editer-box pos-r fn-flex">
+    <widgets ref="widgets" :class="{ 'canvas-fullscreen': isFullscreen }" @panel-fixed="handleWidgetsPanelFixed" />
+    <kanboard-editor ref="kanboardEditor" @fullscreenchange="handleFullscreenChange" @kanboard-edited="$emit('kanboard-edited')" />
   </div>
 </template>
 <script>
@@ -19,7 +19,6 @@ export default {
   data () {
     return {
       isFullscreen: false,
-      kanboardReady: false
     }
   },
   methods: {
@@ -44,8 +43,6 @@ export default {
 
 <style lang="scss" scoped>
   .kanboard-editer-box {
-    position: relative;
-    display: flex;
     width: 100%;
     height: 100%;
     /deep/ {

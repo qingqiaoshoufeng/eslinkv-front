@@ -1,11 +1,14 @@
 <template lang="pug">
-	d-right-modal.d-setting-modal(title="编辑器设置" :width="360" icon="ios-easel" :top="144")
+	d-right-modal.d-setting-modal(title="编辑器设置" :width="360" icon="ios-construct" :top="144")
 		header.fn-flex.flex-row
 			span 编辑器设置
 		ul.d-scrollbar
 			li.fn-flex.flex-row
 				label 自动贴靠参考线
 				i-switch(v-model="platform.autoAlignGuide")
+			li.fn-flex.flex-row
+				label 标尺可见
+				i-switch(v-model="platform.ruler.rulerVisible")
 </template>
 <script lang="ts">
 	import dRightModal from '../d-right-modal'

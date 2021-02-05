@@ -15,6 +15,7 @@
 	import scene from '../../store/scene.store'
 
 	export default {
+		name: 'Local',
 		components: {
 			kanbanPreview, Input, Modal, Form, FormItem
 		},

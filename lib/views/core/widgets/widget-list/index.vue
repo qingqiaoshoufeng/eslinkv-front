@@ -1,49 +1,20 @@
-<template>
-	<!-- 组件区 -->
-	<div :class="{ fixed: panelFixed }" class="widgets-panel">
-		<Tabs value="custom0" :animated="false" type="card" @on-click="(name) => handlePanelToggle(name)">
-			<template v-for="tab in tabs">
-				<TabPane v-if="tab.widgets.length" :key="tab.name" :label="tab.label" :name="tab.name">
-					<Collapse v-model="panelStatic[tab.name]" accordion simple
-							  @on-change="(keys) => handlePanelToggle(tab.name, keys[0])">
-						<Panel :key="type" :name="type" :activeSet="setActiveMap(tab.name, type)"
-							   v-for="{ label, type, widgets } in tab.widgets">
-							{{ label }}
-							<template v-if="widgetListActiveMap[`${tab.name}-${format(type)}`]" slot="content">
-								<div v-for="(widget, index) in widgets" :key="index"
-									 class="widget-item-wrapper pos-r">
-									<i class="pos-a"
-									   style="left:0;top:0;font-size: 12px;z-index: 9;">{{widget.type}}</i>
-									<vue-lazy-component>
-										<div draggable="true"
-											 v-if="widget.market"
-											 @dragstart="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)">
-											<img :src="widget.componentImage"/>
-										</div>
-										<div slot="skeleton">加载中...</div>
-										<parts
-											v-if="!widget.market"
-											:type="widget.type"
-											:style="transform(widget)"
-											:classification="tab.name"
-											:config="widgetConfigMap[`${tab.name}-${format(type)}-${index}`].config"
-											draggable="true"
-											readonly
-											no-bind-params
-											@dragstart.native="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)"
-											@widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)"
-										/>
-									</vue-lazy-component>
-								</div>
-							</template>
-						</Panel>
-					</Collapse>
-				</TabPane>
-			</template>
-		</Tabs>
-		<div :class="{ active: panelFixed }" :title="!panelFixed ? '固定小工具栏' : '取消固定'" class="fixed-toggle"
-			 @click="handleFix"></div>
-	</div>
+<template lang="pug">
+	.widgets-panel(:class="{ fixed: panelFixed }")
+		i-tabs(value="custom0" :animated="false" type="card" @on-click="(name) => handlePanelToggle(name)")
+			template(v-for="tab in tabs")
+				i-tab-pane(v-if="tab.widgets.length" :key="tab.name" :label="tab.label" :name="tab.name")
+					i-collapse(v-model="panelStatic[tab.name]" accordion simple @on-change="(keys) => handlePanelToggle(tab.name, keys[0])")
+						i-panel(:key="type" :name="type" :activeSet="setActiveMap(tab.name, type)" v-for="{ label, type, widgets } in tab.widgets")
+							span {{ label }}
+							template(v-if="widgetListActiveMap[`${tab.name}-${format(type)}`]" slot="content")
+								.widget-item-wrapper.pos-r(v-for="(widget, index) in widgets" :key="index")
+									i.pos-a(style="left:0;top:0;font-size: 12px;z-index: 9;") {{widget.type}}
+									vue-lazy-component
+										div(draggable="true" v-if="widget.market" @dragstart="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)")
+											img(:src="widget.componentImage")
+										div(slot="skeleton") 加载中...
+										parts(v-if="!widget.market" :type="widget.type" :style="transform(widget)" :classification="tab.name" :config="widgetConfigMap[`${tab.name}-${format(type)}-${index}`].config" draggable="true" readonly no-bind-params @dragstart.native="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)" @widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)")
+		d-svg.fixed-toggle.pointer(icon-class="pin" :title="panelFixed ? '取消固定' : '固定小工具栏'" :class="{ active: panelFixed }" @click="handleFix")
 </template>
 <script>
 	import parts from '../parts/index'
@@ -52,17 +23,20 @@
 	import eChart from './e-chart'
 	import other from './other'
 	import {Collapse, TabPane, Tabs, Panel} from 'view-design'
-	import {store} from '../../../../store'
 	import {component as VueLazyComponent} from '@xunlei/vue-lazy-component'
 	import custom from '../../../../store/custom.store'
 
 	export default {
 		components: {
-			parts, Collapse, TabPane, Tabs, Panel, VueLazyComponent
+			parts, 
+			'i-collapse':Collapse, 
+			'i-tab-pane':TabPane, 
+			'i-tabs':Tabs, 
+			'i-panel':Panel, 
+			VueLazyComponent
 		},
 		data() {
 			return {
-				store,
 				custom: custom.state,
 				panelFixed: false,
 				widgetListActiveMap: {},
@@ -192,7 +166,6 @@
 		},
 	}
 </script>
-
 <style lang="scss" scoped>
 	.widget-item-wrapper {
 		padding: 5px 0;
@@ -302,12 +275,6 @@
 		right: -24px;
 		width: 24px;
 		height: 24px;
-		background-color: white;
-		background-image: url('../../icons/pin_outlined.png');
-		background-position: center;
-		background-size: 20px;
-		background-repeat: no-repeat;
-		border-radius: 50%;
 		transform: rotate(0deg);
 		opacity: 0.3;
 		transition: 0.2s;
@@ -318,7 +285,6 @@
 		}
 
 		&.active {
-			background-image: url('../../icons/pin.png');
 			transform: rotate(-45deg);
 			right: 0;
 			opacity: 1;

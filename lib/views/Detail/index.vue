@@ -23,6 +23,7 @@
 	import dFooter from '../../components/d-footer'
 
 	export default {
+		name: 'Detail',
 		components: {
 			kanbanPreview, dFooter
 		},

@@ -68,5 +68,9 @@ export default {
 		{
 			content: '移除自封装axios'
 		},
+		{
+			type: ['refactor'],
+			content: '优化store',
+		},
 	]
 }
