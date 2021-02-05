@@ -1,7 +1,7 @@
 <template>
   <div class="step kanboard-editer-box">
     <widgets v-if="kanboardReady" ref="widgets" :class="{ 'canvas-fullscreen': isFullscreen }" @panel-fixed="handleWidgetsPanelFixed" />
-    <kanboard-editor ref="kanboardEditor" :template="template" @fullscreenchange="handleFullscreenChange" @kanboard-edited="$emit('kanboard-edited')" @kanboard-ready="kanboardReady = true" />
+    <kanboard-editor ref="kanboardEditor" @fullscreenchange="handleFullscreenChange" @kanboard-edited="$emit('kanboard-edited')" @kanboard-ready="kanboardReady = true" />
   </div>
 </template>
 <script>
@@ -11,12 +11,6 @@ export default {
   name: 'edit-kanboard',
   provide () {
     return { kanboardEditor: this.$refs.kanboardEditor }
-  },
-  props: {
-    template: {
-      type: Object,
-      default: null
-    }
   },
   components: {
     widgets,

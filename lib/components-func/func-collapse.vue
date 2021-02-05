@@ -6,7 +6,7 @@
 					DManageItem(:config="k" v-for="(k, i) in config.props" :key="i")
 </template>
 <script lang="ts">
-	import func from './func'
+	import func from './func.min'
 	import {Component} from 'vue-property-decorator'
 	import DManageItem from '../components/d-right-manage/item'
 

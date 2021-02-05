@@ -8,14 +8,6 @@
 		@select.prevent.stop
 		@contextmenu.stop.prevent
 	>
-		<!-- 遮罩层 -->
-		<div :class="{ active: refilling }" class="refill-mask">
-			<div class="mask-content">
-				<div class="mask-title">组件渲染中，请稍后…</div>
-				<Progress :percent="refillPercent" :stroke-width="20" text-inside
-						  :stroke-color="['#108ee9', '#87d068']"/>
-			</div>
-		</div>
 		<!-- 底部信息栏 -->
 		<d-bottom-bar/>
 		<!-- 标尺容器 -->
@@ -246,9 +238,7 @@
 	import widgetOperation from './mixins/widget-operation'
 	import panelOperation from './mixins/panel-operation'
 	import canvasOperation from './mixins/canvas-operation'
-	import refill from './mixins/refill'
 	import createKanboardData from './mixins/create-kanboard-data'
-	import template from './mixins/template.js'
 	import editorEventHandler from './mixins/editor-event-handler'
 	import configEventHandler from './mixins/config-event-handler'
 	import layoutGridMixin from './layout-grid/mixin'
@@ -273,8 +263,8 @@
 	export default {
 		name: 'kanboard-editor',
 		mixins: [
-			template, widgetOperation, panelOperation,
-			canvasOperation, refill, createKanboardData,
+			widgetOperation, panelOperation,
+			canvasOperation, createKanboardData,
 			configEventHandler, editorEventHandler, layoutGridMixin,
 			positionSize, layerOperation, globalApi,
 			widgetShareData, crossFrameMessageParamBind,
@@ -404,16 +394,6 @@
 			},
 			sidebarTools() {
 				return this.$refs.sidebarTools
-			}
-		},
-		watch: {
-			widgetAdded() {
-				if (this.refilling) return
-				this.$emit('kanboard-edited')
-			},
-			gridsAdded() {
-				if (this.refilling) return
-				this.$emit('kanboard-edited')
 			}
 		},
 		mounted() {

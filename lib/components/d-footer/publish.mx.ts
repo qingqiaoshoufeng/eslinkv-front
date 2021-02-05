@@ -1,4 +1,3 @@
-
 export default {
 	methods: {
 		publishBoard() {
@@ -15,13 +14,13 @@ export default {
 					this.$api.board.publish({id: this.$parent.kanboardId}).then(res => {
 						if (res.responseCode == 100000) {
 							this.$Message.success('发布成功！')
-							this.$emit('update-kanboard-list')
+							this.$router.push('/')
 							this.exit()
 						}
 						this.$Modal.remove()
-					}).catch((err) => {
+					}).catch(() => {
 						this.$Modal.remove()
-					});
+					})
 				}
 			})
 		}

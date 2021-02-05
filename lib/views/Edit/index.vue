@@ -4,12 +4,7 @@
 			<core ref="kanboardEditor" :class="{ screenshot: screenshotCreating }"
 				  @kanboard-edited="kanboardEdited = true"/>
 		</div>
-		<d-footer :kanboardEdited="kanboardEdited" @previewOpen="previewOpen = true"/>
-		<transition name="preview-fade">
-			<div v-if="previewOpen" class="preview-wrapper">
-				<router-view @close="previewBack"></router-view>
-			</div>
-		</transition>
+		<d-footer :kanboardEdited="kanboardEdited"/>
 	</div>
 </template>
 <script>
@@ -47,26 +42,8 @@
 			return {
 				ready: false,
 				querying: true,
-				previewOpen: false,
 				platform: platform.state,
 			};
-		},
-		methods: {
-			previewBack() {
-				this.previewOpen = false
-				this.$router.back()
-			},
-		},
-		watch: {
-			previewOpen(value) {
-				if (value) {
-					this.$nextTick(() => {
-						document.querySelector('.preview-wrapper').requestFullscreen()
-					})
-				} else {
-					document.fullscreenElement && document.exitFullscreen()
-				}
-			}
 		},
 	}
 </script>
