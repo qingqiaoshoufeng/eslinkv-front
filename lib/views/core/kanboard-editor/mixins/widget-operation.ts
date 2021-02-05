@@ -41,7 +41,6 @@ class Mixins extends Vue {
 	updateWidget(value) {
 		if (this.widgetMoving || !value || !value.widget) return
 		const id = value.widget.id
-		console.log(this.widgetAdded)
 		const currentWidget = this.widgetAdded[id]
 		if (!id || !currentWidget) return
 		this.$set(currentWidget, 'config', value)
@@ -93,7 +92,7 @@ class Mixins extends Vue {
 
 	handleActivated(obj, activeAllowed: boolean = true) {
 		const {config, id, type} = obj
-		if (!activeAllowed || config.widget.locked) {
+		if (!activeAllowed) {
 			return this.deactivateWidget(id)
 		}
 
@@ -159,7 +158,6 @@ class Mixins extends Vue {
 	widgetEditable({config}) {
 		return !config.widget.locked && !config.widget.hide
 	}
-
 
 	@Watch('activatedWidgetId')
 	onActivatedWidgetIdChange(id, oldId) {
