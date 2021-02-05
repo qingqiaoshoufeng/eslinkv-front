@@ -1,5 +1,6 @@
 <script>
-import { http } from '../../../../api/axios.js';
+	// todo delete
+ const http=null
 
 import VueLazyload from 'vue-lazyload'
 
