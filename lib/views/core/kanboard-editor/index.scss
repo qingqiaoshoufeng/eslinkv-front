@@ -154,16 +154,6 @@
 		pointer-events: none !important;
 	}
 
-	&.content-moving {
-		/deep/ {
-			.vdr-custom-style {
-				& > .widget-part {
-					pointer-events: none !important;
-				}
-			}
-		}
-	}
-
 	/deep/ {
 		.widget,
 		.widget-part {

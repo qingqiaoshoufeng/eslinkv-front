@@ -50,29 +50,17 @@
 						:snap="platform.autoAlignGuide"
 						:snap-tolerance="10"
 						:class="[{
-              'no-pointer': (isDragIn && item.type !== 'combination') || rulerCanvasMoving,
-              'content-moving': item.type === 'combination' && rulerCanvasMoving,
-              locked: item.config.widget.locked,
-              preview: !platform.ruler.rulerVisible,
-              'widget-hide': item.config.widget.hide
-            }, `widget-${item.id}`]"
+						  'no-pointer': isDragIn || rulerCanvasMoving,
+						  locked: item.config.widget.locked,
+						  preview: !platform.ruler.rulerVisible,
+						  'widget-hide': item.config.widget.hide
+						}, `widget-${item.id}`]"
 						:widget-info="`${item.id} ${item.config.widget.name || ''}`"
 						snap-to-target="guide-line"
 						class-name="vdr-custom-style"
 						@refLineParams="getRefLineParams"
 						@activated="handleActivated(item, widgetEditable(item) && !item.config.widget.innerEditing)"
 						@deactivated="handleDeactivated(item)"
-						@dragging="dragging"
-						@resizing="resizing"
-						@dragstop="(left, top) => {
-              dragging(left, top)
-              updatePosition(item.id)
-            }"
-						@resizestop="(left, top) => {
-              dragging(left, top)
-              updatePosition(item.id)
-              updateSize(item.id)
-            }"
 						@contextmenu.native="showRightMenu($event, item)"
 					>
 						<parts
@@ -80,84 +68,8 @@
 							:type="item.type"
 							:config="item.config"
 							:market="item.market"
-							@combination-drop="handleCombinationDrop"
 							@widget-config-update="(data) => handleWidgetConfig(data, item)"
 						>
-							<!-- 组合小工具 - 子小工具 -->
-							<template v-if="shouldBeShow(item)">
-								<template v-for="child in getItemChildren(item, 'widget')">
-									<vdr
-										v-if="showParts(child)"
-										:key="child.id"
-										:ref="`widget_${child.id}`"
-										:parent="true"
-										:parent-size="{ width: vdrItem([item.id]).w, height: vdrItem([item.id]).h }"
-										:scale-ratio="canvasZoom"
-										:draggable="widgetEditable(child) && item.config.widget.innerEditing"
-										:resizable="widgetEditable(child) && item.config.widget.innerEditing"
-										:active="child.id === activatedWidgetId && widgetEditable(child) && item.config.widget.innerEditing"
-										:prevent-deactivation="true"
-										:w="vdrItem([child.id]).w"
-										:h="vdrItem([child.id]).h"
-										:x="vdrItem([child.id]).x"
-										:y="vdrItem([child.id]).y"
-										:z="child.config.layout.zIndex"
-										:snap="platform.autoAlignGuide"
-										:snap-tolerance="5"
-										:class="[
-                      `group-item group-item-${child.id}`, `widget-${child.id}`,
-                      {
-                        'no-pointer': isDragIn || !item.config.widget.innerEditing,
-                        locked: child.config.widget.locked,
-                        preview: !platform.ruler.rulerVisible,
-                        'slide-hide': calcSlideHide(item.config, child.id),
-                        'widget-hide': child.config.widget.hide
-                      },
-                    ]"
-										:widget-info="`${child.id} ${child.config.widget.name || ''}`"
-										snap-to-target="guide-line"
-										class-name="vdr-custom-style"
-										@refLineParams="getInnerRefLineParams"
-										@activated="handleActivated(child, item.config.widget.innerEditing || false)"
-										@deactivated="handleDeactivated(child)"
-										@dragging="dragging"
-										@resizing="resizing"
-										@dragstop="
-                      updatePosition(child.id)
-                    "
-										@resizestop="
-                      updatePosition(child.id)
-                      updateSize(child.id)
-                    "
-										@contextmenu.native.prevent="item.config.widget.innerEditing && showRightMenu($event, child)"
-									>
-										<parts
-											:market="item.market"
-											:ref="child.id" :type="child.type" :config="child.config"
-											@widget-config-update="(data) => handleWidgetConfig(data, child)"/>
-
-									</vdr>
-								</template>
-								<!-- 组合小工具内部辅助线 -->
-								<template v-if="item.config.widget.innerEditing">
-									<!--辅助线-->
-									<span
-										v-for="(item, index) in vInnerLine"
-										v-show="item.display"
-										:style="{ left: item.position, top: item.origin, height: item.lineLength }"
-										:key="`v-${index}`"
-										class="ref-line v-line"
-									/>
-									<span
-										v-for="(item, index) in hInnerLine"
-										v-show="item.display"
-										:style="{ top: item.position, left: item.origin, width: item.lineLength }"
-										:key="`h-${index}`"
-										class="ref-line h-line"
-									/>
-									<!--辅助线END-->
-								</template>
-							</template>
 						</parts>
 					</vdr>
 				</template>
@@ -242,7 +154,6 @@
 	import editorEventHandler from './mixins/editor-event-handler'
 	import configEventHandler from './mixins/config-event-handler'
 	import layoutGridMixin from './layout-grid/mixin'
-	import combination from './mixins/combination'
 	import positionSize from './mixins/position-size'
 	import layerOperation from '../../../components/widget-layers/mixin'
 	import globalApi from './global-api/mixin'
@@ -268,7 +179,7 @@
 			configEventHandler, editorEventHandler, layoutGridMixin,
 			positionSize, layerOperation, globalApi,
 			widgetShareData, crossFrameMessageParamBind,
-			rulerGuides, combination
+			rulerGuides
 		],
 		components: {
 			Icon,
@@ -338,7 +249,7 @@
 				const ordinaryWidgets = {}
 				Object.keys(this.widgetAdded).forEach(id => {
 					const widget = this.widgetAdded[id]
-					if (widget.type && !widget.config.widget.combinationTo) ordinaryWidgets[id] = widget
+					if (widget.type) ordinaryWidgets[id] = widget
 				})
 				return ordinaryWidgets
 			},
