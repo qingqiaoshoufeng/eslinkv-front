@@ -207,16 +207,7 @@
 		<!-- 右键菜单 -->
 		<right-menu
 			ref="rightMenu"
-			:hideWidget="hideWidget"
-			:zIndexMap="zIndexMap"
-			:updateWidgetZIndex="updateWidgetZIndex"
-			:isWidgetLocked="isWidgetLocked"
-			:rightMenuGrid="rightMenuGrid"
-			:rightMenuBindWidgetId="rightMenuBindWidgetId"
-			:toggleWidgetLock="toggleWidgetLock"
 			:copyWidget="copyWidget"
-			:deactivateWidget="deactivateWidget"
-			:activatedWidgetId="activatedWidgetId"
 			:deleteWidget="deleteWidget"/>
 		<!-- 数仓配置面板 -->
 		<database-config
@@ -329,12 +320,7 @@
 			 * @description 复制组件
 			 */
 			copyWidget() {
-				if (!this.rightMenuGrid) {
-					this.copyTargetWidget()
-				} else {
-					this.copyTargetGrid(this.rightMenuGrid)
-					this.rightMenuGrid = null
-				}
+				this.copyTargetWidget()
 			},
 			/**
 			 * @description 隐藏组件
