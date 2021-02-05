@@ -14,18 +14,17 @@
 						v-else
 						:style="`transform: scale(${scaleRatio}) translate3d(0, 0, 0); overflow: hidden;`"
 		/>
+		<d-footer :show="false"/>
 	</div>
 </template>
 
 <script>
 	import kanbanPreview from '../preview-base.vue'
-	import {getQueryString} from '../../utils'
-	import platform from '../../store/platform.store'
-	import scene from '../../store/scene.store'
+	import dFooter from '../../components/d-footer'
 
 	export default {
 		components: {
-			kanbanPreview,
+			kanbanPreview, dFooter
 		},
 		provide() {
 			return {kanboard: this}
@@ -60,25 +59,6 @@
 				this.actualScaleRatio = this.isMobile ? clientWidth / w : Math.min(clientWidth / w, clientHeight / h)
 				this.mobileWrapHeight = h * this.actualScaleRatio
 			},
-			queryKanboard() {
-				const {params: {id}} = this.$route
-				if (id) {
-					this.$api.board.detail({dataBoardId:id}).then(res => {
-						const value = JSON.parse(res.attribute)
-						platform.actions.initPlatform(value)
-						this.refill(value)
-						scene.actions.initScene(value)
-					})
-					if (getQueryString('scene')) {
-						window.GoldChart.mutations.setSceneIndex(getQueryString('scene'))
-					}
-				}
-			},
-			refill(value) {
-				this.$refs.previewContainer.refillConfig().then(() => {
-					this.ready = true
-				})
-			},
 		},
 		computed: {
 			scaleRatio() {
@@ -87,9 +67,6 @@
 				return ratio < 1 ? ratio : 1
 			}
 		},
-		mounted() {
-			this.queryKanboard()
-		}
 	}
 </script>
 

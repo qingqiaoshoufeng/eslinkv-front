@@ -2,18 +2,17 @@
 	<div ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen }" class="preview-wrapper">
 		<kanban-preview @mounted="updateKanboardSize" ref="previewContainer"
 						:style="`transform: scale(${scaleRatio},${scale}) translate3d(0, 0, 0); overflow: hidden;`"/>
+		<d-footer :show="false"/>
 	</div>
 </template>
 
 <script>
 	import kanbanPreview from '../preview-base.vue'
-	import {getQueryString} from '../../utils'
-	import platform from '../../store/platform.store'
-	import scene from '../../store/scene.store'
+	import dFooter from '../../components/d-footer'
 
 	export default {
 		components: {
-			kanbanPreview,
+			kanbanPreview, dFooter
 		},
 		provide() {
 			return {kanboard: this}
@@ -46,33 +45,6 @@
 				this.screenSize.height = clientHeight
 				this.actualScaleRatio = Math.min(clientWidth / w, clientHeight / h)
 			},
-			queryKanboard() {
-				const {params: {id}} = this.$route
-				const dataBoardId = id
-				this.$api.board.detail({dataBoardId}).then(res => {
-					const value = JSON.parse(res.attribute)
-					platform.actions.initPlatform(value)
-					this.refill(value)
-					scene.actions.initScene(value)
-				})
-				/**
-				 * @description 默认场景
-				 */
-				if (getQueryString('scene')) {
-					window.GoldChart.mutations.setSceneIndex(getQueryString('scene'))
-				}
-				/**
-				 * @description 适配
-				 */
-				if (getQueryString('scale'))
-					if (!isNaN(getQueryString('scale')))
-						this.scale = Number(getQueryString('scale'))
-			},
-			refill(value) {
-				this.$refs.previewContainer.refillConfig(value).then(() => {
-					this.ready = true
-				})
-			},
 		},
 		computed: {
 			scaleRatio() {
@@ -81,9 +53,6 @@
 				return ratio < 1 ? ratio : 1
 			}
 		},
-		mounted() {
-			this.queryKanboard()
-		}
 	}
 </script>
 
