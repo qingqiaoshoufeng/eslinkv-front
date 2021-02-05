@@ -59,7 +59,6 @@
 			return {
 				ready: false,
 				querying: true,
-				kanboardName: '',
 				previewOpen: false,
 				platform: platform.state,
 			};
@@ -71,7 +70,6 @@
 			},
 			renderByDetail(res) {
 				const {attribute, name} = res
-				this.kanboardName = name
 				document.title = `编辑 - ${name} - 数据看板`
 				let value
 				if (typeof attribute === 'string') {
