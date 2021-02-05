@@ -5,7 +5,7 @@
 			span.suffix 当前 {{ zIndex }}
 			ul.sub-menu.pos-a
 				li(@click="handleZIndex(1)") 上移一层
-				li(@click="handleZIndex(-1)") 下移一层
+				li(@click="handleZIndex(-1)" :class="{disabled: zIndex === 1}") 下移一层
 				li(@click="handleZIndexTop") 置顶
 				li(@click="handleZIndexBottom") 置底
 		li(@click="copyWidget") 复制
@@ -88,7 +88,8 @@
 		}
 
 		handleLock() {
-			this.platform.widgetAdded[this.platform.chooseWidgetId].config.widget.locked = !this.isLock
+			this.isLock = !this.isLock
+			this.platform.widgetAdded[this.platform.chooseWidgetId].config.widget.locked = this.isLock
 		}
 		
 		@Watch('platform.chooseWidgetId')
