@@ -1,20 +1,21 @@
 <template lang="pug">
-	.d-footer.fn-flex
-		.d-footer-left.fn-flex
-			span.d-footer-title {{ platform.info ? platform.info.name : '' }}
-		.d-footer-right.fn-flex
-			i-button(@click="exit") 返回
-			i-button(@click="preview") 预览
-			i-button(type="primary" @click="editBoard" :loading="loading") 保存
-			i-button(@click="publishBoard" :loading="loading" v-if="!isNew") 发布
-			i-button(@click="handleExport" :loading="loading") 导出
-			i-button(@click="importModal=true" :loading="loading") 导入
-		load-mask(:show="saving") 正在保存数据…
-		Modal(v-model="importModal")
-			Form
-				FormItem
-					label(for="originFile" class="style-file-input") 全覆盖导入
-					input.fn-hide#originFile(type="file" accept="application/json" @change="handleFile")
+	.d-detail
+		.d-footer.fn-flex(v-if="show")
+			.d-footer-left.fn-flex
+				span.d-footer-title {{ platform.info ? platform.info.name : '' }}
+			.d-footer-right.fn-flex
+				i-button(@click="exit") 返回
+				i-button(@click="preview") 预览
+				i-button(type="primary" @click="editBoard" :loading="loading") 保存
+				i-button(@click="publishBoard" :loading="loading" v-if="!isNew") 发布
+				i-button(@click="handleExport" :loading="loading") 导出
+				i-button(@click="importModal=true" :loading="loading") 导入
+			load-mask(:show="saving") 正在保存数据…
+			Modal(v-model="importModal")
+				Form
+					FormItem
+						label(for="originFile" class="style-file-input") 全覆盖导入
+						input.fn-hide#originFile(type="file" accept="application/json" @change="handleFile")
 </template>
 <script lang="ts">
 	import { Component, Prop} from 'vue-property-decorator'

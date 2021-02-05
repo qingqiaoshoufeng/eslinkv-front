@@ -1,21 +1,10 @@
 <template>
 	<div class="layout-wrapper">
 		<div class="main-container">
-			<core v-if="ready" ref="kanboardEditor" :class="{ screenshot: screenshotCreating }"
+			<core ref="kanboardEditor" :class="{ screenshot: screenshotCreating }"
 				  @kanboard-edited="kanboardEdited = true"/>
-			<load-mask :show="screenshotCreating || querying">{{ querying ? '请求看板数据…' : '正在生成快照…' }}</load-mask>
 		</div>
-		<d-footer :kanboardEdited="kanboardEdited" @previewOpen="previewOpen = true">
-<!--			<span slot="left" class="d-footer-title">{{ kanboardName }}</span>-->
-<!--			<div slot="right">-->
-<!--				<Button type="default" @click="exit">返回</Button>-->
-<!--				<Button type="default" @click="preview">预览</Button>-->
-<!--				<Button type="primary" @click="editBoard" :loading="loading">保存</Button>-->
-<!--				<Button type="default" @click="publishBoard" :loading="loading">发布</Button>-->
-<!--				<Button type="default" @click="exportKanboardData" :loading="loading">导出</Button>-->
-<!--				<Button type="default" @click="showImportModal" :loading="loading">导入</Button>-->
-<!--			</div>-->
-		</d-footer>
+		<d-footer :kanboardEdited="kanboardEdited" @previewOpen="previewOpen = true"/>
 		<transition name="preview-fade">
 			<div v-if="previewOpen" class="preview-wrapper">
 				<router-view @close="previewBack"></router-view>
@@ -33,7 +22,6 @@
 	import {Button, Input, Modal, Form, FormItem} from 'view-design'
 	import '@/components-market'
 	import platform from '../../store/platform.store'
-	import scene from '../../store/scene.store'
 
 	export default {
 		name: 'Edit',
@@ -68,31 +56,6 @@
 				this.previewOpen = false
 				this.$router.back()
 			},
-			renderByDetail(res) {
-				const {attribute, name} = res
-				document.title = `编辑 - ${name} - 数据看板`
-				let value
-				if (typeof attribute === 'string') {
-					value = JSON.parse(attribute)
-				} else {
-					value = attribute
-				}
-				if (value.scene) {
-					scene.actions.initScene(value)
-				}
-				this.querying = false
-				platform.actions.initPlatform(value)
-				this.$refs.kanboardEditor.refillConfig()
-			},
-			init() {
-				const {params: {id}} = this.$route
-				this.querying = true
-				this.ready = true
-				platform.actions.setId(id)
-				this.$api.board.detail({dataBoardId: id}).then(res => {
-					this.renderByDetail(res)
-				})
-			},
 		},
 		watch: {
 			previewOpen(value) {
@@ -105,9 +68,6 @@
 				}
 			}
 		},
-		mounted() {
-			this.init()
-		}
 	}
 </script>
 

@@ -1,13 +1,5 @@
 <template>
     <div ref="canvas-wrapper" id="kanban" class="canvas-wrapper" :style="canvasStyle()">
-        <load-mask :show="querying">请求看板数据…</load-mask>
-        <div :class="{ active: refilling }" class="refill-mask">
-            <div class="mask-content">
-                <div class="mask-title">加载中，请稍后…</div>
-                <Progress :percent="refillPercent" :stroke-width="20" text-inside
-                          :stroke-color="['#108ee9', '#87d068']"/>
-            </div>
-        </div>
         <template v-for="item in platform.widgetAdded">
             <template v-if="!item.config.widget.combinationTo">
                 <parts v-if="showParts(item)" :key="item.id" :type="item.type" :config="item.config"
@@ -67,61 +59,11 @@
             return {
                 platform: platform.state,
 				scene: scene.state,
-                querying: true,
-                refilling: false,
                 refillPercent: 0,
                 time: Date.now()
             }
         },
         methods: {
-            initWidgetConfig(id, type, config, scene, market) {
-				platform.actions.setWidgetsAddedItem(id, type, config, scene, market)
-            },
-            sortWidgets: function (widgets) {
-                const providers = []
-                const responders = []
-                widgets.forEach(widget => {
-                    const api = widget.value.api
-                    const isProvider = api && api.bind && api.bind.enable && api.bind.role.includes('provider')
-                    if (isProvider) {
-                        providers.push(widget)
-                    } else {
-                        responders.push(widget)
-                    }
-                })
-                return [...providers, ...responders]
-            },
-            refillConfig() {
-                const {widgets, apis, kanboard} = this.platform.data
-                this.platform.panelConfig = kanboard
-                this.querying = false
-                this.apis = apis
-                return new Promise(resolve => {
-                    this.refilling = true
-                    const widgetsArray = this.sortWidgets(Object.values(widgets))
-                    const length = widgetsArray.length
-                    // 小工具初始化需要时间，此处进行延时逐个回填
-                    const reDrawWidget = ({id, type, value, scene = 0, market = false}) => {
-                        this.initWidgetConfig(id, type, value, scene, market)
-                        const currentLength = widgetsArray.length
-                        if (currentLength) {
-                            this.refillPercent = (length - currentLength) / length * 100 | 0
-                            reDrawWidget(widgetsArray.shift())
-                        } else {
-                            this.refillPercent = 100
-                            this.refilling = false
-                            resolve()
-                        }
-                    }
-                    if (length) {
-                        reDrawWidget(widgetsArray.shift())
-                    } else {
-                        this.refilling = false
-                        this.refillPercent = 100
-                        resolve()
-                    }
-                })
-            },
             canvasStyle() {
                 const val = styleParser(this.platform.panelConfig)
                 if (val) {

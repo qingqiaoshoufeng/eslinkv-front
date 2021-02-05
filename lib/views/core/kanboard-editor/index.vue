@@ -40,7 +40,7 @@
 				<!-- 小工具清单 -->
 				<template v-for="item in ordinaryWidgets">
 					<vdr
-						v-if="showParts(item) && sizeMap[item.id]"
+						v-if="showParts(item)"
 						:key="item.id"
 						:ref="`widget_${item.id}`"
 						:parent="true"
@@ -50,10 +50,10 @@
 						:resizable="widgetEditable(item)"
 						:active="item.id === activatedWidgetId && widgetEditable(item)"
 						:prevent-deactivation="true"
-						:w="sizeMap[item.id].w"
-						:h="sizeMap[item.id].h"
-						:x="positionMap[item.id].x"
-						:y="positionMap[item.id].y"
+						:w="vdrItem([item.id]).w"
+						:h="vdrItem([item.id]).h"
+						:x="vdrItem([item.id]).x"
+						:y="vdrItem([item.id]).y"
 						:z="item.config.layout.zIndex"
 						:snap="platform.autoAlignGuide"
 						:snap-tolerance="10"
@@ -95,20 +95,20 @@
 							<template v-if="shouldBeShow(item)">
 								<template v-for="child in getItemChildren(item, 'widget')">
 									<vdr
-										v-if="showParts(child) && sizeMap[item.id]"
+										v-if="showParts(child)"
 										:key="child.id"
 										:ref="`widget_${child.id}`"
 										:parent="true"
-										:parent-size="{ width: sizeMap[item.id].w, height: sizeMap[item.id].h }"
+										:parent-size="{ width: vdrItem([item.id]).w, height: vdrItem([item.id]).h }"
 										:scale-ratio="canvasZoom"
 										:draggable="widgetEditable(child) && item.config.widget.innerEditing"
 										:resizable="widgetEditable(child) && item.config.widget.innerEditing"
 										:active="child.id === activatedWidgetId && widgetEditable(child) && item.config.widget.innerEditing"
 										:prevent-deactivation="true"
-										:w="sizeMap[child.id].w"
-										:h="sizeMap[child.id].h"
-										:x="positionMap[child.id].x"
-										:y="positionMap[child.id].y"
+										:w="vdrItem([child.id]).w"
+										:h="vdrItem([child.id]).h"
+										:x="vdrItem([child.id]).x"
+										:y="vdrItem([child.id]).y"
 										:z="child.config.layout.zIndex"
 										:snap="platform.autoAlignGuide"
 										:snap-tolerance="5"
@@ -356,9 +356,6 @@
 							this.removeCombinationChild(id)
 							platform.actions.unChooseWidget()
 							this.$delete(this.widgetAdded, id)
-							this.$delete(this.zIndexMap, id)
-							this.$delete(this.sizeMap, id)
-							this.$delete(this.positionMap, id)
 							this.activatedWidgetId = this.rightMenuBindWidgetId = null
 						} else {
 							this.handleGridDelete(this.rightMenuGrid.chainedId, true)
@@ -381,6 +378,18 @@
 			}
 		},
 		computed: {
+			vdrItem() {
+				return (id) => {
+					const item = this.platform.widgetAdded[id]
+					return {
+						x: item.config.layout.position.left,
+						y: item.config.layout.position.top,
+						h: item.config.layout.size.height,
+						w: item.config.layout.size.width,
+						zIndex: item.config.layout.zIndex,
+					}
+				}
+			},
 			widgetAdded() {
 				return this.platform.widgetAdded
 			},
