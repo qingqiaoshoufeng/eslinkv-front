@@ -1,4 +1,11 @@
+import html2canvas from 'html2canvas'
+
 export default {
+	data() {
+		return {
+			screenshotCreating: false,
+		}
+	},
 	methods: {
 		async addBoard() {
 			const data = this.platFormData()
@@ -68,6 +75,69 @@ export default {
 			}).catch(() => {
 				this.loading = false
 				this.saving = false
+			})
+		},
+		/**
+		 * 快照上传
+		 * @param {File} blob 快照数据
+		 * @param {Number} type 快照类型， 0：看板, 1:模板，2:布局模板
+		 * @param {*} resolve
+		 * @param {*} reject
+		 */
+		upload(blob, resolve, reject) {
+			const name = `screenShot-${Date.now()}.jpg`
+			const data = new FormData()
+			data.append('file', blob, name)
+			data.append('type', this.type)
+			this.$api.uploadFile(data).then((data) => {
+				resolve(data)
+			}).catch(reject).finally(() => {
+				this.screenshotCreating = false
+			})
+		},
+		/**
+		 * 请求创建快照
+		 * @param {Object} 参数表
+		 * selector: String 选择器，指定截取快照的元素
+		 * type: Number 快照类型
+		 * returnSource: Boolean 是否返回快照资源，默认为 false，返回快照链接
+		 * options: Object html2canvas 参数表
+		 */
+		capture({selector, returnSource = false, options = {}}) {
+			this.screenshotCreating = true
+
+			// 禁用图片缓存
+			// this.disabledCache()
+			return new Promise((resolve, reject) => {
+				html2canvas(document.querySelector(selector), {
+					allowTaint: true,
+					scale: 1,
+					useCORS: true,
+					...options,
+					// onclone: function () {
+					// 	return new Promise(resolve)
+					// }
+				}).then(canvas => {
+					console.log(canvas.toDataURL('image/jpeg', 0.9))
+					try {
+						if (!returnSource) {
+							canvas.toBlob(blob => {
+								this.upload(blob, resolve, reject)
+							}, 'image/jpeg', 0.9)
+						} else {
+							resolve(canvas.toDataURL('image/jpeg', 0.9))
+						}
+					} catch (e) {
+						if (e.message.indexOf('Tainted canvases') > -1) {
+							this.$Message.warning('请检查是否使用了外部素材！')
+						}
+						this.screenshotCreating = false
+						reject(e)
+					}
+				}).catch(error => {
+					this.screenshotCreating = false
+					reject(error)
+				})
 			})
 		}
 	}

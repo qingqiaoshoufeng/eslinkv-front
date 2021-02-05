@@ -1,15 +1,13 @@
 <template>
 	<div class="layout-wrapper">
 		<div class="main-container">
-			<core ref="kanboardEditor" :class="{ screenshot: screenshotCreating }"
-				  @kanboard-edited="kanboardEdited = true"/>
+			<core ref="kanboardEditor" @kanboard-edited="kanboardEdited = true"/>
 		</div>
 		<d-footer :kanboardEdited="kanboardEdited"/>
 	</div>
 </template>
 <script>
 	import core from '../core/index'
-	import screenshot from '../mixins/screenshot'
 	import funcs from '../mixins/funcs'
 	import loadMask from '../../components/load-mask'
 	import * as widgetBindManager from '../mixins/widget-bind-manage'
@@ -20,7 +18,7 @@
 
 	export default {
 		name: 'Edit',
-		mixins: [screenshot, funcs],
+		mixins: [funcs],
 		provide() {
 			return {...widgetBindManager, kanboard: this}
 		},
@@ -72,47 +70,6 @@
 	#kanban:-webkit-full-screen {
 		width: 100%;
 		height: 100%;
-	}
-
-	.screenshot-mask {
-		position: fixed;
-		top: 0;
-		right: 0;
-		bottom: 0;
-		left: 0;
-		background-color: rgba(0, 0, 0, 0.6);
-		color: #e2e2e2;
-		font-size: 1.5em;
-		display: flex;
-		flex-direction: column;
-		line-height: 3;
-		justify-content: center;
-		align-items: center;
-		z-index: 999999;
-	}
-
-	.doc-link /deep/ i {
-		font-size: 1.4em;
-	}
-
-	.preview-fade-enter-active,
-	.preview-fade-leave-active {
-		transition: 0.4s;
-	}
-
-	.preview-fade-enter,
-	.preview-fade-leave-to {
-		opacity: 0;
-		transform: scale(0.8);
-	}
-
-	.preview-wrapper {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		z-index: 999;
 	}
 </style>
 <style lang="scss">

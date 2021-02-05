@@ -1,76 +1,32 @@
-<template>
-	<div class="layout-wrapper">
-		<div class="main-container">
-			<core
-				ref="kanboardEditor"
-				:class="{ screenshot: screenshotCreating }"
-				@querying="status => (querying = status)"
-				@kanboard-edited="kanboardEdited = true"
-			/>
-			<load-mask :show="screenshotCreating || querying">{{
-				querying ? '请求模板数据…' : '正在生成快照…'
-				}}
-			</load-mask>
-		</div>
-		<d-footer/>
-	</div>
+<template lang="pug">
+	.layout-wrapper
+		.main-container
+			core(ref="kanboardEditor" @querying="status => (querying = status)" @kanboard-edited="kanboardEdited = true")
+			load-mask(:show="querying") {{querying ? '请求模板数据…' : '正在生成快照…'}}
 </template>
 <script>
-	import core from '../core/index';
-	import screenshot from '../mixins/screenshot';
-	import funcs from '../mixins/funcs';
-	import loadMask from '../../components/load-mask/index';
-	import dFooter from '../../components/d-footer/index';
-	import * as widgetBindManager from '../mixins/widget-bind-manage';
-	import {Button, Input, Modal, Form, FormItem} from 'view-design';
-	import scene from '../../store/scene.store'
+	import core from '../core/index'
+	import funcs from '../mixins/funcs'
+	import loadMask from '../../components/load-mask/index'
+	import dFooter from '../../components/d-footer/index'
+	import * as widgetBindManager from '../mixins/widget-bind-manage'
 
 	export default {
 		name: 'New',
-		mixins: [screenshot, funcs],
+		mixins: [funcs],
 		provide() {
-			return {...widgetBindManager, kanboard: this};
+			return {...widgetBindManager, kanboard: this}
 		},
 		components: {
 			core,
 			loadMask,
-			Modal,
-			Button,
 			'd-footer': dFooter,
-			'i-input': Input,
-			Form,
-			FormItem,
-		},
-		props: {
-			data: {
-				type: String,
-				default: null,
-			},
 		},
 		data() {
 			return {
 				ready: false,
 				querying: false,
 			};
-		},
-		methods: {
-			renderByDetail(res) {
-				const {attribute, createTime, name} = res;
-				document.title = `编辑 - ${name} - 数据看板`;
-				this.createTime = createTime;
-				let value;
-				if (typeof attribute === 'string') {
-					value = JSON.parse(attribute);
-				} else {
-					value = attribute;
-				}
-				if (value.scene) {
-					scene.actions.initScene(value)
-				}
-				this.querying = false;
-				this.$refs.kanboardEditor.refillConfig(value);
-			},
-
 		},
 		mounted() {
 			document.title = '新增 - 数据看板'

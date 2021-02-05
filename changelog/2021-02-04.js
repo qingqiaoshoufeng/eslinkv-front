@@ -55,7 +55,7 @@ export default {
 			content: '统一所有页面的渲染逻辑',
 		},
 		{
-			content: '移除mixin positionMap、sizeMap、zIndexMap、refill、template'
+			content: '移除mixin positionMap、sizeMap、zIndexMap、refill、template、screenshot'
 		},
 		{
 			type: ['refactor'],
@@ -64,6 +64,9 @@ export default {
 		{
 			type: ['refactor'],
 			content: '添加json版本概念和平台版本概念',
+		},
+		{
+			content: '移除自封装axios'
 		},
 	]
 }

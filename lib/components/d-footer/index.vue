@@ -140,8 +140,6 @@
 				attribute: JSON.stringify({
 					kanboard: panelConfig, // 看板画布配置
 					widgets, // 小工具配置
-					apis: [], // 全局数据源配置
-					grids: {}, // 布局格子
 					scene: this.scene.obj, // 场景
 					guides // 参考线
 				})
@@ -151,7 +149,6 @@
 		mounted() {
 			const {params: {id}} = this.$route
 			this.isNew = !id
-			// todo 通过name/id 判断是否是new/edit/local/full/detail 显示不同的button
 		}
 	}
 </script>
