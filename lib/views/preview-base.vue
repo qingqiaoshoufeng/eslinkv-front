@@ -35,7 +35,6 @@
     import parts from './core/widgets/parts/index'
     import styleParser from './core/widgets/parts/lib/style-parser'
     import widgetOperation from './core/kanboard-editor/mixins/widget-operation'
-    import refill from './core/kanboard-editor/mixins/refill'
     import combination from './core/kanboard-editor/mixins/combination'
     import globalApi from './core/kanboard-editor/global-api/mixin'
     import widgetShareData from './core/kanboard-editor/mixins/widget-share-data'
@@ -47,7 +46,7 @@
 
     export default {
         name: 'kanboard-editor',
-        mixins: [widgetOperation, refill, combination, globalApi, widgetShareData, crossFrameMessageParamBind],
+        mixins: [widgetOperation, combination, globalApi, widgetShareData, crossFrameMessageParamBind],
         provide() {
             return {...widgetBindManager, kanboard: this, kanboardEditor: this}
         },
@@ -59,7 +58,6 @@
             return {
                 platform: platform.state,
 				scene: scene.state,
-                refillPercent: 0,
                 time: Date.now()
             }
         },
@@ -95,51 +93,6 @@
     }
 </style>
 <style lang="scss" scoped>
-    .refill-mask {
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        z-index: 999999;
-        background-color: rgba(0, 0, 0, 0.4);
-        opacity: 0;
-        transition: 0.2s;
-        pointer-events: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        
-        &.active {
-            opacity: 1;
-            pointer-events: auto;
-            
-            & ~ .widget-part {
-                filter: blur(7px);
-            }
-        }
-        
-        .mask-content {
-            width: 320px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            
-            .mask-title {
-                line-height: 3;
-                color: white;
-                font-size: 1.3em;
-            }
-        }
-        
-        /deep/ {
-            .ivu-progress-inner {
-                background-color: #717171;
-            }
-        }
-    }
-    
     .canvas-wrapper {
         &:before {
             content: '';

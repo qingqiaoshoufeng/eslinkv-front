@@ -18,7 +18,7 @@
 						input.fn-hide#originFile(type="file" accept="application/json" @change="handleFile")
 </template>
 <script lang="ts">
-	import { Component, Prop} from 'vue-property-decorator'
+	import {Component, Prop} from 'vue-property-decorator'
 	import {Icon, Button, Modal, Form, FormItem} from 'view-design'
 	import copy from 'fast-copy'
 	import format from 'date-fns/format'
@@ -47,6 +47,7 @@
 	export default class DFooter extends mixins(exportMx, detailMx, saveMx, importMx, publishMx) {
 		@Prop(Boolean) kanboardEdited: boolean
 		@Prop({default: true}) show: boolean  // detail,full,local 隐藏该模块
+		@Prop({default: 0}) type: number  // 数据类型：0:看板, 1:小工具模板, 2:参考线模板
 
 		platform = platform.state
 		scene = scene.state
@@ -55,9 +56,8 @@
 		isNew = true
 
 		preview() {
-			this.$emit('previewOpen')
-			const data = this.platFormData().attribute
-			this.$router.push({name: this.isNew ? 'big-data-new-preview' : 'big-data-edit-preview', params: {data}})
+			document.body.requestFullscreen()
+			this.$router.push('/preview')
 		}
 
 		exit() {

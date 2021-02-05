@@ -59,7 +59,6 @@
 						data.widgets.forEach(v => {
 							setDefault(v.value)
 						})
-						platform.actions.initPlatform(data)
 						scene.actions.initScene(value)
 						this.refill(data)
 						localStorage.setItem('dvdp_local', JSON.stringify(data))
@@ -92,7 +91,6 @@
 			let data = localStorage.getItem('dvdp_local')
 			if (data) {
 				data = JSON.parse(data)
-				platform.actions.initPlatform(data)
 				scene.actions.initScene(value)
 				this.refill(data)
 			}

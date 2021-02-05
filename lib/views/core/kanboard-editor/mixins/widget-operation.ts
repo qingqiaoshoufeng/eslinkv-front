@@ -27,7 +27,7 @@ class Mixins extends Vue {
 		if (!this.widgetSources[type]) {
 			this.$set(this.widgetSources, type, source)
 		}
-		if (this.refilling || this.widgetsImporting) {
+		if (this.widgetsImporting) {
 			this.isWidgetProcessing = false
 			return
 		}
@@ -45,12 +45,10 @@ class Mixins extends Vue {
 		const currentWidget = this.widgetAdded[id]
 		if (!id || !currentWidget) return
 		this.$set(currentWidget, 'config', value)
-		if (this.refilling) return
-		this.$emit('kanboard-edited')
 	}
 
 	showProcessing(top, left, width, height, widget) {
-		if (this.refilling || this.widgetsImporting) return
+		if (this.widgetsImporting) return
 		if (widget && widget.combinationTo) {
 			const widgetElement = this.$refs[widget.combinationTo][0].$el
 			const {offsetLeft, offsetTop} = widgetElement.parentElement
@@ -198,7 +196,7 @@ class Mixins extends Vue {
 
 	@Watch('activatedWidgetId')
 	onActivatedWidgetIdChange(id, oldId) {
-		if (!id || this.refilling || this.widgetsImporting) return
+		if (!id || this.widgetsImporting) return
 
 		if (this.currentWidgetValue && id === this.currentWidgetValue.widget.id || !id) return
 		this.updateConfigPanelValue(id, oldId)

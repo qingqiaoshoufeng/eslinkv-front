@@ -46,5 +46,24 @@ export default {
 			type: ['refactor'],
 			content: '打包及路由改造，实现前端权限控制，不同权限打不同的包',
 		},
+		{
+			type: ['refactor'],
+			content: '改造右键菜单逻辑',
+		},
+		{
+			type: ['refactor'],
+			content: '统一所有页面的渲染逻辑',
+		},
+		{
+			content: '移除mixin positionMap、sizeMap、zIndexMap、refill、template'
+		},
+		{
+			type: ['refactor'],
+			content: '预览界面分离子路由强依赖',
+		},
+		{
+			type: ['refactor'],
+			content: '添加json版本概念和平台版本概念',
+		},
 	]
 }

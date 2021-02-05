@@ -1,6 +1,6 @@
 export default {
-	path: '/new',
-	name: 'new',
+	path: '/preview',
+	name: 'preview',
 	mode: [],
 	component: () => import('./index.vue'),
 }

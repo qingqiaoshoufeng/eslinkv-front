@@ -79,7 +79,7 @@
 
 </template>
 <script lang="ts">
-	import func from './func'
+	import func from './func.min'
 	import {Component} from 'vue-property-decorator'
 	import databaseConfig from '../views/core/kanboard-editor/data-warehouse/index.vue'
 	import { getProviderList, getProviderParams } from '../views/mixins/widget-bind-manage'

@@ -16,8 +16,7 @@ export default {
 			if (value.scene) {
 				scene.actions.initScene(value)
 			}
-			platform.actions.initPlatform(value)
-			this.refillConfig()
+			this.refillConfig(value)
 		},
 		// todo 是否可以移除 影响渲染时间
 		sortWidgets(widgets) {
@@ -34,8 +33,8 @@ export default {
 			})
 			return [...providers, ...responders]
 		},
-		refillConfig() {
-			const {widgets, apis, kanboard} = this.platform.data
+		refillConfig(res) {
+			const {widgets, apis, kanboard} = res
 			this.platform.panelConfig = kanboard
 			// this.querying = false
 			// this.apis = apis
