@@ -42,5 +42,9 @@ export default {
 			type: ['fix'],
 			content: '优化复杂组件测试页面不打入正式包',
 		},
+		{
+			type: ['refactor'],
+			content: '打包及路由改造，实现前端权限控制，不同权限打不同的包',
+		},
 	]
 }
