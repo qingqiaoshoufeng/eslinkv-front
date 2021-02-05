@@ -28,14 +28,13 @@
 			:contentMove="contentMove"
 			:contentWidth="contentWidth"
 			:contentHeight="contentHeight"
-			:guides="lineList"
 			:scrollLeft="contentScrollLeft"
 			:scrollTop="contentScrollTop"
 			:dragTransition="dragTransition"
+			:contentLayout="contentLayout"
 			:zoom="zoom"
 			:locked="lockGuides"
 			@guide-drag="handleDragLine"
-			@guide-remove="handleGuideRemove"
 		></guides>
 		<div :class="{ drag: contentMove }"
 			 class="vue-ruler-content"
@@ -130,26 +129,6 @@
 				vrHeight: 0 // 垂直标尺高度
 			}
 		},
-		computed: {
-			lineList() {
-				let hCount = 0;
-				let vCount = 0;
-				const {left, top} = this.contentLayout
-				return this.platform.ruler.guideLines.map((item) => {
-					const isH = item.type === 'h'
-					const site = item.site
-					const value = site - (isH ? top : left)
-					return {
-						id: `${item.type}_${isH ? hCount++ : vCount++}`,
-						type: item.type,
-						title: value + 'px',
-						site: site,
-						value,
-						[isH ? 'top' : 'left']: site / (this.stepLength / 50) + this.size
-					}
-				}).filter(item => item.site > -18)
-			}
-		},
 		methods: {
 			handleDragLine({type, id}, e) {
 				if (e.which !== 1) return
@@ -202,7 +181,7 @@
 				border: 18px transparent solid;
 				transition: transform 0.4s;
 				overflow: visible;
-				background-image: url(../icons/transparent-bg.png);
+				background-image: url(../../../../src/assets/editor/transparent-bg.png);
 				background-clip: content-box;
 				background-size: 32px;
 			}

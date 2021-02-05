@@ -12,7 +12,6 @@ import {
 import platform from '../../lib/store/platform.store'
 
 const GoldChart: any = {
-    version: '0.0.1',
     scene: {
         initScene: mutations.initScene,
         setSceneIndex: mutations.setSceneIndex,

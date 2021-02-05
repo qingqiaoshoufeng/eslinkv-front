@@ -34,8 +34,9 @@ export default {
 			return [...providers, ...responders]
 		},
 		refillConfig(res) {
-			const {widgets, apis, kanboard} = res
+			const {widgets, kanboard, guides} = res
 			this.platform.panelConfig = kanboard
+			this.platform.ruler.guideLines = guides
 			// this.querying = false
 			// this.apis = apis
 			return new Promise(resolve => {

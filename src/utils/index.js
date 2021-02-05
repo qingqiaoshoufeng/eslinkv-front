@@ -17,3 +17,34 @@ export function getQueryString(name) {
 export function hexToRgba(hex, opacity) {
 	return "rgba(" + parseInt("0x" + hex.slice(1, 3)) + "," + parseInt("0x" + hex.slice(3, 5)) + "," + parseInt("0x" + hex.slice(5, 7)) + "," + opacity + ")";
 }
+
+
+/**
+ * @description 向上查找 components
+ */
+export function findComponentUpward(context, componentName, componentNames) {
+	if (typeof componentName === 'string') {
+		componentNames = [componentName];
+	} else {
+		componentNames = componentName;
+	}
+
+	let parent = context.$parent;
+	let name = parent.$options.name;
+	while (parent && (!name || componentNames.indexOf(name) < 0)) {
+		parent = parent.$parent;
+		if (parent) name = parent.$options.name;
+	}
+	return parent;
+}
+
+/**
+ * @description 向下查找 components
+ */
+export function findComponentsDownward(context, componentName) {
+	return context.$children.reduce((components, child) => {
+		if (child.$options.name === componentName) components.push(child);
+		const foundChilds = findComponentsDownward(child, componentName);
+		return components.concat(foundChilds);
+	}, []);
+}
