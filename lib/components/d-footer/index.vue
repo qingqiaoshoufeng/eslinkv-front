@@ -20,11 +20,12 @@
 <script lang="ts">
 	import { Component, Prop} from 'vue-property-decorator'
 	import {Icon, Button, Modal, Form, FormItem} from 'view-design'
+	import copy from 'fast-copy'
+	import format from 'date-fns/format'
+	import {mixins} from 'vue-class-component'
 	import platform from '../../store/platform.store'
 	import scene from '../../store/scene.store'
 	import commonConfigValue from '../../views/core/widgets/parts/lib/common-config-value'
-	import copy from 'fast-copy'
-	import format from 'date-fns/format'
 	import {isObjectString} from '../../utils'
 	import loadMask from '../load-mask'
 	import importMx from './import.mx'
@@ -32,7 +33,6 @@
 	import publishMx from './publish.mx'
 	import detailMx from './detail.mx'
 	import saveMx from './save.mx'
-	import {mixins} from 'vue-class-component'
 
 	@Component({
 		components: {

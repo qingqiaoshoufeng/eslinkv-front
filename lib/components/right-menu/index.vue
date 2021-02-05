@@ -1,35 +1,57 @@
 <template lang="pug">
 	ul.right-menu.pos-f(ref="rightMenu" @contextmenu.stop.prevent)
-		li(:class="{disabled: rightMenuGrid}")
+		li
 			span 层叠 
-			span.suffix 当前 {{ zIndexMap[rightMenuBindWidgetId] }}
+			span.suffix 当前 {{ zIndex }}
 			ul.sub-menu.pos-a
-				li(@click="updateWidgetZIndex(1)") 上移一层
-				li(:class="{ disabled: zIndexMap[rightMenuBindWidgetId] === 0 }" @click="updateWidgetZIndex(-1)") 下移一层
-				li(@click="updateWidgetZIndex('top')") 置顶
-				li(:class="{ disabled: zIndexMap[rightMenuBindWidgetId] === 0 }" @click="updateWidgetZIndex('bottom')") 置底
+				li(@click="handleZIndex(1)") 上移一层
+				li( @click="handleZIndex(-1)") 下移一层
+				li(@click="handleZIndexTop") 置顶
+				li( @click="handleZIndexBottom") 置底
 		li(@click="copyWidget") 复制
-		li(:class="{disabled: rightMenuBindWidgetId !== activatedWidgetId}" @click="deactivateWidget(activatedWidgetId)") 取消选定
-		li(@click="toggleWidgetLock") {{ isWidgetLocked ? '解锁' : '锁定' }}
-		li(:class="{disabled: rightMenuGrid}" @click="hideWidget") 隐藏
-		li(:class="{disabled: rightMenuBindWidgetId !== activatedWidgetId || rightMenuGrid}" @click="deleteWidget") 删除
+		li(@click="handleUnActive") 取消选定
+		li(@click="handleLock") {{ isLock ? '解锁' : '锁定' }}
+		li(@click="hideWidget") 隐藏
+		li(@click="deleteWidget") 删除
 	</ul>
 </template>
-<script>
-	export default {
-		props: [
-			'hideWidget',
-			'isWidgetLocked',
-			'zIndexMap',
-			'updateWidgetZIndex',
-			'rightMenuGrid',
-			'rightMenuBindWidgetId',
-			'toggleWidgetLock',
-			'copyWidget',
-			'deactivateWidget',
-			'activatedWidgetId',
-			'deleteWidget'
-		]
+<script lang="ts">
+	import {Vue, Component, Prop} from 'vue-property-decorator'
+	import platform from '../../store/platform.store'
+
+	@Component
+	export default class rightMenu extends Vue {
+		platform = platform.state
+		@Prop deleteWidget
+		@Prop copyWidget
+
+		handleZIndex(num) {
+			this.platform.widgetAdded[this.platform.chooseWidgetId].config.layout.zIndex = this.zIndex + num
+		}
+
+		handleZIndexTop() {
+
+		}
+
+		handleZIndexBottom() {
+
+		}
+
+		handleUnActive() {
+			this.platform.chooseWidgetId = null
+		}
+
+		handleLock() {
+			this.platform.widgetAdded[this.platform.chooseWidgetId].config.widget.locked = !this.isLock
+		}
+
+		get isLock() {
+			return this.platform.widgetAdded[this.platform.chooseWidgetId].config.widget.locked
+		}
+
+		get zIndex() {
+			return this.platform.widgetAdded[this.platform.chooseWidgetId].config.layout.zIndex
+		}
 	}
 </script>
 <style lang="scss">

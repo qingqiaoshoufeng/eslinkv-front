@@ -44,33 +44,6 @@ class Mixins extends Vue {
 		console.log(this.widgetAdded)
 		const currentWidget = this.widgetAdded[id]
 		if (!id || !currentWidget) return
-		this.zIndexMap[id] = value.layout.zIndex
-		if (!this.sizeMap[id]) {
-			let size
-			/**
-			 * @description 开发阶段 异常情况会出现，宽高未配置的情况，会给定一个默认的宽高
-			 */
-			if (!value.layout.size) {
-				size = {
-					height: 100,
-					range: {
-						maxHeight: 0,
-						maxWidth: 0,
-						minHeight: 0,
-						minWidth: 0,
-						rangeUnit: "%"
-					},
-					unit: "px",
-					width: 100
-				}
-			}
-			const {width = 100, height = 100} = value.layout.size ? value.layout.size : size
-			this.$set(this.sizeMap, id, {w: width, h: height})
-		}
-		if (!this.positionMap[id]) {
-			const {left, top} = value.layout.position
-			this.$set(this.positionMap, id, {x: left, y: top})
-		}
 		this.$set(currentWidget, 'config', value)
 		if (this.refilling) return
 		this.$emit('kanboard-edited')
@@ -116,9 +89,6 @@ class Mixins extends Vue {
 		if (layout.zIndex) layout.zIndex = 10
 		widget.id = id
 		widget.componentVersion = componentVersion
-		this.$set(this.zIndexMap, id, layout.zIndex)
-		this.sizeMap[id] = {w: width, h: height}
-		this.positionMap[id] = {x: left, y: top}
 		const value = {layout, widget, config, api}
 		this.initWidgetConfig(id, type, this.scene.index, market)
 		this.updateWidget(value)
@@ -185,8 +155,6 @@ class Mixins extends Vue {
 		this.$set(this.zIndexMap, id, layout.zIndex)
 		const {width, height} = layout.size
 		const {left, top} = layout.position
-		this.$set(this.sizeMap, id, {w: width, h: height})
-		this.$set(this.positionMap, id, {x: left, y: top})
 	}
 
 	/**
@@ -211,49 +179,6 @@ class Mixins extends Vue {
 			return
 		}
 		this.initNewWidget(id, copiedWidget)
-	}
-
-	/**
-	 * @description 调整图层 z-index
-	 */
-	updateWidgetZIndex(type) {
-		const id = this.rightMenuBindWidgetId
-		const widget = this.widgetAdded[id]
-		if (!widget) return
-		const zIndexes = this.zIndexMap
-		const layout = widget.config.layout
-		if (typeof type === 'number') {
-			if (layout.zIndex === 0 && type < 0) {
-				zIndexes[id] = layout.zIndex = this.getMinZIndex()
-				return
-			}
-			layout.zIndex += type
-			zIndexes[id] += type
-		} else {
-			zIndexes[id] = layout.zIndex = type === 'top' ? this.getMaxZIndex() : this.getMinZIndex()
-		}
-	}
-
-	/**
-	 * @description 获取当前图层 最大 z-index + 1
-	 */
-	getMaxZIndex() {
-		return Math.max(...Object.values(this.zIndexMap)) + 1
-	}
-
-	/**
-	 * @description 获取当前图层 最小 设为0 ，其他如有0 依次+1
-	 */
-	getMinZIndex() {
-		const zIndexes = this.zIndexMap
-		const currentMin = Math.min(...Object.values(zIndexes))
-		if (currentMin > 0) return 0
-		const widgets = this.widgetAdded
-		Object.keys(zIndexes).forEach(key => {
-			zIndexes[key]++
-			widgets[key].config.layout.zIndex++
-		})
-		return 0
 	}
 
 	markWidgetMoving() {
