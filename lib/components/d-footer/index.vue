@@ -27,8 +27,11 @@
 	import format from 'date-fns/format'
 	import {isObjectString} from '../../utils'
 	import loadMask from '../load-mask'
+	import importMx from './import.mx'
 	import exportMx from './export.mx'
+	import publishMx from './publish.mx'
 	import detailMx from './detail.mx'
+	import saveMx from './save.mx'
 	import {mixins} from 'vue-class-component'
 
 	@Component({
@@ -41,142 +44,15 @@
 			FormItem,
 		},
 	})
-	export default class DFooter extends mixins(exportMx,detailMx) {
+	export default class DFooter extends mixins(exportMx, detailMx, saveMx, importMx, publishMx) {
 		@Prop(Boolean) kanboardEdited: boolean
 		@Prop({default: true}) show: boolean  // detail,full,local 隐藏该模块
 
 		platform = platform.state
 		scene = scene.state
-		importModal: boolean = false
 		saving: boolean = false
 		loading = false
 		isNew = true
-
-		handleFile(e) {
-			const file = e.target.files[0];
-			const reader = new FileReader();
-			reader.onload = e => {
-				try {
-					this.loading = true;
-					const result = JSON.parse(e.target.result);
-					const {data, createTime, name} = result;
-					this.$parent.renderByDetail({name, attribute: data, createTime});
-					this.importModal = false
-					this.loading = false;
-				} catch (e) {
-					this.$Message.error('配置文件识别失败');
-				}
-			};
-			reader.onerror = () => {
-				this.$Message.error('配置文件识别失败');
-			};
-			reader.readAsText(file);
-		}
-
-		publishBoard() {
-			if (this.kanboardEdited) {
-				this.$Message.warning('请先保存看板！')
-				return
-			}
-			this.$Modal.confirm({
-				title: '提示',
-				content: '确认发布此看板吗？',
-				loading: true,
-				onOk: () => {
-					console.log(this.$parent)
-					this.$api.board.publish({id: this.$parent.kanboardId}).then(res => {
-						if (res.responseCode == 100000) {
-							this.$Message.success('发布成功！')
-							this.$emit('update-kanboard-list')
-							this.exit()
-						}
-						this.$Modal.remove()
-					}).catch((err) => {
-						this.$Modal.remove()
-					});
-				}
-			})
-		}
-
-		// 新建看板
-		saveBoard(data) {
-			this.loading = true;
-			this.$api.board
-				.add(data)
-				.then(res => {
-					this.kanboardEdited = false;
-					this.$Message.success('保存成功！');
-					this.loading = false;
-					this.$router.back();
-				})
-				.catch(() => {
-					this.loading = false;
-				});
-		}
-
-		async addBoard() {
-			const data = this.platFormData()
-			// 数据类型：0:看板, 1:小工具模板, 2:参考线模板
-			data.type = 0;
-			this.$Modal.confirm({
-				title: '快照',
-				content: '是否创建看板快照？',
-				onOk: async () => {
-					const snapshot = await this.capture({
-						selector: '#kanban',
-					}).catch(e => {
-						console.warn('快照创建失败', e);
-					});
-					if (snapshot) data.snapshot = snapshot;
-					this.saveBoard(data);
-				},
-				onCancel: () => {
-					this.saveBoard(data);
-				},
-				okText: '创建',
-				cancelText: '跳过',
-			});
-		}
-
-		// 修改看板
-		editBoard() {
-			if (this.isNew) {
-				this.addBoard()
-				return
-			}
-			const data = this.platFormData()
-			this.$Modal.confirm({
-				title: '快照',
-				content: '是否更新看板快照？',
-				onOk: async () => {
-					const snapshot = await this.capture({selector: '#kanban'}).catch(e => {
-						console.warn('快照创建失败', e)
-					})
-					if (snapshot) data.snapshot = snapshot
-					this.submitKanboard(data)
-				},
-				onCancel: () => {
-					this.submitKanboard(data)
-				},
-				okText: '更新',
-				cancelText: '跳过'
-			})
-		}
-
-		submitKanboard(data) {
-			this.saving = true
-			const {params: {id}} = this.$route
-			data.type = 0 // 数据类型：0:看板, 1:小工具模板, 2:参考线模板
-			this.$api.board.update({...data, id}).then((res) => {
-				this.kanboardEdited = false
-				this.$Message.success('修改成功')
-				this.loading = false
-				this.saving = false
-			}).catch(() => {
-				this.loading = false
-				this.saving = false
-			})
-		}
 
 		preview() {
 			this.$emit('previewOpen')
