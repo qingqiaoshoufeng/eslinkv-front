@@ -151,32 +151,6 @@ class Mixins extends Vue {
 		}
 		platform.actions.setWidgetsAddedItem(id, widget.type, widget.config, widget.scene)
 		this.$set(this.zIndexMap, id, layout.zIndex)
-		const {width, height} = layout.size
-		const {left, top} = layout.position
-	}
-
-	/**
-	 * @description 复制组件
-	 */
-	copyTargetWidget() {
-		const copyId = this.rightMenuBindWidgetId
-		const widget = this.widgetAdded[copyId]
-		if (!widget) return
-		const copiedWidget = copy(widget)
-		const id = uuid()
-		copiedWidget.id = id
-		// 如果属于某组合小工具，则副本挂入该组合小工具
-		const combinationToTargetId = copiedWidget.config.widget.combinationTo
-		combinationToTargetId && this.insertChild(combinationToTargetId, id)
-		// 如果是组合小工具，则复制子小工具
-		const combinationChildren = copiedWidget.config.config.children
-		if (combinationChildren && combinationChildren.list) {
-			const children = combinationChildren.list.split(',')
-			combinationChildren.list = ''
-			this.copyCombinationChildren(copiedWidget, children)
-			return
-		}
-		this.initNewWidget(id, copiedWidget)
 	}
 
 	markWidgetMoving() {

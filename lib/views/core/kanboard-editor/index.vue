@@ -199,8 +199,8 @@
 		<!-- 右键菜单 -->
 		<right-menu
 			ref="rightMenu"
-			:copyWidget="copyWidget"
-			:deleteWidget="deleteWidget"/>
+			@deactivateWidget="deactivateWidget"
+		/>
 		<!-- 数仓配置面板 -->
 		<database-config
 			ref="dataBaseConfig"
@@ -290,56 +290,6 @@
 			}
 		},
 		methods: {
-			/**
-			 * @description 解锁/锁定
-			 */
-			toggleWidgetLock() {
-				if (!this.rightMenuGrid) {
-					const id = this.rightMenuBindWidgetId
-					if (!id) return
-					const widget = this.widgetAdded[id].config.widget
-					widget.locked = !widget.locked
-					this.deactivateWidget(id)
-				} else {
-					const widget = this.rightMenuGrid.config.widget
-					widget.locked = !widget.locked
-					this.rightMenuGrid = null
-				}
-			},
-			/**
-			 * @description 复制组件
-			 */
-			copyWidget() {
-				this.copyTargetWidget()
-			},
-			/**
-			 * @description 隐藏组件
-			 */
-			hideWidget() {
-				const id = this.rightMenuBindWidgetId
-				if (!id) return
-				const widget = this.widgetAdded[id].config.widget
-				widget.hide = !widget.hide
-				this.deactivateWidget(id)
-			},
-			deleteWidget() {
-				this.$Modal.confirm({
-					title: '提示',
-					content: '是否删除当前组件？',
-					onOk: () => {
-						if (!this.rightMenuGrid) {
-							const id = this.rightMenuBindWidgetId
-							this.removeCombinationChild(id)
-							platform.actions.unChooseWidget()
-							this.$delete(this.widgetAdded, id)
-							this.activatedWidgetId = this.rightMenuBindWidgetId = null
-						} else {
-							this.handleGridDelete(this.rightMenuGrid.chainedId, true)
-							this.rightMenuGrid = null
-						}
-					}
-				});
-			},
 			hideSubPanels(e) {
 				if (e) {
 					const classPath = e.path.map(ele => ele.className).join(',')
