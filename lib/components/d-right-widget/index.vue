@@ -110,11 +110,7 @@
 				title: '提示',
 				content: '是否删除当前组件？',
 				onOk: () => {
-					// this.removeCombinationChild(id)
 					this.$delete(this.platform.widgetAdded, id)
-					// this.$delete(this.zIndexMap, id)
-					// this.$delete(this.sizeMap, id)
-					// this.$delete(this.positionMap, id)
 					this.platform.chooseWidgetId = null
 				}
 			})

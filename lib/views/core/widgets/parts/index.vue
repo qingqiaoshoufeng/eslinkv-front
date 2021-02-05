@@ -65,7 +65,6 @@
 		baiduMap: () => import('./other/baidu-map.vue'),
 		slotTable: () => import('./other/slot-table.vue'),
 		menuList: () => import('./other/menu.vue'),
-		combination: () => import('./other/combination/index.vue'),
 		marquee: () => import('./other/marquee'),
 		numberDisplay: () => import('./other/number-display'),
 		ratioBar: () => import('./other/ratio-bar.vue'),

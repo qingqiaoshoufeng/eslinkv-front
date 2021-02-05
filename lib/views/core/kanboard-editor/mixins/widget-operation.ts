@@ -49,13 +49,6 @@ class Mixins extends Vue {
 
 	showProcessing(top, left, width, height, widget) {
 		if (this.widgetsImporting) return
-		if (widget && widget.combinationTo) {
-			const widgetElement = this.$refs[widget.combinationTo][0].$el
-			const {offsetLeft, offsetTop} = widgetElement.parentElement
-			const {offsetTop: bodyTop} = widgetElement.querySelector('.combination-body')
-			left += offsetLeft
-			top += offsetTop + bodyTop
-		}
 		this.widgetProcessingStyle = `
                 transform: translate3d(${left}px, ${top}px, 0);
                 width: ${width}px;

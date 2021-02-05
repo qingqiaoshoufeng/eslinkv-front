@@ -1,31 +1,10 @@
 <template>
     <div ref="canvas-wrapper" id="kanban" class="canvas-wrapper" :style="canvasStyle()">
         <template v-for="item in platform.widgetAdded">
-            <template v-if="!item.config.widget.combinationTo">
-                <parts v-if="showParts(item)" :key="item.id" :type="item.type" :config="item.config"
-                       :ref="item.id" :market="item.market"
-                       :style="item.config.widget.hide ? 'display: none' : ''" readonly>
-                    <template v-if="shouldBeShow(item)">
-                        <template v-for="child in getItemChildren(item, 'widget')">
-                            <parts
-                                    v-if="showParts(child)"
-                                    :key="child.id" :market="item.market"
-                                    :ref="child.id"
-                                    :class="[
-								  `group-item group-item-${child.id}`,
-								  {
-									'slide-hide': calcSlideHide(item.config, child.id)
-								  },
-								]"
-                                    :type="child.type"
-                                    :config="child.config"
-                                    :style="child.config.widget.hide ? 'display: none' : ''"
-                                    readonly
-                            />
-                        </template>
-                    </template>
-                </parts>
-            </template>
+			<parts v-if="showParts(item)" :key="item.id" :type="item.type" :config="item.config"
+				   :ref="item.id" :market="item.market"
+				   :style="item.config.widget.hide ? 'display: none' : ''" readonly>
+			</parts>
         </template>
         <api-executor v-for="api in apis" :key="api.variable" :api="api"
                       @api-data-update="(data) => handleApiDataUpdate(api.variable, data)"/>
@@ -35,7 +14,6 @@
     import parts from './core/widgets/parts/index'
     import styleParser from './core/widgets/parts/lib/style-parser'
     import widgetOperation from './core/kanboard-editor/mixins/widget-operation'
-    import combination from './core/kanboard-editor/mixins/combination'
     import globalApi from './core/kanboard-editor/global-api/mixin'
     import widgetShareData from './core/kanboard-editor/mixins/widget-share-data'
     import crossFrameMessageParamBind from './core/kanboard-editor/mixins/cross-frame-message-param-bind'
@@ -46,7 +24,7 @@
 
     export default {
         name: 'kanboard-editor',
-        mixins: [widgetOperation, combination, globalApi, widgetShareData, crossFrameMessageParamBind],
+        mixins: [widgetOperation, globalApi, widgetShareData, crossFrameMessageParamBind],
         provide() {
             return {...widgetBindManager, kanboard: this, kanboardEditor: this}
         },
@@ -125,10 +103,6 @@
                 .delete {
                     display: none !important;
                 }
-            }
-            
-            .combination-body {
-                outline: none;
             }
         }
     }
