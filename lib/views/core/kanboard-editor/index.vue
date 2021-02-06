@@ -12,10 +12,8 @@
 		<d-bottom-bar/>
 		<!-- 标尺容器 -->
 		<ruler-canvas
-			v-model="guides"
 			:guide-step="moveStep"
 			ref="rulerCanvas"
-			@zoom="handleZoomChange"
 			@content-move="(moving) => (rulerCanvasMoving = moving)"
 		>
 			<!-- 大屏 -->
@@ -37,7 +35,7 @@
 						:ref="`widget_${item.id}`"
 						:parent="true"
 						:parent-size="canvasSize"
-						:scale-ratio="canvasZoom"
+						:scale-ratio="platform.ruler.zooms[platform.ruler.zoomIndex]"
 						:draggable="widgetEditable(item)"
 						:resizable="widgetEditable(item)"
 						:active="item.id === activatedWidgetId && widgetEditable(item)"
@@ -73,39 +71,6 @@
 						</parts>
 					</vdr>
 				</template>
-				<!-- 布局格子 -->
-				<template v-for="grid in ordinaryGrids">
-					<grid-item
-						:key="grid.id"
-						v-bind="grid"
-						@embed-drop="handleEmbedDrop"
-						@embed-widget-drop="handleWidgetGridDrop"
-						@grid-drag-move="handleGridDragMove"
-						@delete="handleGridDelete"
-						@copy="handleGridCopy"
-						@update-config="handleGridUpdate"
-						@active-change="handleGridActive"
-						@widget-config-update="handleGridWidgetConfig"
-						@contextmenu="(data) => showRightMenu(data)"
-					/>
-				</template>
-				<!--辅助线-->
-				<span
-					v-for="(item, index) in vLine"
-					v-show="item.display"
-					:style="{ left: item.position, top: item.origin, height: item.lineLength }"
-					:key="`v-${index}`"
-					class="ref-line v-line"
-				/>
-				<span
-					v-for="(item, index) in hLine"
-					v-show="item.display"
-					:style="{ top: item.position, left: item.origin, width: item.lineLength }"
-					:key="`h-${index}`"
-					class="ref-line h-line"
-				/>
-				<!--辅助线END-->
-				<!--				<div v-show="isWidgetProcessing" :style="widgetProcessingStyle" class="widget-processing">正在初始化配置…</div>-->
 			</section>
 		</ruler-canvas>
 		<!-- 右键菜单 -->
@@ -150,18 +115,14 @@
 	import widgetOperation from './mixins/widget-operation'
 	import panelOperation from './mixins/panel-operation'
 	import canvasOperation from './mixins/canvas-operation'
-	import createKanboardData from './mixins/create-kanboard-data'
 	import editorEventHandler from './mixins/editor-event-handler'
 	import configEventHandler from './mixins/config-event-handler'
-	import layoutGridMixin from './layout-grid/mixin'
-	import positionSize from './mixins/position-size'
 	import layerOperation from '../../../components/widget-layers/mixin'
 	import globalApi from './global-api/mixin'
 	import widgetShareData from './mixins/widget-share-data'
 	import crossFrameMessageParamBind from './mixins/cross-frame-message-param-bind'
 	import databaseConfig from './data-warehouse/index.vue'
 	import jsEditorModal from './js-editor-modal.vue'
-	import gridItem from './layout-grid/grid.vue'
 	import dRightFullScreen from '../../../components/d-right-full-screen'
 	import dRightManage from '../../../components/d-right-manage'
 	import dRightWidget from '../../../components/d-right-widget'
@@ -175,9 +136,8 @@
 		name: 'kanboard-editor',
 		mixins: [
 			widgetOperation, panelOperation,
-			canvasOperation, createKanboardData,
-			configEventHandler, editorEventHandler, layoutGridMixin,
-			positionSize, layerOperation, globalApi,
+			canvasOperation,
+			configEventHandler, editorEventHandler, layerOperation, globalApi,
 			widgetShareData, crossFrameMessageParamBind,
 			rulerGuides
 		],
@@ -188,7 +148,6 @@
 			vdr,
 			databaseConfig,
 			jsEditorModal,
-			gridItem,
 			dRightFullScreen, dRightManage, dRightWidget, dBottomBar, dRightSetting,
 			rightMenu
 		},
@@ -240,11 +199,6 @@
 					return false
 				}
 			},
-			isWidgetLocked() {
-				if (this.rightMenuGrid) return this.rightMenuGrid.config.widget.locked
-				const id = this.rightMenuBindWidgetId
-				return id && this.widgetAdded[id] && this.widgetAdded[id].config.widget.locked
-			},
 			ordinaryWidgets() {
 				const ordinaryWidgets = {}
 				Object.keys(this.widgetAdded).forEach(id => {
@@ -253,9 +207,6 @@
 				})
 				return ordinaryWidgets
 			},
-			sidebarTools() {
-				return this.$refs.sidebarTools
-			}
 		},
 		mounted() {
 			window.GoldChart.mutations.setInstance('kanboard', this)

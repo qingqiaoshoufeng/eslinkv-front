@@ -55,7 +55,7 @@ export default {
 			content: '统一所有页面的渲染逻辑',
 		},
 		{
-			content: '移除mixin positionMap、sizeMap、zIndexMap、refill、template、screenshot'
+			content: '移除mixin positionMap、sizeMap、zIndexMap、refill、template、screenshot、createKanboardData、positionSize'
 		},
 		{
 			type: ['refactor'],
