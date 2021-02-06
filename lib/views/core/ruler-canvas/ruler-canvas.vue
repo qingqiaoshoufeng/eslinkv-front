@@ -1,11 +1,9 @@
 <template>
 	<div ref="rulerWrapper"
-		 :style="`position: ${position}`"
-		 class="vue-ruler-wrapper"
-		 onselectstart="return false;"
+		 class="vue-ruler-wrapper pos-r"
 		 @dblclick="resetZoomAndMove">
 		<ruler
-			:locked="lockGuides"
+			:locked="platform.ruler.lockGuides"
 			:show="platform.ruler.rulerVisible"
 			:xScale="xScale"
 			:yScale="yScale"
@@ -16,25 +14,17 @@
 			:contentMove="contentMove"
 			:create-h-guide="horizontalDragRuler"
 			:create-v-guide="verticalDragRuler"
-			:dragTransition="dragTransition"
 			:clientX="clientX - leftSpacing"
 			:clientY="clientY - topSpacing"
 			:zoom="zoom"
 		></ruler>
 		<guides
-			v-show="platform.ruler.rulerVisible"
 			:vGuideTop="verticalDottedTop"
 			:hGuideLeft="horizontalDottedLeft"
 			:contentMove="contentMove"
 			:contentWidth="contentWidth"
 			:contentHeight="contentHeight"
-			:scrollLeft="contentScrollLeft"
-			:scrollTop="contentScrollTop"
-			:dragTransition="dragTransition"
-			:contentLayout="contentLayout"
 			:zoom="zoom"
-			:locked="lockGuides"
-			@guide-drag="handleDragLine"
 		></guides>
 		<div :class="{ drag: contentMove }"
 			 class="vue-ruler-content"
@@ -45,8 +35,9 @@
 			</div>
 		</div>
 		<div v-show="platform.ruler.rulerVisible" class="zoom-tip">ZOOM: {{ zoom }}</div>
-		<div v-show="platform.ruler.rulerVisible" :class="{ active: lockGuides }" class="guides-locked">已锁定</div>
-		<div v-show="isDrag" class="vue-ruler-content-mask"></div>
+		<div v-show="platform.ruler.rulerVisible" :class="{ active: platform.ruler.lockGuides }" class="guides-locked">
+			已锁定
+		</div>
 	</div>
 </template>
 <script>
@@ -66,52 +57,17 @@
 			guides
 		},
 		props: {
-			// 规定元素的定位类型
-			position: {
-				type: String,
-				default: 'relative',
-				validator: function (val) {
-					return ['absolute', 'fixed', 'relative', 'static', 'inherit'].indexOf(val) !== -1
-				}
-			},
-			// 热键开关
-			isHotKey: {
-				type: Boolean, default: true
-			},
-			// 刻度修正，根据 contentLayout 参数确定 0 刻度位置
 			isScaleRevise: {
 				type: Boolean, default: false
-			},
-			// 预置参考线
-			value: {
-				type: Array,
-				default: () => {
-					return [] // { type: 'h', site: 50 }, { type: 'v', site: 180 }
-				}
-			},
-			// 内容部分布局
-			contentLayout: {
-				type: Object,
-				default: () => {
-					return {top: 0, left: 0}
-				}
 			},
 			parent: {
 				type: Boolean,
 				default: false
 			},
-			stepLength: {
-				type: Number,
-				default: 50,
-				validator: (val) => val % 10 === 0
-			},
-			rulerRange: {
-				type: Number,
-				default: 10000
-			}
 		},
 		data() {
 			return {
+				rulerRange: 10000,
 				platform: platform.state,
 				size: 18,
 				windowWidth: 0, // 窗口宽度
@@ -130,18 +86,12 @@
 			}
 		},
 		methods: {
-			handleDragLine({type, id}, e) {
-				if (e.which !== 1) return
-				this.guideDragStartX = e.clientX
-				this.guideDragStartY = e.clientY
-				return type === 'h' ? this.dragHorizontalLine(id) : this.dragVerticalLine(id)
-			},
 			setSpacing() {
 				this.topSpacing = Math.ceil(this.$refs.horizontalRuler.getBoundingClientRect().y)
 				this.leftSpacing = Math.ceil(this.$refs.verticalRuler.getBoundingClientRect().x)
 			},
 			resetZoomAndMove() {
-				this.resetContentZoom()
+				this.resetZoom()
 				requestAnimationFrame(this.resetContentMove)
 			}
 		}
@@ -179,7 +129,7 @@
 				left: 0;
 				top: 0;
 				border: 18px transparent solid;
-				transition: transform 0.4s;
+				transition: all .3s;
 				overflow: visible;
 				background-image: url(../../../../src/assets/editor/transparent-bg.png);
 				background-clip: content-box;

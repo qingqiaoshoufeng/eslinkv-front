@@ -31,9 +31,6 @@ export default {
     handleFullscreenChange (status) {
       this.isFullscreen = status
     },
-    prepareKanboardData () {
-      return this.$refs.kanboardEditor.prepareKanboardData()
-    },
     setContentPosition (left = 0, top = 0) {
       this.$refs.kanboardEditor.setContentPosition(left, top)
     }

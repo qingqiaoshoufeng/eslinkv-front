@@ -9,6 +9,9 @@
 			li.fn-flex.flex-row
 				label 标尺可见
 				i-switch(v-model="platform.ruler.rulerVisible")
+			li.fn-flex.flex-row
+				label 锁定参考线
+				i-switch(v-model="platform.ruler.lockGuides")
 </template>
 <script lang="ts">
 	import dRightModal from '../d-right-modal'

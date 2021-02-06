@@ -1,9 +1,9 @@
 <template lang="pug">
-	section
-		.vue-ruler-ref-dot-h(:style="{ transform: `translateY(${vGuideTop}px)` }")
-		.vue-ruler-ref-dot-v(:style="{ transform: `translateX(${hGuideLeft}px)` }")
-		.guides-wrapper(:style="guidesWrapperStyle")
-		.guide-line(v-for="item in lineList" :title="getTitle(item)" :style="{...getLineStyle(item),transform: `scale(${item.type === 'v' ? 1 / zoom + ', 1' : '1, ' + 1 / zoom})`,}" :key="item.id" :class="[`vue-ruler-ref-line-${item.type}`, { locked: locked, 'no-pointer': zoom !== 1 || contentMove || locked }]" :type="item.type" :value="item.value" @mousedown="$emit('guide-drag', item, $event)" @contextmenu="openGuideMenu(item.id, $event)")
+	section(v-show="platform.ruler.rulerVisible")
+		.vue-ruler-ref-dot-h.pos-a(:style="{ transform: `translateY(${vGuideTop}px)` }")
+		.vue-ruler-ref-dot-v.pos-a(:style="{ transform: `translateX(${hGuideLeft}px)` }")
+		.guides-wrapper.pos-a(:style="guidesWrapperStyle")
+		.guide-line.z-index-9.pos-a(v-for="item in platform.ruler.guideLines" :title="item.title" :style="{...getLineStyle(item)}" :key="item.id" :class="[`vue-ruler-ref-line-${item.type}`, { locked: platform.ruler.lockGuides, 'no-pointer': zoom !== 1 || contentMove || platform.ruler.lockGuides }]" @mousedown="e=>handleGuideDrag(e,item)" @contextmenu="openGuideMenu(item.id, $event)")
 		ul.guide-right-menu(v-show="showGuideMenu" :style="`left: ${menuLeft}px; top:${menuTop - 10}px`")
 			li(@click="handleDestroy(removeId)") 删除
 </template>
@@ -16,16 +16,11 @@
 			vGuideTop: Number,
 			hGuideLeft: Number,
 			contentMove: Boolean,
-			locked: Boolean,
-			left: Number,
-			top: Number,
 			contentWidth: Number,
 			contentHeight: Number,
 			scrollLeft: Number,
 			scrollTop: Number,
 			zoom: Number,
-			dragTransition: String,
-			contentLayout: Object
 		},
 		data() {
 			return {
@@ -33,7 +28,10 @@
 				menuLeft: 0,
 				menuTop: 0,
 				removeId: null,
-				platform: platform.state
+				platform: platform.state,
+				guideDragStartX: 0,
+				guideDragStartY: 0,
+				isDrag: false,
 			}
 		},
 		computed: {
@@ -42,42 +40,63 @@
 				style.push(`width: ${this.contentWidth}px`)
 				style.push(`height: ${this.contentHeight}px`)
 				style.push(`transform: translate3d(${this.scrollLeft}px, ${this.scrollTop}px, 0) scale(${this.zoom})`)
-				this.dragTransition && style.push(`transition: ${this.dragTransition}`)
 				return style.join(';')
 			},
-			lineList() {
-				let hCount = 0;
-				let vCount = 0;
-				const {left, top} = this.contentLayout
-				return this.platform.ruler.guideLines.map((item) => {
-					const isH = item.type === 'h'
-					const site = item.site
-					const value = site - (isH ? top : left)
-					return {
-						id: `${item.type}_${isH ? hCount++ : vCount++}`,
-						type: item.type,
-						title: value + 'px',
-						site: site,
-						value,
-						[isH ? 'top' : 'left']: site / (this.platform.ruler.stepLength / 50) + this.platform.ruler.size
-					}
-				}).filter(item => item.site > -18)
-			}
 		},
 		methods: {
+			handleGuideDragEnd(e) {
+				const {clientX, clientY} = e
+				this.isDrag = false
+				this.isMoved = false
+				const cloneList = this.platform.ruler.guideLines
+				const stepLength = this.platform.ruler.stepLength
+				const {topSpacing, leftSpacing, size, rulerWidth, rulerHeight} = this
+				switch (this.platform.ruler.dragFlag) {
+					case 'x':
+						cloneList.push({
+							type: 'h',
+							site: this.guideStepFence((clientY - topSpacing - size) * (stepLength / 50) - this.platform.ruler.contentScrollTop)
+						})
+						break
+					case 'y':
+						cloneList.push({
+							type: 'v',
+							site: this.guideStepFence((clientX - leftSpacing - size) * (stepLength / 50) - this.platform.ruler.contentScrollLeft)
+						})
+						break
+					case 'h':
+						this.dragCalc(cloneList, clientY - this.guideDragStartY)
+						break
+					case 'v':
+						this.dragCalc(cloneList, clientX - this.guideDragStartX)
+						break
+					default:
+						break
+				}
+				this.platform.ruler.guideLines = cloneList
+				this.verticalDottedTop = this.horizontalDottedLeft = -999
+				this.guideDragStartX = this.guideDragStartY = 0
+			},
+			// 水平线/垂直线 处按下鼠标
+			handleGuideDrag(e, item) {
+				if (e.which !== 1) return
+				const {type, id} = item
+				this.guideDragStartX = e.clientX
+				this.guideDragStartY = e.clientY
+				this.isDrag = true
+				this.platform.ruler.dragFlag = type
+				this.dragGuideId = id
+			},
 			handleDestroy(id) {
 				console.log(id)
 				console.log(this.platform.ruler.guideLines)
-			},
-			getTitle(item) {
-				const type = item.type
-				return (type === 'h' ? item.top - 18 : item.left - 18) + 'px'
 			},
 			getLineStyle({type, top, left, site}) {
 				const style = {}
 				type === 'h' && (style.top = `${top - 18}px`)
 				type === 'v' && (style.left = `${left - 18}px`)
-				site < 0 && (style.opacity = '0')
+				// site < 0 && (style.opacity = '0')
+				style.transform = `scale(${type === 'v' ? 1 / this.zoom + ', 1' : '1, ' + 1 / this.zoom})`
 				return style
 			},
 			openGuideMenu(id, e) {
@@ -102,20 +121,18 @@
 </script>
 <style lang="scss" scoped>
 	.guides-wrapper {
-		position: absolute;
 		top: 18px;
 		left: 18px;
 		z-index: 3;
 		pointer-events: none;
 		overflow: visible;
-		transition: transform 0.4s;
+		transition: transform .3s;
 	}
 
 	.vue-ruler-ref-line-v,
 	.vue-ruler-ref-line-h,
 	.vue-ruler-ref-dot-h,
 	.vue-ruler-ref-dot-v {
-		position: absolute;
 		left: 0;
 		top: 0;
 		pointer-events: auto;
@@ -203,7 +220,6 @@
 	.vue-ruler-ref-dot-v {
 		width: 0;
 		height: 100%;
-		_height: 9999px;
 		border-left: grey 1px dotted;
 		left: 0;
 	}
