@@ -1,7 +1,8 @@
 <template lang="pug">
-        .message.pointer(v-if="JSON.stringify(message)!=='{}'" @click="handleClick"  :class="unReadStatus?'un-read':''")    
+	div
+        //.message.pointer(v-if="JSON.stringify(message)!=='{}'" @click="handleClick"  :class="unReadStatus?'un-read':''")
             svg-icon.icon(iconName="iconmessage")
-            span.content 
+            span.content
                 marquee {{message.interactionContent}}
             span.time {{message.createTime}}
 </template>
