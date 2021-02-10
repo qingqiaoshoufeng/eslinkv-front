@@ -23,6 +23,7 @@
         active: boolean = false
 
         showFullTagger() {
+            console.log(1)
             this.active = !this.active
         }
 
@@ -34,6 +35,7 @@
         }
 
         beforeDestroy() {
+            this.$off('message', this.showFullTagger)
             if (this.timer) {
                 clearInterval(this.timer)
             }
@@ -84,6 +86,8 @@
 
         handleClick() {
             MessageList()
+            document.removeEventListener('mapMessage', this.showFullTagger)
+            document.addEventListener('mapMessage', this.showFullTagger, false)
         }
     }
 
