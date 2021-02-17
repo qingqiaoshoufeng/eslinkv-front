@@ -30,7 +30,7 @@
 			 class="vue-ruler-content"
 			 @mousedown="handleContentMoveStart($event)"
 			 @mousemove.prevent>
-			<div ref="content" :style="contentStyle" class="content-body">
+			<div :id="platform.ruler.dragId" ref="content" class="content-body">
 				<slot/>
 			</div>
 		</div>

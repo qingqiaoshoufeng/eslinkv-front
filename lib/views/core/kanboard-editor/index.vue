@@ -14,7 +14,6 @@
 		<ruler-canvas
 			:guide-step="moveStep"
 			ref="rulerCanvas"
-			@content-move="(moving) => (rulerCanvasMoving = moving)"
 		>
 			<!-- 大屏 -->
 			<section
@@ -48,7 +47,7 @@
 						:snap="platform.autoAlignGuide"
 						:snap-tolerance="10"
 						:class="[{
-						  'no-pointer': isDragIn || rulerCanvasMoving,
+						  'no-pointer': isDragIn,
 						  locked: item.config.widget.locked,
 						  preview: !platform.ruler.rulerVisible,
 						  'widget-hide': item.config.widget.hide
