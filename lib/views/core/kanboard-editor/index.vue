@@ -70,6 +70,22 @@
 						</parts>
 					</vdr>
 				</template>
+				<!--辅助线-->
+				<span
+					v-for="(item, index) in vLine"
+					v-show="item.display"
+					:style="{ left: item.position, top: item.origin, height: item.lineLength }"
+					:key="`v-${index}`"
+					class="ref-line v-line"
+				/>
+				<span
+					v-for="(item, index) in hLine"
+					v-show="item.display"
+					:style="{ top: item.position, left: item.origin, width: item.lineLength }"
+					:key="`h-${index}`"
+					class="ref-line h-line"
+				/>
+				<!--辅助线END-->
 			</section>
 		</ruler-canvas>
 		<!-- 右键菜单 -->
@@ -156,9 +172,15 @@
 		data() {
 			return {
 				platform: platform.state,
+				vLine: [],
+				hLine: []
 			}
 		},
 		methods: {
+			getRefLineParams({vLine, hLine}) {
+				this.vLine = vLine
+				this.hLine = hLine
+			},
 			hideSubPanels(e) {
 				if (e) {
 					const classPath = e.path.map(ele => ele.className).join(',')

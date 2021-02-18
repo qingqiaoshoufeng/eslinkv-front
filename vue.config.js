@@ -30,8 +30,8 @@ module.exports = {
 			'^/hangran': {
 				// target: 'http://ebp-pc.hw-qa.eslink.net.cn',
 				// target: 'http://ebp-pc.hzrq.local:15003',
-				// target: 'http://10.20.10.154:3000',
-				target: 'http://192.168.31.219:3000',
+				target: 'http://10.20.10.154:3000',
+				// target: 'http://192.168.31.219:3000',
 				changeOrigin: true,
 				headers: {
 					// Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
@@ -44,8 +44,8 @@ module.exports = {
 			'^/api': {
 				// target: 'http://ebp-pc.hw-qa.eslink.net.cn',
 				// target: 'http://ebp-pc.hzrq.local:15003',
-				// target: 'http://10.20.10.154:3000',
-				target: 'http://192.168.31.219:3000',
+				target: 'http://10.20.10.154:3000',
+				// target: 'http://192.168.31.219:3000',
 				changeOrigin: true,
 				headers: {
 					// Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
