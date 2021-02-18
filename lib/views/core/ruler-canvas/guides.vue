@@ -3,7 +3,14 @@
 		.vue-ruler-ref-dot-h.pos-a(:style="{ transform: `translateY(${vGuideTop}px)` }")
 		.vue-ruler-ref-dot-v.pos-a(:style="{ transform: `translateX(${hGuideLeft}px)` }")
 		.guides-wrapper.pos-a(:style="guidesWrapperStyle")
-		.guide-line.z-index-9.pos-a(v-for="item in platform.ruler.guideLines" :title="item.title" :style="{...getLineStyle(item)}" :key="item.id" :class="[`vue-ruler-ref-line-${item.type}`, { locked: platform.ruler.lockGuides, 'no-pointer': zoom !== 1 || contentMove || platform.ruler.lockGuides }]" @mousedown="e=>handleGuideDrag(e,item)" @contextmenu="openGuideMenu(item.id, $event)")
+		.guide-line.z-index-9.pos-a(
+			v-for="item in platform.ruler.guideLines"
+			:title="item.title" :style="{...getLineStyle(item)}"
+			:key="item.id"
+			:class="[`vue-ruler-ref-line-${item.type}`, { locked: platform.ruler.lockGuides, 'no-pointer': zoom !== 1 || contentMove || platform.ruler.lockGuides }]"
+			@mousedown="e=>handleGuideDrag(e,item)"
+			@contextmenu="openGuideMenu(item.id, $event)"
+		)
 		ul.guide-right-menu(v-show="showGuideMenu" :style="`left: ${menuLeft}px; top:${menuTop - 10}px`")
 			li(@click="handleDestroy(removeId)") 删除
 </template>
@@ -44,57 +51,24 @@
 			},
 		},
 		methods: {
-			handleGuideDragEnd(e) {
-				const {clientX, clientY} = e
-				this.isDrag = false
-				this.isMoved = false
-				const cloneList = this.platform.ruler.guideLines
-				const stepLength = this.platform.ruler.stepLength
-				const {topSpacing, leftSpacing, size, rulerWidth, rulerHeight} = this
-				switch (this.platform.ruler.dragFlag) {
-					case 'x':
-						cloneList.push({
-							type: 'h',
-							site: this.guideStepFence((clientY - topSpacing - size) * (stepLength / 50) - this.platform.ruler.contentScrollTop)
-						})
-						break
-					case 'y':
-						cloneList.push({
-							type: 'v',
-							site: this.guideStepFence((clientX - leftSpacing - size) * (stepLength / 50) - this.platform.ruler.contentScrollLeft)
-						})
-						break
-					case 'h':
-						this.dragCalc(cloneList, clientY - this.guideDragStartY)
-						break
-					case 'v':
-						this.dragCalc(cloneList, clientX - this.guideDragStartX)
-						break
-					default:
-						break
-				}
-				this.platform.ruler.guideLines = cloneList
-				this.verticalDottedTop = this.horizontalDottedLeft = -999
-				this.guideDragStartX = this.guideDragStartY = 0
-			},
 			// 水平线/垂直线 处按下鼠标
 			handleGuideDrag(e, item) {
 				if (e.which !== 1) return
 				const {type, id} = item
 				this.guideDragStartX = e.clientX
 				this.guideDragStartY = e.clientY
-				this.isDrag = true
+				this.platform.ruler.isDrag = true
 				this.platform.ruler.dragFlag = type
-				this.dragGuideId = id
+				this.platform.ruler.dragGuideId = id
 			},
 			handleDestroy(id) {
-				console.log(id)
-				console.log(this.platform.ruler.guideLines)
+				const index = this.platform.ruler.guideLines.findIndex(v => v.id === id)
+				this.platform.ruler.guideLines.splice(index, 1)
 			},
-			getLineStyle({type, top, left, site}) {
+			getLineStyle({type, value, left, site}) {
 				const style = {}
-				type === 'h' && (style.top = `${top - 18}px`)
-				type === 'v' && (style.left = `${left - 18}px`)
+				type === 'h' && (style.top = `${value}px`)
+				type === 'v' && (style.left = `${value}px`)
 				// site < 0 && (style.opacity = '0')
 				style.transform = `scale(${type === 'v' ? 1 / this.zoom + ', 1' : '1, ' + 1 / this.zoom})`
 				return style

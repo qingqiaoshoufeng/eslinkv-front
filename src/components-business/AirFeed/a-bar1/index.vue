@@ -24,7 +24,7 @@
 </template>
 <script>
     import mixins from '../../mixins';
-    import options from './options';
+    import getOption from './options';
 	import { config, configSource, value } from './index.component'
 
 	export default {
@@ -45,15 +45,7 @@
         },
         methods: {
             setOption(data) {
-                let yValue2 = this.data.yValue.map(
-                    (item, index) =>
-                        (this.data.yValue[index] / this.data.yValue1[index]) * 100
-                );
-                options.xAxis[0].data = data.xValue;
-                options.series[0].data = data.yValue;
-                options.series[1].data = data.yValue1;
-                options.series[1].itemStyle.normal.color = data.color2;
-                this.instance && this.instance.setOption(options);
+                this.instance && this.instance.setOption(getOption(data));
             },
         },
         watch: {
