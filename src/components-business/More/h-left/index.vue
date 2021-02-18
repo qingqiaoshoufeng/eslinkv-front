@@ -33,7 +33,7 @@
 </template>
 <script>
     import mixins from '../../mixins'
-    import {config, value, configSource} from './index.component'
+    import {config, value} from './index.component'
     import pie from './pie'
     import lngline from './line'
 
@@ -41,7 +41,6 @@
         mixins: [mixins],
         components: {pie, lngline},
         created() {
-            this.configSource = this.parseConfigSource(config, configSource)
             this.configValue = this.parseConfigValue(config, value)
         },
         mounted() {

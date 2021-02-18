@@ -20,7 +20,7 @@
 <script>
 	import mixins from '../../mixins';
 	import getOption from './options';
-	import { config, configSource, value } from './index.component'
+	import { config, value } from './index.component'
 
 	export default {
 		mixins: [mixins],
@@ -44,7 +44,6 @@
 			},
 		},
 		created() {
-			this.configSource = this.parseConfigSource(config, configSource);
 			this.configValue = this.parseConfigValue(config, value);
 		},
 	};

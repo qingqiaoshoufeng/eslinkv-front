@@ -51,7 +51,7 @@ npm run serve
     class HelloWorld extends mixins(window.GoldChart.mixins) {
         created() {
             if (process.env.NODE_ENV !== 'development') {
-                this.configSource = this.parseConfigSource(config)
+                
                 this.configValue = this.parseConfigValue(config, value)
             } else {
                 this.data = JSON.parse(value.api.data)

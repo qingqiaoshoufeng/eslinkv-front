@@ -65,5 +65,5 @@ const value = {
         color: JSON.stringify(['rgba(0, 62, 144, 0.8)', 'rgba(0, 145, 210, 0.8)', 'rgba(0, 233, 194, 0.8)']),
     }
 }
-export {config, configSource, value}
+export {config, value}
 

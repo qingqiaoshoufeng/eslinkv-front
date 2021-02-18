@@ -58,7 +58,6 @@ export default {
     }
   },
 	created() {
-		this.configSource = this.parseConfigSource(config);
 		this.configValue = this.parseConfigValue(config, value);
 	},
   beforeDestroy() {

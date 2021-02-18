@@ -22,7 +22,7 @@
         icons: Int8Array = new Int8Array(50)
 
         created() {
-            this.configSource = this.parseConfigSource(config, configSource)
+            
             this.configValue = this.parseConfigValue(config, value)
         }
     }

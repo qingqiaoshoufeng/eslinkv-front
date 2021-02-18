@@ -84,7 +84,6 @@
 			}
 		},
 		created() {
-			this.configSource = this.parseConfigSource(config, configSource)
 			this.configValue = this.parseConfigValue(config, value)
 			this.gradientColors('#0057A9', '#00DDFF', 50)
 		}

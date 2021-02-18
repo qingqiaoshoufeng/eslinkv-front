@@ -43,27 +43,6 @@
 				display: none;
 			}
 		}
-
-		/deep/ {
-			.layout-grid-row,
-			.layout-grid-col {
-				outline: none;
-
-				.grid,
-				.widget-part {
-					outline: none;
-
-					&:after,
-					&:before {
-						display: none;
-					}
-				}
-
-				.delete {
-					display: none;
-				}
-			}
-		}
 	}
 
 	/deep/ {

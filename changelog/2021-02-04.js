@@ -72,5 +72,9 @@ export default {
 			type: ['refactor'],
 			content: '优化store',
 		},
+		{
+			type: ['refactor'],
+			content: '移除parseConfigSource'
+		}
 	]
 }

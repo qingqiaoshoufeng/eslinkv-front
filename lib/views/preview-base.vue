@@ -81,29 +81,6 @@
             & > .widget-part {
                 position: absolute !important;
             }
-            
-            .layout-grid-row,
-            .layout-grid-col {
-                outline: none;
-                
-                &:hover {
-                    background-color: unset;
-                }
-                
-                .grid,
-                .widget-part:not(.widget-preset-slot) {
-                    outline: none;
-                    
-                    &:after,
-                    &:before {
-                        display: none;
-                    }
-                }
-                
-                .delete {
-                    display: none !important;
-                }
-            }
         }
     }
     

@@ -52,4 +52,4 @@ const value = {
 	}
 }
 
-export {config, value, configSource}
+export {config, value}

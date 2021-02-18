@@ -14,7 +14,7 @@
 	export default class extends mixins(mx) {
         created() {
             setTimeout(() => {
-                this.configSource = this.parseConfigSource(config)
+                
                 this.configValue = this.parseConfigValue(config, value)
             }, 1000)
         }
