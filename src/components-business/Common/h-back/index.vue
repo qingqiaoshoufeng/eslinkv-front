@@ -8,7 +8,8 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import { config, value } from './index.component'
+	import {config, value} from './index.component'
+	import scene from '../../../../lib/store/scene.store'
 
 	export default {
 		mixins: [mixins],
@@ -18,7 +19,7 @@
 		methods: {
 			back() {
 				if (!this.data.sceneId) return
-				window.GoldChart.scene.destroyScene(this.data.sceneId)
+				scene.actions.destroyScene(this.data.sceneId)
 			}
 		}
 	}

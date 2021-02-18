@@ -10,7 +10,8 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import { config, value } from './index.component'
+	import {config, value} from './index.component'
+	import scene from '../../../../lib/store/scene.store'
 
 	export default {
 		data() {
@@ -21,11 +22,11 @@
 		mixins: [mixins],
 		methods: {
 			changeScene(index) {
-				window.GoldChart.scene.setSceneIndex(index)
+				scene.actions.setSceneIndex(index)
 			}
 		},
 		created() {
-			
+
 			this.configValue = this.parseConfigValue(config, value)
 		}
 	}

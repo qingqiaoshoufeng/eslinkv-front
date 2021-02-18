@@ -1,4 +1,5 @@
 import {getCompList, getLevel0} from '@/api/bussiness.api'
+import custom from '../../lib/store/custom.store'
 
 let widgetsArray: ComponentsWidgetsArray = []
 
@@ -6,7 +7,7 @@ getLevel0().then(res => {
 	res.forEach(child => {
 		getCompList({componentTypeId: child.componentTypeId}).then(res => {
 			widgetsArray = res
-			window.GoldChart.mutations.setCustomWidgets({
+			custom.actions.setCustomWidgets({
 				label: child.componentTypeName,
 				widgets: widgetsArray
 			})

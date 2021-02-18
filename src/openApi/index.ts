@@ -1,14 +1,5 @@
 import {mutations, store} from '../../lib/store'
 import mixins from '../components-business/mixins'
-import {
-	getInput,
-	getInputNumber,
-	getSelect,
-	getArrayGroup,
-	getColors,
-	getAnimationCurve,
-	getBooleanInput, getBackground, getColor, getFile
-} from '../../lib/views/core/widgets/parts/lib/config-tools'
 import platform from '../../lib/store/platform.store'
 
 const GoldChart: any = {
@@ -55,16 +46,6 @@ const GoldChart: any = {
     },
     components: {},
     mixins,
-	getInput,
-	getInputNumber,
-	getSelect,
-	getArrayGroup,
-	getColors,
-	getAnimationCurve,
-	getBooleanInput,
-	getBackground,
-	getColor,
-	getFile,
     methods: {},
 }
 
