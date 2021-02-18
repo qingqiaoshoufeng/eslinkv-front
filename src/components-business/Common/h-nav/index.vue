@@ -12,7 +12,8 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import { config, value } from './index.component'
+	import {config, value} from './index.component'
+	import scene from '../../../../lib/store/scene.store'
 
 	export default {
 		data() {
@@ -27,10 +28,10 @@
 					if (this.data.disabled.indexOf(title) !== -1) {
 						return false
 					} else {
-						window.GoldChart.scene.setSceneIndex(index)
+						scene.actions.setSceneIndex(index)
 					}
 				} else {
-					window.GoldChart.scene.setSceneIndex(index)
+					scene.actions.setSceneIndex(index)
 				}
 			}
 		},

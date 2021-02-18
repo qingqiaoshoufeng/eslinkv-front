@@ -148,6 +148,7 @@
 	// config-panel 与 fields 互相引用，须提前注册为 Vue 组件
 	Vue.component('fields', fields)
 	import platform from '../../../store/platform.store'
+	import scene from '../../../store/scene.store'
 
 	export default {
 		name: 'kanboard-editor',
@@ -174,6 +175,7 @@
 		data() {
 			return {
 				platform: platform.state,
+				scene: scene.state,
 				vLine: [],
 				hLine: []
 			}
@@ -210,9 +212,9 @@
 			},
 			showParts() {
 				return (item) => {
-					if (item.scene === 0 && window.GoldChart.store.scene.showMainScene) {
+					if (item.scene === 0 && this.scene.showMainScene) {
 						return true
-					} else if (item.scene === window.GoldChart.store.scene.index) {
+					} else if (item.scene === this.scene.index) {
 						return true
 					}
 					return false

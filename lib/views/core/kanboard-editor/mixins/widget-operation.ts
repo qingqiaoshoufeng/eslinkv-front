@@ -8,8 +8,6 @@ import scene from '../../../../store/scene.store'
 class Mixins extends Vue {
 	currentWidgetType = null
 	activatedWidgetId = null
-	isWidgetDragging = false
-	isWidgetResizing = false
 	isWidgetProcessing = false
 	widgetProcessingStyle = null
 	rightMenuBindWidgetId = null
@@ -129,18 +127,6 @@ class Mixins extends Vue {
 		})
 	}
 
-	initNewWidget(id, widget, makeOffset = true) {
-		const config = widget.config
-		config.widget.id = id
-		const layout = config.layout
-		if (makeOffset) {
-			layout.position.left += 10
-			layout.position.top += 10
-		}
-		platform.actions.setWidgetsAddedItem(id, widget.type, widget.config, widget.scene)
-		this.$set(this.zIndexMap, id, layout.zIndex)
-	}
-
 	markWidgetMoving() {
 		if (this.widgetMovingTimer) clearTimeout(this.widgetMovingTimer)
 		this.widgetMoving = true
@@ -171,18 +157,6 @@ class Mixins extends Vue {
 	@Watch('currentWidgetValue', {deep: true})
 	onCurrentWidgetValueChange(value) {
 		value && this.updateWidget(value)
-	}
-
-	widgetUnActived() {
-		this.activatedWidgetId = null
-		platform.actions.unChooseWidget()
-	}
-
-	mounted() {
-		/**
-		 * @description 事件收集
-		 */
-		window.GoldChart.mutations.setEvent({widgetUnActived: this.widgetUnActived})
 	}
 }
 

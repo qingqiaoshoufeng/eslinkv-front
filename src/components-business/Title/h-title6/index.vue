@@ -9,14 +9,14 @@
     import {Component} from 'vue-property-decorator'
     import {mixins} from 'vue-class-component'
     import {config, value} from './index.component'
-
+	import scene from '../../../../lib/store/scene.store'
     @Component
     class HTitle6 extends mixins(mx) {
         store: any = window.GoldChart.store
 
         handleClick(index) {
             if (index) {
-                window.GoldChart.scene.setSceneIndex(index)
+                scene.actions.setSceneIndex(index)
             }
         }
 

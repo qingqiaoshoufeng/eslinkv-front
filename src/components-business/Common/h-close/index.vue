@@ -4,18 +4,19 @@
 </template>
 <script>
 	import mixins from '../../mixins'
-	import { config, value } from './index.component'
+	import {config, value} from './index.component'
+	import scene from '../../../../lib/store/scene.store'
 
 	export default {
 		mixins: [mixins],
 		created() {
-			
+
 			this.configValue = this.parseConfigValue(config, value);
 		},
 		methods: {
 			back() {
 				if (!this.data.sceneId) return
-				window.GoldChart.scene.setSceneIndex(this.data.sceneId)
+				scene.actions.setSceneIndex(this.data.sceneId)
 			}
 		}
 	}

@@ -10,12 +10,13 @@
 <script>
 	import mixins from '../../mixins'
 	import {config, value} from './index.component'
+	import scene from '../../../../lib/store/scene.store'
 
 	export default {
 		mixins: [mixins],
 		methods: {
 			handleClick() {
-				window.GoldChart.scene.destroyScene(this.config.config.index)
+				scene.actions.destroyScene(this.config.config.index)
 			}
 		},
 		created() {
