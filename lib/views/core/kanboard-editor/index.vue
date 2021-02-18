@@ -39,10 +39,10 @@
 						:resizable="widgetEditable(item)"
 						:active="item.id === activatedWidgetId && widgetEditable(item)"
 						:prevent-deactivation="true"
-						:w="vdrItem([item.id]).w"
-						:h="vdrItem([item.id]).h"
-						:x="vdrItem([item.id]).x"
-						:y="vdrItem([item.id]).y"
+						:w="item.config.layout.size.width"
+						:h="item.config.layout.size.height"
+						:x="item.config.layout.position.left"
+						:y="item.config.layout.position.top"
 						:z="item.config.layout.zIndex"
 						:snap="platform.autoAlignGuide"
 						:snap-tolerance="10"
@@ -55,6 +55,8 @@
 						:widget-info="`${item.id} ${item.config.widget.name || ''}`"
 						snap-to-target="guide-line"
 						class-name="vdr-custom-style"
+						@resizing="onResizing"
+						@dragging="onDragging"
 						@refLineParams="getRefLineParams"
 						@activated="handleActivated(item, widgetEditable(item) && !item.config.widget.innerEditing)"
 						@deactivated="handleDeactivated(item)"
@@ -177,6 +179,14 @@
 			}
 		},
 		methods: {
+			onDragging(left, top) {
+				this.platform.widgetAdded[this.platform.chooseWidgetId].config.layout.position.left = left
+				this.platform.widgetAdded[this.platform.chooseWidgetId].config.layout.position.top = top
+			},
+			onResizing(left, top, width, height) {
+				this.platform.widgetAdded[this.platform.chooseWidgetId].config.layout.size.width = width
+				this.platform.widgetAdded[this.platform.chooseWidgetId].config.layout.size.height = height
+			},
 			getRefLineParams({vLine, hLine}) {
 				this.vLine = vLine
 				this.hLine = hLine
@@ -195,18 +205,6 @@
 			}
 		},
 		computed: {
-			vdrItem() {
-				return (id) => {
-					const item = this.platform.widgetAdded[id]
-					return {
-						x: item.config.layout.position.left,
-						y: item.config.layout.position.top,
-						h: item.config.layout.size.height,
-						w: item.config.layout.size.width,
-						zIndex: item.config.layout.zIndex,
-					}
-				}
-			},
 			widgetAdded() {
 				return this.platform.widgetAdded
 			},
