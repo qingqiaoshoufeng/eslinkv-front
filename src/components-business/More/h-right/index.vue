@@ -29,13 +29,12 @@
 <script>
     import mixins from '../../mixins'
     import pie from '../h-left/pie'
-    import {config, value, configSource} from './index.component'
+    import {config, value} from './index.component'
 
     export default {
         mixins: [mixins],
         components: {pie},
         created() {
-            this.configSource = this.parseConfigSource(config, configSource)
             this.configValue = this.parseConfigValue(config, value)
         },
         mounted() {

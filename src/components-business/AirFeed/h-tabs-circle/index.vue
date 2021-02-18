@@ -68,7 +68,7 @@ export default {
   },
 	mixins: [mixins],
 	created() {
-		this.configSource = this.parseConfigSource(config);
+		
 		this.configValue = this.parseConfigValue(config, value);
 	},
 	mounted() {

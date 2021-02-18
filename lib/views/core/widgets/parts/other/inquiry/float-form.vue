@@ -453,7 +453,6 @@ export default {
     }
   },
   created () {
-    this.configSource = this.parseConfigSource(configParseMap, localConfigSource)
     this.configValue = this.parseConfigValue(configParseMap, localConfigValue)
   },
   mounted () {

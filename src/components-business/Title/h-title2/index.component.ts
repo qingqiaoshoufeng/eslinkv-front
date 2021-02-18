@@ -1,19 +1,10 @@
-import {getInput} from '../../../../lib'
-
-const configSource = {
-    config: {
-        fields: {
-            title: getInput('title', '标题'),
-        }
-    }
-}
-const config = {
+export const config = {
     animation: true,
     config: {
         title: true,
     }
 }
-const value = {
+export const value = {
     api: {
         data: JSON.stringify({
             value: 0
@@ -33,12 +24,10 @@ const value = {
     }
 }
 
-const customConfig = [
+export const customConfig = [
 	{
 		prop: 'config.config.title',
 		label: '标题',
 		type: 'func-input',
 	}
 ]
-
-export {configSource, config, value, customConfig}

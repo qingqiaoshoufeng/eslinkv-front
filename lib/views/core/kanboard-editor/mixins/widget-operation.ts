@@ -86,10 +86,6 @@ class Mixins extends Vue {
 		return id
 	}
 
-	activatedFromSidebar (id) {
-		this.handleActivated(platform.state.widgetAdded[id])
-	}
-
 	handleActivated(obj, activeAllowed: boolean = true) {
 		const {config, id, type} = obj
 		if (!activeAllowed) {

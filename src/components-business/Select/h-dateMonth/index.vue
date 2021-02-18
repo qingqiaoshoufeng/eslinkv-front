@@ -13,7 +13,7 @@
 	import addMonths from 'date-fns/addMonths'
 	import isSameMonth from 'date-fns/isSameMonth'
 	import format from 'date-fns/format'
-	import { config, configSource, value } from './index.component'
+	import { config, value } from './index.component'
 
 	@Component
 	class HDateMonth extends mixins(mx) {
@@ -69,7 +69,6 @@
 		}
 
 		created() {
-			this.configSource = this.parseConfigSource(config, configSource)
 			this.configValue = this.parseConfigValue(config, value)
 		}
 

@@ -33,7 +33,7 @@
 			},
 		},
 		created() {
-			this.configSource = this.parseConfigSource(config, configSource);
+			
 			this.configValue = this.parseConfigValue(config, value);
 		},
 	};

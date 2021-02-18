@@ -28,4 +28,4 @@ const config = {
     }
 }
 
-export {configSource, config, value}
+export {config, value}

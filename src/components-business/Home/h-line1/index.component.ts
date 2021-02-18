@@ -33,4 +33,4 @@ const value = {
     }
 }
 
-export {config, configSource, value}
+export {config, value}

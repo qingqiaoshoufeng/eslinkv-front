@@ -73,30 +73,6 @@
 		width: 100%;
 		height: 100%;
 	}
-
-	.doc-link /deep/ i {
-		font-size: 1.4em;
-	}
-
-	.preview-fade-enter-active,
-	.preview-fade-leave-active {
-		transition: 0.4s;
-	}
-
-	.preview-fade-enter,
-	.preview-fade-leave-to {
-		opacity: 0;
-		transform: scale(0.8);
-	}
-
-	.preview-wrapper {
-		position: absolute;
-		top: 0;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		z-index: 999;
-	}
 </style>
 <style lang="scss">
 	.kanboard-editer-box {

@@ -59,4 +59,4 @@ const value = {
         title: '用户'
     }
 }
-export {config, configSource, value}
+export {config, value}

@@ -136,7 +136,6 @@
         },
         created() {
             this.animateActiveIndex = 0
-            this.configSource = this.parseConfigSource(config)
             this.configValue = this.parseConfigValue(config, value)
         },
     };

@@ -171,10 +171,6 @@
 			}
 		}
 
-		.doc-link {
-			align-items: center;
-		}
-
 		.d-footer-left {
 			.d-footer-title {
 				font-size: 15px;

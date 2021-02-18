@@ -73,7 +73,7 @@
 <script>
 	import mixins from '../../mixins'
 	import hBg54441 from './h-bg-54441'
-	import {config, value, configSource} from './index.component'
+	import {config, value} from './index.component'
 	import scene from '../../../../lib/store/scene.store'
 
 	export default {
@@ -99,7 +99,6 @@
 			document.removeEventListener('DestroyScene', this.closeVideo)
 		},
 		created() {
-			this.configSource = this.parseConfigSource(config, configSource)
 			this.configValue = this.parseConfigValue(config, value)
 			document.addEventListener('DestroyScene', this.closeVideo, false)
 		},
