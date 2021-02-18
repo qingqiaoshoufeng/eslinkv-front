@@ -1,7 +1,6 @@
 <template>
 	<div ref="rulerWrapper"
-		 class="vue-ruler-wrapper pos-r"
-		 @dblclick="resetZoomAndMove">
+		 class="vue-ruler-wrapper pos-r">
 		<ruler
 			:locked="platform.ruler.lockGuides"
 			:show="platform.ruler.rulerVisible"
@@ -46,12 +45,11 @@
 	import eventHandlers from './event'
 	import contentDrag from './content-drag'
 	import guideDrag from './guide-drag'
-	import zoom from './zoom'
 	import platform from '../../../store/platform.store'
 
 	export default {
 		name: 'VRuler',
-		mixins: [eventHandlers, contentDrag, guideDrag, zoom],
+		mixins: [eventHandlers, contentDrag, guideDrag],
 		components: {
 			ruler,
 			guides
@@ -78,9 +76,6 @@
 				leftSpacing: 0, //  标尺与窗口左间距
 				rulerWidth: 0, // 垂直标尺的宽度
 				rulerHeight: 0, // 水平标尺的高度
-				keyCode: {
-					r: 82
-				}, // 快捷键参数
 				hrWidth: 0, // 水平标尺宽度
 				vrHeight: 0 // 垂直标尺高度
 			}
@@ -90,10 +85,6 @@
 				this.topSpacing = Math.ceil(this.$refs.horizontalRuler.getBoundingClientRect().y)
 				this.leftSpacing = Math.ceil(this.$refs.verticalRuler.getBoundingClientRect().x)
 			},
-			resetZoomAndMove() {
-				this.resetZoom()
-				requestAnimationFrame(this.resetContentMove)
-			}
 		}
 	}
 </script>
