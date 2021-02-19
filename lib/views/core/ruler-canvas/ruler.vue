@@ -8,10 +8,10 @@
 				:style="`width: ${props.hrWidth}px; transform: translateX(${props.scrollLeft}px);`"
 				@mousedown.stop="props.createHGuide"
 			>
-        <span v-for="(item, index) in props.xScale" :key="index" :style="{ left: index * 50 + 2 + 'px' }"
-			  :class="{ zeroScale: item.id === 0 }" class="n">{{
-          item.id
-        }}</span>
+				<span v-for="(item, index) in props.xScale" :key="index" :style="{ left: index * 50 + 2 + 'px' }"
+					  :class="{ zeroScale: item.id === 0 }" class="n">
+					{{ item.id }}
+				</span>
 			</div>
 		</div>
 		<div class="ruler-wrapper v">
@@ -21,8 +21,11 @@
 				:style="`height: ${props.vrHeight}px; transform: translateY(${props.scrollTop}px);`"
 				@mousedown.stop="props.createVGuide"
 			>
-				<span v-for="(item, index) in props.yScale" :key="index" :style="{ top: index * 50 + 2 + 'px' }"
-					  class="n">{{ item.id }}</span>
+				<span v-for="(item, index) in props.yScale"
+					  :key="index"
+					  :style="{ top: index * 50 + 2 + 'px' }"
+					  class="n"
+				>{{ item.id }}</span>
 			</div>
 		</div>
 		<div class="mouse-position x" :style="`transform: translateX(${props.clientX}px)`"></div>
