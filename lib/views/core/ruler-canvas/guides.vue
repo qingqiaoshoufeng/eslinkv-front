@@ -3,14 +3,14 @@
 		.vue-ruler-ref-dot-h.pos-a(:style="{ transform: `translateY(${vGuideTop}px)` }")
 		.vue-ruler-ref-dot-v.pos-a(:style="{ transform: `translateX(${hGuideLeft}px)` }")
 		.guides-wrapper.pos-a(:style="guidesWrapperStyle")
-		.guide-line.z-index-9.pos-a(
-			v-for="item in platform.ruler.guideLines"
-			:title="item.title" :style="{...getLineStyle(item)}"
-			:key="item.id"
-			:class="[`vue-ruler-ref-line-${item.type}`, { locked: platform.ruler.lockGuides, 'no-pointer': zoom !== 1 || contentMove || platform.ruler.lockGuides }]"
-			@mousedown="e=>handleGuideDrag(e,item)"
-			@contextmenu="openGuideMenu(item.id, $event)"
-		)
+			.guide-line.z-index-9.pos-a(
+				v-for="item in platform.ruler.guideLines"
+				:title="item.title" :style="{...getLineStyle(item)}"
+				:key="item.id"
+				:class="[`vue-ruler-ref-line-${item.type}`, { locked: platform.ruler.lockGuides, 'no-pointer': zoom !== 1 || contentMove || platform.ruler.lockGuides }]"
+				@mousedown="e=>handleGuideDrag(e,item)"
+				@contextmenu="openGuideMenu(item.id, $event)"
+			)
 		ul.guide-right-menu(v-show="showGuideMenu" :style="`left: ${menuLeft}px; top:${menuTop - 10}px`")
 			li(@click="handleDestroy(removeId)") 删除
 </template>
@@ -25,8 +25,6 @@
 			contentMove: Boolean,
 			contentWidth: Number,
 			contentHeight: Number,
-			scrollLeft: Number,
-			scrollTop: Number,
 			zoom: Number,
 		},
 		data() {
@@ -36,8 +34,6 @@
 				menuTop: 0,
 				removeId: null,
 				platform: platform.state,
-				guideDragStartX: 0,
-				guideDragStartY: 0,
 				isDrag: false,
 			}
 		},
@@ -46,7 +42,7 @@
 				const style = []
 				style.push(`width: ${this.contentWidth}px`)
 				style.push(`height: ${this.contentHeight}px`)
-				style.push(`transform: translate3d(${this.scrollLeft}px, ${this.scrollTop}px, 0) scale(${this.zoom})`)
+				style.push(`transform: translate3d(${this.platform.ruler.contentScrollLeft}px, ${this.platform.ruler.contentScrollTop}px, 0) scale(${this.zoom})`)
 				return style.join(';')
 			},
 		},
@@ -55,8 +51,8 @@
 			handleGuideDrag(e, item) {
 				if (e.which !== 1) return
 				const {type, id} = item
-				this.guideDragStartX = e.clientX
-				this.guideDragStartY = e.clientY
+				this.platform.ruler.guideDragStartX = e.clientX
+				this.platform.ruler.guideDragStartY = e.clientY
 				this.platform.ruler.isDrag = true
 				this.platform.ruler.dragFlag = type
 				this.platform.ruler.dragGuideId = id
@@ -65,11 +61,11 @@
 				const index = this.platform.ruler.guideLines.findIndex(v => v.id === id)
 				this.platform.ruler.guideLines.splice(index, 1)
 			},
-			getLineStyle({type, value, left, site}) {
+			getLineStyle({type, site}) {
 				const style = {}
-				type === 'h' && (style.top = `${value}px`)
-				type === 'v' && (style.left = `${value}px`)
-				// site < 0 && (style.opacity = '0')
+				type === 'h' && (style.top = `${site}px`)
+				type === 'v' && (style.left = `${site}px`)
+				site < 0 && (style.opacity = '0')
 				style.transform = `scale(${type === 'v' ? 1 / this.zoom + ', 1' : '1, ' + 1 / this.zoom})`
 				return style
 			},
