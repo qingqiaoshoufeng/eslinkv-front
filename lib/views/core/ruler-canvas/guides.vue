@@ -34,7 +34,6 @@
 				menuTop: 0,
 				removeId: null,
 				platform: platform.state,
-				isDrag: false,
 			}
 		},
 		computed: {

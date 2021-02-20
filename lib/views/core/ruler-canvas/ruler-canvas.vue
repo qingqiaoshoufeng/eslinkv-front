@@ -56,7 +56,8 @@
 		},
 		props: {
 			isScaleRevise: {
-				type: Boolean, default: false
+				type: Boolean,
+				default: false
 			},
 			parent: {
 				type: Boolean,

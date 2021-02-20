@@ -230,6 +230,7 @@
 			},
 		},
 		mounted() {
+			platform.actions.initKanboard()
 			window.GoldChart.mutations.setInstance('kanboard', this)
 			window.GoldChart.mutations.setStatus('inEdit')
 		}
