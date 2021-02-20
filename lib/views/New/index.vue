@@ -3,6 +3,7 @@
 		.main-container
 			core(ref="kanboardEditor" @querying="status => (querying = status)" @kanboard-edited="kanboardEdited = true")
 			load-mask(:show="querying") {{querying ? '请求模板数据…' : '正在生成快照…'}}
+		d-footer
 </template>
 <script>
 	import core from '../core/index'
