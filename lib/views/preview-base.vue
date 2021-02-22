@@ -6,27 +6,23 @@
 				   :style="item.config.widget.hide ? 'display: none' : ''" readonly>
 			</parts>
         </template>
-        <api-executor v-for="api in apis" :key="api.variable" :api="api"
-                      @api-data-update="(data) => handleApiDataUpdate(api.variable, data)"/>
     </div>
 </template>
 <script>
     import parts from '../components/d-widget-part/index'
     import styleParser from './core/widgets/parts/lib/style-parser'
     import widgetOperation from './core/kanboard-editor/mixins/widget-operation'
-    import globalApi from './core/kanboard-editor/global-api/mixin'
     import widgetShareData from './core/kanboard-editor/mixins/widget-share-data'
     import crossFrameMessageParamBind from './core/kanboard-editor/mixins/cross-frame-message-param-bind'
-    import * as widgetBindManager from './mixins/widget-bind-manage'
     import loadMask from '../components/load-mask'
     import platform from '../store/platform.store'
     import scene from '../store/scene.store'
 
     export default {
         name: 'kanboard-editor',
-        mixins: [widgetOperation, globalApi, widgetShareData, crossFrameMessageParamBind],
+        mixins: [widgetOperation, widgetShareData, crossFrameMessageParamBind],
         provide() {
-            return {...widgetBindManager, kanboard: this, kanboardEditor: this}
+            return {kanboard: this, kanboardEditor: this}
         },
         components: {
             parts,

@@ -78,7 +78,7 @@ export default {
 		},
 		{
 			type: ['refactor'],
-			content: '移除除杭燃组件外的所有组件'
+			content: '移除除杭燃组件外的所有内置组件'
 		},
 		{
 			type: ['perf'],
@@ -86,7 +86,7 @@ export default {
 		},
 		{
 			type: [],
-			content: '移除source-tool'
+			content: '移除mixin source-tool，funcs'
 		},
 	]
 }

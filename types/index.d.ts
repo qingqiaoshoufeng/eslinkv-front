@@ -42,14 +42,6 @@ interface ComponentValueApi {
     data: any
 }
 
-interface ComponentConfigSource {
-    config: ComponentConfigSourceConfig
-}
-
-interface ComponentConfigSourceConfig {
-    fields: any
-}
-
 interface ComponentConfig {
     animation?: boolean
     config?: any

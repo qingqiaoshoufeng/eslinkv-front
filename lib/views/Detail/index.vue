@@ -122,29 +122,4 @@
 			overflow: hidden;
 		}
 	}
-
-	.action-bar {
-		position: fixed;
-		right: 15px;
-		bottom: 15px;
-		display: flex;
-		z-index: 100000;
-
-		.action {
-			padding: 10px 18px;
-			color: white;
-			border: 1px solid currentColor;
-			opacity: 0.5;
-			background-color: rgba(0, 0, 0, 0.4);
-			cursor: pointer;
-
-			&:hover {
-				opacity: 0.8;
-			}
-
-			&:not(:first-child) {
-				margin-left: 10px;
-			}
-		}
-	}
 </style>

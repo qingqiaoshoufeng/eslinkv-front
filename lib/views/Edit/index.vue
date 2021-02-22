@@ -8,9 +8,7 @@
 </template>
 <script>
 	import core from '../core/index'
-	import funcs from '../mixins/funcs'
 	import loadMask from '../../components/load-mask'
-	import * as widgetBindManager from '../mixins/widget-bind-manage'
 	import dFooter from '../../components/d-footer'
 	import {Button, Input, Modal, Form, FormItem} from 'view-design'
 	import '@/components-market'
@@ -18,9 +16,8 @@
 
 	export default {
 		name: 'Edit',
-		mixins: [funcs],
 		provide() {
-			return {...widgetBindManager, kanboard: this}
+			return {kanboard: this}
 		},
 		components: {
 			Button,
@@ -33,13 +30,14 @@
 		props: {
 			data: {
 				type: String,
-				default: null
+				default: null,
 			}
 		},
 		data() {
 			return {
 				ready: false,
 				querying: true,
+				kanboardEdited: false,
 				platform: platform.state,
 			};
 		},
