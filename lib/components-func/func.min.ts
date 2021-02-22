@@ -45,7 +45,9 @@ export default class Func extends Vue {
 		return res
 	}
 
+	// config.api.data，返回‘data‘
 	get inputKey() {
+		if (!this.config.prop) return null
 		const props = this.config.prop.split('.')
 		return props.reverse()[0]
 	}
@@ -59,29 +61,45 @@ export default class Func extends Vue {
 		require('brace/theme/chrome')
 		require('brace/snippets/javascript')
 	}
-
-	getCode(key) {
-		return this.item[key]
-	}
-
-	setCode(val, key) {
-		this.item[key] = val
-	}
-
+	
 	getJson(key) {
-		if (typeof this.item[key] === 'object') {
-			return JSON.stringify(this.item[key], null, '\t')
+		const req = this.getItemValue(key)
+		if (typeof req === 'object') {
+			return JSON.stringify(req, null, '\t')
 		} else {
-			if (this.item[key]) {
-				return JSON.stringify(JSON.parse(this.item[key]), null, '\t')
+			if (req) {
+				return JSON.stringify(JSON.parse(req), null, '\t')
 			}
 			return ''
 		}
 	}
 
 	setJson(val, key) {
-		if (val)
-			this.item[key] = JSON.stringify(JSON.parse(val))
-		this.item[key] = ''
+		let data = this.getItemObj(key)
+		const prop = key.split('.').reverse()[0]
+		if (val) {
+			data[prop] = JSON.stringify(JSON.parse(val))
+		} else {
+			data[prop] = ''
+		}
+	}
+	
+	getItemValue (keyString) {
+		let res = this.item
+		const props = keyString.split('.')
+		props.forEach(v => {
+			res = res[v]
+		})
+		return res
+	}
+	
+	getItemObj (keyString) {
+		let res = this.item
+		const props = keyString.split('.')
+		props.length = props.length - 1
+		props.forEach(v => {
+			res = res[v]
+		})
+		return res
 	}
 }

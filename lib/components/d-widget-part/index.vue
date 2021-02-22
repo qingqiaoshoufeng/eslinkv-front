@@ -105,12 +105,6 @@
 			}
 		},
 		watch: {
-			animation: {
-				handler: function () {
-					this.replayAnimation = true
-				},
-				deep: true
-			},
 			animationEnabled(value) {
 				value && this.setAnimation('enter')
 			},
