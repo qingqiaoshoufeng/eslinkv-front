@@ -6,7 +6,7 @@
 	</div>
 </template>
 <script>
-	import widgets from './widgets/widget-list/index'
+	import widgets from '../../components/d-widget-list/index'
 	import kanboardEditor from './kanboard-editor/index'
 
 	export default {

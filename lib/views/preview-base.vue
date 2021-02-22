@@ -11,7 +11,7 @@
     </div>
 </template>
 <script>
-    import parts from './core/widgets/parts/index'
+    import parts from '../components/d-widget-part/index'
     import styleParser from './core/widgets/parts/lib/style-parser'
     import widgetOperation from './core/kanboard-editor/mixins/widget-operation'
     import globalApi from './core/kanboard-editor/global-api/mixin'

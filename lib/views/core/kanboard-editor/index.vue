@@ -123,7 +123,7 @@
 	import rulerCanvas from '../../../components/d-ruler/index.vue'
 	import vdr from 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable'
 	import 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable.css'
-	import parts from '../widgets/parts/index'
+	import parts from '../../../components/d-widget-part/index'
 	import dBottomBar from '../../../components/d-bottom-bar'
 	import widgetOperation from './mixins/widget-operation'
 	import panelOperation from './mixins/panel-operation'
