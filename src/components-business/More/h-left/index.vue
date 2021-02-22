@@ -41,7 +41,7 @@
         mixins: [mixins],
         components: {pie, lngline},
         created() {
-            this.configValue = this.parseConfigValue(config, value)
+            this.configValue = this.parseConfigValue(value)
         },
         mounted() {
             setTimeout(() => {
