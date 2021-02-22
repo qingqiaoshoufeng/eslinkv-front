@@ -67,7 +67,7 @@
 					i-option(value="inherit") inherit
 </template>
 <script lang="ts">
-	import func from './func.min'
+	import func from './func.mx'
 	import {Component} from 'vue-property-decorator'
 
 	@Component

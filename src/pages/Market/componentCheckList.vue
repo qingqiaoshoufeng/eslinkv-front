@@ -14,7 +14,7 @@
 <script lang="ts">
     import {Vue, Component} from 'vue-property-decorator'
     import {Table, Page, Button} from 'view-design'
-    import {getWaitCheckList} from '@/api/bussiness.api'
+    import {getWaitCheckList} from '../../../lib/api/bussiness.api'
     import dialogCheck from './dialogCheckComponent.vue'
 
     @Component({

@@ -121,15 +121,19 @@
 			} else {
 				if (this.market) {
 					this.componentVersion = this.config.widget.componentVersion
+					// todo 
+					// this.$root.$options.components
 					if (window.GoldChart.components[`${this.type}-${this.componentVersion}`]) {
 						this.ready = true
 					} else {
-						this.$sysApi.bussiness.detailMarket({
+						this.$api.bussiness.detailMarket({
 							componentEnTitle: this.type,
 							componentVersion: this.config.widget.componentVersion
 						}).then(res => {
 							let script = document.createElement('script')
 							script.onload = () => {
+								// todo 
+								// this.$root.$options.components
 								Vue.component(
 									`market-${res.componentEnTitle}-${this.config.widget.componentVersion}`,
 									window.GoldChart.components[`${res.componentEnTitle}-${this.config.widget.componentVersion}`].component)
@@ -140,10 +144,14 @@
 						})
 					}
 				} else {
+					// todo 
+					// this.$root.$options.components
 					if (window.GoldChart.components[`dvdp-${this.type}`]) {
 						this.ready = true
 					} else {
 						Vue.component(`dvdp-${this.type}`, this.custom.components[this.type])
+						// todo 
+						// this.$root.$options.components
 						window.GoldChart.components[`dvdp-${this.type}`] = this.custom.components[this.type]
 						this.ready = true
 					}

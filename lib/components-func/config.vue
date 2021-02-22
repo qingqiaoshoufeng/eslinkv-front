@@ -85,7 +85,7 @@
 					i-option(value="full-height") 100%高度
 </template>
 <script lang="ts">
-	import func from './func.min'
+	import func from './func.mx'
 	import {Component} from 'vue-property-decorator'
 
 	@Component

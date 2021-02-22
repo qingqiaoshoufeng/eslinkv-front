@@ -31,7 +31,6 @@ custom.actions.setCustomWidgets({
     label: '杭燃样式',
     widgets: widgetsArray
 })
-Vue.component('new', dvdp.new)
 Vue.component('edit', dvdp.edit)
 Vue.component('detail', dvdp.detail)
 Vue.component('preview', dvdp.preview)

@@ -19,15 +19,19 @@
         }
 
         mounted() {
+        	// todo 
+			// this.$root.$options.components
             if (window.GoldChart.components[`${this.type}-${this.version}`]) {
                 this.ready = true
             } else {
-                this.$sysApi.bussiness.detailMarket({
+                this.$api.bussiness.detailMarket({
                     componentEnTitle: this.type,
                     componentVersion: this.version
                 }).then(res => {
                     let script = document.createElement('script')
                     script.onload = () => {
+						// todo 
+						// this.$root.$options.components
                         Vue.component(
                             `market-${res.componentEnTitle}-${this.version}`,
                             window.GoldChart.components[`${res.componentEnTitle}-${this.version}`].component)

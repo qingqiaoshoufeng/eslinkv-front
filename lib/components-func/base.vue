@@ -26,13 +26,17 @@
 				i-option(:value="0") 主场景
 				i-option(:value="key" v-for="(item,key) in scene.obj" :key="key") {{item.name}}
 				i-option(:value="-1") 场景回收站
+		.d-manage-modal-control
+			i-button(icon="md-sync" @click="handleSync") 强制刷新当前组件
 </template>
 <script lang="ts">
-	import func from './func.min'
+	import func from './func.mx'
 	import {Component} from 'vue-property-decorator'
 
 	@Component
 	export default class FuncBase extends func {
-
+		handleSync() {
+			
+		}
 	}
 </script>

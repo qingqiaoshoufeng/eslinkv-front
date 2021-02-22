@@ -25,7 +25,7 @@
 <script lang="ts">
     import {Vue, Component, Prop, Watch} from 'vue-property-decorator'
     import {Modal, Form, FormItem, Input, Button, Upload, Icon} from 'view-design'
-    import {createComponent, updateComponent, getAllComponentType} from '@/api/bussiness.api'
+    import {createComponent, updateComponent, getAllComponentType} from '../../../lib/api/bussiness.api'
     import TreeSelect from '@riophae/vue-treeselect'
     import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 
