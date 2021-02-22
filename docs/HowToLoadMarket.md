@@ -45,7 +45,7 @@ Content-Type: application/json
 ```
 主要逻辑代码
 ```javascript
-this.$sysApi.bussiness.detailMarket({componentEnTitle: this.type}).then(res => {
+this.$api.bussiness.detailMarket({componentEnTitle: this.type}).then(res => {
     let script = document.createElement('script')
     script.onload = () => {
         // ...        

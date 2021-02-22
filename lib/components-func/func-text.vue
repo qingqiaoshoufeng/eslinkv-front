@@ -4,7 +4,7 @@
 		i-input(v-model="obj[inputKey]" :disabled="true")
 </template>
 <script lang="ts">
-	import func from './func.min'
+	import func from './func.mx'
 	import {Component} from 'vue-property-decorator'
 
 	@Component

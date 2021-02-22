@@ -1,4 +1,4 @@
-import {getCompList, getLevel0} from '@/api/bussiness.api'
+import {getCompList, getLevel0} from '../../lib/api/bussiness.api'
 import custom from '../../lib/store/custom.store'
 
 let widgetsArray: ComponentsWidgetsArray = []

@@ -15,7 +15,7 @@
 			i-inputNumber(v-model="item.config.animation.duration" :disabled="platform.chooseWidgetState")
 </template>
 <script lang="ts">
-import func from './func.min'
+import func from './func.mx'
 import {Component} from 'vue-property-decorator'
 
 @Component
