@@ -15,7 +15,7 @@
         created() {
             setTimeout(() => {
                 
-                this.configValue = this.parseConfigValue(config, value)
+                this.configValue = this.parseConfigValue(value)
             }, 1000)
         }
     }

@@ -52,7 +52,7 @@ npm run serve
         created() {
             if (process.env.NODE_ENV !== 'development') {
                 
-                this.configValue = this.parseConfigValue(config, value)
+                this.configValue = this.parseConfigValue(value)
             } else {
                 this.data = JSON.parse(value.api.data)
                 this.styles = {

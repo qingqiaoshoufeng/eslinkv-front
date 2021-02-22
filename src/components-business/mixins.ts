@@ -1,6 +1,5 @@
 import {styleParser, widgetMixin} from '../../lib'
 import scene from '../../lib/store/scene.store'
-import {findComponentUpward} from '../utils'
 
 const mx: any = {
 	data() {
@@ -26,12 +25,6 @@ const mx: any = {
 		 */
 		emitComponentUpdate(data) {
 			if (this.configValue) {
-				// const parent = findComponentUpward(this, 'Edit')
-				// 	|| findComponentUpward(this, 'Full')
-				// 	|| findComponentUpward(this, 'Detail')
-				// 	|| findComponentUpward(this, 'Local')
-				// 	|| findComponentUpward(this, 'New')
-				// 	|| findComponentUpward(this, 'Preview')
 				this.configValue.api.bind.refIds.forEach(ref => {
 					let dom
 					if (this.kanboardEditor.$refs[ref]) {

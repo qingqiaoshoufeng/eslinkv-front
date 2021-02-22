@@ -99,7 +99,7 @@
 			document.removeEventListener('DestroyScene', this.closeVideo)
 		},
 		created() {
-			this.configValue = this.parseConfigValue(config, value)
+			this.configValue = this.parseConfigValue(value)
 			document.addEventListener('DestroyScene', this.closeVideo, false)
 		},
 		mounted() {

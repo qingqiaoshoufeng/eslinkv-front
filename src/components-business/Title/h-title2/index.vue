@@ -13,7 +13,7 @@
     @Component
     class HTitle2 extends mixins(mx) {
         created() {
-            this.configValue = this.parseConfigValue(config, value, customConfig)
+            this.configValue = this.parseConfigValue(value, customConfig)
         }
     }
 

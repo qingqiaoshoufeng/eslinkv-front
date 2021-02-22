@@ -49,7 +49,7 @@
 		},
 		created() {
 			
-			this.configValue = this.parseConfigValue(config, value);
+			this.configValue = this.parseConfigValue(value);
 		},
 	}
 </script>
