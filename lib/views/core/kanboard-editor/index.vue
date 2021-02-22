@@ -113,9 +113,6 @@
 		<d-right-widget/>
 		<!-- 编辑器设置 -->
 		<d-right-setting/>
-		<!-- 全局 api 执行器 -->
-		<api-executor v-for="api in apis" :key="api.variable" :api="api"
-					  @api-data-update="(data) => handleApiDataUpdate(api.variable, data)"/>
 	</div>
 </template>
 <script>
@@ -131,7 +128,6 @@
 	import editorEventHandler from './mixins/editor-event-handler'
 	import configEventHandler from './mixins/config-event-handler'
 	import layerOperation from '../../../components/widget-layers/mixin'
-	import globalApi from './global-api/mixin'
 	import widgetShareData from './mixins/widget-share-data'
 	import crossFrameMessageParamBind from './mixins/cross-frame-message-param-bind'
 	import databaseConfig from './data-warehouse/index.vue'
@@ -149,7 +145,7 @@
 		mixins: [
 			widgetOperation, panelOperation,
 			canvasOperation,
-			configEventHandler, editorEventHandler, layerOperation, globalApi,
+			configEventHandler, editorEventHandler, layerOperation,
 			widgetShareData, crossFrameMessageParamBind,
 		],
 		components: {
@@ -196,7 +192,6 @@
 					if (excludeClass.findIndex(c => classPath.indexOf(c) > -1) > -1) return
 				}
 				this.$refs.rightMenu && this.$refs.rightMenu.$el.classList.remove('active')
-				this.activeGridId = null
 			}
 		},
 		computed: {

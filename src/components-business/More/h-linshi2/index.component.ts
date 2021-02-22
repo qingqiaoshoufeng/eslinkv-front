@@ -1,6 +1,6 @@
 import {getInput} from '../../../../lib'
 
-export const configSource: ComponentConfigSource = {
+export const configSource = {
     config: {
         fields: {
             transform: getInput('transform', '旋转角度'),

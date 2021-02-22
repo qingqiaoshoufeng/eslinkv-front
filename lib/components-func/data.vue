@@ -82,12 +82,10 @@
 	import func from './func.min'
 	import {Component} from 'vue-property-decorator'
 	import databaseConfig from '../views/core/kanboard-editor/data-warehouse/index.vue'
-	import { getProviderList, getProviderParams } from '../views/mixins/widget-bind-manage'
-
+	
 	@Component({components: {databaseConfig}})
 	export default class FuncData extends func {
 		showDatabaseConfigModal: boolean = false
-		relateList: any[] = []
 		
 		get apiMethod(){
 			return this.getCode('config.api.process.methodBody')
@@ -113,6 +111,18 @@
 			this.setJson(val, 'config.api.data')
 		}
 
+		get relateList(){
+			console.log(this.platform.widgetAdded)
+			const list = Object.values(this.platform.widgetAdded).map(async widget => {
+				const { id, name } = widget.config.widget
+				return {
+					id,
+					name,
+				}
+			})
+			return list
+		}
+		
 		updateApiSystem (value) {
 			Object.assign(this.item.config.api.system.params, value)
 			this.showDatabaseConfigModal = false
@@ -128,16 +138,6 @@
 			}
 			this.showDatabaseConfigModal = true
 			this.$refs.dataBaseConfig.setQueryCond(value.api.system.params)
-		}
-
-		async bindEnableChange (value) {
-			setTimeout(async () => {
-				this.relateList = await getProviderList()
-			}, 500)
-		}
-		
-		async created () {
-			this.relateList = await getProviderList()
 		}
 	}
 </script>

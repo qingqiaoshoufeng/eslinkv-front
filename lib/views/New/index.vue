@@ -7,16 +7,13 @@
 </template>
 <script>
 	import core from '../core/index'
-	import funcs from '../mixins/funcs'
 	import loadMask from '../../components/load-mask/index'
 	import dFooter from '../../components/d-footer/index'
-	import * as widgetBindManager from '../mixins/widget-bind-manage'
 
 	export default {
 		name: 'New',
-		mixins: [funcs],
 		provide() {
-			return {...widgetBindManager, kanboard: this}
+			return {kanboard: this}
 		},
 		components: {
 			core,
@@ -27,6 +24,7 @@
 			return {
 				ready: false,
 				querying: false,
+				kanboardEdited: false,
 			};
 		},
 		mounted() {

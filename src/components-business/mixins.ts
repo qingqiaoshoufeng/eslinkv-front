@@ -110,12 +110,8 @@ const mx: any = {
 			const {layout} = this.config
 			return styleParser(layout)
 		},
-		mergedConfig() {
-			if (!this.config.config) return false
-			return {...this.config.config}
-		},
 		id() {
-			const now: number = new Date().getTime()
+			const now: number = +new Date()
 			if (this.config) {
 				if (this.config.widget) {
 					return `d-${this.config.widget.id ? this.config.widget.id : ''}${now}`
