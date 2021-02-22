@@ -18,21 +18,17 @@
 </template>
 <script>
 	import parts from '../parts/index'
-	import decoration from './decoration'
-	import dvChart from './dv-chart'
-	import eChart from './e-chart'
-	import other from './other'
 	import {Collapse, TabPane, Tabs, Panel} from 'view-design'
 	import {component as VueLazyComponent} from '@xunlei/vue-lazy-component'
 	import custom from '../../../../store/custom.store'
 
 	export default {
 		components: {
-			parts, 
-			'i-collapse':Collapse, 
-			'i-tab-pane':TabPane, 
-			'i-tabs':Tabs, 
-			'i-panel':Panel, 
+			parts,
+			'i-collapse': Collapse,
+			'i-tab-pane': TabPane,
+			'i-tabs': Tabs,
+			'i-panel': Panel,
 			VueLazyComponent
 		},
 		data() {
@@ -51,13 +47,7 @@
 				this.custom.widgets.map(item => {
 					custom[item.name] = item
 				})
-				return {
-					...custom,
-					decoration,
-					dvChart,
-					eChart,
-					other,
-				}
+				return custom
 			}
 		},
 		watch: {

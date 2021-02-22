@@ -8,7 +8,6 @@ import './scss/index.scss'
 import './openApi'
 import './components-business'
 import './components-map'
-import directives from '../lib/directives'
 import * as filters from '@/utils/filter'
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
@@ -32,9 +31,6 @@ Vue.prototype.$Message = Message
 Vue.prototype.$Modal = Modal
 Vue.config.productionTip = false
 
-Object.keys(directives).forEach((key) => {
-	Vue.directive(key, directives[key])
-})
 Object.keys(filters).forEach(key => Vue.filter(key, filters[key]))
 
 new Vue({

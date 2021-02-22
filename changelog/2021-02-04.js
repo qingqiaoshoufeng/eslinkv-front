@@ -75,6 +75,14 @@ export default {
 		{
 			type: ['refactor'],
 			content: '移除parseConfigSource'
+		},
+		{
+			type: ['refactor'],
+			content: '移除除杭燃组件外的所有组件'
+		},
+		{
+			type: ['perf'],
+			content: '优化组件无序加载，加载速度更快'
 		}
 	]
 }
