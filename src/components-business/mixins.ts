@@ -1,9 +1,32 @@
-import {styleParser, widgetMixin} from '../../lib'
+import {styleParser} from '../../lib'
 import scene from '../../lib/store/scene.store'
+import apiHandler from '../../lib/views/core/widgets/parts/lib/api-handler/index.js'
+import configMerge from '../../lib/views/core/widgets/parts/lib/config-merge'
+import globalConfigValue from '../../lib/views/core/widgets/parts/lib/common-config-value'
+import sourceToLayout from '../../lib/views/core/widgets/parts/lib/source-to-layout'
+import platform from '../../lib/store/platform.store'
 
 const mx: any = {
+	mixins: [apiHandler],
+	inject: ['kanboardEditor'],
+	props: {
+		config: {
+			type: Object,
+			default: null
+		},
+		readonly: {
+			type: Boolean,
+			default: false
+		}
+	},
 	data() {
 		return {
+			configSource: null,
+			configValue: null,
+			ready: false,
+			data: null,
+			configReady: false,
+			time: Date.now(),
 			instance: null,
 			animateTimer: null,
 			animateActiveIndex: -1,
@@ -11,7 +34,6 @@ const mx: any = {
 			inPreview: scene.state.status === 'inPreview',
 		}
 	},
-	mixins: [widgetMixin],
 	beforeDestroy() {
 		this.instance = null
 		clearInterval(this.animateTimer)
@@ -60,6 +82,34 @@ const mx: any = {
 			}
 			this.config.api.params = params
 		},
+		/**
+		 * @description
+		 *
+		 */
+		parseConfigValue(localConfigValue = null, customConfig) {
+			const mergedValue = localConfigValue ? configMerge(localConfigValue, globalConfigValue()) : globalConfigValue()
+			const inputConfig = Object.freeze(this.config || {})
+			const res = configMerge(inputConfig, mergedValue)
+			// 过滤可用属性
+			res.widget.name = res.widget.name || this.$parent.type
+			if (customConfig) {
+				res.customConfig = customConfig
+			}
+			if (this.config.widget) {
+				platform.actions.updateConfig(this.config.widget.id, res)
+			}
+			this.$nextTick(() => {
+				this.updateConfig()
+			})
+			return res
+		},
+		updateConfig() {
+			const payload = this.readonly
+				? {value: {...this.configValue}}
+				: {source: sourceToLayout({...this.configSource}), value: {...this.configValue}}
+			this.configReady = true
+			this.$emit('widget-config-update', payload)
+		}
 	},
 	computed: {
 		styles() {
@@ -81,6 +131,29 @@ const mx: any = {
 				return `d-${now}`
 			}
 		}
+	},
+	watch: {
+		configReady(value) {
+			if (value) {
+				requestAnimationFrame(() => {
+					this.$el.classList.add('widget')
+					this.readonly && this.$el.classList.add('readonly')
+					this.ready = true
+					this.$emit('ready')
+				})
+			}
+		},
+		'config.widget.locked'(value) {
+			if (this.$el.style) this.$el.style.pointerEvents = value ? 'none' : null
+		}
+	},
+	mounted() {
+		this.$nextTick(() => {
+			const classList = this.$el.classList
+			if (classList) {
+				if (!classList.contains('widget')) classList.add('widget')
+			}
+		})
 	}
 }
 
