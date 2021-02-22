@@ -17,7 +17,7 @@
 				i-input(v-model="item.config.api.path" :disabled="platform.chooseWidgetState")
 		.d-manage-modal-control
 			label 请求参数
-			editor.d-manage-modal-control-editor(v-model="apiParams" @init="editorInit" lang="json" theme="chrome" height="100")
+			editor.d-manage-modal-control-editor(v-model="item.config.api.params" @init="editorInit" lang="json" theme="chrome" height="100")
 		.d-manage-modal-control
 			label 响应数据
 			editor.d-manage-modal-control-editor(v-model="apiData" @init="editorInit" lang="json" theme="chrome" height="100")
@@ -26,7 +26,7 @@
 			i-switch(v-model="item.config.api.process.enable" :disabled="platform.chooseWidgetState")
 		.d-manage-modal-control(v-if="item.config.api.process.enable")
 			label 加工CODE
-			editor.d-manage-modal-control-editor(v-model="apiMethod" @init="editorInit" lang="javascript" theme="chrome" height="100")
+			editor.d-manage-modal-control-editor(v-model="item.config.api.process.methodBody" @init="editorInit" lang="javascript" theme="chrome" height="100")
 		.fn-flex.flex-row.d-manage-modal-control-more
 			.d-manage-modal-control
 				label 定时刷新
@@ -71,7 +71,7 @@
 			)
 		.d-manage-modal-control
 			label 组件关联
-			i-switch(v-model="item.config.api.bind.enable" :disabled="platform.chooseWidgetState" @on-change="bindEnableChange")
+			i-switch(v-model="item.config.api.bind.enable" :disabled="platform.chooseWidgetState")
 		.d-manage-modal-control(v-if="item.config.api.bind.enable")
 			checkbox-group(v-model="item.config.api.bind.refIds")
 				checkbox(:label="k.id" v-for="(k, i) in relateList" :key="i") {{k.name}}
@@ -82,44 +82,30 @@
 	import func from './func.min'
 	import {Component} from 'vue-property-decorator'
 	import databaseConfig from '../views/core/kanboard-editor/data-warehouse/index.vue'
-	
+	import scene from '../store/scene.store'
+
 	@Component({components: {databaseConfig}})
 	export default class FuncData extends func {
 		showDatabaseConfigModal: boolean = false
 		
-		get apiMethod(){
-			return this.getCode('config.api.process.methodBody')
-		}
-
-		set apiMethod(val){
-			this.setCode(val, 'config.api.data')
-		}
-		
-		get apiParams() {
-			return this.getJson('config.api.params')
-		}
-
-		set apiParams(val) {
-			this.setJson(val, 'config.api.params')
-		}
-		
-		get apiData(){
+		get apiData () {
 			return this.getJson('config.api.data')
 		}
-
-		set apiData(val) {
-			this.setJson(val, 'config.api.data')
+		
+		set apiData (v) {
+			return this.setJson(v, 'config.api.data')
 		}
 
 		get relateList(){
-			console.log(this.platform.widgetAdded)
-			const list = Object.values(this.platform.widgetAdded).map(async widget => {
-				const { id, name } = widget.config.widget
-				return {
-					id,
-					name,
-				}
-			})
+			const list = Object.values(this.platform.widgetAdded)
+				.filter(v => v.config.api.bind.enable && v.scene === scene.state.index)
+				.map(v => {
+					const { id, name } = v.config.widget
+					return {
+						id,
+						name,
+					}
+				})
 			return list
 		}
 		
