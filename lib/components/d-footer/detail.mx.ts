@@ -18,21 +18,6 @@ export default {
 			}
 			this.refillConfig(value)
 		},
-		// todo 是否可以移除 影响渲染时间
-		sortWidgets(widgets) {
-			const providers = []
-			const responders = []
-			widgets.forEach(widget => {
-				const api = widget.value.api
-				const isProvider = api && api.bind && api.bind.enable && api.bind.role.includes('provider')
-				if (isProvider) {
-					providers.push(widget)
-				} else {
-					responders.push(widget)
-				}
-			})
-			return [...providers, ...responders]
-		},
 		refillConfig(res) {
 			const {widgets, kanboard, guides} = res
 			this.platform.panelConfig = kanboard
@@ -41,7 +26,7 @@ export default {
 			// this.apis = apis
 			return new Promise(resolve => {
 				// this.refilling = true
-				const widgetsArray = this.sortWidgets(Object.values(widgets))
+				const widgetsArray = Object.values(widgets)
 				const length = widgetsArray.length
 				// 小工具初始化需要时间，此处进行延时逐个回填
 				const reDrawWidget = ({id, type, value, scene = 0, market = false}) => {

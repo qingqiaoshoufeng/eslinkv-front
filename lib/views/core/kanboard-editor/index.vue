@@ -121,8 +121,6 @@
 <script>
 	import rightMenu from '../../../components/right-menu'
 	import rulerCanvas from '../../../components/d-ruler/index.vue'
-	import fields from '../config-panel/components/fields'
-	import Vue from 'vue'
 	import vdr from 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable'
 	import 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable.css'
 	import parts from '../widgets/parts/index'
@@ -143,8 +141,6 @@
 	import dRightWidget from '../../../components/d-right-widget'
 	import dRightSetting from '../../../components/d-right-setting'
 	import {Icon} from 'view-design'
-	// config-panel 与 fields 互相引用，须提前注册为 Vue 组件
-	Vue.component('fields', fields)
 	import platform from '../../../store/platform.store'
 	import scene from '../../../store/scene.store'
 
