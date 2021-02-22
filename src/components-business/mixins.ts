@@ -3,7 +3,6 @@ import scene from '../../lib/store/scene.store'
 import apiHandler from '../../lib/views/core/widgets/parts/lib/api-handler/index.js'
 import configMerge from '../../lib/views/core/widgets/parts/lib/config-merge'
 import globalConfigValue from '../../lib/views/core/widgets/parts/lib/common-config-value'
-import sourceToLayout from '../../lib/views/core/widgets/parts/lib/source-to-layout'
 import platform from '../../lib/store/platform.store'
 
 const mx: any = {
@@ -99,16 +98,11 @@ const mx: any = {
 				platform.actions.updateConfig(this.config.widget.id, res)
 			}
 			this.$nextTick(() => {
-				this.updateConfig()
+				const payload = {value: {...this.configValue}}
+				this.configReady = true
+				this.$emit('widget-config-update', payload)
 			})
 			return res
-		},
-		updateConfig() {
-			const payload = this.readonly
-				? {value: {...this.configValue}}
-				: {source: sourceToLayout({...this.configSource}), value: {...this.configValue}}
-			this.configReady = true
-			this.$emit('widget-config-update', payload)
 		}
 	},
 	computed: {
