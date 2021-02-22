@@ -69,9 +69,11 @@ export default {
 
 	mounted() {
 		const {params: {id}} = this.$route
-		this.$api.board.detail({dataBoardId: id}).then(res => {
-			this.renderByDetail(res)
-		})
+		if (id) {
+			this.$api.board.detail({dataBoardId: id}).then(res => {
+				this.renderByDetail(res)
+			})
+		}
 		/**
 		 * @description 默认场景
 		 */
