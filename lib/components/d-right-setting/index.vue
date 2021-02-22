@@ -4,6 +4,9 @@
 			span 编辑器设置
 		ul.d-scrollbar
 			li.fn-flex.flex-row
+				label 平台版本
+				span {{platform.version}}
+			li.fn-flex.flex-row
 				label 自动贴靠参考线
 				i-switch(v-model="platform.autoAlignGuide")
 			li.fn-flex.flex-row
@@ -12,11 +15,21 @@
 			li.fn-flex.flex-row
 				label 锁定参考线
 				i-switch(v-model="platform.ruler.lockGuides")
+			li.fn-flex.flex-row
+				label 画布左边距
+				i-inputNumber(v-model="platform.ruler.contentScrollLeft")
+			li.fn-flex.flex-row
+				label 画布上边距
+				i-inputNumber(v-model="platform.ruler.contentScrollTop")
+			li.fn-flex.flex-row
+				label 画布zoom
+				i-select(v-model="platform.ruler.zoomIndex")
+					i-option(:value="index" v-for="(item,index) in platform.ruler.zooms" :key="item") {{item}}
 </template>
 <script lang="ts">
 	import dRightModal from '../d-right-modal'
 	import {Component, Vue} from 'vue-property-decorator'
-	import {Icon, Switch} from 'view-design'
+	import {Icon, Switch, InputNumber, Select, Option,} from 'view-design'
 	import platform from '../../store/platform.store'
 
 	@Component({
@@ -24,6 +37,9 @@
 			dRightModal,
 			'i-icon': Icon,
 			'i-switch': Switch,
+			'i-inputNumber': InputNumber,
+			'i-select': Select,
+			'i-option': Option,
 		},
 	})
 	export default class DRightSetting extends Vue {
@@ -49,11 +65,17 @@
 
 		li {
 			margin-top: 10px;
+			align-items: center;
+			height: 32px;
 
 			label {
 				margin-right: auto;
 				font-size: 14px;
 			}
+		}
+
+		.ivu-select {
+			width: 80px;
 		}
 	}
 
