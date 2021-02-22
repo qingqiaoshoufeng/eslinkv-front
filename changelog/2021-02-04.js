@@ -83,6 +83,10 @@ export default {
 		{
 			type: ['perf'],
 			content: '优化组件无序加载，加载速度更快'
-		}
+		},
+		{
+			type: [],
+			content: '移除source-tool'
+		},
 	]
 }
