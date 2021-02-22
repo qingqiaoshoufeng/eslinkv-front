@@ -20,11 +20,7 @@ class Mixins extends Vue {
 	scene = scene.state
 
 
-	handleWidgetConfig({source, value = {}}, item) {
-		const type = item.type
-		if (!this.widgetSources[type]) {
-			this.$set(this.widgetSources, type, source)
-		}
+	handleWidgetConfig({value = {}}, item) {
 		if (this.widgetsImporting) {
 			this.isWidgetProcessing = false
 			return

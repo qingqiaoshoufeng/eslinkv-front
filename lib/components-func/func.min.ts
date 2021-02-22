@@ -35,6 +35,7 @@ export default class Func extends Vue {
 	}
 
 	get obj() {
+		if (!this.config.prop) return null
 		let res = this.item
 		const props = this.config.prop.split('.')
 		props.length = props.length - 1

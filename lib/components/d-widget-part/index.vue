@@ -47,7 +47,6 @@
 				replayAnimation: false,
 				ready: false,
 				animationClass: null,
-				animationStyle: 'opacity: 0',
 				componentList: {},
 				custom: custom.state
 			}
@@ -95,7 +94,6 @@
 					animationClass = animationSource.map(item => `animate__${item}`).join(' ')
 				}
 				this.animationClass = `animate__animated ${animationClass}`
-				this.animationStyle = `animation-duration: ${duration}ms; animation-delay: ${delay}ms`
 				let timer = setTimeout(() => {
 					this.removeAnimation()
 					this.handleAnimationEnd()
@@ -104,7 +102,6 @@
 			},
 			removeAnimation() {
 				this.animationClass = null
-				this.animationStyle = null
 			}
 		},
 		watch: {
