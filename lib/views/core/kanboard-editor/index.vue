@@ -12,7 +12,6 @@
 		<d-bottom-bar/>
 		<!-- 标尺容器 -->
 		<ruler-canvas
-			:guide-step="moveStep"
 			ref="rulerCanvas"
 		>
 			<!-- 大屏 -->
@@ -121,14 +120,13 @@
 </template>
 <script>
 	import rightMenu from '../../../components/right-menu'
-	import rulerCanvas from '../ruler-canvas/ruler-canvas.vue'
+	import rulerCanvas from '../../../components/d-ruler/index.vue'
 	import fields from '../config-panel/components/fields'
 	import Vue from 'vue'
 	import vdr from 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable'
 	import 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable.css'
 	import parts from '../widgets/parts/index'
 	import dBottomBar from '../../../components/d-bottom-bar'
-	import rulerGuides from './mixins/ruler-guides'
 	import widgetOperation from './mixins/widget-operation'
 	import panelOperation from './mixins/panel-operation'
 	import canvasOperation from './mixins/canvas-operation'
@@ -157,7 +155,6 @@
 			canvasOperation,
 			configEventHandler, editorEventHandler, layerOperation, globalApi,
 			widgetShareData, crossFrameMessageParamBind,
-			rulerGuides
 		],
 		components: {
 			Icon,
