@@ -23,9 +23,6 @@
 	export default {
 		props: {
 			market: {},
-			classification: {
-				type: String
-			},
 			type: {
 				type: String,
 				required: true

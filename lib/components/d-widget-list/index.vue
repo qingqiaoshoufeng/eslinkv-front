@@ -1,9 +1,9 @@
 <template lang="pug">
 	.widgets-panel(:class="{ fixed: panelFixed }")
-		i-tabs(value="custom0" :animated="false" type="card" @on-click="(name) => handlePanelToggle(name)")
+		i-tabs(:animated="false" type="card" @on-click="(name) => handlePanelToggle(name)")
 			template(v-for="tab in tabs")
 				i-tab-pane(v-if="tab.widgets.length" :key="tab.name" :label="tab.label" :name="tab.name")
-					i-collapse(v-model="panelStatic[tab.name]" accordion simple @on-change="(keys) => handlePanelToggle(tab.name, keys[0])")
+					i-collapse(accordion simple @on-change="(keys) => handlePanelToggle(tab.name, keys[0])")
 						i-panel(:key="type" :name="type" :activeSet="setActiveMap(tab.name, type)" v-for="{ label, type, widgets } in tab.widgets")
 							span {{ label }}
 							template(v-if="widgetListActiveMap[`${tab.name}-${format(type)}`]" slot="content")
@@ -13,7 +13,16 @@
 										div(draggable="true" v-if="widget.market" @dragstart="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)")
 											img(:src="widget.componentImage")
 										div(slot="skeleton") 加载中...
-										parts(v-if="!widget.market" :type="widget.type" :style="transform(widget)" :classification="tab.name" :config="widgetConfigMap[`${tab.name}-${format(type)}-${index}`].config" draggable="true" readonly no-bind-params @dragstart.native="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)" @widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)")
+										parts(
+											v-if="!widget.market" 
+											:type="widget.type" 
+											:style="transform(widget)" 
+											:config="widgetConfigMap[`${tab.name}-${format(type)}-${index}`].config" 
+											draggable="true" 
+											readonly 
+											no-bind-params 
+											@dragstart.native="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)" 
+											@widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)")
 		d-svg.fixed-toggle.pointer(icon-class="pin" :title="panelFixed ? '取消固定' : '固定小工具栏'" :class="{ active: panelFixed }" @click="handleFix")
 </template>
 <script>
@@ -38,7 +47,6 @@
 				widgetListActiveMap: {},
 				widgetConfigMap: {},
 				widgetListToggleTimer: {},
-				panelStatic: {} // 记录当前打开关闭状态
 			}
 		},
 		computed: {
@@ -47,6 +55,7 @@
 				this.custom.widgets.map(item => {
 					custom[item.name] = item
 				})
+				console.log(custom)
 				return custom
 			}
 		},
@@ -54,9 +63,6 @@
 			tabs: {
 				handler() {
 					this.initWidgetConfigMap()
-					Object.keys(this.tabs).map(key => {
-						this.$set(this.panelStatic, key, [])
-					})
 				},
 				immediate: true,
 				deep: true
@@ -74,7 +80,6 @@
 			},
 			handleFix() {
 				this.panelFixed = !this.panelFixed
-				this.$emit('panel-fixed')
 			},
 			setActiveMap(tab, panel = '') {
 				const key = tab + '-' + this.format(panel)
@@ -92,11 +97,6 @@
 					}
 					this.widgetListToggleTimer[prevKey] = setTimeout(() => {
 						this.widgetListActiveMap[prevKey] = false
-						if (!panel) {
-							Object.keys(this.panelStatic).forEach(item => {
-								item !== tab && this.panelStatic[item].splice(0)
-							})
-						}
 						this.clearWidgetConfig(prevKey)
 					}, 400)
 				}
