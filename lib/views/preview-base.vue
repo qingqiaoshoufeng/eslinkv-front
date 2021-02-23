@@ -12,15 +12,13 @@
     import parts from '../components/d-widget-part/index'
     import styleParser from './core/widgets/parts/lib/style-parser'
     import widgetOperation from './core/kanboard-editor/mixins/widget-operation'
-    import widgetShareData from './core/kanboard-editor/mixins/widget-share-data'
-    import crossFrameMessageParamBind from './core/kanboard-editor/mixins/cross-frame-message-param-bind'
     import loadMask from '../components/load-mask'
     import platform from '../store/platform.store'
     import scene from '../store/scene.store'
 
     export default {
         name: 'kanboard-editor',
-        mixins: [widgetOperation, widgetShareData, crossFrameMessageParamBind],
+        mixins: [widgetOperation],
         provide() {
             return {kanboard: this, kanboardEditor: this}
         },
