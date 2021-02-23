@@ -22,10 +22,6 @@
 			return {
 				ready: false,
 				fitScreen: true,
-				kanboardSize: {
-					width: 1920,
-					height: 1080
-				},
 				screenSize: {
 					width: 1920,
 					height: 1080
@@ -39,8 +35,6 @@
 				const arr = val.split(';')
 				const w = arr[0].replace(/width:(.*)px/, '$1')
 				const h = arr[1].replace(/height:(.*)px/, '$1')
-				this.kanboardSize.width = w
-				this.kanboardSize.height = h
 				const {clientWidth, clientHeight} = document.body
 				this.screenSize.width = clientWidth
 				this.screenSize.height = clientHeight

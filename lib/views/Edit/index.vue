@@ -70,7 +70,7 @@
 	}
 </style>
 <style lang="scss">
-	.kanboard-editer-box {
+	.d-editor-box {
 		.left {
 			.components {
 				.ivu-collapse-header {
