@@ -145,6 +145,10 @@
 				})
 			}
 		}
+		
+		created () {
+			platform.state.currentType = 0
+		}
 
 		mounted() {
 			this.isNew = !this.$route.params.id
