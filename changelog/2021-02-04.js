@@ -91,6 +91,10 @@ export default {
 		{
 			type: [],
 			content: '移除vendor debounce、formatting'
+		},
+		{
+			type: [],
+			content: '移除config-merge'
 		}
 	]
 }

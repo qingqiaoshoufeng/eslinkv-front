@@ -4,12 +4,12 @@
 		 class="preview-wrapper"
 	>
 		<div :style="{height: mobileWrapHeight + 'px'}" class="mobile-wrap" v-if="isMobile">
-			<kanban-preview @mounted="updateKanboardSize"
+			<d-view @mounted="updateKanboardSize"
 							ref="previewContainer"
 							:style="`transform: scale(${scaleRatio}) translate3d(0, 0, 0); overflow: hidden;`"
 			/>
 		</div>
-		<kanban-preview @mounted="updateKanboardSize"
+		<d-view @mounted="updateKanboardSize"
 						ref="previewContainer"
 						v-else
 						:style="`transform: scale(${scaleRatio}) translate3d(0, 0, 0); overflow: hidden;`"
@@ -19,13 +19,13 @@
 </template>
 
 <script>
-	import kanbanPreview from '../preview-base.vue'
+	import dView from '../../components/d-view/index.vue'
 	import dFooter from '../../components/d-footer'
 
 	export default {
 		name: 'Detail',
 		components: {
-			kanbanPreview, dFooter
+			dView, dFooter
 		},
 		provide() {
 			return {kanboard: this}
@@ -92,7 +92,6 @@
 				outline: rgba(255, 255, 255, 0.2) 1px dotted;
 				flex-shrink: 0;
 				flex-grow: 0;
-				/*margin: auto;*/
 			}
 		}
 

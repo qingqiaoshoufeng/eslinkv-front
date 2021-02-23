@@ -1,5 +1,4 @@
-import copy from 'fast-copy'
-import {uuid} from '../../../../utils'
+import {uuid} from '../../../../utils/index'
 import {Vue, Component, Watch} from 'vue-property-decorator'
 import platform from '../../../../store/platform.store'
 import scene from '../../../../store/scene.store'
@@ -11,7 +10,6 @@ class Mixins extends Vue {
 	isWidgetProcessing = false
 	widgetProcessingStyle = null
 	rightMenuBindWidgetId = null
-	zIndexMap = {}
 	widgetMovingTimer = null
 	widgetActivating = false
 	widgetMoving = false
@@ -85,11 +83,6 @@ class Mixins extends Vue {
 		if (!activeAllowed) {
 			return this.deactivateWidget(id)
 		}
-
-		// todo 选中之后要做什么
-		console.group(id)
-		console.log(obj)
-		console.groupEnd()
 		platform.actions.chooseWidget(id)
 		platform.actions.setChooseWidgetCustomConfig(config.customConfig)
 		if (this.widgetActivating) return

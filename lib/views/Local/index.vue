@@ -1,6 +1,6 @@
 <template lang="pug">
 	.preview-wrapper(ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen }")
-		kanban-preview(@mounted="updateKanboardSize" ref="previewContainer" :style="`transform: scale(${scaleRatio},${scale}) translate3d(0, 0, 0); overflow: hidden;`")
+		d-view(@mounted="updateKanboardSize" ref="previewContainer" :style="`transform: scale(${scaleRatio},${scale}) translate3d(0, 0, 0); overflow: hidden;`")
 		Form
 			FormItem
 				label.style-file-input(for="originFile") 第一次请选择本地文件
@@ -8,16 +8,15 @@
 </template>
 
 <script>
-	import kanbanPreview from '../preview-base.vue'
+	import dView from '../../components/d-view/index.vue'
 	import {getQueryString, setDefault} from '../../utils'
 	import {Input, Modal, Form, FormItem} from 'view-design'
-	import platform from '../../store/platform.store'
 	import scene from '../../store/scene.store'
 
 	export default {
 		name: 'Local',
 		components: {
-			kanbanPreview, Input, Modal, Form, FormItem
+			dView, Input, Modal, Form, FormItem
 		},
 		provide() {
 			return {kanboard: this}
@@ -120,7 +119,6 @@
 				outline: rgba(255, 255, 255, 0.2) 1px dotted;
 				flex-shrink: 0;
 				flex-grow: 0;
-				/*margin: auto;*/
 			}
 		}
 

@@ -1,0 +1,76 @@
+<template lang="pug">
+	.canvas-wrapper#kanban(ref="canvas-wrapper" :style="canvasStyle()")
+		template(v-for="item in platform.widgetAdded")
+			parts(v-if="showParts(item)" :key="item.id" :type="item.type" :config="item.config" :ref="item.id" :market="item.market" :style="item.config.widget.hide ? 'display: none' : ''" readonly)
+</template>
+<script lang="ts">
+	import parts from '../d-widget-part/index'
+	import styleParser from '../../views/core/widgets/style-parser'
+	import loadMask from '../load-mask/index'
+	import platform from '../../store/platform.store'
+	import scene from '../../store/scene.store'
+	import {Component, Vue, Provide} from 'vue-property-decorator'
+	
+	@Component({
+		components: {
+			parts,
+			loadMask
+		}
+	})
+	export default class DView extends Vue {
+		@Provide('kanboard') kanboard = this
+		@Provide('kanboardEditor') kanboardEditor = this
+
+		platform = platform.state
+		scene = scene.state
+
+		canvasStyle() {
+			const val = styleParser(this.platform.panelConfig)
+			if (val) {
+				this.$emit('mounted', val)
+			}
+			return val
+		}
+
+		showParts(item) {
+			if (item.scene === 0 && this.scene.showMainScene) {
+				return true
+			} else if (item.scene === this.scene.index) {
+				return true
+			}
+			return false
+		}
+
+		mounted() {
+			window.GoldChart.mutations.setInstance('kanboard', this)
+			window.GoldChart.mutations.setStatus('inPreview')
+		}
+	}
+</script>
+<style lang="scss">
+	.scene-temporary-wrapper {
+		.widget-part {
+			position: absolute !important;
+		}
+	}
+</style>
+<style lang="scss" scoped>
+	.canvas-wrapper {
+		&:before {
+			content: '';
+			display: flex;
+		}
+
+		/deep/ {
+			& > .widget-part {
+				position: absolute !important;
+			}
+		}
+	}
+
+	/deep/ {
+		.load-mask {
+			position: fixed !important;
+		}
+	}
+</style>

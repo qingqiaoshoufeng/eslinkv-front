@@ -162,3 +162,10 @@ body {
   opacity: 0;
   transition: opacity .5s;
 }
+
+/**
+ * @description 去掉百度API 左下角logo
+ */
+.anchorBL {
+	display: none!important;
+}

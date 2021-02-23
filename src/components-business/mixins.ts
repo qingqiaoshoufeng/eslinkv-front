@@ -1,12 +1,35 @@
 import {styleParser} from '../../lib'
 import scene from '../../lib/store/scene.store'
-import apiHandler from '../../lib/views/core/widgets/parts/lib/api-handler/index.js'
-import configMerge from '../../lib/views/core/widgets/parts/lib/config-merge'
-import globalConfigValue from '../../lib/views/core/widgets/parts/lib/common-config-value'
+import fetch from '../../lib/views/core/widgets/fetch.js'
+import dataProcess from '../../lib/views/core/widgets/data-process.js'
+import globalConfigValue from '../../lib/views/core/widgets/common-config-value'
 import platform from '../../lib/store/platform.store'
+import copy from 'fast-copy'
+
+/**
+ * @description 合并对象 生成一个新的对象,用前面的覆盖后面的
+ */
+const configMerge = function (from, to) {
+	const output = copy(to)
+	const isArray = Array.isArray(from);
+	(!isArray ? Object.keys(from) : from).forEach((key, index) => {
+		const actualKey = !isArray ? key : index
+		const value = from[actualKey];
+		if (value && typeof value === 'object') {
+			if (!output[actualKey]) {
+				output[actualKey] = !Array.isArray(value) ? { ...value } : [...value]
+				return
+			}
+			output[actualKey] = configMerge(value, output[actualKey])
+		} else if (value !== undefined) {
+			output[actualKey] = value
+		}
+	})
+	return output
+}
 
 const mx: any = {
-	mixins: [apiHandler],
+	mixins: [fetch, dataProcess],
 	inject: ['kanboardEditor'],
 	props: {
 		config: {
