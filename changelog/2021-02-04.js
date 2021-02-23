@@ -90,7 +90,7 @@ export default {
 		},
 		{
 			type: [],
-			content: '移除vendor debounce、formatting'
+			content: '移除vendor debounce、formatting、parse-function-string、object-find-leaf-path、is-object-string'
 		},
 		{
 			type: [],
