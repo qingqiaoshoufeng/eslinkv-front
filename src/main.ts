@@ -8,7 +8,6 @@ import './scss/index.scss'
 import './openApi'
 import './components-business'
 import './components-map'
-import * as filters from '@/utils/filter'
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import './api'
@@ -16,9 +15,8 @@ import '../lib/icons'
 import PortalVue from 'portal-vue'
 import '@babel/polyfill'
 import format from 'date-fns/format'
-import plugins from '../plugins'
+import '../plugins'
 
-Vue.use(plugins)
 Vue.use(PortalVue)
 Vue.use(VueVideoPlayer)
 Vue.component('iSwitch', Switch);
@@ -31,7 +29,6 @@ Vue.prototype.$Message = Message
 Vue.prototype.$Modal = Modal
 Vue.config.productionTip = false
 
-Object.keys(filters).forEach(key => Vue.filter(key, filters[key]))
 
 new Vue({
 	router,

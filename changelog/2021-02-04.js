@@ -86,7 +86,7 @@ export default {
 		},
 		{
 			type: [],
-			content: '移除mixin source-tool、funcs'
+			content: '移除mixin source-tool、funcs、widget-layers'
 		},
 		{
 			type: [],

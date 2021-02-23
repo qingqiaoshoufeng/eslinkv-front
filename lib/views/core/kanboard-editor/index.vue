@@ -127,7 +127,6 @@
 	import canvasOperation from './mixins/canvas-operation'
 	import editorEventHandler from './mixins/editor-event-handler'
 	import configEventHandler from './mixins/config-event-handler'
-	import layerOperation from '../../../components/widget-layers/mixin'
 	import databaseConfig from './data-warehouse/index.vue'
 	import jsEditorModal from './js-editor-modal.vue'
 	import dRightFullScreen from '../../../components/d-right-full-screen'
@@ -143,7 +142,7 @@
 		mixins: [
 			widgetOperation, panelOperation,
 			canvasOperation,
-			configEventHandler, editorEventHandler, layerOperation,
+			configEventHandler, editorEventHandler,
 		],
 		components: {
 			Icon,
