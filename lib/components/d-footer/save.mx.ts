@@ -1,4 +1,5 @@
 import html2canvas from 'html2canvas'
+import platform from '../../store/platform.store'
 
 export default {
 	data() {
@@ -7,6 +8,23 @@ export default {
 		}
 	},
 	methods: {
+		handleSave (type) {
+			this.type = type || platform.state.currentType
+			this.$Modal.confirm({
+				title: '确定保存吗？',
+				okText: '确定',
+				cancelText: '取消',
+				onOk: () => {
+					setTimeout(() => {
+						if (this.isNew) {
+							this.addBoard()
+						} else {
+							this.editBoard()
+						}
+					}, 300)
+				}
+			})
+		},
 		async addBoard() {
 			const data = this.platFormData()
 			data.type = this.type
@@ -28,12 +46,9 @@ export default {
 				okText: '创建',
 				cancelText: '跳过',
 			})
+
 		},
 		editBoard() {
-			if (this.isNew) {
-				this.addBoard()
-				return
-			}
 			const data = this.platFormData()
 			this.$Modal.confirm({
 				title: '快照',

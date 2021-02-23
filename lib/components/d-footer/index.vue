@@ -6,7 +6,8 @@
 			.d-footer-right.fn-flex
 				i-button(@click="exit") 返回
 				i-button(@click="preview") 预览
-				i-button(type="primary" @click="editBoard" :loading="loading") 保存
+				i-button(type="primary" @click="handleSave(0)" :loading="loading") 保存
+				i-button(type="primary" @click="handleSave(1)" :loading="loading" v-if="isNew") 保存为模板
 				i-button(@click="publishBoard" :loading="loading" v-if="!isNew") 发布
 				i-button(@click="handleExport" :loading="loading") 导出
 				i-button(@click="importModal=true" :loading="loading") 导入
@@ -47,13 +48,13 @@
 	export default class DFooter extends mixins(exportMx, detailMx, saveMx, importMx, publishMx) {
 		@Prop(Boolean) kanboardEdited: boolean
 		@Prop({default: true}) show: boolean  // detail,full,local 隐藏该模块
-		@Prop({default: 0}) type: number  // 数据类型：0:看板, 1:小工具模板, 2:参考线模板
 
 		platform = platform.state
 		scene = scene.state
 		saving: boolean = false
 		loading = false
 		isNew = true
+		type = 0 // 数据类型：0:看板, 1:小工具模板, 2:参考线模板
 
 		preview() {
 			document.body.requestFullscreen()
@@ -146,8 +147,7 @@
 		}
 
 		mounted() {
-			const {params: {id}} = this.$route
-			this.isNew = !id
+			this.isNew = !this.$route.params.id
 		}
 	}
 </script>

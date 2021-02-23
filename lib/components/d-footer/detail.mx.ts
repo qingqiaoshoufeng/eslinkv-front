@@ -53,7 +53,8 @@ export default {
 	},
 
 	mounted() {
-		const {params: {id}} = this.$route
+		const templateId = localStorage.getItem('templateId')
+		const id = this.$route.params.id || templateId
 		if (id) {
 			this.$api.board.detail({dataBoardId: id}).then(res => {
 				this.renderByDetail(res)
