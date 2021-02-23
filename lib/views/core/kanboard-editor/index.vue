@@ -128,8 +128,6 @@
 	import editorEventHandler from './mixins/editor-event-handler'
 	import configEventHandler from './mixins/config-event-handler'
 	import layerOperation from '../../../components/widget-layers/mixin'
-	import widgetShareData from './mixins/widget-share-data'
-	import crossFrameMessageParamBind from './mixins/cross-frame-message-param-bind'
 	import databaseConfig from './data-warehouse/index.vue'
 	import jsEditorModal from './js-editor-modal.vue'
 	import dRightFullScreen from '../../../components/d-right-full-screen'
@@ -146,7 +144,6 @@
 			widgetOperation, panelOperation,
 			canvasOperation,
 			configEventHandler, editorEventHandler, layerOperation,
-			widgetShareData, crossFrameMessageParamBind,
 		],
 		components: {
 			Icon,
