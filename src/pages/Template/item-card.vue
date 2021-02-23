@@ -10,7 +10,7 @@
         .pos-a.list-item-card-mask.fn-flex.flex-column
             Button(icon="ios-create-outline" @click="handleEdit") 编辑
             Button(v-if="status" icon="ios-link" :style="{marginTop:'10px'}" @click="handleLink") 打开
-            Button(v-else icon="ios-cloud-upload-outline" :style="{marginTop:'10px'}" @click="handlePublish") 发布
+            Button(v-else icon="ios-cloud-upload-outline" :style="{marginTop:'10px'}" @click="handleUse") 使用
             Button(icon="ios-trash-outline" :style="{marginTop:'10px'}" type="error" @click="handleRemove") 删除
 </template>
 <script lang="ts">
@@ -53,19 +53,8 @@
             })
         }
 
-        handlePublish() {
-            this.$Modal.confirm({
-                title: '提示',
-                content: '确认发布此看板吗？',
-                loading: true,
-                onOk: () => {
-                    this.$api.panel.publish({id: this.id}).then(() => {
-                        this.$Message.success('发布成功')
-                        this.$Modal.remove()
-                        this.$emit('init')
-                    })
-                }
-            })
+		handleUse() {
+           this.$router.push('/new?templateId=' + this.id)
         }
     }
 </script>
