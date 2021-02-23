@@ -60,7 +60,7 @@
 	</div>
 </template>
 <script>
-	import builtInFuncTemplate from './function/index'
+	import builtInFuncTemplate from './function'
 	import jsEditor from '../../../components/js-editor.vue'
 	import {Modal, Button, Tabs, TabPane, Table, Input} from 'view-design'
 

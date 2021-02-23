@@ -1,19 +1,19 @@
 <template>
 	<div ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen }" class="preview-wrapper">
-		<kanban-preview @mounted="updateKanboardSize" ref="previewContainer"
+		<d-view @mounted="updateKanboardSize" ref="previewContainer"
 						:style="`transform: scale(${scaleRatio},${scale}) translate3d(0, 0, 0); overflow: hidden;`"/>
 		<d-footer :show="false"/>
 	</div>
 </template>
 
 <script>
-	import kanbanPreview from '../preview-base.vue'
+	import dView from '../../components/d-view/index.vue'
 	import dFooter from '../../components/d-footer'
 
 	export default {
 		name: 'Full',
 		components: {
-			kanbanPreview, dFooter
+			dView, dFooter
 		},
 		provide() {
 			return {kanboard: this}
@@ -78,7 +78,6 @@
 				outline: rgba(255, 255, 255, 0.2) 1px dotted;
 				flex-shrink: 0;
 				flex-grow: 0;
-				/*margin: auto;*/
 			}
 		}
 

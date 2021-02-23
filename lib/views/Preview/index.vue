@@ -1,17 +1,17 @@
 <template lang="pug">
 	.preview-wrapper.pos-f.fn-flex(ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen }")
-		kanban-preview(ref="previewContainer" :style="`transform: scale(${scaleRatio}); overflow: hidden;`")
+		d-view(ref="previewContainer" :style="`transform: scale(${scaleRatio}); overflow: hidden;`")
 		.action-bar.pos-f.fn-flex
 			.action.fit-screen.pointer(v-if="actualScaleRatio < 1" @click="fitScreen = !fitScreen") {{ fitScreen ?'原始大小' : '适应窗口' }}
 			.action.close.pointer(@click="handleClose") 关闭
 </template>
 <script>
-	import kanbanPreview from '../preview-base.vue'
+	import dView from '../../components/d-view/index.vue'
 
 	export default {
 		name: 'Preview',
 		components: {
-			kanbanPreview
+			dView
 		},
 		provide() {
 			return {kanboard: this}

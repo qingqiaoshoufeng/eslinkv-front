@@ -116,7 +116,7 @@
 	</div>
 </template>
 <script>
-	import rightMenu from '../../../components/right-menu'
+	import rightMenu from '../../../components/right-menu/index'
 	import rulerCanvas from '../../../components/d-ruler/index.vue'
 	import vdr from 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable'
 	import 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable.css'
@@ -133,7 +133,6 @@
 	import dRightManage from '../../../components/d-right-manage'
 	import dRightWidget from '../../../components/d-right-widget'
 	import dRightSetting from '../../../components/d-right-setting'
-	import {Icon} from 'view-design'
 	import platform from '../../../store/platform.store'
 	import scene from '../../../store/scene.store'
 
@@ -145,7 +144,6 @@
 			configEventHandler, editorEventHandler,
 		],
 		components: {
-			Icon,
 			parts,
 			rulerCanvas,
 			vdr,
@@ -222,7 +220,7 @@
 </script>
 
 <style lang="scss" scoped>
-	@import './index.scss';
+	@import 'index';
 </style>
 
 <style lang="scss">
