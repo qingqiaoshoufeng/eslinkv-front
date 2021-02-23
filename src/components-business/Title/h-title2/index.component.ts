@@ -26,7 +26,7 @@ export const value = {
 
 export const customConfig = [
 	{
-		prop: 'config.config.title',
+		prop: 'title',
 		label: '标题',
 		type: 'func-input',
 	}

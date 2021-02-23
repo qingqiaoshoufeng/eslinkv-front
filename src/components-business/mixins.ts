@@ -92,6 +92,7 @@ const mx: any = {
 			// 过滤可用属性
 			res.widget.name = res.widget.name || this.$parent.type
 			if (customConfig) {
+				customConfig.map(item => item.prop = `config.config.${item.prop}`)
 				res.customConfig = customConfig
 			}
 			if (this.config.widget) {
@@ -129,7 +130,6 @@ const mx: any = {
 					this.$el.classList.add('widget')
 					this.readonly && this.$el.classList.add('readonly')
 					this.ready = true
-					this.$emit('ready')
 				})
 			}
 		},

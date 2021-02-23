@@ -14,7 +14,7 @@
 			Modal(v-model="importModal")
 				Form
 					FormItem
-						label(for="originFile" class="style-file-input") 全覆盖导入
+						label.ivu-btn.ivu-btn-primary.d-footer-import-button(for="originFile") 全覆盖导入
 						input.fn-hide#originFile(type="file" accept="application/json" @change="handleFile")
 </template>
 <script lang="ts">
@@ -169,6 +169,10 @@
 			.return {
 				margin-left: 0;
 			}
+		}
+
+		.d-footer-import-button {
+			line-height: 32px;
 		}
 
 		.d-footer-left {

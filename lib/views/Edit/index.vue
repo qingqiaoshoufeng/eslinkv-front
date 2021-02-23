@@ -35,7 +35,6 @@
 		},
 		data() {
 			return {
-				ready: false,
 				querying: true,
 				kanboardEdited: false,
 				platform: platform.state,
