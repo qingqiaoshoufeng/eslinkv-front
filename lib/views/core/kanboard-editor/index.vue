@@ -8,8 +8,6 @@
 		@select.prevent.stop
 		@contextmenu.stop.prevent
 	>
-		<!-- 底部信息栏 -->
-		<d-bottom-bar/>
 		<!-- 标尺容器 -->
 		<ruler-canvas
 			ref="rulerCanvas"
@@ -89,6 +87,8 @@
 				<!--辅助线END-->
 			</section>
 		</ruler-canvas>
+		<!-- 底部信息栏 -->
+		<d-bottom-bar/>
 		<!-- 右键菜单 -->
 		<right-menu
 			ref="rightMenu"
@@ -119,7 +119,7 @@
 	import 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable.css'
 	import parts from '../../../components/d-widget-part/index'
 	import dBottomBar from '../../../components/d-bottom-bar'
-	import widgetOperation from './mixins/widget-operation'
+	import widgetOperation from './widget-operation'
 	import databaseConfig from '../../../components/data-warehouse/index.vue'
 	import dRightFullScreen from '../../../components/d-right-full-screen'
 	import dRightManage from '../../../components/d-right-manage'

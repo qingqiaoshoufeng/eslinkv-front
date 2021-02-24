@@ -15,9 +15,6 @@
 		components: {
 			dView, dFooter
 		},
-		provide() {
-			return {kanboard: this}
-		},
 		data() {
 			return {
 				ready: false,

@@ -1,5 +1,5 @@
 <template lang="pug">
-	.d-bottom-bar-box.pos-a.fn-flex.flex-row(v-show="platform.ruler.rulerVisible")
+	.d-bottom-bar-box.pos-a.fn-flex.flex-row.z-index-9(v-show="platform.ruler.rulerVisible")
 		.d-bottom-bar.fn-flex.flex-row
 			label {{scene.index===0?'主场景':scene.obj[scene.index].name}}
 		.d-bottom-bar.fn-flex.flex-row

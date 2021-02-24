@@ -14,7 +14,7 @@
 					<i class="far fa-star" @click="collectHandle"></i>
 					<i class="far fa-file-alt" @click="getTemplate"></i>
 				</div>
-				<js-editor ref="editor" v-if="isVisible" v-model="source"/>
+<!--				<js-editor ref="editor" v-if="isVisible" v-model="source"/>-->
 			</div>
 			<div slot="footer" class="footer">
 				<Button type="default" @click.native="exit">取消</Button>
@@ -61,7 +61,7 @@
 </template>
 <script>
 	
-	import jsEditor from '../../../components/js-editor.vue'
+	// import jsEditor from '../../../components/js-editor.vue'
 	import {Modal, Button, Tabs, TabPane, Table, Input} from 'view-design'
 	const numberExpand = `return data.map(item => {
     item.value = item.value * 100
@@ -77,7 +77,8 @@
 	export default {
 		name: 'js-editor-modal',
 		components: {
-			jsEditor, Modal, Button, Tabs, TabPane, Table, Input
+			// jsEditor, 
+			Modal, Button, Tabs, TabPane, Table, Input
 		},
 		props: {
 			// 弹窗状态

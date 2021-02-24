@@ -108,5 +108,13 @@ export default {
 			type: ['refactor'],
 			content: '编辑器设置新增画布边距、画布zoom功能',
 		},
+		{
+			type: ['refactor'],
+			content: '添加模版市场，基本功能为，看板另存为模版，新建时快速添加，可再次编辑，可删除',
+		},
+		{
+			type: [],
+			content: '移除vue组件 js-editor'
+		}
 	]
 }

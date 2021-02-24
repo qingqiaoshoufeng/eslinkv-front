@@ -17,7 +17,7 @@ const configMerge = function (from, to) {
 		const value = from[actualKey];
 		if (value && typeof value === 'object') {
 			if (!output[actualKey]) {
-				output[actualKey] = !Array.isArray(value) ? { ...value } : [...value]
+				output[actualKey] = !Array.isArray(value) ? {...value} : [...value]
 				return
 			}
 			output[actualKey] = configMerge(value, output[actualKey])
@@ -141,16 +141,14 @@ const mx: any = {
 					return `d-${this.config.widget.id ? this.config.widget.id : ''}${now}`
 				}
 				return `d-${now}`
-			} else {
-				return `d-${now}`
 			}
+			return `d-${now}`
 		}
 	},
 	watch: {
 		configReady(value) {
 			if (value) {
 				requestAnimationFrame(() => {
-					this.$el.classList.add('widget')
 					this.readonly && this.$el.classList.add('readonly')
 					this.ready = true
 				})
@@ -159,14 +157,6 @@ const mx: any = {
 		'config.widget.locked'(value) {
 			if (this.$el.style) this.$el.style.pointerEvents = value ? 'none' : null
 		}
-	},
-	mounted() {
-		this.$nextTick(() => {
-			const classList = this.$el.classList
-			if (classList) {
-				if (!classList.contains('widget')) classList.add('widget')
-			}
-		})
 	}
 }
 

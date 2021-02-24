@@ -27,9 +27,6 @@
 		components: {
 			dView, dFooter
 		},
-		provide() {
-			return {kanboard: this}
-		},
 		data() {
 			return {
 				isMobile: /android|iphone/i.test(navigator.userAgent),
