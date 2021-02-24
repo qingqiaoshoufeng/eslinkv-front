@@ -40,7 +40,7 @@
     </div>
 </template>
 <script>
-    import mixins from '../../mixins';
+    import mixins from '../../../../lib/mixins';
     import LineOne from '@/components/LineOne'
     import {config, value} from './index.component'
 

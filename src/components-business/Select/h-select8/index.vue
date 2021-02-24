@@ -8,7 +8,7 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins'
+	import mixins from '../../../../lib/mixins'
 	import {
 		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
 		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,

@@ -10,7 +10,7 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
+	import mixins from '../../../../lib/mixins';
 	import HLinePercentItem from './HLinePercentItem';
 	import { config, value } from './index.component'
 

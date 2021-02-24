@@ -27,7 +27,7 @@
     </div>
 </template>
 <script>
-    import mixins from '../../mixins'
+    import mixins from '../../../../lib/mixins'
     import pie from '../h-left/pie'
     import {config, value} from './index.component'
 

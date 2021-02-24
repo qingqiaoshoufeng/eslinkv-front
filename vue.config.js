@@ -70,18 +70,20 @@ module.exports = {
 				},
 			},
 			'^/server': {
-				target: 'http://192.168.1.33:9082',
+				// target: 'http://192.168.1.33:9082',
+				target: 'http://10.20.10.154:3000',
 				changeOrigin: true,
-				pathRewrite: {
-					'^/server': '/',
-				},
+				// pathRewrite: {
+				// 	'^/server': '/',
+				// },
 			},
 			'^/pipenetwork': {
-				target: 'http://192.168.1.104:6080',
+				// target: 'http://192.168.1.104:6080',
+				target: 'http://10.20.10.154:3000',
 				changeOrigin: true,
-				pathRewrite: {
-					'^/pipenetwork': '/',
-				},
+				// pathRewrite: {
+				// 	'^/pipenetwork': '/',
+				// },
 			},
 		},
 	},

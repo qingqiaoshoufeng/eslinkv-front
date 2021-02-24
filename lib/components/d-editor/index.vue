@@ -113,21 +113,21 @@
 	</div>
 </template>
 <script>
-	import rightMenu from '../../../components/right-menu/index'
-	import rulerCanvas from '../../../components/d-ruler/index.vue'
+	import rightMenu from '../right-menu/index'
+	import rulerCanvas from '../d-ruler/index.vue'
 	import vdr from 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable'
 	import 'vue-draggable-resizable-gorkys2/src/components/vue-draggable-resizable.css'
-	import parts from '../../../components/d-widget-part/index'
-	import dBottomBar from '../../../components/d-bottom-bar'
+	import parts from '../d-widget-part/index'
+	import dBottomBar from '../d-bottom-bar'
 	import widgetOperation from './widget-operation'
-	import databaseConfig from '../../../components/data-warehouse/index.vue'
-	import dRightFullScreen from '../../../components/d-right-full-screen'
-	import dRightManage from '../../../components/d-right-manage'
-	import dRightWidget from '../../../components/d-right-widget'
-	import dRightSetting from '../../../components/d-right-setting'
-	import platform from '../../../store/platform.store'
-	import scene from '../../../store/scene.store'
-	import styleParser from '../widgets/style-parser'
+	import databaseConfig from '../data-warehouse/index.vue'
+	import dRightFullScreen from '../d-right-full-screen'
+	import dRightManage from '../d-right-manage'
+	import dRightWidget from '../d-right-widget'
+	import dRightSetting from '../d-right-setting'
+	import platform from '../../../lib/store/platform.store'
+	import scene from '../../../lib/store/scene.store'
+	import styleParser from '../../../lib/style-parser'
 	
 	export default {
 		name: 'kanboard-editor',

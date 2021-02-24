@@ -2,30 +2,30 @@
 	.home-container
 		.layout-wrapper
 			.main-container
-				core(ref="kanboardEditor" @querying="status => (querying = status)" @kanboard-edited="kanboardEdited = true")
+				.d-editor-box.pos-r.fn-flex
+					d-widget-list(ref="widgets" :class="{ 'd-editor-fullscreen': platform.fullscreen }")
+					d-editor(ref="kanboardEditor")
 				load-mask(:show="querying") {{querying ? '请求模板数据…' : '正在生成快照…'}}
 			d-footer
 </template>
 <script>
-	import core from '../../../lib/views/core/index'
 	import loadMask from '../../../lib/components/load-mask/index'
 	import dFooter from '../../../lib/components/d-footer/index'
+	import dWidgetList from '../../../lib/components/d-widget-list/index'
+	import dEditor from '../../../lib/components/d-editor/index'
+	import platform from '../../../lib/store/platform.store'
 
 	export default {
 		name: 'New',
 		provide() {
-			return {kanboard: this}
+			return {kanboardEditor: this.$refs.kanboardEditor}
 		},
-		components: {
-			core,
-			loadMask,
-			'd-footer': dFooter,
-		},
+		components: {loadMask, dFooter, dWidgetList, dEditor},
 		data() {
 			return {
 				ready: false,
 				querying: false,
-				kanboardEdited: false,
+				platform: platform.state,
 			};
 		},
 		mounted() {
@@ -35,6 +35,23 @@
 </script>
 
 <style lang="scss" scoped>
+	.d-editor-box {
+		width: 100%;
+		height: 100%;
+
+		.d-editor-fullscreen {
+			position: fixed;
+		}
+
+		/deep/ {
+
+			.widgets-panel.fixed + .center {
+				width: calc(100% - 428px) !important;
+				margin-left: 428px !important;
+			}
+		}
+	}
+
 	.home-container {
 		height: 100%;
 		overflow: hidden;

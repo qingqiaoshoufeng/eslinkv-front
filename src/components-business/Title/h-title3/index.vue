@@ -12,7 +12,7 @@
                 p {{config.config&&config.config.subTitle}}
 </template>
 <script lang="ts">
-    import mx from '../../mixins'
+    import mx from '../../../../lib/mixins'
     import {Component} from 'vue-property-decorator'
     import {mixins} from 'vue-class-component'
     import {config, configSource, value} from './index.component'

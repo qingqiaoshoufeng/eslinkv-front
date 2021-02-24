@@ -1,6 +1,6 @@
 import custom from '../../lib/store/custom.store'
 
-let components: Components = {}
+let components = {}
 const widgetsArray: ComponentsWidgetsArray = [], widgetsObject: ComponentsWidgetsObject = {}
 const conf = require.context('./', true, /\.(component.js)$/)
 const component = require.context('./', true, /index\.(vue)$/)

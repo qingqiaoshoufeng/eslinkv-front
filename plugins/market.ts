@@ -1,7 +1,7 @@
-import {getCompList, getLevel0} from '../../lib/api/bussiness.api'
-import custom from '../../lib/store/custom.store'
+import {getCompList, getLevel0} from '../lib/api/bussiness.api'
+import custom from '../lib/store/custom.store'
 
-let widgetsArray: ComponentsWidgetsArray = []
+let widgetsArray = []
 
 getLevel0().then(res => {
 	res.forEach(child => {

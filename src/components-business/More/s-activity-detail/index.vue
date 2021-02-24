@@ -115,7 +115,7 @@
     </div>
 </template>
 <script>
-    import mixins from '../../mixins'
+    import mixins from '../../../../lib/mixins'
     import getOption from './options'
     import {Swiper, SwiperSlide} from 'vue-awesome-swiper'
     import 'swiper/css/swiper.css'

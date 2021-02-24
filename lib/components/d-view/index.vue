@@ -5,7 +5,7 @@
 </template>
 <script lang="ts">
 	import parts from '../d-widget-part/index'
-	import styleParser from '../../views/core/widgets/style-parser'
+	import styleParser from '../../style-parser'
 	import loadMask from '../load-mask/index'
 	import platform from '../../store/platform.store'
 	import scene from '../../store/scene.store'

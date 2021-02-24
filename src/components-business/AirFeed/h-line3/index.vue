@@ -4,7 +4,7 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
+	import mixins from '../../../../lib/mixins';
 	import getOption from './options';
 	import { config, value } from './index.component'
 

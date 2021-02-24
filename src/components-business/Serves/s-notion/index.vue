@@ -14,7 +14,7 @@
 	</div>
 </template>
 <script>
-import mixins from '../../mixins';
+import mixins from '../../../../lib/mixins';
 import MarqueeText from 'vue-marquee-text-component'
 import { config, value } from './index.component'
 
