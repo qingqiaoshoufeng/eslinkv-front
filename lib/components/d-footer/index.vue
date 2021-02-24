@@ -4,6 +4,7 @@
 			.d-footer-left.fn-flex
 				span.d-footer-title {{ platform.panelConfig.info ? platform.panelConfig.info.name : '' }}
 			.d-footer-right.fn-flex
+				i-button(@click="saveSnapshot") 保存截图
 				i-button(@click="exit") 返回
 				i-button(@click="preview") 预览
 				i-button(type="primary" @click="handleSave(0)" :loading="loading") 保存

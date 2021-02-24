@@ -134,11 +134,7 @@ export default {
 					scale: 1,
 					useCORS: true,
 					...options,
-					// onclone: function () {
-					// 	return new Promise(resolve)
-					// }
 				}).then(canvas => {
-					console.log(canvas.toDataURL('image/jpeg', 0.9))
 					try {
 						if (!returnSource) {
 							canvas.toBlob(blob => {
@@ -158,6 +154,22 @@ export default {
 					this.screenshotCreating = false
 					reject(error)
 				})
+			})
+		},
+
+		saveSnapshot () {
+			html2canvas(document.querySelector('.widget-part'), {
+				allowTaint: true,
+				scale: 1,
+				useCORS: true,
+				backgroundColor: 'transparent'
+			}).then(canvas => {
+				const link = document.createElement('a')
+				link.href = canvas.toDataURL()
+				link.setAttribute('download', 'snapshot.png')
+				link.style.display = 'none'
+				document.body.appendChild(link)
+				link.click()
 			})
 		}
 	}
