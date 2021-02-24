@@ -158,18 +158,21 @@ export default {
 		},
 
 		saveSnapshot () {
-			html2canvas(document.querySelector('.widget-part'), {
-				allowTaint: true,
-				scale: 1,
-				useCORS: true,
-				backgroundColor: 'transparent'
-			}).then(canvas => {
-				const link = document.createElement('a')
-				link.href = canvas.toDataURL()
-				link.setAttribute('download', 'snapshot.png')
-				link.style.display = 'none'
-				document.body.appendChild(link)
-				link.click()
+			const nodes = document.querySelectorAll('.widget-part')
+			nodes.forEach(node => {
+				html2canvas(node, {
+					allowTaint: true,
+					scale: 1,
+					useCORS: true,
+					backgroundColor: 'transparent'
+				}).then(canvas => {
+					const link = document.createElement('a')
+					link.href = canvas.toDataURL()
+					link.setAttribute('download', 'snapshot.png')
+					link.style.display = 'none'
+					document.body.appendChild(link)
+					link.click()
+				})
 			})
 		}
 	}

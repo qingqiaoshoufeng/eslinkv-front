@@ -164,5 +164,8 @@
 <style lang="scss">
 .widget-part {
 	text-align: center;
+	font-size: 15px;
+	color: rgb(0, 0, 0);
+	line-height: 1.5em;
 }
 </style>
