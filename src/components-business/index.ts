@@ -6,7 +6,7 @@ let components = {}, snapshots = {}
 const widgetsArray: ComponentsWidgetsArray = [], widgetsObject: ComponentsWidgetsObject = {}
 const conf = require.context('./', true, /\.(component.ts)$/)
 const component = require.context('./', true, /index\.(vue)$/)
-const snapshot = require.context('./', true, /snapshot\.(jpg)$/)
+const snapshot = require.context('./', true, /snapshot\.(jpg|png)$/)
 snapshot.keys().forEach(name => {
 	const title = name.split('/')[2]
 	snapshots[title] = snapshot(name)

@@ -161,3 +161,8 @@
 		}
 	}
 </script>
+<style lang="scss">
+.widget-part {
+	text-align: center;
+}
+</style>

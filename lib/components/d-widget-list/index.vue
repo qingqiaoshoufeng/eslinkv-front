@@ -155,14 +155,22 @@
 		margin-bottom: 5px;
 		opacity: 0.9;
 		transition: 0.2s;
-		height: auto;
-		min-height: 80px;
+		height: 100px;
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		overflow: hidden;
 		background: rgba(0, 0, 0, 0.5);
-		max-height: 100px;
+		
+		>div {
+			width: 100%;
+			height: 100%;
+			img {
+				object-fit: contain;
+				width: 100%;
+				height: 100%;
+			}
+		}
 
 		&:last-child {
 			margin-bottom: 0;
