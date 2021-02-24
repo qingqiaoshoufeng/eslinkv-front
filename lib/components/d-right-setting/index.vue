@@ -4,9 +4,6 @@
 			span 编辑器设置
 		ul.d-scrollbar
 			li.fn-flex.flex-row
-				label 平台版本
-				span {{platform.version}}
-			li.fn-flex.flex-row
 				label 自动贴靠参考线
 				i-switch(v-model="platform.autoAlignGuide")
 			li.fn-flex.flex-row
@@ -25,6 +22,9 @@
 				label 画布zoom
 				i-select(v-model="platform.ruler.zoomIndex")
 					i-option(:value="index" v-for="(item,index) in platform.ruler.zooms" :key="item") {{item}}
+			li.fn-flex.flex-row
+				label 平台版本
+				span {{platform.version}}
 </template>
 <script lang="ts">
 	import dRightModal from '../d-right-modal'

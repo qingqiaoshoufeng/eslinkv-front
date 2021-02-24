@@ -95,6 +95,18 @@ export default {
 		{
 			type: [],
 			content: '移除config-merge'
-		}
+		},
+		{
+			type: [],
+			content: '移除utils parse-path-to-object、configMerge'
+		},
+		{
+			type: ['refactor'],
+			content: '改造标尺、辅助线',
+		},
+		{
+			type: ['refactor'],
+			content: '编辑器设置新增画布边距、画布zoom功能',
+		},
 	]
 }

@@ -12,6 +12,8 @@
 					span {{have}}/{{total}} 设置
 					i-icon(type="ios-arrow-down")
 				i-dropdown-menu(slot="list")
+					i-dropdown-item(name="copy")
+						span 复制场景ID
 					i-dropdown-item(name="create")
 						span 新增场景
 					i-dropdown-item(name="edit" :disabled="scene.index===0")
@@ -36,21 +38,28 @@
 						i-icon(type="ios-arrow-dropup" @click="handleUpZIndex(item.id)" @click.stop)
 						span {{item.config.layout.zIndex}}
 						i-icon(type="ios-arrow-dropdown" @click="handleDownZIndex(item.id)" @click.stop)
+		i-modal(v-model="copyModel" title="提示" :footer-hide="true")
+			.fn-flex.flex-row
+				span.fn-hide.copy-id {{scene.index}}
+				i-input(v-model="scene.index" search readonly enter-button="复制" @on-search="handleCopy")
 </template>
 <script lang="ts">
 	import dRightModal from '../d-right-modal'
 	import {Component, Vue} from 'vue-property-decorator'
-	import {Icon, Input, Select, Option, DropdownMenu, DropdownItem, Dropdown} from 'view-design'
+	import {Icon, Input, Select, Option, DropdownMenu, DropdownItem, Dropdown, Modal, Button} from 'view-design'
 	import scene from '../../store/scene.store'
 	import platform from '../../store/platform.store'
+	import {copyText} from '../../utils'
 
 	@Component({
 		components: {
 			dRightModal,
 			'i-icon': Icon,
+			'i-modal': Modal,
 			'i-input': Input,
 			'i-select': Select,
 			'i-option': Option,
+			'i-button': Button,
 			'i-dropdown-menu': DropdownMenu,
 			'i-dropdown-item': DropdownItem,
 			'i-dropdown': Dropdown,
@@ -62,6 +71,7 @@
 		total: nunber = 0
 		have: nunber = 0
 		editScene: boolean = false
+		copyModel: boolean = false
 
 		get list() {
 			let list = [], total = 0, have = 0
@@ -97,12 +107,19 @@
 				case 'destroy':
 					this.destroyScene()
 					break;
+				case 'copy':
+					this.copyModel = true
+					break;
 			}
 		}
 
 		handleChoose(id) {
 			this.platform.chooseWidgetId = id
 			this.$emit('handleActivated', id)
+		}
+
+		handleCopy() {
+			copyText(this.scene.index)
 		}
 
 		handleDelete(id) {

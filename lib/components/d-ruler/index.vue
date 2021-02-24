@@ -27,8 +27,6 @@
 		.vue-ruler-content(:class="{ drag: contentMove }" @mousedown="handleContentMoveStart" @mousemove.prevent)
 			.content-body(:id="platform.ruler.dragId" :style="contentStyle")
 				slot
-		.zoom-tip(v-show="platform.ruler.rulerVisible") ZOOM: {{ zoom }}
-		.guides-locked(v-show="platform.ruler.rulerVisible" :class="{ active: platform.ruler.lockGuides }") 已锁定
 </template>
 <script lang="ts">
 	import guides from './guides'
@@ -238,30 +236,6 @@
 			height: 100%;
 			background: transparent;
 			z-index: 4;
-		}
-	}
-
-	.guides-locked,
-	.zoom-tip {
-		position: absolute;
-		bottom: 15px;
-		left: 33px;
-		color: white;
-		font-size: 12px;
-		background-color: rgba(0, 0, 0, 0.5);
-		padding: 4px 8px;
-		opacity: 0.5;
-		z-index: 10;
-		pointer-events: none;
-	}
-
-	.guides-locked {
-		left: 120px;
-		opacity: 0;
-		transition: opacity 0.2s;
-
-		&.active {
-			opacity: 0.5;
 		}
 	}
 </style>

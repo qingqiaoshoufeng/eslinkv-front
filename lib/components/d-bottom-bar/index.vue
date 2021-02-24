@@ -1,23 +1,31 @@
 <template lang="pug">
-	.d-bottom-bar.fn-flex.flex-row.pos-a(v-show="platform.ruler.rulerVisible")
-		label.d-bottom-info.fn-flex.flex-row(v-if="platform.panelConfig.info")
-			span {{ platform.panelConfig.size.width}}×{{platform.panelConfig.size.height}}{{ platform.panelConfig.size.unit}}
-		label.d-bottom-hot-keys.pos-r.fn-flex.flex-row
-			d-svg.pointer(icon-class="keyboard" title="快捷键")
-			.d-bottom-hot-key-list.pos-a
-				ul
-					li.fn-flex.flex-row(v-for="item in platform.hotKeys" :key="item.name")
-						label.d-bottom-name {{ item.name }}
-						.d-bottom-key-code.fn-flex.flex-row(v-for="child in item.key")
-							i.d-bottom-hot-key-text(v-if="child.type==='text'") {{ child.value }}
-							span.d-bottom-hot-key-item(v-if="child.type==='+'") +
-							img.d-bottom-hot-key-img(v-if="child.type==='img'" :src="child.value")
+	.d-bottom-bar-box.pos-a.fn-flex.flex-row(v-show="platform.ruler.rulerVisible")
+		.d-bottom-bar.fn-flex.flex-row
+			label {{scene.index===0?'主场景':scene.obj[scene.index].name}}
+		.d-bottom-bar.fn-flex.flex-row
+			label.d-bottom-info.fn-flex.flex-row(v-if="platform.panelConfig.info")
+				span {{ platform.panelConfig.size.width}}×{{platform.panelConfig.size.height}}{{ platform.panelConfig.size.unit}}
+			label.d-bottom-hot-keys.pos-r.fn-flex.flex-row
+				d-svg.pointer(icon-class="keyboard" title="快捷键")
+				.d-bottom-hot-key-list.pos-a
+					ul
+						li.fn-flex.flex-row(v-for="item in platform.hotKeys" :key="item.name")
+							label.d-bottom-name {{ item.name }}
+							.d-bottom-key-code.fn-flex.flex-row(v-for="child in item.key")
+								i.d-bottom-hot-key-text(v-if="child.type==='text'") {{ child.value }}
+								span.d-bottom-hot-key-item(v-if="child.type==='+'") +
+								img.d-bottom-hot-key-img(v-if="child.type==='img'" :src="child.value")
+		.d-bottom-bar.fn-flex.flex-row
+			label(v-show="platform.ruler.rulerVisible") {{ zoom }}
 </template>
 <script lang="ts">
 	import {Vue, Component} from 'vue-property-decorator'
 	import platform from '../../store/platform.store'
+	import scene from '../../store/scene.store'
 	import {Icon} from 'view-design'
+	import BigNumber from 'bignumber.js'
 
+	BigNumber.set({DECIMAL_PLACES: 20})
 	@Component({
 		components: {
 			'i-icon': Icon,
@@ -25,24 +33,33 @@
 	})
 	export default class bottomBar extends Vue {
 		platform = platform.state
+		scene = scene.state
+
+		get zoom() {
+			const zoom = new BigNumber(this.platform.ruler.zooms[this.platform.ruler.zoomIndex])
+			return `${zoom.multipliedBy(100)}%`
+		}
 	}
 </script>
 <style lang="scss">
 	@import "../../../src/scss/conf";
 
+	.d-bottom-bar-box {
+		right: 0;
+		user-select: none;
+		bottom: 15px;
+	}
+
 	.d-bottom-bar {
-		align-items: center;
-		justify-content: center;
-		right: 15px;
 		padding: 4px 10px;
 		background-color: rgba(0, 0, 0, 0.5);
-		user-select: none;
 		transition: all .3s;
-		opacity: .5;
-		bottom: 15px;
-		z-index: 2;
 		color: $white_08;
 		border-radius: 2px;
+		opacity: .5;
+		align-items: center;
+		justify-content: center;
+		margin-right: 15px;
 
 		&:hover {
 			opacity: 1;

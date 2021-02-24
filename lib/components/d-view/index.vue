@@ -43,7 +43,7 @@
 
 		mounted() {
 			window.GoldChart.mutations.setInstance('kanboard', this)
-			window.GoldChart.mutations.setStatus('inPreview')
+			scene.actions.setStatus('inPreview')
 		}
 	}
 </script>
