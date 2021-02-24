@@ -43,6 +43,7 @@
 			font-size: 32px;
 			line-height: 32px;
 			color: #FEFFFF;
+			white-space: nowrap;
 		}
 	}
 </style>
