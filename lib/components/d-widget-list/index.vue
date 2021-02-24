@@ -9,26 +9,15 @@
 							template(v-if="widgetListActiveMap[`${tab.name}-${format(type)}`]" slot="content")
 								.widget-item-wrapper.pos-r(v-for="(widget, index) in widgets" :key="index")
 									i.pos-a(style="left:0;top:0;font-size: 12px;z-index: 9;") {{widget.type}}
-									vue-lazy-component
-										div(draggable="true" v-if="widget.market" @dragstart="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)")
-											img(:src="widget.componentImage")
-										div(slot="skeleton") 加载中...
-										parts(
-											v-if="!widget.market" 
-											:type="widget.type" 
-											:style="transform(widget)" 
-											:config="widgetConfigMap[`${tab.name}-${format(type)}-${index}`].config" 
-											draggable="true" 
-											readonly 
-											no-bind-params 
-											@dragstart.native="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)" 
-											@widget-config-update="({ value }) => setWidgetConfig(value, index, `${tab.name}-${format(type)}`)")
+									div(draggable="true" v-if="widget.market" @dragstart="dragstartMarket($event, `${tab.name}-${format(type)}-${index}`, widget)")
+										img(:src="widget.componentImage")
+									div(draggable="true" v-if="!widget.market" @dragstart="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)")
+										img(:src="widget.snapshot")
 		d-svg.fixed-toggle.pointer(icon-class="pin" :title="panelFixed ? '取消固定' : '固定小工具栏'" :class="{ active: panelFixed }" @click="handleFix")
 </template>
 <script>
 	import parts from '../d-widget-part/index'
 	import {Collapse, TabPane, Tabs, Panel} from 'view-design'
-	import {component as VueLazyComponent} from '@xunlei/vue-lazy-component'
 	import custom from '../../store/custom.store'
 
 	export default {
@@ -38,7 +27,6 @@
 			'i-tab-pane': TabPane,
 			'i-tabs': Tabs,
 			'i-panel': Panel,
-			VueLazyComponent
 		},
 		data() {
 			return {
@@ -114,14 +102,6 @@
 					configMap[configKey].config = {...config}
 				})
 			},
-			setWidgetConfig(currentValue = {}, index, prefix) {
-				const configMap = this.widgetConfigMap
-				const key = prefix + '-' + index
-				const currentConfig = configMap[key]
-				requestAnimationFrame(() => {
-					this.$set(currentConfig, 'config', {...currentValue})
-				})
-			},
 			initWidgetConfigMap() {
 				const widgets = this.tabs
 				const configMap = this.widgetConfigMap
@@ -141,6 +121,19 @@
 			 * @description h5 原生拖拽事件
 			 */
 			dragstart(e, configKey, {type, market, componentVersion}) {
+				const widgetConfig = this.widgetConfigMap[configKey]
+				if (!widgetConfig || !type) return
+				const {config} = widgetConfig
+				e.dataTransfer.setData('widget-config', JSON.stringify({
+					type,
+					config,
+					market,
+					componentVersion,
+					startX: e.offsetX,
+					startY: e.offsetY,
+				}))
+			},
+			dragstartMarket(e, configKey, {type, market, componentVersion}) {
 				const widgetConfig = this.widgetConfigMap[configKey]
 				if (!widgetConfig || !type) return
 				const {config} = widgetConfig

@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import mixins from '../../mixins';
+import mixins from '../../../../lib/mixins';
 import HVerticalTabs from './HVerticalTabs';
 import pie from './pie';
 import { getCircleOption } from './options'

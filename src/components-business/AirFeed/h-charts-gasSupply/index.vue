@@ -18,7 +18,7 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
+	import mixins from '../../../../lib/mixins';
 	import getOptions from './options'
 	import format from 'date-fns/format'
 	import { config, configSource, value } from './index.component'

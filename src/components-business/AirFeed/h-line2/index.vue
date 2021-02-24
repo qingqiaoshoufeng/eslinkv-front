@@ -5,7 +5,7 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins'
+	import mixins from '../../../../lib/mixins'
 	import options from './options'
 	import { config, configSource, value } from './index.component'
 

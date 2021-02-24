@@ -1,7 +1,3 @@
-interface Components {
-    [key: string]: any
-}
-
 interface ComponentsWidgetsItem {
     label: string
     type: string

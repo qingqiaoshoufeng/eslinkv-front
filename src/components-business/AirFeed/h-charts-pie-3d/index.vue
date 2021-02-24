@@ -39,7 +39,7 @@ import pieBgBtnJson from './yuan1.json'
 import pieTopBg from './yuan2.json'
 import { config, value } from './index.component'
 highcharts3d(highcharts)
-import mixins from '../../mixins'
+import mixins from '../../../../lib/mixins'
 
 export default {
 	name: 'baoji-big-screen-wrap',

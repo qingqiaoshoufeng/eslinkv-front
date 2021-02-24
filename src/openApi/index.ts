@@ -1,5 +1,5 @@
 import {mutations, store} from '../../lib/store'
-import mixins from '../components-business/mixins'
+import mixins from '../../lib/mixins'
 import platform from '../../lib/store/platform.store'
 
 const GoldChart: any = {

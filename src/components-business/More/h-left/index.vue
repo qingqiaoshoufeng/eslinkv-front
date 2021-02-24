@@ -32,7 +32,7 @@
     </div>
 </template>
 <script>
-    import mixins from '../../mixins'
+    import mixins from '../../../../lib/mixins'
     import {config, value} from './index.component'
     import pie from './pie'
     import lngline from './line'

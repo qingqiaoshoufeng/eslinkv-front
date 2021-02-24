@@ -26,7 +26,7 @@
 	import {mixins} from 'vue-class-component'
 	import platform from '../../store/platform.store'
 	import scene from '../../store/scene.store'
-	import commonConfigValue from './common-config-value'
+	import commonConfigValue from '../../common-config-value'
 	import {isObjectString} from '../../utils'
 	import loadMask from '../load-mask'
 	import importMx from './import.mx'

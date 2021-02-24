@@ -21,7 +21,7 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins'
+	import mixins from '../../../../lib/mixins'
 	import circle1 from './circle1'
 	import {config, value} from './index.component'
 

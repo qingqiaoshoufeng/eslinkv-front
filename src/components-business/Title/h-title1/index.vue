@@ -5,7 +5,7 @@
             h2 {{data&&data.title}}
 </template>
 <script lang="ts">
-    import mx from '../../mixins'
+    import mx from '../../../../lib/mixins'
     import {Component} from 'vue-property-decorator'
     import {mixins} from 'vue-class-component'
     import {config, value} from './index.component'

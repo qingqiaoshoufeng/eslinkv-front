@@ -20,7 +20,7 @@
     </div>
 </template>
 <script>
-    import mixins from '../../mixins';
+    import mixins from '../../../../lib/mixins';
     import './turn.min'
     import {value, config} from './index.component'
 

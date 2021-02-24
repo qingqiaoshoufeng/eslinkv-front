@@ -7,7 +7,7 @@ export const value = {
 		position: {
 			value: 'relative'
 		}
-	}
+	},
 }
 
 export const config = {animation: true}

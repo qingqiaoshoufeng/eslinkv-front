@@ -12,7 +12,7 @@
     </div>
 </template>
 <script>
-    import mixins from '../../mixins'
+    import mixins from '../../../../lib/mixins'
     import {value, config} from './index.component'
 
     export default {

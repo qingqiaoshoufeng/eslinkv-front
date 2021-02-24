@@ -49,7 +49,7 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins'
+	import mixins from '../../../../lib/mixins'
 	import Ring from '@/components/Ring/ring'
 	import { config, value } from './index.component'
 
