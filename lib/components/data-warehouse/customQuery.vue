@@ -34,7 +34,7 @@
 	</div>
 </template>
 <script>
-	import esSql from '../../../../components/esSql.vue';
+	import esSql from '../esSql.vue';
 	import customSource from './customSource';
 	import {RadioGroup, Radio, Select, Option, FormItem, Form} from 'view-design'
 

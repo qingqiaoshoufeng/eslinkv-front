@@ -2,7 +2,6 @@
     "name": "dvdp-expand",
     "version": "1.0.3",
     "description": "",
-    "main": "index.js",
     "scripts": {
         "serve": "vue-cli-service serve",
         "serve:simple": "vue-cli-service serve --mode simple",
@@ -23,8 +22,6 @@
         "astq": "^2.7.1",
         "axios": "^0.19.2",
         "babel-polyfill": "^6.26.0",
-        "bignumber.js": "^9.0.1",
-        "clipboard": "^2.0.6",
         "codemirror": "^5.49.2",
         "core-js": "^3.6.5",
         "date-fns": "^2.16.1",

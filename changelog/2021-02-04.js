@@ -55,7 +55,7 @@ export default {
 			content: '统一所有页面的渲染逻辑',
 		},
 		{
-			content: '移除mixin positionMap、sizeMap、zIndexMap、refill、template、screenshot、createKanboardData、positionSize'
+			content: '移除mixin positionMap、sizeMap、zIndexMap、refill、template、screenshot、createKanboardData、positionSize、canvas-operation'
 		},
 		{
 			type: ['refactor'],
@@ -86,11 +86,11 @@ export default {
 		},
 		{
 			type: [],
-			content: '移除mixin source-tool、funcs、widget-layers'
+			content: '移除mixin source-tool、funcs、widget-layers、config-event-handler、editor-event-handler、panel-operation'
 		},
 		{
 			type: [],
-			content: '移除vendor debounce、formatting、parse-function-string、object-find-leaf-path、is-object-string'
+			content: '移除vendor debounce、formatting、parse-function-string、object-find-leaf-path、is-object-string、builtInFuncTemplate'
 		},
 		{
 			type: [],
@@ -98,7 +98,7 @@ export default {
 		},
 		{
 			type: [],
-			content: '移除utils parse-path-to-object、configMerge'
+			content: '移除utils parse-path-to-object、configMerge、widget-type-list'
 		},
 		{
 			type: ['refactor'],

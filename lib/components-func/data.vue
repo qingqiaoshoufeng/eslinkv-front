@@ -81,7 +81,7 @@
 <script lang="ts">
 	import func from './func.mx'
 	import {Component} from 'vue-property-decorator'
-	import databaseConfig from '../views/core/kanboard-editor/data-warehouse/index.vue'
+	import databaseConfig from '../components/data-warehouse/index.vue'
 	import scene from '../store/scene.store'
 
 	@Component({components: {databaseConfig}})
