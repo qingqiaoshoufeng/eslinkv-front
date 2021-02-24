@@ -29,7 +29,7 @@
 
 <script>
 	import {Form, FormItem, Select, Option} from 'view-design'
-	import esSql from '../../../../components/esSql.vue';
+	import esSql from '../esSql.vue';
 
 	export default {
 		data() {

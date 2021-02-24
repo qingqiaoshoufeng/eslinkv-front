@@ -1,33 +1,18 @@
 <template>
-	<!-- 选择查询 -->
-	<div class="select-query">
-		<div class="ivu-form-item-required source">
-			<label class="ivu-form-item-label">数据来源</label>
-			<RadioGroup v-model="dataType">
-				<Radio label="0"><span>数仓</span></Radio>
-				<Radio label="1"><span>数据源</span></Radio>
-			</RadioGroup>
-		</div>
-		<es-form-new v-if="dataType == 0" :data="selectObj" :model="selectObjModel" ref="select"></es-form-new>
-		<select-source @getSource="getSource" ref="selectSource" v-else></select-source>
+	<div>
+		<es-form-new :data="selectObj" :model="selectObjModel" ref="select"></es-form-new>
 	</div>
 </template>
+
 <script>
-	import selectSource from './selectSource'
-	import {RadioGroup, Radio} from 'view-design'
-	import esFormNew from '../../../../components/es-form-new'
+	import esFormNew from '../es-form-new'
 
 	export default {
-		props: {
-			lastQuery: {
-				type: Object,
-				default: () => {
-				}
-			}
+		components: {
+			esFormNew
 		},
 		data() {
 			return {
-				dataType: '0',
 				// 表单配置
 				selectObj: {
 					showMessage: true,
@@ -36,8 +21,8 @@
 					templetDetailList: [
 						{
 							type: 2,
-							name: '项目',
-							enName: 'projectId',
+							name: '数据源',
+							enName: 'dataSourceId',
 							placeholder: '请选择',
 							addEdit: true,
 							modifyEdit: true,
@@ -64,7 +49,7 @@
 							onOpenChange: (value) => {
 								if (value) {
 									this.selectObj.templetDetailList[1].dataSourceList = [];
-									this.getQueryName(this.selectObjModel.projectId);
+									this.getQueryName(this.selectObjModel.dataSourceId);
 								}
 							}
 						}
@@ -72,16 +57,15 @@
 				},
 				chartType: 0,
 				selectObjModel: {
-					projectId: '',
+					dataSourceId: '',
 					dataAnalyseId: ''
 				}
 			};
 		},
-		components: {selectSource, RadioGroup, Radio, esFormNew},
 		methods: {
-			// 获取查询项目列表
+			// 获取项目列表
 			getProList() {
-				this.$api.dataWarehouse.getProList().then((data) => {
+				this.$api.dataWarehouse.getSourceList().then((data) => {
 					let list = [];
 					data.map((item) => {
 						list.push({
@@ -93,13 +77,13 @@
 				})
 			},
 			// 获取查询名称列表
-			getQueryName(projectId) {
-				if (!projectId) {
+			getQueryName(dataSourceId) {
+				if (!dataSourceId) {
 					this.$Message.warning('请先选择项目');
 					return;
 				}
 				this.selectObj.templetDetailList[1].dataSourceList = [];
-				this.$api.dataWarehouse.getAnalyseList({projectId: projectId}).then((data) => {
+				this.$api.dataWarehouse.getAnalyseList({dataSourceId: dataSourceId}).then((data) => {
 					let arr = [];
 					if (data.length > 0) {
 						data.map((item) => {
@@ -114,12 +98,14 @@
 					}
 				})
 			},
-			getSource(data) {
-				this.$emit('getQueryCond', data);
+			reShow(data) {
+				this.getProList();
+				this.selectObjModel.dataSourceId = data.dataSourceId.toString();
+				this.selectObjModel.dataAnalyseId = data.dataAnalyseId.toString();
 			}
 		},
 		watch: {
-			'selectObjModel.projectId': {
+			'selectObjModel.dataSourceId': {
 				handler(value) {
 					if (value) {
 						this.getQueryName(value);
@@ -129,39 +115,13 @@
 			selectObjModel: {
 				deep: true,
 				handler(obj) {
-					this.$set(obj, 'dataType', 0);
-					this.$emit('getQueryCond', obj);
-				}
-			},
-			dataType: {
-				deep: true,
-				immediate: true,
-				handler(type) {
-					if (type === '0') {
-						const {projectId, dataAnalyseId} = this.lastQuery
-						this.getProList();
-						this.selectObjModel.projectId = projectId
-						this.selectObjModel.dataAnalyseId = dataAnalyseId
-					} else {
-						this.$nextTick(() => {
-							this.$refs.selectSource.reShow(this.lastQuery)
-						})
-					}
+					this.$set(obj, 'dataType', 1);
+					this.$emit('getSource', obj);
 				}
 			}
 		}
 	};
 </script>
-<style lang="scss" scoped>
-	.source {
-		padding: 10px 0 10px 5px;
 
-		label {
-			margin-right: 8px;
-		}
-	}
-
-	.select-query {
-		width: 100%;
-	}
+<style>
 </style>

@@ -16,13 +16,30 @@ class Mixins extends Vue {
 	currentWidgetValue = null
 	platform = platform.state
 	scene = scene.state
+	configPanelValueUpdateTimer= null
 
-
-	handleWidgetConfig({value = {}}, item) {
-		if (this.widgetsImporting) {
-			this.isWidgetProcessing = false
-			return
+	updateConfigPanelValue(id, oldId) {
+		const update = () => {
+			const configPanel = this.$refs.configPanel
+			if (oldId) {
+				configPanel && configPanel.reset()
+				this.$nextTick(() => {
+					this.currentWidgetValue = this.widgetAdded[id].config
+				})
+			} else {
+				this.currentWidgetValue = this.widgetAdded[id].config
+			}
+			this.configPanelValueUpdateTimer = null
 		}
+		this.configPanelValueUpdateTimer && clearTimeout(this.configPanelValueUpdateTimer)
+		this.configPanelValueUpdateTimer = setTimeout(update, 380)
+	}
+	
+	handleWidgetConfig({value = {}}, item) {
+		// if (this.widgetsImporting) {
+		// 	this.isWidgetProcessing = false
+		// 	return
+		// }
 		this.updateWidget(value)
 		requestAnimationFrame(() => {
 			this.isWidgetProcessing = false
@@ -39,7 +56,7 @@ class Mixins extends Vue {
 	}
 
 	showProcessing(top, left, width, height, widget) {
-		if (this.widgetsImporting) return
+		// if (this.widgetsImporting) return
 		this.widgetProcessingStyle = `
                 transform: translate3d(${left}px, ${top}px, 0);
                 width: ${width}px;

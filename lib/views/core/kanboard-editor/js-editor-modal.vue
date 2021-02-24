@@ -60,10 +60,20 @@
 	</div>
 </template>
 <script>
-	import builtInFuncTemplate from './function'
+	
 	import jsEditor from '../../../components/js-editor.vue'
 	import {Modal, Button, Tabs, TabPane, Table, Input} from 'view-design'
-
+	const numberExpand = `return data.map(item => {
+    item.value = item.value * 100
+    return item
+})`
+	const builtInFuncTemplate = [
+		{
+			name: "数值扩大100倍",
+			remark: "备注数值扩大100倍",
+			source: numberExpand
+		}
+	]
 	export default {
 		name: 'js-editor-modal',
 		components: {

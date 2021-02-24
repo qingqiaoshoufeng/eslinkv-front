@@ -26,7 +26,7 @@
 				@mousedown.self="deactivateWidget(activatedWidgetId)"
 			>
 				<!-- 小工具清单 -->
-				<template v-for="item in ordinaryWidgets">
+				<template v-for="item in platform.widgetAdded">
 					<vdr
 						v-if="showParts(item)"
 						:key="item.id"
@@ -102,9 +102,6 @@
 			@update="updateApiSystem"
 			@keyup.native.stop
 		/>
-		<!-- 数据加工 js 编辑器 -->
-		<js-editor-modal ref="jsEditorModal" :showModal="showJsEditorModal" @close="showJsEditorModal = false"
-						 @update="updateProcessBody" @keyup.native.stop/>
 		<!-- 画布全屏 -->
 		<d-right-full-screen/>
 		<!-- 看板配置 -->
@@ -123,32 +120,25 @@
 	import parts from '../../../components/d-widget-part/index'
 	import dBottomBar from '../../../components/d-bottom-bar'
 	import widgetOperation from './mixins/widget-operation'
-	import panelOperation from './mixins/panel-operation'
-	import canvasOperation from './mixins/canvas-operation'
-	import editorEventHandler from './mixins/editor-event-handler'
-	import configEventHandler from './mixins/config-event-handler'
-	import databaseConfig from './data-warehouse/index.vue'
-	import jsEditorModal from './js-editor-modal.vue'
+	import databaseConfig from '../../../components/data-warehouse/index.vue'
 	import dRightFullScreen from '../../../components/d-right-full-screen'
 	import dRightManage from '../../../components/d-right-manage'
 	import dRightWidget from '../../../components/d-right-widget'
 	import dRightSetting from '../../../components/d-right-setting'
 	import platform from '../../../store/platform.store'
 	import scene from '../../../store/scene.store'
-
+	import styleParser from '../widgets/style-parser'
+	
 	export default {
 		name: 'kanboard-editor',
 		mixins: [
-			widgetOperation, panelOperation,
-			canvasOperation,
-			configEventHandler, editorEventHandler,
+			widgetOperation,
 		],
 		components: {
 			parts,
 			rulerCanvas,
 			vdr,
 			databaseConfig,
-			jsEditorModal,
 			dRightFullScreen, dRightManage, dRightWidget, dBottomBar, dRightSetting,
 			rightMenu
 		},
@@ -160,10 +150,35 @@
 				platform: platform.state,
 				scene: scene.state,
 				vLine: [],
-				hLine: []
+				hLine: [],
+				isDragIn: false,
+				showDatabaseConfigModal: false,
 			}
 		},
 		methods: {
+			handleFullscreenChange() {
+				this.platform.fullscreen = !this.platform.fullscreen
+			},
+			showRightMenu(e, item) {
+				e.preventDefault()
+				this.handleActivated(this.platform.widgetAdded[item.id])
+				const rightMenu = this.$refs.rightMenu.$el
+				rightMenu.classList.add('active')
+				rightMenu.style.left = e.clientX + 'px'
+				rightMenu.style.top = e.clientY + 'px'
+			},
+			drop(e) {
+				this.isDragIn = false
+				const widgetConfig = e.dataTransfer.getData('widget-config')
+				if (widgetConfig) {
+					this.handleWidgetDrop(e, widgetConfig)
+					return
+				}
+			},
+			updateApiSystem (value) {
+				Object.assign(this.currentWidgetValue.api.system.params, value)
+				this.showDatabaseConfigModal = false
+			},
 			onDragging(left, top) {
 				this.platform.widgetAdded[this.platform.chooseWidgetId].config.layout.position.left = left
 				this.platform.widgetAdded[this.platform.chooseWidgetId].config.layout.position.top = top
@@ -176,19 +191,18 @@
 				this.vLine = vLine
 				this.hLine = hLine
 			},
-			hideSubPanels(e) {
-				if (e) {
-					const classPath = e.path.map(ele => ele.className).join(',')
-					const excludeClass = [
-						'config-panel-wrapper',
-						'color-input-pop'
-					]
-					if (excludeClass.findIndex(c => classPath.indexOf(c) > -1) > -1) return
-				}
+			hideSubPanels() {
 				this.$refs.rightMenu && this.$refs.rightMenu.$el.classList.remove('active')
 			}
 		},
 		computed: {
+			canvasStyle() {
+				return styleParser(this.platform.panelConfig)
+			},
+			canvasSize() {
+				const {width, height} = this.platform.panelConfig.size
+				return {width, height}
+			},
 			widgetAdded() {
 				return this.platform.widgetAdded
 			},
@@ -202,52 +216,24 @@
 					return false
 				}
 			},
-			ordinaryWidgets() {
-				const ordinaryWidgets = {}
-				Object.keys(this.widgetAdded).forEach(id => {
-					const widget = this.widgetAdded[id]
-					if (widget.type) ordinaryWidgets[id] = widget
-				})
-				return ordinaryWidgets
-			},
+		},
+		beforeDestroy() {
+			this.platform.fullscreen = false
+			document.removeEventListener('fullscreenchange', this.handleFullscreenChange)
+		},
+		watch: {
+			isDragIn(value) {
+				if (value) this.hideSubPanels()
+			}
 		},
 		mounted() {
+			document.addEventListener('fullscreenchange', this.handleFullscreenChange)
 			platform.actions.initKanboard()
 			window.GoldChart.mutations.setInstance('kanboard', this)
 			window.GoldChart.mutations.setStatus('inEdit')
 		}
 	}
 </script>
-
 <style lang="scss" scoped>
 	@import 'index';
-</style>
-
-<style lang="scss">
-	.canvas-background-select {
-		width: 640px !important;
-		height: 420px !important;
-		top: 50% !important;
-		left: 50% !important;
-		background-color: #777777 !important;
-		transform: translate3d(-50%, -50%, 0) !important;
-		border-radius: 5px;
-		padding: 0 5px 5px 0;
-		filter: drop-shadow(0 4px 7px #2d8cf094);
-
-		.background-item {
-			width: calc(50% - 5px) !important;
-			max-height: 180px;
-			margin: 5px 0 0 5px !important;
-			padding: 0 !important;
-			background-color: #cde0f5 !important;
-			cursor: pointer;
-
-			&:hover {
-				img {
-					transform: scale(1.1) !important;
-				}
-			}
-		}
-	}
 </style>
