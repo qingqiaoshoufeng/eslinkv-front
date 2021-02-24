@@ -1,17 +1,17 @@
 <template lang="pug">
 	.widgets-panel(:class="{ fixed: panelFixed }")
 		i-tabs(:animated="false" type="card" @on-click="(name) => handlePanelToggle(name)")
-			template(v-for="tab in tabs")
-				i-tab-pane(v-if="tab.widgets.length" :key="tab.name" :label="tab.label" :name="tab.name")
+			template(v-for="(tab,tabKey) in custom.widgets")
+				i-tab-pane(:key="tab.name" :label="tab.label" :name="tab.name")
 					i-collapse(accordion simple @on-change="(keys) => handlePanelToggle(tab.name, keys[0])")
 						i-panel(:key="type" :name="type" :activeSet="setActiveMap(tab.name, type)" v-for="{ label, type, widgets } in tab.widgets")
 							span {{ label }}
 							template(v-if="widgetListActiveMap[`${tab.name}-${format(type)}`]" slot="content")
 								.widget-item-wrapper.pos-r(v-for="(widget, index) in widgets" :key="index")
 									i.pos-a(style="left:0;top:0;font-size: 12px;z-index: 9;") {{widget.type}}
-									div(draggable="true" v-if="widget.market" @dragstart="dragstartMarket($event, `${tab.name}-${format(type)}-${index}`, widget)")
+									div(draggable="true" v-if="widget.market" @dragstart="dragstart($event, type, index,tabKey,widget)")
 										img(:src="widget.componentImage")
-									div(draggable="true" v-if="!widget.market" @dragstart="dragstart($event, `${tab.name}-${format(type)}-${index}`, widget)")
+									div(draggable="true" v-if="!widget.market" @dragstart="dragstart($event, type, index,tabKey,widget)")
 										img(:src="widget.snapshot")
 		d-svg.fixed-toggle.pointer(icon-class="pin" :title="panelFixed ? '取消固定' : '固定小工具栏'" :class="{ active: panelFixed }" @click="handleFix")
 </template>
@@ -33,27 +33,7 @@
 				custom: custom.state,
 				panelFixed: false,
 				widgetListActiveMap: {},
-				widgetConfigMap: {},
 				widgetListToggleTimer: {},
-			}
-		},
-		computed: {
-			tabs() {
-				let custom = {}
-				this.custom.widgets.map(item => {
-					custom[item.name] = item
-				})
-				console.log(custom)
-				return custom
-			}
-		},
-		watch: {
-			tabs: {
-				handler() {
-					this.initWidgetConfigMap()
-				},
-				immediate: true,
-				deep: true
 			}
 		},
 		methods: {
@@ -85,43 +65,17 @@
 					}
 					this.widgetListToggleTimer[prevKey] = setTimeout(() => {
 						this.widgetListActiveMap[prevKey] = false
-						this.clearWidgetConfig(prevKey)
 					}, 400)
 				}
 			},
 			format(type) {
 				return type.split('-').join('_')
 			},
-			clearWidgetConfig(keyPrefix) {
-				const configMap = this.widgetConfigMap
-				Object.keys(configMap).filter(key => key.indexOf(keyPrefix) === 0).forEach(configKey => {
-					const [tab, panel, index] = configKey.split('-')
-					const widget = (((this.tabs[tab].widgets || []).find(item => this.format(item.type) === panel) || {}).widgets || [])[index]
-					if (!widget) return
-					const {config} = widget
-					configMap[configKey].config = {...config}
-				})
-			},
-			initWidgetConfigMap() {
-				const widgets = this.tabs
-				const configMap = this.widgetConfigMap
-				Object.keys(widgets).forEach(tab => {
-					const panels = widgets[tab].widgets
-					panels.forEach(panel => {
-						panel.widgets.forEach(({config}, index) => {
-							const key = `${tab}-${this.format(panel.type)}-${index}`
-							this.$set(configMap, [key], {
-								config
-							})
-						})
-					})
-				})
-			},
 			/**
 			 * @description h5 原生拖拽事件
 			 */
-			dragstart(e, configKey, {type, market, componentVersion}) {
-				const widgetConfig = this.widgetConfigMap[configKey]
+			dragstart(e, title, index, tabKey, {type, market, componentVersion}) {
+				const widgetConfig = this.custom.widgets[tabKey].widgets[title].widgets[type]
 				if (!widgetConfig || !type) return
 				const {config} = widgetConfig
 				e.dataTransfer.setData('widget-config', JSON.stringify({
@@ -133,19 +87,6 @@
 					startY: e.offsetY,
 				}))
 			},
-			dragstartMarket(e, configKey, {type, market, componentVersion}) {
-				const widgetConfig = this.widgetConfigMap[configKey]
-				if (!widgetConfig || !type) return
-				const {config} = widgetConfig
-				e.dataTransfer.setData('widget-config', JSON.stringify({
-					type,
-					config,
-					market,
-					componentVersion,
-					startX: e.offsetX,
-					startY: e.offsetY,
-				}))
-			}
 		},
 	}
 </script>
