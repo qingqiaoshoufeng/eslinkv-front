@@ -12,7 +12,7 @@
 </template>
 <script>
     import mixins from '../../../../lib/mixins'
-    import pie from '../../More/h-left/pie'
+    import pie from './pie'
     import {config, value} from './index.component'
 
     export default {

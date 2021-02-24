@@ -11,7 +11,7 @@
 			{{ config.config && config.config.text }}
 		</div>
 		<div class="h-icon-info-count__count font-num">
-			{{ computedMinutes| toThousand}}
+			{{ computedMinutes }}
 		</div>
 		<div class="h-icon-info-count__unit">分钟</div>
 	</div>
