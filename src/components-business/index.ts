@@ -3,7 +3,7 @@ import dvdp from '../../lib'
 import custom from '../../lib/store/custom.store'
 
 let components = {}, snapshots = {}
-const widgetsArray: ComponentsWidgetsArray = [], widgetsObject: ComponentsWidgetsObject = {}
+const widgetsObject = {}
 const conf = require.context('./', true, /\.(component.ts)$/)
 const component = require.context('./', true, /index\.(vue)$/)
 const snapshot = require.context('./', true, /snapshot\.(jpg|png)$/)
@@ -22,24 +22,21 @@ conf.keys().forEach(name => {
 	const snapshot = snapshots[title] || 'https://via.placeholder.com/150'
 	if (obj) {
 		if (widgetsObject[type]) {
-			widgetsObject[type].widgets.push({...obj, type: title, label: title, snapshot})
+			widgetsObject[type].widgets[title] = {...obj, type: title, label: title, snapshot}
 		} else {
 			widgetsObject[type] = {
 				type,
 				label: type,
-				widgets: [{...obj, type: title, label: title, snapshot}]
+				widgets: {[title]: {...obj, type: title, label: title, snapshot}}
 			}
 		}
 	}
 })
-for (let key in widgetsObject) {
-	widgetsArray.push(widgetsObject[key])
-}
 
 custom.actions.setCustomComponents(components)
 custom.actions.setCustomWidgets({
 	label: '杭燃样式',
-	widgets: widgetsArray
+	widgets: widgetsObject,
 })
 Vue.component('detail', dvdp.detail)
 Vue.component('preview', dvdp.preview)

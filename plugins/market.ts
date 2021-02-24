@@ -9,7 +9,7 @@ getLevel0().then(res => {
 			widgetsArray = res
 			custom.actions.setCustomWidgets({
 				label: child.componentTypeName,
-				widgets: widgetsArray
+				widgets: widgetsArray,
 			})
 		})
 	})
