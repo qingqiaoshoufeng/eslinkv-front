@@ -18,9 +18,6 @@
 		components: {
 			dView, Input, Modal, Form, FormItem
 		},
-		provide() {
-			return {kanboard: this}
-		},
 		data() {
 			return {
 				ready: false,

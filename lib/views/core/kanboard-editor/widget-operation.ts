@@ -1,7 +1,7 @@
-import {uuid} from '../../../../utils/index'
+import {uuid} from '../../../utils/index'
 import {Vue, Component, Watch} from 'vue-property-decorator'
-import platform from '../../../../store/platform.store'
-import scene from '../../../../store/scene.store'
+import platform from '../../../store/platform.store'
+import scene from '../../../store/scene.store'
 
 @Component
 class Mixins extends Vue {

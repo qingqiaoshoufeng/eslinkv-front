@@ -18,7 +18,6 @@
 		}
 	})
 	export default class DView extends Vue {
-		@Provide('kanboard') kanboard = this
 		@Provide('kanboardEditor') kanboardEditor = this
 
 		platform = platform.state
