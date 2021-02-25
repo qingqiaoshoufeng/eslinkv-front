@@ -10,12 +10,26 @@ export const configSource = {
 		}
 	}
 }
-export const config = {
-	animation: true,
-	config: {
-		background: true,
+export const customConfig = [
+	{
+		prop: 'background',
+		label: '组',
+		type: 'func-group',
+		children: [
+			{
+				prop: 'title',
+				label: '标题',
+				type: 'func-input',
+			},
+			{
+				prop: 'background',
+				label: '背景图片',
+				type: 'func-background',
+				options: ['/static/icons/s-progress1-1.svg', '/static/icons/s-progress1-2.svg', '/static/icons/s-progress1-3.svg']
+			}
+		]
 	}
-}
+]
 export const value = {
 	layout: {
 		size: {

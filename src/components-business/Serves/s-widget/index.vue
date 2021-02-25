@@ -19,49 +19,49 @@
 </template>
 <script>
 	import mixins from '../../../../lib/mixins';
-	import { config, value } from './index.component'
+	import { value } from './index.component'
 
 	const SIZE = 8
 	export default {
 		mixins: [mixins],
-    data() {
-      return {
-        loop: 0
-      }
-    },
-    computed: {
-      curr () {
-        if (!this.data) return []
-        return this.data.list.slice(this.loop * SIZE, (this.loop + 1) * SIZE)
-      }
-    },
-    methods: {
-      nextPage () {
-        if (this.loop === Math.ceil(this.data.list.length / SIZE) - 1) {
-          this.loop = 0
-        } else {
-          this.loop++
-        }
-      },
-      getIndex (n) {
-        const num = n + 1 + this.loop * SIZE
-        return num < 10 ? '0' + num : num
-      },
-      getIndexClass (n) {
-        let res = ''
-        let num = this.getIndex(n)
-        switch (num) {
-          case '01':
-          case '02':
-          case '03':
-            res = 'top'
-            break
-          default:
-            res = ''
-        }
-        return res
-      }
-    },
+		data() {
+			return {
+				loop: 0
+			}
+		},
+		computed: {
+			curr () {
+				if (!this.data) return []
+				return this.data.list.slice(this.loop * SIZE, (this.loop + 1) * SIZE)
+			}
+		},
+		methods: {
+			nextPage () {
+				if (this.loop === Math.ceil(this.data.list.length / SIZE) - 1) {
+					this.loop = 0
+				} else {
+					this.loop++
+				}
+			},
+			getIndex (n) {
+				const num = n + 1 + this.loop * SIZE
+				return num < 10 ? '0' + num : num
+			},
+			getIndexClass (n) {
+				let res = ''
+				let num = this.getIndex(n)
+				switch (num) {
+					case '01':
+					case '02':
+					case '03':
+						res = 'top'
+						break
+					default:
+						res = ''
+				}
+				return res
+			}
+		},
 		created() {
 			this.configValue = this.parseConfigValue(value);
 		}

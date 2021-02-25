@@ -1,12 +1,12 @@
-import {getInput} from '../../../../lib'
+export const customConfig = [
+	{
+		prop: 'size',
+		label: '每页数量',
+		type: 'func-input',
+	}
+]
 
-const config = {
-    animation: true,
-    config: {
-        size: true
-    }
-};
-const value = {
+export const value = {
     layout: {
         size: {
             width: 480,
@@ -94,11 +94,4 @@ const value = {
         size: 4
     }
 }
-const configSource = {
-    config: {
-        fields: {
-            size: getInput('size', '每页数量'),
-        }
-    },
-}
-export {configSource, config, value}
+

@@ -39,9 +39,12 @@ export default class Func extends Vue {
 	platform = platform.state
 	scene = scene.state
 	@Prop() config
+	@Prop() parent // group时会有
 
 	get item() {
-		if (this.platform.widgetAdded[this.platform.chooseWidgetId]) {
+		if (this.parent) {
+			return this.parent
+		} else if (this.platform.widgetAdded[this.platform.chooseWidgetId]) {
 			return this.platform.widgetAdded[this.platform.chooseWidgetId]
 		} else {
 			return null

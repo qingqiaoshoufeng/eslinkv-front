@@ -1,5 +1,5 @@
 <template lang="pug">
-	component(:is="currentComponent[config.type]" :config="config")
+	component(:is="currentComponent[config.type]" :config="config" :parent="parent")
 </template>
 <script lang="ts">
 	import {Component, Vue, Prop} from 'vue-property-decorator'
@@ -7,6 +7,7 @@
 	@Component
 	export default class DManageItem extends Vue {
 		@Prop({type: Object}) config: any
+		@Prop({type: Object}) parent: any
 		store: any = window.GoldChart.store
 		currentComponent: any = {}
 

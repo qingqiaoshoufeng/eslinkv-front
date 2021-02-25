@@ -2,7 +2,7 @@
 	<div class="widget-part" :style="styles">
 		<div class="s-progress-1">
 			<ul>
-				<li class="fn-flex flex-row pos-r" v-for="(item,index) in data?data:[]" :key="index">
+				<li class="fn-flex flex-row pos-r" v-for="(item,index) in config.config.background" :key="index">
 					<i :style="{backgroundImage:`url(${config.config&&config.config.background[index].background})`}"></i>
 					<label>{{config.config&&config.config.background[index].title}}</label>
 					<div class="fn-flex flex-row s-progress-1-line-box pos-r">
@@ -20,7 +20,7 @@
 </template>
 <script>
 	import mixins from '../../../../lib/mixins'
-	import { config, configSource, value } from './index.component'
+	import { customConfig, value } from './index.component'
 
 	export default {
 		data() {
@@ -84,7 +84,7 @@
 			}
 		},
 		created() {
-			this.configValue = this.parseConfigValue(value)
+			this.configValue = this.parseConfigValue(value, customConfig)
 			this.gradientColors('#0057A9', '#00DDFF', 50)
 		}
 	}
