@@ -1,5 +1,4 @@
-const config = {animation: true}
-const value = {
+export const value = {
     api: {
         data: JSON.stringify({title: '标题'})
     },
@@ -14,4 +13,3 @@ const value = {
     }
 }
 
-export {config, value}
