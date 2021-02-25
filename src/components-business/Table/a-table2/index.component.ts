@@ -1,12 +1,12 @@
-import {getInput} from '../../../../lib'
+export const customConfig = [
+	{
+		prop: 'tableHeader',
+		label: '表头',
+		type: 'func-input',
+	}
+]
 
-const config = {
-    animation: true,
-    config: {
-        tableHeader: true
-    }
-}
-const value = {
+export const value = {
     layout: {
         size: {
             width: 654,
@@ -80,12 +80,3 @@ const value = {
         tableHeader: ['发现时间', '隐患类型', '设备类型', '隐患等级', '隐患状态', '处理时间']
     }
 }
-const configSource = {
-    config: {
-        fields: {
-            tableHeader: getInput('tableHeader', '表头')
-        }
-    },
-}
-
-export {configSource, config, value}
