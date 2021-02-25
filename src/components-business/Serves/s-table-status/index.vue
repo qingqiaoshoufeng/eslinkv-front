@@ -25,7 +25,7 @@
 <script>
 	import mixins from '../../../../lib/mixins';
 	import VueSeamLess from 'vue-seamless-scroll'
-	import { config, value } from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		data() {

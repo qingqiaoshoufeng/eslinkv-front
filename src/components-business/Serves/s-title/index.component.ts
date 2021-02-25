@@ -1,20 +1,16 @@
-import {getInput, getSelect} from '../../../../lib';
-
-export const configSource = {
-	config: {
-		fields: {
-			desc: getInput('desc', '描述'),
-			img: getSelect('img', '图片', ['/static/icons/s-title-1.svg', '/static/icons/s-title-2.svg']),
-		},
+export const customConfig = [
+	{
+		prop: 'desc',
+		label: '描述',
+		type: 'func-input',
 	},
-};
-export const config = {
-	animation: true,
-	config: {
-		desc: true,
-		img: true,
-	},
-};
+	{
+		prop: 'img',
+		label: '图片',
+		type: 'func-background',
+		options: ['/static/icons/s-title-1.svg', '/static/icons/s-title-2.svg']
+	}
+]
 export const value = {
 	api: {
 		data: JSON.stringify({
