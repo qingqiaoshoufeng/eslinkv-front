@@ -9,15 +9,18 @@
 							template(v-if="widgetListActiveMap[`${tab.name}-${format(type)}`]" slot="content")
 								.widget-item-wrapper.pos-r(v-for="(widget, index) in widgets" :key="index")
 									i.pos-a(style="left:0;top:0;font-size: 12px;z-index: 9;") {{widget.type}}
-									div(draggable="true" v-if="widget.market" @dragstart="dragstart($event, type, index,tabKey,widget)")
-										img(:src="widget.componentImage")
-									div(draggable="true" v-if="!widget.market" @dragstart="dragstart($event, type, index,tabKey,widget)")
-										img(:src="widget.snapshot")
+									vue-lazy-component.d-widget-list-lazy-component
+										div(slot="skeleton") 加载中...
+										div.d-widget-list-img(draggable="true" v-if="widget.market" @dragstart="dragstart($event, type, index,tabKey,widget)")
+											img(:src="widget.componentImage" )
+										div.d-widget-list-img(draggable="true" v-if="!widget.market" @dragstart="dragstart($event, type, index,tabKey,widget)")
+											img(:src="widget.snapshot")
 		d-svg.fixed-toggle.pointer(icon-class="pin" :title="panelFixed ? '取消固定' : '固定小工具栏'" :class="{ active: panelFixed }" @click="handleFix")
 </template>
 <script>
 	import parts from '../d-widget-part/index'
 	import {Collapse, TabPane, Tabs, Panel} from 'view-design'
+	import {component as VueLazyComponent} from '@xunlei/vue-lazy-component'
 	import custom from '../../store/custom.store'
 
 	export default {
@@ -27,6 +30,7 @@
 			'i-tab-pane': TabPane,
 			'i-tabs': Tabs,
 			'i-panel': Panel,
+			VueLazyComponent
 		},
 		data() {
 			return {
@@ -37,15 +41,6 @@
 			}
 		},
 		methods: {
-			transform(widget) {
-				if (widget.config.layout.size.width > 400 || widget.config.layout.size.height > 100) {
-					if (100 / widget.config.layout.size.height > 400 / widget.config.layout.size.width) {
-						return `transform: scale(${400 / widget.config.layout.size.width});`
-					}
-					return `transform: scale(${100 / widget.config.layout.size.height});`
-				}
-				return ''
-			},
 			handleFix() {
 				this.panelFixed = !this.panelFixed
 			},
@@ -91,6 +86,10 @@
 	}
 </script>
 <style lang="scss" scoped>
+	.d-widget-list-img {
+		height: 100px;
+	}
+
 	.widget-item-wrapper {
 		padding: 5px 0;
 		margin-bottom: 5px;
@@ -102,10 +101,11 @@
 		align-items: center;
 		overflow: hidden;
 		background: rgba(0, 0, 0, 0.5);
-		
-		>div {
+
+		> div {
 			width: 100%;
 			height: 100%;
+
 			img {
 				object-fit: contain;
 				width: 100%;

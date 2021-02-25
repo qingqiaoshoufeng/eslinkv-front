@@ -22,7 +22,7 @@
 <script>
     import mixins from '../../../../lib/mixins'
     import options from './options'
-    import {config, value, configSource} from './index.component'
+    import {value} from './index.component'
 
     export default {
         mixins: [mixins],
