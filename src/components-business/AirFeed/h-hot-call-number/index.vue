@@ -25,25 +25,25 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins';
-	import { config, value } from './index.component'
+	import mixins from '../../../../lib/mixins'
+	import {value} from './index.component'
 
 	export default {
 		mixins: [mixins],
 		methods: {},
 		computed: {},
 		created() {
-			
-			this.configValue = this.parseConfigValue(value);
+
+			this.configValue = this.parseConfigValue(value)
 		},
 	}
 </script>
 <style lang="scss" scoped>
 	.h-hot-call-number {
 		.video {
-      width: 100%;
-      height: 100%;
-    }
+			width: 100%;
+			height: 100%;
+		}
 
 		.oncall-onwait-common {
 			position: absolute;
@@ -74,7 +74,7 @@
 
 			&__num {
 				@extend .num-common;
-				color: #00FFCF!important;
+				color: #00FFCF !important;
 			}
 
 			&__desc {

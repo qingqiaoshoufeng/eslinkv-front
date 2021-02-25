@@ -11,49 +11,49 @@
 	</div>
 </template>
 <script>
-import mixins from '../../../../lib/mixins';
-import { config, configSource, value } from './index.component'
+	import mixins from '../../../../lib/mixins'
+	import {customConfig, value} from './index.component'
 
-export default {
-	mixins: [mixins],
-	methods: {},
-	computed: {},
-	created() {
-		
-		this.configValue = this.parseConfigValue(value);
-	},
-};
+	export default {
+		mixins: [mixins],
+		methods: {},
+		computed: {},
+		created() {
+
+			this.configValue = this.parseConfigValue(value, customConfig)
+		},
+	}
 </script>
 <style lang="scss" scoped>
-.widget-part {
-	display: flex;
-	align-items: center;
-	background: linear-gradient(
-		89.95deg,
-		rgba(255, 255, 255, 0.08) 0.04%,
-		rgba(255, 255, 255, 0) 100.59%
-	);
+	.widget-part {
+		display: flex;
+		align-items: center;
+		background: linear-gradient(
+				89.95deg,
+				rgba(255, 255, 255, 0.08) 0.04%,
+				rgba(255, 255, 255, 0) 100.59%
+		);
 
-	.icon {
-		width: 64px;
-		height: 64px;
-		background-size: 100% 100%;
-	}
+		.icon {
+			width: 64px;
+			height: 64px;
+			background-size: 100% 100%;
+		}
 
-	.info {
-		width: 214px;
-		font-size: 18px;
-		line-height: 24px;
-		color: #00DDFF;
-		margin-left: 24px;
-	}
+		.info {
+			width: 214px;
+			font-size: 18px;
+			line-height: 24px;
+			color: #00DDFF;
+			margin-left: 24px;
+		}
 
-	.number {
-		font-weight: bold;
-		font-size: 32px;
-		line-height: 32px;
-		color: #FFFFFF;
+		.number {
+			font-weight: bold;
+			font-size: 32px;
+			line-height: 32px;
+			color: #FFFFFF;
+		}
 	}
-}
 </style>
 

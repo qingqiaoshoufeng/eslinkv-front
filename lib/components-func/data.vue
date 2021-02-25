@@ -33,7 +33,7 @@
 				i-switch(v-model="item.config.api.autoFetch.enable" :disabled="platform.chooseWidgetState")
 			.d-manage-modal-control(v-if="item.config.api.autoFetch.enable")
 				label 刷新间隔
-				i-inputNumber(:min="1" :step="1" v-model="item.config.api.autoFetch.duration" :disabled="platform.chooseWidgetState")
+				i-input-number(:min="1" :step="1" v-model="item.config.api.autoFetch.duration" :disabled="platform.chooseWidgetState")
 		.d-manage-modal-control
 			label 数仓接口
 			.setting

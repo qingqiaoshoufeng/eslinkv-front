@@ -8,16 +8,15 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins';
-	import { config, value } from './index.component'
+	import mixins from '../../../../lib/mixins'
+	import {value} from './index.component'
 
 	export default {
 		mixins: [mixins],
 		methods: {},
 		computed: {},
 		created() {
-			
-			this.configValue = this.parseConfigValue(value);
+			this.configValue = this.parseConfigValue(value)
 		},
 	}
 </script>
@@ -40,7 +39,6 @@
 			text-align: left;
 
 			.number {
-				font-family: DIN Alternate;
 				font-style: normal;
 				font-weight: bold;
 				font-size: 32px;

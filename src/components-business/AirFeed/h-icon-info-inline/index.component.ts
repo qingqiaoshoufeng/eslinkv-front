@@ -1,22 +1,3 @@
-import { getInput, getSelect } from '../../../../lib';
-
-export const config = {
-	animation: true,
-	config: {
-		text: true,
-		icon: true,
-	},
-};
-export const configSource = {
-	config: {
-		fields: {
-			text: getInput('text', '描述'),
-			icon: getSelect('icon', 'icon', [
-				'/static/icons/h-inline-logo1.svg',
-			]),
-		},
-	},
-};
 export const value = {
 	layout: {
 		size: {
@@ -36,4 +17,20 @@ export const value = {
 		icon: '/static/icons/h-inline-logo1.svg',
 		text: '',
 	},
-};
+}
+
+export const customConfig = [
+	{
+		prop: 'text',
+		label: '描述',
+		type: 'func-input',
+	},
+	{
+		prop: 'icon',
+		label: '图片',
+		type: 'func-background',
+		options: [
+			'/static/icons/h-inline-logo1.svg',
+		]
+	}
+]

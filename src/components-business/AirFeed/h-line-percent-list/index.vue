@@ -10,9 +10,9 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins';
-	import HLinePercentItem from './HLinePercentItem';
-	import { config, value } from './index.component'
+	import mixins from '../../../../lib/mixins'
+	import HLinePercentItem from './HLinePercentItem'
+	import {value} from './index.component'
 
 	export default {
 		mixins: [mixins],
@@ -25,25 +25,24 @@
 			};
 		},
 		created() {
-			
-			this.configValue = this.parseConfigValue(value);
+			this.configValue = this.parseConfigValue(value)
 		},
 		computed: {
 			maxAmout() {
-				const list = this.list || [];
+				const list = this.list || []
 				const amoutList = list.reduce((initVal, val) => {
-					initVal.push(val?.amount || 0);
-					return initVal;
-				}, []);
-				return Math.max(...amoutList);
+					initVal.push(val?.amount || 0)
+					return initVal
+				}, [])
+				return Math.max(...amoutList)
 			},
 			computedList() {
 				if (this.list.length) {
 					return this.list.map((item, index) => {
-						let startColor = !index ? '#FF7217' : '#00DDFF';
+						let startColor = !index ? '#FF7217' : '#00DDFF'
 						let endColor = !index
 							? 'rgba(255, 114, 23, 0)'
-							: 'rgba(0, 221, 255, 0)';
+							: 'rgba(0, 221, 255, 0)'
 						let NOBg
 						if (index === 0) {
 							NOBg = '#FF7217'
@@ -53,9 +52,9 @@
 							NOBg = 'rgba(255, 255, 255, 0.2)'
 						}
 
-						item.styles = {NOBg, startColor, endColor};
-						return item;
-					});
+						item.styles = {NOBg, startColor, endColor}
+						return item
+					})
 				} else {
 					return []
 				}
@@ -65,9 +64,9 @@
 			initList(_list = []) {
 				if (_list.length) {
 					return _list.map((item, index) => {
-						item.NO = `0${index + 1}`;
-						return item;
-					});
+						item.NO = `0${index + 1}`
+						return item
+					})
 				} else {
 					return []
 				}
@@ -77,7 +76,7 @@
 			data: {
 				handler(val) {
 					if (val) {
-						this.list = this.initList(val.list);
+						this.list = this.initList(val.list)
 					}
 				},
 			},
@@ -89,7 +88,7 @@
 				this.list = this.initList(this.data.list)
 			}
 		}
-	};
+	}
 </script>
 <style lang="scss">
 	.h-line-percent-list {

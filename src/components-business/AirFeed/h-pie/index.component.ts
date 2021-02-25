@@ -1,12 +1,3 @@
-import {getInput} from '../../../../lib'
-
-export const config = {
-	animation: true,
-	config: {
-		colors: true,
-		unit: true
-	},
-};
 export const value = {
 	layout: {
 		size: {
@@ -38,11 +29,16 @@ export const value = {
 		unit: '件'
 	}
 }
-export const configSource = {
-	config: {
-		fields: {
-			colors: getInput('color1', '扇形颜色'),
-			unit: getInput('unit', '单位')
-		}
+
+export const customConfig = [
+	{
+		prop: 'colors',
+		label: '扇形颜色',
+		type: 'func-input',
 	},
-}
+	{
+		prop: 'unit',
+		label: '单位',
+		type: 'func-input',
+	},
+]

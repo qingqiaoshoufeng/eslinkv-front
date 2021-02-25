@@ -18,7 +18,7 @@
 	import {Component} from 'vue-property-decorator'
 
 	@Component
-	export default class FuncBackground extends func {
+	export default class FuncWebm extends func {
 		pick(webm) {
 			this.obj[this.inputKey] = webm
 		}

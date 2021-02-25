@@ -9,10 +9,10 @@
 				i-option(:value="k" v-for="k in animationEnterNames" :key="k") {{k}}
 		.d-manage-modal-control
 			label 延时时长
-			i-inputNumber(v-model="item.config.animation.delay" :disabled="platform.chooseWidgetState")
+			i-input-number(v-model="item.config.animation.delay" :disabled="platform.chooseWidgetState")
 		.d-manage-modal-control
 			label 动画时长
-			i-inputNumber(v-model="item.config.animation.duration" :disabled="platform.chooseWidgetState")
+			i-input-number(v-model="item.config.animation.duration" :disabled="platform.chooseWidgetState")
 </template>
 <script lang="ts">
 import func from './func.mx'

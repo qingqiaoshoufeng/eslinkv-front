@@ -1,49 +1,46 @@
 <template>
 	<div class="widget-part" :style="styles" v-if="data">
-		<div class="chart" :id="id" />
+		<div class="chart" :id="id"/>
 	</div>
 </template>
 <script>
-import mixins from '../../../../lib/mixins';
-import getOption from './options';
-import { config, configSource, value } from './index.component'
+	import mixins from '../../../../lib/mixins'
+	import getOption from './options'
+	import {customConfig, value} from './index.component'
 
-
-export default {
-	mixins: [mixins],
-	methods: {
-		setOption(data) {
-			this.instance && this.instance.setOption(getOption(this.data, this.config.config))
-		}
-	},
-	watch: {
-		data: {
-			handler(val) {
-				if (this.id) {
-					this.$nextTick(() => {
-						this.instance = echarts.init(document.getElementById(this.id))
-						this.setOption()
-					});
-				}
-			},
-			deep: true,
-			immediate: true,
+	export default {
+		mixins: [mixins],
+		methods: {
+			setOption(data) {
+				this.instance && this.instance.setOption(getOption(this.data, this.config.config))
+			}
 		},
-	},
-	created() {
-		
-		this.configValue = this.parseConfigValue(value);
-	},
-};
+		watch: {
+			data: {
+				handler(val) {
+					if (this.id) {
+						this.$nextTick(() => {
+							this.instance = echarts.init(document.getElementById(this.id))
+							this.setOption()
+						})
+					}
+				},
+				deep: true,
+				immediate: true,
+			},
+		},
+		created() {
+			this.configValue = this.parseConfigValue(value, customConfig)
+		},
+	}
 </script>
 <style lang="scss" scoped>
-.chart {
-  width: 100%;
-	height: 100%;
-  background: url('/static/images/airfeed/warning.svg') no-repeat center;
-  background-size: 64px 64px;
-  position: relative;
-}
-
+	.chart {
+		width: 100%;
+		height: 100%;
+		background: url('/static/images/airfeed/warning.svg') no-repeat center;
+		background-size: 64px 64px;
+		position: relative;
+	}
 </style>
 
