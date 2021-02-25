@@ -1,17 +1,16 @@
 <template>
-	<div class="h-call-count-statistics widget-part" :style="styles" >
+	<div class="h-call-count-statistics widget-part" :style="styles">
 		<div class="chart" :id="id"></div>
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins';
+	import mixins from '../../../../lib/mixins'
 	import getOption from './options'
-	import { config, value } from './index.component'
+	import {value} from './index.component'
 
 	export default {
 		mixins: [mixins],
-		computed: {
-		},
+		computed: {},
 		methods: {
 			setOption(data) {
 				this.instance && this.instance.setOption(getOption(JSON.parse(JSON.stringify(this.data.data))))
@@ -32,15 +31,14 @@
 			}
 		},
 		created() {
-			
-			this.configValue = this.parseConfigValue(value);
+			this.configValue = this.parseConfigValue(value)
 		}
 	}
 </script>
 <style lang="scss" scoped>
-.chart {
-	width: 100%;
-	height: 100%;
-}
+	.chart {
+		width: 100%;
+		height: 100%;
+	}
 </style>
 

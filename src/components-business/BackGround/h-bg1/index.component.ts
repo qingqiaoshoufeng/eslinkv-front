@@ -9,5 +9,3 @@ export const value = {
 		}
 	},
 }
-
-export const config = {animation: true}

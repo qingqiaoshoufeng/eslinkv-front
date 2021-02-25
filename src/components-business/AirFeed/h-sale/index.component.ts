@@ -1,6 +1,5 @@
-import {test} from "./options";
+import {test} from './options'
 
-export const config = {animation: true}
 export const value = {
 	layout: {
 		size: {
