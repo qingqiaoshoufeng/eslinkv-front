@@ -21,7 +21,7 @@
 </template>
 <script>
     import mixins from '../../../../lib/mixins'
-    import {config, configSource, value} from './index.component'
+    import {customConfig, value} from './index.component'
 
     const SIZE = 5
     export default {
@@ -59,7 +59,7 @@
         },
         methods: {},
         created() {
-            this.configValue = this.parseConfigValue(value)
+            this.configValue = this.parseConfigValue(value, customConfig)
         },
         beforeDestroy() {
             clearInterval(this.timer)
