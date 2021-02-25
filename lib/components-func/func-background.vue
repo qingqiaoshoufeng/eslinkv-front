@@ -26,10 +26,10 @@
 		img {
 			width: 50px;
 			margin-right: 10px;
-			border: 1px solid transparent;
+			border: 1px solid #464f5c;
 
 			&.active {
-				border: 1px solid #464f5c;
+				border: 1px solid #ec3f3f;
 			}
 		}
 	}

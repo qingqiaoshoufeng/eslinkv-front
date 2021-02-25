@@ -1,22 +1,21 @@
-import {getInput} from '../../../../lib'
+export const customConfig = [
+	{
+		prop: 'color',
+		label: '颜色',
+		type: 'func-input',
+	},
+	{
+		prop: 'intervalTime',
+		label: '轮播时长',
+		type: 'func-number',
+	},
+	{
+		prop: 'timeoutTime',
+		label: '轮播点击后间隔时长',
+		type: 'func-number',
+	},
+]
 
-const configSource = {
-    config: {
-        fields: {
-            color: getInput('color', '颜色'),
-            intervalTime: getInput('intervalTime', '轮播时长'),
-            timeoutTime: getInput('timeoutTime', '轮播点击后间隔时长'),
-        }
-    }
-}
-const config = {
-    animation: true,
-    config: {
-        color: true,
-        intervalTime: true,
-        timeoutTime: true,
-    },
-}
 const itemList = [
     {
         title: '钢管（米）',
@@ -43,7 +42,7 @@ const itemList = [
         ],
     },
 ]
-const value = {
+export const value = {
     layout: {
         size: {
             width: 480,
@@ -65,5 +64,4 @@ const value = {
         color: JSON.stringify(['rgba(0, 62, 144, 0.8)', 'rgba(0, 145, 210, 0.8)', 'rgba(0, 233, 194, 0.8)']),
     }
 }
-export {config, value}
 

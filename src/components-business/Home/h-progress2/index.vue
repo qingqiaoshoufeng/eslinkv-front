@@ -12,7 +12,7 @@
 </template>
 <script>
     import mixins from '../../../../lib/mixins'
-    import {config, value} from './index.component'
+    import {customConfig, value} from './index.component'
 
     export default {
         mixins: [mixins],
@@ -28,7 +28,7 @@
             },
         },
         created() {
-            this.configValue = this.parseConfigValue(value)
+            this.configValue = this.parseConfigValue(value, customConfig)
         }
     }
 </script>

@@ -22,7 +22,7 @@
 <script>
     import mixins from '../../../../lib/mixins'
     import options from './options'
-    import {config, value} from './index.component'
+    import {customConfig, value} from './index.component'
 
     export default {
         mixins: [mixins],
@@ -96,7 +96,7 @@
         watch: {
             data: {
                 handler(val) {
-                    if (this.id) {
+                    if (this.id && val) {
                         const data = [...val]
                         this.$nextTick(() => {
                             this.instance = echarts.init(document.getElementById(this.id))
@@ -110,7 +110,7 @@
             }
         },
         created() {
-            this.configValue = this.parseConfigValue(value)
+            this.configValue = this.parseConfigValue(value, customConfig)
         }
     }
 </script>

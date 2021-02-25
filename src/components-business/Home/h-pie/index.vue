@@ -13,13 +13,13 @@
 <script>
     import mixins from '../../../../lib/mixins'
     import pie from './pie'
-    import {config, value} from './index.component'
+    import {customConfig, value} from './index.component'
 
     export default {
         mixins: [mixins],
         components: {pie},
         created() {
-            this.configValue = this.parseConfigValue(value)
+            this.configValue = this.parseConfigValue(value, customConfig)
         }
     }
 </script>

@@ -23,7 +23,7 @@
 <script>
 	import mixins from '../../../../lib/mixins'
 	import circle1 from './circle1'
-	import {config, value} from './index.component'
+	import {customConfig, value} from './index.component'
 
 	export default {
 		data() {
@@ -42,7 +42,7 @@
 			},
 		},
 		created() {
-			this.configValue = this.parseConfigValue(value)
+			this.configValue = this.parseConfigValue(value, customConfig)
 		},
 		mounted() {
 			this.actived = this.defaultActived || 0
