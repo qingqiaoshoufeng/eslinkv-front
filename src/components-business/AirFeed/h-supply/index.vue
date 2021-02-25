@@ -28,8 +28,8 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins';
-	import { config, value } from './index.component'
+	import mixins from '../../../../lib/mixins'
+	import {value} from './index.component'
 
 	let inside = 0
 	const SIZE = 12
@@ -52,8 +52,8 @@
 		watch: {
 			data: {
 				handler(val) {
-					if (val){
-						if(val.length){
+					if (val) {
+						if (val.length) {
 							this.subItem = val[0].children.slice(0, SIZE)
 						}
 					}
@@ -112,7 +112,6 @@
 			}
 		},
 		created() {
-			
 			this.configValue = this.parseConfigValue(value)
 		},
 		mounted() {

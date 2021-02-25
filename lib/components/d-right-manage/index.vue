@@ -40,7 +40,7 @@
 			}
 		]
 
-		@Watch('platform.chooseWidgetCustomConfig', {immediate: true, deep: true})
+		@Watch('platform.chooseWidgetCustomConfig', {deep: true})
 		changeChooseWidgetCustomConfig(val) {
 			this.list[4].key = val
 		}

@@ -1,6 +1,3 @@
-export const config = {
-	animation: true
-}
 const testChildren = [
 	{
 		name: '星桥站',

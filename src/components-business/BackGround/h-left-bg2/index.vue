@@ -6,12 +6,11 @@
 </template>
 <script>
 	import mixins from '../../../../lib/mixins'
-	import { config, value } from './index.component'
+	import {value} from './index.component'
 
 	export default {
 		mixins: [mixins],
 		created() {
-			
 			this.configValue = this.parseConfigValue(value)
 		}
 	}
@@ -23,6 +22,5 @@
 		height: 1050px;
 		background: linear-gradient(90deg, rgba(0, 4, 98, 1) 0%, rgba(0, 4, 98, 0) 100%);
 	}
-
 </style>
 

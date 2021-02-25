@@ -7,9 +7,9 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins';
-	import getOption from './options';
-	import { config, configSource, value } from './index.component'
+	import mixins from '../../../../lib/mixins'
+	import getOption from './options'
+	import {customConfig, value} from './index.component'
 
 	export default {
 		mixins: [mixins],
@@ -25,7 +25,7 @@
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
 							this.setOption()
-						});
+						})
 					}
 				},
 				deep: true,
@@ -33,10 +33,9 @@
 			},
 		},
 		created() {
-			
-			this.configValue = this.parseConfigValue(value);
+			this.configValue = this.parseConfigValue(value, customConfig)
 		},
-	};
+	}
 </script>
 <style lang="scss" scoped>
 	.widget-part {
