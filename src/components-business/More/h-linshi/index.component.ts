@@ -1,21 +1,4 @@
-import {getInput} from '../../../../lib'
-
-const configSource = {
-	config: {
-		fields: {
-			transform: getInput('transform', '旋转角度'),
-			left: getInput('left', '位移'),
-		}
-	}
-}
-const config = {
-	animation: true,
-	config: {
-		transform: true,
-		left: true,
-	}
-}
-const value = {
+export const value = {
 	layout: {
 		size: {
 			width: 600,
@@ -45,11 +28,5 @@ const value = {
 				registeredUsers: 254336,
 			}
 		}
-	},
-	config: {
-		transform: 30,
-		left: -50,
 	}
 }
-
-export {config, value}

@@ -1,14 +1,30 @@
-import {getInput} from '../../../../lib'
-export const config = {
-	animation: true,
-	config: {
-		desc1: true,
-		img1: true,
-		desc2: true,
-		img2: true,
-		title: true,
+export const customConfig = [
+	{
+		prop: 'desc1',
+		label: '描述1',
+		type: 'func-input',
 	},
-};
+	{
+		prop: 'img1',
+		label: '图片1地址',
+		type: 'func-input',
+	},
+	{
+		prop: 'desc2',
+		label: '描述2',
+		type: 'func-input',
+	},
+	{
+		prop: 'img2',
+		label: '图片2地址',
+		type: 'func-input',
+	},
+	{
+		prop: '饼图名称',
+		label: 'title',
+		type: 'func-input',
+	}
+]
 export const value = {
 	layout: {
 		size: {
@@ -33,15 +49,4 @@ export const value = {
 		img2: '/static/images/serves/actual.svg',
 		title: '联码率'
 	}
-}
-export const configSource = {
-	config: {
-		fields: {
-			desc1: getInput('desc1', '描述1'),
-			img1: getInput('img1', '图片1地址'),
-			desc2: getInput('desc2', '描述2'),
-			img2: getInput('img2', '图片2地址'),
-			title: getInput('title', '饼图名称'),
-		}
-	},
 }

@@ -1,13 +1,4 @@
-import {getInput} from '../../../../lib'
-
-const configSource = {
-    config: {
-        fields: {
-            sceneId: getInput('sceneId', '场景ID'),
-        },
-    },
-};
-const value = {
+export const value = {
     layout: {
         size: {
             width: 3500,
@@ -21,11 +12,11 @@ const value = {
         sceneId: '',
     },
 };
-const config = {
-    animation: true,
-    config: {
-        sceneId: true
-    }
-}
+export const customConfig = [
+	{
+		prop: 'sceneId',
+		label: '场景ID',
+		type: 'func-input',
+	}
+]
 
-export {config, value}

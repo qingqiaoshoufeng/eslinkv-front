@@ -32,7 +32,7 @@
 	import addDays from 'date-fns/addDays'
 	import addMonths from 'date-fns/addMonths'
 	import addYears from 'date-fns/addYears'
-	import { config, value } from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		data() {

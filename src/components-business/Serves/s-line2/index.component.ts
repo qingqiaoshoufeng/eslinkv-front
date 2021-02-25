@@ -1,5 +1,3 @@
-import {getInput} from '../../../../lib'
-
 const test = [{"x": "1月", "y1": 10, "y2": 23, y3: 21}, {"x": "2月", "y1": 18, "y2": 60, y3: 21}, {
 	"x": "3月",
 	"y1": 5,
@@ -16,17 +14,7 @@ const test = [{"x": "1月", "y1": 10, "y2": 23, y3: 21}, {"x": "2月", "y1": 18,
 	"y2": 73,
 	y3: 21
 }, {"x": "12月", "y1": 47, "y2": 68, y3: 21}]
-export const config = {
-	animation: true,
-	config: {
-		color1: true,
-		color2: true,
-		color3: true,
-		// lineName1: true,
-		// lineName2: true,
-		unit: true
-	},
-};
+
 export const value = {
 	layout: {
 		size: {
@@ -50,20 +38,29 @@ export const value = {
 		color1: '#2C99FF',
 		color2: '#E5615B',
 		color3: '#f8cd47',
-		// lineName1: '今年',
-		// lineName2: '去年',
 		unit: '单'
 	}
 }
-export const configSource = {
-	config: {
-		fields: {
-			color1: getInput('color1', '折线1颜色'),
-			color2: getInput('color2', '折线2颜色'),
-			color3: getInput('color3', '折线3颜色'),
-			// lineName1: getInput('lineName1', '折线1名称'),
-			// lineName2: getInput('lineName2', '折线2名称'),
-			unit: getInput('unit', '单位')
-		}
+
+export const customConfig = [
+	{
+		prop: 'color1',
+		label: '折线1颜色',
+		type: 'func-color',
 	},
-}
+	{
+		prop: 'color2',
+		label: '折线2颜色',
+		type: 'func-color',
+	},
+	{
+		prop: 'color3',
+		label: '折线3颜色',
+		type: 'func-color',
+	},
+	{
+		prop: 'unit',
+		label: '单位',
+		type: 'func-input',
+	}
+]

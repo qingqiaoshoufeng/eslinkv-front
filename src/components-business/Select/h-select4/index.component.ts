@@ -1,7 +1,5 @@
 import format from "date-fns/format";
 
-export const config = {animation: true}
-
 export const value = {
 	api: {
 		data: {

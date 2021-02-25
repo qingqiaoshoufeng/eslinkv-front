@@ -63,7 +63,7 @@
 </template>
 <script>
 	import mixins from '../../../../lib/mixins'
-	import {config, value} from './index.component'
+	import {value} from './index.component'
 
 	export default {
 		mixins: [mixins],
@@ -116,13 +116,6 @@
 		},
 		created() {
 			this.configValue = this.parseConfigValue(value)
-		},
-		mounted() {
-			// setTimeout(()=>{
-			//   this.$refs.img.style.transform=`perspective(763px) rotateY(${this.config.config.transform}deg) translateZ(-120px)`
-			//   this.$refs.img.style.left=`auto`
-			//   this.$refs.img.style.right=`${this.config.config.left}px`
-			// },1500)
 		},
 		beforeDestroy() {
 			clearInterval(this.buildingTimer)

@@ -9,14 +9,24 @@ export const configSource = {
 		}
 	}
 }
-export const config = {
-	animation: true,
-	config: {
-		img: true,
-		index: true,
-		left: true,
+export const customConfig = [
+	{
+		prop: 'index',
+		label: '场景ID',
+		type: 'func-input',
+	},
+	{
+		prop: 'left',
+		label: '位移',
+		type: 'func-number',
+	},
+	{
+		prop: 'img',
+		label: '图片',
+		type: 'func-background',
+		options: ['/static/icons/数据下钻.png', '/static/icons/工商户点位弹窗.png']
 	}
-}
+]
 export const value = {
 	layout: {
 		size: {

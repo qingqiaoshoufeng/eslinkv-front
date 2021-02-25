@@ -16,7 +16,7 @@
 <script>
 import mixins from '../../../../lib/mixins';
 import MarqueeText from 'vue-marquee-text-component'
-import { config, value } from './index.component'
+import { value } from './index.component'
 
 export default {
 	mixins: [mixins],

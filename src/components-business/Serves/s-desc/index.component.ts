@@ -1,12 +1,15 @@
-import {getInput} from '../../../../lib'
-
-export const config = {
-	animation: true,
-	config: {
-		title: true,
-		numColor: true
+export const customConfig = [
+	{
+		prop: 'numColor',
+		label: '数字颜色',
+		type: 'func-color',
 	},
-};
+	{
+		prop: 'title',
+		label: '标题',
+		type: 'func-input',
+	}
+]
 export const value = {
 	layout: {
 		size: {
@@ -27,11 +30,4 @@ export const value = {
 		numColor: '#fff'
 	}
 }
-export const configSource = {
-	config: {
-		fields: {
-			title: getInput('title', '标题'),
-			numColor: getInput('numColor', '数字颜色')
-		}
-	}
-}
+

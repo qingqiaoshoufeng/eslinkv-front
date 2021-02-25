@@ -1,4 +1,3 @@
-export const config = { animation: true };
 export const value = {
 	api: {
 		data: JSON.stringify({

@@ -1,17 +1,40 @@
-import {getInput} from '../../../../lib'
-
-export const config = {
-	animation: true,
-	config: {
-		color1: true,
-		color2: true,
-		color3: true,
-		desc1: true,
-		desc2: true,
-		desc3: true,
-		unit: true,
+export const customConfig = [
+	{
+		prop: 'color1',
+		label: '外圈柱形图颜色',
+		type: 'func-color',
 	},
-};
+	{
+		prop: 'color2',
+		label: '内圈柱形图颜色',
+		type: 'func-color',
+	},
+	{
+		prop: 'color3',
+		label: '折线图颜色',
+		type: 'func-color',
+	},
+	{
+		prop: 'desc1',
+		label: '外圈柱形图名称',
+		type: 'func-input',
+	},
+	{
+		prop: 'desc2',
+		label: '内圈柱形图名称',
+		type: 'func-input',
+	},
+	{
+		prop: 'desc3',
+		label: '折线图名称',
+		type: 'func-input',
+	},
+	{
+		prop: 'unit',
+		label: '单位',
+		type: 'func-input',
+	}
+]
 export const value = {
 	layout: {
 		size: {
@@ -38,17 +61,4 @@ export const value = {
 		desc3: '办结率',
 		unit: '单',
 	}
-}
-export const configSource = {
-	config: {
-		fields: {
-			color1: getInput('color1', '外圈柱形图颜色'),
-			color2: getInput('color2', '内圈柱形图颜色'),
-			color3: getInput('color3', '折线图颜色'),
-			desc1: getInput('desc1', '外圈柱形图名称'),
-			desc2: getInput('desc2', '内圈柱形图名称'),
-			desc3: getInput('desc3', '折线图名称'),
-			unit: getInput('unit', '单位'),
-		},
-	},
 }

@@ -19,14 +19,14 @@
 </template>
 <script>
     import mixins from '../../../../lib/mixins';
-    import {value, config, configSource} from './index.component'
+    import {value, customConfig} from './index.component'
 
     export default {
         mixins: [mixins],
         methods: {},
         created() {
             
-            this.configValue = this.parseConfigValue(value)
+            this.configValue = this.parseConfigValue(value, customConfig)
         },
     };
 </script>
