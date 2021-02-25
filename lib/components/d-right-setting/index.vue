@@ -19,7 +19,7 @@
 				label 画布上边距
 				i-inputNumber(v-model="platform.ruler.contentScrollTop")
 			li.fn-flex.flex-row
-				label 画布zoom
+				label 画布缩放比例
 				i-select(v-model="platform.ruler.zoomIndex")
 					i-option(:value="index" v-for="(item,index) in platform.ruler.zooms" :key="item") {{item}}
 			li.fn-flex.flex-row
@@ -43,7 +43,6 @@
 		},
 	})
 	export default class DRightSetting extends Vue {
-
 		platform: any = platform.state
 	}
 </script>

@@ -2,9 +2,10 @@
 	.d-bottom-bar-box.pos-a.fn-flex.flex-row.z-index-9(v-show="platform.ruler.rulerVisible")
 		.d-bottom-bar.fn-flex.flex-row
 			label {{scene.index===0?'主场景':scene.obj[scene.index].name}}
-		.d-bottom-bar.fn-flex.flex-row
 			label.d-bottom-info.fn-flex.flex-row(v-if="platform.panelConfig.info")
 				span {{ platform.panelConfig.size.width}}×{{platform.panelConfig.size.height}}{{ platform.panelConfig.size.unit}}
+		.d-bottom-bar.fn-flex.flex-row
+			label(v-show="platform.ruler.rulerVisible") {{ zoom }}
 			label.d-bottom-hot-keys.pos-r.fn-flex.flex-row
 				d-svg.pointer(icon-class="keyboard" title="快捷键")
 				.d-bottom-hot-key-list.pos-a
@@ -15,8 +16,6 @@
 								i.d-bottom-hot-key-text(v-if="child.type==='text'") {{ child.value }}
 								span.d-bottom-hot-key-item(v-if="child.type==='+'") +
 								img.d-bottom-hot-key-img(v-if="child.type==='img'" :src="child.value")
-		.d-bottom-bar.fn-flex.flex-row
-			label(v-show="platform.ruler.rulerVisible") {{ zoom }}
 </template>
 <script lang="ts">
 	import {Vue, Component} from 'vue-property-decorator'
@@ -72,10 +71,11 @@
 	}
 
 	.d-bottom-info {
-		margin-right: 10px;
+		margin-left: 10px;
 	}
 
 	.d-bottom-hot-keys {
+		margin-left: 10px;
 
 		.d-bottom-hot-key-list {
 			bottom: 100%;
