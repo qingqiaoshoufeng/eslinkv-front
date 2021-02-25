@@ -1,13 +1,4 @@
-import {getInput} from '../../../../lib'
-
-const config = {
-    animation: true,
-    config: {
-        desc: true,
-        unit: true
-    },
-};
-const value = {
+export const value = {
     layout: {
         size: {
             width: 400,
@@ -27,13 +18,16 @@ const value = {
         unit: '人'
     }
 }
-const configSource = {
-    config: {
-        fields: {
-            desc: getInput('desc', '描述'),
-            unit: getInput('unit', '单位')
-        }
-    }
-}
 
-export {config, value, configSource}
+export const customConfig = [
+	{
+		prop: 'desc',
+		label: '描述',
+		type: 'func-input',
+	},
+	{
+		prop: 'unit',
+		label: '单位',
+		type: 'func-input',
+	},
+]

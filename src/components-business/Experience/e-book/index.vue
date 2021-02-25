@@ -20,9 +20,9 @@
     </div>
 </template>
 <script>
-    import mixins from '../../../../lib/mixins';
+    import mixins from '../../../../lib/mixins'
     import './turn.min'
-    import {value, config} from './index.component'
+    import {value} from './index.component'
 
     export default {
         mixins: [mixins],
@@ -128,10 +128,9 @@
             }
         },
         created() {
-            
-            this.configValue = this.parseConfigValue(value);
+            this.configValue = this.parseConfigValue(value)
         }
-    };
+    }
 </script>
 <style lang="scss" scoped>
     .container {
