@@ -1,29 +1,35 @@
-import {getInput} from '../../../../lib'
-
-export const configSource = {
-	config: {
-		fields: {
-			color1: getInput('color1', '条形图颜色1'),
-			color2: getInput('color2', '条形图颜色2'),
-			desc1: getInput('desc1', '条形图名称1'),
-			desc2: getInput('desc2', '条形图名称2'),
-			unit1: getInput('unit1', '条形图左侧单位'),
-			unit2: getInput('unit2', '条形图右侧单位')
-		},
+export const customConfig = [
+	{
+		prop: 'color1',
+		label: '条形图颜色1',
+		type: 'func-color',
 	},
-}
-
-export const config = {
-	animation: true,
-	config: {
-		color1: true,
-		color2: true,
-		desc1: true,
-		desc2: true,
-		unit1: true,
-		unit2: true,
+	{
+		prop: 'color2',
+		label: '条形图颜色2',
+		type: 'func-color',
+	},
+	{
+		prop: 'desc1',
+		label: '条形图名称1',
+		type: 'func-input',
+	},
+	{
+		prop: 'desc2',
+		label: '条形图名称2',
+		type: 'func-input',
+	},
+	{
+		prop: 'unit1',
+		label: '条形图左侧单位',
+		type: 'func-input',
+	},
+	{
+		prop: 'unit2',
+		label: '条形图右侧单位',
+		type: 'func-input',
 	}
-}
+]
 export const value = {
 	layout: {
 		size: {

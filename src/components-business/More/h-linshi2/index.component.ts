@@ -1,20 +1,3 @@
-import {getInput} from '../../../../lib'
-
-export const configSource = {
-    config: {
-        fields: {
-            transform: getInput('transform', '旋转角度'),
-            left: getInput('left', '位移'),
-        }
-    }
-}
-export const config: ComponentConfig = {
-    animation: true,
-    config: {
-        transform: true,
-        left: true,
-    }
-}
 export const value: ComponentValue = {
     layout: {
         size: {
@@ -24,10 +7,6 @@ export const value: ComponentValue = {
         position: {
             value: 'relative'
         }
-    },
-    config: {
-        transform: -30,
-        left: -50,
     },
     api: {
         data: {

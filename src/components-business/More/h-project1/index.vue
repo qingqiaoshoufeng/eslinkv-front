@@ -77,7 +77,7 @@
     import step6 from './step-6'
     import step8 from './step-8'
     import hswiper from './h-swiper'
-    import {config, value} from './index.component'
+    import {value} from './index.component'
 
     export default {
         mixins: [mixins],

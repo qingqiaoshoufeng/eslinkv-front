@@ -1,22 +1,21 @@
-import {getInput, getSelect} from '../../../../lib'
-
-export const configSource = {
-	config: {
-		fields: {
-			background: getSelect('background', '背景图片', ['/static/icons/h-ring1-1.svg', '/static/icons/h-ring1-2.svg', '/static/icons/h-ring1-3.svg']),
-			color: getInput('color', '颜色'),
-			suffix: getInput('suffix', '后缀'),
-		}
+export const customConfig = [
+	{
+		prop: 'color',
+		label: '颜色',
+		type: 'func-color',
+	},
+	{
+		prop: 'suffix',
+		label: '后缀',
+		type: 'func-input',
+	},
+	{
+		prop: 'background',
+		label: '背景图片',
+		type: 'func-background',
+		options: ['/static/icons/h-ring1-1.svg', '/static/icons/h-ring1-2.svg', '/static/icons/h-ring1-3.svg']
 	}
-}
-export const config = {
-	animation: true,
-	config: {
-		background: true,
-		color: true,
-		suffix: true,
-	}
-}
+]
 export const value = {
 	layout: {
 		size: {

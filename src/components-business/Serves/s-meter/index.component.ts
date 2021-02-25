@@ -1,27 +1,32 @@
-import {getInput, getSelect} from '../../../../lib'
-
-export const configSource = {
-	config: {
-		fields: {
-			desc1: getInput('desc1', '描述1'),
-			img1: getSelect('img1', '图片1地址', ['/static/icons/s-meter-1.svg', '/static/icons/s-meter-2.svg', '/static/icons/s-meter-3.svg', '/static/icons/s-meter-4.svg']),
-			desc2: getInput('desc2', '描述2'),
-			desc: getInput('desc', '描述'),
-			img2: getSelect('img2', '图片2地址', ['/static/icons/s-meter-1.svg', '/static/icons/s-meter-2.svg', '/static/icons/s-meter-3.svg', '/static/icons/s-meter-4.svg']),
-		}
+export const customConfig = [
+	{
+		prop: 'desc1',
+		label: '描述1',
+		type: 'func-input',
 	},
-}
-
-export const config = {
-	animation: true,
-	config: {
-		desc: true,
-		desc1: true,
-		desc2: true,
-		img1: true,
-		img2: true,
+	{
+		prop: 'img1',
+		label: '图片1',
+		type: 'func-background',
+		options: ['/static/icons/s-meter-1.svg', '/static/icons/s-meter-2.svg', '/static/icons/s-meter-3.svg', '/static/icons/s-meter-4.svg']
+	},
+	{
+		prop: 'desc2',
+		label: '描述2',
+		type: 'func-input',
+	},
+	{
+		prop: 'img2',
+		label: '图片2',
+		type: 'func-background',
+		options: ['/static/icons/s-meter-1.svg', '/static/icons/s-meter-2.svg', '/static/icons/s-meter-3.svg', '/static/icons/s-meter-4.svg']
+	},
+	{
+		prop: 'desc',
+		label: '描述',
+		type: 'func-input',
 	}
-};
+]
 export const value = {
 	api: {
 		data: JSON.stringify([

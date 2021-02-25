@@ -1,22 +1,20 @@
-import {getInput} from '../../../../lib'
-
-export const configSource = {
-	config: {
-		fields: {
-			unit: getInput('unit', '纵坐标单位'),
-			color: getInput('color', '线条颜色'),
-			icon: getInput('icon', '拐点图标') // png转base64，data:开头
-		}
+export const customConfig = [
+	{
+		prop: 'color',
+		label: '线条颜色',
+		type: 'func-color',
 	},
-}
-export const config = {
-	animation: true,
-	config: {
-		unit: true,
-		color: true,
-		icon: true
+	{
+		prop: 'unit',
+		label: '纵坐标单位',
+		type: 'func-input',
+	},
+	{
+		prop: 'icon',
+		label: '拐点图标', // png转base64，data:开头
+		type: 'func-input',
 	}
-}
+]
 export const value = {
 	layout: {
 		size: {

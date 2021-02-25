@@ -13,7 +13,7 @@
 		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
 		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
 	} from '../../../components-map/AMap/a-map/config/scene'
-	import { config, value } from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		data() {

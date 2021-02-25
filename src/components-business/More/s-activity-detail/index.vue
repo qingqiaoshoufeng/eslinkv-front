@@ -119,7 +119,7 @@
     import getOption from './options'
     import {Swiper, SwiperSlide} from 'vue-awesome-swiper'
     import 'swiper/css/swiper.css'
-    import {value, config} from './index.component'
+    import {value} from './index.component'
 
     export default {
         components: {

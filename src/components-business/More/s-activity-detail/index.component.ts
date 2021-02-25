@@ -1,4 +1,3 @@
-export const config: ComponentConfig = {animation: true}
 export const value: ComponentValue = {
     layout: {
         size: {
