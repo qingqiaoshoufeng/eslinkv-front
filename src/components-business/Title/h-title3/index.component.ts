@@ -11,15 +11,31 @@ const configSource = {
         }
     }
 }
-const config = {
-    animation: true,
-    config: {
-        background: true,
-        color: true,
-        suffix: true,
-        subTitle: true,
-    }
-}
+
+const customConfig = [
+	{
+		prop: 'color',
+		label: '颜色',
+		type: 'func-color',
+	},
+	{
+		prop: 'suffix',
+		label: '后缀',
+		type: 'func-input',
+	},
+	{
+		prop: 'subTitle',
+		label: '副标题',
+		type: 'func-input',
+	},
+	{
+		prop: 'background',
+		label: '背景图片',
+		type: 'func-background',
+		options: ['/static/icons/h-title3-1.svg', '/static/icons/h-title3-2.svg', '/static/icons/h-title3-3.svg', '/static/icons/h-title3-4.svg']
+	}
+]
+
 const value = {
     layout: {
         size: {
@@ -43,4 +59,4 @@ const value = {
     }
 }
 
-export {configSource, config, value}
+export {configSource, customConfig, value}

@@ -1,9 +1,3 @@
-export const config = {
-    animation: true,
-    config: {
-        title: true,
-    }
-}
 export const value = {
     api: {
         data: JSON.stringify({

@@ -8,7 +8,7 @@
     import mx from '../../../../lib/mixins'
     import {Component} from 'vue-property-decorator'
     import {mixins} from 'vue-class-component'
-    import {config, value} from './index.component'
+    import {value} from './index.component'
 	import scene from '../../../../lib/store/scene.store'
     @Component
     class HTitle6 extends mixins(mx) {
