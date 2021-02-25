@@ -13,7 +13,7 @@
 </template>
 <script>
     import mixins from '../../../../lib/mixins'
-    import {value, config} from './index.component'
+    import {value} from './index.component'
 
     export default {
         mixins: [mixins],
@@ -21,10 +21,9 @@
             return {}
         },
         created() {
-            
             this.configValue = this.parseConfigValue(value)
         },
-    };
+    }
 </script>
 <style lang="scss" scoped>
     .container {

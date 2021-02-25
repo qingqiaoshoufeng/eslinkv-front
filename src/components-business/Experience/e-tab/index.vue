@@ -9,7 +9,7 @@
 </template>
 <script>
 	import mixins from '../../../../lib/mixins'
-	import {config, value} from './index.component'
+	import {value} from './index.component'
 	import scene from '../../../../lib/store/scene.store'
 
 	export default {
@@ -25,10 +25,9 @@
 			}
 		},
 		created() {
-
 			this.configValue = this.parseConfigValue(value)
 		},
-	};
+	}
 </script>
 <style lang="scss" scoped>
 	.widget-part {
