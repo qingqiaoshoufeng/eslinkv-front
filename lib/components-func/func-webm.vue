@@ -1,12 +1,15 @@
 <template lang="pug">
 	.d-manage-modal-control
 		label {{config.label}}
-		.imgs
-			img(
+		.webms
+			video(
 				v-for="(k, i) in config.options"
 				:key="i"
 				:src="k"
 				@click="pick(k)"
+				autoplay="autoplay"
+				muted="muted"
+				loop
 				:class="{active: k === obj[inputKey]}"
 			)
 </template>
@@ -16,14 +19,14 @@
 
 	@Component
 	export default class FuncBackground extends func {
-		pick(img) {
-			this.obj[this.inputKey] = img
+		pick(webm) {
+			this.obj[this.inputKey] = webm
 		}
 	}
 </script>
 <style lang="scss" scoped>
-	.imgs {
-		img {
+	.webms {
+		video {
 			width: 50px;
 			margin-right: 10px;
 			border: 1px solid transparent;

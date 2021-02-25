@@ -18,10 +18,10 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins';
+	import mixins from '../../../../lib/mixins'
 	import getOptions from './options'
 	import format from 'date-fns/format'
-	import { config, configSource, value } from './index.component'
+	import {customConfig, value} from './index.component'
 
 	export default {
 		mixins: [mixins],
@@ -75,8 +75,8 @@
 			},
 		},
 		created() {
-			
-			this.configValue = this.parseConfigValue(value);
+
+			this.configValue = this.parseConfigValue(value, customConfig)
 		},
 	};
 </script>

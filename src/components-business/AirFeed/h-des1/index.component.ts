@@ -1,21 +1,3 @@
-import {getInput, getSelect} from '../../../../lib'
-
-export const config = {
-	animation: true,
-	config: {
-		title: true, img: true
-	}
-}
-
-export const configSource = {
-	config: {
-		fields: {
-			title: getInput('title', '标题'),
-			img: getSelect('img', '图形', ['/static/icons/h-des1-1.svg', '/static/icons/h-des1-2.svg', '/static/icons/h-des1-3.svg']),
-		}
-	},
-}
-
 export const value = {
 	api: {
 		data: JSON.stringify({
@@ -36,3 +18,17 @@ export const value = {
 		}
 	}
 }
+
+export const customConfig = [
+	{
+		prop: 'img',
+		label: '图形',
+		type: 'func-background',
+		options: ['/static/icons/h-des1-1.svg', '/static/icons/h-des1-2.svg', '/static/icons/h-des1-3.svg']
+	},
+	{
+		prop: 'title',
+		label: '标题',
+		type: 'func-input',
+	},
+]

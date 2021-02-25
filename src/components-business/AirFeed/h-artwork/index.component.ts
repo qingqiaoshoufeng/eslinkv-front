@@ -1,4 +1,3 @@
-
 export const value = {
 	api: {
 		data: JSON.stringify({
@@ -14,7 +13,4 @@ export const value = {
 			value: 'relative'
 		}
 	}
-}
-export const config = {
-	animation: true
 }

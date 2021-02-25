@@ -8,8 +8,8 @@
 </template>
 <script>
 	import ImageView from '@/components/ImageView'
-	import mixins from '../../../../lib/mixins';
-	import { config, value } from './index.component'
+	import mixins from '../../../../lib/mixins'
+	import {value } from './index.component'
 
 	export default {
 		mixins: [mixins],
@@ -37,7 +37,6 @@
 		},
 		methods: {},
 		created() {
-			
 			this.configValue = this.parseConfigValue(value)
 		}
 	}

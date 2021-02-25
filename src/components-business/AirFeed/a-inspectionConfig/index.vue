@@ -3,23 +3,23 @@
 		<div class="a-inspectionConfig fn-flex flex-column">
 			<div class="video-box fn-flex flex-row">
 				<div class="wrap">
-          <video
-              :src="config.config && config.config.videoUrl"
-              controls="controls"
-              autoplay="autoplay"
-              muted="muted"
-              loop
-          ></video>
-        </div>
+					<video
+						:src="config.config && config.config.videoUrl"
+						controls="controls"
+						autoplay="autoplay"
+						muted="muted"
+						loop
+					></video>
+				</div>
 				<div class="wrap">
-          <div class="a-inspectionConfig-ratio-box pos-r">
-            <div class="a-inspectionConfig-ratio pos-a" :style="{height:`${ data&&data.ratio}`}"></div>
-          </div>
-          <div class="a-inspectionConfig-title">
-            <h2 class="font-num">{{data&&data.ratio}}</h2>
-            <p>在线率</p>
-          </div>
-        </div>
+					<div class="a-inspectionConfig-ratio-box pos-r">
+						<div class="a-inspectionConfig-ratio pos-a" :style="{height:`${ data&&data.ratio}`}"></div>
+					</div>
+					<div class="a-inspectionConfig-title">
+						<h2 class="font-num">{{data&&data.ratio}}</h2>
+						<p>在线率</p>
+					</div>
+				</div>
 			</div>
 			<div class="context fn-flex flex-row">
 				<div class="context-item fn-flex flex-column">
@@ -43,17 +43,16 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins';
-	import { config, configSource, value } from './index.component'
+	import mixins from '../../../../lib/mixins'
+	import {value, customConfig} from './index.component'
 
 	export default {
 		mixins: [mixins],
 		methods: {},
 		created() {
-			
-			this.configValue = this.parseConfigValue(value);
+			this.configValue = this.parseConfigValue(value, customConfig)
 		},
-	};
+	}
 </script>
 <style lang="scss">
 	.a-inspectionConfig-title {
@@ -92,10 +91,10 @@
 		height: 200px;
 		width: 497px;
 
-    .wrap {
-      flex: 1;
-      display: flex;
-    }
+		.wrap {
+			flex: 1;
+			display: flex;
+		}
 
 		video::-webkit-media-controls {
 			display: none !important;
