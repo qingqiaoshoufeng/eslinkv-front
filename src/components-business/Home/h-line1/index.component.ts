@@ -1,19 +1,12 @@
-import {getInput} from '../../../../lib'
+export const customConfig = [
+	{
+		prop: 'title',
+		label: '文字',
+		type: 'func-input',
+	}
+]
 
-const configSource = {
-    config: {
-        fields: {
-            title: getInput('title', '文字'),
-        }
-    }
-}
-const config = {
-    animation: true,
-    config: {
-        title: true,
-    }
-}
-const value = {
+export const value = {
     layout: {
         size: {
             width: 480,
@@ -32,5 +25,3 @@ const value = {
         title: '数量'
     }
 }
-
-export {config, value}

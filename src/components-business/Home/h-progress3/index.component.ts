@@ -1,19 +1,12 @@
-import {getInput} from '../../../../lib'
+export const customConfig = [
+	{
+		prop: 'unit',
+		label: '单位',
+		type: 'func-input',
+	}
+]
 
-const configSource = {
-    config: {
-        fields: {
-            unit: getInput('unit', '单位'),
-        }
-    }
-}
-const config = {
-    animation: true,
-    config: {
-        unit: true,
-    }
-}
-const value = {
+export const value = {
     layout: {
         size: {
             width: 756,
@@ -49,5 +42,3 @@ const value = {
         unit: '万m³',
     }
 }
-
-export {config, value}

@@ -1,13 +1,17 @@
-import {getInput} from '../../../../lib'
+export const customConfig = [
+	{
+		prop: 'desc1',
+		label: '描述1',
+		type: 'func-input',
+	},
+	{
+		prop: 'desc2',
+		label: '描述2',
+		type: 'func-input',
+	}
+]
 
-const config = {
-    animation: true,
-    config: {
-        desc1: true,
-        desc2: true
-    }
-}
-const value = {
+export const value = {
     layout: {
         size: {
             width: 364,
@@ -28,13 +32,3 @@ const value = {
         desc2: '今日LNG加气量m³'
     }
 }
-const configSource = {
-    config: {
-        fields: {
-            desc1: getInput('desc1', '描述1'),
-            desc2: getInput('desc2', '描述2')
-        }
-    }
-}
-
-export {config, value}
