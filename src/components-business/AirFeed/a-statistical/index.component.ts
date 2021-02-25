@@ -1,5 +1,3 @@
-import {getInput} from '../../../../lib'
-
 export const value = {
 	api: {
 		data: JSON.stringify({
@@ -20,18 +18,16 @@ export const value = {
 		}
 	}
 }
-export const configSource = {
-	config: {
-		fields: {
-			desc: getInput('desc', '描述'),
-			timeDesc: getInput('timeDesc', '时间'),
-		},
+
+export const customConfig = [
+	{
+		prop: 'desc',
+		label: '描述',
+		type: 'func-input',
 	},
-}
-export const config = {
-	animation: true,
-	config: {
-		desc: true,
-		timeDesc: true,
-	},
-}
+	{
+		prop: 'timeDesc',
+		label: '时间',
+		type: 'func-input',
+	}
+]

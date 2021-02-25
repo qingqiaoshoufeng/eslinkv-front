@@ -1,5 +1,3 @@
-import {getInput, getSelect} from '../../../../lib'
-
 export const value = {
 	api: {
 		data: JSON.stringify({
@@ -24,27 +22,29 @@ export const value = {
 	}
 }
 
-export const configSource = {
-	config: {
-		fields: {
-			background: getSelect('background', '背景图片', [
-				'/static/images/airfeed/carout01.webm',
-				'/static/images/airfeed/carout02.webm',
-			]),
-			color: getInput('color', '颜色'),
-			desc1: getInput('desc1', '描述1'),
-			desc2: getInput('desc2', '描述2'),
-		},
+export const customConfig = [
+	{
+		prop: 'background',
+		label: '背景图片',
+		type: 'func-webm',
+		options: [
+			'/static/images/airfeed/carout01.webm',
+			'/static/images/airfeed/carout02.webm',
+		]
 	},
-}
-
-export const config = {
-	animation: true,
-	config: {
-		background: true,
-		color: true,
-		desc1: true,
-		desc2: true,
+	{
+		prop: 'color',
+		label: '颜色',
+		type: 'func-input',
 	},
-}
-
+	{
+		prop: 'desc1',
+		label: '描述1',
+		type: 'func-input',
+	},
+	{
+		prop: 'desc2',
+		label: '描述2',
+		type: 'func-input',
+	},
+]

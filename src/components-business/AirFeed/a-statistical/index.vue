@@ -42,8 +42,8 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins';
-	import { config, configSource, value } from './index.component'
+	import mixins from '../../../../lib/mixins'
+	import {customConfig, value} from './index.component'
 
 	export default {
 		data() {
@@ -79,8 +79,7 @@
 			},
 		},
 		created() {
-			
-			this.configValue = this.parseConfigValue(value);
+			this.configValue = this.parseConfigValue(value, customConfig)
 		},
 		mounted() {
 			setTimeout(() => {
@@ -90,7 +89,7 @@
 				this.year = res
 			})
 		},
-	};
+	}
 </script>
 <style lang="scss">
 	.statistical-box {

@@ -25,40 +25,40 @@
 <script>
 	import mixins from '../../../../lib/mixins'
 	import getOption from './options'
-	import {value} from './index.component'
+	import {customConfig, value} from './index.component'
 
 	export default {
 		mixins: [mixins],
 		computed: {
 			colorList() {
-				if (!this.data) return ['#00DDFF', 'rgba(1,253,210,1)'];
+				if (!this.data) return ['#00DDFF', 'rgba(1,253,210,1)']
 				return [this.config.config.color1, this.config.config.color2]
 			},
 			descList() {
-				if (!this.data) return ['第三方破坏', '同比'];
-				return [this.config.config.desc1, this.config.config.desc2];
+				if (!this.data) return ['第三方破坏', '同比']
+				return [this.config.config.desc1, this.config.config.desc2]
 			},
 			title() {
-				if (!this.data) return '';
-				return this.config.config.title;
+				if (!this.data) return ''
+				return this.config.config.title
 			}
 		},
 		methods: {
 			setOption(data) {
-				this.instance && this.instance.setOption(getOption(data));
+				this.instance && this.instance.setOption(getOption(data))
 			},
 		},
 		watch: {
 			data: {
 				handler(val) {
 					if (this.id) {
-						const data = {...val};
+						const data = {...val}
 						this.$nextTick(() => {
 							this.instance = echarts.init(
 								document.getElementById(this.id)
-							);
-							this.setOption(data);
-						});
+							)
+							this.setOption(data)
+						})
 					}
 				},
 				deep: true,
@@ -66,9 +66,9 @@
 			},
 		},
 		created() {
-			this.configValue = this.parseConfigValue(value)
+			this.configValue = this.parseConfigValue(value, customConfig)
 		},
-	};
+	}
 </script>
 <style lang="scss" scoped>
 	.a-bar1 {

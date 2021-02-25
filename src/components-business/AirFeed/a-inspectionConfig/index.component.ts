@@ -1,33 +1,9 @@
-import {getInput, getSelect} from '../../../../lib'
-
-export const config = {
-	animation: true,
-	config: {
-		desc: true,
-		desc2: true,
-		videoUrl: true,
-	},
-}
-
-export const configSource = {
-	config: {
-		fields: {
-			desc: getInput('desc', '描述'),
-			desc2: getInput('desc2', '描述'),
-			videoUrl: getSelect('videoUrl', '图片地址', [
-				'/static/images/airfeed/car.webm',
-				'/static/images/airfeed/people.webm',
-			]),
-		},
-	},
-}
-
 export const value = {
 	api: {
 		data: JSON.stringify({
 			value1: 298,
 			value2: 298,
-			ratio: 95.3,
+			ratio: '95.3%',
 		}),
 	},
 	config: {
@@ -45,3 +21,26 @@ export const value = {
 		}
 	}
 }
+
+
+export const customConfig = [
+	{
+		prop: 'videoUrl',
+		label: '图片地址',
+		type: 'func-webm',
+		options: [
+			'/static/images/airfeed/car.webm',
+			'/static/images/airfeed/people.webm',
+		]
+	},
+	{
+		prop: 'desc',
+		label: '左描述',
+		type: 'func-input',
+	},
+	{
+		prop: 'desc2',
+		label: '右描述',
+		type: 'func-input',
+	},
+]

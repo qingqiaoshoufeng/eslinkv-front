@@ -6,7 +6,7 @@
 			itemList(:list="item.key" v-if="tabIndex===index" :needChoose="item.needChoose")
 </template>
 <script lang="ts">
-	import {Component, Vue} from 'vue-property-decorator'
+	import {Component, Vue, Watch} from 'vue-property-decorator'
 	import itemList from './item-list.vue'
 	import dRightModal from '../d-right-modal'
 	import platform from '../../store/platform.store'
@@ -40,11 +40,13 @@
 			}
 		]
 
+		@Watch('platform.chooseWidgetCustomConfig', {immediate: true, deep: true})
+		changeChooseWidgetCustomConfig(val) {
+			this.list[4].key = val
+		}
+
 		handleChangeTab(index) {
 			this.tabIndex = index
-			if (index === 4) {
-				this.list[4].key = [...this.platform.chooseWidgetCustomConfig]
-			}
 		}
 	}
 </script>

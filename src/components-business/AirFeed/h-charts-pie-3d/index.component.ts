@@ -1,4 +1,3 @@
-
 export const value = {
 	api: {
 		data: JSON.stringify([
@@ -19,4 +18,3 @@ export const value = {
 		}
 	}
 }
-export const config = {animation: true}
