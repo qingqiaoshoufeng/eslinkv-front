@@ -17,7 +17,7 @@ const value = {
     layout: {
         size: {
             width: 756,
-            height: 56
+            height: 245
         },
         position: {
             value: 'relative'
