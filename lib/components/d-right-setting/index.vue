@@ -14,10 +14,10 @@
 				i-switch(v-model="platform.ruler.lockGuides")
 			li.fn-flex.flex-row
 				label 画布左边距
-				i-inputNumber(v-model="platform.ruler.contentScrollLeft")
+				i-input-number(v-model="platform.ruler.contentScrollLeft")
 			li.fn-flex.flex-row
 				label 画布上边距
-				i-inputNumber(v-model="platform.ruler.contentScrollTop")
+				i-input-number(v-model="platform.ruler.contentScrollTop")
 			li.fn-flex.flex-row
 				label 画布缩放比例
 				i-select(v-model="platform.ruler.zoomIndex")
@@ -37,7 +37,7 @@
 			dRightModal,
 			'i-icon': Icon,
 			'i-switch': Switch,
-			'i-inputNumber': InputNumber,
+			'i-input-number': InputNumber,
 			'i-select': Select,
 			'i-option': Option,
 		},

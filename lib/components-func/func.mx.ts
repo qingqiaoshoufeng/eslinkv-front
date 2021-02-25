@@ -22,7 +22,7 @@ const editor = require('vue2-ace-editor')
 	components: {
 		'i-input': Input,
 		'i-icon': Icon,
-		'i-inputNumber': InputNumber,
+		'i-input-number': InputNumber,
 		'i-select': Select,
 		'i-option': Option,
 		'i-switch': Switch,

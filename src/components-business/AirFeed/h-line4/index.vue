@@ -4,9 +4,9 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins';
-	import getOption from './options';
-	import { config, configSource, value } from './index.component'
+	import mixins from '../../../../lib/mixins'
+	import getOption from './options'
+	import {value, customConfig} from './index.component'
 
 	export default {
 		mixins: [mixins],
@@ -30,10 +30,9 @@
 			},
 		},
 		created() {
-			
-			this.configValue = this.parseConfigValue(value);
+			this.configValue = this.parseConfigValue(value, customConfig)
 		},
-	};
+	}
 </script>
 <style lang="scss" scoped>
 	.chart {

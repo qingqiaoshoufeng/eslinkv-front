@@ -15,16 +15,16 @@
 		.fn-flex.flex-row.d-manage-modal-control-more
 			.d-manage-modal-control
 				label 上
-				i-inputNumber(v-model="item.config.layout.position.top" :disabled="platform.chooseWidgetState")
+				i-input-number(v-model="item.config.layout.position.top" :disabled="platform.chooseWidgetState")
 			.d-manage-modal-control
 				label 下
-				i-inputNumber(v-model="item.config.layout.position.bottom" :disabled="platform.chooseWidgetState")
+				i-input-number(v-model="item.config.layout.position.bottom" :disabled="platform.chooseWidgetState")
 			.d-manage-modal-control
 				label 左
-				i-inputNumber(v-model="item.config.layout.position.left" :disabled="platform.chooseWidgetState")
+				i-input-number(v-model="item.config.layout.position.left" :disabled="platform.chooseWidgetState")
 			.d-manage-modal-control
 				label 右
-				i-inputNumber(v-model="item.config.layout.position.right" :disabled="platform.chooseWidgetState")
+				i-input-number(v-model="item.config.layout.position.right" :disabled="platform.chooseWidgetState")
 			.d-manage-modal-control
 				label 单位
 				i-select(v-model="item.config.layout.position.unit" :disabled="platform.chooseWidgetState")
@@ -37,10 +37,10 @@
 		.fn-flex.flex-row.d-manage-modal-control-more
 			.d-manage-modal-control
 				label 宽度
-				i-inputNumber(:min="1" :step="1" v-model="item.config.layout.size.width" :disabled="platform.chooseWidgetState")
+				i-input-number(:min="1" :step="1" v-model="item.config.layout.size.width" :disabled="platform.chooseWidgetState")
 			.d-manage-modal-control
 				label 高度
-				i-inputNumber(:min="1" :step="1" v-model="item.config.layout.size.height" :disabled="platform.chooseWidgetState")
+				i-input-number(:min="1" :step="1" v-model="item.config.layout.size.height" :disabled="platform.chooseWidgetState")
 			.d-manage-modal-control
 				label 单位
 				i-select(v-model="item.config.layout.size.unit" :disabled="platform.chooseWidgetState")
@@ -53,10 +53,10 @@
 		.fn-flex.flex-row.d-manage-modal-control-more
 			.d-manage-modal-control
 				label 层级
-				i-inputNumber(:min="1" :step="1" v-model="item.config.layout.zIndex" :disabled="platform.chooseWidgetState")
+				i-input-number(:min="1" :step="1" v-model="item.config.layout.zIndex" :disabled="platform.chooseWidgetState")
 			.d-manage-modal-control
 				label 透明度
-				i-inputNumber(:min="0" :step=".1" :max="1" v-model="item.config.layout.opacity" :disabled="platform.chooseWidgetState")
+				i-input-number(:min="0" :step=".1" :max="1" v-model="item.config.layout.opacity" :disabled="platform.chooseWidgetState")
 			.d-manage-modal-control
 				label 内容溢出
 				i-select(v-model="item.config.layout.overflow" :clearable="true" :disabled="platform.chooseWidgetState")

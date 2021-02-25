@@ -12,10 +12,10 @@
 		.fn-flex.flex-row.d-manage-modal-control-more
 			.d-manage-modal-control
 				label 宽度
-				i-inputNumber(:min="1" :step="1" v-model="platform.panelConfig.size.width")
+				i-input-number(:min="1" :step="1" v-model="platform.panelConfig.size.width")
 			.d-manage-modal-control
 				label 高度
-				i-inputNumber(:min="1" :step="1" v-model="platform.panelConfig.size.height")
+				i-input-number(:min="1" :step="1" v-model="platform.panelConfig.size.height")
 			.d-manage-modal-control
 				label 单位
 				i-select(v-model="platform.panelConfig.size.unit")

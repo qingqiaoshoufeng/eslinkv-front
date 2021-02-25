@@ -1,6 +1,5 @@
-import {barData, dashLineData} from "./options";
+import {barData, dashLineData} from './options'
 
-export const config = {animation: true}
 export const value = {
 	api: {
 		data: JSON.stringify({
