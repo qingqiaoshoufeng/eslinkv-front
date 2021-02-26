@@ -115,6 +115,14 @@ export default {
 		{
 			type: [],
 			content: '移除vue组件 js-editor'
-		}
+		},
+		{
+			type: ['refactor'],
+			content: '杭燃组件添加缩略图'
+		},
+		{
+			type: ['refactor'],
+			content: '杭燃组件更新配置'
+		},
 	]
 }

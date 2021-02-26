@@ -31,7 +31,7 @@
 						:ref="`widget_${item.id}`"
 						:parent="true"
 						:parent-size="canvasSize"
-						:scale-ratio="platform.ruler.zooms[platform.ruler.zoomIndex]"
+						:scale-ratio="platform.ruler.zoom"
 						:draggable="widgetEditable(item)"
 						:resizable="widgetEditable(item)"
 						:active="item.id === activatedWidgetId && widgetEditable(item)"

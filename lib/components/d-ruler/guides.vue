@@ -7,7 +7,7 @@
 				v-for="item in platform.ruler.guideLines"
 				:title="item.title" :style="{...getLineStyle(item)}"
 				:key="item.id"
-				:class="[`vue-ruler-ref-line-${item.type}`, { locked: platform.ruler.lockGuides, 'no-pointer': zoom !== 1 || contentMove || platform.ruler.lockGuides }]"
+				:class="[`vue-ruler-ref-line-${item.type}`, { locked: platform.ruler.lockGuides, 'no-pointer': platform.ruler.zoom !== 1 || contentMove || platform.ruler.lockGuides }]"
 				@mousedown="e=>handleGuideDrag(e,item)"
 				@contextmenu="openGuideMenu(item.id, $event)"
 			)
@@ -25,7 +25,6 @@
 			contentMove: Boolean,
 			contentWidth: Number,
 			contentHeight: Number,
-			zoom: Number,
 		},
 		data() {
 			return {
@@ -41,7 +40,7 @@
 				const style = []
 				style.push(`width: ${this.contentWidth}px`)
 				style.push(`height: ${this.contentHeight}px`)
-				style.push(`transform: translate3d(${this.platform.ruler.contentScrollLeft}px, ${this.platform.ruler.contentScrollTop}px, 0) scale(${this.zoom})`)
+				style.push(`transform: translate3d(${this.platform.ruler.contentScrollLeft}px, ${this.platform.ruler.contentScrollTop}px, 0) scale(${this.platform.ruler.zoom})`)
 				return style.join(';')
 			},
 		},
@@ -65,7 +64,7 @@
 				type === 'h' && (style.top = `${site}px`)
 				type === 'v' && (style.left = `${site}px`)
 				site < 0 && (style.opacity = '0')
-				style.transform = `scale(${type === 'v' ? 1 / this.zoom + ', 1' : '1, ' + 1 / this.zoom})`
+				style.transform = `scale(${type === 'v' ? 1 / this.platform.ruler.zoom + ', 1' : '1, ' + 1 / this.platform.ruler.zoom})`
 				return style
 			},
 			openGuideMenu(id, e) {

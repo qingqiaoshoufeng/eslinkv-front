@@ -35,7 +35,7 @@
 		scene = scene.state
 
 		get zoom() {
-			const zoom = new BigNumber(this.platform.ruler.zooms[this.platform.ruler.zoomIndex])
+			const zoom = new BigNumber(this.platform.ruler.zoom)
 			return `${zoom.multipliedBy(100)}%`
 		}
 	}

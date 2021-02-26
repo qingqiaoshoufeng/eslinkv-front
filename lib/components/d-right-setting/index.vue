@@ -20,8 +20,8 @@
 				i-input-number(v-model="platform.ruler.contentScrollTop")
 			li.fn-flex.flex-row
 				label 画布缩放比例
-				i-select(v-model="platform.ruler.zoomIndex")
-					i-option(:value="index" v-for="(item,index) in platform.ruler.zooms" :key="item") {{item}}
+				i-select(v-model="zoom")
+					i-option(:value="item" v-for="(item) in zooms" :key="item") {{item}}
 			li.fn-flex.flex-row
 				label 平台版本
 				span {{platform.version}}
@@ -31,7 +31,9 @@
 	import {Component, Vue} from 'vue-property-decorator'
 	import {Icon, Switch, InputNumber, Select, Option,} from 'view-design'
 	import platform from '../../store/platform.store'
+	import BigNumber from 'bignumber.js'
 
+	BigNumber.set({DECIMAL_PLACES: 20})
 	@Component({
 		components: {
 			dRightModal,
@@ -44,6 +46,24 @@
 	})
 	export default class DRightSetting extends Vue {
 		platform: any = platform.state
+		zooms = [
+			'10%', '20%', '30%', '40%', '50%', '60%', '70%', '80%', '90%', '100%',
+			'110%', '120%', '130%', '140%', '150%', '160%', '170%', '180%', '190%', '200%',
+			'210%', '220%', '230%', '240%', '250%', '260%', '270%', '280%', '290%', '300%',
+			'310%', '320%', '330%', '340%', '350%', '360%', '370%', '380%', '390%', '400%'
+		]
+
+		get zoom() {
+			const zoom = new BigNumber(this.platform.ruler.zoom)
+			return `${zoom.multipliedBy(100)}%`
+		}
+
+		set zoom(val) {
+			if (val) {
+				const zoom = new BigNumber(val.replace('%', ''))
+				this.platform.ruler.zoom = zoom.dividedBy(100)
+			}
+		}
 	}
 </script>
 <style lang="scss" scoped>
