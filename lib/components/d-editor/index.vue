@@ -126,6 +126,7 @@
 	import dRightWidget from '../d-right-widget'
 	import dRightSetting from '../d-right-setting'
 	import platform from '../../store/platform.store'
+	import instance from '../../../lib/store/instance.store'
 	import scene from '../../store/scene.store'
 	import styleParser from '../../style-parser'
 	
@@ -229,8 +230,8 @@
 		mounted() {
 			document.addEventListener('fullscreenchange', this.handleFullscreenChange)
 			platform.actions.initKanboard()
-			window.GoldChart.mutations.setInstance('kanboard', this)
-			window.GoldChart.mutations.setStatus('inEdit')
+			instance.actions.setInstance('kanboard', this)
+			scene.actions.setStatus('inEdit')
 		}
 	}
 </script>

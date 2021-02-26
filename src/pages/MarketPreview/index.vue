@@ -21,6 +21,7 @@
         mounted() {
         	// todo 
 			// this.$root.$options.components
+			// this.$root.$store.platform=true
             if (window.GoldChart.components[`${this.type}-${this.version}`]) {
                 this.ready = true
             } else {

@@ -9,7 +9,7 @@ import copy from 'fast-copy'
 /**
  * @description 合并对象 生成一个新的对象,用前面的覆盖后面的
  */
-const configMerge = function (from, to) {
+export const configMerge = function (from, to) {
 	const output = copy(to)
 	const isArray = Array.isArray(from);
 	(!isArray ? Object.keys(from) : from).forEach((key, index) => {
