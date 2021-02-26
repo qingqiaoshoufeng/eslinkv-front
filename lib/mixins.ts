@@ -1,4 +1,4 @@
-import {styleParser} from './'
+import styleParser from './style-parser'
 import scene from './store/scene.store'
 import fetch from './fetch.js'
 import dataProcess from './data-process.js'
