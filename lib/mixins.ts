@@ -115,11 +115,6 @@ const mx: any = {
 			// 过滤可用属性
 			res.widget.name = res.widget.name || this.$parent.type
 			if (customConfig) {
-				customConfig.map(item => {
-					if (!item.prop.includes('config.config')) {
-						item.prop = `config.config.${item.prop}`
-					}
-				})
 				res.customConfig = customConfig
 			}
 			if (this.config.widget) {
