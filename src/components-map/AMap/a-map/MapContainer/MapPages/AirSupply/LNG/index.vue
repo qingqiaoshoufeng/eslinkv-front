@@ -106,7 +106,7 @@
 		AIRSUPPLY_LNG_OVERLAY_MAP,
 		AIRSUPPLY_LNG_LEGEND_MAP,
 	} from './config.js';
-	import scene from '../../../../../../../../lib/store/scene.store'
+	import scene from 'eslink-npm/src/store/scene.store'
 
 	export default {
 		name: 'LNG',

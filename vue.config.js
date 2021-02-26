@@ -131,6 +131,7 @@ module.exports = {
 			.loader('iview-loader')
 			.options({prefix: false})
 		config.resolve.alias.set('@lib', path.resolve(__dirname, './lib'))
+		// config.resolve.alias.set('eslink-npm', path.resolve(__dirname, './node_modules/eslink-npm'))
 		if (isProduction) {
 			if (needReport) {
 				config

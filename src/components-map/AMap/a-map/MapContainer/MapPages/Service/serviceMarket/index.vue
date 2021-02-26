@@ -55,7 +55,7 @@ import {
 	SERVICE_SERVICEMARKET_LEGEND_MAP,
 } from './config';
 
-import scene from '../../../../../../../../lib/store/scene.store'
+import scene from 'eslink-npm/src/store/scene.store'
 export default {
 	name: 'serviceMarket',
 	components: {

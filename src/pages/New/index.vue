@@ -9,11 +9,11 @@
 			d-footer
 </template>
 <script>
-	import loadMask from '../../../lib/components/load-mask/index'
-	import dFooter from '../../../lib/components/d-footer/index'
-	import dWidgetList from '../../../lib/components/d-widget-list/index'
-	import dEditor from '../../../lib/components/d-editor/index'
-	import platform from '../../../lib/store/platform.store'
+	import loadMask from 'eslink-npm/src/components/load-mask/index.vue'
+	import dFooter from 'eslink-npm/src/components/d-footer/index.vue'
+	import dWidgetList from 'eslink-npm/src/components/d-widget-list/index.vue'
+	import dEditor from 'eslink-npm/src/components/d-editor/index.vue'
+	import platform from 'eslink-npm/src/store/platform.store'
 
 	export default {
 		name: 'New',

@@ -21,7 +21,7 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins'
+	import mixins from 'eslink-npm/mixins'
 	import circle1 from './circle1'
 	import {customConfig, value} from './index.component'
 

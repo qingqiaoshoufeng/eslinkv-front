@@ -6,8 +6,8 @@
 </template>
 <script lang="ts">
 	import {Vue, Component} from 'vue-property-decorator'
-	import dView from '../../../lib/components/d-view/index.vue'
-	import dFooter from '../../../lib/components/d-footer/index.vue'
+	import dView from 'eslink-npm/src/components/d-view/index.vue'
+	import dFooter from 'eslink-npm/src/components/d-footer/index.vue'
 
 	@Component({
 		components: {

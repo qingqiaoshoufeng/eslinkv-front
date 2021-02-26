@@ -40,7 +40,7 @@
     </div>
 </template>
 <script>
-    import mixins from '../../../../lib/mixins';
+    import mixins from 'eslink-npm/mixins';
     import LineOne from '@/components/LineOne'
     import {value} from './index.component'
 

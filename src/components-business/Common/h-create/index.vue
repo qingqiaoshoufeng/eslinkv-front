@@ -5,11 +5,11 @@
 			h2(@click="handleClick") {{data&&data.title}}
 </template>
 <script lang="ts">
-	import mx from '../../../../lib/mixins'
+	import mx from 'eslink-npm/mixins'
 	import {Component} from 'vue-property-decorator'
 	import {mixins} from 'vue-class-component'
 	import {value} from './index.component'
-	import scene from '../../../../lib/store/scene.store'
+	import scene from 'eslink-npm/src/store/scene.store'
 
 	@Component
 	export default class extends mixins(mx) {

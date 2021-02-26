@@ -1,4 +1,4 @@
-import custom from '../../lib/store/custom.store'
+import custom from 'eslink-npm/src/store/custom.store'
 
 let components = {}, snapshots = {}
 const widgetsObject = {}

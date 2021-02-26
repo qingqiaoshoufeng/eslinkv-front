@@ -4,7 +4,7 @@
 			p.pos-r.text-left {{data&&data.title}}
 </template>
 <script>
-	import mx from '../../../../lib/mixins'
+	import mx from 'eslink-npm/mixins'
 	import {Component} from 'vue-property-decorator'
 	import {mixins} from 'vue-class-component'
     import {value} from './index.component'
