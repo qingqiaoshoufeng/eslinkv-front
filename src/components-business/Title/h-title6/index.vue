@@ -5,11 +5,11 @@
             h2.pos-r.pointer(v-for="item in data?data:[]" :class="{active:store.scene.index===item.sceneId}" @click="handleClick(item.sceneId)") {{item.title}}
 </template>
 <script lang="ts">
-    import mx from '../../../../lib/mixins'
+    import mx from 'eslink-npm/mixins'
     import {Component} from 'vue-property-decorator'
     import {mixins} from 'vue-class-component'
     import {value} from './index.component'
-	import scene from '../../../../lib/store/scene.store'
+	import scene from 'eslink-npm/src/store/scene.store'
     @Component
     class HTitle6 extends mixins(mx) {
         store: any = window.GoldChart.store

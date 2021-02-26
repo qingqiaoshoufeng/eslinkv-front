@@ -46,11 +46,11 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins'
+	import mixins from 'eslink-npm/mixins'
 	import format from 'date-fns/format'
 	import {customConfig, value} from './index.component'
-	import scene from '../../../../lib/store/scene.store'
-	import instance from '../../../../lib/store/instance.store'
+	import scene from 'eslink-npm/src/store/scene.store'
+	import instance from 'eslink-npm/src/store/instance.store'
 
 	export default {
 		data() {

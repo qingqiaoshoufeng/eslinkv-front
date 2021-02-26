@@ -25,6 +25,7 @@
         "codemirror": "^5.49.2",
         "core-js": "^3.6.5",
         "date-fns": "^2.16.1",
+        "eslink-npm": "git+http://10.200.1.145/shen.zhe.pei/Eslink-npm.git",
         "fast-copy": "^2.0.5",
         "highcharts": "^8.2.2",
         "highlight.js": "^10.5.0",

@@ -49,7 +49,7 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins'
+	import mixins from 'eslink-npm/mixins'
 	import Ring from '@/components/Ring/ring'
 	import {value} from './index.component'
 

@@ -20,7 +20,7 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins'
+	import mixins from 'eslink-npm/mixins'
 	import options from './options'
 	import {value, customConfig} from './index.component'
 

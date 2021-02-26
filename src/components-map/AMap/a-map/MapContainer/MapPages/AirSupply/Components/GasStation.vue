@@ -29,8 +29,8 @@ import {
 	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
 } from '../../../../config/scene'
 import { BaseOverlay } from '../../../../components/index'
-import scene from '../../../../../../../../lib/store/scene.store'
-import instance from '../../../../../../../../lib/store/instance.store'
+import scene from 'eslink-npm/src/store/scene.store'
+import instance from 'eslink-npm/src/store/instance.store'
 export default {
 	name: 'GasStation',
 	components: {

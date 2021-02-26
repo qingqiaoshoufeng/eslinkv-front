@@ -139,8 +139,8 @@
 		SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
 		SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP,
 	} from './config.js';
-	import scene from '../../../../../../../../lib/store/scene.store'
-	import instance from '../../../../../../../../lib/store/instance.store'
+	import scene from 'eslink-npm/src/store/scene.store'
+	import instance from 'eslink-npm/src/store/instance.store'
 
 	export default {
 		name: 'ServiceCustomer',

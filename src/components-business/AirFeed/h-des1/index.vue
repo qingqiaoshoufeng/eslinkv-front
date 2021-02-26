@@ -10,7 +10,7 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins'
+	import mixins from 'eslink-npm/mixins'
 	import {customConfig, value} from './index.component'
 
 	export default {

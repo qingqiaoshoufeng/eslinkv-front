@@ -1,6 +1,5 @@
-import {mutations, store} from '../../lib/store'
-import mixins from '../../lib/mixins'
-import platform from '../../lib/store/platform.store'
+import {mutations, store} from 'eslink-npm/src/store'
+import platform from 'eslink-npm/src/store/platform.store'
 
 const GoldChart: any = {
     scene: {
@@ -45,7 +44,6 @@ const GoldChart: any = {
         }
     },
     components: {},
-    mixins,
     methods: {},
 }
 

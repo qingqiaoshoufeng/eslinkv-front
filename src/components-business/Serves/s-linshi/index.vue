@@ -8,9 +8,9 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../../../lib/mixins'
+	import mixins from 'eslink-npm/mixins'
 	import {customConfig, value} from './index.component'
-	import scene from '../../../../lib/store/scene.store'
+	import scene from 'eslink-npm/src/store/scene.store'
 
 	export default {
 		mixins: [mixins],
