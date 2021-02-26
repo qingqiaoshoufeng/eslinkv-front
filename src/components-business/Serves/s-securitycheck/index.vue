@@ -30,8 +30,8 @@
 	</div>
 </template>
 <script>
-import mixins from 'eslink-npm/mixins';
-import options from './options';
+import mixins from 'eslinkv-npm/mixins'
+import options from './options'
 import { value } from './index.component'
 
 export default {

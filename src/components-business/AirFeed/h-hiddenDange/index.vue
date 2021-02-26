@@ -10,7 +10,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslink-npm/mixins'
+	import mixins from 'eslinkv-npm/mixins'
 	import dangerList from "./dangerList"
 	import dangerTable from "./dangerTable"
 	import {value} from './index.component'

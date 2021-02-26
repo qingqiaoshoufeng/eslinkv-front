@@ -8,7 +8,7 @@
 </template>
 <script>
 	import ImageView from '@/components/ImageView'
-	import mixins from 'eslink-npm/mixins'
+	import mixins from 'eslinkv-npm/mixins'
 	import {value } from './index.component'
 
 	export default {

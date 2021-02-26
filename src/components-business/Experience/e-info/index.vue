@@ -16,7 +16,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslink-npm/mixins'
+	import mixins from 'eslinkv-npm/mixins'
 	import {value, customConfig} from './index.component'
 
 	export default {

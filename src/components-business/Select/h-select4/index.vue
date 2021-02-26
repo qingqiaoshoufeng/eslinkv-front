@@ -27,7 +27,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslink-npm/mixins'
+	import mixins from 'eslinkv-npm/mixins'
 	import format from 'date-fns/format'
 	import addDays from 'date-fns/addDays'
 	import addMonths from 'date-fns/addMonths'

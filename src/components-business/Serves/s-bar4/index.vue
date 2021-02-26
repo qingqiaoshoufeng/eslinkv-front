@@ -18,10 +18,10 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslink-npm/mixins';
+	import mixins from 'eslinkv-npm/mixins';
 	import getOption from './options';
 	import {value} from './index.component'
-	import scene from 'eslink-npm/src/store/scene.store'
+	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
 		mixins: [mixins],

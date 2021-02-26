@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-    import mixins from 'eslink-npm/mixins'
+    import mixins from 'eslinkv-npm/mixins'
     import ETable from './ETable'
     import {value} from './index.component'
 

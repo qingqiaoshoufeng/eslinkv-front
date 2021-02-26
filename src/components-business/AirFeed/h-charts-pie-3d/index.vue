@@ -40,7 +40,7 @@
 	import {value} from './index.component'
 
 	highcharts3d(highcharts)
-	import mixins from 'eslink-npm/mixins'
+	import mixins from 'eslinkv-npm/mixins'
 
 	export default {
 		name: 'baoji-big-screen-wrap',

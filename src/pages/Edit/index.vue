@@ -9,10 +9,10 @@
 </template>
 <script lang="ts">
 	import {Vue, Component, Provide} from 'vue-property-decorator'
-	import platform from 'eslink-npm/src/store/platform.store'
-	import dWidgetList from 'eslink-npm/src/components/d-widget-list/index.vue'
-	import dEditor from 'eslink-npm/src/components/d-editor/index.vue'
-	import dFooter from 'eslink-npm/src/components/d-footer/index.vue'
+	import platform from 'eslinkv-npm/src/store/platform.store'
+	import dWidgetList from 'eslinkv-npm/src/components/d-widget-list/index.vue'
+	import dEditor from 'eslinkv-npm/src/components/d-editor/index.vue'
+	import dFooter from 'eslinkv-npm/src/components/d-footer/index.vue'
 
 	@Component({
 		components: {dWidgetList, dEditor, dFooter}

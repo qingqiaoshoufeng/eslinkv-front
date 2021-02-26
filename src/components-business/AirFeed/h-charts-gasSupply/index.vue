@@ -18,7 +18,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslink-npm/mixins'
+	import mixins from 'eslinkv-npm/mixins'
 	import getOptions from './options'
 	import format from 'date-fns/format'
 	import {customConfig, value} from './index.component'
