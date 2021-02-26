@@ -120,6 +120,10 @@
 					this.componentVersion = this.config.widget.componentVersion
 					// todo 
 					// this.$root.$options.components
+					if (this.$root.$options.components[`market-${this.type}-${this.componentVersion}`]) {
+						this.ready = true
+						return
+					}
 					if (window.GoldChart.components[`${this.type}-${this.componentVersion}`]) {
 						this.ready = true
 					} else {

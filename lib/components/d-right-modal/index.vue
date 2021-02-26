@@ -1,7 +1,7 @@
 <template lang="pug">
 	.d-right-modal-box.pos-a(:style="{top:`${top}px`}")
-		.d-right.pos-a.pointer
-			i-icon(:type="icon" :title="title" @click="handleClick" size="28" :class="[{active:rightModal}]")
+		.d-right.pos-a.pointer(@click="handleClick")
+			i-icon(:type="icon" :title="title" size="28" :class="[{active:rightModal}]")
 		.d-right-modal.pos-a(:class="[{active:rightModal}]" :style="{width:`${width}px`,top:`-${top-35}px`}" v-if="needModel")
 			slot
 </template>
@@ -9,6 +9,8 @@
 	import {Icon} from 'view-design'
 	import {Component, Vue, Prop} from 'vue-property-decorator'
 	import {findComponentsDownward} from '../../utils'
+	
+	console.log(Icon)
 
 	@Component({
 		components: {

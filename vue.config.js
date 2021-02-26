@@ -56,18 +56,20 @@ module.exports = {
 				// },
 			},
 			'^/data': {
-				target: 'http://127.0.0.1:7001',
+				// target: 'http://127.0.0.1:7001',
+				target: 'http://10.30.3.156:7001',
 				changeOrigin: true,
-				pathRewrite: {
-					'^/data': '/',
-				},
+				// pathRewrite: {
+				// 	'^/data': '/',
+				// },
 			},
 			'^/cdn': {
-				target: 'http://127.0.0.1:7001',
+				// target: 'http://127.0.0.1:7001',
+				target: 'http://10.30.3.156:7001',
 				changeOrigin: true,
-				pathRewrite: {
-					'^/cdn': '/',
-				},
+				// pathRewrite: {
+				// 	'^/cdn': '/',
+				// },
 			},
 			'^/server': {
 				// target: 'http://192.168.1.33:9082',

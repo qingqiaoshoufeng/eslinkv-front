@@ -3,12 +3,13 @@
 </template>
 <script lang="ts">
 	import {Component, Vue, Prop} from 'vue-property-decorator'
-
+	import {store} from '../../store'
+	
 	@Component
 	export default class DManageItem extends Vue {
 		@Prop({type: Object}) config: any
 		@Prop({type: Object}) parent: any
-		store: any = window.GoldChart.store
+		store: any = store
 		currentComponent: any = {}
 
 		created() {
