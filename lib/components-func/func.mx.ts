@@ -52,21 +52,11 @@ export default class Func extends Vue {
 	}
 
 	get obj() {
-		if (!this.config.prop) return null
-		let res = this.item
-		const props = this.config.prop.split('.')
-		props.length = props.length - 1
-		props.forEach(v => {
-			res = res[v]
-		})
-		return res
+		return this.item.config.config
 	}
 
-	// config.api.data，返回‘data‘
 	get inputKey() {
-		if (!this.config.prop) return null
-		const props = this.config.prop.split('.')
-		return props.reverse()[0]
+		return this.config.prop
 	}
 
 	editorInit() {

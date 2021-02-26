@@ -10,8 +10,6 @@
 	import {Component, Vue, Prop} from 'vue-property-decorator'
 	import {findComponentsDownward} from '../../utils'
 	
-	console.log(Icon)
-
 	@Component({
 		components: {
 			'i-icon': Icon
@@ -24,7 +22,6 @@
 		@Prop({default: '标题'}) title: string
 		@Prop({default: 33}) top: number
 		@Prop({default: true}) needModel: boolean
-
 
 		handleClick() {
 			if (this.needModel) {
