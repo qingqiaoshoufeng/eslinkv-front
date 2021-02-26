@@ -1,3 +1,4 @@
+import '../../lib'
 import custom from '../../lib/store/custom.store'
 
 let components = {}, snapshots = {}
