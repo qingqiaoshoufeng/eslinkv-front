@@ -140,6 +140,7 @@
 		SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP,
 	} from './config.js';
 	import scene from '../../../../../../../../lib/store/scene.store'
+	import instance from '../../../../../../../../lib/store/instance.store'
 
 	export default {
 		name: 'ServiceCustomer',
@@ -316,7 +317,7 @@
 				scene.actions.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX);
 				this.$nextTick(() => {
 					THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
-						window.GoldChart.instance.updateComponent(i, {
+						instance.actions.updateComponent(i, {
 							params: {
 								id,
 							},

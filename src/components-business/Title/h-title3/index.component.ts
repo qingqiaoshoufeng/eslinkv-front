@@ -1,17 +1,3 @@
-import {getInput, getSelect} from '../../../../lib'
-
-const configSource = {
-    config: {
-        fields: {
-            background: getSelect('background', '背景图片',
-                ['/static/icons/h-title3-1.svg', '/static/icons/h-title3-2.svg', '/static/icons/h-title3-3.svg', '/static/icons/h-title3-4.svg']),
-            color: getInput('color', '颜色'),
-            suffix: getInput('suffix', '后缀'),
-            subTitle: getInput('subTitle', '副标题'),
-        }
-    }
-}
-
 const customConfig = [
 	{
 		prop: 'color',
@@ -59,4 +45,4 @@ const value = {
     }
 }
 
-export {configSource, customConfig, value}
+export {customConfig, value}

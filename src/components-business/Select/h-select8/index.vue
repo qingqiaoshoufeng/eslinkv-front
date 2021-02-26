@@ -1,7 +1,8 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<ul class="h-select8 fn-flex flex-column pos-r">
-			<li @click="handleChange(item)" class="pointer pos-r text-left" :class="{active:(selectLabel?selectLabel:data.label)===item.name}" v-for="item in list">
+			<li @click="handleChange(item)" class="pointer pos-r text-left"
+				:class="{active:(selectLabel?selectLabel:data.label)===item.name}" v-for="item in list">
 				{{item.name}}
 			</li>
 		</ul>
@@ -13,28 +14,29 @@
 		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
 		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
 	} from '../../../components-map/AMap/a-map/config/scene'
-	import { value } from './index.component'
+	import {value} from './index.component'
+	import instance from '../../../../lib/store/instance.store'
 
 	export default {
 		data() {
 			return {
-				list:[],
+				list: [],
 				showOptions: false,
 				selectLabel: '',
 			}
 		},
-		watch:{
+		watch: {
 			data: {
 				handler(val) {
 					if (val) {
 						let c
-						this.list.forEach(item=>{
-							if(item.label ===val.label){
-								c=item
+						this.list.forEach(item => {
+							if (item.label === val.label) {
+								c = item
 							}
 						})
-						if(c){
-							this.selectLabel=c.label
+						if (c) {
+							this.selectLabel = c.label
 						}
 					}
 				},
@@ -52,7 +54,7 @@
 					id: a.id,
 				})
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach(item => {
-					window.GoldChart.instance.updateComponent(item, {
+					instance.actions.updateComponent(item, {
 						data: {
 							label: a.name,
 							title: a.name,
@@ -62,9 +64,9 @@
 					});
 				});
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach(item => {
-					window.GoldChart.instance.updateComponent(item, {
+					instance.actions.updateComponent(item, {
 						params: {
-							id:a.id,
+							id: a.id,
 						},
 					});
 				});
@@ -74,8 +76,8 @@
 			this.configValue = this.parseConfigValue(value)
 		},
 		mounted() {
-			this.$sysApi.map.airSupply.getAllTypeStationList({types:'GasStation'}).then(res=>{
-				this.list=res.gasStationList
+			this.$sysApi.map.airSupply.getAllTypeStationList({types: 'GasStation'}).then(res => {
+				this.list = res.gasStationList
 			})
 		}
 	}
