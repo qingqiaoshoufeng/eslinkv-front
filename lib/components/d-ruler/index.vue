@@ -1,7 +1,7 @@
 <template lang="pug">
 	.vue-ruler-wrapper.pos-r
 		section(v-show="platform.ruler.rulerVisible"
-			:style="(contentMove || zoom !== 1 || platform.ruler.lockGuides) && 'pointer-events: none'")
+			:style="(contentMove || platform.ruler.zoom !== 1 || platform.ruler.lockGuides) && 'pointer-events: none'")
 			.ruler-wrapper.h
 				.vue-ruler-h(
 					ref="horizontalRuler"
@@ -22,8 +22,7 @@
 			:hGuideLeft="horizontalDottedLeft"
 			:contentMove="contentMove"
 			:contentWidth="contentWidth"
-			:contentHeight="contentHeight"
-			:zoom="zoom")
+			:contentHeight="contentHeight")
 		.vue-ruler-content(:class="{ drag: contentMove }" @mousedown="handleContentMoveStart" @mousemove.prevent)
 			.content-body(:id="platform.ruler.dragId" :style="contentStyle")
 				slot
@@ -53,7 +52,7 @@
 		leftSpacing = 0 //  标尺与窗口左间距
 
 		get contentStyle() {
-			return `transform:translate3d(${this.platform.ruler.contentScrollLeft}px, ${this.platform.ruler.contentScrollTop}px, 0) scale(${this.zoom});width:${this.contentWidth + 18 * 2} px;height:${this.contentHeight + 18 * 2} px;`
+			return `transform:translate3d(${this.platform.ruler.contentScrollLeft}px, ${this.platform.ruler.contentScrollTop}px, 0) scale(${this.platform.ruler.zoom});width:${this.contentWidth + 18 * 2} px;height:${this.contentHeight + 18 * 2} px;`
 		}
 
 		/**
@@ -64,7 +63,7 @@
 		 * 去控制刻度显示和位移（有正负）
 		 */
 		get hRulerStyle() {
-			const fixedWidth = this.contentWidth * (this.zoom - 1) / 2
+			const fixedWidth = this.contentWidth * (this.platform.ruler.zoom - 1) / 2
 			const translateX = Math.ceil(this.platform.ruler.contentScrollLeft - fixedWidth - this.platform.ruler.rulerRange / 2)
 			return `width: ${this.platform.ruler.rulerRange * 1.5}px; transform: translateX(${translateX}px);`
 		}
@@ -77,7 +76,7 @@
 		 * 去控制刻度显示和位移（有正负）
 		 */
 		get vRulerStyle() {
-			const fixedHeight = this.contentHeight * (this.zoom - 1) / 2
+			const fixedHeight = this.contentHeight * (this.platform.ruler.zoom - 1) / 2
 			const translateY = Math.ceil(this.platform.ruler.contentScrollTop - fixedHeight - this.platform.ruler.rulerRange / 2)
 			return `height: ${this.platform.ruler.rulerRange * 1.5}px; transform: translateY(${translateY}px);`
 		}

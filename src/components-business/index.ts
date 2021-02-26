@@ -1,5 +1,3 @@
-import Vue from 'vue'
-import dvdp from '../../lib'
 import custom from '../../lib/store/custom.store'
 
 let components = {}, snapshots = {}
@@ -38,7 +36,3 @@ custom.actions.setCustomWidgets({
 	label: '杭燃样式',
 	widgets: widgetsObject,
 })
-Vue.component('detail', dvdp.detail)
-Vue.component('preview', dvdp.preview)
-Vue.component('full', dvdp.full)
-Vue.component('local', dvdp.local)
