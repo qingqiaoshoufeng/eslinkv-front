@@ -30,6 +30,7 @@ import {
 } from '../../../../config/scene'
 import { BaseOverlay } from '../../../../components/index'
 import scene from '../../../../../../../../lib/store/scene.store'
+import instance from '../../../../../../../../lib/store/instance.store'
 export default {
 	name: 'GasStation',
 	components: {
@@ -121,7 +122,7 @@ export default {
 			)
 			this.$nextTick(() => {
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach((item) => {
-					window.GoldChart.instance.updateComponent(item, {
+					instance.actions.updateComponent(item, {
 						data: {
 							label: name,
 							title: name,
@@ -131,7 +132,7 @@ export default {
 					})
 				})
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach((item) => {
-					window.GoldChart.instance.updateComponent(item, {
+					instance.actions.updateComponent(item, {
 						params: {
 							id,
 						},

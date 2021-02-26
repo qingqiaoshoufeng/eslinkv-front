@@ -125,9 +125,9 @@
 	import dRightManage from '../d-right-manage'
 	import dRightWidget from '../d-right-widget'
 	import dRightSetting from '../d-right-setting'
-	import platform from '../../../lib/store/platform.store'
-	import scene from '../../../lib/store/scene.store'
-	import styleParser from '../../../lib/style-parser'
+	import platform from '../../store/platform.store'
+	import scene from '../../store/scene.store'
+	import styleParser from '../../style-parser'
 	
 	export default {
 		name: 'kanboard-editor',

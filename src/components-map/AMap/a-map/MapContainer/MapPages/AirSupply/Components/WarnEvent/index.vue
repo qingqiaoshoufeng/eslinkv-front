@@ -47,6 +47,7 @@
 <script>
 import bus from '../../../../../utils/bus'
 import scene from '../../../../../../../../../lib/store/scene.store'
+import instance from '../../../../../../../../../lib/store/instance.store'
 import {
 	INDEXSCENEMAP,
 	OVERLAYINFOMAP_AIRSUPPLY,
@@ -136,7 +137,7 @@ export default {
 			//更新数据
 			this.$nextTick(() => {
 				AIRSUPPLY_WARN_COMPONENTINDEX.forEach((i) => {
-					window.GoldChart.instance.updateComponent(i, {
+					instance.actions.updateComponent(i, {
 						params: {
 							id: this.data.id,
 						},

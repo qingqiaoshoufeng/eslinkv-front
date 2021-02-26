@@ -50,6 +50,7 @@
 	import format from 'date-fns/format'
 	import {customConfig, value} from './index.component'
 	import scene from '../../../../lib/store/scene.store'
+	import instance from '../../../../lib/store/instance.store'
 
 	export default {
 		data() {
@@ -76,7 +77,7 @@
 					scene.actions.createSceneInstance(this.config.config.sceneId, 'slideRight')
 					if (this.config.config.componentId) {
 						this.$nextTick(() => {
-							scene.actions.updateComponent(this.config.config.componentId, {
+							instance.actions.updateComponent(this.config.config.componentId, {
 								data: {
 									selectType: '日',
 									selectValue: format(new Date(), 'yyyy.MM.dd')
