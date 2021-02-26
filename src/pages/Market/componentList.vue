@@ -17,7 +17,7 @@
 <script lang="ts">
     import {Vue, Component} from 'vue-property-decorator'
     import {Table, Page, Button} from 'view-design'
-    import {getCompListAll, destroyComponent} from 'eslink-npm/src/api/bussiness.api'
+    import {getCompListAll, destroyComponent} from 'eslinkv-npm/src/api/bussiness.api'
     import ImageView from '@/components/ImageView/index.vue'
     import dialogEdit from './dialogEditComponent.vue'
     import dialogVersion from './dialogEditComponentVersion.vue'

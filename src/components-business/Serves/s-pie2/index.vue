@@ -27,7 +27,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslink-npm/mixins'
+	import mixins from 'eslinkv-npm/mixins'
 	import getOption from './options'
 	import { customConfig, value } from './index.component'
 	import HVerticalTabs from '../../AirFeed/h-tabs-circle/HVerticalTabs';

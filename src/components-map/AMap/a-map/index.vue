@@ -11,7 +11,7 @@
 
 <script>
 	import MapContainer from './MapContainer/index';
-	import scene from 'eslink-npm/src/store/scene.store'
+	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
 		name: 'HRMap',

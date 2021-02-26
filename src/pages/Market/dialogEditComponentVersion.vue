@@ -9,7 +9,7 @@
 <script lang="ts">
     import {Vue, Component, Prop, Watch} from 'vue-property-decorator'
     import {Modal, Select, Option, Button} from 'view-design'
-    import {getVersionList, changeComponentVersion} from 'eslink-npm/src/api/bussiness.api'
+    import {getVersionList, changeComponentVersion} from 'eslinkv-npm/src/api/bussiness.api'
 
     @Component({
         components: {

@@ -23,7 +23,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslink-npm/mixins';
+	import mixins from 'eslinkv-npm/mixins';
 	import VueSeamLess from 'vue-seamless-scroll'
 	import { value } from './index.component'
 

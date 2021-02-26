@@ -12,7 +12,7 @@
     import MarketPreview from '../MarketPreview/index.vue'
     import '@riophae/vue-treeselect/dist/vue-treeselect.css'
     import html2canvas from 'html2canvas'
-    import {uploadFile, checkSuccess, checkError} from 'eslink-npm/src/api/bussiness.api'
+    import {uploadFile, checkSuccess, checkError} from 'eslinkv-npm/src/api/bussiness.api'
 
     @Component({
         components: {

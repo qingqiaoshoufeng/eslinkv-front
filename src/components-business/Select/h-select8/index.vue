@@ -9,13 +9,13 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslink-npm/mixins'
+	import mixins from 'eslinkv-npm/mixins'
 	import {
 		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
 		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
 	} from '../../../components-map/AMap/a-map/config/scene'
 	import {value} from './index.component'
-	import instance from 'eslink-npm/src/store/instance.store'
+	import instance from 'eslinkv-npm/src/store/instance.store'
 
 	export default {
 		data() {

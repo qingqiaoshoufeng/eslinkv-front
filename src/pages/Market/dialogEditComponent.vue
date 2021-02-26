@@ -25,7 +25,7 @@
 <script lang="ts">
     import {Vue, Component, Prop, Watch} from 'vue-property-decorator'
     import {Modal, Form, FormItem, Input, Button, Upload, Icon} from 'view-design'
-    import {createComponent, updateComponent, getAllComponentType} from 'eslink-npm/src/api/bussiness.api'
+    import {createComponent, updateComponent, getAllComponentType} from 'eslinkv-npm/src/api/bussiness.api'
     import TreeSelect from '@riophae/vue-treeselect'
     import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 

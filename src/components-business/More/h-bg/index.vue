@@ -71,10 +71,10 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslink-npm/mixins'
+	import mixins from 'eslinkv-npm/mixins'
 	import hBg54441 from './h-bg-54441'
 	import {customConfig, value} from './index.component'
-	import scene from 'eslink-npm/src/store/scene.store'
+	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
 		data() {

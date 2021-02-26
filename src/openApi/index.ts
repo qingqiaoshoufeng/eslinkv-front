@@ -1,5 +1,5 @@
-import {mutations, store} from 'eslink-npm/src/store'
-import platform from 'eslink-npm/src/store/platform.store'
+import {mutations, store} from 'eslinkv-npm/src/store'
+import platform from 'eslinkv-npm/src/store/platform.store'
 
 const GoldChart: any = {
     scene: {

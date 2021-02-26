@@ -5,7 +5,7 @@
             p {{config.config&&config.config.title}}
 </template>
 <script lang="ts">
-    import mx from 'eslink-npm/mixins'
+    import mx from 'eslinkv-npm/mixins'
     import {Component} from 'vue-property-decorator'
     import {mixins} from 'vue-class-component'
     import {value, customConfig} from './index.component'

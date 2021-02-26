@@ -8,6 +8,7 @@ const needReport = false
 function resolve(dir) {
 	return path.join(__dirname, dir)
 }
+
 module.exports = {
 	transpileDependencies: [
 		'@simonwep',
@@ -26,6 +27,10 @@ module.exports = {
 		hot: true,
 		open: true,
 		disableHostCheck: true,
+		overlay: {
+			warning: false,
+			errors: false
+		},
 		proxy: {
 			'^/hangran': {
 				// target: 'http://ebp-pc.hw-qa.eslink.net.cn',
@@ -131,7 +136,7 @@ module.exports = {
 			.loader('iview-loader')
 			.options({prefix: false})
 		config.resolve.alias.set('@lib', path.resolve(__dirname, './lib'))
-		// config.resolve.alias.set('eslink-npm', path.resolve(__dirname, './node_modules/eslink-npm'))
+		// config.resolve.alias.set('eslinkv-npm', path.resolve(__dirname, './node_modules/eslinkv-npm'))
 		if (isProduction) {
 			if (needReport) {
 				config

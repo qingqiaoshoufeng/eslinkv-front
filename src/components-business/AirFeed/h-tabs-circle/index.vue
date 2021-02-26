@@ -20,7 +20,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslink-npm/mixins'
+	import mixins from 'eslinkv-npm/mixins'
 	import HVerticalTabs from './HVerticalTabs'
 	import pie from './pie'
 	import {getCircleOption} from './options'

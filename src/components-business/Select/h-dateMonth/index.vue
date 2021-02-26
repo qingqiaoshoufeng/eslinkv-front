@@ -7,7 +7,7 @@
 				.h-dateMonth-right(:class="{disabled}" @click="handleChange(1)")
 </template>
 <script lang="ts">
-	import mx from 'eslink-npm/mixins'
+	import mx from 'eslinkv-npm/mixins'
 	import {Component,Watch} from 'vue-property-decorator'
 	import {mixins} from 'vue-class-component'
 	import addMonths from 'date-fns/addMonths'

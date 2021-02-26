@@ -12,7 +12,7 @@ import 'video.js/dist/video-js.css'
 import './api'
 import PortalVue from 'portal-vue'
 import '@babel/polyfill'
-import 'eslink-npm'
+import 'eslinkv-npm'
 
 Vue.use(PortalVue)
 Vue.use(VueVideoPlayer)
