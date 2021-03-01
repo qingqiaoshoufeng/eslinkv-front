@@ -1,6 +1,6 @@
 <template>
 	<div class="widget-part" :style="styles" v-if="data">
-		<div class="item" :class="{active:item.index.indexOf(store.scene.index)!==-1}" @click="switchTab(item.index[0])"
+		<div class="item" :class="{active:item.index.indexOf(scene.index)!==-1}" @click="switchTab(item.index[0])"
 			 v-for="item in data?data.value:[]">
 			<img :src="item.img">
 			<span>{{item.title}}</span>
@@ -16,7 +16,7 @@
 		mixins: [mixins],
 		data() {
 			return {
-				store: window.GoldChart.store
+				scene:scene.state,
 			}
 		},
 		methods: {

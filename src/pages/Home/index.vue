@@ -4,8 +4,6 @@
 			Button(type="warning" @click="handleNew") 新建看板
 			Button.ml20(type="info" @click="handleTemplate") 模版市场
 			Button.ml20(type="info" @click="handleMarket") 组件市场
-			Button.ml20(type="info" @click="handleHistory") 更新日志
-			Button.ml20(type="info" @click="handleHelp") 帮助文档
 		.search
 			Input(v-model="query.name" placeholder="看板标题" style="width: 200px;" clearable)
 			DatePicker(type="daterange" placeholder="创建日期" placement="bottom-end" v-model="date" style="margin-left: 10px;")
@@ -44,14 +42,6 @@
 			if (!val[0] || !val[1]) return
 			this.query.startDate = format(val[0], 'yyyy-MM-dd')
 			this.query.endDate = format(val[1], 'yyyy-MM-dd')
-		}
-
-		handleHistory() {
-			this.$router.push('/changeLog')
-		}
-
-		handleHelp() {
-			this.$router.push('/help/HowToUseMarket')
 		}
 
 		handleTemplate() {

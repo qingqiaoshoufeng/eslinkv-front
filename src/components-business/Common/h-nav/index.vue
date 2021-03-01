@@ -3,7 +3,7 @@
 		<ul class="h-nav fn-flex flex-row">
 			<li class="pos-r pointer fn-flex"
 				v-for="item in data?data.value:[]"
-				:class="{active:item.index.indexOf(store.scene.index)!==-1,disabled:data.disabled?data.disabled.indexOf(item.title)!==-1:false}"
+				:class="{active:item.index.indexOf(scene.index)!==-1,disabled:data.disabled?data.disabled.indexOf(item.title)!==-1:false}"
 				@click="changeScene(item.title,item.index[0])">
 				{{item.title}}
 			</li>
@@ -18,7 +18,7 @@
 	export default {
 		data() {
 			return {
-				store: window.GoldChart.store
+				scene: scene.state,
 			}
 		},
 		mixins: [mixins],

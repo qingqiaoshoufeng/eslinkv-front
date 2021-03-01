@@ -1,5 +1,4 @@
 {
-	"defaultSeverity": "none", // 关闭tslint
 	"compilerOptions": {
 		"target": "esnext",
 		"module": "esnext",

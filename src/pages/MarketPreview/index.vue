@@ -19,10 +19,7 @@
         }
 
         mounted() {
-        	// todo 
-			// this.$root.$options.components
-			// this.$root.$store.platform=true
-            if (window.GoldChart.components[`${this.type}-${this.version}`]) {
+            if (Vue.options.components[`${this.type}-${this.version}`]) {
                 this.ready = true
             } else {
                 this.$api.bussiness.detailMarket({
@@ -31,11 +28,6 @@
                 }).then(res => {
                     let script = document.createElement('script')
                     script.onload = () => {
-						// todo 
-						// this.$root.$options.components
-                        Vue.component(
-                            `market-${res.componentEnTitle}-${this.version}`,
-                            window.GoldChart.components[`${res.componentEnTitle}-${this.version}`].component)
                         this.ready = true
                     }
                     script.src = res.componentJsUrl

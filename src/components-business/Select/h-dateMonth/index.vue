@@ -8,25 +8,27 @@
 </template>
 <script lang="ts">
 	import mx from 'eslinkv-npm/mixins'
-	import {Component,Watch} from 'vue-property-decorator'
+	import {Component, Watch} from 'vue-property-decorator'
 	import {mixins} from 'vue-class-component'
 	import addMonths from 'date-fns/addMonths'
 	import isSameMonth from 'date-fns/isSameMonth'
 	import format from 'date-fns/format'
-	import { customConfig, value } from './index.component'
+	import {customConfig, value} from './index.component'
+	import instance from 'eslinkv-npm/src/store/instance.store'
 
 	@Component
 	class HDateMonth extends mixins(mx) {
 
-		lastDay:Date = new Date()
-		showOptions:Boolean = false
-		selectValue:Date = addMonths(new Date(), -1)
+		lastDay: Date = new Date()
+		showOptions: Boolean = false
+		selectValue: Date = addMonths(new Date(), -1)
+		instance = instance.state
 
-		@Watch('data', { immediate: true, deep: true })
+		@Watch('data', {immediate: true, deep: true})
 		onDataChange(val) {
-			if(val){
-				this.lastDay= new Date(val[0].month_id)
-				this.selectValue=new Date(val[0].month_id)
+			if (val) {
+				this.lastDay = new Date(val[0].month_id)
+				this.selectValue = new Date(val[0].month_id)
 			}
 		}
 
@@ -55,9 +57,9 @@
 					if (this.kanboardEditor.$refs[ref]) {
 						dom = this.kanboardEditor.$refs[ref][0].$refs.widgets
 					} else {
-						if (window.GoldChart.store.instance.createKanboard) {
-							if (window.GoldChart.store.instance.createKanboard.$refs[ref]) {
-								dom = window.GoldChart.store.instance.createKanboard.$refs[ref][0].$refs.widgets
+						if (this.instance.createKanboard) {
+							if (instance.actions.createKanboard.$refs[ref]) {
+								dom = instance.actions.createKanboard.$refs[ref][0].$refs.widgets
 							}
 						}
 					}
@@ -81,9 +83,9 @@
 					if (this.kanboardEditor.$refs[ref]) {
 						dom = this.kanboardEditor.$refs[ref][0].$refs.widgets
 					} else {
-						if (window.GoldChart.store.instance.createKanboard) {
-							if (window.GoldChart.store.instance.createKanboard.$refs[ref]) {
-								dom = window.GoldChart.store.instance.createKanboard.$refs[ref][0].$refs.widgets
+						if (this.instance.createKanboard) {
+							if (instance.actions.createKanboard.$refs[ref]) {
+								dom = instance.actions.createKanboard.$refs[ref][0].$refs.widgets
 							}
 						}
 					}
