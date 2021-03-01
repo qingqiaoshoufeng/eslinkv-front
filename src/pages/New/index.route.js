@@ -1,6 +1,6 @@
 export default {
-	path: '/new',
-	name: 'new',
+	path: '/editor/new',
+	name: 'editorNew',
 	mode: [],
 	component: () => import('./index.vue'),
 }
