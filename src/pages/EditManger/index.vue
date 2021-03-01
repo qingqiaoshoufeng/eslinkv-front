@@ -75,7 +75,6 @@
 </script>
 <style lang="scss" scoped>
 	.list-container {
-		height: 100%;
 		padding: 15px;
 		min-width: 930px;
 

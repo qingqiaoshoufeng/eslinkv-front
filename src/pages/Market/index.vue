@@ -36,7 +36,6 @@
 <style lang="scss">
     .market-content {
         margin-left: 240px;
-        height: calc(100vh);
         padding: 40px 80px;
         overflow-y: auto;
         

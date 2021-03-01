@@ -14,8 +14,9 @@ import './api'
 import PortalVue from 'portal-vue'
 import '@babel/polyfill'
 import 'eslinkv-npm'
-import eLeft from './components/ELeft/index.vue'
-import eLayout from './components/ELayout/index.vue'
+import eLeft from './components/e-left/index.vue'
+import eLayout from './components/e-layout/index.vue'
+import eHeader from './components/e-header/index.vue'
 
 Vue.use(PortalVue)
 Vue.use(VueVideoPlayer)
@@ -25,6 +26,7 @@ Vue.component('iOption', Option)
 Vue.component('iIcon', Icon)
 Vue.component('e-left', eLeft)
 Vue.component('e-layout', eLayout)
+Vue.component('e-header', eHeader)
 
 Vue.prototype.$format = format
 Vue.prototype.$Message = Message

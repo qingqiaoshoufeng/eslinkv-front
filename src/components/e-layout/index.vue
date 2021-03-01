@@ -1,19 +1,19 @@
 <template lang="pug">
-	.layout-container.fn-flex.flex-row
+	.e-layout-container.fn-flex.flex-row
 		e-left
-		slot
+		.e-layout-content
+			e-header
+			slot
 </template>
 <script lang="ts">
 	import {Vue, Component} from 'vue-property-decorator'
 
 	@Component
-	export default class Left extends Vue {
+	export default class Layout extends Vue {
 	}
 </script>
 <style lang="scss" scoped>
-	@import "../../scss/conf";
-
-	.layout-container {
-		
+	.e-layout-content{
+		padding-top: 40px;
 	}
 </style>
