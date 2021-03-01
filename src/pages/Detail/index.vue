@@ -40,8 +40,7 @@
 
 		get scaleRatio() {
 			if (!this.fitScreen) return 1
-			const ratio = this.actualScaleRatio
-			return ratio < 1 ? ratio : 1
+			return this.actualScaleRatio
 		}
 	}
 </script>
@@ -87,7 +86,7 @@
 		&.mobile {
 			align-items: unset;
 			overflow: auto;
-
+			
 			#kanban {
 				transform-origin: 0 0;
 			}
@@ -96,6 +95,7 @@
 		.mobile-wrap {
 			position: relative;
 			overflow: hidden;
+			width: 100%;
 		}
 	}
 </style>
