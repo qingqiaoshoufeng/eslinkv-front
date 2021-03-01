@@ -10,7 +10,6 @@
 </template>
 <script lang="ts">
     import Left from './left.vue'
-    import 'markdown-it-vue/dist/markdown-it-vue.css'
     import {Component, Vue, Watch} from 'vue-property-decorator'
 
     @Component({

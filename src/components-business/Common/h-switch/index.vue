@@ -2,7 +2,7 @@
 	<div class="widget-part pos-r" :style="styles">
 		<ul class="h-switch fn-flex flex-row">
 			<li class="pos-r pointer fn-flex" v-for="item in data?data.value:[]"
-				:class="{active:item .indexOf(store.scene.index)!==-1}"
+				:class="{active:item .indexOf(scene.index)!==-1}"
 				@click="changeScene(item[0])">
 			</li>
 		</ul>
@@ -16,7 +16,7 @@
 	export default {
 		data() {
 			return {
-				store: window.GoldChart.store
+				scene:scene.state,
 			}
 		},
 		mixins: [mixins],

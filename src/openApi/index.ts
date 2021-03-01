@@ -1,34 +1,4 @@
-import {mutations, store} from 'eslinkv-npm/src/store'
-import platform from 'eslinkv-npm/src/store/platform.store'
-
 const GoldChart: any = {
-    scene: {
-        initScene: mutations.initScene,
-        setSceneIndex: mutations.setSceneIndex,
-        createScene: mutations.createScene,
-        destroyScene: mutations.destroyScene,
-        createSceneInstance: mutations.createSceneInstance,
-        changeShowMainScene: mutations.changeShowMainScene,
-    },
-    instance: {
-        updateComponent: (id, config) => {
-            const widgetConfig = platform.actions.widgetAdded[id].config.api
-            if (config.params) {
-                widgetConfig.params = JSON.stringify(config.params)
-            }
-            if (config.data) {
-                widgetConfig.data = JSON.stringify(config.data)
-            }
-            if (config.url)
-                widgetConfig.url = config.url
-            if (config.path)
-                widgetConfig.path = config.path
-            if (config.method)
-                widgetConfig.method = config.method
-        },
-    },
-    store,
-    mutations,
     liveVideo: {
         flvPlayer: null,
         myPlayer: null,
@@ -43,8 +13,6 @@ const GoldChart: any = {
             }
         }
     },
-    components: {},
-    methods: {},
 }
 
 if (!window.GoldChart) {
