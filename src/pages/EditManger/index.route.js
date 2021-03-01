@@ -1,6 +1,6 @@
 export default {
-	path: '/',
-	name: 'home',
+	path: '/editor/Manger',
+	name: 'editorManger',
 	mode: [],
 	component: () => import('./index.vue'),
 }

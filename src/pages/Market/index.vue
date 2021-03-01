@@ -1,12 +1,9 @@
-<template>
-    <div>
-        <div class="fn-clear">
-            <left/>
-            <div class="market-content">
-                <component :is="currentComponent"/>
-            </div>
-        </div>
-    </div>
+<template lang="pug">
+    e-layout
+        .fn-clear
+            left
+            .market-content
+                component(:is="currentComponent")
 </template>
 <script lang="ts">
     import Left from './left.vue'

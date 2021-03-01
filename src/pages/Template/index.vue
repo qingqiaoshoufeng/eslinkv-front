@@ -1,8 +1,9 @@
 <template lang="pug">
-	.list-container
-		ul.fn-flex.flex-row.list-item-card-box
-			item-card(v-for="item in list" v-bind="item" :key="item.id" @init="init")
-		Page(:total="total" :show-sizer="true" :show-elevator="true" :show-total="true" @on-change="handleChange" @on-page-size-change="handlePageSize")
+	e-layout
+		.list-container
+			ul.fn-flex.flex-row.list-item-card-box
+				item-card(v-for="item in list" v-bind="item" :key="item.id" @init="init")
+			Page(:total="total" :show-sizer="true" :show-elevator="true" :show-total="true" @on-change="handleChange" @on-page-size-change="handlePageSize")
 </template>
 <script lang="ts">
 	import {Vue, Component} from 'vue-property-decorator'
