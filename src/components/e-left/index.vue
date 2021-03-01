@@ -1,18 +1,18 @@
 <template lang="pug">
-	.left-container
-		.left-logo-container
-		ul.left-content.text-center
+	.e-left-container.pos-r.z-index-9
+		.e-left-logo-container
+		ul.e-left-content.text-center
 			li.fn-flex.flex-column.pointer
-				i-icon(type="ios-apps" size="24")
+				i-icon(type="ios-apps" :size="24")
 				span 目录
 			li.fn-flex.flex-column.pointer(@click="handleLink('/market/componentList')" :class="{active:index==='/market/componentList'}")
-				i-icon(type="ios-apps" size="24")
+				i-icon(type="ios-pie" :size="24")
 				span 组件市场
 			li.fn-flex.flex-column.pointer(@click="handleLink('/template')" :class="{active:index==='/template'}")
-				i-icon(type="ios-apps" size="24")
+				i-icon(type="ios-aperture" :size="24")
 				span 模版市场
 			li.fn-flex.flex-column.pointer(@click="handleLink('/editor/Manger')" :class="{active:index==='/editor/Manger'}")
-				i-icon(type="ios-apps" size="24")
+				i-icon(type="ios-easel" :size="24")
 				span 看板管理
 </template>
 <script lang="ts">
@@ -41,14 +41,11 @@
 <style lang="scss" scoped>
 	@import "../../scss/conf";
 
-	.left-container {
+	.e-left-container {
 		width: 70px;
 	}
 
-	.left-container {
-	}
-
-	.left-content {
+	.e-left-content {
 		background-color: #2c3d59;
 		height: calc(100vh - 40px);
 		padding-top: 15px;
@@ -67,7 +64,7 @@
 		}
 	}
 
-	.left-logo-container {
+	.e-left-logo-container {
 		background-color: $themeColor;
 		height: 40px;
 	}
