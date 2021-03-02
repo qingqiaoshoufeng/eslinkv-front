@@ -3,8 +3,6 @@ import App from './App.vue'
 import router from './router'
 import {Message, Modal, Switch, Select, Option, Icon} from 'view-design'
 import {format} from 'date-fns'
-// import './scss/reset.scss'
-// import './scss/index.scss'
 import './openApi'
 import './components-business'
 import './components-map'
@@ -17,6 +15,7 @@ import 'eslinkv-npm'
 import eLeft from './components/e-left/index.vue'
 import eLayout from './components/e-layout/index.vue'
 import eHeader from './components/e-header/index.vue'
+import ePage from './components/e-page/index.vue'
 
 Vue.use(PortalVue)
 Vue.use(VueVideoPlayer)
@@ -27,6 +26,7 @@ Vue.component('iIcon', Icon)
 Vue.component('e-left', eLeft)
 Vue.component('e-layout', eLayout)
 Vue.component('e-header', eHeader)
+Vue.component('e-page', ePage)
 
 Vue.prototype.$format = format
 Vue.prototype.$Message = Message

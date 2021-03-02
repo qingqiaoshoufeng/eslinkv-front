@@ -15,12 +15,12 @@
 			i-button(icon="ios-trash-outline" :style="{marginTop:'10px'}" type="error" @click="handleRemove") 删除
 </template>
 <script lang="ts">
-	import {Card, Tag, Button} from 'view-design'
+	import {Card, Button} from 'view-design'
 	import EmptyImage from '../../components/empty-image/index.vue'
 	import {Vue, Component, Prop} from 'vue-property-decorator'
 
 	@Component({
-		components: {'i-card': Card, EmptyImage, 'i-button': Button},
+		components: {'i-card': Card, 'i-button': Button, EmptyImage},
 	})
 	export default class ItemCard extends Vue {
 		@Prop(String) snapshot: string
@@ -36,7 +36,7 @@
 		}
 
 		handleLink() {
-			window.open(`${location.origin}${location.pathname}#/detail/${this.id}`)
+			window.open(`${location.origin}${location.pathname}/detail/${this.id}`)
 		}
 
 		handleRemove() {
@@ -48,7 +48,7 @@
 					this.$api.board.remove({dataBoardId: this.id}).then(() => {
 						this.$Message.success('删除成功')
 						this.$Modal.remove()
-						this.$emit('init')
+						this.$emit('reload')
 					})
 				}
 			})
@@ -63,18 +63,17 @@
 					this.$api.panel.publish({id: this.id}).then(() => {
 						this.$Message.success('发布成功')
 						this.$Modal.remove()
-						this.$emit('init')
+						this.$emit('reload')
 					})
 				}
 			})
 		}
 	}
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	.list-item-card {
-		width: calc((100% - 90px) / 4);
+		width: calc((100% - 110px) / 4);
 		margin: 0 30px 25px 0;
-		min-width: 195px;
 
 		/deep/ .ivu-icon {
 			font-size: 16px;
@@ -100,6 +99,7 @@
 			align-items: center;
 			justify-content: center;
 			background-color: rgba(0, 0, 0, .5);
+			border-radius: 4px;
 		}
 
 		.list-item-card-time-box {

@@ -15,7 +15,7 @@
 	</div>
 </template>
 <script>
-import mixins from 'eslinkv-npm/mixins';
+import mixins from 'eslinkv-npm/mixins'
 import { value } from './index.component'
 
 const SIZE = 5

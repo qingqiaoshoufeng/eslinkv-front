@@ -2,17 +2,17 @@
 	e-layout
 		.list-container
 			div
-				Button(type="warning" @click="handleNew") 新建看板
+				i-button(type="warning" @click="handleNew") 新建看板
 			.search
-				Input(v-model="query.name" placeholder="看板标题" style="width: 200px;" clearable)
-				DatePicker(type="daterange" placeholder="创建日期" placement="bottom-end" v-model="date" style="margin-left: 10px;")
-				Select(v-model="query.status" placeholder="状态" style="width: 100px;margin-left: 10px;" clearable)
-					Option(:value="0") 未发布
-					Option(:value="1") 已发布
-				Button.ml20(type="primary" @click="handleChange(1)") 查询
-			ul.fn-flex.flex-row.list-item-card-box
-				item-card(v-for="item in list" v-bind="item" :key="item.id" @init="init")
-			Page(:total="total" :show-sizer="true" :show-elevator="true" :show-total="true" @on-change="handleChange" @on-page-size-change="handlePageSize")
+				i-input(v-model="query.name" placeholder="看板标题" style="width: 200px;" clearable)
+				i-date-picker(type="daterange" placeholder="创建日期" placement="bottom-end" v-model="date" style="margin-left: 10px;")
+				i-select(v-model="query.status" placeholder="状态" style="width: 100px;margin-left: 10px;" clearable)
+					i-option(:value="0") 未发布
+					i-option(:value="1") 已发布
+				i-button.ml20(type="primary" @click="handleChange(1)") 查询
+			e-page(@init="init" :total="total" ref="page")
+				ul.fn-flex.flex-row.list-item-card-box
+					item-card(v-for="item in list" v-bind="item" :key="item.id" @reload="reload")
 </template>
 <script lang="ts">
 	import {Vue, Component, Watch} from 'vue-property-decorator'
@@ -21,13 +21,19 @@
 	import {Page, Button, Input, DatePicker, Select, Option} from 'view-design'
 
 	@Component({
-		components: {itemCard, Page, Button, Input, DatePicker, Select, Option}
+		components: {
+			itemCard,
+			'i-page': Page,
+			'i-button': Button,
+			'i-input': Input,
+			'i-date-picker': DatePicker,
+			'i-select': Select,
+			'i-option': Option
+		}
 	})
 	export default class EditManger extends Vue {
 		list: any[] = []
 		total: number = 0
-		pageNum: number = 1
-		pageSize: number = 10
 		date: any = []
 		query: any = {
 			name: '',
@@ -47,36 +53,25 @@
 			this.$router.push('/editor/new')
 		}
 
-		handleChange(pageNum) {
-			this.pageNum = pageNum
-			this.init()
+		reload() {
+			this.$refs.page.reload()
 		}
 
-		handlePageSize(pageSize) {
-			this.pageSize = pageSize
-			this.init()
-		}
-
-		init() {
+		init({pageSize, pageNum}) {
 			this.$api.panel.list({
-				pageSize: this.pageSize,
-				type: 0, pageNum: this.pageNum,
+				pageSize, pageNum,
+				type: 0,
 				...this.query
 			}).then(res => {
 				this.list = res.list
 				this.total = res.total
 			})
 		}
-
-		mounted() {
-			this.init()
-		}
 	}
 </script>
 <style lang="scss" scoped>
 	.list-container {
 		padding: 15px;
-		min-width: 930px;
 
 		.ml20 {
 			margin-left: 20px;
