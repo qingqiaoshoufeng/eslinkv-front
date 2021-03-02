@@ -1,20 +1,19 @@
 <template lang="pug">
-    .container
-        .btn-box
-            Button.mr10(type="primary" @click="check" :disabled="!selectOne") 审核
-        Table(:columns="columns" :data="tableData" @on-selection-change="selectHandle")
-            template(#status="{ row }")
-                span {{status[row.status]}}
-            template(#createTime="{ row }")
-                span {{$format(new Date(row.createTime),'yyyy-MM-dd HH:mm:ss')}}
-        .page
-            page(:total="total" show-elevator show-total :page-size="pageSize" :current="pageNum" @on-change="pageChange")
-        dialogCheck(v-model="dialogCheckShow" :detail="currentRow" @reload="reload")
+	e-layout
+		.market-container
+			.btn-box
+				Button.mr10(type="primary" @click="check" :disabled="!selectOne") 审核
+			Table(:columns="columns" :data="list" @on-selection-change="selectHandle")
+				template(#status="{ row }")
+					span {{status[row.status]}}
+				template(#createTime="{ row }")
+					span {{$format(new Date(row.createTime),'yyyy-MM-dd HH:mm:ss')}}
+			e-page(@init="init" :total="total" ref="page")
+			dialogCheck(v-model="dialogCheckShow" :detail="currentRow" @reload="reload")
 </template>
 <script lang="ts">
     import {Vue, Component} from 'vue-property-decorator'
     import {Table, Page, Button} from 'view-design'
-    import {getWaitCheckList} from 'eslinkv-npm/src/api/bussiness.api'
     import dialogCheck from './dialogCheckComponent.vue'
 
     @Component({
@@ -26,7 +25,7 @@
         }
     })
     export default class Market extends Vue {
-        tableData = []
+        list = []
         columns = [
             {
                 type: 'selection',
@@ -59,8 +58,6 @@
             },
         ]
         total: number = 0
-        pageNum: number = 1
-        pageSize: number = 10
         dialogCheckShow: boolean = false
         currentRow: any = null
         selectMore: any = false
@@ -71,14 +68,14 @@
             success: '审核通过',
         }
 
-        async search() {
-            const res = await getWaitCheckList({
-                pageNum: this.pageNum,
-                pageSize: this.pageSize,
-            })
-            this.tableData = res.rows
-            this.total = res.count
-        }
+		async init({pageNum, pageSize}) {
+			const res = await this.$api.bussiness.getWaitCheckList({
+				pageNum,
+				pageSize,
+			})
+			this.list = res.rows
+			this.total = res.count
+		}
 
         selectHandle(selection) {
             if (selection.length > 1) {
@@ -93,25 +90,14 @@
             }
         }
 
-        reload() {
-            this.pageNum = 1
-            this.pageSize = 10
-            this.search()
-        }
-
         check() {
             this.currentRow = this.selectOne
             this.dialogCheckShow = true
         }
 
-        pageChange(page) {
-            this.pageNum = page
-            this.search()
-        }
-
-        created() {
-            this.search()
-        }
+		reload() {
+			this.$refs.page.reload()
+		}
     }
 </script>
 <style lang="scss" scoped>
@@ -119,10 +105,7 @@
         margin-bottom: 10px;
     }
 
-    .container {
-        width: 100%;
-        height: 100%;
-        background: #fff;
+    .market-container {
         padding: 15px;
 
         .page {

@@ -1,5 +1,5 @@
 <template lang="pug">
-	.e-layout-container.fn-flex.flex-row
+	.e-layout-container
 		e-left
 		.e-layout-content
 			e-header
@@ -9,11 +9,12 @@
 	import {Vue, Component} from 'vue-property-decorator'
 
 	@Component
-	export default class Layout extends Vue {
+	export default class ELayout extends Vue {
 	}
 </script>
 <style lang="scss" scoped>
 	.e-layout-content{
 		padding-top: 40px;
+		padding-left: 70px;
 	}
 </style>

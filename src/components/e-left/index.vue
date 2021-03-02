@@ -1,10 +1,10 @@
 <template lang="pug">
-	.e-left-container.pos-r.z-index-9
+	.e-left-container.pos-f.z-index-9
 		.e-left-logo-container
 		ul.e-left-content.text-center
-			li.fn-flex.flex-column.pointer
-				i-icon(type="ios-apps" :size="24")
-				span 目录
+			//li.fn-flex.flex-column.pointer
+			//	i-icon(type="ios-apps" :size="24")
+			//	span 目录
 			li.fn-flex.flex-column.pointer(@click="handleLink('/market/componentList')" :class="{active:index==='/market/componentList'}")
 				i-icon(type="ios-pie" :size="24")
 				span 组件市场
@@ -24,7 +24,7 @@
 			'i-icon': Icon
 		}
 	})
-	export default class Left extends Vue {
+	export default class ELeft extends Vue {
 		index = ''
 
 		handleLink(url) {
@@ -43,6 +43,8 @@
 
 	.e-left-container {
 		width: 70px;
+		top: 0;
+		left: 0;
 	}
 
 	.e-left-content {
