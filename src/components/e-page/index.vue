@@ -1,7 +1,7 @@
 <template lang="pug">
 	div
 		slot
-		i-page(:total="total" :show-sizer="true" :show-elevator="true" :show-total="true" @on-change="handleChange" @on-page-size-change="handlePageSize")
+		i-page.e-page(:total="total" :show-sizer="true" :show-elevator="true" :show-total="true" @on-change="handleChange" @on-page-size-change="handlePageSize")
 </template>
 <script lang="ts">
 	import {Vue, Component, Prop} from 'vue-property-decorator'
@@ -37,3 +37,8 @@
 		}
 	}
 </script>
+<style lang="scss" scoped>
+	.e-page {
+		margin-top: 15px;
+	}
+</style>

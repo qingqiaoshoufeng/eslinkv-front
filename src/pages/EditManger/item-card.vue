@@ -72,7 +72,7 @@
 </script>
 <style lang="scss" scoped>
 	.list-item-card {
-		width: calc((100% - 110px) / 4);
+		width: calc((100% - 120px) / 5);
 		margin: 0 30px 25px 0;
 
 		/deep/ .ivu-icon {
@@ -85,7 +85,7 @@
 			}
 		}
 
-		&:nth-child(4n) {
+		&:nth-child(5n) {
 			margin-right: 0;
 		}
 
