@@ -46,7 +46,7 @@
 		}
 	}
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	.market-container {
 		padding: 15px;
 
