@@ -36,7 +36,7 @@
 		}
 
 		handleLink() {
-			window.open(`${location.origin}${location.pathname}/detail/${this.id}`)
+			window.open(`${location.origin}/detail/${this.id}`)
 		}
 
 		handleRemove() {
