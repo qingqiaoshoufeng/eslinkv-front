@@ -1,7 +1,7 @@
 <template>
     <div ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen }" class="preview-wrapper">
         <kanban-preview @mounted="updateKanboardSize" ref="previewContainer"
-                        :style="`transform: scale(${scaleRatio},${scale}) translate3d(0, 0, 0); overflow: hidden;`"/>
+                        :style="`transform: scale(${customScale?customScale:scaleRatio},${scale}) translate3d(0, 0, 0); overflow: hidden;`"/>
     </div>
 </template>
 
@@ -29,6 +29,7 @@
                     height: 1080
                 },
                 scale: 1,
+                customScale: 0,
                 actualScaleRatio: 1
             }
         },
@@ -66,6 +67,12 @@
                 if (getQueryString('scale'))
                     if (!isNaN(getQueryString('scale')))
                         this.scale = Number(getQueryString('scale'))
+                if (getQueryString('scaleY'))
+                    if (!isNaN(getQueryString('scaleY')))
+                        this.scale = Number(getQueryString('scaleY'))
+                if (getQueryString('scaleX'))
+                    if (!isNaN(getQueryString('scaleX')))
+                        this.customScale = Number(getQueryString('scaleX'))
             },
             refill(value) {
                 this.$refs.previewContainer.refillConfig(value).then(() => {
@@ -97,16 +104,16 @@
         background: #0f3b69;
         z-index: 99999;
         display: flex;
-
+        
         &.active {
             overflow: auto;
         }
-
+        
         &::-webkit-scrollbar {
             width: 0;
             height: 0;
         }
-
+        
         /deep/ {
             #kanban {
                 position: relative;
@@ -116,21 +123,21 @@
                 /*margin: auto;*/
             }
         }
-
+        
         &.fit-mode {
             justify-content: center;
             align-items: center;
             overflow: hidden;
         }
     }
-
+    
     .action-bar {
         position: fixed;
         right: 15px;
         bottom: 15px;
         display: flex;
         z-index: 100000;
-
+        
         .action {
             padding: 10px 18px;
             color: white;
@@ -138,11 +145,11 @@
             opacity: 0.5;
             background-color: rgba(0, 0, 0, 0.4);
             cursor: pointer;
-
+            
             &:hover {
                 opacity: 0.8;
             }
-
+            
             &:not(:first-child) {
                 margin-left: 10px;
             }

@@ -42,7 +42,8 @@
                     width: 1920,
                     height: 1080
                 },
-                actualScaleRatio: 1
+                actualScaleRatio: 1,
+				testScale: 0.5485714285714286
             }
         },
         methods: {
