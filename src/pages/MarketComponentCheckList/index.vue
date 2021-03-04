@@ -15,6 +15,9 @@
 	import {Vue, Component} from 'vue-property-decorator'
 	import {Table, Button} from 'view-design'
 	import dialogCheck from './dialogCheckComponent.vue'
+	import commonConfigValue from 'eslinkv-npm/common-config-value.js'
+	import {configMerge} from 'eslinkv-npm/mixins'
+	import platform from 'eslinkv-npm/src/store/platform.store.js'
 
 	@Component({
 		components: {
@@ -92,6 +95,19 @@
 		check() {
 			this.currentRow = this.selectOne
 			this.dialogCheckShow = true
+			const id = +new Date()
+			const value = JSON.parse(this.selectOne.componentConfig)
+			value.widget.componentVersion = this.selectOne.componentVersion
+			const config = configMerge(value, commonConfigValue())
+			platform.state.widgetAdded = {
+				[id]: {
+					id,
+					type: this.selectOne.componentEnTitle,
+					config,
+					scene: 0,
+					market: true
+				}
+			}
 		}
 
 		reload() {
