@@ -1,6 +1,6 @@
 <template lang="pug">
 	i-modal.check-modal(v-model="modalShow" title="审核")
-		market-preview(:detail="detail" v-if="modalShow")
+		d-view(v-if="modalShow")
 		div(slot="footer")
 			i-button(type="primary" @click="submit") 通过
 			i-button(type="error" @click="cancel") 拒绝
@@ -9,15 +9,15 @@
 <script lang="ts">
 	import {Vue, Component, Prop, Watch} from 'vue-property-decorator'
 	import {Modal, Button,} from 'view-design'
-	import MarketPreview from './preview.vue'
 	import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 	import html2canvas from 'html2canvas'
-
+	import dView from 'eslinkv-npm/src/components/d-view/index.vue'
+	
 	@Component({
 		components: {
 			'i-button': Button,
 			'i-modal': Modal,
-			MarketPreview,
+			dView,
 		}
 	})
 	export default class MarketEditDialog extends Vue {

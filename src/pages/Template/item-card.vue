@@ -58,7 +58,7 @@
 		}
 	}
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 	.list-item-card {
 		width: calc((100% - 90px) / 4);
 		margin: 0 30px 25px 0;
