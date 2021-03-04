@@ -28,8 +28,7 @@
 					<div
 						class="item"
 						:class="[getItemIndex(i)]"
-						v-for="(k, i) in data.building"
-            :key="i"
+						v-for="(k, i) in data.building" :key="i"
 					>{{k.name}}
 					</div>
 				</div>
