@@ -7,9 +7,22 @@
                 <video id="video" class="pos-a bg-video" src="/static/videos/bg1.webm" autoplay="autoplay" @ended="end"
                        muted
                        ref="video"
+                       webkit-playsinline="true"
+                       playsInline
+                       x5-video-orientation="portraint"
+                       x5-video-player-type="h5-page"
+                       x-webkit-airplay="allow"
+                       x5-playsinline="true"
                        v-show="!video1Ended"></video>
-                <video class="pos-a bg-video" src="/static/videos/bg2.webm" autoplay="autoplay" loop ref="video2"
+                <video class="pos-a bg-video" src="/static/videos/bg2.webm" autoplay="autoplay" loop
+                       ref="video2"
                        muted
+                       webkit-playsinline="true"
+                       playsInline
+                       x5-video-orientation="portraint"
+                       x5-video-player-type="h5-page"
+                       x-webkit-airplay="allow"
+                       x5-playsinline="true"
                        v-show="video1Ended"></video>
             </template>
             <div class="h-bg-top pos-a"></div>
