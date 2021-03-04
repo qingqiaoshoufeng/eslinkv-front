@@ -45,7 +45,7 @@
 			<img src="/static/icons/right-icon.svg">
 		</section>
 		<section class="fans pos-r">
-			<video class="fans-video pos-a" autoplay="autoplay" loop="loop" src="./img/shouyetiyan.webm"></video>
+			<video muted class="fans-video pos-a" autoplay="autoplay" loop="loop" src="./img/shouyetiyan.webm"></video>
       <transition name="fade">
         <div class="fans-top" :key="currFan.name">
           <div style="text-align: left">

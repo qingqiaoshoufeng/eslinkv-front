@@ -5,9 +5,11 @@
             <div class="h-bg-5441 pos-a" v-if="status54441"></div>
             <template v-if="!status54441">
                 <video id="video" class="pos-a bg-video" src="/static/videos/bg1.webm" autoplay="autoplay" @ended="end"
+                       muted
                        ref="video"
                        v-show="!video1Ended"></video>
                 <video class="pos-a bg-video" src="/static/videos/bg2.webm" autoplay="autoplay" loop ref="video2"
+                       muted
                        v-show="video1Ended"></video>
             </template>
             <div class="h-bg-top pos-a"></div>
