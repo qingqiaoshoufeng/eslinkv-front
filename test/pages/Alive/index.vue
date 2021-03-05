@@ -4,7 +4,7 @@
 </template>
 <script lang="ts">
 	import {Vue, Component} from 'vue-property-decorator'
-	import LiveVideo from '../../../src/components/LiveVideo/index.vue'
+	import LiveVideo from '../../../src/components-business/More/h-project1/live-video.vue'
 
 	@Component({
 		components:{LiveVideo}

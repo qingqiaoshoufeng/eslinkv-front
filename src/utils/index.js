@@ -48,3 +48,29 @@ export function findComponentsDownward(context, componentName) {
 		return components.concat(foundChilds);
 	}, []);
 }
+
+export function loadJs(src) {
+	if (typeof src === 'string') {
+		return new Promise(resolve => {
+			const el = document.createElement('script')
+			el.src = src
+			el.onload = () => {
+				resolve()
+			}
+			document.head.appendChild(el)
+		})
+	} else {
+		let p = []
+		src.forEach(item => {
+			p.push(new Promise(resolve => {
+				const el = document.createElement('script')
+				el.src = item
+				el.onload = () => {
+					resolve()
+				}
+				document.head.appendChild(el)
+			}))
+		})
+		return Promise.all(p)
+	}
+}

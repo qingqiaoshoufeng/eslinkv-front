@@ -60,6 +60,7 @@
 	var chooseplaysite = 0; //选中的第几窗口,默认为0代表没有选择
 
 	var host = 'http://' + _cf.q2httpServer.host + ':' + _cf.q2httpServer.port + '/icvs2/';
+	import {loadJs} from '../../../utils'
 
 	//post请求
 	function requestPost(router, params, callback) {
@@ -297,7 +298,6 @@
 				//播视频接口
 				let url = host + "stream.flv?puid=" + puid + "&idx=" + idx + "&stream=0&token=" + token;
 				this.isPlaying = true
-
 				if (flvjs.isSupported()) {
 					var videoElement = "";
 					videoElement = this.$refs.live
@@ -358,9 +358,7 @@
 			document.removeEventListener('SceneIndex', this.handleSceneChange)
 		}
 	}
-
 </script>
-
 <style lang="scss" scoped>
 	.video-wrap {
 		position: relative;

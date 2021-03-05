@@ -71,7 +71,7 @@
 </script>
 <style lang="scss" scoped>
 	.list-container {
-		padding: 15px;
+		padding: 15px 0 15px 15px;
 
 		.ml20 {
 			margin-left: 20px;
@@ -85,5 +85,7 @@
 	.list-item-card-box {
 		flex-wrap: wrap;
 		margin-top: 15px;
+		min-width: 1135px;
+		padding-right: 15px;
 	}
 </style>
