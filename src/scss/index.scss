@@ -15,6 +15,7 @@ body {
 
 .pos-a {
   position: absolute;
+  transform: translateZ(0px);
 }
 
 .pos-r {
@@ -115,17 +116,19 @@ body {
 }
 
 
-
 .fade-enter {
-  opacity:0;
+  opacity: 0;
 }
-.fade-leave{
+
+.fade-leave {
   opacity: 1;
 }
-.fade-enter-active{
+
+.fade-enter-active {
   transition: opacity .5s;
 }
-.fade-leave-active{
+
+.fade-leave-active {
   opacity: 0;
   transition: opacity .5s;
 }

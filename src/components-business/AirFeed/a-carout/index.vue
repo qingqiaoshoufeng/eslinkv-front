@@ -19,7 +19,7 @@
 					<div class="radius"></div>
 					<div class="carout_point"></div>
 				</div>
-				<div class="context">
+				<div class="context pos-a">
 					<div class="value font-num">{{ data.value1 }}%</div>
 					<div class="desc1 text-center">{{ desc1 }}</div>
 					<div class="desc2 text-center">
@@ -134,7 +134,6 @@ export default {
 	}
 
 	.context {
-		position: absolute;
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
