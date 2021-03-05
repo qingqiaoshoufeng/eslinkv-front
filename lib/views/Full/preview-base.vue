@@ -153,9 +153,11 @@
     .scene-temporary-wrapper {
         .widget-part {
             position: absolute !important;
-            backface-visibility: hidden;
         }
     }
+	.widget-part {
+		backface-visibility: hidden;
+	}
 </style>
 <style lang="scss" scoped>
     .refill-mask {
