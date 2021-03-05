@@ -7,22 +7,10 @@
                 <video id="video" class="pos-a bg-video" src="/static/videos/bg1.webm" autoplay="autoplay" @ended="end"
                        muted
                        ref="video"
-                       webkit-playsinline="true"
-                       playsInline
-                       x5-video-orientation="portraint"
-                       x5-video-player-type="h5-page"
-                       x-webkit-airplay="allow"
-                       x5-playsinline="true"
                        v-show="!video1Ended"></video>
                 <video class="pos-a bg-video" src="/static/videos/bg2.webm" autoplay="autoplay" loop
                        ref="video2"
                        muted
-                       webkit-playsinline="true"
-                       playsInline
-                       x5-video-orientation="portraint"
-                       x5-video-player-type="h5-page"
-                       x-webkit-airplay="allow"
-                       x5-playsinline="true"
                        v-show="video1Ended"></video>
             </template>
             <div class="h-bg-top pos-a"></div>
@@ -49,29 +37,29 @@
                 <li class="pointer fn-flex flex-column pos-r" @click="handleClick('nn16rowdl5r')"
                     @mouseover="hoverNav1=true"
                     @mouseleave="hoverNav1=false">
-                    <video class="pos-a" src="./img/nav-1.webm" v-if="hoverNav1" autoplay="autoplay"/>
-                    <img class="pos-a" src="./img/nav-1.svg" v-show="!hoverNav1"/>
+                    <video class="pos-r" src="./img/nav-1.webm" v-if="hoverNav1" autoplay="autoplay"/>
+                    <img src="./img/nav-1.svg" v-show="!hoverNav1"/>
                     <span class="pos-a">杭燃供气</span>
                 </li>
                 <li class="pointer fn-flex flex-column pos-r" @click="handleClick('6gouq223fze')"
                     @mouseover="hoverNav2=true"
                     @mouseleave="hoverNav2=false">
-                    <video class="pos-a" src="./img/nav-2.webm" v-if="hoverNav2" autoplay="autoplay"/>
-                    <img class="pos-a" src="./img/nav-2.svg" v-show="!hoverNav2"/>
+                    <video class="pos-r" src="./img/nav-2.webm" v-if="hoverNav2" autoplay="autoplay"/>
+                    <img src="./img/nav-2.svg" v-show="!hoverNav2"/>
                     <span class="pos-a">杭燃服务</span>
                 </li>
                 <li class="pointer fn-flex flex-column pos-r" @click="handleClick('o8tkm981qdh')"
                     @mouseover="hoverNav3=true"
                     @mouseleave="hoverNav3=false">
-                    <video class="pos-a" src="./img/nav-3.webm" v-if="hoverNav3" autoplay="autoplay"/>
-                    <img class="pos-a" src="./img/nav-3.svg" v-show="!hoverNav3"/>
+                    <video class="pos-r" src="./img/nav-3.webm" v-if="hoverNav3" autoplay="autoplay"/>
+                    <img src="./img/nav-3.svg" v-show="!hoverNav3"/>
                     <span class="pos-a">杭燃优家</span>
                 </li>
                 <li class="pointer fn-flex flex-column pos-r" @click="handleClick('vxoiljh5my9')"
                     @mouseover="hoverNav4=true"
                     @mouseleave="hoverNav4=false">
-                    <video class="pos-a" src="./img/nav-4.webm" v-if="hoverNav4" autoplay="autoplay"/>
-                    <img class="pos-a" src="./img/nav-4.svg" v-show="!hoverNav4"/>
+                    <video class="pos-r" src="./img/nav-4.webm" v-if="hoverNav4" autoplay="autoplay"/>
+                    <img src="./img/nav-4.svg" v-show="!hoverNav4"/>
                     <span class="pos-a">杭燃体验</span>
                 </li>
             </ul>
@@ -212,7 +200,7 @@
             color: rgba(255, 255, 255, 0.75);
             font-weight: normal;
             margin-right: 96px;
-            justify-content: center;
+            align-items: center;
             transition: all .3s;
             width: 160px;
             height: 160px;
@@ -221,17 +209,6 @@
                 font-size: 40px;
                 line-height: 40px;
                 top: 107px;
-            }
-            
-            video {
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            
-            img {
-                top: 0;
-                left: 50%;
-                transform: translateX(-50%);
             }
             
             &:nth-child(1) {
