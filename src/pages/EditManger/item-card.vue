@@ -74,6 +74,7 @@
 	.list-item-card {
 		width: calc((100% - 120px) / 5);
 		margin: 0 30px 25px 0;
+		min-width: 190px;
 
 		/deep/ .ivu-icon {
 			font-size: 16px;
