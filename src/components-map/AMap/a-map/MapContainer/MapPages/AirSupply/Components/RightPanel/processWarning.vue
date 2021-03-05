@@ -39,7 +39,7 @@
 					:class="repairState === 0 ? 'active' : ''"
 					@click="changeRepairState(0)"
 				>
-				
+					已处理
 				</div>
 			</div>
 		</div>

@@ -11,4 +11,12 @@
     .vjs-poster {
         transform: translateZ(0px);
     }
+    
+    .vjs-big-play-button{
+        backface-visibility: hidden;
+    }
+    
+    .vjs-icon-placeholder:before{
+        backface-visibility: hidden;
+    }
 </style>
