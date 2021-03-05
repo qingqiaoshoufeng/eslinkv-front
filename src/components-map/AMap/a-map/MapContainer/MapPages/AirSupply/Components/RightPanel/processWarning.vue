@@ -39,7 +39,7 @@
 					:class="repairState === 0 ? 'active' : ''"
 					@click="changeRepairState(0)"
 				>
-					已处理
+				
 				</div>
 			</div>
 		</div>
@@ -180,7 +180,7 @@ export default {
 	font-size: 20px;
 	height: 800px;
 	backface-visibility: hidden;
-	dialogEditVersionShow {
+	.filter-bar {
 		position: sticky;
 		backface-visibility: hidden;
 		width: 100%;

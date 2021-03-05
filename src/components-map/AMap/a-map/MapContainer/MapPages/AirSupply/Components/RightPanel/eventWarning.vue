@@ -163,7 +163,7 @@ export default {
 	height: 800px;
 	font-size: 20px;
 	backface-visibility: hidden;
-	dialogEditVersionShow {
+	.filter-bar {
 		justify-content: space-between;
 		color: #00ddff;
 		font-size: 20px;

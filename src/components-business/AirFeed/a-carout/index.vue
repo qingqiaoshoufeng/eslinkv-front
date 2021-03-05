@@ -195,6 +195,7 @@ export default {
 	.carout_point {
 		width: 15px;
 		height: 15px;
+		transform: translateZ(0px);
 		background: #fff;
 		position: absolute;
 		bottom: -4px;
