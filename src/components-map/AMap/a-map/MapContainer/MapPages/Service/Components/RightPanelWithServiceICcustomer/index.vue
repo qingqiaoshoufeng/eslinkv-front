@@ -66,6 +66,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.tabs-container-ic{
+	backface-visibility: hidden;
+}
 .right-panel {
 	position: absolute;
 	right: 32px;

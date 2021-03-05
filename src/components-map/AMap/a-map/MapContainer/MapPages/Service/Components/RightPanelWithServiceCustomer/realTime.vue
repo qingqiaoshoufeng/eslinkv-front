@@ -103,9 +103,9 @@ export default {
 	methods: {
         async getData(){
             //除第一次需要loading外，其余需要无感刷新
-            if(!this.loaded){    
+            if(!this.loaded){
                 this.loading = true
-            } 
+            }
 			let data = await  this.$sysApi.map.serve.getServiceCustomerTaskList()
 			this.list = data;
             this.loading = false;
@@ -149,6 +149,7 @@ export default {
 .list {
 	height: 799px;
 	overflow-y: scroll;
+	backface-visibility: hidden;
 	&::-webkit-scrollbar {
 		display: none;
 	}

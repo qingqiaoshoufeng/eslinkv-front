@@ -52,6 +52,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .hangrancode_switch_Box {
+	backface-visibility: hidden;
 	padding: 4px 16px;
 	position: fixed;
 	left: 32px;

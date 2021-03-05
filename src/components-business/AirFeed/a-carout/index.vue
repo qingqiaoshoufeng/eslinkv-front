@@ -136,7 +136,7 @@ export default {
 	.context {
 		top: 50%;
 		left: 50%;
-		transform: translate(-50%, -50%);
+		transform: translate(-50%, -50%) translateZ(0px);
 		display: flex;
 		flex-direction: column;
 		align-items: center;

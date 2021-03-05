@@ -162,7 +162,8 @@ export default {
 .event-warning {
 	height: 800px;
 	font-size: 20px;
-	.filter-bar {
+	backface-visibility: hidden;
+	dialogEditVersionShow {
 		justify-content: space-between;
 		color: #00ddff;
 		font-size: 20px;

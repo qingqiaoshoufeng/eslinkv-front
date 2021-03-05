@@ -1,5 +1,5 @@
 <template functional>
-	<div v-show="props.show" class="no_model_box">
+	<div v-show="props.show" class="no-data-box">
 		<img src="/static/images/amap/noModel.svg" alt="" />
 		<div>{{ props.noDataText }}</div>
 	</div>
@@ -21,11 +21,12 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.no_model_box {
+.no-data-box {
 	display: flex;
 	flex-direction: column;
 	position: absolute;
 	top: 35%;
+	backface-visibility: hidden;
 	left: 50%;
 	transform: translate(-50%);
 	div {

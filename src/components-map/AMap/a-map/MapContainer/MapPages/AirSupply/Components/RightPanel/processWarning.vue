@@ -179,8 +179,10 @@ export default {
 	color: #fff;
 	font-size: 20px;
 	height: 800px;
-	.filter-bar {
+	backface-visibility: hidden;
+	dialogEditVersionShow {
 		position: sticky;
+		backface-visibility: hidden;
 		width: 100%;
 		position: sticky;
 		justify-content: space-between;

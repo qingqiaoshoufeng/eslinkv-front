@@ -205,6 +205,10 @@
             width: 160px;
             height: 160px;
             
+            img {
+                transform: translateZ(0px);
+            }
+            
             span {
                 font-size: 40px;
                 line-height: 40px;

@@ -59,6 +59,7 @@ export default {
 	right: 530px;
 	top: 148px;
 	z-index: 100;
+	backface-visibility: hidden;
 	.data_statistics_item {
 		display: flex;
 		flex-direction: column;
