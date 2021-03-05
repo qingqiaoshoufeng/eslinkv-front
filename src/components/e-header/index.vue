@@ -22,6 +22,7 @@
 		padding-right: 10px;
 		left: 0;
 		align-items: center;
+		z-index: 8;
 
 		h1 {
 			margin-right: auto;
