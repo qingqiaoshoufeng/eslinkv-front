@@ -6,7 +6,7 @@
         "serve": "vue-cli-service serve",
         "serve:simple": "vue-cli-service serve --mode simple",
         "build": "vue-cli-service build --no-clean",
-        "build:simple": "cross-env NODE_ENV=production vue-cli-service build --no-clean --mode simple",
+        "build:simple": "vue-cli-service build --no-clean --mode simple",
         "update": "auto-vers -t",
         "lint": "vue-cli-service lint",
         "fix": "eslint --fix --ext .js --ext .jsx --ext .vue src/",
