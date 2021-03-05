@@ -13,20 +13,6 @@ const GoldChart: any = {
             }
         }
     },
-	// 自定义事件监听
-	$event: {
-		events: new Map(),
-		addEventListener: function (name, callback) {
-			this.events.set(name, callback)
-		},
-		removeEventListener: function (name) {
-			this.events.delete(name)
-		},
-		emit: function (name, data) {
-			const callback = this.events.get(name)
-			callback && callback(data)
-		}
-	}
 }
 
 if (!window.GoldChart) {
