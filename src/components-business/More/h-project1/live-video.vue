@@ -60,7 +60,6 @@
 	var chooseplaysite = 0; //选中的第几窗口,默认为0代表没有选择
 
 	var host = 'http://' + _cf.q2httpServer.host + ':' + _cf.q2httpServer.port + '/icvs2/';
-	import {loadJs} from '../../../utils'
 
 	//post请求
 	function requestPost(router, params, callback) {

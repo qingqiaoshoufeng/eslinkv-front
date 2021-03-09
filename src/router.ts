@@ -49,4 +49,12 @@ const router: any = new VueRouter({
 	]
 })
 
+router.beforeEach(async (to, from, next) => {
+	if (to.name === 'editorNew' || to.name === 'editorEdit' || to.name === 'editorDetail' || to.name === 'editorFull') {
+		import('./components-business')
+		import('./components-map')
+	}
+	next()
+})
+
 export default router
