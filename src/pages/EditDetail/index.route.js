@@ -1,6 +1,6 @@
 export default {
 	path: '/detail/:id',
-	name: 'detail',
+	name: 'editorDetail',
 	mode: ['SIMPLE_PLATFORM'],
 	component: () => import('./index.vue'),
 }

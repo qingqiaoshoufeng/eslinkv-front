@@ -53,6 +53,8 @@ export function findComponentsDownward(context, componentName) {
  * @description 加载三方包
  */
 export function loadJs(src, value) {
+	if (!src)
+		return
 	if (typeof src === 'string') {
 		return new Promise(resolve => {
 			if (window[value]) {

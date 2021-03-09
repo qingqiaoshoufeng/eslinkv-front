@@ -1,6 +1,6 @@
 export default {
 	path: '/full/:id',
-	name: 'full',
+	name: 'editorFull',
 	mode: ['SIMPLE_PLATFORM'],
 	component: () => import('./index.vue'),
 }

@@ -4,8 +4,6 @@ import router from './router'
 import {Message, Modal, Switch, Select, Option, Icon} from 'view-design'
 import {format} from 'date-fns'
 import './openApi'
-import './components-business'
-import './components-map'
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import './api'
@@ -23,6 +21,8 @@ Vue.component('iSwitch', Switch)
 Vue.component('iSelect', Select)
 Vue.component('iOption', Option)
 Vue.component('iIcon', Icon)
+
+
 Vue.component('e-left', eLeft)
 Vue.component('e-layout', eLayout)
 Vue.component('e-header', eHeader)
