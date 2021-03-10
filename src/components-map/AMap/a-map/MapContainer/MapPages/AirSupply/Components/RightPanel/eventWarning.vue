@@ -86,12 +86,13 @@
 
 <script>
 import { SvgIcon, NoData } from '../../../../../components/'
-
+import {Icon} from 'view-design'
 export default {
 	name: 'HomeRealTimeList',
 	components: {
 		SvgIcon,
 		NoData,
+		'i-icon': Icon,
 	},
 	data() {
 		return {

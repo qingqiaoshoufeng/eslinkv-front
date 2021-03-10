@@ -12,7 +12,7 @@
 			i-button(icon="ios-create-outline" @click="handleEdit") 编辑组件
 			i-button(icon="ios-link" :style="{marginTop:'10px'}" @click="handleVersion") 切换版本
 			i-button(icon="ios-trash-outline" :style="{marginTop:'10px'}" type="error" @click="handleRemove") 删除组件
-		i-modal(v-model="dialogEditShow" title="编辑")
+		i-modal.market-edit-modal(v-model="dialogEditShow" title="编辑")
 			i-form(:label-width="100")
 				i-form-item(label="组件名")
 					i-input(v-model="currentItem.componentTitle")
@@ -120,10 +120,21 @@
 		}
 	}
 </script>
+<style lang="scss">
+	.market-edit-modal {
+		.img-wrap {
+			img {
+				max-width: 100%;
+				max-height: 100%;
+			}
+		}
+	}
+</style>
 <style lang="scss" scoped>
 	.list-item-card {
 		width: calc((100% - 110px) / 4);
 		margin: 0 30px 25px 0;
+		min-width: 170px;
 
 		/deep/ .ivu-icon {
 			font-size: 16px;
@@ -158,7 +169,9 @@
 
 		.avatar {
 			padding-bottom: 50%;
-			background-size: cover;
+			background-size: 100% auto;
+			background-repeat: no-repeat;
+			background-position: center;
 		}
 
 		h2 {
