@@ -23,6 +23,7 @@
 	</div>
 </template>
 <script>
+	// todo 改造
 	var _cf = {
 		ver: 'debug',
 		q2httpServer: {
@@ -262,7 +263,7 @@
 
 					console.warn('------获取到以下设备---------')
 					console.log(device_list)
-					// this.pu = device_list[0] // todo
+					// this.pu = device_list[0]
 					this.puList = device_list.filter(v => v.OnlineFlag === '1')
 					this.$emit('getPuList', this.puList)
 					this.pu = this.puList[0]

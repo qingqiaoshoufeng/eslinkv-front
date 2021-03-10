@@ -22,7 +22,8 @@
 <script>
 	import mixins from 'eslinkv-npm/mixins'
 	import {value} from './index.component'
-
+	import './turn.min'
+	
 	export default {
 		mixins: [mixins],
 		data() {
