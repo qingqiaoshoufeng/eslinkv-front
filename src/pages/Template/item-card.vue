@@ -31,11 +31,11 @@
 		@Prop(String) shareUrl: string
 
 		handleEdit() {
-			this.$router.push(`/edit/${this.id}`)
+			this.$router.push(`/editor/manger/${this.id}`)
 		}
 
 		handleLink() {
-			window.open(`${location.origin}${location.pathname}#/detail/${this.id}`)
+			window.open(`${location.origin}/detail/${this.id}`)
 		}
 
 		handleRemove() {

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import {Message, Modal, Switch, Select, Option, Icon} from 'view-design'
+import {Message, Modal} from 'view-design'
 import {format} from 'date-fns'
 import './openApi'
 import VueVideoPlayer from 'vue-video-player'
@@ -17,11 +17,6 @@ import ePage from './components/e-page/index.vue'
 
 Vue.use(PortalVue)
 Vue.use(VueVideoPlayer)
-Vue.component('iSwitch', Switch)
-Vue.component('iSelect', Select)
-Vue.component('iOption', Option)
-Vue.component('iIcon', Icon)
-
 
 Vue.component('e-left', eLeft)
 Vue.component('e-layout', eLayout)

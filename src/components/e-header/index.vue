@@ -6,8 +6,13 @@
 </template>
 <script lang="ts">
 	import {Vue, Component} from 'vue-property-decorator'
+	import {Icon} from 'view-design'
 
-	@Component
+	@Component({
+		components: {
+			'i-icon': Icon
+		}
+	})
 	export default class EHeader extends Vue {
 	}
 </script>
