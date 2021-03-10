@@ -48,6 +48,7 @@
 	.detail-container {
 		height: 100%;
 	}
+
 	.preview-wrapper {
 		position: fixed;
 		left: 0;
@@ -68,13 +69,11 @@
 			height: 0;
 		}
 
-		/deep/ {
-			#kanban {
-				position: relative;
-				outline: rgba(255, 255, 255, 0.2) 1px dotted;
-				flex-shrink: 0;
-				flex-grow: 0;
-			}
+		#kanban {
+			position: relative;
+			outline: rgba(255, 255, 255, 0.2) 1px dotted;
+			flex-shrink: 0;
+			flex-grow: 0;
 		}
 
 		&.fit-mode {
@@ -86,7 +85,7 @@
 		&.mobile {
 			align-items: unset;
 			overflow: auto;
-			
+
 			#kanban {
 				transform-origin: 0 0;
 			}

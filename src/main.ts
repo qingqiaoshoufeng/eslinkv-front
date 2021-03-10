@@ -7,6 +7,7 @@ import './openApi'
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import './api'
+
 import PortalVue from 'portal-vue'
 import '@babel/polyfill'
 import 'eslinkv-npm'
