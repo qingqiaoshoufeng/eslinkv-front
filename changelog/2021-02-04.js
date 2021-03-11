@@ -144,5 +144,9 @@ export default {
 			type: [''],
 			content: '修改router模式为history'
 		},
+		{
+			type: [''],
+			content: 'ruler 改 canvas'
+		},
 	]
 }
