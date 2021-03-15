@@ -100,7 +100,7 @@
 <script>
 	import { SvgIcon, NoData } from '../../../../../components/'
 	import { Icon, Select, Option } from 'view-design'
-	
+
 	export default {
 		name: 'ProcessWarningList',
 		components: {
@@ -180,155 +180,135 @@
 </script>
 
 <style lang="scss" scoped>
-	.process-warning {
-		height: 800px;
+.process-warning {
+	color: #fff;
+	font-size: 20px;
+	height: 800px;
+	backface-visibility: hidden;
+	.filter-bar {
+		position: sticky;
+		backface-visibility: hidden;
+		width: 100%;
+		position: sticky;
+		justify-content: space-between;
+		color: #00ddff;
 		font-size: 20px;
-		color: #fff;
+		padding: 8px 2px 7px 2px;
+		border-bottom: 1px solid #00ddff;
+		line-height: 38px;
+		user-select: none;
+		.fitler-item {
+			display: flex;
+			> div {
+				padding: 0 8px;
+				cursor: pointer;
+			}
+			> div:not(:last-child) {
+				margin-right: 16px;
+			}
+		}
+		.repair-type {
+			.active {
+				color: #fff;
+				background: #0057a9;
+				border: 1px solid #00ddff;
+				border-radius: 4px;
+			}
+		}
+		.repair-state {
+			.active {
+				color: #fff;
+				&::after {
+					content: ' ';
+					display: inline-block;
+					position: absolute;
+					width: 0px;
+					height: 0px;
+					left: 4px;
+					top: calc(50% - 5px);
+					border: 4px solid #fff;
+				}
+			}
+			> div {
+				position: relative;
+				padding-left: 20px;
+				&::before {
+					content: ' ';
+					display: inline-block;
+					position: absolute;
+					width: 16px;
+					height: 16px;
+					left: 0px;
+					top: calc(50% - 9px);
+					border: 2px solid #00ddff;
+				}
+			}
+		}
+	}
+	.event-warning-list {
+		height: 744px;
+		overflow-y: scroll;
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+	.demo-spin-icon-load {
+		animation: ani-demo-spin 1s linear infinite;
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%);
+	}
+	@keyframes ani-demo-spin {
+		from {
+			transform: rotate(0deg);
+		}
+		50% {
+			transform: rotate(180deg);
+		}
+		to {
+			transform: rotate(360deg);
+		}
+	}
+	/deep/ {
+		.ivu-select-dropdown {
+			margin-top: 18px !important;
 
-		.filter-bar {
-			position: sticky;
-			position: sticky;
-			justify-content: space-between;
-			width: 100%;
-			padding: 8px 2px 7px 2px;
+			background: #0057a9;
+		}
+		.ivu-select-selection {
+			color: #fff;
+			background: #0057a9;
+			border: 1px solid #57a3f3 !important;
+		}
+		.ivu-select {
+			padding: 0 !important;
+			height: 40px !important;
+			font-style: normal !important;
+			font-weight: 600 !important;
+			font-size: 20px !important;
+		}
+		.ivu-icon-ios-arrow-down:before {
+			margin: 0px -6px;
+		}
+		.ivu-select-item {
+			font-size: 20px !important;
+			line-height: 32px;
+			line-height: 20px !important;
+		}
+		.ivu-select-item:hover {
+			background: rgba(0, 221, 255, 0.3) !important;
+		}
+		.ivu-select-selected-value {
+			padding-left: 13px;
+			font-size: 20px !important;
+		}
+		.ivu-icon-ios-arrow-down:before {
 			font-size: 20px;
-			line-height: 38px;
-			color: #0df;
-			user-select: none;
-			border-bottom: 1px solid #0df;
-
-			.fitler-item {
-				display: flex;
-
-				> div {
-					padding: 0 8px;
-					cursor: pointer;
-				}
-
-				> div:not(:last-child) {
-					margin-right: 16px;
-				}
-			}
-
-			.repair-type {
-				.active {
-					color: #fff;
-					background: #0057a9;
-					border: 1px solid #0df;
-					border-radius: 4px;
-				}
-			}
-
-			.repair-state {
-				.active {
-					color: #fff;
-
-					&::after {
-						position: absolute;
-						top: calc(50% - 5px);
-						left: 4px;
-						display: inline-block;
-						width: 0;
-						height: 0;
-						content: ' ';
-						border: 4px solid #fff;
-					}
-				}
-
-				> div {
-					position: relative;
-					padding-left: 20px;
-
-					&::before {
-						position: absolute;
-						top: calc(50% - 9px);
-						left: 0;
-						display: inline-block;
-						width: 16px;
-						height: 16px;
-						content: ' ';
-						border: 2px solid #0df;
-					}
-				}
-			}
+			font-weight: 700;
+			color: #fff;
 		}
-
-		.event-warning-list {
-			height: 744px;
-			overflow-y: scroll;
-
-			&::-webkit-scrollbar {
-				display: none;
-			}
-		}
-
-		.demo-spin-icon-load {
-			position: absolute;
-			top: 40%;
-			left: 50%;
-			transform: translate(-50%);
-			animation: ani-demo-spin 1s linear infinite;
-		}
-
-		@keyframes ani-demo-spin {
-			from {
-				transform: rotate(0deg);
-			}
-
-			50% {
-				transform: rotate(180deg);
-			}
-
-			to {
-				transform: rotate(360deg);
-			}
-		}
-
-		/deep/ {
-			.ivu-select-dropdown {
-				margin-top: 18px !important;
-				background: #0057a9;
-			}
-
-			.ivu-select-selection {
-				color: #fff;
-				background: #0057a9;
-				border: 1px solid #57a3f3 !important;
-			}
-
-			.ivu-select {
-				height: 40px !important;
-				padding: 0 !important;
-				font-size: 20px !important;
-				font-style: normal !important;
-				font-weight: 600 !important;
-			}
-
-			.ivu-icon-ios-arrow-down::before {
-				margin: 0 -6px;
-			}
-
-			.ivu-select-item {
-				font-size: 20px !important;
-				line-height: 32px;
-				line-height: 20px !important;
-			}
-
-			.ivu-select-item:hover {
-				background: rgba(0, 221, 255, 0.3) !important;
-			}
-
-			.ivu-select-selected-value {
-				padding-left: 13px;
-				font-size: 20px !important;
-			}
-
-			.ivu-icon-ios-arrow-down::before {
-				font-size: 20px;
-				font-weight: 700;
-				color: #fff;
-			}
-		}
+	}
 
 		.list-item {
 			box-sizing: border-box;

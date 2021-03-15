@@ -37,3 +37,10 @@
 		}
 	}
 </script>
+
+
+<style lang="scss" scoped>
+	.tab-panel{
+		backface-visibility: hidden;
+	}
+</style>

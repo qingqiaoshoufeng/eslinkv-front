@@ -19,7 +19,7 @@
 					<div class="radius"></div>
 					<div class="carout_point"></div>
 				</div>
-				<div class="context">
+				<div class="context pos-a">
 					<div class="value font-num">{{ data.value1 }}%</div>
 					<div class="desc1 text-center">{{ desc1 }}</div>
 					<div class="desc2 text-center">
@@ -133,17 +133,16 @@
 			height: 200px !important;
 		}
 
-		.context {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
-			margin-top: 15px;
-			color: #fff;
-			transform: translate(-50%, -50%);
+	.context {
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) translateZ(0px);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		color: #fff;
+		margin-top: 15px;
 
 			.value {
 				font-size: 40px;
@@ -195,6 +194,7 @@
 
 		.carout_point {
 			position: absolute;
+      transform: translateZ(0px);
 			bottom: -4px;
 			width: 15px;
 			height: 15px;

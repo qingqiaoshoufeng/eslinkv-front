@@ -52,24 +52,19 @@
 			<img src="/static/icons/right-icon.svg">
 		</section>
 		<section class="fans pos-r">
-			<video
-				class="fans-video pos-a"
-				autoplay="autoplay"
-				loop="loop"
-				src="./img/shouyetiyan.webm"
-			></video>
-			<transition name="fade">
-				<div class="fans-top" :key="currFan.name">
-					<div style="text-align: left;">
-						<div class="fan-title">{{ currFan.name }}</div>
-						<div class="fan-num font-num">{{ currFan.fanDailyNum| toThousand }}</div>
-					</div>
-					<div style="text-align: right;">
-						<div class="fan-title">{{ currFan.name2 }}</div>
-						<div class="fan-num font-num">{{ currFan.fanTotalNum| toThousand }}</div>
-					</div>
-				</div>
-			</transition>
+			<video muted class="fans-video pos-a" autoplay="autoplay" loop="loop" src="./img/shouyetiyan.webm"></video>
+      <transition name="fade">
+        <div class="fans-top" :key="currFan.name">
+          <div style="text-align: left">
+            <div class="fan-title">{{currFan.name}}</div>
+            <div class="fan-num font-num">{{ currFan.fanDailyNum| toThousand }}</div>
+          </div>
+          <div style="text-align: right">
+            <div class="fan-title">{{currFan.name2}}</div>
+            <div class="fan-num font-num">{{ currFan.fanTotalNum| toThousand }}</div>
+          </div>
+        </div>
+      </transition>
 		</section>
 	</div>
 </template>
