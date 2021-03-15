@@ -8,16 +8,16 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
 		mixins: [mixins],
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		},
 		methods: {
-			back() {
+			back () {
 				if (!this.data.sceneId) return
 				scene.actions.destroyScene(this.data.sceneId)
 			}
@@ -42,7 +42,7 @@
 		.txt {
 			font-size: 32px;
 			line-height: 32px;
-			color: #FEFFFF;
+			color: #feffff;
 			white-space: nowrap;
 		}
 	}

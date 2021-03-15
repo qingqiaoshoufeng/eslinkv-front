@@ -17,22 +17,21 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value, customConfig} from './index.component'
+	import { value, customConfig } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		methods: {},
 		computed: {
-			computedMinutes() {
+			computedMinutes () {
 				if (!this.data) return 0
 				return this.data.minutes.toLocaleString()
-			},
+			}
 		},
-		created() {
-
+		created () {
 			this.configValue = this.parseConfigValue(value, customConfig)
-		},
-	};
+		}
+	}
 </script>
 <style lang="scss">
 	.h-icon-info-count {
@@ -43,25 +42,25 @@
 		&__icon {
 			width: 32px;
 			height: 32px;
-			background-size: 32px;
+			margin-left: 16px;
 			background-repeat: no-repeat;
 			background-position: center;
-			margin-left: 16px;
+			background-size: 32px;
 		}
 
 		&__text {
+			margin-left: 8px;
 			font-size: 18px;
 			line-height: 24px;
-			color: #00ddff;
-			margin-left: 8px;
+			color: #0df;
 		}
 
 		&__count {
-			font-weight: bold;
-			font-size: 32px;
-			line-height: 32px;
-			color: #ffffff;
 			margin-left: 16px;
+			font-size: 32px;
+			font-weight: bold;
+			line-height: 32px;
+			color: #fff;
 		}
 
 		&__unit {

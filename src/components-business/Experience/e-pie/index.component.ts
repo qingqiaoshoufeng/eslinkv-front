@@ -11,20 +11,20 @@ export const value = {
 	api: {
 		data: JSON.stringify(
 			[
-				{value: 12.5, des: '111', title: '南门站'},
-				{value: 12.5, des: '', title: '北门站'},
-				{value: 12.5, des: '', title: '下沙门站'},
-				{value: 12.5, des: '', title: '江东门站'},
-				{value: 12.5, des: '', title: '所前门站'},
-				{value: 12.5, des: '', title: '杭州东站'},
-				{value: 12.5, des: '', title: '杭州西站'},
+				{ value: 12.5, des: '111', title: '南门站' },
+				{ value: 12.5, des: '', title: '北门站' },
+				{ value: 12.5, des: '', title: '下沙门站' },
+				{ value: 12.5, des: '', title: '江东门站' },
+				{ value: 12.5, des: '', title: '所前门站' },
+				{ value: 12.5, des: '', title: '杭州东站' },
+				{ value: 12.5, des: '', title: '杭州西站' }
 			]
 		)
 	},
 	config: {
 		background: '/static/icons/h-ring1-3.svg',
 		suffix: '%',
-		color: JSON.stringify(['#db4f49', '#367cf6', '#84e4fc', '#f8cd47', '#fceb50', '#ed9144', '#5fcbb9']),
+		color: JSON.stringify(['#db4f49', '#367cf6', '#84e4fc', '#f8cd47', '#fceb50', '#ed9144', '#5fcbb9'])
 	}
 }
 
@@ -38,11 +38,11 @@ export const customConfig = [
 	{
 		prop: 'color',
 		label: '颜色',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'suffix',
 		label: '后缀',
-		type: 'func-input',
-	},
+		type: 'func-input'
+	}
 ]

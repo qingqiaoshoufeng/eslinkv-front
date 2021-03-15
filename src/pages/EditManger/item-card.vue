@@ -15,12 +15,12 @@
 			i-button(icon="ios-trash-outline" :style="{marginTop:'10px'}" type="error" @click="handleRemove") 删除
 </template>
 <script lang="ts">
-	import {Card, Button} from 'view-design'
+	import { Card, Button } from 'view-design'
 	import EmptyImage from '../../components/empty-image/index.vue'
-	import {Vue, Component, Prop} from 'vue-property-decorator'
+	import { Vue, Component, Prop } from 'vue-property-decorator'
 
 	@Component({
-		components: {'i-card': Card, 'i-button': Button, EmptyImage},
+		components: { 'i-card': Card, 'i-button': Button, EmptyImage }
 	})
 	export default class ItemCard extends Vue {
 		@Prop(String) snapshot: string
@@ -31,21 +31,21 @@
 		@Prop(String) createTime: string
 		@Prop(String) shareUrl: string
 
-		handleEdit() {
+		handleEdit () {
 			this.$router.push(`/editor/manger/${this.id}`)
 		}
 
-		handleLink() {
+		handleLink () {
 			window.open(`${location.origin}/detail/${this.id}`)
 		}
 
-		handleRemove() {
+		handleRemove () {
 			this.$Modal.confirm({
 				title: '提示',
 				content: '确认删除吗？',
 				loading: true,
 				onOk: () => {
-					this.$api.board.remove({dataBoardId: this.id}).then(() => {
+					this.$api.board.remove({ dataBoardId: this.id }).then(() => {
 						this.$Message.success('删除成功')
 						this.$Modal.remove()
 						this.$emit('reload')
@@ -54,13 +54,13 @@
 			})
 		}
 
-		handlePublish() {
+		handlePublish () {
 			this.$Modal.confirm({
 				title: '提示',
 				content: '确认发布此看板吗？',
 				loading: true,
 				onOk: () => {
-					this.$api.panel.publish({id: this.id}).then(() => {
+					this.$api.panel.publish({ id: this.id }).then(() => {
 						this.$Message.success('发布成功')
 						this.$Modal.remove()
 						this.$emit('reload')
@@ -73,8 +73,8 @@
 <style lang="scss" scoped>
 	.list-item-card {
 		width: calc((100% - 120px) / 5);
-		margin: 0 30px 25px 0;
 		min-width: 200px;
+		margin: 0 30px 25px 0;
 
 		/deep/ .ivu-icon {
 			font-size: 16px;
@@ -91,16 +91,16 @@
 		}
 
 		.list-item-card-mask {
-			width: 100%;
-			height: 100%;
-			opacity: 0;
-			transition: .3s;
 			top: 0;
 			left: 0;
 			align-items: center;
 			justify-content: center;
-			background-color: rgba(0, 0, 0, .5);
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
 			border-radius: 4px;
+			opacity: 0;
+			transition: 0.3s;
 		}
 
 		.list-item-card-time-box {
@@ -113,8 +113,8 @@
 		}
 
 		h2 {
-			font-size: 18px;
 			margin: 10px 0 4px 0;
+			font-size: 18px;
 		}
 
 		p {

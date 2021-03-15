@@ -2,12 +2,12 @@ export const customConfig = [
 	{
 		prop: 'desc1',
 		label: '描述1',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'desc2',
 		label: '描述2',
-		type: 'func-input',
+		type: 'func-input'
 	}
 ]
 

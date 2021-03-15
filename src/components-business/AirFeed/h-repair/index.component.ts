@@ -54,11 +54,11 @@ export const customConfig = [
 	{
 		prop: 'title',
 		label: '标题',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'desc',
 		label: '底下描述',
-		type: 'func-input',
-	},
+		type: 'func-input'
+	}
 ]

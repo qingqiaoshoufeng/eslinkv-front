@@ -13,10 +13,10 @@
 				</div>
 				<div class="wrap">
 					<div class="a-inspectionConfig-ratio-box pos-r">
-						<div class="a-inspectionConfig-ratio pos-a" :style="{height:`${ data&&data.ratio}`}"></div>
+						<div class="a-inspectionConfig-ratio pos-a" :style="{height:`${ data && data.ratio}`}"></div>
 					</div>
 					<div class="a-inspectionConfig-title">
-						<h2 class="font-num">{{data&&data.ratio}}</h2>
+						<h2 class="font-num">{{ data && data.ratio }}</h2>
 						<p>在线率</p>
 					</div>
 				</div>
@@ -44,56 +44,56 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value, customConfig} from './index.component'
+	import { value, customConfig } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		methods: {},
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value, customConfig)
-		},
+		}
 	}
 </script>
 <style lang="scss">
 	.a-inspectionConfig-title {
 		h2 {
+			margin-top: 18px;
 			font-size: 48px;
 			line-height: 48px;
-			color: #00FFCF;
-			margin-top: 18px;
+			color: #00ffcf;
 		}
 
 		p {
+			margin-top: 14px;
 			font-size: 20px;
 			line-height: 24px;
 			color: #fff;
-			margin-top: 14px;
 			text-align: left;
 		}
 	}
 
 	.a-inspectionConfig-ratio {
-		width: 14px;
 		bottom: 0;
 		left: 0;
-		background: linear-gradient(180deg, #00F0FF 0%, rgba(0, 221, 255, 0.0001) 100%);
+		width: 14px;
+		background: linear-gradient(180deg, #00f0ff 0%, rgba(0, 221, 255, 0.0001) 100%);
 	}
 
 	.a-inspectionConfig-ratio-box {
 		width: 16px;
 		height: 84px;
-		border: 1px solid #00DDFF;
-		margin-right: 8px;
 		margin-top: 21px;
+		margin-right: 8px;
+		border: 1px solid #0df;
 	}
 
 	.a-inspectionConfig {
-		height: 200px;
 		width: 497px;
+		height: 200px;
 
 		.wrap {
-			flex: 1;
 			display: flex;
+			flex: 1;
 		}
 
 		video::-webkit-media-controls {
@@ -101,9 +101,9 @@
 		}
 
 		video {
-			height: 123px !important;
-			width: 200px;
 			flex: none;
+			width: 200px;
+			height: 123px !important;
 		}
 
 		.context-item {
@@ -113,8 +113,8 @@
 				.inspection-desc {
 					color: #fff;
 
-					&:before {
-						border: 4px solid #00DDFF;
+					&::before {
+						border: 4px solid #0df;
 					}
 				}
 			}
@@ -124,33 +124,33 @@
 			margin-top: 8px;
 
 			.inspection-value {
-				text-align: left;
+				padding-left: 34px;
 				font-size: 32px;
 				line-height: 32px;
 				color: #fff;
-				padding-left: 34px;
+				text-align: left;
 			}
 
 			.inspection-desc {
-				margin-top: 8px;
+				position: relative;
 				width: 198px;
 				height: 24px;
+				margin-top: 8px;
 				font-size: 20px;
 				line-height: 24px;
-				white-space: nowrap;
 				color: #fff;
 				text-align: center;
-				position: relative;
+				white-space: nowrap;
 
-				&:before {
-					content: '';
+				&::before {
+					position: absolute;
+					top: 50%;
+					left: 0;
 					width: 16px;
 					height: 16px;
-					position: absolute;
-					left: 0;
-					top: 50%;
 					margin-top: -8px;
-					border: 4px solid #00DDFF;
+					content: '';
+					border: 4px solid #0df;
 					border-radius: 100px;
 				}
 			}

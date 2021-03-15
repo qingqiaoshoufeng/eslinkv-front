@@ -2,7 +2,7 @@ export const value = {
 	api: {
 		data: JSON.stringify({
 			value: 34325
-		}),
+		})
 	},
 	config: {
 		unit: '万m³',
@@ -24,16 +24,16 @@ export const customConfig = [
 	{
 		prop: 'title1',
 		label: '标题1',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'title2',
 		label: '标题2',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'unit',
 		label: '单位',
-		type: 'func-input',
-	},
+		type: 'func-input'
+	}
 ]

@@ -2,7 +2,7 @@ export const value = {
 	api: {
 		data: JSON.stringify({
 			value: 73
-		}),
+		})
 	},
 	config: {
 		title: '巡检点数(点)',
@@ -29,6 +29,6 @@ export const customConfig = [
 	{
 		prop: 'title',
 		label: '标题',
-		type: 'func-input',
-	},
+		type: 'func-input'
+	}
 ]

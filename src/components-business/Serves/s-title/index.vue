@@ -1,20 +1,20 @@
 <template>
 	<div class="widget-part" :style="styles" v-if="data">
-		<img :src="config.config&&config.config.img" alt="">
-		<div class="desc">{{ config.config&&config.config.desc }}</div>
+		<img :src="config.config && config.config.img" alt="">
+		<div class="desc">{{ config.config && config.config.desc }}</div>
 		<div class="num font-num">{{ data.value | toThousand }}</div>
 	</div>
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {customConfig, value} from './index.component'
+	import { customConfig, value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
-			this.configValue = this.parseConfigValue(value, customConfig);
-		},
-	};
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
+		}
+	}
 </script>
 <style lang="scss" scoped>
 	.widget-part {
@@ -25,19 +25,19 @@
 		background-size: 100% 100%;
 
 		.num {
-			font-weight: bold;
 			font-size: 48px;
+			font-weight: bold;
 			line-height: 48px;
+			color: #fff;
 			text-align: right;
-			color: #FFFFFF;
 		}
 
 		.desc {
+			flex: 1;
+			margin-left: 6px;
 			font-size: 24px;
 			line-height: 24px;
-			color: #00DDFF;
-			margin-left: 6px;
-			flex: 1;
+			color: #0df;
 			text-align: left;
 		}
 	}

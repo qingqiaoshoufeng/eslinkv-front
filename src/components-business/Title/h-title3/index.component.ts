@@ -2,17 +2,17 @@ const customConfig = [
 	{
 		prop: 'color',
 		label: '颜色',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'suffix',
 		label: '后缀',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'subTitle',
 		label: '副标题',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'background',
@@ -34,15 +34,15 @@ const value = {
     },
     api: {
         data: JSON.stringify({
-            title: 1000,
+            title: 1000
         })
     },
     config: {
         background: '/static/icons/h-title3-1.svg',
         suffix: '台',
         color: 'rgba(0,221,255,1)',
-        subTitle: '分户供暖用户',
+        subTitle: '分户供暖用户'
     }
 }
 
-export {customConfig, value}
+export { customConfig, value }

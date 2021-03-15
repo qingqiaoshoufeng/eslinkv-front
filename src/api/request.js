@@ -23,7 +23,7 @@ request.interceptors.request.use(
  *   message：'错误信息'
  * }
  */
-let errMessage = '网络异常，请重试'
+const errMessage = '网络异常，请重试'
 request.interceptors.response.use(
     (response) => {
         const { data } = response

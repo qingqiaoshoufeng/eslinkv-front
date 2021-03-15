@@ -46,6 +46,6 @@ export const customConfig = [
 	{
 		prop: 'unit',
 		label: '单位',
-		type: 'func-input',
-	},
+		type: 'func-input'
+	}
 ]

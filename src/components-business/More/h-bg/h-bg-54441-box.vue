@@ -1,10 +1,10 @@
 <template>
 	<div class="h-bg-54441-box fn-flex flex-column">
 		<div class="fn-flex flex-row">
-			<h2 class="text-center">{{title}}</h2>
+			<h2 class="text-center">{{ title }}</h2>
 		</div>
 		<ul class="text-center fn-flex flex-column">
-			<li v-for="(item,index) in content" :key="index">{{item}}</li>
+			<li v-for="(item,index) in content" :key="index">{{ item }}</li>
 		</ul>
 	</div>
 </template>
@@ -16,7 +16,7 @@
 			},
 			content: {
 				type: Array,
-				default() {
+				default () {
 					return []
 				}
 			}
@@ -25,29 +25,30 @@
 </script>
 <style lang="scss">
 	.h-bg-54441-box {
-		background: linear-gradient(142.18deg, #001A77 0%, #057CD1 103.19%);
-		border: 1px solid #00DDFF;
 		width: 192px;
 		height: 212px;
+		background: linear-gradient(142.18deg, #001a77 0%, #057cd1 103.19%);
+		border: 1px solid #0df;
 
-		&:before, &:after {
+		&::before,
+		&::after {
 			position: absolute;
-			content: '';
 			width: 15px;
 			height: 15px;
+			content: '';
 			background-size: 15px;
 		}
 
-		&:after {
-			background-image: url('img/top.svg');
-			right: -7px;
+		&::after {
 			top: -7px;
+			right: -7px;
+			background-image: url('img/top.svg');
 		}
 
-		&:before {
-			background-image: url('img/bottom.svg');
-			left: -7px;
+		&::before {
 			bottom: -7px;
+			left: -7px;
+			background-image: url('img/bottom.svg');
 		}
 
 		img {
@@ -62,8 +63,8 @@
 		}
 
 		> div {
-			margin: 16px;
 			align-items: center;
+			margin: 16px;
 		}
 
 		li {
@@ -74,13 +75,13 @@
 
 		h2 {
 			width: 100%;
-			font-weight: 600;
-			font-size: 32px;
-			line-height: 32px;
 			margin-left: 4px;
+			font-size: 32px;
+			font-weight: 600;
+			line-height: 32px;
+			background-image: -webkit-linear-gradient(right, #d9fff8, #0df);
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
-			background-image: -webkit-linear-gradient(right, #D9FFF8, #00DDFF);
 		}
 	}
 </style>

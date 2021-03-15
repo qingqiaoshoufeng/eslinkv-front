@@ -13,60 +13,62 @@
 	</BaseOverlay>
 </template>
 <script>
-import { BaseOverlay } from '../../../../components/index';
-export default {
-	name: 'ListOverlay',
-	components: {
-		BaseOverlay,
-	},
-	methods: {
-		async getData() {
-			let eventTypeIconMap = {
-				0: 'iconbaoguanshijian',
-				1: 'iconxieloushijian',
-			};
-			return new Promise(async (resolve, reject) => {
-				let list = await this.$sysApi.map.mock.getWarningList();
-				//根据事件类型，判断图标，根据状态，显示图标颜色
-				list = list.map(item => {
-					let { status, eventType } = item;
-					let icon = eventTypeIconMap[eventType];
-					if (status === 0) {
-						icon = icon + '-suc';
-					}
-					item.icon = icon;
-					return item;
-				});
-				resolve(list);
-			});
+	import { BaseOverlay } from '../../../../components/index'
+	export default {
+		name: 'ListOverlay',
+		components: {
+			BaseOverlay
 		},
-		handleOverlayClick(marker) {
-			this.$emit('overlay-click', marker, 'WarningList');
-		},
-	},
-};
+		methods: {
+			async getData () {
+				const eventTypeIconMap = {
+					0: 'iconbaoguanshijian',
+					1: 'iconxieloushijian'
+				}
+				return new Promise(async (resolve, reject) => {
+					let list = await this.$sysApi.map.mock.getWarningList()
+					// 根据事件类型，判断图标，根据状态，显示图标颜色
+					list = list.map(item => {
+						const { status, eventType } = item
+						let icon = eventTypeIconMap[eventType]
+						if (status === 0) {
+							icon = icon + '-suc'
+						}
+						item.icon = icon
+						return item
+					})
+					resolve(list)
+				})
+			},
+			handleOverlayClick (marker) {
+				this.$emit('overlay-click', marker, 'WarningList')
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>
 .warnoverlay {
+	position: absolute;
+	box-sizing: border-box;
 	width: 54px;
 	height: 54px;
-	position: absolute;
-	cursor: pointer;
-	text-align: center;
 	padding: 3px;
-	box-sizing: border-box;
+	text-align: center;
+	cursor: pointer;
+
 	.warnoverlay-icon {
 		font-size: 48px;
 	}
+
 	.warnoverlay-gif {
-		transform: translateX(-50%);
 		position: absolute;
 		display: block;
 		width: 100px;
 		height: 35px;
 		margin-top: -14px;
 		margin-left: 19px;
+		transform: translateX(-50%);
 	}
 
 	img {
@@ -78,6 +80,7 @@ export default {
 		padding: 0;
 	}
 }
+
 .station-icon {
 	font-size: 44px;
 }

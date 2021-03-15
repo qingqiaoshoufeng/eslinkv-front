@@ -16,62 +16,63 @@
 </template>
 
 <script>
-export default {
-	name: 'SvgIcon',
-	props: {
-		iconName: {
-			type: String,
-			required: true,
-		},
-		iconPrefix: {
-			type: String,
-			default: '',
-		},
-		className: {
-			type: String,
-			default: '',
-		},
-	},
-	computed: {
-		isExternal() {
-			return /^(https?:|mailto:|tel:)/.test(this.iconName);
-		},
-		iconNameComputed() {
-			let { iconPrefix, iconName } = this;
-			if (iconPrefix) {
-				return `#${iconPrefix}-${iconName}`;
-			} else {
-				return `#${iconName}`;
+	export default {
+		name: 'SvgIcon',
+		props: {
+			iconName: {
+				type: String,
+				required: true
+			},
+			iconPrefix: {
+				type: String,
+				default: ''
+			},
+			className: {
+				type: String,
+				default: ''
 			}
 		},
-		svgClass() {
-			if (this.className) {
-				return 'svg-icon ' + this.className;
-			} else {
-				return 'svg-icon';
+		computed: {
+			isExternal () {
+				return /^(https?:|mailto:|tel:)/.test(this.iconName)
+			},
+			iconNameComputed () {
+				const { iconPrefix, iconName } = this
+				if (iconPrefix) {
+					return `#${iconPrefix}-${iconName}`
+				} else {
+					return `#${iconName}`
+				}
+			},
+			svgClass () {
+				if (this.className) {
+					return 'svg-icon ' + this.className
+				} else {
+					return 'svg-icon'
+				}
+			},
+			styleExternalIcon () {
+				return {
+					mask: `url(${this.iconName}) no-repeat 50% 50%`,
+					'-webkit-mask': `url(${this.iconName}) no-repeat 50% 50%`
+				}
 			}
-		},
-		styleExternalIcon() {
-			return {
-				mask: `url(${this.iconName}) no-repeat 50% 50%`,
-				'-webkit-mask': `url(${this.iconName}) no-repeat 50% 50%`,
-			};
-		},
-	},
-};
+		}
+	}
 </script>
 
 <style scoped>
 .svg-icon {
 	width: 1em;
 	height: 1em;
+	overflow: hidden;
 	vertical-align: middle;
 	fill: currentColor;
-	overflow: hidden;
 }
+
 .svg-external-icon {
+	display: inline-block;
 	background-color: currentColor;
 	mask-size: cover !important;
-	display: inline-block;
 }
 </style>

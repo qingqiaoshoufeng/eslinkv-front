@@ -8,14 +8,14 @@ const HANGRANURL = '/server'
         'BranchCompany', // 子公司
     ].toString()}
  */
-export function getHangranCodeList(data) {
+export function getHangranCodeList (data) {
     return request({
         url: `${HANGRANURL}/gasCode/mapDataResult`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 
@@ -23,53 +23,53 @@ export function getHangranCodeList(data) {
  * 获取杭燃码地图热力图数据列表
  * @params {null}
  */
-export function getHangranCodeHotList(data) {
+export function getHangranCodeHotList (data) {
     return request({
         url: `${HANGRANURL}/gasCode/heatCount`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 /**
  * 获取杭燃码门站详情
  * @params {null}
  */
-export function getHangranCodeDetailInfo(data) {
+export function getHangranCodeDetailInfo (data) {
     return request({
         url: `${HANGRANURL}/gasCode/mapDetailInfo`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 // 点击查询杭燃码下服务厅详情
-export function clickGetBranchCompanyDetialInfo(data) {
+export function clickGetBranchCompanyDetialInfo (data) {
     return request({
         url: `${HANGRANURL}/gasCode/mapBranchCompanyInfo`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 /**
  * 联码新增统计数据
  * @params {null}
  */
-export function getCouplingIncreaseInfo(data) {
+export function getCouplingIncreaseInfo (data) {
     return request({
         url: `${HANGRANURL}/gasCode/addNum`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 
@@ -80,14 +80,14 @@ export function getCouplingIncreaseInfo(data) {
         'MajorClient'    // 工商户
     ].toString()}
  */
-export function getICcustomerStationList(data) {
+export function getICcustomerStationList (data) {
     return request({
         url: `${HANGRANURL}/businessAnalysis/mapDataResult`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 /**
@@ -98,14 +98,14 @@ export function getICcustomerStationList(data) {
         stationType:'工商户节点类型',
     };
  */
-export function getICcustomerDetailInfo(data) {
+export function getICcustomerDetailInfo (data) {
     return request({
         url: `${HANGRANURL}/businessAnalysis/mapDetailInfo`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 
@@ -113,14 +113,14 @@ export function getICcustomerDetailInfo(data) {
  * 获取工商户报警汇总信息（统计信息）
  * @params {null}
  */
-export function getICcustomerCallingInfo(data) {
+export function getICcustomerCallingInfo (data) {
     return request({
         url: `${HANGRANURL}/businessAnalysis/callResult`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 
@@ -128,28 +128,28 @@ export function getICcustomerCallingInfo(data) {
  * 获取工商户年用气热力图
  * @params {null}
  */
-export function getICcustomerHotInfo(data) {
+export function getICcustomerHotInfo (data) {
     return request({
         url: `${HANGRANURL}/businessAnalysis/heatCount`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 /**
  * 工商户前二十（右侧及页面）
  * @params {null}
  */
-export function getICcustomerSituationAwareness(data) {
+export function getICcustomerSituationAwareness (data) {
     return request({
         url: `${HANGRANURL}/businessAnalysis/yesterdayUseOrder`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 
@@ -162,14 +162,14 @@ export function getICcustomerSituationAwareness(data) {
         params: '',
     };
  */
-export function getNineteenStatisticsInfo(data) {
+export function getNineteenStatisticsInfo (data) {
     return request({
-        url: `server/api/impalaByQueryId`,
+        url: 'server/api/impalaByQueryId',
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 
@@ -185,14 +185,14 @@ export function getNineteenStatisticsInfo(data) {
         type: '子公司名称',
     };
  */
-export function getNineteenStationDetailInfo(data) {
+export function getNineteenStationDetailInfo (data) {
     return request({
-        url: `/server/api/impalaByQueryId`,
+        url: '/server/api/impalaByQueryId',
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 
@@ -207,14 +207,14 @@ export function getNineteenStationDetailInfo(data) {
         ].toString(),
     }
  */
-export function getServiceCustomerStationList(data) {
+export function getServiceCustomerStationList (data) {
     return request({
         url: `${HANGRANURL}/threeSocial/mapDataResult`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 
@@ -222,14 +222,14 @@ export function getServiceCustomerStationList(data) {
  * 查询客户服务统计数据
  * @params {null}
  */
-export function getServiceCustomerStatisticsInfo(data) {
+export function getServiceCustomerStatisticsInfo (data) {
     return request({
         url: `${HANGRANURL}/threeSocial/houseNum`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 
@@ -241,14 +241,14 @@ export function getServiceCustomerStatisticsInfo(data) {
         type:'站点类型',
     };
  */
-export function getServiceCustomerDetialInfo(data) {
+export function getServiceCustomerDetialInfo (data) {
     return request({
         url: `${HANGRANURL}/threeSocial/mapDetailInfo`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 
@@ -256,14 +256,14 @@ export function getServiceCustomerDetialInfo(data) {
  * 客户服务任务工单列表
  * @params {null}
  */
-export function getServiceCustomerTaskList(data) {
+export function getServiceCustomerTaskList (data) {
     return request({
         url: `${HANGRANURL}/threeSocial/task`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 
@@ -271,14 +271,14 @@ export function getServiceCustomerTaskList(data) {
  * 客户服务三社联动信息
  * @params {null}
  */
-export function getServiceCustomerThreeSocialList(data) {
+export function getServiceCustomerThreeSocialList (data) {
     return request({
         url: `${HANGRANURL}/threeSocial/event`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 
@@ -286,13 +286,13 @@ export function getServiceCustomerThreeSocialList(data) {
  * 三社联动 客户分布热力列表
  * @params {null}
  */
-export function getThreeSocialLinkagecustmerHot(data) {
+export function getThreeSocialLinkagecustmerHot (data) {
     return request({
         url: HANGRANURL + '/threeSocial/heatCount',
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }

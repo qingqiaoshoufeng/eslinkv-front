@@ -1,6 +1,6 @@
 import custom from 'eslinkv-npm/src/store/custom.store'
 
-let components = {}, snapshots = {}
+const components = {}; const snapshots = {}
 const widgetsObject = {}
 const conf = require.context('./', true, /\.(component.ts)$/)
 const component = require.context('./', true, /index\.(vue)$/)
@@ -16,16 +16,16 @@ component.keys().forEach(name => {
 conf.keys().forEach(name => {
 	const type = name.split('/')[1]
 	const title = name.split('/')[2]
-	const obj = {config: {layout: conf(name).value ? conf(name).value.layout : {}}}
+	const obj = { config: { layout: conf(name).value ? conf(name).value.layout : {} } }
 	const snapshot = snapshots[title] || 'https://via.placeholder.com/150'
 	if (obj) {
 		if (widgetsObject[type]) {
-			widgetsObject[type].widgets[title] = {...obj, type: title, label: title, snapshot}
+			widgetsObject[type].widgets[title] = { ...obj, type: title, label: title, snapshot }
 		} else {
 			widgetsObject[type] = {
 				type,
 				label: type,
-				widgets: {[title]: {...obj, type: title, label: title, snapshot}}
+				widgets: { [title]: { ...obj, type: title, label: title, snapshot } }
 			}
 		}
 	}
@@ -34,5 +34,5 @@ conf.keys().forEach(name => {
 custom.actions.setCustomComponents(components)
 custom.actions.setCustomWidgets({
 	label: '杭燃样式',
-	widgets: widgetsObject,
+	widgets: widgetsObject
 })

@@ -75,7 +75,7 @@ export const value = {
 				y1: 258,
 				y2: 369,
 				y3: 147
-			},
+			}
 		])
 	}
 }

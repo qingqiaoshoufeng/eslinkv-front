@@ -6,12 +6,12 @@
 			Page(:total="total" :show-sizer="true" :show-elevator="true" :show-total="true" @on-change="handleChange" @on-page-size-change="handlePageSize")
 </template>
 <script lang="ts">
-	import {Vue, Component} from 'vue-property-decorator'
+	import { Vue, Component } from 'vue-property-decorator'
 	import itemCard from './item-card.vue'
-	import {Page, Button, Input, DatePicker, Select, Option} from 'view-design'
+	import { Page, Button, Input, DatePicker, Select, Option } from 'view-design'
 
 	@Component({
-		components: {itemCard, Page, Button, Input, DatePicker, Select, Option}
+		components: { itemCard, Page, Button, Input, DatePicker, Select, Option }
 	})
 	export default class Template extends Vue {
 		list: any[] = []
@@ -20,20 +20,21 @@
 		pageSize: number = 10
 		date: any = []
 		
-		handleChange(pageNum) {
+		handleChange (pageNum) {
 			this.pageNum = pageNum
 			this.init()
 		}
 
-		handlePageSize(pageSize) {
+		handlePageSize (pageSize) {
 			this.pageSize = pageSize
 			this.init()
 		}
 
-		init() {
+		init () {
 			this.$api.panel.list({
 				pageSize: this.pageSize,
-				type: 1, pageNum: this.pageNum,
+				type: 1,
+pageNum: this.pageNum,
 				...this.query
 			}).then(res => {
 				this.list = res.list
@@ -41,16 +42,16 @@
 			})
 		}
 
-		mounted() {
+		mounted () {
 			this.init()
 		}
 	}
 </script>
 <style lang="scss" scoped>
 	.list-container {
+		min-width: 930px;
 		height: 100%;
 		padding: 15px;
-		min-width: 930px;
 
 		.ml20 {
 			margin-left: 20px;

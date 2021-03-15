@@ -16,31 +16,31 @@
 <script>
 	import mixins from 'eslinkv-npm/mixins'
 	import MarqueeText from 'vue-marquee-text-component'
-	import {value} from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		components: {MarqueeText},
+		components: { MarqueeText },
 		methods: {
-			getMsg() {
+			getMsg () {
 				this.data.push({
 					txt: '李先生上报亲亲家园小区发, 生燃气泄露事故冯方法。',
 					time: '13:24:51'
 				})
 			}
 		},
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value)
-		},
+		}
 	}
 </script>
 <style lang="scss" scoped>
 	.widget-part {
-		background: #001F6D;
-		border: 1px solid #00DDFF;
 		box-sizing: border-box;
-		border-radius: 20px;
 		overflow: hidden;
+		background: #001f6d;
+		border: 1px solid #0df;
+		border-radius: 20px;
 
 		.flex {
 			display: flex;
@@ -56,22 +56,22 @@
 
 			.row {
 				flex: 1;
-				transition: all 0.4s;
 				height: 100%;
+				transition: all 0.4s;
 
 				.item {
-					height: 100%;
-					align-items: center;
 					display: flex;
+					align-items: center;
+					height: 100%;
 				}
 			}
 
 			.txt {
-				font-size: 18px;
-				color: #FFFFFF;
 				width: 342px;
-				text-align: left;
 				overflow: hidden;
+				font-size: 18px;
+				color: #fff;
+				text-align: left;
 			}
 
 			.time {

@@ -20,44 +20,42 @@
 	/>
 </template>
 <script>
-import { BaseOverlay } from '../../../../components/index';
-export default {
-	name: 'ServiceStation',
-	components: {
-		BaseOverlay,
-	},
-	props: {
-		visible: {
-			type: Boolean,
-			default: true,
+	import { BaseOverlay } from '../../../../components/index'
+	export default {
+		name: 'ServiceStation',
+		components: {
+			BaseOverlay
 		},
-		overlayIcon: {
-			type: String,
-			default: '',
-		},
-		overlayType: {
-			type: String,
-			default: '',
-		},
-		detailList: {
-			type: Array,
-			default() {
-				return [];
+		props: {
+			visible: {
+				type: Boolean,
+				default: true
 			},
-		},
-		data: {
-			type: Array,
-			default() {
-				return [];
+			overlayIcon: {
+				type: String,
+				default: ''
 			},
+			overlayType: {
+				type: String,
+				default: ''
+			},
+			detailList: {
+				type: Array,
+				default () {
+					return []
+				}
+			},
+			data: {
+				type: Array,
+				default () {
+					return []
+				}
+			}
 		},
-	},
-	data() {
-		return {};
-	},
-	mounted() {},
-};
+		data () {
+			return {}
+		},
+		mounted () {}
+	}
 </script>
-
-
 

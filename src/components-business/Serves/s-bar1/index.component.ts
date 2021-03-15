@@ -2,42 +2,42 @@ export const customConfig = [
 	{
 		prop: 'color1',
 		label: '颜色1',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'color2',
 		label: '颜色2',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'color3',
 		label: '颜色3',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'desc1',
 		label: '名称1',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'desc2',
 		label: '名称2',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'desc3',
 		label: '名称3',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'title',
 		label: '标题',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'lineSmooth',
 		label: '曲线是否平滑',
-		type: 'func-switch',
+		type: 'func-switch'
 	}
 ]
 export const value = {
@@ -59,7 +59,7 @@ export const value = {
 		desc3: '自助抄表率',
 		title: '户',
 		lineSmooth: true,
-		hasSymbal: true,
+		hasSymbal: true
 	},
 	api: {
 		data: JSON.stringify([
@@ -104,7 +104,7 @@ export const value = {
 				yValue2: 130,
 				yValue3: 30,
 				xValue: '11月'
-			},
-		]),
-	},
-};
+			}
+		])
+	}
+}

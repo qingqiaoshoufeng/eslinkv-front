@@ -45,14 +45,14 @@ export function getCircleOption (data) {
                 data: [
                     {
                         value: data[2].percent,
-                        name: '一般',
+                        name: '一般'
 
                     },
                     {
                         value: 100 - data[2].percent,
                         name: '',
                         itemStyle: {
-                            color: "rgba(0,0,0,0)",
+                            color: 'rgba(0,0,0,0)',
                             borderWidth: 0
                         },
                         tooltip: {
@@ -80,20 +80,20 @@ export function getCircleOption (data) {
                 data: [
                     {
                         value: data[1].percent,
-                        name: '良',
+                        name: '良'
 
                     },
                     {
                         value: 100 - data[1].percent,
                         name: '',
                         itemStyle: {
-                            color: "rgba(0,0,0,0)",
+                            color: 'rgba(0,0,0,0)',
                             borderWidth: 0
                         },
                         tooltip: {
                             show: false
-                        },
-                    },
+                        }
+                    }
 
                 ]
             },
@@ -116,21 +116,21 @@ export function getCircleOption (data) {
                 data: [
                     {
                         value: data[0].percent,
-                        name: '优',
+                        name: '优'
                     },
                     {
                         value: 100 - data[0].percent,
                         name: '',
                         itemStyle: {
-                            color: "rgba(0,0,0,0)",
+                            color: 'rgba(0,0,0,0)',
                             borderWidth: 0
                         },
                         tooltip: {
                             show: false
-                        },
-                    },
+                        }
+                    }
                 ]
-            },
+            }
         ]
     }
 }
@@ -158,12 +158,12 @@ export function getLineOption (data) {
             },
             axisTick: {
                 show: false
-            },
+            }
         }],
         yAxis: [{
             name: 'km',
             nameTextStyle: {
-                padding: [0,30,0,0]
+                padding: [0, 30, 0, 0]
             },
             axisLine: {
                 show: false
@@ -172,9 +172,9 @@ export function getLineOption (data) {
                 show: false
             },
             splitLine: {
-                lineStyle:{
-                    color:'rgba(255, 255, 255, 0.2)',
-                    opacity:0.3
+                lineStyle: {
+                    color: 'rgba(255, 255, 255, 0.2)',
+                    opacity: 0.3
                 }
             }
         }],
@@ -190,15 +190,15 @@ export function getLineOption (data) {
             },
             areaStyle: {
                 normal: {
-                    color: new echarts.graphic.LinearGradient(0,0,0,1,[{
+                    color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
                         offset: 0,
-                        color: 'rgba(0, 221, 255, 0.3)',
+                        color: 'rgba(0, 221, 255, 0.3)'
 
                     },
                         {
                             offset: 1,
-                            color: 'rgba(0, 221, 255, 0.1)',
-                        }],false),
+                            color: 'rgba(0, 221, 255, 0.1)'
+                        }], false)
                 }
             },
             markPoint: {
@@ -215,12 +215,12 @@ export function getLineOption (data) {
                     offset: [-38, -24],
                     textBorderWidth: 0,
                     textShadowBlur: 0,
-                    textShadowColor:'transparent',
+                    textShadowColor: 'transparent',
                     formatter: param => {
                         return '{card|' + param.value + 'km}'
                     },
                     rich: {
-                        'card': {
+                        card: {
                             width: 84,
                             height: 30,
                             fontSize: 18,
@@ -236,7 +236,7 @@ export function getLineOption (data) {
                 },
                 data: [{
                     type: 'max'
-                },{
+                }, {
                     type: 'min',
                     label: {
                         show: false

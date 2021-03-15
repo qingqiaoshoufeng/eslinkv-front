@@ -20,44 +20,44 @@
 <script>
 	import mixins from 'eslinkv-npm/mixins'
 	import getOption from './options'
-	import {value} from './index.component'
+	import { value } from './index.component'
 	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
 		mixins: [mixins],
 		methods: {
-			clickHandle() {
+			clickHandle () {
 				scene.actions.createSceneInstance('qdj532f41re')
 			},
-			setOption(data) {
+			setOption (data) {
 				if (this.instance) {
 					this.instance.setOption(getOption(this.data))
 					this.instance.off('click', this.barClick)
 					this.instance.on('click', this.barClick)
 				}
 			},
-			barClick(param) {
+			barClick (param) {
 				console.log(param)
 			}
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						this.$nextTick(() => {
-							this.instance = echarts.init(document.getElementById(this.id));
-							this.setOption();
-						});
+							this.instance = echarts.init(document.getElementById(this.id))
+							this.setOption()
+						})
 					}
 				},
 				deep: true,
-				immediate: true,
-			},
+				immediate: true
+			}
 		},
-		created() {
-			this.configValue = this.parseConfigValue(value);
-		},
-	};
+		created () {
+			this.configValue = this.parseConfigValue(value)
+		}
+	}
 </script>
 <style lang="scss" scoped>
 	.chart {
@@ -81,22 +81,22 @@
 				margin-right: 4px;
 
 				&.color1 {
-					background: #FB5325;
+					background: #fb5325;
 				}
 
 				&.color2 {
-					background: #017CEF;
+					background: #017cef;
 				}
 
 				&.color3 {
-					background: #01FDD2;
+					background: #01fdd2;
 				}
 			}
 
 			.legend-txt {
 				font-size: 16px;
 				line-height: 16px;
-				color: #FFFFFF;
+				color: #fff;
 			}
 		}
 	}

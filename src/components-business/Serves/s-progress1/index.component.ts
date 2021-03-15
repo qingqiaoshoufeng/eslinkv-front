@@ -7,7 +7,7 @@ export const customConfig = [
 			{
 				prop: 'title',
 				label: '标题',
-				type: 'func-input',
+				type: 'func-input'
 			},
 			{
 				prop: 'background',
@@ -48,6 +48,6 @@ export const value = {
 		}, {
 			background: '/static/icons/s-progress1-2.svg',
 			title: '安装(户)'
-		}, {background: '/static/icons/s-progress1-3.svg', title: '点火(户)'}],
+		}, { background: '/static/icons/s-progress1-3.svg', title: '点火(户)' }]
 	}
 }

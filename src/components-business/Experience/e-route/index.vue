@@ -16,29 +16,29 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value)
-		},
+		}
 	}
 </script>
 <style lang="scss" scoped>
 	.widget-part {
 		.container {
-			padding: 16px 24px;
-			overflow: auto;
 			width: 100%;
 			height: 100%;
+			padding: 16px 24px;
+			overflow: auto;
 		}
 
 		.title {
-			font-weight: 500;
 			font-size: 24px;
+			font-weight: 500;
 			line-height: 34px;
-			color: #66E3FD;
+			color: #66e3fd;
 			text-align: left;
 		}
 
@@ -53,19 +53,19 @@
 					align-items: center;
 
 					> span {
-						font-weight: 600;
-						font-size: 18px;
-						line-height: 25px;
 						margin-left: 8px;
-						color: #66E3FD;
+						font-size: 18px;
+						font-weight: 600;
+						line-height: 25px;
+						color: #66e3fd;
 					}
 				}
 
 				.content {
+					margin-top: 8px;
 					font-size: 18px;
 					line-height: 25px;
-					color: #FFFFFF;
-					margin-top: 8px;
+					color: #fff;
 				}
 			}
 		}

@@ -5,9 +5,9 @@
 	.empty-image {
 		background-color: #ddd;
 		background-image: url('/static/images/logo.png');
-		background-size: 20% !important;
+		filter: grayscale(100%);
 		background-repeat: no-repeat;
 		background-position: center;
-		filter: grayscale(100%)
+		background-size: 20% !important;
 	}
 </style>

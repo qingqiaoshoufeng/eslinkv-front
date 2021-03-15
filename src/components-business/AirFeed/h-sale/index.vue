@@ -2,10 +2,10 @@
 	<div class="widget-part" :style="styles" v-if="data">
 		<div class="title">
 			<div class="title-txt">LNG宁波挂牌价(元/吨)</div>
-			<div class="num">{{data.lngPrice}}</div>
+			<div class="num">{{ data.lngPrice }}</div>
 		</div>
 		<div class="ul-wrap">
-			<ul class="jars" :style="{transform: `translateX(${-992*groupIndex}px)`}">
+			<ul class="jars" :style="{transform: `translateX(${-992 * groupIndex}px)`}">
 				<li
 					v-for="(k, i) in data.station"
 					:key="i"
@@ -14,19 +14,19 @@
 				>
 					<div class="jar">
 						<div class="jar-heart">
-							<div class="water" :style="{top: (100-k.percent) + '%'}"></div>
-							<div class="jar-num font-num">{{k.percent}}%</div>
+							<div class="water" :style="{top: (100 - k.percent) + '%'}"></div>
+							<div class="jar-num font-num">{{ k.percent }}%</div>
 						</div>
 					</div>
-					<div class="li-num">{{k.value}}</div>
-					<div class="li-name">{{k.name}}</div>
+					<div class="li-num">{{ k.value }}</div>
+					<div class="li-name">{{ k.name }}</div>
 					<div class="li-unit">储气量(m³)</div>
 					<div class="active-dot" v-show="currentIndex === i">
 						<div class="dot"></div>
 					</div>
 				</li>
 			</ul>
-			<div class="split-line" style="transform: translateY(-2px)"></div>
+			<div class="split-line" style="transform: translateY(-2px);"></div>
 		</div>
 		<div class="view">
 			<div class="titles">
@@ -50,7 +50,7 @@
 				</div>
 				<div class="chart" :id="id"></div>
 				<div class="x-axis">
-					<div class="month" v-for="k in month" :key="k">{{k}}</div>
+					<div class="month" v-for="k in month" :key="k">{{ k }}</div>
 				</div>
 			</div>
 		</div>
@@ -60,11 +60,11 @@
 <script>
 	import mixins from 'eslinkv-npm/mixins'
 	import getOptions from './options'
-	import {value} from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		data() {
+		data () {
 			return {
 				currentIndex: 0,
 				groupIndex: 0,
@@ -74,7 +74,7 @@
 			}
 		},
 		computed: {
-			month() {
+			month () {
 				if (this.data) {
 					return this.data.station[this.currentIndex].chart.map(v => v.name)
 				}
@@ -82,10 +82,10 @@
 			}
 		},
 		methods: {
-			setOption() {
+			setOption () {
 				this.instance && this.instance.setOption(getOptions(this.data.station[this.currentIndex].chart))
 			},
-			changeStation(i) {
+			changeStation (i) {
 				clearTimeout(this.clickTimer)
 				this.currentIndex = i
 				this.isClick = true
@@ -96,7 +96,7 @@
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
@@ -108,10 +108,10 @@
 				immediate: true
 			}
 		},
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		},
-		mounted() {
+		mounted () {
 			this.timer = setInterval(() => {
 				if (this.isClick) return
 				if (this.currentIndex === this.data.station.length - 1) {
@@ -126,7 +126,7 @@
 				this.setOption()
 			}, 2000)
 		},
-		beforeDestroy() {
+		beforeDestroy () {
 			this.timer && clearInterval(this.timer)
 			this.clickTimer && clearTimeout(this.clickTimer)
 		}
@@ -134,32 +134,32 @@
 </script>
 <style lang="scss" scoped>
 	.view {
-		width: 100%;
 		display: flex;
+		width: 100%;
 	}
 
 	.title {
-		width: 400px;
-		height: 64px;
-		background: url("/static/icons/long-bg.svg");
-		background-size: 100% 100%;
 		display: flex;
 		align-items: center;
+		width: 400px;
+		height: 64px;
 		padding-left: 22px;
 		margin-bottom: 22px;
+		background: url("/static/icons/long-bg.svg");
+		background-size: 100% 100%;
 
 		.title-txt {
+			margin-right: 33px;
 			font-size: 20px;
 			line-height: 24px;
-			color: #00DDFF;
-			margin-right: 33px;
+			color: #0df;
 		}
 
 		.num {
-			font-weight: bold;
 			font-size: 48px;
+			font-weight: bold;
 			line-height: 48px;
-			color: #FEFFFF;
+			color: #feffff;
 		}
 	}
 
@@ -169,21 +169,21 @@
 
 	.jars {
 		display: flex;
-		justify-content: space-between;
 		flex-wrap: nowrap;
-		transition: all 0.4s;
+		justify-content: space-between;
 		padding-bottom: 24px;
+		transition: all 0.4s;
 
 		li {
-			flex: none;
 			position: relative;
-			height: 230px;
-			width: 160px;
-			text-align: center;
-			background: linear-gradient(180deg, rgba(0, 68, 169, 0.3) 0%, rgba(0, 68, 169, 0) 100%);
 			box-sizing: border-box;
+			flex: none;
+			width: 160px;
+			height: 230px;
 			padding-top: 16px;
 			margin-right: 48px;
+			text-align: center;
+			background: linear-gradient(180deg, rgba(0, 68, 169, 0.3) 0%, rgba(0, 68, 169, 0) 100%);
 
 			&:nth-child(5n) {
 				margin-right: 0;
@@ -193,99 +193,99 @@
 				position: relative;
 				width: 48px;
 				height: 104px;
+				margin: 0 auto 16px;
 				background: url("/static/icons/jar.svg") no-repeat;
 				background-size: 100% 100%;
-				margin: 0 auto 16px;
 
 				.jar-heart {
 					position: absolute;
 					top: 3px;
 					left: 4px;
-					width: 40px;
-					height: 92px;
-					border-radius: 16px;
-					background: #001F6D;
-					overflow: hidden;
 					display: flex;
 					align-items: center;
 					justify-content: center;
+					width: 40px;
+					height: 92px;
+					overflow: hidden;
+					background: #001f6d;
+					border-radius: 16px;
 				}
 
 				.water {
 					position: absolute;
 					top: 100%;
-					left: 0;
 					bottom: 0;
+					left: 0;
 					width: 40px;
 					background: linear-gradient(to top, rgba(0, 221, 255, 0), rgba(0, 221, 255, 1));
 				}
 
 				.jar-num {
 					z-index: 1;
-					font-weight: bold;
 					font-size: 24px;
+					font-weight: bold;
 					line-height: 24px;
-					color: #FFFFFF;
+					color: #fff;
 					text-align: center;
 				}
 			}
 
 			.li-num {
-				font-weight: bold;
-				font-size: 32px;
-				line-height: 32px;
-				text-align: center;
-				color: #FFFFFF;
 				margin-bottom: 4px;
+				font-size: 32px;
+				font-weight: bold;
+				line-height: 32px;
+				color: #fff;
+				text-align: center;
 			}
 
 			.li-name {
+				margin-bottom: 4px;
 				font-size: 20px;
 				line-height: 24px;
+				color: #0df;
 				text-align: center;
-				color: #00DDFF;
-				margin-bottom: 4px;
 			}
 
 			.li-unit {
 				font-size: 18px;
 				line-height: 24px;
-				text-align: center;
 				color: rgba(255, 255, 255, 0.75);
+				text-align: center;
 			}
 
 			&.active {
 				border: 1px solid rgba(0, 221, 255, 0.5);
 
-				&:after {
-					content: '';
-					display: block;
-					background: #00DDFF;
+				&::after {
 					position: absolute;
+					right: 0;
 					bottom: 0;
 					left: 0;
-					right: 0;
+					display: block;
 					height: 4px;
+					content: '';
+					background: #0df;
 				}
 			}
 
 			.active-dot {
 				position: absolute;
-				left: 0;
 				right: 0;
-				margin: auto;
 				bottom: -20px;
-				background: #00FFCF;
+				left: 0;
 				width: 2px;
 				height: 20px;
+				margin: auto;
+				background: #00ffcf;
 
 				.dot {
 					position: absolute;
-					left: -3px;
 					bottom: -8px;
-					background: #00FFCF;
+					left: -3px;
 					width: 8px;
 					height: 8px;
+					background: #00ffcf;
 				}
 			}
 		}
@@ -297,44 +297,44 @@
 		height: 2px;
 		background: rgba(0, 221, 255, 0.5);
 
-		&:before {
-			content: '';
-			display: block;
+		&::before {
 			position: absolute;
 			top: 0;
 			left: 0;
-			height: 2px;
+			display: block;
 			width: 40px;
-			background: #00DDFF;
+			height: 2px;
+			content: '';
+			background: #0df;
 		}
 
-		&:after {
-			content: '';
-			display: block;
+		&::after {
 			position: absolute;
 			top: 0;
 			right: 0;
-			height: 2px;
+			display: block;
 			width: 40px;
-			background: #00DDFF;
+			height: 2px;
+			content: '';
+			background: #0df;
 		}
 	}
 
 	.chart-wrap {
+		position: relative;
 		width: 100%;
 		height: 435px;
-		position: relative;
 		margin-top: 24px;
 
 		.legend {
 			position: absolute;
-			left: 0;
-			right: 0;
-			margin: auto;
 			top: 0;
+			right: 0;
+			left: 0;
 			display: flex;
 			justify-content: space-between;
 			width: 320px;
+			margin: auto;
 
 			.legend-item {
 				display: flex;
@@ -343,74 +343,74 @@
 				.legend-color {
 					width: 16px;
 					height: 8px;
-					background: #2194FF;
+					background: #2194ff;
 
 					&.red {
-						background: #E5615B;
+						background: #e5615b;
 					}
 
 					&.green {
-						background: #00FFCF;
+						background: #00ffcf;
 					}
 				}
 
 				.line-legend {
-					background: #00DDFF;
 					width: 16px;
 					height: 2px;
+					background: #0df;
 				}
 
 				.legend-txt {
+					margin-left: 4px;
 					font-size: 16px;
 					line-height: 16px;
-					color: #FFFFFF;
-					margin-left: 4px;
+					color: #fff;
 				}
 			}
 		}
 	}
 
 	.chart {
+		position: relative;
 		width: 100%;
 		height: 100%;
-		position: relative;
 	}
 
 	.x-axis {
 		position: absolute;
-		z-index: 999;
+		right: 50px;
 		bottom: 10px;
 		left: 50px;
-		right: 50px;
-		background: rgba(0, 87, 169, 0.2);
-		border-radius: 12px;
-		height: 24px;
+		z-index: 999;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		height: 24px;
 		padding: 0 18px;
+		background: rgba(0, 87, 169, 0.2);
+		border-radius: 12px;
 
 		.month {
+			font-size: 16px;
 			font-style: normal;
 			font-weight: normal;
-			font-size: 16px;
 			line-height: 16px;
+			color: #fff;
 			text-align: center;
-			color: #FFFFFF;
 		}
 	}
 
 	.titles {
-		width: 82px;
 		flex: none;
+		width: 82px;
 
 		> div {
+			padding-top: 98px;
+			font-size: 20px;
 			font-style: normal;
 			font-weight: normal;
-			font-size: 20px;
 			line-height: 24px;
-			color: #FFFFFF;
-			padding-top: 98px;
+			color: #fff;
 
 			&:last-child {
 				padding-top: 192px;

@@ -15,10 +15,10 @@
 					item-card(v-for="item in list" v-bind="item" :key="item.id" @reload="reload")
 </template>
 <script lang="ts">
-	import {Vue, Component, Watch} from 'vue-property-decorator'
+	import { Vue, Component, Watch } from 'vue-property-decorator'
 	import itemCard from './item-card.vue'
 	import format from 'date-fns/format'
-	import {Page, Button, Input, DatePicker, Select, Option} from 'view-design'
+	import { Page, Button, Input, DatePicker, Select, Option } from 'view-design'
 
 	@Component({
 		components: {
@@ -43,23 +43,24 @@
 		}
 
 		@Watch('date')
-		dateChange(val) {
+		dateChange (val) {
 			if (!val[0] || !val[1]) return
 			this.query.startDate = format(val[0], 'yyyy-MM-dd')
 			this.query.endDate = format(val[1], 'yyyy-MM-dd')
 		}
 
-		handleNew() {
+		handleNew () {
 			this.$router.push('/editor/new')
 		}
 
-		reload() {
+		reload () {
 			this.$refs.page.reload()
 		}
 
-		init({pageSize, pageNum}) {
+		init ({ pageSize, pageNum }) {
 			this.$api.panel.list({
-				pageSize, pageNum,
+				pageSize,
+pageNum,
 				type: 0,
 				...this.query
 			}).then(res => {
@@ -84,8 +85,8 @@
 
 	.list-item-card-box {
 		flex-wrap: wrap;
-		margin-top: 15px;
 		min-width: 1135px;
 		padding-right: 15px;
+		margin-top: 15px;
 	}
 </style>

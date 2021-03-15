@@ -1,4 +1,4 @@
-import {hexToRgba} from '@/utils/index'
+import { hexToRgba } from '@/utils/index'
 
 export default function (data, config) {
 	return {
@@ -6,25 +6,25 @@ export default function (data, config) {
 			top: '20%',
 			left: '8%',
 			right: '4%',
-			bottom: '20%',
+			bottom: '20%'
 		},
 		tooltip: {
-			trigger: "axis",
+			trigger: 'axis',
 			triggerOn: 'mousemove|click',
 			axisPointer: {
 				lineStyle: {
 					color: {
-						type: "linear",
+						type: 'linear',
 						x: 0,
 						y: 0,
 						x2: 0,
 						y2: 1,
 						colorStops: [{
 							offset: 0,
-							color: "rgba(0, 255, 207, 0.5)"
+							color: 'rgba(0, 255, 207, 0.5)'
 						}, {
 							offset: 1,
-							color: "rgba(0, 255, 207, 0)"
+							color: 'rgba(0, 255, 207, 0)'
 						}],
 						global: false
 					}
@@ -59,12 +59,12 @@ export default function (data, config) {
 				show: false
 			},
 			splitLine: {
-				show: false,
+				show: false
 
 			},
 			axisLine: {
-				show: false,
-			},
+				show: false
+			}
 
 		}],
 		yAxis: [{
@@ -79,14 +79,14 @@ export default function (data, config) {
 			splitLine: {
 				show: true,
 				lineStyle: {
-					color: "rgba(199, 209, 219, 0.2)"
+					color: 'rgba(199, 209, 219, 0.2)'
 				}
 			},
 			axisTick: {
-				show: false,
+				show: false
 			},
 			axisLine: {
-				show: false,
+				show: false
 			},
 			splitArea: {
 				show: false
@@ -113,7 +113,7 @@ export default function (data, config) {
 				}
 			},
 			symbol: 'emptyCircle',
-			showSymbol: false, //是否显示 symbol, 如果 false 则只有在 tooltip hover 的时候显示。
+			showSymbol: false, // 是否显示 symbol, 如果 false 则只有在 tooltip hover 的时候显示。
 			itemStyle: {
 				color: config.color1
 			},
@@ -124,7 +124,7 @@ export default function (data, config) {
 				type: 'line',
 				data: data.data.map(v => v.y2),
 				lineStyle: {
-					color: config.color2,
+					color: config.color2
 				},
 				areaStyle: {
 					normal: {
@@ -151,7 +151,7 @@ export default function (data, config) {
 				type: 'line',
 				data: data.data.map(v => v.y3),
 				lineStyle: {
-					color: config.color3,
+					color: config.color3
 				},
 				areaStyle: {
 					normal: {

@@ -2,12 +2,12 @@ export const customConfig = [
 	{
 		prop: 'desc',
 		label: '描述',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'desc2',
 		label: '描述2',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'logo',
@@ -29,12 +29,12 @@ export const value = {
 	api: {
 		data: JSON.stringify({
 			value: 22326,
-			percent: 74.8,
-		}),
+			percent: 74.8
+		})
 	},
 	config: {
 		desc: '热线服务话务量(次)',
 		desc2: '接通率',
 		logo: '/static/images/serves/s-tag1-logo1.svg'
-	},
+	}
 }

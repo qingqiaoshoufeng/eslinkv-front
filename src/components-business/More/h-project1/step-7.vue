@@ -10,7 +10,7 @@
 	import step from './step'
 
 	export default {
-		mixins: [step],
+		mixins: [step]
 	}
 </script>
 <style lang="scss">

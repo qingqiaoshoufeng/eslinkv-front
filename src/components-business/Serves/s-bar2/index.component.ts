@@ -2,27 +2,27 @@ export const customConfig = [
 	{
 		prop: 'color1',
 		label: '颜色1',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'color2',
 		label: '颜色2',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'desc1',
 		label: '名称1',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'desc2',
 		label: '名称2',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'title',
 		label: '单位',
-		type: 'func-input',
+		type: 'func-input'
 	}
 ]
 
@@ -72,8 +72,8 @@ export const value = {
 				yValue: 130,
 				yValue1: 130,
 				xValue: '11月'
-			},
-		]),
+			}
+		])
 	},
 	config: {
 		color2: '#00DDFF',
@@ -82,4 +82,4 @@ export const value = {
 		desc2: '销量',
 		title: '户'
 	}
-};
+}

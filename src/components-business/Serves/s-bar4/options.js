@@ -1,4 +1,4 @@
-var colorArry = [
+const colorArry = [
     new echarts.graphic.LinearGradient(1, 0, 0, 0, [{
         offset: 0,
         color: '#FB5325' // 0% 处的颜色
@@ -29,7 +29,7 @@ export default function (data) {
             left: '2%',
             right: '3%',
             bottom: '3%',
-            top: "0%",
+            top: '0%',
             containLabel: true
         },
         calculable: true,
@@ -51,12 +51,12 @@ export default function (data) {
                 }
             },
             splitLine: {
-                show: false,
+                show: false
             }
         }],
         yAxis: [{
             type: 'category',
-            name: "",
+            name: '',
             data: data.map(v => v.x),
             axisLabel: {
                 textStyle: {
@@ -65,11 +65,11 @@ export default function (data) {
                 }
             },
             axisTick: {
-                show: false,
+                show: false
             },
             axisLine: {
-                show: false,
-            },
+                show: false
+            }
         }],
         series: [{
             name: '今日',
@@ -78,7 +78,7 @@ export default function (data) {
             itemStyle: {
                 barBorderRadius: 4
             },
-            data: data.map(v => v.y1),
+            data: data.map(v => v.y1)
         },
             {
                 name: '昨日',

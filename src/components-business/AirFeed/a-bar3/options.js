@@ -9,7 +9,7 @@ export default function getOption (data) {
 		xAxis: [{
 			type: 'category',
 			axisTick: {
-				show: false,
+				show: false
 			},
 			axisLabel: {
 				textStyle: {
@@ -26,11 +26,11 @@ export default function getOption (data) {
 			axisTick: {
 				show: false,
 				textStyle: {
-					color: '#fff',
+					color: '#fff'
 				}
 			},
 			splitLine: {
-				show: false,
+				show: false
 			},
 			axisLabel: {
 				textStyle: {
@@ -40,14 +40,14 @@ export default function getOption (data) {
 				}
 			},
 			axisLine: {
-				show: false,
+				show: false
 			}
 		}, {
 			name: '次',
 			splitLine: {
 				lineStyle: {
-					type: "solid",
-					color: "rgba(199, 209, 219, 0.2)"
+					type: 'solid',
+					color: 'rgba(199, 209, 219, 0.2)'
 				}
 			},
 			nameTextStyle: {
@@ -62,7 +62,7 @@ export default function getOption (data) {
 			axisTick: {
 				show: false,
 				textStyle: {
-					color: '#fff',
+					color: '#fff'
 				}
 			},
 			axisLabel: {
@@ -75,7 +75,7 @@ export default function getOption (data) {
 			},
 			interval: 50,
 			axisLine: {
-				show: true,
+				show: true
 			}
 		}],
 		barGap: -0.8,
@@ -102,13 +102,13 @@ export default function getOption (data) {
 			axisTick: {
 				show: false,
 				textStyle: {
-					color: '#fff',
+					color: '#fff'
 				}
 			},
 			axisLabel: {
 				textStyle: {
 					color: '#fff',
-					show: false,
+					show: false
 				}
 			},
 			symbol: 'none',
@@ -116,14 +116,14 @@ export default function getOption (data) {
 				normal: {
 					lineStyle: {
 						width: 2,
-						type: 'solid',  //'dotted'虚线 'solid'实线
+						type: 'solid', // 'dotted'虚线 'solid'实线
 						color: data.color2
 					}
 				}
 			},
 			smooth: true,
 			axisLine: {
-				show: false,
+				show: false
 			},
 			data: data.yValue
 		}]

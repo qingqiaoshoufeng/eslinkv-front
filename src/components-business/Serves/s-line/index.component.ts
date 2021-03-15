@@ -2,17 +2,17 @@ export const customConfig = [
 	{
 		prop: 'color',
 		label: '线条颜色',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'unit',
 		label: '纵坐标单位',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'icon',
 		label: '拐点图标', // png转base64，data:开头
-		type: 'func-input',
+		type: 'func-input'
 	}
 ]
 export const value = {
@@ -29,43 +29,43 @@ export const value = {
 		data: JSON.stringify({
 			data: [
 				{
-					name: "10-1",
+					name: '10-1',
 					value: 10
 				},
 				{
-					name: "10-2",
+					name: '10-2',
 					value: 40
 				},
 				{
-					name: "10-3",
+					name: '10-3',
 					value: 30
 				},
 				{
-					name: "10-4",
+					name: '10-4',
 					value: 20
 				},
 				{
-					name: "10-5",
+					name: '10-5',
 					value: 10
 				},
 				{
-					name: "10-6",
+					name: '10-6',
 					value: 50
 				},
 				{
-					name: "10-7",
+					name: '10-7',
 					value: 70
 				},
 				{
-					name: "10-8",
+					name: '10-8',
 					value: 60
 				},
 				{
-					name: "10-9",
+					name: '10-9',
 					value: 80
 				},
 				{
-					name: "10-10",
+					name: '10-10',
 					value: 40
 				}
 			]

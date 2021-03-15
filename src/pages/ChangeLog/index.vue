@@ -16,27 +16,27 @@
 </template>
 <script lang="ts">
 	import 'markdown-it-vue/dist/markdown-it-vue.css'
-	import {Component, Vue} from 'vue-property-decorator'
-	import {Timeline, TimelineItem, Tag, Icon} from 'view-design'
+	import { Component, Vue } from 'vue-property-decorator'
+	import { Timeline, TimelineItem, Tag, Icon } from 'view-design'
 
 	@Component({
 		components: {
 			'i-time-line': Timeline,
 			'i-time-line-item': TimelineItem,
 			'i-tag': Tag,
-			'i-icon': Icon,
+			'i-icon': Icon
 		}
 	})
 	export default class ChangeLog extends Vue {
 		list: any[] = []
 
-		get type() {
+		get type () {
 			return (type) => {
 				let text = ''
 				switch (type) {
 					case 'fix':
 						text = 'ios-bug'
-						break;
+						break
 					case 'perf':
 						text = 'md-thumbs-up'
 						break
@@ -48,9 +48,9 @@
 			}
 		}
 
-		init() {
+		init () {
 			const log = require.context('../../../changelog', true, /\.(js)$/)
-			let list = []
+			const list = []
 			log.keys().forEach(name => {
 				const time = name.split('/')[1].replace('.js', '')
 				const item = log(name).default
@@ -61,7 +61,7 @@
 			this.list = list
 		}
 
-		mounted() {
+		mounted () {
 			this.init()
 		}
 	}
@@ -99,10 +99,10 @@
 		}
 
 		.change-log {
-			list-style: circle;
-			margin-left: 20px;
 			margin-bottom: 10px;
+			margin-left: 20px;
 			line-height: 14px;
+			list-style: circle;
 		}
 	}
 </style>

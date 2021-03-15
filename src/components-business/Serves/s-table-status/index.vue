@@ -2,21 +2,24 @@
 	<div class="s-table-status widget-part" :style="styles">
 		<div
 			class="s-table-status__content"
-			v-if="!!data">
+			v-if="!!data"
+		>
 			<vue-seamless-scroll
 				:data="data || []"
 				class="s-table-status__content__seamless-warp"
-				:class-option="classOption">
+				:class-option="classOption"
+			>
 				<ul
 					class="s-table-status__content__row"
-					v-for="(item, index) in data?data:[]"
-					:key="index">
-					<li class="text-right">{{item.title || ''}}</li>
+					v-for="(item, index) in data ? data : []"
+					:key="index"
+				>
+					<li class="text-right">{{ item.title || '' }}</li>
 					<li class="pos-r">
-						<i class="pos-a" :style="{width:`${item.value/max*100}%`}"></i>
+						<i class="pos-a" :style="{width:`${item.value / max * 100}%`}"></i>
 					</li>
-					<li class="font-num">{{item.value || ''}}</li>
-					<li>{{item.suffix || ''}}</li>
+					<li class="font-num">{{ item.value || '' }}</li>
+					<li>{{ item.suffix || '' }}</li>
 				</ul>
 			</vue-seamless-scroll>
 		</div>
@@ -28,7 +31,7 @@
 	import { value } from './index.component'
 
 	export default {
-		data() {
+		data () {
 			return {
 				max: 0
 			}
@@ -40,13 +43,13 @@
 		methods: {},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (val) {
 						const list = this.data || []
 						const amoutList = list.reduce((initVal, val) => {
 							initVal.push(val?.value || 0)
 							return initVal
-						}, []);
+						}, [])
 						this.max = Math.max(...amoutList)
 					}
 				},
@@ -55,7 +58,7 @@
 			}
 		},
 		computed: {
-			classOption() {
+			classOption () {
 				return {
 					step: 0.2, // 数值越大速度滚动越快
 					limitMoveNum: this.data?.length, // 开始无缝滚动的数据量
@@ -68,16 +71,16 @@
 				}
 			}
 		},
-		created() {
-			this.configValue = this.parseConfigValue(value);
-		},
+		created () {
+			this.configValue = this.parseConfigValue(value)
+		}
 	}
 </script>
 <style lang="scss">
 	.s-table-status {
 		&__content {
-			margin-top: 9px;
 			height: 152px;
+			margin-top: 9px;
 
 			&__seamless-warp {
 				height: 200px;
@@ -85,39 +88,40 @@
 			}
 
 			&__row {
-				width: 480px;
-				height: 24px;
+				box-sizing: border-box;
 				display: flex;
 				align-items: center;
+				width: 480px;
+				height: 24px;
 				padding: 4px 8px;
-				box-sizing: border-box;
 				margin-top: 16px;
 
 				& > li {
-					text-align: left;
 					font-size: 16px;
 					line-height: 16px;
-					color: #FFFFFF;
+					color: #fff;
+					text-align: left;
 
 					&:nth-child(1) {
 						width: 90px;
-						color: #00DDFF;
+						color: #0df;
 					}
 
 					&:nth-child(2) {
 						width: 252px;
 						height: 16px;
-						background: rgba(0, 87, 169, 0.2);
-						margin-left: 16px;
 						margin-right: 16px;
+						margin-left: 16px;
+						background: rgba(0, 87, 169, 0.2);
 
 						i {
-							height: 8px;
-							left: 4px;
 							top: 4px;
-							background: linear-gradient(270deg, #00DDFF 0%, rgba(0, 221, 255, 0) 100%);
+							left: 4px;
+							height: 8px;
+							background: linear-gradient(270deg, #0df 0%, rgba(0, 221, 255, 0) 100%);
 						}
 					}
+
 					&:nth-child(4) {
 						font-size: 13px;
 					}

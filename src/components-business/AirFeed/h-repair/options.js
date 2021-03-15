@@ -19,7 +19,7 @@ export default function (data) {
             },
             axisTick: {
                 show: false
-            },
+            }
         }],
         yAxis: [{
             axisLabel: {
@@ -47,7 +47,7 @@ export default function (data) {
                 color: '#00DDFF'
             },
             areaStyle: {
-                color: 'rgba(0, 221, 255, 0.2)',
+                color: 'rgba(0, 221, 255, 0.2)'
             }
         }]
     }

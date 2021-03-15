@@ -8,15 +8,15 @@ export default {
     xAxis: {
         type: 'category',
         axisTick: {
-            show: false,
+            show: false
         },
-        axisLabel:{
+        axisLabel: {
             textStyle: {
                 color: '#fff',
 				fontSize: 16,
 				lineHeight: 16
             }
-        },
+        }
     },
     yAxis: [
         {
@@ -24,17 +24,17 @@ export default {
             show: true,
             splitLine: {
                 lineStyle: {
-                    type: "solid",
-                    color: "rgba(199, 209, 219, 0.2)"
+                    type: 'solid',
+                    color: 'rgba(199, 209, 219, 0.2)'
                 }
             },
             axisTick: {
                 show: false,
                 textStyle: {
-                    color: '#fff',
+                    color: '#fff'
                 }
             },
-            axisLabel:{
+            axisLabel: {
                 textStyle: {
                     color: '#fff',
                     fontSize: 16,
@@ -42,7 +42,7 @@ export default {
                 }
             },
             axisLine: {
-                show: false,
+                show: false
             }
         },
         {
@@ -54,10 +54,10 @@ export default {
             axisTick: {
                 show: false,
                 textStyle: {
-                    color: '#fff',
+                    color: '#fff'
                 }
             },
-            axisLabel:{
+            axisLabel: {
                 textStyle: {
                     color: '#fff',
                     fontSize: 16,
@@ -65,9 +65,9 @@ export default {
                 }
             },
             axisLine: {
-                show: false,
+                show: false
             }
-        },
+        }
     ],
     barWidth: 6,
     barGap: 0.5,
@@ -77,7 +77,7 @@ export default {
             normal: {
                 color: '#2C99FF'
             }
-        },
+        }
     }, {
         type: 'bar',
         yAxisIndex: 1,
@@ -85,6 +85,6 @@ export default {
             normal: {
                 color: '#00FFCF'
             }
-        },
+        }
     }]
-};
+}

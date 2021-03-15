@@ -2,7 +2,7 @@ export const customConfig = [
 	{
 		prop: 'tableHeader',
 		label: '表头',
-		type: 'func-input',
+		type: 'func-input'
 	}
 ]
 

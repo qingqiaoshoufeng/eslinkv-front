@@ -1,8 +1,11 @@
 <template>
 	<div class="widget-part" :style="styles" v-if="data">
-		<div class="container" :style="{
-	  transform: `translateX(-${100*tabSwitch}%)`
-	}">
+		<div
+			class="container"
+			:style="{
+				transform: `translateX(-${100 * tabSwitch}%)`
+			}"
+		>
 			<dangerList :data="data.data1"></dangerList>
 			<dangerTable :data="data.data2"></dangerTable>
 		</div>
@@ -11,30 +14,29 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import dangerList from "./dangerList"
-	import dangerTable from "./dangerTable"
-	import {value} from './index.component'
+	import dangerList from './dangerList'
+	import dangerTable from './dangerTable'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		components: {
 			dangerList, dangerTable
 		},
-		data() {
+		data () {
 			return {
 				tabSwitch: false
 			}
 		},
 		methods: {
-			changeTab() {
+			changeTab () {
 				this.tabSwitch = !this.tabSwitch
 			}
 		},
-		created() {
-
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		}
-	};
+	}
 </script>
 <style lang="scss" scoped>
 	.widget-part {
@@ -48,13 +50,13 @@
 
 		.icon-right {
 			position: absolute;
-			background: url("./img/page.svg") no-repeat;
-			background-size: 100% 100%;
+			top: 74px;
+			right: 0;
 			width: 20px;
 			height: 40px;
-			right: 0;
-			top: 74px;
 			cursor: pointer;
+			background: url("./img/page.svg") no-repeat;
+			background-size: 100% 100%;
 		}
 	}
 </style>

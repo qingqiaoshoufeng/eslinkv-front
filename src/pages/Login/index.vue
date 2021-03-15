@@ -14,14 +14,14 @@
 					i-button(type="primary" shape="circle" :long="true") 登录
 </template>
 <script lang="ts">
-	import {Input, Button, Icon} from 'view-design'
-	import {Component, Vue} from 'vue-property-decorator'
+	import { Input, Button, Icon } from 'view-design'
+	import { Component, Vue } from 'vue-property-decorator'
 
 	@Component({
 		components: {
 			'i-input': Input,
 			'i-button': Button,
-			'i-icon': Icon,
+			'i-icon': Icon
 		}
 	})
 	export default class Login extends Vue {
@@ -32,10 +32,10 @@
 	@import "../../scss/conf";
 
 	.login-container {
-		width: 100%;
-		height: 100%;
 		align-items: center;
 		justify-content: center;
+		width: 100%;
+		height: 100%;
 	}
 
 	.login-card {
@@ -45,21 +45,22 @@
 	}
 
 	.login-card-logo {
-		width: 450px;
 		align-items: center;
 		justify-content: center;
+		width: 450px;
 
 		.login-card-logo-img {
-			background-size: cover;
-			background-position: center;
 			background-image: url('../../assets/login/login-bg.jpg');
+			background-position: center;
+			background-size: cover;
 		}
 
-		.login-card-logo-img, .login-card-logo-mask {
-			width: 100%;
-			height: 100%;
+		.login-card-logo-img,
+		.login-card-logo-mask {
 			top: 0;
 			left: 0;
+			width: 100%;
+			height: 100%;
 		}
 
 		.login-card-logo-mask {

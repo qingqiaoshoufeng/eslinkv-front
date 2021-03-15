@@ -22,67 +22,67 @@
 	</div>
 </template>
 <script>
-import { Overlay } from '../../../../components/index';
-let eventTypeIconMap = {
-	0: 'iconrenwugongdan-suc',
-	1: 'iconrenwugongdan',
-};
-export default {
-	name: 'useHotYear',
-	components: {
-		Overlay,
-	},
-	props: {
-		overlayType: {
-			type: String,
-			default: 'WarningICcustomer',
+	import { Overlay } from '../../../../components/index'
+	const eventTypeIconMap = {
+		0: 'iconrenwugongdan-suc',
+		1: 'iconrenwugongdan'
+	}
+	export default {
+		name: 'useHotYear',
+		components: {
+			Overlay
 		},
-		data: {
-			type: Array,
-			default() {
-				return [];
+		props: {
+			overlayType: {
+				type: String,
+				default: 'WarningICcustomer'
 			},
-		},
-		detailList: {
-			type: Array,
-			default() {
-				return [];
+			data: {
+				type: Array,
+				default () {
+					return []
+				}
 			},
-		},
-		activeIndex: {
-			type: Number,
-			default: -1,
-		},
-	},
-	data() {
-		return {
-			eventTypeIconMap,
-		};
-	},
-	watch: {
-		data: {
-			handler(val) {
-				this.data = val;
+			detailList: {
+				type: Array,
+				default () {
+					return []
+				}
 			},
-			deep: true,
+			activeIndex: {
+				type: Number,
+				default: -1
+			}
 		},
-	},
-	async created() {
-		this.map = this.$parent.$amap;
-	},
-	mounted() {},
-	methods: {
-		handleOverlayClick(marker) {
-			this.$emit('view-detail', {
-				...marker,
-				overlayType: this.overlayType,
-			});
+		data () {
+			return {
+				eventTypeIconMap
+			}
 		},
-		handleMouseleave() {
-			this.$emit('close');
+		watch: {
+			data: {
+				handler (val) {
+					this.data = val
+				},
+				deep: true
+			}
 		},
-	},
-};
+		async created () {
+			this.map = this.$parent.$amap
+		},
+		mounted () {},
+		methods: {
+			handleOverlayClick (marker) {
+				this.$emit('view-detail', {
+					...marker,
+					overlayType: this.overlayType
+				})
+			},
+			handleMouseleave () {
+				this.$emit('close')
+			}
+		}
+	}
 </script>
 
 
@@ -90,15 +90,18 @@ export default {
 video::-webkit-media-controls {
 	display: none !important;
 }
+
 .warning-videO {
-	margin-left: -80px;
-	margin-top: -40px;
-	outline: none;
 	position: absolute;
+	margin-top: -40px;
+	margin-left: -80px;
+	outline: none;
 }
+
 .amap-icon {
 	width: 44px !important;
 	height: 44px !important;
+
 	> img {
 		width: 44px !important;
 		height: 44px !important;

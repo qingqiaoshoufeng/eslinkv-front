@@ -17,21 +17,21 @@
 
 	export default {
 		name: 'New',
-		provide() {
-			return {kanboardEditor: this.$refs.kanboardEditor}
+		provide () {
+			return { kanboardEditor: this.$refs.kanboardEditor }
 		},
-		components: {loadMask, dFooter, dWidgetList, dEditor},
-		data() {
+		components: { loadMask, dFooter, dWidgetList, dEditor },
+		data () {
 			return {
 				ready: false,
 				querying: false,
-				platform: platform.state,
-			};
+				platform: platform.state
+			}
 		},
-		mounted() {
+		mounted () {
 			document.title = '新增 - 数据看板'
-		},
-	};
+		}
+	}
 </script>
 
 <style lang="scss" scoped>
@@ -44,7 +44,6 @@
 		}
 
 		/deep/ {
-
 			.widgets-panel.fixed + .center {
 				width: calc(100% - 428px) !important;
 				margin-left: 428px !important;
@@ -58,17 +57,17 @@
 	}
 
 	.layout-wrapper {
+		display: flex;
+		flex-direction: column;
 		width: 100%;
 		height: 100%;
 		padding: 0 !important;
-		display: flex;
-		flex-direction: column;
 	}
 
 	.main-container {
 		width: 100%;
 		height: calc(100% - 50px);
-		background-color: #ffffff;
+		background-color: #fff;
 	}
 
 	/deep/ {
@@ -86,8 +85,8 @@
 
 	.line {
 		width: 100%;
-		border-bottom: 1px dashed #414141;
 		margin: 13px 0;
+		border-bottom: 1px dashed #414141;
 		opacity: 0.4;
 	}
 

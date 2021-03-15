@@ -3,7 +3,7 @@
 		<h-vertical-tabs
 			class="h-tabs-circle__tabs"
 			:source="data"
-      :hasInterval="false"
+			:hasInterval="false"
 			:defaultActived="tabActived"
 			@actived-change="tabActivedChange"
 		/>
@@ -12,14 +12,20 @@
 			<div class="unit">单位：万m³</div>
 			<div class="h-ring-1-legend-box">
 				<ul class="h-ring-1-legend" :style="legengdTransform">
-					<li class="fn-flex flex-row" v-for="(item,index) in list" :key="index"
+					<li
+						class="fn-flex flex-row"
+						v-for="(item,index) in list"
+						:key="index"
 						@click="activeHandler(index)"
-						:class="[{active: animateActiveIndex===index}]">
-						<i class="circle"
-						   :style="{color:JSON.parse(config.config.color)[index%(JSON.parse(config.config.color).length)]}"/>
-						<label class="ellipsis">{{item.title}}</label>
-						<a>{{item.des}}</a>
-						<span>{{item.value}}{{config.config.suffix}}</span>
+						:class="[{active: animateActiveIndex === index}]"
+					>
+						<i
+							class="circle"
+							:style="{color:JSON.parse(config.config.color)[index % (JSON.parse(config.config.color).length)]}"
+						/>
+						<label class="ellipsis">{{ item.title }}</label>
+						<a>{{ item.des }}</a>
+						<span>{{ item.value }}{{ config.config.suffix }}</span>
 					</li>
 				</ul>
 			</div>
@@ -30,43 +36,43 @@
 	import mixins from 'eslinkv-npm/mixins'
 	import getOption from './options'
 	import { customConfig, value } from './index.component'
-	import HVerticalTabs from '../../AirFeed/h-tabs-circle/HVerticalTabs';
+	import HVerticalTabs from '../../AirFeed/h-tabs-circle/HVerticalTabs'
 
 	export default {
 		mixins: [mixins],
-		components: {HVerticalTabs},
-		data() {
+		components: { HVerticalTabs },
+		data () {
 			return {
 				showSize: 9,
-				tabActived: 0,
+				tabActived: 0
 			}
 		},
 		computed: {
-			list() {
+			list () {
 				return this.data ? this.data[this.tabActived].data : []
 			},
-			legengdTransform() {
+			legengdTransform () {
 				if (this.list) {
 					if (this.list.length <= this.showSize + 1) {
-						return {transform: `translateY(0px)`}
+						return { transform: 'translateY(0px)' }
 					} else {
 						if (this.animateActiveIndex > this.showSize) {
 							const top = (this.animateActiveIndex - this.showSize) * 24
-							return {transform: `translateY(-${top}px)`}
+							return { transform: `translateY(-${top}px)` }
 						} else {
-							return {transform: `translateY(0px)`}
+							return { transform: 'translateY(0px)' }
 						}
 					}
 				}
-				return {transform: `translateY(0px)`}
+				return { transform: 'translateY(0px)' }
 			}
 		},
 		methods: {
-			tabActivedChange(tabActived) {
+			tabActivedChange (tabActived) {
 				this.tabActived = tabActived
 				this.setOption(this.data[tabActived].data)
 			},
-			activeHandler(index) {
+			activeHandler (index) {
 				clearInterval(this.animateTimer)
 				this.instance.dispatchAction({
 					type: 'downplay',
@@ -83,12 +89,12 @@
 					this.show(this.list)
 				}, 2000)
 			},
-			setOption(data) {
+			setOption (data) {
 				this.instance && this.instance.setOption(getOption(data, this.config.config))
-        this.animateActiveIndex = 0
-        this.show(data)
+				this.animateActiveIndex = 0
+				this.show(data)
 			},
-			show(data) {
+			show (data) {
 				clearInterval(this.animateTimer)
 				this.animateTimer = setInterval(() => {
 					this.instance.dispatchAction({
@@ -111,7 +117,7 @@
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						const data = [...val]
 						this.$nextTick(() => {
@@ -124,7 +130,7 @@
 				immediate: true
 			}
 		},
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value, customConfig)
 		}
 	}
@@ -143,34 +149,34 @@
 	}
 
 	.h-ring-1-legend-box {
-		right: 25px;
 		top: 49px;
+		right: 25px;
 		max-height: 176px;
 		overflow-y: hidden;
 	}
 
 	.unit {
+		margin-bottom: 8px;
 		font-size: 18px;
 		line-height: 24px;
-		color: #FFFFFF;
+		color: #fff;
 		text-align: right;
-		margin-bottom: 8px;
 	}
 
 	.h-ring-1-legend {
 		display: flex;
-		justify-content: space-between;
 		flex-wrap: wrap;
+		justify-content: space-between;
 		width: 570px;
-		transition: all .3s;
+		transition: all 0.3s;
 
 		li {
-			width: 40%;
-			margin-left: 5%;
 			align-items: center;
+			width: 40%;
 			min-width: 132px;
 			padding: 3px 8px;
 			margin-bottom: 8px;
+			margin-left: 5%;
 
 			&.active {
 				background: rgba(255, 255, 255, 0.2);
@@ -179,21 +185,23 @@
 		}
 
 		i {
-			border: 2px solid;
 			width: 12px;
 			height: 12px;
+			border: 2px solid;
 		}
 
-		label, span, a {
-			color: #fff;
+		label,
+		span,
+		a {
 			font-size: 18px;
 			line-height: 18px;
+			color: #fff;
 		}
 
 		label {
-			margin-left: 4px;
 			min-width: 100px;
 			max-width: 100px;
+			margin-left: 4px;
 			text-align: left;
 		}
 

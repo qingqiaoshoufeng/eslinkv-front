@@ -10,27 +10,27 @@ export const value = {
 	},
 	api: {
 		data: JSON.stringify({
-			count: 123458,
-		}),
+			count: 123458
+		})
 	},
 	config: {
 		icon: '/static/icons/h-inline-logo1.svg',
-		text: '',
-	},
+		text: ''
+	}
 }
 
 export const customConfig = [
 	{
 		prop: 'text',
 		label: '描述',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'icon',
 		label: '图片',
 		type: 'func-background',
 		options: [
-			'/static/icons/h-inline-logo1.svg',
+			'/static/icons/h-inline-logo1.svg'
 		]
 	}
 ]

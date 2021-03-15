@@ -9,7 +9,7 @@ export default function getOption (data) {
 		xAxis: [{
 			type: 'category',
 			axisTick: {
-				show: false,
+				show: false
 			},
 			axisLabel: {
 				textStyle: {
@@ -26,7 +26,7 @@ export default function getOption (data) {
 			axisTick: {
 				show: false,
 				textStyle: {
-					color: '#fff',
+					color: '#fff'
 				}
 			},
 			axisLabel: {
@@ -37,10 +37,10 @@ export default function getOption (data) {
 				}
 			},
 			splitLine: {
-				show: false,
+				show: false
 			},
 			axisLine: {
-				show: false,
+				show: false
 			}
 		}, {
 			name: '%',
@@ -54,15 +54,15 @@ export default function getOption (data) {
 			type: 'value',
 			splitLine: {
 				lineStyle: {
-					type: "solid",
-					color: "rgba(199, 209, 219, 0.2)"
+					type: 'solid',
+					color: 'rgba(199, 209, 219, 0.2)'
 				}
 			},
 			show: true,
 			axisTick: {
 				show: false,
 				textStyle: {
-					color: '#fff',
+					color: '#fff'
 				}
 			},
 			axisLabel: {
@@ -74,7 +74,7 @@ export default function getOption (data) {
 				}
 			},
 			axisLine: {
-				show: true,
+				show: true
 			}
 		}],
 		barGap: -0.8,
@@ -87,8 +87,8 @@ export default function getOption (data) {
 					color: new echarts.graphic.LinearGradient(
 						0, 0, 0, 1,
 						[
-							{offset: 0, color: '#00DDFF'},
-							{offset: 1, color: 'rgba(0, 221, 255, 0)'}
+							{ offset: 0, color: '#00DDFF' },
+							{ offset: 1, color: 'rgba(0, 221, 255, 0)' }
 						])
 				}
 			},
@@ -101,13 +101,13 @@ export default function getOption (data) {
 			axisTick: {
 				show: false,
 				textStyle: {
-					color: '#fff',
+					color: '#fff'
 				}
 			},
 			axisLabel: {
 				textStyle: {
 					color: '#fff',
-					show: false,
+					show: false
 				}
 			},
 			symbol: 'none',
@@ -115,14 +115,14 @@ export default function getOption (data) {
 				normal: {
 					lineStyle: {
 						width: 2,
-						type: 'dotted',  //'dotted'虚线 'solid'实线
+						type: 'dotted', // 'dotted'虚线 'solid'实线
 						color: data.color2
 					}
 				}
 			},
 			smooth: true,
 			axisLine: {
-				show: false,
+				show: false
 			},
 			data: data.yValue1
 		}]

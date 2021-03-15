@@ -1,11 +1,11 @@
 import { hexToRgba } from '@/utils/index'
 
 export default function (percent, config) {
-    let max = 100;
+    const max = 100
 
     return {
         title: {
-            text: percent+'%',
+            text: percent + '%',
             x: 'center',
             y: '25%',
             textStyle: {
@@ -26,7 +26,7 @@ export default function (percent, config) {
         polar: {
             // 圆弧大小
             radius: '210%',
-            center: ["50%", "95%"]
+            center: ['50%', '95%']
         },
         angleAxis: {
             axisLine: {
@@ -79,32 +79,32 @@ export default function (percent, config) {
             name: 'C',
             roundCap: 1,
             color: config.bgColor,
-            barGap: '-100%',
+            barGap: '-100%'
         },
             {
-                "type": "pie",
+                type: 'pie',
                 radius: ['170%', '180%'],
-                center: ["50%", "97%"],
-                "hoverAnimation": false,
+                center: ['50%', '97%'],
+                hoverAnimation: false,
                 startAngle: 180,
                 endAngle: 0,
-                "data": [{
-                    "name": "",
-                    "value": percent,
-                    "label": {
+                data: [{
+                    name: '',
+                    value: percent,
+                    label: {
                         show: false
                     },
-                    "labelLine": {
+                    labelLine: {
                         show: false
                     },
                     itemStyle: {
                         color: 'rgba(1,0,0,0)'
                     }
                 },
-                    { //画中间的图标
-                        "name": "",
-                        "value": 0,
-                        "label": {
+                    { // 画中间的图标
+                        name: '',
+                        value: 0,
+                        label: {
                             position: 'inside',
                             backgroundColor: config.pointerColor,
                             borderRadius: 8,
@@ -114,12 +114,12 @@ export default function (percent, config) {
 
                         }
                     }, {
-                        "name": "",
+                        name: '',
                         value: max - percent,
-                        "label": {
+                        label: {
                             show: false
                         },
-                        "labelLine": {
+                        labelLine: {
                             show: false
                         },
                         itemStyle: {
@@ -127,12 +127,12 @@ export default function (percent, config) {
                         }
                     },
                     {
-                        "name": "",
+                        name: '',
                         value: max,
-                        "label": {
+                        label: {
                             show: false
                         },
-                        "labelLine": {
+                        labelLine: {
                             show: false
                         },
                         itemStyle: {

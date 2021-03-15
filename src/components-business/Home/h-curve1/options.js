@@ -1,4 +1,4 @@
-export default  {
+export default {
 	grid: {
 		top: 40,
 		left: 60,
@@ -28,7 +28,7 @@ export default  {
 			showMinLabel: true,
 			interval: 2,
 			textStyle: {
-				color: "rgba(255, 255, 255, 1)",
+				color: 'rgba(255, 255, 255, 1)',
 				fontSize: 16,
 				lineHeight: 16
 			}
@@ -57,7 +57,7 @@ export default  {
 				}
 			},
 			textStyle: {
-				color: "rgba(255, 255, 255, 1)",
+				color: 'rgba(255, 255, 255, 1)',
 				fontSize: 16,
 				lineHeight: 16
 			}

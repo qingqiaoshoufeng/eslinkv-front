@@ -22,11 +22,11 @@ export default function (data, config) {
             axisTick: {
                 show: false
             },
-            axisLine: {show: false},
+            axisLine: { show: false },
             splitLine: {
                 show: true,
                 lineStyle: {
-                    color: 'rgba(255, 255, 255, 0.2)',
+                    color: 'rgba(255, 255, 255, 0.2)'
                 }
             }
         },
@@ -38,24 +38,24 @@ export default function (data, config) {
             axisTick: {
                 show: false
             },
-            axisLine: {show: false},
+            axisLine: { show: false },
             splitLine: {
                 show: false,
                 lineStyle: {
-                    color: '#D1D1D1',
+                    color: '#D1D1D1'
                 }
             }
         },
         series: [{
             type: 'scatter',
             symbol: 'circle',
-            symbolSize: function(data) {
+            symbolSize: function (data) {
                 return data[2]
             },
             itemStyle: {
                 color: 'rgba(0, 221, 255, 0.5)'
             },
             data: data.data
-        }, ]
+        }]
     }
 }

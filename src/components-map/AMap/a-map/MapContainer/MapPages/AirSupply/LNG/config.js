@@ -1,5 +1,5 @@
 // 引入详情字典
-import { LNGstationNumber } from "../../../../utils/dictionary"
+import { LNGstationNumber } from '../../../../utils/dictionary'
 // 覆盖物legend配置
 export const AIRSUPPLY_LNG_LEGEND_MAP = {
 	LNGStation: {
@@ -7,8 +7,8 @@ export const AIRSUPPLY_LNG_LEGEND_MAP = {
 		legendIcon: 'icontulilNG',
 		component: 'LNGStation',
 		visible: true,
-		dataProp: "lNGStationList"
-	},
+		dataProp: 'lNGStationList'
+	}
 	// HighPressureLine: {
 	//     label: '高压管网',
 	//     legendIcon: 'icontuligaoyaguanwang',
@@ -108,7 +108,7 @@ export const AIRSUPPLY_LNG_LEGEND_MAP = {
 	// },
 }
 
-//覆盖物详情
+// 覆盖物详情
 export const AIRSUPPLY_LNG_OVERLAY_MAP = {
 
 	// EmergencyAirSourceStation: {
@@ -135,18 +135,18 @@ export const AIRSUPPLY_LNG_OVERLAY_MAP = {
 	// },
 	LNGStation: {
 		fields: {
-			name: {},
-		},
+			name: {}
+		}
 	},
 	WARN: {
 		fields: {
 			name: {
 				style: {
 					fontSize: '32px',
-					color: '#FFDC45',
+					color: '#FFDC45'
 				},
-				errColor: '#FFDC45',
-			},
+				errColor: '#FFDC45'
+			}
 			// address: {
 			//     style: {
 			//         fontSize: '18px',
@@ -155,7 +155,7 @@ export const AIRSUPPLY_LNG_OVERLAY_MAP = {
 			//     errColor: '#FF7217',
 			// },
 		},
-		visibleMore: false,
+		visibleMore: false
 	},
 	WARNEVENT: {
 		fields: {
@@ -169,12 +169,12 @@ export const AIRSUPPLY_LNG_OVERLAY_MAP = {
 			address: {
 				style: {
 					fontSize: '24px',
-					color: '#00DDFF',
+					color: '#00DDFF'
 				},
-				errColor: '#fff',
-			},
+				errColor: '#fff'
+			}
 		},
-		visibleMore: true,
+		visibleMore: true
 	},
 	WarningList: {
 		fields: {
@@ -188,11 +188,11 @@ export const AIRSUPPLY_LNG_OVERLAY_MAP = {
 			address: {
 				style: {
 					fontSize: '24px',
-					color: '#fff',
+					color: '#fff'
 				},
-				errColor: '#fff',
-			},
-		},
+				errColor: '#fff'
+			}
+		}
 
 	}
 }

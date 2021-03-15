@@ -5,36 +5,36 @@ export const WARNING_OVERLAY_MAP = {
             repairContent: {
                 style: {
                     fontSize: '32px',
-                    color: '#FFDC45',
+                    color: '#FFDC45'
                 },
-                errColor: '#FFDC45',
+                errColor: '#FFDC45'
             },
             address: {
                 style: {
                     fontSize: '24px',
-                    color: '#fff',
+                    color: '#fff'
                 },
-                errColor: '#fff',
-            },
+                errColor: '#fff'
+            }
         },
-        visibleMore: true,
+        visibleMore: true
     },
     WarningList: {
         fields: {
             description: {
                 style: {
                     fontSize: '32px',
-                    color: '#FFDC45',
+                    color: '#FFDC45'
                 },
-                errColor: '#FFDC45',
+                errColor: '#FFDC45'
             },
             address: {
                 style: {
                     fontSize: '24px',
-                    color: '#fff',
+                    color: '#fff'
                 },
-                errColor: '#fff',
-            },
-        },
+                errColor: '#fff'
+            }
+        }
     }
 }

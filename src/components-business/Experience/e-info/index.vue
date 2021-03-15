@@ -17,13 +17,13 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value, customConfig} from './index.component'
+	import { value, customConfig } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value, customConfig)
-		},
+		}
 	}
 </script>
 <style lang="scss" scoped>
@@ -42,33 +42,33 @@
 			text-align: left;
 
 			.info-nun {
-				font-weight: bold;
 				font-size: 48px;
+				font-weight: bold;
 				line-height: 48px;
-				color: #FEFFFF;
+				color: #feffff;
 			}
 
 			.info-txt {
+				margin-top: 4px;
 				font-size: 20px;
 				line-height: 24px;
-				color: #00DDFF;
-				margin-top: 4px;
+				color: #0df;
 			}
 		}
 
 		.change {
-			text-align: left;
 			width: 130px;
 			height: 85px;
+			padding: 16px 8px;
+			text-align: left;
 			background: linear-gradient(180deg, rgba(0, 221, 255, 0.3) 0%, rgba(0, 221, 255, 0) 100%);
 			border-radius: 8px;
-			padding: 16px 8px;
 
 			.change-num {
-				font-weight: bold;
 				font-size: 32px;
+				font-weight: bold;
 				line-height: 32px;
-				color: #FEFFFF;
+				color: #feffff;
 
 				.arrow {
 					width: 12px;
@@ -77,10 +77,10 @@
 			}
 
 			.change-txt {
+				margin-top: 4px;
 				font-size: 20px;
 				line-height: 24px;
-				color: #00DDFF;
-				margin-top: 4px;
+				color: #0df;
 			}
 		}
 	}

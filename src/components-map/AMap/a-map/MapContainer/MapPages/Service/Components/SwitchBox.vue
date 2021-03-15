@@ -14,98 +14,108 @@
 	</div>
 </template>
 <script>
-export default {
-	name: 'SwitchBox',
-	props: {
-		data: {
-			type: Array,
-			default() {
-				return [];
+	export default {
+		name: 'SwitchBox',
+		props: {
+			data: {
+				type: Array,
+				default () {
+					return []
+				}
 			},
+			className: {
+				type: Object,
+				default () {
+					return {}
+				}
+			}
 		},
-		className: {
-			type: Object,
-			default() {
-				return {};
-			},
+		watch: {
+			data: {
+				handler (val) {
+					this.data = val
+				},
+				deep: true,
+				immediate: true
+			}
 		},
-	},
-	watch: {
-		data: {
-			handler(val) {
-				this.data = val;
-			},
-			deep: true,
-			immediate: true,
+		data () {
+			return {}
 		},
-	},
-	data() {
-		return {};
-	},
-	methods: {
-		change(type) {
-			this.$emit('switch-change', this.data, type);
+		methods: {
+			change (type) {
+				this.$emit('switch-change', this.data, type)
+			}
 		},
-	},
-	mounted() {},
-};
+		mounted () {}
+	}
 </script>
 <style lang="scss" scoped>
 .hangrancode_switch_Box {
-	padding: 4px 16px;
 	position: fixed;
-	left: 32px;
 	bottom: 32px;
+	left: 32px;
 	z-index: 99999;
 	display: flex;
 	flex-direction: column;
-	border: 1px solid #00ddff;
+	padding: 4px 16px;
+	border: 1px solid #0df;
 	border-radius: 8px;
+
 	.item {
 		margin-top: 1px;
 	}
+
 	.label {
 		display: inline-block;
 		min-width: 145px;
 	}
 
-	.ivu-switch-default:after {
+	.ivu-switch-default::after {
 		background-color: rgba(255, 255, 255, 0.4) !important;
-		.ivu-switch-inner:after {
+
+		.ivu-switch-inner::after {
 			background-color: rgba(255, 255, 255, 0.4) !important;
 		}
 	}
-	.ivu-switch-checked:after {
+
+	.ivu-switch-checked::after {
 		background-color: rgba(255, 255, 255, 1) !important;
-		.ivu-switch-inner:after {
+
+		.ivu-switch-inner::after {
 			background-color: rgba(255, 255, 255, 1) !important;
 		}
 	}
+
 	.desc {
 		width: 40px;
 	}
+
 	div {
 		display: flex;
-		height: 44px;
-		line-height: 44px;
-		justify-items: center;
 		align-items: center;
+		justify-items: center;
+		height: 44px;
+		padding-left: 8px;
+		font-size: 18px;
 		font-style: normal;
 		font-weight: normal;
-		font-size: 18px;
+		line-height: 44px;
 		line-height: 24px;
-		padding-left: 8px;
+
 		/* identical to box height, or 133% */
 
 		/* 辅助色/绿色 */
 
 		color: #00ffcf;
+
 		.ivu-switch {
-			margin-left: 12px;
 			margin-right: 8px;
+			margin-left: 12px;
 		}
 	}
 }
+
 .left {
 	left: 2695px;
 }

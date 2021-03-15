@@ -6,17 +6,17 @@ const placeHolderStyle = {
         labelLine: {
             show: false
         },
-        color: "rgba(0,0,0,0)",
+        color: 'rgba(0,0,0,0)',
         borderWidth: 0
     },
     emphasis: {
-        color: "rgba(0,0,0,0)",
+        color: 'rgba(0,0,0,0)',
         borderWidth: 0
     }
-};
+}
 
 export default {
-    //第一个图表
+    // 第一个图表
     series: [
         {
             type: 'pie',
@@ -50,12 +50,12 @@ export default {
 							},
 							opacity: 0.5
                         }
-                    },
+                    }
 				},
 				{
                     value: 0,
 					itemStyle: placeHolderStyle
-                },
+                }
             ]
 		},
 		{
@@ -87,15 +87,15 @@ export default {
 									offset: 1, color: '#00DDFF' // 100% 处的颜色
 								}],
 								global: false // 缺省为 false
-							},
+							}
                         }
-                    },
+                    }
 				},
 				{
                     value: 0,
 					itemStyle: placeHolderStyle
-                },
+                }
             ]
-        },
+        }
     ]
-};
+}

@@ -1,101 +1,100 @@
 
-
-let ValveOpenFinish = {
+const ValveOpenFinish = {
     label: '阀门状态',
     DW: '',
-    prop: "valveOpenFinish",
+    prop: 'valveOpenFinish',
     style: {
         color: '#ffd200',
-        "minWidth": "70%",
-        "fontWeight": "700"
+        minWidth: '70%',
+        fontWeight: '700'
     }
 }
-let time = {
+const time = {
     label: '时间',
     DW: '',
-    prop: "createDate",
+    prop: 'createDate'
 }
 
-let DevicedId = {
+const DevicedId = {
     label: '编号',
     DW: '',
-    prop: "deviceId",
+    prop: 'deviceId'
 }
-let DeviceName = {
+const DeviceName = {
     label: '设备名称',
     DW: '',
-    prop: "deviceName",
+    prop: 'deviceName'
 }
-let DeviceLocation = {
+const DeviceLocation = {
     label: '设备坐标',
     DW: '',
-    prop: "deviceLocation",
+    prop: 'deviceLocation'
 }
-let F_BatteryVoltage = {
+const F_BatteryVoltage = {
     label: '电池电压',
     DW: 'V',
-    prop: "f_batteryVoltage",
+    prop: 'f_batteryVoltage'
 }
-let SolarCell = {
+const SolarCell = {
     label: '太阳能电压',
     DW: 'V',
-    prop: "solarCell",
+    prop: 'solarCell'
 }
-let GatewaySingal = {
+const GatewaySingal = {
     label: '信号强度',
     DW: 'dBm',
-    prop: "gatewaySingal",
+    prop: 'gatewaySingal'
 }
-let deviceType = {
+const deviceType = {
     label: '类型',
     DW: '',
-    prop: "deviceType",
+    prop: 'deviceType'
 }
-let inletPressure = {
+const inletPressure = {
     label: '进口压力',
     DW: 'kPa',
-    prop: "inletPressure",
+    prop: 'inletPressure',
     Fixed: 2
 }
-let outletPressure = {
+const outletPressure = {
     label: '出口压力',
     DW: 'kPa',
-    prop: "outletPressure",
+    prop: 'outletPressure',
     Fixed: 2
 }
-let MC = {
+const MC = {
     label: '井盖状态',
     DW: '',
-    prop: "mc",
+    prop: 'mc'
 }
-let TEMP = {
+const TEMP = {
     label: '温度',
     DW: '°C',
-    prop: "temp",
+    prop: 'temp',
     Fixed: 2
 }
 
-let inletTemperature = {
+const inletTemperature = {
     label: '进口温度',
     DW: '°C',
-    prop: "inletTemperature",
+    prop: 'inletTemperature',
     Fixed: 2
 }
-let outletTemperature = {
+const outletTemperature = {
     label: '出口温度',
     DW: '°C',
-    prop: "outletTemperature",
+    prop: 'outletTemperature',
     Fixed: 2
 }
-let h2S = {
+const h2S = {
     label: '硫化氢',
     DW: 'ppm',
-    prop: "h2S",
+    prop: 'h2S'
 }
-let ch4 = {
+const ch4 = {
     label: '甲烷',
     DW: 'LEL',
-    prop: "ch4",
+    prop: 'ch4'
 }
 
 

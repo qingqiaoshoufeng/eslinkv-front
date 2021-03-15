@@ -1,6 +1,6 @@
-import {hexToRgba} from '@/utils'
+import { hexToRgba } from '@/utils'
 
-export default function getOption(data, config) {
+export default function getOption (data, config) {
 	return {
 		textStyle: {
 			fontSize: 16,
@@ -13,22 +13,22 @@ export default function getOption(data, config) {
 			right: 10
 		},
 		tooltip: {
-			trigger: "axis",
+			trigger: 'axis',
 			triggerOn: 'mousemove|click',
 			axisPointer: {
 				lineStyle: {
 					color: {
-						type: "linear",
+						type: 'linear',
 						x: 0,
 						y: 0,
 						x2: 0,
 						y2: 1,
 						colorStops: [{
 							offset: 0,
-							color: "rgba(0, 255, 207, 0.5)"
+							color: 'rgba(0, 255, 207, 0.5)'
 						}, {
 							offset: 1,
-							color: "rgba(0, 255, 207, 0)"
+							color: 'rgba(0, 255, 207, 0)'
 						}],
 						global: false
 					}
@@ -36,7 +36,7 @@ export default function getOption(data, config) {
 			}
 		},
 		xAxis: [{
-			type: "category",
+			type: 'category',
 			axisTick: {
 				show: false
 			},
@@ -44,7 +44,7 @@ export default function getOption(data, config) {
 				show: false
 			},
 			axisLabel: {
-				color: "#fff",
+				color: '#fff',
 				fontSize: 16,
 				lineHeight: 16
 			},
@@ -53,16 +53,16 @@ export default function getOption(data, config) {
 		}],
 		yAxis: [{
 			name: config.unit,
-			type: "value",
+			type: 'value',
 			splitLine: {
 				show: true,
 				lineStyle: {
-					type: "solid",
-					color: "rgba(199, 209, 219, 0.2)"
+					type: 'solid',
+					color: 'rgba(199, 209, 219, 0.2)'
 				}
 			},
 			axisLabel: {
-				color: "#fff",
+				color: '#fff',
 				fontSize: 16,
 				lineHeight: 16
 			},
@@ -73,16 +73,16 @@ export default function getOption(data, config) {
 				show: false
 			},
 			nameTextStyle: {
-				color: "#fff"
+				color: '#fff'
 			},
 			offset: 5
 		}],
 		series: [{
-			type: "line",
+			type: 'line',
 			symbolSize: 16,
 			symbol: 'image://' + config.icon,
 			itemStyle: {
-				color: config.color,
+				color: config.color
 			},
 			lineStyle: {
 				color: config.color

@@ -1,5 +1,5 @@
 <template>
-	<div class="h-project-1-step-6" :style="{left:`${left}%`}" v-if="step===6">
+	<div class="h-project-1-step-6" :style="{left:`${left}%`}" v-if="step === 6">
 		<div class="h-project-1-step-icon fn-flex">
 			<img :src="icon6" alt=""/>
 		</div>
@@ -10,7 +10,7 @@
 	import step from './step'
 
 	export default {
-		mixins: [step],
+		mixins: [step]
 	}
 </script>
 <style lang="scss">

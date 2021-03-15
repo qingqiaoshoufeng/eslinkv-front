@@ -2,37 +2,37 @@ export const customConfig = [
 	{
 		prop: 'color1',
 		label: '颜色1',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'color2',
 		label: '颜色2',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'color3',
 		label: '颜色3',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'desc1',
 		label: '名称1',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'desc2',
 		label: '名称2',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'desc3',
 		label: '名称3',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'unit',
 		label: '单位',
-		type: 'func-input',
+		type: 'func-input'
 	}
 ]
 export const value = {
@@ -82,7 +82,7 @@ export const value = {
 				a: 51,
 				b: 35,
 				c: 16
-			},
+			}
 		])
 	},
 	config: {
@@ -92,6 +92,6 @@ export const value = {
 		desc1: '申请数量',
 		desc2: '审核通过',
 		desc3: '审核未通过',
-		unit: '单',
+		unit: '单'
 	}
 }

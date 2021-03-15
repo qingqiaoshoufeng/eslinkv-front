@@ -10,7 +10,7 @@ export default function (data, config) {
 		xAxis: [{
 			type: 'category',
 			axisTick: {
-				show: false,
+				show: false
 			},
 			axisLabel: {
 				textStyle: {
@@ -28,12 +28,12 @@ export default function (data, config) {
 			axisTick: {
 				show: false,
 				textStyle: {
-					color: '#fff',
+					color: '#fff'
 				}
 			},
 			splitLine: {
 				lineStyle: {
-					color: "rgba(199, 209, 219, 0.2)"
+					color: 'rgba(199, 209, 219, 0.2)'
 				}
 			},
 			axisLabel: {
@@ -44,7 +44,7 @@ export default function (data, config) {
 				}
 			},
 			axisLine: {
-				show: false,
+				show: false
 			}
 		}, {
 			name: '%',
@@ -63,7 +63,7 @@ export default function (data, config) {
 			axisTick: {
 				show: false,
 				textStyle: {
-					color: '#fff',
+					color: '#fff'
 				}
 			},
 			axisLabel: {
@@ -74,7 +74,7 @@ export default function (data, config) {
 				}
 			},
 			axisLine: {
-				show: false,
+				show: false
 			}
 		}],
 		barGap: -0.8,
@@ -84,7 +84,7 @@ export default function (data, config) {
 			showBackground: true,
 			itemStyle: {
 				normal: {
-					color: config.color1,
+					color: config.color1
 				}
 			},
 			barWidth: 10,
@@ -96,7 +96,7 @@ export default function (data, config) {
 			showBackground: true,
 			itemStyle: {
 				normal: {
-					color: config.color2,
+					color: config.color2
 				}
 			},
 			data: data.yValue
@@ -106,7 +106,7 @@ export default function (data, config) {
 			show: true,
 			axisLabel: {
 				textStyle: {
-					color: '#fff',
+					color: '#fff'
 				}
 			},
 			itemStyle: {

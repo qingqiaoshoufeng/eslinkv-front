@@ -11,13 +11,13 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value)
-		},
+		}
 	}
 </script>
 <style lang="scss" scoped>
@@ -28,11 +28,11 @@
 
 		.item {
 			.num {
-				font-weight: bold;
-				font-size: 24px;
-				line-height: 24px;
-				color: #FFFFFF;
 				margin-bottom: 8px;
+				font-size: 24px;
+				font-weight: bold;
+				line-height: 24px;
+				color: #fff;
 			}
 
 			.bar-wrap {
@@ -40,23 +40,23 @@
 				width: 16px;
 				height: 136px;
 				margin: 0 auto;
-				background: #0057A9;
+				background: #0057a9;
 
 				.bar {
 					position: absolute;
+					top: 0;
+					right: 0;
 					bottom: 0;
 					left: 0;
-					right: 0;
-					top: 0;
-					background: #00ddff;
+					background: #0df;
 				}
 			}
 
 			.txt {
+				margin-top: 8px;
 				font-size: 16px;
 				line-height: 16px;
-				color: #00DDFF;
-				margin-top: 8px;
+				color: #0df;
 			}
 		}
 	}

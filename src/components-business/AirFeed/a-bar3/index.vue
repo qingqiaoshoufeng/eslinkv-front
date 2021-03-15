@@ -25,49 +25,49 @@
 <script>
 	import mixins from 'eslinkv-npm/mixins'
 	import getOption from './options'
-	import {customConfig, value} from './index.component'
+	import { customConfig, value } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		computed: {
-			colorList() {
+			colorList () {
 				if (!this.data) return ['#00DDFF', 'rgba(1,253,210,1)']
 				return [this.config.config.color1, this.config.config.color2]
 			},
-			descList() {
+			descList () {
 				if (!this.data) return ['第三方破坏', '同比']
 				return [this.config.config.desc1, this.config.config.desc2]
 			},
-			title() {
+			title () {
 				if (!this.data) return ''
 				return this.config.config.title
-			},
+			}
 		},
 		methods: {
-			setOption(data) {
+			setOption (data) {
 				this.instance && this.instance.setOption(getOption(data))
-			},
+			}
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
-						const data = {...val};
+						const data = { ...val }
 						this.$nextTick(() => {
 							this.instance = echarts.init(
 								document.getElementById(this.id)
-							);
+							)
 							this.setOption(data)
-						});
+						})
 					}
 				},
 				deep: true,
-				immediate: true,
-			},
+				immediate: true
+			}
 		},
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value, customConfig)
-		},
+		}
 	}
 </script>
 <style lang="scss" scoped>
@@ -76,32 +76,32 @@
 	}
 
 	.a-legend-box {
-		width: 100%;
-		height: 20px;
-		display: flex;
-		align-items: center;
 		position: absolute;
 		top: 10px;
 		left: 0;
+		display: flex;
+		align-items: center;
+		width: 100%;
+		height: 20px;
 
 		.unit {
 			width: 30px;
-			text-align: right;
-			color: #fff;
 			font-size: 16px;
 			font-style: normal;
 			font-weight: 400;
 			line-height: 16px;
+			color: #fff;
+			text-align: right;
 			letter-spacing: 0;
 		}
 
 		.legend {
-			display: flex;
 			position: absolute;
 			left: 0;
-			width: 100%;
+			display: flex;
 			align-items: center;
 			justify-content: center;
+			width: 100%;
 
 			.legend1,
 			.legend2 {
@@ -129,8 +129,8 @@
 				font-style: normal;
 				font-weight: 400;
 				line-height: 16px;
-				letter-spacing: 0px;
 				color: #fff;
+				letter-spacing: 0;
 			}
 		}
 	}

@@ -2,12 +2,12 @@ export const customConfig = [
 	{
 		prop: 'title',
 		label: '标题',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'suffix',
 		label: '后缀',
-		type: 'func-input',
+		type: 'func-input'
 	}
 ]
 
@@ -24,7 +24,7 @@ export const value = {
     },
     config: {
         title: '昨日用气量：',
-        suffix: 'm³',
+        suffix: 'm³'
     },
     api: {
         data: JSON.stringify({

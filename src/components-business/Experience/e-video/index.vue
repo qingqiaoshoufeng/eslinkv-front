@@ -13,24 +13,24 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value)
-		},
+		}
 	}
 </script>
 <style lang="scss" scoped>
 	.wrapper {
 		width: 100%;
 		height: 100%;
+		padding-top: 61px;
+		padding-left: 435px;
 		text-align: left;
 		background: url("./img/bg.png") no-repeat;
 		background-size: 100% 100%;
-		padding-top: 61px;
-		padding-left: 435px;
 
 		.video {
 			width: 1104px;

@@ -5,12 +5,11 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
-
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		}
 	}
@@ -20,7 +19,7 @@
 		width: 100%;
 		height: 1050px;
 		background: rgba(11, 0, 90, 0.9);
-		border-left: 1px solid #00DDFF;
+		border-left: 1px solid #0df;
 	}
 </style>
 

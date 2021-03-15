@@ -2,7 +2,7 @@ export const customConfig = [
 	{
 		prop: 'links',
 		label: '关联组件',
-		type: 'func-input',
+		type: 'func-input'
 	}
 ]
 

@@ -6,27 +6,28 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
 		mixins: [mixins],
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		},
 		methods: {
-			handleClick() {
-				if (this.data.sceneId)
+			handleClick () {
+				if (this.data.sceneId) {
 					scene.actions.destroyScene(this.data.sceneId)
+				}
 			}
 		}
 	}
 </script>
 <style lang="scss" scoped>
 	.h-bg2 {
-		background-color: rgba(0, 0, 0, 0);
 		width: 3500px;
 		height: 1050px;
+		background-color: rgba(0, 0, 0, 0);
 	}
 
 </style>

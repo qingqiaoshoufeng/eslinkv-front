@@ -6,44 +6,44 @@ export default {
 		bottom: 40
 	},
 	tooltip: {
-		triggerOn: 'mousemove|click',
+		triggerOn: 'mousemove|click'
 	},
 	xAxis: [{
 		type: 'category',
 		axisTick: {
-			show: false,
+			show: false
 		},
 		axisLine: {
-			show: false,
+			show: false
 		},
 		axisLabel: {
-			color: "#fff",
+			color: '#fff',
 			fontSize: 16,
 			lineHeight: 16
-		},
+		}
 	}],
 	yAxis: [{
 		type: 'value',
 		show: true,
 		splitLine: {
 			lineStyle: {
-				type: "solid",
-				color: "rgba(199, 209, 219, 0.2)"
+				type: 'solid',
+				color: 'rgba(199, 209, 219, 0.2)'
 			}
 		},
 		axisTick: {
 			show: false,
 			textStyle: {
-				color: '#fff',
+				color: '#fff'
 			}
 		},
 		axisLabel: {
-			color: "#fff",
+			color: '#fff',
 			fontSize: 16,
 			lineHeight: 16
 		},
 		axisLine: {
-			show: false,
+			show: false
 		}
 	}, {
 		name: '%',
@@ -62,17 +62,17 @@ export default {
 		axisTick: {
 			show: false,
 			textStyle: {
-				color: '#fff',
+				color: '#fff'
 			}
 		},
 		axisLabel: {
 			textStyle: {
 				show: true,
-				color: '#fff',
+				color: '#fff'
 			}
 		},
 		axisLine: {
-			show: false,
+			show: false
 		}
 	}],
 	series: [{
@@ -80,10 +80,10 @@ export default {
 		yAxisIndex: 0,
 		itemStyle: {
 			normal: {
-				color: '#E5615B',
+				color: '#E5615B'
 			}
 		},
-		barWidth: 6,
+		barWidth: 6
 	}, {
 		type: 'bar',
 		barWidth: 6,
@@ -91,9 +91,9 @@ export default {
 		barGap: 1,
 		itemStyle: {
 			normal: {
-				color: '#00DDFF',
+				color: '#00DDFF'
 			}
-		},
+		}
 	}, {
 		type: 'line',
 		yAxisIndex: 1,
@@ -101,13 +101,13 @@ export default {
 		axisTick: {
 			show: false,
 			textStyle: {
-				color: '#fff',
+				color: '#fff'
 			}
 		},
 		axisLabel: {
 			textStyle: {
 				color: '#fff',
-				show: false,
+				show: false
 			}
 		},
 		symbol: 'none',
@@ -122,7 +122,7 @@ export default {
 		},
 		smooth: true,
 		axisLine: {
-			show: false,
+			show: false
 		}
 	}]
-};
+}

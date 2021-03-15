@@ -26,26 +26,26 @@ export const customConfig = [
 	{
 		prop: 'desc',
 		label: '描述',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'numFontSize',
 		label: '数字字体大小',
-		type: 'func-number',
+		type: 'func-number'
 	},
 	{
 		prop: 'descFontSize',
 		label: '描述字体大小',
-		type: 'func-number',
+		type: 'func-number'
 	},
 	{
 		prop: 'numColor',
 		label: '数字颜色',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'descColor',
 		label: '描述颜色',
-		type: 'func-color',
+		type: 'func-color'
 	}
 ]

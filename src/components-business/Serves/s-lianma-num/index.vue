@@ -5,7 +5,7 @@
 			<div class="s-lianma-num-code"></div>
 			<div class="s-lianma-num-ring pos-a"></div>
 			<div class="s-lianma-num-right">
-				<h2 class="font-num">{{data&&data.value}}</h2>
+				<h2 class="font-num">{{ data && data.value }}</h2>
 				<p>实际联码数(户)</p>
 			</div>
 		</div>
@@ -17,10 +17,10 @@
 
 	export default {
 		mixins: [mixins],
-		created() {
-			this.configValue = this.parseConfigValue(value);
-		},
-	};
+		created () {
+			this.configValue = this.parseConfigValue(value)
+		}
+	}
 </script>
 <style lang="scss" scoped>
 	.s-lianma-num-right {
@@ -30,7 +30,7 @@
 			margin-top: 45px;
 			font-size: 48px;
 			line-height: 48px;
-			color: #FFFFFF;
+			color: #fff;
 			text-align: left;
 		}
 
@@ -38,7 +38,7 @@
 			margin-top: 16px;
 			font-size: 24px;
 			line-height: 24px;
-			color: #FFFFFF;
+			color: #fff;
 		}
 	}
 
@@ -46,9 +46,11 @@
 		0% {
 			transform: rotate(0deg);
 		}
+
 		50% {
 			transform: rotate(180deg);
 		}
+
 		100% {
 			transform: rotate(360deg);
 		}
@@ -58,42 +60,43 @@
 		0% {
 			top: 33px;
 		}
+
 		100% {
 			top: 117px;
 		}
 	}
 
 	.s-lianma-num {
-		height: 176px;
 		width: 480px;
+		height: 176px;
 
 		.s-lianma-num-sao {
-			width: 96px;
-			height: 27px;
 			top: 33px;
 			left: 45px;
-			background-size: 96px 27px;
+			width: 96px;
+			height: 27px;
 			background-image: url('./img/sao.svg');
+			background-size: 96px 27px;
 			animation: infinite top linear 3s;
 		}
 
 		.s-lianma-num-ring {
-			width: 182px;
-			height: 182px;
-			background-size: 182px;
 			top: 0;
 			left: 0;
+			width: 182px;
+			height: 182px;
 			background-image: url('./img/ring.svg');
+			background-size: 182px;
 			animation: infinite rotate linear 3s;
 		}
 
 		.s-lianma-num-code {
 			width: 182px;
 			height: 182px;
-			background-size: 146px;
+			background-image: url('./img/code.svg');
 			background-repeat: no-repeat;
 			background-position: center;
-			background-image: url('./img/code.svg');
+			background-size: 146px;
 		}
 	}
 </style>

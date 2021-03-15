@@ -23,11 +23,11 @@ export const customConfig = [
 	{
 		prop: 'desc',
 		label: '描述',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'unit',
 		label: '单位',
-		type: 'func-input',
-	},
+		type: 'func-input'
+	}
 ]

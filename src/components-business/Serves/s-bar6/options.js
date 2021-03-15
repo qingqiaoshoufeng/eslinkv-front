@@ -26,25 +26,25 @@ export default function (data, config) {
         grid: {
             top: '20%',
             bottom: '4%',
-            right:'3%',
-            left:'1%',
+            right: '3%',
+            left: '1%',
             containLabel: true
         },
         animationDuration: 3000,
         xAxis: [{
-            type: "category",
+            type: 'category',
             axisLine: {
                 show: false
             },
 			axisLabel: {
-				color: "#fff",
+				color: '#fff',
 				fontSize: 16,
 				lineHeight: 16
 			},
             axisTick: {
                 show: false
             },
-            data: data.map(v => v.x),
+            data: data.map(v => v.x)
         }],
         yAxis: [{
             type: 'value',
@@ -56,7 +56,7 @@ export default function (data, config) {
                 show: false
             },
 			axisLabel: {
-				color: "#fff",
+				color: '#fff',
 				fontSize: 16,
 				lineHeight: 16
 			},
@@ -72,22 +72,22 @@ export default function (data, config) {
         series: [
             {
                 name: config.desc1,
-                type: "bar",
+                type: 'bar',
                 barGap: '-75%',
                 barWidth: 16,
                 itemStyle: {
                     color: 'transparent',
                     borderColor: config.color1,
-                    borderWidth: 2,
+                    borderWidth: 2
                 },
                 data: data.map(v => v.a),
                 zlevel: 1
             }, {
                 name: config.desc2,
-                type: "bar",
-                stack: "总量",
+                type: 'bar',
+                stack: '总量',
                 barMaxWidth: 8,
-				barMinHeight:10,
+				barMinHeight: 10,
                 itemStyle: {
                     color: config.color2
                 },
@@ -95,10 +95,10 @@ export default function (data, config) {
                 zlevel: 2
             }, {
                 name: config.desc3,
-                type: "bar",
-                stack: "总量",
+                type: 'bar',
+                stack: '总量',
                 barMaxWidth: 8,
-				barMinHeight:10,
+				barMinHeight: 10,
                 itemStyle: {
                     color: config.color3
                 },

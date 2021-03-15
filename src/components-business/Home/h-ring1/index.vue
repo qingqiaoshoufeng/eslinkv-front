@@ -1,193 +1,206 @@
 <template>
-    <div class="widget-part pos-r" :style="styles">
-        <div class="h-ring-1" :id="id"/>
-        <ul class="h-ring-1-icon pos-a" :style="{backgroundImage:`url(${config.config&&config.config.background})`}">
-            <li class="pos-a" v-for="(item,index) in icon" :key="index" :style="{transform:`rotate(${3.6*index}deg)`}"/>
-        </ul>
-        <div class="pos-a h-ring-1-legend-box">
-            <ul class="h-ring-1-legend" :style="legengdTransform">
-                <li class="fn-flex flex-row" v-for="(item,index) in data?data:[]" :key="index"
-                    @click="activeHandler(index)"
-                    :class="[{active:animateActiveIndex===index}]">
-                    <i class="circle"
-                       :style="{color:config.config&&JSON.parse(config.config.color)[index%(config.config?JSON.parse(config.config.color).length:0)]}"/>
-                    <label class="ellipsis">{{item.title}}</label>
-                    <a>{{item.des}}</a>
-                    <span>{{item.b}}{{config.config&&config.config.suffix}}</span>
-                </li>
-            </ul>
-        </div>
-    </div>
+	<div class="widget-part pos-r" :style="styles">
+		<div class="h-ring-1" :id="id"/>
+		<ul class="h-ring-1-icon pos-a" :style="{backgroundImage:`url(${config.config && config.config.background})`}">
+			<li
+				class="pos-a"
+				v-for="(item,index) in icon"
+				:key="index"
+				:style="{transform:`rotate(${3.6 * index}deg)`}"
+			/>
+		</ul>
+		<div class="pos-a h-ring-1-legend-box">
+			<ul class="h-ring-1-legend" :style="legengdTransform">
+				<li
+					class="fn-flex flex-row"
+					v-for="(item,index) in data ? data : []"
+					:key="index"
+					@click="activeHandler(index)"
+					:class="[{active:animateActiveIndex === index}]"
+				>
+					<i
+						class="circle"
+						:style="{color:config.config && JSON.parse(config.config.color)[index % (config.config ? JSON.parse(config.config.color).length : 0)]}"
+					/>
+					<label class="ellipsis">{{ item.title }}</label>
+					<a>{{ item.des }}</a>
+					<span>{{ item.b }}{{ config.config && config.config.suffix }}</span>
+				</li>
+			</ul>
+		</div>
+	</div>
 </template>
 <script>
-    import mixins from 'eslinkv-npm/mixins'
-    import options from './options'
-    import {customConfig, value} from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import options from './options'
+	import { customConfig, value } from './index.component'
 
-    export default {
-        mixins: [mixins],
-        data() {
-            return {
-                icon: new Int8Array(100),
-                showSize: 4,
-            }
-        },
-        computed: {
-            legengdTransform() {
-                if (this.data) {
-                    if (this.data.length <= this.showSize + 1) {
-                        return {transform: `translateY(0px)`}
-                    } else {
-                        if (this.animateActiveIndex > this.showSize) {
-                            const top = (this.animateActiveIndex - this.showSize) * 32
-                            return {transform: `translateY(-${top}px)`}
-                        } else {
-                            return {transform: `translateY(0px)`}
-                        }
-                    }
-                }
-                return {transform: `translateY(0px)`}
-            }
-        },
-        methods: {
-            activeHandler(index) {
-                clearInterval(this.animateTimer)
-                this.instance.dispatchAction({
-                    type: 'downplay',
-                    seriesIndex: 0,
-                    dataIndex: this.animateActiveIndex
-                })
-                this.animateActiveIndex = index
-                this.instance.dispatchAction({
-                    type: 'highlight',
-                    seriesIndex: 0,
-                    dataIndex: index
-                })
-                setTimeout(() => {
-                    this.show(this.data)
-                }, 2000)
-            },
-            setOption(data) {
-                options.series[0].data = data.map(item => item.value)
-                options.color = JSON.parse(this.config.config.color)
-                this.instance && this.instance.setOption(options)
-            },
-            show(data) {
-                clearInterval(this.animateTimer)
-                this.animateTimer = setInterval(() => {
-                    this.instance.dispatchAction({
-                        type: 'downplay',
-                        seriesIndex: 0,
-                        dataIndex: this.animateActiveIndex % data.length
-                    })
-                    if (this.animateActiveIndex >= data.length - 1) {
-                        this.animateActiveIndex = 0
-                    } else {
-                        this.animateActiveIndex = this.animateActiveIndex + 1
-                    }
-                    this.instance.dispatchAction({
-                        type: 'highlight',
-                        seriesIndex: 0,
-                        dataIndex: this.animateActiveIndex % data.length
-                    })
-                }, 1000)
-            }
-        },
-        watch: {
-            data: {
-                handler(val) {
-                    if (this.id && val) {
-                        const data = [...val]
-                        this.$nextTick(() => {
-                            this.instance = echarts.init(document.getElementById(this.id))
-                            this.setOption(data)
-                            this.show(data)
-                        })
-                    }
-                },
-                deep: true,
-                immediate: true
-            }
-        },
-        created() {
-            this.configValue = this.parseConfigValue(value, customConfig)
-        }
-    }
+	export default {
+		mixins: [mixins],
+		data () {
+			return {
+				icon: new Int8Array(100),
+				showSize: 4
+			}
+		},
+		computed: {
+			legengdTransform () {
+				if (this.data) {
+					if (this.data.length <= this.showSize + 1) {
+						return { transform: 'translateY(0px)' }
+					} else {
+						if (this.animateActiveIndex > this.showSize) {
+							const top = (this.animateActiveIndex - this.showSize) * 32
+							return { transform: `translateY(-${top}px)` }
+						} else {
+							return { transform: 'translateY(0px)' }
+						}
+					}
+				}
+				return { transform: 'translateY(0px)' }
+			}
+		},
+		methods: {
+			activeHandler (index) {
+				clearInterval(this.animateTimer)
+				this.instance.dispatchAction({
+					type: 'downplay',
+					seriesIndex: 0,
+					dataIndex: this.animateActiveIndex
+				})
+				this.animateActiveIndex = index
+				this.instance.dispatchAction({
+					type: 'highlight',
+					seriesIndex: 0,
+					dataIndex: index
+				})
+				setTimeout(() => {
+					this.show(this.data)
+				}, 2000)
+			},
+			setOption (data) {
+				options.series[0].data = data.map(item => item.value)
+				options.color = JSON.parse(this.config.config.color)
+				this.instance && this.instance.setOption(options)
+			},
+			show (data) {
+				clearInterval(this.animateTimer)
+				this.animateTimer = setInterval(() => {
+					this.instance.dispatchAction({
+						type: 'downplay',
+						seriesIndex: 0,
+						dataIndex: this.animateActiveIndex % data.length
+					})
+					if (this.animateActiveIndex >= data.length - 1) {
+						this.animateActiveIndex = 0
+					} else {
+						this.animateActiveIndex = this.animateActiveIndex + 1
+					}
+					this.instance.dispatchAction({
+						type: 'highlight',
+						seriesIndex: 0,
+						dataIndex: this.animateActiveIndex % data.length
+					})
+				}, 1000)
+			}
+		},
+		watch: {
+			data: {
+				handler (val) {
+					if (this.id && val) {
+						const data = [...val]
+						this.$nextTick(() => {
+							this.instance = echarts.init(document.getElementById(this.id))
+							this.setOption(data)
+							this.show(data)
+						})
+					}
+				},
+				deep: true,
+				immediate: true
+			}
+		},
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
+		}
+	}
 </script>
 <style lang="scss" scoped>
-    .h-ring-1 {
-        height: 100%;
-    }
+	.h-ring-1 {
+		height: 100%;
+	}
 
-    .h-ring-1-icon {
-        background-size: 40px 49px;
-        background-repeat: no-repeat;
-        background-position: center;
-        width: 112px;
-        height: 112px;
-        top: 50%;
-        left: 25%;
-        margin-left: -56px;
-        margin-top: -56px;
+	.h-ring-1-icon {
+		top: 50%;
+		left: 25%;
+		width: 112px;
+		height: 112px;
+		margin-top: -56px;
+		margin-left: -56px;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 40px 49px;
 
-        li {
-            width: 2px;
-            height: 8px;
-            background-color: rgba(255, 255, 255, 0.2);
-            top: 0;
-            left: 50%;
-            margin-left: -1px;
-            transform-origin: 0 56px;
-        }
-    }
+		li {
+			top: 0;
+			left: 50%;
+			width: 2px;
+			height: 8px;
+			margin-left: -1px;
+			background-color: rgba(255, 255, 255, 0.2);
+			transform-origin: 0 56px;
+		}
+	}
 
-    .h-ring-1-legend-box {
-        right: 25px;
-        top: 49px;
-        max-height: 176px;
-        overflow-y: hidden;
-    }
+	.h-ring-1-legend-box {
+		top: 49px;
+		right: 25px;
+		max-height: 176px;
+		overflow-y: hidden;
+	}
 
-    .h-ring-1-legend {
-        transition: all .3s;
+	.h-ring-1-legend {
+		transition: all 0.3s;
 
-        li {
-            align-items: center;
-            min-width: 132px;
-            padding: 8px;
+		li {
+			align-items: center;
+			min-width: 132px;
+			padding: 8px;
 
-            &.active {
-                background: rgba(255, 255, 255, 0.2);
-                border-radius: 4px;
-            }
-        }
+			&.active {
+				background: rgba(255, 255, 255, 0.2);
+				border-radius: 4px;
+			}
+		}
 
-        i {
-            border: 2px solid;
-            width: 12px;
-            height: 12px;
-        }
+		i {
+			width: 12px;
+			height: 12px;
+			border: 2px solid;
+		}
 
-        label, span, a {
-            color: #fff;
-            font-size: 18px;
-            line-height: 18px;
-        }
+		label,
+		span,
+		a {
+			font-size: 18px;
+			line-height: 18px;
+			color: #fff;
+		}
 
-        label {
-            margin-left: 4px;
-            min-width: 100px;
-            max-width: 100px;
-            text-align: left;
-        }
+		label {
+			min-width: 100px;
+			max-width: 100px;
+			margin-left: 4px;
+			text-align: left;
+		}
 
-        a {
-            margin-right: 10px;
-        }
+		a {
+			margin-right: 10px;
+		}
 
-        span {
-            margin-left: auto;
-        }
-    }
+		span {
+			margin-left: auto;
+		}
+	}
 </style>
 

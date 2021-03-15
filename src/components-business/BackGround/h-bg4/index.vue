@@ -3,21 +3,21 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		}
 	}
 </script>
 <style lang="scss" scoped>
 	.widget-part {
-		background: url("./img/activity-service-bg.png") no-repeat;
-		background-size: 100% 100%;
 		width: 100%;
 		height: 100%;
+		background: url("./img/activity-service-bg.png") no-repeat;
+		background-size: 100% 100%;
 	}
 
 </style>

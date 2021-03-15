@@ -6,23 +6,22 @@
 </template>
 <script lang="ts">
 	import mx from 'eslinkv-npm/mixins'
-	import {Component} from 'vue-property-decorator'
-	import {mixins} from 'vue-class-component'
-	import {value} from './index.component'
+	import { Component } from 'vue-property-decorator'
+	import { mixins } from 'vue-class-component'
+	import { value } from './index.component'
 	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	@Component
 	class HTitle6 extends mixins(mx) {
 		scene = scene.state
 
-		handleClick(index) {
+		handleClick (index) {
 			if (index) {
 				scene.actions.setSceneIndex(index)
 			}
 		}
 
-		created() {
-
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		}
 	}
@@ -31,10 +30,10 @@
 </script>
 <style lang="scss">
 	.h-title-6-icon {
-		background-image: url('/static/icons/h-title1-1.svg');
-		height: 34px;
 		width: 34px;
+		height: 34px;
 		margin-right: 9px;
+		background-image: url('/static/icons/h-title1-1.svg');
 	}
 
 	.h-title-6 {
@@ -43,22 +42,22 @@
 		border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 
 		h2 {
-			font-weight: 600;
-			font-size: 24px;
-			color: rgba(255, 255, 255, 0.75);
 			margin-right: 24px;
+			font-size: 24px;
+			font-weight: 600;
+			color: rgba(255, 255, 255, 0.75);
 
 			&.active {
 				color: rgba(255, 255, 255, 1);
 
-				&:before {
+				&::before {
 					position: absolute;
-					content: '';
-					height: 4px;
-					width: 100%;
-					background: #00DDFF;
 					bottom: -15px;
+					width: 100%;
+					height: 4px;
 					color: rgba(255, 255, 255, 1);
+					content: '';
+					background: #0df;
 				}
 			}
 		}

@@ -2,20 +2,25 @@
 	"compilerOptions": {
 		"target": "esnext",
 		"module": "esnext",
-		"strict": false,
-		"jsx": "preserve",
-		"importHelpers": true,
+		"jsx": "preserve", // 指定 jsx 代码的生成: 'preserve', 'react-native', or 'react'
+		"importHelpers": true, // 从 tslib 导入辅助工具函数
 		"moduleResolution": "node",
-		"experimentalDecorators": true,
+		"experimentalDecorators": true, // 启用装饰器
 		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
+		"allowSyntheticDefaultImports": true, // 允许从没有设置默认导出的模块中默认导入
+		"downlevelIteration": true, // 降级遍历器实现，如果目标源是es3/5，那么遍历器会有降级的实现
+		"noUnusedLocals": true, // 检查只声明、未使用的局部变量(只提示不报错)
+		"noUnusedParameters": true, // 检查未使用的函数参数(只提示不报错)
+		"removeComments":true, // 删除注释
 		"sourceMap": true,
 		"baseUrl": ".",
 		"typeRoots": [
 			"./node_modules/@types/",
 			"./types/"
 		],
-		"noImplicitAny": false,
+		"strict": false,
+		"noImplicitAny": false, // 在表达式和声明上有隐含的 any类型时报错
+		"noImplicitThis": false, // 在"this"表达式上有隐含的 any类型时报错
 		"types": [
 			"webpack-env"
 		],
@@ -37,7 +42,6 @@
 		"src/**/*.vue",
 		"tests/**/*.ts",
 		"tests/**/*.tsx",
-		"src/components-map/AMap/a-map/MapContainer/MapPages/AirSupply/index.js",
 		"types/index.d.ts"
 	],
 	"exclude": [

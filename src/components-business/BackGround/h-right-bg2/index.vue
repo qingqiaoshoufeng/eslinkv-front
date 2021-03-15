@@ -1,5 +1,5 @@
 <template>
-	<div class="widget-part pos-r" :style="`${styles};top:0;${inPreview?'pointer-events: none;':''}`">
+	<div class="widget-part pos-r" :style="`${styles};top:0;${inPreview ? 'pointer-events: none;' : ''}`">
 		<div class="h-right-bg2 pos-r">
 			<i class="pos-a"></i>
 			<i class="pos-a"></i>
@@ -15,26 +15,26 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		}
 	}
 </script>
 <style lang="scss" scoped>
 	.h-right-bg2 {
-		pointer-events: none;
 		width: 2200px;
 		height: 1050px;
+		pointer-events: none;
 
 		i {
+			top: 0;
+			left: 0;
 			width: 2200px;
 			height: 1050px;
-			left: 0;
-			top: 0;
 			background: linear-gradient(270deg, rgba(0, 4, 98, 1) 0%, rgba(0, 4, 98, 0) 100%);
 		}
 	}

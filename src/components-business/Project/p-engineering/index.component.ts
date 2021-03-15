@@ -2,7 +2,7 @@ export const customConfig = [
 	{
 		prop: 'desc',
 		label: '描述',
-		type: 'func-input',
+		type: 'func-input'
 	}
 ]
 
@@ -18,10 +18,10 @@ export const value = {
     },
     api: {
         data: JSON.stringify({
-            value: 652,
-        }),
+            value: 652
+        })
     },
     config: {
-        desc: '无安全事故（天）',
-    },
+        desc: '无安全事故（天）'
+    }
 }

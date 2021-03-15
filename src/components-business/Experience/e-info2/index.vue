@@ -12,14 +12,13 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
-
+		created () {
 			this.configValue = this.parseConfigValue(value)
-		},
+		}
 	}
 </script>
 <style lang="scss" scoped>
@@ -28,20 +27,20 @@
 		background-size: 100% 100%;
 
 		.title {
-			height: 48px;
-			padding-left: 16px;
 			display: flex;
 			align-items: center;
-			font-weight: 500;
+			height: 48px;
+			padding-left: 16px;
 			font-size: 24px;
-			color: #FFFFFF;
+			font-weight: 500;
+			color: #fff;
 
 			.color {
 				width: 6px;
 				height: 28px;
-				background: #00DDFF;
-				transform: skewY(30deg);
 				margin-right: 8px;
+				background: #0df;
+				transform: skewY(30deg);
 			}
 		}
 
@@ -49,11 +48,11 @@
 			padding: 16px;
 
 			.content {
+				margin-top: 32px;
 				font-size: 18px;
 				line-height: 25px;
-				color: #FFFFFF;
+				color: #fff;
 				text-align: left;
-				margin-top: 32px;
 			}
 		}
 	}

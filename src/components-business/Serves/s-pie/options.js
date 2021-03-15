@@ -1,6 +1,6 @@
 import { hexToRgba } from '@/utils/index'
 
-export default function (value1, value2, config,percent1,percent2) {
+export default function (value1, value2, config, percent1, percent2) {
     return {
         series: [
             // 主要展示层的
@@ -16,7 +16,7 @@ export default function (value1, value2, config,percent1,percent2) {
                             color: hexToRgba(config.color1, 0.3)
                         },
                         label: {
-                            formatter: function(params) {
+                            formatter: function (params) {
                                 return `{normal|${config.desc1}}{value|${Number(params.value).toLocaleString()}}\n{unit|${percent1}%}`
                             },
                             padding: [0, -100],
@@ -34,7 +34,7 @@ export default function (value1, value2, config,percent1,percent2) {
                                     lineHeight: 24,
                                     color: '#fff',
 									fontFamily: 'font-num',
-                                    padding: [0, 0, -6, 0],
+                                    padding: [0, 0, -6, 0]
                                 },
                                 unit: {
                                     align: 'left',
@@ -42,7 +42,7 @@ export default function (value1, value2, config,percent1,percent2) {
                                     lineHeight: 24,
                                     color: '#fff',
 									fontFamily: 'font-num',
-                                    padding: [-6, 0, 0, 0],
+                                    padding: [-6, 0, 0, 0]
                                 }
                             }
                         },
@@ -52,8 +52,8 @@ export default function (value1, value2, config,percent1,percent2) {
                             lineStyle: {
                                 color: 'rgba(255, 255, 255, 0.4)'
                             }
-                        },
-                    },{
+                        }
+                    }, {
                         value: value2,
                         itemStyle: {
                             color: 'rgba(0 ,0,0,0)'
@@ -76,9 +76,9 @@ export default function (value1, value2, config,percent1,percent2) {
                     show: false
                 },
                 data: [
-                    {value:value1},
+                    { value: value1 },
                     {
-                        value:value2,
+                        value: value2,
                         itemStyle: {
                             color: 'rgba(0 ,0,0,0)'
                         }
@@ -98,13 +98,13 @@ export default function (value1, value2, config,percent1,percent2) {
                         label: {
                             show: false
                         }
-                    },{
+                    }, {
                         value: value2,
                         itemStyle: {
                             color: hexToRgba(config.color2, 0.2)
                         },
                         label: {
-                            formatter: function(params) {
+                            formatter: function (params) {
                                 return `{normal|${config.desc2}}{value|${Number(params.value).toLocaleString()}}\n{unit|${percent2}%}`
                             },
                             padding: [0, -100],
@@ -122,7 +122,7 @@ export default function (value1, value2, config,percent1,percent2) {
                                     lineHeight: 24,
                                     color: '#fff',
                                     fontFamily: 'font-num',
-                                    padding: [0, 0, -6, 0],
+                                    padding: [0, 0, -6, 0]
                                 },
                                 unit: {
                                     align: 'left',
@@ -130,7 +130,7 @@ export default function (value1, value2, config,percent1,percent2) {
                                     lineHeight: 24,
                                     color: '#fff',
                                     fontFamily: 'font-num',
-                                    padding: [-6, 0, 0, 0],
+                                    padding: [-6, 0, 0, 0]
                                 }
                             }
                         },
@@ -140,7 +140,7 @@ export default function (value1, value2, config,percent1,percent2) {
                             lineStyle: {
                                 color: 'rgba(255, 255, 255, 0.4)'
                             }
-                        },
+                        }
                     }]
             },
             // 边框的设置
@@ -162,7 +162,7 @@ export default function (value1, value2, config,percent1,percent2) {
                             color: 'rgba(0 ,0,0,0)'
                         }
                     },
-                    {value:value2},
+                    { value: value2 }
                 ]
             }
         ]

@@ -92,8 +92,23 @@
 	</div>
 </template>
 <script>
-	//页面覆盖物组件
-	let componentPageArr = [
+	// 页面覆盖物组件
+	import {
+		INDEXSCENEMAP,
+		THREESOCIALLINKAGE_SCENEINDEX,
+		THREESOCIALLINKAGE_COMPONENTINDEX
+	} from '../../../../config'
+
+	import {
+		DATASTATISTICSLIST,
+		SWICHBOX,
+		SERVICE_SERVICECUSTOMER_LEGEND_MAP,
+		SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
+		SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP
+	} from './config.js'
+	import scene from 'eslinkv-npm/src/store/scene.store'
+	import instance from 'eslinkv-npm/src/store/instance.store'
+	const componentPageArr = [
 		'ThreeSocialLinkage',
 		'ServiceNetworkStation',
 		'BranchCompany',
@@ -103,53 +118,38 @@
 		'ClickTaskList',
 		'CustomerHot',
 		'SwitchBox',
-		'SaleAreaBoundary',
-	];
-	//页面所需公共组件
-	let componentCommonArr = [
+		'SaleAreaBoundary'
+	]
+	// 页面所需公共组件
+	const componentCommonArr = [
 		'DataStatistics',
 		'RegionBoundary',
 		'OverlayDetail',
-		'MapLegend',
-	];
-	//异步加载组件函数
-	let componentPageMap = {};
-	let componentCommonMap = {};
+		'MapLegend'
+	]
+	// 异步加载组件函数
+	const componentPageMap = {}
+	const componentCommonMap = {}
 	componentPageArr.map(componentName => {
 		componentPageMap[componentName] = () =>
-			import(/*webpackInclude:/\.(vue)$/ */ '../Components/' + componentName);
-	});
+			import(/* webpackInclude:/\.(vue)$/ */ '../Components/' + componentName)
+	})
 	componentCommonArr.map(componentName => {
 		componentCommonMap[componentName] = () =>
 			import(
-				/*webpackInclude:/\.(vue)$/ */ '../../../../components/' +
+				/* webpackInclude:/\.(vue)$/ */ '../../../../components/' +
 			componentName
-				);
-	});
-	import {
-		INDEXSCENEMAP,
-		THREESOCIALLINKAGE_SCENEINDEX,
-		THREESOCIALLINKAGE_COMPONENTINDEX,
-	} from '../../../../config';
-
-	import {
-		DATASTATISTICSLIST,
-		SWICHBOX,
-		SERVICE_SERVICECUSTOMER_LEGEND_MAP,
-		SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
-		SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP,
-	} from './config.js';
-	import scene from 'eslinkv-npm/src/store/scene.store'
-	import instance from 'eslinkv-npm/src/store/instance.store'
+		)
+	})
 
 	export default {
 		name: 'ServiceCustomer',
 		components: {
 			...componentPageMap,
 			...componentCommonMap,
-			iSwitchBox: componentPageMap.SwitchBox,
+			iSwitchBox: componentPageMap.SwitchBox
 		},
-		data() {
+		data () {
 			return {
 				overlayInfoConfigMap: Object.freeze(
 					SERVICE_SERVICECUSTOMER_OVERLAY_MAP
@@ -167,210 +167,210 @@
 					citizenNumber: 0,
 					publicBuildNumber: 0,
 					industryNumber: 0,
-					businessServe: 0,
+					businessServe: 0
 				},
 				activeArea: '',
 				detailInfo: {},
 				isShowMore: false,
 				activeIndex: null,
 				swichBoxInfo: SWICHBOX,
-				visible: false,
-			};
+				visible: false
+			}
 		},
 
-		created() {
-			this.$amap = this.$parent.$amap;
-			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.setCenter(this.center, 100);
+		created () {
+			this.$amap = this.$parent.$amap
+			this.$amap.setZoom(this.zoom, 100)
+			this.$amap.setCenter(this.center, 100)
 		},
 		computed: {
-			OverlayDetailProp() {
-				let {activeOverlay, overlayInfoConfigMap, legendMap} = this;
+			OverlayDetailProp () {
+				const { activeOverlay, overlayInfoConfigMap, legendMap } = this
 				if (JSON.stringify(activeOverlay) !== '{}') {
-					let {overlayType} = activeOverlay;
-					//详情展示信息配置
-					let overlayDetailConfig =
-						overlayInfoConfigMap[overlayType] || {};
-					let legendConfig = legendMap[overlayType] || {};
-					//图标大小，是否显示关闭按钮，是否显示查看详情
-					let {
+					const { overlayType } = activeOverlay
+					// 详情展示信息配置
+					const overlayDetailConfig =
+						overlayInfoConfigMap[overlayType] || {}
+					const legendConfig = legendMap[overlayType] || {}
+					// 图标大小，是否显示关闭按钮，是否显示查看详情
+					const {
 						iconSize = 38,
 						showPopCloseBtn: showCloseBtn,
-						showMore,
-					} = legendConfig;
+						showMore
+					} = legendConfig
 					return {
 						data: activeOverlay,
 						iconSize,
 						showCloseBtn,
 						overlayDetailConfig,
-						showMore,
-					};
+						showMore
+					}
 				} else {
-					return {};
+					return {}
 				}
-			},
+			}
 		},
 
 		methods: {
 			// 切换热力图显示隐藏
-			switchChange(data, type) {
-				this.swichBoxInfo = data;
-				let [{value}] = this.swichBoxInfo;
+			switchChange (data, type) {
+				this.swichBoxInfo = data
+				const [{ value }] = this.swichBoxInfo
 
-				this.visible = value;
+				this.visible = value
 			},
 			// 详情弹框展示更多详情
-			showMoreDetail() {
-				this.showThreeSocialLinkageDetail();
+			showMoreDetail () {
+				this.showThreeSocialLinkageDetail()
 			},
 			// 获取三社联动热力数据信息
-			async getThreeSocialLinkagecustmerHot() {
-				let res = await this.$sysApi.map.serve.getThreeSocialLinkagecustmerHot();
+			async getThreeSocialLinkagecustmerHot () {
+				const res = await this.$sysApi.map.serve.getThreeSocialLinkagecustmerHot()
 
-				this.allTypeStationList.CustomerHotList = res.customer;
+				this.allTypeStationList.CustomerHotList = res.customer
 			},
 			// 点击覆盖物icon
-			async handleOverlayClick(overlay, overlayType1, isCenter = false) {
-				this.activeOverlay = {};
-				this.detailInfo = {};
-				this.showOverlayDetail = false;
-				let {lng, lat, type, name, id, overlayType} = overlay;
-				let params = {
+			async handleOverlayClick (overlay, overlayType1, isCenter = false) {
+				this.activeOverlay = {}
+				this.detailInfo = {}
+				this.showOverlayDetail = false
+				const { lng, lat, type, name, id, overlayType } = overlay
+				const params = {
 					name,
 					id,
-					type,
-				};
+					type
+				}
 				// 如果点击到分公司覆盖物 请求覆盖物详情
 				if (['BranchCompany'].includes(overlayType)) {
-					this.detailInfo = await this.getDetailInfo(params);
+					this.detailInfo = await this.getDetailInfo(params)
 					// 如果点击到任务工单覆盖物 直接过滤该条工单数据不必请求
 				} else if (overlayType === 'TaskList') {
 					overlay.activeIndex = this.allTypeStationList.TaskList.findIndex(
 						item => item.id === overlay.id
-					);
-					this.isShowMore = false;
+					)
+					this.isShowMore = false
 					// 触发点击右侧栏相同效果
-					this.handleListClick(overlay);
-					return;
+					this.handleListClick(overlay)
+					return
 				}
-				this.activeOverlay = overlay;
+				this.activeOverlay = overlay
 
-				this.showOverlayDetail = this.$refs[overlayType][0].mouseIn;
+				this.showOverlayDetail = this.$refs[overlayType][0].mouseIn
 				// 判断是否展示更多详情按钮
-				this.isShowMore = ['ThreeSocialLinkage'].includes(overlayType);
+				this.isShowMore = ['ThreeSocialLinkage'].includes(overlayType)
 				if (['ThreeSocialLinkage', 'TaskList'].includes(overlayType)) {
-					this.$amap.setZoom(14, 100);
-					this.$amap.panTo([lng, lat], 100);
+					this.$amap.setZoom(14, 100)
+					this.$amap.panTo([lng, lat], 100)
 				}
 			},
 			// 关闭详情
-			closeOverlayDetail(done) {
-				let {overlayType} = this.activeOverlay;
-				this.showOverlayDetail = false;
-				this.activeOverlay = {};
-				this.detailInfo = {};
-				this.$amap.setZoom(this.zoom, 100);
-				this.$amap.panTo(this.center, 100);
-				this.activeIndex = -1;
-				done && done();
+			closeOverlayDetail (done) {
+				const { overlayType } = this.activeOverlay
+				this.showOverlayDetail = false
+				this.activeOverlay = {}
+				this.detailInfo = {}
+				this.$amap.setZoom(this.zoom, 100)
+				this.$amap.panTo(this.center, 100)
+				this.activeIndex = -1
+				done && done()
 			},
 			// 点击右侧栏
-			handleListClick(item) {
-				let {
+			handleListClick (item) {
+				const {
 					name,
 					time,
 					activeIndex,
 					overlayType,
 					lng,
 					lat,
-					address,
-				} = item;
+					address
+				} = item
 				if (overlayType === 'ThreeSocialLinkage') {
-					this.$refs.ThreeSocialLinkage[0].mouseIn = true;
-					this.handleOverlayClick(item);
-					return;
+					this.$refs.ThreeSocialLinkage[0].mouseIn = true
+					this.handleOverlayClick(item)
+					return
 				}
 				// 更新任务工单位置
 				this.allTypeStationList.TaskList[activeIndex] = {
 					...this.allTypeStationList.TaskList[activeIndex],
 					lng,
-					lat,
-				};
-				this.isShowMore = false;
-				this.activeIndex = activeIndex;
-				this.activeOverlay.activeIndex = activeIndex;
+					lat
+				}
+				this.isShowMore = false
+				this.activeIndex = activeIndex
+				this.activeOverlay.activeIndex = activeIndex
 				this.activeOverlay = {
 					...item,
 					detailList:
-					SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP.TaskList.detailList,
-				};
+						SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP.TaskList.detailList
+				}
 
-				this.detailInfo = item;
-				this.$amap.setZoom(14, 100);
-				this.$amap.panTo([lng, lat], 100);
-				this.showOverlayDetail = true;
+				this.detailInfo = item
+				this.$amap.setZoom(14, 100)
+				this.$amap.panTo([lng, lat], 100)
+				this.showOverlayDetail = true
 			},
 			// 打开三社联动更多详情场景
-			showThreeSocialLinkageDetail() {
-				let {id} = this.activeOverlay;
-				//打开三社联动的弹框
-				scene.actions.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX);
+			showThreeSocialLinkageDetail () {
+				const { id } = this.activeOverlay
+				// 打开三社联动的弹框
+				scene.actions.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX)
 				this.$nextTick(() => {
 					THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
 						instance.actions.updateComponent(i, {
 							params: {
-								id,
-							},
-						});
-					});
-				});
+								id
+							}
+						})
+					})
+				})
 			},
 			// 客户服务统一数据
-			async getDataStatisticsList() {
-				this.dataStatisticsInfo = await this.$sysApi.map.serve.getServiceCustomerStatisticsInfo();
+			async getDataStatisticsList () {
+				this.dataStatisticsInfo = await this.$sysApi.map.serve.getServiceCustomerStatisticsInfo()
 			},
 			// 查询客户服务站点列表
-			async getAllTypeStationList() {
-				let params = {
+			async getAllTypeStationList () {
+				const params = {
 					types: [
 						'NetworkStation',
 						'BranchCompany',
-						'ThreeSocialLinkage',
-					].toString(),
-				};
-				let res = await this.$sysApi.map.serve.getServiceCustomerStationList(
+						'ThreeSocialLinkage'
+					].toString()
+				}
+				const res = await this.$sysApi.map.serve.getServiceCustomerStationList(
 					params
-				);
-				this.allTypeStationList = {...this.allTypeStationList, ...res};
+				)
+				this.allTypeStationList = { ...this.allTypeStationList, ...res }
 			},
 			// 查询三社联动站点列表
 
 			// 获取任务工单列表
-			async getTasklist() {
-				let TaskList = await this.$sysApi.map.serve.getServiceCustomerTaskList();
+			async getTasklist () {
+				const TaskList = await this.$sysApi.map.serve.getServiceCustomerTaskList()
 				this.allTypeStationList = {
 					...this.allTypeStationList,
-					TaskList,
-				};
+					TaskList
+				}
 			},
 			// 查看详情接口
-			getDetailInfo(params) {
-				return this.$sysApi.map.serve.getServiceCustomerDetialInfo(params);
-			},
+			getDetailInfo (params) {
+				return this.$sysApi.map.serve.getServiceCustomerDetialInfo(params)
+			}
 		},
-		mounted() {
+		mounted () {
 			document.addEventListener('DestroyScene', () => {
-				this.closeOverlayDetail('');
-			});
-			this.getDataStatisticsList();
-			this.getAllTypeStationList();
-			this.getTasklist();
-			this.getThreeSocialLinkagecustmerHot();
-			let [{value}] = this.swichBoxInfo;
+				this.closeOverlayDetail('')
+			})
+			this.getDataStatisticsList()
+			this.getAllTypeStationList()
+			this.getTasklist()
+			this.getThreeSocialLinkagecustmerHot()
+			const [{ value }] = this.swichBoxInfo
 
-			this.visible = value;
-		},
-	};
+			this.visible = value
+		}
+	}
 </script>
 <style lang="scss" scoped>
 	.map-legend {

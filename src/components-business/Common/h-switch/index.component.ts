@@ -12,7 +12,7 @@ export const value = {
 		data: JSON.stringify({
 			value: [
 				['nn16rowdl5r'],
-				['p2wovclspks'],
+				['p2wovclspks']
 			]
 		})
 	}

@@ -1,7 +1,7 @@
 export const value = {
 	config: {
 		icon: '/static/icons/h-icon-info-desc-1.svg',
-		desc: '热线服务业务受理分析(次)',
+		desc: '热线服务业务受理分析(次)'
 	},
 	layout: {
 		size: {
@@ -18,7 +18,7 @@ export const customConfig = [
 	{
 		prop: 'desc',
 		label: '描述',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'icon',
@@ -26,7 +26,7 @@ export const customConfig = [
 		type: 'func-background',
 		options: [
 			'/static/icons/phone-border.svg',
-			'/static/icons/h-icon-info-desc-1.svg',
+			'/static/icons/h-icon-info-desc-1.svg'
 		]
 	}
 ]

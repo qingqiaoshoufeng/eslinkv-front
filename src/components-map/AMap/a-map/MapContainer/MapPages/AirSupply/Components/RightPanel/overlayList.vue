@@ -43,158 +43,171 @@
 </template>
 
 <script>
-import { SvgIcon, NoData } from '../../../../../components/';
-export default {
-	name: 'HomeRealTimeList',
-	components: {
-		SvgIcon,
-		NoData,
-	},
-	data() {
-		let iconList = {
-			GasStation: 'icontulimenzhan', // '门站',
-			PressureRegulatingStation: 'icontulitiaoyazhan', // '调压站',
-			EmergencyAirSourceStation: 'icontuliqiyuanzhan', // '应急气源站',
-			ServiceStation: 'icontulizonghefuwuzhan1', // '综合服务站',
-			PipeManageMentStation: 'icontuliguanwangyunhangguanlizhan', // '管网运行管理站',
-			UndergroundRepairStation: 'icontulidixiaqiangxiudian', // '地下抢修点',
-			OngroundRepairStation: 'icontulidishangqiangxiudian', // '地上抢修点',
-			LNGStation: 'icontulilNG', // 'LNG站',
-			LiquefiedGasStation: 'icontuliyehuaqi', // '液化气站',
-			NaturalGasStation: 'icontulijiaqizhan', // '加气站',
-			DistributedEnergyResource: 'icontulinengyuanzhan', // '分布式能源',
-		};
-
-		return {
-			list: [],
-			iconList,
-			searchName: '',
-		};
-	},
-	props: {
-		activeItem: {
-			type: Object,
-			default() {
-				return {};
-			},
+	import { SvgIcon, NoData } from '../../../../../components/'
+	export default {
+		name: 'HomeRealTimeList',
+		components: {
+			SvgIcon,
+			NoData
 		},
-		stationList: {
-			type: Array,
-			default() {
-				return [];
-			},
-		},
-	},
-	computed: {
-		showStationList() {
-			if (this.searchName) {
-				return this.stationList.filter(item =>
-					item.name.includes(this.searchName)
-				);
+		data () {
+			const iconList = {
+				GasStation: 'icontulimenzhan', // '门站',
+				PressureRegulatingStation: 'icontulitiaoyazhan', // '调压站',
+				EmergencyAirSourceStation: 'icontuliqiyuanzhan', // '应急气源站',
+				ServiceStation: 'icontulizonghefuwuzhan1', // '综合服务站',
+				PipeManageMentStation: 'icontuliguanwangyunhangguanlizhan', // '管网运行管理站',
+				UndergroundRepairStation: 'icontulidixiaqiangxiudian', // '地下抢修点',
+				OngroundRepairStation: 'icontulidishangqiangxiudian', // '地上抢修点',
+				LNGStation: 'icontulilNG', // 'LNG站',
+				LiquefiedGasStation: 'icontuliyehuaqi', // '液化气站',
+				NaturalGasStation: 'icontulijiaqizhan', // '加气站',
+				DistributedEnergyResource: 'icontulinengyuanzhan' // '分布式能源',
 			}
-			return this.stationList;
+
+			return {
+				list: [],
+				iconList,
+				searchName: ''
+			}
 		},
-	},
-	methods: {
-		clearSearch() {
-			this.searchName = '';
+		props: {
+			activeItem: {
+				type: Object,
+				default () {
+					return {}
+				}
+			},
+			stationList: {
+				type: Array,
+				default () {
+					return []
+				}
+			}
 		},
-		handleClick(item, index) {
-			this.$emit(
-				'change',
-				{ ...item, overlayType: item.type },
-				'StationList'
-			);
+		computed: {
+			showStationList () {
+				if (this.searchName) {
+					return this.stationList.filter(item =>
+						item.name.includes(this.searchName)
+					)
+				}
+				return this.stationList
+			}
 		},
-	},
-};
+		methods: {
+			clearSearch () {
+				this.searchName = ''
+			},
+			handleClick (item, index) {
+				this.$emit(
+					'change',
+					{ ...item, overlayType: item.type },
+					'StationList'
+				)
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>
 .search {
-	margin-top: 6px;
+	box-sizing: border-box;
+	box-sizing: content-box;
+	display: flex;
 	width: 100%;
 	height: 48px;
-	border: 1px solid #0057a9;
-	box-sizing: border-box;
-	border-radius: 4px;
-	display: flex;
+	margin-top: 6px;
+	font-size: 20px;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 20px;
 	line-height: 24px;
-	box-sizing: content-box;
+	border: 1px solid #0057a9;
+	border-radius: 4px;
+
 	input {
 		display: block;
-		background-color: transparent;
-		color: #fff;
-		height: 100%;
 		flex: 1;
+		height: 100%;
 		padding-left: 16px;
+		font-size: 20px;
 		font-style: normal;
 		font-weight: normal;
-		font-size: 20px;
+		color: #fff;
+		background-color: transparent;
 		border: 1px solid #0057a9;
 	}
+
 	::-webkit-input-placeholder {
-		color: #fff;
+		font-size: 20px;
 		font-style: normal;
 		font-weight: normal;
-		font-size: 20px;
+		color: #fff;
 	}
+
 	.search-btn {
 		display: flex;
-		background: #0057a9;
+		align-items: center;
+		justify-content: center;
 		width: 40px;
 		height: 100%;
 		font-size: 14px;
-		justify-content: center;
-		align-items: center;
+		background: #0057a9;
 	}
 }
+
 .list {
 	height: 744px;
 	overflow-y: scroll;
+	font-size: 16px;
+	color: #fff;
+
 	&::-webkit-scrollbar {
 		display: none;
 	}
-	color: #fff;
-	font-size: 16px;
+
 	.list-item {
+		box-sizing: border-box;
 		display: flex;
 		justify-content: space-between;
 		padding: 24px 16px 24px 8px;
-		box-sizing: border-box;
 		cursor: pointer;
+
 		&:hover,
 		&.active {
 			background: rgba(23, 115, 201, 0.4);
 		}
+
 		.panel-type-icon {
 			width: 24px;
 			height: 24px;
 		}
+
 		.row {
 			display: flex;
 			align-items: center;
+
 			.status-err {
 				color: #ffdc45;
 			}
+
 			.status-suc {
-				color: #00ddff;
+				color: #0df;
 			}
+
 			.content {
-				flex: 1;
-				font-size: 24px;
 				display: flex;
+				flex: 1;
 				align-items: center;
 				margin-left: 12px;
+				font-size: 24px;
 			}
+
 			.station-name {
-				font-size: 20px;
 				flex: 1;
-				color: rgba(255, 255, 255, 0.8);
 				margin-left: 36px;
+				font-size: 20px;
+				color: rgba(255, 255, 255, 0.8);
 			}
 		}
 	}
