@@ -63,57 +63,8 @@
 	</div>
 </template>
 <script>
-//页面覆盖物组件
-import {
-	ComprehensiveServiceStation,
-	LiquefiedGasStation,
-	NaturalGasStation,
-	DistributedEnergyResource,
-	InspectionPerson,
-	InspectionCar,
-	RightPanel,
-	RoutePlan, //规划路线
-	LNGStation,
-	HighPressureLine,
-	HighPressureLine_Process,
-	LowPressureLine,
-	GasStation,
-	PressureRegulatingStation,
-	EmergencyAirSourceStation,
-	ServiceStation,
-	PipeManageMentStation,
-	UndergroundRepairStation,
-	OngroundRepairStation,
-	WarningList,
-	WarnEvent,
-} from '../Components/index.js';
-//页面所需公共组件
-import {
-	RegionBoundary,
-	OverlayDetail,
-	MapLegend,
-} from '../../../../components/index.js';
-import { DataStatistics } from '../../../../components';
-import {
-	INDEXSCENEMAP,
-	OVERLAYINFOMAP_AIRSUPPLY,
-	AIRSUPPLY_WARN_SCENEINDEX,
-	AIRSUPPLY_WARN_COMPONENTINDEX,
-	AIRSUPPLYOVERLAYCONFIGMAP,
-	AIRSUPPLYLEGEND_UCAN,
-} from '../../../../config';
-import {
-	AIRSUPPLY_UCAN_LEGEND_MAP,
-	AIRSUPPLY_UCAN_OVERLAY_MAP,
-	DATASTATISTICSLIST,
-} from './config.js';
-
-export default {
-	name: 'AirSupplyHighPressure',
-	components: {
-		OverlayDetail,
-		MapLegend,
-		RegionBoundary,
+// 页面覆盖物组件
+	import {
 		ComprehensiveServiceStation,
 		LiquefiedGasStation,
 		NaturalGasStation,
@@ -121,7 +72,7 @@ export default {
 		InspectionPerson,
 		InspectionCar,
 		RightPanel,
-		RoutePlan, //规划路线
+		RoutePlan, // 规划路线
 		LNGStation,
 		HighPressureLine,
 		HighPressureLine_Process,
@@ -134,150 +85,200 @@ export default {
 		UndergroundRepairStation,
 		OngroundRepairStation,
 		WarningList,
-		DataStatistics,
-		WarnEvent,
-	},
-	created() {
-		this.$amap = this.$parent.$amap;
-		this.$amap.setZoom(this.zoom, 100);
-		this.$amap.setCenter(this.center, 100);
-	},
-	mounted() {
-		this.getAllTypeStationList();
-		this.getDataStatisticsInfo();
-0	},
-	watch: {
-		center(val) {
-			this.$amap.panTo(val, 100);
-		},
-	},
-	data() {
-		let {
+		WarnEvent
+	} from '../Components/index.js'
+	// 页面所需公共组件
+	import {
+		RegionBoundary,
+		OverlayDetail,
+		MapLegend
+	} from '../../../../components/index.js'
+	import { DataStatistics } from '../../../../components'
+	import {
+		INDEXSCENEMAP,
+		OVERLAYINFOMAP_AIRSUPPLY,
+		AIRSUPPLY_WARN_SCENEINDEX,
+		AIRSUPPLY_WARN_COMPONENTINDEX,
+		AIRSUPPLYOVERLAYCONFIGMAP,
+		AIRSUPPLYLEGEND_UCAN
+	} from '../../../../config'
+	import {
+		AIRSUPPLY_UCAN_LEGEND_MAP,
+		AIRSUPPLY_UCAN_OVERLAY_MAP,
+		DATASTATISTICSLIST
+	} from './config.js'
+
+	export default {
+		name: 'AirSupplyHighPressure',
+		components: {
+			OverlayDetail,
+			MapLegend,
+			RegionBoundary,
+			ComprehensiveServiceStation,
 			LiquefiedGasStation,
 			NaturalGasStation,
 			DistributedEnergyResource,
-		} = AIRSUPPLY_UCAN_LEGEND_MAP;
-		return {
-			overlayInfoConfigMap: Object.freeze(AIRSUPPLY_UCAN_OVERLAY_MAP),
-			activeOverlay: {},
-			activeWarnData: {},
-			center: [120.131259, 30.263295],
-			zoom: 10.7,
-			showOverlayDetail: false,
-			showRoutePlan: false,
-			activeTab: 'eventWarning',
-			legendMap: {
+			InspectionPerson,
+			InspectionCar,
+			RightPanel,
+			RoutePlan, // 规划路线
+			LNGStation,
+			HighPressureLine,
+			HighPressureLine_Process,
+			LowPressureLine,
+			GasStation,
+			PressureRegulatingStation,
+			EmergencyAirSourceStation,
+			ServiceStation,
+			PipeManageMentStation,
+			UndergroundRepairStation,
+			OngroundRepairStation,
+			WarningList,
+			DataStatistics,
+			WarnEvent
+		},
+		created () {
+			this.$amap = this.$parent.$amap
+			this.$amap.setZoom(this.zoom, 100)
+			this.$amap.setCenter(this.center, 100)
+		},
+		mounted () {
+			this.getAllTypeStationList()
+			this.getDataStatisticsInfo()
+			0
+		},
+		watch: {
+			center (val) {
+				this.$amap.panTo(val, 100)
+			}
+		},
+		data () {
+			const {
 				LiquefiedGasStation,
 				NaturalGasStation,
-				DistributedEnergyResource,
-			},
-			overlayMap: AIRSUPPLY_UCAN_LEGEND_MAP,
-			dataStatisticsConfigMap: DATASTATISTICSLIST,
-			dataStatisticsInfo: {
-				commonUseNumber: 21742,
-				registerNumber: 44579,
-			},
-			stationDataMap: {},
-			stationList: [],
-			stationListData: {},
-		};
-	},
-	computed: {
-		rightListActiveItemMap() {
-			let { activeWarnData, activeStationData } = this;
+				DistributedEnergyResource
+			} = AIRSUPPLY_UCAN_LEGEND_MAP
 			return {
-				processWarning: activeWarnData,
-				eventWarning: activeWarnData,
-				overlayList: activeStationData,
-			};
-		},
-	},
-	methods: {
-		closeStationListDetail() {
-			// this.StationListData = {};
-			// this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
-			// this.$refs.RightPanel.$refs.eventWarning.activeIndex = -1;
-			// this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
-			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.setCenter(this.center, 100);
-		},
-		setCenter(center) {
-			this.center = center || this.center;
-		},
-		// 获取所有站点数据
-		async getAllTypeStationList() {
-			let params = {
-				types: [
-					'LiquefiedGasStation', // '液化气站',
-					'NaturalGasStation', // '加气站',
-					'DistributedEnergyResource', // '分布式能源',
-				].toString(),
-			};
-			let res = await this.$sysApi.map.airSupply.getAllTypeStationList(
-				params
-			);
-			this.stationDataMap = { ...this.stationDataMap, ...res };
-			let {
-				liquefiedGasStationList,
-				naturalGasStationList,
-				distributedEnergyResourceList,
-			} = res;
-			this.stationList = [
-				...liquefiedGasStationList,
-				...naturalGasStationList,
-				...distributedEnergyResourceList,
-			];
-		},
-		// 获取统计数据
-		async getDataStatisticsInfo() {
-			this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getStatisticsInfo(
-				{ type: 'UCAN' }
-			);
-		},
-		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			let { lng, lat } = overlay;
-			overlay.overlayType = overlayType;
-			this.activeOverlay = overlay;
-			this.showOverlayDetail = true;
-		},
-		closeOverlayDetail(done) {
-			let { overlayType } = this.activeOverlay;
-			this.showOverlayDetail = false;
-			this.activeOverlay = {};
-			// this.$amap.setZoom(11, 100);
-			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.setCenter(this.center, 100);
-			done && done();
-		},
-		viewOverlayDetail(overlay) {
-			let { overlayType } = overlay;
-		},
-		setZoomAndPanTo(lng, lat) {
-			this.$amap.setZoom(14, 100);
-			this.$nextTick(() => {
-				this.$amap.panTo([lng, lat], 100);
-			});
-		},
-		handleListClick(overlay, eventType) {
-			if (this.showOverlayDetail) {
-				this.showOverlayDetail = false;
-				this.activeOverlay = {};
+				overlayInfoConfigMap: Object.freeze(AIRSUPPLY_UCAN_OVERLAY_MAP),
+				activeOverlay: {},
+				activeWarnData: {},
+				center: [120.131259, 30.263295],
+				zoom: 10.7,
+				showOverlayDetail: false,
+				showRoutePlan: false,
+				activeTab: 'eventWarning',
+				legendMap: {
+					LiquefiedGasStation,
+					NaturalGasStation,
+					DistributedEnergyResource
+				},
+				overlayMap: AIRSUPPLY_UCAN_LEGEND_MAP,
+				dataStatisticsConfigMap: DATASTATISTICSLIST,
+				dataStatisticsInfo: {
+					commonUseNumber: 21742,
+					registerNumber: 44579
+				},
+				stationDataMap: {},
+				stationList: [],
+				stationListData: {}
 			}
-			let { lng, lat } = overlay;
-			if (eventType) {
-				this.stationListData = overlay;
-			} else {
-				this.activeWarnData = overlay;
+		},
+		computed: {
+			rightListActiveItemMap () {
+				const { activeWarnData, activeStationData } = this
+				return {
+					processWarning: activeWarnData,
+					eventWarning: activeWarnData,
+					overlayList: activeStationData
+				}
 			}
-			this.setZoomAndPanTo(lng, lat);
 		},
-		closeWarnEventDetail() {
-			this.activeWarnData = {};
-			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.setCenter(this.center, 100);
-		},
-	},
-};
+		methods: {
+			closeStationListDetail () {
+				// this.StationListData = {};
+				// this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
+				// this.$refs.RightPanel.$refs.eventWarning.activeIndex = -1;
+				// this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
+				this.$amap.setZoom(this.zoom, 100)
+				this.$amap.setCenter(this.center, 100)
+			},
+			setCenter (center) {
+				this.center = center || this.center
+			},
+			// 获取所有站点数据
+			async getAllTypeStationList () {
+				const params = {
+					types: [
+						'LiquefiedGasStation', // '液化气站',
+						'NaturalGasStation', // '加气站',
+						'DistributedEnergyResource' // '分布式能源',
+					].toString()
+				}
+				const res = await this.$sysApi.map.airSupply.getAllTypeStationList(
+					params
+				)
+				this.stationDataMap = { ...this.stationDataMap, ...res }
+				const {
+					liquefiedGasStationList,
+					naturalGasStationList,
+					distributedEnergyResourceList
+				} = res
+				this.stationList = [
+					...liquefiedGasStationList,
+					...naturalGasStationList,
+					...distributedEnergyResourceList
+				]
+			},
+			// 获取统计数据
+			async getDataStatisticsInfo () {
+				this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getStatisticsInfo(
+					{ type: 'UCAN' }
+				)
+			},
+			handleOverlayClick (overlay, overlayType, isCenter = true) {
+				const { lng, lat } = overlay
+				overlay.overlayType = overlayType
+				this.activeOverlay = overlay
+				this.showOverlayDetail = true
+			},
+			closeOverlayDetail (done) {
+				const { overlayType } = this.activeOverlay
+				this.showOverlayDetail = false
+				this.activeOverlay = {}
+				// this.$amap.setZoom(11, 100);
+				this.$amap.setZoom(this.zoom, 100)
+				this.$amap.setCenter(this.center, 100)
+				done && done()
+			},
+			viewOverlayDetail (overlay) {
+				const { overlayType } = overlay
+			},
+			setZoomAndPanTo (lng, lat) {
+				this.$amap.setZoom(14, 100)
+				this.$nextTick(() => {
+					this.$amap.panTo([lng, lat], 100)
+				})
+			},
+			handleListClick (overlay, eventType) {
+				if (this.showOverlayDetail) {
+					this.showOverlayDetail = false
+					this.activeOverlay = {}
+				}
+				const { lng, lat } = overlay
+				if (eventType) {
+					this.stationListData = overlay
+				} else {
+					this.activeWarnData = overlay
+				}
+				this.setZoomAndPanTo(lng, lat)
+			},
+			closeWarnEventDetail () {
+				this.activeWarnData = {}
+				this.$amap.setZoom(this.zoom, 100)
+				this.$amap.setCenter(this.center, 100)
+			}
+		}
+	}
 </script>
 <style lang="scss" scoped>
 .map-legend {

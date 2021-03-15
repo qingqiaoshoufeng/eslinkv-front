@@ -1,18 +1,19 @@
 
 export default function (data) {
-    let newData = []
-    let newData1 = []
-    let color = [0, 255, 207]
+    const newData = []
+    const newData1 = []
+    const color = [0, 255, 207]
     for (let i = data; i > 0; i--) {
         let opacity = 1 - i / data
-        if (opacity < 0)
-            opacity = 0.1
+        if (opacity < 0) {
+opacity = 0.1
+}
         newData.push({
             value: 1,
             itemStyle: {
                 borderRadius: 100,
-                color: `rgba(${color[0]}, ${color[1]}, ${color[2]},${opacity})`,
-            },
+                color: `rgba(${color[0]}, ${color[1]}, ${color[2]},${opacity})`
+            }
         })
     }
     while (newData.length < 100) {
@@ -20,18 +21,18 @@ export default function (data) {
             value: 1,
             itemStyle: {
                 borderRadius: 100,
-                color: `rgba(${color[0]}, ${color[1]}, ${color[2]},0)`,
-            },
+                color: `rgba(${color[0]}, ${color[1]}, ${color[2]},0)`
+            }
         })
     }
     newData1.push({
         value: 100,
         itemStyle: {
-            color: `rgba(${color[0]}, ${color[1]}, ${color[2]},0.1)`,
-        },
-    });
+            color: `rgba(${color[0]}, ${color[1]}, ${color[2]},0.1)`
+        }
+    })
     return {
-        "series": [
+        series: [
             {
                 name: '访问',
                 animation: false,
@@ -54,7 +55,7 @@ export default function (data) {
                 },
                 itemStyle: {
                     normal: {
-                        color:'#fff',
+                        color: '#fff'
                     }
 
                 },

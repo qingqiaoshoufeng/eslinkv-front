@@ -6,13 +6,13 @@
 </template>
 <script>
 	import mx from 'eslinkv-npm/mixins'
-	import {Component} from 'vue-property-decorator'
-	import {mixins} from 'vue-class-component'
-    import {customConfig, value} from './index.component'
+	import { Component } from 'vue-property-decorator'
+	import { mixins } from 'vue-class-component'
+	import { customConfig, value } from './index.component'
 
 	@Component
 	class HTitle4 extends mixins(mx) {
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value, customConfig)
 		}
 	}
@@ -23,13 +23,13 @@
 		h2 {
 			font-size: 40px;
 			line-height: 48px;
-			color: #FFFFFF;
+			color: #fff;
 		}
 
 		p {
 			font-size: 18px;
 			line-height: 24px;
-			color: #00DDFF;
+			color: #0df;
 		}
 	}
 

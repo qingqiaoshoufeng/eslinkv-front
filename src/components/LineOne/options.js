@@ -1,4 +1,4 @@
-export default function getOption(data, config) {
+export default function getOption (data, config) {
 	const res = {
 		textStyle: {
 			fontSize: 16,
@@ -11,7 +11,7 @@ export default function getOption(data, config) {
 			right: 60
 		},
 		xAxis: [{
-			type: "category",
+			type: 'category',
 			axisTick: {
 				show: false
 			},
@@ -20,7 +20,7 @@ export default function getOption(data, config) {
 			},
 			axisLabel: {
 				show: config.isShowXAxis,
-				color: "#fff",
+				color: '#fff',
 				fontSize: 16,
 				lineHeight: 16,
 				interval: 0
@@ -38,7 +38,7 @@ export default function getOption(data, config) {
 				axisTick: {
 					show: false,
 					textStyle: {
-						color: '#fff',
+						color: '#fff'
 					}
 				},
 				nameTextStyle: {
@@ -55,19 +55,19 @@ export default function getOption(data, config) {
 				splitLine: {
 					show: true,
 					lineStyle: {
-						type: "solid",
-						color: "rgba(199, 209, 219, 0.2)",
+						type: 'solid',
+						color: 'rgba(199, 209, 219, 0.2)'
 					}
 				},
 				axisLine: {
-					show: false,
+					show: false
 				}
 			}
 		],
 		series: [
 			{
 				name: '',
-				type: "line",
+				type: 'line',
 				symbolSize: 16,
 				symbol: 'none',
 				lineStyle: {
@@ -78,15 +78,15 @@ export default function getOption(data, config) {
 						x2: 0,
 						y2: 1,
 						colorStops: [
-							{offset: 0, color: config.lineColor},
-							{offset: 1, color: config.lineStopColor},
-						],
+							{ offset: 0, color: config.lineColor },
+							{ offset: 1, color: config.lineStopColor }
+						]
 					} : config.lineColor,
 					width: 3
 				},
 				smooth: true,
 				itemStyle: {
-					color: config.lineColor,
+					color: config.lineColor
 				},
 				data: data.map(v => v.y)
 			}

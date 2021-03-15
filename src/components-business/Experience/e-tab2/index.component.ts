@@ -25,7 +25,7 @@ export const value = {
 				},
 				{
 					name: '寻绿西部二号线'
-				},
+				}
 			]
 		})
 	}

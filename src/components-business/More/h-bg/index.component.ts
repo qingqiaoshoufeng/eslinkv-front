@@ -9,14 +9,14 @@ export const value = {
         }
     },
     config: {
-        sceneId: '',
-    },
-};
+        sceneId: ''
+    }
+}
 export const customConfig = [
 	{
 		prop: 'sceneId',
 		label: '场景ID',
-		type: 'func-input',
+		type: 'func-input'
 	}
 ]
 

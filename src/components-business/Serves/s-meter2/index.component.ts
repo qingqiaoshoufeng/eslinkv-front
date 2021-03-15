@@ -2,7 +2,7 @@ export const customConfig = [
 	{
 		prop: 'desc1',
 		label: '描述1',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'img1',
@@ -13,7 +13,7 @@ export const customConfig = [
 	{
 		prop: 'desc2',
 		label: '描述2',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'img2',
@@ -81,13 +81,13 @@ export const value = {
 				num1: 543,
 				num2: 236,
 				percent: 44
-			},
+			}
 		])
 	},
 	config: {
 		desc1: '计划抄表数',
 		desc2: '实际抄表数',
 		img1: '/static/icons/s-meter-1.svg',
-		img2: '/static/icons/s-meter-2.svg',
+		img2: '/static/icons/s-meter-2.svg'
 	}
 }

@@ -6,19 +6,19 @@
 <script>
 	import mixins from 'eslinkv-npm/mixins'
 	import getOption from './options'
-	import {customConfig, value} from './index.component'
+	import { customConfig, value } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		computed: {},
 		methods: {
-			setOption() {
+			setOption () {
 				this.instance && this.instance.setOption(getOption(this.data, this.config.config))
 			}
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
@@ -30,8 +30,7 @@
 				immediate: true
 			}
 		},
-		created() {
-
+		created () {
 			this.configValue = this.parseConfigValue(value, customConfig)
 		}
 	}

@@ -29,7 +29,7 @@ export default function getOption (percent) {
                     itemStyle: {
                         color: 'rgba(0, 87, 169, 0.5)'
                     }
-                },
+                }
             ]
         }]
     }

@@ -17,66 +17,68 @@
 	</Tabs>
 </template>
 <script>
-import { Tabs, TabPanel } from '../../../../../components/Tabs/';
-import ICCustomerList from './ICCustomerList';
-export default {
-	name: 'RightlistPanel',
-	data() {
-		return {
-			activeIndex: null,
-			ready: false,
-			currentTab: 'ICCustomerList',
-		};
-	},
-	props: {
-		activeOverlay: {
-			type: Object,
-			default() {
-				return {};
-			},
-		},
-	},
-	components: {
-		Tabs,
-		TabPanel,
-		ICCustomerList,
-	},
-	mounted() {
-		this.ready = true;
-	},
-	watch: {
-		activeItem(val) {
-			if (JSON.stringify(val) == '{}') {
-				return (this.activeIndex = null);
+	import { Tabs, TabPanel } from '../../../../../components/Tabs/'
+	import ICCustomerList from './ICCustomerList'
+	export default {
+		name: 'RightlistPanel',
+		data () {
+			return {
+				activeIndex: null,
+				ready: false,
+				currentTab: 'ICCustomerList'
 			}
-			let index = this.data.findIndex(item => {
-				let { id } = item;
-				return val.id === id;
-			});
-			this.activeIndex = index > -1 ? index : null;
 		},
-	},
-	methods: {
-		handleClick(item, index) {
-			this.activeIndex = index;
-			this.$emit('overlay-click', item);
+		props: {
+			activeOverlay: {
+				type: Object,
+				default () {
+					return {}
+				}
+			}
 		},
-	},
-};
+		components: {
+			Tabs,
+			TabPanel,
+			ICCustomerList
+		},
+		mounted () {
+			this.ready = true
+		},
+		watch: {
+			activeItem (val) {
+				if (JSON.stringify(val) == '{}') {
+					return (this.activeIndex = null)
+				}
+				const index = this.data.findIndex(item => {
+					const { id } = item
+					return val.id === id
+				})
+				this.activeIndex = index > -1 ? index : null
+			}
+		},
+		methods: {
+			handleClick (item, index) {
+				this.activeIndex = index
+				this.$emit('overlay-click', item)
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>
 .right-panel {
 	position: absolute;
-	right: 32px;
 	top: 148px;
-	width: 480px;
+	right: 32px;
 	z-index: 100;
+	width: 480px;
 	max-height: 860px;
 }
+
 .tabs-container {
 	max-height: 846px;
 	overflow-y: auto;
+
 	&::-webkit-scrollbar {
 		display: none;
 	}

@@ -11,7 +11,7 @@
 				.bullshit__headline 找不到这个页面了...
 </template>
 <script lang="ts">
-	import {Component, Vue} from 'vue-property-decorator'
+	import { Component, Vue } from 'vue-property-decorator'
 
 	@Component
 	export default class Page404 extends Vue {
@@ -21,10 +21,10 @@
 	@import "../../scss/conf";
 
 	.wscn-http404-container {
-		transform: translate(-50%, -50%);
 		position: absolute;
 		top: 40%;
 		left: 50%;
+		transform: translate(-50%, -50%);
 	}
 
 	.wscn-http404 {
@@ -47,39 +47,39 @@
 				position: absolute;
 
 				&.left {
-					width: 80px;
 					top: 17px;
 					left: 220px;
+					width: 80px;
 					opacity: 0;
 					animation-name: cloudLeft;
 					animation-duration: 2s;
 					animation-timing-function: linear;
-					animation-fill-mode: forwards;
 					animation-delay: 1s;
+					animation-fill-mode: forwards;
 				}
 
 				&.mid {
-					width: 46px;
 					top: 10px;
 					left: 420px;
+					width: 46px;
 					opacity: 0;
 					animation-name: cloudMid;
 					animation-duration: 2s;
 					animation-timing-function: linear;
-					animation-fill-mode: forwards;
 					animation-delay: 1.2s;
+					animation-fill-mode: forwards;
 				}
 
 				&.right {
-					width: 62px;
 					top: 100px;
 					left: 500px;
+					width: 62px;
 					opacity: 0;
 					animation-name: cloudRight;
 					animation-duration: 2s;
 					animation-timing-function: linear;
-					animation-fill-mode: forwards;
 					animation-delay: 1s;
+					animation-fill-mode: forwards;
 				}
 
 				@keyframes cloudLeft {
@@ -88,60 +88,71 @@
 						left: 220px;
 						opacity: 0;
 					}
+
 					20% {
 						top: 33px;
 						left: 188px;
 						opacity: 1;
 					}
+
 					80% {
 						top: 81px;
 						left: 92px;
 						opacity: 1;
 					}
+
 					100% {
 						top: 97px;
 						left: 60px;
 						opacity: 0;
 					}
 				}
+
 				@keyframes cloudMid {
 					0% {
 						top: 10px;
 						left: 420px;
 						opacity: 0;
 					}
+
 					20% {
 						top: 40px;
 						left: 360px;
 						opacity: 1;
 					}
+
 					70% {
 						top: 130px;
 						left: 180px;
 						opacity: 1;
 					}
+
 					100% {
 						top: 160px;
 						left: 120px;
 						opacity: 0;
 					}
 				}
+
 				@keyframes cloudRight {
 					0% {
 						top: 100px;
 						left: 500px;
 						opacity: 0;
 					}
+
 					20% {
 						top: 120px;
 						left: 460px;
 						opacity: 1;
 					}
+
 					80% {
 						top: 180px;
 						left: 340px;
 						opacity: 1;
 					}
+
 					100% {
 						top: 200px;
 						left: 300px;
@@ -159,24 +170,24 @@
 			overflow: hidden;
 
 			&__oops {
+				margin-bottom: 20px;
 				font-size: 32px;
 				font-weight: bold;
 				line-height: 40px;
 				color: $themeColor;
 				opacity: 0;
-				margin-bottom: 20px;
 				animation-name: slideUp;
 				animation-duration: 0.5s;
 				animation-fill-mode: forwards;
 			}
 
 			&__headline {
+				margin-bottom: 10px;
 				font-size: 20px;
+				font-weight: bold;
 				line-height: 24px;
 				color: #222;
-				font-weight: bold;
 				opacity: 0;
-				margin-bottom: 10px;
 				animation-name: slideUp;
 				animation-duration: 0.5s;
 				animation-delay: 0.1s;
@@ -185,12 +196,13 @@
 
 			@keyframes slideUp {
 				0% {
-					transform: translateY(60px);
 					opacity: 0;
+					transform: translateY(60px);
 				}
+
 				100% {
-					transform: translateY(0);
 					opacity: 1;
+					transform: translateY(0);
 				}
 			}
 		}

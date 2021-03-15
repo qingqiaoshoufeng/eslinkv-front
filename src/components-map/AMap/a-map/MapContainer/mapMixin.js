@@ -15,11 +15,11 @@ initAMapApiLoader({
         'AMap.ToolBar'
     ],
     v: '1.4.15',
-    key: '8081bdaac8258a8a4a6244bf16084fed',
+    key: '8081bdaac8258a8a4a6244bf16084fed'
 })
 
 export default {
-    data() {
+    data () {
         return {
             showMap: true,
             mapReady: false,
@@ -35,26 +35,26 @@ export default {
                 viewMode: '2D',
                 // pitch: 10,
                 // zooms:[11,19],
-                mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c',
-            },
+                mapStyle: 'amap://styles/e0e1899c1695e012c70d0731a5cda43c'
+            }
         }
     },
     computed: {
-        //是否显示地图
-        showMapPage() {
-            let { mapReady, showMap, mapComponentName } = this
+        // 是否显示地图
+        showMapPage () {
+            const { mapReady, showMap, mapComponentName } = this
             return mapReady && showMap && mapComponentName
-        },
+        }
     },
     methods: {
-        handleSceneChange(e) {
-            let sceneIndexMap = SCENEINDEXMAP
-            let { index } = e.detail
+        handleSceneChange (e) {
+            const sceneIndexMap = SCENEINDEXMAP
+            const { index } = e.detail
             console.log(index, 'index')
-            let pageName = sceneIndexMap[index] || ''
-            //无匹配pageName 则 不显示地图
+            const pageName = sceneIndexMap[index] || ''
+            // 无匹配pageName 则 不显示地图
             this.showMap = !!pageName
-            let pageNameArr = pageName.split('-')
+            const pageNameArr = pageName.split('-')
             if (pageNameArr[0] === 'unchange') {
                 if (pageNameArr[1]) {
                     this.mapComponentNameBefore = pageNameArr[1]
@@ -63,22 +63,21 @@ export default {
             }
             this.changePageName(pageName)
         },
-        changePageName(pageName) {
+        changePageName (pageName) {
             if (this.mapComponentNameBefore === 'routeplan') {
                 bus.$emit('clearRoutePlan')
             }
             // if(this.map){
             //     this.map.clearMap()
             // }
-            this.$nextTick(()=>{
+            this.$nextTick(() => {
                 this.mapComponentNameBefore = this.mapComponentName
                 this.mapComponentName = pageName
                 this._provided.parentInfo.pageName = pageName
                 this.sateMapCtrPos = ['ServiceNineteen', 'ServiceHangranCode'].includes(pageName) ? 'left' : null
             })
-           
         },
-        mapInit() {
+        mapInit () {
             console.log('地图初始化完成！')
             this.mapReady = true
             this.map = this.$refs.amap.$amap
@@ -112,12 +111,12 @@ export default {
             // 	item.hide()
             // })
             // this.$refs.amap.$amap.add(originInstance);
-        },
+        }
     },
-    created() {
+    created () {
         document.addEventListener('SceneIndex', this.handleSceneChange)
     },
-    beforeDestroy() {
+    beforeDestroy () {
         document.removeEventListener('SceneIndex', this.handleSceneChange)
-    },
+    }
 }

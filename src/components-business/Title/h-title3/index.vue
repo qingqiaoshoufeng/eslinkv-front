@@ -12,72 +12,72 @@
                 p {{config.config&&config.config.subTitle}}
 </template>
 <script lang="ts">
-    import mx from 'eslinkv-npm/mixins'
-    import {Component} from 'vue-property-decorator'
-    import {mixins} from 'vue-class-component'
-    import {customConfig, value} from './index.component'
+	import mx from 'eslinkv-npm/mixins'
+	import { Component } from 'vue-property-decorator'
+	import { mixins } from 'vue-class-component'
+	import { customConfig, value } from './index.component'
 
     @Component
     class HTitle3 extends mixins(mx) {
         icons: Int8Array = new Int8Array(50)
 
-        created() {
+        created () {
             this.configValue = this.parseConfigValue(value, customConfig)
         }
     }
 
-    export default HTitle3
+	export default HTitle3
 </script>
 <style lang="scss">
-    .h-title-3 {
-        width: 100%;
-        height: 100%;
+	.h-title-3 {
+		width: 100%;
+		height: 100%;
 
-        .left-box {
-            width: 56px;
-            height: 56px;
-            border: 1px dashed;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-        }
+		.left-box {
+			align-items: center;
+			justify-content: center;
+			width: 56px;
+			height: 56px;
+			margin-right: 12px;
+			border: 1px dashed;
+		}
 
-        .right-box {
-            ul {
-                margin: 2px 0;
-            }
+		.right-box {
+			ul {
+				margin: 2px 0;
+			}
 
-            li {
-                width: 1px;
-                height: 4px;
-                background-color: rgba(96, 230, 255, .32);
-                transform: rotate(-10deg);
-                margin-right: 2px;
-            }
+			li {
+				width: 1px;
+				height: 4px;
+				margin-right: 2px;
+				background-color: rgba(96, 230, 255, 0.32);
+				transform: rotate(-10deg);
+			}
 
-            h2 {
-                font-size: 24px;
-                line-height: 24px;
-                color: #FEFFFF;
+			h2 {
+				font-size: 24px;
+				line-height: 24px;
+				color: #feffff;
 
-                i {
-                    font-style: normal;
-                }
+				i {
+					font-style: normal;
+				}
 
-                span {
-                    margin-left: 8px;
-                    font-size: 20px;
-                    line-height: 24px;
-                    font-weight: normal;
-                }
-            }
+				span {
+					margin-left: 8px;
+					font-size: 20px;
+					font-weight: normal;
+					line-height: 24px;
+				}
+			}
 
-            p {
-                font-size: 20px;
-                line-height: 24px;
-                color: rgba(254, 255, 255, 0.6);
-            }
-        }
-    }
+			p {
+				font-size: 20px;
+				line-height: 24px;
+				color: rgba(254, 255, 255, 0.6);
+			}
+		}
+	}
 </style>
 

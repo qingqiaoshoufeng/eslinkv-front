@@ -9,18 +9,18 @@
             page(:total="total" show-elevator show-total :page-size="pageSize" :current="pageNum" @on-change="pageChange")
 </template>
 <script lang="ts">
-    import {Vue, Component} from 'vue-property-decorator'
-    import {Table, Page, Button} from 'view-design'
-    import {getCheckHistoryList} from 'eslinkv-npm/src/api/bussiness.api'
+	import { Vue, Component } from 'vue-property-decorator'
+	import { Table, Page, Button } from 'view-design'
+	import { getCheckHistoryList } from 'eslinkv-npm/src/api/bussiness.api'
 
     @Component({
         components: {
             Table,
             Button,
-            Page,
+            Page
         }
     })
-    export default class Market extends Vue {
+	export default class Market extends Vue {
         tableData = []
         columns = [
             {
@@ -42,56 +42,57 @@
             {
                 title: '创建时间',
                 slot: 'createTime'
-            },
+            }
         ]
+
         total: number = 0
         pageNum: number = 1
         pageSize: number = 10
         status: any = {
             error: '审核失败',
             pending: '待审核',
-            success: '审核通过',
+            success: '审核通过'
         }
 
-        async search() {
+        async search () {
             const res = await getCheckHistoryList({
                 pageNum: this.pageNum,
-                pageSize: this.pageSize,
+                pageSize: this.pageSize
             })
             this.tableData = res.rows
             this.total = res.count
         }
 
-        pageChange(page) {
+        pageChange (page) {
             this.pageNum = page
             this.search()
         }
 
-        created() {
+        created () {
             this.search()
         }
-    }
+	}
 </script>
 <style lang="scss" scoped>
-    .container {
-        width: 100%;
-        height: 100%;
-        background: #fff;
-        padding: 15px;
-        
-        .page {
-            text-align: center;
-            margin-top: 10px;
-        }
-        
-        .avatar {
-            width: 100px;
-            height: 60px;
-            vertical-align: middle;
-        }
-        
-        .mr10 {
-            margin-right: 10px;
-        }
-    }
+	.container {
+		width: 100%;
+		height: 100%;
+		padding: 15px;
+		background: #fff;
+
+		.page {
+			margin-top: 10px;
+			text-align: center;
+		}
+
+		.avatar {
+			width: 100px;
+			height: 60px;
+			vertical-align: middle;
+		}
+
+		.mr10 {
+			margin-right: 10px;
+		}
+	}
 </style>

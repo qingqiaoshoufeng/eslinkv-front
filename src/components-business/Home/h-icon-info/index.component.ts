@@ -2,17 +2,17 @@ export const customConfig = [
 	{
 		prop: 'icon',
 		label: '图片',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'text',
 		label: '文字',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'suffix',
 		label: '后缀',
-		type: 'func-input',
+		type: 'func-input'
 	}
 ]
 
@@ -28,7 +28,7 @@ export const value = {
     },
     api: {
         data: JSON.stringify({
-            num: '11.01',
+            num: '11.01'
         })
     },
     config: {

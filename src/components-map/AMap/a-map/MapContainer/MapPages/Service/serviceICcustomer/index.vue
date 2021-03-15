@@ -67,229 +67,229 @@
 	</div>
 </template>
 <script>
-//页面覆盖物组件
-let componentPageArr = [
-	'RightPanelWithServiceICcustomer',
-	'BranchCompany',
-	'MajorClient',
-	'WarningICcustomer',
-	'TipDetial',
-	'SaleAreaBoundary',
-	'SwitchBox',
-	'useHotYear',
-];
-//页面所需公共组件
-let componentCommonArr = [
-	'DataStatistics',
-	'RegionBoundary',
-	'OverlayDetail',
-	'MapLegend',
-];
-//异步加载组件函数
-let componentPageMap = {};
-let componentCommonMap = {};
-componentPageArr.map(componentName => {
-	componentPageMap[componentName] = () =>
-		import(/*webpackInclude:/\.(vue)$/ */ '../Components/' + componentName);
-});
-componentCommonArr.map(componentName => {
-	componentCommonMap[componentName] = () =>
+// 页面覆盖物组件
+	import {
+		SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
+		SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP,
+		DATASTATISTICSLIST,
+		SWICHBOX
+	} from './config'
+	import {
+		ICcustomer_WARN__SCENEINDEX,
+		ICcustomer_WARN__COMPONENTINDEX
+	} from '../../../../config'
+
+	const componentPageArr = [
+		'RightPanelWithServiceICcustomer',
+		'BranchCompany',
+		'MajorClient',
+		'WarningICcustomer',
+		'TipDetial',
+		'SaleAreaBoundary',
+		'SwitchBox',
+		'useHotYear'
+	]
+	// 页面所需公共组件
+	const componentCommonArr = [
+		'DataStatistics',
+		'RegionBoundary',
+		'OverlayDetail',
+		'MapLegend'
+	]
+	// 异步加载组件函数
+	const componentPageMap = {}
+	const componentCommonMap = {}
+	componentPageArr.map(componentName => {
+		componentPageMap[componentName] = () =>
+		import(/* webpackInclude:/\.(vue)$/ */ '../Components/' + componentName)
+	})
+	componentCommonArr.map(componentName => {
+		componentCommonMap[componentName] = () =>
 		import(
-			/*webpackInclude:/\.(vue)$/ */ '../../../../components/' +
+			/* webpackInclude:/\.(vue)$/ */ '../../../../components/' +
 				componentName
-		);
-});
-
-import {
-	SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
-	SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP,
-	DATASTATISTICSLIST,
-	SWICHBOX,
-} from './config';
-import {
-	ICcustomer_WARN__SCENEINDEX,
-	ICcustomer_WARN__COMPONENTINDEX,
-} from '../../../../config';
-export default {
-	name: 'serviceICcustomer',
-	components: {
-		...componentPageMap,
-		...componentCommonMap,
-		iSwitchBox: componentPageMap.SwitchBox,
-	},
-	data() {
-		let {
-			MajorClient,
-			BranchCompany,
-			WarningICcustomer,
-		} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP;
-		return {
-			overlayInfoConfigMap: Object.freeze(
-				SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP
-			),
-			dataStatisticsList: DATASTATISTICSLIST,
-			overlayMap: SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
-			legendMap: { MajorClient, BranchCompany },
-			legendMultiple: true,
-			showOverlayDetail: false,
-			activeOverlay: {},
-			center: [120.22476196, 30.30531764],
-			zoom: 11,
-			allTypeStationList: {},
-			detailInfo: {},
-			ICcustomerDetailInfo: {},
-			isShowMore: false,
-			activeArea: '',
-			swichBoxInfo: SWICHBOX,
-			WarningDetialInfo: {},
-			activeIndex: null,
-		};
-	},
-	computed: {
-		OverlayDetailProp() {
-			let { activeOverlay, overlayInfoConfigMap, legendMap } = this;
-			if (JSON.stringify(activeOverlay) !== '{}') {
-				let { overlayType } = activeOverlay;
-				//详情展示信息配置
-				let overlayDetailConfig =
-					overlayInfoConfigMap[overlayType] || {};
-				let legendConfig = legendMap[overlayType] || {};
-				//图标大小，是否显示关闭按钮，是否显示查看详情
-				let {
-					iconSize = 38,
-					showPopCloseBtn: showCloseBtn,
-					showMore,
-				} = legendConfig;
-				return {
-					data: activeOverlay,
-					iconSize,
-					showCloseBtn,
-					overlayDetailConfig,
-					showMore,
-				};
-			} else {
-				return {};
+		)
+	})
+	export default {
+		name: 'serviceICcustomer',
+		components: {
+			...componentPageMap,
+			...componentCommonMap,
+			iSwitchBox: componentPageMap.SwitchBox
+		},
+		data () {
+			const {
+				MajorClient,
+				BranchCompany,
+				WarningICcustomer
+			} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP
+			return {
+				overlayInfoConfigMap: Object.freeze(
+					SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP
+				),
+				dataStatisticsList: DATASTATISTICSLIST,
+				overlayMap: SERVICE_SERVICEICCUSTOMER_LEGEND_MAP,
+				legendMap: { MajorClient, BranchCompany },
+				legendMultiple: true,
+				showOverlayDetail: false,
+				activeOverlay: {},
+				center: [120.22476196, 30.30531764],
+				zoom: 11,
+				allTypeStationList: {},
+				detailInfo: {},
+				ICcustomerDetailInfo: {},
+				isShowMore: false,
+				activeArea: '',
+				swichBoxInfo: SWICHBOX,
+				WarningDetialInfo: {},
+				activeIndex: null
 			}
 		},
-	},
-	created() {
-		this.$amap = this.$parent.$amap;
-		this.$amap.setZoom(this.zoom, 100);
-		this.$amap.panTo(this.center, 100);
-	},
-
-	methods: {
-		showMoreDetail() {},
-		// 板块图变化
-		saleAreaChange(val) {},
-		// 切换热力图显示隐藏
-		switchChange(data, type) {
-			this.swichBoxInfo = data;
-			let [{ value }] = this.swichBoxInfo;
-			this.overlayMap.useHotYear.visible = value;
-		},
-		closeOverlayDetail(done) {
-			this.showOverlayDetail = false;
-			this.activeOverlay = {};
-			this.detailInfo = {};
-
-			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.panTo(this.center, 100);
-			done && done();
-		},
-		// 点击地图marker
-		handleOverlayClick(overlay, overlayType, isCenter = false) {
-			this.activeOverlay = {};
-			this.detailInfo = {};
-			this.showOverlayDetail = false;
-
-			overlay.overlayType = overlayType || overlay.overlayType;
-			let {
-				lng,
-				lat,
-				id,
-				overlayType: type,
-				detailList,
-				name,
-				status,
-				activeIndex,
-				type: stationType,
-			} = overlay;
-			let params = {
-				stationType,
-				name,
-				id,
-			};
-			this.activeArea = name;
-			this.activeOverlay = overlay;
-			this.activeIndex = activeIndex || this.activeIndex;
-			this.getDetailInfo(params, status);
-
-			this.isShowMore = [''].includes(type);
-			if (['MajorClient', 'WarningICcustomer'].includes(type)) {
-				this.$amap.setZoom(14, 100);
-				this.$amap.panTo([lng, lat], 100);
+		computed: {
+			OverlayDetailProp () {
+				const { activeOverlay, overlayInfoConfigMap, legendMap } = this
+				if (JSON.stringify(activeOverlay) !== '{}') {
+					const { overlayType } = activeOverlay
+					// 详情展示信息配置
+					const overlayDetailConfig =
+						overlayInfoConfigMap[overlayType] || {}
+					const legendConfig = legendMap[overlayType] || {}
+					// 图标大小，是否显示关闭按钮，是否显示查看详情
+					const {
+						iconSize = 38,
+						showPopCloseBtn: showCloseBtn,
+						showMore
+					} = legendConfig
+					return {
+						data: activeOverlay,
+						iconSize,
+						showCloseBtn,
+						overlayDetailConfig,
+						showMore
+					}
+				} else {
+					return {}
+				}
 			}
 		},
-		// 请求子公司数据列表
-		async getAllTypeStationList() {
-			let params = {
-				types: ['ICcustomer', 'BranchCompany'].toString(),
-			};
-			let res = await this.$sysApi.map.serve.getICcustomerStationList(
-				params
-			);
-			this.allTypeStationList = { ...this.allTypeStationList, ...res };
+		created () {
+			this.$amap = this.$parent.$amap
+			this.$amap.setZoom(this.zoom, 100)
+			this.$amap.panTo(this.center, 100)
 		},
 
-		// 联码新增统计数据
-		async getDataStatisticsList() {
-			this.ICcustomerDetailInfo = await this.$sysApi.map.serve.getICcustomerCallingInfo();
-		},
+		methods: {
+			showMoreDetail () {},
+			// 板块图变化
+			saleAreaChange (val) {},
+			// 切换热力图显示隐藏
+			switchChange (data, type) {
+				this.swichBoxInfo = data
+				const [{ value }] = this.swichBoxInfo
+				this.overlayMap.useHotYear.visible = value
+			},
+			closeOverlayDetail (done) {
+				this.showOverlayDetail = false
+				this.activeOverlay = {}
+				this.detailInfo = {}
 
-		// 获取热力图信息
-		async getAllHotList() {
-			let res = await this.$sysApi.map.serve.getICcustomerHotInfo();
-			this.allTypeStationList = { ...this.allTypeStationList, ...res };
-		},
-		//获取站点详情
-		async getDetailInfo(params, status) {
-			this.detailInfo = await this.$sysApi.map.serve.getICcustomerDetailInfo(
-				params
-			);
-			if (status && status === '0') {
-				this.detailInfo.ICcustomerStatus = '已处理';
-			} else if (status && status === '1') {
-				this.detailInfo.ICcustomerStatus = '待处理';
+				this.$amap.setZoom(this.zoom, 100)
+				this.$amap.panTo(this.center, 100)
+				done && done()
+			},
+			// 点击地图marker
+			handleOverlayClick (overlay, overlayType, isCenter = false) {
+				this.activeOverlay = {}
+				this.detailInfo = {}
+				this.showOverlayDetail = false
+
+				overlay.overlayType = overlayType || overlay.overlayType
+				const {
+					lng,
+					lat,
+					id,
+					overlayType: type,
+					detailList,
+					name,
+					status,
+					activeIndex,
+					type: stationType
+				} = overlay
+				const params = {
+					stationType,
+					name,
+					id
+				}
+				this.activeArea = name
+				this.activeOverlay = overlay
+				this.activeIndex = activeIndex || this.activeIndex
+				this.getDetailInfo(params, status)
+
+				this.isShowMore = [''].includes(type)
+				if (['MajorClient', 'WarningICcustomer'].includes(type)) {
+					this.$amap.setZoom(14, 100)
+					this.$amap.panTo([lng, lat], 100)
+				}
+			},
+			// 请求子公司数据列表
+			async getAllTypeStationList () {
+				const params = {
+					types: ['ICcustomer', 'BranchCompany'].toString()
+				}
+				const res = await this.$sysApi.map.serve.getICcustomerStationList(
+					params
+				)
+				this.allTypeStationList = { ...this.allTypeStationList, ...res }
+			},
+
+			// 联码新增统计数据
+			async getDataStatisticsList () {
+				this.ICcustomerDetailInfo = await this.$sysApi.map.serve.getICcustomerCallingInfo()
+			},
+
+			// 获取热力图信息
+			async getAllHotList () {
+				const res = await this.$sysApi.map.serve.getICcustomerHotInfo()
+				this.allTypeStationList = { ...this.allTypeStationList, ...res }
+			},
+			// 获取站点详情
+			async getDetailInfo (params, status) {
+				this.detailInfo = await this.$sysApi.map.serve.getICcustomerDetailInfo(
+					params
+				)
+				if (status && status === '0') {
+					this.detailInfo.ICcustomerStatus = '已处理'
+				} else if (status && status === '1') {
+					this.detailInfo.ICcustomerStatus = '待处理'
+				}
+
+				this.showOverlayDetail = this.$refs[
+					this.activeOverlay.overlayType
+				][0].mouseIn
+			},
+			// 获取右侧table列表报警信息
+			async getWarningList (params) {
+				const WarningICcustomerList = await this.$sysApi.map.serve.getICcustomerSituationAwareness(
+					params
+				)
+				this.allTypeStationList = {
+					...this.allTypeStationList,
+					WarningICcustomerList
+				}
+			},
+			handleListClick (item) {
+				this.$refs.WarningICcustomer[0].mouseIn = true
+				this.activeOverlay = item
+				this.handleOverlayClick(item)
 			}
-
-			this.showOverlayDetail = this.$refs[
-				this.activeOverlay.overlayType
-			][0].mouseIn;
 		},
-		// 获取右侧table列表报警信息
-		async getWarningList(params) {
-			let WarningICcustomerList = await this.$sysApi.map.serve.getICcustomerSituationAwareness(
-				params
-			);
-			this.allTypeStationList = {
-				...this.allTypeStationList,
-				WarningICcustomerList,
-			};
-		},
-		handleListClick(item) {
-			this.$refs.WarningICcustomer[0].mouseIn = true;
-			this.activeOverlay = item;
-			this.handleOverlayClick(item);
-		},
-	},
-	mounted() {
-		this.getDataStatisticsList();
-		this.getAllTypeStationList();
-		this.getWarningList();
-		this.getAllHotList();
-	},
-};
+		mounted () {
+			this.getDataStatisticsList()
+			this.getAllTypeStationList()
+			this.getWarningList()
+			this.getAllHotList()
+		}
+	}
 </script>
 
 <style lang="scss" scoped>

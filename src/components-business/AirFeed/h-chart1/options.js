@@ -1,6 +1,5 @@
 
-
-export default function getOption(data, config) {
+export default function getOption (data, config) {
 	return {
 		textStyle: {
 			fontSize: 16,
@@ -30,9 +29,9 @@ export default function getOption(data, config) {
 				fontSize: 16
 			}
 		},
-		color: "#52EDC5",
+		color: '#52EDC5',
 		xAxis: [{
-			type: "category",
+			type: 'category',
 			axisTick: {
 				show: false
 			},
@@ -40,7 +39,7 @@ export default function getOption(data, config) {
 				show: false
 			},
 			axisLabel: {
-				color: "#fff",
+				color: '#fff',
 				fontSize: 16,
 				lineHeight: 16,
 				interval: 0
@@ -56,7 +55,7 @@ export default function getOption(data, config) {
 				axisTick: {
 					show: false,
 					textStyle: {
-						color: '#fff',
+						color: '#fff'
 					}
 				},
 				axisLabel: {
@@ -69,22 +68,22 @@ export default function getOption(data, config) {
 				splitLine: {
 					show: true,
 					lineStyle: {
-						type: "solid",
-						color: "rgba(199, 209, 219, 0.2)",
+						type: 'solid',
+						color: 'rgba(199, 209, 219, 0.2)'
 					}
 				},
 				axisLine: {
-					show: false,
+					show: false
 				}
 			},
 			{
 				name: config.unit2,
-				type: "value",
+				type: 'value',
 				splitLine: {
 					show: false
 				},
 				axisLabel: {
-					color: "#fff",
+					color: '#fff',
 					fontSize: 16,
 					lineHeight: 16
 				},
@@ -95,59 +94,59 @@ export default function getOption(data, config) {
 					show: false
 				},
 				nameTextStyle: {
-					color: "#fff"
+					color: '#fff'
 				},
 				offset: 5
 			}],
 		series: [
 			{
 				name: config.legend1,
-				type: "line",
+				type: 'line',
 				symbolSize: 16,
 				symbol: 'none',
 				lineStyle: {
-					color: "#00DDFF",
+					color: '#00DDFF',
 					type: 'dotted'
 				},
 				itemStyle: {
-					color: "#00DDFF",
+					color: '#00DDFF'
 				},
 				data: data.yValue1
 			},
 			{
 				name: config.legend2,
-				type: "line",
+				type: 'line',
 				symbolSize: 16,
 				symbol: 'none',
 				lineStyle: {
-					color: "#FFD200",
+					color: '#FFD200',
 					type: 'dotted'
 				},
 				itemStyle: {
-					color: "#FFD200",
+					color: '#FFD200'
 				},
 				data: data.yValue2
 			},
 			{
 				name: config.legend3,
-				type: "line",
+				type: 'line',
 				symbolSize: 16,
 				symbol: 'image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAFWSURBVHgBjVPRUYNAEH2XcfxOB9KByViASQWxBNNBOhArSDqADtAKknw5oxPBCkIHYAGyvuUOORhksjMvYZe3u+9uF4O+yccCuF4B1QO9wEUzh2eYee7TJ21iOiW2wFXC5G9GliSbGsCaOBL7mqNcZ+YvWV8CX8SGSSWGrOZVIfveuwZl80Kr7nCpSRpbtdYJiLMvS0QCYk8UYi3RWO+4BbEwkCwCfo4wd3GTzL+UmPb6qty5MSa3RU6hcniJMuOZMo+4HUiGi0WtO4mJlcqRzvHGrUD3LmQy0Gl4Aq2KjmmBHPJ548WykQKvXveZclmgYlDWHmn9jwqNbTy/LqCVFm4k/TEmzbndSAOv+9SN3sXktKMT4VLzFq+/ygfYD2Zklesxq/x6le0UbMKS96EFUyp6hLzP2sQ33dYnPp2J5kMrWwXdLgF/Q+LWdVLLYSfwwsSDT/8FGjPas7LeaZQAAAAASUVORK5CYII=',
 				itemStyle: {
-					color: "#00FFCF",
+					color: '#00FFCF'
 				},
 				lineStyle: {
-					color: "#00FFCF"
+					color: '#00FFCF'
 				},
 				yAxisIndex: 1,
 				areaStyle: {
 					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
 						offset: 0,
-						color: "rgba(0, 255, 207, 0.5)"
+						color: 'rgba(0, 255, 207, 0.5)'
 					},
 						{
 							offset: 1,
-							color: "rgba(0, 255, 207, 0)"
+							color: 'rgba(0, 255, 207, 0)'
 						}
 					], false)
 				},

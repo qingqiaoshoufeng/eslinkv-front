@@ -2,12 +2,12 @@ export const customConfig = [
 	{
 		prop: 'numColor',
 		label: '数字颜色',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'title',
 		label: '标题',
-		type: 'func-input',
+		type: 'func-input'
 	}
 ]
 export const value = {

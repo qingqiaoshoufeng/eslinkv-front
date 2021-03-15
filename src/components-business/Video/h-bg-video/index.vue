@@ -17,11 +17,11 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
-		data() {
+		data () {
 			return {
 				playerOptions: {
 					width: 1200,
@@ -34,18 +34,18 @@
 					sources: [
 						{
 							src: '/cdn/videos/shouye.webm'
-						},
-					],
-				},
+						}
+					]
+				}
 			}
 		},
 		mixins: [mixins],
 		methods: {
-			handleClose() {
+			handleClose () {
 				scene.actions.destroyScene('grdnn9tiey')
 			}
 		},
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		},
 		props: {
@@ -72,29 +72,29 @@
 
 	.h-bg-video {
 		top: 35px;
-		width: 100%;
 		justify-content: center;
+		width: 100%;
 
 		.video-player-box {
-			border: 2px solid #00DDFF;
+			border: 2px solid #0df;
 		}
 	}
 
 	.h-bg-video-close {
-		background-image: url('../../More/h-bg/img/close.svg');
+		top: -35px;
+		left: 50%;
 		width: 32px;
 		height: 32px;
-		left: 50%;
 		margin-left: 570px;
-		top: -35px;
+		background-image: url('../../More/h-bg/img/close.svg');
 		background-size: 32px;
 	}
 
 	.h-bg-video-close1 {
-		width: 257px;
-		height: 64px;
 		bottom: -200px;
 		left: 50%;
+		width: 257px;
+		height: 64px;
 		margin-left: 725px;
 	}
 </style>

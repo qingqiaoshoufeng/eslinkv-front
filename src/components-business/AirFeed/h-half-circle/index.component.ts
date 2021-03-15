@@ -19,7 +19,7 @@ export const value = {
 		bgColor: 'rgba(0, 87, 169, 0.5)',
 		pointerColor: '#00FFCF',
 		titleColor: '#fff',
-		subTitleColor: '#00DDFF',
+		subTitleColor: '#00DDFF'
 	}
 }
 
@@ -27,26 +27,26 @@ export const customConfig = [
 	{
 		prop: 'title',
 		label: '标题',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'mainColor',
 		label: '环形主颜色',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'pointerColor',
 		label: '圆点颜色',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'titleColor',
 		label: '标题颜色',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'subTitleColor',
 		label: '副标题颜色',
-		type: 'func-color',
+		type: 'func-color'
 	}
 ]

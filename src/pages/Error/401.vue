@@ -9,14 +9,14 @@
 </template>
 <script lang="ts">
 	import errGif from '../../assets/401_images/401.gif'
-	import {Button, Row, Col} from 'view-design'
-	import {Component, Vue} from 'vue-property-decorator'
+	import { Button, Row, Col } from 'view-design'
+	import { Component, Vue } from 'vue-property-decorator'
 
 	@Component({
 		components: {
 			'i-button': Button,
 			'i-row': Row,
-			'i-col': Col,
+			'i-col': Col
 		}
 	})
 	export default class Page401 extends Vue {
@@ -35,7 +35,7 @@
 
 	.error-content {
 		align-items: center;
-		height: 100%;
 		justify-content: center;
+		height: 100%;
 	}
 </style>

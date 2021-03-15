@@ -2,7 +2,7 @@ export const customConfig = [
 	{
 		prop: 'desc',
 		label: '描述',
-		type: 'func-input',
+		type: 'func-input'
 	}
 ]
 export const value = {
@@ -17,10 +17,10 @@ export const value = {
 	},
 	api: {
 		data: JSON.stringify({
-			value: 24,
-		}),
+			value: 24
+		})
 	},
 	config: {
-		desc: '标题',
-	},
-};
+		desc: '标题'
+	}
+}

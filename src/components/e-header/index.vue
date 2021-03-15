@@ -8,21 +8,21 @@
 		span 测试用户
 </template>
 <script lang="ts">
-	import {Vue, Component} from 'vue-property-decorator'
-	import {Icon, Button} from 'view-design'
+	import { Vue, Component } from 'vue-property-decorator'
+	import { Icon, Button } from 'view-design'
 
 	@Component({
 		components: {
 			'i-icon': Icon,
-			'i-button': Button,
+			'i-button': Button
 		}
 	})
 	export default class EHeader extends Vue {
-		handleHelp() {
+		handleHelp () {
 			this.$router.push('/help/HowToUseMarket')
 		}
 
-		handleChangeLog() {
+		handleChangeLog () {
 			this.$router.push('/changeLog')
 		}
 	}
@@ -31,21 +31,21 @@
 	@import "../../scss/conf";
 
 	.e-header {
-		height: 40px;
-		background-color: #ffffff;
-		box-shadow: 0 0 10px rgba(61, 77, 102, 0.1);
-		width: 100%;
 		top: 0;
-		padding-left: 70px;
-		padding-right: 10px;
 		left: 0;
-		align-items: center;
 		z-index: 8;
+		align-items: center;
+		width: 100%;
+		height: 40px;
+		padding-right: 10px;
+		padding-left: 70px;
+		background-color: #fff;
+		box-shadow: 0 0 10px rgba(61, 77, 102, 0.1);
 
 		h1 {
 			margin-right: auto;
-			font-size: 16px;
 			margin-left: 10px;
+			font-size: 16px;
 		}
 
 		span {

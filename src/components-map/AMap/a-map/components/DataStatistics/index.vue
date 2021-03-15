@@ -17,100 +17,110 @@
 </template>
 
 <script>
-export default {
-	name: 'DataStatistics',
-	props: {
-		position: {
-			type: String,
-			default: 'right',
-		},
-		dataStatisticsList: {
-			type: [Object, Array],
-			default() {
-				return {};
+	export default {
+		name: 'DataStatistics',
+		props: {
+			position: {
+				type: String,
+				default: 'right'
 			},
-		},
-		data: {
-			type: [Object, Array],
-			default() {
-				return {};
+			dataStatisticsList: {
+				type: [Object, Array],
+				default () {
+					return {}
+				}
 			},
+			data: {
+				type: [Object, Array],
+				default () {
+					return {}
+				}
+			}
 		},
-	},
-	computed: {
-		animate() {
-			let { position } = this;
-			return (
-				'animate__fadeIn' +
-				(position.charAt(0).toUpperCase() + position.slice(1))
-			);
+		computed: {
+			animate () {
+				const { position } = this
+				return (
+					'animate__fadeIn' +
+					(position.charAt(0).toUpperCase() + position.slice(1))
+				)
+			}
 		},
-	},
-	components: {},
-	data() {
-		return {};
-	},
-};
+		components: {},
+		data () {
+			return {}
+		}
+	}
 </script>
  <style lang="scss" scoped>
 .data_statistics_box {
-	width: 280px;
 	position: fixed;
-	right: 530px;
 	top: 148px;
+	right: 530px;
 	z-index: 100;
+	width: 280px;
+
 	.data_statistics_item {
 		display: flex;
 		flex-direction: column;
+
 		&:not(:first-child) {
 			margin-top: 30px;
 		}
+
 		.value {
 			height: 48px;
+			padding-right: 16px;
 			font-family: DIN Alternate;
 			font-size: 48px;
 			font-style: normal;
 			font-weight: 700;
 			line-height: 48px;
-			text-align: right;
 			color: #ffdc45;
-			padding-right: 16px;
+			text-align: right;
 		}
+
 		.warning {
 			color: #ff7217;
 		}
+
 		.desc {
 			height: 32px;
-			line-height: 32px;
+			padding-right: 16px;
 			margin-top: 8px;
 			font-size: 24px;
-			border-radius: 16px;
+			line-height: 32px;
 			color: #fff;
-			padding-right: 16px;
 			text-align: right;
-			background: linear-gradient(
-				90deg,
-				rgba(0, 77, 150, 0.3) 0%,
-				#004d96 100%
-			);
+			background:
+				linear-gradient(
+					90deg,
+					rgba(0, 77, 150, 0.3) 0%,
+					#004d96 100%
+				);
+			border-radius: 16px;
 			border-radius: 16px;
 		}
 	}
 }
+
 .position-left {
 	left: 34px !important;
+
 	.value {
-		text-align: left !important;
 		padding-left: 16px !important;
+		text-align: left !important;
 	}
+
 	.desc {
-		text-align: left !important;
 		padding-left: 16px !important;
-		background: linear-gradient(
-			90deg,
-			#004d96 0%,
-			rgba(0, 77, 150, 0.3) 100%
-		) !important;
+		text-align: left !important;
+		background:
+			linear-gradient(
+				90deg,
+				#004d96 0%,
+				rgba(0, 77, 150, 0.3) 100%
+			) !important;
 	}
 }
 </style>

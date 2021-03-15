@@ -6,8 +6,8 @@ export const value = {
 			start2: 73,
 			end2: 73,
 			start3: 73,
-			end3: 73,
-		}),
+			end3: 73
+		})
 	},
 	layout: {
 		size: {

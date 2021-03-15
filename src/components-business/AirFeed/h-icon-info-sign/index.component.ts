@@ -3,7 +3,7 @@ export const value = {
 		data: JSON.stringify({
 			count: 123456,
 			icon: '/static/icons/h-inline-logo1.svg',
-			text: '居民户',
+			text: '居民户'
 		})
 	},
 	layout: {

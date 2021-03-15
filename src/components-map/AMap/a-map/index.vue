@@ -10,40 +10,40 @@
 </template>
 
 <script>
-	import MapContainer from './MapContainer/index';
+	import MapContainer from './MapContainer/index'
 	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
 		name: 'HRMap',
 		components: {
-			MapContainer,
+			MapContainer
 		},
 		computed: {
-			inPreview() {
-				return scene.state.status === 'inPreview';
-			},
+			inPreview () {
+				return scene.state.status === 'inPreview'
+			}
 		},
-		data() {
+		data () {
 			return {
-				ready: false,
-			};
+				ready: false
+			}
 		},
 		methods: {
-			resetMap() {
-				this.ready = false;
+			resetMap () {
+				this.ready = false
 				setTimeout(() => {
-					this.ready = true;
-				}, 5000);
-			},
+					this.ready = true
+				}, 5000)
+			}
 		},
-		mounted() {
+		mounted () {
 			setTimeout(() => {
-				this.ready = true;
-			}, 2000);
-			//以防地图加载不出hock处理
-			window.resetMap = this.resetMap.bind(this);
-		},
-	};
+				this.ready = true
+			}, 2000)
+			// 以防地图加载不出hock处理
+			window.resetMap = this.resetMap.bind(this)
+		}
+	}
 </script>
 
 
@@ -56,11 +56,11 @@
 	.map-box {
 		position: relative;
 		display: flex;
-		justify-content: center;
 		align-items: center;
-		overflow: hidden;
+		justify-content: center;
 		width: 100%;
 		height: 100%;
+		overflow: hidden;
 	}
 </style>
 
@@ -96,6 +96,4 @@
 		display: none !important;
 	}
 </style>
-
-
 

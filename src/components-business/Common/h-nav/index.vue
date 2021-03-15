@@ -1,29 +1,31 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<ul class="h-nav fn-flex flex-row">
-			<li class="pos-r pointer fn-flex"
-				v-for="item in data?data.value:[]"
-				:class="{active:item.index.indexOf(scene.index)!==-1,disabled:data.disabled?data.disabled.indexOf(item.title)!==-1:false}"
-				@click="changeScene(item.title,item.index[0])">
-				{{item.title}}
+			<li
+				class="pos-r pointer fn-flex"
+				v-for="item in data ? data.value : []"
+				:class="{active:item.index.indexOf(scene.index) !== -1,disabled:data.disabled ? data.disabled.indexOf(item.title) !== -1 : false}"
+				@click="changeScene(item.title,item.index[0])"
+			>
+				{{ item.title }}
 			</li>
 		</ul>
 	</div>
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
-		data() {
+		data () {
 			return {
-				scene: scene.state,
+				scene: scene.state
 			}
 		},
 		mixins: [mixins],
 		methods: {
-			changeScene(title, index) {
+			changeScene (title, index) {
 				if (this.data.disabled) {
 					if (this.data.disabled.indexOf(title) !== -1) {
 						return false
@@ -35,7 +37,7 @@
 				}
 			}
 		},
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		}
 	}
@@ -45,12 +47,12 @@
 		height: 100%;
 
 		li {
+			justify-content: center;
+			height: 50px;
 			margin-right: 80px;
 			font-size: 32px;
 			line-height: 32px;
 			color: rgba(255, 255, 255, 0.75);
-			height: 50px;
-			justify-content: center;
 
 			&:last-child {
 				margin-right: 0;
@@ -59,21 +61,21 @@
 			&.active {
 				color: #fff;
 
-				&:before {
-					content: '';
+				&::before {
 					position: absolute;
-					background: #00DDFF;
-					border-radius: 4px;
-					width: 100%;
-					height: 4px;
 					bottom: 0;
 					left: 50%;
+					width: 100%;
+					height: 4px;
+					content: '';
+					background: #0df;
+					border-radius: 4px;
 					transform: translateX(-50%);
 				}
 			}
 
 			&.disabled {
-				color: rgba(255, 255, 255, .3)
+				color: rgba(255, 255, 255, 0.3);
 			}
 		}
 	}

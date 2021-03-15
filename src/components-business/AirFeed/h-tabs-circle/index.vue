@@ -12,7 +12,8 @@
 			<li v-for="(k, i) in curr" :key="i">
 				<div class="circle-legend-color"></div>
 				<div class="circle-legend-name">{{ k.name }}</div>
-				<div class="circle-legend-num"><span class="font-num">{{ k.count | toThousand }}</span>{{ k.unit }}
+				<div class="circle-legend-num">
+					<span class="font-num">{{ k.count | toThousand }}</span>{{ k.unit }}
 				</div>
 				<div class="circle-legend-percent font-num">{{ k.percent }}%</div>
 			</li>
@@ -23,39 +24,39 @@
 	import mixins from 'eslinkv-npm/mixins'
 	import HVerticalTabs from './HVerticalTabs'
 	import pie from './pie'
-	import {getCircleOption} from './options'
-	import {value} from './index.component'
+	import { getCircleOption } from './options'
+	import { value } from './index.component'
 
 	export default {
 		name: 'h-tabs-circle',
 		components: {
 			HVerticalTabs,
-			pie,
+			pie
 		},
-		data() {
+		data () {
 			return {
 				tabSource: [
 					{
-						name: '管网压力等级',
+						name: '管网压力等级'
 					},
 					{
-						name: '管网材质',
+						name: '管网材质'
 					},
 					{
-						name: '管网口径',
-					},
+						name: '管网口径'
+					}
 				],
-				tabActived: 2,
+				tabActived: 2
 			}
 		},
 		computed: {
-			curr() {
+			curr () {
 				return this.data ? this.data.circle[this.tabActived] : []
 			}
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						this.$nextTick(() => {
 							this.$refs.circle && echarts.init(this.$refs.circle).setOption(getCircleOption(this.curr))
@@ -67,17 +68,17 @@
 			}
 		},
 		mixins: [mixins],
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		},
 		methods: {
-			tabActivedChange(tabActived) {
+			tabActivedChange (tabActived) {
 				this.tabActived = tabActived
 				this.$nextTick(() => {
 					this.$refs.circle && echarts.init(this.$refs.circle).setOption(getCircleOption(this.curr))
 				})
 			}
-		},
+		}
 	}
 </script>
 <style lang="scss" scoped>
@@ -95,26 +96,26 @@
 			li {
 				display: flex;
 				align-items: center;
-				font-size: 18px;
-				color: #FFFFFF;
 				margin-bottom: 16px;
+				font-size: 18px;
+				color: #fff;
 
 				.circle-legend-color {
 					box-sizing: content-box;
 					width: 6px;
 					height: 6px;
-					border-radius: 50%;
+					margin-right: 10px;
 					background: transparent;
 					border: 4px solid #2c99ff;
-					margin-right: 10px;
+					border-radius: 50%;
 				}
 
 				&:nth-child(2) .circle-legend-color {
-					border-color: #18CEB9;
+					border-color: #18ceb9;
 				}
 
 				&:nth-child(3) .circle-legend-color {
-					border-color: #FB592C;
+					border-color: #fb592c;
 				}
 
 				&:nth-child(4) .circle-legend-color {
@@ -147,23 +148,23 @@
 				}
 
 				.circle-legend-num {
-					text-align: right;
 					width: 100px;
+					text-align: right;
 
 					> span {
-						font-weight: bold;
-						font-size: 24px;
 						margin-right: 8px;
+						font-size: 24px;
+						font-weight: bold;
 					}
 				}
 
 				.circle-legend-percent {
 					width: 80px;
-					text-align: right;
-					font-weight: bold;
 					font-size: 24px;
+					font-weight: bold;
 					line-height: 24px;
-					color: #FFFFFF;
+					color: #fff;
+					text-align: right;
 				}
 			}
 		}

@@ -17,22 +17,22 @@
 			i-menu-item(name="HowToLoadMarket") 如何加载
 </template>
 <script lang="ts">
-	import {Component, Vue} from 'vue-property-decorator'
-	import {Menu, Submenu, MenuItem} from 'view-design'
+	import { Component, Vue } from 'vue-property-decorator'
+	import { Menu, Submenu, MenuItem } from 'view-design'
 
 	// todo 文档完善
 	@Component({
 		components: {
 			'i-menu': Menu,
 			'i-sub-menu': Submenu,
-			'i-menu-item': MenuItem,
+			'i-menu-item': MenuItem
 		}
 	})
 	export default class HelpLeft extends Vue {
 		leftName: string = ''
 
-		handleSelect(name) {
-			const currentHash = decodeURIComponent(location.hash.replace('#', ''));
+		handleSelect (name) {
+			const currentHash = decodeURIComponent(location.hash.replace('#', ''))
 			const nowHash = `/help/${name}`
 			if (encodeURIComponent(currentHash.replace(/\s+/g, '')) !== encodeURIComponent(nowHash.replace(/\s+/g, ''))) {
 				this.$router.push(nowHash)
@@ -41,15 +41,15 @@
 			}
 		}
 
-		mounted() {
-			let {name} = this.$route.params
+		mounted () {
+			const { name } = this.$route.params
 			this.leftName = name
 		}
 	}
 </script>
 <style lang="scss">
 	.help-left {
-		left: 0;
 		top: 0;
+		left: 0;
 	}
 </style>

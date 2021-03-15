@@ -3,12 +3,12 @@ export const customConfig = [
 	{
 		prop: 'index',
 		label: '场景ID',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'left',
 		label: '位移',
-		type: 'func-number',
+		type: 'func-number'
 	},
 	{
 		prop: 'img',

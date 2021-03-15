@@ -6,10 +6,10 @@ const placeHolderStyle = {
         labelLine: {
             show: false
         },
-        color: "rgba(0,0,0,0.3)",
+        color: 'rgba(0,0,0,0.3)',
         borderWidth: 0
     }
-};
+}
 
 export default function (percent) {
     return {
@@ -46,7 +46,7 @@ export default function (percent) {
                                 },
                                 opacity: 0.5
                             }
-                        },
+                        }
                     },
                     {
                         value: 100 - percent,
@@ -57,10 +57,10 @@ export default function (percent) {
                             labelLine: {
                                 show: false
                             },
-                            color: "rgba(0, 87, 169, 0.5)",
-                            borderWidth: 0,
+                            color: 'rgba(0, 87, 169, 0.5)',
+                            borderWidth: 0
                         }
-                    },
+                    }
                 ]
             },
             {
@@ -92,9 +92,9 @@ export default function (percent) {
                                         offset: 1, color: '#00DDFF' // 100% 处的颜色
                                     }],
                                     global: false // 缺省为 false
-                                },
+                                }
                             }
-                        },
+                        }
                     },
                     {
                         value: 100 - percent,
@@ -105,12 +105,12 @@ export default function (percent) {
                             labelLine: {
                                 show: false
                             },
-                            color: "rgba(0, 255, 207, 0.2)",
-                            borderWidth: 0,
+                            color: 'rgba(0, 255, 207, 0.2)',
+                            borderWidth: 0
                         }
-                    },
+                    }
                 ]
-            },
+            }
         ]
     }
 }

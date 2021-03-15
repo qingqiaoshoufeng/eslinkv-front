@@ -9,30 +9,60 @@
 		<div class="row">
 			<div class="title">出车</div>
 			<div class="item chart">
-				<ring class="ring" back-color="rgba(229, 97, 91, 0.3)" color="#E5615B" :percent="data.start1"></ring>
+				<ring
+					class="ring"
+					back-color="rgba(229, 97, 91, 0.3)"
+					color="#E5615B"
+					:percent="data.start1"
+				></ring>
 				<span>{{ data.start1 }}%</span>
 			</div>
 			<div class="item chart">
-				<ring class="ring" back-color="rgba(229, 97, 91, 0.3)" color="#E5615B" :percent="data.start2"></ring>
+				<ring
+					class="ring"
+					back-color="rgba(229, 97, 91, 0.3)"
+					color="#E5615B"
+					:percent="data.start2"
+				></ring>
 				<span>{{ data.start2 }}%</span>
 			</div>
 			<div class="item chart">
-				<ring class="ring" back-color="rgba(229, 97, 91, 0.3)" color="#E5615B" :percent="data.start3"></ring>
+				<ring
+					class="ring"
+					back-color="rgba(229, 97, 91, 0.3)"
+					color="#E5615B"
+					:percent="data.start3"
+				></ring>
 				<span>{{ data.start3 }}%</span>
 			</div>
 		</div>
 		<div class="row">
 			<div class="title">到达</div>
 			<div class="item chart">
-				<ring class="ring" back-color="#0057A9" color="#00FFCF" :percent="data.end1"></ring>
+				<ring
+					class="ring"
+					back-color="#0057A9"
+					color="#00FFCF"
+					:percent="data.end1"
+				></ring>
 				<span>{{ data.end1 }}%</span>
 			</div>
 			<div class="item chart">
-				<ring class="ring" back-color="#0057A9" color="#00FFCF" :percent="data.end2"></ring>
+				<ring
+					class="ring"
+					back-color="#0057A9"
+					color="#00FFCF"
+					:percent="data.end2"
+				></ring>
 				<span>{{ data.end2 }}%</span>
 			</div>
 			<div class="item chart">
-				<ring class="ring" back-color="#0057A9" color="#00FFCF" :percent="data.end3"></ring>
+				<ring
+					class="ring"
+					back-color="#0057A9"
+					color="#00FFCF"
+					:percent="data.end3"
+				></ring>
 				<span>{{ data.end3 }}%</span>
 			</div>
 		</div>
@@ -51,12 +81,12 @@
 <script>
 	import mixins from 'eslinkv-npm/mixins'
 	import Ring from '@/components/Ring/ring'
-	import {value} from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		components: {Ring},
-		created() {
+		components: { Ring },
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		}
 	}
@@ -70,22 +100,22 @@
 			.title {
 				width: 24px;
 				height: 48px;
-				background: #0057A9;
 				font-size: 18px;
 				line-height: 20px;
-				color: #FFFFFF;
+				color: #fff;
+				background: #0057a9;
 			}
 
 			.item {
-				width: 138px;
-				height: 48px;
-				background: rgba(0, 87, 169, 0.5);
-				font-size: 18px;
-				color: #FFFFFF;
-				margin-right: 8px;
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				width: 138px;
+				height: 48px;
+				margin-right: 8px;
+				font-size: 18px;
+				color: #fff;
+				background: rgba(0, 87, 169, 0.5);
 
 				&.chart {
 					background: rgba(255, 255, 255, 0.1);
@@ -99,10 +129,10 @@
 
 				> span {
 					font-family: font-num;
-					font-weight: bold;
 					font-size: 24px;
+					font-weight: bold;
 					line-height: 24px;
-					color: #FFFFFF;
+					color: #fff;
 				}
 			}
 		}
@@ -110,8 +140,8 @@
 		.legend {
 			display: flex;
 			align-items: center;
-			margin-top: 8px;
 			padding-left: 40px;
+			margin-top: 8px;
 
 			.legend-item {
 				display: flex;
@@ -121,19 +151,19 @@
 				.color {
 					width: 12px;
 					height: 12px;
-					background: transparent;
-					border-radius: 50%;
-					border: 3px solid #E5615B;
 					margin-right: 10px;
+					background: transparent;
+					border: 3px solid #e5615b;
+					border-radius: 50%;
 
 					&.green {
-						border-color: #00FFCF;
+						border-color: #00ffcf;
 					}
 				}
 
 				.label {
 					font-size: 18px;
-					color: #FFFFFF;
+					color: #fff;
 				}
 			}
 		}

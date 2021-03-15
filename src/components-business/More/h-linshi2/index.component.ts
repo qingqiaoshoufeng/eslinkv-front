@@ -102,7 +102,7 @@ export const value: ComponentValue = {
                     value2: 326084,
                     unit2: '元',
                     icon1: '/static/images/home/home-u-6.svg'
-                },
+                }
             ],
             yearData: 53269871
         }

@@ -1,6 +1,6 @@
 
 // 引入详情字典
-import { citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus, activity, community, households, } from "./dictionary"
+import { citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus, activity, community, households } from './dictionary'
 
 
 // 覆盖物legend配置
@@ -37,7 +37,7 @@ export const SERVICE_SERVICECUSTOMER_LEGEND_MAP = {
         visible: true,
         dataProp: 'threeSocialLinkageList',
         detailList: []
-    },
+    }
 }
 export const SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP = {
     TaskList: {
@@ -49,22 +49,22 @@ export const SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP = {
         visible: false,
         dataProp: 'TaskList',
         detailList: [serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus]
-    },
+    }
 }
-//覆盖物详情
+// 覆盖物详情
 export const SERVICE_SERVICECUSTOMER_OVERLAY_MAP = {
     ThreeSocialLinkage: {
         fields: {
-            name: {},
+            name: {}
         },
-        isShowMore: true,
-    },
+        isShowMore: true
+    }
 }
 // 客户服务页面统计数据
-export const DATASTATISTICSLIST = [citizenNumber, publicBuildNumber, industryNumber, businessServe, activity, community, households,]
+export const DATASTATISTICSLIST = [citizenNumber, publicBuildNumber, industryNumber, businessServe, activity, community, households]
 
 
 // SwitchBox配置
 export const SWICHBOX = [
-    { label: '客户分布热力', value: false, type: 'customer' },
+    { label: '客户分布热力', value: false, type: 'customer' }
 ]

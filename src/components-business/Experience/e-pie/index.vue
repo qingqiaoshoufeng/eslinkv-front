@@ -2,18 +2,29 @@
 	<div class="widget-part pos-r" :style="styles" v-if="data">
 		<div class="e-ring" :id="id"/>
 		<ul class="e-ring-icon pos-a" :style="{backgroundImage:`url(${config.config.background})`}">
-			<li class="pos-a" v-for="(item,index) in icon" :key="index" :style="{transform:`rotate(${3.6*index}deg)`}"/>
+			<li
+				class="pos-a"
+				v-for="(item,index) in icon"
+				:key="index"
+				:style="{transform:`rotate(${3.6 * index}deg)`}"
+			/>
 		</ul>
 		<div class="pos-a e-ring-legend-box">
 			<ul class="e-ring-legend" :style="legengdTransform">
-				<li class="fn-flex flex-row" v-for="(item,index) in data?data:[]" :key="index"
+				<li
+					class="fn-flex flex-row"
+					v-for="(item,index) in data ? data : []"
+					:key="index"
 					@click="activeHandler(index)"
-					:class="[{active:animateActiveIndex===index}]">
-					<i class="circle"
-					   :style="{color:JSON.parse(config.config.color)[index%(config.config?JSON.parse(config.config.color).length:0)]}"/>
-					<label class="ellipsis">{{item.title}}</label>
-					<a>{{item.des}}</a>
-					<span>{{item.value}}{{config.config.suffix}}</span>
+					:class="[{active:animateActiveIndex === index}]"
+				>
+					<i
+						class="circle"
+						:style="{color:JSON.parse(config.config.color)[index % (config.config ? JSON.parse(config.config.color).length : 0)]}"
+					/>
+					<label class="ellipsis">{{ item.title }}</label>
+					<a>{{ item.des }}</a>
+					<span>{{ item.value }}{{ config.config.suffix }}</span>
 				</li>
 			</ul>
 		</div>
@@ -22,35 +33,35 @@
 <script>
 	import mixins from 'eslinkv-npm/mixins'
 	import options from './options'
-	import {value, customConfig} from './index.component'
+	import { value, customConfig } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		data() {
+		data () {
 			return {
 				icon: new Int8Array(100),
-				showSize: 4,
+				showSize: 4
 			}
 		},
 		computed: {
-			legengdTransform() {
+			legengdTransform () {
 				if (this.data) {
 					if (this.data.length <= this.showSize + 1) {
-						return {transform: `translateY(0px)`}
+						return { transform: 'translateY(0px)' }
 					} else {
 						if (this.animateActiveIndex > this.showSize) {
 							const top = (this.animateActiveIndex - this.showSize) * 32
-							return {transform: `translateY(-${top}px)`}
+							return { transform: `translateY(-${top}px)` }
 						} else {
-							return {transform: `translateY(0px)`}
+							return { transform: 'translateY(0px)' }
 						}
 					}
 				}
-				return {transform: `translateY(0px)`}
+				return { transform: 'translateY(0px)' }
 			}
 		},
 		methods: {
-			activeHandler(index) {
+			activeHandler (index) {
 				clearInterval(this.animateTimer)
 				this.instance.dispatchAction({
 					type: 'downplay',
@@ -67,12 +78,12 @@
 					this.show(this.data)
 				}, 2000)
 			},
-			setOption(data) {
+			setOption (data) {
 				options.series[0].data = data.map(item => item.value)
 				options.color = JSON.parse(this.config.config.color)
 				this.instance && this.instance.setOption(options)
 			},
-			show(data) {
+			show (data) {
 				clearInterval(this.animateTimer)
 				this.animateTimer = setInterval(() => {
 					this.instance.dispatchAction({
@@ -95,7 +106,7 @@
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						const data = [...val]
 						this.$nextTick(() => {
@@ -109,7 +120,7 @@
 				immediate: true
 			}
 		},
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value, customConfig)
 		}
 	}
@@ -120,40 +131,40 @@
 	}
 
 	.e-ring-icon {
-		background-size: 40px 49px;
-		background-repeat: no-repeat;
-		background-position: center;
-		width: 100px;
-		height: 100px;
 		top: 50%;
 		left: 10%;
-		margin-left: -50px;
+		width: 100px;
+		height: 100px;
 		margin-top: -50px;
+		margin-left: -50px;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 40px 49px;
 
 		li {
-			width: 2px;
-			height: 8px;
-			background-color: rgba(255, 255, 255, 0.2);
 			top: 0;
 			left: 51%;
+			width: 2px;
+			height: 8px;
 			margin-left: -1px;
+			background-color: rgba(255, 255, 255, 0.2);
 			transform-origin: 0 50px;
 		}
 	}
 
 	.e-ring-legend-box {
-		left: 24%;
 		top: 45px;
+		left: 24%;
 		max-height: 176px;
 		overflow-y: hidden;
 	}
 
 	.e-ring-legend {
 		display: flex;
-		justify-content: space-between;
 		flex-wrap: wrap;
+		justify-content: space-between;
 		width: 660px;
-		transition: all .3s;
+		transition: all 0.3s;
 
 		li {
 			align-items: center;
@@ -167,28 +178,30 @@
 		}
 
 		i {
-			border: 2px solid;
 			width: 12px;
 			height: 12px;
+			border: 2px solid;
 		}
 
-		label, span, a {
-			color: #fff;
+		label,
+		span,
+		a {
 			font-size: 18px;
 			line-height: 18px;
+			color: #fff;
 		}
 
 		label {
-			margin-left: 4px;
 			min-width: 100px;
 			max-width: 100px;
+			margin-left: 4px;
 			text-align: left;
 		}
 
 		a {
 			flex: 1;
-			text-align: right;
 			margin-right: 10px;
+			text-align: right;
 		}
 
 		span {

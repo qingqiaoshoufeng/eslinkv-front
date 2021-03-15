@@ -1,7 +1,7 @@
 <template>
 	<div class="wrap">
 		<div class="chart" ref="chart"></div>
-		<div class="unit">单位：{{unit}}</div>
+		<div class="unit">单位：{{ unit }}</div>
 	</div>
 </template>
 
@@ -24,27 +24,27 @@
 				type: String,
 				default: '万m³'
 			},
-			startAngle:{
-				default :270
+			startAngle: {
+				default: 270
 			}
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					this.$nextTick(() => {
 						this.instance = echarts.init(this.$refs.chart).setOption(this.getOption())
 					})
 				},
 				deep: true,
-				immediate: true,
-			},
+				immediate: true
+			}
 		},
 		methods: {
-			getOption() {
+			getOption () {
 				const total = this.data.reduce((p, n) => {
-					return (Number(p)||0) + Number(n.value)
+					return (Number(p) || 0) + Number(n.value)
 				})
-				const _self=this
+				const _self = this
 				return {
 					title: {
 						text: this.text,
@@ -73,8 +73,9 @@
 						label: {
 							formatter: function (params) {
 								const percent = (params.value * 100 / total).toFixed(2)
-								if(_self.unit==='万m³')
-								return `{normal|${params.name} ${percent}%} \n {value|${Math.ceil(params.value / 10000).toLocaleString()}}`
+								if (_self.unit === '万m³') {
+									return `{normal|${params.name} ${percent}%} \n {value|${Math.ceil(params.value / 10000).toLocaleString()}}`
+								}
 								return `{normal|${params.name} ${percent}%} \n {value|${Math.ceil(params.value).toLocaleString()}}`
 							},
 							padding: [0, -100],
@@ -91,7 +92,7 @@
 									fontSize: 14,
 									lineHeight: 14,
 									color: '#fff',
-									padding: [-8, 0, 0, 0],
+									padding: [-8, 0, 0, 0]
 								}
 							}
 						},
@@ -115,11 +116,11 @@
 
 		.unit {
 			position: absolute;
-			bottom: 24px;
 			right: 24px;
+			bottom: 24px;
 			font-size: 18px;
 			line-height: 24px;
-			color: #FFFFFF;
+			color: #fff;
 		}
 	}
 

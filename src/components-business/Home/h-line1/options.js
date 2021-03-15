@@ -22,7 +22,7 @@ export default {
 		axisLabel: {
 			interval: 0,
 			textStyle: {
-				color: "rgba(255, 255, 255, 1)",
+				color: 'rgba(255, 255, 255, 1)',
 				fontSize: 16,
 				lineHeight: 16
 			}
@@ -44,7 +44,7 @@ export default {
 		},
 		axisLabel: {
 			textStyle: {
-				color: "rgba(255, 255, 255, 1)",
+				color: 'rgba(255, 255, 255, 1)',
 				fontSize: 16,
 				lineHeight: 16
 			}
@@ -68,7 +68,7 @@ export default {
 				height: 4,
 				rich: {
 					a: {
-						color: '#fff',
+						color: '#fff'
 
 					}
 				}
@@ -78,8 +78,8 @@ export default {
 					color: new echarts.graphic.LinearGradient(
 						0, 0, 0, 1,
 						[
-							{offset: 0, color: 'rgba(255,255,255,.6)'},
-							{offset: 1, color: 'rgba(255,255,255,0)'}
+							{ offset: 0, color: 'rgba(255,255,255,.6)' },
+							{ offset: 1, color: 'rgba(255,255,255,0)' }
 						]
 					)
 				}

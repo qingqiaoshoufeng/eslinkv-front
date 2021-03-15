@@ -16,5 +16,5 @@ export const value = {
 				percent: 60
 			})
 		})
-	},
-};
+	}
+}

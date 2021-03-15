@@ -1,4 +1,4 @@
-import {barData, dashLineData} from './options'
+import { barData, dashLineData } from './options'
 
 export const value = {
 	api: {

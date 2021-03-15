@@ -10,12 +10,11 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
-
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		}
 	}
@@ -27,24 +26,24 @@
 
 		.val {
 			font-family: font-num;
+			font-size: 40px;
 			font-style: normal;
 			font-weight: bold;
-			font-size: 40px;
 			line-height: 48px;
-			color: #00DDFF;
+			color: #0df;
 		}
 
 		.unit {
+			margin: 8px 0 22px;
 			font-size: 20px;
 			line-height: 24px;
 			color: rgba(255, 255, 255, 0.75);
-			margin: 8px 0 22px;
 		}
 
 		.title {
 			font-size: 20px;
 			line-height: 32px;
-			color: #FFFFFF;
+			color: #fff;
 		}
 	}
 </style>

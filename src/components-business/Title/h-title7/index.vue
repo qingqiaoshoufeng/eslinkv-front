@@ -1,44 +1,44 @@
 <template>
-    <div class="widget-part" :style="styles">
-        <div class="h-title-7">
-            <p class="pos-r text-left">{{config.config&&config.config.title}}</p>
-        </div>
-    </div>
+	<div class="widget-part" :style="styles">
+		<div class="h-title-7">
+			<p class="pos-r text-left">{{ config.config && config.config.title }}</p>
+		</div>
+	</div>
 </template>
 <script>
-    import mixins from 'eslinkv-npm/mixins'
-    import {customConfig, value} from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { customConfig, value } from './index.component'
 
-    export default {
-        mixins: [mixins],
-        created() {
-            this.configValue = this.parseConfigValue(value, customConfig)
-        }
-    }
+	export default {
+		mixins: [mixins],
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
+		}
+	}
 </script>
 <style lang="scss">
-    .h-title-7 {
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
-        height: 100%;
+	.h-title-7 {
+		height: 100%;
+		background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
 
-        p {
-            font-weight: 600;
-            font-size: 20px;
-            line-height: 40px;
-            color: #FFFFFF;
-            padding-left: 12px;
+		p {
+			padding-left: 12px;
+			font-size: 20px;
+			font-weight: 600;
+			line-height: 40px;
+			color: #fff;
 
-            &:before {
-                content: '';
-                position: absolute;
-                width: 4px;
-                height: 40px;
-                left: 0;
-                top: 0;
-                background: #00DDFF;
-            }
-        }
-    }
+			&::before {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 4px;
+				height: 40px;
+				content: '';
+				background: #0df;
+			}
+		}
+	}
 
 </style>
 

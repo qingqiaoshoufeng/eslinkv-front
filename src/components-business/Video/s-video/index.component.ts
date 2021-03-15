@@ -11,7 +11,7 @@ export const value = {
     api: {
         data: JSON.stringify({
             videoSrc: '/cdn/videos/sanshe.MOV',
-            poster: '/static/images/hangranma-bg.png',
-        }),
-    },
+            poster: '/static/images/hangranma-bg.png'
+        })
+    }
 }

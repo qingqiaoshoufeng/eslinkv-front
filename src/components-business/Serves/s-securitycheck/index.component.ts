@@ -16,7 +16,7 @@ export const value = {
 			realValue: 96,
 			realDesc: '本月实际入户数',
 			realTip: 'static/images/serves/securitycheck-reality.svg',
-			percentage: 56,
-		}),
-	},
-};
+			percentage: 56
+		})
+	}
+}

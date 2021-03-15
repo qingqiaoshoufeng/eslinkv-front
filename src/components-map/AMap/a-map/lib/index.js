@@ -10,7 +10,7 @@ import AMapPolyline from './components/amap-polyline.vue'
 // managers
 import AMapManager from './managers/amap-manager'
 
-export { AMap, AMapMarker, AMapPolyline,AMapTile }
+export { AMap, AMapMarker, AMapPolyline, AMapTile }
 
 export { AMapManager, initAMapApiLoader }
 export { lazyAMapApiLoaderInstance } from './services/injected-amap-api-instance'

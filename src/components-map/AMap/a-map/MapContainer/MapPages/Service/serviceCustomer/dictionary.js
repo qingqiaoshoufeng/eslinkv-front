@@ -1,103 +1,103 @@
 // 客户服务统计数据
-let citizenNumber = {
+const citizenNumber = {
     label: '居民户',
     DW: '',
-    prop: "resident",
+    prop: 'resident'
 }
-let publicBuildNumber = {
+const publicBuildNumber = {
     label: '公建户',
     DW: '',
-    prop: "surname",
+    prop: 'surname'
 }
-let industryNumber = {
+const industryNumber = {
     label: '工业户',
     DW: '',
-    prop: "industry",
+    prop: 'industry'
 }
-let businessServe = {
+const businessServe = {
     label: '营业服务网点',
     DW: '',
-    prop: "service",
+    prop: 'service'
 }
 
 // 子公司详情数据
-let citizenNumberDetial = {
+const citizenNumberDetial = {
     label: '居民户',
     DW: '户',
-    prop: "citizenNumberDetial",
+    prop: 'citizenNumberDetial',
     Fixed: 0
 }
-let publicBuildNumberDetial = {
+const publicBuildNumberDetial = {
     label: '公建户',
     DW: '户',
-    prop: "publicBuildNumberDetial",
+    prop: 'publicBuildNumberDetial',
     Fixed: 0
 }
-let industryNumberDetial = {
+const industryNumberDetial = {
     label: '工业户',
     DW: '户',
-    prop: "industryNumberDetial",
+    prop: 'industryNumberDetial',
     Fixed: 0
 }
-let monthAccountDetial = {
+const monthAccountDetial = {
     label: '本月开户',
     DW: '户',
-    prop: "monthAccountDetial",
+    prop: 'monthAccountDetial',
     Fixed: 0
 }
-let monthInstallDetial = {
+const monthInstallDetial = {
     label: '本月安装',
     DW: '户',
-    prop: "monthInstallDetial",
+    prop: 'monthInstallDetial',
     Fixed: 0
 }
-let monthFireDetial = {
+const monthFireDetial = {
     label: '本月点火',
     DW: '户',
-    prop: "monthFireDetial",
+    prop: 'monthFireDetial',
     Fixed: 0
 }
 
 
-let activity = {
+const activity = {
     label: '三社联动活动次数',
     DW: '户',
-    prop: "activity",
+    prop: 'activity',
     Fixed: 0
 }
-let community = {
+const community = {
     label: '三社联动参加人员',
     DW: '户',
-    prop: "joinNumber",
+    prop: 'joinNumber',
     Fixed: 0
 }
-let households = {
+const households = {
     label: '三社联动入户数',
     DW: '户',
-    prop: "households",
+    prop: 'households',
     Fixed: 0
 }
 
 // 客户服务任务工单详情
-let serviceCustomerPipeline = {
+const serviceCustomerPipeline = {
     label: '渠道',
     DW: '',
-    prop: "channel",
+    prop: 'channel'
 }
-let serviceCustomerCustomer = {
+const serviceCustomerCustomer = {
     label: '客户',
     DW: '',
-    prop: "customer",
+    prop: 'customer'
 }
-let serviceCustomerAddress = {
+const serviceCustomerAddress = {
     label: '地址',
     DW: '',
-    prop: "address",
+    prop: 'address'
 }
-let serviceCustomerStatus = {
+const serviceCustomerStatus = {
     label: '状态',
     DW: '',
-    prop: "statusText",
+    prop: 'statusText'
 }
 export {
     citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, activity, community, households, serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus

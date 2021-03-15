@@ -85,199 +85,222 @@
 </template>
 
 <script>
-import { SvgIcon, NoData } from '../../../../../components/'
-import {Icon} from 'view-design'
-export default {
-	name: 'HomeRealTimeList',
-	components: {
-		SvgIcon,
-		NoData,
-		'i-icon': Icon,
-	},
-	data() {
-		return {
-			list: [],
-			repairType: '抢修',
-			repairState: 1,
-			loading: false,
-			loaded: false,
-		}
-	},
-	props: {
-		activeItem: {
-			type: Object,
-			default() {
-				return {}
-			},
+	import { SvgIcon, NoData } from '../../../../../components/'
+	import { Icon } from 'view-design'
+	export default {
+		name: 'HomeRealTimeList',
+		components: {
+			SvgIcon,
+			NoData,
+			'i-icon': Icon
 		},
-	},
-	computed: {
-		active() {
-			return this.$parent.active
-		},
-	},
-	async created() {
-		this.getData()
-		this.timer = setInterval(() => {
-			this.getData()
-		}, 60000)
-	},
-	methods: {
-		changeRepairState(repairState) {
-			this.repairState = repairState
-			this.getData()
-		},
-		changeRepairType(repairType) {
-			this.repairType = repairType
-			this.getData()
-		},
-		async getData() {
-			//除第一次需要loading外，其余需要无感刷新
-			if (!this.loaded) {
-				this.loading = true
+		data () {
+			return {
+				list: [],
+				repairType: '抢修',
+				repairState: 1,
+				loading: false,
+				loaded: false
 			}
-			let data = await this.$sysApi.map.airSupply.getEventWarningList({
-				repairType: this.repairType,
-				repairState: this.repairState,
-			})
-			this.list = data
-			this.loading = false
-			this.loaded = true
 		},
-		handleClick(item) {
-			item.status = item.stateName == '处理完成' ? 0 : 1
-			item.overlayType = 'WARNEVENT'
-			this.$emit('change', item)
+		props: {
+			activeItem: {
+				type: Object,
+				default () {
+					return {}
+				}
+			}
 		},
-	},
-	beforeDestroy() {
-		if (this.timer) {
-			clearInterval(this.timer)
-			this.timer = null
+		computed: {
+			active () {
+				return this.$parent.active
+			}
+		},
+		async created () {
+			this.getData()
+			this.timer = setInterval(() => {
+				this.getData()
+			}, 60000)
+		},
+		methods: {
+			changeRepairState (repairState) {
+				this.repairState = repairState
+				this.getData()
+			},
+			changeRepairType (repairType) {
+				this.repairType = repairType
+				this.getData()
+			},
+			async getData () {
+				// 除第一次需要loading外，其余需要无感刷新
+				if (!this.loaded) {
+					this.loading = true
+				}
+				const data = await this.$sysApi.map.airSupply.getEventWarningList({
+					repairType: this.repairType,
+					repairState: this.repairState
+				})
+				this.list = data
+				this.loading = false
+				this.loaded = true
+			},
+			handleClick (item) {
+				item.status = item.stateName == '处理完成' ? 0 : 1
+				item.overlayType = 'WARNEVENT'
+				this.$emit('change', item)
+			}
+		},
+		beforeDestroy () {
+			if (this.timer) {
+				clearInterval(this.timer)
+				this.timer = null
+			}
 		}
-	},
-}
+	}
 </script>
 
 <style lang="scss" scoped>
 .event-warning {
 	height: 800px;
 	font-size: 20px;
+
 	.filter-bar {
 		justify-content: space-between;
-		color: #00ddff;
-		font-size: 20px;
 		padding: 8px 2px 7px 2px;
-		border-bottom: 1px solid #00ddff;
+		font-size: 20px;
 		line-height: 38px;
+		color: #0df;
 		user-select: none;
+		border-bottom: 1px solid #0df;
+
 		.fitler-item {
 			display: flex;
+
 			> div {
 				padding: 0 8px;
 				cursor: pointer;
 			}
+
 			> div:not(:last-child) {
 				margin-right: 16px;
 			}
 		}
+
 		.repair-type {
 			.active {
 				color: #fff;
 				background: #0057a9;
-				border: 1px solid #00ddff;
+				border: 1px solid #0df;
 				border-radius: 4px;
 			}
 		}
+
 		.repair-state {
 			.active {
 				color: #fff;
+
 				&::after {
-					content: ' ';
-					display: inline-block;
 					position: absolute;
-					width: 0px;
-					height: 0px;
-					left: 4px;
 					top: calc(50% - 5px);
+					left: 4px;
+					display: inline-block;
+					width: 0;
+					height: 0;
+					content: ' ';
 					border: 4px solid #fff;
 				}
 			}
+
 			> div {
 				position: relative;
 				padding-left: 20px;
+
 				&::before {
-					content: ' ';
-					display: inline-block;
 					position: absolute;
+					top: calc(50% - 9px);
+					left: 0;
+					display: inline-block;
 					width: 16px;
 					height: 16px;
-					left: 0px;
-					top: calc(50% - 9px);
-					border: 2px solid #00ddff;
+					content: ' ';
+					border: 2px solid #0df;
 				}
 			}
 		}
 	}
+
 	.event-warning-list {
 		height: 744px;
-		color: #fff;
-		font-size: 20px;
 		overflow-y: scroll;
+		font-size: 20px;
+		color: #fff;
+
 		&::-webkit-scrollbar {
 			display: none;
 		}
+
 		.list-item {
-			padding: 16px 8px;
 			box-sizing: border-box;
+			padding: 16px 8px;
 			cursor: pointer;
+
 			&:hover,
 			&.active {
 				background: rgba(23, 115, 201, 0.4);
 			}
+
 			.panel-type-icon {
 				width: 24px;
 				height: 24px;
 			}
+
 			.row {
 				display: flex;
 				align-items: center;
+
 				.content {
-					flex: 1;
-					font-size: 24px;
 					display: flex;
+					flex: 1;
 					align-items: center;
 					margin-left: 12px;
+					font-size: 24px;
 				}
+
 				.station-name {
-					font-size: 20px;
 					flex: 1;
-					color: rgba(255, 255, 255, 0.8);
 					margin-left: 36px;
+					font-size: 20px;
+					color: rgba(255, 255, 255, 0.8);
 				}
 			}
 		}
+
 		.status-err {
 			color: #ffdc45;
 		}
+
 		.status-suc {
-			color: #00ddff;
+			color: #0df;
 		}
 	}
+
 	/deep/.demo-spin-icon-load {
-		animation: ani-demo-spin 1s linear infinite;
 		position: absolute;
 		top: 40%;
 		left: 50%;
 		transform: translate(-50%);
+		animation: ani-demo-spin 1s linear infinite;
 	}
+
 	@keyframes ani-demo-spin {
 		from {
 			transform: rotate(0deg);
 		}
+
 		50% {
 			transform: rotate(180deg);
 		}
+
 		to {
 			transform: rotate(360deg);
 		}

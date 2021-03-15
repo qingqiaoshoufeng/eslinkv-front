@@ -1,4 +1,4 @@
-import {test} from './options'
+import { test } from './options'
 
 export const value = {
 	layout: {

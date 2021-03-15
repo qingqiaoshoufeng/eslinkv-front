@@ -37,42 +37,41 @@
 	import lottie from 'lottie-web'
 	import pieBgBtnJson from './yuan1.json'
 	import pieTopBg from './yuan2.json'
-	import {value} from './index.component'
+	import { value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
 
 	highcharts3d(highcharts)
-	import mixins from 'eslinkv-npm/mixins'
 
 	export default {
 		name: 'baoji-big-screen-wrap',
-		data() {
+		data () {
 			return {
 				gasPercent: [],
-				randomId: Math.random(),
+				randomId: Math.random()
 			}
 		},
 		mixins: [mixins],
-		created() {
-
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					this.$nextTick(() => {
 						this.renderChart()
 					})
 				},
 				deep: true,
-				immediate: true,
-			},
+				immediate: true
+			}
 		},
-		mounted() {
+		mounted () {
 			const pieBgBtn = lottie.loadAnimation({
 				animationData: pieBgBtnJson,
 				loop: true,
 				autoplay: true,
 				renderer: 'svg',
-				container: this.$refs.pieBgBtn, // 容器 //渲染方式，有"html"、"canvas"和"svg"三种
+				container: this.$refs.pieBgBtn // 容器 //渲染方式，有"html"、"canvas"和"svg"三种
 			})
 			pieBgBtn.play()
 			const pieBgTop = lottie.loadAnimation({
@@ -80,39 +79,39 @@
 				loop: true,
 				autoplay: true,
 				renderer: 'svg',
-				container: this.$refs.pieBgTop, // 容器 //渲染方式，有"html"、"canvas"和"svg"三种
+				container: this.$refs.pieBgTop // 容器 //渲染方式，有"html"、"canvas"和"svg"三种
 			})
 			pieBgTop.play()
 		},
 		methods: {
-			renderChart() {
+			renderChart () {
 				this.init()
 			},
-			init() {
+			init () {
 				this.gasPercent = this.data || []
 				this.drawLeftBottmRightTop(this.gasPercent)
 			},
-			drawLeftBottmRightTop(attr) {
-				let _newData = []
+			drawLeftBottmRightTop (attr) {
+				const _newData = []
 				attr.forEach(item => {
-					let itemData = []
+					const itemData = []
 					itemData.push(item.typeName)
 					itemData.push(item.percent)
 					_newData.push(itemData)
 				})
-				var chart = highcharts.chart(
+				const chart = highcharts.chart(
 					`left-bottom-right-top-echarts-${this.randomId}`,
 					{
 						chart: {
 							type: 'pie',
 							options3d: {
 								enabled: true,
-								alpha: 55,
+								alpha: 55
 							},
 							style: {
-								backgroundColor: 'none',
+								backgroundColor: 'none'
 							},
-							backgroundColor: '',
+							backgroundColor: ''
 						},
 						plotOptions: {
 							pie: {
@@ -126,19 +125,19 @@
 									crookDistance: '100%',
 									format: ' {point.percentage:.1f} %',
 									style: {
-										color: '#fff',
-									},
-								},
-							},
+										color: '#fff'
+									}
+								}
+							}
 						},
 						credits: {
-							text: '',
+							text: ''
 						},
 						title: {
-							text: '',
+							text: ''
 						},
 						tooltip: {
-							enabled: false,
+							enabled: false
 						},
 						colors: [
 							'#43D9FF',
@@ -148,18 +147,18 @@
 							'#43FF9E',
 							'#FF8033',
 							'#C81B1B',
-							'#AB5FFF',
+							'#AB5FFF'
 						],
 						series: [
 							{
 								name: '日用气量',
-								data: _newData,
-							},
-						],
+								data: _newData
+							}
+						]
 					}
 				)
-			},
-		},
+			}
+		}
 	}
 </script>
 <style lang="scss">

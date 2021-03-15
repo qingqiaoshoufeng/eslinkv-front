@@ -6,20 +6,20 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		}
 	}
 </script>
 <style lang="scss" scoped>
 	.h-bg1 {
-		background-color: rgba(0, 0, 0, 0.8);
 		width: 3500px;
 		height: 1050px;
+		background-color: rgba(0, 0, 0, 0.8);
 	}
 
 </style>

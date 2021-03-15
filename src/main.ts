@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import {Message, Modal} from 'view-design'
-import {format} from 'date-fns'
+import { Message, Modal } from 'view-design'
+import { format } from 'date-fns'
 import './openApi'
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
@@ -31,5 +31,5 @@ Vue.config.productionTip = false
 
 new Vue({
 	router,
-	render: (h) => h(App),
+	render: (h) => h(App)
 }).$mount('#app')

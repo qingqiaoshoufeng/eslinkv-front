@@ -2,27 +2,27 @@ export const customConfig = [
 	{
 		prop: 'desc1',
 		label: '描述1',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'img1',
 		label: '图片1地址',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'desc2',
 		label: '描述2',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'img2',
 		label: '图片2地址',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: '饼图名称',
 		label: 'title',
-		type: 'func-input',
+		type: 'func-input'
 	}
 ]
 export const value = {

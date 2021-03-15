@@ -5,7 +5,7 @@ export const value = {
 				txt: '李先生上报亲亲家园小区发, 生燃气泄露事故冯方法。',
 				time: '13:24:51'
 			}
-		]),
+		])
 	},
 	layout: {
 		size: {
@@ -16,4 +16,4 @@ export const value = {
 			value: 'relative'
 		}
 	}
-};
+}

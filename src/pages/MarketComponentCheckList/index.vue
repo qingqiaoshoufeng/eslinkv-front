@@ -12,11 +12,11 @@
 			dialogCheck(v-model="dialogCheckShow" :detail="currentRow" @reload="reload")
 </template>
 <script lang="ts">
-	import {Vue, Component} from 'vue-property-decorator'
-	import {Table, Button} from 'view-design'
+	import { Vue, Component } from 'vue-property-decorator'
+	import { Table, Button } from 'view-design'
 	import dialogCheck from './dialogCheckComponent.vue'
 	import commonConfigValue from 'eslinkv-npm/common-config-value.js'
-	import {configMerge} from 'eslinkv-npm/mixins'
+	import { configMerge } from 'eslinkv-npm/mixins'
 	import platform from 'eslinkv-npm/src/store/platform.store.js'
 
 	@Component({
@@ -57,8 +57,9 @@
 			{
 				title: '创建时间',
 				slot: 'createTime'
-			},
+			}
 		]
+
 		total: number = 0
 		dialogCheckShow: boolean = false
 		currentRow: any = null
@@ -67,19 +68,19 @@
 		status: any = {
 			error: '审核失败',
 			pending: '待审核',
-			success: '审核通过',
+			success: '审核通过'
 		}
 
-		async init({pageNum, pageSize}) {
+		async init ({ pageNum, pageSize }) {
 			const res = await this.$api.bussiness.getWaitCheckList({
 				pageNum,
-				pageSize,
+				pageSize
 			})
 			this.list = res.rows
 			this.total = res.count
 		}
 
-		selectHandle(selection) {
+		selectHandle (selection) {
 			if (selection.length > 1) {
 				this.selectMore = selection
 			} else {
@@ -92,7 +93,7 @@
 			}
 		}
 
-		check() {
+		check () {
 			this.currentRow = this.selectOne
 			this.dialogCheckShow = true
 			const id = +new Date()
@@ -110,7 +111,7 @@
 			}
 		}
 
-		reload() {
+		reload () {
 			this.$refs.page.reload()
 		}
 	}

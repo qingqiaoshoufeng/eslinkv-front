@@ -22,10 +22,10 @@ export default {
             },
             itemStyle: {
                 normal: {
-                    color:'#fff',
+                    color: '#fff'
                 }
                 
-            }  
+            }
         },
         {
             name: '访问来源',
@@ -46,8 +46,8 @@ export default {
                     smooth: 0.2,
                     length: 10
                 }
-            },
-        },
+            }
+        }
         // {
         //     name: '访问',
         //     animation: false,
@@ -93,4 +93,4 @@ export default {
         //     }
         // },
     ]
-};
+}

@@ -2,12 +2,12 @@ export const value = {
 	api: {
 		data: JSON.stringify({
 			icon: '/static/icons/phone-border.svg',
-			minutes: 680230,
-		}),
+			minutes: 680230
+		})
 	},
 	config: {
 		icon: '/static/icons/phone-border.svg',
-		text: '累计通话时长:',
+		text: '累计通话时长:'
 	},
 	layout: {
 		size: {
@@ -24,7 +24,7 @@ export const customConfig = [
 	{
 		prop: 'text',
 		label: '描述',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'icon',

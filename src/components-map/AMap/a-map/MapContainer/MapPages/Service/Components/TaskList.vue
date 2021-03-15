@@ -21,46 +21,46 @@
 	</div>
 </template>
 <script>
-import { Overlay } from '../../../../components/index';
-let eventTypeIconMap = {
-	0: 'iconrenwugongdan-suc',
-	1: 'iconrenwugongdan',
-};
-export default {
-	name: 'useHotYear',
-	components: {
-		Overlay,
-	},
-	props: {
-		overlayType: {
-			type: String,
-			default: 'WarningICcustomer',
+	import { Overlay } from '../../../../components/index'
+	const eventTypeIconMap = {
+		0: 'iconrenwugongdan-suc',
+		1: 'iconrenwugongdan'
+	}
+	export default {
+		name: 'useHotYear',
+		components: {
+			Overlay
 		},
-		data: {
-			type: Array,
-			default() {
-				return [];
+		props: {
+			overlayType: {
+				type: String,
+				default: 'WarningICcustomer'
 			},
-		},
-		detailList: {
-			type: Array,
-			default() {
-				return [];
+			data: {
+				type: Array,
+				default () {
+					return []
+				}
 			},
+			detailList: {
+				type: Array,
+				default () {
+					return []
+				}
+			}
 		},
-	},
-	data() {
-		return {
-			eventTypeIconMap,
-		};
-	},
+		data () {
+			return {
+				eventTypeIconMap
+			}
+		},
 
-	async created() {
-		this.map = this.$parent.$amap;
-		this.list = await this.$sysApi.map.airSupply.getEventWarningList();
-	},
-	mounted() {},
-};
+		async created () {
+			this.map = this.$parent.$amap
+			this.list = await this.$sysApi.map.airSupply.getEventWarningList()
+		},
+		mounted () {}
+	}
 </script>
 
 
@@ -68,15 +68,18 @@ export default {
 video::-webkit-media-controls {
 	display: none !important;
 }
+
 .warning-videO {
-	margin-left: -80px;
-	margin-top: -40px;
-	outline: none;
 	position: absolute;
+	margin-top: -40px;
+	margin-left: -80px;
+	outline: none;
 }
+
 .amap-icon {
 	width: 44px !important;
 	height: 44px !important;
+
 	> img {
 		width: 44px !important;
 		height: 44px !important;

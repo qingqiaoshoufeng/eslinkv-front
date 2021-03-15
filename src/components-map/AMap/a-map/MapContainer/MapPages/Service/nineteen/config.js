@@ -1,6 +1,6 @@
 
 // 引入详情字典
-import { OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayUnPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent } from "./dictionary"
+import { OnlineType, TodayApplication, TodayUnproving, TodayPass, TodayUnPass, TodayProvingTo2, monthAccpet, monthManage, monthManagePercent } from './dictionary'
 // 覆盖物legend配置
 export const SERVICE_SERVICENINETEEN_LEGEND_MAP = {
     BranchCompany: {
@@ -12,16 +12,16 @@ export const SERVICE_SERVICENINETEEN_LEGEND_MAP = {
         visible: true,
         dataProp: 'branchCompanyList',
         detailList: [monthAccpet, monthManage, monthManagePercent]
-    },
+    }
 }
 
-//覆盖物详情
+// 覆盖物详情
 export const SERVICE_SERVICENINETEEN_OVERLAY_MAP = {
     BranchCompany: {
         fields: {
-            name: {},
-        },
-    },
+            name: {}
+        }
+    }
 }
 
 // 19厅统计数据

@@ -1,10 +1,10 @@
-//页面内所需组件
-export { default as ThreeSocialLinkage } from './ThreeSocialLinkage'   // 三社联动
+// 页面内所需组件
+export { default as ThreeSocialLinkage } from './ThreeSocialLinkage' // 三社联动
 export { default as ServiceNetworkStation } from './ServiceNetworkStation' // 服务网点
 export { default as BranchCompany } from './BranchCompany' // 子公司
 export { default as RightPanelWithServiceCustomer } from './RightPanelWithServiceCustomer' // 客户服务右侧table
 export { default as CouplingHot } from './CouplingHot' // 联动数量热力
-export { default as HeatMap } from './HeatMap'  //销气热力
+export { default as HeatMap } from './HeatMap' // 销气热力
 export { default as OperationHot } from './OperationHot' // 操作数量热力
 export { default as RightPanelWithServiceICcustomer } from './RightPanelWithServiceICcustomer' // 工商户右侧table
 export { default as ICcustomer } from './ICcustomer' // 工商户
@@ -22,5 +22,4 @@ export { default as CustomerHot } from './CustomerHot' // 客户分布热力
 
 
 export { default as TipDetial } from './TipDetial' // 子公司详情自定义组件
-
 

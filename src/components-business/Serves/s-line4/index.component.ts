@@ -2,27 +2,27 @@ export const customConfig = [
 	{
 		prop: 'lineColor',
 		label: '线条颜色',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'lineStopColor',
 		label: '渐变后颜色',
-		type: 'func-color',
+		type: 'func-color'
 	},
 	{
 		prop: 'isShowXAxis',
 		label: '显示横坐标',
-		type: 'func-switch',
+		type: 'func-switch'
 	},
 	{
 		prop: 'scale',
 		label: '纵坐标是否以0开始',
-		type: 'func-switch',
+		type: 'func-switch'
 	},
 	{
 		prop: 'unit',
 		label: '单位',
-		type: 'func-input',
+		type: 'func-input'
 	}
 ]
 export const value = {
@@ -67,7 +67,7 @@ export const value = {
 			},
 			{
 				x: '20:00',
-				y: 15,
+				y: 15
 			}
 		])
 	},

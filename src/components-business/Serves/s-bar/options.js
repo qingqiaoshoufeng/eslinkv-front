@@ -1,4 +1,4 @@
-export default function getOption(data, config) {
+export default function getOption (data, config) {
     return {
         grid: {
             left: 70,
@@ -7,14 +7,14 @@ export default function getOption(data, config) {
             bottom: 40
         },
         tooltip: {
-            triggerOn: 'mousemove|click',
+            triggerOn: 'mousemove|click'
         },
         xAxis: {
             type: 'category',
             axisTick: {
-                show: false,
+                show: false
             },
-            axisLabel:{
+            axisLabel: {
                 textStyle: {
                     color: '#fff',
                     fontSize: 16,
@@ -28,17 +28,17 @@ export default function getOption(data, config) {
             show: true,
             splitLine: {
                 lineStyle: {
-                    type: "solid",
-                    color: "rgba(199, 209, 219, 0.2)"
+                    type: 'solid',
+                    color: 'rgba(199, 209, 219, 0.2)'
                 }
             },
             axisTick: {
                 show: false,
                 textStyle: {
-                    color: '#fff',
+                    color: '#fff'
                 }
             },
-            axisLabel:{
+            axisLabel: {
                 textStyle: {
                     color: '#fff',
                     fontSize: 16,
@@ -46,7 +46,7 @@ export default function getOption(data, config) {
                 }
             },
             axisLine: {
-                show: false,
+                show: false
             }
         },
         barWidth: 6,

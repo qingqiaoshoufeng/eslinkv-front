@@ -16,8 +16,8 @@
 				span 看板管理
 </template>
 <script lang="ts">
-	import {Vue, Component} from 'vue-property-decorator'
-	import {Icon} from 'view-design'
+	import { Vue, Component } from 'vue-property-decorator'
+	import { Icon } from 'view-design'
 
 	@Component({
 		components: {
@@ -27,13 +27,13 @@
 	export default class ELeft extends Vue {
 		index = ''
 
-		handleLink(url) {
+		handleLink (url) {
 			this.index = url
 			this.$router.push(url)
 		}
 		
-		mounted() {
-			const {path} = this.$route
+		mounted () {
+			const { path } = this.$route
 			this.index = path
 		}
 	}
@@ -42,21 +42,22 @@
 	@import "../../scss/conf";
 
 	.e-left-container {
-		width: 70px;
 		top: 0;
 		left: 0;
+		width: 70px;
 	}
 
 	.e-left-content {
-		background-color: #2c3d59;
 		height: calc(100vh - 40px);
 		padding-top: 15px;
+		background-color: #2c3d59;
 
 		li {
-			color: rgba(255, 255, 255, 0.5);
 			margin: 15px 0 20px 0;
+			color: rgba(255, 255, 255, 0.5);
 
-			&:hover, &.active {
+			&:hover,
+			&.active {
 				color: #fff;
 			}
 
@@ -67,7 +68,7 @@
 	}
 
 	.e-left-logo-container {
-		background-color: $themeColor;
 		height: 40px;
+		background-color: $themeColor;
 	}
 </style>

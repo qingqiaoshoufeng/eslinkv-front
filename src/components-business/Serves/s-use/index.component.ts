@@ -15,6 +15,6 @@ export const value = {
 			yesterdayType: 'up',
 			lastWeek: 1190,
 			lastWeekType: 'down'
-		}),
+		})
 	}
-};
+}

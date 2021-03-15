@@ -37,10 +37,10 @@ export default function (data) {
             },
             data: data.map(v => v.actual)
         },
-            { //背景条
+            { // 背景条
                 zlevel: 1,
                 yAxisIndex: 0,
-                type: "bar",
+                type: 'bar',
                 itemStyle: {
                     color: 'rgba(0,87,169,0.5)'
                 },
@@ -50,11 +50,11 @@ export default function (data) {
                     }
                 },
                 barWidth: 12,
-                barGap: "-150%",
+                barGap: '-150%',
                 tooltip: {
                     show: false
                 },
-                cursor: "default",
+                cursor: 'default',
                 data: data.map(v => v.plan),
                 animation: false
             }

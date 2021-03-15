@@ -2,12 +2,12 @@ export const customConfig = [
 	{
 		prop: 'title',
 		label: '标题',
-		type: 'func-input',
+		type: 'func-input'
 	},
 	{
 		prop: 'unit',
 		label: '单位',
-		type: 'func-input',
+		type: 'func-input'
 	}
 ]
 
@@ -29,7 +29,7 @@ export const value = {
     },
     config: {
         title: '标题',
-        unit: '单',
+        unit: '单'
     }
 }
 

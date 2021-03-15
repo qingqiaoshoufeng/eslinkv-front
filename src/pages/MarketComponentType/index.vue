@@ -7,13 +7,13 @@
 			e-page(@init="init" :total="total" ref="page")
 </template>
 <script lang="ts">
-	import {Vue, Component} from 'vue-property-decorator'
-	import {Table, Button} from 'view-design'
+	import { Vue, Component } from 'vue-property-decorator'
+	import { Table, Button } from 'view-design'
 
 	@Component({
 		components: {
 			'i-table': Table,
-			'i-button': Button,
+			'i-button': Button
 		}
 	})
 	export default class Market extends Vue {
@@ -26,14 +26,15 @@
 			// },
 			{
 				title: '组件分类名',
-				key: 'componentTypeName',
+				key: 'componentTypeName'
 				// tree: true
-			},
+			}
 			// {
 			// 	title: '创建时间',
 			// 	slot: 'createTime'
 			// },
 		]
+
 		total: number = 0
 		dialogCheckShow: boolean = false
 		currentRow: any = null
@@ -42,16 +43,16 @@
 		status: any = {
 			error: '审核失败',
 			pending: '待审核',
-			success: '审核通过',
+			success: '审核通过'
 		}
 
-		async init() {
+		async init () {
 			const res = await this.$api.bussiness.getAllComponentType()
 			this.list = res
 			this.total = res.length
 		}
 
-		selectHandle(selection) {
+		selectHandle (selection) {
 			if (selection.length > 1) {
 				this.selectMore = selection
 			} else {
@@ -64,12 +65,12 @@
 			}
 		}
 
-		check() {
+		check () {
 			this.currentRow = this.selectOne
 			this.dialogCheckShow = true
 		}
 
-		reload() {
+		reload () {
 			this.$refs.page.reload()
 		}
 	}

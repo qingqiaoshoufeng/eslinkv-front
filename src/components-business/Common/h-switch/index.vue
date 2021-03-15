@@ -1,31 +1,34 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<ul class="h-switch fn-flex flex-row">
-			<li class="pos-r pointer fn-flex" v-for="item in data?data.value:[]"
-				:class="{active:item .indexOf(scene.index)!==-1}"
-				@click="changeScene(item[0])">
+			<li
+				class="pos-r pointer fn-flex"
+				v-for="item in data ? data.value : []"
+				:class="{active:item .indexOf(scene.index) !== -1}"
+				@click="changeScene(item[0])"
+			>
 			</li>
 		</ul>
 	</div>
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
-		data() {
+		data () {
 			return {
-				scene:scene.state,
+				scene: scene.state
 			}
 		},
 		mixins: [mixins],
 		methods: {
-			changeScene(index) {
+			changeScene (index) {
 				scene.actions.setSceneIndex(index)
 			}
 		},
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		}
 	}
@@ -35,19 +38,19 @@
 		height: 100%;
 
 		li {
-			font-size: 20px;
 			width: 55px;
 			height: 12px;
-			background: rgba(255, 255, 255, 0.4);
 			margin-right: 8px;
+			font-size: 20px;
+			background: rgba(255, 255, 255, 0.4);
 
 			&:last-child {
 				margin-right: 0;
 			}
 
 			&.active {
-				background: #0057A9;
-				border: 1px solid #00DDFF;
+				background: #0057a9;
+				border: 1px solid #0df;
 			}
 		}
 	}

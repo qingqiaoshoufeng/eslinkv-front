@@ -1,9 +1,9 @@
-export default function getOption(data, config) {
+export default function getOption (data, config) {
     const x = []
     const y1 = []
     const y2 = []
-	let y1Max=0,y1Min=0,y2Max=0,y2Min=0,diff1=0,diff2=0
-	if( data instanceof Array){
+	let y1Max = 0; let y1Min = 0; let y2Max = 0; let y2Min = 0; let diff1 = 0; let diff2 = 0
+	if (data instanceof Array) {
 		data.forEach(v => {
 			x.push(v.x)
 			y1.push(v.y1)
@@ -47,7 +47,7 @@ export default function getOption(data, config) {
             }
         },
         xAxis: [{
-            type: "category",
+            type: 'category',
             axisTick: {
                 show: false
             },
@@ -55,7 +55,7 @@ export default function getOption(data, config) {
                 show: false
             },
             axisLabel: {
-                color: "#fff",
+                color: '#fff',
                 fontSize: 16,
                 lineHeight: 16,
                 interval: 0
@@ -75,7 +75,7 @@ export default function getOption(data, config) {
                 axisTick: {
                     show: false,
                     textStyle: {
-                        color: '#fff',
+                        color: '#fff'
                     }
                 },
                 nameTextStyle: {
@@ -92,17 +92,17 @@ export default function getOption(data, config) {
                 splitLine: {
                     show: true,
                     lineStyle: {
-                        type: "solid",
-                        color: "rgba(199, 209, 219, 0.2)",
+                        type: 'solid',
+                        color: 'rgba(199, 209, 219, 0.2)'
                     }
                 },
                 axisLine: {
-                    show: false,
+                    show: false
                 }
             },
             {
                 name: 'Mpa',
-                type: "value",
+                type: 'value',
                 scale: true,
                 min: y2Min.toFixed(3),
                 max: y2Max.toFixed(3),
@@ -110,7 +110,7 @@ export default function getOption(data, config) {
                     show: false
                 },
                 axisLabel: {
-                    color: "#fff",
+                    color: '#fff',
                     fontSize: 16,
                     lineHeight: 16
                 },
@@ -129,16 +129,16 @@ export default function getOption(data, config) {
         series: [
             {
                 name: '进站压力',
-                type: "line",
+                type: 'line',
                 symbolSize: 16,
                 symbol: 'none',
                 lineStyle: {
-                    color: "#FB592C",
+                    color: '#FB592C',
                     width: 3
                 },
                 smooth: true,
                 itemStyle: {
-                    color: "#FB592C",
+                    color: '#FB592C'
                 },
                 data: y1,
                 markPoint: {
@@ -155,7 +155,7 @@ export default function getOption(data, config) {
                         offset: [0, -18],
                         textBorderWidth: 0,
                         textShadowBlur: 0,
-                        textShadowColor:'transparent',
+                        textShadowColor: 'transparent',
                         width: 49,
                         height: 25,
                         fontSize: 14,
@@ -171,7 +171,7 @@ export default function getOption(data, config) {
                     },
                     data: [{
                         type: 'max'
-                    },{
+                    }, {
                         type: 'min'
                     }]
                 },
@@ -192,21 +192,21 @@ export default function getOption(data, config) {
                             x: '10%'
                         }, {
                             type: 'max'
-                        }],
+                        }]
                     ]
                 }
             },
             {
                 name: '出站压力',
-                type: "line",
+                type: 'line',
                 symbolSize: 16,
                 symbol: 'none',
                 smooth: true,
                 itemStyle: {
-                    color: "#56C1FF",
+                    color: '#56C1FF'
                 },
                 lineStyle: {
-                    color: "#56C1FF",
+                    color: '#56C1FF',
                     width: 3
                 },
                 yAxisIndex: 1,
@@ -241,7 +241,7 @@ export default function getOption(data, config) {
                     },
                     data: [{
                         type: 'max'
-                    },{
+                    }, {
                         type: 'min'
                     }]
                 },
@@ -262,7 +262,7 @@ export default function getOption(data, config) {
                             x: '90%'
                         }, {
                             type: 'max'
-                        }],
+                        }]
                     ]
                 }
             }

@@ -6,7 +6,8 @@
 				:key="i"
 				:class="{active: currIndex === i}"
 				@click="changeChannel(i)"
-			>{{ k.Name }}
+			>
+				{{ k.Name }}
 			</li>
 		</ul>
 		<div class="video-wrap">
@@ -15,19 +16,23 @@
 				<div class="enter" @click="changeChannel(currIndex)">进入直播</div>
 			</div>
 			<div class="windowbox" @dblclick="videofullscreen">
-				<video id="liveVideoShow" ref="live" class="video-js"
-					   style="width:100%;height:100%;background-color:black;object-fit:fill"
-					   @timeupdate="progress($event)"></video>
+				<video
+					id="liveVideoShow"
+					ref="live"
+					class="video-js"
+					style="width: 100%; height: 100%; background-color: black; object-fit: fill;"
+					@timeupdate="progress($event)"
+				></video>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
 	// todo 改造
-	var _cf = {
+	const _cf = {
 		ver: 'debug',
 		q2httpServer: {
-			host: "36.134.113.152",
+			host: '36.134.113.152',
 			port: 9585,
 			sslPort: 443,
 			secure: false
@@ -35,36 +40,36 @@
 		// - 配置登录参数
 		connParams: {
 			// - 登录平台IP
-			address: "36.134.113.152",
-			port: "9988",
+			address: '36.134.113.152',
+			port: '9988',
 			// - 登录平台用户名
-			user: "hzranqi",
+			user: 'hzranqi',
 			// - 登录平台密码
-			password: "rq123456",
+			password: 'rq123456',
 			// - 登录平台企业ID
-			epid: "hzrq",
+			epid: 'hzrq',
 			// - 登录平台是否通过网闸模式
 			bfix: 1
 		}
 	}
 
-	var url = "";
-	var ws = null;
-	var token = "";
-	var device_list = [];
-	var ponBusyPos = new Array();
-	var pictureId = "";
-	var storageId = "";
-	var videoelem = "";
-	var flvPlayerList = [];
-	var replay = 0;
-	var chooseplaysite = 0; //选中的第几窗口,默认为0代表没有选择
+	let url = ''
+	let ws = null
+	let token = ''
+	let device_list = []
+	const ponBusyPos = new Array()
+	const pictureId = ''
+	const storageId = ''
+	const videoelem = ''
+	const flvPlayerList = []
+	const replay = 0
+	const chooseplaysite = 0 // 选中的第几窗口,默认为0代表没有选择
 
-	var host = 'http://' + _cf.q2httpServer.host + ':' + _cf.q2httpServer.port + '/icvs2/';
+	const host = 'http://' + _cf.q2httpServer.host + ':' + _cf.q2httpServer.port + '/icvs2/'
 
-	//post请求
-	function requestPost(router, params, callback) {
-		var self = this;
+	// post请求
+	function requestPost (router, params, callback) {
+		const self = this
 		$.ajax({
 			type: 'post',
 			url: host + router,
@@ -73,34 +78,33 @@
 			dataType: 'json',
 			async: true,
 			complete: function (rv) {
-				if (typeof callback == 'function') callback(rv)
+				if (typeof callback === 'function') callback(rv)
 			}
 		})
 	}
 
-	//get请求
-	function requestGet(router, callback) {
-		var self = this;
-		var url = host + router;
+	// get请求
+	function requestGet (router, callback) {
+		const self = this
+		const url = host + router
 		$.ajax({
 			type: 'get',
 			url: url,
 			dataType: 'json',
 			async: true,
 			complete: function (rv) {
-				if (typeof callback == 'function') callback(rv)
+				if (typeof callback === 'function') callback(rv)
 			}
 		})
 	}
 
-	function createPlayer() {
-
-		var videoElement = document.getElementById('liveVideoShow');
+	function createPlayer () {
+		let videoElement = document.getElementById('liveVideoShow')
 		if (videoelem) {
-			videoElement = videoelem;
+			videoElement = videoelem
 		}
 		window.GoldChart.liveVideo.myPlayer = new videojs('videoElement', {
-			"techOrder": ["html5", "flash"],
+			techOrder: ['html5', 'flash'],
 			preload: 'auto',
 			posterImage: false,
 			controls: true,
@@ -117,30 +121,30 @@
 				progressControl: false,
 				LiveDisplay: true
 			}
-		});
+		})
 	}
 
-	//开始对讲
-	function starttalk() {
-		var camera = get_select_node();
-		if (!camera) return;
-		var puid = camera.puid;
-		var idx = camera.idx;
-		startTalk(host, token, puid, idx, "token1", function (message) {
+	// 开始对讲
+	function starttalk () {
+		const camera = get_select_node()
+		if (!camera) return
+		const puid = camera.puid
+		const idx = camera.idx
+		startTalk(host, token, puid, idx, 'token1', function (message) {
 			console.log(message)
 		})
 	}
 
-	function stoptalk() {
-		var camera = get_select_node();
-		if (!camera) return;
-		var puid = camera.puid;
-		var idx = camera.idx;
-		stopTalk(puid);
+	function stoptalk () {
+		const camera = get_select_node()
+		if (!camera) return
+		const puid = camera.puid
+		const idx = camera.idx
+		stopTalk(puid)
 	}
 
 	export default {
-		data() {
+		data () {
 			return {
 				videoList: [],
 				puList: [],
@@ -150,84 +154,83 @@
 			}
 		},
 		methods: {
-			connect() {
+			connect () {
 				console.warn('------开始连接------')
-				var params = {
-					"address": _cf.connParams.address,
-					"port": _cf.connParams.port,
-					"user": _cf.connParams.user,
-					"password": _cf.connParams.password,
-					"epid": _cf.connParams.epid,
-					"fixaddr": _cf.connParams.bfix
+				const params = {
+					address: _cf.connParams.address,
+					port: _cf.connParams.port,
+					user: _cf.connParams.user,
+					password: _cf.connParams.password,
+					epid: _cf.connParams.epid,
+					fixaddr: _cf.connParams.bfix
 				}
 				requestPost('login', params, rv => {
-					let self = this;
-					var result = {
+					const self = this
+					const result = {
 						errcode: -1,
 						token: ''
 					}
-					var respJSON = rv.responseJSON;
+					const respJSON = rv.responseJSON
 					if (respJSON.hasOwnProperty('errcode')) {
-						result.errcode = respJSON.errcode;
+						result.errcode = respJSON.errcode
 					}
 					if (respJSON.hasOwnProperty('token')) {
-						result.token = respJSON.token;
-						result.errcode = 0;
-						token = result.token;
-						this.fetch_device(0, 200);
+						result.token = respJSON.token
+						result.errcode = 0
+						token = result.token
+						this.fetch_device(0, 200)
 					}
 					if (_cf.q2httpServer.secure === true) {
-						url = "wss://" + _cf.q2httpServer.host + ":" + _cf.q2httpServer.sslPort + "?token=" + token;
+						url = 'wss://' + _cf.q2httpServer.host + ':' + _cf.q2httpServer.sslPort + '?token=' + token
 					} else {
-						url = "ws://" + _cf.q2httpServer.host + ":" + _cf.q2httpServer.port + "?token=" + token;
+						url = 'ws://' + _cf.q2httpServer.host + ':' + _cf.q2httpServer.port + '?token=' + token
 					}
 					console.log(url)
-					if ("WebSocket" in window) {
-						ws = new WebSocket(url);
+					if ('WebSocket' in window) {
+						ws = new WebSocket(url)
 						ws.onopen = function () {
 						}
 						ws.onmessage = function (evt) {
-							if (typeof evt == "object" && evt.data) {
-								var msg = $.xml2json(evt.data);
+							if (typeof evt === 'object' && evt.data) {
+								const msg = $.xml2json(evt.data)
 
-								var event = msg.E || null;
+								const event = msg.E || null
 
 								if (event) {
-									if (event.ID == "E_CU_Online") {
+									if (event.ID == 'E_CU_Online') {
 										$.messager.show({
 											title: '消息',
 											msg: '用户上线(' + (event.Desc.UserID + '@' + event.Desc.EPID) + ')',
 											timeout: 3000,
 											showType: 'slide'
-										});
-									} else if (event.ID == "E_CU_Offline") {
+										})
+									} else if (event.ID == 'E_CU_Offline') {
 										$.messager.show({
 											title: '消息',
 											msg: '用户下线(' + (event.Desc.UserID + '@' + event.Desc.EPID) + ')',
 											timeout: 3000,
 											showType: 'slide'
-										});
-									} else if (event.ID == "E_PU_Online") {
+										})
+									} else if (event.ID == 'E_PU_Online') {
 										$.messager.show({
 											title: '消息',
 											msg: '设备上线.',
 											timeout: 3000,
 											showType: 'slide'
-										});
-									} else if (event.ID == "E_PU_Offline") {
+										})
+									} else if (event.ID == 'E_PU_Offline') {
 										$.messager.show({
 											title: '消息',
 											msg: '设备下线.',
 											timeout: 3000,
 											showType: 'slide'
-										});
+										})
 									} else {
-										console.log(" no treatment event id " + (event["ID"] ? event["ID"] : ""));
+										console.log(' no treatment event id ' + (event.ID ? event.ID : ''))
 									}
 								}
 							}
-
-						};
+						}
 						ws.onclose = function () {
 
 						}
@@ -235,31 +238,31 @@
 
 						}
 					} else {
-						console.log("not support web socket.");
+						console.log('not support web socket.')
 					}
 				})
 			},
-			updateDevice(index) {
+			updateDevice (index) {
 				this.pu = this.puList[index]
 
-				requestPost('C_CAS_QueryPUIDRes?token=' + token, {puid: [this.pu.$]}, rv => {
+				requestPost('C_CAS_QueryPUIDRes?token=' + token, { puid: [this.pu.$] }, rv => {
 					// 过滤直播资源
 					this.videoList = rv.responseJSON.Res.filter(v => v.Type === 'IV' || v.Type === 'ST')
 					console.warn('------获取到以下子设备---------')
 					console.log(this.videoList)
 				})
 			},
-			fetch_device() {
-				var self = this;
+			fetch_device () {
+				const self = this
 
-				//获取设备列表的接口
-				var router = 'CAS/C_CAS_QueryPUIDSets?offset=' + 0 + '&count=' + 2000 + '&token=' + token;
+				// 获取设备列表的接口
+				const router = 'CAS/C_CAS_QueryPUIDSets?offset=' + 0 + '&count=' + 2000 + '&token=' + token
 				requestGet(router, rv => {
-					var respJSON = rv.responseJSON;
+					let respJSON = rv.responseJSON
 					if (respJSON.constructor != Array) {
-						respJSON = [respJSON];
+						respJSON = [respJSON]
 					}
-					device_list = respJSON;
+					device_list = respJSON
 
 					console.warn('------获取到以下设备---------')
 					console.log(device_list)
@@ -268,7 +271,7 @@
 					this.$emit('getPuList', this.puList)
 					this.pu = this.puList[0]
 
-					requestPost('C_CAS_QueryPUIDRes?token=' + token, {puid: [this.pu.$]}, rv => {
+					requestPost('C_CAS_QueryPUIDRes?token=' + token, { puid: [this.pu.$] }, rv => {
 						// 过滤直播资源
 						console.log(rv)
 						this.videoList = rv.responseJSON.Res.filter(v => v.Type === 'IV' || v.Type === 'ST')
@@ -277,84 +280,83 @@
 					})
 				})
 			},
-			progress(e) {
-				var bf = e.srcElement.buffered;
-				var currentTime = e.srcElement.currentTime;
+			progress (e) {
+				const bf = e.srcElement.buffered
+				const currentTime = e.srcElement.currentTime
 				if (bf.length > 0) {
-					let end = bf.end(0);
+					const end = bf.end(0)
 					if (end - currentTime > 1.5) {
-						e.srcElement.currentTime = end - 0.1;
+						e.srcElement.currentTime = end - 0.1
 					}
 				}
 			},
-			videofullscreen() {
-				var p = this.$refs.live
-				$(p).fullScreen(true);
+			videofullscreen () {
+				const p = this.$refs.live
+				$(p).fullScreen(true)
 				// $(p).toggleFullScreen();
-				$(p).fullScreen(false);
+				$(p).fullScreen(false)
 			},
-			playvideo(puid, idx) {
+			playvideo (puid, idx) {
 				window.GoldChart.liveVideo.pauseVideo()
-				//播视频接口
-				let url = host + "stream.flv?puid=" + puid + "&idx=" + idx + "&stream=0&token=" + token;
+				// 播视频接口
+				const url = host + 'stream.flv?puid=' + puid + '&idx=' + idx + '&stream=0&token=' + token
 				this.isPlaying = true
 				if (flvjs.isSupported()) {
-					var videoElement = "";
+					let videoElement = ''
 					videoElement = this.$refs.live
 
-					videoElement.controls = false;
+					videoElement.controls = false
 					window.GoldChart.liveVideo.flvPlayer = flvjs.createPlayer({
 						type: 'flv',
 						url: url,
-						isLive: true,
+						isLive: true
 					}, {
 						enableWorker: false,
-						autoCleanupSourceBuffer: true, //清理缓冲区
+						autoCleanupSourceBuffer: true, // 清理缓冲区
 						enableStashBuffer: false,
 						stashInitialSize: 128, // 减少首桢显示等待时长
 						statisticsInfoReportInterval: 600
-					});
-					window.GoldChart.liveVideo.flvPlayer.attachMediaElement(videoElement);
-					window.GoldChart.liveVideo.flvPlayer.load();
+					})
+					window.GoldChart.liveVideo.flvPlayer.attachMediaElement(videoElement)
+					window.GoldChart.liveVideo.flvPlayer.load()
 
 					setTimeout(function () {
-						window.GoldChart.liveVideo.flvPlayer.play();
-					}, 100);
-
+						window.GoldChart.liveVideo.flvPlayer.play()
+					}, 100)
 				} else {
-					createPlayer();
-					window.GoldChart.liveVideo.myPlayer.src(url);
-					window.GoldChart.liveVideo.myPlayer.on("error", e => {
+					createPlayer()
+					window.GoldChart.liveVideo.myPlayer.src(url)
+					window.GoldChart.liveVideo.myPlayer.on('error', e => {
 						setTimeout(e => {
-							window.GoldChart.liveVideo.myPlayer.src(url);
-							window.GoldChart.liveVideo.myPlayer.load(url);
-							window.GoldChart.liveVideo.myPlayer.play();
-						}, 1000);
-					});
-					window.GoldChart.liveVideo.myPlayer.on("ended", e => {
+							window.GoldChart.liveVideo.myPlayer.src(url)
+							window.GoldChart.liveVideo.myPlayer.load(url)
+							window.GoldChart.liveVideo.myPlayer.play()
+						}, 1000)
+					})
+					window.GoldChart.liveVideo.myPlayer.on('ended', e => {
 						setTimeout((e) => {
-							window.GoldChart.liveVideo.myPlayer.src(url);
-							window.GoldChart.liveVideo.myPlayer.load(url);
-							window.GoldChart.liveVideo.myPlayer.play();
-						}, 1000);
+							window.GoldChart.liveVideo.myPlayer.src(url)
+							window.GoldChart.liveVideo.myPlayer.load(url)
+							window.GoldChart.liveVideo.myPlayer.play()
+						}, 1000)
 					})
 				}
 			},
-			changeChannel(n) {
+			changeChannel (n) {
 				this.currIndex = n
 				this.playvideo(this.pu.$, this.videoList[this.currIndex].Idx)
 			},
-			handleSceneChange() {
+			handleSceneChange () {
 				window.GoldChart.liveVideo.pauseVideo()
 			}
 		},
-		created() {
+		created () {
 			this.connect()
 		},
-		mounted() {
+		mounted () {
 			document.addEventListener('SceneIndex', this.handleSceneChange)
 		},
-		beforeDestroy() {
+		beforeDestroy () {
 			document.removeEventListener('SceneIndex', this.handleSceneChange)
 		}
 	}
@@ -364,8 +366,8 @@
 		position: relative;
 		width: 640px;
 		height: 400px;
-		background: url("./img/shipk.svg") no-repeat;
 		padding: 4px;
+		background: url("./img/shipk.svg") no-repeat;
 
 		.windowbox {
 			width: 100%;
@@ -376,48 +378,48 @@
 		.mask {
 			position: absolute;
 			top: 4px;
-			left: 4px;
 			right: 4px;
 			bottom: 4px;
+			left: 4px;
+			z-index: 1;
 			padding-top: 130px;
 			text-align: center;
-			z-index: 1;
 
 			.enter {
-				cursor: pointer;
 				width: 112px;
 				height: 40px;
-				background: #0057A9;
-				border-radius: 4px;
+				margin: 24px auto 0;
 				font-size: 24px;
 				line-height: 40px;
-				color: #FFFFFF;
-				margin: 24px auto 0;
+				color: #fff;
+				cursor: pointer;
+				background: #0057a9;
+				border-radius: 4px;
 			}
 		}
 	}
 
 	.video-list {
-		margin-bottom: 12px;
-		height: 32px;
 		top: -42px;
+		height: 32px;
+		margin-bottom: 12px;
 
 		li {
-			padding: 4px 8px;
-			font-size: 18px;
-			border-radius: 4px;
-			margin-right: 8px;
-			background: rgba(0, 87, 169, 0.5);
-			color: rgba(255, 255, 255, 0.75);
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			padding: 4px 8px;
+			margin-right: 8px;
+			font-size: 18px;
+			color: rgba(255, 255, 255, 0.75);
 			cursor: pointer;
+			background: rgba(0, 87, 169, 0.5);
+			border-radius: 4px;
 
 			&.active {
 				color: #fff;
-				background: #0057A9;
-				border: 1px solid #00DDFF;
+				background: #0057a9;
+				border: 1px solid #0df;
 			}
 		}
 	}

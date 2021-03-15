@@ -1,76 +1,76 @@
-let CouplingNumber = {
+const CouplingNumber = {
     label: '联码户数',
     DW: '户',
-    prop: "couplingNumber",
+    prop: 'couplingNumber',
     Fixed: 0
 }
-let operationYesterday = {
+const operationYesterday = {
     label: '昨日扫码',
     DW: '次',
-    prop: "operationYesterday",
+    prop: 'operationYesterday',
     Fixed: 0
 }
 
-let OperationWeek = {
+const OperationWeek = {
     label: '本周扫码',
     DW: '次',
-    prop: "operationWeek",
+    prop: 'operationWeek',
     Fixed: 0
 }
-let operationLastWeek = {
+const operationLastWeek = {
     label: '上周扫码',
     DW: '次',
-    prop: "operationLastWeek",
+    prop: 'operationLastWeek',
     Fixed: 0
 }
-let operationMonth = {
+const operationMonth = {
     label: '本月扫码',
     DW: '次',
-    prop: "operationMonth",
+    prop: 'operationMonth',
     Fixed: 0
 }
-let operationLastMonth = {
+const operationLastMonth = {
     label: '上月扫码',
     DW: '次',
-    prop: "operationLastMonth",
+    prop: 'operationLastMonth',
     Fixed: 0
 }
-let operationYear = {
+const operationYear = {
     label: '年度扫码',
     DW: '次',
-    prop: "operationYear",
+    prop: 'operationYear',
     Fixed: 0
 }
 
-let CouplingPercent = {
+const CouplingPercent = {
     label: '联码率',
     DW: '%',
-    prop: "couplingPercent"
+    prop: 'couplingPercent'
 }
-let NewCouplingNumber = {
+const NewCouplingNumber = {
     label: '本月新增联码户数',
     DW: '次',
-    prop: "newCouplingNumber"
+    prop: 'newCouplingNumber'
 }
-let couplingIncreaseToday = {
+const couplingIncreaseToday = {
     label: '昨日新增联码数',
     DW: '',
-    prop: "yesterday"
+    prop: 'yesterday'
 }
-let couplingIncreaseWeek = {
+const couplingIncreaseWeek = {
     label: '近一周新增联码数',
     DW: '',
-    prop: "week"
+    prop: 'week'
 }
-let couplingIncreaseMonth = {
+const couplingIncreaseMonth = {
     label: '上月新增联码数',
     DW: '',
-    prop: "lastMonth"
+    prop: 'lastMonth'
 }
-let ICcustomer = {
+const ICcustomer = {
     label: '工商户',
     DW: '户',
-    prop: "iCcustomer"
+    prop: 'iCcustomer'
 }
 
 export {

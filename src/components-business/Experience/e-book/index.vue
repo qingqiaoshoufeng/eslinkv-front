@@ -2,7 +2,12 @@
 	<div class="widget-part" :style="styles" v-if="data">
 		<div class="container">
 			<ul class="tabs">
-				<li :class="{active: i === tab}" v-for="(k, i) in data.list" :key="i" @click="changeTab(i)">
+				<li
+					:class="{active: i === tab}"
+					v-for="(k, i) in data.list"
+					:key="i"
+					@click="changeTab(i)"
+				>
 					<span class="tab-name">{{ k.name }}</span>
 					<img src="./img/arrow.svg" v-show="i === tab">
 				</li>
@@ -10,10 +15,30 @@
 			<div class="main">
 				<div class="content magazine animated"></div>
 				<div class="btns">
-					<img src="./img/left2.svg" class="prev" @click="prePage" v-show="isStart">
-					<img src="./img/left1.svg" class="prev" @click="prePage" v-show="!isStart">
-					<img src="./img/right1.svg" class="next" @click="nextPage" v-show="!isEnd">
-					<img src="./img/right2.svg" class="next" @click="nextPage" v-show="isEnd">
+					<img
+						src="./img/left2.svg"
+						class="prev"
+						@click="prePage"
+						v-show="isStart"
+					>
+					<img
+						src="./img/left1.svg"
+						class="prev"
+						@click="prePage"
+						v-show="!isStart"
+					>
+					<img
+						src="./img/right1.svg"
+						class="next"
+						@click="nextPage"
+						v-show="!isEnd"
+					>
+					<img
+						src="./img/right2.svg"
+						class="next"
+						@click="nextPage"
+						v-show="isEnd"
+					>
 				</div>
 			</div>
 		</div>
@@ -21,12 +46,12 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 	import './turn.min'
 	
 	export default {
 		mixins: [mixins],
-		data() {
+		data () {
 			return {
 				tab: 1,
 				isStart: false,
@@ -34,16 +59,16 @@
 			}
 		},
 		computed: {
-			curr() {
+			curr () {
 				if (!this.data) return {}
 				return this.data.list[this.tab]
 			}
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (val) {
-						let that = this
+						const that = this
 						this.$nextTick(() => {
 							$('.magazine').turn({
 								width: 1035,
@@ -76,35 +101,35 @@
 					}
 				},
 				deep: true,
-				immediate: true,
-			},
+				immediate: true
+			}
 		},
 		methods: {
-			loadPage(page, pageElement) {
-				var img = $('<img />')
+			loadPage (page, pageElement) {
+				const img = $('<img />')
 				img.on('load', function () {
-					$(this).css({width: '100%', height: '100%'})
+					$(this).css({ width: '100%', height: '100%' })
 					$(this).appendTo(pageElement)
 					pageElement.find('.loader').remove()
 				})
 				// img.attr('src', `pdf/${this.curr.id}/${page}.${this.curr.type}`)
 				img.attr('src', `/cdn/pdf/${this.curr.id}/${page}.${this.curr.type}`)
-				let reg = $('.p' + page)
+				const reg = $('.p' + page)
 				reg.appendTo(pageElement)
 			},
-			addPage(page, book) {
+			addPage (page, book) {
 				const element = $('<div />', {}).html('<div class="gradient"></div><div class="loader"></div>')
 				if (book.turn('addPage', element, page)) {
 					this.loadPage(page, element)
 				}
 			},
-			nextPage() {
+			nextPage () {
 				$('.magazine').turn('next')
 			},
-			prePage() {
+			prePage () {
 				$('.magazine').turn('previous')
 			},
-			changeTab(n) {
+			changeTab (n) {
 				this.tab = n
 				const that = this
 				$('.magazine').turn('destroy')
@@ -119,7 +144,7 @@
 					autoCenter: true,
 					when: {
 						missing: function (e, pages) {
-							for (var i = 0; i < pages.length; i++) {
+							for (let i = 0; i < pages.length; i++) {
 								that.addPage(pages[i], $(this))
 							}
 						}
@@ -127,7 +152,7 @@
 				})
 			}
 		},
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		}
 	}
@@ -138,38 +163,38 @@
 		width: 1600px;
 		height: 860px;
 		background: #060460;
-		border: 2px solid #00DDFF;
+		border: 2px solid #0df;
 
 		.tabs {
-			background: #001A77;
 			width: 200px;
 			height: 100%;
 			padding-top: 48px;
+			background: #001a77;
 
 			li {
-				cursor: pointer;
-				padding: 0 14px 0 18px;
-				height: 80px;
 				position: relative;
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
+				height: 80px;
+				padding: 0 14px 0 18px;
 				font-size: 24px;
 				color: rgba(255, 255, 255, 0.75);
+				cursor: pointer;
 
 				&.active {
 					color: #fff;
-					background: #0057A9;
+					background: #0057a9;
 
-					&:before {
+					&::before {
 						position: absolute;
-						content: '';
-						display: block;
-						left: 0;
 						top: 0;
+						left: 0;
+						display: block;
 						width: 4px;
 						height: 80px;
-						background: #00DDFF;
+						content: '';
+						background: #0df;
 					}
 				}
 
@@ -191,8 +216,8 @@
 
 			.btns {
 				display: flex;
-				justify-content: center;
 				align-items: center;
+				justify-content: center;
 
 				.next {
 					margin-left: 60px;
@@ -207,10 +232,10 @@
 				}
 
 				.page {
-					box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 					background-color: white;
 					background-repeat: no-repeat;
 					background-size: 100% 100%;
+					box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 				}
 
 				.even .gradient {
@@ -232,14 +257,14 @@
 				}
 
 				.loader {
-					background-image: url(./img/loader.gif);
-					background-repeat: no-repeat;
-					background-position: center;
 					position: absolute;
 					top: 0;
 					left: 0;
 					z-index: 99;
 					background-color: #fff;
+					background-image: url(./img/loader.gif);
+					background-repeat: no-repeat;
+					background-position: center;
 				}
 			}
 

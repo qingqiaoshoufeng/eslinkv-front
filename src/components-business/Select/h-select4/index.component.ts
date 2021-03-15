@@ -1,10 +1,10 @@
-import format from "date-fns/format";
+import format from 'date-fns/format'
 
 export const value = {
 	api: {
 		data: {
 			selectType: '日',
-			selectValue: format(new Date(), 'yyyy.MM.dd'),
+			selectValue: format(new Date(), 'yyyy.MM.dd')
 		},
 		bind: {
 			enable: true,

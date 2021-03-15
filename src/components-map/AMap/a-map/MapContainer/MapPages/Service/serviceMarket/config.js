@@ -7,27 +7,27 @@ export const SERVICE_SERVICEMARKET_LEGEND_MAP = {
         iconSize: 38,
         icon: 'iconfengongsi1',
         component: 'BranchCompany',
-        isShow: true,
+        isShow: true
     },
     HeatMap: {
         label: '销气热力',
         legendIcon: 'icontulixiaoqireli',
         component: 'HeatMap',
-        isShow: true,
+        isShow: true
     }
 }
 
-//覆盖物详情
+// 覆盖物详情
 export const SERVICE_SERVICEMARKET_OVERLAY_MAP = {
 
     BranchCompany: {
         fields: {
-            name: {},
-        },
+            name: {}
+        }
     },
     HeatMap: {
         fields: {
-            name: {},
-        },
-    },
+            name: {}
+        }
+    }
 }

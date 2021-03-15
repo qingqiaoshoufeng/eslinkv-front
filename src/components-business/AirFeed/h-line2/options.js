@@ -45,7 +45,7 @@ export default {
 		axisLabel: {
 			interval: 0,
 			textStyle: {
-				color: "rgba(255, 255, 255, 1)",
+				color: 'rgba(255, 255, 255, 1)',
 				fontSize: 16,
 				lineHeight: 16
 			}
@@ -67,7 +67,7 @@ export default {
 		},
 		axisLabel: {
 			textStyle: {
-				color: "rgba(255, 255, 255, 1)",
+				color: 'rgba(255, 255, 255, 1)',
 				fontSize: 16,
 				lineHeight: 16
 			}

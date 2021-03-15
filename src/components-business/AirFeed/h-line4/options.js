@@ -1,4 +1,4 @@
-export default function getOption(data, config) {
+export default function getOption (data, config) {
     return {
         textStyle: {
             fontSize: 16,
@@ -11,7 +11,7 @@ export default function getOption(data, config) {
             right: 60
         },
         xAxis: [{
-            type: "category",
+            type: 'category',
             axisTick: {
                 show: false
             },
@@ -19,13 +19,13 @@ export default function getOption(data, config) {
                 show: false
             },
             axisLabel: {
-                color: "#fff",
+                color: '#fff',
                 fontSize: 16,
                 lineHeight: 16,
                 interval: 0
             },
             offset: 5,
-            data: data instanceof Array?data.map(v => v.x):[]
+            data: data instanceof Array ? data.map(v => v.x) : []
         }],
         yAxis: [
             {
@@ -35,7 +35,7 @@ export default function getOption(data, config) {
                 axisTick: {
                     show: false,
                     textStyle: {
-                        color: '#fff',
+                        color: '#fff'
                     }
                 },
                 nameTextStyle: {
@@ -52,19 +52,19 @@ export default function getOption(data, config) {
                 splitLine: {
                     show: true,
                     lineStyle: {
-                        type: "solid",
-                        color: "rgba(199, 209, 219, 0.2)",
+                        type: 'solid',
+                        color: 'rgba(199, 209, 219, 0.2)'
                     }
                 },
                 axisLine: {
-                    show: false,
+                    show: false
                 }
             }
             ],
         series: [
             {
                 name: '',
-                type: "line",
+                type: 'line',
                 symbolSize: 16,
                 symbol: 'none',
                 lineStyle: {
@@ -78,16 +78,16 @@ export default function getOption(data, config) {
                             { offset: 0, color: '#FB592C' },
                             { offset: 0.33, color: '#8FFFA1' },
                             { offset: 0.66, color: '#18CEB9' },
-                            { offset: 1, color: '#56C1FF' },
-                        ],
+                            { offset: 1, color: '#56C1FF' }
+                        ]
                     },
                     width: 3
                 },
                 smooth: true,
                 itemStyle: {
-                    color: "#FB592C",
+                    color: '#FB592C'
                 },
-                data:data instanceof Array? data.map(v => v.y):[],
+                data: data instanceof Array ? data.map(v => v.y) : [],
                 markPoint: {
                     symbol: 'circle',
                     symbolSize: 8,
@@ -102,7 +102,7 @@ export default function getOption(data, config) {
                         offset: [0, -18],
                         textBorderWidth: 0,
                         textShadowBlur: 0,
-                        textShadowColor:'transparent',
+                        textShadowColor: 'transparent',
                         width: 49,
                         height: 25,
                         fontSize: 14,
@@ -118,7 +118,7 @@ export default function getOption(data, config) {
                                 image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAZCAYAAABzVH1EAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAU3SURBVHgB1VdLjxw1EHaV3T37mF0FlEjJAUJWXBIFCcGFOxducEwuaPklJP+AG1ducOHC/0AgoVx4SShCQrCI7JPZtl1Fld3u6e6ZWRayc0jteuy22+X66uVqOH9w/xGC+di8wERsHjsd/Hyye/D1nzd+O/GuOQ1V+DtinJGjQEhgDHNvE5jFJ2if5mOWP0jjMtfv57vNwv7xWn+qwgi1JdzE6KbOu2kVqrde/uPWnemRSUA8QTwUEIfNpDnylT+NLpwHGxt2VLiRgXbEYJ6b5rwEbquowlfXhmdgC9Mh44bzdmpj8BGryMieIepqCwTp2Nf+ma+bw/O6OY6TcKZAyFKkuTKhPaUwpyUilnnoSduJL/+thbte+a3i1SeLySK4FaxtXHTMkLQQxHs6IIKMRPCgYA7DRAGFM+/CjJBZUOt5ggdwZHwaASrrYr1Oi/lX+KT9hbJuxP1EOdRpnwz0FDJ0SgCCiXj6zFpLLKqX8cRG6w1yDwjwLFbhNLh44ittAkrcS+JELGKKFbKWMR2eY2AuKCQ34U7LkJXeCsxJ6zwPB1P4zKMKWkuTAkoG61sX5WEDg6gf2QWjIMKZC44JqAMiUc/n4l7iSvEsSvMunoWKZtFFNWFmxsCtjGDsiiCGBKgvGLRxQANbclpE43jsUmWtHyv6g8I62gx6C9HOApIX16f29QxEWtDAodRTI8C89BJILJmLW0GLVZgXDh8Qjwa8JAMtZAwerY33WnElTQubopdGlE4ibxA5izu6LEirBEbuP/PiIWOBVs6N12EFnyUgV59HyXvSHI/WcM5OHZGH0wT9jLOULpuL+T/Oj8+gf5EFM7N+RsnPRBcfCCvml73zvJSzAPcSxaJrJvmhDeiSR4trAa6+/C6jycu88z8pC0hz9acYEf1DSi2Q7goZRkl3shSHWi3J9CJdj1f7sXB5WuSiIls07a0qMqIqmoZA0ksSELXcnk5eclZu0Rg1T5homcfCDOqjnJW7rEkjcfpU9nR67O1Lj7DoAYW/yGes9LXKlxpJU+fJF2oGIo+1leJFSoCJDXZLSxNZ0UsoynuKvp/wh5kGOqCa08s4Ei54VjpR1JMVK9aH3ryZu3I+q9wjGS0KuwkE3JTbfEMKxxpTA5tr0wzEglaUZLerYOVStEEjS/ZPBIXmazYXx4qqjNoKILKVZtQ52xQ+17hNB6vr6plRe1B3wY7XEou0QGSf2UiVr1a9jdtyAkjGOATCsKVlMWlFKbeJmGtD7CM3p9WicVmpPs71IV1QwFpChCh9UoBYqCQQVPdVK5AUf7nXixohirKBEQZZacGSCnripGgUi+zU3u26ptqSEqVqIz4BEX+zO1VTRXE4LT4qsZBskJJF6xjkUhwONVVKllziiOACBvQbRqsC9hEog5kL4zIIdGIZbRJ+qVetIvR5a3QWi+Z6TJcrcacNCYEdVbrz1U7lKyfh0AGpLaMAqTUjTQTLpvNRrBFVyyUYS+ndB1NuWS06tYJWi8h3AikQ/QRIVqJcpmNKJJSEqcUKTs6sIAHCnClTrJpF1zJdvWVTXGSr6IfVjnxY1ci2A7I3PbquzVwh/XS8e/DpD3e/U6sUa+zvfX/33rW/bporJuKru3wHxPtvXovn/psvn+6d/Xi0c6jx8fZLBzfevfmrc58/uWPWQGjWQPDZt8/E/T9679bT129vn05f2TydvnP991d1zqyJ1mKRQv7h/U9+OZl+qLF1e/v4K/fFk7UBcWaN5Cbu0Wvm+H0de46PzYtM4eEbHzQP7u2bNdM/lyH+VubPiyIAAAAASUVORK5CYII='
                             }
                         }
-                    },{
+                    }, {
                         type: 'min',
                         label: {
                             color: '#56C1FF',
@@ -148,7 +148,7 @@ export default function getOption(data, config) {
                             x: '6%'
                         }, {
                             type: 'max'
-                        }],
+                        }]
                     ]
                 }
             }

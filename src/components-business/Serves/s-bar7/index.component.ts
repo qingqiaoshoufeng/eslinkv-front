@@ -17,7 +17,7 @@ export const value = {
 					actual: 66,
 					percent: 66,
 					rate1: 5,
-					rate2: -6,
+					rate2: -6
 				},
 				{
 					name: '2020.07',
@@ -25,7 +25,7 @@ export const value = {
 					actual: 88,
 					percent: 88,
 					rate1: 5,
-					rate2: 6,
+					rate2: 6
 				},
 				{
 					name: '2020.08',
@@ -33,7 +33,7 @@ export const value = {
 					actual: 69,
 					percent: 69,
 					rate1: 5,
-					rate2: 6,
+					rate2: 6
 				},
 				{
 					name: '2020.09',
@@ -41,7 +41,7 @@ export const value = {
 					actual: 55,
 					percent: 55,
 					rate1: 5,
-					rate2: 6,
+					rate2: 6
 				},
 				{
 					name: '2020.10',
@@ -49,7 +49,7 @@ export const value = {
 					actual: 36,
 					percent: 36,
 					rate1: 5,
-					rate2: 6,
+					rate2: 6
 				},
 				{
 					name: '2020.11',
@@ -57,8 +57,8 @@ export const value = {
 					actual: 28,
 					percent: 28,
 					rate1: 5,
-					rate2: 6,
-				},
+					rate2: 6
+				}
 			]
 		})
 	}

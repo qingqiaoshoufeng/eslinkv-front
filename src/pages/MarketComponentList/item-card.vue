@@ -133,8 +133,8 @@
 <style lang="scss" scoped>
 	.list-item-card {
 		width: calc((100% - 110px) / 4);
-		margin: 0 30px 25px 0;
 		min-width: 170px;
+		margin: 0 30px 25px 0;
 
 		/deep/ .ivu-icon {
 			font-size: 16px;
@@ -151,16 +151,16 @@
 		}
 
 		.list-item-card-mask {
-			width: 100%;
-			height: 100%;
-			opacity: 0;
-			transition: .3s;
 			top: 0;
 			left: 0;
 			align-items: center;
 			justify-content: center;
-			background-color: rgba(0, 0, 0, .5);
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.5);
 			border-radius: 4px;
+			opacity: 0;
+			transition: 0.3s;
 		}
 
 		.list-item-card-time-box {
@@ -169,14 +169,14 @@
 
 		.avatar {
 			padding-bottom: 50%;
-			background-size: 100% auto;
 			background-repeat: no-repeat;
 			background-position: center;
+			background-size: 100% auto;
 		}
 
 		h2 {
-			font-size: 18px;
 			margin: 10px 0 4px 0;
+			font-size: 18px;
 		}
 
 		p {

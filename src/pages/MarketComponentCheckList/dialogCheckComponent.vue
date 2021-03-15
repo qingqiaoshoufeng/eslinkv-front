@@ -74,10 +74,10 @@
 	.check-modal {
 		/deep/ {
 			.ivu-modal-body {
-				max-height: 500px;
 				max-width: 500px;
-				overflow-y: auto;
+				max-height: 500px;
 				overflow-x: auto;
+				overflow-y: auto;
 			}
 		}
 	}

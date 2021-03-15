@@ -1,244 +1,244 @@
 
-let OperationToday = {
+const OperationToday = {
     label: '今日操作',
     DW: '次',
-    prop: "operationToday"
-};
-let OperationWeek = {
+    prop: 'operationToday'
+}
+const OperationWeek = {
     label: '本周操作',
     DW: '次',
-    prop: "operationWeek"
+    prop: 'operationWeek'
 }
-let CouplingNumber = {
+const CouplingNumber = {
     label: '联码户数',
     DW: '户',
-    prop: "couplingNumber"
+    prop: 'couplingNumber'
 }
-let CouplingPercent = {
+const CouplingPercent = {
     label: '联码率',
     DW: '%',
-    prop: "couplingPercent"
+    prop: 'couplingPercent'
 }
-let NewCouplingNumber = {
+const NewCouplingNumber = {
     label: '本月新增联码户数',
     DW: '次',
-    prop: "newCouplingNumber"
+    prop: 'newCouplingNumber'
 }
-let couplingIncreaseToday = {
+const couplingIncreaseToday = {
     label: '昨日新增联码数',
     DW: '',
-    prop: "yesterday"
+    prop: 'yesterday'
 }
-let couplingIncreaseWeek = {
+const couplingIncreaseWeek = {
     label: '近一周新增联码数',
     DW: '',
-    prop: "week"
+    prop: 'week'
 }
-let couplingIncreaseMonth = {
+const couplingIncreaseMonth = {
     label: '上月新增联码数',
     DW: '',
-    prop: "lastMonth"
+    prop: 'lastMonth'
 }
 // 工商户详情
-let ICcustomer = {
+const ICcustomer = {
     label: '工商户',
     DW: '户',
-    prop: "iCcustomer"
+    prop: 'iCcustomer'
 }
 
-let useNumberYestoday = {
+const useNumberYestoday = {
     label: '昨日用气量',
     DW: 'm³',
-    prop: "useNumberYestoday"
+    prop: 'useNumberYestoday'
 }
 
-let ICcustomerStatus = {
+const ICcustomerStatus = {
     label: '流量异常',
     DW: '',
-    prop: "ICcustomerStatus"
+    prop: 'ICcustomerStatus'
 }
 
-let warningYestoday = {
+const warningYestoday = {
     label: '昨日报警',
     DW: '次',
-    prop: "warningYestoday"
+    prop: 'warningYestoday'
 }
-let FTPNumber = {
+const FTPNumber = {
     label: '工商户远传流量计',
     DW: '次',
-    prop: "longPass"
+    prop: 'longPass'
 }
-let warningYestodayTotal = {
+const warningYestodayTotal = {
     label: '昨日报警次数',
     DW: '',
-    prop: "yesterdayCallNumber"
+    prop: 'yesterdayCallNumber'
 }
-let warningYestodayMetersTotal = {
+const warningYestodayMetersTotal = {
     label: '昨日报警表数',
     DW: '',
-    prop: "yesterdayMeterNumer"
+    prop: 'yesterdayMeterNumer'
 }
 
 // 高压统计数据
-let HighPressureGasStation = {
+const HighPressureGasStation = {
     label: '门站',
     DW: '',
-    prop: "gageStation"
+    prop: 'gageStation'
 }
-let emergencyAirSourceStation = {
+const emergencyAirSourceStation = {
     label: '应急气源站',
     DW: '',
-    prop: "emergencyAirSourceStation"
+    prop: 'emergencyAirSourceStation'
 }
-let HighPressureHighPressureGasStation = {
+const HighPressureHighPressureGasStation = {
     label: '高中压调压站',
     DW: '',
-    prop: "pressureRegulatingStation"
+    prop: 'pressureRegulatingStation'
 }
-let HighPressureLineLength = {
+const HighPressureLineLength = {
     label: '高压管线长度(km)',
     DW: '',
-    prop: "pipelineLength"
+    prop: 'pipelineLength'
 }
-let HighPressureCarNumber = {
+const HighPressureCarNumber = {
     label: '高压巡检车辆',
     DW: '',
-    prop: "car"
+    prop: 'car'
 }
 
-let HighPressureInspectionNumber = {
+const HighPressureInspectionNumber = {
     label: '高压巡检人员',
     DW: '',
-    prop: "inspectPeople"
+    prop: 'inspectPeople'
 }
-let HighPressurePreservationNumber = {
+const HighPressurePreservationNumber = {
     label: '高压场站维保人员',
     DW: '',
-    prop: "repairPeople"
+    prop: 'repairPeople'
 }
 // 中低压数据配置
-let LowPressureMediumline = {
+const LowPressureMediumline = {
     label: '中压管线(km)',
     DW: '',
-    prop: "lowLength"
+    prop: 'lowLength'
 }
-let LowPressureLowline = {
+const LowPressureLowline = {
     label: '低压管线(km)',
     DW: '',
-    prop: "smallLength"
+    prop: 'smallLength'
 }
-let LowPressureGreenServeStation = {
+const LowPressureGreenServeStation = {
     label: '绿色能源综合服务站',
     DW: '',
-    prop: "greenStation"
+    prop: 'greenStation'
 }
-let LowPressureManageStation = {
+const LowPressureManageStation = {
     label: '管网运行管理站',
     DW: '',
-    prop: "gwxxStation"
+    prop: 'gwxxStation'
 }
-let LowPressureOnNumber = {
+const LowPressureOnNumber = {
     label: '地上抢修点',
     DW: '',
-    prop: "up",
+    prop: 'up',
     type: 'warning'
 }
-let LowPressureUnderNumber = {
+const LowPressureUnderNumber = {
     label: '地下抢修点',
     DW: '',
-    prop: "down",
+    prop: 'down',
     type: 'warning'
 }
 // lng站统计数据
-let LNGstationNumber = {
+const LNGstationNumber = {
     label: 'LNG站点',
     DW: '',
-    prop: "lINGStation",
+    prop: 'lINGStation'
 }
 // 其他 站统计数据
-let commonUseNumber = {
+const commonUseNumber = {
     label: '常用钢瓶用户数量',
     DW: '',
-    prop: "user",
+    prop: 'user'
 }
-let registerNumber = {
+const registerNumber = {
     label: '在册钢瓶数量',
     DW: '',
-    prop: "register",
+    prop: 'register'
 }
 
 // 客户服务统计数据
-let citizenNumber = {
+const citizenNumber = {
     label: '居民户',
     DW: '',
-    prop: "resident",
+    prop: 'resident'
 }
-let publicBuildNumber = {
+const publicBuildNumber = {
     label: '公建户',
     DW: '',
-    prop: "surname",
+    prop: 'surname'
 }
-let industryNumber = {
+const industryNumber = {
     label: '工业户',
     DW: '',
-    prop: "industry",
+    prop: 'industry'
 }
-let businessServe = {
+const businessServe = {
     label: '营业服务网点',
     DW: '',
-    prop: "service",
+    prop: 'service'
 }
 // 客户服务详情数据
-let citizenNumberDetial = {
+const citizenNumberDetial = {
     label: '居民户',
     DW: '户',
-    prop: "citizenNumberDetial",
+    prop: 'citizenNumberDetial'
 }
-let publicBuildNumberDetial = {
+const publicBuildNumberDetial = {
     label: '公建户',
     DW: '户',
-    prop: "publicBuildNumberDetial",
+    prop: 'publicBuildNumberDetial'
 }
-let industryNumberDetial = {
+const industryNumberDetial = {
     label: '工业户',
     DW: '户',
-    prop: "industryNumberDetial",
+    prop: 'industryNumberDetial'
 }
-let monthAccountDetial = {
+const monthAccountDetial = {
     label: '本月开户',
     DW: '户',
-    prop: "monthAccountDetial",
+    prop: 'monthAccountDetial'
 }
-let monthInstallDetial = {
+const monthInstallDetial = {
     label: '本月安装',
     DW: '户',
-    prop: "monthInstallDetial",
+    prop: 'monthInstallDetial'
 }
-let monthFireDetial = {
+const monthFireDetial = {
     label: '本月点火',
     DW: '户',
-    prop: "monthFireDetial",
+    prop: 'monthFireDetial'
 }
 // 客户服务任务工单详情
-let serviceCustomerPipeline = {
+const serviceCustomerPipeline = {
     label: '渠道',
     DW: '',
-    prop: "channel",
+    prop: 'channel'
 }
-let serviceCustomerCustomer = {
+const serviceCustomerCustomer = {
     label: '客户',
     DW: '',
-    prop: "customer",
+    prop: 'customer'
 }
-let serviceCustomerAddress = {
+const serviceCustomerAddress = {
     label: '地址',
     DW: '',
-    prop: "address",
+    prop: 'address'
 }
-let serviceCustomerStatus = {
+const serviceCustomerStatus = {
     label: '状态',
     DW: '',
-    prop: "statusText",
+    prop: 'statusText'
 }
 
 export { OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, ICcustomer, useNumberYestoday, ICcustomerStatus, warningYestoday, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, HighPressureGasStation, emergencyAirSourceStation, HighPressureHighPressureGasStation, HighPressureLineLength, HighPressureCarNumber, HighPressureInspectionNumber, HighPressurePreservationNumber, LowPressureMediumline, LowPressureLowline, LowPressureGreenServeStation, LowPressureManageStation, LowPressureOnNumber, LowPressureUnderNumber, LNGstationNumber, commonUseNumber, registerNumber, citizenNumber, publicBuildNumber, industryNumber, businessServe, citizenNumberDetial, publicBuildNumberDetial, industryNumberDetial, monthAccountDetial, monthInstallDetial, monthFireDetial, serviceCustomerPipeline, serviceCustomerCustomer, serviceCustomerAddress, serviceCustomerStatus }

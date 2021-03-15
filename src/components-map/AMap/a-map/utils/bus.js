@@ -16,5 +16,5 @@
  * bus.$off(['event-name1', 'event-name2'])
  * 来一次性注销多个事件
  */
-import Vue from 'vue';
-export default new Vue();
+import Vue from 'vue'
+export default new Vue()

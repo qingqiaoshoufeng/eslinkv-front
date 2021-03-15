@@ -12,7 +12,7 @@
 		mixins: [mixins],
 		computed: {},
 		methods: {
-			setOption(data) {
+			setOption (data) {
 				// options.yAxis[0].name = this.config.config.title
 				// options.series[0].data = data.data.map(item => item.value)
 				// options.xAxis[0].data = data.data.map(item => item.name)
@@ -21,7 +21,7 @@
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
@@ -33,8 +33,8 @@
 				immediate: true
 			}
 		},
-		created() {
-			this.configValue = this.parseConfigValue(value, customConfig);
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
 		}
 	}
 </script>

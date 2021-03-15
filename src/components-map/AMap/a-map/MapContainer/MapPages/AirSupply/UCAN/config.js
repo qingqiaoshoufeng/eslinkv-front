@@ -1,6 +1,6 @@
 
 // 引入详情字典
-import { commonUseNumber, registerNumber, } from "../../../../utils/dictionary"
+import { commonUseNumber, registerNumber } from '../../../../utils/dictionary'
 
 // 首页覆盖物配置项
 export const AIRSUPPLY_UCAN_LEGEND_MAP = {
@@ -10,7 +10,7 @@ export const AIRSUPPLY_UCAN_LEGEND_MAP = {
 		iconSize: 38,
 		component: 'LiquefiedGasStation',
 		visible: true,
-		dataProp: "liquefiedGasStationList"
+		dataProp: 'liquefiedGasStationList'
 
 	},
 	NaturalGasStation: {
@@ -19,7 +19,7 @@ export const AIRSUPPLY_UCAN_LEGEND_MAP = {
 		legendIcon: 'icontulijiaqizhan',
 		component: 'NaturalGasStation',
 		visible: true,
-		dataProp: "naturalGasStationList"
+		dataProp: 'naturalGasStationList'
 	},
 	DistributedEnergyResource: {
 		label: '分布式能源',
@@ -27,7 +27,7 @@ export const AIRSUPPLY_UCAN_LEGEND_MAP = {
 		iconSize: 38,
 		component: 'DistributedEnergyResource',
 		visible: true,
-		dataProp: "distributedEnergyResourceList"
+		dataProp: 'distributedEnergyResourceList'
 	},
 	// LNGStation: {
 	//     label: 'LNG站',
@@ -107,9 +107,9 @@ export const AIRSUPPLY_UCAN_LEGEND_MAP = {
 		iconSize: 38,
 		component: 'ServiceStation',
 		visible: false,
-		dataProp: 'comprehensiveServiceStationList',
+		dataProp: 'comprehensiveServiceStationList'
 		// detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
-	},
+	}
 	// PipeManageMentStation: {
 	//     label: '管网运行管理站',
 	//     legendIcon: 'icontuliqiyuanzhan',
@@ -136,7 +136,7 @@ export const AIRSUPPLY_UCAN_LEGEND_MAP = {
 	// },
 }
 
-//覆盖物详情
+// 覆盖物详情
 export const AIRSUPPLY_UCAN_OVERLAY_MAP = {
 	EmergencyAirSourceStation: {
 		fields: {
@@ -146,8 +146,8 @@ export const AIRSUPPLY_UCAN_OVERLAY_MAP = {
 					color: '#FFDC45'
 				},
 				errColor: '#FFDC45'
-			},
-		},
+			}
+		}
 	},
 	ServiceStation: {
 		fields: {
@@ -157,33 +157,33 @@ export const AIRSUPPLY_UCAN_OVERLAY_MAP = {
 					color: '#FFDC45'
 				},
 				errColor: '#FFDC45'
-			},
-		},
+			}
+		}
 	},
 	LiquefiedGasStation: {
 		fields: {
-			name: {},
-		},
+			name: {}
+		}
 	},
 	NaturalGasStation: {
 		fields: {
-			name: {},
-		},
+			name: {}
+		}
 	},
 	DistributedEnergyResource: {
 		fields: {
-			name: {},
-		},
+			name: {}
+		}
 	},
 	WARN: {
 		fields: {
 			name: {
 				style: {
 					fontSize: '32px',
-					color: '#FFDC45',
+					color: '#FFDC45'
 				},
-				errColor: '#FFDC45',
-			},
+				errColor: '#FFDC45'
+			}
 			// address: {
 			//     style: {
 			//         fontSize: '18px',
@@ -192,7 +192,7 @@ export const AIRSUPPLY_UCAN_OVERLAY_MAP = {
 			//     errColor: '#FF7217',
 			// },
 		},
-		visibleMore: false,
+		visibleMore: false
 	}
 }
 // 中低压统计数据

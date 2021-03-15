@@ -20,6 +20,6 @@ export const customConfig = [
 	{
 		prop: 'title',
 		label: '标题',
-		type: 'func-input',
-	},
+		type: 'func-input'
+	}
 ]

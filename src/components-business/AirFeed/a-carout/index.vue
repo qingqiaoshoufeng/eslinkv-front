@@ -32,16 +32,16 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import options from './options';
-	import {customConfig, value} from './index.component'
+	import options from './options'
+	import { customConfig, value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
+		created () {
 			this.configValue = this.parseConfigValue(value, customConfig)
 		},
 		computed: {
-			desc1() {
+			desc1 () {
 				if (this.data) {
 					return this.config.config.desc1.replace(
 						'{x}',
@@ -50,23 +50,23 @@
 				}
 				return ''
 			},
-			style() {
+			style () {
 				if (this.data) {
-					let rotate = (this.data.value1 / 100) * 360 + 6
+					const rotate = (this.data.value1 / 100) * 360 + 6
 					return {
-						transform: `translateX(-50%) rotate(${rotate}deg)`,
+						transform: `translateX(-50%) rotate(${rotate}deg)`
 					}
 				}
 				return {
-					transform: `translateX(-50%) rotate(0deg)`,
+					transform: 'translateX(-50%) rotate(0deg)'
 				}
-			},
+			}
 		},
 		methods: {
-			setOption(data) {
-				let newData = []
-				let newData1 = []
-				let color = JSON.parse(this.config.config.color)
+			setOption (data) {
+				const newData = []
+				const newData1 = []
+				const color = JSON.parse(this.config.config.color)
 				console.log(color)
 				for (let i = data.value1; i > 0; i--) {
 					let opacity = 1 - i / data.value1
@@ -75,8 +75,8 @@
 						value: 1,
 						itemStyle: {
 							borderRadius: 100,
-							color: `rgba(${color[0]}, ${color[1]}, ${color[2]},${opacity})`,
-						},
+							color: `rgba(${color[0]}, ${color[1]}, ${color[2]},${opacity})`
+						}
 					})
 				}
 				while (newData.length < 100) {
@@ -84,26 +84,26 @@
 						value: 1,
 						itemStyle: {
 							borderRadius: 100,
-							color: `rgba(${color[0]}, ${color[1]}, ${color[2]},0)`,
-						},
+							color: `rgba(${color[0]}, ${color[1]}, ${color[2]},0)`
+						}
 					})
 				}
 				newData1.push({
 					value: 100,
 					itemStyle: {
-						color: `rgba(${color[0]}, ${color[1]}, ${color[2]},0.1)`,
-					},
+						color: `rgba(${color[0]}, ${color[1]}, ${color[2]},0.1)`
+					}
 				})
 				options.series[0].data = newData1
 				options.series[1].data = newData
 				this.instance && this.instance.setOption(options)
-			},
+			}
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
-						const data = {...val}
+						const data = { ...val }
 						this.$nextTick(() => {
 							this.instance = echarts.init(
 								document.getElementById(this.id)
@@ -113,16 +113,16 @@
 					}
 				},
 				deep: true,
-				immediate: true,
-			},
-		},
+				immediate: true
+			}
+		}
 	}
 </script>
 <style lang="scss" scoped>
 	.carout-bg {
+		position: relative;
 		width: 200px;
 		height: 200px;
-		position: relative;
 
 		video::-webkit-media-controls {
 			display: none !important;
@@ -137,13 +137,13 @@
 			position: absolute;
 			top: 50%;
 			left: 50%;
-			transform: translate(-50%, -50%);
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: center;
-			color: #fff;
 			margin-top: 15px;
+			color: #fff;
+			transform: translate(-50%, -50%);
 
 			.value {
 				font-size: 40px;
@@ -152,13 +152,13 @@
 			}
 
 			.desc1 {
+				margin-top: 10px;
 				font-size: 16px;
 				font-weight: 400;
 				line-height: 20px;
 				letter-spacing: 0;
-				margin-top: 10px;
-				opacity: 0.75;
 				white-space: nowrap;
+				opacity: 0.75;
 			}
 
 			.desc2 {
@@ -166,8 +166,8 @@
 				font-weight: 400;
 				line-height: 20px;
 				letter-spacing: 0;
-				opacity: 0.75;
 				white-space: nowrap;
+				opacity: 0.75;
 			}
 		}
 	}
@@ -179,26 +179,26 @@
 		transform: translate(-50%, -50%);
 
 		.carout-canvas {
-			margin-top: 2px;
 			width: 160px;
 			height: 160px;
+			margin-top: 2px;
 		}
 	}
 
 	.pointBox {
-		height: 160px;
-		width: 10px;
 		position: absolute;
 		top: 0;
 		left: 50%;
+		width: 10px;
+		height: 160px;
 		opacity: 1;
 
 		.carout_point {
+			position: absolute;
+			bottom: -4px;
 			width: 15px;
 			height: 15px;
 			background: #fff;
-			position: absolute;
-			bottom: -4px;
 			border-radius: 10px;
 		}
 	}

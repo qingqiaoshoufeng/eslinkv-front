@@ -4,17 +4,16 @@
 </template>
 <script>
 	import mixins from 'eslinkv-npm/mixins'
-	import {value} from './index.component'
+	import { value } from './index.component'
 	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
 		mixins: [mixins],
-		created() {
-
+		created () {
 			this.configValue = this.parseConfigValue(value)
 		},
 		methods: {
-			back() {
+			back () {
 				if (!this.data.sceneId) return
 				scene.actions.setSceneIndex(this.data.sceneId)
 			}

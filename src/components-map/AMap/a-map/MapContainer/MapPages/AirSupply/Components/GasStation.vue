@@ -23,128 +23,128 @@
 	</BaseOverlay>
 </template>
 <script>
-import {
-	AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
-	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
-	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
-} from '../../../../config/scene'
-import { BaseOverlay } from '../../../../components/index'
-import scene from 'eslinkv-npm/src/store/scene.store'
-import instance from 'eslinkv-npm/src/store/instance.store'
-export default {
-	name: 'GasStation',
-	components: {
-		BaseOverlay,
-	},
-	props: {
-		visible: {
-			type: Boolean,
-			default: true,
+	import {
+		AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
+		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
+		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2
+	} from '../../../../config/scene'
+	import { BaseOverlay } from '../../../../components/index'
+	import scene from 'eslinkv-npm/src/store/scene.store'
+	import instance from 'eslinkv-npm/src/store/instance.store'
+	export default {
+		name: 'GasStation',
+		components: {
+			BaseOverlay
 		},
-		overlayIcon: {
-			type: String,
-			default: '',
-		},
-		overlayType: {
-			type: String,
-			default: '',
-		},
-		active: {
-			type: Boolean,
-			default: false,
-		},
-		data: {
-			type: Array,
-		},
-		detailList: {
-			type: Array,
-			default() {
-				return []
+		props: {
+			visible: {
+				type: Boolean,
+				default: true
 			},
-		},
-	},
-	data() {
-		let apiFun = this.$sysApi.map.mock.getGasStationList
-		return {
-			apiFun: apiFun,
-			propDwMap: {
-				flow: 'm³/h',
-				inPressure: 'MPa',
-				inTemp: '℃',
-				outPressure: 'MPa',
-				outTemp: '℃',
-				todayAirFeed: 'm³',
+			overlayIcon: {
+				type: String,
+				default: ''
 			},
-			mouseIn: false,
-		}
-	},
-	methods: {
-		async handleOverlayClick(marker) {
-			if (!marker.detail) {
-				let { id = '', name = '', type = '' } = marker
-				let data = {}
-				let dataComp = {}
-				try {
-					data = await this.$sysApi.map.airSupply.getStationRealTimeInfo(
-						{
-							id,
-							name,
-							type,
-						}
-					)
-				} catch (error) {
-					console.error(error, '接口报错')
+			overlayType: {
+				type: String,
+				default: ''
+			},
+			active: {
+				type: Boolean,
+				default: false
+			},
+			data: {
+				type: Array
+			},
+			detailList: {
+				type: Array,
+				default () {
+					return []
 				}
-				Object.keys(data).forEach((prop) => {
-					let dw = this.propDwMap[prop]
-					if (typeof data[prop] !== 'object') {
-						return false
-					}
-					data[prop].forEach((item, index) => {
-						let { name, value } = item
-						let propInner = prop + index
-						dataComp[propInner] = {
-							label: name,
-							value: value,
-							dw,
-						}
-					})
-				})
-				marker.detail = dataComp
 			}
-			this.$emit('overlay-click', marker, 'GasStation', false)
 		},
-		viewDetail(marker) {
-			let { name, id } = marker
-			scene.actions.createSceneInstance(
-				AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
-				'slideRight'
-			)
-			this.$nextTick(() => {
-				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach((item) => {
-					instance.actions.updateComponent(item, {
-						data: {
-							label: name,
-							title: name,
-							image: name,
-							stationId: id,
-						},
-					})
-				})
-				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach((item) => {
-					instance.actions.updateComponent(item, {
-						params: {
-							id,
-						},
-					})
-				})
-				setTimeout(() => {
-					this.$emit('close')
-				}, 2000)
-			})
+		data () {
+			const apiFun = this.$sysApi.map.mock.getGasStationList
+			return {
+				apiFun: apiFun,
+				propDwMap: {
+					flow: 'm³/h',
+					inPressure: 'MPa',
+					inTemp: '℃',
+					outPressure: 'MPa',
+					outTemp: '℃',
+					todayAirFeed: 'm³'
+				},
+				mouseIn: false
+			}
 		},
-	},
-}
+		methods: {
+			async handleOverlayClick (marker) {
+				if (!marker.detail) {
+					const { id = '', name = '', type = '' } = marker
+					let data = {}
+					const dataComp = {}
+					try {
+						data = await this.$sysApi.map.airSupply.getStationRealTimeInfo(
+							{
+								id,
+								name,
+								type
+							}
+						)
+					} catch (error) {
+						console.error(error, '接口报错')
+					}
+					Object.keys(data).forEach((prop) => {
+						const dw = this.propDwMap[prop]
+						if (typeof data[prop] !== 'object') {
+							return false
+						}
+						data[prop].forEach((item, index) => {
+							const { name, value } = item
+							const propInner = prop + index
+							dataComp[propInner] = {
+								label: name,
+								value: value,
+								dw
+							}
+						})
+					})
+					marker.detail = dataComp
+				}
+				this.$emit('overlay-click', marker, 'GasStation', false)
+			},
+			viewDetail (marker) {
+				const { name, id } = marker
+				scene.actions.createSceneInstance(
+					AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
+					'slideRight'
+				)
+				this.$nextTick(() => {
+					AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach((item) => {
+						instance.actions.updateComponent(item, {
+							data: {
+								label: name,
+								title: name,
+								image: name,
+								stationId: id
+							}
+						})
+					})
+					AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach((item) => {
+						instance.actions.updateComponent(item, {
+							params: {
+								id
+							}
+						})
+					})
+					setTimeout(() => {
+						this.$emit('close')
+					}, 2000)
+				})
+			}
+		}
+	}
 </script>
 <style lang="scss" scoped>
 img {
@@ -162,13 +162,13 @@ img {
 
 .right {
 	.arrow {
-		left: 100%;
 		top: 50%;
-		margin-top: -44px;
-		background: url('/static/amap/arrow-right.svg');
-		line-height: 88px;
-		padding-left: 5px;
+		left: 100%;
 		width: 100px;
+		padding-left: 5px;
+		margin-top: -44px;
+		line-height: 88px;
+		background: url('/static/amap/arrow-right.svg');
 		background-repeat: no-repeat;
 		animation: fade-left-fade-out 5s infinite;
 	}
@@ -176,33 +176,33 @@ img {
 
 .down {
 	.arrow {
-		left: 50%;
-		margin-left: -44px;
-		width: 88px;
 		top: 100%;
-		background: url('/static/amap/arrow-down.svg');
+		left: 50%;
+		width: 88px;
 		padding-top: 20px;
+		margin-left: -44px;
+		background: url('/static/amap/arrow-down.svg');
 		background-repeat: no-repeat;
 		animation: fade-up-fade-out 5s infinite;
 	}
 
 	.stationName {
-		bottom: 100%;
 		top: auto;
+		bottom: 100%;
 	}
 }
 
 .up {
 	.arrow {
 		bottom: 100%;
-		width: 88px;
 		left: 50%;
-		background: url('/static/amap/arrow-up.svg');
-		margin-left: -44px;
-		padding-top: 20px;
-		background-repeat: no-repeat;
 		box-sizing: border-box;
+		width: 88px;
 		height: 66px;
+		padding-top: 20px;
+		margin-left: -44px;
+		background: url('/static/amap/arrow-up.svg');
+		background-repeat: no-repeat;
 		animation: fade-down-fade-out 5s infinite;
 	}
 }
@@ -212,28 +212,28 @@ img {
 }
 
 .stationName {
-	color: #fff;
-	white-space: nowrap;
-	transform: translateX(-50%);
+	position: absolute;
 	left: 50%;
 	font-size: 24px;
 	font-weight: 700;
-	position: absolute;
+	color: #fff;
+	white-space: nowrap;
+	transform: translateX(-50%);
 }
 
 .arrow {
 	position: absolute;
 	width: 33px;
 	height: 88px;
-	color: #62fff5;
 	font-size: 26px;
+	color: #62fff5;
 }
 // }
 
 @keyframes fade-down-fade-out {
 	0% {
-		transform: translateY(-50px);
 		opacity: 0;
+		transform: translateY(-50px);
 	}
 
 	30% {
@@ -249,15 +249,15 @@ img {
 	}
 
 	100% {
-		transform: translateY(0);
 		opacity: 0;
+		transform: translateY(0);
 	}
 }
 
 @keyframes fade-up-fade-out {
 	0% {
-		transform: translateY(50px);
 		opacity: 0;
+		transform: translateY(50px);
 	}
 
 	30% {
@@ -273,15 +273,15 @@ img {
 	}
 
 	100% {
-		transform: translateY(0);
 		opacity: 0;
+		transform: translateY(0);
 	}
 }
 
 @keyframes fade-left-fade-out {
 	0% {
-		transform: translateX(50px);
 		opacity: 0;
+		transform: translateX(50px);
 	}
 
 	30% {
@@ -297,15 +297,15 @@ img {
 	}
 
 	100% {
-		transform: translateX(0);
 		opacity: 0;
+		transform: translateX(0);
 	}
 }
 
 @keyframes fade-right-fade-out {
 	0% {
-		transform: translateX(-50px);
 		opacity: 0;
+		transform: translateX(-50px);
 	}
 
 	30% {
@@ -321,8 +321,8 @@ img {
 	}
 
 	100% {
-		transform: translateX(0);
 		opacity: 0;
+		transform: translateX(0);
 	}
 }
 

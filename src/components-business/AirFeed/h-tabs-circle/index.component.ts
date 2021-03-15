@@ -1,4 +1,4 @@
-export const config = { animation: true };
+export const config = { animation: true }
 export const value = {
 	layout: {
 		size: {
@@ -21,7 +21,7 @@ export const value = {
 						unit: 'km',
 						countStyle: '',
 						unitStyle: '',
-						percentStyle: '',
+						percentStyle: ''
 					},
 					{
 						name: '中压管道',
@@ -31,7 +31,7 @@ export const value = {
 						unit: 'km',
 						countStyle: '',
 						unitStyle: '',
-						percentStyle: '',
+						percentStyle: ''
 					},
 					{
 						name: '低压管道',
@@ -41,8 +41,8 @@ export const value = {
 						unit: 'km',
 						countStyle: '',
 						unitStyle: '',
-						percentStyle: '',
-					},
+						percentStyle: ''
+					}
 				],
 				[
 					{
@@ -53,7 +53,7 @@ export const value = {
 						unit: 'km',
 						countStyle: '',
 						unitStyle: '',
-						percentStyle: '',
+						percentStyle: ''
 					},
 					{
 						name: '钢管',
@@ -63,7 +63,7 @@ export const value = {
 						unit: 'km',
 						countStyle: '',
 						unitStyle: '',
-						percentStyle: '',
+						percentStyle: ''
 					},
 					{
 						name: '镀锌管',
@@ -73,7 +73,7 @@ export const value = {
 						unit: 'km',
 						countStyle: '',
 						unitStyle: '',
-						percentStyle: '',
+						percentStyle: ''
 					}
 				],
 				[
@@ -85,7 +85,7 @@ export const value = {
 						unit: 'km',
 						countStyle: '',
 						unitStyle: '',
-						percentStyle: '',
+						percentStyle: ''
 					},
 					{
 						name: 'DN500',
@@ -95,7 +95,7 @@ export const value = {
 						unit: 'km',
 						countStyle: '',
 						unitStyle: '',
-						percentStyle: '',
+						percentStyle: ''
 					},
 					{
 						name: 'DN300',
@@ -105,7 +105,7 @@ export const value = {
 						unit: 'km',
 						countStyle: '',
 						unitStyle: '',
-						percentStyle: '',
+						percentStyle: ''
 					},
 					{
 						name: 'DN250',
@@ -115,7 +115,7 @@ export const value = {
 						unit: 'km',
 						countStyle: '',
 						unitStyle: '',
-						percentStyle: '',
+						percentStyle: ''
 					},
 					{
 						name: 'DN200',
@@ -125,7 +125,7 @@ export const value = {
 						unit: 'km',
 						countStyle: '',
 						unitStyle: '',
-						percentStyle: '',
+						percentStyle: ''
 					},
 					{
 						name: 'DN100',
@@ -135,10 +135,10 @@ export const value = {
 						unit: 'km',
 						countStyle: '',
 						unitStyle: '',
-						percentStyle: '',
-					},
-				],
+						percentStyle: ''
+					}
+				]
 			]
-		}),
-	},
-};
+		})
+	}
+}

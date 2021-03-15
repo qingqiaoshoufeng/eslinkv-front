@@ -21,4 +21,4 @@ const value = {
         ])
     }
 }
-export {value}
+export { value }

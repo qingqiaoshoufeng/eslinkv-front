@@ -49,172 +49,186 @@
 </template>
 
 <script>
-import { SvgIcon, NoData } from '../../../../../components/'
-import { SERVICE_SERVICEICCUSTOMER_LEGEND_MAP } from '../../serviceICcustomer/config'
+	import { SvgIcon, NoData } from '../../../../../components/'
+	import { SERVICE_SERVICEICCUSTOMER_LEGEND_MAP } from '../../serviceICcustomer/config'
 
-export default {
-	name: 'HomeRealTimeList',
-	components: {
-		SvgIcon,
-		NoData,
-	},
-	data() {
-		let iconList = [
-			'/static/images/amap/first.svg',
-			'/static/images/amap/second.svg',
-			'/static/images/amap/third.svg',
-		]
-		let statusList = {
-			up: 'iconup',
-			down: 'icondown',
-			parallel: 'iconkeep',
-		}
-		return {
-			activeIndex: null,
-			list: [],
-			iconList,
-			statusList,
-			loading: true,
-			loaded: false,
-		}
-	},
-	props: {
-		activeItem: {
-			type: Object,
-			default() {
-				return {}
-			},
+	export default {
+		name: 'HomeRealTimeList',
+		components: {
+			SvgIcon,
+			NoData
 		},
-		activeOverlay: {
-			type: Object,
-			default() {
-				return {}
-			},
+		data () {
+			const iconList = [
+				'/static/images/amap/first.svg',
+				'/static/images/amap/second.svg',
+				'/static/images/amap/third.svg'
+			]
+			const statusList = {
+				up: 'iconup',
+				down: 'icondown',
+				parallel: 'iconkeep'
+			}
+			return {
+				activeIndex: null,
+				list: [],
+				iconList,
+				statusList,
+				loading: true,
+				loaded: false
+			}
 		},
-	},
-	async created() {
-		this.getData()
-		this.timer = setInterval(() => {
+		props: {
+			activeItem: {
+				type: Object,
+				default () {
+					return {}
+				}
+			},
+			activeOverlay: {
+				type: Object,
+				default () {
+					return {}
+				}
+			}
+		},
+		async created () {
 			this.getData()
-		}, 60000)
-	},
-	watch: {
-		activeItem(val) {
-			if (JSON.stringify(val) == '{}') {
-				return (this.activeIndex = null)
-			}
-			let index = this.list.findIndex((item) => {
-				let { id } = item
-				return val.id === id
-			})
-			this.activeIndex = index > -1 ? index : null
+			this.timer = setInterval(() => {
+				this.getData()
+			}, 60000)
 		},
-	},
-	methods: {
-		async getData() {
-			//除第一次需要loading外，其余需要无感刷新
-			if (!this.loaded) {
-				this.loading = true
+		watch: {
+			activeItem (val) {
+				if (JSON.stringify(val) == '{}') {
+					return (this.activeIndex = null)
+				}
+				const index = this.list.findIndex((item) => {
+					const { id } = item
+					return val.id === id
+				})
+				this.activeIndex = index > -1 ? index : null
 			}
-			let data = await this.$sysApi.map.serve.getICcustomerSituationAwareness()
-			this.list = data
-			this.loading = false
-			this.loaded = true
 		},
-		handleClick(item, index) {
-			this.activeIndex = index
-			let {
-				detailList,
-				component: overlayType,
-			} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP['WarningICcustomer']
+		methods: {
+			async getData () {
+				// 除第一次需要loading外，其余需要无感刷新
+				if (!this.loaded) {
+					this.loading = true
+				}
+				const data = await this.$sysApi.map.serve.getICcustomerSituationAwareness()
+				this.list = data
+				this.loading = false
+				this.loaded = true
+			},
+			handleClick (item, index) {
+				this.activeIndex = index
+				const {
+					detailList,
+					component: overlayType
+				} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP.WarningICcustomer
 
-			this.$emit('change', {
-				...item,
-				type: 'ICcustomer',
-				detailList,
-				overlayType,
-				activeIndex: this.activeIndex,
-			})
-		},
-	},
-}
+				this.$emit('change', {
+					...item,
+					type: 'ICcustomer',
+					detailList,
+					overlayType,
+					activeIndex: this.activeIndex
+				})
+			}
+		}
+	}
 </script>
 
 <style lang="scss" scoped>
 /deep/.demo-spin-icon-load {
-	animation: ani-demo-spin 1s linear infinite;
 	position: absolute;
 	top: 40%;
 	left: 50%;
 	transform: translate(-50%);
+	animation: ani-demo-spin 1s linear infinite;
 }
+
 @keyframes ani-demo-spin {
 	from {
 		transform: rotate(0deg);
 	}
+
 	50% {
 		transform: rotate(180deg);
 	}
+
 	to {
 		transform: rotate(360deg);
 	}
 }
+
 .list {
-	color: #fff;
-	font-size: 16px;
 	height: 799px;
 	overflow-y: scroll;
+	font-size: 16px;
+	color: #fff;
+
 	&::-webkit-scrollbar {
 		display: none;
 	}
+
 	.list-item {
+		box-sizing: border-box;
 		// height: 96px;
 		// display: flex;
 		padding: 16px 8px;
-		box-sizing: border-box;
 		// justify-content: space-between;
 		cursor: pointer;
+
 		&:hover,
 		&.active {
 			background: rgba(23, 115, 201, 0.4);
 		}
+
 		.panel-type-icon {
 			width: 24px;
 			height: 24px;
 		}
+
 		.panel-type-desc {
 			width: 24px;
 			height: 24px;
-			border-radius: 50%;
+			font-size: 20px;
 			font-style: normal;
 			font-weight: normal;
-			font-size: 20px;
 			line-height: 24px;
+			color: #fff;
 			text-align: center;
 			background: #0057a9;
-			color: #ffffff;
+			border-radius: 50%;
 		}
+
 		.row {
 			display: flex;
 			align-items: center;
+
 			.status-err {
 				color: #ffdc45;
 			}
+
 			.status-suc {
-				color: #00ddff;
+				color: #0df;
 			}
+
 			.content {
-				flex: 1;
-				font-size: 24px;
 				display: flex;
+				flex: 1;
 				align-items: center;
 				margin-left: 12px;
+				font-size: 24px;
 			}
+
 			.station-name {
-				font-size: 20px;
 				flex: 1;
-				color: rgba(255, 255, 255, 0.8);
 				margin-left: 36px;
+				font-size: 20px;
+				color: rgba(255, 255, 255, 0.8);
 			}
 		}
 	}

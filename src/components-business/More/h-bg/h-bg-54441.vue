@@ -1,19 +1,44 @@
 <template>
 	<div class="h-bg-54441 pos-a fn-flex flex-row">
 		<transition name="flipInY">
-			<box class="pos-a h-bg-54441-box1" title="五者" :content="content1" v-if="status5"/>
+			<box
+				class="pos-a h-bg-54441-box1"
+				title="五者"
+				:content="content1"
+				v-if="status5"
+			/>
 		</transition>
 		<transition name="flipInY">
-			<box class="pos-a h-bg-54441-box2" title="四大发展" :content="content2" v-if="status41"/>
+			<box
+				class="pos-a h-bg-54441-box2"
+				title="四大发展"
+				:content="content2"
+				v-if="status41"
+			/>
 		</transition>
 		<transition name="flipInY">
-			<box class="pos-a h-bg-54441-box3" title="四大战略" :content="content3" v-if="status42"/>
+			<box
+				class="pos-a h-bg-54441-box3"
+				title="四大战略"
+				:content="content3"
+				v-if="status42"
+			/>
 		</transition>
 		<transition name="flipInY">
-			<box class="pos-a h-bg-54441-box4" title="四大工程" :content="content4" v-if="status43"/>
+			<box
+				class="pos-a h-bg-54441-box4"
+				title="四大工程"
+				:content="content4"
+				v-if="status43"
+			/>
 		</transition>
 		<transition name="flipInY">
-			<box class="pos-a h-bg-54441-box5" title="第一方阵" :content="content5" v-if="status1"/>
+			<box
+				class="pos-a h-bg-54441-box5"
+				title="第一方阵"
+				:content="content5"
+				v-if="status1"
+			/>
 		</transition>
 		<div class="pos-a h-bg-54441-num-box">
 			<transition name="slide-down">
@@ -43,7 +68,7 @@
 		components: {
 			box
 		},
-		data() {
+		data () {
 			return {
 				status5: false,
 				status41: false,
@@ -91,7 +116,7 @@
 				type: Function
 			}
 		},
-		mounted() {
+		mounted () {
 			setTimeout(() => {
 				this.status5 = true
 			}, 100)
@@ -111,36 +136,38 @@
 	}
 </script>
 <style lang="scss">
-	.flipInY-enter-active, .flipInY-leave-active {
-		transition: all .5s;
+	.flipInY-enter-active,
+	.flipInY-leave-active {
+		transition: all 0.5s;
 	}
 
-	.flipInY-enter, .flipInY-leave-to {
+	.flipInY-enter,
+	.flipInY-leave-to {
 		transform: rotateY(180deg);
 	}
 
 	.h-bg-54441-num-box {
-		width: 2123px;
-		height: 1097px;
 		top: -190px;
 		align-items: center;
 		justify-content: center;
+		width: 2123px;
+		height: 1097px;
 	}
 
 	.h-bg-54441-num-5 {
+		top: 426px;
+		left: 260px;
 		width: 272px;
 		height: 158px;
-		background-size: 272px 158px;
-		top: 426px;
 		background-image: url('img/5.png');
-		left: 260px;
+		background-size: 272px 158px;
 	}
 
 	.h-bg-54441-num-4 {
+		top: 426px;
 		width: 272px;
 		height: 158px;
 		background-size: 272px 158px;
-		top: 426px;
 	}
 
 	.h-bg-54441-num-41 {
@@ -159,18 +186,18 @@
 	}
 
 	.h-bg-54441-num-1 {
-		width: 272px;
-		height: 158px;
-		background-size: 272px 158px;
 		top: 426px;
 		left: 1600px;
+		width: 272px;
+		height: 158px;
 		background-image: url('img/1.png');
+		background-size: 272px 158px;
 	}
 
 	.h-bg-54441 {
 		top: 380px;
-		width: 100%;
 		justify-content: center;
+		width: 100%;
 	}
 
 	.h-bg-54441-box1 {
@@ -194,20 +221,20 @@
 	}
 
 	.h-bg-54441-close1 {
-		width: 257px;
-		height: 64px;
 		bottom: -470px;
 		left: 50%;
+		width: 257px;
+		height: 64px;
 		margin-left: -1015px;
 	}
 
 	.h-bg-54441-close {
-		background-image: url('img/close.svg');
+		top: -44px;
+		left: 50%;
 		width: 32px;
 		height: 32px;
-		left: 50%;
 		margin-left: 710px;
-		top: -44px;
+		background-image: url('img/close.svg');
 		background-size: 32px;
 	}
 </style>

@@ -63,7 +63,7 @@
 	</div>
 </template>
 <script>
-	//页面覆盖物组件
+	// 页面覆盖物组件
 	import {
 		LiquefiedGasStation,
 		NaturalGasStation,
@@ -71,7 +71,7 @@
 		InspectionPerson,
 		InspectionCar,
 		RightPanel,
-		RoutePlan, //规划路线
+		RoutePlan, // 规划路线
 		LNGStation,
 		HighPressureLine,
 		HighPressureLine_Process,
@@ -84,28 +84,28 @@
 		UndergroundRepairStation,
 		OngroundRepairStation,
 		WarningList,
-		WarnEvent,
-	} from '../Components/index.js';
-	//页面所需公共组件
+		WarnEvent
+	} from '../Components/index.js'
+	// 页面所需公共组件
 	import {
 		RegionBoundary,
 		OverlayDetail,
 		MapLegend,
-		DataStatistics,
-	} from '../../../../components/index.js';
+		DataStatistics
+	} from '../../../../components/index.js'
 
-	//场景相关配置
+	// 场景相关配置
 	import {
 		INDEXSCENEMAP,
 		AIRSUPPLY_WARN_SCENEINDEX,
-		AIRSUPPLY_WARN_COMPONENTINDEX,
-	} from '../../../../config/scene';
-	//页面配置
+		AIRSUPPLY_WARN_COMPONENTINDEX
+	} from '../../../../config/scene'
+	// 页面配置
 	import {
 		DATASTATISTICSLIST,
 		AIRSUPPLY_LNG_OVERLAY_MAP,
-		AIRSUPPLY_LNG_LEGEND_MAP,
-	} from './config.js';
+		AIRSUPPLY_LNG_LEGEND_MAP
+	} from './config.js'
 	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
@@ -131,34 +131,34 @@
 			InspectionCar,
 			DataStatistics,
 			WarningList,
-			WarnEvent,
+			WarnEvent
 		},
 		watch: {
-			center(val) {
-				this.$amap.panTo(val, 100);
-			},
+			center (val) {
+				this.$amap.panTo(val, 100)
+			}
 		},
-		created() {
-			this.$amap = this.$parent.$amap;
-			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.setCenter(this.center, 100);
+		created () {
+			this.$amap = this.$parent.$amap
+			this.$amap.setZoom(this.zoom, 100)
+			this.$amap.setCenter(this.center, 100)
 		},
 		computed: {
-			rightListActiveItemMap() {
-				let {activeWarnData, activeStationData} = this;
+			rightListActiveItemMap () {
+				const { activeWarnData, activeStationData } = this
 				return {
 					processWarning: activeWarnData,
 					eventWarning: activeWarnData,
-					overlayList: activeStationData,
-				};
-			},
+					overlayList: activeStationData
+				}
+			}
 		},
-		mounted() {
-			this.getAllTypeStationList();
-			this.getDataStatisticsInfo();
+		mounted () {
+			this.getAllTypeStationList()
+			this.getDataStatisticsInfo()
 		},
-		data() {
-			let {LNGStation} = AIRSUPPLY_LNG_LEGEND_MAP;
+		data () {
+			const { LNGStation } = AIRSUPPLY_LNG_LEGEND_MAP
 			return {
 				overlayInfoConfigMap: Object.freeze(AIRSUPPLY_LNG_OVERLAY_MAP),
 				center: [120.131259, 30.263295],
@@ -168,32 +168,32 @@
 				showOverlayDetail: false,
 				showRoutePlan: false,
 				activeTab: 'eventWarning',
-				legendMap: {LNGStation},
+				legendMap: { LNGStation },
 				overlayMap: AIRSUPPLY_LNG_LEGEND_MAP,
 				dataStatisticsConfigMap: DATASTATISTICSLIST,
 				dataStatisticsInfo: {
-					stationNumber: 8,
+					stationNumber: 8
 				},
 				stationDataMap: {},
 				stationList: [],
-				stationListData: {},
-			};
+				stationListData: {}
+			}
 		},
 		methods: {
-			closeStationListDetail() {
-				this.StationListData = {};
-				this.$refs.RightPanel.$refs.processWarning.activeIndex = -1;
-				this.$refs.RightPanel.$refs.eventWarning.activeIndex = -1;
-				this.$refs.RightPanel.$refs.overlayList.activeIndex = -1;
-				this.$amap.setZoom(this.zoom, 100);
-				this.$amap.setCenter(this.center, 100);
+			closeStationListDetail () {
+				this.StationListData = {}
+				this.$refs.RightPanel.$refs.processWarning.activeIndex = -1
+				this.$refs.RightPanel.$refs.eventWarning.activeIndex = -1
+				this.$refs.RightPanel.$refs.overlayList.activeIndex = -1
+				this.$amap.setZoom(this.zoom, 100)
+				this.$amap.setCenter(this.center, 100)
 			},
-			setCenter(center) {
-				this.center = center || this.center;
+			setCenter (center) {
+				this.center = center || this.center
 			},
 			// 获取所有站点数据
-			async getAllTypeStationList() {
-				let params = {
+			async getAllTypeStationList () {
+				const params = {
 					types: [
 						// 'InspectionPerson', // '巡检人员',
 						// 'InspectionCar', // '巡检车辆',
@@ -203,75 +203,75 @@
 						// 'ServiceStation', // '综合服务站',
 						// // 'PipeManageMentStation', // '管网运行管理站',
 						// // 'UndergroundRepairStation', // '地下抢修点',
-						'LNGStation', // 'LNG站',
+						'LNGStation' // 'LNG站',
 						// 'LiquefiedGasStation', // '液化气站',
 						// 'NaturalGasStation', // '加气站',
 						// 'DistributedEnergyResource', // '分布式能源',
-					].toString(),
-				};
-				let res = await this.$sysApi.map.airSupply.getAllTypeStationList(
+					].toString()
+				}
+				const res = await this.$sysApi.map.airSupply.getAllTypeStationList(
 					params
-				);
-				this.stationDataMap = {...this.stationDataMap, ...res};
-				let {lNGStationList} = res;
-				this.stationList = [...lNGStationList];
+				)
+				this.stationDataMap = { ...this.stationDataMap, ...res }
+				const { lNGStationList } = res
+				this.stationList = [...lNGStationList]
 			},
 			// 获取统计数据
-			async getDataStatisticsInfo() {
+			async getDataStatisticsInfo () {
 				this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getStatisticsInfo(
-					{type: 'LNG'}
-				);
+					{ type: 'LNG' }
+				)
 			},
-			handleOverlayClick(overlay, overlayType, isCenter = true) {
-				let {lng, lat} = overlay;
-				overlay.overlayType = overlayType;
-				this.activeOverlay = overlay;
-				this.showOverlayDetail = true;
+			handleOverlayClick (overlay, overlayType, isCenter = true) {
+				const { lng, lat } = overlay
+				overlay.overlayType = overlayType
+				this.activeOverlay = overlay
+				this.showOverlayDetail = true
 				// if (isCenter) {
 				// 	this.setZoomAndPanTo(lng, lat + 0.005);
 				// }
 			},
-			closeOverlayDetail(done) {
-				let {overlayType} = this.activeOverlay;
+			closeOverlayDetail (done) {
+				const { overlayType } = this.activeOverlay
 				if (overlayType === 'WARNEVENT') {
-					scene.actions.setSceneIndex(INDEXSCENEMAP['AirSupplyLNG']);
-					this.showRoutePlan = false;
+					scene.actions.setSceneIndex(INDEXSCENEMAP.AirSupplyLNG)
+					this.showRoutePlan = false
 				}
-				this.showOverlayDetail = false;
-				this.activeOverlay = {};
+				this.showOverlayDetail = false
+				this.activeOverlay = {}
 				// this.$amap.setZoom(11, 100);
-				this.$amap.setZoom(this.zoom, 100);
-				this.$amap.setCenter(this.center, 100);
-				done && done();
+				this.$amap.setZoom(this.zoom, 100)
+				this.$amap.setCenter(this.center, 100)
+				done && done()
 			},
-			viewOverlayDetail(overlay) {
+			viewOverlayDetail (overlay) {
 			},
-			setZoomAndPanTo(lng, lat) {
-				this.$amap.setZoom(14, 100);
+			setZoomAndPanTo (lng, lat) {
+				this.$amap.setZoom(14, 100)
 				this.$nextTick(() => {
-					this.$amap.panTo([lng, lat], 100);
-				});
+					this.$amap.panTo([lng, lat], 100)
+				})
 			},
-			handleListClick(overlay, eventType) {
+			handleListClick (overlay, eventType) {
 				if (this.showOverlayDetail) {
-					this.showOverlayDetail = false;
-					this.activeOverlay = {};
+					this.showOverlayDetail = false
+					this.activeOverlay = {}
 				}
-				let {lng, lat} = overlay;
+				const { lng, lat } = overlay
 				if (eventType) {
-					this.stationListData = overlay;
+					this.stationListData = overlay
 				} else {
-					this.activeWarnData = overlay;
+					this.activeWarnData = overlay
 				}
-				this.setZoomAndPanTo(lng, lat);
+				this.setZoomAndPanTo(lng, lat)
 			},
-			closeWarnEventDetail() {
-				this.activeWarnData = {};
-				this.$amap.setZoom(this.zoom, 100);
-				this.$amap.setCenter(this.center, 100);
-			},
-		},
-	};
+			closeWarnEventDetail () {
+				this.activeWarnData = {}
+				this.$amap.setZoom(this.zoom, 100)
+				this.$amap.setCenter(this.center, 100)
+			}
+		}
+	}
 </script>
 <style lang="scss" scoped>
 	.map-legend {
