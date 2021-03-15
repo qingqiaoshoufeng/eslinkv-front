@@ -237,7 +237,7 @@
 		position: relative;
 		display: flex;
 		align-items: center;
-		justify-content: start;
+		justify-content: flex-start;
 		width: 210px;
 
 		.h-line-1 {

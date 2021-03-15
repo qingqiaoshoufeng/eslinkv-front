@@ -75,7 +75,6 @@
 		LNGStation,
 		HighPressureLine,
 		HighPressureLine_Process,
-		LowPressureLine,
 		GasStation,
 		PressureRegulatingStation,
 		EmergencyAirSourceStation,
@@ -83,7 +82,6 @@
 		PipeManageMentStation,
 		UndergroundRepairStation,
 		OngroundRepairStation,
-		WarningList,
 		WarnEvent
 	} from '../Components/index.js'
 	// 页面所需公共组件
@@ -119,7 +117,6 @@
 			MapLegend,
 			HighPressureLine,
 			HighPressureLine_Process,
-			LowPressureLine,
 			InspectionPerson,
 			GasStation,
 			PressureRegulatingStation,
@@ -130,7 +127,6 @@
 			ServiceStation,
 			InspectionCar,
 			DataStatistics,
-			WarningList,
 			WarnEvent
 		},
 		watch: {

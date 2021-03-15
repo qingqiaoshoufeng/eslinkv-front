@@ -238,7 +238,7 @@
 							display: flex;
 							flex-direction: column;
 							align-items: flex-start;
-							justify-content: start;
+							justify-content: flex-start;
 							width: 8px;
 							height: 400px;
 							margin-left: 60px;

@@ -59,8 +59,10 @@
 	display: flex;
 	flex-direction: column;
 	padding: 4px 16px;
+	padding: 4px 16px;
 	border: 1px solid #0df;
 	border-radius: 8px;
+	backface-visibility: hidden;
 
 	.item {
 		margin-top: 1px;

@@ -2,19 +2,19 @@ import request from './request'
 const HANGRANURL = '/server'
 
 // 获取最近两天消息列表
-export function getRecentMessageList(data) {
+export function getRecentMessageList (data) {
 	return request({
 		url: HANGRANURL + '/message/recentMessage',
 		method: 'get',
 		params: data,
 		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-		},
+			'Content-Type': 'application/x-www-form-urlencoded'
+		}
 	})
 }
 
 // 回复消息
-export function toReplyMessage(data) {
+export function toReplyMessage (data) {
 	return request({
 		url: HANGRANURL + '/message/reply',
 		method: 'post',
@@ -22,13 +22,13 @@ export function toReplyMessage(data) {
 	})
 }
 // 获取未读消息
-export function getUnReadMessage(data) {
+export function getUnReadMessage (data) {
 	return request({
 		url: HANGRANURL + '/message/unReadMessage',
 		method: 'get',
 		params: data,
 		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded',
-		},
+			'Content-Type': 'application/x-www-form-urlencoded'
+		}
 	})
 }
