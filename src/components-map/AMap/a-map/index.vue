@@ -14,7 +14,7 @@
 <script>
 import MapContainer from './MapContainer/index'
 import Message from './components/Message/'
-
+import scene from 'eslinkv-npm/src/store/scene.store'
 export default {
 	name: 'HRMap',
 	components: {
@@ -29,10 +29,7 @@ export default {
 	},
 	computed: {
 		inPreview() {
-			return (
-				window.GoldChart.store.scene.status === 'inPreview' ||
-				this.preview
-			)
+      return scene.state.status === 'inPreview'
 		},
 	},
 	data() {

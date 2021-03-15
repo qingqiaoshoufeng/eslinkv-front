@@ -6,7 +6,7 @@
 </template>
 <script lang="ts">
 	import {Vue, Component} from 'vue-property-decorator'
-	import amap from '@/components-map/AMap/a-map/index.vue'
+	import amap from '../../../src/components-map/AMap/a-map/MapContainer/index.vue'
 
 	@Component({
 		components: {amap}

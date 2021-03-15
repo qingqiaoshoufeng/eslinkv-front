@@ -2,7 +2,7 @@
         .message-item
             .title {{data.name}}
             Icon.expend-btn.pointer(v-if="this.data.messageStatus == 0 && !this.alwaysExpend" :type="ependReply?'ios-arrow-up':'ios-arrow-down'" size="24" @click="ependReply=!ependReply")
-            .content(ref="content")
+            .content(ref="content") 
                 template(v-if="showTextExpend")
                     span.content-text {{data.interactionContent.slice(0,textExpend?-1:41)}}
                     span {{textExpend?'':'...'}}
@@ -19,24 +19,24 @@
                 .time {{data.createTime}}
 </template>
 <script lang="ts">
-	import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
-	import { Input, Icon } from 'view-design'
-	function strlen (str) {
-		let len = 0
-		for (var i = 0; i < str.length; i++) {
-			const c = str.charCodeAt(i)
-			// 单字节加1
-			if ((c >= 0x0001 && c <= 0x007e) || (c >= 0xff60 && c <= 0xff9f)) {
-				len++
-			} else {
-				len += 2
-			}
-			if (len > 82) {
-				return i
-			}
+import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
+import { Input, Icon } from 'view-design'
+function strlen(str) {
+	var len = 0
+	for (var i = 0; i < str.length; i++) {
+		var c = str.charCodeAt(i)
+		//单字节加1
+		if ((c >= 0x0001 && c <= 0x007e) || (0xff60 <= c && c <= 0xff9f)) {
+			len++
+		} else {
+			len += 2
 		}
-		return i
+		if (len > 82) {
+			return i
+		}
 	}
+	return i
+}
 @Component({ components: { Input, Icon: Icon } })
 class MessageItem extends Vue {
 	replyContent: String = ''
@@ -46,15 +46,14 @@ class MessageItem extends Vue {
 	sending: Boolean = false
 	@Prop(Object) data: any
 	@Prop(Boolean) alwaysExpend: any
-	created () {
+	created() {
 		this.showTextExpend =
-			this.data.interactionContent.length > 41
+			this.data.interactionContent.length > 41 ? true : false
 	}
-
 	@Emit('refresh')
-	handleReply () {
-		const { replyContent, data, sending } = this
-		const { messageId } = data
+	handleReply() {
+		let { replyContent, data, sending } = this
+		let { messageId } = data
 		if (!replyContent || sending) {
 			return false
 		}
@@ -63,121 +62,105 @@ class MessageItem extends Vue {
 			this.$sysApi.message
 				.toReplyMessage({
 					messageId: messageId,
-					resultContent: replyContent
+					resultContent: replyContent,
 				})
 				.then((data) => {
 					if (data === 'OK') {
 						resolve({
 							...this.data,
 							messageStatus: 0,
-							interactionResult: replyContent
+							interactionResult: replyContent,
 						})
 					}
 					this.sending = false
 				})
 		})
 	}
-
 	@Emit('changeExpend')
-	changeExpend () {
+	changeExpend() {
 		this.textExpend = !this.textExpend
 		return this.textExpend
 	}
 }
 
-	export default MessageItem
+export default MessageItem
 </script>
 <style lang="scss" scoped>
 .message-item {
-	position: relative;
-	padding: 24px;
-	padding-top: 24px;
-	font-size: 20px;
 	color: #fff;
+	padding: 24px;
+	font-size: 20px;
 	background: #012f87;
-
+	position: relative;
+	padding-top: 24px;
 	.title {
 		font-size: 24px;
-		font-weight: 400;
 		line-height: 24px;
 		color: #ffdc45;
+		font-weight: 400;
 	}
-
 	.expend-btn {
 		position: absolute;
 		top: 24px;
 		right: 24px;
 	}
-
 	.content {
-		margin-top: 24px;
 		line-height: 32px;
-
+		margin-top: 24px;
 		.content-text {
 			word-break: break-all;
 		}
-
 		.text-expend-btn {
+			color: #00ddff;
 			margin-left: 8px;
-			color: #0df;
 			cursor: pointer;
 		}
 	}
-
 	.time {
-		margin: 2px 0 19px 0;
 		opacity: 0.75;
+		margin: 2px 0 19px 0;
 	}
 
 	.button {
-		height: 40px;
-		margin-top: 24px;
-		line-height: 40px;
-		text-align: center;
 		background: rgba(0, 87, 169, 0.5);
 		border-radius: 4px;
-
+		height: 40px;
+		line-height: 40px;
+		text-align: center;
+		margin-top: 24px;
 		> span {
 			opacity: 0.4;
 		}
 	}
-
 	.valid {
 		> span {
 			opacity: 1;
 		}
 	}
-
 	/deep/ textarea.ivu-input {
-		font-size: 20px;
-		color: #fff;
 		background: #0057a9;
 		border: none;
+		color: #fff;
+		font-size: 20px;
 		border: 1px solid transparent;
-
 		&:focus {
 			border-color: #57a3f3;
 		}
 	}
-
 	::-webkit-scrollbar {
 		display: none;
 	}
-
 	.replyed {
+		border-top: 1px solid #0057a9;
 		padding-top: 24px;
 		line-height: 1;
-		border-top: 1px solid #0057a9;
-
 		.reply-title {
-			color: #0df;
+			color: #00ddff;
 		}
-
 		.reply-content {
 			margin-top: 12px;
 			line-height: 1.5em;
 		}
-
 		.time {
 			margin: 0;
 		}

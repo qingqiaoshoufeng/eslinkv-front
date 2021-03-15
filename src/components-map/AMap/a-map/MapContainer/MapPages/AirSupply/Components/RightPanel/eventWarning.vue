@@ -163,6 +163,7 @@
 .event-warning {
 	height: 800px;
 	font-size: 20px;
+	backface-visibility: hidden;
 
 	.filter-bar {
 		justify-content: space-between;

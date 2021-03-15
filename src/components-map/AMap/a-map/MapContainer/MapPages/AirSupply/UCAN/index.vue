@@ -76,6 +76,7 @@
 		LNGStation,
 		HighPressureLine,
 		HighPressureLine_Process,
+		LowPressureLine,
 		GasStation,
 		PressureRegulatingStation,
 		EmergencyAirSourceStation,
@@ -83,6 +84,7 @@
 		PipeManageMentStation,
 		UndergroundRepairStation,
 		OngroundRepairStation,
+		WarningList,
 		WarnEvent
 	} from '../Components/index.js'
 	// 页面所需公共组件
@@ -123,6 +125,7 @@
 			LNGStation,
 			HighPressureLine,
 			HighPressureLine_Process,
+			LowPressureLine,
 			GasStation,
 			PressureRegulatingStation,
 			EmergencyAirSourceStation,
@@ -130,6 +133,7 @@
 			PipeManageMentStation,
 			UndergroundRepairStation,
 			OngroundRepairStation,
+			WarningList,
 			DataStatistics,
 			WarnEvent
 		},

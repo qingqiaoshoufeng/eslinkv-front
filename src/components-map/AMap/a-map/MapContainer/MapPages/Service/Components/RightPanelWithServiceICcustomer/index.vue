@@ -66,10 +66,9 @@
 </script>
 
 <style lang="scss" scoped>
-.tabs-container-ic {
+.tabs-container-ic{
 	backface-visibility: hidden;
 }
-
 .right-panel {
 	position: absolute;
 	top: 148px;

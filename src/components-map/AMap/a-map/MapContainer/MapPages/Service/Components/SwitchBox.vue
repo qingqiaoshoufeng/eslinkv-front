@@ -52,6 +52,8 @@
 </script>
 <style lang="scss" scoped>
 .hangrancode_switch_Box {
+	backface-visibility: hidden;
+	padding: 4px 16px;
 	position: fixed;
 	bottom: 32px;
 	left: 32px;
@@ -59,10 +61,8 @@
 	display: flex;
 	flex-direction: column;
 	padding: 4px 16px;
-	padding: 4px 16px;
 	border: 1px solid #0df;
 	border-radius: 8px;
-	backface-visibility: hidden;
 
 	.item {
 		margin-top: 1px;

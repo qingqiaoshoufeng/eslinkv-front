@@ -100,23 +100,23 @@
 				this.activeIndex = index > -1 ? index : null
 			}
 		},
-		methods: {
-			async getData () {
-				// 除第一次需要loading外，其余需要无感刷新
-				if (!this.loaded) {
-					this.loading = true
-				}
-				const data = await this.$sysApi.map.serve.getServiceCustomerTaskList()
-				this.list = data
-				this.loading = false
-				this.loaded = true
-			},
-			handleClick (item, index) {
-				item.activeIndex = index
-				this.activeIndex = index
-				item.overlayType = 'TaskList'
-				this.$emit('change', item)
-			}
+	},
+	methods: {
+        async getData(){
+            //除第一次需要loading外，其余需要无感刷新
+            if(!this.loaded){
+                this.loading = true
+            }
+			let data = await  this.$sysApi.map.serve.getServiceCustomerTaskList()
+			this.list = data;
+            this.loading = false;
+            this.loaded=true;
+        },
+		handleClick(item, index) {
+			item.activeIndex = index;
+			this.activeIndex = index;
+			item.overlayType = 'TaskList';
+			this.$emit('change', item);
 		},
 		beforeDestroy () {
 			if (this.timer) {
@@ -153,6 +153,7 @@
 .list {
 	height: 799px;
 	overflow-y: scroll;
+	backface-visibility: hidden;
 	font-size: 16px;
 	color: #fff;
 

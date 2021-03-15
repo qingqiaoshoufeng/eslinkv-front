@@ -43,7 +43,7 @@
                 :data="allTypeStationList.CustomerHotList"
                 ref="OverlayDetail"
         />
-        
+
         <!-- 覆盖物详情 -->
         <OverlayDetail
                 :legendMap="legendMap"
@@ -93,6 +93,21 @@
 </template>
 <script>
     //页面覆盖物组件
+    import {
+      INDEXSCENEMAP,
+      THREESOCIALLINKAGE_SCENEINDEX,
+      THREESOCIALLINKAGE_COMPONENTINDEX
+    } from '../../../../config'
+
+    import {
+      DATASTATISTICSLIST,
+      SWICHBOX,
+      SERVICE_SERVICECUSTOMER_LEGEND_MAP,
+      SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
+      SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP
+    } from './config.js'
+    import scene from 'eslinkv-npm/src/store/scene.store'
+    import instance from 'eslinkv-npm/src/store/instance.store'
     let componentPageArr = [
         'ThreeSocialLinkage',
         'ServiceNetworkStation',
@@ -126,19 +141,6 @@
             componentName
                 );
     });
-    import {
-        INDEXSCENEMAP,
-        THREESOCIALLINKAGE_SCENEINDEX,
-        THREESOCIALLINKAGE_COMPONENTINDEX,
-    } from '../../../../config';
-
-    import {
-        DATASTATISTICSLIST,
-        SWICHBOX,
-        SERVICE_SERVICECUSTOMER_LEGEND_MAP,
-        SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
-        SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP,
-    } from './config.js';
 
     export default {
         name: 'ServiceCustomer',
@@ -312,11 +314,11 @@
             showThreeSocialLinkageDetail() {
                 let {id} = this.activeOverlay;
                 //打开三社联动的弹框
-                window.GoldChart.scene.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX);
+              scene.actions.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX);
                 this.$nextTick(() => {
                     THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
                         this.$sysApi.map.serve.getServiceCustomerThreeSocialDetail({id}).then(res => {
-                            window.GoldChart.instance.updateComponent(i, {
+                          instance.actions.updateComponent(i, {
                                 data: res
                             });
                         })

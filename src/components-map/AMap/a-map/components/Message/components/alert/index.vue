@@ -1,15 +1,15 @@
 <template lang="pug">
  .at-container(:id="id")
         div(:style="pageTransform")
-            .at-content(:style="textExpend?'max-height:600px':'max-height:400px'" :class="ready?'ready':''" )
+            .at-content(:style="textExpend?'max-height:600px':'max-height:400px'" :class="ready?'ready':''" ) 
                 div(@click.stop="close")
                     svg-icon.close-btn.pointer(icon-name="iconbaseline-close-px")
-                ms-item(:data="innerData" @changeExpend="changeExpend" :alwaysExpend="true" @refresh="refresh")
+                ms-item(:data="innerData" @changeExpend="changeExpend" :alwaysExpend="true" @refresh="refresh")    
 </template>
 <script lang="ts">
-	import { Vue, Component, Prop } from 'vue-property-decorator'
-	import MsItem from '../messageItem/index.vue'
-	import SvgIcon from '../../../SvgIcon/index.vue'
+import { Vue, Component, Prop } from 'vue-property-decorator'
+import MsItem from '../messageItem/index.vue'
+import SvgIcon from '../../../SvgIcon/index.vue'
 
 @Component({ components: { 'ms-item': MsItem, 'svg-icon': SvgIcon } })
 class MessageAlert extends Vue {
@@ -20,109 +20,98 @@ class MessageAlert extends Vue {
 	textExpend: boolean = false
 	pageTransform: string = 'scale(1) translate3d(0px, 0px, 0px)'
 	@Prop(Object) data: any
-	created () {
+	created() {
 		this.id = 'MessageAlert' + Math.ceil(Math.random() * 100)
 		this.innerData = this.data
 		this.pageTransform = document.getElementById('kanban').style.cssText
 	}
-
-	mounted () {
+	mounted() {
 		setTimeout(() => {
 			this.ready = true
 		}, 300)
 	}
-
-	close () {
+	close() {
 		this.ready = false
 		setTimeout(() => {
 			this.$destroy()
 		}, 300)
 	}
-
-	refresh (data) {
+	refresh(data) {
 		if (data === false) return
 		this.innerData = data
 	}
-
-	changeExpend (val) {
+	changeExpend(val) {
 		this.textExpend = val
 	}
-
-	beforeDestroy () {
+	beforeDestroy() {
 		document.getElementById(this.id)?.remove()
 	}
 }
 
-	export default MessageAlert
+export default MessageAlert
 </script>
 <style lang="scss">
 .at-container {
+	pointer-events: auto;
 	position: fixed;
 	top: 0;
 	right: 0;
-	bottom: 0;
 	left: 0;
+	bottom: 0;
+	inset: 0px;
 	z-index: 99999;
-	display: flex;
-	align-items: center;
 	justify-content: center;
-	pointer-events: auto;
+	align-items: center;
+	display: flex;
 	pointer-events: none;
-	inset: 0;
-
 	> div {
 		position: relative;
-		right: 0;
-		z-index: 99999;
-		flex-grow: 0;
 		flex-shrink: 0;
+		flex-grow: 0;
 		overflow: hidden;
-		pointer-events: none;
 		background-color: transparent;
-
+		z-index: 99999;
+		right: 0px;
+		pointer-events: none;
 		.at-content {
-			position: absolute;
-			right: 32px;
-			bottom: -100%;
-			z-index: 2000;
-			width: 480px;
-			font-size: 20px;
-			color: #fff;
 			pointer-events: all;
+			position: absolute;
+			width: 480px;
+			color: #fff;
 			background: #012f87;
-			border-top: 4px solid #0df;
+			border-top: 4px solid #00ddff;
+			bottom: -100%;
+			right: 32px;
+			z-index: 2000;
+			font-size: 20px;
 			transition: all 0.3s ease 0s;
 
 			&.ready {
-				bottom: 24px;
 				opacity: 1;
+				bottom: 24px;
 			}
-
 			.close-btn {
 				position: absolute;
 				top: 24px;
 				right: 24px;
-				z-index: 2;
 				font-size: 34px;
 				color: #fff;
+				z-index: 2;
 			}
-
 			/deep/ {
 				.title {
 					font-size: 32px;
-					font-weight: 600;
 					line-height: 32px;
 					color: #ffdc45;
+					font-weight: 600;
 				}
-
 				.message-item {
-					max-height: 600px;
 					overflow: auto;
+					max-height: 600px;
 				}
 			}
 		}
 	}
-
 	::-webkit-scrollbar {
 		display: none;
 	}

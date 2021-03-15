@@ -5,6 +5,10 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
 const needReport = false
 
+function resolve(dir) {
+	return path.join(__dirname, dir)
+}
+
 module.exports = {
 	transpileDependencies: [
 		'@simonwep',
@@ -13,7 +17,7 @@ module.exports = {
 		'dom7',
 	],
 	assetsDir: 'static',
-	publicPath: isProduction ? `./${pkg.version}` : './',
+	publicPath: isProduction ? `/${pkg.version}` : '/',
 	outputDir: `dist/${pkg.version}`,
 	indexPath: '../index.html',
 	productionSourceMap: false,
@@ -22,37 +26,44 @@ module.exports = {
 		port: 3000,
 		hot: true,
 		open: true,
+		historyApiFallback: true,
 		disableHostCheck: true,
+		overlay: {
+			warning: false,
+			errors: false
+		},
 		proxy: {
 			'^/hangran': {
 				// target: 'http://ebp-pc.hw-qa.eslink.net.cn',
-				target: 'http://ebp-pc.hzrq.local:15003',
-				// target: 'http://10.20.10.154:3000',
+				// target: 'http://ebp-pc.hzrq.local:15003',
+				target: 'http://10.20.10.154:3000',
+				// target: 'http://192.168.31.219:3000',
 				changeOrigin: true,
 				headers: {
 					// Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
 					Cookie: 'SESSION=951dde65-40c7-4afc-ad9e-f28a68a0dcac',
 				},
-				pathRewrite: {
-					'^/hangran': '/',
-				},
+				// pathRewrite: {
+				// 	'^/hangran': '/',
+				// },
 			},
 			'^/api': {
 				// target: 'http://ebp-pc.hw-qa.eslink.net.cn',
-				target: 'http://ebp-pc.hzrq.local:15003',
-				// target: 'http://10.20.10.154:3000',
+				// target: 'http://ebp-pc.hzrq.local:15003',
+				target: 'http://10.20.10.154:3000',
+				// target: 'http://192.168.31.219:3000',
 				changeOrigin: true,
 				headers: {
 					// Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
 					Cookie: 'SESSION=951dde65-40c7-4afc-ad9e-f28a68a0dcac',
 				},
-				pathRewrite: {
-					'^/api': '/',
-				},
+				// pathRewrite: {
+				// 	'^/api': '/',
+				// },
 			},
 			'^/data': {
 				target: 'http://127.0.0.1:7001',
-				// target: 'http://10.20.10.154:3000',
+				// target: 'http://10.30.3.156:7001',
 				changeOrigin: true,
 				pathRewrite: {
 					'^/data': '/',
@@ -60,34 +71,34 @@ module.exports = {
 			},
 			'^/cdn': {
 				target: 'http://127.0.0.1:7001',
-				// target: 'http://10.20.10.154:3000',
+				// target: 'http://10.30.3.156:7001',
 				changeOrigin: true,
 				pathRewrite: {
 					'^/cdn': '/',
 				},
 			},
 			'^/server': {
-				target: 'http://192.168.1.33:9082',
-				// target: 'http://10.20.10.154:3000',
+				// target: 'http://192.168.1.33:9082',
+				target: 'http://10.20.10.154:3000',
 				changeOrigin: true,
-				pathRewrite: {
-					'^/server': '/',
-				},
+				// pathRewrite: {
+				// 	'^/server': '/',
+				// },
 			},
 			'^/pipenetwork': {
-				target: 'http://192.168.1.104:6080',
-				// target: 'http://10.20.10.154:3000',
+				// target: 'http://192.168.1.104:6080',
+				target: 'http://10.20.10.154:3000',
 				changeOrigin: true,
-				pathRewrite: {
-					'^/pipenetwork': '/',
-				},
+				// pathRewrite: {
+				// 	'^/pipenetwork': '/',
+				// },
 			},
 		},
 	},
 	css: {
 		extract: false,
 		sourceMap: false,
-		modules: false,
+		requireModuleExtension: false,
 	},
 	configureWebpack: (config) => {
 		if (isProduction) {
@@ -112,9 +123,9 @@ module.exports = {
 		]
 		config.plugins.push(
 			new webpack.DefinePlugin({
-				'process.env.staticPath': JSON.stringify(
-					isProduction ? `/${pkg.version}` : ''
-				),
+				'process.env.version': JSON.stringify(pkg.version),
+				'process.env.staticVuePath': JSON.stringify(isProduction ? 'vue.min.js' : 'vue.js'),
+				'process.env.BUILD_MODE': JSON.stringify(process.env.BUILD_MODE)
 			})
 		)
 	},
@@ -123,8 +134,9 @@ module.exports = {
 			.rule('vue')
 			.use('iview')
 			.loader('iview-loader')
-			.options({ prefix: false })
+			.options({prefix: false})
 		config.resolve.alias.set('@lib', path.resolve(__dirname, './lib'))
+		// config.resolve.alias.set('eslinkv-npm', path.resolve(__dirname, './node_modules/eslinkv-npm'))
 		if (isProduction) {
 			if (needReport) {
 				config
@@ -152,6 +164,21 @@ module.exports = {
 			.end()
 			.use('markdown-loader')
 			.loader('markdown-loader')
+			.end()
+		config.module
+			.rule('svg')
+			.exclude.add(resolve('node_modules/eslinkv-npm/src/icons'))
+			.end()
+		config.module
+			.rule('icons')
+			.test(/\.svg$/)
+			.include.add(resolve('node_modules/eslinkv-npm/src/icons'))
+			.end()
+			.use('svg-sprite-loader')
+			.loader('svg-sprite-loader')
+			.options({
+				symbolId: 'icon-[name]'
+			})
 			.end()
 	},
 }
