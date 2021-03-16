@@ -5,7 +5,7 @@ const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const isProduction = process.env.NODE_ENV === 'production'
 const needReport = false
 
-function resolve(dir) {
+function resolve (dir) {
 	return path.join(__dirname, dir)
 }
 
@@ -14,11 +14,11 @@ module.exports = {
 		'@simonwep',
 		'vue-draggable-resizable-gorkys2',
 		'swiper',
-		'dom7',
+		'dom7'
 	],
 	assetsDir: 'static',
-	publicPath: isProduction ? `/${pkg.version}` : '/',
-	outputDir: `dist/${pkg.version}`,
+	publicPath: '/',
+	outputDir: 'dist',
 	indexPath: '../index.html',
 	productionSourceMap: false,
 	lintOnSave: false,
@@ -41,8 +41,8 @@ module.exports = {
 				changeOrigin: true,
 				headers: {
 					// Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
-					Cookie: 'SESSION=951dde65-40c7-4afc-ad9e-f28a68a0dcac',
-				},
+					Cookie: 'SESSION=951dde65-40c7-4afc-ad9e-f28a68a0dcac'
+				}
 				// pathRewrite: {
 				// 	'^/hangran': '/',
 				// },
@@ -55,8 +55,8 @@ module.exports = {
 				changeOrigin: true,
 				headers: {
 					// Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
-					Cookie: 'SESSION=951dde65-40c7-4afc-ad9e-f28a68a0dcac',
-				},
+					Cookie: 'SESSION=951dde65-40c7-4afc-ad9e-f28a68a0dcac'
+				}
 				// pathRewrite: {
 				// 	'^/api': '/',
 				// },
@@ -66,21 +66,21 @@ module.exports = {
 				// target: 'http://10.30.3.156:7001',
 				changeOrigin: true,
 				pathRewrite: {
-					'^/data': '/',
-				},
+					'^/data': '/'
+				}
 			},
 			'^/cdn': {
 				target: 'http://127.0.0.1:7001',
 				// target: 'http://10.30.3.156:7001',
 				changeOrigin: true,
 				pathRewrite: {
-					'^/cdn': '/',
-				},
+					'^/cdn': '/'
+				}
 			},
 			'^/server': {
 				// target: 'http://192.168.1.33:9082',
 				target: 'http://10.20.10.154:3000',
-				changeOrigin: true,
+				changeOrigin: true
 				// pathRewrite: {
 				// 	'^/server': '/',
 				// },
@@ -88,15 +88,15 @@ module.exports = {
 			'^/pipenetwork': {
 				// target: 'http://192.168.1.104:6080',
 				target: 'http://10.20.10.154:3000',
-				changeOrigin: true,
+				changeOrigin: true
 				// pathRewrite: {
 				// 	'^/pipenetwork': '/',
 				// },
-			},
-		},
+			}
+		}
 	},
 	css: {
-		sourceMap: false,
+		sourceMap: false
 	},
 	configureWebpack: (config) => {
 		if (isProduction) {
@@ -106,7 +106,7 @@ module.exports = {
 					algorithm: 'gzip',
 					test: /.js|\.html|.json$|.css/,
 					threshold: 10240,
-					minRatio: 0.8,
+					minRatio: 0.8
 				})
 			)
 		}
@@ -116,15 +116,15 @@ module.exports = {
 				vue: 'Vue',
 				'vue-router': 'VueRouter',
 				'vue-class-component': 'VueClassComponent',
-				echarts: 'echarts',
-			},
+				echarts: 'echarts'
+			}
 		]
 		config.plugins.push(
 			new webpack.DefinePlugin({
 				'process.env.version': JSON.stringify(pkg.version),
 				'process.env.staticVuePath': JSON.stringify(isProduction ? 'vue.min.js' : 'vue.js'),
 				'process.env.BUILD_MODE': JSON.stringify(process.env.BUILD_MODE),
-				'process.env.staticPath': JSON.stringify(isProduction ? `/${pkg.version}` : '')
+				'process.env.staticPath': JSON.stringify('')
 			})
 		)
 	},
@@ -133,7 +133,7 @@ module.exports = {
 			.rule('vue')
 			.use('iview')
 			.loader('iview-loader')
-			.options({prefix: false})
+			.options({ prefix: false })
 		if (isProduction) {
 			if (needReport) {
 				config
@@ -177,5 +177,5 @@ module.exports = {
 				symbolId: 'icon-[name]'
 			})
 			.end()
-	},
+	}
 }
