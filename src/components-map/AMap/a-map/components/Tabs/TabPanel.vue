@@ -40,7 +40,7 @@
 
 
 <style lang="scss" scoped>
-	.tab-panel{
+	.tab-panel {
 		backface-visibility: hidden;
 	}
 </style>

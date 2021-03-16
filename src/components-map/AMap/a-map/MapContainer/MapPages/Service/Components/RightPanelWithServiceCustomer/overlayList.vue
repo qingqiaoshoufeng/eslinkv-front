@@ -102,34 +102,34 @@
 				this.activeIndex = index > -1 ? index : null
 			}
 		},
-	},
-	methods: {
-		async getData() {
-            //除第一次需要loading外，其余需要无感刷新
-            if(!this.loaded){
-                this.loading = true
-            }
-			let res = await this.$sysApi.map.serve.getServiceCustomerThreeSocialList()
-			this.list = res.map((item) => {
-				let { stationType } = item
-				let config = SERVICE_SERVICECUSTOMER_LEGEND_MAP[stationType]
-				if (config) {
-					item.icon = config.legendIcon
+		methods: {
+			async getData () {
+				// 除第一次需要loading外，其余需要无感刷新
+				if (!this.loaded) {
+					this.loading = true
 				}
-				return item
-            })
-            this.loading = false;
-            this.loaded=true;
-		},
-		handleClick(item, index) {
-			this.activeIndex = index
-			item.overlayType = 'ThreeSocialLinkage'
-			this.$emit('change', { ...item, activeIndex: index })
-		},
-		beforeDestroy () {
-			if (this.timer) {
-				clearInterval(this.timer)
-				this.timer = null
+				const res = await this.$sysApi.map.serve.getServiceCustomerThreeSocialList()
+				this.list = res.map((item) => {
+					const { stationType } = item
+					const config = SERVICE_SERVICECUSTOMER_LEGEND_MAP[stationType]
+					if (config) {
+						item.icon = config.legendIcon
+					}
+					return item
+				})
+				this.loading = false
+				this.loaded = true
+			},
+			handleClick (item, index) {
+				this.activeIndex = index
+				item.overlayType = 'ThreeSocialLinkage'
+				this.$emit('change', { ...item, activeIndex: index })
+			},
+			beforeDestroy () {
+				if (this.timer) {
+					clearInterval(this.timer)
+					this.timer = null
+				}
 			}
 		}
 	}

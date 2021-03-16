@@ -15,6 +15,7 @@ module.exports = {
 		'vue-draggable-resizable-gorkys2',
 		'swiper',
 		'dom7',
+		'eslinkv-npm'
 	],
 	assetsDir: 'static',
 	publicPath: isProduction ? `/${pkg.version}` : '/',
@@ -96,9 +97,7 @@ module.exports = {
 		},
 	},
 	css: {
-		extract: false,
 		sourceMap: false,
-		requireModuleExtension: false,
 	},
 	configureWebpack: (config) => {
 		if (isProduction) {
@@ -135,7 +134,6 @@ module.exports = {
 			.use('iview')
 			.loader('iview-loader')
 			.options({prefix: false})
-		config.resolve.alias.set('@lib', path.resolve(__dirname, './lib'))
 		// config.resolve.alias.set('eslinkv-npm', path.resolve(__dirname, './node_modules/eslinkv-npm'))
 		if (isProduction) {
 			if (needReport) {

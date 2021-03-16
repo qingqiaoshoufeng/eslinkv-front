@@ -133,16 +133,16 @@
 			height: 200px !important;
 		}
 
-	.context {
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, -50%) translateZ(0px);
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		color: #fff;
-		margin-top: 15px;
+		.context {
+			top: 50%;
+			left: 50%;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			margin-top: 15px;
+			color: #fff;
+			transform: translate(-50%, -50%) translateZ(0);
 
 			.value {
 				font-size: 40px;
@@ -194,12 +194,12 @@
 
 		.carout_point {
 			position: absolute;
-      transform: translateZ(0px);
 			bottom: -4px;
 			width: 15px;
 			height: 15px;
 			background: #fff;
 			border-radius: 10px;
+			transform: translateZ(0);
 		}
 	}
 </style>

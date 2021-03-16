@@ -59,8 +59,8 @@
 	right: 530px;
 	z-index: 100;
 	width: 280px;
-
 	backface-visibility: hidden;
+
 	.data_statistics_item {
 		display: flex;
 		flex-direction: column;

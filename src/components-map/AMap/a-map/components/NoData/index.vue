@@ -22,15 +22,15 @@
 </script>
 <style lang="scss" scoped>
 .no-data-box {
-	display: flex;
-	flex-direction: column;
 	position: absolute;
 	top: 35%;
-	backface-visibility: hidden;
 	left: 50%;
 	display: flex;
+	display: flex;
+	flex-direction: column;
 	flex-direction: column;
 	transform: translate(-50%);
+	backface-visibility: hidden;
 
 	div {
 		margin-top: 20px;

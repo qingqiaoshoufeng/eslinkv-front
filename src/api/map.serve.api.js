@@ -292,14 +292,14 @@ export function getServiceCustomerThreeSocialList (data) {
  * 客户服务三社联动信息
  * @params {null}
  */
-export function getServiceCustomerThreeSocialDetail(data) {
+export function getServiceCustomerThreeSocialDetail (data) {
     return request({
         url: `${HANGRANURL}/threeSocial/eventDetail`,
         method: 'get',
         params: data,
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
     })
 }
 
