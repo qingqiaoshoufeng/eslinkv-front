@@ -26,6 +26,14 @@ let DeviceName = {
     DW: '',
     prop: "deviceName",
 }
+let DeviceStatus = {
+    label: '设备状态',
+    DW: '',
+    prop: "deviceStatus",
+    style: {
+        "minWidth": "70%",
+    }
+}
 let DeviceLocation = {
     label: '设备坐标',
     DW: '',
@@ -101,5 +109,5 @@ let ch4 = {
 
 export {
     ValveOpenFinish, time,
-    DevicedId, DeviceName, DeviceLocation, F_BatteryVoltage, SolarCell, GatewaySingal, deviceType, inletPressure, outletPressure, inletTemperature, outletTemperature, MC, TEMP, h2S, ch4
+    DevicedId, DeviceName, DeviceStatus, DeviceLocation, F_BatteryVoltage, SolarCell, GatewaySingal, deviceType, inletPressure, outletPressure, inletTemperature, outletTemperature, MC, TEMP, h2S, ch4
 }
