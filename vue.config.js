@@ -19,7 +19,7 @@ module.exports = {
 	assetsDir: 'static',
 	publicPath: '/',
 	outputDir: 'dist',
-	indexPath: '../index.html',
+	indexPath: './index.html',
 	productionSourceMap: false,
 	lintOnSave: false,
 	devServer: {
