@@ -23,8 +23,8 @@
       height: 1080
     }
 
-      scaleY = 1
-      scaleX = 0
+    scaleY = 1
+    scaleX = 0
     actualScaleRatio = 1
 
     updateKanboardSize (val) {

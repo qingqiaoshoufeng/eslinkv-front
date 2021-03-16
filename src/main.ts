@@ -7,7 +7,8 @@ import './openApi'
 import VueVideoPlayer from 'vue-video-player'
 import 'video.js/dist/video-js.css'
 import './api'
-
+import './components-business/index.ts'
+import './components-map/index.ts'
 import PortalVue from 'portal-vue'
 import '@babel/polyfill'
 import 'eslinkv-npm'
@@ -30,6 +31,6 @@ Vue.prototype.$Modal = Modal
 Vue.config.productionTip = false
 
 new Vue({
-	router,
-	render: (h) => h(App)
+    router,
+    render: (h) => h(App)
 }).$mount('#app')
