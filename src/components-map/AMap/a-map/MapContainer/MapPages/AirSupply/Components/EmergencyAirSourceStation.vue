@@ -49,9 +49,9 @@
 			dataInner () {
 				const { data = [] } = this
 				const stationPoseMap = {
-					'西部应急气源站': 'left',
-					'东部应急气源站': 'top',
-					'西部应急气源站': 'left'
+					西部应急气源站: 'left',
+					东部应急气源站: 'top',
+					西部应急气源站: 'left'
 				}
 				return this.data.map(item => {
 					item.pose = stationPoseMap[item.name]

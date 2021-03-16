@@ -23,8 +23,8 @@
       height: 1080
     }
 
-    scaleY = 1
-    scaleX = 0
+      scaleY = 1
+      scaleX = 0
     actualScaleRatio = 1
 
     updateKanboardSize (val) {
@@ -58,40 +58,40 @@
 </script>
 <style lang="scss">
 .detail-container {
-  height: 100%;
+	height: 100%;
 }
 
 .preview-wrapper {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 99999;
-  display: flex;
-  overflow: hidden;
-  background: #0f3b69;
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 99999;
+	display: flex;
+	overflow: hidden;
+	background: #0f3b69;
 
-  &.active {
-    overflow: auto;
-  }
+	&.active {
+		overflow: auto;
+	}
 
-  &::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
+	&::-webkit-scrollbar {
+		width: 0;
+		height: 0;
+	}
 
-  #kanban {
-    position: relative;
-    flex-grow: 0;
-    flex-shrink: 0;
-    outline: rgba(255, 255, 255, 0.2) 1px dotted;
-  }
+	#kanban {
+		position: relative;
+		flex-grow: 0;
+		flex-shrink: 0;
+		outline: rgba(255, 255, 255, 0.2) 1px dotted;
+	}
 
-  &.fit-mode {
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
+	&.fit-mode {
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+	}
 }
 </style>
