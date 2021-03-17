@@ -314,16 +314,14 @@
 			showThreeSocialLinkageDetail () {
 				const { id } = this.activeOverlay
 				// 打开三社联动的弹框
-				scene.actions.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX)
-				this.$nextTick(() => {
-					THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
-						this.$sysApi.map.serve.getServiceCustomerThreeSocialDetail({ id }).then(res => {
-							instance.actions.updateComponent(i, {
-								data: res
-							})
-						})
-					})
-				})
+        THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
+          this.$sysApi.map.serve.getServiceCustomerThreeSocialDetail({ id }).then(res => {
+            instance.actions.updateComponent(i, {
+              data: res
+            })
+            scene.actions.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX)
+          })
+        })
 			},
 			// 客户服务统一数据
 			async getDataStatisticsList () {
