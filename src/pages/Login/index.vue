@@ -1,17 +1,17 @@
 <template lang="pug">
-	.login-container.fn-flex
-		.login-card.fn-flex
-			.login-card-logo.pos-r.fn-flex
-				.login-card-logo-img.pos-a
-				.login-card-logo-mask.pos-a
-				h2.pos-r EslinkV
-			ul.login-card-content
-				li
-					i-input(prefix="md-contact" placeholder="用户名")
-				li
-					i-input(prefix="md-lock" placeholder="密码")
-				li
-					i-button(type="primary" shape="circle" :long="true") 登录
+  .login-container.fn-flex
+    .login-card.fn-flex
+      .login-card-logo.pos-r.fn-flex
+        .login-card-logo-img.pos-a
+        .login-card-logo-mask.pos-a
+        h2.pos-r EslinkV
+      ul.login-card-content
+        li
+          i-input(prefix="md-contact" placeholder="用户名" v-model="userName")
+        li
+          i-input(prefix="md-lock" placeholder="密码" v-model="password" @keyup.enter="login" type="password")
+        li
+          i-button(type="primary" shape="circle" :long="true" @click="login") 登录
 </template>
 <script lang="ts">
 	import { Input, Button, Icon } from 'view-design'
@@ -25,7 +25,17 @@
 		}
 	})
 	export default class Login extends Vue {
+    userName: string = ''
+    password: string = ''
 
+    async login () {
+      if (!this.userName || !this.password) return
+      await this.$sysApi.common.login({
+        userName: this.userName,
+        password: this.password
+      })
+      this.$router.replace('/')
+    }
 	}
 </script>
 <style lang="scss" scoped>
