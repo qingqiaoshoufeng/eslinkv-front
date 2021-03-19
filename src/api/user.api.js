@@ -1,4 +1,4 @@
-import request from './requestForNode'
+import request from './request'
 const prefix = '/node'
 
 // 登陆

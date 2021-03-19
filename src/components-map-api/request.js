@@ -29,8 +29,12 @@ request.interceptors.response.use(
         const { data } = response
         // console.log(data)
         if (data) {
-            if (data.code === 200) {
+            if (data.code === 0 || data.returnCode === '0000') {
                 return data.data
+            } else if (data.responseCode === '101002') {
+                // 未登录
+                Message.error(data.message || errMessage)
+                return Promise.reject(false)
             } else {
                 Message.error(data.message || errMessage)
                 return Promise.reject(false)
