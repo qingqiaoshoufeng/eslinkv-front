@@ -7,7 +7,7 @@
 			.search
 			e-page(@init="init" :total="total" ref="page")
 				ul.fn-flex.flex-row.list-item-card-box
-					item-card(v-for="item in list" :item="item" :key="item.id" @reload="reload")
+					item-card(v-for="(item, i) in list" :item="item" :key="i" @reload="reload")
 </template>
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
@@ -27,8 +27,8 @@
 		total: number = 0
 
 		async init ({ pageNum, pageSize }) {
-			const res = await this.$api.bussiness.getCompListAll({ pageNum, pageSize })
-			this.list = res.rows
+			const res = await this.$api.marketComponent.list({ pageNum, pageSize })
+			this.list = res.list
 			this.total = res.count
 		}
 

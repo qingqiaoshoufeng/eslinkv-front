@@ -4,7 +4,7 @@
 		empty-image.avatar(v-if="!currentItem.componentImage")
 		h2.ellipsis {{currentItem.componentTitle}}
 		.fn-flex.flex-row.list-item-card-time-box
-			p {{$format(currentItem.createTime,'yyyy-MM-dd hh:mm:ss')}}
+			p {{$format(new Date(currentItem.createTime),'yyyy-MM-dd hh:mm:ss')}}
 		div
 			i-button(type="success" size="small") {{currentItem.componentVersion}}
 			i-button(:style="{marginLeft:'10px'}" type="info" size="small") {{currentItem.componentEnTitle}}
@@ -84,7 +84,7 @@
 		}
 
 		submitEdit() {
-			this.$api.bussiness.updateComponent(this.currentItem).then(() => {
+			this.$api.marketComponent.update(this.currentItem).then(() => {
 				this.dialogEditShow = false
 				this.$Message.success('更新成功')
 				this.$emit('reload')
@@ -93,7 +93,7 @@
 
 		handleEdit() {
 			this.dialogEditShow = true
-			this.$api.bussiness.getAllComponentType().then(r => {
+			this.$api.marketComponentType.getAllComponentType().then(r => {
 				this.componentTypeList = r
 			})
 		}

@@ -47,7 +47,7 @@
 		}
 
 		async init () {
-			const res = await this.$api.bussiness.getAllComponentType()
+			const res = await this.$api.marketComponentType.getAllComponentType()
 			this.list = res
 			this.total = res.length
 		}
