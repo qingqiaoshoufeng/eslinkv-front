@@ -2,28 +2,32 @@
 	<div class="widget-part" :style="styles">
 		<div class="s-progress-1">
 			<ul>
-				<li class="fn-flex flex-row pos-r" v-for="(item,index) in data?data:[]" :key="index">
-					<i :style="{backgroundImage:`url(${config.config&&config.config.background[index].background})`}"></i>
-					<label>{{config.config&&config.config.background[index].title}}</label>
+				<li class="fn-flex flex-row pos-r" v-for="(item,index) in config.config.background" :key="index">
+					<i :style="{backgroundImage:`url(${config.config && config.config.background[index].background})`}"></i>
+					<label>{{ config.config && config.config.background[index].title }}</label>
 					<div class="fn-flex flex-row s-progress-1-line-box pos-r">
 						<div class="s-progress-1-line" v-for="(child,key) in icons" :key="key"></div>
 					</div>
 					<div class="fn-flex flex-row s-progress-1-real-box pos-a">
-						<div :style="{background:`linear-gradient(to right, ${colors[i]} , ${colors[i+1]})`}"
-							 class="s-progress-1-real" v-for="(child,i) in realArr[index]" :key="i"></div>
+						<div
+							:style="{background:`linear-gradient(to right, ${colors[i]} , ${colors[i + 1]})`}"
+							class="s-progress-1-real"
+							v-for="(child,i) in realArr[index]"
+							:key="i"
+						></div>
 					</div>
-					<p class="font-num">{{item.value}}</p>
+					<p class="font-num">{{ item.value }}</p>
 				</li>
 			</ul>
 		</div>
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins'
-	import { config, configSource, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { customConfig, value } from './index.component'
 
 	export default {
-		data() {
+		data () {
 			return {
 				icons: new Int8Array(50),
 				max: 0,
@@ -34,9 +38,9 @@
 		mixins: [mixins],
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (val) {
-						let realArr = []
+						const realArr = []
 						const list = val.reduce((initVal, val) => {
 							initVal.push(val.value || 0)
 							return initVal
@@ -50,42 +54,41 @@
 					}
 				},
 				immediate: true,
-				deep: true,
-			},
+				deep: true
+			}
 		},
 		methods: {
-			parseColor(hexStr) {
+			parseColor (hexStr) {
 				return hexStr.length === 4 ? hexStr.substr(1).split('').map(function (s) {
-					return 0x11 * parseInt(s, 16);
+					return 0x11 * parseInt(s, 16)
 				}) : [hexStr.substr(1, 2), hexStr.substr(3, 2), hexStr.substr(5, 2)].map(function (s) {
-					return parseInt(s, 16);
+					return parseInt(s, 16)
 				})
 			},
-			pad(s) {
-				return (s.length === 1) ? '0' + s : s;
+			pad (s) {
+				return (s.length === 1) ? '0' + s : s
 			},
-			gradientColors(start, end, steps, gamma) {
-				let i, j, ms, me, output = [], so = [];
-				gamma = gamma || 1;
+			gradientColors (start, end, steps, gamma) {
+				let i; let j; let ms; let me; const output = []; const so = []
+				gamma = gamma || 1
 				const normalize = function (channel) {
-					return Math.pow(channel / 255, gamma);
-				};
-				start = this.parseColor(start).map(normalize);
-				end = this.parseColor(end).map(normalize);
+					return Math.pow(channel / 255, gamma)
+				}
+				start = this.parseColor(start).map(normalize)
+				end = this.parseColor(end).map(normalize)
 				for (i = 0; i < steps; i++) {
-					ms = i / (steps - 1);
-					me = 1 - ms;
+					ms = i / (steps - 1)
+					me = 1 - ms
 					for (j = 0; j < 3; j++) {
-						so[j] = this.pad(Math.round(Math.pow(start[j] * me + end[j] * ms, 1 / gamma) * 255).toString(16));
+						so[j] = this.pad(Math.round(Math.pow(start[j] * me + end[j] * ms, 1 / gamma) * 255).toString(16))
 					}
-					output.push('#' + so.join(''));
+					output.push('#' + so.join(''))
 				}
 				this.colors = output
 			}
 		},
-		created() {
-			this.configSource = this.parseConfigSource(config, configSource)
-			this.configValue = this.parseConfigValue(config, value)
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
 			this.gradientColors('#0057A9', '#00DDFF', 50)
 		}
 	}
@@ -95,35 +98,34 @@
 		height: 100%;
 
 		li {
-			margin-bottom: 24px;
 			align-items: center;
+			margin-bottom: 24px;
 
 			p {
+				margin-left: auto;
 				font-size: 24px;
 				line-height: 24px;
 				color: #fff;
-				margin-left: auto;
 			}
 
 			i {
 				width: 32px;
 				height: 32px;
-				background-size: 32px;
 				margin-right: 8px;
+				background-size: 32px;
 			}
 
 			label {
 				margin-right: 8px;
-				color: #fff;
 				font-size: 18px;
 				line-height: 24px;
+				color: #fff;
 			}
 
 			&:last-child {
 				margin-bottom: 0;
 			}
 		}
-
 	}
 
 	.s-progress-1-real-box {

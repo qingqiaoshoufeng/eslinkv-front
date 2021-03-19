@@ -1,11 +1,3 @@
-import {getInput} from '../../../../lib'
-
-export const config = {
-	animation: true,
-	config: {
-		unit: true
-	}
-};
 export const value = {
 	layout: {
 		size: {
@@ -48,7 +40,7 @@ export const value = {
 			},
 			{
 				x: '20:00',
-				y: 8,
+				y: 8
 			}
 		])
 	},
@@ -56,10 +48,11 @@ export const value = {
 		unit: 'm³'
 	}
 }
-export const configSource = {
-	config: {
-		fields: {
-			unit: getInput('unit', '单位'),
-		}
-	},
-}
+
+export const customConfig = [
+	{
+		prop: 'unit',
+		label: '单位',
+		type: 'func-input'
+	}
+]

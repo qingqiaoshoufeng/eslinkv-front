@@ -1,18 +1,17 @@
-// eg 文件名  map.mock.js  调用  this.$sysApi.map.mock.xxx函数
 import Vue from 'vue'
-
+import { configMerge } from '../utils'
 const context = require.context('/', false, /\.(api.js)$/)
 const apis: any = {}
 context.keys().forEach((name) => {
-	let key = name.replace(/^\.\//, '').replace(/\.(api.js)$/, '')
-	let keyArr = key.split('.')
+	const key = name.replace(/^\.\//, '').replace(/\.(api.js)$/, '')
+	const keyArr = key.split('.')
 	let content = null
 	if (context(name).default) {
 		content = context(name).default
 	} else {
 		content = context(name)
 	}
-	let keyArrLen = keyArr.length
+	const keyArrLen = keyArr.length
 	let target = apis
 	keyArr.forEach((key, index) => {
 		if (!target[key]) {
@@ -22,4 +21,9 @@ context.keys().forEach((name) => {
 	})
 })
 
-Vue.prototype.$sysApi = apis
+if (Vue.prototype.$api) {
+	Vue.prototype.$api = configMerge(apis, Vue.prototype.$api)
+} else {
+	Vue.prototype.$api = apis
+}
+

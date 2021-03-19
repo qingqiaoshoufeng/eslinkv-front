@@ -14,61 +14,61 @@
 	/>
 </template>
 <script>
-import { BaseOverlay } from '../../../../components/index'
+	import { BaseOverlay } from '../../../../components/index'
 
-export default {
-	name: 'MajorClient',
-	components: {
-		BaseOverlay,
-	},
-	props: {
-		visible: {
-			type: Boolean,
-			default: true,
+	export default {
+		name: 'MajorClient',
+		components: {
+			BaseOverlay
 		},
-		overlayIcon: {
-			type: String,
-			default: '',
-		},
-		overlayType: {
-			type: String,
-			default: '',
-		},
-		data: {
-			type: Array,
-			default() {
-				return []
+		props: {
+			visible: {
+				type: Boolean,
+				default: true
 			},
-		},
-		detailList: {
-			type: Array,
-			default() {
-				return []
+			overlayIcon: {
+				type: String,
+				default: ''
 			},
+			overlayType: {
+				type: String,
+				default: ''
+			},
+			data: {
+				type: Array,
+				default () {
+					return []
+				}
+			},
+			detailList: {
+				type: Array,
+				default () {
+					return []
+				}
+			}
 		},
-	},
-	data() {
-		return {
-			apiFun: this.$sysApi.map.mock.getGrouphallList,
-			mouseIn: true,
+		data () {
+			return {
+				apiFun: this.$api.map.mock.getGrouphallList,
+				mouseIn: true
+			}
+		},
+		methods: {
+			mouseover (marker) {
+				this.mouseIn = true
+				marker.detailList = this.detailList
+				marker.overlayType = this.overlayType
+				this.$emit('overlay-click', marker, this.overlayType)
+			},
+			mouseleave () {
+				this.mouseIn = true
+				this.$emit('close')
+			},
+			handleOverlayClick (marker) {
+				marker.detailList = this.detailList
+				marker.overlayType = this.overlayType
+				this.$emit('overlay-click', marker, this.overlayType)
+			}
 		}
-	},
-	methods: {
-		mouseover(marker) {
-			this.mouseIn = true
-			marker.detailList = this.detailList
-			marker.overlayType = this.overlayType
-			this.$emit('overlay-click', marker, this.overlayType)
-		},
-		mouseleave() {
-			this.mouseIn = true
-			this.$emit('close')
-		},
-		handleOverlayClick(marker) {
-			marker.detailList = this.detailList
-			marker.overlayType = this.overlayType
-			this.$emit('overlay-click', marker, this.overlayType)
-		},
-	},
-}
+	}
 </script>

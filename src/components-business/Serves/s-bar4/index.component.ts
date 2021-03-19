@@ -1,6 +1,3 @@
-export const config = {
-	animation: true
-};
 export const value = {
 	layout: {
 		size: {
@@ -78,7 +75,7 @@ export const value = {
 				y1: 258,
 				y2: 369,
 				y3: 147
-			},
+			}
 		])
 	}
 }

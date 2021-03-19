@@ -1,18 +1,3 @@
-import {getInput} from '../../../../lib'
-
-export const configSource = {
-	config: {
-		fields: {
-			title: getInput('title', '文字'),
-		}
-	}
-}
-export const config = {
-	animation: true,
-	config: {
-		title: true,
-	}
-}
 export const value = {
 	api: {
 		data: JSON.stringify({
@@ -33,3 +18,11 @@ export const value = {
 		}
 	}
 }
+
+export const customConfig = [
+	{
+		prop: 'title',
+		label: '文字',
+		type: 'func-input'
+	}
+]

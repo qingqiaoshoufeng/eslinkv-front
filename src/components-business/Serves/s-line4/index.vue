@@ -4,42 +4,41 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
-	import getOption from './options';
-	import { config, configSource, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import getOption from './options'
+	import { customConfig, value } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		methods: {
-			setOption(data) {
+			setOption (data) {
 				this.instance && this.instance.setOption(getOption(this.data, this.config.config))
 			}
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
 							this.setOption()
-						});
+						})
 					}
 				},
 				deep: true,
-				immediate: true,
-			},
+				immediate: true
+			}
 		},
-		created() {
-			this.configSource = this.parseConfigSource(config, configSource);
-			this.configValue = this.parseConfigValue(config, value);
-		},
-	};
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
+		}
+	}
 </script>
 <style lang="scss" scoped>
 	.chart {
+		position: relative;
 		width: 100%;
 		height: 100%;
-		position: relative;
 	}
 </style>
 

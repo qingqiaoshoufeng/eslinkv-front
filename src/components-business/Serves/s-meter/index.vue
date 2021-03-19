@@ -6,7 +6,7 @@
 				:key="i"
 				:class="{active: i === index}"
 			>
-				<div class="li-progress" :style="{right: `${100-k.percent}%`}"></div>
+				<div class="li-progress" :style="{right: `${100 - k.percent}%`}"></div>
 				<div class="li-main">
 					<div class="li-name">{{ k.name }}</div>
 					<div class="li-percent">{{ k.percent }}%</div>
@@ -18,8 +18,8 @@
 			<div class="row">
 				<div class="info">
 					<img :src="config.config.img1" alt="">
-					<span class="info-txt">{{config.config.desc1}}</span>
-					<span class="info-num font-num">{{ activeItem.num1 | toThousand}}</span>
+					<span class="info-txt">{{ config.config.desc1 }}</span>
+					<span class="info-num font-num">{{ activeItem.num1 | toThousand }}</span>
 				</div>
 				<div class="progress">
 					<div class="progress-line" :style="{width: 468 * activeItem.rate1 + 'px' }">
@@ -30,8 +30,8 @@
 			<div class="row">
 				<div class="info">
 					<img :src="config.config.img2" alt="">
-					<span class="info-txt">{{config.config.desc2}}</span>
-					<span class="info-num font-num">{{ activeItem.num2 | toThousand}}</span>
+					<span class="info-txt">{{ config.config.desc2 }}</span>
+					<span class="info-num font-num">{{ activeItem.num2 | toThousand }}</span>
 				</div>
 				<div class="progress">
 					<div class="progress-line" :style="{width: 468 * activeItem.rate2 + 'px' }">
@@ -44,68 +44,67 @@
 			<div class="chart" :id="id"/>
 			<div class="chart-info">
 				<div class="chart-info-num font-num">{{ activeItem.finishRate }}%</div>
-				<div class="chart-info-txt">{{config.config.desc}}</div>
+				<div class="chart-info-txt">{{ config.config.desc }}</div>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
-	import getOption from './options';
-	import { config, configSource, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import getOption from './options'
+	import { customConfig, value } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		methods: {
-			setOption(data) {
+			setOption (data) {
 				this.instance && this.instance.setOption(getOption(this.activeItem.finishRate))
 			}
 		},
-		data() {
+		data () {
 			return {
 				index: 0,
 				timer: null
 			}
 		},
 		computed: {
-			activeItem() {
+			activeItem () {
 				return this.data ? this.data[this.index] : {}
 			}
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						this.$nextTick(() => {
 							this.instance = echarts.init(
 								document.getElementById(this.id)
-							);
-						});
+							)
+						})
 					}
 				},
 				deep: true,
-				immediate: true,
-			},
+				immediate: true
+			}
 		},
-		created() {
-			this.configSource = this.parseConfigSource(config, configSource);
-			this.configValue = this.parseConfigValue(config, value);
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
 		},
-		mounted() {
+		mounted () {
 			this.timer = setInterval(() => {
 				if (this.index === this.data.length - 1) {
 					this.index = 0
 				} else {
 					this.index++
 				}
-				this.setOption();
+				this.setOption()
 			}, 2000)
 		},
-		beforeDestroy() {
+		beforeDestroy () {
 			clearInterval(this.timer)
 			this.timer = null
 		}
-	};
+	}
 </script>
 <style lang="scss" scoped>
 	.widget-part {
@@ -113,24 +112,25 @@
 		align-items: center;
 
 		.list {
-			flex: none;
 			display: flex;
-			margin-right: 68px;
+			flex: none;
 			flex-direction: column;
 			justify-content: space-around;
+			margin-right: 68px;
 
 			li {
+				position: relative;
 				width: 200px;
 				height: 40px;
-				position: relative;
-				font-size: 18px;
 				margin-bottom: 8px;
+				font-size: 18px;
 				color: rgba(255, 255, 255, 0.75);
 				background: rgba(0, 31, 109, 0.5);
 
 				&.active {
 					color: #fff;
-					border: 1px solid #00DDFF;
+					border: 1px solid #0df;
+
 					.li-progress {
 						background: rgba(0, 221, 255, 0.5);
 					}
@@ -138,27 +138,30 @@
 
 				.li-progress {
 					position: absolute;
-					left: 0;
-					right: 30%;
 					top: 0;
+					right: 30%;
 					bottom: 0;
+					left: 0;
 					z-index: 5;
-					background: #0057A9;
+					background: #0057a9;
 				}
+
 				.li-main {
 					position: absolute;
-					left: 0;
-					right: 0;
 					top: 0;
+					right: 0;
 					bottom: 0;
+					left: 0;
 					z-index: 6;
-					padding: 0 12px;
 					display: flex;
 					align-items: center;
+					padding: 0 12px;
 					text-align: left;
+
 					.li-name {
 						width: 100px;
 					}
+
 					.li-percent {
 						width: 30px;
 						margin-right: 30px;
@@ -188,57 +191,57 @@
 					}
 
 					.info-txt {
-						text-align: left;
+						flex: 1;
 						font-size: 24px;
 						line-height: 24px;
-						color: #FEFFFF;
-						flex: 1;
+						color: #feffff;
+						text-align: left;
 					}
 
 					.info-num {
 						font-size: 24px;
 						line-height: 24px;
-						color: #FEFFFF;
+						color: #feffff;
 					}
 				}
 
 				.progress {
 					width: 480px;
 					height: 16px;
-					background: rgba(255, 255, 255, 0.1);
-					padding-left: 6px;
 					padding-top: 6px;
+					padding-left: 6px;
+					background: rgba(255, 255, 255, 0.1);
 
 					.progress-line {
 						position: relative;
 						width: 200px;
 						height: 4px;
-						background: linear-gradient(90deg, rgba(1, 229, 255, 0.0001) 0%, #00DDFF 100%);
-						transition: all .3s;
+						background: linear-gradient(90deg, rgba(1, 229, 255, 0.0001) 0%, #0df 100%);
+						transition: all 0.3s;
 
 						.dot {
+							position: absolute;
+							top: -8px;
+							right: -10px;
 							width: 20px;
 							height: 20px;
-							position: absolute;
-							right: -10px;
-							top: -8px;
-							border-radius: 50%;
 							border: 2px solid rgba(0, 254, 207, 0.4);
+							border-radius: 50%;
 
-							&:after {
-								content: '';
-								display: block;
+							&::after {
 								position: absolute;
-								right: 0;
 								top: 0;
-								left: 0;
+								right: 0;
 								bottom: 0;
-								margin: auto;
+								left: 0;
+								display: block;
 								width: 12px;
 								height: 12px;
+								margin: auto;
+								content: '';
+								background: #00ffcf;
 								border-radius: 50%;
-								background: #00FFCF;
-								box-shadow: 0px 0px 4px #00FECF;
+								box-shadow: 0 0 4px #00fecf;
 							}
 						}
 					}
@@ -247,10 +250,10 @@
 		}
 
 		.chart-wrap {
-			margin-left: 48px;
 			position: relative;
 			width: 156px;
 			height: 156px;
+			margin-left: 48px;
 
 			.chart {
 				width: 156px;
@@ -260,22 +263,22 @@
 			.chart-info {
 				position: absolute;
 				top: 48px;
-				left: 0;
 				right: 0;
+				left: 0;
 
 				.chart-info-num {
-					font-weight: bold;
 					font-size: 32px;
+					font-weight: bold;
 					line-height: 32px;
-					color: #FFFFFF;
+					color: #fff;
 				}
 
 				.chart-info-txt {
+					margin-top: 8px;
 					font-size: 18px;
 					line-height: 25px;
-					text-align: center;
 					color: rgba(255, 255, 255, 0.75);
-					margin-top: 8px;
+					text-align: center;
 				}
 			}
 		}

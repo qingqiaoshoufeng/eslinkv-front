@@ -2,76 +2,80 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<div class="accident-box">
-            <div class="video-box">
-                <video
-				src="/static/images/serves/accident.webm"
-				controls="controls"
-				autoplay="autoplay"
-				muted="muted"
-				loop
-			></video>
-            </div>
+			<div class="video-box">
+				<video
+					src="/static/images/serves/accident.webm"
+					controls="controls"
+					autoplay="autoplay"
+					muted="muted"
+					loop
+				></video>
+			</div>
 
 			<div class="context">
-				<div class="accident-value font-num">{{data&&data.value}}</div>
-				<div class="accident-desc">{{data&&data.desc}}</div>
+				<div class="accident-value font-num">{{ data && data.value }}</div>
+				<div class="accident-desc">{{ data && data.desc }}</div>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-import mixins from '../../mixins';
-import { config, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value } from './index.component'
 
-export default {
-	mixins: [mixins],
-	methods: {},
-	created() {
-		this.configSource = this.parseConfigSource(config);
-		this.configValue = this.parseConfigValue(config, value);
-	},
-};
+	export default {
+		mixins: [mixins],
+		methods: {},
+		created () {
+			this.configValue = this.parseConfigValue(value)
+		}
+	}
 </script>
 <style lang="scss">
 .accident-box {
-	height: 160px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 340px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	height: 160px;
+
 	video::-webkit-media-controls {
 		display: none !important;
 	}
+
 	video {
-        margin-left: 22px;
-		height: 160px;
-		width: 160px;
 		flex: none;
+		width: 160px;
+		height: 160px;
+		margin-left: 22px;
 	}
+
 	.context {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        height: 100%;
-        margin-left:50px ;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		margin-left: 50px;
+
 		.accident-value {
-			text-align: left;
+			padding-left: 8px;
 			font-size: 48px;
-            color: #FF7217;
-            padding-left: 8px;
+			color: #ff7217;
+			text-align: left;
 		}
+
 		.accident-desc {
-            margin-top: 13px;
-            width: 150px;
-            height: 32px;
-            line-height: 32px;
+			width: 150px;
+			height: 32px;
+			margin-top: 13px;
+			font-size: 20px;
 			font-style: normal;
 			font-weight: normal;
-			font-size: 20px;
-            color: #fff;
-            text-align: center;
-            background-color: #001F6D;
+			line-height: 32px;
+			color: #fff;
+			text-align: center;
+			background-color: #001f6d;
 		}
 	}
 }

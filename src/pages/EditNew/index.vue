@@ -1,0 +1,98 @@
+<template lang="pug">
+	.home-container
+		.layout-wrapper
+			.main-container
+				.d-editor-box.pos-r.fn-flex
+					d-widget-list(ref="widgets" :class="{ 'd-editor-fullscreen': platform.fullscreen }")
+					d-editor(ref="kanboardEditor")
+				load-mask(:show="querying") {{querying ? '请求模板数据…' : '正在生成快照…'}}
+			d-footer
+</template>
+<script>
+	import loadMask from 'eslinkv-npm/src/components/load-mask/index.vue'
+	import dFooter from 'eslinkv-npm/src/components/d-footer/index.vue'
+	import dWidgetList from 'eslinkv-npm/src/components/d-widget-list/index.vue'
+	import dEditor from 'eslinkv-npm/src/components/d-editor/index.vue'
+	import platform from 'eslinkv-npm/src/store/platform.store'
+
+	export default {
+		name: 'New',
+		provide () {
+			return { kanboardEditor: this.$refs.kanboardEditor }
+		},
+		components: { loadMask, dFooter, dWidgetList, dEditor },
+		data () {
+			return {
+				ready: false,
+				querying: false,
+				platform: platform.state
+			}
+		},
+		mounted () {
+			document.title = '新增 - 数据看板'
+		}
+	}
+</script>
+
+<style lang="scss" scoped>
+	.d-editor-box {
+		width: 100%;
+		height: 100%;
+
+		.d-editor-fullscreen {
+			position: fixed;
+		}
+
+		/deep/ {
+			.widgets-panel.fixed + .center {
+				width: calc(100% - 428px) !important;
+				margin-left: 428px !important;
+			}
+		}
+	}
+
+	.home-container {
+		height: 100%;
+		overflow: hidden;
+	}
+
+	.layout-wrapper {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100%;
+		padding: 0 !important;
+	}
+
+	.main-container {
+		width: 100%;
+		height: calc(100% - 50px);
+		background-color: #fff;
+	}
+
+	/deep/ {
+		.ivu-steps {
+			position: absolute;
+			top: 8px;
+			left: 140px;
+			width: calc(100% - 200px);
+
+			.ivu-steps-title {
+				line-height: 26px;
+			}
+		}
+	}
+
+	.line {
+		width: 100%;
+		margin: 13px 0;
+		border-bottom: 1px dashed #414141;
+		opacity: 0.4;
+	}
+
+	#kanban:-webkit-full-screen {
+		width: 100%;
+		height: 100%;
+	}
+</style>
+

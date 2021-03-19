@@ -6782,8 +6782,6 @@ var IOController = function () {
             }
 
             this._dataSource.url = url;
-
-            // TODO: replace with new url
         }
     }, {
         key: '_expandBuffer',

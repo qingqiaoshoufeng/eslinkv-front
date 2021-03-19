@@ -1,21 +1,17 @@
-import {getInput} from '../../../../lib'
+export const customConfig = [
+	{
+		prop: 'title',
+		label: '标题',
+		type: 'func-input'
+	},
+	{
+		prop: 'unit',
+		label: '单位',
+		type: 'func-input'
+	}
+]
 
-const configSource = {
-    config: {
-        fields: {
-            title: getInput('title', '标题'),
-            unit: getInput('unit', '单位'),
-        }
-    }
-}
-const config = {
-    animation: true,
-    config: {
-        title: true,
-        unit: true,
-    }
-}
-const value = {
+export const value = {
     layout: {
         size: {
             width: 208,
@@ -33,9 +29,7 @@ const value = {
     },
     config: {
         title: '标题',
-        unit: '单',
+        unit: '单'
     }
 }
-
-export {config, configSource, value}
 

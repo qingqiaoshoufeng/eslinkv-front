@@ -1,23 +1,18 @@
-import {getInput} from '../../../../lib'
+export const customConfig = [
+	{
+		prop: 'title',
+		label: '标题',
+		type: 'func-input'
+	},
+	{
+		prop: 'suffix',
+		label: '后缀',
+		type: 'func-input'
+	}
+]
 
-const config = {
-    animation: true,
-    config: {
-        suffix: true,
-        title: true
-    }
-}
 
-const configSource = {
-    config: {
-        fields: {
-            title: getInput('title', '标题'),
-            suffix: getInput('suffix', '后缀'),
-        }
-    },
-}
-
-const value = {
+export const value = {
     layout: {
         size: {
             width: 300,
@@ -29,7 +24,7 @@ const value = {
     },
     config: {
         title: '昨日用气量：',
-        suffix: 'm³',
+        suffix: 'm³'
     },
     api: {
         data: JSON.stringify({
@@ -37,5 +32,3 @@ const value = {
         })
     }
 }
-
-export {configSource, config, value}

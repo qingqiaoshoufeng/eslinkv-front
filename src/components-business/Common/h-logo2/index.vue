@@ -14,17 +14,16 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins'
-	import { config, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
-			this.configSource = this.parseConfigSource(config)
-			this.configValue = this.parseConfigValue(config, value)
+		created () {
+			this.configValue = this.parseConfigValue(value)
 		},
 		methods: {
-			handleClick() {
+			handleClick () {
 				location.reload()
 			}
 		}
@@ -34,12 +33,12 @@
 	.h-logo2 {
 		h2 {
 			font-size: 48px;
+			font-weight: normal;
 			line-height: 48px;
+			white-space: nowrap;
 			background-image: -webkit-linear-gradient(rgba(255, 255, 255, 1), rgba(102, 227, 253, 1));
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
-			font-weight: normal;
-			white-space: nowrap;
 		}
 
 		img {
@@ -49,40 +48,40 @@
 		}
 
 		ul {
-			margin-top: 14px;
 			width: 384px;
+			margin-top: 14px;
 		}
 
 		li {
-			color: #fff;
+			flex: 1;
 			font-size: 20px;
 			line-height: 24px;
-			flex: 1;
+			color: #fff;
 
 			&:nth-child(1) {
-				&:before {
-					content: '';
+				&::before {
+					position: absolute;
+					top: 50%;
+					left: 50%;
 					width: 4px;
 					height: 4px;
-					position: absolute;
-					background-color: rgba(255, 255, 255, 0.6);
-					left: 50%;
-					margin-left: 48px;
-					top: 50%;
 					margin-top: -2px;
+					margin-left: 48px;
+					content: '';
+					background-color: rgba(255, 255, 255, 0.6);
 				}
 			}
 
 			&:nth-child(2) {
-				&:before {
-					content: '';
+				&::before {
+					position: absolute;
+					top: 50%;
+					left: 50%;
 					width: 4px;
 					height: 4px;
-					position: absolute;
-					left: 50%;
-					margin-left: 78px;
-					top: 50%;
 					margin-top: -2px;
+					margin-left: 78px;
+					content: '';
 					background-color: rgba(255, 255, 255, 0.6);
 				}
 			}

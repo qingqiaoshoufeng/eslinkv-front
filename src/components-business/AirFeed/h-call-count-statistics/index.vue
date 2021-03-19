@@ -33,126 +33,126 @@
 	</div>
 </template>
 <script>
-import mixins from '../../mixins';
-import options from './options';
-import { config, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import options from './options'
+	import { value } from './index.component'
 
-export default {
-	mixins: [mixins],
-	computed: {},
-	methods: {
-		setOption(data) {
-			options.series[0].data[0].value = data?.value;
-			options.series[0].data[1].value = 100 - data?.value;
-			options.series[1].data[0].value = data?.value;
-			options.series[1].data[1].value = 100 - data?.value;
-			this.instance && this.instance.setOption(options);
+	export default {
+		mixins: [mixins],
+		computed: {},
+		methods: {
+			setOption (data) {
+				options.series[0].data[0].value = data?.value
+				options.series[0].data[1].value = 100 - data?.value
+				options.series[1].data[0].value = data?.value
+				options.series[1].data[1].value = 100 - data?.value
+				this.instance && this.instance.setOption(options)
+			}
 		},
-	},
-	watch: {
-		data: {
-			handler(val) {
-				if (this.id) {
-					this.$nextTick(() => {
-						this.instance = echarts.init(
-							document.getElementById(this.id)
-						);
-						this.setOption(val);
-					});
-				}
-			},
-			deep: true,
-			immediate: true,
+		watch: {
+			data: {
+				handler (val) {
+					if (this.id) {
+						this.$nextTick(() => {
+							this.instance = echarts.init(
+								document.getElementById(this.id)
+							)
+							this.setOption(val)
+						})
+					}
+				},
+				deep: true,
+				immediate: true
+			}
 		},
-	},
-	created() {
-		this.configSource = this.parseConfigSource(config);
-		this.configValue = this.parseConfigValue(config, value);
-	},
-};
+		created () {
+			this.configValue = this.parseConfigValue(value)
+		}
+	}
 </script>
 <style lang="scss">
-.h-call-count-statistics {
-	width: 480px;
-	height: 100%;
-	display: flex;
-	background: linear-gradient(
-		360deg,
-		rgba(255, 255, 255, 0.1) -2.01%,
-		rgba(255, 255, 255, 0) 100%
-	);
+	.h-call-count-statistics {
+		display: flex;
+		width: 480px;
+		height: 100%;
+		background:
+			linear-gradient(
+				360deg,
+				rgba(255, 255, 255, 0.1) -2.01%,
+				rgba(255, 255, 255, 0) 100%
+			);
 
-	&__icon {
-		margin-left: 16px;
-		margin-top: 26px;
-		width: 110px;
-		height: 110px;
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: 100px;
-	}
-
-	&__call-amount {
-		margin-left: 16px;
-		margin-top: 53px;
-
-		&__count {
-			font-weight: bold;
-			font-size: 32px;
-			line-height: 32px;
-			color: #FEFFFF;
-			text-align: left;
-		}
-
-		&__desc {
-			font-size: 18px;
-			line-height: 24px;
-			color: rgba(255, 255, 255, 0.75);
-			margin-top: 8px;
-			text-align: left;
-		}
-	}
-
-	&__call-success-rate {
-		position: relative;
-		width: 144px;
-		height: 144px;
-		margin-top: 8px;
-		margin-left: 22px;
-
-		&__graph {
-			width: 144px;
-			height: 144px;
-			background-image: url('/static/icons/ellipse-dashed.svg');
+		&__icon {
+			width: 110px;
+			height: 110px;
+			margin-top: 26px;
+			margin-left: 16px;
 			background-repeat: no-repeat;
-			background-size: 144px;
 			background-position: center;
+			background-size: 100px;
 		}
 
-		&__desc {
-			position: absolute;
-			display: flex;
-			flex-direction: column;
-			top: 45px;
-			left: 50%;
-			width: 100%;
-			transform: translateX(-50%);
+		&__call-amount {
+			margin-top: 53px;
+			margin-left: 16px;
 
-			&__rate {
-				font-weight: bold;
+			&__count {
 				font-size: 32px;
+				font-weight: bold;
 				line-height: 32px;
-				color: #FEFFFF;
+				color: #feffff;
+				text-align: left;
 			}
 
-			&__font {
+			&__desc {
+				margin-top: 8px;
 				font-size: 18px;
 				line-height: 24px;
 				color: rgba(255, 255, 255, 0.75);
-				margin-top: 7px;
+				text-align: left;
+			}
+		}
+
+		&__call-success-rate {
+			position: relative;
+			width: 144px;
+			height: 144px;
+			margin-top: 8px;
+			margin-left: 22px;
+
+			&__graph {
+				width: 144px;
+				height: 144px;
+				background-image: url('/static/icons/ellipse-dashed.svg');
+				background-repeat: no-repeat;
+				background-position: center;
+				background-size: 144px;
+			}
+
+			&__desc {
+				position: absolute;
+				top: 45px;
+				left: 50%;
+				display: flex;
+				flex-direction: column;
+				width: 100%;
+				transform: translateX(-50%);
+
+				&__rate {
+					font-size: 32px;
+					font-weight: bold;
+					line-height: 32px;
+					color: #feffff;
+				}
+
+				&__font {
+					margin-top: 7px;
+					font-size: 18px;
+					line-height: 24px;
+					color: rgba(255, 255, 255, 0.75);
+				}
 			}
 		}
 	}
-}
 </style>
 

@@ -15,74 +15,72 @@
 	/>
 </template>
 <script>
-import { BaseOverlay } from '../../../../components/index';
+	import { BaseOverlay } from '../../../../components/index'
 
-export default {
-	name: 'BranchCompany',
-	components: {
-		BaseOverlay,
-	},
-	props: {
-		visible: {
-			type: Boolean,
-			default: true,
+	export default {
+		name: 'BranchCompany',
+		components: {
+			BaseOverlay
 		},
-		overlayIcon: {
-			type: String,
-			default: '',
-		},
-		overlayType: {
-			type: String,
-			default: '',
-		},
-		data: {
-			type: Array,
-			default() {
-				return [];
+		props: {
+			visible: {
+				type: Boolean,
+				default: true
 			},
-		},
-		detailList: {
-			type: Array,
-			default() {
-				return [];
+			overlayIcon: {
+				type: String,
+				default: ''
 			},
-		},
-	},
-	computed: {
-		dataInner() {
-			return this.data.map(item => {
-				item.colName = item.name.replace(/有限公司|分公司/, '');
-				return item;
-			});
-		},
-	},
-	data() {
-		return {
-			apiFun: this.$sysApi.map.mock.getBranchCompanyList,
-			nameStyle: {
-				fontSize: '24px',
+			overlayType: {
+				type: String,
+				default: ''
 			},
-			mouseIn: true,
-		};
-	},
-	mounted() {},
-	methods: {
-		mouseover(marker) {
-			this.mouseIn = true;
-			this.$emit(
-				'overlay-click',
-				{
-					detailList: this.detailList,
-					...marker,
-					overlayType: this.overlayType,
+			data: {
+				type: Array,
+				default () {
+					return []
+				}
+			},
+			detailList: {
+				type: Array,
+				default () {
+					return []
+				}
+			}
+		},
+		computed: {
+			dataInner () {
+				return this.data.map(item => {
+					item.colName = item.name.replace(/有限公司|分公司/, '')
+					return item
+				})
+			}
+		},
+		data () {
+			return {
+				apiFun: this.$api.map.mock.getBranchCompanyList,
+				nameStyle: {
+					fontSize: '24px'
 				},
-				this.overlayType
-			);
+				mouseIn: true
+			}
 		},
-		mouseleave() {},
-	},
-};
+		mounted () {},
+		methods: {
+			mouseover (marker) {
+				this.mouseIn = true
+				this.$emit(
+					'overlay-click',
+					{
+						detailList: this.detailList,
+						...marker,
+						overlayType: this.overlayType
+					},
+					this.overlayType
+				)
+			},
+			mouseleave () {}
+		}
+	}
 </script>
-
-
 

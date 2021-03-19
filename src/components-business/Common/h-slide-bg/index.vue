@@ -4,14 +4,13 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins'
-	import { config, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
-			this.configSource = this.parseConfigSource(config)
-			this.configValue = this.parseConfigValue(config, value)
+		created () {
+			this.configValue = this.parseConfigValue(value)
 		}
 	}
 </script>
@@ -20,7 +19,7 @@
 		width: 100%;
 		height: 1050px;
 		background: rgba(11, 0, 90, 0.9);
-		border-left: 1px solid #00DDFF;
+		border-left: 1px solid #0df;
 	}
 </style>
 

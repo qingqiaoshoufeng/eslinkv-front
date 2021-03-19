@@ -8,14 +8,14 @@ export const WARNSTATIONS_OVER_LAY = {
             name: {
                 style: {
                     fontSize: '32px',
-                    color: '#FFDC45',
+                    color: '#FFDC45'
                 },
-                errColor: '#FFDC45',
-            },
-        },
-    },
+                errColor: '#FFDC45'
+            }
+        }
+    }
 }
 
 export const DETAILLIST = [ValveOpenFinish, time,
-    DevicedId, DeviceName, DeviceStatus, DeviceLocation, F_BatteryVoltage, SolarCell, GatewaySingal, deviceType, inletPressure, outletPressure, inletTemperature, outletTemperature, h2S, ch4, MC, TEMP,
+    DevicedId, DeviceName, DeviceStatus, DeviceLocation, F_BatteryVoltage, SolarCell, GatewaySingal, deviceType, inletPressure, outletPressure, inletTemperature, outletTemperature, h2S, ch4, MC, TEMP
 ]

@@ -5,42 +5,39 @@
             h2 {{data&&data.title}}
 </template>
 <script lang="ts">
-    import mx from '../../mixins'
-    import {Component} from 'vue-property-decorator'
-    import {mixins} from 'vue-class-component'
-    import {config, value} from './index.component'
+	import mx from 'eslinkv-npm/mixins'
+	import { Component } from 'vue-property-decorator'
+	import { mixins } from 'vue-class-component'
+	import { value } from './index.component'
 
     @Component
-    class HTitle1 extends mixins(mx) {
-        created() {
+	export default class extends mixins(mx) {
+        created () {
             setTimeout(() => {
-                this.configSource = this.parseConfigSource(config)
-                this.configValue = this.parseConfigValue(config, value)
+                this.configValue = this.parseConfigValue(value)
             }, 1000)
         }
     }
-
-    export default HTitle1
 </script>
 <style lang="scss">
-    .h-title-1-icon {
-        background-image: url('/static/icons/h-title1-1.svg');
-        height: 34px;
-        width: 34px;
-        margin-right: 9px;
-    }
+	.h-title-1-icon {
+		width: 34px;
+		height: 34px;
+		margin-right: 9px;
+		background-image: url('/static/icons/h-title1-1.svg');
+	}
 
-    .h-title-1 {
-        align-items: center;
-        padding-bottom: 8px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+	.h-title-1 {
+		align-items: center;
+		padding-bottom: 8px;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 
-        h2 {
-            font-weight: 600;
-            font-size: 24px;
-            color: #fff;
-        }
-    }
+		h2 {
+			font-size: 24px;
+			font-weight: 600;
+			color: #fff;
+		}
+	}
 
 </style>
 

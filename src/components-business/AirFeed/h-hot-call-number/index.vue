@@ -5,10 +5,11 @@
 			src="/static/images/serves/hot-call-number.webm"
 			loop
 			muted
-			autoplay></video>
+			autoplay
+		></video>
 		<div class="h-hot-call-number__oncall">
 			<div class="h-hot-call-number__oncall__num font-num">
-				{{ data.onCall || 0}}
+				{{ data.onCall || 0 }}
 			</div>
 			<div class="h-hot-call-number__oncall__desc">
 				通话中
@@ -16,7 +17,7 @@
 		</div>
 		<div class="h-hot-call-number__onwait">
 			<div class="h-hot-call-number__onwait__num font-num">
-				{{ data.onWait || 0}}
+				{{ data.onWait || 0 }}
 			</div>
 			<div class="h-hot-call-number__onwait__desc font-num">
 				等待中
@@ -25,40 +26,39 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
-	import { config, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		methods: {},
 		computed: {},
-		created() {
-			this.configSource = this.parseConfigSource(config);
-			this.configValue = this.parseConfigValue(config, value);
-		},
+		created () {
+			this.configValue = this.parseConfigValue(value)
+		}
 	}
 </script>
 <style lang="scss" scoped>
 	.h-hot-call-number {
 		.video {
-      width: 100%;
-      height: 100%;
-    }
+			width: 100%;
+			height: 100%;
+		}
 
 		.oncall-onwait-common {
 			position: absolute;
-			width: 90px;
-			height: 64px;
 			display: flex;
 			flex-direction: column;
+			width: 90px;
+			height: 64px;
 		}
 
 		.num-common {
-			font-weight: bold;
-			font-size: 32px;
-			line-height: 32px;
-			color: #FFFFFF;
 			margin-bottom: 8px;
+			font-size: 32px;
+			font-weight: bold;
+			line-height: 32px;
+			color: #fff;
 		}
 
 		.desc-common {
@@ -69,12 +69,14 @@
 
 		&__oncall {
 			@extend .oncall-onwait-common;
-			left: 240px;
+
 			top: 45px;
+			left: 240px;
 
 			&__num {
 				@extend .num-common;
-				color: #00FFCF!important;
+
+				color: #00ffcf !important;
 			}
 
 			&__desc {
@@ -84,18 +86,19 @@
 
 		&__onwait {
 			@extend .oncall-onwait-common;
-			right: 36px;
+
 			top: 45px;
+			right: 36px;
 
 			&__num {
 				@extend .num-common;
-				color: #FF7217 !important;
+
+				color: #ff7217 !important;
 			}
 
 			&__desc {
 				@extend .desc-common;
 			}
-
 		}
 	}
 </style>

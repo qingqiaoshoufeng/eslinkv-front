@@ -1,9 +1,11 @@
+import copy from 'fast-copy'
+
 /**
  * @description 获取url参数
  */
-export function getQueryString(name) {
-	let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i")
-	let r = window.location.search.substr(1).match(reg)
+export function getQueryString (name) {
+	const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
+	const r = window.location.search.substr(1).match(reg)
 	if (r != null) return unescape(r[2])
 	return null
 }
@@ -14,6 +16,98 @@ export function getQueryString(name) {
  * @param opacity 透明度
  * @returns {string}
  */
-export function hexToRgba(hex, opacity) {
-	return "rgba(" + parseInt("0x" + hex.slice(1, 3)) + "," + parseInt("0x" + hex.slice(3, 5)) + "," + parseInt("0x" + hex.slice(5, 7)) + "," + opacity + ")";
+export function hexToRgba (hex, opacity) {
+	return 'rgba(' + parseInt('0x' + hex.slice(1, 3)) + ',' + parseInt('0x' + hex.slice(3, 5)) + ',' + parseInt('0x' + hex.slice(5, 7)) + ',' + opacity + ')'
+}
+
+/**
+ * @description 合并对象 生成一个新的对象,用前面的覆盖后面的
+ */
+export const configMerge = function (from, to) {
+	const output = copy(to)
+	const isArray = Array.isArray(from);
+	(!isArray ? Object.keys(from) : from).forEach((key, index) => {
+		const actualKey = !isArray ? key : index
+		const value = from[actualKey]
+		if (value && typeof value === 'object') {
+			if (!output[actualKey]) {
+				output[actualKey] = !Array.isArray(value) ? { ...value } : [...value]
+				return
+			}
+			output[actualKey] = configMerge(value, output[actualKey])
+		} else if (value !== undefined) {
+			output[actualKey] = value
+		}
+	})
+	return output
+}
+
+/**
+ * @description 向上查找 components
+ */
+export function findComponentUpward (context, componentName, componentNames) {
+	if (typeof componentName === 'string') {
+		componentNames = [componentName]
+	} else {
+		componentNames = componentName
+	}
+
+	let parent = context.$parent
+	let name = parent.$options.name
+	while (parent && (!name || componentNames.indexOf(name) < 0)) {
+		parent = parent.$parent
+		if (parent) name = parent.$options.name
+	}
+	return parent
+}
+
+/**
+ * @description 向下查找 components
+ */
+export function findComponentsDownward (context, componentName) {
+	return context.$children.reduce((components, child) => {
+		if (child.$options.name === componentName) components.push(child)
+		const foundChilds = findComponentsDownward(child, componentName)
+		return components.concat(foundChilds)
+	}, [])
+}
+
+/**
+ * @description 加载三方包
+ */
+export function loadJs (src, value) {
+	if (!src) {
+return
+}
+	if (typeof src === 'string') {
+		return new Promise(resolve => {
+			if (window[value]) {
+				resolve()
+			} else {
+				const el = document.createElement('script')
+				el.src = src
+				el.onload = () => {
+					resolve()
+				}
+				document.head.appendChild(el)
+			}
+		})
+	} else {
+		const p = []
+		src.forEach((item, index) => {
+			p.push(new Promise(resolve => {
+				if (window[value[index]]) {
+					resolve()
+				} else {
+					const el = document.createElement('script')
+					el.src = item
+					el.onload = () => {
+						resolve()
+					}
+					document.head.appendChild(el)
+				}
+			}))
+		})
+		return Promise.all(p)
+	}
 }

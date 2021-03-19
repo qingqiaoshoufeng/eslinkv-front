@@ -5,7 +5,7 @@ import {
     LowPressureGreenServeStation,
     LowPressureManageStation,
     LowPressureOnNumber,
-    LowPressureUnderNumber,
+    LowPressureUnderNumber
 } from '../../../../utils/dictionary'
 
 // 首页覆盖物配置项
@@ -14,20 +14,20 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         label: '中压管网',
         legendIcon: 'icontulizhongyaguanwang',
         visible: true,
-        tileQuery: [11, 12],
+        tileQuery: [11, 12]
     },
     LowPressureLine: {
         label: '低压管网',
         legendIcon: 'icontulidiyaguanwang',
         visible: true,
-        tileQuery: [10],
+        tileQuery: [10]
     },
     PressureRegulatingStation: {
         label: '调压站',
         legendIcon: 'icondiyatiaoyanzhan',
         iconSize: 38,
         tileQuery: [34],
-        visible: false,
+        visible: false
     },
     ServiceStation: {
         label: '综合服务站',
@@ -35,7 +35,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         iconSize: 38,
         component: 'ServiceStation',
         visible: true,
-        dataProp: 'serviceStationList',
+        dataProp: 'serviceStationList'
         // detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
     },
     PipeManageMentStation: {
@@ -44,7 +44,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         iconSize: 38,
         component: 'PipeManageMentStation',
         visible: true,
-        dataProp: 'pipeManageMentStationList',
+        dataProp: 'pipeManageMentStationList'
     },
     UndergroundRepairStation: {
         label: '地下抢修点',
@@ -52,7 +52,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         iconSize: 38,
         component: 'UndergroundRepairStation',
         visible: true,
-        dataProp: 'undergroundRepairStationList',
+        dataProp: 'undergroundRepairStationList'
     },
     OngroundRepairStation: {
         label: '地上抢修点',
@@ -60,7 +60,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         iconSize: 38,
         component: 'OngroundRepairStation',
         visible: true,
-        dataProp: 'ongroundRepairStationList',
+        dataProp: 'ongroundRepairStationList'
     },
     InspectionPerson: {
         label: '巡检人员',
@@ -70,7 +70,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         component: 'InspectionPerson',
         showOverlayName: false,
         visible: false,
-        dataProp: 'inspectionPersonList',
+        dataProp: 'inspectionPersonList'
     },
     InspectionCar: {
         label: '巡检车辆',
@@ -80,116 +80,116 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
         component: 'InspectionCar',
         showOverlayName: false,
         visible: false,
-        dataProp: 'inspectionCarList',
-    },
+        dataProp: 'inspectionCarList'
+    }
 }
 
-//覆盖物详情
+// 覆盖物详情
 export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
     EmergencyAirSourceStation: {
         fields: {
             name: {
                 style: {
                     fontSize: '32px',
-                    color: '#FFDC45',
+                    color: '#FFDC45'
                 },
-                errColor: '#FFDC45',
-            },
-        },
+                errColor: '#FFDC45'
+            }
+        }
     },
     ServiceStation: {
         fields: {
             name: {
                 style: {
                     fontSize: '32px',
-                    color: '#FFDC45',
+                    color: '#FFDC45'
                 },
-                errColor: '#FFDC45',
-            },
-        },
+                errColor: '#FFDC45'
+            }
+        }
     },
     PipeManageMentStation: {
         fields: {
             name: {
                 style: {
                     fontSize: '32px',
-                    color: '#FFDC45',
+                    color: '#FFDC45'
                 },
-                errColor: '#FFDC45',
-            },
-        },
+                errColor: '#FFDC45'
+            }
+        }
     },
     UndergroundRepairStation: {
         fields: {
             name: {
                 style: {
                     fontSize: '32px',
-                    color: '#FFDC45',
+                    color: '#FFDC45'
                 },
-                errColor: '#FFDC45',
-            },
-        },
+                errColor: '#FFDC45'
+            }
+        }
     },
     OngroundRepairStation: {
         fields: {
             name: {
                 style: {
                     fontSize: '32px',
-                    color: '#FFDC45',
+                    color: '#FFDC45'
                 },
-                errColor: '#FFDC45',
-            },
-        },
+                errColor: '#FFDC45'
+            }
+        }
     },
     UndergroundRepairStation: {
         fields: {
             name: {
                 style: {
                     fontSize: '32px',
-                    color: '#FFDC45',
+                    color: '#FFDC45'
                 },
-                errColor: '#FFDC45',
-            },
-        },
+                errColor: '#FFDC45'
+            }
+        }
     },
     InspectionPerson: {
         fields: {
             name: {
                 style: {
                     fontSize: '32px',
-                    color: '#FFDC45',
+                    color: '#FFDC45'
                 },
-                errColor: '#FFDC45',
-            },
-        },
+                errColor: '#FFDC45'
+            }
+        }
     },
     InspectionCar: {
         fields: {
             name: {
                 style: {
                     fontSize: '32px',
-                    color: '#FFDC45',
-                },
+                    color: '#FFDC45'
+                }
             },
             carPlateNo: {
                 style: {
                     fontSize: '24px',
-                    color: '#fff',
-                },
-            },
-        },
+                    color: '#fff'
+                }
+            }
+        }
     },
     ServiceStation: {
         fields: {
             name: {
                 style: {
                     fontSize: '32px',
-                    color: '#FFDC45',
+                    color: '#FFDC45'
                 },
-                errColor: '#FFDC45',
-            },
-        },
-    },
+                errColor: '#FFDC45'
+            }
+        }
+    }
 }
 // 中低压统计数据
 export const DATASTATISTICSLIST = [
@@ -198,5 +198,5 @@ export const DATASTATISTICSLIST = [
     LowPressureGreenServeStation,
     LowPressureManageStation,
     LowPressureOnNumber,
-    LowPressureUnderNumber,
+    LowPressureUnderNumber
 ]

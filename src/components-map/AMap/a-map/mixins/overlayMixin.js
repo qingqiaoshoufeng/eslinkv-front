@@ -3,27 +3,27 @@ export default {
 	props: {
 		visible: {
 			type: Boolean,
-			default: true,
+			default: true
 		},
 		overlayIcon: {
 			type: String,
-			default: '',
+			default: ''
 		},
 		overlayType: {
 			type: String,
-			default: '',
+			default: ''
 		},
 		data: {
-			type: Array,
-		},
+			type: Array
+		}
 	},
-	data() {
+	data () {
 		return {
-			hasLoad: false,
+			hasLoad: false
 		}
 	},
 	watch: {
-		visible(val) {
+		visible (val) {
 			if (val) {
 				if (this.hasLoad) {
 					this.instanceArr.forEach((instance) => {
@@ -38,14 +38,14 @@ export default {
 					if (instance.setDataSet) {
 						instance.setDataSet({
 							data: [],
-							max: 0,
+							max: 0
 						})
 					}
 				})
 			}
-		},
+		}
 	},
-	created() {
+	created () {
 		this.instanceArr = []
 		this.$amap = this.getMap()
 		if (this.visible) {
@@ -53,28 +53,28 @@ export default {
 		}
 	},
 	methods: {
-		initData() {
+		initData () {
 			this.init && this.init()
 			this.hasLoad = true
 		},
-		clearInstance() {
+		clearInstance () {
 			this.instanceArr.forEach((instance) => {
 				this.$amap.remove(instance)
-				//热力图特殊处理
+				// 热力图特殊处理
 				if (instance.setDataSet) {
 					instance.setDataSet({
 						data: [],
-						max: 0,
+						max: 0
 					})
 				}
 			})
 			this.instanceArr = null
-		},
+		}
 	},
-	beforeDestroy() {
+	beforeDestroy () {
 		this.clearInstance()
 	},
-	destroyed() {
+	destroyed () {
 		this.map = null
 	}
 }

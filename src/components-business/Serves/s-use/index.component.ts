@@ -1,6 +1,3 @@
-export const config = {
-	animation: true,
-}
 export const value = {
 	layout: {
 		size: {
@@ -18,6 +15,6 @@ export const value = {
 			yesterdayType: 'up',
 			lastWeek: 1190,
 			lastWeekType: 'down'
-		}),
+		})
 	}
-};
+}

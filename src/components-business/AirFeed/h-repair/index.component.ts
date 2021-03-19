@@ -1,12 +1,3 @@
-import {getInput} from '../../../../lib'
-
-export const config = {
-	animation: true,
-	config: {
-		title: true,
-		desc: true
-	},
-}
 export const value = {
 	layout: {
 		size: {
@@ -57,11 +48,17 @@ export const value = {
 		desc: '近7日趋势'
 	}
 }
-export const configSource = {
-	config: {
-		fields: {
-			title: getInput('title', '标题'),
-			desc: getInput('desc', '底下描述')
-		}
+
+
+export const customConfig = [
+	{
+		prop: 'title',
+		label: '标题',
+		type: 'func-input'
 	},
-}
+	{
+		prop: 'desc',
+		label: '底下描述',
+		type: 'func-input'
+	}
+]

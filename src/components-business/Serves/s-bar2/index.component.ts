@@ -1,26 +1,31 @@
-import {getInput} from '../../../../lib'
-
-export const config = {
-	animation: true,
-	config: {
-		color2: true,
-		color1: true,
-		desc1: true,
-		desc2: true,
-		title: true,
-	}
-}
-export const configSource = {
-	config: {
-		fields: {
-			color1: getInput('color1', '颜色1'),
-			color2: getInput('color2', '颜色2'),
-			desc1: getInput('desc1', '名称1'),
-			desc2: getInput('desc2', '名称2'),
-			title: getInput('title', '单位'),
-		},
+export const customConfig = [
+	{
+		prop: 'color1',
+		label: '颜色1',
+		type: 'func-color'
 	},
-}
+	{
+		prop: 'color2',
+		label: '颜色2',
+		type: 'func-color'
+	},
+	{
+		prop: 'desc1',
+		label: '名称1',
+		type: 'func-input'
+	},
+	{
+		prop: 'desc2',
+		label: '名称2',
+		type: 'func-input'
+	},
+	{
+		prop: 'title',
+		label: '单位',
+		type: 'func-input'
+	}
+]
+
 export const value = {
 	layout: {
 		size: {
@@ -67,8 +72,8 @@ export const value = {
 				yValue: 130,
 				yValue1: 130,
 				xValue: '11月'
-			},
-		]),
+			}
+		])
 	},
 	config: {
 		color2: '#00DDFF',
@@ -77,4 +82,4 @@ export const value = {
 		desc2: '销量',
 		title: '户'
 	}
-};
+}

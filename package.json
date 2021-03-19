@@ -2,13 +2,15 @@
     "name": "dvdp-expand",
     "version": "1.0.15",
     "description": "",
-    "main": "index.js",
     "scripts": {
         "serve": "vue-cli-service serve",
+        "serve:simple": "vue-cli-service serve --mode simple",
         "build": "vue-cli-service build --no-clean",
+        "build:simple": "vue-cli-service build --no-clean --mode simple",
         "update": "auto-vers -t",
-        "lint": "vue-cli-service lint",
-        "fix": "eslint --fix --ext .js --ext .jsx --ext .vue src/"
+        "lint": "eslint --fix --ext .js --ext .jsx --ext .vue --ext .ts src/",
+        "stylelint": "stylelint 'src/**/*.{scss,vue}' --config '.stylelintrc.js' --fix",
+        "commit": "git add .&&git cz"
     },
     "dependencies": {
         "@babel/polyfill": "^7.12.1",
@@ -17,25 +19,23 @@
         "@riophae/vue-treeselect": "^0.4.0",
         "@simonwep/pickr": "^1.7.4",
         "@xunlei/vue-lazy-component": "^1.1.3",
-        "astq": "^2.7.1",
         "axios": "^0.19.2",
         "babel-polyfill": "^6.26.0",
-        "codemirror": "^5.49.2",
         "core-js": "^3.6.5",
         "date-fns": "^2.16.1",
-        "fast-copy": "^2.0.5",
+        "eslinkv-npm": "git+http://10.200.1.145/shen.zhe.pei/Eslink-npm.git",
         "highcharts": "^8.2.2",
         "highlight.js": "^10.5.0",
         "html2canvas": "^1.0.0-rc.5",
         "jquery": "^3.5.1",
-        "jsonic": "^0.3.1",
-        "lodash": "^4.17.20",
+        "json5": "^2.1.3",
         "lottie-web": "^5.6.10",
         "markdown-it-vue": "^1.1.6",
         "moment": "^2.29.1",
         "plain-object-is-equal": "^1.0.0",
         "portal-vue": "^2.1.7",
         "qs": "^6.9.4",
+        "regenerator-runtime": "^0.13.7",
         "swiper": "^5.4.5",
         "v-viewer": "^1.5.1",
         "view-design": "^4.4.0",
@@ -43,7 +43,6 @@
         "vue-awesome-swiper": "^4.1.1",
         "vue-baidu-map": "^0.21.22",
         "vue-class-component": "^7.2.6",
-        "vue-draggable-resizable-gorkys2": "^1.0.0",
         "vue-lazyload": "^1.3.3",
         "vue-loader": "^14.2.1",
         "vue-marquee-text-component": "^1.2.0",
@@ -54,6 +53,7 @@
         "xss": "^1.0.7"
     },
     "devDependencies": {
+        "@babel/plugin-proposal-decorators": "^7.13.5",
         "@babel/plugin-proposal-nullish-coalescing-operator": "^7.12.1",
         "@babel/plugin-proposal-optional-chaining": "^7.12.1",
         "@babel/plugin-transform-runtime": "^7.12.1",
@@ -65,12 +65,22 @@
         "@vue/cli-plugin-eslint": "~4.5.0",
         "@vue/cli-plugin-typescript": "^4.5.8",
         "@vue/cli-service": "^4.5.7",
+        "@vue/eslint-config-standard": "^5.1.2",
         "@vue/eslint-config-typescript": "^7.0.0",
         "auto-vers": "^1.0.3",
-        "babel-eslint": "^10.1.0",
+        "babel-eslint": "^8.1.1",
         "babel-plugin-import": "^1.13.0",
+        "commitizen": "^4.2.3",
         "compression-webpack-plugin": "^6.0.2",
+        "cross-env": "^7.0.3",
+        "cz-conventional-changelog": "^3.3.0",
         "eslint": "^6.7.2",
+        "eslint-plugin-flowtype": "^5.4.0",
+        "eslint-plugin-import": "^2.22.1",
+        "eslint-plugin-node": "^11.1.0",
+        "eslint-plugin-promise": "^4.3.1",
+        "eslint-plugin-sonarjs": "^0.6.0",
+        "eslint-plugin-standard": "^5.0.0",
         "eslint-plugin-vue": "^6.2.2",
         "html-loader": "^1.3.2",
         "husky": "^4.3.7",
@@ -80,6 +90,11 @@
         "pug": "^3.0.0",
         "pug-plain-loader": "^1.0.0",
         "sass-loader": "^10.0.3",
+        "stylelint": "^13.12.0",
+        "stylelint-config-recess-order": "^2.3.0",
+        "stylelint-config-standard": "^21.0.0",
+        "stylelint-scss": "^3.19.0",
+        "svg-sprite-loader": "^5.2.1",
         "typescript": "^4.0.3",
         "vue-template-compiler": "^2.6.11",
         "webpack-bundle-analyzer": "^3.9.0"
@@ -87,6 +102,11 @@
     "husky": {
         "hooks": {
             "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+        }
+    },
+    "config": {
+        "commitizen": {
+            "path": "./node_modules/cz-conventional-changelog"
         }
     }
 }

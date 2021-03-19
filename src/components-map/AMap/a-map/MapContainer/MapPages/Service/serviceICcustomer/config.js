@@ -1,6 +1,6 @@
 
 // 引入详情字典
-import { ICcustomer, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, useNumberYear, useNumberLastMonth, } from "./dictionary"
+import { ICcustomer, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal, useNumberYear, useNumberLastMonth } from './dictionary'
 // 覆盖物legend配置
 export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
     MajorClient: {
@@ -12,7 +12,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         visible: true,
         dataProp: 'iCcustomerList',
         detailList: [
-            useNumberLastMonth, useNumberYear,]
+            useNumberLastMonth, useNumberYear]
     },
 
     useHotYear: {
@@ -20,7 +20,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         component: 'useHotYear',
         visible: false,
         dataProp: 'year',
-        legendIcon: '',
+        legendIcon: ''
     },
     BranchCompany: {
         label: '子公司',
@@ -31,7 +31,7 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         dataProp: 'branchCompanyList',
         detailList: [ICcustomer,
 
-            useNumberLastMonth, useNumberYear,]
+            useNumberLastMonth, useNumberYear]
     },
     WarningICcustomer: {
         label: '报警',
@@ -42,17 +42,17 @@ export const SERVICE_SERVICEICCUSTOMER_LEGEND_MAP = {
         visible: true,
         dataProp: 'WarningICcustomerList',
         detailList: [
-            useNumberLastMonth, useNumberYear,]
+            useNumberLastMonth, useNumberYear]
     }
 }
 
-//覆盖物详情
+// 覆盖物详情
 export const SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP = {
     BranchCompany: {
         fields: {
-            name: {},
-        },
-    },
+            name: {}
+        }
+    }
 
 }
 
@@ -60,5 +60,5 @@ export const SERVICE_SERVICEICCUSTOMER_OVERLAY_MAP = {
 export const DATASTATISTICSLIST = [ICcustomer, FTPNumber, warningYestodayTotal, warningYestodayMetersTotal]
 // SwitchBox配置
 export const SWICHBOX = [
-    { label: '年度工商户用气热力', value: false, type: 'useHotYear' },
+    { label: '年度工商户用气热力', value: false, type: 'useHotYear' }
 ]

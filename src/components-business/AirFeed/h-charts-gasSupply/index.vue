@@ -18,16 +18,16 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
+	import mixins from 'eslinkv-npm/mixins'
 	import getOptions from './options'
 	import format from 'date-fns/format'
-	import { config, configSource, value } from './index.component'
+	import { customConfig, value } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		computed: {},
 		methods: {
-			setOption() {
+			setOption () {
 				const xData = this.data.map(item => item.xData)
 				const barData = this.data.map(item => item.barData)
 				const lineData = this.data.map(item => item.lineData)
@@ -43,7 +43,7 @@
 				this.instance.off('click', this.handleClick)
 				this.instance.on('click', this.handleClick)
 			},
-			handleClick(params) {
+			handleClick (params) {
 				const item = this.data[params.dataIndex]
 				let selectType = '日'
 				let selectValue = format(new Date(), 'yyyy.MM.dd')
@@ -60,25 +60,24 @@
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						this.$nextTick(() => {
 							this.instance = echarts.init(
 								document.getElementById(this.id)
-							);
-							this.setOption(val);
-						});
+							)
+							this.setOption(val)
+						})
 					}
 				},
 				deep: true,
-				immediate: true,
-			},
+				immediate: true
+			}
 		},
-		created() {
-			this.configSource = this.parseConfigSource(config, configSource);
-			this.configValue = this.parseConfigValue(config, value);
-		},
-	};
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
+		}
+	}
 </script>
 <style lang="scss" scoped>
 	.widget-part {
@@ -86,14 +85,14 @@
 
 		.legend {
 			position: absolute;
-			left: 0;
 			top: 22px;
-			width: 100%;
+			left: 0;
 			display: flex;
 			justify-content: center;
+			width: 100%;
 			font-size: 16px;
 			line-height: 16px;
-			color: #FFFFFF;
+			color: #fff;
 
 			.legend-item {
 				display: flex;
@@ -104,16 +103,16 @@
 			.tanc {
 				width: 16px;
 				height: 8px;
-				background: #00DDFF;
+				background: #0df;
 			}
 
 			.line-legend {
 				width: 16px;
 				height: 2px;
-				background: #E5615B;
+				background: #e5615b;
 
 				&.green {
-					background: #00FFCF;
+					background: #00ffcf;
 				}
 			}
 

@@ -1,7 +1,4 @@
-const config = {
-	animation: true,
-};
-const value = {
+export const value = {
 	layout: {
 		size: {
 			width: 1526,
@@ -28,10 +25,8 @@ const value = {
 				},
 				{
 					name: '寻绿西部二号线'
-				},
+				}
 			]
 		})
 	}
 }
-
-export {config, value}

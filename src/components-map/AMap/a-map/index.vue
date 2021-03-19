@@ -12,50 +12,47 @@
 </template>
 
 <script>
-import MapContainer from './MapContainer/index'
-import Message from './components/Message/'
-
-export default {
-	name: 'HRMap',
-	components: {
-		MapContainer,
-		Message,
-	},
-	props: {
-		preview: {
-			type: Boolean,
-			default: false,
+	import MapContainer from './MapContainer/index'
+	import Message from './components/Message/'
+	import scene from 'eslinkv-npm/src/store/scene.store'
+	export default {
+		name: 'HRMap',
+		components: {
+			MapContainer,
+			Message
 		},
-	},
-	computed: {
-		inPreview() {
-			return (
-				window.GoldChart.store.scene.status === 'inPreview' ||
-				this.preview
-			)
+		props: {
+			preview: {
+				type: Boolean,
+				default: false
+			}
 		},
-	},
-	data() {
-		return {
-			ready: false,
-		}
-	},
-	methods: {
-		resetMap() {
-			this.ready = false
+		computed: {
+			inPreview () {
+				return scene.state.status === 'inPreview'
+			}
+		},
+		data () {
+			return {
+				ready: false
+			}
+		},
+		methods: {
+			resetMap () {
+				this.ready = false
+				setTimeout(() => {
+					this.ready = true
+				}, 5000)
+			}
+		},
+		mounted () {
 			setTimeout(() => {
 				this.ready = true
-			}, 5000)
-		},
-	},
-	mounted() {
-		setTimeout(() => {
-			this.ready = true
-		}, 2000)
-		//以防地图加载不出hock处理
-		window.resetMap = this.resetMap.bind(this)
-	},
-}
+			}, 2000)
+			// 以防地图加载不出hock处理
+			window.resetMap = this.resetMap.bind(this)
+		}
+	}
 </script>
 
 <style lang="scss" scoped>
@@ -67,11 +64,11 @@ export default {
 .map-box {
 	position: relative;
 	display: flex;
-	justify-content: center;
 	align-items: center;
-	overflow: hidden;
+	justify-content: center;
 	width: 100%;
 	height: 100%;
+	overflow: hidden;
 }
 </style>
 

@@ -1,4 +1,3 @@
-
 <template>
 	<div class="h-icon-info-count widget-part" :style="styles">
 		<div
@@ -11,66 +10,65 @@
 			{{ config.config && config.config.text }}
 		</div>
 		<div class="h-icon-info-count__count font-num">
-			{{ computedMinutes| toThousand}}
+			{{ computedMinutes }}
 		</div>
 		<div class="h-icon-info-count__unit">分钟</div>
 	</div>
 </template>
 <script>
-import mixins from '../../mixins';
-import { config, configSource, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value, customConfig } from './index.component'
 
-export default {
-	mixins: [mixins],
-	methods: {},
-	computed: {
-		computedMinutes() {
-			if (!this.data) return 0;
-			return this.data.minutes.toLocaleString();
+	export default {
+		mixins: [mixins],
+		methods: {},
+		computed: {
+			computedMinutes () {
+				if (!this.data) return 0
+				return this.data.minutes.toLocaleString()
+			}
 		},
-	},
-	created() {
-		this.configSource = this.parseConfigSource(config, configSource);
-		this.configValue = this.parseConfigValue(config, value);
-	},
-};
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
+		}
+	}
 </script>
 <style lang="scss">
-.h-icon-info-count {
-	display: flex;
-	align-items: center;
-	background: linear-gradient(90deg, #001f6d 0%, rgba(0, 31, 109, 0) 100%);
+	.h-icon-info-count {
+		display: flex;
+		align-items: center;
+		background: linear-gradient(90deg, #001f6d 0%, rgba(0, 31, 109, 0) 100%);
 
-	&__icon {
-		width: 32px;
-		height: 32px;
-		background-size: 32px;
-		background-repeat: no-repeat;
-		background-position: center;
-		margin-left: 16px;
-	}
+		&__icon {
+			width: 32px;
+			height: 32px;
+			margin-left: 16px;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 32px;
+		}
 
-	&__text {
-		font-size: 18px;
-		line-height: 24px;
-		color: #00ddff;
-		margin-left: 8px;
-	}
+		&__text {
+			margin-left: 8px;
+			font-size: 18px;
+			line-height: 24px;
+			color: #0df;
+		}
 
-	&__count {
-		font-weight: bold;
-		font-size: 32px;
-		line-height: 32px;
-		color: #ffffff;
-		margin-left: 16px;
-	}
+		&__count {
+			margin-left: 16px;
+			font-size: 32px;
+			font-weight: bold;
+			line-height: 32px;
+			color: #fff;
+		}
 
-	&__unit {
-		margin-left: 8px;
-		font-size: 18px;
-		line-height: 24px;
-		color: rgba(255, 255, 255, 0.75);
+		&__unit {
+			margin-left: 8px;
+			font-size: 18px;
+			line-height: 24px;
+			color: rgba(255, 255, 255, 0.75);
+		}
 	}
-}
 </style>
 

@@ -3,7 +3,7 @@
 		<div class="total">
 			<img src="./img/click-logo.svg" alt="">
 			<span class="total-txt">本月累计扫码次数</span>
-			<span class="total-num font-num">{{ data&&data.total| toThousand }}</span>
+			<span class="total-num font-num">{{ data && data.total| toThousand }}</span>
 		</div>
 		<div class="history">
 			<div class="history-item">
@@ -12,7 +12,7 @@
 					<div class="history-title-unit">次数</div>
 				</div>
 				<div class="content">
-					<div class="content-num font-num">{{ data&&data.yesterday| toThousand }}</div>
+					<div class="content-num font-num">{{ data && data.yesterday| toThousand }}</div>
 					<img class="content-icon" src="./img/arrow-up.svg" v-if="data.yesterdayType === 'up'"/>
 					<img class="content-icon" src="./img/arrow-down.svg" v-else/>
 				</div>
@@ -23,7 +23,7 @@
 					<div class="history-title-unit">次数</div>
 				</div>
 				<div class="content">
-					<div class="content-num font-num">{{ data&&data.lastWeek| toThousand }}</div>
+					<div class="content-num font-num">{{ data && data.lastWeek| toThousand }}</div>
 					<img class="content-icon" src="./img/arrow-up.svg" v-if="data.lastWeekType === 'up'"/>
 					<img class="content-icon" src="./img/arrow-down.svg" v-else/>
 				</div>
@@ -32,16 +32,15 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
-	import { config, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
-			this.configSource = this.parseConfigSource(config);
-			this.configValue = this.parseConfigValue(config, value);
-		},
-	};
+		created () {
+			this.configValue = this.parseConfigValue(value)
+		}
+	}
 </script>
 <style lang="scss" scoped>
 	.widget-part {
@@ -59,15 +58,15 @@
 			.total-txt {
 				font-size: 18px;
 				line-height: 24px;
-				color: #00DDFF;
+				color: #0df;
 			}
 
 			.total-num {
-				font-weight: bold;
-				font-size: 32px;
-				line-height: 32px;
-				color: #FFFFFF;
 				margin-left: 16px;
+				font-size: 32px;
+				font-weight: bold;
+				line-height: 32px;
+				color: #fff;
 			}
 		}
 
@@ -78,41 +77,41 @@
 			.history-title {
 				display: flex;
 				justify-content: space-between;
-				border-bottom: 1px solid #00DDFF;
+				border-bottom: 1px solid #0df;
 
 				.history-title-txt {
 					width: 88px;
 					height: 32px;
-					line-height: 32px;
-					background: #0057A9;
 					font-size: 18px;
-					color: #FFFFFF;
+					line-height: 32px;
+					color: #fff;
 					text-align: center;
+					background: #0057a9;
 				}
 
 				.history-title-unit {
 					font-size: 16px;
 					line-height: 16px;
-					color: #00DDFF;
+					color: #0df;
 				}
 			}
 
 			.content {
-				margin-top: 6px;
 				position: relative;
-				width: 224px;
-				height: 72px;
-				padding: 0 16px;
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
+				width: 224px;
+				height: 72px;
+				padding: 0 16px;
+				margin-top: 6px;
 				background: linear-gradient(360deg, rgba(0, 87, 169, 0.5) 0%, rgba(0, 87, 169, 0.2) 100%);
 
 				.content-num {
-					font-weight: bold;
 					font-size: 32px;
+					font-weight: bold;
 					line-height: 32px;
-					color: #FFFFFF;
+					color: #fff;
 				}
 
 				.content-icon {
@@ -120,26 +119,26 @@
 					height: 16px;
 				}
 
-				&:before {
-					content: '';
+				&::before {
+					position: absolute;
+					bottom: 1px;
+					left: 0;
 					display: block;
 					width: 40px;
 					height: 1px;
-					background: #1675CE;
-					position: absolute;
-					left: 0;
-					bottom: 1px;
+					content: '';
+					background: #1675ce;
 				}
 
-				&:after {
-					content: '';
-					display: block;
-					width: 40px;
-					height: 1px;
-					background: #1675CE;
+				&::after {
 					position: absolute;
 					right: 0;
 					bottom: 1px;
+					display: block;
+					width: 40px;
+					height: 1px;
+					content: '';
+					background: #1675ce;
 				}
 			}
 		}

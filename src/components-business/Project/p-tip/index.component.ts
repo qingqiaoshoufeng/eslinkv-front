@@ -1,24 +1,17 @@
-import {getInput, getSelect} from '../../../../lib'
+export const customConfig = [
+	{
+		prop: 'desc',
+		label: '标题',
+		type: 'func-input'
+	},
+	{
+		prop: 'icon',
+		label: 'icon',
+		type: 'func-input'
+	}
+]
 
-const configSource = {
-    config: {
-        fields: {
-            desc: getInput('desc', '标题'),
-            icon: getSelect('icon', 'icon', [
-                '/static/images/project/tip-qizhong.svg',
-            ]),
-        },
-    },
-};
-
-const config = {
-    animation: true,
-    config: {
-        icon: true,
-        desc: true,
-    },
-};
-const value = {
+export const value = {
     layout: {
         size: {
             width: 150,
@@ -31,14 +24,12 @@ const value = {
     api: {
         data: JSON.stringify({
             value: {
-                context: 24,
-            },
-        }),
+                context: 24
+            }
+        })
     },
     config: {
         icon: '/static/images/project/tip-qizhong.svg',
-        desc: '标题',
-    },
+        desc: '标题'
+    }
 }
-
-export {configSource, config, value}

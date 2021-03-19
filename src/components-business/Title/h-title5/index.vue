@@ -4,45 +4,44 @@
 			p.pos-r.text-left {{data&&data.title}}
 </template>
 <script>
-	import mx from '../../mixins'
-	import {Component} from 'vue-property-decorator'
-	import {mixins} from 'vue-class-component'
-    import {config, value} from './index.component'
+	import mx from 'eslinkv-npm/mixins'
+	import { Component } from 'vue-property-decorator'
+	import { mixins } from 'vue-class-component'
+	import { value } from './index.component'
 
 	@Component
 	class HTitle5 extends mixins(mx) {
-		created() {
-			this.configSource = this.parseConfigSource(config)
-			this.configValue = this.parseConfigValue(config, value)
+		created () {
+			this.configValue = this.parseConfigValue(value)
 		}
 	}
 	export default HTitle5
 </script>
 <style lang="scss">
 	.h-title-5 {
-
 		p {
-			font-weight: 600;
+			padding-bottom: 16px;
 			font-size: 32px;
+			font-weight: 600;
 			line-height: 32px;
 			color: #fff;
-			padding-bottom: 16px;
 			border-bottom: 2px solid rgba(255, 255, 255, 0.4);
 
-			&:before, &:after {
+			&::before,
+			&::after {
 				position: absolute;
-				content: '';
+				bottom: 0;
 				width: 48px;
 				height: 2px;
-				background: #00DDFF;
-				bottom: 0;
+				content: '';
+				background: #0df;
 			}
 
-			&:before {
+			&::before {
 				left: 0;
 			}
 
-			&:after {
+			&::after {
 				right: 0;
 			}
 		}

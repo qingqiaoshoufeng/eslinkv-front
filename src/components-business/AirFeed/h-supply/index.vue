@@ -3,8 +3,13 @@
 		<div class="container">
 			<div class="main">
 				<ul>
-					<li class="item" v-for="(k, i) in data" :class="{active: i === index}" :key="i"
-						@click="changeTab(i)">
+					<li
+						class="item"
+						v-for="(k, i) in data"
+						:class="{active: i === index}"
+						:key="i"
+						@click="changeTab(i)"
+					>
 						<div class="title">{{ k.name }} {{ k.value | toThousand }}</div>
 						<div class="bar" :style="{width: getBarWidth(k.value)}"></div>
 					</li>
@@ -12,7 +17,7 @@
 				<div class="unit">单位：万m³</div>
 			</div>
 			<div class="outside">
-				<h5>{{curr.name}}外供量</h5>
+				<h5>{{ curr.name }}外供量</h5>
 				<div class="sub">
 					<div class="sub-item" v-for="(k, i) in (subItem || curr.children || [])" :key="i">
 						<div class="sub-item-rank font-num">{{ getIndex(i) }}</div>
@@ -28,14 +33,14 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
-	import { config, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value } from './index.component'
 
 	let inside = 0
 	const SIZE = 12
 	export default {
 		mixins: [mixins],
-		data() {
+		data () {
 			return {
 				index: 0,
 				timer: null,
@@ -44,16 +49,16 @@
 			}
 		},
 		computed: {
-			curr() {
+			curr () {
 				if (!this.data) return {}
 				return this.data[this.index]
 			}
 		},
 		watch: {
 			data: {
-				handler(val) {
-					if (val){
-						if(val.length){
+				handler (val) {
+					if (val) {
+						if (val.length) {
 							this.subItem = val[0].children.slice(0, SIZE)
 						}
 					}
@@ -62,7 +67,7 @@
 				immediate: true
 			},
 			index: {
-				handler(val) {
+				handler (val) {
 					if (!this.data) return
 					this.subItem = this.data[val].children.slice(0, SIZE)
 					if (this.data[val].children.length > SIZE) {
@@ -75,13 +80,13 @@
 			}
 		},
 		methods: {
-			getBarWidth(value) {
+			getBarWidth (value) {
 				return ~~(value / this.data[0].value * 192) + 'px'
 			},
-			getSubBarWidth(value) {
+			getSubBarWidth (value) {
 				return ~~(value / this.curr.children[0].value * 92) + 'px'
 			},
-			changeTab(n) {
+			changeTab (n) {
 				clearInterval(this.timer)
 				clearTimeout(this.restartTimer)
 				this.index = n
@@ -89,10 +94,10 @@
 					this.startInterval()
 				}, 3000)
 			},
-			getIndex(n) {
+			getIndex (n) {
 				return inside === 0 ? n + 1 : n + 1 + (inside - 1) * SIZE
 			},
-			startInterval() {
+			startInterval () {
 				this.timer = setInterval(() => {
 					if (inside) {
 						if (inside === Math.ceil(this.data[this.index].children.length / SIZE)) {
@@ -111,14 +116,13 @@
 				}, 3000)
 			}
 		},
-		created() {
-			this.configSource = this.parseConfigSource(config)
-			this.configValue = this.parseConfigValue(config, value)
+		created () {
+			this.configValue = this.parseConfigValue(value)
 		},
-		mounted() {
+		mounted () {
 			this.startInterval()
 		},
-		beforeDestroy() {
+		beforeDestroy () {
 			clearInterval(this.timer)
 			clearTimeout(this.restartTimer)
 			this.timer = null
@@ -147,31 +151,31 @@
 				}
 
 				&.active {
-					background: #0057A9;
+					background: #0057a9;
 
 					.bar {
-						background: #00FFCF;
+						background: #00ffcf;
 					}
 				}
 
 				.title {
+					margin-bottom: 4px;
 					font-size: 18px;
 					line-height: 24px;
-					color: #FFFFFF;
-					margin-bottom: 4px;
+					color: #fff;
 				}
 
 				.bar {
 					width: 0;
 					height: 8px;
-					background: #2194FF;
+					background: #2194ff;
 				}
 			}
 
 			.unit {
 				font-size: 18px;
 				line-height: 24px;
-				color: #00DDFF;
+				color: #0df;
 				text-align: left;
 			}
 		}
@@ -180,28 +184,28 @@
 			padding-left: 15px;
 
 			h5 {
-				text-align: left;
-				font-weight: 600;
-				font-size: 20px;
-				line-height: 24px;
-				color: #00DDFF;
 				padding-top: 8px;
 				margin-bottom: 16px;
+				font-size: 20px;
+				font-weight: 600;
+				line-height: 24px;
+				color: #0df;
+				text-align: left;
 			}
 
 			.sub {
 				display: flex;
-				flex-wrap: wrap;
-				flex-direction: column;
 				flex: 1;
+				flex-direction: column;
+				flex-wrap: wrap;
 				height: 432px;
 
 				.sub-item {
 					display: flex;
 					width: 120px;
 					height: 64px;
-					background: linear-gradient(180deg, rgba(0, 87, 169, 0) 0%, rgba(0, 87, 169, 0.3) 100%);
 					margin-bottom: 8px;
+					background: linear-gradient(180deg, rgba(0, 87, 169, 0) 0%, rgba(0, 87, 169, 0.3) 100%);
 
 					&:nth-child(2n+1) {
 						margin-right: 8px;
@@ -213,20 +217,20 @@
 
 					.sub-item-rank {
 						flex: none;
-						background: #2194FF;
 						width: 24px;
 						height: 24px;
-						font-weight: bold;
-						font-size: 24px;
-						line-height: 24px;
-						color: #FFFFFF;
 						margin-right: 4px;
+						font-size: 24px;
+						font-weight: bold;
+						line-height: 24px;
+						color: #fff;
+						background: #2194ff;
 					}
 
 					.sub-detail {
-						text-align: left;
 						font-size: 18px;
-						color: #F9F9F9;
+						color: #f9f9f9;
+						text-align: left;
 
 						.sub-title {
 							height: 33px;
@@ -236,23 +240,23 @@
 						.sub-bar {
 							width: 0;
 							height: 2px;
-							background: #00DDFF;
+							background: #0df;
 						}
 					}
 
 					&:nth-child(1) .sub-item-rank {
-						background: #FFD200;
-						color: #001A77;
+						color: #001a77;
+						background: #ffd200;
 					}
 
 					&:nth-child(2) .sub-item-rank {
-						background: #00DDFF;
-						color: #001A77;
+						color: #001a77;
+						background: #0df;
 					}
 
 					&:nth-child(3) .sub-item-rank {
-						background: #00FFCF;
-						color: #001A77;
+						color: #001a77;
+						background: #00ffcf;
 					}
 				}
 			}

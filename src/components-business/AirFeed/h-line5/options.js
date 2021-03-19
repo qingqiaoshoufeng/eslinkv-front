@@ -11,22 +11,22 @@ export default function getOption (data, config) {
 			right: 0
 		},
 		tooltip: {
-			trigger: "axis",
+			trigger: 'axis',
 			triggerOn: 'mousemove|click',
 			axisPointer: {
 				lineStyle: {
 					color: {
-						type: "linear",
+						type: 'linear',
 						x: 0,
 						y: 0,
 						x2: 0,
 						y2: 1,
 						colorStops: [{
 							offset: 0,
-							color: "rgba(0, 221, 255, .5)"
+							color: 'rgba(0, 221, 255, .5)'
 						}, {
 							offset: 1,
-							color: "rgba(0, 221, 255, 0)"
+							color: 'rgba(0, 221, 255, 0)'
 						}],
 						global: false
 					}
@@ -34,9 +34,9 @@ export default function getOption (data, config) {
 			}
 
 		},
-		color: "rgba(0, 221, 255, 1)",
+		color: 'rgba(0, 221, 255, 1)',
 		xAxis: [{
-			type: "category",
+			type: 'category',
 			axisTick: {
 				show: false
 			},
@@ -44,7 +44,7 @@ export default function getOption (data, config) {
 				show: false
 			},
 			axisLabel: {
-				color: "#fff",
+				color: '#fff',
 				fontSize: 16,
 				lineHeight: 16,
 				interval: 0
@@ -54,16 +54,16 @@ export default function getOption (data, config) {
 		}],
 		yAxis: [{
 			name: config.title,
-			type: "value",
+			type: 'value',
 			splitLine: {
 				show: true,
 				lineStyle: {
-					type: "solid",
-					color: "rgba(199, 209, 219, 0.2)",
+					type: 'solid',
+					color: 'rgba(199, 209, 219, 0.2)'
 				}
 			},
 			axisLabel: {
-				color: "#fff",
+				color: '#fff',
 				fontSize: 16,
 				lineHeight: 16
 			},
@@ -74,29 +74,29 @@ export default function getOption (data, config) {
 				show: false
 			},
 			nameTextStyle: {
-				color: "#fff"
+				color: '#fff'
 			},
 			offset: 5
 		}],
 		series: [{
-			type: "line",
+			type: 'line',
 			symbolSize: 16,
 			symbol: 'image://' + config.icon,
 			itemStyle: {
-				color: "#fff",
-				borderColor: "rgba(0, 221, 255, 1)",
+				color: '#fff',
+				borderColor: 'rgba(0, 221, 255, 1)'
 			},
 			lineStyle: {
-				color: "rgba(0, 221, 255, 1)"
+				color: 'rgba(0, 221, 255, 1)'
 			},
 			areaStyle: {
 				color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
 					offset: 0,
-					color: "rgba(0, 221, 255, 0.5)"
+					color: 'rgba(0, 221, 255, 0.5)'
 				},
 					{
 						offset: 1,
-						color: "rgba(0, 221, 255, 0)"
+						color: 'rgba(0, 221, 255, 0)'
 					}
 				], false)
 			},
@@ -105,7 +105,7 @@ export default function getOption (data, config) {
 				symbolSize: 8,
 				itemStyle: {
 					color: '#fff',
-					borderWidth: 4,
+					borderWidth: 4
 				},
 				label: {
 					show: true,
@@ -113,12 +113,12 @@ export default function getOption (data, config) {
 					offset: [-38, -24],
 					textBorderWidth: 0,
 					textShadowBlur: 0,
-					textShadowColor:'transparent',
+					textShadowColor: 'transparent',
 					formatter: param => {
 						return '{card|' + param.value + config.title + '}'
 					},
 					rich: {
-						'card': {
+						card: {
 							width: 84,
 							height: 30,
 							fontSize: 18,
@@ -137,7 +137,7 @@ export default function getOption (data, config) {
 					label: {
 						show: config.isShowMaxMarker
 					}
-				},{
+				}, {
 					type: 'min',
 					label: {
 						show: false

@@ -1,40 +1,46 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<ul class="h-select8 fn-flex flex-column pos-r">
-			<li @click="handleChange(item)" class="pointer pos-r text-left" :class="{active:(selectLabel?selectLabel:data.label)===item.name}" v-for="item in list">
-				{{item.name}}
+			<li
+				@click="handleChange(item)"
+				class="pointer pos-r text-left"
+				:class="{active:(selectLabel ? selectLabel : data.label) === item.name}"
+				v-for="item in list"
+			>
+				{{ item.name }}
 			</li>
 		</ul>
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins'
+	import mixins from 'eslinkv-npm/mixins'
 	import {
 		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
-		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
+		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2
 	} from '../../../components-map/AMap/a-map/config/scene'
-	import { config, value } from './index.component'
+	import { value } from './index.component'
+	import instance from 'eslinkv-npm/src/store/instance.store'
 
 	export default {
-		data() {
+		data () {
 			return {
-				list:[],
+				list: [],
 				showOptions: false,
-				selectLabel: '',
+				selectLabel: ''
 			}
 		},
-		watch:{
+		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (val) {
 						let c
-						this.list.forEach(item=>{
-							if(item.label ===val.label){
-								c=item
+						this.list.forEach(item => {
+							if (item.label === val.label) {
+								c = item
 							}
 						})
-						if(c){
-							this.selectLabel=c.label
+						if (c) {
+							this.selectLabel = c.label
 						}
 					}
 				},
@@ -44,39 +50,38 @@
 		},
 		mixins: [mixins],
 		methods: {
-			handleChange(a) {
+			handleChange (a) {
 				this.selectLabel = a.name
 				this.showOptions = false
 				this.emitComponentUpdate({
 					label: this.selectLabel,
-					id: a.id,
+					id: a.id
 				})
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach(item => {
-					window.GoldChart.instance.updateComponent(item, {
+					instance.actions.updateComponent(item, {
 						data: {
 							label: a.name,
 							title: a.name,
 							image: a.name,
-							stationId: a.id,
-						},
-					});
-				});
+							stationId: a.id
+						}
+					})
+				})
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach(item => {
-					window.GoldChart.instance.updateComponent(item, {
+					instance.actions.updateComponent(item, {
 						params: {
-							id:a.id,
-						},
-					});
-				});
+							id: a.id
+						}
+					})
+				})
 			}
 		},
-		created() {
-			this.configSource = this.parseConfigSource(config)
-			this.configValue = this.parseConfigValue(config, value)
+		created () {
+			this.configValue = this.parseConfigValue(value)
 		},
-		mounted() {
-			this.$sysApi.map.airSupply.getAllTypeStationList({types:'GasStation'}).then(res=>{
-				this.list=res.gasStationList
+		mounted () {
+			this.$api.map.airSupply.getAllTypeStationList({ types: 'GasStation' }).then(res => {
+				this.list = res.gasStationList
 			})
 		}
 	}
@@ -84,19 +89,19 @@
 <style lang="scss">
 	.h-select8 {
 		height: 100%;
-		background: #001A77;
+		background: #001a77;
 
 		h2 {
-			color: #fff;
 			align-items: center;
 			width: 100%;
 			font-weight: normal;
+			color: #fff;
 
 			span {
+				margin-right: auto;
+				margin-left: 8px;
 				font-size: 16px;
 				line-height: 16px;
-				margin-left: 8px;
-				margin-right: auto;
 			}
 
 			img {
@@ -105,66 +110,66 @@
 		}
 
 		li {
-			color: rgba(255, 255, 255, 0.75);
-			font-weight: 600;
-			font-size: 24px;
-			line-height: 80px;
-			padding-left: 16px;
-			transition: all .3s;
-			height: 80px;
 			width: 100%;
+			height: 80px;
+			padding-left: 16px;
+			font-size: 24px;
+			font-weight: 600;
+			line-height: 80px;
+			color: rgba(255, 255, 255, 0.75);
+			transition: all 0.3s;
 
 			&:hover {
-				background: #0057A9;
 				color: #fff;
+				background: #0057a9;
 
-				&:before {
-					content: '';
+				&::before {
 					position: absolute;
+					top: 0;
+					left: 0;
 					width: 4px;
 					height: 100%;
-					left: 0;
-					top: 0;
-					background: #00DDFF;
+					content: '';
+					background: #0df;
 				}
 
-				&:after {
+				&::after {
+					position: absolute;
+					top: 50%;
+					right: 14px;
 					width: 15px;
 					height: 15px;
-					background-image: url('./img/right.svg');
-					background-size: 15px;
-					right: 14px;
-					top: 50%;
 					margin-top: -7.5px;
 					content: '';
-					position: absolute;
+					background-image: url('./img/right.svg');
+					background-size: 15px;
 				}
 			}
 
 			&.active {
-				background: #0057A9;
 				color: #fff;
+				background: #0057a9;
 
-				&:after {
+				&::after {
+					position: absolute;
+					top: 50%;
+					right: 14px;
 					width: 15px;
 					height: 15px;
-					background-image: url('./img/right.svg');
-					background-size: 15px;
-					right: 14px;
-					top: 50%;
 					margin-top: -7.5px;
 					content: '';
-					position: absolute;
+					background-image: url('./img/right.svg');
+					background-size: 15px;
 				}
 
-				&:before {
-					content: '';
+				&::before {
 					position: absolute;
+					top: 0;
+					left: 0;
 					width: 4px;
 					height: 100%;
-					left: 0;
-					top: 0;
-					background: #00DDFF;
+					content: '';
+					background: #0df;
 				}
 			}
 		}

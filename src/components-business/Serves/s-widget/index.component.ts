@@ -1,6 +1,3 @@
-export const config = {
-	animation: true,
-};
 export const value = {
 	layout: {
 		size: {
@@ -19,5 +16,5 @@ export const value = {
 				percent: 60
 			})
 		})
-	},
-};
+	}
+}

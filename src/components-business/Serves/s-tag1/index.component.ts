@@ -1,22 +1,21 @@
-import {getInput, getSelect} from '../../../../lib';
-
-export const configSource = {
-	config: {
-		fields: {
-			desc: getInput('desc', '描述'),
-			desc2: getInput('desc2', '描述2'),
-			logo: getSelect('logo', '图片logo', ['/static/images/serves/s-tag1-logo1.svg', '/static/images/serves/s-tag1-logo2.svg']),
-		},
+export const customConfig = [
+	{
+		prop: 'desc',
+		label: '描述',
+		type: 'func-input'
 	},
-};
-export const config = {
-	animation: true,
-	config: {
-		desc: true,
-		desc2: true,
-		logo: true,
+	{
+		prop: 'desc2',
+		label: '描述2',
+		type: 'func-input'
 	},
-};
+	{
+		prop: 'logo',
+		label: '图片logo',
+		type: 'func-background',
+		options: ['/static/images/serves/s-tag1-logo1.svg', '/static/images/serves/s-tag1-logo2.svg']
+	}
+]
 export const value = {
 	layout: {
 		size: {
@@ -30,12 +29,12 @@ export const value = {
 	api: {
 		data: JSON.stringify({
 			value: 22326,
-			percent: 74.8,
-		}),
+			percent: 74.8
+		})
 	},
 	config: {
 		desc: '热线服务话务量(次)',
 		desc2: '接通率',
 		logo: '/static/images/serves/s-tag1-logo1.svg'
-	},
+	}
 }

@@ -1,25 +1,24 @@
 <template>
-	<div class="h-call-count-statistics widget-part" :style="styles" >
+	<div class="h-call-count-statistics widget-part" :style="styles">
 		<div class="chart" :id="id"></div>
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
+	import mixins from 'eslinkv-npm/mixins'
 	import getOptions from './options'
-	import { config, value } from './index.component'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		computed: {
-		},
+		computed: {},
 		methods: {
-			setOption(data) {
+			setOption (data) {
 				this.instance && this.instance.setOption(getOptions(this.data.barData, this.data.dashLineData))
 			}
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
@@ -31,16 +30,15 @@
 				immediate: true
 			}
 		},
-		created() {
-			this.configSource = this.parseConfigSource(config);
-			this.configValue = this.parseConfigValue(config, value);
+		created () {
+			this.configValue = this.parseConfigValue(value)
 		}
 	}
 </script>
 <style lang="scss" scoped>
-.chart {
-	width: 100%;
-	height: 100%;
-}
+	.chart {
+		width: 100%;
+		height: 100%;
+	}
 </style>
 

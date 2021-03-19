@@ -1,4 +1,3 @@
-export const config: ComponentConfig = {animation: true}
 export const value: ComponentValue = {
     layout: {
         size: {
@@ -62,7 +61,7 @@ export const value: ComponentValue = {
                     month2: '-5%',
                     data: [4, 20, 7, 8, 9, 10, 8]
                 }
-            ],
-        }),
-    },
+            ]
+        })
+    }
 }

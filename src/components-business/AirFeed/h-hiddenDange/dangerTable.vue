@@ -5,76 +5,76 @@
 			<li>隐患排行</li>
 			<li>设备类型</li>
 			<li>隐患数</li>
-      <li>待处理</li>
-      <li>处理中</li>
+			<li>待处理</li>
+			<li>处理中</li>
 			<li>已完成</li>
 		</ul>
 		<div class="content" v-if="data">
-      <ul
-          class="content-row"
-          v-for="(item, index) in curr"
-          :key="index"
-          @mouseenter="isStop = true"
-          @mouseleave="isStop = false"
-      >
-        <li class="font-num" :class="{first: getIndex(index) === '01', second: getIndex(index) === '02' || getIndex(index) === '03'}">{{ getIndex(index) }}</li>
-        <li>{{ item.name }}</li>
-        <li>{{ item.type }}</li>
-        <li>{{ item.total }}</li>
-        <li>{{ item.waitHandle }}</li>
-        <li>{{ item.handling }}</li>
-        <li>{{ item.finish }}</li>
-      </ul>
+			<ul
+				class="content-row"
+				v-for="(item, index) in curr"
+				:key="index"
+				@mouseenter="isStop = true"
+				@mouseleave="isStop = false"
+			>
+				<li class="font-num" :class="{first: getIndex(index) === '01', second: getIndex(index) === '02' || getIndex(index) === '03'}">{{ getIndex(index) }}</li>
+				<li>{{ item.name }}</li>
+				<li>{{ item.type }}</li>
+				<li>{{ item.total }}</li>
+				<li>{{ item.waitHandle }}</li>
+				<li>{{ item.handling }}</li>
+				<li>{{ item.finish }}</li>
+			</ul>
 		</div>
 	</div>
 </template>
 <script>
 
-  const SIZE = 5
+	const SIZE = 5
 	export default {
 		props: ['data'],
-    data() {
-      return {
-        timer: null,
-        loop: 0,
-        isStop: false
-      }
-    },
-    watch: {
-      data: {
-        handler(val) {
-          clearInterval(this.timer)
-			this.loop = 0
-          this.timer = setInterval(() => {
-            if (this.isStop) return
-            if (this.loop === Math.ceil(val.length / SIZE)- 1) {
-              this.loop = 0
-            } else {
-              this.loop++
-            }
-          }, 2000)
-        },
-        deep: true,
-        immediate: true
-      },
-    },
-    computed: {
-      curr () {
-        if (!this.data) return []
-        return this.data.slice(this.loop * SIZE, (this.loop + 1) * SIZE)
-      }
-    },
-    methods: {
-      getIndex (n) {
-        const num = n + 1 + this.loop * SIZE
-        return num < 10 ? '0' + num : num
-      }
-    },
-    beforeDestroy() {
-      clearInterval(this.timer)
-      this.timer = null
-    }
-	};
+		data () {
+			return {
+				timer: null,
+				loop: 0,
+				isStop: false
+			}
+		},
+		watch: {
+			data: {
+				handler (val) {
+					clearInterval(this.timer)
+					this.loop = 0
+					this.timer = setInterval(() => {
+						if (this.isStop) return
+						if (this.loop === Math.ceil(val.length / SIZE) - 1) {
+							this.loop = 0
+						} else {
+							this.loop++
+						}
+					}, 2000)
+				},
+				deep: true,
+				immediate: true
+			}
+		},
+		computed: {
+			curr () {
+				if (!this.data) return []
+				return this.data.slice(this.loop * SIZE, (this.loop + 1) * SIZE)
+			}
+		},
+		methods: {
+			getIndex (n) {
+				const num = n + 1 + this.loop * SIZE
+				return num < 10 ? '0' + num : num
+			}
+		},
+		beforeDestroy () {
+			clearInterval(this.timer)
+			this.timer = null
+		}
+	}
 </script>
 <style lang="scss" scoped>
 	.table {
@@ -82,19 +82,19 @@
 		width: 100%;
 
 		.title {
-			width: 100%;
-			height: 32px;
-			background: rgba(23, 123, 255, 0.2);
+			box-sizing: border-box;
 			display: flex;
 			align-items: center;
-			box-sizing: border-box;
+			width: 100%;
+			height: 32px;
 			white-space: nowrap;
+			background: rgba(23, 123, 255, 0.2);
 
 			& > li {
-				font-size: 18px;
-				color: #00CBF4;
-				text-align: left;
 				flex: none;
+				font-size: 18px;
+				color: #00cbf4;
+				text-align: left;
 
 				&:nth-child(1) {
 					width: 24px;
@@ -132,33 +132,33 @@
 			}
 
 			.content-row {
-				height: 24px;
+				box-sizing: border-box;
 				display: flex;
 				align-items: center;
-				box-sizing: border-box;
+				height: 24px;
 				margin-top: 8px;
 
 				& > li {
+					flex: none;
 					font-size: 18px;
 					color: #fff;
 					text-align: left;
-					flex: none;
 
-          &.first {
-            background: #FF7217!important;
-          }
+					&.first {
+						background: #ff7217 !important;
+					}
 
-          &.second {
-            background: #0057A9!important;
-          }
+					&.second {
+						background: #0057a9 !important;
+					}
 
 					&:nth-child(1) {
 						width: 24px;
 						height: 24px;
-						text-align: center;
-						line-height: 24px;
-						background: rgba(255, 255, 255, 0.2);
 						margin-right: 8px;
+						line-height: 24px;
+						text-align: center;
+						background: rgba(255, 255, 255, 0.2);
 					}
 
 					&:nth-child(2) {
@@ -179,13 +179,13 @@
 
 					&:nth-child(6) {
 						width: 90px;
-            color: #FFDC45;
+						color: #ffdc45;
 					}
 
 					&:nth-child(7) {
 						width: 90px;
-            color: #00FFCF;
-          }
+						color: #00ffcf;
+					}
 				}
 			}
 		}

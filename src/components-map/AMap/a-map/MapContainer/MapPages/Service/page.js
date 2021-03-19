@@ -7,5 +7,5 @@ export default {
 	Market: 'serviceMarket',
 	HangranCode: 'serviceHangranCode',
 	Nineteen: 'nineteen',
-	ICcustomer: 'serviceICcustomer',
+	ICcustomer: 'serviceICcustomer'
 }

@@ -5,61 +5,60 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
-	import getOption from './options';
-	import { config, configSource, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import getOption from './options'
+	import { customConfig, value } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		methods: {
-			setOption(data) {
+			setOption (data) {
 				const total = Number(this.data.value1) + Number(this.data.value2)
 				const percent1 = ~~(this.data.value1 * 100 / total)
-				const percent2 = 100-percent1
-				this.instance && this.instance.setOption(getOption(this.data.value1, this.data.value2, this.config.config,percent1,percent2))
+				const percent2 = 100 - percent1
+				this.instance && this.instance.setOption(getOption(this.data.value1, this.data.value2, this.config.config, percent1, percent2))
 			}
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
 							this.setOption()
-						});
+						})
 					}
 				},
 				deep: true,
-				immediate: true,
-			},
+				immediate: true
+			}
 		},
-		created() {
-			this.configSource = this.parseConfigSource(config, configSource);
-			this.configValue = this.parseConfigValue(config, value);
-		},
-	};
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
+		}
+	}
 </script>
 <style lang="scss" scoped>
 	.chart {
+		position: relative;
 		width: 100%;
 		height: 100%;
 		background: url('/static/icons/ellipse-dashed.svg') no-repeat center;
 		background-size: 128px 128px;
-		position: relative;
 	}
 
 	.dot {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		z-index: 1;
 		width: 24px;
 		height: 24px;
-		background: #687692;
-		position: absolute;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
 		margin: auto;
+		background: #687692;
 		border-radius: 50%;
-		z-index: 1;
 	}
 
 </style>

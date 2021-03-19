@@ -1,14 +1,30 @@
-import {getInput, getBooleanInput} from '../../../../lib'
-
-export const config = {
-	animation: true,
-	config: {
-		unit: true,
-		lineColor: true,
-		scale: true,
-		isShowXAxis: true
+export const customConfig = [
+	{
+		prop: 'lineColor',
+		label: '线条颜色',
+		type: 'func-color'
+	},
+	{
+		prop: 'lineStopColor',
+		label: '渐变后颜色',
+		type: 'func-color'
+	},
+	{
+		prop: 'isShowXAxis',
+		label: '显示横坐标',
+		type: 'func-switch'
+	},
+	{
+		prop: 'scale',
+		label: '纵坐标是否以0开始',
+		type: 'func-switch'
+	},
+	{
+		prop: 'unit',
+		label: '单位',
+		type: 'func-input'
 	}
-};
+]
 export const value = {
 	layout: {
 		size: {
@@ -51,7 +67,7 @@ export const value = {
 			},
 			{
 				x: '20:00',
-				y: 15,
+				y: 15
 			}
 		])
 	},
@@ -62,15 +78,4 @@ export const value = {
 		scale: false,
 		isShowXAxis: false
 	}
-}
-export const configSource = {
-	config: {
-		fields: {
-			unit: getInput('unit', '单位'),
-			lineColor: getInput('lineColor', '线条颜色'),
-			lineStopColor: getInput('lineStopColor', '渐变后颜色'),
-			isShowXAxis: getBooleanInput('isShowXAxis', '显示横坐标'),
-			scale: getBooleanInput('scale', '纵坐标是否以0开始'),
-		}
-	},
 }

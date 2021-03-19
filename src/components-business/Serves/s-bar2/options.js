@@ -9,11 +9,11 @@ export default function getOption (data, config) {
         xAxis: [{
             type: 'category',
             axisTick: {
-                show: false,
+                show: false
             },
             axisLabel: {
                 textStyle: {
-                    color: '#fff',
+                    color: '#fff'
                 }
             },
             data: data.map(v => v.xValue)
@@ -24,58 +24,58 @@ export default function getOption (data, config) {
             axisTick: {
                 show: false,
                 textStyle: {
-                    color: '#fff',
+                    color: '#fff'
                 }
             },
             axisLabel: {
                 textStyle: {
-                    color: '#fff',
+                    color: '#fff'
                 }
             },
             axisLine: {
-                show: false,
+                show: false
             }
-        },{
+        }, {
             type: 'value',
-            splitLine:{
+            splitLine: {
                 show: true
             },
             show: true,
             axisTick: {
                 show: false,
                 textStyle: {
-                    color: '#fff',
+                    color: '#fff'
                 }
             },
             axisLabel: {
                 textStyle: {
                     show: true,
-                    color: '#fff',
+                    color: '#fff'
                 }
             },
             axisLine: {
-                show: true,
+                show: true
             }
         }],
         barGap: -1,
         series: [{
             type: 'bar',
-            yAxisIndex:0,
+            yAxisIndex: 0,
             stack: 'a',
             showBackground: true,
             itemStyle: {
                 normal: {
-                    color: config.color1,
+                    color: config.color1
                 }
             },
             barWidth: 10,
             data: data.map(v => v.yValue1)
         }, {
-            name:'%',
+            name: '%',
             type: 'bar',
             stack: 'a',
             barWidth: 10,
-            yAxisIndex:0,
+            yAxisIndex: 0,
             showBackground: true,
             itemStyle: {
                 normal: {

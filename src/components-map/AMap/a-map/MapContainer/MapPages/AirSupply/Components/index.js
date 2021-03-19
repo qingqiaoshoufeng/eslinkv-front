@@ -1,4 +1,4 @@
-//页面内所需组件
+// 页面内所需组件
 export { default as ComprehensiveServiceStation } from './ComprehensiveServiceStation'
 export { default as DistributedEnergyResource } from './DistributedEnergyResource'
 export { default as EmergencyAirSourceStation } from './EmergencyAirSourceStation'

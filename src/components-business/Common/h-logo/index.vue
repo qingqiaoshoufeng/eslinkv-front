@@ -14,17 +14,16 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins'
-	import { config, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
-			this.configSource = this.parseConfigSource(config)
-			this.configValue = this.parseConfigValue(config, value)
+		created () {
+			this.configValue = this.parseConfigValue(value)
 		},
 		methods: {
-			handleClick() {
+			handleClick () {
 				location.reload()
 			}
 		}
@@ -34,13 +33,13 @@
 	.h-logo {
 		h2 {
 			font-size: 48px;
+			font-weight: normal;
 			line-height: 48px;
+			letter-spacing: 21px;
+			white-space: nowrap;
 			background-image: -webkit-linear-gradient(rgba(255, 255, 255, 1), rgba(102, 227, 253, 1));
 			-webkit-background-clip: text;
 			-webkit-text-fill-color: transparent;
-			font-weight: normal;
-			letter-spacing: 21px;
-			white-space: nowrap;
 		}
 
 		img {
@@ -50,41 +49,41 @@
 		}
 
 		ul {
-			margin-top: 14px;
 			width: 528px;
+			margin-top: 14px;
 		}
 
 		li {
-			color: #fff;
+			flex: 1;
 			font-size: 20px;
 			line-height: 24px;
+			color: #fff;
 			letter-spacing: 11px;
-			flex: 1;
 
 			&:nth-child(1) {
-				&:before {
-					content: '';
+				&::before {
+					position: absolute;
+					top: 50%;
+					left: 50%;
 					width: 4px;
 					height: 4px;
-					position: absolute;
-					background-color: rgba(255, 255, 255, 0.6);
-					left: 50%;
-					margin-left: 68px;
-					top: 50%;
 					margin-top: -2px;
+					margin-left: 68px;
+					content: '';
+					background-color: rgba(255, 255, 255, 0.6);
 				}
 			}
 
 			&:nth-child(2) {
-				&:before {
-					content: '';
+				&::before {
+					position: absolute;
+					top: 50%;
+					left: 50%;
 					width: 4px;
 					height: 4px;
-					position: absolute;
-					left: 50%;
-					margin-left: 98px;
-					top: 50%;
 					margin-top: -2px;
+					margin-left: 98px;
+					content: '';
 					background-color: rgba(255, 255, 255, 0.6);
 				}
 			}

@@ -1,4 +1,3 @@
-
 export const value = {
 	api: {
 		data: JSON.stringify({
@@ -7,8 +6,8 @@ export const value = {
 			start2: 73,
 			end2: 73,
 			start3: 73,
-			end3: 73,
-		}),
+			end3: 73
+		})
 	},
 	layout: {
 		size: {
@@ -20,5 +19,3 @@ export const value = {
 		}
 	}
 }
-
-export const config = { animation: true }

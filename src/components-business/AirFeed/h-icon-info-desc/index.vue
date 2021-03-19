@@ -13,50 +13,50 @@
 	</div>
 </template>
 <script>
-import mixins from '../../mixins';
-import { config, configSource, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { customConfig, value } from './index.component'
 
-export default {
-	mixins: [mixins],
-	created() {
-		this.configSource = this.parseConfigSource(config, configSource);
-		this.configValue = this.parseConfigValue(config, value);
-	},
-};
+	export default {
+		mixins: [mixins],
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
+		}
+	}
 </script>
 <style lang="scss">
-.h-icon-info-desc {
-	align-items: center;
+	.h-icon-info-desc {
+		align-items: center;
 
-	.h-icon-info-bg {
-		background: linear-gradient(
-			90deg,
-			rgba(0, 31, 109, 1) 0%,
-			rgba(0, 31, 109, 0) 100%
-		);
-		width: 100%;
-		height: 100%;
-		opacity: 0.2;
-		top: 0;
-		left: 0;
-	}
+		.h-icon-info-bg {
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background:
+				linear-gradient(
+					90deg,
+					rgba(0, 31, 109, 1) 0%,
+					rgba(0, 31, 109, 0) 100%
+				);
+			opacity: 0.2;
+		}
 
-	&__icon {
-		width: 32px;
-		height: 32px;
-		background-color: #064F94;
-		background-size: 22px 24px;
-		background-repeat: no-repeat;
-		background-position: center;
-		margin-left: 6px;
-	}
+		&__icon {
+			width: 32px;
+			height: 32px;
+			margin-left: 6px;
+			background-color: #064f94;
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 22px 24px;
+		}
 
-	&__text {
-		font-size: 20px;
-		line-height: 24px;
-		color: #FEFFFF;
-		margin-left: 10px;
+		&__text {
+			margin-left: 10px;
+			font-size: 20px;
+			line-height: 24px;
+			color: #feffff;
+		}
 	}
-}
 </style>
 

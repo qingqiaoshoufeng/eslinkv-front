@@ -5,7 +5,7 @@
 				<i-select
 					class="filter-select"
 					v-model="currentLevel"
-					style="width: 80px"
+					style="width: 80px;"
 					@on-change="getData"
 				>
 					<i-option
@@ -50,7 +50,7 @@
 				class="demo-spin-icon-load"
 				v-show="loading"
 			></i-icon>
-			<NoData :show="!loading && !list.length" />
+			<NoData :show="!loading && !list.length"/>
 			<template v-if="!loading">
 				<div
 					@click="handleClick(item, index, 'WarningList')"
@@ -98,207 +98,234 @@
 </template>
 
 <script>
-import { SvgIcon, NoData } from '../../../../../components/'
-export default {
-	name: 'ProcessWarningList',
-	components: {
-		SvgIcon,
-		NoData,
-	},
-	data() {
-		return {
-			activeIndex: null,
-			list: [],
-			loading: false,
-			loaded: false,
-			currentLevel: 1,
-			repairState: 1,
-			levelList: [
-				{ value: 1, label: '一级' },
-				{ value: 2, label: '二级' },
-				{ value: 3, label: '三级' },
-			],
-		}
-	},
-	props: {
-		activeItem: {
-			type: Object,
-			default() {
-				return {}
-			},
+	import { SvgIcon, NoData } from '../../../../../components/'
+	import { Icon, Select, Option } from 'view-design'
+
+	export default {
+		name: 'ProcessWarningList',
+		components: {
+			SvgIcon,
+			NoData,
+			'i-icon': Icon,
+			'i-select': Select,
+			'i-option': Option
 		},
-	},
-	//定时刷新数据
-	async created() {
-		this.getData()
-		this.timer = setInterval(() => {
-			this.getData()
-		}, 60000)
-	},
-	computed: {
-		active() {
-			return this.$parent.active
-		},
-	},
-	methods: {
-		changeRepairState(val) {
-			this.repairState = val
-			this.getData()
-		},
-		handleClick(listItem, index) {
-			let { address, time } = listItem
-			this.activeIndex = index
-			listItem.status = listItem.status == '1' ? 1 : 0
-			listItem.overlayType = 'WarningList'
-			this.$emit('change', listItem)
-		},
-		async getData() {
-			//除第一次需要loading外，其余需要无感刷新
-			if (!this.loaded) {
-				this.loading = true
+		data () {
+			return {
+				activeIndex: null,
+				list: [],
+				loading: false,
+				loaded: false,
+				currentLevel: 1,
+				repairState: 1,
+				levelList: [
+					{ value: 1, label: '一级' },
+					{ value: 2, label: '二级' },
+					{ value: 3, label: '三级' }
+				]
 			}
-			this.list = await this.$sysApi.map.airSupply.getProcessWarningList({
-				priority: this.currentLevel,
-				status: this.repairState,
-			})
-			this.loading = false
-			this.loaded = true
 		},
-	},
-	beforeDestroy() {
-		if (this.timer) {
-			clearInterval(this.timer)
-			this.timer = null
+		props: {
+			activeItem: {
+				type: Object,
+				default () {
+					return {}
+				}
+			}
+		},
+		// 定时刷新数据
+		async created () {
+			this.getData()
+			this.timer = setInterval(() => {
+				this.getData()
+			}, 60000)
+		},
+		computed: {
+			active () {
+				return this.$parent.active
+			}
+		},
+		methods: {
+			changeRepairState (val) {
+				this.repairState = val
+				this.getData()
+			},
+			handleClick (listItem, index) {
+				const { address, time } = listItem
+				this.activeIndex = index
+				listItem.status = listItem.status == '1' ? 1 : 0
+				listItem.overlayType = 'WarningList'
+				this.$emit('change', listItem)
+			},
+			async getData () {
+				// 除第一次需要loading外，其余需要无感刷新
+				if (!this.loaded) {
+					this.loading = true
+				}
+				this.list = await this.$api.map.airSupply.getProcessWarningList({
+					priority: this.currentLevel,
+					status: this.repairState
+				})
+				this.loading = false
+				this.loaded = true
+			}
+		},
+		beforeDestroy () {
+			if (this.timer) {
+				clearInterval(this.timer)
+				this.timer = null
+			}
 		}
-	},
-}
+	}
 </script>
 
 <style lang="scss" scoped>
 .process-warning {
-	color: #fff;
-	font-size: 20px;
 	height: 800px;
+	font-size: 20px;
+	color: #fff;
 	backface-visibility: hidden;
+
 	.filter-bar {
 		position: sticky;
-		backface-visibility: hidden;
-		width: 100%;
 		position: sticky;
 		justify-content: space-between;
-		color: #00ddff;
-		font-size: 20px;
+		width: 100%;
 		padding: 8px 2px 7px 2px;
-		border-bottom: 1px solid #00ddff;
+		font-size: 20px;
 		line-height: 38px;
+		color: #0df;
 		user-select: none;
+		border-bottom: 1px solid #0df;
+		backface-visibility: hidden;
+
 		.fitler-item {
 			display: flex;
+
 			> div {
 				padding: 0 8px;
 				cursor: pointer;
 			}
+
 			> div:not(:last-child) {
 				margin-right: 16px;
 			}
 		}
+
 		.repair-type {
 			.active {
 				color: #fff;
 				background: #0057a9;
-				border: 1px solid #00ddff;
+				border: 1px solid #0df;
 				border-radius: 4px;
 			}
 		}
+
 		.repair-state {
 			.active {
 				color: #fff;
+
 				&::after {
-					content: ' ';
-					display: inline-block;
 					position: absolute;
-					width: 0px;
-					height: 0px;
-					left: 4px;
 					top: calc(50% - 5px);
+					left: 4px;
+					display: inline-block;
+					width: 0;
+					height: 0;
+					content: ' ';
 					border: 4px solid #fff;
 				}
 			}
+
 			> div {
 				position: relative;
 				padding-left: 20px;
+
 				&::before {
-					content: ' ';
-					display: inline-block;
 					position: absolute;
+					top: calc(50% - 9px);
+					left: 0;
+					display: inline-block;
 					width: 16px;
 					height: 16px;
-					left: 0px;
-					top: calc(50% - 9px);
-					border: 2px solid #00ddff;
+					content: ' ';
+					border: 2px solid #0df;
 				}
 			}
 		}
 	}
+
 	.event-warning-list {
 		height: 744px;
 		overflow-y: scroll;
+
 		&::-webkit-scrollbar {
 			display: none;
 		}
 	}
+
 	.demo-spin-icon-load {
-		animation: ani-demo-spin 1s linear infinite;
 		position: absolute;
 		top: 40%;
 		left: 50%;
 		transform: translate(-50%);
+		animation: ani-demo-spin 1s linear infinite;
 	}
+
 	@keyframes ani-demo-spin {
 		from {
 			transform: rotate(0deg);
 		}
+
 		50% {
 			transform: rotate(180deg);
 		}
+
 		to {
 			transform: rotate(360deg);
 		}
 	}
+
 	/deep/ {
 		.ivu-select-dropdown {
 			margin-top: 18px !important;
-
 			background: #0057a9;
 		}
+
 		.ivu-select-selection {
 			color: #fff;
 			background: #0057a9;
 			border: 1px solid #57a3f3 !important;
 		}
+
 		.ivu-select {
-			padding: 0 !important;
 			height: 40px !important;
+			padding: 0 !important;
+			font-size: 20px !important;
 			font-style: normal !important;
 			font-weight: 600 !important;
-			font-size: 20px !important;
 		}
-		.ivu-icon-ios-arrow-down:before {
-			margin: 0px -6px;
+
+		.ivu-icon-ios-arrow-down::before {
+			margin: 0 -6px;
 		}
+
 		.ivu-select-item {
 			font-size: 20px !important;
 			line-height: 32px;
 			line-height: 20px !important;
 		}
+
 		.ivu-select-item:hover {
 			background: rgba(0, 221, 255, 0.3) !important;
 		}
+
 		.ivu-select-selected-value {
 			padding-left: 13px;
 			font-size: 20px !important;
 		}
-		.ivu-icon-ios-arrow-down:before {
+
+		.ivu-icon-ios-arrow-down::before {
 			font-size: 20px;
 			font-weight: 700;
 			color: #fff;
@@ -306,62 +333,73 @@ export default {
 	}
 
 	.list-item {
-		padding: 16px 8px;
 		box-sizing: border-box;
+		padding: 16px 8px;
 		cursor: pointer;
+
 		&:hover,
 		&.active {
 			background: rgba(23, 115, 201, 0.4);
 		}
+
 		.panel-type-icon {
 			width: 24px;
 			height: 24px;
 			margin-top: 8px;
 		}
+
 		.row {
 			display: flex;
 			// align-items: center;
 			.content {
-				flex: 1;
-				font-size: 24px;
 				display: flex;
+				display: flex;
+				flex: 1;
+				align-items: center;
 				align-items: center;
 				margin-left: 12px;
-				display: flex;
-				align-items: center;
+				font-size: 24px;
+
 				.level {
 					width: 20px;
 					height: 24px;
-					line-height: 24px;
 					margin-left: 8px;
+					line-height: 24px;
 					text-align: center;
 				}
+
 				.first {
 					background: #9e1a14;
 				}
+
 				.second {
 					background: #be4a18;
 				}
+
 				.third {
 					background: #cf8900;
 				}
 			}
+
 			.station-name {
-				font-size: 20px;
 				flex: 1;
-				color: rgba(255, 255, 255, 0.8);
 				margin-left: 36px;
+				font-size: 20px;
+				color: rgba(255, 255, 255, 0.8);
 			}
+
 			.time {
 				color: rgba(255, 255, 255, 0.8);
 			}
 		}
 	}
+
 	.status-err {
 		color: #ffdc45;
 	}
+
 	.status-suc {
-		color: #00ddff;
+		color: #0df;
 	}
 }
 </style>

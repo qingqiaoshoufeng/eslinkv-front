@@ -8,17 +8,16 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
-	import { config, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		methods: {},
 		computed: {},
-		created() {
-			this.configSource = this.parseConfigSource(config);
-			this.configValue = this.parseConfigValue(config, value);
-		},
+		created () {
+			this.configValue = this.parseConfigValue(value)
+		}
 	}
 </script>
 <style lang="scss" scoped>
@@ -28,33 +27,32 @@
 		.icon {
 			width: 120px;
 			height: 120px;
-			background-size: 100% 100%;
 			margin-right: 16px;
+			background-size: 100% 100%;
 		}
 
 		.detail {
 			width: 160px;
 			height: 120px;
 			padding: 28px 16px;
-			background: linear-gradient(91.45deg, rgba(255, 255, 255, 0.08) 1.46%, rgba(255, 255, 255, 0));
 			text-align: left;
+			background: linear-gradient(91.45deg, rgba(255, 255, 255, 0.08) 1.46%, rgba(255, 255, 255, 0));
 
 			.number {
-				font-family: DIN Alternate;
+				margin-bottom: 12px;
+				font-size: 32px;
 				font-style: normal;
 				font-weight: bold;
-				font-size: 32px;
 				line-height: 32px;
-				color: #FFFFFF;
-				margin-bottom: 12px;
+				color: #fff;
 			}
 
 			.info {
+				font-size: 18px;
 				font-style: normal;
 				font-weight: normal;
-				font-size: 18px;
 				line-height: 24px;
-				color: #00DDFF;
+				color: #0df;
 			}
 		}
 	}

@@ -2,7 +2,7 @@
 	<div class="widget-part pos-r" :style="styles" v-if="data">
 		<div class="statistical-box">
 			<div class="left fn-flex flex-column">
-				<div class="time">{{ year }}{{config.config.timeDesc}}</div>
+				<div class="time">{{ year }}{{ config.config.timeDesc }}</div>
 				<div class="decs">
 					{{ config.config.desc }}
 				</div>
@@ -42,61 +42,60 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
-	import { config, configSource, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { customConfig, value } from './index.component'
 
 	export default {
-		data() {
+		data () {
 			return {
 				year: new Date().getFullYear(),
 				scrollList: new Int8Array(10),
-				transform: new Int8Array(9),
-			};
+				transform: new Int8Array(9)
+			}
 		},
 		mixins: [mixins],
 		computed: {
-			statisticalVal() {
-				if (this.data) return Number(this.data.value).toLocaleString().split('');
-				return [];
-			},
+			statisticalVal () {
+				if (this.data) return Number(this.data.value).toLocaleString().split('')
+				return []
+			}
 		},
 		methods: {
-			setNumberTransform() {
+			setNumberTransform () {
 				if (this.data) {
-					const numberArr = Number(this.data.value).toLocaleString().split('');
-					this.transform = numberArr.map(item => item * 10);
+					const numberArr = Number(this.data.value).toLocaleString().split('')
+					this.transform = numberArr.map(item => item * 10)
 				}
-			},
+			}
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (val) {
-						this.setNumberTransform();
+						this.setNumberTransform()
 					}
 				},
-				deep: true,
-			},
+				deep: true
+			}
 		},
-		created() {
-			this.configSource = this.parseConfigSource(config, configSource);
-			this.configValue = this.parseConfigValue(config, value);
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
 		},
-		mounted() {
+		mounted () {
 			setTimeout(() => {
 				this.setNumberTransform()
 			}, 500)
-			this.$sysApi.bussiness.year().then(res => {
+			this.$api.bussiness.year().then(res => {
 				this.year = res
 			})
-		},
-	};
+		}
+	}
 </script>
 <style lang="scss">
 	.statistical-box {
+		display: flex;
 		width: 100%;
 		height: 100%;
-		display: flex;
 
 		.left {
 			min-width: 180px;
@@ -105,26 +104,26 @@
 			.time {
 				width: 100%;
 				height: 32px;
-				line-height: 32px;
+				margin-top: 11px;
 				font-size: 32px;
 				font-style: normal;
 				font-weight: 600;
-				letter-spacing: 0;
-				text-align: right;
+				line-height: 32px;
 				color: #fff;
-				margin-top: 11px;
+				text-align: right;
+				letter-spacing: 0;
 			}
 
 			.decs {
 				width: 100%;
+				margin-top: 16px;
 				font-size: 24px;
 				font-style: normal;
 				font-weight: 400;
 				line-height: 24px;
-				letter-spacing: 0;
+				color: #0df;
 				text-align: right;
-				color: #00DDFF;
-				margin-top: 16px;
+				letter-spacing: 0;
 			}
 		}
 
@@ -132,19 +131,19 @@
 			flex: 1;
 
 			.value {
-				width: 100%;
-				height: 100%;
 				display: flex;
 				align-items: center;
+				width: 100%;
+				height: 100%;
 
 				.item {
-					height: 80px;
 					width: 56px;
+					height: 80px;
 					margin: 0 8px;
 
 					.scroll-box {
-						height: 80px;
 						width: 56px;
+						height: 80px;
 						overflow: hidden;
 
 						.scroll-list {
@@ -153,18 +152,18 @@
 							transition: transform 1s ease-in-out;
 
 							.scroll-item {
-								height: 80px;
 								width: 56px;
-								border-radius: 2px;
-								background-image: url('/static/images/airfeed/statistical.svg');
-								line-height: 80px;
-								background-repeat: no-repeat;
-								background-size: 100% 100%;
-								text-align: center;
+								height: 80px;
 								font-size: 48px;
 								font-style: normal;
 								font-weight: 700;
+								line-height: 80px;
 								color: #fff;
+								text-align: center;
+								background-image: url('/static/images/airfeed/statistical.svg');
+								background-repeat: no-repeat;
+								background-size: 100% 100%;
+								border-radius: 2px;
 							}
 						}
 					}
@@ -176,9 +175,9 @@
 					font-size: 48px;
 					font-style: normal;
 					font-weight: 700;
+					line-height: 80px;
 					color: #fff;
 					text-align: center;
-					line-height: 80px;
 				}
 			}
 		}

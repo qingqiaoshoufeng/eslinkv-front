@@ -1,8 +1,6 @@
-export const config = {animation: true}
-
 export const value = {
 	api: {
-		data: JSON.stringify([{"label": "年", "value": "year"}, {"label": "月", "value": "month"}]),
+		data: JSON.stringify([{ label: '年', value: 'year' }, { label: '月', value: 'month' }]),
 		bind: {
 			enable: true,
 			role: ['provider']

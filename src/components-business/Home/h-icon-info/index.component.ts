@@ -1,23 +1,22 @@
-import {getInput, getSelect} from '../../../../lib'
+export const customConfig = [
+	{
+		prop: 'icon',
+		label: '图片',
+		type: 'func-input'
+	},
+	{
+		prop: 'text',
+		label: '文字',
+		type: 'func-input'
+	},
+	{
+		prop: 'suffix',
+		label: '后缀',
+		type: 'func-input'
+	}
+]
 
-const configSource = {
-    config: {
-        fields: {
-            icon: getSelect('icon', '图片', ['/static/icons/cylinder.svg']),
-            text: getInput('text', '文字'),
-            suffix: getInput('suffix', '后缀'),
-        }
-    }
-}
-const config = {
-    animation: true,
-    config: {
-        icon: true,
-        text: true,
-        suffix: true,
-    }
-}
-const value = {
+export const value = {
     layout: {
         size: {
             width: 145,
@@ -29,7 +28,7 @@ const value = {
     },
     api: {
         data: JSON.stringify({
-            num: '11.01',
+            num: '11.01'
         })
     },
     config: {
@@ -38,5 +37,3 @@ const value = {
         suffix: '亿m³'
     }
 }
-
-export {configSource, config, value}

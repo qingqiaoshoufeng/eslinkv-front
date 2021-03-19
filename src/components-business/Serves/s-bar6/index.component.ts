@@ -1,17 +1,40 @@
-import {getInput} from '../../../../lib'
-
-export const config = {
-	animation: true,
-	config: {
-		color1: true,
-		color2: true,
-		color3: true,
-		desc1: true,
-		desc2: true,
-		desc3: true,
-		unit: true,
+export const customConfig = [
+	{
+		prop: 'color1',
+		label: '颜色1',
+		type: 'func-color'
 	},
-};
+	{
+		prop: 'color2',
+		label: '颜色2',
+		type: 'func-color'
+	},
+	{
+		prop: 'color3',
+		label: '颜色3',
+		type: 'func-color'
+	},
+	{
+		prop: 'desc1',
+		label: '名称1',
+		type: 'func-input'
+	},
+	{
+		prop: 'desc2',
+		label: '名称2',
+		type: 'func-input'
+	},
+	{
+		prop: 'desc3',
+		label: '名称3',
+		type: 'func-input'
+	},
+	{
+		prop: 'unit',
+		label: '单位',
+		type: 'func-input'
+	}
+]
 export const value = {
 	layout: {
 		size: {
@@ -59,7 +82,7 @@ export const value = {
 				a: 51,
 				b: 35,
 				c: 16
-			},
+			}
 		])
 	},
 	config: {
@@ -69,19 +92,6 @@ export const value = {
 		desc1: '申请数量',
 		desc2: '审核通过',
 		desc3: '审核未通过',
-		unit: '单',
+		unit: '单'
 	}
-}
-export const configSource = {
-	config: {
-		fields: {
-			color1: getInput('color1', '颜色1'),
-			color2: getInput('color2', '颜色2'),
-			color3: getInput('color2', '颜色3'),
-			desc1: getInput('desc1', '名称1'),
-			desc2: getInput('desc2', '名称2'),
-			desc3: getInput('desc3', '名称3'),
-			unit: getInput('unit', '单位'),
-		}
-	},
 }

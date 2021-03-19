@@ -1,5 +1,5 @@
 // 引入详情字典
-import { operationYesterday, OperationWeek, CouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, operationLastWeek, operationMonth, operationLastMonth, operationYear, } from "./dictionary"
+import { operationYesterday, OperationWeek, CouplingNumber, couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth, operationLastWeek, operationMonth, operationLastMonth, operationYear } from './dictionary'
 // 覆盖物legend配置
 export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
     BranchCompany: {
@@ -10,7 +10,7 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         component: 'BranchCompany',
         visible: true,
         dataProp: 'branchCompanyList',
-        detailList: [CouplingNumber, operationYesterday, OperationWeek, operationLastWeek, operationMonth, operationLastMonth, operationYear,
+        detailList: [CouplingNumber, operationYesterday, OperationWeek, operationLastWeek, operationMonth, operationLastMonth, operationYear
         ]
     },
 
@@ -32,22 +32,22 @@ export const SERVICE_SERVICEHANGRANCODE_LEGEND_MAP = {
         visible: false,
         dataProp: 'month'
 
-    },
+    }
 }
 
-//覆盖物详情
+// 覆盖物详情
 export const SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP = {
     OperationHot: {
         fields: {
-            name: {},
-        },
+            name: {}
+        }
     },
 
     CouplingHot: {
         fields: {
-            name: {},
-        },
-    },
+            name: {}
+        }
+    }
 }
 // 杭燃码统计数据
 export const DATASTATISTICSLIST = [couplingIncreaseToday, couplingIncreaseWeek, couplingIncreaseMonth]

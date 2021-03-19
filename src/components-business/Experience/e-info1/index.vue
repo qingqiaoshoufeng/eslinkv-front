@@ -1,53 +1,52 @@
 <template>
-    <div class="widget-part" :style="styles" v-if="data">
-        <div class="desc">{{ config.config.desc }}</div>
-        <div class="num">
-            {{ data.num }}
-            <div class="unit">{{ config.config.unit }}</div>
-        </div>
-    </div>
+	<div class="widget-part" :style="styles" v-if="data">
+		<div class="desc">{{ config.config.desc }}</div>
+		<div class="num">
+			{{ data.num }}
+			<div class="unit">{{ config.config.unit }}</div>
+		</div>
+	</div>
 </template>
 <script>
-    import mixins from '../../mixins'
-    import {value, config,configSource} from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value, customConfig } from './index.component'
 
-    export default {
-        mixins: [mixins],
-        created() {
-            this.configSource = this.parseConfigSource(config, configSource);
-            this.configValue = this.parseConfigValue(config, value);
-        },
-    };
+	export default {
+		mixins: [mixins],
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
+		}
+	}
 </script>
 <style lang="scss" scoped>
-    .widget-part {
-        display: flex;
-        align-items: center;
+	.widget-part {
+		display: flex;
+		align-items: center;
 
-        .desc {
-            width: 192px;
-            font-weight: 500;
-            font-size: 24px;
-            line-height: 34px;
-            color: #66E3FD;
-        }
+		.desc {
+			width: 192px;
+			font-size: 24px;
+			font-weight: 500;
+			line-height: 34px;
+			color: #66e3fd;
+		}
 
-        .num {
-            display: flex;
-            align-items: baseline;
-            font-weight: 600;
-            font-size: 48px;
-            line-height: 67px;
-            color: #FEE607;
-            margin-left: 6px;
-        }
+		.num {
+			display: flex;
+			align-items: baseline;
+			margin-left: 6px;
+			font-size: 48px;
+			font-weight: 600;
+			line-height: 67px;
+			color: #fee607;
+		}
 
-        .unit {
-            font-size: 24px;
-            line-height: 34px;
-            color: #FFFFFF;
-            margin-left: 4px;
-        }
-    }
+		.unit {
+			margin-left: 4px;
+			font-size: 24px;
+			line-height: 34px;
+			color: #fff;
+		}
+	}
 </style>
 

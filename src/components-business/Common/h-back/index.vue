@@ -7,19 +7,19 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins'
-	import { config, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value } from './index.component'
+	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
 		mixins: [mixins],
-		created() {
-			this.configSource = this.parseConfigSource(config);
-			this.configValue = this.parseConfigValue(config, value);
+		created () {
+			this.configValue = this.parseConfigValue(value)
 		},
 		methods: {
-			back() {
+			back () {
 				if (!this.data.sceneId) return
-				window.GoldChart.scene.destroyScene(this.data.sceneId)
+				scene.actions.destroyScene(this.data.sceneId)
 			}
 		}
 	}
@@ -42,7 +42,8 @@
 		.txt {
 			font-size: 32px;
 			line-height: 32px;
-			color: #FEFFFF;
+			color: #feffff;
+			white-space: nowrap;
 		}
 	}
 </style>

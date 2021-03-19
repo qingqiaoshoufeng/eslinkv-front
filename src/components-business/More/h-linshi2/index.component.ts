@@ -1,20 +1,3 @@
-import {getInput} from '../../../../lib'
-
-export const configSource: ComponentConfigSource = {
-    config: {
-        fields: {
-            transform: getInput('transform', '旋转角度'),
-            left: getInput('left', '位移'),
-        }
-    }
-}
-export const config: ComponentConfig = {
-    animation: true,
-    config: {
-        transform: true,
-        left: true,
-    }
-}
 export const value: ComponentValue = {
     layout: {
         size: {
@@ -24,10 +7,6 @@ export const value: ComponentValue = {
         position: {
             value: 'relative'
         }
-    },
-    config: {
-        transform: -30,
-        left: -50,
     },
     api: {
         data: {
@@ -123,7 +102,7 @@ export const value: ComponentValue = {
                     value2: 326084,
                     unit2: '元',
                     icon1: '/static/images/home/home-u-6.svg'
-                },
+                }
             ],
             yearData: 53269871
         }

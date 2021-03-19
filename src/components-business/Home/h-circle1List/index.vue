@@ -5,119 +5,122 @@
 				<div
 					class="list-item"
 					:class="{'list-item-active':activeIndex === index}"
-					v-for="(item,index) in data&&data.list"
+					v-for="(item,index) in data && data.list"
 					:key="index"
 					:activeIndex="activeIndex"
 					@click="selectTab(index)"
-				>{{item}}
-					<img src="/static/images/arrow.svg" v-if="index===activeIndex"/>
+				>
+					{{ item }}
+					<img src="/static/images/arrow.svg" v-if="index === activeIndex"/>
 				</div>
 			</div>
 			<div class="right-circle">
-				<circle1 :data="computedData" v-if="computedData"
-						 :color="config.config&&JSON.parse(config.config.color)"/>
+				<circle1
+					:data="computedData"
+					v-if="computedData"
+					:color="config.config && JSON.parse(config.config.color)"
+				/>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins'
+	import mixins from 'eslinkv-npm/mixins'
 	import circle1 from './circle1'
-	import {config, value, configSource} from './index.component'
+	import { customConfig, value } from './index.component'
 
 	export default {
-		data() {
+		data () {
 			return {
 				activeIndex: 0,
 				intervalId: null,
-				timeId: null,
-			};
+				timeId: null
+			}
 		},
 		mixins: [mixins],
-		components: {circle1},
+		components: { circle1 },
 		computed: {
-			computedData() {
+			computedData () {
 				if (!this.data) return
 				return this.data && this.data.itemList[this.activeIndex]
-			},
+			}
 		},
-		created() {
-			this.configSource = this.parseConfigSource(config, configSource)
-			this.configValue = this.parseConfigValue(config, value)
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
 		},
-		mounted() {
+		mounted () {
 			this.actived = this.defaultActived || 0
 			this.beginInterval()
 		},
-		beforeDestroy() {
+		beforeDestroy () {
 			this.clearIntervalId()
 		},
 		methods: {
-			selectTab(index) {
+			selectTab (index) {
 				clearInterval(this.intervalId)
 				this.intervalId = null
 				this.activeIndex = index
 				setTimeout(this.beginInterval, this.config.config.timeoutTime)
 			},
-			beginInterval() {
+			beginInterval () {
 				if (!this.data) return
 				if (this.intervalId) return
 				this.intervalId = setInterval(() => {
 					this.activeIndex = (this.activeIndex + 1) % 3
 				}, this.config.config.intervalTime)
 			},
-			clearIntervalId() {
+			clearIntervalId () {
 				clearInterval(this.intervalId)
 				this.intervalId = null
-			},
-		},
+			}
+		}
 	}
 </script>
 <style lang="scss">
 	.circle1list-box {
+		display: flex;
 		width: 100%;
 		height: 100%;
-		display: flex;
 
 		.left-list {
-			width: 100px;
-			height: 140px;
 			display: flex;
 			flex-direction: column;
 			align-items: center;
 			justify-content: space-between;
+			width: 100px;
+			height: 140px;
 
 			.list-item {
-				text-align: left;
-				padding-left: 8px;
-				height: 40px;
-				line-height: 40px;
-				width: 96px;
-				background: rgba(0, 31, 109, 0.5);
-				font-style: normal;
-				font-weight: normal;
-				font-size: 18px;
-				color: #fff;
-				border-left: 4px solid rgba(0, 31, 109, 0.5);
 				display: flex;
 				align-items: center;
+				width: 96px;
+				height: 40px;
+				padding-left: 8px;
+				font-size: 18px;
+				font-style: normal;
+				font-weight: normal;
+				line-height: 40px;
+				color: #fff;
+				text-align: left;
+				background: rgba(0, 31, 109, 0.5);
+				border-left: 4px solid rgba(0, 31, 109, 0.5);
 
 				img {
-					height: 20px;
 					width: 20px;
+					height: 20px;
 					margin-left: 20px;
 				}
 			}
 
 			.list-item-active {
-				border-left: 4px solid #00ddff;
+				border-left: 4px solid #0df;
 			}
 		}
 
 		.right-circle {
-			margin-left: 32px !important;
 			display: flex;
 			align-items: center;
+			margin-left: 32px !important;
 		}
 	}
 </style>

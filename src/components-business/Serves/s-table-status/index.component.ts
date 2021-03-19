@@ -1,4 +1,3 @@
-export const config = {animation: true}
 export const value = {
 	layout: {
 		size: {
@@ -35,7 +34,7 @@ export const value = {
 				title: '下城区区',
 				value: 1221342,
 				suffix: 'm³'
-			},
+			}
 		])
 	}
 }

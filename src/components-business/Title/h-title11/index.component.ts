@@ -1,7 +1,3 @@
-const config = {
-	animation: true,
-}
-
 const value = {
 	layout: {
 		size: {
@@ -19,4 +15,4 @@ const value = {
 	}
 }
 
-export {config,value}
+export { value }

@@ -1,21 +1,21 @@
 export default {
-	data() {
+	data () {
 		return {
-			activeWarnData: {},
+			activeWarnData: {}
             
-		};
+		}
 	},
 	methods: {
-		handleListClick(overlay, overlayType) {
-			let { lng, lat, } = overlay;
-			overlay.overlayType = overlayType || overlay.overlayType;
-			this.activeWarnData = overlay;
-			this.setZoomAndPanTo(lng, lat);
+		handleListClick (overlay, overlayType) {
+			const { lng, lat } = overlay
+			overlay.overlayType = overlayType || overlay.overlayType
+			this.activeWarnData = overlay
+			this.setZoomAndPanTo(lng, lat)
 		},
-		closeWarnEventDetail() {
-			this.activeWarnData = {};
-			this.$amap.setZoom(this.zoom, 100);
-			this.$amap.setCenter(this.center, 100);
-		},
+		closeWarnEventDetail () {
+			this.activeWarnData = {}
+			this.$amap.setZoom(this.zoom, 100)
+			this.$amap.setCenter(this.center, 100)
+		}
 	}
-};
+}

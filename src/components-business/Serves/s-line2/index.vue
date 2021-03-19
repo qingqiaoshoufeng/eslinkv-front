@@ -4,56 +4,63 @@
 			<div class="swiper" @click="back" :class="{active: offset > 0}"><span class="left"></span></div>
 			<div class="scroll-wrapper">
 				<ul class="scroll" :style="{transform: `translateX(-${offsetX}px)`}" ref="scroll">
-					<li class="pointer" v-for="(k) in list" :class="{active: k.label === currIndex}"
+					<li
+						class="pointer"
+						v-for="(k) in list"
+						:class="{active: k.label === currIndex}"
 						:key="k.label"
-						@click="drawLine(k)">
-						{{k.label}}
+						@click="drawLine(k)"
+					>
+						{{ k.label }}
 					</li>
 				</ul>
 			</div>
-			<div class="swiper" @click="next" :class="{active: offset < list.length}"><span
-				class="right"></span></div>
+			<div class="swiper" @click="next" :class="{active: offset < list.length}">
+				<span
+					class="right"
+				></span>
+			</div>
 		</div>
 		<div class="chart" :id="id"/>
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
-	import getOption from './options';
-	import { config, configSource, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import getOption from './options'
+	import { customConfig, value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		data() {
+		data () {
 			return {
 				offset: 0,
 				offsetX: 0,
 				currIndex: '全部',
-				list:[]
+				list: []
 			}
 		},
 		methods: {
-			setOption(data) {
+			setOption (data) {
 				this.instance && this.instance.setOption(getOption(data, this.config.config))
 			},
-			back() {
+			back () {
 				if (this.offset === 0) return
 				this.offset--
 				this.getOffset()
 			},
-			next() {
+			next () {
 				if (this.offset === this.data.typeList.length) return
 				this.offset++
 				this.getOffset()
 			},
-			drawLine(row,) {
+			drawLine (row) {
 				this.currIndex = row.label
 				let params = this.config.api.params
 				if (params) {
 					if (typeof params === 'string') {
-						params = {...JSON.parse(params), industry: row.code}
+						params = { ...JSON.parse(params), industry: row.code }
 					} else {
-						params = {...params, industry: row.code}
+						params = { ...params, industry: row.code }
 					}
 				} else {
 					params = {}
@@ -61,7 +68,7 @@
 				}
 				this.config.api.params = JSON.stringify(params)
 			},
-			getOffset() {
+			getOffset () {
 				if (!this.$refs.scroll) return 0
 				const n = (this.$refs.scroll.scrollWidth - this.$refs.scroll.offsetWidth) / this.$refs.scroll.offsetWidth
 				const extra = (this.$refs.scroll.scrollWidth - this.$refs.scroll.offsetWidth) % this.$refs.scroll.offsetWidth
@@ -73,49 +80,48 @@
 			}
 		},
 		watch: {
-			'config.api.params':{
-				handler(val){
-					if(val){
-						if(val.compareType==='year'){
-							this.config.config.lineName1=new Date().getFullYear()
-							this.config.config.lineName2=new Date().getFullYear()-1
+			'config.api.params': {
+				handler (val) {
+					if (val) {
+						if (val.compareType === 'year') {
+							this.config.config.lineName1 = new Date().getFullYear()
+							this.config.config.lineName2 = new Date().getFullYear() - 1
 						}
-						if(val.compareType==='month'){
-							this.config.config.lineName1=`${new Date().getMonth()+1}月`
-							this.config.config.lineName2=`${new Date().getMonth()}月`
+						if (val.compareType === 'month') {
+							this.config.config.lineName1 = `${new Date().getMonth() + 1}月`
+							this.config.config.lineName2 = `${new Date().getMonth()}月`
 						}
-						if(val.compareType==='day'){
-							this.config.config.lineName1=`${new Date().getMonth()+1}.${new Date().getDate()}`
-							this.config.config.lineName2=`${new Date().getMonth()+1}.${new Date().getDate()-1}`
+						if (val.compareType === 'day') {
+							this.config.config.lineName1 = `${new Date().getMonth() + 1}.${new Date().getDate()}`
+							this.config.config.lineName2 = `${new Date().getMonth() + 1}.${new Date().getDate() - 1}`
 						}
 					}
 				},
 				deep: true,
-				immediate: true,
+				immediate: true
 			},
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
 							this.setOption(val)
-						});
+						})
 					}
 				},
 				deep: true,
-				immediate: true,
-			},
+				immediate: true
+			}
 		},
-		created() {
-			this.configSource = this.parseConfigSource(config, configSource);
-			this.configValue = this.parseConfigValue(config, value);
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
 		},
-		mounted() {
-			this.$sysApi.bussiness.businessAnalysisType().then(res=>{
-				this.list=res.typeList
+		mounted () {
+			this.$api.bussiness.businessAnalysisType().then(res => {
+				this.list = res.typeList
 			})
 		}
-	};
+	}
 </script>
 <style lang="scss" scoped>
 	.chart {
@@ -125,21 +131,21 @@
 
 	.tab {
 		display: flex;
-		justify-content: space-between;
 		align-items: center;
+		justify-content: space-between;
 
 		.swiper {
+			display: flex;
 			flex: none;
+			align-items: center;
+			justify-content: center;
 			width: 12px;
 			height: 20px;
-			background: #0057A9;
+			background: #0057a9;
 			border-radius: 2px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
 
 			&.active {
-				border: 1px solid #00DDFF;
+				border: 1px solid #0df;
 			}
 
 			> .left {
@@ -154,45 +160,45 @@
 				width: 0;
 				height: 0;
 				border-top: 6px solid transparent;
-				border-left: 6px solid rgba(255, 255, 255, 0.75);
 				border-bottom: 6px solid transparent;
+				border-left: 6px solid rgba(255, 255, 255, 0.75);
 			}
 		}
 
 		.scroll-wrapper {
-			overflow: hidden;
 			margin: 0 8px;
+			overflow: hidden;
 		}
 
 		.scroll {
-			transition: all 0.4s;
 			display: flex;
-			align-items: center;
 			flex-wrap: nowrap;
+			align-items: center;
+			transition: all 0.4s;
 
 			> li {
-				flex: none;
 				position: relative;
+				flex: none;
 				height: 32px;
 				padding: 0 8px;
-				background: #0057A9;
+				margin-right: 8px;
 				font-size: 16px;
 				line-height: 32px;
 				color: rgba(255, 255, 255, 0.75);
-				margin-right: 8px;
+				background: #0057a9;
 
 				&.active {
-					color: #FFFFFF;
+					color: #fff;
 
-					&:before {
-						content: '';
-						display: block;
+					&::before {
 						position: absolute;
 						top: 0;
-						left: 0;
 						right: 0;
+						left: 0;
+						display: block;
 						height: 2px;
-						background: #00DDFF;
+						content: '';
+						background: #0df;
 					}
 				}
 			}

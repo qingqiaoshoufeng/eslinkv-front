@@ -1,4 +1,6 @@
 export default {
 	path: '/',
-	component: () => import('./index.vue'),
+	name: 'home',
+	mode: [],
+	component: () => import('./index.vue')
 }

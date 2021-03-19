@@ -1,20 +1,3 @@
-import {getSelect} from '../../../../lib'
-
-export const configSource = {
-	config: {
-		fields: {
-			img: getSelect('img', '图片', ['/static/mock/test1.png', '/static/mock/test2.png', '/static/mock/test3.png']),
-		}
-	}
-}
-
-export const config = {
-	animation: true,
-	config: {
-		img: true
-	}
-}
-
 export const value = {
 	layout: {
 		size: {
@@ -29,3 +12,12 @@ export const value = {
 		img: '/static/mock/test1.png'
 	}
 }
+
+export const customConfig = [
+	{
+		prop: 'img',
+		label: '图片',
+		type: 'func-background',
+		options: ['/static/mock/test1.png', '/static/mock/test2.png', '/static/mock/test3.png']
+	}
+]

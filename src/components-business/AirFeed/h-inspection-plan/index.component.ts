@@ -1,15 +1,3 @@
-import {getInput} from '../../../../lib'
-
-export const config = {
-	animation: true,
-	config: {
-		desc: true,
-		numFontSize: true,
-		descFontSize: true,
-		numColor: true,
-		descColor: true
-	},
-};
 export const value = {
 	layout: {
 		size: {
@@ -33,14 +21,31 @@ export const value = {
 		descColor: '#00FFCF'
 	}
 }
-export const configSource = {
-	config: {
-		fields: {
-			desc: getInput('desc', '描述'),
-			numFontSize: getInput('numFontSize', '数字字体大小'),
-			descFontSize: getInput('descFontSize', '描述字体大小'),
-			numColor: getInput('numColor', '数字颜色'),
-			descColor: getInput('descColor', '描述颜色'),
-		}
+
+export const customConfig = [
+	{
+		prop: 'desc',
+		label: '描述',
+		type: 'func-input'
 	},
-}
+	{
+		prop: 'numFontSize',
+		label: '数字字体大小',
+		type: 'func-number'
+	},
+	{
+		prop: 'descFontSize',
+		label: '描述字体大小',
+		type: 'func-number'
+	},
+	{
+		prop: 'numColor',
+		label: '数字颜色',
+		type: 'func-color'
+	},
+	{
+		prop: 'descColor',
+		label: '描述颜色',
+		type: 'func-color'
+	}
+]

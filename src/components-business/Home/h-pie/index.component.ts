@@ -1,25 +1,27 @@
-import {getInput} from '../../../../lib'
+export const customConfig = [
+	{
+		prop: 'unit',
+		label: '单位',
+		type: 'func-input'
+	},
+	{
+		prop: 'title1',
+		label: '标题1',
+		type: 'func-input'
+	},
+	{
+		prop: 'title2',
+		label: '标题2',
+		type: 'func-input'
+	},
+	{
+		prop: 'startAngle',
+		label: '起始角度',
+		type: 'func-number'
+	}
+]
 
-const configSource = {
-    config: {
-        fields: {
-            unit: getInput('unit', '单位'),
-            title1: getInput('title1', '标题1'),
-            title2: getInput('title2', '标题2'),
-            startAngle: getInput('startAngle', '起始角度'),
-        }
-    }
-}
-const config = {
-    animation: true,
-    config: {
-        unit: true,
-        title1: true,
-        startAngle: true,
-        title2: true,
-    }
-}
-const value = {
+export const value = {
     layout: {
         size: {
             width: 820,
@@ -42,15 +44,13 @@ const value = {
             {
                 name: '城区3',
                 value: 12
-            },
+            }
         ])
     },
     config: {
         unit: '万m³',
         title1: '区域',
         title2: '销售气量',
-        startAngle: 270,
+        startAngle: 270
     }
 }
-
-export {config, configSource, value}

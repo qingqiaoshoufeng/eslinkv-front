@@ -29,13 +29,10 @@ const testData = [
     },
     {
         x: '20:00',
-        y: 15,
+        y: 15
     }
 ]
 
-export const config: ComponentConfig = {
-    animation: true
-};
 export const value: ComponentValue = {
     layout: {
         size: {

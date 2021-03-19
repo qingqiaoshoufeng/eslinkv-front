@@ -7,36 +7,35 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
-	import getOption from './options';
-	import { config, configSource, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import getOption from './options'
+	import { customConfig, value } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		methods: {
-			setOption(data) {
+			setOption (data) {
 				this.instance && this.instance.setOption(getOption(this.data.chartData))
 			}
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
 							this.setOption()
-						});
+						})
 					}
 				},
 				deep: true,
-				immediate: true,
-			},
+				immediate: true
+			}
 		},
-		created() {
-			this.configSource = this.parseConfigSource(config, configSource);
-			this.configValue = this.parseConfigValue(config, value);
-		},
-	};
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
+		}
+	}
 </script>
 <style lang="scss" scoped>
 	.widget-part {
@@ -51,12 +50,12 @@
 		}
 
 		.num {
-			font-weight: bold;
-			font-size: 40px;
-			line-height: 48px;
-			text-align: center;
-			color: #00FFCF;
 			margin: 6px 0 10px;
+			font-size: 40px;
+			font-weight: bold;
+			line-height: 48px;
+			color: #00ffcf;
+			text-align: center;
 		}
 
 		.chart {
@@ -66,11 +65,11 @@
 		}
 
 		.desc {
+			margin-top: 8px;
 			font-size: 18px;
 			line-height: 24px;
-			text-align: center;
 			color: rgba(255, 255, 255, 0.75);
-			margin-top: 8px;
+			text-align: center;
 		}
 	}
 

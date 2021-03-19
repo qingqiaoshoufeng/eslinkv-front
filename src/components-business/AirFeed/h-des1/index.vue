@@ -4,36 +4,35 @@
 			<div class="fn-flex">
 				<img :src="config.config.img" alt=""/>
 			</div>
-			<p class="pos-r text-left">{{config.config.title}}</p>
-			<h2 class="font-num">{{data.value |toThousand}}</h2>
+			<p class="pos-r text-left">{{ config.config.title }}</p>
+			<h2 class="font-num">{{ data.value |toThousand }}</h2>
 		</div>
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins'
-	import { config, configSource, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { customConfig, value } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
-			this.configSource = this.parseConfigSource(config, configSource)
-			this.configValue = this.parseConfigValue(config, value)
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
 		}
 	}
 </script>
 <style lang="scss" scoped>
 	.h-des-1 {
-		background: linear-gradient(90deg, rgba(0, 87, 169, 0.5) 0%, rgba(0, 87, 169, 0) 100%);
-		height: 100%;
 		align-items: center;
+		height: 100%;
+		background: linear-gradient(90deg, rgba(0, 87, 169, 0.5) 0%, rgba(0, 87, 169, 0) 100%);
 
 		> div {
+			align-items: center;
+			justify-content: center;
 			width: 56px;
 			height: 56px;
-			justify-content: center;
-			align-items: center;
 			margin-right: 16px;
-      background: rgba(0, 87, 169, 0.5);
+			background: rgba(0, 87, 169, 0.5);
 		}
 
 		p {
@@ -43,14 +42,12 @@
 		}
 
 		h2 {
+			margin-right: 8px;
+			margin-left: auto;
 			font-size: 24px;
 			line-height: 24px;
+			color: #fff;
 			text-align: right;
-			color: #FFFFFF;
-			margin-left: auto;
-			margin-right: 8px;
 		}
 	}
-
 </style>
-

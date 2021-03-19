@@ -40,13 +40,13 @@
 						<span class="value">{{
 							`${
 								(detailInfo[item.prop] &&
-								detailInfo[item.prop] !== 0 &&
-								isNumber(detailInfo[item.prop])
+									detailInfo[item.prop] !== 0 &&
+									isNumber(detailInfo[item.prop])
 									? parseFloat(
-											detailInfo[item.prop].toFixed(
-												item.Fixed || 0
-											)
-									  ).toLocaleString()
+										detailInfo[item.prop].toFixed(
+											item.Fixed || 0
+										)
+									).toLocaleString()
 									: detailInfo[item.prop] || 0) + item.DW
 							} `
 						}}</span>
@@ -58,125 +58,132 @@
 	</div>
 </template>
 <script>
-import { DETAILLIST } from './config';
-import { SvgIcon } from '../../../../../components/';
-export default {
-	name: 'TipDetial',
-	components: { SvgIcon },
-	props: {
-		data: {
-			Type: Object,
-			default() {
-				return {};
-			},
-		},
-		isShowMore: {
-			Type: Boolean,
-			default: false,
-		},
-		isShowList: {
-			Type: Number,
-			default: -1,
-		},
-		detailShowList: {
-			Type: Array,
-			default() {
-				return [];
-			},
-		},
-	},
-	watch: {
-		detailShowList: {
-			handler(val) {
-				this.detailInfo = {};
-				if (val.length === 1) {
-					this.getDetailInfo(val[0].middleId);
-				} else {
-					this.getDetailInfo(val[this.activeIndex].middleId);
+	import { DETAILLIST } from './config'
+	import { SvgIcon } from '../../../../../components/'
+	export default {
+		name: 'TipDetial',
+		components: { SvgIcon },
+		props: {
+			data: {
+				Type: Object,
+				default () {
+					return {}
 				}
 			},
-			immediate: true,
+			isShowMore: {
+				Type: Boolean,
+				default: false
+			},
+			isShowList: {
+				Type: Number,
+				default: -1
+			},
+			detailShowList: {
+				Type: Array,
+				default () {
+					return []
+				}
+			}
 		},
-	},
-	data() {
-		return {
-			detailList: DETAILLIST,
-			activeIndex: 0,
-			detailInfo: {},
-		};
-	},
-	methods: {
-		handleViewDetail() {
-			this.$emit('view-detail');
+		watch: {
+			detailShowList: {
+				handler (val) {
+					this.detailInfo = {}
+					if (val.length === 1) {
+						this.getDetailInfo(val[0].middleId)
+					} else {
+						this.getDetailInfo(val[this.activeIndex].middleId)
+					}
+				},
+				immediate: true
+			}
 		},
-		isNumber(val) {
-			return typeof val === 'number' && !isNaN(val);
+		data () {
+			return {
+				detailList: DETAILLIST,
+				activeIndex: 0,
+				detailInfo: {}
+			}
 		},
-		handlerClick(item, index) {
-			this.detailInfo = {};
-			this.activeIndex = index;
-			this.getDetailInfo(item.middleId);
+		methods: {
+			handleViewDetail () {
+				this.$emit('view-detail')
+			},
+			isNumber (val) {
+				return typeof val === 'number' && !isNaN(val)
+			},
+			handlerClick (item, index) {
+				this.detailInfo = {}
+				this.activeIndex = index
+				this.getDetailInfo(item.middleId)
+			},
+			async getDetailInfo (id) {
+				const params = {
+					id
+				}
+				const res = await this.$api.map.airSupply.getLowMidDevice(params)
+				res.valveOpenFinish =
+					res.valveOpenFinish === 'true' ? '开启' : '关闭'
+				res.mc = res.mc ? '异常' : '正常'
+				this.detailInfo = res
+			}
 		},
-		async getDetailInfo(id) {
-			let params = {
-				id,
-			};
-			let res = await this.$sysApi.map.airSupply.getLowMidDevice(params);
-			res.valveOpenFinish =
-				res.valveOpenFinish === 'true' ? '开启' : '关闭';
-			res.mc = res.mc ? '异常' : '正常';
-			this.detailInfo = res;
-		},
-	},
-	mounted() {},
-};
+		mounted () {}
+	}
 </script>
 <style lang="scss" scoped>
 .companyName {
+	font-size: 32px;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 32px;
 	line-height: 1.5em;
 	color: #ffd200;
 }
+
 .TipDetial {
 	display: flex;
 	min-width: 300px;
 	text-align: left;
+
 	.station_list {
-		margin-left: 2px;
-		margin-right: 24px;
-		background: #001a77;
+		box-sizing: content-box;
 		width: 300px;
 		padding: 15px 0;
-		box-sizing: content-box;
+		margin-right: 24px;
+		margin-left: 2px;
+		background: #001a77;
+
 		.station_item {
-			font-style: normal;
-			font-weight: 600;
-			font-size: 24px;
-			line-height: 40px;
-			padding-left: 15px;
-			color: rgba(255, 255, 255, 0.8);
 			width: 300px;
 			height: 40px;
+			padding-left: 15px;
+			font-size: 24px;
+			font-style: normal;
+			font-weight: 600;
+			line-height: 40px;
+			color: rgba(255, 255, 255, 0.8);
+
 			.arrow {
 				margin-top: -5px;
 			}
 		}
+
 		.active {
-			background: #0057a9;
 			color: #fff;
+			background: #0057a9;
 		}
 	}
+
 	.accept,
 	.complete,
 	.percentage {
+		font-size: 24px;
 		font-style: normal;
 		font-weight: normal;
-		font-size: 24px;
 		line-height: 32px;
-		color: #ffffff;
+		color: #fff;
 	}
+
 	.right {
 		margin: 15px 0;
 		overflow-y: scroll;
@@ -185,36 +192,43 @@ export default {
 			display: none;
 		}
 	}
+
 	.detial_info_list {
 		width: 100%;
+
 		.item {
-			min-width: 45%;
 			display: inline-block;
+			min-width: 45%;
+			font-size: 24px;
 			font-style: normal;
 			font-weight: normal;
-			font-size: 24px;
-			color: #ffffff;
+			color: #fff;
+
 			.label {
 				color: #fff;
 			}
+
 			.value {
 				color: #ffd200;
 			}
 		}
 	}
+
 	.accept {
 		margin-top: 16px;
 	}
+
 	.btn {
-		padding: 0px 8px;
-		line-height: 32px;
+		display: inline-block;
 		width: 80px;
 		height: 32px;
+		padding: 0 8px;
+		margin-top: 16px;
+		line-height: 32px;
+		cursor: pointer;
 		background: #0057a9;
 		border-radius: 4px;
-		display: inline-block;
-		cursor: pointer;
-		margin-top: 16px;
+
 		&:hover {
 			opacity: 0.8;
 		}

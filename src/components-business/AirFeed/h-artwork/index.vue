@@ -1,44 +1,46 @@
 <template>
 	<div class="widget-part" :style="styles">
-		<image-view :images="[`/static/images/h-artwork/${data&&data.image}.svg`]"
-					:option="option" :show-image="false"
-					class="art"></image-view>
+		<image-view
+			:images="[`/static/images/h-artwork/${data && data.image}.svg`]"
+			:option="option"
+			:show-image="false"
+			class="art"
+		></image-view>
 		<img class="tooltip" src="./img/tooltip.svg">
 	</div>
 </template>
 <script>
 	import ImageView from '@/components/ImageView'
-	import mixins from '../../mixins';
-	import { config, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		components: {
 			ImageView
 		},
-		data() {
+		data () {
 			return {
 				option: {
-					"inline": true,
-					"button": false,
-					"navbar": false,
-					"title": false,
-					"toolbar": true,
-					"tooltip": true,
-					"movable": true,
-					"zoomable": true,
-					"rotatable": false,
-					"scalable": false,
-					"transition": false,
-					"fullscreen": false,
-					"keyboard": false
-				},
+					inline: true,
+					button: false,
+					navbar: false,
+					title: false,
+					toolbar: true,
+					tooltip: true,
+					movable: true,
+					zoomable: true,
+					rotatable: false,
+					scalable: false,
+					transition: false,
+					fullscreen: false,
+					keyboard: false
+				}
 			}
 		},
 		methods: {},
-		created() {
-			this.configSource = this.parseConfigSource(config)
-			this.configValue = this.parseConfigValue(config, value)
+		created () {
+			this.configValue = this.parseConfigValue(value)
 		}
 	}
 </script>
@@ -51,8 +53,8 @@
 
 		.tooltip {
 			position: absolute;
-			right: 1.2%;
 			top: 39.05%;
+			right: 1.2%;
 			width: 257px;
 		}
 	}

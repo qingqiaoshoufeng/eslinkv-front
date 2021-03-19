@@ -4,19 +4,20 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins'
-	import { config, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value } from './index.component'
+	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
 		mixins: [mixins],
-		created() {
-			this.configSource = this.parseConfigSource(config)
-			this.configValue = this.parseConfigValue(config, value)
+		created () {
+			this.configValue = this.parseConfigValue(value)
 		},
 		methods: {
-			handleClick() {
-				if (this.data.sceneId)
-					window.GoldChart.scene.destroyScene(this.data.sceneId)
+			handleClick () {
+				if (this.data.sceneId) {
+					scene.actions.destroyScene(this.data.sceneId)
+				}
 			}
 		}
 	}
@@ -24,9 +25,9 @@
 <style lang="scss" scoped>
 
 	.h-slide-bg-back {
-		background-image: url('./img/back.svg');
 		width: 24px;
 		height: 112px;
+		background-image: url('./img/back.svg');
 	}
 </style>
 

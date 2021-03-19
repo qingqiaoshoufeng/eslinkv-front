@@ -54,85 +54,85 @@
 </template>
 
 <script>
-import { SvgIcon, NoData } from '../../../../../components/'
-import { SERVICE_SERVICECUSTOMER_LEGEND_MAP } from '../../serviceCustomer/config'
-export default {
-	name: 'overlayList',
-	components: {
-		SvgIcon,
-		NoData,
-	},
-	data() {
-		return {
-			activeIndex: null,
-			list: [],
-			loading: false,
-			loaded: false,
-		}
-	},
-	props: {
-		activeItem: {
-			type: Object,
-			default() {
-				return {}
-			},
+	import { SvgIcon, NoData } from '../../../../../components/'
+	import { SERVICE_SERVICECUSTOMER_LEGEND_MAP } from '../../serviceCustomer/config'
+	export default {
+		name: 'overlayList',
+		components: {
+			SvgIcon,
+			NoData
 		},
-		activeOverlay: {
-			type: Object,
-			default() {
-				return {}
-			},
-		},
-	},
-	created() {
-		this.getData()
-		this.timer = setInterval(() => {
-			this.getData()
-		}, 60000)
-	},
-	watch: {
-		activeItem(val) {
-			if (JSON.stringify(val) == '{}') {
-				return (this.activeIndex = null)
+		data () {
+			return {
+				activeIndex: null,
+				list: [],
+				loading: false,
+				loaded: false
 			}
-			let index = this.list.findIndex((item) => {
-				let { id } = item
-				return val.id === id
-			})
-			this.activeIndex = index > -1 ? index : null
 		},
-	},
-	methods: {
-		async getData() {
-            //除第一次需要loading外，其余需要无感刷新
-            if(!this.loaded){
-                this.loading = true
-            }
-			let res = await this.$sysApi.map.serve.getServiceCustomerThreeSocialList()
-			this.list = res.map((item) => {
-				let { stationType } = item
-				let config = SERVICE_SERVICECUSTOMER_LEGEND_MAP[stationType]
-				if (config) {
-					item.icon = config.legendIcon
+		props: {
+			activeItem: {
+				type: Object,
+				default () {
+					return {}
 				}
-				return item
-            })
-            this.loading = false;
-            this.loaded=true;
+			},
+			activeOverlay: {
+				type: Object,
+				default () {
+					return {}
+				}
+			}
 		},
-		handleClick(item, index) {
-			this.activeIndex = index
-			item.overlayType = 'ThreeSocialLinkage'
-			this.$emit('change', { ...item, activeIndex: index })
+		created () {
+			this.getData()
+			this.timer = setInterval(() => {
+				this.getData()
+			}, 60000)
 		},
-	},
-	beforeDestroy() {
-		if (this.timer) {
-			clearInterval(this.timer)
-			this.timer = null
+		watch: {
+			activeItem (val) {
+				if (JSON.stringify(val) == '{}') {
+					return (this.activeIndex = null)
+				}
+				const index = this.list.findIndex((item) => {
+					const { id } = item
+					return val.id === id
+				})
+				this.activeIndex = index > -1 ? index : null
+			}
+		},
+		methods: {
+			async getData () {
+				// 除第一次需要loading外，其余需要无感刷新
+				if (!this.loaded) {
+					this.loading = true
+				}
+				const res = await this.$api.map.serve.getServiceCustomerThreeSocialList()
+				this.list = res.map((item) => {
+					const { stationType } = item
+					const config = SERVICE_SERVICECUSTOMER_LEGEND_MAP[stationType]
+					if (config) {
+						item.icon = config.legendIcon
+					}
+					return item
+				})
+				this.loading = false
+				this.loaded = true
+			},
+			handleClick (item, index) {
+				this.activeIndex = index
+				item.overlayType = 'ThreeSocialLinkage'
+				this.$emit('change', { ...item, activeIndex: index })
+			},
+			beforeDestroy () {
+				if (this.timer) {
+					clearInterval(this.timer)
+					this.timer = null
+				}
+			}
 		}
-	},
-}
+	}
 </script>
 
 <style lang="scss" scoped>
@@ -140,75 +140,87 @@ export default {
 	height: 799px;
 	overflow-y: scroll;
 	backface-visibility: hidden;
+	font-size: 16px;
+	color: #fff;
+
 	&::-webkit-scrollbar {
 		display: none;
 	}
-	color: #fff;
-	font-size: 16px;
+
 	.list-item {
+		box-sizing: border-box;
 		// height: 96px;
 		padding: 16px 8px;
-		box-sizing: border-box;
 		cursor: pointer;
+
 		&:hover,
 		&.active {
 			background: rgba(23, 115, 201, 0.4);
 		}
+
 		.panel-type-icon {
 			width: 24px;
 			height: 24px;
 		}
+
 		.row {
 			display: flex;
 			align-items: center;
+
 			.content {
-				flex: 1;
-				font-size: 24px;
 				display: flex;
+				flex: 1;
 				align-items: center;
-				margin-left: 12px;
 				justify-content: space-between;
+				margin-left: 12px;
+				font-size: 24px;
+
 				.name {
 					width: 320px;
-					white-space: nowrap;
-
 					overflow: hidden;
-
 					text-overflow: ellipsis;
+					white-space: nowrap;
 				}
+
 				.time {
+					font-size: 20px;
 					font-style: normal;
 					font-weight: normal;
-					font-size: 20px;
 					line-height: 16px;
 					color: #fff;
 				}
 			}
+
 			.status {
 				font-size: 20px;
 			}
+
 			.station-name {
-				font-size: 20px;
 				flex: 1;
-				color: rgba(255, 255, 255, 0.8);
 				margin-left: 36px;
+				font-size: 20px;
+				color: rgba(255, 255, 255, 0.8);
 			}
 		}
 	}
+
 	/deep/.demo-spin-icon-load {
-		animation: ani-demo-spin 1s linear infinite;
 		position: absolute;
 		top: 40%;
 		left: 50%;
 		transform: translate(-50%);
+		animation: ani-demo-spin 1s linear infinite;
 	}
+
 	@keyframes ani-demo-spin {
 		from {
 			transform: rotate(0deg);
 		}
+
 		50% {
 			transform: rotate(180deg);
 		}
+
 		to {
 			transform: rotate(360deg);
 		}

@@ -1,6 +1,6 @@
 const colors = ['#4A7CDE', '#2CA0C5', '#28A486', '#2A4CC3', '#6A49F0', '#2BAEC0', '#32F6B0', '#3A5ACC', '#0057FF']
 
-export default function getOption(links) {
+export default function getOption (links) {
 	const list = []
 	let linkMark = ''
 	let colorIndex = -1
@@ -35,7 +35,7 @@ export default function getOption(links) {
             layout: 'none',
             focusNodeAdjacency: 'allEdges',
             itemStyle: {
-                borderWidth: 0,
+                borderWidth: 0
             },
             label: {
                 formatter: '{b}: {c}',

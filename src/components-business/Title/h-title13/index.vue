@@ -1,51 +1,50 @@
 <template>
-    <div class="widget-part" :style="styles">
-        <div class="h-title-5">
-            <p class="pos-r text-left">{{data&&data.title}}工艺图</p>
-        </div>
-    </div>
+	<div class="widget-part" :style="styles">
+		<div class="h-title-5">
+			<p class="pos-r text-left">{{ data && data.title }}工艺图</p>
+		</div>
+	</div>
 </template>
 <script>
-    import mixins from '../../mixins'
-    import {config, value} from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value } from './index.component'
 
-    export default {
-        mixins: [mixins],
-        created() {
-            this.configSource = this.parseConfigSource(config)
-            this.configValue = this.parseConfigValue(config, value)
-        }
-    }
+	export default {
+		mixins: [mixins],
+		created () {
+			this.configValue = this.parseConfigValue(value)
+		}
+	}
 </script>
 <style lang="scss">
-    .h-title-5 {
+	.h-title-5 {
+		p {
+			padding-bottom: 16px;
+			font-size: 32px;
+			font-weight: 600;
+			line-height: 32px;
+			color: #fff;
+			border-bottom: 2px solid rgba(255, 255, 255, 0.4);
 
-        p {
-            font-weight: 600;
-            font-size: 32px;
-            line-height: 32px;
-            color: #fff;
-            padding-bottom: 16px;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+			&::before,
+			&::after {
+				position: absolute;
+				bottom: 0;
+				width: 48px;
+				height: 2px;
+				content: '';
+				background: #0df;
+			}
 
-            &:before, &:after {
-                position: absolute;
-                content: '';
-                width: 48px;
-                height: 2px;
-                background: #00DDFF;
-                bottom: 0;
-            }
+			&::before {
+				left: 0;
+			}
 
-            &:before {
-                left: 0;
-            }
-
-            &:after {
-                right: 0;
-            }
-        }
-    }
+			&::after {
+				right: 0;
+			}
+		}
+	}
 
 </style>
 

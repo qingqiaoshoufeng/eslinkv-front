@@ -4,15 +4,15 @@
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
+	import mixins from 'eslinkv-npm/mixins'
 	import options from './options'
-	import { config, configSource, value } from './index.component'
+	import { customConfig, value } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		computed: {},
 		methods: {
-			setOption(data) {
+			setOption (data) {
 				options.yAxis[0].name = this.config.config.title
 				options.series[0].data = data.data.map(item => item.value)
 				options.xAxis[0].data = data.data.map(item => item.name)
@@ -21,7 +21,7 @@
 		},
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
@@ -33,9 +33,8 @@
 				immediate: true
 			}
 		},
-		created() {
-			this.configSource = this.parseConfigSource(config, configSource);
-			this.configValue = this.parseConfigValue(config, value);
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
 		}
 	}
 </script>

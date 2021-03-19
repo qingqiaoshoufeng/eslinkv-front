@@ -5,13 +5,13 @@ export default function getOption (data) {
                 left: '5%',
                 top: '5%',
                 right: '5%',
-                bottom: '5%',
+                bottom: '5%'
             },
             splitNumber: 4,
             backgroundColor: 'rgba(255,255,255,1)',
             name: {
                 textStyle: {
-                    color: '#fff',
+                    color: '#fff'
                 }
             },
             splitArea: {
@@ -19,20 +19,20 @@ export default function getOption (data) {
                     color: ['rgba(255,255,255,0)']
                 },
                 lineStyle: {
-                    color: "#fff"
+                    color: '#fff'
                 }
             },
             axisLine: {
                 show: true,
                 lineStyle: {
-                    color: "#0E7AC3",
+                    color: '#0E7AC3',
                     width: 2
                 }
             },
             splitLine: {
                 show: true,
                 lineStyle: {
-                    color: "#0E7AC3",
+                    color: '#0E7AC3',
                     width: 2
                 }
             },
@@ -44,7 +44,7 @@ export default function getOption (data) {
             type: 'radar',
             lineStyle: {
                 normal: {
-                    color: "#000",
+                    color: '#000',
                     width: 0
                 }
             },
@@ -56,15 +56,15 @@ export default function getOption (data) {
                     }, {
                         offset: 1,
                         color: 'rgba(0,255,207,0.6)'
-                    }]),
+                    }])
                 }
             },
             data: [
                 {
                     value: data.dataList.map(item => item.percent),
-                    symbolSize: 0,
+                    symbolSize: 0
                 }
-            ],
+            ]
         }
     }
 }

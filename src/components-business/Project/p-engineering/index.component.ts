@@ -1,20 +1,12 @@
-import {getInput} from '../../../../lib'
+export const customConfig = [
+	{
+		prop: 'desc',
+		label: '描述',
+		type: 'func-input'
+	}
+]
 
-const configSource = {
-    config: {
-        fields: {
-            desc: getInput('desc', '描述'),
-        },
-    },
-}
-
-const config = {
-    animation: true,
-    config: {
-        desc: true,
-    },
-}
-const value = {
+export const value = {
     layout: {
         size: {
             width: 340,
@@ -26,12 +18,10 @@ const value = {
     },
     api: {
         data: JSON.stringify({
-            value: 652,
-        }),
+            value: 652
+        })
     },
     config: {
-        desc: '无安全事故（天）',
-    },
+        desc: '无安全事故（天）'
+    }
 }
-
-export {config, configSource, value}

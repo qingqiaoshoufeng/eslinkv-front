@@ -1,42 +1,41 @@
 <template>
 	<div class="widget-part" :style="styles">
 		<div class="h-title-10 fn-flex flex-row">
-			<h2>{{config.config&&config.config.title}}</h2>
-			<p class="font-num">{{data&&data.value|toThousand}}</p>
-			<span>{{config.config&&config.config.suffix}}</span>
+			<h2>{{ config.config && config.config.title }}</h2>
+			<p class="font-num">{{ data && data.value|toThousand }}</p>
+			<span>{{ config.config && config.config.suffix }}</span>
 		</div>
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins'
-	import {config, configSource, value} from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value, customConfig } from './index.component'
 
 	export default {
 		mixins: [mixins],
-		created() {
-			this.configSource = this.parseConfigSource(config, configSource)
-			this.configValue = this.parseConfigValue(config, value)
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
 		}
 	}
 </script>
 <style lang="scss">
 	.h-title-10 {
-		height: 100%;
 		align-items: center;
+		height: 100%;
 
 		h2 {
 			font-size: 24px;
-			line-height: 24px;
-			color: #00DDFF;
 			font-weight: normal;
+			line-height: 24px;
+			color: #0df;
 		}
 
 		p {
+			margin-right: 4px;
+			margin-left: 8px;
 			font-size: 32px;
 			line-height: 32px;
-			color: #FFFFFF;
-			margin-left: 8px;
-			margin-right: 4px;
+			color: #fff;
 		}
 
 		span {

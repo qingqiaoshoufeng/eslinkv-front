@@ -1,6 +1,3 @@
-export const config = {
-	animation: true
-}
 const testChildren = [
 	{
 		name: '星桥站',
@@ -49,7 +46,7 @@ const testChildren = [
 	{
 		name: '三墩站',
 		value: 123
-	},
+	}
 ]
 export const value = {
 	layout: {

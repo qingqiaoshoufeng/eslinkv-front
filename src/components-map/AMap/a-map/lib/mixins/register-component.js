@@ -4,30 +4,30 @@ import { lazyAMapApiLoaderInstance } from '../services/injected-amap-api-instanc
 import CONSTANTS from '../utils/constant'
 import VueAMap from '../'
 
-function findAmapRoot() {
+function findAmapRoot () {
 	if (this.$amap) return this.$amap
-	let parent = this.$parent
+	const parent = this.$parent
 	if (parent) {
-		let fun = findAmapRoot.bind(parent)
+		const fun = findAmapRoot.bind(parent)
 		return fun()
 	}
 }
 
 export default {
-	data() {
+	data () {
 		return {
-			unwatchFns: [],
+			unwatchFns: []
 		}
 	},
 
-	async mounted() {
+	async mounted () {
 		if (lazyAMapApiLoaderInstance) {
 			lazyAMapApiLoaderInstance.load().then(() => {
 				this.__contextReady &&
 					this.__contextReady.call(this, this.convertProps())
 			})
 		}
-		let fun = findAmapRoot.bind(this)
+		const fun = findAmapRoot.bind(this)
 		this.$amap = fun()
 		if (this.$amap) {
 			this.register()
@@ -39,7 +39,7 @@ export default {
 		}
 	},
 
-	destroyed() {
+	destroyed () {
 		this.unregisterEvents()
 		if (!this.$amapComponent) return
 		this.$amapComponent.setMap && this.$amapComponent.setMap(null)
@@ -50,7 +50,7 @@ export default {
 	},
 
 	methods: {
-		getHandlerFun(prop) {
+		getHandlerFun (prop) {
 			if (this.handlers && this.handlers[prop]) {
 				return this.handlers[prop]
 			}
@@ -61,25 +61,26 @@ export default {
 			)
 		},
 
-		convertProps() {
+		convertProps () {
 			const props = {}
 			if (this.$amap) props.map = this.$amap
 			const {
 				$options: { propsData = {} },
-				propsRedirect,
+				propsRedirect
 			} = this
 			return Object.keys(propsData).reduce((res, _key) => {
 				let key = _key
-				let propsValue = this.convertSignalProp(key, propsData[key])
+				const propsValue = this.convertSignalProp(key, propsData[key])
 				if (propsValue === undefined) return res
-				if (propsRedirect && propsRedirect[_key])
-					key = propsRedirect[key]
+				if (propsRedirect && propsRedirect[_key]) {
+key = propsRedirect[key]
+}
 				props[key] = propsValue
 				return res
 			}, props)
 		},
 
-		convertSignalProp(key, sourceData) {
+		convertSignalProp (key, sourceData) {
 			let converter = ''
 			let type = ''
 
@@ -104,11 +105,11 @@ export default {
 			}
 		},
 
-		registerEvents() {
+		registerEvents () {
 			this.setEditorEvents && this.setEditorEvents()
 			if (!this.$options.propsData) return
 			if (this.$options.propsData.events) {
-				for (let eventName in this.events) {
+				for (const eventName in this.events) {
 					eventHelper.addListener(
 						this.$amapComponent,
 						eventName,
@@ -118,7 +119,7 @@ export default {
 			}
 
 			if (this.$options.propsData.onceEvents) {
-				for (let eventName in this.onceEvents) {
+				for (const eventName in this.onceEvents) {
 					eventHelper.addListenerOnce(
 						this.$amapComponent,
 						eventName,
@@ -128,21 +129,22 @@ export default {
 			}
 		},
 
-		unregisterEvents() {
+		unregisterEvents () {
 			eventHelper.clearListeners(this.$amapComponent)
 		},
 
-		setPropWatchers() {
+		setPropWatchers () {
 			const {
 				propsRedirect,
-				$options: { propsData = {} },
+				$options: { propsData = {} }
 			} = this
 
 			Object.keys(propsData).forEach((prop) => {
 				let handleProp = prop
-				if (propsRedirect && propsRedirect[prop])
-					handleProp = propsRedirect[prop]
-				let handleFun = this.getHandlerFun(handleProp)
+				if (propsRedirect && propsRedirect[prop]) {
+handleProp = propsRedirect[prop]
+}
+				const handleFun = this.getHandlerFun(handleProp)
 				if (!handleFun && prop !== 'events') return
 
 				// watch props
@@ -157,7 +159,7 @@ export default {
 						handleFun === this.$amapComponent.setOptions
 					) {
 						return handleFun.call(this.$amapComponent, {
-							[handleProp]: this.convertSignalProp(prop, nv),
+							[handleProp]: this.convertSignalProp(prop, nv)
 						})
 					}
 
@@ -172,15 +174,15 @@ export default {
 			})
 		},
 
-		registerToManager() {
-			let manager = this.amapManager || this.$parent.amapManager
+		registerToManager () {
+			const manager = this.amapManager || this.$parent.amapManager
 			if (manager && this.vid !== undefined) {
 				manager.setComponent(this.vid, this.$amapComponent)
 			}
 		},
 
 		// some prop can not init by initial created methods
-		initProps() {
+		initProps () {
 			const props = ['editable', 'visible']
 
 			props.forEach((propStr) => {
@@ -201,43 +203,45 @@ export default {
 		 * methods for developing
 		 * find reactive props
 		 */
-		printReactiveProp() {
+		printReactiveProp () {
 			Object.keys(this._props).forEach((k) => {
-				let fn = this.$amapComponent[`set${k}`]
+				const fn = this.$amapComponent[`set${k}`]
 				if (fn) {
 					console.log(k)
 				}
 			})
 		},
 
-		register() {
+		register () {
 			const res =
 				this.__initComponent &&
 				this.__initComponent(this.convertProps())
-			if (res && res.then)
-				res.then((instance) => this.registerRest(instance))
+			if (res && res.then) {
+res.then((instance) => this.registerRest(instance))
+}
 			// promise
 			else this.registerRest(res)
 		},
 
-		registerRest(instance) {
+		registerRest (instance) {
 			if (!this.$amapComponent && instance) this.$amapComponent = instance
 			this.registerEvents()
 			this.initProps()
 			this.setPropWatchers()
 			this.registerToManager()
 
-			if (this.events && this.events.init)
-				this.events.init(
+			if (this.events && this.events.init) {
+this.events.init(
 					this.$amapComponent,
 					this.$amap,
 					this.amapManager || this.$parent.amapManager
 				)
+}
 		},
 
 		// helper method
-		$$getInstance() {
+		$$getInstance () {
 			return this.$amapComponent
-		},
-	},
+		}
+	}
 }

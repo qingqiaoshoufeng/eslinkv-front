@@ -1,10 +1,9 @@
-export const config = { animation: true };
 export const value = {
 	api: {
 		data: JSON.stringify({
 			desc: '客户事故数(件)',
-			value: 298,
-		}),
+			value: 298
+		})
 	},
 	layout: {
 		size: {
@@ -15,4 +14,4 @@ export const value = {
 			value: 'relative'
 		}
 	}
-};
+}

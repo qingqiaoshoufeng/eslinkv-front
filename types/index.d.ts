@@ -1,21 +1,3 @@
-interface Components {
-    [key: string]: any
-}
-
-interface ComponentsWidgetsItem {
-    label: string
-    type: string
-    config?: any
-    layout?: any
-    widgets?: ComponentsWidgetsItem[]
-}
-
-type ComponentsWidgetsArray = ComponentsWidgetsItem[]
-
-interface ComponentsWidgetsObject {
-    [key: string]: ComponentsWidgetsItem
-}
-
 interface ComponentValueLayout {
     size: ComponentValueLayoutSize
     position: ComponentValueLayoutPosition
@@ -40,17 +22,4 @@ interface ComponentValue {
 
 interface ComponentValueApi {
     data: any
-}
-
-interface ComponentConfigSource {
-    config: ComponentConfigSourceConfig
-}
-
-interface ComponentConfigSourceConfig {
-    fields: any
-}
-
-interface ComponentConfig {
-    animation?: boolean
-    config?: any
 }

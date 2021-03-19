@@ -12,44 +12,41 @@
 	/>
 </template>
 <script>
-import { BaseOverlay } from '../../../../components/index';
-export default {
-	name: 'LNGStation',
-	components: {
-		BaseOverlay,
-	},
-	props: {
-		visible: {
-			type: Boolean,
-			default: true,
+	import { BaseOverlay } from '../../../../components/index'
+	export default {
+		name: 'LNGStation',
+		components: {
+			BaseOverlay
 		},
-		overlayIcon: {
-			type: String,
-			default: '',
-		},
-		overlayType: {
-			type: String,
-			default: '',
-		},
-		data: {
-			type: Array,
-		},
-		detailList: {
-			type: Array,
-			default() {
-				return [];
+		props: {
+			visible: {
+				type: Boolean,
+				default: true
 			},
+			overlayIcon: {
+				type: String,
+				default: ''
+			},
+			overlayType: {
+				type: String,
+				default: ''
+			},
+			data: {
+				type: Array
+			},
+			detailList: {
+				type: Array,
+				default () {
+					return []
+				}
+			}
 		},
-	},
-	data() {
-		let apiFun = this.$sysApi.map.mock.getLNGStationList;
-		return {
-			apiFun: apiFun,
-		};
-	},
-};
+		data () {
+			const apiFun = this.$api.map.mock.getLNGStationList
+			return {
+				apiFun: apiFun
+			}
+		}
+	}
 </script>
-
-
-
 

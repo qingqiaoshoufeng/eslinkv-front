@@ -1,26 +1,26 @@
 <template>
 	<div class="widget-part" :style="styles" v-if="data">
-		<div class="num font-num">{{ data&&data.value |toThousand }}</div>
-		<div class="txt">{{ config.config&&config.config.desc }}</div>
+		<div class="num font-num">{{ data && data.value |toThousand }}</div>
+		<div class="txt">{{ config.config && config.config.desc }}</div>
 		<div class="flex">
 			<div>
 				<div class="percent font-num">{{ data.percent }}%</div>
-				<div class="percent-txt">{{ config.config&&config.config.desc2 }}</div>
+				<div class="percent-txt">{{ config.config && config.config.desc2 }}</div>
 			</div>
-			<div class="chart" :id="id" :style="{ backgroundImage: `url(${config.config&&config.config.logo})` }"></div>
+			<div class="chart" :id="id" :style="{ backgroundImage: `url(${config.config && config.config.logo})` }"></div>
 		</div>
 	</div>
 </template>
 <script>
-	import mixins from '../../mixins';
-	import getOption from "./options";
-	import { config, configSource, value } from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import getOption from './options'
+	import { customConfig, value } from './index.component'
 
 	export default {
 		mixins: [mixins],
 		watch: {
 			data: {
-				handler(val) {
+				handler (val) {
 					if (this.id) {
 						this.$nextTick(() => {
 							this.instance = echarts.init(document.getElementById(this.id))
@@ -29,40 +29,39 @@
 					}
 				},
 				deep: true,
-				immediate: true,
+				immediate: true
 			}
 		},
 		methods: {
-			setOption(data) {
+			setOption (data) {
 				this.instance && this.instance.setOption(getOption(this.data.percent))
 			}
 		},
-		created() {
-			this.configSource = this.parseConfigSource(config, configSource);
-			this.configValue = this.parseConfigValue(config, value);
-		},
-	};
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
+		}
+	}
 </script>
 <style lang="scss" scoped>
 	.widget-part {
-		background: linear-gradient(360deg, rgba(255, 255, 255, 0.1) -2.01%, rgba(255, 255, 255, 0) 100%);
 		padding: 16px;
+		background: linear-gradient(360deg, rgba(255, 255, 255, 0.1) -2.01%, rgba(255, 255, 255, 0) 100%);
 
 		.num {
-			text-align: left;
-			font-weight: bold;
-			font-size: 32px;
-			line-height: 32px;
 			margin-bottom: 8px;
-			color: #FEFFFF;
+			font-size: 32px;
+			font-weight: bold;
+			line-height: 32px;
+			color: #feffff;
+			text-align: left;
 		}
 
 		.txt {
-			text-align: left;
+			margin-bottom: 12px;
 			font-size: 18px;
 			line-height: 24px;
 			color: rgba(255, 255, 255, 0.75);
-			margin-bottom: 12px;
+			text-align: left;
 		}
 
 		.flex {
@@ -71,11 +70,11 @@
 			justify-content: space-between;
 
 			.percent {
-				font-weight: bold;
-				font-size: 24px;
-				line-height: 24px;
-				color: #00FFCF;
 				margin-bottom: 8px;
+				font-size: 24px;
+				font-weight: bold;
+				line-height: 24px;
+				color: #00ffcf;
 			}
 
 			.percent-txt {

@@ -1,21 +1,23 @@
-import {getSelect, getArrayGroup, getInput} from "../../../../lib";
-
-export const configSource = {
-	config: {
-		fields: {
-			background: getArrayGroup('background', '背景图片', [
-				getInput('title', '标题'),
-				getSelect('background', '背景图片', ['/static/icons/s-progress1-1.svg', '/static/icons/s-progress1-2.svg', '/static/icons/s-progress1-3.svg'])
-			]),
-		}
+export const customConfig = [
+	{
+		prop: 'background',
+		label: '组',
+		type: 'func-group',
+		children: [
+			{
+				prop: 'title',
+				label: '标题',
+				type: 'func-input'
+			},
+			{
+				prop: 'background',
+				label: '背景图片',
+				type: 'func-background',
+				options: ['/static/icons/s-progress1-1.svg', '/static/icons/s-progress1-2.svg', '/static/icons/s-progress1-3.svg']
+			}
+		]
 	}
-}
-export const config = {
-	animation: true,
-	config: {
-		background: true,
-	}
-}
+]
 export const value = {
 	layout: {
 		size: {
@@ -46,6 +48,6 @@ export const value = {
 		}, {
 			background: '/static/icons/s-progress1-2.svg',
 			title: '安装(户)'
-		}, {background: '/static/icons/s-progress1-3.svg', title: '点火(户)'}],
+		}, { background: '/static/icons/s-progress1-3.svg', title: '点火(户)' }]
 	}
 }

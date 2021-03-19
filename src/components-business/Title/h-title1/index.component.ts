@@ -1,7 +1,6 @@
-const config = {animation: true}
-const value = {
+export const value = {
     api: {
-        data: JSON.stringify({title: '标题'})
+        data: JSON.stringify({ title: '标题' })
     },
     layout: {
         size: {
@@ -14,4 +13,3 @@ const value = {
     }
 }
 
-export {config, value}

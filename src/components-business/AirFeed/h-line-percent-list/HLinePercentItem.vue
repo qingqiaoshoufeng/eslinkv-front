@@ -28,75 +28,82 @@
 	</div>
 </template>
 <script>
-export default {
-	computed: {
-		rulerWidth() {
-			// 根据视觉稿来的
-			const safeWidth = 388;
-			const safeCountPerPx = safeWidth / this.maxAmout;
-			return this.value?.amount * safeCountPerPx + 'px';
+	export default {
+		computed: {
+			rulerWidth () {
+				// 根据视觉稿来的
+				const safeWidth = 388
+				const safeCountPerPx = safeWidth / this.maxAmout
+				return this.value?.amount * safeCountPerPx + 'px'
+			},
+			styles () {
+				return this.item?.styles || {}
+			},
+			value () {
+				return this.item || {}
+			}
 		},
-		styles() {
-			return this.item?.styles || {};
-		},
-		value() {
-			return this.item || {};
-		},
-	},
-	props: {
-		maxAmout: {
-			type: Number,
-			default: 4500,
-		},
-		item: {
-			type: Object,
-			default: () => ({}),
-		},
-	},
-};
+		props: {
+			maxAmout: {
+				type: Number,
+				default: 4500
+			},
+			item: {
+				type: Object,
+				default: () => ({})
+			}
+		}
+	}
 </script>
 <style lang="scss">
 .h-line-percent {
 	display: flex;
 	width: 474px;
 	height: 28px;
+
 	&__NO {
 		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 24px;
 		height: 28px;
-		justify-content: center;
-		align-items: center;
-		font-weight: bold;
 		font-size: 18px;
+		font-weight: bold;
 		line-height: 24px;
-		color: #ffffff;
+		color: #fff;
 	}
+
 	&__right {
-		margin-left: 10px;
 		display: flex;
 		flex-direction: column;
 		width: 440px;
+		margin-left: 10px;
+
 		&__top {
 			display: flex;
 			justify-content: space-between;
+
 			&__name {
 				font-size: 16px;
 				line-height: 16px;
-				color: #ffffff;
+				color: #fff;
 			}
+
 			&__amount {
 				font-size: 16px;
 				line-height: 16px;
-				color: #ffffff;
+				color: #fff;
 			}
 		}
+
 		&__bottom {
 			position: relative;
-			margin-top: 8px;
+			z-index: -1;
 			width: 440px;
 			height: 4px;
-			z-index: -1;
+			margin-top: 8px;
 			background: rgba(255, 255, 255, 0.1);
+
 			&__ruler {
 				position: absolute;
 				height: 4px;

@@ -1,4 +1,3 @@
-export const config = {animation: true}
 export const value = {
 	layout: {
 		size: {
@@ -13,7 +12,7 @@ export const value = {
 		data: JSON.stringify({
 			value: [
 				['nn16rowdl5r'],
-				['p2wovclspks'],
+				['p2wovclspks']
 			]
 		})
 	}

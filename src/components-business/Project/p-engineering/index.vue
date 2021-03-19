@@ -1,68 +1,67 @@
 <template>
-    <div class="widget-part pos-r" :style="styles">
-        <div class="engineering-box">
-            <video
-                    src="/static/images/project/engineering.webm"
-                    controls="controls"
-                    autoplay="autoplay"
-                    muted="muted"
-                    loop
-            ></video>
-            <div class="engineering-value font-num">
-                {{ data && data.value }}
-            </div>
-            <div class="engineering-desc">
-                {{ config.config && config.config.desc }}
-            </div>
-        </div>
-    </div>
+	<div class="widget-part pos-r" :style="styles">
+		<div class="engineering-box">
+			<video
+				src="/static/images/project/engineering.webm"
+				controls="controls"
+				autoplay="autoplay"
+				muted="muted"
+				loop
+			></video>
+			<div class="engineering-value font-num">
+				{{ data && data.value }}
+			</div>
+			<div class="engineering-desc">
+				{{ config.config && config.config.desc }}
+			</div>
+		</div>
+	</div>
 </template>
 <script>
-    import mixins from '../../mixins';
-    import {value, config, configSource} from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value, customConfig } from './index.component'
 
-    export default {
-        mixins: [mixins],
-        methods: {},
-        created() {
-            this.configSource = this.parseConfigSource(config, configSource)
-            this.configValue = this.parseConfigValue(config, value)
-        },
-    };
+	export default {
+		mixins: [mixins],
+		methods: {},
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
+		}
+	}
 </script>
 <style lang="scss">
-    .engineering-box {
-        height: 150px;
-        width: 340px;
-        position: relative;
+	.engineering-box {
+		position: relative;
+		width: 340px;
+		height: 150px;
 
-        video::-webkit-media-controls {
-            display: none !important;
-        }
+		video::-webkit-media-controls {
+			display: none !important;
+		}
 
-        .engineering-value {
-            height: 150px;
-            width: 150px;
-            line-height: 150px;
-            text-align: center;
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-size: 48px;
-            color: #fff;
-        }
+		.engineering-value {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 150px;
+			height: 150px;
+			font-size: 48px;
+			line-height: 150px;
+			color: #fff;
+			text-align: center;
+		}
 
-        .engineering-desc {
-            font-style: normal;
-            font-weight: normal;
-            font-size: 20px;
-            height: 150px;
-            line-height: 150px;
-            position: absolute;
-            left: 170px;
-            top: 0;
-            color: #fff;
-        }
-    }
+		.engineering-desc {
+			position: absolute;
+			top: 0;
+			left: 170px;
+			height: 150px;
+			font-size: 20px;
+			font-style: normal;
+			font-weight: normal;
+			line-height: 150px;
+			color: #fff;
+		}
+	}
 </style>
 

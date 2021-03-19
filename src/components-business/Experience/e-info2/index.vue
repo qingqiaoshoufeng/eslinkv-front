@@ -1,61 +1,60 @@
 <template>
-    <div class="widget-part" :style="styles" v-if="data">
-        <div class="title">
-            <div class="color"></div>
-            <span>线路总览</span>
-        </div>
-        <div class="main">
-            <img :src="data.map" class="map">
-            <div class="content" v-html="data.content"></div>
-        </div>
-    </div>
+	<div class="widget-part" :style="styles" v-if="data">
+		<div class="title">
+			<div class="color"></div>
+			<span>线路总览</span>
+		</div>
+		<div class="main">
+			<img :src="data.map" class="map">
+			<div class="content" v-html="data.content"></div>
+		</div>
+	</div>
 </template>
 <script>
-    import mixins from '../../mixins'
-    import {config, value} from './index.component'
+	import mixins from 'eslinkv-npm/mixins'
+	import { value } from './index.component'
 
-    export default {
-        mixins: [mixins],
-        created() {
-            this.configSource = this.parseConfigSource(config);
-            this.configValue = this.parseConfigValue(config, value);
-        },
-    };
+	export default {
+		mixins: [mixins],
+		created () {
+			this.configValue = this.parseConfigValue(value)
+		}
+	}
 </script>
 <style lang="scss" scoped>
-    .widget-part {
-        background: url("./img/dikuang.svg") no-repeat;
-        background-size: 100% 100%;
+	.widget-part {
+		background: url("./img/dikuang.svg") no-repeat;
+		background-size: 100% 100%;
 
-        .title {
-            height: 48px;
-            padding-left: 16px;
-            display: flex;
-            align-items: center;
-            font-weight: 500;
-            font-size: 24px;
-            color: #FFFFFF;
+		.title {
+			display: flex;
+			align-items: center;
+			height: 48px;
+			padding-left: 16px;
+			font-size: 24px;
+			font-weight: 500;
+			color: #fff;
 
-            .color {
-                width: 6px;
-                height: 28px;
-                background: #00DDFF;
-                transform: skewY(30deg);
-                margin-right: 8px;
-            }
-        }
+			.color {
+				width: 6px;
+				height: 28px;
+				margin-right: 8px;
+				background: #0df;
+				transform: skewY(30deg);
+			}
+		}
 
-        .main {
-            padding: 16px;
+		.main {
+			padding: 16px;
 
-            .content {
-                font-size: 18px;
-                line-height: 25px;
-                color: #FFFFFF;
-                text-align: left;
-                margin-top: 32px;
-            }
-        }
-    }
+			.content {
+				margin-top: 32px;
+				font-size: 18px;
+				line-height: 25px;
+				color: #fff;
+				text-align: left;
+			}
+		}
+	}
 </style>
 

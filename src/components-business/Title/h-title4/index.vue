@@ -5,16 +5,15 @@
 			p {{config.config&&config.config.title}}
 </template>
 <script>
-	import mx from '../../mixins'
-	import {Component} from 'vue-property-decorator'
-	import {mixins} from 'vue-class-component'
-    import {config, configSource, value} from './index.component'
+	import mx from 'eslinkv-npm/mixins'
+	import { Component } from 'vue-property-decorator'
+	import { mixins } from 'vue-class-component'
+	import { customConfig, value } from './index.component'
 
 	@Component
 	class HTitle4 extends mixins(mx) {
-		created() {
-			this.configSource = this.parseConfigSource(config,configSource)
-			this.configValue = this.parseConfigValue(config, value)
+		created () {
+			this.configValue = this.parseConfigValue(value, customConfig)
 		}
 	}
 	export default HTitle4
@@ -24,13 +23,13 @@
 		h2 {
 			font-size: 40px;
 			line-height: 48px;
-			color: #FFFFFF;
+			color: #fff;
 		}
 
 		p {
 			font-size: 18px;
 			line-height: 24px;
-			color: #00DDFF;
+			color: #0df;
 		}
 	}
 

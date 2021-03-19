@@ -4,37 +4,39 @@
 		<div class="swiper-Part">
 			<!-- 视频区域 -->
 			<div class="left pos-r">
-        <live-video @getPuList="getPuList" ref="live"></live-video>
+				<live-video @getPuList="getPuList" ref="live"></live-video>
 			</div>
 			<!-- 轮播图区域 -->
 			<div class="right">
-        <div class="select" v-if="deviceList.length">
-          <div class="current ellipsis" @click="isShowDevice = !isShowDevice">
-            <span>{{ deviceList[deviceIndex].Name }}</span>
-            <img src="./img/arrow-down.svg">
-          </div>
-          <div class="options" v-show="isShowDevice">
-            <div
-                class="option ellipsis"
-                v-for="(k, i) in deviceList"
-                :key="i"
-                :class="{active: i === deviceIndex}"
-                @click="chooseDevice(i)"
-            >{{ k.Name }}</div>
-          </div>
-        </div>
+				<div class="select" v-if="deviceList.length">
+					<div class="current ellipsis" @click="isShowDevice = !isShowDevice">
+						<span>{{ deviceList[deviceIndex].Name }}</span>
+						<img src="./img/arrow-down.svg">
+					</div>
+					<div class="options" v-show="isShowDevice">
+						<div
+							class="option ellipsis"
+							v-for="(k, i) in deviceList"
+							:key="i"
+							:class="{active: i === deviceIndex}"
+							@click="chooseDevice(i)"
+						>
+							{{ k.Name }}
+						</div>
+					</div>
+				</div>
 				<div class="swiper-area">
 					<div class="swiper-container gallery-thumbs swiper-swiper">
 						<div class="swiper-wrapper" ref="backTop">
 							<div class="swiper-slide">
-                <img src="./img/fixing-1.png">
-              </div>
+								<img src="./img/fixing-1.png">
+							</div>
 							<div class="swiper-slide">
-                <img src="./img/fixing-2.png">
-              </div>
+								<img src="./img/fixing-2.png">
+							</div>
 							<div class="swiper-slide">
-                <img src="./img/fixing-3.png">
-              </div>
+								<img src="./img/fixing-3.png">
+							</div>
 						</div>
 						<div class="swiper-pagination"></div>
 					</div>
@@ -42,49 +44,49 @@
 			</div>
 		</div>
 		<!-- 出车抢修部分 -->
-<!--		<div class="carout-Part" v-if="[5].includes(step)">-->
-<!--			<video src="/static/images/airfeed/carout03.webm" controls="controls" autoplay="autoplay" muted="muted"-->
-<!--				   loop>-->
-<!--			</video>-->
-<!--		</div>-->
+		<!--		<div class="carout-Part" v-if="[5].includes(step)">-->
+		<!--			<video src="/static/images/airfeed/carout03.webm" controls="controls" autoplay="autoplay" muted="muted"-->
+		<!--				   loop>-->
+		<!--			</video>-->
+		<!--		</div>-->
 	</div>
 </template>
 <script>
-	import Swiper from 'swiper';
-	import 'swiper/css/swiper.min.css';
-	import LiveVideo from '@/components/LiveVideo'
+	import Swiper from 'swiper'
+	import 'swiper/css/swiper.min.css'
+	import liveVideo from './live-video.vue'
 
 	export default {
-	  components: { LiveVideo },
+		components: { liveVideo },
 		props: {
 			step: {
 				type: Number,
-				default: 0,
+				default: 0
 			}
 		},
-		data() {
+		data () {
 			return {
-        deviceIndex: 0,
-        deviceList: [],
+				deviceIndex: 0,
+				deviceList: [],
 				swiper: null,
-        isShowDevice: false,
+				isShowDevice: false,
 				galleryThumbs: null,
-				galleryThumbs1: null,
-			};
+				galleryThumbs1: null
+			}
 		},
 		methods: {
-	    chooseDevice (index) {
-	      if (index === this.deviceIndex) return
-	      this.deviceIndex = index
-        this.isShowDevice = false
-        this.$refs.live.updateDevice(index)
-      },
-      getPuList (list) {
-        this.deviceList = list
-      },
-			swiperInit(swiper, tag, spaceBetween, slidesPerView, isControl) {
-				let _this = this;
-				let options = {
+			chooseDevice (index) {
+				if (index === this.deviceIndex) return
+				this.deviceIndex = index
+				this.isShowDevice = false
+				this.$refs.live.updateDevice(index)
+			},
+			getPuList (list) {
+				this.deviceList = list
+			},
+			swiperInit (swiper, tag, spaceBetween, slidesPerView, isControl) {
+				const _this = this
+				const options = {
 					direction: 'vertical',
 					spaceBetween: spaceBetween,
 					slidesPerView: slidesPerView,
@@ -95,32 +97,32 @@
 						clickable: true,
 						renderBullet: function (index, className) {
 							return `<span class="${className}" style="height:${
-							400 / 2
-								}px"></span>`;
-						},
+								400 / 2
+							}px"></span>`
+						}
 					},
 					on: {
 						init: function (swiper) {
-							this.activeIndex = 0;
+							this.activeIndex = 0
 						},
 						slideChange: function () {
 							// 处理兼容 重新创建组件 会导致activeIndex数量翻倍 这里取余
-						},
-					},
-				};
-				return new Swiper(`${tag}`, options);
-			},
+						}
+					}
+				}
+				return new Swiper(`${tag}`, options)
+			}
 		},
-		mounted() {
+		mounted () {
 			this.swiper = this.swiperInit(
 				this.galleryThumbs,
 				'.swiper-swiper',
 				24,
 				2.5,
 				true
-			);
-		},
-	};
+			)
+		}
+	}
 </script>
 <style lang="scss">
 	.swiper-box1 {
@@ -131,17 +133,18 @@
 
 		.swiper-slide {
 			background-size: cover;
-      img {
-        width: 100%;
-        height: 100%;
-      }
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
 		}
 
 		.swiper-Part {
-			height: 100%;
-			width: 100%;
 			display: flex;
 			justify-content: space-between;
+			width: 100%;
+			height: 100%;
 
 			.left {
 				width: 640px;
@@ -152,102 +155,109 @@
 					height: 400px;
 				}
 
-				video, .video-js {
+				video,
+				.video-js {
 					width: 640px;
 					height: 400px;
 				}
 			}
 
 			.right {
+				position: relative;
 				width: 340px;
 				height: 400px;
-        position: relative;
 
-        .select {
-          position: absolute;
-          top: -42px;
-          right: 10px;
-          .current {
-            width: 180px;
-            height: 32px;
-            display: flex;
-            color: #fff;
-            align-items: center;
-            justify-content: center;
-            background: #0057A9;
-            border: 1px solid #00DDFF;
-            border-radius: 4px;
-            font-weight: 600;
-            font-size: 20px;
-          }
-          .options {
-            position: absolute;
-            left: 0;
-            right: 0;
-            top: 36px;
-            background: #0057A9;
-            border-radius: 4px;
-            padding: 8px 0;
-            z-index: 9;
-            .option {
-              color: rgba(255, 255, 255, 0.75);
-              text-align: center;
-              font-size: 20px;
-              cursor: pointer;
-              &~.option {
-                margin-top: 8px;
-              }
-              &.active, &:hover {
-                font-weight: 600;
-                color: #fff;
-                background: rgba(0, 221, 255, 0.3);
-              }
-            }
-          }
-        }
+				.select {
+					position: absolute;
+					top: -42px;
+					right: 10px;
+
+					.current {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						width: 180px;
+						height: 32px;
+						font-size: 20px;
+						font-weight: 600;
+						color: #fff;
+						background: #0057a9;
+						border: 1px solid #0df;
+						border-radius: 4px;
+					}
+
+					.options {
+						position: absolute;
+						top: 36px;
+						right: 0;
+						left: 0;
+						z-index: 9;
+						padding: 8px 0;
+						background: #0057a9;
+						border-radius: 4px;
+
+						.option {
+							font-size: 20px;
+							color: rgba(255, 255, 255, 0.75);
+							text-align: center;
+							cursor: pointer;
+
+							& ~ .option {
+								margin-top: 8px;
+							}
+
+							&.active,
+							&:hover {
+								font-weight: 600;
+								color: #fff;
+								background: rgba(0, 221, 255, 0.3);
+							}
+						}
+					}
+				}
 
 				.swiper-area {
+					position: relative;
 					width: 340px;
 					height: 400px;
-					position: relative;
 
 					.swiper-swiper {
-						height: 100%;
 						width: 340px;
+						height: 100%;
 
 						.swiper-wrapper {
-							width: 320px;
 							position: relative;
 							left: -10px;
+							width: 320px;
 						}
 
 						.swiper-pagination {
-							display: flex;
-							background: #00217d;
-							height: 400px;
-							width: 8px;
-							flex-direction: column;
-							align-items: flex-start;
-							justify-content: start;
-							margin-left: 60px;
 							position: absolute;
 							top: 200px;
 							right: 11px;
+							display: flex;
+							flex-direction: column;
+							align-items: flex-start;
+							justify-content: start;
+							width: 8px;
+							height: 400px;
+							margin-left: 60px;
+							background: #00217d;
 
 							span {
 								width: 8px;
 							}
 
 							.swiper-pagination-bullet {
-								border-radius: 0;
-								margin: 0 0 !important;
-								height: 0;
 								width: 0;
+								height: 0;
+								margin: 0 0 !important;
+								border-radius: 0;
 							}
 
 							.swiper-pagination-bullet-active {
 								width: 8px;
-								background: #00ddff;
+								background: #0df;
 							}
 						}
 					}

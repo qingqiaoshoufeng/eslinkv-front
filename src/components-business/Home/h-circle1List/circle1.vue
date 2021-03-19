@@ -12,12 +12,12 @@
 			></h4>
 		</div>
 		<div class="h-circle-1-list fn-flex flex-column">
-			<h1>{{data&&data.title}}</h1>
+			<h1>{{ data && data.title }}</h1>
 			<ul>
-				<li class="fn-flex flex-row" v-for="(item,index) in data?data.value:[]" :key="index">
+				<li class="fn-flex flex-row" v-for="(item,index) in data ? data.value : []" :key="index">
 					<i class="circle" :style="{backgroundColor:color[index]}"/>
-					<label>{{item.title}}</label>
-					<span>{{item.value}}</span>
+					<label>{{ item.title }}</label>
+					<span>{{ item.value }}</span>
 				</li>
 			</ul>
 		</div>
@@ -28,58 +28,58 @@
 		props: {
 			color: {
 				type: Array,
-				default() {
+				default () {
 					return [
 						'rgba(0, 62, 144, 0.8)',
 						'rgba(0, 145, 210, 0.8)',
-						'rgba(0, 233, 194, 0.8)',
+						'rgba(0, 233, 194, 0.8)'
 					]
 				}
 			},
 			data: {
 				type: Object,
-				default() {
+				default () {
 					return {
 
 						title: '钢管（米）',
 						value: [
-							{title: '设计量：', value: 34452},
-							{title: '领用量：', value: 23445},
-							{title: '核销量：', value: 13345},
-						],
-					};
-				},
-			},
+							{ title: '设计量：', value: 34452 },
+							{ title: '领用量：', value: 23445 },
+							{ title: '核销量：', value: 13345 }
+						]
+					}
+				}
+			}
 		},
 
 		computed: {
-			ratio1() {
+			ratio1 () {
 				if (this.data) {
 					return `${(this.data.value[1].value /
 						this.data.value[0].value) *
-					100}%`;
+						100}%`
 				}
-				return '';
+				return ''
 			},
-			ratio2() {
+			ratio2 () {
 				if (this.data) {
 					return `${(this.data.value[2].value /
 						this.data.value[0].value) *
-					100}%`;
+						100}%`
 				}
-				return '';
-			},
+				return ''
+			}
 		},
-		created() {
-		},
-	};
+		created () {
+		}
+	}
 </script>
 <style lang="scss">
 	.circle1-box {
-		margin-top: 10px !important;
+		display: flex;
 		width: 330px;
 		height: 120px;
-		display: flex;
+		margin-top: 10px !important;
 
 		.h-circle-1 {
 			width: 120px;
@@ -103,13 +103,13 @@
 			margin-left: 32px;
 
 			h1 {
-				font-size: 20px;
-				line-height: 24px;
-				color: #00ddff;
 				margin-top: 15px;
 				margin-bottom: 8px;
 				margin-left: 16px;
+				font-size: 20px;
 				font-weight: normal;
+				line-height: 24px;
+				color: #0df;
 			}
 
 			li {

@@ -1,5 +1,4 @@
-const config = {animation: true}
-const value = {
+export const value = {
     layout: {
         size: {
             width: 1016,
@@ -12,9 +11,7 @@ const value = {
     api: {
         data: JSON.stringify({
             videoSrc: '/cdn/videos/sanshe.MOV',
-            poster: '/static/images/hangranma-bg.png',
-        }),
-    },
+            poster: '/static/images/hangranma-bg.png'
+        })
+    }
 }
-
-export {config, value}

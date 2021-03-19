@@ -1,29 +1,12 @@
-import {getInput} from '../../../../lib'
-import {data} from "./options";
+import { data } from './options'
 
-export const configSource = {
-	config: {
-		fields: {
-			sceneId: getInput('sceneId', '场景id'),
-			componentId: getInput('componentId', '组件id'),
-		},
-	},
-}
-
-export const config = {
-	animation: true,
-	config: {
-		sceneId: true,
-		componentId: true,
-	},
-}
 export const value = {
 	api: {
-		data: JSON.stringify(data),
+		data: JSON.stringify(data)
 	},
 	config: {
 		sceneId: '',
-		componentId: '',
+		componentId: ''
 	},
 	layout: {
 		size: {
@@ -35,3 +18,16 @@ export const value = {
 		}
 	}
 }
+
+export const customConfig = [
+	{
+		prop: 'sceneId',
+		label: '场景id',
+		type: 'func-input'
+	},
+	{
+		prop: 'componentId',
+		label: '组件id',
+		type: 'func-input'
+	}
+]
