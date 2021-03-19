@@ -36,7 +36,7 @@
 		}
 
 		cancel() {
-			this.$api.bussiness.checkError({componentId: this.detail.componentId}).then(() => {
+			this.$api.marketComponent.checkError({componentId: this.detail.componentId}).then(() => {
 				this.modalShow = false
 				this.$emit('reload')
 			})
@@ -59,7 +59,7 @@
 			const data = new FormData()
 			data.append('file', blob, name)
 			this.$api.bussiness.uploadFile(data).then(res => {
-				this.$api.bussiness.checkSuccess({
+				this.$api.marketComponent.checkSuccess({
 					componentId: this.detail.componentId,
 					componentImage: res.file
 				}).then(() => {

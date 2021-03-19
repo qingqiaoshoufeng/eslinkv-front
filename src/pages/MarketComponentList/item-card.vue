@@ -100,7 +100,7 @@
 
 		handleVersion() {
 			this.dialogEditVersionShow = true
-			this.$api.bussiness.getVersionList({componentEnTitle: this.currentItem.componentEnTitle}).then(r => {
+			this.$api.marketComponent.getVersionList({componentEnTitle: this.currentItem.componentEnTitle}).then(r => {
 				this.versionList = r
 			})
 		}
@@ -111,7 +111,7 @@
 				content: '确认删除吗？',
 				loading: true,
 				onOk: async () => {
-					await this.$api.bussiness.destroyComponent({componentId: this.currentItem.componentId})
+					await this.$api.marketComponent.destroy({componentId: this.currentItem.componentId})
 					this.$Message.success('删除成功')
 					this.$Modal.remove()
 					this.$emit('reload')

@@ -78,3 +78,14 @@ export function checkError (data) {
         }
     })
 }
+
+export function getVersionList (data) {
+    return request({
+        url: `${prefix}/market/component/version`,
+        method: 'post',
+        data,
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+}
