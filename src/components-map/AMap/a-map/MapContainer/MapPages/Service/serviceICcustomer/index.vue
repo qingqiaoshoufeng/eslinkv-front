@@ -236,7 +236,7 @@
 				const params = {
 					types: ['ICcustomer', 'BranchCompany'].toString()
 				}
-				const res = await this.$sysApi.map.serve.getICcustomerStationList(
+				const res = await this.$api.map.serve.getICcustomerStationList(
 					params
 				)
 				this.allTypeStationList = { ...this.allTypeStationList, ...res }
@@ -244,17 +244,17 @@
 
 			// 联码新增统计数据
 			async getDataStatisticsList () {
-				this.ICcustomerDetailInfo = await this.$sysApi.map.serve.getICcustomerCallingInfo()
+				this.ICcustomerDetailInfo = await this.$api.map.serve.getICcustomerCallingInfo()
 			},
 
 			// 获取热力图信息
 			async getAllHotList () {
-				const res = await this.$sysApi.map.serve.getICcustomerHotInfo()
+				const res = await this.$api.map.serve.getICcustomerHotInfo()
 				this.allTypeStationList = { ...this.allTypeStationList, ...res }
 			},
 			// 获取站点详情
 			async getDetailInfo (params, status) {
-				this.detailInfo = await this.$sysApi.map.serve.getICcustomerDetailInfo(
+				this.detailInfo = await this.$api.map.serve.getICcustomerDetailInfo(
 					params
 				)
 				if (status && status === '0') {
@@ -269,7 +269,7 @@
 			},
 			// 获取右侧table列表报警信息
 			async getWarningList (params) {
-				const WarningICcustomerList = await this.$sysApi.map.serve.getICcustomerSituationAwareness(
+				const WarningICcustomerList = await this.$api.map.serve.getICcustomerSituationAwareness(
 					params
 				)
 				this.allTypeStationList = {

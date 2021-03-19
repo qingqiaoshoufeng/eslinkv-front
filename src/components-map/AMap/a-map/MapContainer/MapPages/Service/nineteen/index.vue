@@ -174,7 +174,7 @@
 					queryId: 898,
 					params: ''
 				}
-				const res = await this.$sysApi.map.serve.getNineteenStatisticsInfo(
+				const res = await this.$api.map.serve.getNineteenStatisticsInfo(
 					params
 				)
 
@@ -194,7 +194,7 @@
 					types: ['BranchCompany'].toString()
 				}
 
-				const res = await this.$sysApi.map.serve.getICcustomerStationList(
+				const res = await this.$api.map.serve.getICcustomerStationList(
 					params
 				)
 				res.branchCompanyList = res.branchCompanyList.filter(
@@ -214,7 +214,7 @@
 					type: name
 				}
 				params.params = JSON.stringify(params)
-				const res = await this.$sysApi.map.serve.getNineteenStationDetailInfo(
+				const res = await this.$api.map.serve.getNineteenStationDetailInfo(
 					params
 				)
 				this.detailInfo = res[0]

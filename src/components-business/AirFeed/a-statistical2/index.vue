@@ -111,7 +111,7 @@
 			setTimeout(() => {
 				this.setNumberTransform()
 			}, 500)
-			this.$sysApi.bussiness.year().then(res => {
+			this.$api.bussiness.year().then(res => {
 				this.year = res
 			})
 		}

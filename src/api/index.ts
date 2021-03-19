@@ -1,6 +1,6 @@
-// eg 文件名  map.mock.js  调用  this.$sysApi.map.mock.xxx函数
+// eg 文件名  map.mock.js  调用  this.$api.map.mock.xxx函数
 import Vue from 'vue'
-
+import { configMerge } from '../utils'
 const context = require.context('/', false, /\.(api.js)$/)
 const apis: any = {}
 context.keys().forEach((name) => {
@@ -22,4 +22,9 @@ context.keys().forEach((name) => {
 	})
 })
 
-Vue.prototype.$sysApi = apis
+if (Vue.prototype.$api) {
+	Vue.prototype.$api = configMerge(apis, Vue.prototype.$api)
+} else {
+	Vue.prototype.$api = apis
+}
+

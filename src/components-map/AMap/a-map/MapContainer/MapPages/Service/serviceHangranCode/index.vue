@@ -221,7 +221,7 @@
 			},
 			// 联码新增统计数据
 			async getDataStatisticsList () {
-				this.couplingIncreaseInfo = await this.$sysApi.map.serve.getCouplingIncreaseInfo()
+				this.couplingIncreaseInfo = await this.$api.map.serve.getCouplingIncreaseInfo()
 			},
 			// 请求集团大厅，子公司，综合服务站数据列表
 			async getAllTypeStationList () {
@@ -233,13 +233,13 @@
 				}
 
 				this.detialBoxWidth = 480
-				return this.$sysApi.map.serve.getHangranCodeList(params)
+				return this.$api.map.serve.getHangranCodeList(params)
 			},
 			// 获取热力图信息
 			async getAllHotList () {
 				let res
 				try {
-					res = await this.$sysApi.map.serve.getHangranCodeHotList()
+					res = await this.$api.map.serve.getHangranCodeHotList()
 				} catch (error) {
 					res = {}
 				}
@@ -248,14 +248,14 @@
 			},
 			// 获取站点详情
 			async getDetailInfo (params) {
-				this.detailInfo = await this.$sysApi.map.serve.getHangranCodeDetailInfo(
+				this.detailInfo = await this.$api.map.serve.getHangranCodeDetailInfo(
 					params
 				)
 				this.showOverlayDetail = true
 			},
 			// 获取点击站点服务站详情
 			async clickGetBranchCompanyDetialInfo (params) {
-				return this.$sysApi.map.serve.clickGetBranchCompanyDetialInfo(
+				return this.$api.map.serve.clickGetBranchCompanyDetialInfo(
 					params
 				)
 			},

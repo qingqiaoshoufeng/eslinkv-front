@@ -162,7 +162,7 @@
 				if (!this.loaded) {
 					this.loading = true
 				}
-				this.list = await this.$sysApi.map.airSupply.getProcessWarningList({
+				this.list = await this.$api.map.airSupply.getProcessWarningList({
 					priority: this.currentLevel,
 					status: this.repairState
 				})

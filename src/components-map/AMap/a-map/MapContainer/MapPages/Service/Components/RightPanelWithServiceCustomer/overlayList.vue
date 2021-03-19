@@ -108,7 +108,7 @@
 				if (!this.loaded) {
 					this.loading = true
 				}
-				const res = await this.$sysApi.map.serve.getServiceCustomerThreeSocialList()
+				const res = await this.$api.map.serve.getServiceCustomerThreeSocialList()
 				this.list = res.map((item) => {
 					const { stationType } = item
 					const config = SERVICE_SERVICECUSTOMER_LEGEND_MAP[stationType]

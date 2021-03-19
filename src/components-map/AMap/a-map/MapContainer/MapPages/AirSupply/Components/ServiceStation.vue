@@ -52,7 +52,7 @@
 		},
 		data () {
 			return {
-				apiFun: this.$sysApi.map.serve.getServiceNetworkStationList
+				apiFun: this.$api.map.serve.getServiceNetworkStationList
 			}
 		}
 	}

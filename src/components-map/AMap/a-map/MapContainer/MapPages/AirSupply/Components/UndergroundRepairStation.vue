@@ -45,7 +45,7 @@
 			}
 		},
 		data () {
-			const apiFun = this.$sysApi.map.mock.getUndergroundRepairStationList
+			const apiFun = this.$api.map.mock.getUndergroundRepairStationList
 			return {
 				apiFun: apiFun
 			}

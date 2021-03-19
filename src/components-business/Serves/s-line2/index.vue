@@ -117,7 +117,7 @@
 			this.configValue = this.parseConfigValue(value, customConfig)
 		},
 		mounted () {
-			this.$sysApi.bussiness.businessAnalysisType().then(res => {
+			this.$api.bussiness.businessAnalysisType().then(res => {
 				this.list = res.typeList
 			})
 		}

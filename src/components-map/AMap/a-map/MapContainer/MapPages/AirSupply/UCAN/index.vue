@@ -214,7 +214,7 @@
 						'DistributedEnergyResource' // '分布式能源',
 					].toString()
 				}
-				const res = await this.$sysApi.map.airSupply.getAllTypeStationList(
+				const res = await this.$api.map.airSupply.getAllTypeStationList(
 					params
 				)
 				this.stationDataMap = { ...this.stationDataMap, ...res }
@@ -231,7 +231,7 @@
 			},
 			// 获取统计数据
 			async getDataStatisticsInfo () {
-				this.dataStatisticsInfo = await this.$sysApi.map.airSupply.getStatisticsInfo(
+				this.dataStatisticsInfo = await this.$api.map.airSupply.getStatisticsInfo(
 					{ type: 'UCAN' }
 				)
 			},

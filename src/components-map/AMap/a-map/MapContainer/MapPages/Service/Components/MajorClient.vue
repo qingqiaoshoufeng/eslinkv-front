@@ -49,7 +49,7 @@
 		},
 		data () {
 			return {
-				apiFun: this.$sysApi.map.mock.getGrouphallList,
+				apiFun: this.$api.map.mock.getGrouphallList,
 				mouseIn: true
 			}
 		},

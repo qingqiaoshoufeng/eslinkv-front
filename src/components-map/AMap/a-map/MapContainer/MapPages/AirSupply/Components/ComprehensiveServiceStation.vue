@@ -36,7 +36,7 @@
 			}
 		},
 		data () {
-			const apiFun = this.$sysApi.map.mock.getComprehensiveServiceStationList
+			const apiFun = this.$api.map.mock.getComprehensiveServiceStationList
 			return {
 				apiFun: apiFun
 			}

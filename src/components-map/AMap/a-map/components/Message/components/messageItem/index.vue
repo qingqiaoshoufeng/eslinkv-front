@@ -60,7 +60,7 @@ class MessageItem extends Vue {
 		}
 		this.sending = true
 		return new Promise((resolve) => {
-			this.$sysApi.message
+			this.$api.message
 				.toReplyMessage({
 					messageId: messageId,
 					resultContent: replyContent

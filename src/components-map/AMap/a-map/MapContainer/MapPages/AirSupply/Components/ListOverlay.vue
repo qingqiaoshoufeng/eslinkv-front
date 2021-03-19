@@ -26,7 +26,7 @@
 					1: 'iconxieloushijian'
 				}
 				return new Promise(async (resolve, reject) => {
-					let list = await this.$sysApi.map.mock.getWarningList()
+					let list = await this.$api.map.mock.getWarningList()
 					// 根据事件类型，判断图标，根据状态，显示图标颜色
 					list = list.map(item => {
 						const { status, eventType } = item

@@ -43,7 +43,7 @@
 			}
 		},
 		data () {
-			const apiFun = this.$sysApi.map.mock.getPressureRegulatingStationList
+			const apiFun = this.$api.map.mock.getPressureRegulatingStationList
 			return {
 				apiFun: apiFun,
 				propDwMap: {
@@ -84,7 +84,7 @@
 					let data = {}
 					const dataComp = {}
 					try {
-						data = await this.$sysApi.map.airSupply.getStationRealTimeInfo(
+						data = await this.$api.map.airSupply.getStationRealTimeInfo(
 							{
 								id,
 								name,

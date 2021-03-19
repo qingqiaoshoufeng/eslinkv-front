@@ -42,7 +42,7 @@
 			}
 		},
 		data () {
-			const apiFun = this.$sysApi.map.mock.getLNGStationList
+			const apiFun = this.$api.map.mock.getLNGStationList
 			return {
 				apiFun: apiFun
 			}

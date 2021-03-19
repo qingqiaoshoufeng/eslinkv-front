@@ -48,7 +48,7 @@
 		},
 		data () {
 			return {
-				apiFun: this.$sysApi.map.mock.getThreeSocialLinkageList
+				apiFun: this.$api.map.mock.getThreeSocialLinkageList
 			}
 		},
 		methods: {

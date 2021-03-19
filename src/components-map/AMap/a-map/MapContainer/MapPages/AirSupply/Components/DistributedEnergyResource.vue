@@ -35,7 +35,7 @@
 			}
 		},
 		data () {
-			const apiFun = this.$sysApi.map.mock.getDistributedEnergyResourceList
+			const apiFun = this.$api.map.mock.getDistributedEnergyResourceList
 			return {
 				apiFun: apiFun
 			}

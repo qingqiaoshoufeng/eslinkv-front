@@ -68,7 +68,7 @@
 				}
 				let passedPathData = []
 				try {
-					passedPathData = await this.$sysApi.map.airSupply.getEmployeeGpsTrack(
+					passedPathData = await this.$api.map.airSupply.getEmployeeGpsTrack(
 						{ employeeName, callDate, arriveDate: arrivalTime }
 					)
 				} catch (error) {

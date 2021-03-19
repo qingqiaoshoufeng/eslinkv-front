@@ -121,7 +121,7 @@
 				const params = {
 					id
 				}
-				const res = await this.$sysApi.map.airSupply.getLowMidDevice(params)
+				const res = await this.$api.map.airSupply.getLowMidDevice(params)
 				res.valveOpenFinish =
 					res.valveOpenFinish === 'true' ? '开启' : '关闭'
 				res.mc = res.mc ? '异常' : '正常'

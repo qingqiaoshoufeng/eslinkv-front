@@ -34,7 +34,7 @@
 		},
 		data () {
 			return {
-				apiFun: this.$sysApi.map.mock.getServiceNetworkStationList
+				apiFun: this.$api.map.mock.getServiceNetworkStationList
 			}
 		},
 		methods: {

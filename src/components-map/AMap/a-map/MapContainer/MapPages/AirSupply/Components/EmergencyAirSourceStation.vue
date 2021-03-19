@@ -60,7 +60,7 @@
 			}
 		},
 		data () {
-			const apiFun = this.$sysApi.map.mock.getEmergencyAirSourceStationList
+			const apiFun = this.$api.map.mock.getEmergencyAirSourceStationList
 			return {
 				apiFun: apiFun
 			}

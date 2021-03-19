@@ -106,7 +106,7 @@
 				if (!this.loaded) {
 					this.loading = true
 				}
-				const data = await this.$sysApi.map.serve.getServiceCustomerTaskList()
+				const data = await this.$api.map.serve.getServiceCustomerTaskList()
 				this.list = data
 				this.loading = false
 				this.loaded = true

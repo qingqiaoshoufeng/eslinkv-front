@@ -225,7 +225,7 @@
 			},
 			// 获取三社联动热力数据信息
 			async getThreeSocialLinkagecustmerHot () {
-				const res = await this.$sysApi.map.serve.getThreeSocialLinkagecustmerHot()
+				const res = await this.$api.map.serve.getThreeSocialLinkagecustmerHot()
 
 				this.allTypeStationList.CustomerHotList = res.customer
 			},
@@ -315,7 +315,7 @@
 				const { id } = this.activeOverlay
 				// 打开三社联动的弹框
         THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
-          this.$sysApi.map.serve.getServiceCustomerThreeSocialDetail({ id }).then(res => {
+          this.$api.map.serve.getServiceCustomerThreeSocialDetail({ id }).then(res => {
             instance.actions.updateComponent(i, {
               data: res
             })
@@ -325,7 +325,7 @@
 			},
 			// 客户服务统一数据
 			async getDataStatisticsList () {
-				this.dataStatisticsInfo = await this.$sysApi.map.serve.getServiceCustomerStatisticsInfo()
+				this.dataStatisticsInfo = await this.$api.map.serve.getServiceCustomerStatisticsInfo()
 			},
 			// 查询客户服务站点列表
 			async getAllTypeStationList () {
@@ -336,7 +336,7 @@
 						'ThreeSocialLinkage'
 					].toString()
 				}
-				const res = await this.$sysApi.map.serve.getServiceCustomerStationList(
+				const res = await this.$api.map.serve.getServiceCustomerStationList(
 					params
 				)
 				this.allTypeStationList = { ...this.allTypeStationList, ...res }
@@ -345,7 +345,7 @@
 
 			// 获取任务工单列表
 			async getTasklist () {
-				const TaskList = await this.$sysApi.map.serve.getServiceCustomerTaskList()
+				const TaskList = await this.$api.map.serve.getServiceCustomerTaskList()
 				this.allTypeStationList = {
 					...this.allTypeStationList,
 					TaskList
@@ -353,7 +353,7 @@
 			},
 			// 查看详情接口
 			getDetailInfo (params) {
-				return this.$sysApi.map.serve.getServiceCustomerDetialInfo(params)
+				return this.$api.map.serve.getServiceCustomerDetialInfo(params)
 			}
 		},
 		mounted () {

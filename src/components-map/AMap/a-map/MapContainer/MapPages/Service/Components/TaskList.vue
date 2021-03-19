@@ -57,7 +57,7 @@
 
 		async created () {
 			this.map = this.$parent.$amap
-			this.list = await this.$sysApi.map.airSupply.getEventWarningList()
+			this.list = await this.$api.map.airSupply.getEventWarningList()
 		},
 		mounted () {}
 	}

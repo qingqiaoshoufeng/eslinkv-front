@@ -13,7 +13,7 @@
 				if (this.data) {
 					data = this.data
 				} else {
-					data = await this.$sysApi.map.mock.getHighPressureLine()
+					data = await this.$api.map.mock.getHighPressureLine()
 				}
 				data.forEach(line => {
 					const polyLine = new AMap.Polyline({

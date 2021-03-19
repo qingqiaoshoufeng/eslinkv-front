@@ -136,7 +136,7 @@
 				if (!this.loaded) {
 					this.loading = true
 				}
-				const data = await this.$sysApi.map.airSupply.getEventWarningList({
+				const data = await this.$api.map.airSupply.getEventWarningList({
 					repairType: this.repairType,
 					repairState: this.repairState
 				})

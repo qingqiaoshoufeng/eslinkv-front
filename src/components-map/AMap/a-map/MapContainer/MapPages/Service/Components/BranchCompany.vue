@@ -58,7 +58,7 @@
 		},
 		data () {
 			return {
-				apiFun: this.$sysApi.map.mock.getBranchCompanyList,
+				apiFun: this.$api.map.mock.getBranchCompanyList,
 				nameStyle: {
 					fontSize: '24px'
 				},

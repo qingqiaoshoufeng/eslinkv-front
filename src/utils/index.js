@@ -1,3 +1,5 @@
+import copy from 'fast-copy'
+
 /**
  * @description 获取url参数
  */
@@ -18,6 +20,27 @@ export function hexToRgba (hex, opacity) {
 	return 'rgba(' + parseInt('0x' + hex.slice(1, 3)) + ',' + parseInt('0x' + hex.slice(3, 5)) + ',' + parseInt('0x' + hex.slice(5, 7)) + ',' + opacity + ')'
 }
 
+/**
+ * @description 合并对象 生成一个新的对象,用前面的覆盖后面的
+ */
+export const configMerge = function (from, to) {
+	const output = copy(to)
+	const isArray = Array.isArray(from);
+	(!isArray ? Object.keys(from) : from).forEach((key, index) => {
+		const actualKey = !isArray ? key : index
+		const value = from[actualKey]
+		if (value && typeof value === 'object') {
+			if (!output[actualKey]) {
+				output[actualKey] = !Array.isArray(value) ? { ...value } : [...value]
+				return
+			}
+			output[actualKey] = configMerge(value, output[actualKey])
+		} else if (value !== undefined) {
+			output[actualKey] = value
+		}
+	})
+	return output
+}
 
 /**
  * @description 向上查找 components

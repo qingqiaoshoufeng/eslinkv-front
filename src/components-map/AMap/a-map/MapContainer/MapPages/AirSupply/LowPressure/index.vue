@@ -250,7 +250,7 @@
 						'OngroundRepairStation' // '地上抢修点',
 					].toString()
 				}
-				const res = await this.$sysApi.map.airSupply.getAllTypeStationList(
+				const res = await this.$api.map.airSupply.getAllTypeStationList(
 					params
 				)
 				let {
@@ -297,7 +297,7 @@
 			},
 			// 获取统计数据
 			async getDataStatisticsInfo () {
-				this.dataStatisticsData = await this.$sysApi.map.airSupply.getStatisticsInfo(
+				this.dataStatisticsData = await this.$api.map.airSupply.getStatisticsInfo(
 					{ type: 'LowPressure' }
 				)
 			},

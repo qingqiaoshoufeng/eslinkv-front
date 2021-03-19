@@ -73,7 +73,7 @@
         getData () {
             this.loading = true
             const { value } = this.selectedItem
-            this.$sysApi.message
+            this.$api.message
                 .getRecentMessageList({
                     messageStatus: value
                 })

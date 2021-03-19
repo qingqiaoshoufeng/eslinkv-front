@@ -225,7 +225,7 @@
 						'MiddleAndLowPressureValve' // 中低压阀门
 					].toString()
 				}
-				const res = await this.$sysApi.map.airSupply.getAllTypeStationList(
+				const res = await this.$api.map.airSupply.getAllTypeStationList(
 					params
 				)
 				this.stationDataMap = { ...this.stationDataMap, ...res }
@@ -242,13 +242,13 @@
 			},
 			// 2.获取高压统计数据
 			async getDataStatisticsInfo () {
-				this.dataStatisticsData = await this.$sysApi.map.airSupply.getStatisticsInfo(
+				this.dataStatisticsData = await this.$api.map.airSupply.getStatisticsInfo(
 					{ type: 'HighPressure' }
 				)
 			},
 			// 3.获取高压管网，高压管网建设中数据
 			async getHighPressurePipe () {
-				const pipeData = await this.$sysApi.map.airSupply.getHighPressurePipe()
+				const pipeData = await this.$api.map.airSupply.getHighPressurePipe()
 				this.stationDataMap = {
 					...this.stationDataMap,
 					...pipeData

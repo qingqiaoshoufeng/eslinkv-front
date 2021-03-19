@@ -43,7 +43,7 @@
 			}
 		},
 		data () {
-			const apiFun = this.$sysApi.map.mock.getNaturalGasStationList
+			const apiFun = this.$api.map.mock.getNaturalGasStationList
 			return {
 				apiFun: apiFun
 			}

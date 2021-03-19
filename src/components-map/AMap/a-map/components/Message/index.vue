@@ -42,7 +42,7 @@
         }
 
         getUnReadMessage () {
-            this.$sysApi.message.getUnReadMessage().then((data) => {
+            this.$api.message.getUnReadMessage().then((data) => {
                 if (data) {
                     this.unReadStatus = true
                     if (this.alertInstance) {
@@ -73,7 +73,7 @@
         }
 
         async getData (messageStatus = '1') {
-            this.$sysApi.message
+            this.$api.message
                 .getRecentMessageList({
                     messageStatus
                 })

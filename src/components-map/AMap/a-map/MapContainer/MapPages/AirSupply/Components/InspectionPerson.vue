@@ -37,7 +37,7 @@
 		// },
 		},
 		data () {
-			const apiFun = this.$sysApi.map.mock.getInspectionPersonList
+			const apiFun = this.$api.map.mock.getInspectionPersonList
 			return {
 				apiFun: apiFun,
 				ready: false,
@@ -64,7 +64,7 @@
 				const params = {
 					types: ['InspectionPerson'].toString()
 				}
-				const res = await this.$sysApi.map.airSupply.getAllTypeStationList(
+				const res = await this.$api.map.airSupply.getAllTypeStationList(
 					params
 				)
 				this.data = (res && res.inspectionPersonList) || []

@@ -8,7 +8,7 @@
 		},
 		methods: {
 			async init () {
-				const data = await this.$sysApi.map.serve.getHeatMapList()
+				const data = await this.$api.map.serve.getHeatMapList()
 				const instance = new AMap.Heatmap(this.$amap, {
 					radius: 100, // 给定半径
 					opacity: [0, 0.8],

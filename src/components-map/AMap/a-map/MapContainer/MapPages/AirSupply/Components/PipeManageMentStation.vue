@@ -45,7 +45,7 @@
 			}
 		},
 		data () {
-			const apiFun = this.$sysApi.map.mock.getPipeManageMentStationList
+			const apiFun = this.$api.map.mock.getPipeManageMentStationList
 			return {
 				apiFun: apiFun
 			}

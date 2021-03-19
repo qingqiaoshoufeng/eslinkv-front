@@ -5,7 +5,6 @@ declare module 'vue/types/vue' {
 	interface Vue {
 		$api: any
 		$agent: any
-		$sysApi: any
 		$route: Route
 		$router: VueRouter
 

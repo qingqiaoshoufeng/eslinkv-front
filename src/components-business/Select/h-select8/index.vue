@@ -80,7 +80,7 @@
 			this.configValue = this.parseConfigValue(value)
 		},
 		mounted () {
-			this.$sysApi.map.airSupply.getAllTypeStationList({ types: 'GasStation' }).then(res => {
+			this.$api.map.airSupply.getAllTypeStationList({ types: 'GasStation' }).then(res => {
 				this.list = res.gasStationList
 			})
 		}

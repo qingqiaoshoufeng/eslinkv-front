@@ -41,7 +41,7 @@
 			}
 		},
 		data () {
-			const apiFun = this.$sysApi.map.mock.getICcustomerList
+			const apiFun = this.$api.map.mock.getICcustomerList
 			return {
 				apiFun: apiFun
 			}

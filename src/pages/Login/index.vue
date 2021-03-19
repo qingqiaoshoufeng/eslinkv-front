@@ -30,7 +30,7 @@
 
     async login () {
       if (!this.userName || !this.password) return
-      await this.$sysApi.common.login({
+      await this.$api.user.login({
         userName: this.userName,
         password: this.password
       })
