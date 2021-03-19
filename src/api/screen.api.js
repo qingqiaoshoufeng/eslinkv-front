@@ -1,11 +1,11 @@
 import request from './request'
 import qs from 'qs'
 const prefix = '/node'
-export function abc (data) {
+
+export function list (data) {
     return request({
-        url: `${prefix}/board/save`,
+        url: `${prefix}/screen/list`,
         method: 'post',
         data: qs.stringify(data),
-        headers
     })
 }

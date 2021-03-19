@@ -1,15 +1,15 @@
 <template lang="pug">
 	i-card.list-item-card.pos-r
-		.avatar(:style="{backgroundImage:`url(${snapshot})`}" v-if="snapshot")
-		empty-image.avatar(v-if="!snapshot")
-		h2.ellipsis {{name}}
+		.avatar(:style="{backgroundImage:`url(${screenAvatar})`}" v-if="screenAvatar")
+		empty-image.avatar(v-if="!screenAvatar")
+		h2.ellipsis {{screenName}}
 		.fn-flex.flex-row.list-item-card-time-box
-			p {{createTime}}
+			p {{beginTime}}
 		div
-			i-button(:type="status?'success':'warning'" size="small") {{statusStr}}
+			i-button(:type="isPublished?'success':'warning'" size="small") {{statusStr}}
 		.pos-a.list-item-card-mask.fn-flex.flex-column
 			i-button(icon="ios-create-outline" @click="handleEdit") 编辑
-			i-button(v-if="status" icon="ios-link" :style="{marginTop:'10px'}" @click="handleLink") 打开
+			i-button(v-if="isPublished" icon="ios-link" :style="{marginTop:'10px'}" @click="handleLink") 打开
 			i-button(v-else icon="ios-jet-outline" :style="{marginTop:'10px'}" @click="handleUse") 使用
 			i-button(icon="ios-trash-outline" :style="{marginTop:'10px'}" type="error" @click="handleRemove") 删除
 </template>
@@ -22,20 +22,26 @@
 		components: { 'i-card': Card, EmptyImage, 'i-button': Button }
 	})
 	export default class ItemCard extends Vue {
-		@Prop(String) snapshot: string
-		@Prop(Number) id: number
-		@Prop(Number) status: number
-		@Prop(String) statusStr: string
-		@Prop(String) name: string
-		@Prop(String) createTime: string
-		@Prop(String) shareUrl: string
+    @Prop(String) screenAvatar: string
+    @Prop(String) screenId: string
+    @Prop(String) screenPublish: string
+    @Prop(String) screenName: string
+    @Prop(String) beginTime: string
+
+    get statusStr () {
+      return this.screenPublish === 'COMPLETE' ? '已发布' : '未发布'
+    }
+
+    get isPublished () {
+      return this.screenPublish === 'COMPLETE'
+    }
 
 		handleEdit () {
-			this.$router.push(`/editor/manger/${this.id}`)
+			this.$router.push(`/editor/manger/${this.screenId}`)
 		}
 
 		handleLink () {
-			window.open(`${location.origin}/detail/${this.id}`)
+			window.open(`${location.origin}/detail/${this.screenId}`)
 		}
 
 		handleRemove () {
@@ -44,7 +50,7 @@
 				content: '确认删除吗？',
 				loading: true,
 				onOk: () => {
-					this.$api.board.remove({ dataBoardId: this.id }).then(() => {
+					this.$api.screen.remove({ screenId: this.screenId }).then(() => {
 						this.$Message.success('删除成功')
 						this.$Modal.remove()
 						this.$emit('init')
@@ -54,7 +60,7 @@
 		}
 
 		handleUse () {
-			this.$router.push('/new?templateId=' + this.id)
+			this.$router.push('/new?templateId=' + this.screenId)
 		}
 	}
 </script>

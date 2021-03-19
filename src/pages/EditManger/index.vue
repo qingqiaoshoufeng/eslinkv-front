@@ -4,15 +4,15 @@
 			div
 				i-button(type="warning" @click="handleNew") 新建看板
 			.search
-				i-input(v-model="query.name" placeholder="看板标题" style="width: 200px;" clearable)
+				i-input(v-model="query.screenName" placeholder="看板标题" style="width: 200px;" clearable)
 				i-date-picker(type="daterange" placeholder="创建日期" placement="bottom-end" v-model="date" style="margin-left: 10px;")
-				i-select(v-model="query.status" placeholder="状态" style="width: 100px;margin-left: 10px;" clearable)
-					i-option(:value="0") 未发布
-					i-option(:value="1") 已发布
-				i-button.ml20(type="primary" @click="handleChange(1)") 查询
+				i-select(v-model="query.screenPublish" placeholder="状态" style="width: 100px;margin-left: 10px;" clearable)
+					i-option(value="EDIT") 未发布
+					i-option(value="COMPLETE") 已发布
+				i-button.ml20(type="primary" @click="search") 查询
 			e-page(@init="init" :total="total" ref="page")
 				ul.fn-flex.flex-row.list-item-card-box
-					item-card(v-for="item in list" v-bind="item" :key="item.id" @reload="reload")
+					item-card(v-for="item in list" v-bind="item" :key="item.screenId" @reload="reload")
 </template>
 <script lang="ts">
 	import { Vue, Component, Watch } from 'vue-property-decorator'
@@ -36,17 +36,17 @@
 		total: number = 0
 		date: any = []
 		query: any = {
-			name: '',
-			startDate: '',
-			status: '',
-			endtartDate: ''
+      screenName: '',
+      beginTime: '',
+      screenPublish: '',
+			endTime: ''
 		}
 
 		@Watch('date')
 		dateChange (val) {
 			if (!val[0] || !val[1]) return
-			this.query.startDate = format(val[0], 'yyyy-MM-dd')
-			this.query.endDate = format(val[1], 'yyyy-MM-dd')
+			this.query.beginTime = format(val[0], 'yyyy-MM-dd')
+			this.query.endTime = format(val[1], 'yyyy-MM-dd')
 		}
 
 		handleNew () {
@@ -57,13 +57,21 @@
 			this.$refs.page.reload()
 		}
 
+    search () {
+		  this.init({
+        pageSize: 10,
+        pageNum: 1
+      })
+    }
+
 		init ({ pageSize, pageNum }) {
-			this.$api.panel.list({
+			this.$api.screen.list({
 				pageSize,
-pageNum,
-				type: 0,
+        pageNum,
+        screenType: 'CUSTOM',
 				...this.query
 			}).then(res => {
+			  console.log(res)
 				this.list = res.list
 				this.total = res.total
 			})

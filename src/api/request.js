@@ -27,10 +27,9 @@ const errMessage = '网络异常，请重试'
 request.interceptors.response.use(
     (response) => {
         const { data } = response
-        // console.log(data)
         if (data) {
             if (data.code === 200) {
-                return data.data
+                return data.result
             } else {
                 Message.error(data.message || errMessage)
                 return Promise.reject(false)

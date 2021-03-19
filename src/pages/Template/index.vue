@@ -2,7 +2,7 @@
 	e-layout
 		.list-container
 			ul.fn-flex.flex-row.list-item-card-box
-				item-card(v-for="item in list" v-bind="item" :key="item.id" @init="init")
+				item-card(v-for="item in list" v-bind="item" :key="item.screenId" @init="init")
 			Page(:total="total" :show-sizer="true" :show-elevator="true" :show-total="true" @on-change="handleChange" @on-page-size-change="handlePageSize")
 </template>
 <script lang="ts">
@@ -19,6 +19,12 @@
 		pageNum: number = 1
 		pageSize: number = 10
 		date: any = []
+    query: any = {
+      screenName: '',
+      beginTime: '',
+      screenPublish: '',
+      endTime: ''
+    }
 		
 		handleChange (pageNum) {
 			this.pageNum = pageNum
@@ -31,10 +37,10 @@
 		}
 
 		init () {
-			this.$api.panel.list({
+			this.$api.screen.list({
 				pageSize: this.pageSize,
-				type: 1,
-pageNum: this.pageNum,
+				type: 'TEMPLATE',
+        pageNum: this.pageNum,
 				...this.query
 			}).then(res => {
 				this.list = res.list
