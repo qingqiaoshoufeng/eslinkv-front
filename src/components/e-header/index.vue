@@ -4,17 +4,23 @@
 		ul.fn-flex.flex-row
 			li.pointer(@click="handleHelp") 帮助文档
 			li.pointer(@click="handleChangeLog") 更新日志
-		i-icon(type="ios-contact" size="22")
-		span 测试用户
+    i-icon(type="ios-contact" size="22")
+    i-drop-down.e-header-user
+      span 下拉菜单
+      i-drop-down-menu(slot="list")
+        i-drop-down-item 退出登录
 </template>
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
-	import { Icon, Button } from 'view-design'
+	import { Icon, Button, Dropdown, DropdownItem, DropdownMenu } from 'view-design'
 
 	@Component({
 		components: {
 			'i-icon': Icon,
-			'i-button': Button
+			'i-button': Button,
+			'i-drop-down': Dropdown,
+			'i-drop-down-item': DropdownItem,
+			'i-drop-down-menu': DropdownMenu
 		}
 	})
 	export default class EHeader extends Vue {
@@ -48,7 +54,7 @@
 			font-size: 16px;
 		}
 
-		span {
+    .e-header-user {
 			margin-left: 10px;
 		}
 

@@ -151,6 +151,10 @@ export default {
 		{
 			type: ['refactor'],
 			content: '添加本地化json文件加载支持'
+		},
+		{
+			type: ['refactor'],
+			content: '添加node服务接口支持，接口优化'
 		}
 	]
 }
