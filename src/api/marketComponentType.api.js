@@ -1,46 +1,37 @@
-import request from './request'
-const prefix = '/node'
+import request, { headers } from './request'
 
 export function create (data) {
     return request({
-        url: `${prefix}/market/componentType/create`,
+        url: '/market/componentType/create',
         method: 'post',
         data,
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers
     })
 }
 
 export function update (data) {
     return request({
-        url: `${prefix}/market/componentType/update`,
+        url: '/market/componentType/update',
         method: 'post',
         data,
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers
     })
 }
 
 export function destroy (data) {
     return request({
-        url: `${prefix}/market/componentType/destroy`,
+        url: '/market/componentType/destroy',
         method: 'post',
         data,
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers
     })
 }
 
 export function getAllComponentType (data) {
     return request({
-        url: `${prefix}/market/componentType/list`,
+        url: '/market/componentType/list',
         method: 'post',
         data,
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers
     })
 }

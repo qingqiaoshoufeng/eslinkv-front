@@ -1,11 +1,11 @@
-import request from './request'
-const prefix = '/node'
+import request, { headers } from './request'
 
 // 登陆
 export function login (data) {
     return request({
-        url: prefix + '/user/login',
+        url: '/user/login',
         method: 'post',
-        data: data
+        headers,
+        data
     })
 }

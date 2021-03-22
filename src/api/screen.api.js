@@ -1,11 +1,10 @@
-import request from './request'
-import qs from 'qs'
-const prefix = '/node'
+import request, { headers } from './request'
 
 export function list (data) {
     return request({
-        url: `${prefix}/screen/list`,
+        url: '/screen/list',
         method: 'post',
-        data: qs.stringify(data),
+        headers,
+        data
     })
 }
