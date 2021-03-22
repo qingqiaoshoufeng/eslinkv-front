@@ -23,7 +23,12 @@
 				i-form-item(label="排序")
 					i-input(v-model="currentItem.sort" number)
 				i-form-item(label="类型")
-					tree-select(v-model="currentItem.componentTypeId" :options="componentTypeList" :normalizer="normalizer")
+					tree-select(
+						v-model="currentItem.componentTypeId"
+						:options="componentTypeList"
+						:normalizer="normalizer"
+						:load-options="loadOptions"
+						)
 				i-form-item(label="缩略图")
 					.img-wrap
 						img(:src="currentItem.componentAvatar" v-if="currentItem.componentAvatar")
@@ -41,6 +46,7 @@
 	import {Vue, Component, PropSync} from 'vue-property-decorator'
 	import TreeSelect from '@riophae/vue-treeselect'
 	import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+	import { LOAD_CHILDREN_OPTIONS } from '@riophae/vue-treeselect'
 
 	@Component({
 		components: {
@@ -64,6 +70,17 @@
 
 		@PropSync('item', {type: Object}) currentItem!: any
 
+		loadOptions({ action, parentNode, callback }) {
+			if (action === LOAD_CHILDREN_OPTIONS) {
+        this.$api.marketComponentType.list({
+          componentTypeParentId: parentNode.componentTypeId
+        }).then(r => {
+          parentNode.children = r.list
+          callback()
+        })
+			}
+		}
+
 		normalizer(node) {
 			return {
 				id: node.componentTypeId,
@@ -74,7 +91,7 @@
 
 		submitVersion() {
 			this.$api.marketComponent.update({
-        componentId: this.currentItem.componentId,
+				componentId: this.currentItem.componentId,
 				componentVersion: this.version
 			}).then(() => {
 				this.dialogEditVersionShow = false
@@ -94,7 +111,10 @@
 		handleEdit() {
 			this.dialogEditShow = true
 			this.$api.marketComponentType.list().then(r => {
-				this.componentTypeList = r
+			  r.list.forEach(v => {
+          v.children = null
+        })
+				this.componentTypeList = r.list
 			})
 		}
 
