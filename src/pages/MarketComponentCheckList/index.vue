@@ -72,7 +72,7 @@
 		}
 
 		async init ({ pageNum, pageSize }) {
-			const res = await this.$api.bussiness.getWaitCheckList({
+			const res = await this.$api.marketComponent.list({
 				pageNum,
 				pageSize
 			})

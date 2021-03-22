@@ -73,8 +73,8 @@
 		}
 
 		submitVersion() {
-			this.$api.bussiness.changeComponentVersion({
-				componentEnTitle: this.currentItem.componentEnTitle,
+			this.$api.marketComponent.update({
+        componentId: this.currentItem.componentId,
 				componentVersion: this.version
 			}).then(() => {
 				this.dialogEditVersionShow = false

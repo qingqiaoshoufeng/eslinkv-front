@@ -27,7 +27,11 @@
 		total: number = 0
 
 		async init ({ pageNum, pageSize }) {
-			const res = await this.$api.marketComponent.list({ pageNum, pageSize })
+			const res = await this.$api.marketComponent.list({
+        pageNum,
+        pageSize,
+        status: 'pending'
+			})
 			this.list = res.list
 			this.total = res.count
 		}
