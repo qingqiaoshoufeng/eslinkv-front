@@ -27,7 +27,7 @@ export function destroy (data) {
     })
 }
 
-export function getAllComponentType (data) {
+export function list (data) {
     return request({
         url: '/market/componentType/list',
         method: 'post',

@@ -2,7 +2,7 @@
 	e-layout
 		.market-container
 			.btn-box
-				i-button.mr10(type="primary" @click="check" :disabled="!selectOne") 审核
+				i-button.mr10(type="primary" @click="check" :disabled="!selectOne") 新增
 			i-table(:columns="columns" :data="list")
 			e-page(@init="init" :total="total" ref="page")
 </template>
@@ -16,23 +16,21 @@
 			'i-button': Button
 		}
 	})
-	export default class Market extends Vue {
+	export default class MarketComponentType extends Vue {
 		list = []
 		columns = [
-			// {
-			// 	type: 'selection',
-			// 	width: 60,
-			// 	align: 'center'
-			// },
 			{
-				title: '组件分类名',
+				title: '分类名',
 				key: 'componentTypeName'
-				// tree: true
+			},
+      {
+        title: '父级分类名',
+        key: 'componentTypeParentName'
+      },
+			{
+				title: '创建时间',
+				slot: 'createTime'
 			}
-			// {
-			// 	title: '创建时间',
-			// 	slot: 'createTime'
-			// },
 		]
 
 		total: number = 0
@@ -40,16 +38,15 @@
 		currentRow: any = null
 		selectMore: any = false
 		selectOne: any = false
-		status: any = {
-			error: '审核失败',
-			pending: '待审核',
-			success: '审核通过'
-		}
 
-		async init () {
-			const res = await this.$api.marketComponentType.getAllComponentType()
-			this.list = res
-			this.total = res.length
+    init ({ pageSize, pageNum }) {
+			this.$api.marketComponentType.list({
+        pageSize,
+        pageNum
+      }).then(res => {
+        this.list = res.list
+        this.total = res.count
+      })
 		}
 
 		selectHandle (selection) {

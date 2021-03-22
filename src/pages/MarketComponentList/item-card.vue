@@ -1,7 +1,7 @@
 <template lang="pug">
 	i-card.list-item-card.pos-r
-		.avatar(:style="{backgroundImage:`url(${currentItem.componentImage})`}" v-if="currentItem.componentImage")
-		empty-image.avatar(v-if="!currentItem.componentImage")
+		.avatar(:style="{backgroundImage:`url(${currentItem.componentAvatar})`}" v-if="currentItem.componentAvatar")
+		empty-image.avatar(v-if="!currentItem.componentAvatar")
 		h2.ellipsis {{currentItem.componentTitle}}
 		.fn-flex.flex-row.list-item-card-time-box
 			p {{$format(new Date(currentItem.createTime),'yyyy-MM-dd hh:mm:ss')}}
@@ -26,7 +26,7 @@
 					tree-select(v-model="currentItem.componentTypeId" :options="componentTypeList" :normalizer="normalizer")
 				i-form-item(label="缩略图")
 					.img-wrap
-						img(:src="currentItem.componentImage" v-if="currentItem.componentImage")
+						img(:src="currentItem.componentAvatar" v-if="currentItem.componentAvatar")
 			div(slot="footer")
 				i-button(type="primary" @click="submitEdit") 确定
 		i-modal(v-model="dialogEditVersionShow" title="切换版本")
@@ -93,7 +93,7 @@
 
 		handleEdit() {
 			this.dialogEditShow = true
-			this.$api.marketComponentType.getAllComponentType().then(r => {
+			this.$api.marketComponentType.list().then(r => {
 				this.componentTypeList = r
 			})
 		}

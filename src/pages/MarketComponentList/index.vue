@@ -30,7 +30,8 @@
 			const res = await this.$api.marketComponent.list({
         pageNum,
         pageSize,
-        status: 'pending'
+        status: 'SUCCESS',
+        isCurrentVersion: true
 			})
 			this.list = res.list
 			this.total = res.count

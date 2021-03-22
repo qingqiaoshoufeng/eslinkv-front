@@ -71,7 +71,6 @@
         screenType: 'CUSTOM',
 				...this.query
 			}).then(res => {
-			  console.log(res)
 				this.list = res.list
 				this.total = res.total
 			})

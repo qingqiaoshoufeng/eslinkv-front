@@ -1,14 +1,14 @@
 <template lang="pug">
-	.e-header.pos-f.fn-flex.flex-row
-		h1 EslinkV
-		ul.fn-flex.flex-row
-			li.pointer(@click="handleHelp") 帮助文档
-			li.pointer(@click="handleChangeLog") 更新日志
-    i-icon(type="ios-contact" size="22")
-    i-drop-down.e-header-user
-      span 下拉菜单
-      i-drop-down-menu(slot="list")
-        i-drop-down-item 退出登录
+.e-header.pos-f.fn-flex.flex-row
+  h1 EslinkV
+  ul.fn-flex.flex-row
+    li.pointer(@click="handleHelp") 帮助文档
+    li.pointer(@click="handleChangeLog") 更新日志
+  i-icon(type="ios-contact" size="22")
+  i-drop-down.e-header-user(@on-click="handleUser")
+    span.pointer {{user.userName}}
+    i-drop-down-menu(slot="list")
+      i-drop-down-item(name="logout") 退出登录
 </template>
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
@@ -24,12 +24,29 @@
 		}
 	})
 	export default class EHeader extends Vue {
+	  user:any={}
+
 		handleHelp () {
 			this.$router.push('/help/HowToUseMarket')
 		}
 
+		handleUser (name) {
+			switch (name) {
+		    case 'logout':
+		      this.$api.user.logout()
+          this.$router.push('/login')
+		      break
+			}
+		}
+
 		handleChangeLog () {
 			this.$router.push('/changeLog')
+		}
+
+		mounted () {
+			this.$api.user.detail().then(res => {
+			  this.user = res
+			})
 		}
 	}
 </script>

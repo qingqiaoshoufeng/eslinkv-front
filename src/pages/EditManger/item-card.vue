@@ -4,7 +4,7 @@
 		empty-image.avatar(v-if="!screenAvatar")
 		h2.ellipsis {{screenName}}
 		.fn-flex.flex-row.list-item-card-time-box
-			p {{beginTime}}
+			p {{$format(new Date(createTime),'yyyy-MM-dd hh:mm:ss')}}
 		div
 			i-button(:type="isPublished?'success':'warning'" size="small") {{statusStr}}
 			i-button(v-if="isPublished" icon="ios-link" :style="{marginLeft:'10px'}" type="info" size="small") 分享链接
@@ -27,7 +27,7 @@
     @Prop(String) screenId: string
     @Prop(String) screenPublish: string
 		@Prop(String) screenName: string
-		@Prop(String) beginTime: string
+		@Prop(String) createTime: string
 
     get statusStr () {
 		  return this.screenPublish === 'COMPLETE' ? '已发布' : '未发布'

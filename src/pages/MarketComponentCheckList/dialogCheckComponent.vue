@@ -12,7 +12,7 @@
 	import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 	import html2canvas from 'html2canvas'
 	import dView from 'eslinkv-npm/src/components/d-view/index.vue'
-	
+
 	@Component({
 		components: {
 			'i-button': Button,
@@ -62,7 +62,7 @@
 			this.$api.upload.uploadFile(data).then(res => {
 				this.$api.marketComponent.checkSuccess({
 					componentId: this.detail.componentId,
-					componentImage: res.file
+          componentAvatar: res.file
 				}).then(() => {
 					this.modalShow = false
 					this.$emit('reload')

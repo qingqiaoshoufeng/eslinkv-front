@@ -9,3 +9,21 @@ export function login (data) {
         data
     })
 }
+
+// 登出
+export function logout () {
+    return request({
+        url: '/user/logout',
+        method: 'post',
+        headers
+    })
+}
+
+// 个人信息详情
+export function detail () {
+    return request({
+        url: '/user/detail',
+        method: 'post',
+        headers
+    })
+}
