@@ -1,9 +1,8 @@
 import request from './request'
-const prefix = '/node'
 
 export function uploadFile (data) {
     return request({
-        url: prefix + '/upload/file',
+        url: '/upload/file',
         method: 'post',
         data,
         headers: {
