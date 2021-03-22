@@ -58,7 +58,8 @@
 			const name = `${+new Date()}.jpg`
 			const data = new FormData()
 			data.append('file', blob, name)
-			this.$api.bussiness.uploadFile(data).then(res => {
+			data.append('library', 'componentSnapshot')
+			this.$api.upload.uploadFile(data).then(res => {
 				this.$api.marketComponent.checkSuccess({
 					componentId: this.detail.componentId,
 					componentImage: res.file
