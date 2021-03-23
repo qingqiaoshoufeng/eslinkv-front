@@ -92,8 +92,8 @@
 
 		submitVersion() {
 			this.$api.marketComponent.update({
-				componentId: this.currentItem.componentId,
-				componentVersion: this.version
+        componentEnTitle: this.currentItem.componentEnTitle,
+				componentVersion: this.currentItem.componentVersion
 			}).then(() => {
 				this.dialogEditVersionShow = false
 				this.$Message.success('更新成功')
@@ -102,7 +102,12 @@
 		}
 
 		submitEdit() {
-			this.$api.marketComponent.update(this.currentItem).then(() => {
+			this.$api.marketComponent.update({
+        componentId: this.currentItem.componentId,
+        sort: this.currentItem.sort,
+        componentTitle: this.currentItem.componentTitle,
+        componentTypeId: this.currentItem.componentTypeId,
+			}).then(() => {
 				this.dialogEditShow = false
 				this.$Message.success('更新成功')
 				this.$emit('reload')

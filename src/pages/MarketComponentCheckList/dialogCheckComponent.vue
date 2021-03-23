@@ -62,7 +62,8 @@
 			this.$api.upload.file(data).then(res => {
 				this.$api.marketComponent.checkSuccess({
 					componentId: this.detail.componentId,
-          componentAvatar: res.url
+          componentAvatar: res.url,
+          componentEnTitle: this.detail.componentEnTitle
 				}).then(() => {
 					this.modalShow = false
 					this.$emit('reload')
