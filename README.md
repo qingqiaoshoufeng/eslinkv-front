@@ -14,9 +14,6 @@
 #### scene
 进入页面后默认场景
 
-### openApi
-#### 自定义业务组件
-
 #### 监听事件示例
 ```javascript
 document.addEventListener('SceneIndex', function (e) {

@@ -58,11 +58,11 @@
 			const name = `${+new Date()}.jpg`
 			const data = new FormData()
 			data.append('file', blob, name)
-			data.append('library', 'componentSnapshot')
+			data.append('library', `componentAvatar/${this.detail.componentEnTitle}/${this.detail.componentVersion}`)
 			this.$api.upload.file(data).then(res => {
 				this.$api.marketComponent.checkSuccess({
 					componentId: this.detail.componentId,
-          componentAvatar: res.file
+          componentAvatar: res.url
 				}).then(() => {
 					this.modalShow = false
 					this.$emit('reload')

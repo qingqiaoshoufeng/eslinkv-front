@@ -16,7 +16,7 @@
 	import { Table, Button } from 'view-design'
 	import dialogCheck from './dialogCheckComponent.vue'
 	import commonConfigValue from 'eslinkv-npm/common-config-value.js'
-	import { configMerge } from 'eslinkv-npm/mixins'
+	import { configMerge } from 'eslinkv-npm/src/utils/index.js'
 	import platform from 'eslinkv-npm/src/store/platform.store.js'
 
 	@Component({
@@ -66,17 +66,18 @@
 		selectMore: any = false
 		selectOne: any = false
 		status: any = {
-			error: '审核失败',
-			pending: '待审核',
-			success: '审核通过'
+			ERROR: '审核失败',
+      PENDING: '待审核',
+			SUCCESS: '审核通过'
 		}
 
 		async init ({ pageNum, pageSize }) {
 			const res = await this.$api.marketComponent.list({
 				pageNum,
-				pageSize
+				pageSize,
+        status: 'PENDING'
 			})
-			this.list = res.rows
+			this.list = res.list
 			this.total = res.count
 		}
 
@@ -97,8 +98,7 @@
 			this.currentRow = this.selectOne
 			this.dialogCheckShow = true
 			const id = +new Date()
-			const value = JSON.parse(this.selectOne.componentConfig)
-			value.widget.componentVersion = this.selectOne.componentVersion
+			const value = this.selectOne.componentConfig
 			const config = configMerge(value, commonConfigValue())
 			platform.state.widgetAdded = {
 				[id]: {
