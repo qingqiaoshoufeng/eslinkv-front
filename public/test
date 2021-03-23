@@ -1,11 +1,10 @@
 {
   "success": true,
-  "responseCode": "100000",
+  "code": 200,
   "message": "请求成功",
   "result": {
-    "name": "杭州燃气数字平台",
-    "remark": "",
-    "attribute": {
+    "screenName": "杭州燃气数字平台",
+    "screenConfig": {
       "kanboard": {
         "info": {
           "id": "",

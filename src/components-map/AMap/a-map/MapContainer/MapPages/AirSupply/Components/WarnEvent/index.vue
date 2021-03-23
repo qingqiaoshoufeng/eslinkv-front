@@ -46,7 +46,8 @@
 </template>
 <script>
 	import bus from '../../../../../utils/bus'
-	import scene from 'eslinkv-npm/src/store/scene.store'
+	import scene from 'eslinkv-npm/src/store/scene.store.js'
+	import event from 'eslinkv-npm/src/store/event.store.js'
 	import instance from 'eslinkv-npm/src/store/instance.store'
 	import {
 		INDEXSCENEMAP,
@@ -143,7 +144,7 @@
 							}
 						})
 					})
-					window.GoldChart.liveVideo.pauseVideo()
+					event.state.func.pauseVideo()
 				})
 			},
 			closeOverlayDetail (done) {

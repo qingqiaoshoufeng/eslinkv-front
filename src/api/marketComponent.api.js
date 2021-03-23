@@ -60,9 +60,7 @@ export function checkError (data) {
         url: '/market/component/checkError',
         method: 'post',
         data,
-        headers: {
-            'Content-Type': 'application/json'
-        }
+        headers
     })
 }
 

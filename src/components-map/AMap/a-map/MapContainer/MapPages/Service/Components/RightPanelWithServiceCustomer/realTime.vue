@@ -52,11 +52,12 @@
 
 <script>
 	import { SvgIcon, NoData } from '../../../../../components/'
-
+	import { Icon } from 'view-design'
 	export default {
 		name: 'realTime',
 		components: {
 			SvgIcon,
+			'i-icon': Icon,
 			NoData
 		},
 		data () {

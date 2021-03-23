@@ -28,6 +28,8 @@
 	</div>
 </template>
 <script>
+	import event from 'eslinkv-npm/src/store/event.store.js'
+
 	// todo 改造
 	const _cf = {
 		ver: 'debug',
@@ -52,7 +54,20 @@
 			bfix: 1
 		}
 	}
-
+	const liveVideo = {
+		flvPlayer: null,
+		myPlayer: null,
+		pauseVideo: () => {
+			if (!liveVideo.flvPlayer?._emitter) return
+			if (window.flvjs.isSupported()) {
+				liveVideo.flvPlayer.unload()
+				liveVideo.flvPlayer.detachMediaElement()
+				liveVideo.flvPlayer.destroy()
+			} else {
+				liveVideo.myPlayer.reset()
+			}
+		}
+	}
 	let url = ''
 	let ws = null
 	let token = ''
@@ -69,7 +84,6 @@
 
 	// post请求
 	function requestPost (router, params, callback) {
-		const self = this
 		$.ajax({
 			type: 'post',
 			url: host + router,
@@ -85,7 +99,6 @@
 
 	// get请求
 	function requestGet (router, callback) {
-		const self = this
 		const url = host + router
 		$.ajax({
 			type: 'get',
@@ -103,7 +116,7 @@
 		if (videoelem) {
 			videoElement = videoelem
 		}
-		window.GoldChart.liveVideo.myPlayer = new videojs('videoElement', {
+		liveVideo.myPlayer = new videojs('videoElement', {
 			techOrder: ['html5', 'flash'],
 			preload: 'auto',
 			posterImage: false,
@@ -165,7 +178,6 @@
 					fixaddr: _cf.connParams.bfix
 				}
 				requestPost('login', params, rv => {
-					const self = this
 					const result = {
 						errcode: -1,
 						token: ''
@@ -253,8 +265,6 @@
 				})
 			},
 			fetch_device () {
-				const self = this
-
 				// 获取设备列表的接口
 				const router = 'CAS/C_CAS_QueryPUIDSets?offset=' + 0 + '&count=' + 2000 + '&token=' + token
 				requestGet(router, rv => {
@@ -297,7 +307,7 @@
 				$(p).fullScreen(false)
 			},
 			playvideo (puid, idx) {
-				window.GoldChart.liveVideo.pauseVideo()
+				liveVideo.pauseVideo()
 				// 播视频接口
 				const url = host + 'stream.flv?puid=' + puid + '&idx=' + idx + '&stream=0&token=' + token
 				this.isPlaying = true
@@ -306,7 +316,7 @@
 					videoElement = this.$refs.live
 
 					videoElement.controls = false
-					window.GoldChart.liveVideo.flvPlayer = flvjs.createPlayer({
+					liveVideo.flvPlayer = flvjs.createPlayer({
 						type: 'flv',
 						url: url,
 						isLive: true
@@ -317,27 +327,28 @@
 						stashInitialSize: 128, // 减少首桢显示等待时长
 						statisticsInfoReportInterval: 600
 					})
-					window.GoldChart.liveVideo.flvPlayer.attachMediaElement(videoElement)
-					window.GoldChart.liveVideo.flvPlayer.load()
-
+					liveVideo.flvPlayer.attachMediaElement(videoElement)
+					liveVideo.flvPlayer.load()
+					event.actions.setEvent('pauseVideo', liveVideo.pauseVideo)
 					setTimeout(function () {
-						window.GoldChart.liveVideo.flvPlayer.play()
+						liveVideo.flvPlayer.play()
 					}, 100)
 				} else {
 					createPlayer()
-					window.GoldChart.liveVideo.myPlayer.src(url)
-					window.GoldChart.liveVideo.myPlayer.on('error', e => {
+					liveVideo.myPlayer.src(url)
+					liveVideo.myPlayer.on('error', e => {
 						setTimeout(e => {
-							window.GoldChart.liveVideo.myPlayer.src(url)
-							window.GoldChart.liveVideo.myPlayer.load(url)
-							window.GoldChart.liveVideo.myPlayer.play()
+							liveVideo.myPlayer.src(url)
+							liveVideo.myPlayer.load(url)
+							liveVideo.myPlayer.play()
 						}, 1000)
 					})
-					window.GoldChart.liveVideo.myPlayer.on('ended', e => {
+					event.actions.setEvent('pauseVideo', liveVideo.pauseVideo)
+					liveVideo.myPlayer.on('ended', e => {
 						setTimeout((e) => {
-							window.GoldChart.liveVideo.myPlayer.src(url)
-							window.GoldChart.liveVideo.myPlayer.load(url)
-							window.GoldChart.liveVideo.myPlayer.play()
+							liveVideo.myPlayer.src(url)
+							liveVideo.myPlayer.load(url)
+							liveVideo.myPlayer.play()
 						}, 1000)
 					})
 				}
@@ -347,7 +358,7 @@
 				this.playvideo(this.pu.$, this.videoList[this.currIndex].Idx)
 			},
 			handleSceneChange () {
-				window.GoldChart.liveVideo.pauseVideo()
+				liveVideo.pauseVideo()
 			}
 		},
 		created () {

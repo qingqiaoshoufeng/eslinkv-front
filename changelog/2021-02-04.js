@@ -155,6 +155,14 @@ export default {
 		{
 			type: ['refactor'],
 			content: '添加node服务接口支持，接口优化'
+		},
+		{
+			type: ['refactor'],
+			content: 'api加载机制优化'
+		},
+		{
+			type: ['refactor'],
+			content: '提供单组件开发发布cli'
 		}
 	]
 }
