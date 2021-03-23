@@ -1,7 +1,7 @@
 <template lang="pug">
 	div
 		slot
-		i-page.e-page(:total="total" :show-sizer="true" :show-elevator="true" :show-total="true" @on-change="handleChange" @on-page-size-change="handlePageSize")
+		i-page.e-page(:total="total" :show-sizer="show" :show-elevator="show" :show-total="show" @on-change="handleChange" @on-page-size-change="handlePageSize")
 </template>
 <script lang="ts">
 	import { Vue, Component, Prop } from 'vue-property-decorator'
@@ -16,6 +16,7 @@
 		@Prop({ default: 0 }) total: number
 		@Prop({ default: 1 }) pageNum: number
 		@Prop({ default: 10 }) pageSize: number
+		@Prop({ default: true }) show: boolean
 
 		handlePageSize (pageSize) {
 			this.pageSize = pageSize

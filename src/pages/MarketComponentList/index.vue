@@ -1,24 +1,23 @@
 <template lang="pug">
-	e-layout
-		.market-container
-			div
-				i-button(type="warning" @click="handleCheck") 组件审核
-				i-button(type="warning" :style="{marginLeft:'10px'}" @click="handleType") 组件分类
-			.search
-			e-page(@init="init" :total="total" ref="page")
-				ul.fn-flex.flex-row.list-item-card-box
-					item-card(v-for="(item, i) in list" :item="item" :key="i" @reload="reload")
+  e-layout
+    .market-container
+      div
+        i-button(type="warning" @click="handleCheck") 组件审核
+        i-button(type="warning" :style="{marginLeft:'10px'}" @click="handleType") 组件分类
+      .search
+      e-page(@init="init" :total="total" ref="page")
+        ul.fn-flex.flex-row.list-item-card-box
+          item-card(v-for="(item, i) in list" :item="item" :key="i" @reload="reload")
 </template>
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
-	import { Table, Page, Button } from 'view-design'
+	import { Table, Button } from 'view-design'
 	import itemCard from './item-card.vue'
 
 	@Component({
 		components: {
 			'i-table': Table,
 			'i-button': Button,
-			'i-page': Page,
 			itemCard
 		}
 	})

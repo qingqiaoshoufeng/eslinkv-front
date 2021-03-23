@@ -4,12 +4,12 @@
       .btn-box
         i-button.mr10(type="primary" @click="create") 新增
         i-button.mr10(type="primary" @click="edit" :disabled="!selectOne") 编辑
-      i-table(:columns="columns" :data="list" @on-selection-change="selectHandle")
+      i-table(row-key="componentTypeId" :columns="columns" :data="list" @on-selection-change="selectHandle" :load-data="handleLoadData")
         template(#componentTypeParentName="{ row }")
           span {{row.componentTypeParentName?row.componentTypeParentName:'无'}}
         template(#createTime="{ row }")
           span {{$format(new Date(row.createTime),'yyyy-MM-dd HH:mm:ss')}}
-      e-page(@init="init" :total="total" ref="page")
+      e-page(@init="init" :total="total" ref="page" :show="false")
 </template>
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
@@ -31,12 +31,9 @@
       },
 			{
 				title: '分类名',
-				key: 'componentTypeName'
+				key: 'componentTypeName',
+        tree: true
 			},
-      {
-        title: '父级分类名',
-        slot: 'componentTypeParentName'
-      },
 			{
 				title: '创建时间',
 				slot: 'createTime'
@@ -49,13 +46,20 @@
 		selectMore: any = false
 		selectOne: any = false
 
-    init ({ pageSize, pageNum }) {
-			this.$api.marketComponentType.list({
-        pageSize,
-        pageNum
-      }).then(res => {
-        this.list = res.list
-        this.total = res.count
+    handleLoadData (item, callback) {
+      this.$api.marketComponentType.level({ componentTypeParentId: item.componentTypeId }).then(res => {
+        callback(res)
+      })
+    }
+
+    init () {
+			this.$api.marketComponentType.level().then(res => {
+			  res.map(item => {
+			    item.children = []
+          item._loading = false
+          return item
+			  })
+        this.list = res
       })
 		}
 
