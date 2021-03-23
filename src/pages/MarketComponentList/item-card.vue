@@ -29,6 +29,7 @@
 						:normalizer="normalizer"
 						:load-options="loadOptions"
 						)
+						label(slot="value-label" slot-scope="{ node }") {{ node.raw.componentTypeName || currentItem.componentTypeName }}
 				i-form-item(label="缩略图")
 					.img-wrap
 						img(:src="currentItem.componentAvatar" v-if="currentItem.componentAvatar")
