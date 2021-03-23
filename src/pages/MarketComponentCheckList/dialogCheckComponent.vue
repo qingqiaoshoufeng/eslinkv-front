@@ -59,7 +59,7 @@
 			const data = new FormData()
 			data.append('file', blob, name)
 			data.append('library', 'componentSnapshot')
-			this.$api.upload.uploadFile(data).then(res => {
+			this.$api.upload.file(data).then(res => {
 				this.$api.marketComponent.checkSuccess({
 					componentId: this.detail.componentId,
           componentAvatar: res.file

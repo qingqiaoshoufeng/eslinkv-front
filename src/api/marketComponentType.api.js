@@ -35,3 +35,12 @@ export function list (data) {
         headers
     })
 }
+
+export function level (data) {
+    return request({
+        url: '/market/componentType/level',
+        method: 'post',
+        data,
+        headers
+    })
+}

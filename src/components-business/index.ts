@@ -17,15 +17,15 @@ conf.keys().forEach(name => {
 	const type = name.split('/')[1]
 	const title = name.split('/')[2]
 	const obj = { config: { layout: conf(name).value ? conf(name).value.layout : {} } }
-	const snapshot = snapshots[title] || 'https://via.placeholder.com/150'
+	const componentAvatar = snapshots[title] || 'https://via.placeholder.com/150'
 	if (obj) {
 		if (widgetsObject[type]) {
-			widgetsObject[type].widgets[title] = { ...obj, type: title, label: title, snapshot }
+			widgetsObject[type].widgets[title] = { ...obj, type: title, label: title, componentAvatar }
 		} else {
 			widgetsObject[type] = {
 				type,
 				label: type,
-				widgets: { [title]: { ...obj, type: title, label: title, snapshot } }
+				widgets: { [title]: { ...obj, type: title, label: title, componentAvatar } }
 			}
 		}
 	}

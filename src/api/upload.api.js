@@ -1,6 +1,6 @@
 import request from './request'
 
-export function uploadFile (data) {
+export function file (data) {
     return request({
         url: '/upload/file',
         method: 'post',

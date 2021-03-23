@@ -72,10 +72,10 @@
 
 		loadOptions({ action, parentNode, callback }) {
 			if (action === LOAD_CHILDREN_OPTIONS) {
-        this.$api.marketComponentType.list({
+        this.$api.marketComponentType.level({
           componentTypeParentId: parentNode.componentTypeId
         }).then(r => {
-          parentNode.children = r.list
+          parentNode.children = r
           callback()
         })
 			}
@@ -110,11 +110,11 @@
 
 		handleEdit() {
 			this.dialogEditShow = true
-			this.$api.marketComponentType.list().then(r => {
-			  r.list.forEach(v => {
+			this.$api.marketComponentType.level().then(r => {
+			  r.forEach(v => {
           v.children = null
         })
-				this.componentTypeList = r.list
+				this.componentTypeList = r
 			})
 		}
 

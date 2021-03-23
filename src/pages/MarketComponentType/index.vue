@@ -1,10 +1,15 @@
 <template lang="pug">
-	e-layout
-		.market-container
-			.btn-box
-				i-button.mr10(type="primary" @click="check" :disabled="!selectOne") 新增
-			i-table(:columns="columns" :data="list")
-			e-page(@init="init" :total="total" ref="page")
+  e-layout
+    .market-container
+      .btn-box
+        i-button.mr10(type="primary" @click="create") 新增
+        i-button.mr10(type="primary" @click="edit" :disabled="!selectOne") 编辑
+      i-table(:columns="columns" :data="list" @on-selection-change="selectHandle")
+        template(#componentTypeParentName="{ row }")
+          span {{row.componentTypeParentName?row.componentTypeParentName:'无'}}
+        template(#createTime="{ row }")
+          span {{$format(new Date(row.createTime),'yyyy-MM-dd HH:mm:ss')}}
+      e-page(@init="init" :total="total" ref="page")
 </template>
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
@@ -19,13 +24,18 @@
 	export default class MarketComponentType extends Vue {
 		list = []
 		columns = [
+      {
+        type: 'selection',
+        width: 60,
+        align: 'center'
+      },
 			{
 				title: '分类名',
 				key: 'componentTypeName'
 			},
       {
         title: '父级分类名',
-        key: 'componentTypeParentName'
+        slot: 'componentTypeParentName'
       },
 			{
 				title: '创建时间',
@@ -34,7 +44,7 @@
 		]
 
 		total: number = 0
-		dialogCheckShow: boolean = false
+    dialogEditShow: boolean = false
 		currentRow: any = null
 		selectMore: any = false
 		selectOne: any = false
@@ -62,9 +72,13 @@
 			}
 		}
 
-		check () {
+    create () {
+
+    }
+
+    edit () {
 			this.currentRow = this.selectOne
-			this.dialogCheckShow = true
+			this.dialogEditShow = true
 		}
 
 		reload () {
