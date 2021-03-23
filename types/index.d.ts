@@ -23,3 +23,10 @@ interface ComponentValue {
 interface ComponentValueApi {
     data: any
 }
+
+interface ComponentTypeCreate {
+    componentTypeId?: string
+    componentTypeName: string
+    componentTypeEnName?: string
+    componentTypeParentId?: string
+}

@@ -3,32 +3,32 @@
     .market-container
       .btn-box
         i-button.mr10(type="primary" @click="create") 新增
-        i-button.mr10(type="primary" @click="edit" :disabled="!selectOne") 编辑
-      i-table(row-key="componentTypeId" :columns="columns" :data="list" @on-selection-change="selectHandle" :load-data="handleLoadData")
+      i-table(row-key="componentTypeId" :columns="columns" :data="list" :load-data="handleLoadData")
         template(#componentTypeParentName="{ row }")
           span {{row.componentTypeParentName?row.componentTypeParentName:'无'}}
         template(#createTime="{ row }")
           span {{$format(new Date(row.createTime),'yyyy-MM-dd HH:mm:ss')}}
+        template(#action="{ row }")
+          i-button.mr10(type="primary" @click="edit(row)") 编辑
+          i-button(type="error" @click="remove(row)") 删除
       e-page(@init="init" :total="total" ref="page" :show="false")
+      dialogComponentType(v-model="dialogEditShow" :detail="currentRow" @reload="init")
 </template>
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
 	import { Table, Button } from 'view-design'
+	import dialogComponentType from './dialogComponentType.vue'
 
 	@Component({
 		components: {
 			'i-table': Table,
-			'i-button': Button
+			'i-button': Button,
+      dialogComponentType
 		}
 	})
 	export default class MarketComponentType extends Vue {
 		list = []
 		columns = [
-      {
-        type: 'selection',
-        width: 60,
-        align: 'center'
-      },
 			{
 				title: '分类名',
 				key: 'componentTypeName',
@@ -37,14 +37,19 @@
 			{
 				title: '创建时间',
 				slot: 'createTime'
-			}
+			},
+      {
+        title: '操作',
+        slot: 'action'
+      }
 		]
 
 		total: number = 0
     dialogEditShow: boolean = false
-		currentRow: any = null
-		selectMore: any = false
-		selectOne: any = false
+		currentRow: ComponentTypeCreate = {
+      componentTypeName: '',
+      componentTypeEnName: ''
+    }
 
     handleLoadData (item, callback) {
       this.$api.marketComponentType.level({ componentTypeParentId: item.componentTypeId }).then(res => {
@@ -63,25 +68,30 @@
       })
 		}
 
-		selectHandle (selection) {
-			if (selection.length > 1) {
-				this.selectMore = selection
-			} else {
-				this.selectMore = false
-			}
-			if (selection.length === 1) {
-				this.selectOne = selection[0]
-			} else {
-				this.selectOne = false
-			}
-		}
-
-    create () {
-
+    async remove (row) {
+      this.$Modal.confirm({
+        title: '提示',
+        content: '确认删除吗？',
+        loading: true,
+        onOk: async () => {
+          await this.$api.marketComponentType.destroy({ componentTypeId: row.componentTypeId })
+          this.$Message.success('删除成功')
+          this.$Modal.remove()
+          this.init()
+        }
+      })
     }
 
-    edit () {
-			this.currentRow = this.selectOne
+    create () {
+      this.dialogEditShow = true
+      this.currentRow = {
+        componentTypeName: '',
+        componentTypeEnName: ''
+      }
+    }
+
+    edit (row) {
+			this.currentRow = { ...row }
 			this.dialogEditShow = true
 		}
 
