@@ -14,7 +14,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import { value } from './index.component'
 
 	export default {
@@ -25,7 +25,7 @@
 				selectValue: '点火数'
 			}
 		},
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		methods: {
 			handleChange (item) {
 				this.selectValue = item.value

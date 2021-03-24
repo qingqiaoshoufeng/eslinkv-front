@@ -46,11 +46,9 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin, scene, instance } from 'eslinkv-npm'
 	import format from 'date-fns/format'
 	import { customConfig, value } from './index.component'
-	import scene from 'eslinkv-npm/src/store/scene.store'
-	import instance from 'eslinkv-npm/src/store/instance.store'
 
 	export default {
 		data () {
@@ -60,7 +58,7 @@
 				transform: new Int8Array(9)
 			}
 		},
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		computed: {
 			statisticalVal () {
 				if (this.data) return Number(this.data.yearData).toLocaleString().split('')

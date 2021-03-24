@@ -38,7 +38,7 @@
 	import pieBgBtnJson from './yuan1.json'
 	import pieTopBg from './yuan2.json'
 	import { value } from './index.component'
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 
 	highcharts3d(highcharts)
 
@@ -50,7 +50,7 @@
 				randomId: Math.random()
 			}
 		},
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		created () {
 			this.configValue = this.parseConfigValue(value)
 		},

@@ -14,11 +14,11 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import { value } from './index.component'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		created () {
 			this.configValue = this.parseConfigValue(value)
 		},

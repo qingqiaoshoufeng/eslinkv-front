@@ -5,13 +5,13 @@
             h2 {{data&&data.title}}
 </template>
 <script lang="ts">
-	import mx from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import { Component } from 'vue-property-decorator'
 	import { mixins } from 'vue-class-component'
 	import { value } from './index.component'
 
-    @Component
-	export default class extends mixins(mx) {
+  @Component
+	export default class extends mixins(widgetMixin) {
         created () {
             setTimeout(() => {
                 this.configValue = this.parseConfigValue(value)

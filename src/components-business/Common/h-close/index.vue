@@ -3,12 +3,11 @@
 		img.img.pointer(src="./close.svg" @click="back")
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin, scene } from 'eslinkv-npm'
 	import { value } from './index.component'
-	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		created () {
 			this.configValue = this.parseConfigValue(value)
 		},

@@ -145,10 +145,10 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin, scene } from 'eslinkv-npm'
 	import hBg54441 from './h-bg-54441'
 	import { value, customConfig } from './index.component'
-	import scene from 'eslinkv-npm/src/store/scene.store.js'
+
 	export default {
 		data () {
 			return {
@@ -164,7 +164,7 @@
 				statusStart: false
 			}
 		},
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		components: {
 			hBg54441
 		},

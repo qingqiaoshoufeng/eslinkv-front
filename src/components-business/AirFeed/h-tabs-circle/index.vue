@@ -21,7 +21,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import HVerticalTabs from './HVerticalTabs'
 	import pie from './pie'
 	import { getCircleOption } from './options'
@@ -67,7 +67,7 @@
 				immediate: true
 			}
 		},
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		created () {
 			this.configValue = this.parseConfigValue(value)
 		},

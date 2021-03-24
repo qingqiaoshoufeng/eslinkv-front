@@ -15,9 +15,7 @@
 	import { Vue, Component } from 'vue-property-decorator'
 	import { Table, Button } from 'view-design'
 	import dialogCheck from './dialogCheckComponent.vue'
-	import commonConfigValue from 'eslinkv-npm/common-config-value.js'
-	import { configMerge } from 'eslinkv-npm/src/utils/index.js'
-	import platform from 'eslinkv-npm/src/store/platform.store.js'
+	import {commonConfigValue,configMerge,platform} from 'eslinkv-npm'
 
 	@Component({
 		components: {
@@ -45,10 +43,6 @@
 			{
 				title: '组件版本号',
 				key: 'componentVersion'
-			},
-			{
-				title: '当前版本号',
-				key: 'currentVersion'
 			},
 			{
 				title: '审核状态',

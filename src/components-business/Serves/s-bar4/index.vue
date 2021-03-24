@@ -18,13 +18,12 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin, scene } from 'eslinkv-npm'
 	import getOption from './options'
 	import { value } from './index.component'
-	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		methods: {
 			clickHandle () {
 				scene.actions.createSceneInstance('qdj532f41re')

@@ -22,11 +22,11 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import { customConfig, value } from './index.component'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		computed: {
 			computeData () {
 				if (!this.data || !this.config.config) return

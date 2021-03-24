@@ -5,14 +5,13 @@
 			h2(@click="handleClick") {{data&&data.title}}
 </template>
 <script lang="ts">
-	import mx from 'eslinkv-npm/mixins'
+	import { widgetMixin, scene } from 'eslinkv-npm'
 	import { Component } from 'vue-property-decorator'
 	import { mixins } from 'vue-class-component'
 	import { value } from './index.component'
-	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	@Component
-	export default class extends mixins(mx) {
+	export default class extends mixins(widgetMixin) {
 		handleClick () {
 			scene.actions.createSceneInstance(this.data.scene)
 		}

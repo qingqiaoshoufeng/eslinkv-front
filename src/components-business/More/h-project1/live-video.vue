@@ -28,8 +28,7 @@
 	</div>
 </template>
 <script>
-	import event from 'eslinkv-npm/src/store/event.store.js'
-
+	import { event } from 'eslinkv-npm'
 	// todo 改造
 	const _cf = {
 		ver: 'debug',

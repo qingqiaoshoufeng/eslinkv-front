@@ -12,9 +12,8 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin, scene } from 'eslinkv-npm'
 	import { value } from './index.component'
-	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
 		data () {
@@ -22,7 +21,7 @@
 				scene: scene.state
 			}
 		},
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		methods: {
 			changeScene (index) {
 				scene.actions.setSceneIndex(index)

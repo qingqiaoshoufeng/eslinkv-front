@@ -7,17 +7,16 @@
 				.h-dateMonth-right(:class="{disabled}" @click="handleChange(1)")
 </template>
 <script lang="ts">
-	import mx from 'eslinkv-npm/mixins'
+	import { widgetMixin, instance } from 'eslinkv-npm'
 	import { Component, Watch } from 'vue-property-decorator'
 	import { mixins } from 'vue-class-component'
 	import addMonths from 'date-fns/addMonths'
 	import isSameMonth from 'date-fns/isSameMonth'
 	import format from 'date-fns/format'
 	import { customConfig, value } from './index.component'
-	import instance from 'eslinkv-npm/src/store/instance.store'
 
 	@Component
-	class HDateMonth extends mixins(mx) {
+	class HDateMonth extends mixins(widgetMixin) {
 		lastDay: Date = new Date()
 		showOptions: Boolean = false
 		selectValue: Date = addMonths(new Date(), -1)

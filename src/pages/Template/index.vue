@@ -25,7 +25,7 @@
       screenPublish: '',
       endTime: ''
     }
-		
+
 		handleChange (pageNum) {
 			this.pageNum = pageNum
 			this.init()
@@ -39,7 +39,7 @@
 		init () {
 			this.$api.screen.list({
 				pageSize: this.pageSize,
-				type: 'TEMPLATE',
+        screenType: 'TEMPLATE',
         pageNum: this.pageNum,
 				...this.query
 			}).then(res => {

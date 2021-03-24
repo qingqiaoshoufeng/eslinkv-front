@@ -11,7 +11,7 @@
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
 	import { Table, Page, Button } from 'view-design'
-	import { getCheckHistoryList } from 'eslinkv-npm/src/api/bussiness.api'
+	// import { getCheckHistoryList } from 'eslinkv-npm/src/api/bussiness.api'
 
     @Component({
         components: {
@@ -55,12 +55,12 @@
         }
 
         async search () {
-            const res = await getCheckHistoryList({
-                pageNum: this.pageNum,
-                pageSize: this.pageSize
-            })
-            this.tableData = res.rows
-            this.total = res.count
+            // const res = await getCheckHistoryList({
+            //     pageNum: this.pageNum,
+            //     pageSize: this.pageSize
+            // })
+            // this.tableData = res.rows
+            // this.total = res.count
         }
 
         pageChange (page) {

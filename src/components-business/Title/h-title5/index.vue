@@ -4,13 +4,13 @@
 			p.pos-r.text-left {{data&&data.title}}
 </template>
 <script>
-	import mx from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import { Component } from 'vue-property-decorator'
 	import { mixins } from 'vue-class-component'
 	import { value } from './index.component'
 
 	@Component
-	class HTitle5 extends mixins(mx) {
+	class HTitle5 extends mixins(widgetMixin) {
 		created () {
 			this.configValue = this.parseConfigValue(value)
 		}

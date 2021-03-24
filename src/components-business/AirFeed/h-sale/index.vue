@@ -58,12 +58,12 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import getOptions from './options'
 	import { value } from './index.component'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		data () {
 			return {
 				currentIndex: 0,

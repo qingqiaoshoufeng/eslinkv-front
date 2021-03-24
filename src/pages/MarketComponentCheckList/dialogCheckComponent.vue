@@ -11,7 +11,7 @@
 	import {Modal, Button,} from 'view-design'
 	import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 	import html2canvas from 'html2canvas'
-	import dView from 'eslinkv-npm/src/components/d-view/index.vue'
+	import {dView} from 'eslinkv-npm'
 
 	@Component({
 		components: {

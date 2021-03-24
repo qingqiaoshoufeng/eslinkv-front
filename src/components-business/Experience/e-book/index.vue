@@ -45,12 +45,12 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import { value } from './index.component'
 	import './turn.min'
-	
+
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		data () {
 			return {
 				tab: 1,

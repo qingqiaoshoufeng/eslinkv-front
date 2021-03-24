@@ -10,12 +10,12 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import HLinePercentItem from './HLinePercentItem'
 	import { value } from './index.component'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		components: {
 			HLinePercentItem
 		},

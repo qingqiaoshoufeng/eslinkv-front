@@ -13,13 +13,12 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin,instance } from 'eslinkv-npm'
 	import {
 		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
 		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2
 	} from '../../../components-map/AMap/a-map/config/scene'
 	import { value } from './index.component'
-	import instance from 'eslinkv-npm/src/store/instance.store'
 
 	export default {
 		data () {
@@ -48,7 +47,7 @@
 				immediate: true
 			}
 		},
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		methods: {
 			handleChange (a) {
 				this.selectLabel = a.name

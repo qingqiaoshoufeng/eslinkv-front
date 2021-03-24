@@ -5,13 +5,13 @@
 			p {{config.config&&config.config.title}}
 </template>
 <script>
-	import mx from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import { Component } from 'vue-property-decorator'
 	import { mixins } from 'vue-class-component'
 	import { customConfig, value } from './index.component'
 
 	@Component
-	class HTitle4 extends mixins(mx) {
+	class HTitle4 extends mixins(widgetMixin) {
 		created () {
 			this.configValue = this.parseConfigValue(value, customConfig)
 		}

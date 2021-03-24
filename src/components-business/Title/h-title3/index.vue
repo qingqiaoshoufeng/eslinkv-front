@@ -12,13 +12,13 @@
                 p {{config.config&&config.config.subTitle}}
 </template>
 <script lang="ts">
-	import mx from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import { Component } from 'vue-property-decorator'
 	import { mixins } from 'vue-class-component'
 	import { customConfig, value } from './index.component'
 
     @Component
-    class HTitle3 extends mixins(mx) {
+    class HTitle3 extends mixins(widgetMixin) {
         icons: Int8Array = new Int8Array(50)
 
         created () {

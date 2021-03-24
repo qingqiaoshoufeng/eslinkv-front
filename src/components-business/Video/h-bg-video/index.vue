@@ -16,9 +16,8 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin, scene } from 'eslinkv-npm'
 	import { value } from './index.component'
-	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
 		data () {
@@ -39,7 +38,7 @@
 				}
 			}
 		},
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		methods: {
 			handleClose () {
 				scene.actions.destroyScene('grdnn9tiey')

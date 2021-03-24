@@ -7,7 +7,7 @@
 				.action.close.pointer(@click="handleClose") 关闭
 </template>
 <script lang="ts">
-	import dView from 'eslinkv-npm/src/components/d-view/index.vue'
+	import {dView} from 'eslinkv-npm'
 	import { Vue, Component, Watch } from 'vue-property-decorator'
 
 	@Component({

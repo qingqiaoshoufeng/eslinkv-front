@@ -68,7 +68,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import step1 from './step-1'
 	import step2 from './step-2'
 	import step3 from './step-3'
@@ -80,7 +80,7 @@
 	import { value } from './index.component'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		components: {
 			step1,
 			step2,

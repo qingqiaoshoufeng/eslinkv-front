@@ -25,7 +25,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import circle1 from './circle1'
 	import { customConfig, value } from './index.component'
 
@@ -37,7 +37,7 @@
 				timeId: null
 			}
 		},
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		components: { circle1 },
 		computed: {
 			computedData () {

@@ -4,12 +4,12 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import getOption from './options'
 	import { value, customConfig } from './index.component'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		methods: {
 			setOption () {
 				this.instance && this.instance.setOption(getOption(this.data, this.config.config))

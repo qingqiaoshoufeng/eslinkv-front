@@ -6,8 +6,7 @@
 </template>
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
-	import dView from 'eslinkv-npm/src/components/d-view/index.vue'
-	import dFooter from 'eslinkv-npm/src/components/d-footer/index.vue'
+	import { dView, dFooter } from 'eslinkv-npm'
 	import { getQueryString } from '../../utils'
 
   @Component({

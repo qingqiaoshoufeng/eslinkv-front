@@ -50,12 +50,12 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import getOption from './options'
 	import { customConfig, value } from './index.component'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		methods: {
 			setOption (data) {
 				this.instance && this.instance.setOption(getOption(this.activeItem.finishRate))

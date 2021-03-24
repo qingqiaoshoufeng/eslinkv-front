@@ -1,4 +1,4 @@
-import custom from 'eslinkv-npm/src/store/custom.store'
+import {custom} from 'eslinkv-npm'
 
 const components = {}; const snapshots = {}
 const widgetsObject = {}

@@ -10,7 +10,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import { value } from './index.component'
 
 	export default {
@@ -20,7 +20,7 @@
 				selectValue: 'month'
 			}
 		},
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		methods: {
 			handleChange (index) {
 				this.selectValue = index

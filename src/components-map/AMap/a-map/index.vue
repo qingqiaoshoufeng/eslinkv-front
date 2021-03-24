@@ -14,7 +14,7 @@
 <script>
 	import MapContainer from './MapContainer/index'
 	import Message from './components/Message/'
-	import scene from 'eslinkv-npm/src/store/scene.store'
+	import {scene} from 'eslinkv-npm'
 	export default {
 		name: 'HRMap',
 		components: {

@@ -11,11 +11,11 @@
 </template>
 <script>
 	import ImageView from '@/components/ImageView'
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import { value } from './index.component'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		components: {
 			ImageView
 		},

@@ -5,12 +5,12 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import options from './options'
 	import { value, customConfig } from './index.component'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		methods: {
 			show (data) {
 				clearInterval(this.animateTimer)

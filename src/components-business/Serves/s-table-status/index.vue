@@ -26,7 +26,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import VueSeamLess from 'vue-seamless-scroll'
 	import { value } from './index.component'
 
@@ -36,7 +36,7 @@
 				max: 0
 			}
 		},
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		components: {
 			VueSeamLess
 		},

@@ -18,12 +18,12 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import { value } from './index.component'
 
 	const SIZE = 8
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		data () {
 			return {
 				loop: 0

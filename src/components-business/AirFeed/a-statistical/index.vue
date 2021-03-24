@@ -42,7 +42,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import { customConfig, value } from './index.component'
 
 	export default {
@@ -53,7 +53,7 @@
 				transform: new Int8Array(9)
 			}
 		},
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		computed: {
 			statisticalVal () {
 				if (this.data) return Number(this.data.value).toLocaleString().split('')

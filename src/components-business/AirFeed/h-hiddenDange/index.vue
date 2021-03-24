@@ -13,13 +13,13 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import dangerList from './dangerList'
 	import dangerTable from './dangerTable'
 	import { value } from './index.component'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		components: {
 			dangerList, dangerTable
 		},

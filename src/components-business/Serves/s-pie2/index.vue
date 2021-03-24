@@ -33,13 +33,13 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import getOption from './options'
 	import { customConfig, value } from './index.component'
 	import HVerticalTabs from '../../AirFeed/h-tabs-circle/HVerticalTabs'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		components: { HVerticalTabs },
 		data () {
 			return {

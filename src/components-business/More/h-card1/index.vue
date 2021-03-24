@@ -27,11 +27,11 @@
 </template>
 
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import { config, value } from './index.component'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		data () {
 			return {
 				icon: new Int8Array(20)

@@ -21,12 +21,12 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import options from './options'
 	import { customConfig, value } from './index.component'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		methods: {
 			setOption (data) {
 				options.xAxis[0].data = data.map(item => item.xValue)

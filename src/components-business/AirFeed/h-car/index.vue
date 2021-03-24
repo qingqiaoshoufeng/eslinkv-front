@@ -79,12 +79,12 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import Ring from '@/components/Ring/ring'
 	import { value } from './index.component'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		components: { Ring },
 		created () {
 			this.configValue = this.parseConfigValue(value)

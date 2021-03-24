@@ -23,7 +23,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import { customConfig, value } from './index.component'
 
 	export default {
@@ -35,7 +35,7 @@
 				realArr: []
 			}
 		},
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		watch: {
 			data: {
 				handler (val) {

@@ -23,12 +23,12 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import getOption from './options'
 	import { customConfig, value } from './index.component'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		computed: {
 			colorList () {
 				if (!this.data) return ['#00DDFF', 'rgba(1,253,210,1)']

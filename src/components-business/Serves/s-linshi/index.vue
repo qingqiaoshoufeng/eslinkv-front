@@ -11,12 +11,11 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin, scene } from 'eslinkv-npm'
 	import { customConfig, value } from './index.component'
-	import scene from 'eslinkv-npm/src/store/scene.store'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		methods: {
 			handleClick () {
 				scene.actions.destroyScene(this.config.config.index)

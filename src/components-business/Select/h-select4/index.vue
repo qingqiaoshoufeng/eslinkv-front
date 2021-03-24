@@ -33,7 +33,7 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import format from 'date-fns/format'
 	import addDays from 'date-fns/addDays'
 	import addMonths from 'date-fns/addMonths'
@@ -49,7 +49,7 @@
 				selectLOptions: ['日', '月', '年']
 			}
 		},
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		watch: {
 			data: {
 				handler (val) {

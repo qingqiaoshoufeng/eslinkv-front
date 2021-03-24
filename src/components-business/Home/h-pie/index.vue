@@ -11,12 +11,12 @@
 	</div>
 </template>
 <script>
-	import mixins from 'eslinkv-npm/mixins'
+	import { widgetMixin } from 'eslinkv-npm'
 	import pie from './pie'
 	import { customConfig, value } from './index.component'
 
 	export default {
-		mixins: [mixins],
+		mixins: [widgetMixin],
 		components: { pie },
 		created () {
 			this.configValue = this.parseConfigValue(value, customConfig)
