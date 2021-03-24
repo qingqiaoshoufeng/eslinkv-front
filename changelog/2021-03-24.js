@@ -1,6 +1,6 @@
 export default {
 	version: '1.0.2',
-	description: '当前版本持续开发中 ',
+	description: '最新版',
 	list: [
 		{
 			type: ['refactor'],
