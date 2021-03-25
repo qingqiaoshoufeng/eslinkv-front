@@ -14,7 +14,11 @@
 	</div>
 </template>
 <script>
+	import { Switch } from 'view-design'
 	export default {
+		components: {
+			'i-switch': Switch
+		},
 		name: 'SwitchBox',
 		props: {
 			data: {

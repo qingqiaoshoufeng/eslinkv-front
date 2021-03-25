@@ -52,15 +52,16 @@
 		</div>
 	</div>
 </template>
-
 <script>
+	import { Icon } from 'view-design'
 	import { SvgIcon, NoData } from '../../../../../components/'
 	import { SERVICE_SERVICECUSTOMER_LEGEND_MAP } from '../../serviceCustomer/config'
 	export default {
 		name: 'overlayList',
 		components: {
 			SvgIcon,
-			NoData
+			NoData,
+			'i-icon': Icon
 		},
 		data () {
 			return {

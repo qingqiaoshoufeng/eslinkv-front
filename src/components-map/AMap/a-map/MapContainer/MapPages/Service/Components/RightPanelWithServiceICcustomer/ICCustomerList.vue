@@ -51,12 +51,14 @@
 <script>
 	import { SvgIcon, NoData } from '../../../../../components/'
 	import { SERVICE_SERVICEICCUSTOMER_LEGEND_MAP } from '../../serviceICcustomer/config'
+	import { Icon } from 'view-design'
 
 	export default {
 		name: 'HomeRealTimeList',
 		components: {
 			SvgIcon,
-			NoData
+			NoData,
+			'i-icon': Icon
 		},
 		data () {
 			const iconList = [
