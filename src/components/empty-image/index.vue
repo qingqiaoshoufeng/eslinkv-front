@@ -1,13 +1,17 @@
 <template lang="pug">
-  .empty-image(@click="handleClick")
+  div(v-if="image" :style="{backgroundImage:`url(${image})`}" @click="handleClick")
+    slot
+  .empty-image(v-else @click="handleClick")
     slot
 </template>
-<script>
-	import { Vue, Component } from 'vue-property-decorator'
+<script lang="ts">
+	import { Vue, Component, Prop } from 'vue-property-decorator'
 
   @Component
 	export default class EmptyImage extends Vue {
-		handleClick () {
+	  @Prop(String) image :string
+
+    handleClick () {
 			this.$emit('click')
 		}
 	}

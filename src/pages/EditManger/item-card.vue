@@ -1,7 +1,6 @@
 <template lang="pug">
   e-card
-    .list-item-card-avatar.pos-r.pointer(:style="{backgroundImage:`url(${screenAvatar})`}" v-if="screenAvatar" @click="handleEdit")
-    empty-image.list-item-card-avatar.pos-r.pointer(v-if="!screenAvatar" @click="handleEdit")
+    empty-image.list-item-card-avatar.pos-r.pointer(:image="screenAvatar" @click="handleEdit")
       .list-item-card-mask.fn-flex.flex-row.pos-a
         i-icon.pointer(
           :style="{marginLeft:'auto',marginRight:'10px'}"

@@ -1,7 +1,6 @@
 <template lang="pug">
   e-card
-    .avatar(:style="{backgroundImage:`url(${currentItem.componentAvatar})`}" v-if="currentItem.componentAvatar")
-    empty-image.avatar(v-if="!currentItem.componentAvatar")
+    empty-image.avatar(:image="currentItem.componentAvatar")
     template(slot="content")
       h2.ellipsis {{currentItem.componentTitle}}
       .fn-flex.flex-row.list-item-card-time-box
