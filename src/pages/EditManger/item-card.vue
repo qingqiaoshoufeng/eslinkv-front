@@ -1,26 +1,38 @@
 <template lang="pug">
-	i-card.list-item-card.pos-r
-		.avatar(:style="{backgroundImage:`url(${screenAvatar})`}" v-if="screenAvatar")
-		empty-image.avatar(v-if="!screenAvatar")
-		h2.ellipsis {{screenName}}
-		.fn-flex.flex-row.list-item-card-time-box
-			p {{$format(new Date(createTime),'yyyy-MM-dd hh:mm:ss')}}
-		div
-			i-button(:type="isPublished?'success':'warning'" size="small") {{statusStr}}
-			i-button(v-if="isPublished" icon="ios-link" :style="{marginLeft:'10px'}" type="info" size="small") 分享链接
-		.pos-a.list-item-card-mask.fn-flex.flex-column
-			i-button(icon="ios-create-outline" @click="handleEdit") 编辑
-			i-button(v-if="isPublished" icon="ios-link" :style="{marginTop:'10px'}" @click="handleLink") 打开
-			i-button(v-else icon="ios-cloud-upload-outline" :style="{marginTop:'10px'}" @click="handlePublish") 发布
-			i-button(icon="ios-trash-outline" :style="{marginTop:'10px'}" type="error" @click="handleRemove") 删除
+  e-card
+    .list-item-card-avatar.pos-r.pointer(:style="{backgroundImage:`url(${screenAvatar})`}" v-if="screenAvatar" @click="handleEdit")
+    empty-image.list-item-card-avatar.pos-r.pointer(v-if="!screenAvatar" @click="handleEdit")
+      .list-item-card-mask.fn-flex.flex-row.pos-a
+        i-icon.pointer(
+          :style="{marginLeft:'auto',marginRight:'10px'}"
+          type="ios-paper-plane-outline"
+          color="#fff"
+          :size="16"
+          @click="handlePublish"
+          @click.stop
+          title="发布")
+        i-icon.pointer(
+          type="ios-trash-outline"
+          color="#fff"
+          :size="16"
+          @click="handleRemove"
+          @click.stop
+          title="删除")
+    template(slot="content")
+      h2.list-item-card-title.ellipsis {{screenName}}
+      .list-item-card-btn.fn-flex.flex-row
+        span {{$format(new Date(createTime),'yyyy-MM-dd hh:mm:ss')}}
+        .list-item-card-btn-link.pointer(@click="handleLink")
+          i-icon(type="ios-link" :style="{marginLeft:'auto'}")
+          span 预览
 </template>
 <script lang="ts">
-	import { Card, Button } from 'view-design'
+	import { Button, Icon } from 'view-design'
 	import EmptyImage from '../../components/empty-image/index.vue'
 	import { Vue, Component, Prop } from 'vue-property-decorator'
 
 	@Component({
-		components: { 'i-card': Card, 'i-button': Button, EmptyImage }
+		components: { 'i-button': Button, 'i-icon': Icon, EmptyImage }
 	})
 	export default class ItemCard extends Vue {
 		@Prop(String) screenAvatar: string
@@ -31,10 +43,6 @@
 
     get statusStr () {
 		  return this.screenPublish === 'COMPLETE' ? '已发布' : '未发布'
-    }
-
-    get isPublished () {
-		  return this.screenPublish === 'COMPLETE'
     }
 
 		handleEdit () {
@@ -77,52 +85,53 @@
 	}
 </script>
 <style lang="scss" scoped>
-	.list-item-card {
-		/deep/ .ivu-icon {
-			font-size: 16px;
-		}
+@import "../../scss/conf";
 
-		&:hover {
-			.list-item-card-mask {
-				opacity: 1;
-			}
-		}
+.list-item-card-btn-link {
+	margin-left: auto;
 
-		&:nth-child(5n) {
-			margin-right: 0;
-		}
+	span {
+		margin-left: 4px;
+	}
 
+	&:hover {
+		color: $themeColor;
+	}
+}
+
+.list-item-card-btn {
+	align-items: center;
+	margin-top: 10px;
+}
+
+.list-item-card-mask {
+	top: -40px;
+	left: 0;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 40px;
+	padding: 0 8px;
+	background-color: rgba(0, 0, 0, 0.8);
+	transition: all 0.3s;
+}
+
+.list-item-card-avatar {
+	padding-bottom: 50%;
+	background-size: cover;
+
+	&:hover {
 		.list-item-card-mask {
 			top: 0;
-			left: 0;
-			align-items: center;
-			justify-content: center;
-			width: 100%;
-			height: 100%;
-			background-color: rgba(0, 0, 0, 0.5);
-			border-radius: 4px;
-			opacity: 0;
-			transition: 0.3s;
-		}
-
-		.list-item-card-time-box {
-			margin-bottom: 10px;
-		}
-
-		.avatar {
-			padding-bottom: 50%;
-			background-size: cover;
-		}
-
-		h2 {
-			margin: 10px 0 4px 0;
-			font-size: 18px;
-		}
-
-		p {
-			margin: 6px 0 0 0;
-			font-size: 12px;
-			color: #999;
 		}
 	}
+}
+
+.list-item-card-title {
+	padding-bottom: 10px;
+	font-size: 14px;
+	font-weight: normal;
+	color: rgb(51, 51, 51);
+	border-bottom: 1px solid rgba(216, 216, 216, 0.37);
+}
 </style>

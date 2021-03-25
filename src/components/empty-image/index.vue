@@ -1,6 +1,17 @@
-<template>
-	<div class="empty-image"/>
+<template lang="pug">
+  .empty-image(@click="handleClick")
+    slot
 </template>
+<script>
+	import { Vue, Component } from 'vue-property-decorator'
+
+  @Component
+	export default class EmptyImage extends Vue {
+		handleClick () {
+			this.$emit('click')
+		}
+	}
+</script>
 <style lang="scss">
 	.empty-image {
 		background-color: #ddd;

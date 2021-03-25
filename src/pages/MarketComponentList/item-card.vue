@@ -1,45 +1,46 @@
 <template lang="pug">
-	i-card.list-item-card.pos-r
-		.avatar(:style="{backgroundImage:`url(${currentItem.componentAvatar})`}" v-if="currentItem.componentAvatar")
-		empty-image.avatar(v-if="!currentItem.componentAvatar")
-		h2.ellipsis {{currentItem.componentTitle}}
-		.fn-flex.flex-row.list-item-card-time-box
-			p {{$format(new Date(currentItem.createTime),'yyyy-MM-dd hh:mm:ss')}}
-		div
-			i-button(type="success" size="small") {{currentItem.componentVersion}}
-			i-button(:style="{marginLeft:'10px'}" type="info" size="small") {{currentItem.componentEnTitle}}
-		.pos-a.list-item-card-mask.fn-flex.flex-column
-			i-button(icon="ios-create-outline" @click="handleEdit") 编辑组件
-			i-button(icon="ios-link" :style="{marginTop:'10px'}" @click="handleVersion") 切换版本
-			i-button(icon="ios-trash-outline" :style="{marginTop:'10px'}" type="error" @click="handleRemove") 删除组件
-		i-modal.market-edit-modal(v-model="dialogEditShow" title="编辑")
-			i-form(:label-width="100")
-				i-form-item(label="组件名")
-					i-input(v-model="currentItem.componentTitle")
-				i-form-item(label="组件英文名")
-					span {{ currentItem.componentEnTitle }}
-				i-form-item(label="当前版本号")
-					span {{ currentItem.componentVersion }}
-				i-form-item(label="排序")
-					i-input(v-model="currentItem.sort" number)
-				i-form-item(label="类型")
-					tree-select(
-						v-model="currentItem.componentTypeId"
-						:options="componentTypeList"
-						:normalizer="normalizer"
-						:load-options="loadOptions"
-						)
-						label(slot="value-label" slot-scope="{ node }") {{ node.raw.componentTypeName || currentItem.componentTypeName }}
-				i-form-item(label="缩略图")
-					.img-wrap
-						img(:src="currentItem.componentAvatar" v-if="currentItem.componentAvatar")
-			div(slot="footer")
-				i-button(type="primary" @click="submitEdit") 确定
-		i-modal(v-model="dialogEditVersionShow" title="切换版本")
-			i-select(v-model="currentItem.componentVersion")
-				i-option(:value="k.componentVersion" v-for="(k, i) in versionList" :key="i") {{ k.componentVersion }}
-			div(slot="footer")
-				i-button(type="primary" @click="submitVersion") 确定
+  e-card
+    .avatar(:style="{backgroundImage:`url(${currentItem.componentAvatar})`}" v-if="currentItem.componentAvatar")
+    empty-image.avatar(v-if="!currentItem.componentAvatar")
+    template(slot="content")
+      h2.ellipsis {{currentItem.componentTitle}}
+      .fn-flex.flex-row.list-item-card-time-box
+        p {{$format(new Date(currentItem.createTime),'yyyy-MM-dd hh:mm:ss')}}
+      div
+        i-button(type="success" size="small") {{currentItem.componentVersion}}
+        i-button(:style="{marginLeft:'10px'}" type="info" size="small") {{currentItem.componentEnTitle}}
+    .pos-a.list-item-card-mask.fn-flex.flex-column
+      i-button(icon="ios-create-outline" @click="handleEdit") 编辑组件
+      i-button(icon="ios-link" :style="{marginTop:'10px'}" @click="handleVersion") 切换版本
+      i-button(icon="ios-trash-outline" :style="{marginTop:'10px'}" type="error" @click="handleRemove") 删除组件
+    i-modal.market-edit-modal(v-model="dialogEditShow" title="编辑")
+      i-form(:label-width="100")
+        i-form-item(label="组件名")
+          i-input(v-model="currentItem.componentTitle")
+        i-form-item(label="组件英文名")
+          span {{ currentItem.componentEnTitle }}
+        i-form-item(label="当前版本号")
+          span {{ currentItem.componentVersion }}
+        i-form-item(label="排序")
+          i-input(v-model="currentItem.sort" number)
+        i-form-item(label="类型")
+          tree-select(
+            v-model="currentItem.componentTypeId"
+            :options="componentTypeList"
+            :normalizer="normalizer"
+            :load-options="loadOptions"
+            )
+          label(slot="value-label" slot-scope="{ node }") {{ node.raw.componentTypeName || currentItem.componentTypeName }}
+        i-form-item(label="缩略图")
+          .img-wrap
+            img(:src="currentItem.componentAvatar" v-if="currentItem.componentAvatar")
+      div(slot="footer")
+        i-button(type="primary" @click="submitEdit") 确定
+    i-modal(v-model="dialogEditVersionShow" title="切换版本")
+      i-select(v-model="currentItem.componentVersion")
+        i-option(:value="k.componentVersion" v-for="(k, i) in versionList" :key="i") {{ k.componentVersion }}
+      div(slot="footer")
+        i-button(type="primary" @click="submitVersion") 确定
 </template>
 <script lang="ts">
 	import {Card, Button, Modal, Form, FormItem, Input, Select, Option} from 'view-design'
@@ -158,7 +159,6 @@
 </style>
 <style lang="scss" scoped>
 	.list-item-card {
-
 		/deep/ .ivu-icon {
 			font-size: 16px;
 		}
@@ -167,10 +167,6 @@
 			.list-item-card-mask {
 				opacity: 1;
 			}
-		}
-
-		&:nth-child(4n) {
-			margin-right: 0;
 		}
 
 		.list-item-card-mask {

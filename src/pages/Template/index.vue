@@ -1,56 +1,34 @@
 <template lang="pug">
-	e-layout
-		.list-container
-			ul.list-item-card-box
-				item-card(v-for="item in list" v-bind="item" :key="item.screenId" @init="init")
-			Page(:total="total" :show-sizer="true" :show-elevator="true" :show-total="true" @on-change="handleChange" @on-page-size-change="handlePageSize")
+  e-layout
+    .list-container
+      e-page(@init="init" :total="total" ref="page")
+        ul.list-item-card-box
+          item-card(v-for="item in list" v-bind="item" :key="item.screenId" @init="init")
 </template>
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
 	import itemCard from './item-card.vue'
-	import { Page, Button, Input, DatePicker, Select, Option } from 'view-design'
 
 	@Component({
-		components: { itemCard, Page, Button, Input, DatePicker, Select, Option }
+		components: { itemCard }
 	})
 	export default class Template extends Vue {
 		list: any[] = []
 		total: number = 0
-		pageNum: number = 1
-		pageSize: number = 10
-		date: any = []
-    query: any = {
-      screenName: '',
-      beginTime: '',
-      screenPublish: '',
-      endTime: ''
-    }
 
-		handleChange (pageNum) {
-			this.pageNum = pageNum
-			this.init()
-		}
-
-		handlePageSize (pageSize) {
-			this.pageSize = pageSize
-			this.init()
-		}
-
-		init () {
-			this.$api.screen.list({
-				pageSize: this.pageSize,
+    async init ({ pageNum, pageSize }) {
+      const res = await this.$api.screen.list({
+				pageSize,
         screenType: 'TEMPLATE',
-        pageNum: this.pageNum,
-				...this.query
-			}).then(res => {
-				this.list = res.list
-				this.total = res.total
+        pageNum
 			})
+      this.list = res.list
+      this.total = res.count
 		}
 
-		mounted () {
-			this.init()
-		}
+    reload () {
+      this.$refs.page.reload()
+    }
 	}
 </script>
 <style lang="scss" scoped>
@@ -66,12 +44,5 @@
 		.search {
 			margin-top: 10px;
 		}
-	}
-
-	.list-item-card-box {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    grid-gap: 24px;
-		margin-top: 15px;
 	}
 </style>

@@ -1,17 +1,18 @@
 <template lang="pug">
-	i-card.list-item-card.pos-r
-		.avatar(:style="{backgroundImage:`url(${screenAvatar})`}" v-if="screenAvatar")
-		empty-image.avatar(v-if="!screenAvatar")
-		h2.ellipsis {{screenName}}
-		.fn-flex.flex-row.list-item-card-time-box
-			p {{beginTime}}
-		div
-			i-button(:type="isPublished?'success':'warning'" size="small") {{statusStr}}
-		.pos-a.list-item-card-mask.fn-flex.flex-column
-			i-button(icon="ios-create-outline" @click="handleEdit") 编辑
-			i-button(v-if="isPublished" icon="ios-link" :style="{marginTop:'10px'}" @click="handleLink") 打开
-			i-button(v-else icon="ios-jet-outline" :style="{marginTop:'10px'}" @click="handleUse") 使用
-			i-button(icon="ios-trash-outline" :style="{marginTop:'10px'}" type="error" @click="handleRemove") 删除
+  e-card
+    .avatar(:style="{backgroundImage:`url(${screenAvatar})`}" v-if="screenAvatar")
+    empty-image.avatar(v-if="!screenAvatar")
+    template(slot="content")
+      h2.ellipsis {{screenName}}
+      .fn-flex.flex-row.list-item-card-time-box
+        p {{beginTime}}
+      div
+        i-button(:type="isPublished?'success':'warning'" size="small") {{statusStr}}
+      .pos-a.list-item-card-mask.fn-flex.flex-column
+        i-button(icon="ios-create-outline" @click="handleEdit") 编辑
+        i-button(v-if="isPublished" icon="ios-link" :style="{marginTop:'10px'}" @click="handleLink") 打开
+        i-button(v-else icon="ios-jet-outline" :style="{marginTop:'10px'}" @click="handleUse") 使用
+        i-button(icon="ios-trash-outline" :style="{marginTop:'10px'}" type="error" @click="handleRemove") 删除
 </template>
 <script lang="ts">
 	import { Card, Button } from 'view-design'
@@ -66,7 +67,6 @@
 </script>
 <style lang="scss" scoped>
 	.list-item-card {
-
 		/deep/ .ivu-icon {
 			font-size: 16px;
 		}
@@ -75,10 +75,6 @@
 			.list-item-card-mask {
 				opacity: 1;
 			}
-		}
-
-		&:nth-child(4n) {
-			margin-right: 0;
 		}
 
 		.list-item-card-mask {

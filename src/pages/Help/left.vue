@@ -1,5 +1,5 @@
 <template lang="pug">
-	i-menu.pos-a.help-left(:open-names="['1']" @on-select="handleSelect" :active-name="leftName")
+	i-menu.pos-f.help-left(:open-names="['3']" @on-select="handleSelect" :active-name="leftName")
 		i-sub-menu(name="1")
 			template(slot="title") 看板管理
 			i-menu-item(name="PanelSetting") 看板配置
@@ -13,8 +13,6 @@
 		i-sub-menu(name="3")
 			template(slot="title") 组件市场
 			i-menu-item(name="HowToUseMarket") 如何开发
-			i-menu-item(name="HowToPutMarket") 如何上架
-			i-menu-item(name="HowToLoadMarket") 如何加载
 </template>
 <script lang="ts">
 	import { Component, Vue } from 'vue-property-decorator'
@@ -49,7 +47,7 @@
 </script>
 <style lang="scss">
 	.help-left {
-		top: 0;
+		top: 50px;
 		left: 0;
 	}
 </style>

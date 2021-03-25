@@ -9,6 +9,10 @@ export default {
 		{
 			type: ['fix'],
 			content: '标尺不显示bug修复'
+		},
+		{
+			type: [],
+			content: '大屏管理UI美化'
 		}
 	]
 }

@@ -2,14 +2,16 @@
 .e-header.pos-f.fn-flex.flex-row
   h1 EslinkV
   ul.fn-flex.flex-row.e-header-nav
-    li.pointer.pos-r(:class="{active:item.url===common.navIndex}" @click="handleLink(item.url)" v-for="item in list" :key="item.url") {{item.title}}
+    li.pointer.pos-r(:class="{active:item.url===common.navIndex}" @click="handleLink(item.url,item.title)" v-for="item in list" :key="item.url") {{item.title}}
   img.circle.e-header-user-avatar(:src="userAvatar")
   i-drop-down.e-header-user(@on-click="handleUser")
     .pointer
       span.e-header-user-name {{common.user&&common.user.userName}}
       i-icon(type="ios-arrow-down" color="#fff")
     i-drop-down-menu(slot="list")
-      i-drop-down-item(name="logout") 退出登录
+      i-drop-down-item(name="logout")
+        i-icon(type="ios-log-out" :size="16" color="#333")
+        span.e-header-user-item 退出登录
 </template>
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
@@ -44,7 +46,7 @@
       },
       {
         url: '/help/HowToUseMarket',
-        title: '帮助文档'
+        title: '帮助中心'
       },
       {
         url: '/changeLog',
@@ -61,8 +63,9 @@
 			}
 		}
 
-    handleLink (url) {
+    handleLink (url, title) {
       common.actions.setNavIndex(url)
+      document.title = title
       this.$router.push(url)
     }
 
@@ -78,6 +81,10 @@
 </script>
 <style lang="scss" scoped>
 	@import "../../scss/conf";
+
+	.e-header-user-item {
+		margin-left: 10px;
+	}
 
 	.e-header-user-avatar {
 		width: 30px;
@@ -123,15 +130,16 @@
 
 				&.active {
 					background-color: rgb(48, 50, 62);
-          &:before{
-            width: 100%;
-            height: 3px;
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            background-color: $themeColor;
-          }
+
+					&::before {
+						position: absolute;
+						bottom: 0;
+						left: 0;
+						width: 100%;
+						height: 3px;
+						content: '';
+						background-color: $themeColor;
+					}
 				}
 			}
 		}

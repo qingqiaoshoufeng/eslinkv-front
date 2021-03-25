@@ -14,6 +14,7 @@ import PortalVue from 'portal-vue'
 import '@babel/polyfill'
 import 'eslinkv-npm'
 import eLayout from './components/e-layout/index.vue'
+import eCard from './components/e-card/index.vue'
 import eHeader from './components/e-header/index.vue'
 import ePage from './components/e-page/index.vue'
 
@@ -21,6 +22,7 @@ Vue.use(PortalVue)
 Vue.use(VueVideoPlayer)
 
 Vue.component('e-layout', eLayout)
+Vue.component('e-card', eCard)
 Vue.component('e-header', eHeader)
 Vue.component('e-page', ePage)
 
