@@ -1,6 +1,5 @@
 <template lang="pug">
 	.e-layout-container
-		e-left
 		.e-layout-content
 			e-header
 			slot
@@ -14,7 +13,6 @@
 </script>
 <style lang="scss" scoped>
 	.e-layout-content {
-		padding-top: 40px;
-		padding-left: 70px;
+		padding-top: 50px;
 	}
 </style>

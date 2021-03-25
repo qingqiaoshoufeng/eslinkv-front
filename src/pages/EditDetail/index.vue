@@ -8,7 +8,7 @@
 </template>
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
-	import {dView,dFooter} from 'eslinkv-npm'
+	import { dView, dFooter } from 'eslinkv-npm'
 
 	@Component({
 		components: {

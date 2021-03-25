@@ -106,7 +106,7 @@
 		SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
 		SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP
 	} from './config.js'
-	import {scene,instance} from 'eslinkv-npm'
+	import { scene, instance } from 'eslinkv-npm'
 	const componentPageArr = [
 		'ThreeSocialLinkage',
 		'ServiceNetworkStation',
@@ -313,14 +313,14 @@
 			showThreeSocialLinkageDetail () {
 				const { id } = this.activeOverlay
 				// 打开三社联动的弹框
-        THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
-          this.$api.map.serve.getServiceCustomerThreeSocialDetail({ id }).then(res => {
-            instance.actions.updateComponent(i, {
-              data: res
-            })
-            scene.actions.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX)
-          })
-        })
+				THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
+					this.$api.map.serve.getServiceCustomerThreeSocialDetail({ id }).then(res => {
+						instance.actions.updateComponent(i, {
+							data: res
+						})
+						scene.actions.createSceneInstance(THREESOCIALLINKAGE_SCENEINDEX)
+					})
+				})
 			},
 			// 客户服务统一数据
 			async getDataStatisticsList () {

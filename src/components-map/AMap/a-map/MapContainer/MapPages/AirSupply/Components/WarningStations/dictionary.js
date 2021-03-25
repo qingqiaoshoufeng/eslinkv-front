@@ -25,15 +25,15 @@ const DeviceName = {
     DW: '',
     prop: 'deviceName'
 }
-let DeviceStatus = {
+const DeviceStatus = {
     label: '设备状态',
     DW: '',
-    prop: "deviceStatus",
+    prop: 'deviceStatus',
     style: {
-        "minWidth": "70%",
+        minWidth: '70%'
     }
 }
-let DeviceLocation = {
+const DeviceLocation = {
     label: '设备坐标',
     DW: '',
     prop: 'deviceLocation'

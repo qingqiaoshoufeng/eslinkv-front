@@ -9,7 +9,7 @@
 </template>
 <script lang="ts">
 	import { Vue, Component, Provide } from 'vue-property-decorator'
-	import {platform,dEditor,dFooter,dWidgetList} from 'eslinkv-npm'
+	import { platform, dEditor, dFooter, dWidgetList } from 'eslinkv-npm'
 
 	@Component({
 		components: { dWidgetList, dEditor, dFooter }

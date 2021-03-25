@@ -185,9 +185,10 @@
 	}
 
 	.right {
+		height: 358px;
 		margin: 15px 0;
 		overflow-y: scroll;
-		height: 358px;
+
 		&::-webkit-scrollbar {
 			display: none;
 		}

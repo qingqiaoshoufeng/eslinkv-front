@@ -9,7 +9,7 @@
 			d-footer
 </template>
 <script>
-	import {loadMask,dFooter,dWidgetList,dEditor,platform} from 'eslinkv-npm'
+	import { loadMask, dFooter, dWidgetList, dEditor, platform } from 'eslinkv-npm'
 
 	export default {
 		name: 'New',
