@@ -124,7 +124,7 @@ module.exports = {
 		config.plugins.push(
 			new webpack.DefinePlugin({
 				'process.env.version': JSON.stringify(pkg.version),
-				'process.env.staticVuePath': JSON.stringify(isProduction ? 'vue.min.js' : 'vue.js'),
+				'process.env.staticVuePath': JSON.stringify(isProduction ? 'vue.js' : 'vue.js'),
 				'process.env.BUILD_MODE': JSON.stringify(process.env.BUILD_MODE),
 				'process.env.staticPath': JSON.stringify('')
 			})
