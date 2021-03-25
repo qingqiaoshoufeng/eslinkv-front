@@ -13,7 +13,6 @@ import './components-map/index.ts'
 import PortalVue from 'portal-vue'
 import '@babel/polyfill'
 import 'eslinkv-npm'
-import eLeft from './components/e-left/index.vue'
 import eLayout from './components/e-layout/index.vue'
 import eHeader from './components/e-header/index.vue'
 import ePage from './components/e-page/index.vue'
@@ -21,7 +20,6 @@ import ePage from './components/e-page/index.vue'
 Vue.use(PortalVue)
 Vue.use(VueVideoPlayer)
 
-Vue.component('e-left', eLeft)
 Vue.component('e-layout', eLayout)
 Vue.component('e-header', eHeader)
 Vue.component('e-page', ePage)

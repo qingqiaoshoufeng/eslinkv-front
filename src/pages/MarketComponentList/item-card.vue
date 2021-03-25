@@ -158,9 +158,6 @@
 </style>
 <style lang="scss" scoped>
 	.list-item-card {
-		width: calc((100% - 110px) / 4);
-		min-width: 170px;
-		margin: 0 30px 25px 0;
 
 		/deep/ .ivu-icon {
 			font-size: 16px;

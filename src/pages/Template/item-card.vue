@@ -66,9 +66,6 @@
 </script>
 <style lang="scss" scoped>
 	.list-item-card {
-		width: calc((100% - 90px) / 4);
-		min-width: 195px;
-		margin: 0 30px 25px 0;
 
 		/deep/ .ivu-icon {
 			font-size: 16px;

@@ -6,7 +6,7 @@
         i-button(type="warning" :style="{marginLeft:'10px'}" @click="handleType") 组件分类
       .search
       e-page(@init="init" :total="total" ref="page")
-        ul.fn-flex.flex-row.list-item-card-box
+        ul.list-item-card-box
           item-card(v-for="(item, i) in list" :item="item" :key="i" @reload="reload")
 </template>
 <script lang="ts">
@@ -79,7 +79,9 @@
 	}
 
 	.list-item-card-box {
-		flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-gap: 24px;
 		margin-top: 15px;
 	}
 </style>

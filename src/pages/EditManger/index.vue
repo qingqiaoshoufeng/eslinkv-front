@@ -11,7 +11,7 @@
 					i-option(value="COMPLETE") 已发布
 				i-button.ml20(type="primary" @click="search") 查询
 			e-page(@init="init" :total="total" ref="page")
-				ul.fn-flex.flex-row.list-item-card-box
+				ul.list-item-card-box
 					item-card(v-for="item in list" v-bind="item" :key="item.screenId" @reload="reload")
 </template>
 <script lang="ts">
@@ -91,7 +91,9 @@
 	}
 
 	.list-item-card-box {
-		flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-gap: 24px;
 		min-width: 1135px;
 		padding-right: 15px;
 		margin-top: 15px;

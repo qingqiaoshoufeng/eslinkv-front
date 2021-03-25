@@ -1,7 +1,7 @@
 <template lang="pug">
 	e-layout
 		.list-container
-			ul.fn-flex.flex-row.list-item-card-box
+			ul.list-item-card-box
 				item-card(v-for="item in list" v-bind="item" :key="item.screenId" @init="init")
 			Page(:total="total" :show-sizer="true" :show-elevator="true" :show-total="true" @on-change="handleChange" @on-page-size-change="handlePageSize")
 </template>
@@ -69,7 +69,9 @@
 	}
 
 	.list-item-card-box {
-		flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-gap: 24px;
 		margin-top: 15px;
 	}
 </style>
