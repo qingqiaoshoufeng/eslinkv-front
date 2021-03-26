@@ -56,7 +56,7 @@
 		}
 
 		upload(blob) {
-			const name = `${+new Date()}.jpg`
+			const name = `${+new Date()}.png`
 			const data = new FormData()
 			data.append('file', blob, name)
 			data.append('library', `componentAvatar/${this.detail.componentEnTitle}/${this.detail.componentVersion}`)
