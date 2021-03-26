@@ -51,7 +51,7 @@
 			}).then(canvas => {
 				canvas.toBlob(blob => {
 					this.upload(blob)
-				}, 'image/jpeg', 0.9)
+				}, 'image/png', 0.9)
 			})
 		}
 
