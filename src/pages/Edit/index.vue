@@ -1,6 +1,7 @@
 <template lang="pug">
 	.home-container
 		.layout-wrapper
+      d-detail
 			.main-container
 				.d-editor-box.pos-r.fn-flex
 					d-widget-list(ref="widgets" :class="{ 'd-editor-fullscreen': platform.fullscreen }")
@@ -9,10 +10,10 @@
 </template>
 <script lang="ts">
 	import { Vue, Component, Provide } from 'vue-property-decorator'
-	import { platform, dEditor, dFooter, dWidgetList } from 'eslinkv-npm'
+	import { platform, dEditor, dFooter, dWidgetList,dDetail } from 'eslinkv-npm'
 
 	@Component({
-		components: { dWidgetList, dEditor, dFooter }
+		components: { dWidgetList, dEditor, dFooter,dDetail }
 	})
 	export default class editor extends Vue {
 		platform = platform.state
@@ -46,7 +47,7 @@
 
 	.main-container {
 		width: 100%;
-		height: calc(100% - 50px);
+		height: calc(100% - 92px);
 	}
 
 	.line {
