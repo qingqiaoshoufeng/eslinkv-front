@@ -13,6 +13,10 @@ export default {
 		{
 			type: [],
 			content: '大屏管理UI美化'
+		},
+		{
+			type: [],
+			content: '编辑器UI美化'
 		}
 	]
 }
