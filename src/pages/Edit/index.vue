@@ -1,12 +1,12 @@
 <template lang="pug">
-	.home-container
-		.layout-wrapper
+  .home-container
+    .layout-wrapper
       d-detail
-			.main-container
-				.d-editor-box.pos-r.fn-flex
-					d-widget-list(ref="widgets" :class="{ 'd-editor-fullscreen': platform.fullscreen }")
-					d-editor(ref="kanboardEditor")
-			d-footer
+      .main-container
+        .d-editor-box.pos-r.fn-flex
+          d-widget-list(ref="widgets" :class="{ 'd-editor-fullscreen': platform.fullscreen }")
+          d-editor(ref="kanboardEditor")
+      d-footer
 </template>
 <script lang="ts">
 	import { Vue, Component, Provide } from 'vue-property-decorator'
