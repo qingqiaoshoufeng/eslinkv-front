@@ -1,22 +1,23 @@
 <template lang="pug">
-	.home-container
-		.layout-wrapper
-			.main-container
-				.d-editor-box.pos-r.fn-flex
-					d-widget-list(ref="widgets" :class="{ 'd-editor-fullscreen': platform.fullscreen }")
-					d-editor(ref="kanboardEditor")
-				load-mask(:show="querying") {{querying ? '请求模板数据…' : '正在生成快照…'}}
-			d-footer
+  .home-container
+    .layout-wrapper
+      d-detail
+      .main-container
+        .d-editor-box.pos-r.fn-flex
+          d-widget-list(ref="widgets" :class="{ 'd-editor-fullscreen': platform.fullscreen }")
+          d-editor(ref="kanboardEditor")
+        load-mask(:show="querying") {{querying ? '请求模板数据…' : '正在生成快照…'}}
+      d-footer
 </template>
 <script>
-	import { loadMask, dFooter, dWidgetList, dEditor, platform } from 'eslinkv-npm'
+	import { loadMask, dFooter, dWidgetList, dEditor, platform, dDetail } from 'eslinkv-npm'
 
 	export default {
 		name: 'New',
 		provide () {
 			return { kanboardEditor: this.$refs.kanboardEditor }
 		},
-		components: { loadMask, dFooter, dWidgetList, dEditor },
+		components: { loadMask, dFooter, dWidgetList, dEditor, dDetail },
 		data () {
 			return {
 				ready: false,
@@ -24,12 +25,8 @@
 				platform: platform.state
 			}
 		},
-		mounted () {
-			document.title = '新增 - 数据看板'
-		}
 	}
 </script>
-
 <style lang="scss" scoped>
 	.d-editor-box {
 		width: 100%;
@@ -62,7 +59,7 @@
 
 	.main-container {
 		width: 100%;
-		height: calc(100% - 50px);
+		height: calc(100% - 92px);
 		background-color: #fff;
 	}
 

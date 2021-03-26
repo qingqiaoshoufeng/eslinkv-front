@@ -10,10 +10,10 @@
 </template>
 <script lang="ts">
 	import { Vue, Component, Provide } from 'vue-property-decorator'
-	import { platform, dEditor, dFooter, dWidgetList,dDetail } from 'eslinkv-npm'
+	import { platform, dEditor, dFooter, dWidgetList, dDetail } from 'eslinkv-npm'
 
 	@Component({
-		components: { dWidgetList, dEditor, dFooter,dDetail }
+		components: { dWidgetList, dEditor, dFooter, dDetail }
 	})
 	export default class editor extends Vue {
 		platform = platform.state
