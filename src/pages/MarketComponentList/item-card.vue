@@ -190,6 +190,7 @@
 			background-repeat: no-repeat;
 			background-position: center;
 			background-size: 100% auto;
+      background-color: #000;
 		}
 
 		h2 {
