@@ -31,8 +31,8 @@
 
 		/deep/ {
 			.widgets-panel.fixed + .center {
-				width: calc(100% - 428px) !important;
-				margin-left: 428px !important;
+				width: calc(100% - 260px) !important;
+				margin-left: 260px !important;
 			}
 		}
 	}

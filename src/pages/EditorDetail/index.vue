@@ -1,24 +1,24 @@
 <template lang="pug">
-	.detail-container
-		.preview-wrapper(ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen, mobile: isMobile }")
-			.mobile-wrap(:style="{height: mobileWrapHeight + 'px'}" v-if="isMobile")
-				d-view(@mounted="updateKanboardSize" ref="previewContainer" :style="`transform: scale(${scaleRatio}) translate3d(0, 0, 0); overflow: hidden;`")
-			d-view(@mounted="updateKanboardSize" ref="previewContainer" v-else :style="`transform: scale(${scaleRatio}) translate3d(0, 0, 0); overflow: hidden;`")
-			d-footer(:show="false")
+  .detail-container
+    .preview-wrapper.fit-mode(ref="kanboardWrapper" :class="{ mobile: isMobile }"
+      :style="{backgroundColor:platform.panelConfig.background.color,backgroundRepeat:platform.panelConfig.background.repeat,backgroundSize:platform.panelConfig.background.size,backgroundPosition:platform.panelConfig.background.position,backgroundImage:`url(${platform.panelConfig.background.url})`,}")
+      .mobile-wrap(:style="{height: mobileWrapHeight + 'px'}" v-if="isMobile")
+        d-view(@mounted="updateKanboardSize" ref="previewContainer" :style="`transform: scale(${actualScaleRatio}) translate3d(0, 0, 0); overflow: hidden;`")
+      d-view(@mounted="updateKanboardSize" ref="previewContainer" v-else :style="`transform: scale(${actualScaleRatio}) translate3d(0, 0, 0); overflow: hidden;`")
+      d-detail(:show="false")
 </template>
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
-	import { dView, dFooter } from 'eslinkv-npm'
+	import { dView, dDetail, platform } from 'eslinkv-npm'
 
 	@Component({
 		components: {
-			dView, dFooter
+			dView, dDetail
 		}
 	})
 	export default class detail extends Vue {
+    platform=platform.state
 		isMobile = /android|iphone/i.test(navigator.userAgent)
-		ready = false
-		fitScreen = true
 		mobileWrapHeight = 0
 		screenSize = {
 			width: 1920,
@@ -37,11 +37,6 @@
 			this.actualScaleRatio = this.isMobile ? clientWidth / w : Math.min(clientWidth / w, clientHeight / h)
 			this.mobileWrapHeight = h * this.actualScaleRatio
 		}
-
-		get scaleRatio () {
-			if (!this.fitScreen) return 1
-			return this.actualScaleRatio
-		}
 	}
 </script>
 <style lang="scss">
@@ -57,12 +52,6 @@
 		left: 0;
 		z-index: 99999;
 		display: flex;
-		overflow: hidden;
-		background: #0f3b69;
-
-		&.active {
-			overflow: auto;
-		}
 
 		&::-webkit-scrollbar {
 			width: 0;
@@ -73,7 +62,6 @@
 			position: relative;
 			flex-grow: 0;
 			flex-shrink: 0;
-			outline: rgba(255, 255, 255, 0.2) 1px dotted;
 		}
 
 		&.fit-mode {

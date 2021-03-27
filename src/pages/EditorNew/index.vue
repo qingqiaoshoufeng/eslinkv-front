@@ -24,7 +24,7 @@
 				querying: false,
 				platform: platform.state
 			}
-		},
+		}
 	}
 </script>
 <style lang="scss" scoped>

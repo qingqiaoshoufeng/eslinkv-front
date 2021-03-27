@@ -1,22 +1,22 @@
 <template lang="pug">
   .detail-container
-    .preview-wrapper(ref="kanboardWrapper" :class="{ active: ready, 'fit-mode': fitScreen }")
-      d-view(@mounted="updateKanboardSize" ref="previewContainer" :style="`transform: scale(${scaleX?scaleX:scaleRatio},${scaleY}) translate3d(0, 0, 0); overflow: hidden;`")
-      d-footer(:show="false")
+    .preview-wrapper.fit-mode(ref="kanboardWrapper"
+      :style="{backgroundColor:platform.panelConfig.background.color,backgroundRepeat:platform.panelConfig.background.repeat,backgroundSize:platform.panelConfig.background.size,backgroundPosition:platform.panelConfig.background.position,backgroundImage:`url(${platform.panelConfig.background.url})`,}")
+      d-view(@mounted="updateKanboardSize" ref="previewContainer" :style="`transform: scale(${scaleX?scaleX:actualScaleRatio},${scaleY}) translate3d(0, 0, 0); overflow: hidden;`")
+      d-detail(:show="false")
 </template>
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
-	import { dView, dFooter } from 'eslinkv-npm'
+	import { dView, dDetail, platform } from 'eslinkv-npm'
 	import { getQueryString } from '../../utils'
 
   @Component({
     components: {
-      dView, dFooter
+      dView, dDetail
     }
   })
 	export default class full extends Vue {
-    ready = false
-    fitScreen = true
+    platform=platform.state
     screenSize = {
       width: 1920,
       height: 1080
@@ -34,12 +34,6 @@
       this.screenSize.width = clientWidth
       this.screenSize.height = clientHeight
       this.actualScaleRatio = Math.min(clientWidth / w, clientHeight / h)
-    }
-
-    get scaleRatio () {
-      if (!this.fitScreen) return 1
-      const ratio = this.actualScaleRatio
-      return ratio < 1 ? ratio : 1
     }
 
     mounted () {
@@ -68,12 +62,6 @@
 	left: 0;
 	z-index: 99999;
 	display: flex;
-	overflow: hidden;
-	background: #0f3b69;
-
-	&.active {
-		overflow: auto;
-	}
 
 	&::-webkit-scrollbar {
 		width: 0;
@@ -84,7 +72,6 @@
 		position: relative;
 		flex-grow: 0;
 		flex-shrink: 0;
-		outline: rgba(255, 255, 255, 0.2) 1px dotted;
 	}
 
 	&.fit-mode {
