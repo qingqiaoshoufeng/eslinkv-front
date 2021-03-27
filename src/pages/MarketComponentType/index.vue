@@ -18,6 +18,7 @@
 	import { Vue, Component } from 'vue-property-decorator'
 	import { Table, Button } from 'view-design'
 	import dialogComponentType from './dialogComponentType.vue'
+	import common from '../../store/common.store.js'
 
 	@Component({
 		components: {
@@ -98,6 +99,10 @@
 		reload () {
 			this.$refs.page.reload()
 		}
+
+		mounted () {
+      common.actions.setNavIndex('/market/componentList')
+    }
 	}
 </script>
 <style lang="scss" scoped>

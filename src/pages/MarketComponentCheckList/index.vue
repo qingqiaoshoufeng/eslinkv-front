@@ -16,6 +16,7 @@
 	import { Table, Button } from 'view-design'
 	import dialogCheck from './dialogCheckComponent.vue'
 	import { commonConfigValue, configMerge, platform } from 'eslinkv-npm'
+	import common from '../../store/common.store.js'
 
 	@Component({
 		components: {
@@ -108,6 +109,10 @@
 		reload () {
 			this.$refs.page.reload()
 		}
+
+    mounted () {
+      common.actions.setNavIndex('/market/componentList')
+    }
 	}
 </script>
 <style lang="scss" scoped>
