@@ -87,7 +87,9 @@
 </script>
 <style lang="scss" scoped>
 	@import "../../scss/conf";
-
+  .e-header-user{
+    height: 100%;
+  }
 	.e-header-user-item {
 		margin-left: 10px;
 	}
@@ -96,6 +98,44 @@
 		width: 30px;
 		height: 30px;
 	}
+
+  .e-header-user-name {
+    margin-right: 10px;
+    margin-left: 8px;
+    color: #fff;
+    line-height: 50px;
+  }
+
+  .e-header-nav {
+    height: 100%;
+    margin-right: auto;
+
+    li {
+      height: 100%;
+      padding: 0 14px;
+      font-size: 14px;
+      line-height: 50px;
+      color: rgb(191, 191, 191);
+
+      &:hover {
+        background-color: rgb(48, 50, 62);
+      }
+
+      &.active {
+        background-color: rgb(48, 50, 62);
+
+        &::before {
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 3px;
+          content: '';
+          background-color: $themeColor;
+        }
+      }
+    }
+  }
 
 	.e-header {
 		top: 0;
@@ -111,43 +151,6 @@
 			width: 200px;
 			font-size: 18px;
 			color: #fff;
-		}
-
-		.e-header-user-name {
-			margin-right: 10px;
-			margin-left: 8px;
-			color: #fff;
-		}
-
-		.e-header-nav {
-			height: 100%;
-			margin-right: auto;
-
-			li {
-				height: 100%;
-				padding: 0 14px;
-				font-size: 14px;
-				line-height: 50px;
-				color: rgb(191, 191, 191);
-
-				&:hover {
-					background-color: rgb(48, 50, 62);
-				}
-
-				&.active {
-					background-color: rgb(48, 50, 62);
-
-					&::before {
-						position: absolute;
-						bottom: 0;
-						left: 0;
-						width: 100%;
-						height: 3px;
-						content: '';
-						background-color: $themeColor;
-					}
-				}
-			}
 		}
 	}
 </style>

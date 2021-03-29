@@ -8,8 +8,8 @@
 			i-menu-item(name="KeyBoard") 快捷键
 			i-menu-item(name="ExportImport") 导入导出
 		i-sub-menu(name="2")
-			template(slot="title") 模版管理
-			i-menu-item(name="HowToUseTemplate") 模版使用
+			template(slot="title") 密钥管理
+			i-menu-item(name="HowToSecretKey") 密钥使用
 		i-sub-menu(name="3")
 			template(slot="title") 组件市场
 			i-menu-item(name="HowToUseMarket") 如何开发
@@ -17,8 +17,8 @@
 <script lang="ts">
 	import { Component, Vue } from 'vue-property-decorator'
 	import { Menu, Submenu, MenuItem } from 'view-design'
+	import common from '../../store/common.store.js'
 
-	// todo 文档完善
 	@Component({
 		components: {
 			'i-menu': Menu,
@@ -42,6 +42,7 @@
 		mounted () {
 			const { name } = this.$route.params
 			this.leftName = name
+      common.actions.setNavIndex('/help/HowToUseMarket')
 		}
 	}
 </script>

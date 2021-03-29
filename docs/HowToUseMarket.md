@@ -40,7 +40,7 @@ esp submit/npm run submit
 |- |- |- eslinkv-npm.umd.min.js                
 |- └---- ……                      
 |- └- index.html           
-|- esp-config.json               // ★eslinkv-cli配置文件   
+|- esp-config.js                 // ★eslinkv-cli配置文件   
 ```
 
 ## custom.vue
@@ -80,7 +80,7 @@ p {
 </style>
 ```
 ## index.component.ts
-```
+```ts
 // 组件中文名唯一
 export const name = '测试组件e-hello'
 // 组件名唯一
@@ -139,3 +139,15 @@ export const value = {
   }
 }
 ```
+## esp-config.js
+```javascript
+module.exports = {
+    domain: 'http://eslinkv.eslink.cc/node/', // cli 接口 domain 设置
+    appKey: '******', // AppKey
+    appSecret: '******', // AppSecret
+    include: [], // 只上传哪些组件
+    exclude: [], // 不上传哪些组件
+}
+```
+
+> [appKey/appSecret 申请使用查看密钥管理相关文档](/help/HowToSecretKey)

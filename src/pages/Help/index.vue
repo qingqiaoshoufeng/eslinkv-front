@@ -47,12 +47,15 @@
 	.help-markdown-body {
 		padding: 40px 80px;
 		margin-left: 240px;
-
+    background-color: #fff;
 		code {
 			word-break: break-all;
 			white-space: pre-wrap;
 		}
-
+    h2{
+      margin-bottom: 10px;
+      margin-top: 20px;
+    }
 		ul,
 		li {
 			list-style: circle;

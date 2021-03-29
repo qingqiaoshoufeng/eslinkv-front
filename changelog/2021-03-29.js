@@ -17,6 +17,10 @@ export default {
 		{
 			type: [],
 			content: '编辑器UI美化'
+		},
+		{
+			type: ['refactor'],
+			content: '添加密钥管理'
 		}
 	]
 }
