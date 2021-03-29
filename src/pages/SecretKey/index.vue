@@ -135,6 +135,12 @@
     }
   }
 }
+.use {
+  color: #67c23a;
+}
+.stop{
+  color: #777;
+}
 .create {
   display: flex;
   justify-content: flex-end;
