@@ -57,7 +57,7 @@ esp submit/npm run submit
 	import { value, customConfig } from './index.component'
 	import { widgetMixin } from 'eslinkv-npm'
 
-  @Component
+    @Component
 	export default class HelloWorld extends mixins(widgetMixin) {
 		// 这个方法是将index.component.ts文件中的配置传入到该组件中，不可少
 
@@ -139,4 +139,3 @@ export const value = {
   }
 }
 ```
-

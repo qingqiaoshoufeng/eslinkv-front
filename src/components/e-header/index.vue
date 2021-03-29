@@ -9,6 +9,9 @@
       span.e-header-user-name {{common.user&&common.user.userName}}
       i-icon(type="ios-arrow-down" color="#fff")
     i-drop-down-menu(slot="list")
+      i-drop-down-item(name="secretKey")
+        i-icon(type="ios-lock-outline" :size="16" color="#333")
+        span.e-header-user-item 密钥管理
       i-drop-down-item(name="logout")
         i-icon(type="ios-log-out" :size="16" color="#333")
         span.e-header-user-item 退出登录
@@ -60,6 +63,9 @@
 		      this.$api.user.logout()
           this.$router.push('/login')
 		      break
+        case 'secretKey':
+          this.$router.push('/secretKey')
+          break
 			}
 		}
 
