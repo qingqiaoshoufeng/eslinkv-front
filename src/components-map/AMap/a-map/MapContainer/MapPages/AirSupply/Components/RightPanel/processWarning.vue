@@ -286,7 +286,7 @@
 		}
 	}
 
-	/deep/ {
+	&::v-deep {
 		.ivu-select-dropdown {
 			margin-top: 18px !important;
 			background: #0057a9;

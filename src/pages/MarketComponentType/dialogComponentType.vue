@@ -92,7 +92,7 @@
 </script>
 <style lang="scss" scoped>
 	.check-modal {
-		/deep/ {
+		&::v-deep {
 			.ivu-modal-body {
 				max-width: 500px;
 				max-height: 500px;

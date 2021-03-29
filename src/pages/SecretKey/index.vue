@@ -1,25 +1,26 @@
 <template lang="pug">
   e-layout
-    i-table(:columns="columns" :data="tableData")
-      template(#createTime="{row}")
-        span {{$format(new Date(row.createTime),'yyyy-MM-dd HH:mm:ss')}}
-      template(#appKey="{row}")
-        .secret
-          .secret-row
-            label appKey:
-            .content {{row.appKey}}
-          .secret-row
-            label appSecret:
-            .content {{ row.isSecretKeyShow ? row.appSecret : row.appSecret.replaceAll(/./g, '*') }}
-              .show(@click="row.isSecretKeyShow = !row.isSecretKeyShow") {{ row.isSecretKeyShow ? '隐藏' : '显示' }}
-      template(#isUsed="{row}")
-        span.use(v-if="row.isUsed") 使用中
-        span.stop(v-else) 已停用
-      template(#action="{row}")
-        i-button(type="warning" @click="handleUse(row)" v-if="row.isUsed") 停用
-        i-button(type="info" @click="handleUse(row)" v-else) 启用
-    .create
-      i-button(type="primary" @click="create") 创建密钥
+    .secret-key-container
+      .create
+        i-button(type="primary" @click="create") 创建密钥
+      i-table(:columns="columns" :data="tableData")
+        template(#createTime="{row}")
+          span {{$format(new Date(row.createTime),'yyyy-MM-dd HH:mm:ss')}}
+        template(#appKey="{row}")
+          .secret
+            .secret-row
+              label appKey:
+              .content {{row.appKey}}
+            .secret-row
+              label appSecret:
+              .content {{ row.isSecretKeyShow ? row.appSecret : row.appSecret.replaceAll(/./g, '*') }}
+                .show.pointer(@click="row.isSecretKeyShow = !row.isSecretKeyShow") {{ row.isSecretKeyShow ? '隐藏' : '显示' }}
+        template(#isUsed="{row}")
+          span.use(v-if="row.isUsed") 使用中
+          span.stop(v-else) 已停用
+        template(#action="{row}")
+          i-button(type="warning" @click="handleUse(row)" v-if="row.isUsed") 停用
+          i-button(type="info" @click="handleUse(row)" v-else) 启用
 </template>
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
@@ -35,7 +36,7 @@
     tableData = []
     columns = [
       {
-        width: 170,
+        width: 200,
         title: '创建时间',
         slot: 'createTime'
       },
@@ -95,20 +96,22 @@
 	}
 </script>
 <style lang="scss" scoped>
+.secret-key-container{
+  padding: 15px;
+}
 .secret {
   .secret-row {
     display: flex;
     align-items: center;
     height: 40px;
     label {
-      width: 70px;
-      flex: none;
+      width: 80px;
       margin-right: 6px;
       text-align: right;
     }
     .content {
       position: relative;
-      width: 244px;
+      width: 290px;
       font-size: 12px;
       height: 32px;
       background-color: #f5f7fa;
@@ -131,6 +134,7 @@
         text-align: center;
         background-color: #b8c7e6;
         border-radius: 3px;
+        user-select: none;
       }
     }
   }
@@ -144,6 +148,6 @@
 .create {
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 </style>

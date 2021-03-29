@@ -225,7 +225,7 @@
 			}
 		}
 
-		/deep/ {
+		&::v-deep {
 			.magazine {
 				img {
 					width: 100%;

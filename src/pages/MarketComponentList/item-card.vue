@@ -158,7 +158,7 @@
 </style>
 <style lang="scss" scoped>
 	.list-item-card {
-		/deep/ .ivu-icon {
+		&::v-deep .ivu-icon {
 			font-size: 16px;
 		}
 

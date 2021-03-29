@@ -256,7 +256,7 @@
 					}
 				}
 
-				/deep/ .spin-icon-load {
+				&::v-deep .spin-icon-load {
 					position: absolute;
 					top: 40%;
 					left: 50%;

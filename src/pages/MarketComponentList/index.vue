@@ -53,7 +53,7 @@
 	.market-container {
 		padding: 15px;
 
-		/deep/ {
+		&::v-deep {
 			.viewer-canvas {
 				background-color: rgba(0, 0, 0, 0.5);
 			}

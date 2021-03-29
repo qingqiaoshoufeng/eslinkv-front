@@ -56,7 +56,7 @@
 		background: url("img/video-bg.svg") no-repeat;
 		background-size: 100% 100%;
 
-		/deep/ .vjs-big-play-button {
+		&::v-deep .vjs-big-play-button {
 			top: 0;
 			right: 0;
 			bottom: 0;

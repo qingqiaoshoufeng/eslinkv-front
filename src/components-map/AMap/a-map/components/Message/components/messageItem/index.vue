@@ -148,7 +148,7 @@ class MessageItem extends Vue {
 		}
 	}
 
-	/deep/ textarea.ivu-input {
+	&::v-deep textarea.ivu-input {
 		font-size: 20px;
 		color: #fff;
 		background: #0057a9;

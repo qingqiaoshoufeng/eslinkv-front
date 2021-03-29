@@ -6,14 +6,13 @@
         .d-editor-box.pos-r.fn-flex
           d-widget-list(ref="widgets" :class="{ 'd-editor-fullscreen': platform.fullscreen }")
           d-editor(ref="kanboardEditor")
-      d-footer
 </template>
 <script lang="ts">
 	import { Vue, Component, Provide } from 'vue-property-decorator'
-	import { dFooter, dWidgetList, dEditor, platform, dDetail, market } from 'eslinkv-npm'
+	import { dWidgetList, dEditor, platform, dDetail, market } from 'eslinkv-npm'
 
   @Component({
-    components: { dFooter, dWidgetList, dEditor, dDetail }
+    components: { dWidgetList, dEditor, dDetail }
   })
 	export default class New extends Vue {
     @Provide('kanboardEditor') kanboardEditor = this.$refs.kanboardEditor
@@ -33,10 +32,10 @@
 			position: fixed;
 		}
 
-		/deep/ {
+		&::v-deep {
 			.widgets-panel.fixed + .center {
-				width: calc(100% - 260px) !important;
-				margin-left: 260px !important;
+				width: calc(100% - 238px) !important;
+				margin-left: 238px !important;
 			}
 		}
 	}
@@ -56,11 +55,11 @@
 
 	.main-container {
 		width: 100%;
-		height: calc(100% - 92px);
+		height: calc(100% - 50px);
 		background-color: #fff;
 	}
 
-	/deep/ {
+	::v-deep {
 		.ivu-steps {
 			position: absolute;
 			top: 8px;

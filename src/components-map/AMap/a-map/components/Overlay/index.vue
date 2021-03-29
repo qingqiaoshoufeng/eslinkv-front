@@ -98,7 +98,7 @@
 		backface-visibility: hidden;
 	}
 
-	/deep/ .sample-icon {
+	&::v-deep .sample-icon {
 		bottom: -60px !important;
 	}
 }

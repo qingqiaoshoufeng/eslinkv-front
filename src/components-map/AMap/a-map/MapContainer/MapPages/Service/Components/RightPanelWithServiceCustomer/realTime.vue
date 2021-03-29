@@ -129,7 +129,7 @@
 </script>
 
 <style lang="scss" scoped>
-/deep/.demo-spin-icon-load {
+::v-deep.demo-spin-icon-load {
 	position: absolute;
 	top: 40%;
 	left: 50%;

@@ -107,7 +107,7 @@ class MessageAlert extends Vue {
 				color: #fff;
 			}
 
-			/deep/ {
+			&::v-deep {
 				.title {
 					font-size: 32px;
 					font-weight: 600;

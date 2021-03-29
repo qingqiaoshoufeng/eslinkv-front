@@ -139,7 +139,7 @@
 
 
 <style lang="scss" scoped>
-/deep/.pop-content {
+::v-deep.pop-content {
 	padding: 0 !important;
 }
 </style>

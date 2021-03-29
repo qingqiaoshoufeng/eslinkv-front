@@ -97,7 +97,7 @@
 			height: 0;
 		}
 
-		/deep/ {
+		&::v-deep {
 			#kanban {
 				position: relative;
 				outline: rgba(255, 255, 255, 0.2) 1px dotted;
