@@ -6,25 +6,22 @@
         .d-editor-box.pos-r.fn-flex
           d-widget-list(ref="widgets" :class="{ 'd-editor-fullscreen': platform.fullscreen }")
           d-editor(ref="kanboardEditor")
-        load-mask(:show="querying") {{querying ? '请求模板数据…' : '正在生成快照…'}}
       d-footer
 </template>
-<script>
-	import { loadMask, dFooter, dWidgetList, dEditor, platform, dDetail } from 'eslinkv-npm'
+<script lang="ts">
+	import { Vue, Component, Provide } from 'vue-property-decorator'
+	import { dFooter, dWidgetList, dEditor, platform, dDetail, market } from 'eslinkv-npm'
 
-	export default {
-		name: 'New',
-		provide () {
-			return { kanboardEditor: this.$refs.kanboardEditor }
-		},
-		components: { loadMask, dFooter, dWidgetList, dEditor, dDetail },
-		data () {
-			return {
-				ready: false,
-				querying: false,
-				platform: platform.state
-			}
-		}
+  @Component({
+    components: { dFooter, dWidgetList, dEditor, dDetail }
+  })
+	export default class New extends Vue {
+    @Provide('kanboardEditor') kanboardEditor = this.$refs.kanboardEditor
+    platform= platform.state
+
+    mounted () {
+      market()
+    }
 	}
 </script>
 <style lang="scss" scoped>

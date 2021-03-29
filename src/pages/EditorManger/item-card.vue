@@ -70,7 +70,7 @@
 		handlePublish () {
 			this.$Modal.confirm({
 				title: '提示',
-				content: '确认发布此看板吗？',
+				content: '确认发布此大屏吗？',
 				loading: true,
 				onOk: () => {
 					this.$api.screen.publish({ screenId: this.screenId }).then(() => {

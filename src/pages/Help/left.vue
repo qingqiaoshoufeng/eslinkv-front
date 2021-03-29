@@ -1,8 +1,8 @@
 <template lang="pug">
 	i-menu.pos-f.help-left(:open-names="['3']" @on-select="handleSelect" :active-name="leftName")
 		i-sub-menu(name="1")
-			template(slot="title") 看板管理
-			i-menu-item(name="PanelSetting") 看板配置
+			template(slot="title") 大屏管理
+			i-menu-item(name="PanelSetting") 大屏配置
 			i-menu-item(name="EditorSetting") 编辑器配置
 			i-menu-item(name="SceneSetting") 场景设置
 			i-menu-item(name="KeyBoard") 快捷键

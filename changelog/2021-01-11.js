@@ -51,7 +51,7 @@ export default {
 		},
 		{
 			type: ['perf'],
-			content: '优化看板编辑器，组件懒加载',
+			content: '优化大屏编辑器，组件懒加载',
 		},
 		{
 			type: ['perf'],
@@ -59,7 +59,7 @@ export default {
 		},
 		{
 			type: ['refactor'],
-			content: '改造编辑器看板添加store，处理公共数据',
+			content: '改造编辑器大屏添加store，处理公共数据',
 		},
 		{
 			type: ['perf'],

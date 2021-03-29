@@ -2,7 +2,7 @@
   e-layout
     .list-container
       .search.fn-flex.flex-row
-        i-input(v-model="query.screenName" placeholder="看板标题" style="width: 200px;" clearable)
+        i-input(v-model="query.screenName" placeholder="大屏标题" style="width: 200px;" clearable)
         i-date-picker(type="daterange" placeholder="创建日期" placement="bottom-end" v-model="date" style="margin-left: 10px;")
         i-select(v-model="query.screenPublish" placeholder="状态" style="width: 100px;margin-left: 10px;" clearable)
           i-option(value="EDIT") 未发布
