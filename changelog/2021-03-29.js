@@ -20,7 +20,7 @@ export default {
 		},
 		{
 			type: ['refactor'],
-			content: '添加密钥管理'
+			content: '添加密钥管理，完善密钥管理文档及组件市场开发文档'
 		}
 	]
 }
