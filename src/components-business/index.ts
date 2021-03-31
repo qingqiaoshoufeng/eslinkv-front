@@ -1,6 +1,7 @@
 import { custom } from 'eslinkv-npm'
 
-const components = {}; const snapshots = {}
+const components = {}
+const snapshots = {}
 const widgetsObject = []
 const w = {}
 const conf = require.context('./', true, /\.(component.ts)$/)
