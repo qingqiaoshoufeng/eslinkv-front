@@ -15,7 +15,7 @@
 </template>
 
 <script>
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import { customConfig, value } from './index.component'
 
 	export default {

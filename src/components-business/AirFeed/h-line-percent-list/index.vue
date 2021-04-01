@@ -10,7 +10,7 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import HLinePercentItem from './HLinePercentItem'
 	import { value } from './index.component'
 

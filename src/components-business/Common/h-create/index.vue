@@ -5,7 +5,7 @@
 			h2(@click="handleClick") {{data&&data.title}}
 </template>
 <script lang="ts">
-	import { widgetMixin, scene } from 'eslinkv-npm'
+	import { widgetMixin, scene } from 'eslinkv-sdk'
 	import { Component } from 'vue-property-decorator'
 	import { mixins } from 'vue-class-component'
 	import { value } from './index.component'

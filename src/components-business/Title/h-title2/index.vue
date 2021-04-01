@@ -5,7 +5,7 @@
             p {{config.config&&config.config.title}}
 </template>
 <script lang="ts">
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import { Component } from 'vue-property-decorator'
 	import { mixins } from 'vue-class-component'
 	import { value, customConfig } from './index.component'

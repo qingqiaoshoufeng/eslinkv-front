@@ -45,7 +45,7 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import LineOne from '@/components/LineOne'
 	import { value } from './index.component'
 

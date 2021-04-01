@@ -62,13 +62,13 @@ module.exports = {
 				// },
 			},
 			'^/node': {
-				// target: 'http://127.0.0.1:7001',
-				target: 'http://eslinkv.eslink.cc',
+				target: 'http://127.0.0.1:7001',
+				// target: 'http://eslinkv.eslink.cc',
 				// target: 'http://10.30.3.156:7001',
 				changeOrigin: true,
-				// pathRewrite: {
-				// 	'^/node': '/'
-				// }
+				pathRewrite: {
+					'^/node': '/'
+				}
 			},
 			'^/cdn': {
 				target: 'http://127.0.0.1:7001',
@@ -115,7 +115,7 @@ module.exports = {
 		config.resolve.extensions = ['.js', '.vue', '.json', '.ts', '.tsx']
 		config.externals = [
 			{
-				'eslinkv-npm': 'eslinkV',
+				'eslinkv-sdk': 'eslinkV',
 				vue: 'Vue',
 				'vue-router': 'VueRouter',
 				'vue-class-component': 'VueClassComponent',
@@ -167,12 +167,12 @@ module.exports = {
 			.end()
 		config.module
 			.rule('svg')
-			.exclude.add(resolve('node_modules/eslinkv-npm/src/icons'))
+			.exclude.add(resolve('node_modules/eslinkv-sdk/src/icons'))
 			.end()
 		config.module
 			.rule('icons')
 			.test(/\.svg$/)
-			.include.add(resolve('node_modules/eslinkv-npm/src/icons'))
+			.include.add(resolve('node_modules/eslinkv-sdk/src/icons'))
 			.end()
 			.use('svg-sprite-loader')
 			.loader('svg-sprite-loader')

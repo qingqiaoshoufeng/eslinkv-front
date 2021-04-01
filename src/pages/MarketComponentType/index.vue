@@ -7,7 +7,7 @@
         template(#componentTypeParentName="{ row }")
           span {{row.componentTypeParentName?row.componentTypeParentName:'无'}}
         template(#createTime="{ row }")
-          span {{$format(new Date(row.createTime),'yyyy-MM-dd HH:mm:ss')}}
+          span {{row.createTime?$format(new Date(row.createTime),'yyyy-MM-dd HH:mm:ss'):''}}
         template(#action="{ row }")
           i-button.mr10(type="primary" @click="edit(row)") 编辑
           i-button(type="error" @click="remove(row)") 删除
@@ -53,13 +53,13 @@
     }
 
     handleLoadData (item, callback) {
-      this.$api.marketComponentType.level({ componentTypeParentId: item.componentTypeId }).then(res => {
+      this.$api.marketComponentTypeCommon.level({ componentTypeParentId: item.componentTypeId }).then(res => {
         callback(res)
       })
     }
 
     init () {
-			this.$api.marketComponentType.level().then(res => {
+			this.$api.marketComponentTypeCommon.level().then(res => {
 			  res.map(item => {
 			    item.children = []
           item._loading = false

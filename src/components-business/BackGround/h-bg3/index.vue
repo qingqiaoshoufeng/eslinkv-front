@@ -3,7 +3,7 @@
 		.h-bg3
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import { value } from './index.component'
 
 	export default {

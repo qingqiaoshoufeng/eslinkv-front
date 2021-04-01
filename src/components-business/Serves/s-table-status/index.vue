@@ -26,7 +26,7 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import VueSeamLess from 'vue-seamless-scroll'
 	import { value } from './index.component'
 

@@ -38,7 +38,7 @@
 	import pieBgBtnJson from './yuan1.json'
 	import pieTopBg from './yuan2.json'
 	import { value } from './index.component'
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 
 	highcharts3d(highcharts)
 

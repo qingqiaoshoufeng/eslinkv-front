@@ -15,7 +15,7 @@
 	import { Vue, Component } from 'vue-property-decorator'
 	import { Table, Button } from 'view-design'
 	import dialogCheck from './dialogCheckComponent.vue'
-	import { commonConfigValue, configMerge, platform } from 'eslinkv-npm'
+	import { commonConfigValue, configMerge, platform } from 'eslinkv-sdk'
 	import common from '../../store/common.store.js'
 
 	@Component({

@@ -2,7 +2,7 @@
 	<div class="widget-part" :style="`${styles};top:0;}`"></div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import { value } from './index.component'
 
 	export default {

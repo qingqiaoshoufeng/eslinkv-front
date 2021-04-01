@@ -14,7 +14,7 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import MarqueeText from 'vue-marquee-text-component'
 	import { value } from './index.component'
 

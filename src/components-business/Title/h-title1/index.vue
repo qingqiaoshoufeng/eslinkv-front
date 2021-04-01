@@ -5,7 +5,7 @@
             h2 {{data&&data.title}}
 </template>
 <script lang="ts">
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import { Component } from 'vue-property-decorator'
 	import { mixins } from 'vue-class-component'
 	import { value } from './index.component'

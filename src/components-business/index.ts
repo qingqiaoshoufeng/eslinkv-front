@@ -1,4 +1,4 @@
-import { custom } from 'eslinkv-npm'
+import { custom } from 'eslinkv-sdk'
 
 const components = {}; const snapshots = {}
 const widgetsObject = []

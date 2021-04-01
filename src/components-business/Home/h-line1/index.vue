@@ -5,7 +5,7 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import options from './options'
 	import { customConfig, value } from './index.component'
 

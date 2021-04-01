@@ -13,7 +13,7 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import dangerList from './dangerList'
 	import dangerTable from './dangerTable'
 	import { value } from './index.component'

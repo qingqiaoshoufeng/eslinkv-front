@@ -28,7 +28,7 @@
 	</div>
 </template>
 <script>
-	import { event } from 'eslinkv-npm'
+	import { event } from 'eslinkv-sdk'
 	// todo 改造
 	const _cf = {
 		ver: 'debug',

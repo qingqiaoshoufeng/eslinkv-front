@@ -10,7 +10,7 @@
 </template>
 <script lang="ts">
 	import { Vue, Component, Provide } from 'vue-property-decorator'
-	import { platform, dEditor, dWidgetList, dDetail, market, dRightManage } from 'eslinkv-npm'
+	import { platform, dEditor, dWidgetList, dDetail, market, dRightManage } from 'eslinkv-sdk'
 
 	@Component({
 		components: { dWidgetList, dEditor, dDetail, dRightManage }
@@ -18,6 +18,7 @@
 	export default class editor extends Vue {
 		platform = platform.state
 		@Provide('kanboardEditor') kanboardEditor = this.$refs.kanboardEditor
+
     mounted () {
       market()
     }

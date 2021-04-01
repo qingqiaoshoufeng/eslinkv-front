@@ -7,7 +7,7 @@
 </template>
 <script lang="ts">
 	import { Vue, Component } from 'vue-property-decorator'
-	import { dView, dDetail, platform } from 'eslinkv-npm'
+	import { dView, dDetail, platform } from 'eslinkv-sdk'
 	import { getQueryString } from '../../utils'
 
   @Component({

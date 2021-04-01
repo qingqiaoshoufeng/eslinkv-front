@@ -11,7 +11,7 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import pie from './pie'
 	import { customConfig, value } from './index.component'
 

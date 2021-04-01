@@ -18,7 +18,7 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import getOption from './options'
 	import { customConfig, value } from './index.component'
 

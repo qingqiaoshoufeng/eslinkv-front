@@ -33,7 +33,7 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import format from 'date-fns/format'
 	import addDays from 'date-fns/addDays'
 	import addMonths from 'date-fns/addMonths'

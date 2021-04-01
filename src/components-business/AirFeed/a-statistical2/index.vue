@@ -46,7 +46,7 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin, scene, instance } from 'eslinkv-npm'
+	import { widgetMixin, scene, instance } from 'eslinkv-sdk'
 	import format from 'date-fns/format'
 	import { customConfig, value } from './index.component'
 

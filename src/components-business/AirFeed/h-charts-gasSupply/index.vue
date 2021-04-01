@@ -18,7 +18,7 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import getOptions from './options'
 	import format from 'date-fns/format'
 	import { customConfig, value } from './index.component'

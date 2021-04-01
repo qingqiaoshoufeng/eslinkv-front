@@ -46,7 +46,7 @@
 </template>
 <script>
 	import bus from '../../../../../utils/bus'
-	import { scene, event, instance } from 'eslinkv-npm'
+	import { scene, event, instance } from 'eslinkv-sdk'
 	import {
 		INDEXSCENEMAP,
 		OVERLAYINFOMAP_AIRSUPPLY,

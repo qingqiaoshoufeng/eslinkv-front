@@ -58,7 +58,7 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import getOptions from './options'
 	import { value } from './index.component'
 

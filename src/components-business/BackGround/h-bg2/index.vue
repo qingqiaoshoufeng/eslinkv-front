@@ -5,7 +5,7 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin, scene } from 'eslinkv-npm'
+	import { widgetMixin, scene } from 'eslinkv-sdk'
 	import { value } from './index.component'
 
 	export default {

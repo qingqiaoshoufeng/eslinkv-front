@@ -36,8 +36,8 @@ esp submit/npm run submit
 |- |- |- index.component.ts      // ★自定义组件配置文件
 |- └---- index.js                // 打包文件
 |- public                        // 网站静态文件
-|- |- eslinkv-npm                // ★eslinkv-npm插件包   
-|- |- |- eslinkv-npm.umd.min.js                
+|- |- eslinkv-sdk                // ★eslinkv-sdk插件包   
+|- |- |- eslinkv-sdk.umd.min.js                
 |- └---- ……                      
 |- └- index.html           
 |- esp-config.js                 // ★eslinkv-cli配置文件   
@@ -55,7 +55,7 @@ esp submit/npm run submit
 	import { Component } from 'vue-property-decorator'
 	import { mixins } from 'vue-class-component'
 	import { value, customConfig } from './index.component'
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 
     @Component
 	export default class HelloWorld extends mixins(widgetMixin) {

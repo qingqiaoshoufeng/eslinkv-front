@@ -68,7 +68,7 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-npm'
+	import { widgetMixin } from 'eslinkv-sdk'
 	import step1 from './step-1'
 	import step2 from './step-2'
 	import step3 from './step-3'

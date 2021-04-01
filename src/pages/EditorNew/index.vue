@@ -10,7 +10,7 @@
 </template>
 <script lang="ts">
 	import { Vue, Component, Provide } from 'vue-property-decorator'
-	import { dWidgetList, dEditor, platform, dDetail, market, dRightManage } from 'eslinkv-npm'
+	import { dWidgetList, dEditor, platform, dDetail, market, dRightManage } from 'eslinkv-sdk'
 
   @Component({
     components: { dWidgetList, dEditor, dDetail, dRightManage }
