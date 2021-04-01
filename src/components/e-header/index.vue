@@ -43,10 +43,10 @@
         url: '/market/componentList',
         title: '组件开发'
       },
-      {
-        url: '/template',
-        title: '模版市场'
-      },
+      // {
+      //   url: '/template',
+      //   title: '模版市场'
+      // },
       {
         url: '/help/HowToUseMarket',
         title: '帮助中心'
@@ -60,6 +60,7 @@
 		handleUser (name) {
 			switch (name) {
 		    case 'logout':
+          common.actions.setUser(null)
 		      this.$api.user.logout()
           this.$router.push('/login')
 		      break

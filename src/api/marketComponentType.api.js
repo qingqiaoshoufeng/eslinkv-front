@@ -27,9 +27,9 @@ export function destroy (data) {
     })
 }
 
-export function list (data) {
+export function levelList (data) {
     return request({
-        url: '/market/componentType/list',
+        url: '/market/componentType/levelList',
         method: 'post',
         data,
         headers

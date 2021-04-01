@@ -16,6 +16,7 @@
 <script lang="ts">
 	import { Input, Button, Icon } from 'view-design'
 	import { Component, Vue } from 'vue-property-decorator'
+	import common from '../../store/common.store.js'
 
 	@Component({
 		components: {
@@ -30,10 +31,11 @@
 
     async login () {
       if (!this.userName || !this.password) return
-      await this.$api.user.login({
+      const res = await this.$api.user.login({
         userName: this.userName,
         password: this.password
       })
+      common.actions.setUser(res)
       this.$router.replace('/')
     }
 	}

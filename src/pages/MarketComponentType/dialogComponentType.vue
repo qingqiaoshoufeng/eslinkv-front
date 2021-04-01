@@ -5,7 +5,7 @@
         i-input(v-model="detail.componentTypeName")
       i-form-item(label="分类英文名")
         i-input(v-model="detail.componentTypeEnName" :disabled="detail.componentTypeId")
-      i-form-item(label="父类")
+      i-form-item(label="父类" v-if="common.user&&common.user.userAdmin")
         tree-select(
           v-model="detail.componentTypeParentId"
           :options="componentTypeList"
@@ -22,6 +22,7 @@
 	import { Modal, Button, Form, FormItem, Input, Select, Option } from 'view-design'
 	import TreeSelect, { LOAD_CHILDREN_OPTIONS } from '@riophae/vue-treeselect'
 	import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+	import common from '../../store/common.store.js'
 
 	@Component({
 		components: {
@@ -40,7 +41,7 @@
 		@Prop(Object) detail: ComponentTypeCreate
 		modalShow = false
     componentTypeList = []
-
+    common=common.state
 		@Watch('value')
 		onValueChange (val) {
 			this.modalShow = val
@@ -53,7 +54,7 @@
 
     loadOptions ({ action, parentNode, callback }) {
       if (action === LOAD_CHILDREN_OPTIONS) {
-        this.$api.marketComponentTypeCommon.level({
+        this.$api.marketComponentType.levelList({
           componentTypeParentId: parentNode.componentTypeId
         }).then(r => {
           parentNode.children = r
@@ -81,7 +82,7 @@
 		}
 
 		created () {
-      this.$api.marketComponentTypeCommon.level().then(r => {
+      this.$api.marketComponentType.levelList().then(r => {
         r.forEach(v => {
           v.children = null
         })

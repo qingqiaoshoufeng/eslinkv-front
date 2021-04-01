@@ -28,6 +28,7 @@
 		}
 	})
 	export default class MarketComponentType extends Vue {
+    common=common.state
 		list = []
 		columns = [
 			{
@@ -53,13 +54,17 @@
     }
 
     handleLoadData (item, callback) {
-      this.$api.marketComponentTypeCommon.level({ componentTypeParentId: item.componentTypeId }).then(res => {
-        callback(res)
-      })
+		  if (this.common.user.userAdmin) {
+        this.$api.marketComponentType.levelList({ componentTypeParentId: item.componentTypeId }).then(res => {
+          callback(res)
+        })
+      } else {
+        callback([])
+      }
     }
 
     init () {
-			this.$api.marketComponentTypeCommon.level().then(res => {
+			this.$api.marketComponentType.levelList().then(res => {
 			  res.map(item => {
 			    item.children = []
           item._loading = false
