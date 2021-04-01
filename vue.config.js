@@ -115,7 +115,7 @@ module.exports = {
 		config.resolve.extensions = ['.js', '.vue', '.json', '.ts', '.tsx']
 		config.externals = [
 			{
-				'eslinkv-sdk': 'eslinkV',
+				// 'eslinkv-sdk': 'eslinkV',
 				vue: 'Vue',
 				'vue-router': 'VueRouter',
 				'vue-class-component': 'VueClassComponent',
