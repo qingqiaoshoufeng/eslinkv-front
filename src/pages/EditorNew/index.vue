@@ -4,16 +4,18 @@
       d-detail
       .main-container(:style="{height: `calc(100% - ${platform.ruler.yRoom}px)`}")
         .d-editor-box.pos-r.fn-flex
-          d-widget-list
+          d-left-widget
+          d-left-scene
           d-editor(ref="kanboardEditor")
-          d-right-manage
+          d-right-manage(v-if="platform.chooseWidgetState")
+          d-right-setting(v-else)
 </template>
 <script lang="ts">
 	import { Vue, Component, Provide } from 'vue-property-decorator'
-	import { dWidgetList, dEditor, platform, dDetail, market, dRightManage } from 'eslinkv-sdk'
+	import { dEditor, platform, dDetail, market, dRightManage, dRightSetting, dLeftWidget, dLeftScene } from 'eslinkv-sdk'
 
   @Component({
-    components: { dWidgetList, dEditor, dDetail, dRightManage }
+    components: { dEditor, dDetail, dRightManage, dRightSetting, dLeftWidget, dLeftScene }
   })
 	export default class New extends Vue {
     @Provide('kanboardEditor') kanboardEditor = this.$refs.kanboardEditor

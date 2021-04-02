@@ -29,6 +29,14 @@ export default {
 		{
 			type: ['refactor'],
 			content: '标尺参考线代码优化及UI优化'
+		},
+		{
+			type: ['refactor'],
+			content: '场景UI优化'
+		},
+		{
+			type: ['refactor'],
+			content: '组件区，场景区，设置区可设置显隐'
 		}
 	]
 }
