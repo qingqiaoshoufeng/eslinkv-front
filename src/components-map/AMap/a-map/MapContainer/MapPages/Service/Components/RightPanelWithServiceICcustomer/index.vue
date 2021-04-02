@@ -17,52 +17,52 @@
 	</Tabs>
 </template>
 <script>
-	import { Tabs, TabPanel } from '../../../../../components/Tabs/'
-	import ICCustomerList from './ICCustomerList'
-	export default {
-		name: 'RightlistPanel',
-		data () {
-			return {
-				activeIndex: null,
-				ready: false,
-				currentTab: 'ICCustomerList'
-			}
-		},
-		props: {
-			activeOverlay: {
-				type: Object,
-				default () {
-					return {}
-				}
-			}
-		},
-		components: {
-			Tabs,
-			TabPanel,
-			ICCustomerList
-		},
-		mounted () {
-			this.ready = true
-		},
-		watch: {
-			activeItem (val) {
-				if (JSON.stringify(val) == '{}') {
-					return (this.activeIndex = null)
-				}
-				const index = this.data.findIndex(item => {
-					const { id } = item
-					return val.id === id
-				})
-				this.activeIndex = index > -1 ? index : null
-			}
-		},
-		methods: {
-			handleClick (item, index) {
-				this.activeIndex = index
-				this.$emit('overlay-click', item)
-			}
+import { Tabs, TabPanel } from '../../../../../components/Tabs/'
+import ICCustomerList from './ICCustomerList'
+export default {
+	name: 'RightlistPanel',
+	data() {
+		return {
+			activeIndex: null,
+			ready: false,
+			currentTab: 'ICCustomerList',
 		}
-	}
+	},
+	props: {
+		activeOverlay: {
+			type: Object,
+			default() {
+				return {}
+			},
+		},
+	},
+	components: {
+		Tabs,
+		TabPanel,
+		ICCustomerList,
+	},
+	mounted() {
+		this.ready = true
+	},
+	watch: {
+		activeItem(val) {
+			if (JSON.stringify(val) == '{}') {
+				return (this.activeIndex = null)
+			}
+			const index = this.data.findIndex(item => {
+				const { id } = item
+				return val.id === id
+			})
+			this.activeIndex = index > -1 ? index : null
+		},
+	},
+	methods: {
+		handleClick(item, index) {
+			this.activeIndex = index
+			this.$emit('overlay-click', item)
+		},
+	},
+}
 </script>
 
 <style lang="scss" scoped>

@@ -7,13 +7,18 @@
 			<li>收藏</li>
 			<li>分享</li>
 		</ul>
-		<div class="content" @mouseenter="isStop = true" @mouseleave="isStop = false">
-			<ul
-				class="content__row1"
-				v-for="(k, index) in curr"
-				:key="index"
-			>
-				<li class="font-num" :class="{first: getIndex(index) === '01'}">{{ getIndex(index) }}</li>
+		<div
+			class="content"
+			@mouseenter="isStop = true"
+			@mouseleave="isStop = false"
+		>
+			<ul class="content__row1" v-for="(k, index) in curr" :key="index">
+				<li
+					class="font-num"
+					:class="{ first: getIndex(index) === '01' }"
+				>
+					{{ getIndex(index) }}
+				</li>
 				<li>{{ k.v1 }}</li>
 				<li>{{ k.v2 | toThousand }}</li>
 				<li>{{ k.v3 | toThousand }}</li>
@@ -23,79 +28,134 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import { value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import { value } from './index.component'
 
-	const SIZE = 6
-	export default {
-		mixins: [widgetMixin],
-		data () {
-			return {
-				timer: null,
-				loop: 0,
-				isStop: false
-			}
-		},
-		watch: {
-			data: {
-				handler (val) {
-					clearInterval(this.timer)
-					this.loop = 0
-					this.timer = setInterval(() => {
-						if (this.isStop) return
-						if (this.loop === Math.ceil(val.list.length / SIZE) - 1) {
-							this.loop = 0
-						} else {
-							this.loop++
-						}
-					}, 2000)
-				},
-				deep: true,
-				immediate: true
-			}
-		},
-		computed: {
-			curr () {
-				if (!this.data) return []
-				return this.data.list.slice(this.loop * SIZE, (this.loop + 1) * SIZE)
-			}
-		},
-		methods: {
-			getIndex (n) {
-				const num = n + 1 + this.loop * SIZE
-				return num < 10 ? '0' + num : num
-			}
-		},
-		created () {
-			this.configValue = this.parseConfigValue(value)
-		},
-		beforeDestroy () {
-			clearInterval(this.timer)
-			this.timer = null
+const SIZE = 6
+export default {
+	mixins: [widgetMixin],
+	data() {
+		return {
+			timer: null,
+			loop: 0,
+			isStop: false,
 		}
-	}
+	},
+	watch: {
+		data: {
+			handler(val) {
+				clearInterval(this.timer)
+				this.loop = 0
+				this.timer = setInterval(() => {
+					if (this.isStop) return
+					if (this.loop === Math.ceil(val.list.length / SIZE) - 1) {
+						this.loop = 0
+					} else {
+						this.loop++
+					}
+				}, 2000)
+			},
+			deep: true,
+			immediate: true,
+		},
+	},
+	computed: {
+		curr() {
+			if (!this.data) return []
+			return this.data.list.slice(
+				this.loop * SIZE,
+				(this.loop + 1) * SIZE,
+			)
+		},
+	},
+	methods: {
+		getIndex(n) {
+			const num = n + 1 + this.loop * SIZE
+			return num < 10 ? '0' + num : num
+		},
+	},
+	created() {
+		this.configValue = this.parseConfigValue(value)
+	},
+	beforeDestroy() {
+		clearInterval(this.timer)
+		this.timer = null
+	},
+}
 </script>
 <style lang="scss" scoped>
-	.widget-part {
-		.title {
+.widget-part {
+	.title {
+		box-sizing: border-box;
+		display: flex;
+		align-items: center;
+		width: 100%;
+		height: 32px;
+		background: rgba(23, 123, 255, 0.2);
+
+		& > li {
+			padding-left: 8px;
+			font-size: 18px;
+			line-height: 24px;
+			color: #00cbf4;
+			text-align: left;
+
+			&:nth-child(1) {
+				width: 24px;
+				height: 24px;
+				margin-right: 8px;
+			}
+
+			&:nth-child(2) {
+				width: 240px;
+			}
+
+			&:nth-child(3) {
+				width: 90px;
+			}
+
+			&:nth-child(4) {
+				width: 65px;
+			}
+
+			&:nth-child(5) {
+				flex: 1;
+			}
+		}
+	}
+
+	.content {
+		height: 170px;
+
+		&__seamless-warp1 {
+			height: 170px;
+			overflow: hidden;
+		}
+
+		&__row1 {
 			box-sizing: border-box;
 			display: flex;
 			align-items: center;
-			width: 100%;
 			height: 32px;
-			background: rgba(23, 123, 255, 0.2);
+			padding-left: 8px;
+
+			&:first-child > li.first {
+				background: #ff7217;
+			}
 
 			& > li {
-				padding-left: 8px;
 				font-size: 18px;
 				line-height: 24px;
-				color: #00cbf4;
+				color: #fff;
 				text-align: left;
 
 				&:nth-child(1) {
 					width: 24px;
 					height: 24px;
 					margin-right: 8px;
+					font-weight: bold;
+					text-align: center;
+					background: #0057a9;
 				}
 
 				&:nth-child(2) {
@@ -115,59 +175,6 @@
 				}
 			}
 		}
-
-		.content {
-			height: 170px;
-
-			&__seamless-warp1 {
-				height: 170px;
-				overflow: hidden;
-			}
-
-			&__row1 {
-				box-sizing: border-box;
-				display: flex;
-				align-items: center;
-				height: 32px;
-				padding-left: 8px;
-
-				&:first-child > li.first {
-					background: #ff7217;
-				}
-
-				& > li {
-					font-size: 18px;
-					line-height: 24px;
-					color: #fff;
-					text-align: left;
-
-					&:nth-child(1) {
-						width: 24px;
-						height: 24px;
-						margin-right: 8px;
-						font-weight: bold;
-						text-align: center;
-						background: #0057a9;
-					}
-
-					&:nth-child(2) {
-						width: 240px;
-					}
-
-					&:nth-child(3) {
-						width: 90px;
-					}
-
-					&:nth-child(4) {
-						width: 65px;
-					}
-
-					&:nth-child(5) {
-						flex: 1;
-					}
-				}
-			}
-		}
 	}
+}
 </style>
-

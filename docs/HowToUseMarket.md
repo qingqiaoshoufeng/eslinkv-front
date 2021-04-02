@@ -21,7 +21,7 @@ npm i eslinkv-cli -g
 esp submit/npm run submit
 ```
 
-## 目录
+## 目录介绍
 ```
 |- examples                      // 本地开发演示主目录
 |- |- App.vue                    // 组件容器，包含截图等附加功能
@@ -36,8 +36,6 @@ esp submit/npm run submit
 |- |- |- index.component.ts      // ★自定义组件配置文件
 |- └---- index.js                // 打包文件
 |- public                        // 网站静态文件
-|- |- eslinkv-sdk                // ★eslinkv-sdk插件包   
-|- |- |- eslinkv-sdk.umd.min.js                
 |- └---- ……                      
 |- └- index.html           
 |- esp-config.js                 // ★eslinkv-cli配置文件   
@@ -59,9 +57,8 @@ esp submit/npm run submit
 
     @Component
 	export default class HelloWorld extends mixins(widgetMixin) {
+		
 		// 这个方法是将index.component.ts文件中的配置传入到该组件中，不可少
-
-		// 我们现在直接修改下mysql，模拟下打包发布组件的过程
 		created () {
 			this.configValue = this.parseConfigValue(value, customConfig)
 		}
@@ -144,7 +141,6 @@ export const value = {
 module.exports = {
     domain: 'http://eslinkv.eslink.cc/node/', // cli 接口 domain 设置
     appKey: '******', // AppKey
-    appSecret: '******', // AppSecret
     include: [], // 只上传哪些组件
     exclude: [], // 不上传哪些组件
 }

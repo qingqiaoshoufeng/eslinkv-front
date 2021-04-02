@@ -3,52 +3,52 @@ export default {
 		top: 40,
 		left: 40,
 		bottom: 30,
-		right: 0
+		right: 0,
 	},
 	xAxis: {
 		type: 'category',
 		axisTick: {
-			show: false
+			show: false,
 		},
 		splitLine: {
-			show: false
+			show: false,
 		},
 		boundaryGap: ['10%', '10%'],
 		axisLine: {
 			lineStyle: {
-				color: 'rgba(255, 255, 255,.1)'
-			}
+				color: 'rgba(255, 255, 255,.1)',
+			},
 		},
 		axisLabel: {
 			interval: 0,
 			textStyle: {
 				color: 'rgba(255, 255, 255, 1)',
 				fontSize: 16,
-				lineHeight: 16
-			}
-		}
+				lineHeight: 16,
+			},
+		},
 	},
 	yAxis: {
 		type: 'value',
 		axisTick: {
-			show: false
+			show: false,
 		},
 		splitNumber: 4,
 		axisLine: {
-			show: false
+			show: false,
 		},
 		splitLine: {
 			lineStyle: {
-				color: 'rgba(255, 255, 255,0.2)'
-			}
+				color: 'rgba(255, 255, 255,0.2)',
+			},
 		},
 		axisLabel: {
 			textStyle: {
 				color: 'rgba(255, 255, 255, 1)',
 				fontSize: 16,
-				lineHeight: 16
-			}
-		}
+				lineHeight: 16,
+			},
+		},
 	},
 	series: [
 		{
@@ -68,23 +68,19 @@ export default {
 				height: 4,
 				rich: {
 					a: {
-						color: '#fff'
-
-					}
-				}
+						color: '#fff',
+					},
+				},
 			},
 			itemStyle: {
 				normal: {
-					color: new echarts.graphic.LinearGradient(
-						0, 0, 0, 1,
-						[
-							{ offset: 0, color: 'rgba(255,255,255,.6)' },
-							{ offset: 1, color: 'rgba(255,255,255,0)' }
-						]
-					)
-				}
+					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+						{ offset: 0, color: 'rgba(255,255,255,.6)' },
+						{ offset: 1, color: 'rgba(255,255,255,0)' },
+					]),
+				},
 			},
-			data: []
-		}
-	]
+			data: [],
+		},
+	],
 }

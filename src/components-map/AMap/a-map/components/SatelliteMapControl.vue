@@ -12,22 +12,22 @@
 	</div>
 </template>
 <script>
-	import SvgIcon from './SvgIcon/index.vue'
-	export default {
-		data () {
-			return { sateLayer: null }
+import SvgIcon from './SvgIcon/index.vue'
+export default {
+	data() {
+		return { sateLayer: null }
+	},
+	components: { SvgIcon },
+	props: ['value', 'sateMapCtrPos'],
+	watch: {
+		value: {
+			handler(val) {
+				console.log(val)
+			},
+			immediate: true,
 		},
-		components: { SvgIcon },
-		props: ['value', 'sateMapCtrPos'],
-		watch: {
-			value: {
-				handler (val) {
-					console.log(val)
-				},
-				immediate: true
-			}
-		}
-	}
+	},
+}
 </script>
 <style lang="scss" scoped>
 .map_button_box {

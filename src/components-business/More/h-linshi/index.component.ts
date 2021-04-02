@@ -2,11 +2,11 @@ export const value = {
 	layout: {
 		size: {
 			width: 600,
-			height: 952
+			height: 952,
 		},
 		position: {
-			value: 'relative'
-		}
+			value: 'relative',
+		},
 	},
 	api: {
 		data: {
@@ -18,15 +18,15 @@ export const value = {
 				mediumPipeline: 2627,
 				gasStation: 2,
 				lowPipeline: 4652,
-				voltageRegulator: 5438
+				voltageRegulator: 5438,
 			},
 			service: {
 				household: 13253458,
 				publicUsers: 9332,
 				industrialUsers: 318,
 				inUseUsers: 121865,
-				registeredUsers: 254336
-			}
-		}
-	}
+				registeredUsers: 254336,
+			},
+		},
+	},
 }

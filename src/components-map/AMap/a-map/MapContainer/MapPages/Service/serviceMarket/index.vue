@@ -43,78 +43,78 @@
 </template>
 <script>
 // 页面覆盖物组件
-	import { BranchCompany, HeatMap } from '../Components/index.js'
-	// 页面所需公共组件
-	import {
+import { BranchCompany, HeatMap } from '../Components/index.js'
+// 页面所需公共组件
+import {
+	RegionBoundary,
+	OverlayDetail,
+	MapLegend,
+} from '../../../../components/index.js'
+import {
+	SERVICE_SERVICEMARKET_OVERLAY_MAP,
+	SERVICE_SERVICEMARKET_LEGEND_MAP,
+} from './config'
+
+import { scene } from 'eslinkv-sdk'
+export default {
+	name: 'serviceMarket',
+	components: {
 		RegionBoundary,
 		OverlayDetail,
-		MapLegend
-	} from '../../../../components/index.js'
-	import {
-		SERVICE_SERVICEMARKET_OVERLAY_MAP,
-		SERVICE_SERVICEMARKET_LEGEND_MAP
-	} from './config'
 
-	import { scene } from 'eslinkv-sdk'
-	export default {
-		name: 'serviceMarket',
-		components: {
-			RegionBoundary,
-			OverlayDetail,
-
-			BranchCompany,
-			HeatMap,
-			MapLegend
-		},
-		data () {
-			return {
-				overlayInfoConfigMap: Object.freeze(
-					SERVICE_SERVICEMARKET_OVERLAY_MAP
-				),
-				legendMap: SERVICE_SERVICEMARKET_LEGEND_MAP,
-				mapLegendStyle: { left: '18%' },
-				legendMultiple: true,
-				showOverlayDetail: false,
-				activeOverlay: {},
-				center: [120.131259, 30.263295],
-				zoom: 10,
-				allTypeStationList: {}
+		BranchCompany,
+		HeatMap,
+		MapLegend,
+	},
+	data() {
+		return {
+			overlayInfoConfigMap: Object.freeze(
+				SERVICE_SERVICEMARKET_OVERLAY_MAP,
+			),
+			legendMap: SERVICE_SERVICEMARKET_LEGEND_MAP,
+			mapLegendStyle: { left: '18%' },
+			legendMultiple: true,
+			showOverlayDetail: false,
+			activeOverlay: {},
+			center: [120.131259, 30.263295],
+			zoom: 10,
+			allTypeStationList: {},
 			// swichBoxInfo: SWICHBOX,
-			}
-		},
-		created () {
-			this.$amap = this.$parent.$amap
-			this.$amap.setZoom(this.zoom, 100)
-			this.$amap.setCenter(this.center, 100)
-		},
-		methods: {
-			// 暂留
-			closeOverlayDetail (done) {
-				const { overlayType } = this.activeOverlay
-				if (overlayType === 'WARNEVENT') {
-					scene.actions.setSceneIndex(INDEXSCENEMAP.ServiceMarket)
-					this.showRoutePlan = false
-				}
-				this.showOverlayDetail = false
-				// this.activeOverlay = {};
-				this.$amap.setZoom(11, 100)
-				done()
-			},
-			handleOverlayClick (overlay, overlayType, isCenter = true) {
-				this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true
-				const { lng, lat } = overlay
-				overlay.overlayType = overlayType
-				this.activeOverlay = overlay
-				this.showOverlayDetail = true
-				this.$amap.setZoom(14, 100)
-				if (isCenter) {
-					this.$nextTick(() => {
-						this.$amap.panTo([lng, lat], 100)
-					})
-				}
-			}
 		}
-	}
+	},
+	created() {
+		this.$amap = this.$parent.$amap
+		this.$amap.setZoom(this.zoom, 100)
+		this.$amap.setCenter(this.center, 100)
+	},
+	methods: {
+		// 暂留
+		closeOverlayDetail(done) {
+			const { overlayType } = this.activeOverlay
+			if (overlayType === 'WARNEVENT') {
+				scene.actions.setSceneIndex(INDEXSCENEMAP.ServiceMarket)
+				this.showRoutePlan = false
+			}
+			this.showOverlayDetail = false
+			// this.activeOverlay = {};
+			this.$amap.setZoom(11, 100)
+			done()
+		},
+		handleOverlayClick(overlay, overlayType, isCenter = true) {
+			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true
+			const { lng, lat } = overlay
+			overlay.overlayType = overlayType
+			this.activeOverlay = overlay
+			this.showOverlayDetail = true
+			this.$amap.setZoom(14, 100)
+			if (isCenter) {
+				this.$nextTick(() => {
+					this.$amap.panTo([lng, lat], 100)
+				})
+			}
+		},
+	},
+}
 </script>
 
 <style lang="scss" scoped>

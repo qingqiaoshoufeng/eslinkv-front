@@ -2,63 +2,63 @@ export const customConfig = [
 	{
 		prop: 'color1',
 		label: '颜色1',
-		type: 'func-color'
+		type: 'func-color',
 	},
 	{
 		prop: 'color2',
 		label: '颜色2',
-		type: 'func-color'
+		type: 'func-color',
 	},
 	{
 		prop: 'color3',
 		label: '颜色3',
-		type: 'func-color'
+		type: 'func-color',
 	},
 	{
 		prop: 'desc1',
 		label: '名称1',
-		type: 'func-input'
+		type: 'func-input',
 	},
 	{
 		prop: 'desc2',
 		label: '名称2',
-		type: 'func-input'
+		type: 'func-input',
 	},
 	{
 		prop: 'desc3',
 		label: '名称3',
-		type: 'func-input'
+		type: 'func-input',
 	},
 	{
 		prop: 'title',
 		label: '条形图单位',
-		type: 'func-input'
+		type: 'func-input',
 	},
 	{
 		prop: 'showBackground',
 		label: '柱状图柱的背景',
-		type: 'func-switch'
+		type: 'func-switch',
 	},
 	{
 		prop: 'showLegend',
 		label: '显示图例',
-		type: 'func-switch'
+		type: 'func-switch',
 	},
 	{
 		prop: 'barBorderRadius',
 		label: '柱的圆角',
-		type: 'func-number'
-	}
+		type: 'func-number',
+	},
 ]
 export const value = {
 	layout: {
 		size: {
 			width: 480,
-			height: 226
+			height: 226,
 		},
 		position: {
-			value: 'relative'
-		}
+			value: 'relative',
+		},
 	},
 	api: {
 		data: JSON.stringify({
@@ -72,9 +72,9 @@ export const value = {
 				{ yValue1: 80, yValue2: 80, yValue3: 80, xValue: '8月' },
 				{ yValue1: 70, yValue2: 70, yValue3: 70, xValue: '9月' },
 				{ yValue1: 110, yValue2: 110, yValue3: 110, xValue: '10月' },
-				{ yValue1: 130, yValue2: 130, yValue3: 130, xValue: '11月' }
-			]
-		})
+				{ yValue1: 130, yValue2: 130, yValue3: 130, xValue: '11月' },
+			],
+		}),
 	},
 	config: {
 		color1: '#2C99FF',
@@ -86,6 +86,6 @@ export const value = {
 		title: '台',
 		showLegend: true,
 		showBackground: true,
-		barBorderRadius: 4
-	}
+		barBorderRadius: 4,
+	},
 }

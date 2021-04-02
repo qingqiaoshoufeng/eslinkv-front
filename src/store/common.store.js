@@ -7,15 +7,15 @@ import { store } from './index'
 
 const state = Vue.observable({
 	navIndex: '/editor/Manger',
-	user: null
+	user: null,
 })
 const actions = {
-	setNavIndex (navIndex) {
+	setNavIndex(navIndex) {
 		state.navIndex = navIndex
 	},
-	setUser (user) {
+	setUser(user) {
 		state.user = user
-	}
+	},
 }
 const scene = store('common', state, actions)
 

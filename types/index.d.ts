@@ -1,32 +1,32 @@
 interface ComponentValueLayout {
-    size: ComponentValueLayoutSize
-    position: ComponentValueLayoutPosition
+	size: ComponentValueLayoutSize
+	position: ComponentValueLayoutPosition
 }
 
 interface ComponentValueLayoutSize {
-    width: number
-    height: number
+	width: number
+	height: number
 }
 
 type ComponentValueLayoutPositionValue = 'relative' | 'absolute' | 'fixed'
 
 interface ComponentValueLayoutPosition {
-    value: ComponentValueLayoutPositionValue
+	value: ComponentValueLayoutPositionValue
 }
 
 interface ComponentValue {
-    layout: ComponentValueLayout
-    api: ComponentValueApi
-    config?: any
+	layout: ComponentValueLayout
+	api: ComponentValueApi
+	config?: any
 }
 
 interface ComponentValueApi {
-    data: any
+	data: any
 }
 
 interface ComponentTypeCreate {
-    componentTypeId?: string
-    componentTypeName: string
-    componentTypeEnName?: string
-    componentTypeParentId?: string
+	componentTypeId?: string
+	componentTypeName: string
+	componentTypeEnName?: string
+	componentTypeParentId?: string
 }

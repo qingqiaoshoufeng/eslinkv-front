@@ -1,4 +1,4 @@
-export default function getOption (data, config) {
+export default function getOption(data, config) {
 	return {
 		color: JSON.parse(config.color),
 		series: [
@@ -8,18 +8,18 @@ export default function getOption (data, config) {
 				radius: ['45%', '57%'],
 				minAngle: 10,
 				label: {
-					show: false
+					show: false,
 				},
 				data: data.map(item => item.value),
 				itemStyle: {
-					opacity: 0.5
+					opacity: 0.5,
 				},
 				emphasis: {
 					itemStyle: {
-						opacity: 1
-					}
-				}
-			}
-		]
+						opacity: 1,
+					},
+				},
+			},
+		],
 	}
 }

@@ -2,32 +2,32 @@ import { data } from './options'
 
 export const value = {
 	api: {
-		data: JSON.stringify(data)
+		data: JSON.stringify(data),
 	},
 	config: {
 		sceneId: '',
-		componentId: ''
+		componentId: '',
 	},
 	layout: {
 		size: {
 			width: 480,
-			height: 208
+			height: 208,
 		},
 		position: {
-			value: 'relative'
-		}
-	}
+			value: 'relative',
+		},
+	},
 }
 
 export const customConfig = [
 	{
 		prop: 'sceneId',
 		label: '场景id',
-		type: 'func-input'
+		type: 'func-input',
 	},
 	{
 		prop: 'componentId',
 		label: '组件id',
-		type: 'func-input'
-	}
+		type: 'func-input',
+	},
 ]

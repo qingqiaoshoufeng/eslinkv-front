@@ -16,59 +16,58 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import { value, customConfig } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import { value, customConfig } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		methods: {},
-		computed: {
-			computedMinutes () {
-				if (!this.data) return 0
-				return this.data.minutes.toLocaleString()
-			}
+export default {
+	mixins: [widgetMixin],
+	methods: {},
+	computed: {
+		computedMinutes() {
+			if (!this.data) return 0
+			return this.data.minutes.toLocaleString()
 		},
-		created () {
-			this.configValue = this.parseConfigValue(value, customConfig)
-		}
-	}
+	},
+	created() {
+		this.configValue = this.parseConfigValue(value, customConfig)
+	},
+}
 </script>
 <style lang="scss">
-	.h-icon-info-count {
-		display: flex;
-		align-items: center;
-		background: linear-gradient(90deg, #001f6d 0%, rgba(0, 31, 109, 0) 100%);
+.h-icon-info-count {
+	display: flex;
+	align-items: center;
+	background: linear-gradient(90deg, #001f6d 0%, rgba(0, 31, 109, 0) 100%);
 
-		&__icon {
-			width: 32px;
-			height: 32px;
-			margin-left: 16px;
-			background-repeat: no-repeat;
-			background-position: center;
-			background-size: 32px;
-		}
-
-		&__text {
-			margin-left: 8px;
-			font-size: 18px;
-			line-height: 24px;
-			color: #0df;
-		}
-
-		&__count {
-			margin-left: 16px;
-			font-size: 32px;
-			font-weight: bold;
-			line-height: 32px;
-			color: #fff;
-		}
-
-		&__unit {
-			margin-left: 8px;
-			font-size: 18px;
-			line-height: 24px;
-			color: rgba(255, 255, 255, 0.75);
-		}
+	&__icon {
+		width: 32px;
+		height: 32px;
+		margin-left: 16px;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 32px;
 	}
-</style>
 
+	&__text {
+		margin-left: 8px;
+		font-size: 18px;
+		line-height: 24px;
+		color: #0df;
+	}
+
+	&__count {
+		margin-left: 16px;
+		font-size: 32px;
+		font-weight: bold;
+		line-height: 32px;
+		color: #fff;
+	}
+
+	&__unit {
+		margin-left: 8px;
+		font-size: 18px;
+		line-height: 24px;
+		color: rgba(255, 255, 255, 0.75);
+	}
+}
+</style>

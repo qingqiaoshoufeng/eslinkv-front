@@ -34,22 +34,24 @@
 						"
 					>
 						<!-- v-show="detailInfo[item.prop]" -->
-						<span class="label" :style="item.style">{{
-							`${item.label}: `
-						}}</span>
-						<span class="value">{{
-							`${
-								(detailInfo[item.prop] &&
+						<span class="label" :style="item.style">
+							{{ `${item.label}: ` }}
+						</span>
+						<span class="value">
+							{{
+								`${
+									(detailInfo[item.prop] &&
 									detailInfo[item.prop] !== 0 &&
 									isNumber(detailInfo[item.prop])
-									? parseFloat(
-										detailInfo[item.prop].toFixed(
-											item.Fixed || 0
-										)
-									).toLocaleString()
-									: detailInfo[item.prop] || 0) + item.DW
-							} `
-						}}</span>
+										? parseFloat(
+												detailInfo[item.prop].toFixed(
+													item.Fixed || 0,
+												),
+										  ).toLocaleString()
+										: detailInfo[item.prop] || 0) + item.DW
+								} `
+							}}
+						</span>
 					</div>
 				</div>
 			</div>
@@ -58,78 +60,78 @@
 	</div>
 </template>
 <script>
-	import { DETAILLIST } from './config'
-	import { SvgIcon } from '../../../../../components/'
-	export default {
-		name: 'TipDetial',
-		components: { SvgIcon },
-		props: {
-			data: {
-				Type: Object,
-				default () {
-					return {}
-				}
+import { DETAILLIST } from './config'
+import { SvgIcon } from '../../../../../components/'
+export default {
+	name: 'TipDetial',
+	components: { SvgIcon },
+	props: {
+		data: {
+			Type: Object,
+			default() {
+				return {}
 			},
-			isShowMore: {
-				Type: Boolean,
-				default: false
-			},
-			isShowList: {
-				Type: Number,
-				default: -1
-			},
-			detailShowList: {
-				Type: Array,
-				default () {
-					return []
-				}
-			}
 		},
-		watch: {
-			detailShowList: {
-				handler (val) {
-					this.detailInfo = {}
-					if (val.length === 1) {
-						this.getDetailInfo(val[0].middleId)
-					} else {
-						this.getDetailInfo(val[this.activeIndex].middleId)
-					}
-				},
-				immediate: true
-			}
+		isShowMore: {
+			Type: Boolean,
+			default: false,
 		},
-		data () {
-			return {
-				detailList: DETAILLIST,
-				activeIndex: 0,
-				detailInfo: {}
-			}
+		isShowList: {
+			Type: Number,
+			default: -1,
 		},
-		methods: {
-			handleViewDetail () {
-				this.$emit('view-detail')
+		detailShowList: {
+			Type: Array,
+			default() {
+				return []
 			},
-			isNumber (val) {
-				return typeof val === 'number' && !isNaN(val)
-			},
-			handlerClick (item, index) {
+		},
+	},
+	watch: {
+		detailShowList: {
+			handler(val) {
 				this.detailInfo = {}
-				this.activeIndex = index
-				this.getDetailInfo(item.middleId)
-			},
-			async getDetailInfo (id) {
-				const params = {
-					id
+				if (val.length === 1) {
+					this.getDetailInfo(val[0].middleId)
+				} else {
+					this.getDetailInfo(val[this.activeIndex].middleId)
 				}
-				const res = await this.$api.map.airSupply.getLowMidDevice(params)
-				res.valveOpenFinish =
-					res.valveOpenFinish === 'true' ? '开启' : '关闭'
-				res.mc = res.mc ? '异常' : '正常'
-				this.detailInfo = res
-			}
+			},
+			immediate: true,
 		},
-		mounted () {}
-	}
+	},
+	data() {
+		return {
+			detailList: DETAILLIST,
+			activeIndex: 0,
+			detailInfo: {},
+		}
+	},
+	methods: {
+		handleViewDetail() {
+			this.$emit('view-detail')
+		},
+		isNumber(val) {
+			return typeof val === 'number' && !isNaN(val)
+		},
+		handlerClick(item, index) {
+			this.detailInfo = {}
+			this.activeIndex = index
+			this.getDetailInfo(item.middleId)
+		},
+		async getDetailInfo(id) {
+			const params = {
+				id,
+			}
+			const res = await this.$api.map.airSupply.getLowMidDevice(params)
+			res.valveOpenFinish =
+				res.valveOpenFinish === 'true' ? '开启' : '关闭'
+			res.mc = res.mc ? '异常' : '正常'
+			this.detailInfo = res
+		},
+	},
+	mounted() {},
+}
 </script>
 <style lang="scss" scoped>
 .companyName {

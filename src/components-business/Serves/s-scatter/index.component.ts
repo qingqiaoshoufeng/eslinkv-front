@@ -2,18 +2,18 @@ export const customConfig = [
 	{
 		prop: 'unit',
 		label: '单位',
-		type: 'func-input'
-	}
+		type: 'func-input',
+	},
 ]
 export const value = {
 	layout: {
 		size: {
 			width: 480,
-			height: 226
+			height: 226,
 		},
 		position: {
-			value: 'relative'
-		}
+			value: 'relative',
+		},
 	},
 	api: {
 		data: JSON.stringify({
@@ -23,11 +23,11 @@ export const value = {
 				['5月', '200', 25],
 				['5月', '300', 32],
 				['5月', '400', 25],
-				['6月', '200', 25]
-			]
-		})
+				['6月', '200', 25],
+			],
+		}),
 	},
 	config: {
-		unit: '万m³'
-	}
+		unit: '万m³',
+	},
 }

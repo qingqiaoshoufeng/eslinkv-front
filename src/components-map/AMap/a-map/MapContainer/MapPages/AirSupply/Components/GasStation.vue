@@ -23,127 +23,127 @@
 	</BaseOverlay>
 </template>
 <script>
-	import {
-		AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
-		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
-		AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2
-	} from '../../../../config/scene'
-	import { BaseOverlay } from '../../../../components/index'
-	import { scene, instance } from 'eslinkv-sdk'
-	export default {
-		name: 'GasStation',
-		components: {
-			BaseOverlay
+import {
+	AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
+	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
+	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
+} from '../../../../config/scene'
+import { BaseOverlay } from '../../../../components/index'
+import { scene, instance } from 'eslinkv-sdk'
+export default {
+	name: 'GasStation',
+	components: {
+		BaseOverlay,
+	},
+	props: {
+		visible: {
+			type: Boolean,
+			default: true,
 		},
-		props: {
-			visible: {
-				type: Boolean,
-				default: true
-			},
-			overlayIcon: {
-				type: String,
-				default: ''
-			},
-			overlayType: {
-				type: String,
-				default: ''
-			},
-			active: {
-				type: Boolean,
-				default: false
-			},
-			data: {
-				type: Array
-			},
-			detailList: {
-				type: Array,
-				default () {
-					return []
-				}
-			}
+		overlayIcon: {
+			type: String,
+			default: '',
 		},
-		data () {
-			const apiFun = this.$api.map.mock.getGasStationList
-			return {
-				apiFun: apiFun,
-				propDwMap: {
-					flow: 'm³/h',
-					inPressure: 'MPa',
-					inTemp: '℃',
-					outPressure: 'MPa',
-					outTemp: '℃',
-					todayAirFeed: 'm³'
-				},
-				mouseIn: false
-			}
+		overlayType: {
+			type: String,
+			default: '',
 		},
-		methods: {
-			async handleOverlayClick (marker) {
-				if (!marker.detail) {
-					const { id = '', name = '', type = '' } = marker
-					let data = {}
-					const dataComp = {}
-					try {
-						data = await this.$api.map.airSupply.getStationRealTimeInfo(
-							{
-								id,
-								name,
-								type
-							}
-						)
-					} catch (error) {
-						console.error(error, '接口报错')
-					}
-					Object.keys(data).forEach((prop) => {
-						const dw = this.propDwMap[prop]
-						if (typeof data[prop] !== 'object') {
-							return false
-						}
-						data[prop].forEach((item, index) => {
-							const { name, value } = item
-							const propInner = prop + index
-							dataComp[propInner] = {
-								label: name,
-								value: value,
-								dw
-							}
-						})
-					})
-					marker.detail = dataComp
-				}
-				this.$emit('overlay-click', marker, 'GasStation', false)
+		active: {
+			type: Boolean,
+			default: false,
+		},
+		data: {
+			type: Array,
+		},
+		detailList: {
+			type: Array,
+			default() {
+				return []
 			},
-			viewDetail (marker) {
-				const { name, id } = marker
-				scene.actions.createSceneInstance(
-					AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
-					'slideRight'
-				)
-				this.$nextTick(() => {
-					AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach((item) => {
-						instance.actions.updateComponent(item, {
-							data: {
-								label: name,
-								title: name,
-								image: name,
-								stationId: id
-							}
-						})
-					})
-					AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach((item) => {
-						instance.actions.updateComponent(item, {
-							params: {
-								id
-							}
-						})
-					})
-					setTimeout(() => {
-						this.$emit('close')
-					}, 2000)
-				})
-			}
+		},
+	},
+	data() {
+		const apiFun = this.$api.map.mock.getGasStationList
+		return {
+			apiFun: apiFun,
+			propDwMap: {
+				flow: 'm³/h',
+				inPressure: 'MPa',
+				inTemp: '℃',
+				outPressure: 'MPa',
+				outTemp: '℃',
+				todayAirFeed: 'm³',
+			},
+			mouseIn: false,
 		}
-	}
+	},
+	methods: {
+		async handleOverlayClick(marker) {
+			if (!marker.detail) {
+				const { id = '', name = '', type = '' } = marker
+				let data = {}
+				const dataComp = {}
+				try {
+					data = await this.$api.map.airSupply.getStationRealTimeInfo(
+						{
+							id,
+							name,
+							type,
+						},
+					)
+				} catch (error) {
+					console.error(error, '接口报错')
+				}
+				Object.keys(data).forEach(prop => {
+					const dw = this.propDwMap[prop]
+					if (typeof data[prop] !== 'object') {
+						return false
+					}
+					data[prop].forEach((item, index) => {
+						const { name, value } = item
+						const propInner = prop + index
+						dataComp[propInner] = {
+							label: name,
+							value: value,
+							dw,
+						}
+					})
+				})
+				marker.detail = dataComp
+			}
+			this.$emit('overlay-click', marker, 'GasStation', false)
+		},
+		viewDetail(marker) {
+			const { name, id } = marker
+			scene.actions.createSceneInstance(
+				AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
+				'slideRight',
+			)
+			this.$nextTick(() => {
+				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach(item => {
+					instance.actions.updateComponent(item, {
+						data: {
+							label: name,
+							title: name,
+							image: name,
+							stationId: id,
+						},
+					})
+				})
+				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach(item => {
+					instance.actions.updateComponent(item, {
+						params: {
+							id,
+						},
+					})
+				})
+				setTimeout(() => {
+					this.$emit('close')
+				}, 2000)
+			})
+		},
+	},
+}
 </script>
 <style lang="scss" scoped>
 img {

@@ -16,55 +16,54 @@
 	/>
 </template>
 <script>
-	import { BaseOverlay } from '../../../../components/index'
-	export default {
-		name: 'EmergencyAirSourceStation',
-		components: {
-			BaseOverlay
+import { BaseOverlay } from '../../../../components/index'
+export default {
+	name: 'EmergencyAirSourceStation',
+	components: {
+		BaseOverlay,
+	},
+	props: {
+		visible: {
+			type: Boolean,
+			default: true,
 		},
-		props: {
-			visible: {
-				type: Boolean,
-				default: true
-			},
-			overlayIcon: {
-				type: String,
-				default: ''
-			},
-			overlayType: {
-				type: String,
-				default: ''
-			},
-			data: {
-				type: Array
-			},
-			detailList: {
-				type: Array,
-				default () {
-					return []
-				}
-			}
+		overlayIcon: {
+			type: String,
+			default: '',
 		},
-		computed: {
-			dataInner () {
-				const { data = [] } = this
-				const stationPoseMap = {
-					西部应急气源站: 'left',
-					东部应急气源站: 'top',
-					西部应急气源站: 'left'
-				}
-				return this.data.map(item => {
-					item.pose = stationPoseMap[item.name]
-					return item
-				})
-			}
+		overlayType: {
+			type: String,
+			default: '',
 		},
-		data () {
-			const apiFun = this.$api.map.mock.getEmergencyAirSourceStationList
-			return {
-				apiFun: apiFun
+		data: {
+			type: Array,
+		},
+		detailList: {
+			type: Array,
+			default() {
+				return []
+			},
+		},
+	},
+	computed: {
+		dataInner() {
+			const { data = [] } = this
+			const stationPoseMap = {
+				西部应急气源站: 'left',
+				东部应急气源站: 'top',
+				西部应急气源站: 'left',
 			}
+			return this.data.map(item => {
+				item.pose = stationPoseMap[item.name]
+				return item
+			})
+		},
+	},
+	data() {
+		const apiFun = this.$api.map.mock.getEmergencyAirSourceStationList
+		return {
+			apiFun: apiFun,
 		}
-	}
+	},
+}
 </script>
-

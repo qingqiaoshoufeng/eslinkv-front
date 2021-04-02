@@ -1,11 +1,9 @@
 <template lang="pug">
-	e-layout
+e-layout
 </template>
 <script lang="ts">
-	import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component } from 'vue-property-decorator'
 
-	@Component
-	export default class Home extends Vue {
-
-	}
+@Component
+export default class Home extends Vue {}
 </script>

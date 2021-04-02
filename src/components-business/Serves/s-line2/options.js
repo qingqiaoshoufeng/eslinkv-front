@@ -6,7 +6,7 @@ export default function (data, config) {
 			top: '20%',
 			left: '8%',
 			right: '4%',
-			bottom: '20%'
+			bottom: '20%',
 		},
 		tooltip: {
 			trigger: 'axis',
@@ -19,17 +19,20 @@ export default function (data, config) {
 						y: 0,
 						x2: 0,
 						y2: 1,
-						colorStops: [{
-							offset: 0,
-							color: 'rgba(0, 255, 207, 0.5)'
-						}, {
-							offset: 1,
-							color: 'rgba(0, 255, 207, 0)'
-						}],
-						global: false
-					}
-				}
-			}
+						colorStops: [
+							{
+								offset: 0,
+								color: 'rgba(0, 255, 207, 0.5)',
+							},
+							{
+								offset: 1,
+								color: 'rgba(0, 255, 207, 0)',
+							},
+						],
+						global: false,
+					},
+				},
+			},
 		},
 		legend: {
 			icon: 'rect',
@@ -42,137 +45,164 @@ export default function (data, config) {
 			itemGap: 16,
 			textStyle: {
 				color: '#fff',
-				fontSize: 16
-			}
+				fontSize: 16,
+			},
 		},
 		textStyle: {
 			color: '#fff',
-			fontSize: 16
+			fontSize: 16,
 		},
-		xAxis: [{
-			type: 'category',
-			data: data.data.map(v => v.x),
-			axisLabel: {
-				show: true
+		xAxis: [
+			{
+				type: 'category',
+				data: data.data.map(v => v.x),
+				axisLabel: {
+					show: true,
+				},
+				axisTick: {
+					show: false,
+				},
+				splitLine: {
+					show: false,
+				},
+				axisLine: {
+					show: false,
+				},
 			},
-			axisTick: {
-				show: false
-			},
-			splitLine: {
-				show: false
-
-			},
-			axisLine: {
-				show: false
-			}
-
-		}],
-		yAxis: [{
-			name: config.unit,
-			type: 'value',
-			axisLabel: {
-				show: true
-			},
-			nameTextStyle: {
-				padding: [0, 30, 0, 0]
-			},
-			splitLine: {
-				show: true,
-				lineStyle: {
-					color: 'rgba(199, 209, 219, 0.2)'
-				}
-			},
-			axisTick: {
-				show: false
-			},
-			axisLine: {
-				show: false
-			},
-			splitArea: {
-				show: false
-			}
-		}],
-		series: [{
-			name: data.nowTime,
-			type: 'line',
-			data: data.data.map(v => v.y1),
-			lineStyle: {
-				color: config.color1
-			},
-			areaStyle: {
-				normal: {
-					color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-						offset: 0,
-						color: hexToRgba(config.color1, 0.6)
+		],
+		yAxis: [
+			{
+				name: config.unit,
+				type: 'value',
+				axisLabel: {
+					show: true,
+				},
+				nameTextStyle: {
+					padding: [0, 30, 0, 0],
+				},
+				splitLine: {
+					show: true,
+					lineStyle: {
+						color: 'rgba(199, 209, 219, 0.2)',
 					},
-						{
-							offset: 1,
-							color: hexToRgba(config.color1, 0)
-						}
-					], false)
-				}
+				},
+				axisTick: {
+					show: false,
+				},
+				axisLine: {
+					show: false,
+				},
+				splitArea: {
+					show: false,
+				},
 			},
-			symbol: 'emptyCircle',
-			showSymbol: false, // 是否显示 symbol, 如果 false 则只有在 tooltip hover 的时候显示。
-			itemStyle: {
-				color: config.color1
+		],
+		series: [
+			{
+				name: data.nowTime,
+				type: 'line',
+				data: data.data.map(v => v.y1),
+				lineStyle: {
+					color: config.color1,
+				},
+				areaStyle: {
+					normal: {
+						color: new echarts.graphic.LinearGradient(
+							0,
+							0,
+							0,
+							1,
+							[
+								{
+									offset: 0,
+									color: hexToRgba(config.color1, 0.6),
+								},
+								{
+									offset: 1,
+									color: hexToRgba(config.color1, 0),
+								},
+							],
+							false,
+						),
+					},
+				},
+				symbol: 'emptyCircle',
+				showSymbol: false, // 是否显示 symbol, 如果 false 则只有在 tooltip hover 的时候显示。
+				itemStyle: {
+					color: config.color1,
+				},
+				smooth: true,
 			},
-			smooth: true
-		},
 			{
 				name: data.lastTime,
 				type: 'line',
 				data: data.data.map(v => v.y2),
 				lineStyle: {
-					color: config.color2
+					color: config.color2,
 				},
 				areaStyle: {
 					normal: {
-						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-							offset: 0,
-							color: hexToRgba(config.color2, 0.6)
-						},
-							{
-								offset: 1,
-								color: hexToRgba(config.color2, 0)
-							}
-						], false)
-					}
+						color: new echarts.graphic.LinearGradient(
+							0,
+							0,
+							0,
+							1,
+							[
+								{
+									offset: 0,
+									color: hexToRgba(config.color2, 0.6),
+								},
+								{
+									offset: 1,
+									color: hexToRgba(config.color2, 0),
+								},
+							],
+							false,
+						),
+					},
 				},
 				symbol: 'emptyCircle',
 				showSymbol: false,
 				itemStyle: {
-					color: config.color2
+					color: config.color2,
 				},
-				smooth: true
+				smooth: true,
 			},
 			{
 				name: data.lastLastTime,
 				type: 'line',
 				data: data.data.map(v => v.y3),
 				lineStyle: {
-					color: config.color3
+					color: config.color3,
 				},
 				areaStyle: {
 					normal: {
-						color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
-							offset: 0,
-							color: hexToRgba(config.color3, 0.6)
-						},
-							{
-								offset: 1,
-								color: hexToRgba(config.color3, 0)
-							}
-						], false)
-					}
+						color: new echarts.graphic.LinearGradient(
+							0,
+							0,
+							0,
+							1,
+							[
+								{
+									offset: 0,
+									color: hexToRgba(config.color3, 0.6),
+								},
+								{
+									offset: 1,
+									color: hexToRgba(config.color3, 0),
+								},
+							],
+							false,
+						),
+					},
 				},
 				symbol: 'emptyCircle',
 				showSymbol: false,
 				itemStyle: {
-					color: config.color3
+					color: config.color3,
 				},
-				smooth: true
-			}
-		]
+				smooth: true,
+			},
+		],
 	}
 }

@@ -1,30 +1,30 @@
 export default class AMapManager {
-	constructor () {
+	constructor() {
 		this._componentMap = new Map()
 		this._map = null
 	}
 
-	setMap (map) {
+	setMap(map) {
 		this._map = map
 	}
 
-	getMap () {
+	getMap() {
 		return this._map
 	}
 
-	setComponent (id, component) {
+	setComponent(id, component) {
 		this._componentMap.set(id, component)
 	}
 
-	getComponent (id) {
+	getComponent(id) {
 		return this._componentMap.get(id)
 	}
 
-	getChildInstance (id) {
+	getChildInstance(id) {
 		return this.getComponent(id)
 	}
 
-	removeComponent (id) {
+	removeComponent(id) {
 		this._componentMap.delete(id)
 	}
 }

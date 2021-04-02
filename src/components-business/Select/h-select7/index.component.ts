@@ -7,20 +7,20 @@ export const value = {
 			{ label: '腰轮表', value: 'metertype_04' },
 			{ label: '超声波表', value: 'metertype_05' },
 			{ label: '远传表', value: 'metertype_06' },
-			{ label: '靶式表', value: 'metertype_07' }
+			{ label: '靶式表', value: 'metertype_07' },
 		]),
 		bind: {
 			enable: true,
-			role: ['provider']
-		}
+			role: ['provider'],
+		},
 	},
 	layout: {
 		size: {
 			width: 90,
-			height: 24
+			height: 24,
 		},
 		position: {
-			value: 'relative'
-		}
-	}
+			value: 'relative',
+		},
+	},
 }

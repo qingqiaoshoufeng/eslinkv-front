@@ -1,11 +1,9 @@
 <template>
 	<div class="map-container">
 		<div
-			:style="
-				`transform: scale(${reverseScaleRatio});transform-origin:top left; overflow: hidden;width:${kanboardSize.width /
-					reverseScaleRatio}px;height:${kanboardSize.height /
-					reverseScaleRatio}px`
-			"
+			:style="`transform: scale(${reverseScaleRatio});transform-origin:top left; overflow: hidden;width:${
+				kanboardSize.width / reverseScaleRatio
+			}px;height:${kanboardSize.height / reverseScaleRatio}px`"
 		>
 			<el-amap
 				vid="overviewMap"
@@ -40,72 +38,72 @@
 </template>
 
 <script>
-	import { AMap } from '../lib'
-	import MapTypeLegend from './MapTypeLegend'
-	import { SatelliteMap, SatelliteMapControl } from '../components'
-	import mapMixin from './mapMixin.js'
-	// 动态引入页面
-	const files = require.context('./MapPages/', true, /page\.js$/)
-	const mapPages = {}
-	const path = require('path')
-	files.keys().forEach((key) => {
-		const pageModule = files(key).default || files(key)
-		const pageName = path.dirname(key).slice(2)
-		Object.keys(pageModule).forEach((componentName) => {
-			const subPageName = pageModule[componentName]
-			mapPages[pageName + componentName] = () =>
+import { AMap } from '../lib'
+import MapTypeLegend from './MapTypeLegend'
+import { SatelliteMap, SatelliteMapControl } from '../components'
+import mapMixin from './mapMixin.js'
+// 动态引入页面
+const files = require.context('./MapPages/', true, /page\.js$/)
+const mapPages = {}
+const path = require('path')
+files.keys().forEach(key => {
+	const pageModule = files(key).default || files(key)
+	const pageName = path.dirname(key).slice(2)
+	Object.keys(pageModule).forEach(componentName => {
+		const subPageName = pageModule[componentName]
+		mapPages[pageName + componentName] = () =>
 			import(
 				/* webpackInclude:/\.(vue)$/ */ './MapPages/' +
 					pageName +
 					'/' +
 					subPageName
 			)
-		})
 	})
+})
 
-	export default {
-		name: 'MainMap',
-		mixins: [mapMixin],
-		provide () {
-			return {
-				parentInfo: {
-					scaleRatio: this.scaleRatio,
-					pageName: this.pageName
-				}
-			}
-		},
-		components: {
-			ElAmap: AMap,
-			MapTypeLegend,
-			SatelliteMap,
-			SatelliteMapControl,
-			...mapPages
-		},
-		data () {
-			return {
-				kanboardSize: {
-					width: 3500,
-					height: 1050
-				},
-				scaleRatio: 1,
-				reverseScaleRatio: 1,
-				isShowSatellite: false
-			}
-		},
-		methods: {
-			updateKanboardSize () {
-				const { clientWidth, clientHeight } = document.body
-				const { width, height } = this.kanboardSize
-				let ratio = Math.min(clientWidth / width, clientHeight / height)
-				ratio = ratio < 1 ? ratio : 1
-				this.reverseScaleRatio = 1 / ratio
-				this._provided.parentInfo.scaleRatio = ratio
-			}
-		},
-		mounted () {
-			this.updateKanboardSize()
+export default {
+	name: 'MainMap',
+	mixins: [mapMixin],
+	provide() {
+		return {
+			parentInfo: {
+				scaleRatio: this.scaleRatio,
+				pageName: this.pageName,
+			},
 		}
-	}
+	},
+	components: {
+		ElAmap: AMap,
+		MapTypeLegend,
+		SatelliteMap,
+		SatelliteMapControl,
+		...mapPages,
+	},
+	data() {
+		return {
+			kanboardSize: {
+				width: 3500,
+				height: 1050,
+			},
+			scaleRatio: 1,
+			reverseScaleRatio: 1,
+			isShowSatellite: false,
+		}
+	},
+	methods: {
+		updateKanboardSize() {
+			const { clientWidth, clientHeight } = document.body
+			const { width, height } = this.kanboardSize
+			let ratio = Math.min(clientWidth / width, clientHeight / height)
+			ratio = ratio < 1 ? ratio : 1
+			this.reverseScaleRatio = 1 / ratio
+			this._provided.parentInfo.scaleRatio = ratio
+		},
+	},
+	mounted() {
+		this.updateKanboardSize()
+	},
+}
 </script>
 <style lang="scss" scoped>
 .vue-portal-target {

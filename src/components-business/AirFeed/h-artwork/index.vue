@@ -6,57 +6,56 @@
 			:show-image="false"
 			class="art"
 		></image-view>
-		<img class="tooltip" src="./img/tooltip.svg">
+		<img class="tooltip" src="./img/tooltip.svg" />
 	</div>
 </template>
 <script>
-	import ImageView from '@/components/ImageView'
-	import { widgetMixin } from 'eslinkv-sdk'
-	import { value } from './index.component'
+import ImageView from '@/components/ImageView'
+import { widgetMixin } from 'eslinkv-sdk'
+import { value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		components: {
-			ImageView
-		},
-		data () {
-			return {
-				option: {
-					inline: true,
-					button: false,
-					navbar: false,
-					title: false,
-					toolbar: true,
-					tooltip: true,
-					movable: true,
-					zoomable: true,
-					rotatable: false,
-					scalable: false,
-					transition: false,
-					fullscreen: false,
-					keyboard: false
-				}
-			}
-		},
-		methods: {},
-		created () {
-			this.configValue = this.parseConfigValue(value)
+export default {
+	mixins: [widgetMixin],
+	components: {
+		ImageView,
+	},
+	data() {
+		return {
+			option: {
+				inline: true,
+				button: false,
+				navbar: false,
+				title: false,
+				toolbar: true,
+				tooltip: true,
+				movable: true,
+				zoomable: true,
+				rotatable: false,
+				scalable: false,
+				transition: false,
+				fullscreen: false,
+				keyboard: false,
+			},
 		}
-	}
+	},
+	methods: {},
+	created() {
+		this.configValue = this.parseConfigValue(value)
+	},
+}
 </script>
 <style lang="scss" scoped>
-	.widget-part {
-		.art {
-			width: 100%;
-			height: 100%;
-		}
-
-		.tooltip {
-			position: absolute;
-			top: 39.05%;
-			right: 1.2%;
-			width: 257px;
-		}
+.widget-part {
+	.art {
+		width: 100%;
+		height: 100%;
 	}
-</style>
 
+	.tooltip {
+		position: absolute;
+		top: 39.05%;
+		right: 1.2%;
+		width: 257px;
+	}
+}
+</style>

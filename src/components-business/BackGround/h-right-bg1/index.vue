@@ -1,48 +1,46 @@
 <template>
-	<div class="widget-part pos-r" :style="`${styles};top:0;${inPreview ? 'pointer-events: none;' : ''}`">
-		<div class="h-right-bg1">
-		</div>
+	<div
+		class="widget-part pos-r"
+		:style="`${styles};top:0;${inPreview ? 'pointer-events: none;' : ''}`"
+	>
+		<div class="h-right-bg1"></div>
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import { value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import { value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		created () {
-			this.configValue = this.parseConfigValue(value)
-		}
-	}
+export default {
+	mixins: [widgetMixin],
+	created() {
+		this.configValue = this.parseConfigValue(value)
+	},
+}
 </script>
 <style lang="scss" scoped>
-	.h-right-bg1 {
-		width: 100%;
-		height: 1050px;
-		pointer-events: none;
-		background-image:
-			-webkit-linear-gradient(
-				0deg,
-				rgba(0, 4, 98, 0),
-				rgba(0, 4, 98, 1)
-			);
+.h-right-bg1 {
+	width: 100%;
+	height: 1050px;
+	pointer-events: none;
+	background-image: -webkit-linear-gradient(
+		0deg,
+		rgba(0, 4, 98, 0),
+		rgba(0, 4, 98, 1)
+	);
 
-		&::after {
-			position: absolute;
-			top: 0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			display: block;
-			content: '';
-			background-image:
-				-webkit-linear-gradient(
-					0deg,
-					rgba(0, 4, 98, 0),
-					rgba(0, 4, 98, 1)
-				);
-		}
+	&::after {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		display: block;
+		content: '';
+		background-image: -webkit-linear-gradient(
+			0deg,
+			rgba(0, 4, 98, 0),
+			rgba(0, 4, 98, 1)
+		);
 	}
-
+}
 </style>
-

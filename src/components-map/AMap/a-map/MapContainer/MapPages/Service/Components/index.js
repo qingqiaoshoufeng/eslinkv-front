@@ -19,7 +19,4 @@ export { default as ClickTipDetial } from './ClickTipDetial' // 任务工单
 export { default as ClickTaskList } from './ClickTaskList' // 点击展示任务工单
 export { default as CustomerHot } from './CustomerHot' // 客户分布热力
 
-
-
 export { default as TipDetial } from './TipDetial' // 子公司详情自定义组件
-

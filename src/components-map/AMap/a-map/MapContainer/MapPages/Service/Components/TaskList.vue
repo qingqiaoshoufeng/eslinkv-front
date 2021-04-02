@@ -16,53 +16,51 @@
 					detailList,
 				})
 			"
-		>
-		</Overlay>
+		></Overlay>
 	</div>
 </template>
 <script>
-	import { Overlay } from '../../../../components/index'
-	const eventTypeIconMap = {
-		0: 'iconrenwugongdan-suc',
-		1: 'iconrenwugongdan'
-	}
-	export default {
-		name: 'useHotYear',
-		components: {
-			Overlay
+import { Overlay } from '../../../../components/index'
+const eventTypeIconMap = {
+	0: 'iconrenwugongdan-suc',
+	1: 'iconrenwugongdan',
+}
+export default {
+	name: 'useHotYear',
+	components: {
+		Overlay,
+	},
+	props: {
+		overlayType: {
+			type: String,
+			default: 'WarningICcustomer',
 		},
-		props: {
-			overlayType: {
-				type: String,
-				default: 'WarningICcustomer'
+		data: {
+			type: Array,
+			default() {
+				return []
 			},
-			data: {
-				type: Array,
-				default () {
-					return []
-				}
+		},
+		detailList: {
+			type: Array,
+			default() {
+				return []
 			},
-			detailList: {
-				type: Array,
-				default () {
-					return []
-				}
-			}
 		},
-		data () {
-			return {
-				eventTypeIconMap
-			}
-		},
+	},
+	data() {
+		return {
+			eventTypeIconMap,
+		}
+	},
 
-		async created () {
-			this.map = this.$parent.$amap
-			this.list = await this.$api.map.airSupply.getEventWarningList()
-		},
-		mounted () {}
-	}
+	async created() {
+		this.map = this.$parent.$amap
+		this.list = await this.$api.map.airSupply.getEventWarningList()
+	},
+	mounted() {},
+}
 </script>
-
 
 <style lang="scss" scoped>
 video::-webkit-media-controls {

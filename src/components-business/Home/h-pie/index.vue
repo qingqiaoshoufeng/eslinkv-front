@@ -11,22 +11,21 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import pie from './pie'
-	import { customConfig, value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import pie from './pie'
+import { customConfig, value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		components: { pie },
-		created () {
-			this.configValue = this.parseConfigValue(value, customConfig)
-		}
-	}
+export default {
+	mixins: [widgetMixin],
+	components: { pie },
+	created() {
+		this.configValue = this.parseConfigValue(value, customConfig)
+	},
+}
 </script>
 <style lang="scss" scoped>
-	.pie {
-		width: 100%;
-		height: 100%;
-	}
+.pie {
+	width: 100%;
+	height: 100%;
+}
 </style>
-

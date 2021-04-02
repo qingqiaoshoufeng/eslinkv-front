@@ -13,59 +13,59 @@
 		v-else
 		@click="handleClick"
 	>
-		<use :xlink:href="iconNameComputed"/>
+		<use :xlink:href="iconNameComputed" />
 	</svg>
 </template>
 
 <script>
-	export default {
-		name: 'SvgIcon',
-		props: {
-			iconName: {
-				type: String,
-				required: true
-			},
-			iconPrefix: {
-				type: String,
-				default: ''
-			},
-			className: {
-				type: String,
-				default: ''
+export default {
+	name: 'SvgIcon',
+	props: {
+		iconName: {
+			type: String,
+			required: true,
+		},
+		iconPrefix: {
+			type: String,
+			default: '',
+		},
+		className: {
+			type: String,
+			default: '',
+		},
+	},
+	computed: {
+		isExternal() {
+			return /^(https?:|mailto:|tel:)/.test(this.iconName)
+		},
+		iconNameComputed() {
+			const { iconPrefix, iconName } = this
+			if (iconPrefix) {
+				return `#${iconPrefix}-${iconName}`
+			} else {
+				return `#${iconName}`
 			}
 		},
-		computed: {
-			isExternal () {
-				return /^(https?:|mailto:|tel:)/.test(this.iconName)
-			},
-			iconNameComputed () {
-				const { iconPrefix, iconName } = this
-				if (iconPrefix) {
-					return `#${iconPrefix}-${iconName}`
-				} else {
-					return `#${iconName}`
-				}
-			},
-			svgClass () {
-				if (this.className) {
-					return 'svg-icon ' + this.className
-				} else {
-					return 'svg-icon'
-				}
-			},
-			styleExternalIcon () {
-				return {
-					mask: `url(${this.iconName}) no-repeat 50% 50%`,
-					'-webkit-mask': `url(${this.iconName}) no-repeat 50% 50%`
-				}
+		svgClass() {
+			if (this.className) {
+				return 'svg-icon ' + this.className
+			} else {
+				return 'svg-icon'
 			}
 		},
-		methods: {
-			handleClick () {
-				this.$emit('click')
+		styleExternalIcon() {
+			return {
+				mask: `url(${this.iconName}) no-repeat 50% 50%`,
+				'-webkit-mask': `url(${this.iconName}) no-repeat 50% 50%`,
 			}
-		}
-	}
+		},
+	},
+	methods: {
+		handleClick() {
+			this.$emit('click')
+		},
+	},
+}
 </script>
 
 <style scoped>

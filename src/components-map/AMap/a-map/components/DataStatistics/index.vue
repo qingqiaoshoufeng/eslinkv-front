@@ -17,42 +17,42 @@
 </template>
 
 <script>
-	export default {
-		name: 'DataStatistics',
-		props: {
-			position: {
-				type: String,
-				default: 'right'
-			},
-			dataStatisticsList: {
-				type: [Object, Array],
-				default () {
-					return {}
-				}
-			},
-			data: {
-				type: [Object, Array],
-				default () {
-					return {}
-				}
-			}
+export default {
+	name: 'DataStatistics',
+	props: {
+		position: {
+			type: String,
+			default: 'right',
 		},
-		computed: {
-			animate () {
-				const { position } = this
-				return (
-					'animate__fadeIn' +
-					(position.charAt(0).toUpperCase() + position.slice(1))
-				)
-			}
+		dataStatisticsList: {
+			type: [Object, Array],
+			default() {
+				return {}
+			},
 		},
-		components: {},
-		data () {
-			return {}
-		}
-	}
+		data: {
+			type: [Object, Array],
+			default() {
+				return {}
+			},
+		},
+	},
+	computed: {
+		animate() {
+			const { position } = this
+			return (
+				'animate__fadeIn' +
+				(position.charAt(0).toUpperCase() + position.slice(1))
+			)
+		},
+	},
+	components: {},
+	data() {
+		return {}
+	},
+}
 </script>
- <style lang="scss" scoped>
+<style lang="scss" scoped>
 .data_statistics_box {
 	position: fixed;
 	top: 148px;
@@ -93,12 +93,11 @@
 			line-height: 32px;
 			color: #fff;
 			text-align: right;
-			background:
-				linear-gradient(
-					90deg,
-					rgba(0, 77, 150, 0.3) 0%,
-					#004d96 100%
-				);
+			background: linear-gradient(
+				90deg,
+				rgba(0, 77, 150, 0.3) 0%,
+				#004d96 100%
+			);
 			border-radius: 16px;
 			border-radius: 16px;
 		}
@@ -116,12 +115,11 @@
 	.desc {
 		padding-left: 16px !important;
 		text-align: left !important;
-		background:
-			linear-gradient(
-				90deg,
-				#004d96 0%,
-				rgba(0, 77, 150, 0.3) 100%
-			) !important;
+		background: linear-gradient(
+			90deg,
+			#004d96 0%,
+			rgba(0, 77, 150, 0.3) 100%
+		) !important;
 	}
 }
 </style>

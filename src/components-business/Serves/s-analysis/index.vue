@@ -3,60 +3,68 @@
 		<div class="analysis-box">
 			<div class="s-analysis" :id="id" />
 			<div class="context">
-				<div v-for="(item,index) in data.dataList" :key="index" class="context-item">
+				<div
+					v-for="(item, index) in data.dataList"
+					:key="index"
+					class="context-item"
+				>
 					<div class="item-name">{{ item.name }}</div>
-					<div class="item-value font-num">{{ item.value | toThousand }}</div>
-					<div class="ratio-value font-num">{{ (item.value / total * 100).toFixed(2) }}%</div>
+					<div class="item-value font-num">
+						{{ item.value | toThousand }}
+					</div>
+					<div class="ratio-value font-num">
+						{{ ((item.value / total) * 100).toFixed(2) }}%
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import getOption from './options'
-	import { value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import getOption from './options'
+import { value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		methods: {
-			setOption (data) {
-				this.instance && this.instance.setOption(getOption(this.data))
-			}
+export default {
+	mixins: [widgetMixin],
+	methods: {
+		setOption(data) {
+			this.instance && this.instance.setOption(getOption(this.data))
 		},
-		computed: {
-			total () {
-				if (this.data) {
-					let total = 0
-					this.data.dataList.forEach(item => {
-						total += Number(item.value)
+	},
+	computed: {
+		total() {
+			if (this.data) {
+				let total = 0
+				this.data.dataList.forEach(item => {
+					total += Number(item.value)
+				})
+				return total
+			}
+			return 0
+		},
+	},
+	watch: {
+		data: {
+			handler(val) {
+				if (this.id) {
+					const data = { ...val }
+					this.$nextTick(() => {
+						this.instance = echarts.init(
+							document.getElementById(this.id),
+						)
+						this.setOption(data)
 					})
-					return total
 				}
-				return 0
-			}
+			},
+			deep: true,
+			immediate: true,
 		},
-		watch: {
-			data: {
-				handler (val) {
-					if (this.id) {
-						const data = { ...val }
-						this.$nextTick(() => {
-							this.instance = echarts.init(
-								document.getElementById(this.id)
-							)
-							this.setOption(data)
-						})
-					}
-				},
-				deep: true,
-				immediate: true
-			}
-		},
-		created () {
-			this.configValue = this.parseConfigValue(value)
-		}
-	}
+	},
+	created() {
+		this.configValue = this.parseConfigValue(value)
+	},
+}
 </script>
 <style lang="scss" scoped>
 .analysis-box {
@@ -112,4 +120,3 @@
 	}
 }
 </style>
-

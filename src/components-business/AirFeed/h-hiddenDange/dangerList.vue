@@ -23,62 +23,61 @@
 	</ul>
 </template>
 <script>
-	export default {
-		props: ['data']
-	}
+export default {
+	props: ['data'],
+}
 </script>
 <style lang="scss" scoped>
-	.list {
-		display: flex;
-		flex: none;
-		justify-content: space-between;
-		width: 100%;
-		text-align: center;
+.list {
+	display: flex;
+	flex: none;
+	justify-content: space-between;
+	width: 100%;
+	text-align: center;
 
-		li {
-			width: 118px;
-			height: 187px;
-			padding-top: 16px;
-			background-size: 100% 100%;
+	li {
+		width: 118px;
+		height: 187px;
+		padding-top: 16px;
+		background-size: 100% 100%;
 
-			&:nth-child(1) {
-				background-image: url("./img/list-bg1.svg");
-			}
+		&:nth-child(1) {
+			background-image: url('./img/list-bg1.svg');
+		}
 
-			&:nth-child(2) {
-				background-image: url("./img/list-bg2.svg");
-			}
+		&:nth-child(2) {
+			background-image: url('./img/list-bg2.svg');
+		}
 
-			&:nth-child(3) {
-				background-image: url("./img/list-bg3.svg");
-			}
+		&:nth-child(3) {
+			background-image: url('./img/list-bg3.svg');
+		}
 
-			&:nth-child(4) {
-				background-image: url("./img/list-bg4.svg");
-			}
+		&:nth-child(4) {
+			background-image: url('./img/list-bg4.svg');
+		}
 
-			&:nth-child(5) {
-				background-image: url("./img/list-bg5.svg");
-			}
+		&:nth-child(5) {
+			background-image: url('./img/list-bg5.svg');
+		}
 
-			.title {
-				font-size: 20px;
-				line-height: 24px;
-				color: rgba(255, 255, 255, 0.8);
-			}
+		.title {
+			font-size: 20px;
+			line-height: 24px;
+			color: rgba(255, 255, 255, 0.8);
+		}
 
-			.num {
-				margin-top: 40px;
-				font-size: 32px;
-				font-weight: bold;
-				line-height: 32px;
-				color: #fff;
+		.num {
+			margin-top: 40px;
+			font-size: 32px;
+			font-weight: bold;
+			line-height: 32px;
+			color: #fff;
 
-				&.finish {
-					color: #00ffcf;
-				}
+			&.finish {
+				color: #00ffcf;
 			}
 		}
 	}
+}
 </style>
-

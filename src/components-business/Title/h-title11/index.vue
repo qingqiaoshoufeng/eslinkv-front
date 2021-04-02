@@ -6,31 +6,29 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import { value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import { value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		created () {
-			this.configValue = this.parseConfigValue(value)
-		}
-	}
+export default {
+	mixins: [widgetMixin],
+	created() {
+		this.configValue = this.parseConfigValue(value)
+	},
+}
 </script>
 <style lang="scss">
-	.h-title-11 {
-		align-items: center;
-		justify-content: center;
-		height: 100%;
-		padding: 4px 16px;
-		background: rgba(0, 221, 255, 0.2);
-		border-radius: 16px;
+.h-title-11 {
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	padding: 4px 16px;
+	background: rgba(0, 221, 255, 0.2);
+	border-radius: 16px;
 
-		p {
-			font-size: 18px;
-			line-height: 24px;
-			color: #00ffcf;
-		}
+	p {
+		font-size: 18px;
+		line-height: 24px;
+		color: #00ffcf;
 	}
-
+}
 </style>
-

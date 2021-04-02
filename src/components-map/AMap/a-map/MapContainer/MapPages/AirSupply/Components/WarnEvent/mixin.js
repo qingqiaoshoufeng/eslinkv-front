@@ -1,21 +1,20 @@
 export default {
-	data () {
+	data() {
 		return {
-			activeWarnData: {}
-            
+			activeWarnData: {},
 		}
 	},
 	methods: {
-		handleListClick (overlay, overlayType) {
+		handleListClick(overlay, overlayType) {
 			const { lng, lat } = overlay
 			overlay.overlayType = overlayType || overlay.overlayType
 			this.activeWarnData = overlay
 			this.setZoomAndPanTo(lng, lat)
 		},
-		closeWarnEventDetail () {
+		closeWarnEventDetail() {
 			this.activeWarnData = {}
 			this.$amap.setZoom(this.zoom, 100)
 			this.$amap.setCenter(this.center, 100)
-		}
-	}
+		},
+	},
 }

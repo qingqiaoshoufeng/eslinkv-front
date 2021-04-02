@@ -2,57 +2,57 @@ export const value = {
 	layout: {
 		size: {
 			width: 608,
-			height: 256
+			height: 256,
 		},
 		position: {
-			value: 'relative'
-		}
+			value: 'relative',
+		},
 	},
 	api: {
 		data: JSON.stringify([
 			{
 				x: '13:00',
-				y: 52
+				y: 52,
 			},
 			{
 				x: '14:00',
-				y: 72
+				y: 72,
 			},
 			{
 				x: '15:00',
-				y: 40
+				y: 40,
 			},
 			{
 				x: '16:00',
-				y: 18
+				y: 18,
 			},
 			{
 				x: '17:00',
-				y: 42
+				y: 42,
 			},
 			{
 				x: '18:00',
-				y: 50
+				y: 50,
 			},
 			{
 				x: '19:00',
-				y: 35
+				y: 35,
 			},
 			{
 				x: '20:00',
-				y: 8
-			}
-		])
+				y: 8,
+			},
+		]),
 	},
 	config: {
-		unit: 'm³'
-	}
+		unit: 'm³',
+	},
 }
 
 export const customConfig = [
 	{
 		prop: 'unit',
 		label: '单位',
-		type: 'func-input'
-	}
+		type: 'func-input',
+	},
 ]

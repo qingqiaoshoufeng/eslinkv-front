@@ -6,19 +6,19 @@
 </template>
 
 <script>
-	export default {
-		name: 'NoData',
-		props: {
-			noDataText: {
-				type: String,
-				default: '暂无数据'
-			},
-			show: {
-				type: Boolean,
-				default: true
-			}
-		}
-	}
+export default {
+	name: 'NoData',
+	props: {
+		noDataText: {
+			type: String,
+			default: '暂无数据',
+		},
+		show: {
+			type: Boolean,
+			default: true,
+		},
+	},
+}
 </script>
 <style lang="scss" scoped>
 .no-data-box {

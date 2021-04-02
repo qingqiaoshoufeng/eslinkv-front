@@ -14,32 +14,31 @@
 	/>
 </template>
 <script>
-	import { BaseOverlay } from '../../../../components/index'
-	export default {
-		name: 'DistributedEnergyResource',
-		components: {
-			BaseOverlay
+import { BaseOverlay } from '../../../../components/index'
+export default {
+	name: 'DistributedEnergyResource',
+	components: {
+		BaseOverlay,
+	},
+	props: {
+		visible: {
+			type: Boolean,
+			default: true,
 		},
-		props: {
-			visible: {
-				type: Boolean,
-				default: true
-			},
-			overlayIcon: {
-				type: String,
-				default: ''
-			},
-			overlayType: {
-				type: String,
-				default: ''
-			}
+		overlayIcon: {
+			type: String,
+			default: '',
 		},
-		data () {
-			const apiFun = this.$api.map.mock.getDistributedEnergyResourceList
-			return {
-				apiFun: apiFun
-			}
+		overlayType: {
+			type: String,
+			default: '',
+		},
+	},
+	data() {
+		const apiFun = this.$api.map.mock.getDistributedEnergyResourceList
+		return {
+			apiFun: apiFun,
 		}
-	}
+	},
+}
 </script>
-

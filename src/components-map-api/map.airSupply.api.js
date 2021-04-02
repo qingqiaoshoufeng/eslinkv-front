@@ -19,14 +19,14 @@ const HANGRANURL = '/server'
    ].toString()}
  *
  */
-export function getAllTypeStationList (data) {
+export function getAllTypeStationList(data) {
 	return request({
 		url: HANGRANURL + '/applyAir/mapDataResult',
 		method: 'get',
 		params: data,
 		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		}
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
 	})
 }
 /**
@@ -36,14 +36,14 @@ export function getAllTypeStationList (data) {
 	type:'子页面字段'  // 高压('HighPressure')  中低压('LowPressure')  LNG('LNG')  其他('UCAN')
  }
  */
-export function getStatisticsInfo (data) {
+export function getStatisticsInfo(data) {
 	return request({
 		url: HANGRANURL + '/airFeed/rightIndex',
 		method: 'get',
 		params: data,
 		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		}
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
 	})
 }
 
@@ -51,13 +51,13 @@ export function getStatisticsInfo (data) {
  * 高压管网（包括是否建成）
  * 返回数据 {highPressureLine_Process:'高压管网建设中数据',highPressureLine:'高压管网数据'}
  */
-export function getHighPressurePipe () {
+export function getHighPressurePipe() {
 	return request({
 		url: HANGRANURL + '/applyAir/applyAirPipeResult',
 		method: 'get',
 		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		}
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
 	})
 }
 /**
@@ -69,14 +69,14 @@ export function getHighPressurePipe () {
 		type:'站点类型',  // 门站('GasStation') 调压站('PressureRegulatingStation')
  }
  */
-export function getStationRealTimeInfo (data) {
+export function getStationRealTimeInfo(data) {
 	return request({
 		url: HANGRANURL + '/airFeed/gasStationData',
 		method: 'get',
 		params: data,
 		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		}
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
 	})
 }
 
@@ -87,14 +87,14 @@ export function getStationRealTimeInfo (data) {
 	 id:'阀门id'
  }
  */
-export function getLowMidDevice (data) {
+export function getLowMidDevice(data) {
 	return request({
 		url: HANGRANURL + '/situationAwareness/lowMidDevice',
 		method: 'get',
 		params: data,
 		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		}
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
 	})
 }
 
@@ -106,14 +106,14 @@ export function getLowMidDevice (data) {
 	 status: '是否处理',        // 已处理（0） 未处理（1）
  }
  */
-export function getProcessWarningList (data) {
+export function getProcessWarningList(data) {
 	return request({
 		url: HANGRANURL + '/highMidPressure/list',
 		method: 'get',
 		params: data,
 		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		}
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
 	})
 }
 
@@ -125,14 +125,14 @@ export function getProcessWarningList (data) {
 	repairState: '是否处理',  已处理(0)      未处理(1)
  }
  */
-export function getEventWarningList (data) {
+export function getEventWarningList(data) {
 	return request({
 		url: HANGRANURL + '/situationAwareness/caseList2',
 		method: 'get',
 		params: data,
 		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		}
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
 	})
 }
 
@@ -145,13 +145,13 @@ export function getEventWarningList (data) {
 	arriveDate:'到达时间'
 }
  */
-export function getEmployeeGpsTrack (data) {
+export function getEmployeeGpsTrack(data) {
 	return request({
 		url: HANGRANURL + '/situationAwareness/employeeGpsTrack',
 		method: 'get',
 		params: data,
 		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
-		}
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
 	})
 }

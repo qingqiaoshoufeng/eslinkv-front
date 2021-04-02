@@ -5,7 +5,7 @@
 			<ul class="list">
 				<li v-for="(k, i) in data.list">
 					<div class="sub-title">
-						<img src="./img/arrow-3-right.svg">
+						<img src="./img/arrow-3-right.svg" />
 						<span>{{ k.name }}</span>
 					</div>
 					<div class="content">{{ k.detail }}</div>
@@ -15,60 +15,59 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import { value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import { value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		created () {
-			this.configValue = this.parseConfigValue(value)
-		}
-	}
+export default {
+	mixins: [widgetMixin],
+	created() {
+		this.configValue = this.parseConfigValue(value)
+	},
+}
 </script>
 <style lang="scss" scoped>
-	.widget-part {
-		.container {
-			width: 100%;
-			height: 100%;
-			padding: 16px 24px;
-			overflow: auto;
-		}
+.widget-part {
+	.container {
+		width: 100%;
+		height: 100%;
+		padding: 16px 24px;
+		overflow: auto;
+	}
 
-		.title {
-			font-size: 24px;
-			font-weight: 500;
-			line-height: 34px;
-			color: #66e3fd;
-			text-align: left;
-		}
+	.title {
+		font-size: 24px;
+		font-weight: 500;
+		line-height: 34px;
+		color: #66e3fd;
+		text-align: left;
+	}
 
-		.list {
-			text-align: left;
+	.list {
+		text-align: left;
 
-			li {
-				margin-top: 15px;
+		li {
+			margin-top: 15px;
 
-				.sub-title {
-					display: flex;
-					align-items: center;
+			.sub-title {
+				display: flex;
+				align-items: center;
 
-					> span {
-						margin-left: 8px;
-						font-size: 18px;
-						font-weight: 600;
-						line-height: 25px;
-						color: #66e3fd;
-					}
-				}
-
-				.content {
-					margin-top: 8px;
+				> span {
+					margin-left: 8px;
 					font-size: 18px;
+					font-weight: 600;
 					line-height: 25px;
-					color: #fff;
+					color: #66e3fd;
 				}
+			}
+
+			.content {
+				margin-top: 8px;
+				font-size: 18px;
+				line-height: 25px;
+				color: #fff;
 			}
 		}
 	}
+}
 </style>
-

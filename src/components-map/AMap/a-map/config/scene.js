@@ -12,8 +12,8 @@ export const SCENEINDEXMAP = {
 	e40ml4vtfa6: 'serviceICcustomer',
 	zciq8u7tmpl: 'unchange-routeplan', // unchang代表地图不进行切换
 	ahais9szswu: 'unchange',
-    phugmfxir4d: 'unchange',
-    '8iyxp8u3gtu': 'unchange' // 巡检动态
+	phugmfxir4d: 'unchange',
+	'8iyxp8u3gtu': 'unchange', // 巡检动态
 }
 export const INDEXSCENEMAP = {
 	AirSupplyLowPressure: 'n1o68ddzgif', // 供气-管网
@@ -24,7 +24,7 @@ export const INDEXSCENEMAP = {
 	ServiceHangranCode: 'bavv56kietf', // 服务-杭燃码
 	ServiceMarket: '6u1qhjs14ws', // 服务-销售
 	ServiceICcustomer: 'e40ml4vtfa6', // 服务-工商户
-	ServiceNineteen: 'a70wh40bnz9' // 服务-19厅
+	ServiceNineteen: 'a70wh40bnz9', // 服务-19厅
 }
 // 三社联动弹窗场景index
 export const THREESOCIALLINKAGE_SCENEINDEX = 'fsg1lcpo1c6'
@@ -41,12 +41,12 @@ export const AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX = 'zcklf7lfbq'
 export const AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1 = [
 	'chx90ijycs9',
 	'59w3zaic3r7',
-	'vmuwvj985ff'
+	'vmuwvj985ff',
 ]
 export const AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2 = [
 	'3om92oavtul',
 	'i7r0tng6ma',
-	'ysggte7pye'
+	'ysggte7pye',
 ]
 // 工商户警报
 export const ICcustomer_WARN__SCENEINDEX = '7gpqnjnklb4'
@@ -57,7 +57,7 @@ export const ICcustomer_WARN__COMPONENTINDEX = [
 	'ai3sf900cwu',
 	'v05qrzfpet9',
 	'hxxs8j4tw0v',
-	'jjt38a1zdh'
+	'jjt38a1zdh',
 ]
 // { 'tkxadgbmu0k': 'tkxadgbmu0k', 'ttek9npf3vb': 'ttek9npf3vb', 'nhgqy71gr3b': 'nhgqy71gr3b', 'd72fx6tk8a7': 'd72fx6tk8a7', 'pujdkocv3tm': 'pujdkocv3tm', 'pxlyqnfzs8i': 'pxlyqnfzs8i', 'z4ur1tcmbgm': 'z4ur1tcmbgm' }
 //

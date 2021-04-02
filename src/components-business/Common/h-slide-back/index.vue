@@ -4,29 +4,27 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin, scene } from 'eslinkv-sdk'
-	import { value } from './index.component'
+import { widgetMixin, scene } from 'eslinkv-sdk'
+import { value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		created () {
-			this.configValue = this.parseConfigValue(value)
-		},
-		methods: {
-			handleClick () {
-				if (this.data.sceneId) {
-					scene.actions.destroyScene(this.data.sceneId)
-				}
+export default {
+	mixins: [widgetMixin],
+	created() {
+		this.configValue = this.parseConfigValue(value)
+	},
+	methods: {
+		handleClick() {
+			if (this.data.sceneId) {
+				scene.actions.destroyScene(this.data.sceneId)
 			}
-		}
-	}
+		},
+	},
+}
 </script>
 <style lang="scss" scoped>
-
-	.h-slide-bg-back {
-		width: 24px;
-		height: 112px;
-		background-image: url('./img/back.svg');
-	}
+.h-slide-bg-back {
+	width: 24px;
+	height: 112px;
+	background-image: url('./img/back.svg');
+}
 </style>
-

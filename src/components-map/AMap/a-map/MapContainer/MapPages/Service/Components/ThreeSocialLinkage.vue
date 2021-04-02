@@ -14,64 +14,63 @@
 	/>
 </template>
 <script>
-	import { BaseOverlay } from '../../../../components/index'
-	export default {
-		name: 'ThreeSocialLinkage',
-		components: {
-			BaseOverlay
+import { BaseOverlay } from '../../../../components/index'
+export default {
+	name: 'ThreeSocialLinkage',
+	components: {
+		BaseOverlay,
+	},
+	props: {
+		visible: {
+			type: Boolean,
+			default: true,
 		},
-		props: {
-			visible: {
-				type: Boolean,
-				default: true
-			},
-			overlayIcon: {
-				type: String,
-				default: ''
-			},
-			overlayType: {
-				type: String,
-				default: ''
-			},
-			data: {
-				type: Array,
-				default () {
-					return []
-				}
-			},
-			detailList: {
-				type: Array,
-				default () {
-					return []
-				}
-			}
+		overlayIcon: {
+			type: String,
+			default: '',
 		},
-		data () {
-			return {
-				apiFun: this.$api.map.mock.getThreeSocialLinkageList
-			}
+		overlayType: {
+			type: String,
+			default: '',
 		},
-		methods: {
-			handleOverlayClick (marker) {
-				this.$emit('view-detail', {
-					...marker,
-					overlayType: this.overlayType
-				})
+		data: {
+			type: Array,
+			default() {
+				return []
 			},
-			mouseover (marker) {
-				this.mouseIn = true
-				this.$emit(
-					'overlay-click',
-					{
-						detailList: this.detailList,
-						...marker,
-						overlayType: this.overlayType
-					},
-					this.overlayType
-				)
+		},
+		detailList: {
+			type: Array,
+			default() {
+				return []
 			},
-			handleMouseleave () {}
+		},
+	},
+	data() {
+		return {
+			apiFun: this.$api.map.mock.getThreeSocialLinkageList,
 		}
-	}
+	},
+	methods: {
+		handleOverlayClick(marker) {
+			this.$emit('view-detail', {
+				...marker,
+				overlayType: this.overlayType,
+			})
+		},
+		mouseover(marker) {
+			this.mouseIn = true
+			this.$emit(
+				'overlay-click',
+				{
+					detailList: this.detailList,
+					...marker,
+					overlayType: this.overlayType,
+				},
+				this.overlayType,
+			)
+		},
+		handleMouseleave() {},
+	},
+}
 </script>
-

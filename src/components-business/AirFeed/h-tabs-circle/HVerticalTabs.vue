@@ -4,7 +4,7 @@
 			:class="`
 				h-vertical-tabs__item
 				h-vertical-tabs__item${actived === index ? '--actived' : ''}`"
-			v-for="(item, index) in (source || [])"
+			v-for="(item, index) in source || []"
 			:key="item.name || index"
 			@click="() => clickTabEvt(index)"
 		>
@@ -15,144 +15,146 @@
 			>
 				{{ item.name || '' }}
 			</div>
-			<div v-if="actived === index" class="h-vertical-tabs__item__icon"></div>
+			<div
+				v-if="actived === index"
+				class="h-vertical-tabs__item__icon"
+			></div>
 		</li>
 	</ul>
 </template>
 
 <script>
+export default {
+	name: 'h-tabs-circle',
 
-	export default {
-		name: 'h-tabs-circle',
+	data() {
+		return {
+			actived: 0,
+			intervalId: null,
+			waitIntervalId: null,
+		}
+	},
+	props: {
+		config: {
+			type: Object,
+			default: () => ({
+				delay: 1000,
+				interval: 3000,
+				wait: 5000,
+			}),
+		},
+		defaultActived: {
+			type: Number,
+			default: 0,
+		},
+		hasInterval: {
+			type: Boolean,
+			default: true,
+		},
+		source: {
+			type: Array,
+			default: () => [],
+		},
+	},
+	mounted() {
+		this.actived = this.defaultActived || 0
+		this.hasInterval && this.beginInterval()
+	},
+	destroyed() {
+		this.clearInterval()
+		this.clearWaitInterval()
+	},
+	methods: {
+		beginInterval() {
+			const { delay = 1000 } = this.config || {}
+			setTimeout(() => {
+				this.autoCheckTab()
+			}, delay)
+		},
+		autoCheckTab() {
+			const { interval = 2500 } = this.config || {}
+			const maxIndex = this.source?.length ? this.source?.length - 1 : 0
 
-		data () {
-			return {
-				actived: 0,
-				intervalId: null,
-				waitIntervalId: null
-			}
+			let count = (this.actived !== null && this.actived) || 0
+			this.intervalId = setInterval(() => {
+				this.changeActived(count)
+				count++
+				if (count > maxIndex) {
+					count = 0
+				}
+			}, interval)
 		},
-		props: {
-			config: {
-				type: Object,
-				default: () => ({
-					delay: 1000,
-					interval: 3000,
-					wait: 5000
-				})
-			},
-			defaultActived: {
-				type: Number,
-				default: 0
-			},
-			hasInterval: {
-				type: Boolean,
-				default: true
-			},
-			source: {
-				type: Array,
-				default: () => ([])
-			}
+		changeActived(index) {
+			this.actived = index
+			this.$emit('actived-change', index)
 		},
-		mounted () {
-			this.actived = this.defaultActived || 0
-			this.hasInterval && this.beginInterval()
+		clearInterval() {
+			clearInterval(this.intervalId)
+			this.intervalId = null
 		},
-		destroyed () {
+		clearWaitInterval() {
+			clearInterval(this.waitIntervalId)
+			this.waitIntervalId = null
+		},
+		clickTabEvt(index) {
 			this.clearInterval()
-			this.clearWaitInterval()
+			this.changeActived(index)
+			this.timeWaitCount()
 		},
-		methods: {
-			beginInterval () {
-				const { delay = 1000 } = this.config || {}
-				setTimeout(() => {
+		timeWaitCount() {
+			if (this.waitIntervalId) {
+				this.clearWaitInterval()
+			}
+			const { wait = 30000 } = this.config || {}
+			let count = 0
+			this.waitIntervalId = setInterval(() => {
+				count += 1000
+				if (count >= wait) {
 					this.autoCheckTab()
-				}, delay)
-			},
-			autoCheckTab () {
-				const { interval = 2500 } = this.config || {}
-				const maxIndex = this.source?.length ? this.source?.length - 1 : 0
-
-				let count = this.actived !== null && this.actived || 0
-				this.intervalId = setInterval(() => {
-					this.changeActived(count)
-					count++
-					if (count > maxIndex) {
-						count = 0
-					}
-				}, interval)
-			},
-			changeActived (index) {
-				this.actived = index
-				this.$emit('actived-change', index)
-			},
-			clearInterval () {
-				clearInterval(this.intervalId)
-				this.intervalId = null
-			},
-			clearWaitInterval () {
-				clearInterval(this.waitIntervalId)
-				this.waitIntervalId = null
-			},
-			clickTabEvt (index) {
-				this.clearInterval()
-				this.changeActived(index)
-				this.timeWaitCount()
-			},
-			timeWaitCount () {
-				if (this.waitIntervalId) {
 					this.clearWaitInterval()
 				}
-				const { wait = 30000 } = this.config || {}
-				let count = 0
-				this.waitIntervalId = setInterval(() => {
-					count += 1000
-					if (count >= wait) {
-						this.autoCheckTab()
-						this.clearWaitInterval()
-					}
-				}, 1000)
-			}
-		}
-	}
+			}, 1000)
+		},
+	},
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
-	.h-vertical-tabs {
-		&__item {
-			box-sizing: border-box;
-			width: 200px;
-			height: 40px;
-			cursor: pointer;
-			background-color: rgba(0, 31, 109, 0.5);
-			border-left: 4px solid rgba(0, 0, 0, 0);
+.h-vertical-tabs {
+	&__item {
+		box-sizing: border-box;
+		width: 200px;
+		height: 40px;
+		cursor: pointer;
+		background-color: rgba(0, 31, 109, 0.5);
+		border-left: 4px solid rgba(0, 0, 0, 0);
 
-			&--actived {
-				background-color: #0057a9;
-				border-left: 4px solid #0df;
-			}
+		&--actived {
+			background-color: #0057a9;
+			border-left: 4px solid #0df;
+		}
 
-			&__name {
-				float: left;
-				margin-top: 7px;
-				margin-left: 8px;
-				font-size: 18px;
-				line-height: 24px;
-				color: #fff;
-			}
+		&__name {
+			float: left;
+			margin-top: 7px;
+			margin-left: 8px;
+			font-size: 18px;
+			line-height: 24px;
+			color: #fff;
+		}
 
-			&__icon {
-				float: right;
-				width: 24px;
-				height: 24px;
-				margin-top: 7px;
-				margin-right: 8px;
-				background-image: url('/static/icons/arrow-right.svg');
-				background-repeat: no-repeat;
-				background-position: center;
-				background-size: 24px;
-			}
+		&__icon {
+			float: right;
+			width: 24px;
+			height: 24px;
+			margin-top: 7px;
+			margin-right: 8px;
+			background-image: url('/static/icons/arrow-right.svg');
+			background-repeat: no-repeat;
+			background-position: center;
+			background-size: 24px;
 		}
 	}
+}
 </style>

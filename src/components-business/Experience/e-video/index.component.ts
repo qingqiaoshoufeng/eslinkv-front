@@ -2,15 +2,15 @@ export const value = {
 	layout: {
 		size: {
 			width: 1964,
-			height: 838
+			height: 838,
 		},
 		position: {
-			value: 'relative'
-		}
+			value: 'relative',
+		},
 	},
 	api: {
 		data: JSON.stringify({
-			video: '/static/images/experience/video.webm'
-		})
-	}
+			video: '/static/images/experience/video.webm',
+		}),
+	},
 }

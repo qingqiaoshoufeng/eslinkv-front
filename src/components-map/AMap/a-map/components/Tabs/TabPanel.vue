@@ -11,36 +11,35 @@
 	</div>
 </template>
 <script>
-	export default {
-		name: 'TabPane',
-		props: {
-			label: String,
-			name: String,
-			lazy: Boolean
-		},
+export default {
+	name: 'TabPane',
+	props: {
+		label: String,
+		name: String,
+		lazy: Boolean,
+	},
 
-		data () {
-			return {
-				loaded: false
-			}
-		},
-
-		computed: {
-			active () {
-				const active = this.$parent.currentName === this.name
-				if (active) {
-					this.loaded = true
-					this.$parent.activeTab = this.name
-				}
-				return active
-			}
+	data() {
+		return {
+			loaded: false,
 		}
-	}
+	},
+
+	computed: {
+		active() {
+			const active = this.$parent.currentName === this.name
+			if (active) {
+				this.loaded = true
+				this.$parent.activeTab = this.name
+			}
+			return active
+		},
+	},
+}
 </script>
 
-
 <style lang="scss" scoped>
-	.tab-panel {
-		backface-visibility: hidden;
-	}
+.tab-panel {
+	backface-visibility: hidden;
+}
 </style>

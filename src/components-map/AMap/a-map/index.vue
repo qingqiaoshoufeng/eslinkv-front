@@ -12,47 +12,47 @@
 </template>
 
 <script>
-	import MapContainer from './MapContainer/index'
-	import Message from './components/Message/'
-	import { scene } from 'eslinkv-sdk'
-	export default {
-		name: 'HRMap',
-		components: {
-			MapContainer,
-			Message
+import MapContainer from './MapContainer/index'
+import Message from './components/Message/'
+import { scene } from 'eslinkv-sdk'
+export default {
+	name: 'HRMap',
+	components: {
+		MapContainer,
+		Message,
+	},
+	props: {
+		preview: {
+			type: Boolean,
+			default: false,
 		},
-		props: {
-			preview: {
-				type: Boolean,
-				default: false
-			}
+	},
+	computed: {
+		inPreview() {
+			return scene.state.status === 'inPreview'
 		},
-		computed: {
-			inPreview () {
-				return scene.state.status === 'inPreview'
-			}
-		},
-		data () {
-			return {
-				ready: false
-			}
-		},
-		methods: {
-			resetMap () {
-				this.ready = false
-				setTimeout(() => {
-					this.ready = true
-				}, 5000)
-			}
-		},
-		mounted () {
+	},
+	data() {
+		return {
+			ready: false,
+		}
+	},
+	methods: {
+		resetMap() {
+			this.ready = false
 			setTimeout(() => {
 				this.ready = true
-			}, 2000)
-			// 以防地图加载不出hock处理
-			window.resetMap = this.resetMap.bind(this)
-		}
-	}
+			}, 5000)
+		},
+	},
+	mounted() {
+		setTimeout(() => {
+			this.ready = true
+		}, 2000)
+		// 以防地图加载不出hock处理
+		window.resetMap = this.resetMap.bind(this)
+	},
+}
 </script>
 
 <style lang="scss" scoped>

@@ -2,10 +2,10 @@ export const value = {
 	layout: {
 		size: {
 			width: 400,
-			height: 1050
+			height: 1050,
 		},
 		position: {
-			value: 'relative'
-		}
-	}
+			value: 'relative',
+		},
+	},
 }

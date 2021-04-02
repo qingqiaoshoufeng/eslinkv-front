@@ -2,11 +2,11 @@ export const value = {
 	layout: {
 		size: {
 			width: 654,
-			height: 187
+			height: 187,
 		},
 		position: {
-			value: 'relative'
-		}
+			value: 'relative',
+		},
 	},
 	api: {
 		data: JSON.stringify({
@@ -15,7 +15,7 @@ export const value = {
 				handlingNum: 9,
 				waitNum: 23,
 				finishNum: 11,
-				finishRate: 78
+				finishRate: 78,
 			},
 			data2: [
 				{
@@ -24,7 +24,7 @@ export const value = {
 					total: 32,
 					waitHandle: 31,
 					handling: 1,
-					finish: 1
+					finish: 1,
 				},
 				{
 					name: '压力异常',
@@ -32,7 +32,7 @@ export const value = {
 					total: 32,
 					waitHandle: 31,
 					handling: 1,
-					finish: 1
+					finish: 1,
 				},
 				{
 					name: '管道破裂',
@@ -40,7 +40,7 @@ export const value = {
 					total: 32,
 					waitHandle: 31,
 					handling: 1,
-					finish: 1
+					finish: 1,
 				},
 				{
 					name: '阀门异常',
@@ -48,7 +48,7 @@ export const value = {
 					total: 32,
 					waitHandle: 31,
 					handling: 1,
-					finish: 1
+					finish: 1,
 				},
 				{
 					name: '阀门异常',
@@ -56,7 +56,7 @@ export const value = {
 					total: 32,
 					waitHandle: 31,
 					handling: 1,
-					finish: 1
+					finish: 1,
 				},
 				{
 					name: '阀门异常',
@@ -64,7 +64,7 @@ export const value = {
 					total: 32,
 					waitHandle: 31,
 					handling: 1,
-					finish: 1
+					finish: 1,
 				},
 				{
 					name: '阀门异常',
@@ -72,9 +72,9 @@ export const value = {
 					total: 32,
 					waitHandle: 31,
 					handling: 1,
-					finish: 1
-				}
-			]
-		})
-	}
+					finish: 1,
+				},
+			],
+		}),
+	},
 }

@@ -2,15 +2,15 @@ export const value = {
 	layout: {
 		size: {
 			width: 24,
-			height: 112
+			height: 112,
 		},
 		position: {
-			value: 'relative'
-		}
+			value: 'relative',
+		},
 	},
 	api: {
 		data: JSON.stringify({
-			sceneId: ''
-		})
-	}
+			sceneId: '',
+		}),
+	},
 }

@@ -28,32 +28,32 @@
 	</div>
 </template>
 <script>
-	export default {
-		computed: {
-			rulerWidth () {
-				// 根据视觉稿来的
-				const safeWidth = 388
-				const safeCountPerPx = safeWidth / this.maxAmout
-				return this.value?.amount * safeCountPerPx + 'px'
-			},
-			styles () {
-				return this.item?.styles || {}
-			},
-			value () {
-				return this.item || {}
-			}
+export default {
+	computed: {
+		rulerWidth() {
+			// 根据视觉稿来的
+			const safeWidth = 388
+			const safeCountPerPx = safeWidth / this.maxAmout
+			return this.value?.amount * safeCountPerPx + 'px'
 		},
-		props: {
-			maxAmout: {
-				type: Number,
-				default: 4500
-			},
-			item: {
-				type: Object,
-				default: () => ({})
-			}
-		}
-	}
+		styles() {
+			return this.item?.styles || {}
+		},
+		value() {
+			return this.item || {}
+		},
+	},
+	props: {
+		maxAmout: {
+			type: Number,
+			default: 4500,
+		},
+		item: {
+			type: Object,
+			default: () => ({}),
+		},
+	},
+}
 </script>
 <style lang="scss">
 .h-line-percent {
@@ -112,4 +112,3 @@
 	}
 }
 </style>
-

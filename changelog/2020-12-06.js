@@ -23,23 +23,27 @@ export default {
 		},
 		{
 			type: ['fix'],
-			content: '修复 animation 支持不填，将取消动画'
+			content: '修复 animation 支持不填，将取消动画',
 		},
 		{
 			type: ['fix'],
-			content: '修复 updateConfig 函数每次组件初始化都会执行，且有setTimeout，组件销毁时容易内存泄漏，不需要执行setTimeout，执行的setTimeout页及时销毁'
+			content:
+				'修复 updateConfig 函数每次组件初始化都会执行，且有setTimeout，组件销毁时容易内存泄漏，不需要执行setTimeout，执行的setTimeout页及时销毁',
 		},
 		{
-			content:'移除setTimeout 自定义组件&比例尺组件 mounted延时700ms执行$forceUpdate函数'
+			content:
+				'移除setTimeout 自定义组件&比例尺组件 mounted延时700ms执行$forceUpdate函数',
 		},
 		{
-			content:'移除setTimeout html2canvas 强制加的2000ms延迟，为了显示loading动画'
+			content:
+				'移除setTimeout html2canvas 强制加的2000ms延迟，为了显示loading动画',
 		},
 		{
-			content:'移除setTimeout 小工具初始化需要时间，此处进行延时逐个回填，强制加的20ms延迟去除'
+			content:
+				'移除setTimeout 小工具初始化需要时间，此处进行延时逐个回填，强制加的20ms延迟去除',
 		},
 		{
-			content:'移除setTimeout 小工具导入成功，强制加的500ms延迟去除'
-		}
-	]
+			content: '移除setTimeout 小工具导入成功，强制加的500ms延迟去除',
+		},
+	],
 }

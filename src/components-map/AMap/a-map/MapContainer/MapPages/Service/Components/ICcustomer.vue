@@ -13,44 +13,44 @@
 	/>
 </template>
 <script>
-	import { BaseOverlay } from '../../../../components/index'
+import { BaseOverlay } from '../../../../components/index'
 
-	export default {
-		name: 'ICcustomer',
-		components: {
-			BaseOverlay
+export default {
+	name: 'ICcustomer',
+	components: {
+		BaseOverlay,
+	},
+	props: {
+		visible: {
+			type: Boolean,
+			default: true,
 		},
-		props: {
-			visible: {
-				type: Boolean,
-				default: true
-			},
-			overlayIcon: {
-				type: String,
-				default: ''
-			},
-			overlayType: {
-				type: String,
-				default: ''
-			},
-			detailList: {
-				type: Array,
-				default () {
-					return []
-				}
-			}
+		overlayIcon: {
+			type: String,
+			default: '',
 		},
-		data () {
-			const apiFun = this.$api.map.mock.getICcustomerList
-			return {
-				apiFun: apiFun
-			}
+		overlayType: {
+			type: String,
+			default: '',
 		},
-		methods: {
-			handleOverlayClick (marker) {
-				marker.detailList = this.detailList
-				$emit('overlay-click', this.marker, this.overlayIcon)
-			}
+		detailList: {
+			type: Array,
+			default() {
+				return []
+			},
+		},
+	},
+	data() {
+		const apiFun = this.$api.map.mock.getICcustomerList
+		return {
+			apiFun: apiFun,
 		}
-	}
+	},
+	methods: {
+		handleOverlayClick(marker) {
+			marker.detailList = this.detailList
+			$emit('overlay-click', this.marker, this.overlayIcon)
+		},
+	},
+}
 </script>

@@ -38,15 +38,14 @@ const router: any = new VueRouter({
 		{
 			path: '/401',
 			name: '401',
-			component: () => import('./pages/Error/401.vue')
-
+			component: () => import('./pages/Error/401.vue'),
 		},
 		{
 			path: '/404',
 			name: '404',
-			component: () => import('./pages/Error/404.vue')
-		}
-	]
+			component: () => import('./pages/Error/404.vue'),
+		},
+	],
 })
 
 router.beforeEach(async (to, from, next) => {

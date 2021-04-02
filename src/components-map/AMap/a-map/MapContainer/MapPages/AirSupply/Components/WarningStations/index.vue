@@ -13,8 +13,7 @@
 			}"
 			:visible="visible"
 			@click="handlerClick(item, index)"
-		>
-		</Overlay>
+		></Overlay>
 		<!-- 详情弹窗 -->
 		<OverlayDetail
 			:value="isShowDetial"
@@ -37,106 +36,105 @@
 	</div>
 </template>
 <script>
-	import { DETAILLIST } from './config'
-	export default {
-		name: 'WarningStations',
-		components: {
-			Overlay: () => import('../../../../../components/Overlay'),
-			OverlayDetail: () => import('../../../../../components/OverlayDetail'),
-			TipDetial: () => import('./TipDetial')
-		},
-		props: {
-			data: {
-				type: Array,
-				default () {
-					return []
-				}
+import { DETAILLIST } from './config'
+export default {
+	name: 'WarningStations',
+	components: {
+		Overlay: () => import('../../../../../components/Overlay'),
+		OverlayDetail: () => import('../../../../../components/OverlayDetail'),
+		TipDetial: () => import('./TipDetial'),
+	},
+	props: {
+		data: {
+			type: Array,
+			default() {
+				return []
 			},
-			visible: {
-				type: Boolean,
-				default () {
-					return true
-				}
+		},
+		visible: {
+			type: Boolean,
+			default() {
+				return true
 			},
-			showOverlayDetail: {
-				type: Boolean,
-				default () {
-					return true
-				}
-			}
 		},
-		data () {
-			return {
-				OverlayDetailProp: {},
-				overlayIcon: 'iconzhongdiyayujing',
-				activeOverlay: {},
-				activeIndex: null,
-				detailInfo: {},
-				padding: 16,
-				isShowDetial: false,
-				width: 880
-			}
+		showOverlayDetail: {
+			type: Boolean,
+			default() {
+				return true
+			},
 		},
-		watch: {
-			showOverlayDetail: {
-				handler (val) {
-					val && (this.isShowDetial = !val)
-				},
-				immediate: true
-			}
+	},
+	data() {
+		return {
+			OverlayDetailProp: {},
+			overlayIcon: 'iconzhongdiyayujing',
+			activeOverlay: {},
+			activeIndex: null,
+			detailInfo: {},
+			padding: 16,
+			isShowDetial: false,
+			width: 880,
+		}
+	},
+	watch: {
+		showOverlayDetail: {
+			handler(val) {
+				val && (this.isShowDetial = !val)
+			},
+			immediate: true,
 		},
-		computed: {
-			detailShowList () {
-				const { activeIndex } = this
-				if (!activeIndex && activeIndex !== 0) return []
-				if (activeIndex == 0) {
-					return this.data.filter(
-						item => item.name === '棋院6159燃气球阀-切断装置'
-					)
-				}
-
+	},
+	computed: {
+		detailShowList() {
+			const { activeIndex } = this
+			if (!activeIndex && activeIndex !== 0) return []
+			if (activeIndex == 0) {
 				return this.data.filter(
-					item => item.name !== '棋院6159燃气球阀-切断装置'
+					item => item.name === '棋院6159燃气球阀-切断装置',
 				)
-			},
-			list () {
-				const list = []
-				list[0] = this.data.find(
-					item => item.name === '棋院6159燃气球阀-切断装置'
-				)
-				list[1] = this.data.find(
-					item => item.name !== '棋院6159燃气球阀-切断装置'
-				)
-				return list
 			}
+
+			return this.data.filter(
+				item => item.name !== '棋院6159燃气球阀-切断装置',
+			)
 		},
+		list() {
+			const list = []
+			list[0] = this.data.find(
+				item => item.name === '棋院6159燃气球阀-切断装置',
+			)
+			list[1] = this.data.find(
+				item => item.name !== '棋院6159燃气球阀-切断装置',
+			)
+			return list
+		},
+	},
 
-		mounted () {},
+	mounted() {},
 
-		methods: {
-			viewOverlayDetail () {},
-			closeOverlayDetail (done) {
-				this.isShowDetial = false
-				this.$emit('moveto', { type: 'center' })
+	methods: {
+		viewOverlayDetail() {},
+		closeOverlayDetail(done) {
+			this.isShowDetial = false
+			this.$emit('moveto', { type: 'center' })
 			// done && done();
-			},
-			handlerClick (item, index) {
-				// debugger;
-				this.activeOverlay = this.list[index]
-				this.padding = index ? 0 : 16
-				this.width = index ? 880 : 680
-				this.isShowDetial = true
-				this.activeIndex = index
-				this.$emit('moveto', { type: 'WarningStations' })
-			},
-			handlerChange (item, index) {
-				this.getDetailInfo(item, item.middleId)
-			}
 		},
-		beforeDestroy () {}
-	}
+		handlerClick(item, index) {
+			// debugger;
+			this.activeOverlay = this.list[index]
+			this.padding = index ? 0 : 16
+			this.width = index ? 880 : 680
+			this.isShowDetial = true
+			this.activeIndex = index
+			this.$emit('moveto', { type: 'WarningStations' })
+		},
+		handlerChange(item, index) {
+			this.getDetailInfo(item, item.middleId)
+		},
+	},
+	beforeDestroy() {},
+}
 </script>
-
 
 <style lang="scss" scoped>
 ::v-deep.pop-content {

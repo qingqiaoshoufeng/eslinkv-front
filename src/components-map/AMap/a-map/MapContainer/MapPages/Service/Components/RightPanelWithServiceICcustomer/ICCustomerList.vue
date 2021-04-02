@@ -49,97 +49,97 @@
 </template>
 
 <script>
-	import { SvgIcon, NoData } from '../../../../../components/'
-	import { SERVICE_SERVICEICCUSTOMER_LEGEND_MAP } from '../../serviceICcustomer/config'
-	import { Icon } from 'view-design'
+import { SvgIcon, NoData } from '../../../../../components/'
+import { SERVICE_SERVICEICCUSTOMER_LEGEND_MAP } from '../../serviceICcustomer/config'
+import { Icon } from 'view-design'
 
-	export default {
-		name: 'HomeRealTimeList',
-		components: {
-			SvgIcon,
-			NoData,
-			'i-icon': Icon
-		},
-		data () {
-			const iconList = [
-				'/static/images/amap/first.svg',
-				'/static/images/amap/second.svg',
-				'/static/images/amap/third.svg'
-			]
-			const statusList = {
-				up: 'iconup',
-				down: 'icondown',
-				parallel: 'iconkeep'
-			}
-			return {
-				activeIndex: null,
-				list: [],
-				iconList,
-				statusList,
-				loading: true,
-				loaded: false
-			}
-		},
-		props: {
-			activeItem: {
-				type: Object,
-				default () {
-					return {}
-				}
-			},
-			activeOverlay: {
-				type: Object,
-				default () {
-					return {}
-				}
-			}
-		},
-		async created () {
-			this.getData()
-			this.timer = setInterval(() => {
-				this.getData()
-			}, 60000)
-		},
-		watch: {
-			activeItem (val) {
-				if (JSON.stringify(val) == '{}') {
-					return (this.activeIndex = null)
-				}
-				const index = this.list.findIndex((item) => {
-					const { id } = item
-					return val.id === id
-				})
-				this.activeIndex = index > -1 ? index : null
-			}
-		},
-		methods: {
-			async getData () {
-				// 除第一次需要loading外，其余需要无感刷新
-				if (!this.loaded) {
-					this.loading = true
-				}
-				const data = await this.$api.map.serve.getICcustomerSituationAwareness()
-				this.list = data
-				this.loading = false
-				this.loaded = true
-			},
-			handleClick (item, index) {
-				this.activeIndex = index
-				const {
-					detailList,
-					component: overlayType
-				} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP.WarningICcustomer
-
-				this.$emit('change', {
-					...item,
-					type: 'ICcustomer',
-					detailList,
-					overlayType,
-					activeIndex: this.activeIndex
-				})
-			}
+export default {
+	name: 'HomeRealTimeList',
+	components: {
+		SvgIcon,
+		NoData,
+		'i-icon': Icon,
+	},
+	data() {
+		const iconList = [
+			'/static/images/amap/first.svg',
+			'/static/images/amap/second.svg',
+			'/static/images/amap/third.svg',
+		]
+		const statusList = {
+			up: 'iconup',
+			down: 'icondown',
+			parallel: 'iconkeep',
 		}
-	}
+		return {
+			activeIndex: null,
+			list: [],
+			iconList,
+			statusList,
+			loading: true,
+			loaded: false,
+		}
+	},
+	props: {
+		activeItem: {
+			type: Object,
+			default() {
+				return {}
+			},
+		},
+		activeOverlay: {
+			type: Object,
+			default() {
+				return {}
+			},
+		},
+	},
+	async created() {
+		this.getData()
+		this.timer = setInterval(() => {
+			this.getData()
+		}, 60000)
+	},
+	watch: {
+		activeItem(val) {
+			if (JSON.stringify(val) == '{}') {
+				return (this.activeIndex = null)
+			}
+			const index = this.list.findIndex(item => {
+				const { id } = item
+				return val.id === id
+			})
+			this.activeIndex = index > -1 ? index : null
+		},
+	},
+	methods: {
+		async getData() {
+			// 除第一次需要loading外，其余需要无感刷新
+			if (!this.loaded) {
+				this.loading = true
+			}
+			const data = await this.$api.map.serve.getICcustomerSituationAwareness()
+			this.list = data
+			this.loading = false
+			this.loaded = true
+		},
+		handleClick(item, index) {
+			this.activeIndex = index
+			const {
+				detailList,
+				component: overlayType,
+			} = SERVICE_SERVICEICCUSTOMER_LEGEND_MAP.WarningICcustomer
+
+			this.$emit('change', {
+				...item,
+				type: 'ICcustomer',
+				detailList,
+				overlayType,
+				activeIndex: this.activeIndex,
+			})
+		},
+	},
+}
 </script>
 
 <style lang="scss" scoped>

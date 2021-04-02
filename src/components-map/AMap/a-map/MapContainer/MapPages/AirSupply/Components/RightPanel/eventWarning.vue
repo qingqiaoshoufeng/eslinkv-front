@@ -85,78 +85,78 @@
 </template>
 
 <script>
-	import { SvgIcon, NoData } from '../../../../../components/'
-	import { Icon } from 'view-design'
-	export default {
-		name: 'HomeRealTimeList',
-		components: {
-			SvgIcon,
-			NoData,
-			'i-icon': Icon
-		},
-		data () {
-			return {
-				list: [],
-				repairType: '抢修',
-				repairState: 1,
-				loading: false,
-				loaded: false
-			}
-		},
-		props: {
-			activeItem: {
-				type: Object,
-				default () {
-					return {}
-				}
-			}
-		},
-		computed: {
-			active () {
-				return this.$parent.active
-			}
-		},
-		async created () {
-			this.getData()
-			this.timer = setInterval(() => {
-				this.getData()
-			}, 60000)
-		},
-		methods: {
-			changeRepairState (repairState) {
-				this.repairState = repairState
-				this.getData()
-			},
-			changeRepairType (repairType) {
-				this.repairType = repairType
-				this.getData()
-			},
-			async getData () {
-				// 除第一次需要loading外，其余需要无感刷新
-				if (!this.loaded) {
-					this.loading = true
-				}
-				const data = await this.$api.map.airSupply.getEventWarningList({
-					repairType: this.repairType,
-					repairState: this.repairState
-				})
-				this.list = data
-				this.loading = false
-				this.loaded = true
-			},
-			handleClick (item) {
-				item.status = item.stateName == '处理完成' ? 0 : 1
-				item.overlayType = 'WARNEVENT'
-				this.$emit('change', item)
-			}
-		},
-		beforeDestroy () {
-			if (this.timer) {
-				clearInterval(this.timer)
-				this.timer = null
-			}
+import { SvgIcon, NoData } from '../../../../../components/'
+import { Icon } from 'view-design'
+export default {
+	name: 'HomeRealTimeList',
+	components: {
+		SvgIcon,
+		NoData,
+		'i-icon': Icon,
+	},
+	data() {
+		return {
+			list: [],
+			repairType: '抢修',
+			repairState: 1,
+			loading: false,
+			loaded: false,
 		}
-	}
+	},
+	props: {
+		activeItem: {
+			type: Object,
+			default() {
+				return {}
+			},
+		},
+	},
+	computed: {
+		active() {
+			return this.$parent.active
+		},
+	},
+	async created() {
+		this.getData()
+		this.timer = setInterval(() => {
+			this.getData()
+		}, 60000)
+	},
+	methods: {
+		changeRepairState(repairState) {
+			this.repairState = repairState
+			this.getData()
+		},
+		changeRepairType(repairType) {
+			this.repairType = repairType
+			this.getData()
+		},
+		async getData() {
+			// 除第一次需要loading外，其余需要无感刷新
+			if (!this.loaded) {
+				this.loading = true
+			}
+			const data = await this.$api.map.airSupply.getEventWarningList({
+				repairType: this.repairType,
+				repairState: this.repairState,
+			})
+			this.list = data
+			this.loading = false
+			this.loaded = true
+		},
+		handleClick(item) {
+			item.status = item.stateName == '处理完成' ? 0 : 1
+			item.overlayType = 'WARNEVENT'
+			this.$emit('change', item)
+		},
+	},
+	beforeDestroy() {
+		if (this.timer) {
+			clearInterval(this.timer)
+			this.timer = null
+		}
+	},
+}
 </script>
 
 <style lang="scss" scoped>

@@ -33,8 +33,7 @@
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
 			:width="400"
-		>
-		</OverlayDetail>
+		></OverlayDetail>
 		<!-- 路线规划 -->
 		<RoutePlan
 			:data="data"
@@ -45,122 +44,120 @@
 	</div>
 </template>
 <script>
-	import bus from '../../../../../utils/bus'
-	import { scene, event, instance } from 'eslinkv-sdk'
-	import {
-		INDEXSCENEMAP,
-		OVERLAYINFOMAP_AIRSUPPLY,
-		AIRSUPPLY_WARN_SCENEINDEX,
-		AIRSUPPLY_WARN_COMPONENTINDEX
-	} from '../../../../../config'
-	import { WARNING_OVERLAY_MAP } from './config.js'
-	export default {
-		name: 'WarnEvent',
-		inject: ['parentInfo'],
-		components: {
-			Overlay: () => import('../../../../../components/Overlay'),
-			OverlayDetail: () => import('../../../../../components/OverlayDetail'),
-			RoutePlan: () => import('../RoutePlan')
-		},
-		props: {
-			data: {
-				type: Object,
-				default () {
-					return {}
-				}
-			}
-		},
-		data () {
-			return {
-				icon: 'iconshijian1',
-				showOverlayDetail: true,
-				showRoutePlan: false,
-				visible: false,
-				overlayIcon: '',
-				OverlayDetailProp: {},
-				overlayInfoConfigMap: Object.freeze(WARNING_OVERLAY_MAP)
-			}
-		},
-		computed: {
-			showMore () {
-				const { data, showRoutePlan } = this
-				return !showRoutePlan && data.overlayType === 'WARNEVENT'
-			}
-		},
-		watch: {
-			data (val) {
-				if (JSON.stringify(val) !== '{}') {
-					const { overlayType, status } = val
-					const { overlayInfoConfigMap } = this
-					const iconMap = {
-						WARNEVENT: 'iconshijian1',
-						WarningList: 'icongongyiyichang'
-					}
-					const overlayDetailConfig =
-						overlayInfoConfigMap[overlayType] || {}
-					// 弹窗详情
-					this.OverlayDetailProp = {
-						iconSize: 38,
-						overlayDetailConfig,
-						showCloseBtn: true
-					}
-					// 报警图标
-					this.overlayIcon =
-						iconMap[overlayType] + (status === 0 ? '-suc' : '')
-					this.visible = true
-					this.showOverlayDetail = true
-				} else {
-					this.visible = false
-					this.showOverlayDetail = false
-					this.showRoutePlan = false
-					return {}
-				}
+import bus from '../../../../../utils/bus'
+import { scene, event, instance } from 'eslinkv-sdk'
+import {
+	INDEXSCENEMAP,
+	OVERLAYINFOMAP_AIRSUPPLY,
+	AIRSUPPLY_WARN_SCENEINDEX,
+	AIRSUPPLY_WARN_COMPONENTINDEX,
+} from '../../../../../config'
+import { WARNING_OVERLAY_MAP } from './config.js'
+export default {
+	name: 'WarnEvent',
+	inject: ['parentInfo'],
+	components: {
+		Overlay: () => import('../../../../../components/Overlay'),
+		OverlayDetail: () => import('../../../../../components/OverlayDetail'),
+		RoutePlan: () => import('../RoutePlan'),
+	},
+	props: {
+		data: {
+			type: Object,
+			default() {
+				return {}
 			},
-			// 路径规划时隐藏管线，legend
-			showRoutePlan (val) {
-				this.$parent.showRoutePlan = val
+		},
+	},
+	data() {
+		return {
+			icon: 'iconshijian1',
+			showOverlayDetail: true,
+			showRoutePlan: false,
+			visible: false,
+			overlayIcon: '',
+			OverlayDetailProp: {},
+			overlayInfoConfigMap: Object.freeze(WARNING_OVERLAY_MAP),
+		}
+	},
+	computed: {
+		showMore() {
+			const { data, showRoutePlan } = this
+			return !showRoutePlan && data.overlayType === 'WARNEVENT'
+		},
+	},
+	watch: {
+		data(val) {
+			if (JSON.stringify(val) !== '{}') {
+				const { overlayType, status } = val
+				const { overlayInfoConfigMap } = this
+				const iconMap = {
+					WARNEVENT: 'iconshijian1',
+					WarningList: 'icongongyiyichang',
+				}
+				const overlayDetailConfig =
+					overlayInfoConfigMap[overlayType] || {}
+				// 弹窗详情
+				this.OverlayDetailProp = {
+					iconSize: 38,
+					overlayDetailConfig,
+					showCloseBtn: true,
+				}
+				// 报警图标
+				this.overlayIcon =
+					iconMap[overlayType] + (status === 0 ? '-suc' : '')
+				this.visible = true
+				this.showOverlayDetail = true
+			} else {
+				this.visible = false
+				this.showOverlayDetail = false
+				this.showRoutePlan = false
+				return {}
 			}
 		},
-		mounted () {
-			bus.$on('clearRoutePlan', () => {
-				this.showRoutePlan = false
-				this.$emit('close')
+		// 路径规划时隐藏管线，legend
+		showRoutePlan(val) {
+			this.$parent.showRoutePlan = val
+		},
+	},
+	mounted() {
+		bus.$on('clearRoutePlan', () => {
+			this.showRoutePlan = false
+			this.$emit('close')
+		})
+	},
+	methods: {
+		viewOverlayDetail() {
+			const { repairContent, address, callDate } = this.data
+			this.showRoutePlan = true
+			// 和场景进行交互
+			scene.actions.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX)
+			// 更新数据
+			this.$nextTick(() => {
+				AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
+					instance.actions.updateComponent(i, {
+						params: {
+							id: this.data.id,
+						},
+					})
+				})
+				event.state.func.pauseVideo()
 			})
 		},
-		methods: {
-			viewOverlayDetail () {
-				const { repairContent, address, callDate } = this.data
-				this.showRoutePlan = true
-				// 和场景进行交互
-				scene.actions.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX)
-				// 更新数据
-				this.$nextTick(() => {
-					AIRSUPPLY_WARN_COMPONENTINDEX.forEach((i) => {
-						instance.actions.updateComponent(i, {
-							params: {
-								id: this.data.id
-							}
-						})
-					})
-					event.state.func.pauseVideo()
-				})
-			},
-			closeOverlayDetail (done) {
-				this.showRoutePlan = false
-				scene.actions.setSceneIndex(
-					INDEXSCENEMAP[this.parentInfo.pageName]
-				)
-				this.$emit('close')
-				done && done()
-			},
-			getDetailOverlayInstance () {
-				return this.$refs.OverlayDetail.getInstance()
-			}
+		closeOverlayDetail(done) {
+			this.showRoutePlan = false
+			scene.actions.setSceneIndex(INDEXSCENEMAP[this.parentInfo.pageName])
+			this.$emit('close')
+			done && done()
 		},
-		beforeDestroy () {
-			bus.$off(['clearRoutePlan'])
-		}
-	}
+		getDetailOverlayInstance() {
+			return this.$refs.OverlayDetail.getInstance()
+		},
+	},
+	beforeDestroy() {
+		bus.$off(['clearRoutePlan'])
+	},
+}
 </script>
 
 <style lang="scss" scoped>

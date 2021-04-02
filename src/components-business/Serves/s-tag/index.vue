@@ -5,15 +5,15 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import { customConfig, value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import { customConfig, value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		created () {
-			this.configValue = this.parseConfigValue(value, customConfig)
-		}
-	}
+export default {
+	mixins: [widgetMixin],
+	created() {
+		this.configValue = this.parseConfigValue(value, customConfig)
+	},
+}
 </script>
 <style lang="scss" scoped>
 .widget-part {
@@ -35,9 +35,12 @@
 		line-height: 32px;
 		color: #0df;
 		text-align: left;
-		background: linear-gradient(90deg, #004d96 0%, rgba(0, 77, 150, 0.3) 100%);
+		background: linear-gradient(
+			90deg,
+			#004d96 0%,
+			rgba(0, 77, 150, 0.3) 100%
+		);
 		border-radius: 16px;
 	}
 }
 </style>
-

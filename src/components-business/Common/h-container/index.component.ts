@@ -2,24 +2,24 @@ export const value = {
 	layout: {
 		size: {
 			width: 820,
-			height: 862
+			height: 862,
 		},
 		position: {
-			value: 'relative'
-		}
+			value: 'relative',
+		},
 	},
 	api: {
-		data: JSON.stringify({})
+		data: JSON.stringify({}),
 	},
 	config: {
-		title: '供气量'
-	}
+		title: '供气量',
+	},
 }
 
 export const customConfig = [
 	{
 		prop: 'title',
 		label: '标题',
-		type: 'func-input'
-	}
+		type: 'func-input',
+	},
 ]

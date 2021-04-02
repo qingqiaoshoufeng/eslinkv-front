@@ -2,35 +2,45 @@ export const customConfig = [
 	{
 		prop: 'desc1',
 		label: '描述1',
-		type: 'func-input'
+		type: 'func-input',
 	},
 	{
 		prop: 'img1',
 		label: '图片1地址',
 		type: 'func-background',
-		options: ['/static/icons/s-meter-1.svg', '/static/icons/s-meter-2.svg', '/static/icons/s-meter-3.svg', '/static/icons/s-meter-4.svg']
+		options: [
+			'/static/icons/s-meter-1.svg',
+			'/static/icons/s-meter-2.svg',
+			'/static/icons/s-meter-3.svg',
+			'/static/icons/s-meter-4.svg',
+		],
 	},
 	{
 		prop: 'desc2',
 		label: '描述2',
-		type: 'func-input'
+		type: 'func-input',
 	},
 	{
 		prop: 'img2',
 		label: '图片2地址',
 		type: 'func-background',
-		options: ['/static/icons/s-meter-1.svg', '/static/icons/s-meter-2.svg', '/static/icons/s-meter-3.svg', '/static/icons/s-meter-4.svg']
-	}
+		options: [
+			'/static/icons/s-meter-1.svg',
+			'/static/icons/s-meter-2.svg',
+			'/static/icons/s-meter-3.svg',
+			'/static/icons/s-meter-4.svg',
+		],
+	},
 ]
 export const value = {
 	layout: {
 		size: {
 			width: 992,
-			height: 188
+			height: 188,
 		},
 		position: {
-			value: 'relative'
-		}
+			value: 'relative',
+		},
 	},
 	api: {
 		data: JSON.stringify([
@@ -40,7 +50,7 @@ export const value = {
 				rate2: 0.5,
 				num1: 674,
 				num2: 236,
-				percent: 56
+				percent: 56,
 			},
 			{
 				date: '2020.07',
@@ -48,7 +58,7 @@ export const value = {
 				rate2: 0.3,
 				num1: 674,
 				num2: 653,
-				percent: 80
+				percent: 80,
 			},
 			{
 				date: '2020.08',
@@ -56,7 +66,7 @@ export const value = {
 				rate2: 0.7,
 				num1: 674,
 				num2: 234,
-				percent: 75
+				percent: 75,
 			},
 			{
 				date: '2020.09',
@@ -64,7 +74,7 @@ export const value = {
 				rate2: 0.5,
 				num1: 674,
 				num2: 236,
-				percent: 22
+				percent: 22,
 			},
 			{
 				date: '2020.10',
@@ -72,7 +82,7 @@ export const value = {
 				rate2: 0.5,
 				num1: 78,
 				num2: 236,
-				percent: 33
+				percent: 33,
 			},
 			{
 				date: '2020.11',
@@ -80,14 +90,14 @@ export const value = {
 				rate2: 0.75,
 				num1: 543,
 				num2: 236,
-				percent: 44
-			}
-		])
+				percent: 44,
+			},
+		]),
 	},
 	config: {
 		desc1: '计划抄表数',
 		desc2: '实际抄表数',
 		img1: '/static/icons/s-meter-1.svg',
-		img2: '/static/icons/s-meter-2.svg'
-	}
+		img2: '/static/icons/s-meter-2.svg',
+	},
 }

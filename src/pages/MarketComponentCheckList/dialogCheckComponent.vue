@@ -1,87 +1,98 @@
 <template lang="pug">
-	i-modal.check-modal(v-model="modalShow" title="审核")
-		d-view(v-if="modalShow")
-		div(slot="footer")
-			i-button(type="primary" @click="submit") 通过
-			i-button(type="error" @click="cancel") 拒绝
+i-modal.check-modal(v-model="modalShow", title="审核")
+	d-view(v-if="modalShow")
+	div(slot="footer")
+		i-button(type="primary", @click="submit") 通过
+		i-button(type="error", @click="cancel") 拒绝
 </template>
 
 <script lang="ts">
-	import {Vue, Component, Prop, Watch} from 'vue-property-decorator'
-	import {Modal, Button,} from 'view-design'
-	import '@riophae/vue-treeselect/dist/vue-treeselect.css'
-	import html2canvas from 'html2canvas'
-	import {dView} from 'eslinkv-sdk'
+import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
+import { Modal, Button } from 'view-design'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+import html2canvas from 'html2canvas'
+import { dView } from 'eslinkv-sdk'
 
-	@Component({
-		components: {
-			'i-button': Button,
-			'i-modal': Modal,
-			dView,
-		}
-	})
-	export default class MarketEditDialog extends Vue {
-		@Prop(Boolean) value!: boolean
-		@Prop(Object) detail: any
-		modalShow = false
+@Component({
+	components: {
+		'i-button': Button,
+		'i-modal': Modal,
+		dView,
+	},
+})
+export default class MarketEditDialog extends Vue {
+	@Prop(Boolean) value!: boolean
+	@Prop(Object) detail: any
+	modalShow = false
 
-		@Watch('value')
-		onValueChange(val) {
-			this.modalShow = val
-		}
+	@Watch('value')
+	onValueChange(val) {
+		this.modalShow = val
+	}
 
-		@Watch('modalShow')
-		onModalShow(val) {
-			this.$emit('input', val)
-		}
+	@Watch('modalShow')
+	onModalShow(val) {
+		this.$emit('input', val)
+	}
 
-		cancel() {
-			this.$api.marketComponent.checkError({componentId: this.detail.componentId}).then(() => {
+	cancel() {
+		this.$api.marketComponent
+			.checkError({ componentId: this.detail.componentId })
+			.then(() => {
 				this.modalShow = false
 				this.$emit('reload')
 			})
-		}
+	}
 
-		submit() {
-			html2canvas(document.getElementsByClassName('widget-part')[0], {
-				allowTaint: true,
-				scale: 1,
-				useCORS: true,
-        backgroundColor: 'transparent'
-			}).then(canvas => {
-				canvas.toBlob(blob => {
+	submit() {
+		html2canvas(document.getElementsByClassName('widget-part')[0], {
+			allowTaint: true,
+			scale: 1,
+			useCORS: true,
+			backgroundColor: 'transparent',
+		}).then(canvas => {
+			canvas.toBlob(
+				blob => {
 					this.upload(blob)
-				}, 'image/png', 0.9)
-			})
-		}
+				},
+				'image/png',
+				0.9,
+			)
+		})
+	}
 
-		upload(blob) {
-			const name = `${+new Date()}.png`
-			const data = new FormData()
-			data.append('file', blob, name)
-			data.append('library', `componentAvatar/${this.detail.componentEnTitle}/${this.detail.componentVersion}`)
-			this.$api.upload.file(data).then(res => {
-				this.$api.marketComponent.checkSuccess({
+	upload(blob) {
+		const name = `${+new Date()}.png`
+		const data = new FormData()
+		data.append('file', blob, name)
+		data.append(
+			'library',
+			`componentAvatar/${this.detail.componentEnTitle}/${this.detail.componentVersion}`,
+		)
+		this.$api.upload.file(data).then(res => {
+			this.$api.marketComponent
+				.checkSuccess({
 					componentId: this.detail.componentId,
-          componentAvatar: res.url,
-          componentEnTitle: this.detail.componentEnTitle
-				}).then(() => {
+					componentAvatar: res.url,
+					componentEnTitle: this.detail.componentEnTitle,
+				})
+				.then(() => {
 					this.modalShow = false
 					this.$emit('reload')
 				})
-			})
-		}
+		})
 	}
+}
 </script>
 <style lang="scss" scoped>
-	.check-modal {
-		&::v-deep {
-			.ivu-modal-body {
-				max-width: 500px;
-				max-height: 500px;
-				overflow-x: auto;
-				overflow-y: auto;
-			}
+.check-modal {
+	&::v-deep {
+		.ivu-modal-body {
+			max-width: 500px;
+			max-height: 500px;
+			overflow-x: auto;
+			overflow-y: auto;
 		}
 	}
+}
 </style>

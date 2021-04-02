@@ -2,35 +2,33 @@ export const value = {
 	layout: {
 		size: {
 			width: 480,
-			height: 64
+			height: 64,
 		},
 		position: {
-			value: 'relative'
-		}
+			value: 'relative',
+		},
 	},
 	api: {
 		data: JSON.stringify({
-			count: 123458
-		})
+			count: 123458,
+		}),
 	},
 	config: {
 		icon: '/static/icons/h-inline-logo1.svg',
-		text: ''
-	}
+		text: '',
+	},
 }
 
 export const customConfig = [
 	{
 		prop: 'text',
 		label: '描述',
-		type: 'func-input'
+		type: 'func-input',
 	},
 	{
 		prop: 'icon',
 		label: '图片',
 		type: 'func-background',
-		options: [
-			'/static/icons/h-inline-logo1.svg'
-		]
-	}
+		options: ['/static/icons/h-inline-logo1.svg'],
+	},
 ]

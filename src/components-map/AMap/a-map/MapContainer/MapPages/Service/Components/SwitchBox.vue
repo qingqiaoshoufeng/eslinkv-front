@@ -14,45 +14,45 @@
 	</div>
 </template>
 <script>
-	import { Switch } from 'view-design'
-	export default {
-		components: {
-			'i-switch': Switch
-		},
-		name: 'SwitchBox',
-		props: {
-			data: {
-				type: Array,
-				default () {
-					return []
-				}
+import { Switch } from 'view-design'
+export default {
+	components: {
+		'i-switch': Switch,
+	},
+	name: 'SwitchBox',
+	props: {
+		data: {
+			type: Array,
+			default() {
+				return []
 			},
-			className: {
-				type: Object,
-				default () {
-					return {}
-				}
-			}
 		},
-		watch: {
-			data: {
-				handler (val) {
-					this.data = val
-				},
-				deep: true,
-				immediate: true
-			}
+		className: {
+			type: Object,
+			default() {
+				return {}
+			},
 		},
-		data () {
-			return {}
+	},
+	watch: {
+		data: {
+			handler(val) {
+				this.data = val
+			},
+			deep: true,
+			immediate: true,
 		},
-		methods: {
-			change (type) {
-				this.$emit('switch-change', this.data, type)
-			}
+	},
+	data() {
+		return {}
+	},
+	methods: {
+		change(type) {
+			this.$emit('switch-change', this.data, type)
 		},
-		mounted () {}
-	}
+	},
+	mounted() {},
+}
 </script>
 <style lang="scss" scoped>
 .hangrancode_switch_Box {
@@ -126,4 +126,3 @@
 	left: 2695px;
 }
 </style>
-

@@ -1,4 +1,4 @@
-	<!-- 点击展示单个任务表单 -->
+<!-- 点击展示单个任务表单 -->
 <template>
 	<div>
 		<Overlay
@@ -17,74 +17,72 @@
 					detailList,
 				})
 			"
-		>
-		</Overlay>
+		></Overlay>
 	</div>
 </template>
 <script>
-	import { Overlay } from '../../../../components/index'
-	const eventTypeIconMap = {
-		0: 'iconrenwugongdan-suc',
-		1: 'iconrenwugongdan'
-	}
-	export default {
-		name: 'useHotYear',
-		components: {
-			Overlay
+import { Overlay } from '../../../../components/index'
+const eventTypeIconMap = {
+	0: 'iconrenwugongdan-suc',
+	1: 'iconrenwugongdan',
+}
+export default {
+	name: 'useHotYear',
+	components: {
+		Overlay,
+	},
+	props: {
+		overlayType: {
+			type: String,
+			default: 'WarningICcustomer',
 		},
-		props: {
-			overlayType: {
-				type: String,
-				default: 'WarningICcustomer'
+		data: {
+			type: Array,
+			default() {
+				return []
 			},
-			data: {
-				type: Array,
-				default () {
-					return []
-				}
+		},
+		detailList: {
+			type: Array,
+			default() {
+				return []
 			},
-			detailList: {
-				type: Array,
-				default () {
-					return []
-				}
-			},
-			activeIndex: {
-				type: Number,
-				default: -1
-			}
 		},
-		data () {
-			return {
-				eventTypeIconMap
-			}
+		activeIndex: {
+			type: Number,
+			default: -1,
 		},
-		watch: {
-			data: {
-				handler (val) {
-					this.data = val
-				},
-				deep: true
-			}
-		},
-		async created () {
-			this.map = this.$parent.$amap
-		},
-		mounted () {},
-		methods: {
-			handleOverlayClick (marker) {
-				this.$emit('view-detail', {
-					...marker,
-					overlayType: this.overlayType
-				})
-			},
-			handleMouseleave () {
-				this.$emit('close')
-			}
+	},
+	data() {
+		return {
+			eventTypeIconMap,
 		}
-	}
+	},
+	watch: {
+		data: {
+			handler(val) {
+				this.data = val
+			},
+			deep: true,
+		},
+	},
+	async created() {
+		this.map = this.$parent.$amap
+	},
+	mounted() {},
+	methods: {
+		handleOverlayClick(marker) {
+			this.$emit('view-detail', {
+				...marker,
+				overlayType: this.overlayType,
+			})
+		},
+		handleMouseleave() {
+			this.$emit('close')
+		},
+	},
+}
 </script>
-
 
 <style lang="scss" scoped>
 video::-webkit-media-controls {

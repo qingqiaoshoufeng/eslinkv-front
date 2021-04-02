@@ -1,4 +1,4 @@
-	<!-- 点击展示单个详情 -->
+<!-- 点击展示单个详情 -->
 <template>
 	<div class="TipDetial">
 		<div class="companyName">{{ data.name || data.address }}</div>
@@ -10,9 +10,9 @@
 			>
 				<span class="index">{{ index + 1 }}</span>
 				<span class="label">{{ `${item.name}联码数` }}</span>
-				<span class="value" v-show="item.value">{{
-					`${item.value && item.value.toLocaleString()}户`
-				}}</span>
+				<span class="value" v-show="item.value">
+					{{ `${item.value && item.value.toLocaleString()}户` }}
+				</span>
 			</div>
 		</div>
 		<div class="btn" v-if="isShowMore" @click="handleViewDetail()">
@@ -21,38 +21,38 @@
 	</div>
 </template>
 <script>
-	export default {
-		name: 'TipDetial',
-		props: {
-			data: {
-				Type: Object,
-				default () {
-					return {}
-				}
+export default {
+	name: 'TipDetial',
+	props: {
+		data: {
+			Type: Object,
+			default() {
+				return {}
 			},
-			detailInfo: {
-				Type: Object,
-				default () {
-					return {}
-				}
+		},
+		detailInfo: {
+			Type: Object,
+			default() {
+				return {}
 			},
-			isShowMore: {
-				Type: Boolean,
-				default: false
-			}
 		},
-		data () {
-			return {}
+		isShowMore: {
+			Type: Boolean,
+			default: false,
 		},
-		methods: {
-			handleViewDetail () {
-				this.$emit('view-detail')
-				const a = 111
-				a.toLocale
-			}
+	},
+	data() {
+		return {}
+	},
+	methods: {
+		handleViewDetail() {
+			this.$emit('view-detail')
+			const a = 111
+			a.toLocale
 		},
-		mounted () {}
-	}
+	},
+	mounted() {},
+}
 </script>
 <style lang="scss" scoped>
 .TipDetial {
@@ -139,4 +139,3 @@
 	}
 }
 </style>
-

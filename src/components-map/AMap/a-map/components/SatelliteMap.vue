@@ -1,51 +1,51 @@
 <template></template>
 <script>
-	export default {
-		data () {
-			return { sateLayer: null, count: 0 }
+export default {
+	data() {
+		return { sateLayer: null, count: 0 }
+	},
+	props: {
+		value: { type: Boolean, default: false },
+		map: {
+			type: [Object, null],
+			default: null,
 		},
-		props: {
-			value: { type: Boolean, default: false },
-			map: {
-				type: [Object, null],
-				default: null
-			}
-		},
-		watch: {
-			value: {
-				handler (val) {
-					this.toggerMapStyle(val)
-				}
-			// immediate: true,
-			}
-		},
-		mounted () {
-			this.createdSatellite()
-		},
-		methods: {
-			createdSatellite () {
-				// this.sateLayer = new AMap.TileLayer.Satellite();
-				AMap.plugin(['AMap.MapType'], () => {
-					this.map.addControl(
-						new AMap.MapType({
-							defaultType: 0 // 使用2D地图
-						})
-					)
-				})
+	},
+	watch: {
+		value: {
+			handler(val) {
+				this.toggerMapStyle(val)
 			},
-			toggerMapStyle (val) {
-				if (!this.map) return
-				const btn = document.querySelector('.amap-maptype-title')
-				this.count++
-				console.log(this.count)
-				if (val) {
-					btn.click()
-				} else {
-					btn.click()
-				}
+			// immediate: true,
+		},
+	},
+	mounted() {
+		this.createdSatellite()
+	},
+	methods: {
+		createdSatellite() {
+			// this.sateLayer = new AMap.TileLayer.Satellite();
+			AMap.plugin(['AMap.MapType'], () => {
+				this.map.addControl(
+					new AMap.MapType({
+						defaultType: 0, // 使用2D地图
+					}),
+				)
+			})
+		},
+		toggerMapStyle(val) {
+			if (!this.map) return
+			const btn = document.querySelector('.amap-maptype-title')
+			this.count++
+			console.log(this.count)
+			if (val) {
+				btn.click()
+			} else {
+				btn.click()
 			}
-		}
-	}
+		},
+	},
+}
 </script>
 <style lang="scss" scoped>
 .map_button_box {

@@ -2,29 +2,33 @@ export const customConfig = [
 	{
 		prop: 'color',
 		label: '颜色',
-		type: 'func-color'
+		type: 'func-color',
 	},
 	{
 		prop: 'suffix',
 		label: '后缀',
-		type: 'func-input'
+		type: 'func-input',
 	},
 	{
 		prop: 'background',
 		label: '背景图片',
 		type: 'func-background',
-		options: ['/static/icons/h-ring1-1.svg', '/static/icons/h-ring1-2.svg', '/static/icons/h-ring1-3.svg']
-	}
+		options: [
+			'/static/icons/h-ring1-1.svg',
+			'/static/icons/h-ring1-2.svg',
+			'/static/icons/h-ring1-3.svg',
+		],
+	},
 ]
 export const value = {
 	layout: {
 		size: {
 			width: 992,
-			height: 214
+			height: 214,
 		},
 		position: {
-			value: 'relative'
-		}
+			value: 'relative',
+		},
 	},
 	api: {
 		data: JSON.stringify([
@@ -41,8 +45,8 @@ export const value = {
 					{ value: 12.5, des: '', title: '杭州西站' },
 					{ value: 12.5, des: '', title: '杭州西站' },
 					{ value: 12.5, des: '', title: '杭州西站' },
-					{ value: 12.5, des: '', title: '杭州西站' }
-				]
+					{ value: 12.5, des: '', title: '杭州西站' },
+				],
 			},
 			{
 				name: '子公司',
@@ -57,8 +61,8 @@ export const value = {
 					{ value: 12.5, des: '', title: '杭州西站' },
 					{ value: 12.5, des: '', title: '杭州西站' },
 					{ value: 12.5, des: '', title: '杭州西站' },
-					{ value: 12.5, des: '', title: '杭州西站' }
-				]
+					{ value: 12.5, des: '', title: '杭州西站' },
+				],
 			},
 			{
 				name: '用气性质',
@@ -73,14 +77,20 @@ export const value = {
 					{ value: 12.5, des: '', title: '杭州西站' },
 					{ value: 12.5, des: '', title: '杭州西站' },
 					{ value: 12.5, des: '', title: '杭州西站' },
-					{ value: 12.5, des: '', title: '杭州西站' }
-				]
-			}
-		])
+					{ value: 12.5, des: '', title: '杭州西站' },
+				],
+			},
+		]),
 	},
 	config: {
 		background: '/static/icons/h-ring1-1.svg',
 		suffix: '%',
-		color: JSON.stringify(['#00DDFF', 'rgba(1,253,210,1)', 'rgba(36,104,206,1)', 'rgba(228,53,53,1)', 'rgba(252,155,93,1)'])
-	}
+		color: JSON.stringify([
+			'#00DDFF',
+			'rgba(1,253,210,1)',
+			'rgba(36,104,206,1)',
+			'rgba(228,53,53,1)',
+			'rgba(252,155,93,1)',
+		]),
+	},
 }

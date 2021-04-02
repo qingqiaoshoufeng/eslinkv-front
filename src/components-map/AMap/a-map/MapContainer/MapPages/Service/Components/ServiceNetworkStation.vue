@@ -8,53 +8,51 @@
 			apiFun,
 		}"
 		@click="mouseover"
-	>
-	</BaseOverlay>
+	></BaseOverlay>
 </template>
 <script>
-	import { BaseOverlay } from '../../../../components/index'
-	export default {
-		name: 'ServiceNetworkStation',
-		components: {
-			BaseOverlay
+import { BaseOverlay } from '../../../../components/index'
+export default {
+	name: 'ServiceNetworkStation',
+	components: {
+		BaseOverlay,
+	},
+	props: {
+		visible: {
+			type: Boolean,
+			default: true,
 		},
-		props: {
-			visible: {
-				type: Boolean,
-				default: true
-			},
-			overlayIcon: {
-				type: String,
-				default: ''
-			},
-			overlayType: {
-				type: String,
-				default: ''
-			}
+		overlayIcon: {
+			type: String,
+			default: '',
 		},
-		data () {
-			return {
-				apiFun: this.$api.map.mock.getServiceNetworkStationList
-			}
+		overlayType: {
+			type: String,
+			default: '',
 		},
-		methods: {
-			mouseover (marker) {
-				this.mouseIn = true
-				this.$emit(
-					'overlay-click',
-					{
-						detailList: this.detailList,
-						...marker,
-						overlayType: this.overlayType
-					},
-					this.overlayType
-				)
-			},
-			handleMouseleave () {
-				this.mouseIn = false
-				this.$emit('close')
-			}
+	},
+	data() {
+		return {
+			apiFun: this.$api.map.mock.getServiceNetworkStationList,
 		}
-	}
+	},
+	methods: {
+		mouseover(marker) {
+			this.mouseIn = true
+			this.$emit(
+				'overlay-click',
+				{
+					detailList: this.detailList,
+					...marker,
+					overlayType: this.overlayType,
+				},
+				this.overlayType,
+			)
+		},
+		handleMouseleave() {
+			this.mouseIn = false
+			this.$emit('close')
+		},
+	},
+}
 </script>
-

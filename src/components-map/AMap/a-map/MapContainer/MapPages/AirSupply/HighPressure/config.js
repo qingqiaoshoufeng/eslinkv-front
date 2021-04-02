@@ -5,7 +5,7 @@ import {
 	HighPressureGasStation,
 	emergencyAirSourceStation,
 	HighPressureHighPressureGasStation,
-	HighPressureLineLength
+	HighPressureLineLength,
 } from '../../../../utils/dictionary'
 
 // 高压统计数据配置
@@ -13,7 +13,7 @@ export const DATA_STATISTICS_MAP = {
 	HighPressureGasStation,
 	emergencyAirSourceStation,
 	HighPressureHighPressureGasStation,
-	HighPressureLineLength
+	HighPressureLineLength,
 }
 
 // 覆盖物legend配置
@@ -23,7 +23,7 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 		legendIcon: 'icontuligaoyaguanwang',
 		component: 'HighPressureLine',
 		visible: true,
-		dataProp: 'highPressureLine'
+		dataProp: 'highPressureLine',
 	},
 	HighPressureLine_Process: {
 		label: '高压管网(建设中)',
@@ -31,7 +31,7 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 		icon: 'icontulizhongyaguanwang-progress',
 		component: 'HighPressureLine_Process',
 		visible: true,
-		dataProp: 'highPressureLine_Process'
+		dataProp: 'highPressureLine_Process',
 	},
 	WarningStations: {
 		label: '中低压预警点',
@@ -41,7 +41,7 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 		component: 'WarningStations',
 		showOverlayName: false,
 		visible: true,
-		dataProp: 'middleAndLowPressureValveList'
+		dataProp: 'middleAndLowPressureValveList',
 	},
 	GasStation: {
 		label: '门站',
@@ -50,7 +50,7 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 		component: 'GasStation',
 		visible: true,
 		showMore: true,
-		dataProp: 'gasStationList'
+		dataProp: 'gasStationList',
 	},
 	PressureRegulatingStation: {
 		label: '调压站',
@@ -58,7 +58,7 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 		iconSize: 38,
 		component: 'PressureRegulatingStation',
 		visible: true,
-		dataProp: 'pressureRegulatingStationList'
+		dataProp: 'pressureRegulatingStationList',
 	},
 	EmergencyAirSourceStation: {
 		label: '应急气源站',
@@ -66,7 +66,7 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 		iconSize: 38,
 		component: 'EmergencyAirSourceStation',
 		visible: true,
-		dataProp: 'emergencyAirSourceStationList'
+		dataProp: 'emergencyAirSourceStationList',
 	},
 	InspectionPerson: {
 		label: '巡检人员',
@@ -76,7 +76,7 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 		component: 'InspectionPerson',
 		showOverlayName: false,
 		visible: false,
-		dataProp: 'inspectionPersonList'
+		dataProp: 'inspectionPersonList',
 	},
 	InspectionCar: {
 		label: '巡检车辆',
@@ -86,8 +86,8 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 		component: 'InspectionCar',
 		showOverlayName: false,
 		visible: false,
-		dataProp: 'inspectionCarList'
-	}
+		dataProp: 'inspectionCarList',
+	},
 }
 // hover覆盖物详情
 export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
@@ -96,78 +96,78 @@ export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
 			name: {
 				style: {
 					fontSize: '32px',
-					color: '#FFDC45'
+					color: '#FFDC45',
 				},
-				errColor: '#FFDC45'
-			}
-		}
+				errColor: '#FFDC45',
+			},
+		},
 	},
 	PressureRegulatingStation: {
 		fields: {
 			name: {
 				style: {
 					fontSize: '32px',
-					color: '#FFDC45'
+					color: '#FFDC45',
 				},
-				errColor: '#FFDC45'
-			}
-		}
+				errColor: '#FFDC45',
+			},
+		},
 	},
 	EmergencyAirSourceStation: {
 		fields: {
 			name: {
 				style: {
 					fontSize: '32px',
-					color: '#FFDC45'
+					color: '#FFDC45',
 				},
-				errColor: '#FFDC45'
-			}
-		}
+				errColor: '#FFDC45',
+			},
+		},
 	},
 	StationList: {
 		fields: {
 			name: {
 				style: {
 					fontSize: '32px',
-					color: '#FFDC45'
+					color: '#FFDC45',
 				},
-				errColor: '#FFDC45'
+				errColor: '#FFDC45',
 			},
 			address: {
 				style: {
 					fontSize: '24px',
-					color: '#fff'
+					color: '#fff',
 				},
-				errColor: '#fff'
-			}
+				errColor: '#fff',
+			},
 		},
-		visibleMore: true
+		visibleMore: true,
 	},
 	InspectionPerson: {
 		fields: {
 			name: {
 				style: {
 					fontSize: '32px',
-					color: '#FFDC45'
+					color: '#FFDC45',
 				},
-				errColor: '#FFDC45'
-			}
-		}
+				errColor: '#FFDC45',
+			},
+		},
 	},
 	InspectionCar: {
 		fields: {
 			name: {
 				style: {
 					fontSize: '32px',
-					color: '#FFDC45'
-				}
+					color: '#FFDC45',
+				},
 			},
 			carPlateNo: {
 				style: {
 					fontSize: '24px',
-					color: '#fff'
-				}
-			}
-		}
-	}
+					color: '#fff',
+				},
+			},
+		},
+	},
 }

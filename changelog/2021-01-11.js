@@ -15,7 +15,8 @@ export default {
 		},
 		{
 			type: ['perf'],
-			content: '添加场景切换回调监听，业务组件可以比较方便的读取到场景变化',
+			content:
+				'添加场景切换回调监听，业务组件可以比较方便的读取到场景变化',
 		},
 		{
 			type: ['perf'],
@@ -64,6 +65,6 @@ export default {
 		{
 			type: ['perf'],
 			content: '打包优化，线上版本出现错误时，方便回退',
-		}
-	]
+		},
+	],
 }

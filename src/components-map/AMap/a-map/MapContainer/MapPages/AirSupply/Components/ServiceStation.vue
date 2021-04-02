@@ -15,46 +15,45 @@
 				$emit(
 					'overlay-click',
 					{ detailList, ...marker, overlayType },
-					overlayType
+					overlayType,
 				)
 		"
 	/>
 </template>
 <script>
-	import { BaseOverlay } from '../../../../components/index'
-	export default {
-		name: 'ServiceNetworkStation',
-		components: {
-			BaseOverlay
+import { BaseOverlay } from '../../../../components/index'
+export default {
+	name: 'ServiceNetworkStation',
+	components: {
+		BaseOverlay,
+	},
+	props: {
+		visible: {
+			type: Boolean,
+			default: true,
 		},
-		props: {
-			visible: {
-				type: Boolean,
-				default: true
-			},
-			overlayIcon: {
-				type: String,
-				default: ''
-			},
-			overlayType: {
-				type: String,
-				default: ''
-			},
-			data: {
-				type: Array
-			},
-			detailList: {
-				type: Array,
-				default () {
-					return []
-				}
-			}
+		overlayIcon: {
+			type: String,
+			default: '',
 		},
-		data () {
-			return {
-				apiFun: this.$api.map.serve.getServiceNetworkStationList
-			}
+		overlayType: {
+			type: String,
+			default: '',
+		},
+		data: {
+			type: Array,
+		},
+		detailList: {
+			type: Array,
+			default() {
+				return []
+			},
+		},
+	},
+	data() {
+		return {
+			apiFun: this.$api.map.serve.getServiceNetworkStationList,
 		}
-	}
+	},
+}
 </script>
-

@@ -28,7 +28,9 @@
 					<span
 						class="legend-label"
 						:class="{ 'in-active': !legend.visible }"
-					>{{ legend.label }}</span>
+					>
+						{{ legend.label }}
+					</span>
 				</div>
 			</div>
 		</div>
@@ -46,79 +48,79 @@
 </template>
 
 <script>
-	import SvgIcon from '../SvgIcon/index'
-	export default {
-		name: 'Legend',
-		props: {
-			data: {
-				type: Object,
-				default: function () {
-					return {}
-				}
+import SvgIcon from '../SvgIcon/index'
+export default {
+	name: 'Legend',
+	props: {
+		data: {
+			type: Object,
+			default: function () {
+				return {}
 			},
-			maxWidth: {
-				type: Number,
-				default: 1360
-			},
-			multiple: {
-				type: Boolean,
-				default: true
-			}
 		},
-		data () {
-			return {
-				isExpend: false,
-				isNeedExpend: true,
-				heightAuto: 'auto'
-			}
+		maxWidth: {
+			type: Number,
+			default: 1360,
 		},
-		watch: {
-			data: {
-				handler (val) {
-					if (JSON.stringify(val) === '{}') {
-						return false
-					}
-					setTimeout(() => {
-						// 计算是否需要展开
-						const contentDom = this.$refs.content
-						const contentHeight = contentDom.offsetHeight
-						const contentWidth = contentDom.offsetWidth
-						if (
-							contentHeight < 100 &&
-							contentWidth < this.maxWidth - 146
-						) {
-							this.isNeedExpend = false
-						} else {
-							this.isNeedExpend = true
-							this.heightAuto = contentHeight + 'px'
-						}
-						this.isExpend = false
-					}, 100)
-				},
-				immediate: true
-			}
+		multiple: {
+			type: Boolean,
+			default: true,
 		},
-		components: {
-			SvgIcon
-		},
-		methods: {
-			handleLegendClick (prop) {
-				const { multiple } = this
-				if (!multiple) {
-					Object.keys(this.data).forEach(legendKey => {
-						this.data[legendKey].visible = false
-					})
-					this.data[prop].visible = true
-				} else {
-					this.data[prop].visible = !this.data[prop].visible
-				}
-				this.$emit('legend-click', prop)
-			},
-			handleExpendClick () {
-				this.isExpend = !this.isExpend
-			}
+	},
+	data() {
+		return {
+			isExpend: false,
+			isNeedExpend: true,
+			heightAuto: 'auto',
 		}
-	}
+	},
+	watch: {
+		data: {
+			handler(val) {
+				if (JSON.stringify(val) === '{}') {
+					return false
+				}
+				setTimeout(() => {
+					// 计算是否需要展开
+					const contentDom = this.$refs.content
+					const contentHeight = contentDom.offsetHeight
+					const contentWidth = contentDom.offsetWidth
+					if (
+						contentHeight < 100 &&
+						contentWidth < this.maxWidth - 146
+					) {
+						this.isNeedExpend = false
+					} else {
+						this.isNeedExpend = true
+						this.heightAuto = contentHeight + 'px'
+					}
+					this.isExpend = false
+				}, 100)
+			},
+			immediate: true,
+		},
+	},
+	components: {
+		SvgIcon,
+	},
+	methods: {
+		handleLegendClick(prop) {
+			const { multiple } = this
+			if (!multiple) {
+				Object.keys(this.data).forEach(legendKey => {
+					this.data[legendKey].visible = false
+				})
+				this.data[prop].visible = true
+			} else {
+				this.data[prop].visible = !this.data[prop].visible
+			}
+			this.$emit('legend-click', prop)
+		},
+		handleExpendClick() {
+			this.isExpend = !this.isExpend
+		},
+	},
+}
 </script>
 
 <style lang="scss" scoped>

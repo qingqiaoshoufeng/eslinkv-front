@@ -79,94 +79,93 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import Ring from '@/components/Ring/ring'
-	import { value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import Ring from '@/components/Ring/ring'
+import { value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		components: { Ring },
-		created () {
-			this.configValue = this.parseConfigValue(value)
-		}
-	}
+export default {
+	mixins: [widgetMixin],
+	components: { Ring },
+	created() {
+		this.configValue = this.parseConfigValue(value)
+	},
+}
 </script>
 <style lang="scss" scoped>
-	.widget-part {
-		.row {
-			display: flex;
-			margin-bottom: 8px;
+.widget-part {
+	.row {
+		display: flex;
+		margin-bottom: 8px;
 
-			.title {
-				width: 24px;
-				height: 48px;
-				font-size: 18px;
-				line-height: 20px;
-				color: #fff;
-				background: #0057a9;
-			}
-
-			.item {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				width: 138px;
-				height: 48px;
-				margin-right: 8px;
-				font-size: 18px;
-				color: #fff;
-				background: rgba(0, 87, 169, 0.5);
-
-				&.chart {
-					background: rgba(255, 255, 255, 0.1);
-				}
-
-				.ring {
-					width: 30px;
-					height: 30px;
-					margin-right: 10px;
-				}
-
-				> span {
-					font-family: font-num;
-					font-size: 24px;
-					font-weight: bold;
-					line-height: 24px;
-					color: #fff;
-				}
-			}
+		.title {
+			width: 24px;
+			height: 48px;
+			font-size: 18px;
+			line-height: 20px;
+			color: #fff;
+			background: #0057a9;
 		}
 
-		.legend {
+		.item {
 			display: flex;
 			align-items: center;
-			padding-left: 40px;
-			margin-top: 8px;
+			justify-content: center;
+			width: 138px;
+			height: 48px;
+			margin-right: 8px;
+			font-size: 18px;
+			color: #fff;
+			background: rgba(0, 87, 169, 0.5);
 
-			.legend-item {
-				display: flex;
-				align-items: center;
-				margin-right: 32px;
+			&.chart {
+				background: rgba(255, 255, 255, 0.1);
+			}
 
-				.color {
-					width: 12px;
-					height: 12px;
-					margin-right: 10px;
-					background: transparent;
-					border: 3px solid #e5615b;
-					border-radius: 50%;
+			.ring {
+				width: 30px;
+				height: 30px;
+				margin-right: 10px;
+			}
 
-					&.green {
-						border-color: #00ffcf;
-					}
-				}
-
-				.label {
-					font-size: 18px;
-					color: #fff;
-				}
+			> span {
+				font-family: font-num;
+				font-size: 24px;
+				font-weight: bold;
+				line-height: 24px;
+				color: #fff;
 			}
 		}
 	}
-</style>
 
+	.legend {
+		display: flex;
+		align-items: center;
+		padding-left: 40px;
+		margin-top: 8px;
+
+		.legend-item {
+			display: flex;
+			align-items: center;
+			margin-right: 32px;
+
+			.color {
+				width: 12px;
+				height: 12px;
+				margin-right: 10px;
+				background: transparent;
+				border: 3px solid #e5615b;
+				border-radius: 50%;
+
+				&.green {
+					border-color: #00ffcf;
+				}
+			}
+
+			.label {
+				font-size: 18px;
+				color: #fff;
+			}
+		}
+	}
+}
+</style>

@@ -15,53 +15,52 @@
 </template>
 
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import { customConfig, value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import { customConfig, value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		created () {
-			this.configValue = this.parseConfigValue(value, customConfig)
-		}
-	}
+export default {
+	mixins: [widgetMixin],
+	created() {
+		this.configValue = this.parseConfigValue(value, customConfig)
+	},
+}
 </script>
 <style lang="scss" scoped>
-	.widget-part {
-		.kuo {
-			width: 185px;
-			height: 32px;
-			margin: 0 auto;
-			background: url("./img/kuohao.svg") no-repeat;
-			background-size: 100% 100%;
-		}
+.widget-part {
+	.kuo {
+		width: 185px;
+		height: 32px;
+		margin: 0 auto;
+		background: url('./img/kuohao.svg') no-repeat;
+		background-size: 100% 100%;
+	}
 
-		.list {
-			display: flex;
-			justify-content: space-between;
+	.list {
+		display: flex;
+		justify-content: space-between;
 
-			.item {
-				width: 178px;
-				height: 80px;
-				padding-top: 8px;
-				background: rgba(0, 87, 169, 0.3);
-				border-top: 1px solid #0df;
+		.item {
+			width: 178px;
+			height: 80px;
+			padding-top: 8px;
+			background: rgba(0, 87, 169, 0.3);
+			border-top: 1px solid #0df;
 
-				> h3 {
-					font-size: 20px;
-					font-weight: normal;
-					line-height: 24px;
-					color: #0df;
-				}
+			> h3 {
+				font-size: 20px;
+				font-weight: normal;
+				line-height: 24px;
+				color: #0df;
+			}
 
-				> p {
-					margin-top: 11px;
-					font-size: 28px;
-					font-weight: bold;
-					line-height: 28px;
-					color: #fff;
-				}
+			> p {
+				margin-top: 11px;
+				font-size: 28px;
+				font-weight: bold;
+				line-height: 28px;
+				color: #fff;
 			}
 		}
 	}
+}
 </style>
-

@@ -1,42 +1,52 @@
 <template lang="pug">
-        .message-item
-            .title {{data.name}}
-            Icon.expend-btn.pointer(v-if="this.data.messageStatus == 0 && !this.alwaysExpend" :type="ependReply?'ios-arrow-up':'ios-arrow-down'" size="24" @click="ependReply=!ependReply")
-            .content(ref="content")
-                template(v-if="showTextExpend")
-                    span.content-text {{data.interactionContent.slice(0,textExpend?-1:41)}}
-                    span {{textExpend?'':'...'}}
-                    span.text-expend-btn(@click="changeExpend") {{textExpend?'收起':'展开'}}
-                span(v-if="!showTextExpend") {{data.interactionContent}}
-            .time {{data.createTime}}
-            .to-reply(v-if="data.messageStatus == 1")
-                Input( v-model="replyContent" type="textarea" :rows="3" placeholder="回复信息" style="width:100%;")
-                .button.pointer( @click="handleReply" :class="replyContent?'valid':''")
-                    span 发送
-            .replyed(v-if="alwaysExpend&&data.messageStatus == 0 || ependReply && data.messageStatus==0")
-                .reply-title 回复内容：
-                .reply-content {{data.interactionResult}}
-                .time {{data.createTime}}
+.message-item
+	.title {{ data.name }}
+	Icon.expend-btn.pointer(
+		v-if="this.data.messageStatus == 0 && !this.alwaysExpend",
+		:type="ependReply ? 'ios-arrow-up' : 'ios-arrow-down'",
+		size="24",
+		@click="ependReply = !ependReply")
+	.content(ref="content")
+		template(v-if="showTextExpend")
+			span.content-text {{ data.interactionContent.slice(0, textExpend ? -1 : 41) }}
+			span {{ textExpend ? '' : '...' }}
+			span.text-expend-btn(@click="changeExpend") {{ textExpend ? '收起' : '展开' }}
+		span(v-if="!showTextExpend") {{ data.interactionContent }}
+	.time {{ data.createTime }}
+	.to-reply(v-if="data.messageStatus == 1")
+		Input(
+			v-model="replyContent",
+			type="textarea",
+			:rows="3",
+			placeholder="回复信息",
+			style="width: 100%")
+		.button.pointer(@click="handleReply", :class="replyContent ? 'valid' : ''")
+			span 发送
+	.replyed(
+		v-if="(alwaysExpend && data.messageStatus == 0) || (ependReply && data.messageStatus == 0)")
+		.reply-title 回复内容：
+		.reply-content {{ data.interactionResult }}
+		.time {{ data.createTime }}
 </template>
 <script lang="ts">
-	import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
-	import { Input, Icon } from 'view-design'
-	function strlen (str) {
-		let len = 0
-		for (var i = 0; i < str.length; i++) {
-			const c = str.charCodeAt(i)
-			// 单字节加1
-			if ((c >= 0x0001 && c <= 0x007e) || (c >= 0xff60 && c <= 0xff9f)) {
-				len++
-			} else {
-				len += 2
-			}
-			if (len > 82) {
-				return i
-			}
+import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
+import { Input, Icon } from 'view-design'
+function strlen(str) {
+	let len = 0
+	for (var i = 0; i < str.length; i++) {
+		const c = str.charCodeAt(i)
+		// 单字节加1
+		if ((c >= 0x0001 && c <= 0x007e) || (c >= 0xff60 && c <= 0xff9f)) {
+			len++
+		} else {
+			len += 2
 		}
-		return i
+		if (len > 82) {
+			return i
+		}
 	}
+	return i
+}
 @Component({ components: { Input, Icon: Icon } })
 class MessageItem extends Vue {
 	replyContent: String = ''
@@ -46,31 +56,30 @@ class MessageItem extends Vue {
 	sending: Boolean = false
 	@Prop(Object) data: any
 	@Prop(Boolean) alwaysExpend: any
-	created () {
-		this.showTextExpend =
-			this.data.interactionContent.length > 41
+	created() {
+		this.showTextExpend = this.data.interactionContent.length > 41
 	}
 
 	@Emit('refresh')
-	handleReply () {
+	handleReply() {
 		const { replyContent, data, sending } = this
 		const { messageId } = data
 		if (!replyContent || sending) {
 			return false
 		}
 		this.sending = true
-		return new Promise((resolve) => {
+		return new Promise(resolve => {
 			this.$api.message
 				.toReplyMessage({
 					messageId: messageId,
-					resultContent: replyContent
+					resultContent: replyContent,
 				})
-				.then((data) => {
+				.then(data => {
 					if (data === 'OK') {
 						resolve({
 							...this.data,
 							messageStatus: 0,
-							interactionResult: replyContent
+							interactionResult: replyContent,
 						})
 					}
 					this.sending = false
@@ -79,13 +88,13 @@ class MessageItem extends Vue {
 	}
 
 	@Emit('changeExpend')
-	changeExpend () {
+	changeExpend() {
 		this.textExpend = !this.textExpend
 		return this.textExpend
 	}
 }
 
-	export default MessageItem
+export default MessageItem
 </script>
 <style lang="scss" scoped>
 .message-item {

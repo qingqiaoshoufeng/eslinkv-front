@@ -7,22 +7,21 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import { customConfig, value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import { customConfig, value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		created () {
-			this.configValue = this.parseConfigValue(value, customConfig)
-		}
-	}
+export default {
+	mixins: [widgetMixin],
+	created() {
+		this.configValue = this.parseConfigValue(value, customConfig)
+	},
+}
 </script>
 <style lang="scss" scoped>
-	.content {
-		font-size: 32px;
-		font-weight: bold;
-		line-height: 32px;
-		color: #fff;
-	}
+.content {
+	font-size: 32px;
+	font-weight: bold;
+	line-height: 32px;
+	color: #fff;
+}
 </style>
-

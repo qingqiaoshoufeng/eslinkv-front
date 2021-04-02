@@ -4,16 +4,16 @@ export const value = {
 	api: {
 		data: JSON.stringify({
 			barData: barData,
-			dashLineData: dashLineData
-		})
+			dashLineData: dashLineData,
+		}),
 	},
 	layout: {
 		size: {
 			width: 480,
-			height: 208
+			height: 208,
 		},
 		position: {
-			value: 'relative'
-		}
-	}
+			value: 'relative',
+		},
+	},
 }

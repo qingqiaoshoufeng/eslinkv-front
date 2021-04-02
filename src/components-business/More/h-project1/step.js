@@ -9,74 +9,81 @@ const icon6 = '/static/icons/step-6.svg'
 const icon7 = '/static/icons/step-7.svg'
 const icon8 = '/static/icons/step-8.svg'
 export default {
-	data () {
+	data() {
 		return {
-			icon1, icon2, icon3, icon4, icon5, icon6, icon7, icon8
+			icon1,
+			icon2,
+			icon3,
+			icon4,
+			icon5,
+			icon6,
+			icon7,
+			icon8,
 		}
 	},
 	props: {
 		step: {
-			type: Number
+			type: Number,
 		},
 		left: {
-			type: [String, Number]
+			type: [String, Number],
 		},
 		step1: {
 			type: Object,
-			default () {
+			default() {
 				return {}
-			}
+			},
 		},
 		step2: {
 			type: Object,
-			default () {
+			default() {
 				return {}
-			}
+			},
 		},
 		step3: {
 			type: Object,
-			default () {
+			default() {
 				return {}
-			}
+			},
 		},
 		step4: {
 			type: Object,
-			default () {
+			default() {
 				return {}
-			}
+			},
 		},
 		step5: {
 			type: Object,
-			default () {
+			default() {
 				return {}
-			}
+			},
 		},
 		step6: {
 			type: Object,
-			default () {
+			default() {
 				return {}
-			}
+			},
 		},
 		step7: {
 			type: Object,
-			default () {
+			default() {
 				return {}
-			}
+			},
 		},
 		step8: {
 			type: Object,
-			default () {
+			default() {
 				return {}
-			}
-		}
+			},
+		},
 	},
 	methods: {
-		formatTime (value) {
+		formatTime(value) {
 			if (value) {
 				return format(value, 'HH:mm')
 			} else {
 				return ''
 			}
-		}
-	}
+		},
+	},
 }

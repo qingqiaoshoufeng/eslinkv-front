@@ -6,5 +6,5 @@ export default {
 	HighPressure: 'HighPressure',
 	LowPressure: 'LowPressure',
 	LNG: 'LNG',
-	UCAN: 'UCAN'
+	UCAN: 'UCAN',
 }

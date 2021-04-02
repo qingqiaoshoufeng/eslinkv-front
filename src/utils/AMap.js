@@ -1,7 +1,7 @@
-export default function MapLoader (
+export default function MapLoader(
 	plugins = '&plugin=AMap.Scale,AMap.ToolBar,AMap.DistrictSearch',
 	key = '8081bdaac8258a8a4a6244bf16084fed',
-	version = '2.0'
+	version = '2.0',
 ) {
 	return new Promise((resolve, reject) => {
 		if (window.AMap) {

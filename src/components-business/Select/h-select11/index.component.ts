@@ -3,16 +3,16 @@ export const value = {
 		data: JSON.stringify([{ label: '点火数', value: '点火数' }]),
 		bind: {
 			enable: true,
-			role: ['provider']
-		}
+			role: ['provider'],
+		},
 	},
 	layout: {
 		size: {
 			width: 76,
-			height: 24
+			height: 24,
 		},
 		position: {
-			value: 'relative'
-		}
-	}
+			value: 'relative',
+		},
+	},
 }

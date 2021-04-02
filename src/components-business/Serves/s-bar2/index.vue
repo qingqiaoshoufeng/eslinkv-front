@@ -4,11 +4,17 @@
 			<div class="unit">{{ config.config.title }}</div>
 			<div class="legend">
 				<div class="legend1">
-					<div class="bgc1" :style="`backgroundColor:${config.config.color1};}`"></div>
+					<div
+						class="bgc1"
+						:style="`backgroundColor:${config.config.color1};}`"
+					></div>
 					<div class="desc1">{{ config.config.desc1 }}</div>
 				</div>
 				<div class="legend2">
-					<div class="bgc2" :style="`backgroundColor:${config.config.color2};}`"></div>
+					<div
+						class="bgc2"
+						:style="`backgroundColor:${config.config.color2};}`"
+					></div>
 					<div class="desc2">{{ config.config.desc2 }}</div>
 				</div>
 			</div>
@@ -17,38 +23,41 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import getOption from './options'
-	import { customConfig, value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import getOption from './options'
+import { customConfig, value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		methods: {
-			setOption (data) {
-				this.instance && this.instance.setOption(getOption(this.data, this.config.config))
-			}
+export default {
+	mixins: [widgetMixin],
+	methods: {
+		setOption(data) {
+			this.instance &&
+				this.instance.setOption(
+					getOption(this.data, this.config.config),
+				)
 		},
-		watch: {
-			data: {
-				handler (val) {
-					if (this.id) {
-						const data = { ...val }
-						this.$nextTick(() => {
-							this.instance = echarts.init(
-								document.getElementById(this.id)
-							)
-							this.setOption(data)
-						})
-					}
-				},
-				deep: true,
-				immediate: true
-			}
+	},
+	watch: {
+		data: {
+			handler(val) {
+				if (this.id) {
+					const data = { ...val }
+					this.$nextTick(() => {
+						this.instance = echarts.init(
+							document.getElementById(this.id),
+						)
+						this.setOption(data)
+					})
+				}
+			},
+			deep: true,
+			immediate: true,
 		},
-		created () {
-			this.configValue = this.parseConfigValue(value, customConfig)
-		}
-	}
+	},
+	created() {
+		this.configValue = this.parseConfigValue(value, customConfig)
+	},
+}
 </script>
 <style lang="scss">
 .h-line-1 {
@@ -116,4 +125,3 @@
 	}
 }
 </style>
-

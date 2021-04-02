@@ -25,74 +25,73 @@
 	</div>
 </template>
 <script>
-	import { Overlay } from '../../../../components/index'
+import { Overlay } from '../../../../components/index'
 
-	export default {
-		name: 'WarningICcustomer',
-		components: {
-			Overlay
+export default {
+	name: 'WarningICcustomer',
+	components: {
+		Overlay,
+	},
+	props: {
+		overlayType: {
+			type: String,
+			default: 'WarningICcustomer',
 		},
-		props: {
-			overlayType: {
-				type: String,
-				default: 'WarningICcustomer'
+		data: {
+			type: Array,
+			default() {
+				return []
 			},
-			data: {
-				type: Array,
-				default () {
-					return []
-				}
-			},
-			detailList: {
-				type: Array,
-				default () {
-					return []
-				}
-			},
-			activeIndex: {
-				type: Number,
-				default: -1
-			}
 		},
-		data () {
-			const eventTypeIconMap = {
-				0: 'icontuli-gongshanghu',
-				1: 'iconyongqidahu2'
-			}
-			return {
-				eventTypeIconMap,
-				mouseIn: false
-			}
-		},
-
-		async created () {
-			this.map = this.$parent.$amap
-		},
-		mounted () {},
-		methods: {
-			mouseleave () {
-				this.mouseIn = false
-				this.$emit('before-close')
+		detailList: {
+			type: Array,
+			default() {
+				return []
 			},
-			mouseover (item) {
-				this.mouseIn = true
-				this.$emit('overlay-click', {
-					overlayType: 'WarningICcustomer',
-					...item,
-					detailList: this.detailList
-				})
-			},
-			handleOverlayClick (marker) {
-				this.mouseIn = true
-				this.$emit('view-detail', {
-					...marker,
-					overlayType: this.overlayType
-				})
-			}
+		},
+		activeIndex: {
+			type: Number,
+			default: -1,
+		},
+	},
+	data() {
+		const eventTypeIconMap = {
+			0: 'icontuli-gongshanghu',
+			1: 'iconyongqidahu2',
 		}
-	}
-</script>
+		return {
+			eventTypeIconMap,
+			mouseIn: false,
+		}
+	},
 
+	async created() {
+		this.map = this.$parent.$amap
+	},
+	mounted() {},
+	methods: {
+		mouseleave() {
+			this.mouseIn = false
+			this.$emit('before-close')
+		},
+		mouseover(item) {
+			this.mouseIn = true
+			this.$emit('overlay-click', {
+				overlayType: 'WarningICcustomer',
+				...item,
+				detailList: this.detailList,
+			})
+		},
+		handleOverlayClick(marker) {
+			this.mouseIn = true
+			this.$emit('view-detail', {
+				...marker,
+				overlayType: this.overlayType,
+			})
+		},
+	},
+}
+</script>
 
 <style lang="scss" scoped>
 video::-webkit-media-controls {

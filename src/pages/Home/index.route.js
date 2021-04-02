@@ -3,5 +3,5 @@ export default {
 	name: 'home',
 	mode: [],
 	redirect: '/editor/Manger',
-	component: () => import('./index.vue')
+	component: () => import('./index.vue'),
 }

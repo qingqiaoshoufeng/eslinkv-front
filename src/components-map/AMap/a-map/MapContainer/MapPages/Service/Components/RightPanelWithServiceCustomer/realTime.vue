@@ -51,81 +51,81 @@
 </template>
 
 <script>
-	import { SvgIcon, NoData } from '../../../../../components/'
-	import { Icon } from 'view-design'
-	export default {
-		name: 'realTime',
-		components: {
-			SvgIcon,
-			'i-icon': Icon,
-			NoData
-		},
-		data () {
-			return {
-				activeIndex: null,
-				list: [],
-				clickNumber: 0,
-				loading: true,
-				loaded: false
-			}
-		},
-		props: {
-			activeItem: {
-				type: Object,
-				default () {
-					return {}
-				}
-			},
-			activeOverlay: {
-				type: Object,
-				default () {
-					return {}
-				}
-			}
-		},
-		async created () {
-			this.getData()
-			this.timer = setInterval(() => {
-				this.getData()
-			}, 60000)
-		},
-		watch: {
-			activeItem (val) {
-				if (JSON.stringify(val) == '{}') {
-					return (this.activeIndex = null)
-				}
-				const index = this.list.findIndex(item => {
-					const { id } = item
-					return val.id === id
-				})
-				this.activeIndex = index > -1 ? index : null
-			}
-		},
-		methods: {
-			async getData () {
-				// 除第一次需要loading外，其余需要无感刷新
-				if (!this.loaded) {
-					this.loading = true
-				}
-				const data = await this.$api.map.serve.getServiceCustomerTaskList()
-				this.list = data
-				this.loading = false
-				this.loaded = true
-			},
-			handleClick (item, index) {
-				item.activeIndex = index
-				this.activeIndex = index
-				item.overlayType = 'TaskList'
-				this.$emit('change', item)
-			},
-			beforeDestroy () {
-				if (this.timer) {
-					clearInterval(this.timer)
-					this.timer = null
-				}
-			}
+import { SvgIcon, NoData } from '../../../../../components/'
+import { Icon } from 'view-design'
+export default {
+	name: 'realTime',
+	components: {
+		SvgIcon,
+		'i-icon': Icon,
+		NoData,
+	},
+	data() {
+		return {
+			activeIndex: null,
+			list: [],
+			clickNumber: 0,
+			loading: true,
+			loaded: false,
 		}
-	}
+	},
+	props: {
+		activeItem: {
+			type: Object,
+			default() {
+				return {}
+			},
+		},
+		activeOverlay: {
+			type: Object,
+			default() {
+				return {}
+			},
+		},
+	},
+	async created() {
+		this.getData()
+		this.timer = setInterval(() => {
+			this.getData()
+		}, 60000)
+	},
+	watch: {
+		activeItem(val) {
+			if (JSON.stringify(val) == '{}') {
+				return (this.activeIndex = null)
+			}
+			const index = this.list.findIndex(item => {
+				const { id } = item
+				return val.id === id
+			})
+			this.activeIndex = index > -1 ? index : null
+		},
+	},
+	methods: {
+		async getData() {
+			// 除第一次需要loading外，其余需要无感刷新
+			if (!this.loaded) {
+				this.loading = true
+			}
+			const data = await this.$api.map.serve.getServiceCustomerTaskList()
+			this.list = data
+			this.loading = false
+			this.loaded = true
+		},
+		handleClick(item, index) {
+			item.activeIndex = index
+			this.activeIndex = index
+			item.overlayType = 'TaskList'
+			this.$emit('change', item)
+		},
+		beforeDestroy() {
+			if (this.timer) {
+				clearInterval(this.timer)
+				this.timer = null
+			}
+		},
+	},
+}
 </script>
 
 <style lang="scss" scoped>

@@ -2,18 +2,15 @@ export const value = {
 	layout: {
 		size: {
 			width: 118,
-			height: 12
+			height: 12,
 		},
 		position: {
-			value: 'relative'
-		}
+			value: 'relative',
+		},
 	},
 	api: {
 		data: JSON.stringify({
-			value: [
-				['nn16rowdl5r'],
-				['p2wovclspks']
-			]
-		})
-	}
+			value: [['nn16rowdl5r'], ['p2wovclspks']],
+		}),
+	},
 }

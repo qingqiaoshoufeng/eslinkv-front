@@ -8,34 +8,34 @@
 </template>
 
 <script>
-	import { SvgIcon } from '../../components/'
-	export default {
-		name: 'MapType',
-		props: {
-			data: {
-				type: Array,
-				default: function () {
-					return [
-						{ label: '2D地图', value: '2D', icon: 'icon2dmap' },
-						{ label: '3D地图', value: '3D', icon: 'icon3dmap' },
-						{
-							label: '卫星地图',
-							value: 'weixing',
-							icon: 'iconweixingmap'
-						}
-					]
-				}
-			}
+import { SvgIcon } from '../../components/'
+export default {
+	name: 'MapType',
+	props: {
+		data: {
+			type: Array,
+			default: function () {
+				return [
+					{ label: '2D地图', value: '2D', icon: 'icon2dmap' },
+					{ label: '3D地图', value: '3D', icon: 'icon3dmap' },
+					{
+						label: '卫星地图',
+						value: 'weixing',
+						icon: 'iconweixingmap',
+					},
+				]
+			},
 		},
-		components: {
-			SvgIcon
+	},
+	components: {
+		SvgIcon,
+	},
+	methods: {
+		changeMaptype() {
+			this.isExpend = !this.isExpend
 		},
-		methods: {
-			changeMaptype () {
-				this.isExpend = !this.isExpend
-			}
-		}
-	}
+	},
+}
 </script>
 
 <style lang="scss" scoped>

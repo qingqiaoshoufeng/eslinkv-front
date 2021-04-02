@@ -10,68 +10,66 @@
 		}"
 		v-if="ready"
 		@click="handleOverlayClick"
-	>
-	</BaseOverlay>
+	></BaseOverlay>
 </template>
 <script>
-	import { BaseOverlay } from '../../../../components/index'
-	export default {
-		name: 'InspectionCar',
-		components: {
-			BaseOverlay
+import { BaseOverlay } from '../../../../components/index'
+export default {
+	name: 'InspectionCar',
+	components: {
+		BaseOverlay,
+	},
+	props: {
+		visible: {
+			type: Boolean,
+			default: true,
 		},
-		props: {
-			visible: {
-				type: Boolean,
-				default: true
-			},
-			overlayIcon: {
-				type: String,
-				default: ''
-			},
-			overlayType: {
-				type: String,
-				default: ''
-			}
+		overlayIcon: {
+			type: String,
+			default: '',
 		},
-		data () {
-			const apiFun = this.$api.map.mock.getInspectionCarList
-			return {
-				apiFun: apiFun,
-				data: [],
-				ready: false
-			}
+		overlayType: {
+			type: String,
+			default: '',
 		},
-		async created () {
-			await this.getData()
-			this.ready = true
-		},
-		methods: {
-			handleOverlayClick (marker) {
-				const { id = '', name = '', type = '' } = marker
-				this.$emit('overlay-click', marker, 'InspectionCar', false)
-			},
-			async getData () {
-				const params = {
-					types: ['InspectionCar'].toString()
-				}
-				const res = await this.$api.map.airSupply.getAllTypeStationList(
-					params
-				)
-				this.data = (res && res.inspectionCarList) || []
-				if (!this.ready) {
-					this.timer = setInterval(() => {
-						this.getData()
-					}, 120000)
-				}
-			}
-		},
-		beforeDestroy () {
-			if (this.timer) {
-				clearInterval(this.timer)
-				this.timer = null
-			}
+	},
+	data() {
+		const apiFun = this.$api.map.mock.getInspectionCarList
+		return {
+			apiFun: apiFun,
+			data: [],
+			ready: false,
 		}
-	}
+	},
+	async created() {
+		await this.getData()
+		this.ready = true
+	},
+	methods: {
+		handleOverlayClick(marker) {
+			const { id = '', name = '', type = '' } = marker
+			this.$emit('overlay-click', marker, 'InspectionCar', false)
+		},
+		async getData() {
+			const params = {
+				types: ['InspectionCar'].toString(),
+			}
+			const res = await this.$api.map.airSupply.getAllTypeStationList(
+				params,
+			)
+			this.data = (res && res.inspectionCarList) || []
+			if (!this.ready) {
+				this.timer = setInterval(() => {
+					this.getData()
+				}, 120000)
+			}
+		},
+	},
+	beforeDestroy() {
+		if (this.timer) {
+			clearInterval(this.timer)
+			this.timer = null
+		}
+	},
+}
 </script>
-

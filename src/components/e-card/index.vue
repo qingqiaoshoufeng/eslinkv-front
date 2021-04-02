@@ -1,16 +1,14 @@
 <template lang="pug">
-  .list-item-card.pos-r
-    slot
-    .list-item-card-content
-      slot(name="content")
+.list-item-card.pos-r
+	slot
+	.list-item-card-content
+		slot(name="content")
 </template>
 <script lang="ts">
-	import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component } from 'vue-property-decorator'
 
-  @Component
-	export default class ECard extends Vue {
-
-	}
+@Component
+export default class ECard extends Vue {}
 </script>
 <style lang="scss">
 .list-item-card-box {

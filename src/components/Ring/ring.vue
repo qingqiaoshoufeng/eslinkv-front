@@ -3,27 +3,29 @@
 </template>
 
 <script>
-
-	export default {
-		props: {
-			percent: Number,
-			backColor: String,
-			color: String
+export default {
+	props: {
+		percent: Number,
+		backColor: String,
+		color: String,
+	},
+	watch: {
+		percent: {
+			handler(val) {
+				this.$nextTick(() => {
+					this.instance = echarts
+						.init(this.$refs.chart)
+						.setOption(this.getOption())
+				})
+			},
+			immediate: true,
 		},
-		watch: {
-			percent: {
-				handler (val) {
-					this.$nextTick(() => {
-						this.instance = echarts.init(this.$refs.chart).setOption(this.getOption())
-					})
-				},
-				immediate: true
-			}
-		},
-		methods: {
-			getOption () {
-				return {
-					series: [{
+	},
+	methods: {
+		getOption() {
+			return {
+				series: [
+					{
 						name: '',
 						type: 'pie',
 						radius: ['75%', '95%'],
@@ -31,32 +33,34 @@
 						hoverAnimation: false,
 						startAngle: 270,
 						label: {
-							show: false
+							show: false,
 						},
 						itemStyle: {},
 						labelLine: {
-							show: false
+							show: false,
 						},
-						data: [{
+						data: [
+							{
 								value: this.percent,
 								name: '亮',
 								itemStyle: {
-									color: this.color
-								}
+									color: this.color,
+								},
 							},
 							{
 								value: 100 - this.percent,
 								name: '暗',
 								itemStyle: {
-									color: this.backColor
-								}
-							}
-						]
-					}]
-				}
+									color: this.backColor,
+								},
+							},
+						],
+					},
+				],
 			}
-		}
-	}
+		},
+	},
+}
 </script>
 
 <style lang="scss" scoped>

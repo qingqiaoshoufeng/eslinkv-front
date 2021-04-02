@@ -13,38 +13,38 @@
 	</BaseOverlay>
 </template>
 <script>
-	import { BaseOverlay } from '../../../../components/index'
-	export default {
-		name: 'ListOverlay',
-		components: {
-			BaseOverlay
-		},
-		methods: {
-			async getData () {
-				const eventTypeIconMap = {
-					0: 'iconbaoguanshijian',
-					1: 'iconxieloushijian'
-				}
-				return new Promise(async (resolve, reject) => {
-					let list = await this.$api.map.mock.getWarningList()
-					// 根据事件类型，判断图标，根据状态，显示图标颜色
-					list = list.map(item => {
-						const { status, eventType } = item
-						let icon = eventTypeIconMap[eventType]
-						if (status === 0) {
-							icon = icon + '-suc'
-						}
-						item.icon = icon
-						return item
-					})
-					resolve(list)
-				})
-			},
-			handleOverlayClick (marker) {
-				this.$emit('overlay-click', marker, 'WarningList')
+import { BaseOverlay } from '../../../../components/index'
+export default {
+	name: 'ListOverlay',
+	components: {
+		BaseOverlay,
+	},
+	methods: {
+		async getData() {
+			const eventTypeIconMap = {
+				0: 'iconbaoguanshijian',
+				1: 'iconxieloushijian',
 			}
-		}
-	}
+			return new Promise(async (resolve, reject) => {
+				let list = await this.$api.map.mock.getWarningList()
+				// 根据事件类型，判断图标，根据状态，显示图标颜色
+				list = list.map(item => {
+					const { status, eventType } = item
+					let icon = eventTypeIconMap[eventType]
+					if (status === 0) {
+						icon = icon + '-suc'
+					}
+					item.icon = icon
+					return item
+				})
+				resolve(list)
+			})
+		},
+		handleOverlayClick(marker) {
+			this.$emit('overlay-click', marker, 'WarningList')
+		},
+	},
+}
 </script>
 
 <style lang="scss" scoped>

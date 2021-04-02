@@ -5,34 +5,33 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import { customConfig, value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import { customConfig, value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		created () {
-			this.configValue = this.parseConfigValue(value, customConfig)
-		}
-	}
+export default {
+	mixins: [widgetMixin],
+	created() {
+		this.configValue = this.parseConfigValue(value, customConfig)
+	},
+}
 </script>
 <style lang="scss" scoped>
-	.widget-part {
-		display: flex;
-		align-items: center;
+.widget-part {
+	display: flex;
+	align-items: center;
 
-		.color {
-			width: 6px;
-			height: 28px;
-			margin-right: 8px;
-			background: #0df;
-			transform: skewY(30deg);
-		}
-
-		.title {
-			font-size: 24px;
-			font-weight: 600;
-			color: #fff;
-		}
+	.color {
+		width: 6px;
+		height: 28px;
+		margin-right: 8px;
+		background: #0df;
+		transform: skewY(30deg);
 	}
-</style>
 
+	.title {
+		font-size: 24px;
+		font-weight: 600;
+		color: #fff;
+	}
+}
+</style>

@@ -4,41 +4,45 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import getOption from './options'
-	import { value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import getOption from './options'
+import { value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		computed: {},
-		methods: {
-			setOption (data) {
-				this.instance && this.instance.setOption(getOption(JSON.parse(JSON.stringify(this.data.data))))
-			}
+export default {
+	mixins: [widgetMixin],
+	computed: {},
+	methods: {
+		setOption(data) {
+			this.instance &&
+				this.instance.setOption(
+					getOption(JSON.parse(JSON.stringify(this.data.data))),
+				)
 		},
-		watch: {
-			data: {
-				handler (val) {
-					if (this.id) {
-						this.$nextTick(() => {
-							this.instance = echarts.init(document.getElementById(this.id))
-							this.setOption(val)
-						})
-					}
-				},
-				deep: true,
-				immediate: true
-			}
+	},
+	watch: {
+		data: {
+			handler(val) {
+				if (this.id) {
+					this.$nextTick(() => {
+						this.instance = echarts.init(
+							document.getElementById(this.id),
+						)
+						this.setOption(val)
+					})
+				}
+			},
+			deep: true,
+			immediate: true,
 		},
-		created () {
-			this.configValue = this.parseConfigValue(value)
-		}
-	}
+	},
+	created() {
+		this.configValue = this.parseConfigValue(value)
+	},
+}
 </script>
 <style lang="scss" scoped>
-	.chart {
-		width: 100%;
-		height: 100%;
-	}
+.chart {
+	width: 100%;
+	height: 100%;
+}
 </style>
-

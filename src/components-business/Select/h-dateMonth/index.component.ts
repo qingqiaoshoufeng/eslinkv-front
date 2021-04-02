@@ -2,23 +2,23 @@ export const customConfig = [
 	{
 		prop: 'links',
 		label: '关联组件',
-		type: 'func-input'
-	}
+		type: 'func-input',
+	},
 ]
 
 export const value = {
 	api: {
 		bind: {
-			enable: true
-		}
+			enable: true,
+		},
 	},
 	layout: {
 		size: {
 			width: 127,
-			height: 32
+			height: 32,
 		},
 		position: {
-			value: 'relative'
-		}
-	}
+			value: 'relative',
+		},
+	},
 }

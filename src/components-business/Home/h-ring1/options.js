@@ -6,8 +6,8 @@ export default {
 			radius: ['45%', '57%'],
 			minAngle: 4,
 			label: {
-				show: false
-			}
-		}
-	]
+				show: false,
+			},
+		},
+	],
 }

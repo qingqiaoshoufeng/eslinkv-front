@@ -12,19 +12,21 @@
 				v-show="detailInfo[item.prop]"
 			>
 				<span class="label">{{ `${item.label}: ` }}</span>
-				<span class="value">{{
-					`${
-						(detailInfo[item.prop] &&
+				<span class="value">
+					{{
+						`${
+							(detailInfo[item.prop] &&
 							detailInfo[item.prop] !== 0 &&
 							isNumber(detailInfo[item.prop])
-							? parseFloat(
-								detailInfo[item.prop].toFixed(
-									item.Fixed || 0
-								)
-							).toLocaleString()
-							: detailInfo[item.prop] || 0) + item.DW
-					} `
-				}}</span>
+								? parseFloat(
+										detailInfo[item.prop].toFixed(
+											item.Fixed || 0,
+										),
+								  ).toLocaleString()
+								: detailInfo[item.prop] || 0) + item.DW
+						} `
+					}}
+				</span>
 			</div>
 		</div>
 		<div class="btn" v-if="isShowMore" @click="handleViewDetail()">
@@ -33,40 +35,40 @@
 	</div>
 </template>
 <script>
-	import { isNumber } from 'highcharts'
-	export default {
-		name: 'TipDetial',
-		props: {
-			data: {
-				Type: Object,
-				default () {
-					return {}
-				}
+import { isNumber } from 'highcharts'
+export default {
+	name: 'TipDetial',
+	props: {
+		data: {
+			Type: Object,
+			default() {
+				return {}
 			},
-			detailInfo: {
-				Type: Object,
-				default () {
-					return {}
-				}
+		},
+		detailInfo: {
+			Type: Object,
+			default() {
+				return {}
 			},
-			isShowMore: {
-				Type: Boolean,
-				default: false
-			}
 		},
-		data () {
-			return {}
+		isShowMore: {
+			Type: Boolean,
+			default: false,
 		},
-		methods: {
-			handleViewDetail () {
-				this.$emit('view-detail')
-			},
-			isNumber (val) {
-				return typeof val === 'number' && !isNaN(val)
-			}
+	},
+	data() {
+		return {}
+	},
+	methods: {
+		handleViewDetail() {
+			this.$emit('view-detail')
 		},
-		mounted () {}
-	}
+		isNumber(val) {
+			return typeof val === 'number' && !isNaN(val)
+		},
+	},
+	mounted() {},
+}
 </script>
 <style lang="scss" scoped>
 .TipDetial {
@@ -145,4 +147,3 @@
 	}
 }
 </style>
-

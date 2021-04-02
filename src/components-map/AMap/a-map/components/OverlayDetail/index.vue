@@ -69,128 +69,128 @@
 	</ElAmapMarker>
 </template>
 <script>
-	import { AMapMarker } from '../../lib'
-	// import PopContainer from '../PopContainer';
-	import SvgIcon from '../SvgIcon/index'
+import { AMapMarker } from '../../lib'
+// import PopContainer from '../PopContainer';
+import SvgIcon from '../SvgIcon/index'
 
-	export default {
-		name: 'OverlayDetail',
-		inject: ['parentInfo'],
-		components: {
-			ElAmapMarker: AMapMarker,
-			SvgIcon
+export default {
+	name: 'OverlayDetail',
+	inject: ['parentInfo'],
+	components: {
+		ElAmapMarker: AMapMarker,
+		SvgIcon,
+	},
+	props: {
+		value: {
+			type: Boolean,
+			default: false,
 		},
-		props: {
-			value: {
-				type: Boolean,
-				default: false
+		data: {
+			type: Object,
+			default() {
+				return {}
 			},
-			data: {
-				type: Object,
-				default () {
-					return {}
-				}
-			},
-			overlayDetailConfig: {
-				type: Object,
-				default () {
-					return {}
-				}
-			},
-			// 容器宽度
-			width: {
-				type: Number,
-				default: 240
-			},
-			padding: {
-				type: Number,
-				default: 16
-			},
-			// iconSize 用于计算需要偏移的位置
-			iconSize: {
-				type: Number
-			},
-			// 关闭按钮
-			showCloseBtn: {
-				type: Boolean,
-				default: true
-			},
-			// 是否显示查看详情
-			showMore: {
-				type: Boolean,
-				default: false
-			},
-			// 关闭弹窗之前的事件
-			beforeClose: Function,
-			// 弹窗位置 默认为bottom
-			position: String
 		},
-		data () {
-			return {
-				overlay: {},
-				rendered: false,
-				showTriangle: true,
-				marginBottom: 19
-			}
+		overlayDetailConfig: {
+			type: Object,
+			default() {
+				return {}
+			},
 		},
-		watch: {
-			data (val) {
-				if (val) {
-					if (JSON.stringify(val) !== '{}') {
-						const { overlayType } = val
-						this.overlay = {
-							...val
-						}
-						const marginBottom = this.iconSize || 38
-						this.marginBottom = marginBottom / 2
-						if (!this.rendered) {
-							this.rendered = true
-						} else {
-							this.$refs.overlayDetailMarker.$amapComponent.setPosition(
-								new window.AMap.LngLat(val.lng, val.lat)
-							)
-						}
+		// 容器宽度
+		width: {
+			type: Number,
+			default: 240,
+		},
+		padding: {
+			type: Number,
+			default: 16,
+		},
+		// iconSize 用于计算需要偏移的位置
+		iconSize: {
+			type: Number,
+		},
+		// 关闭按钮
+		showCloseBtn: {
+			type: Boolean,
+			default: true,
+		},
+		// 是否显示查看详情
+		showMore: {
+			type: Boolean,
+			default: false,
+		},
+		// 关闭弹窗之前的事件
+		beforeClose: Function,
+		// 弹窗位置 默认为bottom
+		position: String,
+	},
+	data() {
+		return {
+			overlay: {},
+			rendered: false,
+			showTriangle: true,
+			marginBottom: 19,
+		}
+	},
+	watch: {
+		data(val) {
+			if (val) {
+				if (JSON.stringify(val) !== '{}') {
+					const { overlayType } = val
+					this.overlay = {
+						...val,
+					}
+					const marginBottom = this.iconSize || 38
+					this.marginBottom = marginBottom / 2
+					if (!this.rendered) {
+						this.rendered = true
+					} else {
+						this.$refs.overlayDetailMarker.$amapComponent.setPosition(
+							new window.AMap.LngLat(val.lng, val.lat),
+						)
 					}
 				}
 			}
 		},
-		methods: {
-			closePop () {
-				if (this.beforeClose) {
-					this.beforeClose(this.hide)
-				} else {
-					this.hide()
-				}
-			},
-			hide () {
-				this.$emit('input', false)
-			},
-			handleViewDetail (overlay) {
-				this.$emit('view-detail', overlay)
-			},
-			getInstance () {
-				return this.$refs.overlayDetailMarker.$amapComponent
+	},
+	methods: {
+		closePop() {
+			if (this.beforeClose) {
+				this.beforeClose(this.hide)
+			} else {
+				this.hide()
 			}
 		},
-		computed: {
-			// 1..外部传入position 2.detail的条数大于2显示与头部
-			positionInner () {
-				const { detail } = this.overlay
-				if (this.position) {
-					return this.position
-				}
-				if (detail && Object.keys(detail).length > 2) {
-					return 'bottom'
-				} else {
-					return 'top'
-				}
-			},
-			scaleRatio () {
-				return (this.parentInfo && this.parentInfo.scaleRatio) || 1
-			},
-			translateX () {
-				const { positionInner, scaleRatio, marginBottom } = this
-				switch (positionInner) {
+		hide() {
+			this.$emit('input', false)
+		},
+		handleViewDetail(overlay) {
+			this.$emit('view-detail', overlay)
+		},
+		getInstance() {
+			return this.$refs.overlayDetailMarker.$amapComponent
+		},
+	},
+	computed: {
+		// 1..外部传入position 2.detail的条数大于2显示与头部
+		positionInner() {
+			const { detail } = this.overlay
+			if (this.position) {
+				return this.position
+			}
+			if (detail && Object.keys(detail).length > 2) {
+				return 'bottom'
+			} else {
+				return 'top'
+			}
+		},
+		scaleRatio() {
+			return (this.parentInfo && this.parentInfo.scaleRatio) || 1
+		},
+		translateX() {
+			const { positionInner, scaleRatio, marginBottom } = this
+			switch (positionInner) {
 				case 'top':
 					this.showTriangle = true
 					return `-${((1 - scaleRatio) / scaleRatio + 1) * 50}%`
@@ -199,12 +199,12 @@
 					return `-${((1 - scaleRatio) / scaleRatio) * 50}% + ${
 						marginBottom + 20
 					}px`
-				}
-			},
-			translateY () {
-				let { positionInner, scaleRatio, marginBottom } = this
-				marginBottom = marginBottom + 14
-				switch (positionInner) {
+			}
+		},
+		translateY() {
+			let { positionInner, scaleRatio, marginBottom } = this
+			marginBottom = marginBottom + 14
+			switch (positionInner) {
 				case 'top':
 					this.showTriangle = true
 					return `-${
@@ -215,14 +215,14 @@
 					return `-${
 						((1 - scaleRatio) / scaleRatio) * 50
 					}% - ${marginBottom}px`
-				}
 			}
 		},
-		mounted () {}
-	}
+	},
+	mounted() {},
+}
 </script>
 
- <style lang="scss" scoped>
+<style lang="scss" scoped>
 .info-item {
 	font-size: 24px;
 }
@@ -306,4 +306,3 @@
 	color: #ffdc45;
 }
 </style>
-

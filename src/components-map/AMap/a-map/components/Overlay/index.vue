@@ -24,58 +24,58 @@
 </template>
 
 <script>
-	import SvgIcon from '../SvgIcon'
-	import { AMapMarker } from '../../lib'
-	export default {
-		name: 'Overlay',
-		components: {
-			SvgIcon,
-			AMapMarker
+import SvgIcon from '../SvgIcon'
+import { AMapMarker } from '../../lib'
+export default {
+	name: 'Overlay',
+	components: {
+		SvgIcon,
+		AMapMarker,
+	},
+	props: {
+		visible: {
+			type: Boolean,
+			default: true,
 		},
-		props: {
-			visible: {
-				type: Boolean,
-				default: true
+		marker: {
+			type: Object,
+			default() {
+				return {}
 			},
-			marker: {
-				type: Object,
-				default () {
-					return {}
-				}
-			},
-			active: {
-				type: Boolean,
-				default: false
-			}
 		},
-		computed: {
-			offset () {
-				let { iconSize } = this.marker
-				iconSize = iconSize || 38
-				return [-iconSize / 2, -iconSize / 2]
-			},
-			// 判断经纬度的有效性
-			checkLngLat () {
-				const { lng, lat } = this.marker
-				return typeof lng === 'number' && typeof lat === 'number'
-			}
+		active: {
+			type: Boolean,
+			default: false,
 		},
-		// watch: {
-		// 	//更新位置
-		// 	// marker(val) {
-		// 	// 	let { lng, lat } = val;
-		// 	// 	let instance = this.getInstance();
-		// 	// 	if (instance && lng) {
-		// 	// 		instance.setPosition(new AMap.LngLat(lng, lat));
-		// 	// 	}
-		// 	// },
-		// },
-		methods: {
-			getInstance () {
-				return this.$refs.marker && this.$refs.marker.$amapComponent
-			}
-		}
-	}
+	},
+	computed: {
+		offset() {
+			let { iconSize } = this.marker
+			iconSize = iconSize || 38
+			return [-iconSize / 2, -iconSize / 2]
+		},
+		// 判断经纬度的有效性
+		checkLngLat() {
+			const { lng, lat } = this.marker
+			return typeof lng === 'number' && typeof lat === 'number'
+		},
+	},
+	// watch: {
+	// 	//更新位置
+	// 	// marker(val) {
+	// 	// 	let { lng, lat } = val;
+	// 	// 	let instance = this.getInstance();
+	// 	// 	if (instance && lng) {
+	// 	// 		instance.setPosition(new AMap.LngLat(lng, lat));
+	// 	// 	}
+	// 	// },
+	// },
+	methods: {
+		getInstance() {
+			return this.$refs.marker && this.$refs.marker.$amapComponent
+		},
+	},
+}
 </script>
 
 <style lang="scss" scoped>
@@ -121,4 +121,3 @@
 	backface-visibility: hidden;
 }
 </style>
-

@@ -12,52 +12,52 @@
 				v-show="showImage"
 				:src="src"
 				:key="src"
-			>
+			/>
 		</template>
 	</viewer>
 </template>
 
 <script>
-	import 'viewerjs/dist/viewer.css'
-	import Viewer from 'v-viewer/src/component.vue'
+import 'viewerjs/dist/viewer.css'
+import Viewer from 'v-viewer/src/component.vue'
 
-	export default {
-		name: 'ImageView',
-		props: {
-			images: {
-				type: Array,
-				default () {
-					return []
-				}
+export default {
+	name: 'ImageView',
+	props: {
+		images: {
+			type: Array,
+			default() {
+				return []
 			},
-			option: {
-				type: Object,
-				default () {
-					return {}
-				}
+		},
+		option: {
+			type: Object,
+			default() {
+				return {}
 			},
-			showImage: {
-				type: Boolean,
-				default: true
-			}
 		},
-		data () {
-			return {
-				$viewer: null
-			}
+		showImage: {
+			type: Boolean,
+			default: true,
 		},
-		methods: {
-			inited (viewer) {
-				this.$viewer = viewer
-			},
-			show () {
-				this.$viewer && this.$viewer.show()
-			}
-		},
-		components: {
-			Viewer
+	},
+	data() {
+		return {
+			$viewer: null,
 		}
-	}
+	},
+	methods: {
+		inited(viewer) {
+			this.$viewer = viewer
+		},
+		show() {
+			this.$viewer && this.$viewer.show()
+		},
+	},
+	components: {
+		Viewer,
+	},
+}
 </script>
 
 <style lang="scss" scoped>

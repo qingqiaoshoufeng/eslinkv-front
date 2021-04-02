@@ -1,4 +1,3 @@
-
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<div class="accident-box">
@@ -13,23 +12,25 @@
 			</div>
 
 			<div class="context">
-				<div class="accident-value font-num">{{ data && data.value }}</div>
+				<div class="accident-value font-num">
+					{{ data && data.value }}
+				</div>
 				<div class="accident-desc">{{ data && data.desc }}</div>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import { value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import { value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		methods: {},
-		created () {
-			this.configValue = this.parseConfigValue(value)
-		}
-	}
+export default {
+	mixins: [widgetMixin],
+	methods: {},
+	created() {
+		this.configValue = this.parseConfigValue(value)
+	},
+}
 </script>
 <style lang="scss">
 .accident-box {
@@ -80,4 +81,3 @@
 	}
 }
 </style>
-

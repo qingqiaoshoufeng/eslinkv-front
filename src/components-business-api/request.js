@@ -3,16 +3,15 @@ import axios from 'axios'
 
 const request = axios.create()
 
-request.defaults.baseURL =
-    process.env.NODE_ENV !== 'production' ? '/' : '/'
+request.defaults.baseURL = process.env.NODE_ENV !== 'production' ? '/' : '/'
 request.defaults.timeout = 30000
 request.interceptors.request.use(
-    function (config) {
-        return config
-    },
-    function (error) {
-        return Promise.reject(error)
-    }
+	function (config) {
+		return config
+	},
+	function (error) {
+		return Promise.reject(error)
+	},
 )
 
 /**
@@ -25,29 +24,29 @@ request.interceptors.request.use(
  */
 const errMessage = '网络异常，请重试'
 request.interceptors.response.use(
-    (response) => {
-        const { data } = response
-        // console.log(data)
-        if (data) {
-            if (data.code === 0 || data.returnCode === '0000') {
-                return data.data
-            } else if (data.responseCode === '101002') {
-                // 未登录
-                Message.error(data.message || errMessage)
-                return Promise.reject(false)
-            } else {
-                Message.error(data.message || errMessage)
-                return Promise.reject(false)
-            }
-        } else {
-            Message.error(errMessage)
-            return Promise.reject(false)
-        }
-    },
-    function (e) {
-        Message.error(errMessage)
-        return Promise.reject(false)
-    }
+	response => {
+		const { data } = response
+		// console.log(data)
+		if (data) {
+			if (data.code === 0 || data.returnCode === '0000') {
+				return data.data
+			} else if (data.responseCode === '101002') {
+				// 未登录
+				Message.error(data.message || errMessage)
+				return Promise.reject(false)
+			} else {
+				Message.error(data.message || errMessage)
+				return Promise.reject(false)
+			}
+		} else {
+			Message.error(errMessage)
+			return Promise.reject(false)
+		}
+	},
+	function (e) {
+		Message.error(errMessage)
+		return Promise.reject(false)
+	},
 )
 
 export default request

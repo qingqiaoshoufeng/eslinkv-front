@@ -5,7 +5,7 @@
 				<i-select
 					class="filter-select"
 					v-model="currentLevel"
-					style="width: 80px;"
+					style="width: 80px"
 					@on-change="getData"
 				>
 					<i-option
@@ -50,7 +50,7 @@
 				class="demo-spin-icon-load"
 				v-show="loading"
 			></i-icon>
-			<NoData :show="!loading && !list.length"/>
+			<NoData :show="!loading && !list.length" />
 			<template v-if="!loading">
 				<div
 					@click="handleClick(item, index, 'WarningList')"
@@ -98,85 +98,85 @@
 </template>
 
 <script>
-	import { SvgIcon, NoData } from '../../../../../components/'
-	import { Icon, Select, Option } from 'view-design'
+import { SvgIcon, NoData } from '../../../../../components/'
+import { Icon, Select, Option } from 'view-design'
 
-	export default {
-		name: 'ProcessWarningList',
-		components: {
-			SvgIcon,
-			NoData,
-			'i-icon': Icon,
-			'i-select': Select,
-			'i-option': Option
-		},
-		data () {
-			return {
-				activeIndex: null,
-				list: [],
-				loading: false,
-				loaded: false,
-				currentLevel: 1,
-				repairState: 1,
-				levelList: [
-					{ value: 1, label: '一级' },
-					{ value: 2, label: '二级' },
-					{ value: 3, label: '三级' }
-				]
-			}
-		},
-		props: {
-			activeItem: {
-				type: Object,
-				default () {
-					return {}
-				}
-			}
-		},
-		// 定时刷新数据
-		async created () {
-			this.getData()
-			this.timer = setInterval(() => {
-				this.getData()
-			}, 60000)
-		},
-		computed: {
-			active () {
-				return this.$parent.active
-			}
-		},
-		methods: {
-			changeRepairState (val) {
-				this.repairState = val
-				this.getData()
-			},
-			handleClick (listItem, index) {
-				const { address, time } = listItem
-				this.activeIndex = index
-				listItem.status = listItem.status == '1' ? 1 : 0
-				listItem.overlayType = 'WarningList'
-				this.$emit('change', listItem)
-			},
-			async getData () {
-				// 除第一次需要loading外，其余需要无感刷新
-				if (!this.loaded) {
-					this.loading = true
-				}
-				this.list = await this.$api.map.airSupply.getProcessWarningList({
-					priority: this.currentLevel,
-					status: this.repairState
-				})
-				this.loading = false
-				this.loaded = true
-			}
-		},
-		beforeDestroy () {
-			if (this.timer) {
-				clearInterval(this.timer)
-				this.timer = null
-			}
+export default {
+	name: 'ProcessWarningList',
+	components: {
+		SvgIcon,
+		NoData,
+		'i-icon': Icon,
+		'i-select': Select,
+		'i-option': Option,
+	},
+	data() {
+		return {
+			activeIndex: null,
+			list: [],
+			loading: false,
+			loaded: false,
+			currentLevel: 1,
+			repairState: 1,
+			levelList: [
+				{ value: 1, label: '一级' },
+				{ value: 2, label: '二级' },
+				{ value: 3, label: '三级' },
+			],
 		}
-	}
+	},
+	props: {
+		activeItem: {
+			type: Object,
+			default() {
+				return {}
+			},
+		},
+	},
+	// 定时刷新数据
+	async created() {
+		this.getData()
+		this.timer = setInterval(() => {
+			this.getData()
+		}, 60000)
+	},
+	computed: {
+		active() {
+			return this.$parent.active
+		},
+	},
+	methods: {
+		changeRepairState(val) {
+			this.repairState = val
+			this.getData()
+		},
+		handleClick(listItem, index) {
+			const { address, time } = listItem
+			this.activeIndex = index
+			listItem.status = listItem.status == '1' ? 1 : 0
+			listItem.overlayType = 'WarningList'
+			this.$emit('change', listItem)
+		},
+		async getData() {
+			// 除第一次需要loading外，其余需要无感刷新
+			if (!this.loaded) {
+				this.loading = true
+			}
+			this.list = await this.$api.map.airSupply.getProcessWarningList({
+				priority: this.currentLevel,
+				status: this.repairState,
+			})
+			this.loading = false
+			this.loaded = true
+		},
+	},
+	beforeDestroy() {
+		if (this.timer) {
+			clearInterval(this.timer)
+			this.timer = null
+		}
+	},
+}
 </script>
 
 <style lang="scss" scoped>

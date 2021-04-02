@@ -1,78 +1,78 @@
 <script>
-	export default {
-		name: 'Tabs',
+export default {
+	name: 'Tabs',
 
-		provide () {
-			return {
-				rootTabs: this
+	provide() {
+		return {
+			rootTabs: this,
+		}
+	},
+
+	props: {
+		value: String,
+	},
+
+	data() {
+		return {
+			panes: [],
+			currentName: '',
+			activeTab: '',
+		}
+	},
+	watch: {
+		value(val) {
+			this.currentName = val
+		},
+	},
+	created() {
+		this.currentName = this.value
+		this.activeTab = this.value
+	},
+
+	methods: {
+		calcPaneInstances(isForceUpdate = false) {
+			if (this.$slots.default) {
+				const paneSlots = this.$slots.default.filter(
+					vnode =>
+						vnode.tag &&
+						vnode.componentOptions &&
+						vnode.componentOptions.Ctor.options.name === 'TabPane',
+				)
+				const panes = paneSlots.map(
+					({ componentInstance }) => componentInstance,
+				)
+				this.panes = panes
+			} else if (this.panes.length !== 0) {
+				this.panes = []
 			}
 		},
+		handleTabClick(tab, tabName, event) {
+			this.setCurrentName(tabName)
+		},
+		setCurrentName(value) {
+			this.$emit('input', value)
+		},
+	},
 
-		props: {
-			value: String
-		},
-
-		data () {
-			return {
-				panes: [],
-				currentName: '',
-				activeTab: ''
-			}
-		},
-		watch: {
-			value (val) {
-				this.currentName = val
-			}
-		},
-		created () {
-			this.currentName = this.value
-			this.activeTab = this.value
-		},
-
-		methods: {
-			calcPaneInstances (isForceUpdate = false) {
-				if (this.$slots.default) {
-					const paneSlots = this.$slots.default.filter(
-						vnode =>
-							vnode.tag &&
-							vnode.componentOptions &&
-							vnode.componentOptions.Ctor.options.name === 'TabPane'
-					)
-					const panes = paneSlots.map(
-						({ componentInstance }) => componentInstance
-					)
-					this.panes = panes
-				} else if (this.panes.length !== 0) {
-					this.panes = []
-				}
+	render(h) {
+		const { panes, handleTabClick, activeTab } = this
+		const navData = {
+			props: {
+				panes,
 			},
-			handleTabClick (tab, tabName, event) {
-				this.setCurrentName(tabName)
-			},
-			setCurrentName (value) {
-				this.$emit('input', value)
-			}
-		},
-
-		render (h) {
-			const { panes, handleTabClick, activeTab } = this
-			const navData = {
-				props: {
-					panes
-				},
-				ref: 'nav'
-			}
-			let header = null
-			if (panes.length == 1) {
-				header = (
+			ref: 'nav',
+		}
+		let header = null
+		if (panes.length == 1) {
+			header = (
 				<div class="fn-flex flex-row h-title-1">
 					<div class="h-title-1-icon" />
 					<h2>{panes[0].label}</h2>
 				</div>
-				)
-			}
-			if (panes.length > 1) {
-				header = (
+			)
+		}
+		if (panes.length > 1) {
+			header = (
 				<div class="tabs__header">
 					{panes.map(panel => {
 						return (
@@ -80,24 +80,25 @@
 								on-click={e =>
 									handleTabClick(panel, panel.name, e)
 								}
-								class={panel.name === activeTab ? 'active' : ''}
-							>
+								class={
+									panel.name === activeTab ? 'active' : ''
+								}>
 								{panel.label}
 							</div>
 						)
 					})}
 				</div>
-				)
-			}
-			const panels = <div class="tabs__content">{this.$slots.default}</div>
-
-			return <div class="tabs">{[header, panels]}</div>
-		},
-
-		mounted () {
-			this.calcPaneInstances()
+			)
 		}
-	}
+		const panels = <div class="tabs__content">{this.$slots.default}</div>
+
+		return <div class="tabs">{[header, panels]}</div>
+	},
+
+	mounted() {
+		this.calcPaneInstances()
+	},
+}
 </script>
 <style lang="scss" scoped>
 .tabs {

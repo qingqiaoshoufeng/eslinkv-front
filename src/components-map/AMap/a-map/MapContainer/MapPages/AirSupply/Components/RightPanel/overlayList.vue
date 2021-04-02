@@ -43,71 +43,71 @@
 </template>
 
 <script>
-	import { SvgIcon, NoData } from '../../../../../components/'
-	export default {
-		name: 'HomeRealTimeList',
-		components: {
-			SvgIcon,
-			NoData
-		},
-		data () {
-			const iconList = {
-				GasStation: 'icontulimenzhan', // '门站',
-				PressureRegulatingStation: 'icontulitiaoyazhan', // '调压站',
-				EmergencyAirSourceStation: 'icontuliqiyuanzhan', // '应急气源站',
-				ServiceStation: 'icontulizonghefuwuzhan1', // '综合服务站',
-				PipeManageMentStation: 'icontuliguanwangyunhangguanlizhan', // '管网运行管理站',
-				UndergroundRepairStation: 'icontulidixiaqiangxiudian', // '地下抢修点',
-				OngroundRepairStation: 'icontulidishangqiangxiudian', // '地上抢修点',
-				LNGStation: 'icontulilNG', // 'LNG站',
-				LiquefiedGasStation: 'icontuliyehuaqi', // '液化气站',
-				NaturalGasStation: 'icontulijiaqizhan', // '加气站',
-				DistributedEnergyResource: 'icontulinengyuanzhan' // '分布式能源',
-			}
+import { SvgIcon, NoData } from '../../../../../components/'
+export default {
+	name: 'HomeRealTimeList',
+	components: {
+		SvgIcon,
+		NoData,
+	},
+	data() {
+		const iconList = {
+			GasStation: 'icontulimenzhan', // '门站',
+			PressureRegulatingStation: 'icontulitiaoyazhan', // '调压站',
+			EmergencyAirSourceStation: 'icontuliqiyuanzhan', // '应急气源站',
+			ServiceStation: 'icontulizonghefuwuzhan1', // '综合服务站',
+			PipeManageMentStation: 'icontuliguanwangyunhangguanlizhan', // '管网运行管理站',
+			UndergroundRepairStation: 'icontulidixiaqiangxiudian', // '地下抢修点',
+			OngroundRepairStation: 'icontulidishangqiangxiudian', // '地上抢修点',
+			LNGStation: 'icontulilNG', // 'LNG站',
+			LiquefiedGasStation: 'icontuliyehuaqi', // '液化气站',
+			NaturalGasStation: 'icontulijiaqizhan', // '加气站',
+			DistributedEnergyResource: 'icontulinengyuanzhan', // '分布式能源',
+		}
 
-			return {
-				list: [],
-				iconList,
-				searchName: ''
-			}
-		},
-		props: {
-			activeItem: {
-				type: Object,
-				default () {
-					return {}
-				}
+		return {
+			list: [],
+			iconList,
+			searchName: '',
+		}
+	},
+	props: {
+		activeItem: {
+			type: Object,
+			default() {
+				return {}
 			},
-			stationList: {
-				type: Array,
-				default () {
-					return []
-				}
-			}
 		},
-		computed: {
-			showStationList () {
-				if (this.searchName) {
-					return this.stationList.filter(item =>
-						item.name.includes(this.searchName)
-					)
-				}
-				return this.stationList
-			}
-		},
-		methods: {
-			clearSearch () {
-				this.searchName = ''
+		stationList: {
+			type: Array,
+			default() {
+				return []
 			},
-			handleClick (item, index) {
-				this.$emit(
-					'change',
-					{ ...item, overlayType: item.type },
-					'StationList'
+		},
+	},
+	computed: {
+		showStationList() {
+			if (this.searchName) {
+				return this.stationList.filter(item =>
+					item.name.includes(this.searchName),
 				)
 			}
-		}
-	}
+			return this.stationList
+		},
+	},
+	methods: {
+		clearSearch() {
+			this.searchName = ''
+		},
+		handleClick(item, index) {
+			this.$emit(
+				'change',
+				{ ...item, overlayType: item.type },
+				'StationList',
+			)
+		},
+	},
+}
 </script>
 
 <style lang="scss" scoped>

@@ -30,157 +30,157 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import options from './options'
-	import { value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import options from './options'
+import { value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		created () {
-			this.configValue = this.parseConfigValue(value)
-		},
-		computed: {
-			style () {
-				const rotate = (this.data.percentage / 100) * 360
-				return {
-					transform: `rotate(${rotate}deg)`
-				}
+export default {
+	mixins: [widgetMixin],
+	created() {
+		this.configValue = this.parseConfigValue(value)
+	},
+	computed: {
+		style() {
+			const rotate = (this.data.percentage / 100) * 360
+			return {
+				transform: `rotate(${rotate}deg)`,
 			}
 		},
-		methods: {
-			setOption (data) {
-				let newData = []
-				let newData1 = []
-				let newData3 = []
-				let newData4 = []
+	},
+	methods: {
+		setOption(data) {
+			let newData = []
+			let newData1 = []
+			let newData3 = []
+			let newData4 = []
 
-				for (let i = 0; i < data.percentage / 4; i++) {
-					let opacity = (i * 4) / data.percentage
-					if (opacity <= 0) opacity = 0.1
-					newData = [
-						...newData,
-						{
-							value: 3.5,
-							itemStyle: {
-								color: '#00FFCF'
-							}
+			for (let i = 0; i < data.percentage / 4; i++) {
+				let opacity = (i * 4) / data.percentage
+				if (opacity <= 0) opacity = 0.1
+				newData = [
+					...newData,
+					{
+						value: 3.5,
+						itemStyle: {
+							color: '#00FFCF',
 						},
-						{
-							value: 0.5,
-							itemStyle: {
-								color: 'rgba(0, 221, 255, 0)'
-							}
-						}
-					]
-					newData1 = [
-						...newData1,
-						{
-							value: 3.5,
-							itemStyle: {
-								color: `rgba(0, 221, 255,${opacity})`
-							}
+					},
+					{
+						value: 0.5,
+						itemStyle: {
+							color: 'rgba(0, 221, 255, 0)',
 						},
-						{
-							value: 0.5,
-							itemStyle: {
-								color: 'rgba(255, 255, 255, 0)'
-							}
-						}
-					]
-					newData3 = [
-						...newData3,
-						{
-							value: 4,
-							itemStyle: {
-								color: 'rgba(0, 221, 255, 0)'
-							}
-						}
-					]
-					newData4 = [
-						...newData4,
-						{
-							value: 4,
-							itemStyle: {
-								color: `rgba(0, 221, 255,${opacity})`
-							}
-						}
-					]
-				}
-				for (let i = 0; i <= (100 - data.percentage) / 4; i++) {
-					newData = [
-						...newData,
-						{
-							value: 3.5,
-							itemStyle: {
-								color: 'rgba(0, 87, 169, 0.5)'
-							}
+					},
+				]
+				newData1 = [
+					...newData1,
+					{
+						value: 3.5,
+						itemStyle: {
+							color: `rgba(0, 221, 255,${opacity})`,
 						},
-						{
-							value: 0.5,
-							itemStyle: {
-								color: 'rgba(255, 255, 255, 0)'
-							}
-						}
-					]
-					newData1 = [
-						...newData1,
-						{
-							value: 3.5,
-							itemStyle: {
-								color: 'rgba(255, 255, 255, .1)'
-							}
+					},
+					{
+						value: 0.5,
+						itemStyle: {
+							color: 'rgba(255, 255, 255, 0)',
 						},
-						{
-							value: 0.5,
-							itemStyle: {
-								color: 'rgba(255, 255, 255, 0)'
-							}
-						}
-					]
-					newData3 = [
-						...newData3,
-						{
-							value: 4,
-							itemStyle: {
-								color: 'rgba(255, 255, 255, 0)'
-							}
-						}
-					]
-					newData4 = [
-						...newData4,
-						{
-							value: 4,
-							itemStyle: {
-								color: 'rgba(255, 255, 255, 0)'
-							}
-						}
-					]
-				}
-				options.series[0].data = newData1
-				options.series[1].data = newData
-				options.series[2].data = newData3
-				options.series[3].data = newData4
-				this.instance && this.instance.setOption(options)
+					},
+				]
+				newData3 = [
+					...newData3,
+					{
+						value: 4,
+						itemStyle: {
+							color: 'rgba(0, 221, 255, 0)',
+						},
+					},
+				]
+				newData4 = [
+					...newData4,
+					{
+						value: 4,
+						itemStyle: {
+							color: `rgba(0, 221, 255,${opacity})`,
+						},
+					},
+				]
 			}
+			for (let i = 0; i <= (100 - data.percentage) / 4; i++) {
+				newData = [
+					...newData,
+					{
+						value: 3.5,
+						itemStyle: {
+							color: 'rgba(0, 87, 169, 0.5)',
+						},
+					},
+					{
+						value: 0.5,
+						itemStyle: {
+							color: 'rgba(255, 255, 255, 0)',
+						},
+					},
+				]
+				newData1 = [
+					...newData1,
+					{
+						value: 3.5,
+						itemStyle: {
+							color: 'rgba(255, 255, 255, .1)',
+						},
+					},
+					{
+						value: 0.5,
+						itemStyle: {
+							color: 'rgba(255, 255, 255, 0)',
+						},
+					},
+				]
+				newData3 = [
+					...newData3,
+					{
+						value: 4,
+						itemStyle: {
+							color: 'rgba(255, 255, 255, 0)',
+						},
+					},
+				]
+				newData4 = [
+					...newData4,
+					{
+						value: 4,
+						itemStyle: {
+							color: 'rgba(255, 255, 255, 0)',
+						},
+					},
+				]
+			}
+			options.series[0].data = newData1
+			options.series[1].data = newData
+			options.series[2].data = newData3
+			options.series[3].data = newData4
+			this.instance && this.instance.setOption(options)
 		},
-		watch: {
-			data: {
-				handler (val) {
-					if (this.id) {
-						const data = { ...val }
-						this.$nextTick(() => {
-							this.instance = echarts.init(
-								document.getElementById(this.id)
-							)
-							this.setOption(data)
-						})
-					}
-				},
-				deep: true,
-				immediate: true
-			}
-		}
-	}
+	},
+	watch: {
+		data: {
+			handler(val) {
+				if (this.id) {
+					const data = { ...val }
+					this.$nextTick(() => {
+						this.instance = echarts.init(
+							document.getElementById(this.id),
+						)
+						this.setOption(data)
+					})
+				}
+			},
+			deep: true,
+			immediate: true,
+		},
+	},
+}
 </script>
 <style lang="scss">
 .securitycheck-box {
@@ -278,4 +278,3 @@
 	}
 }
 </style>
-

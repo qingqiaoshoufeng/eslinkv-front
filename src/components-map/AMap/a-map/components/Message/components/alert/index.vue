@@ -1,15 +1,21 @@
 <template lang="pug">
- .at-container(:id="id")
-        div(:style="pageTransform")
-            .at-content(:style="textExpend?'max-height:600px':'max-height:400px'" :class="ready?'ready':''" )
-                div(@click.stop="close")
-                    svg-icon.close-btn.pointer(icon-name="iconbaseline-close-px")
-                ms-item(:data="innerData" @changeExpend="changeExpend" :alwaysExpend="true" @refresh="refresh")
+.at-container(:id="id")
+	div(:style="pageTransform")
+		.at-content(
+			:style="textExpend ? 'max-height:600px' : 'max-height:400px'",
+			:class="ready ? 'ready' : ''")
+			div(@click.stop="close")
+				svg-icon.close-btn.pointer(icon-name="iconbaseline-close-px")
+			ms-item(
+				:data="innerData",
+				@changeExpend="changeExpend",
+				:alwaysExpend="true",
+				@refresh="refresh")
 </template>
 <script lang="ts">
-	import { Vue, Component, Prop } from 'vue-property-decorator'
-	import MsItem from '../messageItem/index.vue'
-	import SvgIcon from '../../../SvgIcon/index.vue'
+import { Vue, Component, Prop } from 'vue-property-decorator'
+import MsItem from '../messageItem/index.vue'
+import SvgIcon from '../../../SvgIcon/index.vue'
 
 @Component({ components: { 'ms-item': MsItem, 'svg-icon': SvgIcon } })
 class MessageAlert extends Vue {
@@ -20,40 +26,40 @@ class MessageAlert extends Vue {
 	textExpend: boolean = false
 	pageTransform: string = 'scale(1) translate3d(0px, 0px, 0px)'
 	@Prop(Object) data: any
-	created () {
+	created() {
 		this.id = 'MessageAlert' + Math.ceil(Math.random() * 100)
 		this.innerData = this.data
 		this.pageTransform = document.getElementById('kanban').style.cssText
 	}
 
-	mounted () {
+	mounted() {
 		setTimeout(() => {
 			this.ready = true
 		}, 300)
 	}
 
-	close () {
+	close() {
 		this.ready = false
 		setTimeout(() => {
 			this.$destroy()
 		}, 300)
 	}
 
-	refresh (data) {
+	refresh(data) {
 		if (data === false) return
 		this.innerData = data
 	}
 
-	changeExpend (val) {
+	changeExpend(val) {
 		this.textExpend = val
 	}
 
-	beforeDestroy () {
+	beforeDestroy() {
 		document.getElementById(this.id)?.remove()
 	}
 }
 
-	export default MessageAlert
+export default MessageAlert
 </script>
 <style lang="scss">
 .at-container {

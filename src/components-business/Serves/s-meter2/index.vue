@@ -4,7 +4,7 @@
 			<li
 				v-for="(k, i) in data"
 				:key="i"
-				:class="{active: i === index}"
+				:class="{ active: i === index }"
 			>
 				{{ k.date }}
 			</li>
@@ -12,94 +12,107 @@
 		<div class="rows">
 			<div class="row">
 				<div class="info">
-					<img :src="config.config && config.config.img1" alt="">
-					<span class="info-txt">{{ config.config && config.config.desc1 }}</span>
+					<img :src="config.config && config.config.img1" alt="" />
+					<span class="info-txt">
+						{{ config.config && config.config.desc1 }}
+					</span>
 					<span class="info-num font-num">{{ activeItem.num1 }}</span>
 				</div>
 				<div class="progress">
-					<div class="progress-line" :style="{width: 468 * activeItem.rate1 + 'px' }">
+					<div
+						class="progress-line"
+						:style="{ width: 468 * activeItem.rate1 + 'px' }"
+					>
 						<span class="dot"></span>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<div class="info">
-					<img :src="config.config && config.config.img2" alt="">
-					<span class="info-txt">{{ config.config && config.config.desc2 }}</span>
+					<img :src="config.config && config.config.img2" alt="" />
+					<span class="info-txt">
+						{{ config.config && config.config.desc2 }}
+					</span>
 					<span class="info-num font-num">{{ activeItem.num2 }}</span>
 				</div>
 				<div class="progress">
-					<div class="progress-line" :style="{width: 468 * activeItem.rate2 + 'px' }">
+					<div
+						class="progress-line"
+						:style="{ width: 468 * activeItem.rate2 + 'px' }"
+					>
 						<span class="dot"></span>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="chart-wrap">
-			<div class="chart" :id="id"/>
+			<div class="chart" :id="id" />
 			<div class="chart-info">
-				<div class="chart-info-num font-num">{{ activeItem.percent }}%</div>
+				<div class="chart-info-num font-num">
+					{{ activeItem.percent }}%
+				</div>
 				<div class="chart-info-txt">抄表率</div>
 			</div>
 		</div>
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import getOption from './options'
-	import { customConfig, value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import getOption from './options'
+import { customConfig, value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		methods: {
-			setOption (data) {
-				this.instance && this.instance.setOption(getOption(this.activeItem.percent))
-			}
+export default {
+	mixins: [widgetMixin],
+	methods: {
+		setOption(data) {
+			this.instance &&
+				this.instance.setOption(getOption(this.activeItem.percent))
 		},
-		data () {
-			return {
-				index: 0,
-				timer: null
-			}
-		},
-		computed: {
-			activeItem () {
-				return this.data ? this.data[this.index] : {}
-			}
-		},
-		watch: {
-			data: {
-				handler (val) {
-					if (this.id) {
-						this.$nextTick(() => {
-							this.instance = echarts.init(
-								document.getElementById(this.id)
-							)
-						})
-					}
-				},
-				deep: true,
-				immediate: true
-			}
-		},
-		created () {
-			this.configValue = this.parseConfigValue(value, customConfig)
-		},
-		mounted () {
-			this.timer = setInterval(() => {
-				if (this.index === this.data.length - 1) {
-					this.index = 0
-				} else {
-					this.index++
-				}
-				this.setOption()
-			}, 2000)
-		},
-		beforeDestroy () {
-			clearInterval(this.timer)
-			this.timer = null
+	},
+	data() {
+		return {
+			index: 0,
+			timer: null,
 		}
-	}
+	},
+	computed: {
+		activeItem() {
+			return this.data ? this.data[this.index] : {}
+		},
+	},
+	watch: {
+		data: {
+			handler(val) {
+				if (this.id) {
+					this.$nextTick(() => {
+						this.instance = echarts.init(
+							document.getElementById(this.id),
+						)
+					})
+				}
+			},
+			deep: true,
+			immediate: true,
+		},
+	},
+	created() {
+		this.configValue = this.parseConfigValue(value, customConfig)
+	},
+	mounted() {
+		this.timer = setInterval(() => {
+			if (this.index === this.data.length - 1) {
+				this.index = 0
+			} else {
+				this.index++
+			}
+			this.setOption()
+		}, 2000)
+	},
+	beforeDestroy() {
+		clearInterval(this.timer)
+		this.timer = null
+	},
+}
 </script>
 <style lang="scss" scoped>
 .widget-part {
@@ -125,7 +138,11 @@
 				height: 32px;
 				line-height: 32px;
 				color: #0df;
-				background: linear-gradient(270deg, rgba(0, 87, 169, 0.5) 0%, rgba(0, 87, 169, 0) 100%);
+				background: linear-gradient(
+					270deg,
+					rgba(0, 87, 169, 0.5) 0%,
+					rgba(0, 87, 169, 0) 100%
+				);
 
 				&::after {
 					position: absolute;
@@ -189,7 +206,11 @@
 					position: relative;
 					width: 200px;
 					height: 4px;
-					background: linear-gradient(90deg, rgba(1, 229, 255, 0.0001) 0%, #0df 100%);
+					background: linear-gradient(
+						90deg,
+						rgba(1, 229, 255, 0.0001) 0%,
+						#0df 100%
+					);
 					transition: all 0.3s;
 
 					.dot {
@@ -256,5 +277,4 @@
 		}
 	}
 }
-
 </style>

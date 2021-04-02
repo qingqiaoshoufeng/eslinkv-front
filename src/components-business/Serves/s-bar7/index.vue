@@ -1,9 +1,13 @@
 <template>
 	<div class="widget-part" :style="styles" v-if="data">
 		<div class="main">
-			<div class="chart" :id="id"/>
+			<div class="chart" :id="id" />
 			<div class="percent">
-				<div class="percent-item" v-for="k in ~~(24 * curr.percent / 100)" :key="k"></div>
+				<div
+					class="percent-item"
+					v-for="k in ~~((24 * curr.percent) / 100)"
+					:key="k"
+				></div>
 			</div>
 			<div class="legend">
 				<div class="legend-item">
@@ -28,11 +32,15 @@
 			</div>
 			<div class="rates">
 				<div class="rate">
-					<div class="rate-num" :class="{down: curr.rate1 < 0}">{{ curr.rate1 < 0 ? '-' : '+' }}{{ curr.rate1 }}%</div>
+					<div class="rate-num" :class="{ down: curr.rate1 < 0 }">
+						{{ curr.rate1 < 0 ? '-' : '+' }}{{ curr.rate1 }}%
+					</div>
 					<div class="rate-txt">实际销气同比</div>
 				</div>
 				<div class="rate">
-					<div class="rate-num" :class="{down: curr.rate2 < 0}">{{ curr.rate2 < 0 ? '-' : '+' }}{{ curr.rate2 }}%</div>
+					<div class="rate-num" :class="{ down: curr.rate2 < 0 }">
+						{{ curr.rate2 < 0 ? '-' : '+' }}{{ curr.rate2 }}%
+					</div>
 					<div class="rate-txt">实际销气同比</div>
 				</div>
 			</div>
@@ -41,92 +49,94 @@
 	</div>
 </template>
 <script>
-	import { widgetMixin } from 'eslinkv-sdk'
-	import getOption from './options'
-	import { value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
+import getOption from './options'
+import { value } from './index.component'
 
-	export default {
-		mixins: [widgetMixin],
-		data () {
-			return {
-				currIndex: 0,
-				timer: null
-			}
+export default {
+	mixins: [widgetMixin],
+	data() {
+		return {
+			currIndex: 0,
+			timer: null,
+		}
+	},
+	methods: {
+		setOption() {
+			this.instance && this.instance.setOption(getOption(this.data.list))
+			this.instance.dispatchAction({
+				type: 'highlight',
+				seriesIndex: 0,
+				dataIndex: this.currIndex,
+			})
+			this.instance.dispatchAction({
+				type: 'highlight',
+				seriesIndex: 1,
+				dataIndex: this.currIndex,
+			})
+			this.animate()
 		},
-		methods: {
-			setOption () {
-				this.instance && this.instance.setOption(getOption(this.data.list))
+		animate() {
+			clearInterval(this.timer)
+			this.timer = setInterval(() => {
+				if (!this.instance) return
+				this.instance.dispatchAction({
+					type: 'downplay',
+					seriesIndex: 0,
+					dataIndex: this.currIndex,
+				})
+				this.instance.dispatchAction({
+					type: 'downplay',
+					seriesIndex: 1,
+					dataIndex: this.currIndex,
+				})
+				if (this.currIndex === 5) {
+					this.currIndex = 0
+				} else {
+					this.currIndex++
+				}
 				this.instance.dispatchAction({
 					type: 'highlight',
 					seriesIndex: 0,
-					dataIndex: this.currIndex
+					dataIndex: this.currIndex,
 				})
 				this.instance.dispatchAction({
 					type: 'highlight',
 					seriesIndex: 1,
-					dataIndex: this.currIndex
+					dataIndex: this.currIndex,
 				})
-				this.animate()
+			}, 2000)
+		},
+	},
+	watch: {
+		data: {
+			handler(val) {
+				if (this.id) {
+					this.$nextTick(() => {
+						this.instance = echarts.init(
+							document.getElementById(this.id),
+						)
+						this.setOption()
+					})
+				}
 			},
-			animate () {
-				clearInterval(this.timer)
-				this.timer = setInterval(() => {
-					if (!this.instance) return
-					this.instance.dispatchAction({
-						type: 'downplay',
-						seriesIndex: 0,
-						dataIndex: this.currIndex
-					})
-					this.instance.dispatchAction({
-						type: 'downplay',
-						seriesIndex: 1,
-						dataIndex: this.currIndex
-					})
-					if (this.currIndex === 5) {
-						this.currIndex = 0
-					} else {
-						this.currIndex++
-					}
-					this.instance.dispatchAction({
-						type: 'highlight',
-						seriesIndex: 0,
-						dataIndex: this.currIndex
-					})
-					this.instance.dispatchAction({
-						type: 'highlight',
-						seriesIndex: 1,
-						dataIndex: this.currIndex
-					})
-				}, 2000)
-			}
+			deep: true,
+			immediate: true,
 		},
-		watch: {
-			data: {
-				handler (val) {
-					if (this.id) {
-						this.$nextTick(() => {
-							this.instance = echarts.init(document.getElementById(this.id))
-							this.setOption()
-						})
-					}
-				},
-				deep: true,
-				immediate: true
-			}
+	},
+	computed: {
+		curr() {
+			return this.data ? this.data.list[this.currIndex] : {}
 		},
-		computed: {
-			curr () {
-				return this.data ? this.data.list[this.currIndex] : {}
-			}
-		},
-		created () {
-			this.configValue = this.parseConfigValue(value)
-		},
-		beforeDestroy () {
-			clearInterval(this.timer)
-			this.timer = null
-		}
-	}
+	},
+	created() {
+		this.configValue = this.parseConfigValue(value)
+	},
+	beforeDestroy() {
+		clearInterval(this.timer)
+		this.timer = null
+	},
+}
 </script>
 <style lang="scss" scoped>
 .main {
@@ -187,7 +197,7 @@
 		}
 
 		.num {
-			font-family: "font-num";
+			font-family: 'font-num';
 			font-size: 24px;
 			font-weight: bold;
 			color: #fff;
@@ -215,7 +225,11 @@
 		height: 72px;
 		padding-top: 12px;
 		margin-bottom: 8px;
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 100%);
+		background: linear-gradient(
+			180deg,
+			rgba(255, 255, 255, 0) 0%,
+			rgba(255, 255, 255, 0.1) 100%
+		);
 
 		.rate-txt {
 			margin-top: 4px;
@@ -225,7 +239,7 @@
 		}
 
 		.rate-num {
-			font-family: "font-num";
+			font-family: 'font-num';
 			font-size: 24px;
 			font-weight: bold;
 			line-height: 24px;
@@ -246,4 +260,3 @@
 	text-align: left;
 }
 </style>
-
