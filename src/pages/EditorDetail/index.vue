@@ -8,7 +8,7 @@
 			d-view(
 				@mounted="updateKanboardSize",
 				ref="previewContainer",
-				:style="`transform: scale(${scaleX ? scaleX : actualScaleRatio},${scaleY}) translate3d(0, 0, 0); overflow: hidden;`")
+				:style="viewStyle")
 		d-view(
 			@mounted="updateKanboardSize",
 			ref="previewContainer",

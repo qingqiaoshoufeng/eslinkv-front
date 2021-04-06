@@ -22,11 +22,6 @@ import { getQueryString } from '../../utils'
 })
 export default class full extends Vue {
 	platform = platform.state
-	screenSize = {
-		width: 1920,
-		height: 1080,
-	}
-
 	scaleY = 1
 	scaleX = 0
 	actualScaleRatio = 1
@@ -36,8 +31,6 @@ export default class full extends Vue {
 		const w = arr[0].replace(/width:(.*)px/, '$1')
 		const h = arr[1].replace(/height:(.*)px/, '$1')
 		const { clientWidth, clientHeight } = document.body
-		this.screenSize.width = clientWidth
-		this.screenSize.height = clientHeight
 		this.actualScaleRatio = Math.min(clientWidth / w, clientHeight / h)
 	}
 

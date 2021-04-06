@@ -41,6 +41,7 @@ export default class ItemCard extends Vue {
 	@Prop(String) screenPublish: string
 	@Prop(String) screenName: string
 	@Prop(String) createTime: string
+	@Prop(Object) screenConfig: object
 
 	get statusStr() {
 		return this.screenPublish === 'COMPLETE' ? '已发布' : '未发布'
@@ -51,7 +52,7 @@ export default class ItemCard extends Vue {
 	}
 
 	handleLink() {
-		window.open(`${location.origin}/detail/${this.screenId}`)
+		window.open(`${location.origin}/detail/${this.screenId}?layoutMode=${this.screenConfig.kanboard.size.layoutMode}`)
 	}
 
 	handleRemove() {
