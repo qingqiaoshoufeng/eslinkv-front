@@ -10,11 +10,9 @@ i-menu.pos-f.help-left(
 		i-menu-item(name="SceneSetting") 场景设置
 		i-menu-item(name="KeyBoard") 快捷键
 		i-menu-item(name="ExportImport") 导入导出
-	i-sub-menu(name="2")
-		template(slot="title") 密钥管理
-		i-menu-item(name="HowToSecretKey") 密钥使用
 	i-sub-menu(name="3")
 		template(slot="title") 如何贡献
+		i-menu-item(name="HowToSecretKey") 开发密钥
 		i-menu-item(name="HowToUseNpm") 大屏开发
 		i-menu-item(name="HowToUseMarket") 组件开发
 </template>
