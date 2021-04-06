@@ -38,5 +38,13 @@ export default {
 			type: ['refactor'],
 			content: '组件区，场景区，设置区可设置显隐',
 		},
+		{
+			type: ['refactor'],
+			content: '添加主题配置区',
+		},
+		{
+			type: ['refactor'],
+			content: '添加适配模式，目前三种可选，100%宽，100%高，充满屏幕',
+		},
 	],
 }
