@@ -8,17 +8,18 @@
 			d-view(
 				@mounted="updateKanboardSize",
 				ref="previewContainer",
-				:style="`transform: scale(${actualScaleRatio}) translate3d(0, 0, 0); overflow: hidden;`")
+				:style="`transform: scale(${scaleX ? scaleX : actualScaleRatio},${scaleY}) translate3d(0, 0, 0); overflow: hidden;`")
 		d-view(
 			@mounted="updateKanboardSize",
 			ref="previewContainer",
 			v-else,
-			:style="`transform: scale(${actualScaleRatio}) translate3d(0, 0, 0); overflow: hidden;`")
+			:style="viewStyle")
 		d-detail(:show="false")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { dView, dDetail, platform } from 'eslinkv-sdk'
+import { getQueryString } from '../../utils'
 
 @Component({
 	components: {
@@ -30,23 +31,43 @@ export default class detail extends Vue {
 	platform = platform.state
 	isMobile = /android|iphone/i.test(navigator.userAgent)
 	mobileWrapHeight = 0
-	screenSize = {
-		width: 1920,
-		height: 1080,
-	}
-
+	scaleY = 1
+	scaleX = 0
 	actualScaleRatio = 1
+	
+	get viewStyle () {
+		let scale
+		if (getQueryString('layoutMode') === 'full-size') {
+			scale = `${this.scaleX},${this.scaleY}`
+		} else {
+			scale = this.actualScaleRatio
+		}
+		return `transform: scale(${scale}) translate3d(0, 0, 0); overflow: hidden;`
+	}
 
 	updateKanboardSize(val) {
 		const arr = val.split(';')
 		const w = arr[0].replace(/width:(.*)px/, '$1')
 		const h = arr[1].replace(/height:(.*)px/, '$1')
 		const { clientWidth, clientHeight } = document.body
-		this.screenSize.width = clientWidth
-		this.screenSize.height = clientHeight
-		this.actualScaleRatio = this.isMobile
-			? clientWidth / w
-			: Math.min(clientWidth / w, clientHeight / h)
+
+		const layoutMode = getQueryString('layoutMode')
+		switch (layoutMode) {
+			case 'full-size':
+				this.scaleX = clientWidth / w
+				this.scaleY = clientHeight / h
+				break
+			case 'full-width':
+				this.actualScaleRatio = clientWidth / w
+				break
+			case 'full-height':
+				this.actualScaleRatio = clientHeight / h
+				break
+			default:
+				this.actualScaleRatio = this.isMobile
+					? clientWidth / w
+					: Math.min(clientWidth / w, clientHeight / h)
+		}
 		this.mobileWrapHeight = h * this.actualScaleRatio
 	}
 }
