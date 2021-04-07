@@ -1,4 +1,6 @@
 import copy from 'fast-copy'
+import { Message } from 'view-design'
+import Clipboard from 'clipboard'
 
 /**
  * @description 获取url参数
@@ -124,4 +126,28 @@ export function loadJs(src, value) {
 		})
 		return Promise.all(p)
 	}
+}
+
+/**
+ * @description 拷贝插件 kay
+ */
+export function copyText(text, success, error) {
+	const oCopyBtn = document.createElement('button')
+	oCopyBtn.setAttribute('id', 'copy-btn')
+	oCopyBtn.setAttribute('data-clipboard-text', text)
+	document.body.appendChild(oCopyBtn)
+	const clipboard = new Clipboard('#copy-btn')
+	clipboard.on('success', e => {
+		typeof success === 'function' && success(e)
+		Message.success('复制成功！')
+		clipboard.destroy()
+		document.body.removeChild(oCopyBtn)
+	})
+	clipboard.on('error', e => {
+		typeof error === 'function' && error(e)
+		Message.error('复制失败！')
+		clipboard.destroy()
+		document.body.removeChild(oCopyBtn)
+	})
+	oCopyBtn.click()
 }

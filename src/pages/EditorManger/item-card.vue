@@ -9,9 +9,9 @@ e-card
 				type="ios-paper-plane-outline",
 				color="#fff",
 				:size="16",
-				@click="handlePublish",
+				@click="handleShare",
 				@click.stop,
-				title="发布")
+				title="分享")
 			i-icon.pointer(
 				type="ios-trash-outline",
 				color="#fff",
@@ -26,14 +26,47 @@ e-card
 			.list-item-card-btn-link.pointer(@click="handleLink")
 				i-icon(type="ios-link", :style="{ marginLeft: 'auto' }")
 				span 预览
+	i-modal(v-model="shareModal", :footer-hide="true")
+		p(:style="{ marginBottom: '10px' }") 快生成链接，分享给你的好友吧
+		.fn-flex.flex-row(:style="{ marginBottom: '10px' }")
+			label.ivu-btn.d-detail-share-button(
+				:class="{ 'ivu-btn-primary': shareType === 'PASSWORD' }",
+				@click="shareType = 'PASSWORD'") 加密分享
+			label.ivu-btn.d-detail-share-button(
+				:class="{ 'ivu-btn-primary': shareType === 'TIME' }",
+				@click="shareType = 'TIME'") 时效分享
+		.fn-flex.flex-row(:style="{ marginBottom: '10px' }")
+			i-input(
+				v-show="shareType === 'PASSWORD'",
+				:style="{ width: '150px' }",
+				v-model="sharePassword")
+				span(slot="prepend") 密钥
+			i-input(
+				v-show="shareType === 'TIME'",
+				:style="{ width: '150px' }",
+				v-model="shareTime")
+				span(slot="append") 小时
+			i-button(
+				type="primary",
+				@click="shareSubmit",
+				:style="{ marginLeft: '10px' }") 生成
+		.fn-flex.flex-row
+		i-input(search, readonly, enter-button="复制", @on-search="handleCopy")
 </template>
 <script lang="ts">
-import { Button, Icon } from 'view-design'
+import { Button, Icon, Modal, Input } from 'view-design'
 import EmptyImage from '../../components/empty-image/index.vue'
+import { copyText } from '../../utils/index.js'
 import { Vue, Component, Prop } from 'vue-property-decorator'
 
 @Component({
-	components: { 'i-button': Button, 'i-icon': Icon, EmptyImage },
+	components: {
+		'i-button': Button,
+		'i-icon': Icon,
+		EmptyImage,
+		'i-modal': Modal,
+		'i-input': Input,
+	},
 })
 export default class ItemCard extends Vue {
 	@Prop(String) screenAvatar: string
@@ -42,6 +75,20 @@ export default class ItemCard extends Vue {
 	@Prop(String) screenName: string
 	@Prop(String) createTime: string
 	@Prop(Object) screenConfig: object
+
+	shareModal = false
+	shareType = 'PASSWORD'
+	shareUrl = ''
+	shareTime = 1
+	sharePassword = Math.random().toString(36).replace('0.', '')
+
+	handleShare() {
+		this.shareModal = true
+	}
+	handleCopy() {
+		copyText(this.shareUrl)
+	}
+	shareSubmit() {}
 
 	get statusStr() {
 		return this.screenPublish === 'COMPLETE' ? '已发布' : '未发布'
@@ -73,28 +120,14 @@ export default class ItemCard extends Vue {
 			},
 		})
 	}
-
-	handlePublish() {
-		this.$Modal.confirm({
-			title: '提示',
-			content: '确认发布此大屏吗？',
-			loading: true,
-			onOk: () => {
-				this.$api.screen
-					.publish({ screenId: this.screenId })
-					.then(() => {
-						this.$Message.success('发布成功')
-						this.$Modal.remove()
-						this.$emit('reload')
-					})
-			},
-		})
-	}
 }
 </script>
 <style lang="scss" scoped>
 @import '../../scss/conf';
-
+.d-detail-share-button {
+	line-height: 32px;
+	border-radius: 0;
+}
 .list-item-card-btn-link {
 	margin-left: auto;
 
