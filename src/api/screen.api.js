@@ -8,3 +8,12 @@ export function list(data) {
 		data,
 	})
 }
+
+export function destroy(data) {
+	return request({
+		url: '/screen/destroy',
+		method: 'post',
+		headers,
+		data,
+	})
+}

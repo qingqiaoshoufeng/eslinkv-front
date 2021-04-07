@@ -52,7 +52,9 @@ export default class ItemCard extends Vue {
 	}
 
 	handleLink() {
-		window.open(`${location.origin}/detail/${this.screenId}?layoutMode=${this.screenConfig.kanboard.size.layoutMode}`)
+		window.open(
+			`${location.origin}/detail/${this.screenId}?layoutMode=${this.screenConfig.kanboard.size.layoutMode}`,
+		)
 	}
 
 	handleRemove() {
@@ -62,7 +64,7 @@ export default class ItemCard extends Vue {
 			loading: true,
 			onOk: () => {
 				this.$api.screen
-					.remove({ screenId: this.screenId })
+					.destroy({ screenId: this.screenId })
 					.then(() => {
 						this.$Message.success('删除成功')
 						this.$Modal.remove()
