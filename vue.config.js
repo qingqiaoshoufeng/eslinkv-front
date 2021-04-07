@@ -156,20 +156,5 @@ module.exports = {
 			.use('markdown-loader')
 			.loader('markdown-loader')
 			.end()
-		config.module
-			.rule('svg')
-			.exclude.add(resolve('node_modules/eslinkv-sdk/src/icons'))
-			.end()
-		config.module
-			.rule('icons')
-			.test(/\.svg$/)
-			.include.add(resolve('node_modules/eslinkv-sdk/src/icons'))
-			.end()
-			.use('svg-sprite-loader')
-			.loader('svg-sprite-loader')
-			.options({
-				symbolId: 'icon-[name]',
-			})
-			.end()
 	},
 }

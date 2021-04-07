@@ -220,9 +220,6 @@ export default class ItemCard extends Vue {
 	.avatar {
 		padding-bottom: 50%;
 		background-color: #000;
-		background-repeat: no-repeat;
-		background-position: center;
-		background-size: 100% auto;
 	}
 
 	h2 {

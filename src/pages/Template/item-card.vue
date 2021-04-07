@@ -108,7 +108,6 @@ export default class ItemCard extends Vue {
 
 	.avatar {
 		padding-bottom: 50%;
-		background-size: cover;
 	}
 
 	h2 {

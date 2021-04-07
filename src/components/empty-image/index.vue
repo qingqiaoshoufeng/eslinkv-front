@@ -1,7 +1,7 @@
 <template lang="pug">
 div(
 	v-if="image",
-	:style="{ backgroundImage: `url(${image})` }",
+	:style="{ backgroundImage: `url(${image})`, backgroundPosition: 'center', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }",
 	@click="handleClick")
 	slot
 .empty-image(v-else, @click="handleClick")

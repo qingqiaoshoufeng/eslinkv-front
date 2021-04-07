@@ -159,7 +159,6 @@ export default class ItemCard extends Vue {
 
 .list-item-card-avatar {
 	padding-bottom: 50%;
-	background-size: cover;
 
 	&:hover {
 		.list-item-card-mask {
