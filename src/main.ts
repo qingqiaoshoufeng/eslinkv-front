@@ -26,6 +26,23 @@ Vue.component('e-card', eCard)
 Vue.component('e-header', eHeader)
 Vue.component('e-page', ePage)
 
+const errorHandler = (err, vm) => {
+	const r = Math.floor(Math.random() * 256)
+	const g = Math.floor(Math.random() * 256)
+	const b = Math.floor(Math.random() * 256)
+	if (vm.configValue) {
+		console.log(
+			`%c${vm.configValue.widget.name} ${vm.configValue.widget.componentVersion} 有错误信息！！！`,
+			`background:rgb(${r}, ${g}, ${b});color:#fff;padding:4px;`,
+		)
+		console.log(
+			`%c${err}`,
+			`background:rgb(${r}, ${g}, ${b});color:#fff;padding:4px;`,
+		)
+	}
+}
+
+Vue.config.errorHandler = errorHandler
 Vue.prototype.$format = format
 Vue.prototype.$Message = Message
 Vue.prototype.$Modal = Modal

@@ -46,5 +46,9 @@ export default {
 			type: ['refactor'],
 			content: '添加适配模式，目前三种可选，100%宽，100%高，充满屏幕',
 		},
+		{
+			type: [''],
+			content: '移除简化 createSandbox 方法',
+		},
 	],
 }
