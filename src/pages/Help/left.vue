@@ -15,6 +15,7 @@ i-menu.pos-f.help-left(
 		i-menu-item(name="HowToSecretKey") 开发密钥
 		i-menu-item(name="HowToUseNpm") 大屏开发
 		i-menu-item(name="HowToUseMarket") 组件开发
+		i-menu-item(name="HowToUseMarketCli") 组件开发cli
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'

@@ -20,7 +20,7 @@ npm i eslinkv-cli -g
 ```
 esp submit/npm run submit
 ```
-
+> [cli详细功能 查看组件开发cli相关文档](/help/HowToUseMarketCli)
 ## 目录介绍
 ```
 |- examples                      // 本地开发演示主目录
