@@ -28,9 +28,9 @@
 				></video>
 			</template>
 			<div class="h-bg-top pos-a"></div>
-			<div class="h-bg-control pos-a"></div>
 			<div class="h-bg-left pos-a"></div>
 			<div class="h-bg-right pos-a"></div>
+			<div class="h-bg-control pos-a"></div>
 			<div
 				@mouseover="hover54441 = true"
 				@mouseleave="hover54441 = false"
@@ -489,11 +489,11 @@ div.h-bg-red2 {
 .h-bg-control {
 	bottom: -116px;
 	left: 50%;
-	width: 2620px;
+	width: 3500px;
 	height: 498px;
-	margin-left: -1310px;
+	margin-left: -1750px;
 	background-image: url('./img/control.svg');
 	background-repeat: no-repeat;
-	background-size: 2620px 498px;
+	background-size: 3500px 498px;
 }
 </style>
