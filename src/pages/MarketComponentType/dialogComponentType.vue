@@ -1,5 +1,5 @@
 <template lang="pug">
-i-modal.check-modal(v-model="modalShow", title="审核")
+i-modal.check-modal(v-model="modalShow", title="新增")
 	i-form(:label-width="100")
 		i-form-item(label="分类名")
 			i-input(v-model="detail.componentTypeName")

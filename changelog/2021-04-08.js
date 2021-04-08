@@ -50,5 +50,13 @@ export default {
 			type: [''],
 			content: '移除简化 createSandbox 方法',
 		},
+		{
+			type: ['refactor'],
+			content: '设置区增加伸缩功能',
+		},
+		{
+			type: ['perf'],
+			content: '组件增加单组件精准报错提示',
+		},
 	],
 }

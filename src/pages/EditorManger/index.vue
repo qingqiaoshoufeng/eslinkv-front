@@ -25,7 +25,7 @@ e-layout
 				type="primary",
 				style="margin-left: 15px",
 				@click="search")
-			i-button(type="warning", @click="handleNew", style="margin-left: auto") 新建
+			i-button(type="primary", @click="handleNew", style="margin-left: auto") 新建
 		e-page(@init="init", :total="total", ref="page")
 			ul.list-item-card-box
 				item-card(
