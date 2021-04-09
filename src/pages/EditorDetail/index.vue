@@ -34,8 +34,8 @@ export default class detail extends Vue {
 	scaleY = 1
 	scaleX = 0
 	actualScaleRatio = 1
-	
-	get viewStyle () {
+
+	get viewStyle() {
 		let scale
 		if (getQueryString('layoutMode') === 'full-size') {
 			scale = `${this.scaleX},${this.scaleY}`

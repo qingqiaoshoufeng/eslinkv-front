@@ -2,11 +2,18 @@
 .detail-container
 	.preview-wrapper.fit-mode(
 		ref="kanboardWrapper",
+		:class="{ mobile: isMobile }",
 		:style="{ backgroundColor: platform.panelConfig.background.color, backgroundRepeat: platform.panelConfig.background.repeat, backgroundSize: platform.panelConfig.background.size, backgroundPosition: platform.panelConfig.background.position, backgroundImage: `url(${platform.panelConfig.background.url})` }")
+		.mobile-wrap(:style="{ height: mobileWrapHeight + 'px' }", v-if="isMobile")
+			d-view(
+				@mounted="updateKanboardSize",
+				ref="previewContainer",
+				:style="viewStyle")
 		d-view(
 			@mounted="updateKanboardSize",
 			ref="previewContainer",
-			:style="`transform: scale(${scaleX ? scaleX : actualScaleRatio},${scaleY}) translate3d(0, 0, 0); overflow: hidden;`")
+			v-else,
+			:style="viewStyle")
 		d-detail(:show="false")
 </template>
 <script lang="ts">
@@ -20,30 +27,48 @@ import { getQueryString } from '../../utils'
 		dDetail,
 	},
 })
-export default class full extends Vue {
+export default class detail extends Vue {
 	platform = platform.state
+	isMobile = /android|iphone/i.test(navigator.userAgent)
+	mobileWrapHeight = 0
 	scaleY = 1
 	scaleX = 0
 	actualScaleRatio = 1
+
+	get viewStyle() {
+		let scale
+		if (getQueryString('layoutMode') === 'full-size') {
+			scale = `${this.scaleX},${this.scaleY}`
+		} else {
+			scale = this.actualScaleRatio
+		}
+		return `transform: scale(${scale}) translate3d(0, 0, 0); overflow: hidden;`
+	}
 
 	updateKanboardSize(val) {
 		const arr = val.split(';')
 		const w = arr[0].replace(/width:(.*)px/, '$1')
 		const h = arr[1].replace(/height:(.*)px/, '$1')
 		const { clientWidth, clientHeight } = document.body
-		this.actualScaleRatio = Math.min(clientWidth / w, clientHeight / h)
-	}
 
-	mounted() {
-		if (getQueryString('scale') && !isNaN(getQueryString('scale'))) {
-			this.scaleY = Number(getQueryString('scale'))
+		const layoutMode = getQueryString('layoutMode')
+		switch (layoutMode) {
+			case 'full-size':
+				this.scaleX = clientWidth / w
+				this.scaleY = clientHeight / h
+				break
+			case 'full-width':
+				this.actualScaleRatio = clientWidth / w
+				break
+			case 'full-height':
+				this.actualScaleRatio = clientHeight / h
+				break
+			default:
+				this.actualScaleRatio = this.isMobile
+					? clientWidth / w
+					: Math.min(clientWidth / w, clientHeight / h)
 		}
-		if (getQueryString('scaleY') && !isNaN(getQueryString('scaleY'))) {
-			this.scaleY = Number(getQueryString('scaleY'))
-		}
-		if (getQueryString('scaleX') && !isNaN(getQueryString('scaleX'))) {
-			this.scaleX = Number(getQueryString('scaleX'))
-		}
+		this.mobileWrapHeight = h * this.actualScaleRatio
 	}
 }
 </script>
@@ -75,6 +100,21 @@ export default class full extends Vue {
 	&.fit-mode {
 		align-items: center;
 		justify-content: center;
+		overflow: hidden;
+	}
+
+	&.mobile {
+		align-items: unset;
+		overflow: auto;
+
+		#kanban {
+			transform-origin: 0 0;
+		}
+	}
+
+	.mobile-wrap {
+		position: relative;
+		width: 100%;
 		overflow: hidden;
 	}
 }

@@ -1,12 +1,7 @@
-const path = require('path')
 const pkg = require('./package.json')
 const webpack = require('webpack')
 const isProduction = process.env.NODE_ENV === 'production'
 const needReport = false
-
-function resolve(dir) {
-	return path.join(__dirname, dir)
-}
 
 module.exports = {
 	transpileDependencies: [
