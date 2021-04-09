@@ -1,26 +1,26 @@
 <template lang="pug">
 e-layout
-	.secret-key-container
-		.create
-			i-button(type="primary", @click="create") 创建密钥
-		i-table(:columns="columns", :data="tableData")
-			template(#createTime="{row}")
-				span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
-			template(#appKey="{row}")
-				.secret
-					.secret-row
-						label appKey:
-						.content {{ row.appKey }}
-					.secret-row
-						label appSecret:
-						.content {{ row.isSecretKeyShow ? row.appSecret : row.appSecret.replaceAll(/./g, '*') }}
-							.show.pointer(@click="row.isSecretKeyShow = !row.isSecretKeyShow") {{ row.isSecretKeyShow ? '隐藏' : '显示' }}
-			template(#isUsed="{row}")
-				span.use(v-if="row.isUsed") 使用中
-				span.stop(v-else) 已停用
-			template(#action="{row}")
-				i-button(type="warning", @click="handleUse(row)", v-if="row.isUsed") 停用
-				i-button(type="info", @click="handleUse(row)", v-else) 启用
+    .secret-key-container
+        .create
+            i-button(type="primary", @click="create") 创建密钥
+        i-table(:columns="columns", :data="tableData")
+            template(#createTime="{row}")
+                span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
+            template(#appKey="{row}")
+                .secret
+                    .secret-row
+                        label appKey:
+                        .content {{ row.appKey }}
+                    .secret-row
+                        label appSecret:
+                        .content {{ row.isSecretKeyShow ? row.appSecret : row.appSecret.replace(/./g, '*') }}
+                            .show.pointer(@click="row.isSecretKeyShow = !row.isSecretKeyShow") {{ row.isSecretKeyShow ? '隐藏' : '显示' }}
+            template(#isUsed="{row}")
+                span.use(v-if="row.isUsed") 使用中
+                span.stop(v-else) 已停用
+            template(#action="{row}")
+                i-button(type="warning", @click="handleUse(row)", v-if="row.isUsed") 停用
+                i-button(type="info", @click="handleUse(row)", v-else) 启用
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
@@ -56,9 +56,10 @@ export default class SecretKey extends Vue {
 	]
 
 	async getList() {
-		const res = await this.$api.secretKey.getAllSecretKey()
-		res.forEach(v => {
+		let res = await this.$api.secretKey.getAllSecretKey()
+		res = res.map(v => {
 			v.isSecretKeyShow = false
+			return v
 		})
 		this.tableData = res
 	}
