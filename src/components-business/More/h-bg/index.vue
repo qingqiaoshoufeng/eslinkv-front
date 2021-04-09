@@ -79,61 +79,29 @@
 				<li
 					class="pointer fn-flex flex-column pos-r"
 					@click="handleClick('nn16rowdl5r')"
-					@mouseover="hoverNav1 = true"
-					@mouseleave="hoverNav1 = false"
 				>
-					<video
-						class="pos-r"
-						src="./img/nav-1.webm"
-						v-if="hoverNav1"
-						autoplay="autoplay"
-					/>
-					<img src="./img/nav-1.svg" v-show="!hoverNav1" />
+					<img src="./img/nav-1.svg" />
 					<span class="pos-a">杭燃供气</span>
 				</li>
 				<li
 					class="pointer fn-flex flex-column pos-r"
 					@click="handleClick('6gouq223fze')"
-					@mouseover="hoverNav2 = true"
-					@mouseleave="hoverNav2 = false"
 				>
-					<video
-						class="pos-r"
-						src="./img/nav-2.webm"
-						v-if="hoverNav2"
-						autoplay="autoplay"
-					/>
-					<img src="./img/nav-2.svg" v-show="!hoverNav2" />
+					<img src="./img/nav-2.svg" />
 					<span class="pos-a">杭燃服务</span>
 				</li>
 				<li
 					class="pointer fn-flex flex-column pos-r"
 					@click="handleClick('o8tkm981qdh')"
-					@mouseover="hoverNav3 = true"
-					@mouseleave="hoverNav3 = false"
 				>
-					<video
-						class="pos-r"
-						src="./img/nav-3.webm"
-						v-if="hoverNav3"
-						autoplay="autoplay"
-					/>
-					<img src="./img/nav-3.svg" v-show="!hoverNav3" />
+					<img src="./img/nav-3.svg" />
 					<span class="pos-a">杭燃优家</span>
 				</li>
 				<li
 					class="pointer fn-flex flex-column pos-r"
 					@click="handleClick('vxoiljh5my9')"
-					@mouseover="hoverNav4 = true"
-					@mouseleave="hoverNav4 = false"
 				>
-					<video
-						class="pos-r"
-						src="./img/nav-4.webm"
-						v-if="hoverNav4"
-						autoplay="autoplay"
-					/>
-					<img src="./img/nav-4.svg" v-show="!hoverNav4" />
+					<img src="./img/nav-4.svg" />
 					<span class="pos-a">杭燃体验</span>
 				</li>
 			</ul>
@@ -162,10 +130,6 @@ import { value, customConfig } from './index.component'
 export default {
 	data() {
 		return {
-			hoverNav1: false,
-			hoverNav2: false,
-			hoverNav3: false,
-			hoverNav4: false,
 			hover54441: false,
 			hoverVideo: false,
 			video1Ended: false,
@@ -280,15 +244,26 @@ export default {
 	transition: all 0.3s;
 }
 
+@keyframes zoomInOut {
+	0% {
+		transform: translateZ(0) scale(1);
+	}
+	50% {
+		transform: translateZ(0) scale(1.2);
+	}
+	100% {
+		transform: translateZ(0) scale(1);
+	}
+}
+
 .h-bg-nav {
-	bottom: 27px;
+	bottom: 0;
 	left: 50%;
 	transform: translateX(-50%);
 
 	li {
-		align-items: center;
 		width: 160px;
-		height: 160px;
+		height: 188px;
 		margin-right: 96px;
 		font-weight: normal;
 		color: rgba(255, 255, 255, 0.75);
@@ -296,6 +271,9 @@ export default {
 
 		img {
 			transform: translateZ(0);
+			width: 80px;
+			height: 80px;
+			margin: 4px auto 32px auto;
 		}
 
 		span {
@@ -304,35 +282,11 @@ export default {
 			line-height: 40px;
 		}
 
-		&:nth-child(1) {
-			video {
-				top: -6px;
-			}
-		}
-
-		&:nth-child(2) {
-			video {
-				top: -12px;
-			}
-		}
-
-		&:nth-child(3) {
-			video {
-				top: -6px;
-			}
-		}
-
-		&:nth-child(4) {
-			video {
-				top: -14px;
-			}
-		}
-
 		&::before {
 			position: absolute;
 			left: 50%;
 			width: 160px;
-			height: 180px;
+			height: 188px;
 			margin-left: -80px;
 			content: '';
 			opacity: 0;
@@ -341,7 +295,7 @@ export default {
 
 		&::after {
 			position: absolute;
-			bottom: -27px;
+			bottom: 0;
 			left: 50%;
 			width: 160px;
 			height: 8px;
@@ -358,14 +312,18 @@ export default {
 			&::before {
 				background: linear-gradient(
 					180deg,
-					rgba(0, 87, 169, 0) 0%,
-					rgba(0, 87, 169, 0.3) 100%
+					rgba(18, 100, 176, 0) 0%,
+					rgba(18, 100, 176, 0.6) 104.72%
 				);
 				opacity: 1;
 			}
 
+			img {
+				animation: zoomInOut infinite 1s ease-in-out;
+			}
+
 			&::after {
-				background: #0df;
+				background: #00ddff;
 				opacity: 1;
 			}
 		}
