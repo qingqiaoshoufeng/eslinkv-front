@@ -31,7 +31,7 @@ export default class Template extends Vue {
 	}
 
 	reload() {
-		this.$refs.page.reload()
+		;(this.$refs.page as any).reload()
 	}
 }
 </script>

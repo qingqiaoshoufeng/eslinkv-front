@@ -10,7 +10,9 @@
 				.pos-r
 					.select-btn.pointer(@click="showOptions = true")
 						span {{ selectedItem.label }}
-						img(src="/static/icons/h-select-1.svg", :class="showOptions ? 'active' : ''")
+						img(
+							src="/static/icons/h-select-1.svg",
+							:class="showOptions ? 'active' : ''")
 					ul.pos-a(:class="showOptions ? 'active' : ''")
 						li.pointer(
 							:class="selectedItem.value == item.value ? 'active' : ''",
@@ -42,7 +44,7 @@ class MessageAlert extends Vue {
 	data: any = []
 	timer: any = []
 	showOptions: boolean = false
-	selectedItem: object = { label: '未回复', value: '2' }
+	selectedItem: any = { label: '未回复', value: '2' }
 	pageTransform: string = 'scale(1) translate3d(0px, 0px, 0px)'
 	options: any = [
 		{ label: '全部', value: '1' },

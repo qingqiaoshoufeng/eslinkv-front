@@ -31,22 +31,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 import { Input, Icon } from 'view-design'
-function strlen(str) {
-	let len = 0
-	for (var i = 0; i < str.length; i++) {
-		const c = str.charCodeAt(i)
-		// 单字节加1
-		if ((c >= 0x0001 && c <= 0x007e) || (c >= 0xff60 && c <= 0xff9f)) {
-			len++
-		} else {
-			len += 2
-		}
-		if (len > 82) {
-			return i
-		}
-	}
-	return i
-}
+
 @Component({ components: { Input, Icon: Icon } })
 class MessageItem extends Vue {
 	replyContent: String = ''

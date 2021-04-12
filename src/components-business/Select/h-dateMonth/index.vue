@@ -49,8 +49,8 @@ class HDateMonth extends mixins(widgetMixin) {
 		}
 		this.selectValue = addMonths(this.selectValue, index)
 		this.emitComponentUpdate({ month: format(this.selectValue, 'yyyy-MM') })
-		if (this.config.config.links) {
-			const links = JSON.parse(this.config.config.links)
+		if ((this as any).config.config.links) {
+			const links = JSON.parse((this as any).config.config.links)
 			links.forEach(ref => {
 				let dom
 				if (this.kanboardEditor.$refs[ref]) {
@@ -80,8 +80,8 @@ class HDateMonth extends mixins(widgetMixin) {
 
 	mounted() {
 		this.emitComponentUpdate({ month: format(this.selectValue, 'yyyy-MM') })
-		if (this.config?.config?.links) {
-			const links = JSON.parse(this.config.config.links)
+		if ((this as any).config?.config?.links) {
+			const links = JSON.parse((this as any).config.config.links)
 			links.forEach(ref => {
 				let dom
 				if (this.kanboardEditor.$refs[ref]) {

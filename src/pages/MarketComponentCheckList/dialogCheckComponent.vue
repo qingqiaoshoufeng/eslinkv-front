@@ -45,12 +45,15 @@ export default class MarketEditDialog extends Vue {
 	}
 
 	submit() {
-		html2canvas(document.getElementsByClassName('widget-part')[0], {
-			allowTaint: true,
-			scale: 1,
-			useCORS: true,
-			backgroundColor: 'transparent',
-		}).then(canvas => {
+		html2canvas(
+			document.getElementsByClassName('widget-part')[0] as HTMLElement,
+			{
+				allowTaint: true,
+				scale: 1,
+				useCORS: true,
+				backgroundColor: 'transparent',
+			},
+		).then(canvas => {
 			canvas.toBlob(
 				blob => {
 					this.upload(blob)

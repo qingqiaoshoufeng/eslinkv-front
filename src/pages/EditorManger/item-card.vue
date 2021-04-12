@@ -74,7 +74,7 @@ export default class ItemCard extends Vue {
 	@Prop(String) screenPublish: string
 	@Prop(String) screenName: string
 	@Prop(String) createTime: string
-	@Prop(Object) screenConfig: object
+	@Prop(Object) screenConfig: any
 
 	shareModal = false
 	shareType = 'PASSWORD'

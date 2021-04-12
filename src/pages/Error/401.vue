@@ -8,6 +8,8 @@
 			img(:src="errGif", width="313", height="428")
 </template>
 <script lang="ts">
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import errGif from '../../assets/401_images/401.gif'
 import { Button, Row, Col } from 'view-design'
 import { Component, Vue } from 'vue-property-decorator'

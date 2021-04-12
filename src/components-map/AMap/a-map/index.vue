@@ -4,7 +4,7 @@
 		<Message />
 		<MapContainer />
 	</div>
-	<div class="widget-part pos-r" v-else>
+	<div class="widget-part pos-r" v-else :style="styles">
 		<img class="placeholder-map" src="/static/amap/amap.jpg" alt="" />
 	</div>
 </template>

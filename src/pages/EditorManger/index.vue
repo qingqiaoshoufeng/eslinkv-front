@@ -74,7 +74,7 @@ export default class EditManger extends Vue {
 	}
 
 	reload() {
-		this.$refs.page.reload()
+		;(this.$refs.page as any).reload()
 	}
 
 	search() {

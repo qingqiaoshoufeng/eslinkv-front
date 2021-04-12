@@ -63,7 +63,7 @@ class AlertContent extends Vue {
 		})
 	}
 
-	formatTime(message = {}) {
+	formatTime(message) {
 		let { createTime } = message
 		if (createTime) {
 			createTime = format(new Date(createTime), 'MM.dd HH:mm')

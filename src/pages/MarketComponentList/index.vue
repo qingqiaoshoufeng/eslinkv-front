@@ -49,7 +49,7 @@ export default class MarketComponentList extends Vue {
 	}
 
 	reload() {
-		this.$refs.page.reload()
+		;(this.$refs.page as any).reload()
 	}
 }
 </script>

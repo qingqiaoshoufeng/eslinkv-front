@@ -1,26 +1,26 @@
 <template lang="pug">
 e-layout
-    .secret-key-container
-        .create
-            i-button(type="primary", @click="create") 创建密钥
-        i-table(:columns="columns", :data="tableData")
-            template(#createTime="{row}")
-                span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
-            template(#appKey="{row}")
-                .secret
-                    .secret-row
-                        label appKey:
-                        .content {{ row.appKey }}
-                    .secret-row
-                        label appSecret:
-                        .content {{ row.isSecretKeyShow ? row.appSecret : row.appSecret.replace(/./g, '*') }}
-                            .show.pointer(@click="row.isSecretKeyShow = !row.isSecretKeyShow") {{ row.isSecretKeyShow ? '隐藏' : '显示' }}
-            template(#isUsed="{row}")
-                span.use(v-if="row.isUsed") 使用中
-                span.stop(v-else) 已停用
-            template(#action="{row}")
-                i-button(type="warning", @click="handleUse(row)", v-if="row.isUsed") 停用
-                i-button(type="info", @click="handleUse(row)", v-else) 启用
+	.secret-key-container
+		.create
+			i-button(type="primary", @click="create") 创建密钥
+		i-table(:columns="columns", :data="tableData")
+			template(#createTime="{row}")
+				span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
+			template(#appKey="{row}")
+				.secret
+					.secret-row
+						label appKey:
+						.content {{ row.appKey }}
+					.secret-row
+						label appSecret:
+						.content {{ row.isSecretKeyShow ? row.appSecret : row.appSecret.replace(/./g, '*') }}
+							.show.pointer(@click="row.isSecretKeyShow = !row.isSecretKeyShow") {{ row.isSecretKeyShow ? '隐藏' : '显示' }}
+			template(#isUsed="{row}")
+				span.use(v-if="row.isUsed") 使用中
+				span.stop(v-else) 已停用
+			template(#action="{row}")
+				i-button(type="warning", @click="handleUse(row)", v-if="row.isUsed") 停用
+				i-button(type="info", @click="handleUse(row)", v-else) 启用
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
@@ -89,7 +89,6 @@ export default class SecretKey extends Vue {
 		await this.getList()
 		if (this.tableData.length === 0) {
 			this.$Message.success({
-				background: true,
 				content: '让我们创建第一个密钥吧',
 			})
 		}
