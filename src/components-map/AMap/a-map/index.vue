@@ -1,20 +1,19 @@
 <template>
-	<div class="map-box">
-		<!-- 消息提醒 -->
-		<template v-if="ready && inPreview">
-			<Message />
-			<MapContainer />
-		</template>
-		<template v-else>
-			<img class="placeholder-map" src="/static/amap/amap.jpg" alt="" />
-		</template>
+	<!-- 消息提醒 -->
+	<div class="map-box" v-if="ready && inPreview">
+		<Message />
+		<MapContainer />
+	</div>
+	<div class="widget-part pos-r" v-else>
+		<img class="placeholder-map" src="/static/amap/amap.jpg" alt="" />
 	</div>
 </template>
 
 <script>
 import MapContainer from './MapContainer/index'
 import Message from './components/Message/'
-import { scene } from 'eslinkv-sdk'
+import { value } from './index.component'
+import { widgetMixin } from 'eslinkv-sdk'
 export default {
 	name: 'HRMap',
 	components: {
@@ -27,11 +26,7 @@ export default {
 			default: false,
 		},
 	},
-	computed: {
-		inPreview() {
-			return scene.state.status === 'inPreview'
-		},
-	},
+	mixins: [widgetMixin],
 	data() {
 		return {
 			ready: false,
@@ -48,6 +43,7 @@ export default {
 	mounted() {
 		setTimeout(() => {
 			this.ready = true
+			this.configValue = this.parseConfigValue(value)
 		}, 2000)
 		// 以防地图加载不出hock处理
 		window.resetMap = this.resetMap.bind(this)
