@@ -58,5 +58,9 @@ export default {
 			type: ['perf'],
 			content: '组件增加单组件精准报错提示',
 		},
+		{
+			type: ['fix'],
+			content: '修复画布区小于100%拖拽时，会有残影',
+		},
 	],
 }
