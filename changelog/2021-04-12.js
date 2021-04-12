@@ -62,5 +62,13 @@ export default {
 			type: ['fix'],
 			content: '修复画布区小于100%拖拽时，会有残影',
 		},
+		{
+			type: ['fix'],
+			content: '画布区组件快速拖拽会有卡顿',
+		},
+		{
+			type: ['fix'],
+			content: 'ts 报错优化',
+		},
 	],
 }

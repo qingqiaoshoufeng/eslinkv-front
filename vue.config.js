@@ -2,6 +2,8 @@ const pkg = require('./package.json')
 const webpack = require('webpack')
 const isProduction = process.env.NODE_ENV === 'production'
 const needReport = false
+const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
 	transpileDependencies: ['@simonwep', 'swiper', 'dom7'],
@@ -88,17 +90,70 @@ module.exports = {
 	},
 	css: {
 		sourceMap: false,
+		extract: true,
 	},
 	configureWebpack: config => {
-		config.resolve.extensions = ['.js', '.vue', '.json', '.ts', '.tsx']
-		config.externals = [
-			{
-				vue: 'Vue',
-				'vue-router': 'VueRouter',
-				'vue-class-component': 'VueClassComponent',
-				echarts: 'echarts',
+		// 公共代码抽离
+		config.optimization = {
+			splitChunks: {
+				cacheGroups: {
+					vendor: {
+						chunks: 'all',
+						test: /node_modules/,
+						name: 'vendor',
+						minChunks: 1,
+						maxInitialRequests: 5,
+						minSize: 0,
+						maxSize: 1024 * 200,
+						priority: 100,
+					},
+					common: {
+						chunks: 'all',
+						test: /[\\/]src[\\/]js[\\/]/,
+						name: 'common',
+						minChunks: 2,
+						maxInitialRequests: 5,
+						minSize: 0,
+						priority: 60,
+					},
+					styles: {
+						name: 'styles',
+						test: /\.(sa|sc|c)ss$/,
+						chunks: 'all',
+						enforce: true,
+					},
+					runtimeChunk: {
+						name: 'manifest',
+					},
+				},
 			},
-		]
+		}
+		// config.plugins.push(
+		// 	new SkeletonWebpackPlugin({
+		// 		webpackConfig: {
+		// 			entry: {
+		// 				app: path.join(
+		// 					__dirname,
+		// 					'./src/pages/Skeleton/index.js',
+		// 				),
+		// 			},
+		// 		},
+		// 	}),
+		// )
+		config.plugins.push(
+			new UglifyJsPlugin({
+				uglifyOptions: {
+					compress: {
+						drop_debugger: true,
+						drop_console: true,
+						pure_funcs: ['console.log'],
+					},
+				},
+				sourceMap: false,
+				parallel: true,
+			}),
+		)
+		config.plugins.push(new HardSourceWebpackPlugin())
 		config.plugins.push(
 			new webpack.DefinePlugin({
 				'process.env.version': JSON.stringify(pkg.version),
@@ -111,6 +166,15 @@ module.exports = {
 				'process.env.staticPath': JSON.stringify(''),
 			}),
 		)
+		config.resolve.extensions = ['.js', '.vue', '.json', '.ts', '.tsx']
+		config.externals = [
+			{
+				vue: 'Vue',
+				'vue-router': 'VueRouter',
+				'vue-class-component': 'VueClassComponent',
+				echarts: 'echarts',
+			},
+		]
 	},
 	chainWebpack: config => {
 		config.module
@@ -128,6 +192,7 @@ module.exports = {
 					.end()
 			}
 			config.plugins.delete('prefetch')
+			config.plugins.delete('preload')
 		} else {
 			config.resolve.symlinks(true)
 		}
