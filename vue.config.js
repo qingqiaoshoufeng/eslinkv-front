@@ -93,7 +93,6 @@ module.exports = {
 		extract: true,
 	},
 	configureWebpack: config => {
-		// 公共代码抽离
 		config.optimization = {
 			splitChunks: {
 				cacheGroups: {
@@ -128,18 +127,6 @@ module.exports = {
 				},
 			},
 		}
-		// config.plugins.push(
-		// 	new SkeletonWebpackPlugin({
-		// 		webpackConfig: {
-		// 			entry: {
-		// 				app: path.join(
-		// 					__dirname,
-		// 					'./src/pages/Skeleton/index.js',
-		// 				),
-		// 			},
-		// 		},
-		// 	}),
-		// )
 		config.plugins.push(
 			new UglifyJsPlugin({
 				uglifyOptions: {
