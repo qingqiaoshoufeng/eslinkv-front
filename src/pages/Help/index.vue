@@ -1,6 +1,6 @@
 <template lang="pug">
 e-layout
-	.help-container.pos-r
+	.help-container.pos-r.d-scrollbar
 		left
 		.help-markdown-body(v-highlight)
 			div(v-html="help.helpContent")
@@ -44,6 +44,9 @@ export default class Help extends Vue {
 }
 </script>
 <style lang="scss">
+.help-container {
+	height: calc(100vh - 50px);
+}
 .help-markdown-body {
 	padding: 40px 80px;
 	margin-left: 240px;

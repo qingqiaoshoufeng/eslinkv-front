@@ -30,7 +30,7 @@ import common from '../../store/common.store.js'
 	},
 })
 export default class HelpLeft extends Vue {
-	leftName: string = ''
+	leftName = ''
 
 	handleSelect(name) {
 		const currentHash = decodeURIComponent(location.hash.replace('#', ''))

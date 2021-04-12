@@ -2,7 +2,6 @@ const pkg = require('./package.json')
 const webpack = require('webpack')
 const isProduction = process.env.NODE_ENV === 'production'
 const needReport = false
-const HardSourceWebpackPlugin = require('hard-source-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
@@ -127,20 +126,21 @@ module.exports = {
 				},
 			},
 		}
-		config.plugins.push(
-			new UglifyJsPlugin({
-				uglifyOptions: {
-					compress: {
-						drop_debugger: true,
-						drop_console: true,
-						pure_funcs: ['console.log'],
+		if (isProduction) {
+			config.plugins.push(
+				new UglifyJsPlugin({
+					uglifyOptions: {
+						compress: {
+							drop_debugger: true,
+							drop_console: true,
+							pure_funcs: ['console.log'],
+						},
 					},
-				},
-				sourceMap: false,
-				parallel: true,
-			}),
-		)
-		config.plugins.push(new HardSourceWebpackPlugin())
+					sourceMap: false,
+					parallel: true,
+				}),
+			)
+		}
 		config.plugins.push(
 			new webpack.DefinePlugin({
 				'process.env.version': JSON.stringify(pkg.version),

@@ -1,6 +1,6 @@
 <template lang="pug">
 e-layout
-	.change-log-container
+	.change-log-container.d-scrollbar
 		i-time-line
 			i-time-line-item(v-for="item in list")
 				.change-log-title.fn-flex.flex-row
@@ -71,6 +71,7 @@ export default class ChangeLog extends Vue {
 .change-log-container {
 	padding: 20px;
 	background-color: #fff;
+	height: calc(100vh - 50px);
 
 	.change-log-title {
 		align-items: center;
