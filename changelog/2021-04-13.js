@@ -70,5 +70,25 @@ export default {
 			type: ['fix'],
 			content: 'ts 报错优化',
 		},
+		{
+			type: ['perf'],
+			content: '移除拖动时的对比参考线，拖动更流畅',
+		},
+		{
+			type: ['perf'],
+			content: '添加回车登录功能',
+		},
+		{
+			type: ['fix'],
+			content: '修复数据方式切换时，接口不通情况下，json也发生改变',
+		},
+		{
+			type: ['perf'],
+			content: '开放自定义上传组件缩略图',
+		},
+		{
+			type: ['perf'],
+			content: '预加载组件市场组件，场景过度时更加流畅',
+		},
 	],
 }
