@@ -5,21 +5,21 @@
 			.login-card-logo-img.pos-a
 			.login-card-logo-mask.pos-a
 			h2.pos-r EslinkV
-		ul.login-card-content
-			li
+		Form.login-card-content(@keydown.native.enter.prevent="login")
+			FormItem
 				i-input(prefix="md-contact", placeholder="用户名", v-model="userName")
-			li
+			FormItem
 				i-input(
 					prefix="md-lock",
 					placeholder="密码",
 					v-model="password",
 					@keyup.enter="login",
 					type="password")
-			li
+			FormItem
 				i-button(type="primary", shape="circle", :long="true", @click="login") 登录
 </template>
 <script lang="ts">
-import { Input, Button, Icon } from 'view-design'
+import { Input, Button, Icon, Form, FormItem } from 'view-design'
 import { Component, Vue } from 'vue-property-decorator'
 import common from '../../store/common.store.js'
 
@@ -28,6 +28,8 @@ import common from '../../store/common.store.js'
 		'i-input': Input,
 		'i-button': Button,
 		'i-icon': Icon,
+		Form,
+		FormItem,
 	},
 })
 export default class Login extends Vue {
