@@ -38,9 +38,7 @@ e-card
 				label(slot="value-label", slot-scope="{ node }") {{ node.raw.componentTypeName || currentItem.componentTypeName }}
 			i-form-item(label="缩略图")
 				.img-wrap
-					img(
-						:src="currentItem.componentAvatar",
-						v-if="currentItem.componentAvatar")
+					d-upload(v-model="currentItem.componentAvatar" :data="formData")
 		div(slot="footer")
 			i-button(type="primary", @click="submitEdit") 确定
 	i-modal(v-model="dialogEditVersionShow", title="切换版本")
@@ -63,6 +61,7 @@ import {
 	Select,
 	Option,
 } from 'view-design'
+import dUpload from '../../components/d-upload/index.vue'
 import EmptyImage from '../../components/empty-image/index.vue'
 import { Vue, Component, PropSync } from 'vue-property-decorator'
 import TreeSelect from '@riophae/vue-treeselect'
@@ -79,6 +78,7 @@ import { LOAD_CHILDREN_OPTIONS } from '@riophae/vue-treeselect'
 		'i-input': Input,
 		'i-select': Select,
 		'i-option': Option,
+		dUpload,
 		EmptyImage,
 		TreeSelect,
 	},
@@ -88,6 +88,12 @@ export default class ItemCard extends Vue {
 	dialogEditVersionShow: boolean = false
 	componentTypeList: any[] = []
 	versionList: any[] = []
+
+	get formData() {
+		return {
+			library: `componentStatic/${this.currentItem.componentType}/${this.currentItem.componentVersion}`,
+		}
+	}
 
 	@PropSync('item', { type: Object }) currentItem!: any
 
@@ -130,6 +136,7 @@ export default class ItemCard extends Vue {
 			.update({
 				componentId: this.currentItem.componentId,
 				sort: this.currentItem.sort,
+				componentAvatar: this.currentItem.componentAvatar,
 				componentTitle: this.currentItem.componentTitle,
 				componentTypeId: this.currentItem.componentTypeId,
 			})

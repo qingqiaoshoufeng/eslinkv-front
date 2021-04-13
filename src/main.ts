@@ -40,6 +40,8 @@ const errorHandler = (err, vm) => {
 			`%c${err}`,
 			`background:rgb(${r}, ${g}, ${b});color:#fff;padding:4px;`,
 		)
+	} else {
+		console.error(err)
 	}
 }
 
