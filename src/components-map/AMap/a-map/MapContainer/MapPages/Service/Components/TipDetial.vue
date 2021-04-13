@@ -35,7 +35,6 @@
 	</div>
 </template>
 <script>
-import { isNumber } from 'highcharts'
 export default {
 	name: 'TipDetial',
 	props: {
