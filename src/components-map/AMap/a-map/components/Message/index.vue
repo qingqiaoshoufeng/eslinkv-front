@@ -19,13 +19,12 @@ import format from 'date-fns/format'
 })
 class AlertContent extends Vue {
 	message: any = {}
-	unReadStatus: boolean = true
+	unReadStatus = trueme
 	timer: any = null
 	alertInstance: any = null
-	active: boolean = false
+	active = false
 
 	showFullTagger() {
-		console.log(1)
 		this.active = !this.active
 	}
 

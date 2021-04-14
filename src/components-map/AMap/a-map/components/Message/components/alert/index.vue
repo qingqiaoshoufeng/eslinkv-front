@@ -19,17 +19,22 @@ import SvgIcon from '../../../SvgIcon/index.vue'
 
 @Component({ components: { 'ms-item': MsItem, 'svg-icon': SvgIcon } })
 class MessageAlert extends Vue {
-	id: string = ''
-	innerData: object = {}
-	ready: boolean = false
-	showTextExpend: boolean = false
-	textExpend: boolean = false
-	pageTransform: string = 'scale(1) translate3d(0px, 0px, 0px)'
+	id = ''
+	innerData: any = {}
+	ready = false
+	showTextExpend = false
+	textExpend = false
+	pageTransform = 'scale(1) translate3d(0px, 0px, 0px)'
 	@Prop(Object) data: any
 	created() {
 		this.id = 'MessageAlert' + Math.ceil(Math.random() * 100)
 		this.innerData = this.data
-		this.pageTransform = document.getElementById('kanban').style.cssText
+		const arr = document.getElementById('kanban').style.cssText.split(';')
+		let s = ''
+		arr.forEach(item => {
+			if (item.indexOf('background') === -1) s += `${item};`
+		})
+		this.pageTransform = s
 	}
 
 	mounted() {

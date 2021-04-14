@@ -36,16 +36,16 @@ import { Icon } from 'view-design'
 
 @Component({ components: { 'ms-item': MsItem, 'no-data': NoData, Icon: Icon } })
 class MessageAlert extends Vue {
-	replyContent: string = ''
-	id: string = ''
-	visible: boolean = true
-	ready: boolean = false
-	loading: boolean = false
+	replyContent = ''
+	id = ''
+	visible = true
+	ready = false
+	loading = false
 	data: any = []
 	timer: any = []
-	showOptions: boolean = false
+	showOptions = false
 	selectedItem: any = { label: '未回复', value: '2' }
-	pageTransform: string = 'scale(1) translate3d(0px, 0px, 0px)'
+	pageTransform = 'scale(1) translate3d(0px, 0px, 0px)'
 	options: any = [
 		{ label: '全部', value: '1' },
 		{ label: '未回复', value: '2' },
@@ -54,7 +54,12 @@ class MessageAlert extends Vue {
 
 	created() {
 		this.id = 'messageList' + Math.ceil(Math.random() * 100)
-		this.pageTransform = document.getElementById('kanban').style.cssText
+		const arr = document.getElementById('kanban').style.cssText.split(';')
+		let s = ''
+		arr.forEach(item => {
+			if (item.indexOf('background') === -1) s += `${item};`
+		})
+		this.pageTransform = s
 		this.getData()
 	}
 
