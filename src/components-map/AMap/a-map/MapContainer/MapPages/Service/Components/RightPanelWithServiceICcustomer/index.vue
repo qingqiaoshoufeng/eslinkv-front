@@ -1,6 +1,6 @@
 <template>
 	<Tabs
-		class="tabs-container-ic animate__animated animate__fadeInRight"
+		class="tabs-container-ic animate__animated animate-fadeInRight"
 		v-model="currentTab"
 	>
 		<TabPanel

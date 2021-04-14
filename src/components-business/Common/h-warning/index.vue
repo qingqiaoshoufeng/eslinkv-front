@@ -1,5 +1,5 @@
 <template>
-	<div class="widget-part pos-r" :style="`${styles};top:0;`">
+	<div class="widget-part pos-r" :style="styles">
 		<div class="h-waring pos-r">
 			<div class="h-waring-kuang pos-r">
 				<div class="h-waring-top pos-a"></div>

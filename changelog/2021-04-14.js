@@ -90,5 +90,17 @@ export default {
 			type: ['perf'],
 			content: '预加载组件市场组件，场景过度时更加流畅',
 		},
+		{
+			type: ['perf'],
+			content:
+				'拖动组件改为translate3d，开启硬件加速，并且可以在整个画布区内拖拽，可溢出，原先不可溢出',
+		},
+		{
+			type: ['perf'],
+			content: '动画优化，动画选项优化增加中文提示',
+		},
+		{
+			content: '移除style-parser',
+		},
 	],
 }

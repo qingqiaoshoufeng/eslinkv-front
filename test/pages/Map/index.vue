@@ -41,7 +41,7 @@ class Map extends Vue {
 		document.dispatchEvent(event)
 	}
 
-	updateKanboardSize() {
+	updateSize() {
 		const { clientWidth, clientHeight } = document.body
 		const { width, height } = this.kanboardSize
 		let ratio = Math.min(clientWidth / width, clientHeight / height)
@@ -49,7 +49,7 @@ class Map extends Vue {
 	}
 
 	mounted() {
-		this.updateKanboardSize()
+		this.updateSize()
 	}
 }
 

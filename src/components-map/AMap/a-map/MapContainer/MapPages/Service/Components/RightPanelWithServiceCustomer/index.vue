@@ -1,6 +1,6 @@
 <template>
 	<Tabs
-		class="tabs-container animate__animated animate__fadeInRight"
+		class="tabs-container animate__animated animate-fadeInRight"
 		v-model="currentTab"
 	>
 		<TabPanel key="realTime" name="realTime" label="任务工单" lazy>

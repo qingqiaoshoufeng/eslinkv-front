@@ -1,6 +1,6 @@
 <template>
 	<Tabs
-		class="tabs-container animate__animated animate__fadeInRight"
+		class="tabs-container animate__animated animate-fadeInRight"
 		:value="value"
 		@input="val => $emit('input', val)"
 	>

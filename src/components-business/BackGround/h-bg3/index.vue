@@ -1,5 +1,5 @@
 <template lang="pug">
-.widget-part.pos-r(:style="`${styles};top:0;}`")
+.widget-part.pos-r(:style="styles")
 	.h-bg3
 </template>
 <script>

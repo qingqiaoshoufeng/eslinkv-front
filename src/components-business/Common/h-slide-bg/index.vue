@@ -1,5 +1,5 @@
 <template>
-	<div class="widget-part pos-r" :style="`${styles};top:0;}`">
+	<div class="widget-part pos-r" :style="styles">
 		<div class="h-slide-bg pos-r"></div>
 	</div>
 </template>

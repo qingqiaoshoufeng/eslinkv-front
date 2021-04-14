@@ -91,7 +91,7 @@ export default {
 		}
 	},
 	methods: {
-		updateKanboardSize() {
+		updateSize() {
 			const { clientWidth, clientHeight } = document.body
 			const { width, height } = this.kanboardSize
 			let ratio = Math.min(clientWidth / width, clientHeight / height)
@@ -101,7 +101,7 @@ export default {
 		},
 	},
 	mounted() {
-		this.updateKanboardSize()
+		this.updateSize()
 	},
 }
 </script>

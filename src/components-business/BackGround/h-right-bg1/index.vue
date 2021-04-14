@@ -1,7 +1,8 @@
 <template>
 	<div
 		class="widget-part pos-r"
-		:style="`${styles};top:0;${inPreview ? 'pointer-events: none;' : ''}`"
+		:class="{ 'pointer-no': inPreview }"
+		:style="styles"
 	>
 		<div class="h-right-bg1"></div>
 	</div>

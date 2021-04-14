@@ -1,6 +1,6 @@
 <template>
 	<!-- 消息提醒 -->
-	<div class="map-box" v-if="ready && inPreview">
+	<div class="map-box" v-if="ready && inPreview" :style="{ zIndex: 9 }">
 		<Message />
 		<MapContainer />
 	</div>
@@ -69,6 +69,19 @@ export default {
 </style>
 
 <style lang="scss">
+@keyframes fadeInRight1 {
+	0% {
+		opacity: 0;
+		transform: translate3d(100%, 0, 0);
+	}
+	to {
+		opacity: 1;
+		transform: translateZ(0);
+	}
+}
+.animate-fadeInRight {
+	animation-name: fadeInRight1;
+}
 .amap-marker-content {
 	& > div {
 		& > div:not(.no-hover-effect):hover {

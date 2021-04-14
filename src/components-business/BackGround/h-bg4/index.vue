@@ -1,5 +1,5 @@
 <template>
-	<div class="widget-part" :style="`${styles};top:0;}`"></div>
+	<div class="widget-part" :style="styles"></div>
 </template>
 <script>
 import { widgetMixin } from 'eslinkv-sdk'

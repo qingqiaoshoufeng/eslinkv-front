@@ -1,5 +1,5 @@
 <template>
-	<div class="widget-part" :style="`${styles};z-index:19;`">
+	<div class="widget-part" :style="styles">
 		<div class="h-bg-video fn-flex flex-row pos-r">
 			<img
 				class="h-bg-video-left"

@@ -41,7 +41,7 @@ export default {
 		animate() {
 			const { position } = this
 			return (
-				'animate__fadeIn' +
+				'animate-fadeIn' +
 				(position.charAt(0).toUpperCase() + position.slice(1))
 			)
 		},

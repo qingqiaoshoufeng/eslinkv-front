@@ -1,8 +1,5 @@
 <template>
-	<div
-		class="widget-part pos-r"
-		:style="`${styles}left:0px;top:0px;z-index:1002;`"
-	>
+	<div class="widget-part pos-r" :style="styles">
 		<div class="h-bg pos-r">
 			<div class="h-bg-back pos-a"></div>
 			<div class="h-bg-5441 pos-a" v-if="status54441"></div>

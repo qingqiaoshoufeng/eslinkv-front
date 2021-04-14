@@ -393,7 +393,7 @@
             },
             "animation": {
               "delay": 0,
-              "enter": "fadeInRight",
+              "enter": "",
               "duration": 600,
               "transitionEnable": true
             }
@@ -492,7 +492,7 @@
             },
             "animation": {
               "delay": 0,
-              "enter": "fadeInRight",
+              "enter": "",
               "duration": 600,
               "transitionEnable": true
             }
@@ -1001,7 +1001,7 @@
             },
             "animation": {
               "delay": 0,
-              "enter": "fadeInRight",
+              "enter": "",
               "duration": 600,
               "transitionEnable": true
             }
@@ -1079,7 +1079,7 @@
             },
             "animation": {
               "delay": 0,
-              "enter": "fadeInRight",
+              "enter": "",
               "duration": 600,
               "transitionEnable": true
             }
@@ -1181,7 +1181,7 @@
             },
             "animation": {
               "delay": 0,
-              "enter": "fadeInRight",
+              "enter": "",
               "duration": 600,
               "transitionEnable": true
             }
@@ -1517,7 +1517,7 @@
             },
             "animation": {
               "delay": 0,
-              "enter": "fadeInRight",
+              "enter": "",
               "duration": 600,
               "transitionEnable": true
             }
@@ -2499,7 +2499,7 @@
             },
             "animation": {
               "delay": 0,
-              "enter": "fadeInRight",
+              "enter": "",
               "duration": 600,
               "transitionEnable": true
             }
