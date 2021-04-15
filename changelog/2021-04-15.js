@@ -102,5 +102,9 @@ export default {
 		{
 			content: '移除style-parser',
 		},
+		{
+			type: ['perf'],
+			content: '添加私有化部署文档',
+		},
 	],
 }

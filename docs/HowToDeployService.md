@@ -1,9 +1,9 @@
 ## 所需环境
-node>=14.15.1 [如何安装node环境](/help/HowToDeployNode)
+node >= 14.15.1 [如何安装node环境](/help/HowToDeployNode)
 
-mongodb>=3.4 [如何安装node环境](/help/HowToDeployMongodb)
+mongodb >= 3.4 [如何安装node环境](/help/HowToDeployMongodb)
 
-egg>=2.15.1 [egg官网](https://eggjs.org/)
+egg >= 2.15.1 [egg官网](https://eggjs.org/)
 
 ## 下载
 ```

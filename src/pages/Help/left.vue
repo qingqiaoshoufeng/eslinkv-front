@@ -14,6 +14,7 @@ i-menu.pos-f.help-left(
 		template(slot="title") 私有化部署
 		i-menu-item(name="HowToDeployService") 服务端部署
 		i-menu-item(name="HowToDeployWeb") 网页端部署
+		i-menu-item(name="HowToDeployNginx") nginx配置
 		i-menu-item(name="HowToDeployNode") 安装 node.js
 		i-menu-item(name="HowToDeployMongodb") 安裝 mongodb
 	i-sub-menu(name="3")
