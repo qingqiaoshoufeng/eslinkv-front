@@ -19,7 +19,7 @@ import format from 'date-fns/format'
 })
 class AlertContent extends Vue {
 	message: any = {}
-	unReadStatus = trueme
+	unReadStatus = true
 	timer: any = null
 	alertInstance: any = null
 	active = false
