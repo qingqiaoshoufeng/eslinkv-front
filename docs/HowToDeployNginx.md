@@ -34,5 +34,5 @@ server{
 ## 部署成功
 按照如上配置的话，我们打开`http://ip:3000`
 你看到登录就证明部署成功啦～恭喜你！
-![](/node/docs-static/HowToDeployNginx-1.png)
+![](/node/docs-static/HowToDeployNginx-1.jpg)
 

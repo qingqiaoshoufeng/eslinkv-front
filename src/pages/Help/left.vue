@@ -1,6 +1,6 @@
 <template lang="pug">
 i-menu.pos-f.help-left(
-	:open-names="['3']",
+	:open-names="['4']",
 	@on-select="handleSelect",
 	:active-name="leftName")
 	i-sub-menu(name="1")
@@ -11,13 +11,16 @@ i-menu.pos-f.help-left(
 		i-menu-item(name="KeyBoard") 快捷键
 		i-menu-item(name="ExportImport") 导入导出
 	i-sub-menu(name="2")
+		template(slot="title") 大屏迁移
+		i-menu-item(name="ExportImport") 导入导出
+	i-sub-menu(name="3")
 		template(slot="title") 私有化部署
 		i-menu-item(name="HowToDeployService") 服务端部署
 		i-menu-item(name="HowToDeployWeb") 网页端部署
 		i-menu-item(name="HowToDeployNginx") nginx配置
 		i-menu-item(name="HowToDeployNode") 安装 node.js
 		i-menu-item(name="HowToDeployMongodb") 安裝 mongodb
-	i-sub-menu(name="3")
+	i-sub-menu(name="4")
 		template(slot="title") 定制化开发
 		i-menu-item(name="HowToSecretKey") 开发密钥
 		i-menu-item(name="HowToUseNpm") 大屏开发

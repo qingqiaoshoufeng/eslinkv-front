@@ -69,6 +69,7 @@ export default class Help extends Vue {
 	}
 	img {
 		margin: 10px 0;
+		max-width: 100%;
 	}
 	h2 {
 		margin-bottom: 10px;
