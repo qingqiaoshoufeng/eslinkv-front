@@ -38,7 +38,7 @@ e-card
 				label(slot="value-label", slot-scope="{ node }") {{ node.raw.componentTypeName || currentItem.componentTypeName }}
 			i-form-item(label="缩略图")
 				.img-wrap
-					d-upload(v-model="currentItem.componentAvatar" :data="formData")
+					d-upload(v-model="currentItem.componentAvatar", :data="formData")
 		div(slot="footer")
 			i-button(type="primary", @click="submitEdit") 确定
 	i-modal(v-model="dialogEditVersionShow", title="切换版本")
@@ -84,8 +84,8 @@ import { LOAD_CHILDREN_OPTIONS } from '@riophae/vue-treeselect'
 	},
 })
 export default class ItemCard extends Vue {
-	dialogEditShow: boolean = false
-	dialogEditVersionShow: boolean = false
+	dialogEditShow = false
+	dialogEditVersionShow = false
 	componentTypeList: any[] = []
 	versionList: any[] = []
 
@@ -197,8 +197,10 @@ export default class ItemCard extends Vue {
 </style>
 <style lang="scss" scoped>
 .list-item-card {
-	&::v-deep .ivu-icon {
-		font-size: 16px;
+	&::v-deep {
+		.ivu-icon {
+			font-size: 16px;
+		}
 	}
 
 	&:hover {

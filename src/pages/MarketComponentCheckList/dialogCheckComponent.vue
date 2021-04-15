@@ -1,6 +1,6 @@
 <template lang="pug">
 i-modal.check-modal(v-model="modalShow", title="审核")
-	d-view(v-if="modalShow")
+	d-view.pos-r(v-if="modalShow")
 	div(slot="footer")
 		i-button(type="primary", @click="submit") 通过
 		i-button(type="error", @click="cancel") 拒绝
