@@ -51,9 +51,24 @@ export default class Help extends Vue {
 	padding: 40px 80px;
 	margin-left: 240px;
 	background-color: #fff;
+	min-height: 100%;
 	code {
 		word-break: break-all;
 		white-space: pre-wrap;
+	}
+	p {
+		font-size: 14px;
+		code {
+			font-weight: bold;
+			background-color: #333;
+			color: #fff;
+			padding: 1px 4px;
+			font-size: 12px;
+			margin: 0 4px;
+		}
+	}
+	img {
+		margin: 10px 0;
 	}
 	h2 {
 		margin-bottom: 10px;
