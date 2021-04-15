@@ -1,8 +1,9 @@
 <template lang="pug">
 div
 	.pos-a.h-right-bg1(
-		v-if="showMapPage === 'AirSupplyHighPressure' || showMapPage === 'AirSupplyUCAN' || showMapPage === 'AirSupplyLNG' || showMapPage === 'ServiceCustomer' || showMapPage === 'serviceICcustomer'")
-	.pos-a.h-left-bg2(v-if="showMapPage === 'ServiceNineteen' || showMapPage === 'ServiceHangranCode'")
+		v-if="showMapPage === 'AirSupplyHighPressure' || showMapPage === 'AirSupplyLowPressure' || showMapPage === 'AirSupplyUCAN' || showMapPage === 'AirSupplyLNG' || showMapPage === 'ServiceCustomer' || showMapPage === 'serviceICcustomer'")
+	.pos-a.h-left-bg2(
+		v-if="showMapPage === 'ServiceNineteen' || showMapPage === 'ServiceHangranCode'")
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
