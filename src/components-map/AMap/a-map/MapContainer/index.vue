@@ -33,6 +33,7 @@
 		<!-- 地图类型 -->
 		<MapTypeLegend />
 		<!-- 传送门的出口 -->
+		<map-bg :showMapPage="showMapPage" />
 		<portal-target class="portal-target" name="destination"></portal-target>
 	</div>
 </template>
@@ -40,6 +41,7 @@
 <script>
 import { AMap } from '../lib'
 import MapTypeLegend from './MapTypeLegend'
+import MapBg from './MapBg'
 import { SatelliteMap, SatelliteMapControl } from '../components'
 import mapMixin from './mapMixin.js'
 // 动态引入页面
@@ -73,6 +75,7 @@ export default {
 		}
 	},
 	components: {
+		MapBg,
 		ElAmap: AMap,
 		MapTypeLegend,
 		SatelliteMap,

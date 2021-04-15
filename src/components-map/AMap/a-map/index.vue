@@ -8,7 +8,6 @@
 		<img class="placeholder-map" src="/static/amap/amap.jpg" alt="" />
 	</div>
 </template>
-
 <script>
 import MapContainer from './MapContainer/index'
 import Message from './components/Message/'
