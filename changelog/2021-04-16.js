@@ -110,5 +110,9 @@ export default {
 			type: ['fix'],
 			content: '修复实例化场景中无法加载组件市场组件',
 		},
+		{
+			type: ['perf'],
+			content: '添加导入导出文档',
+		},
 	],
 }

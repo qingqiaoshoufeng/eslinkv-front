@@ -15,11 +15,11 @@ i-menu.pos-f.help-left(
 		i-menu-item(name="ExportImport") 导入导出
 	i-sub-menu(name="3")
 		template(slot="title") 私有化部署
-		i-menu-item(name="HowToDeployService") 服务端部署
-		i-menu-item(name="HowToDeployWeb") 网页端部署
-		i-menu-item(name="HowToDeployNginx") nginx配置
-		i-menu-item(name="HowToDeployNode") 安装 node.js
-		i-menu-item(name="HowToDeployMongodb") 安裝 mongodb
+		i-menu-item(name="DeployService") 服务端部署
+		i-menu-item(name="DeployWeb") 网页端部署
+		i-menu-item(name="DeployNginx") nginx配置
+		i-menu-item(name="DeployNode") 安装 node.js
+		i-menu-item(name="DeployMongodb") 安裝 mongodb
 	i-sub-menu(name="4")
 		template(slot="title") 定制化开发
 		i-menu-item(name="HowToSecretKey") 开发密钥
