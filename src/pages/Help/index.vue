@@ -71,6 +71,13 @@ export default class Help extends Vue {
 		margin: 10px 0;
 		max-width: 100%;
 	}
+	blockquote {
+		margin: 10px 0;
+		background-color: #ddd;
+		p {
+			padding: 1px 4px;
+		}
+	}
 	h2 {
 		margin-bottom: 10px;
 		margin-top: 20px;
