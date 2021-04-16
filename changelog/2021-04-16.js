@@ -106,5 +106,9 @@ export default {
 			type: ['perf'],
 			content: '添加私有化部署文档',
 		},
+		{
+			type: ['fix'],
+			content: '修复实例化场景中无法加载组件市场组件',
+		},
 	],
 }
