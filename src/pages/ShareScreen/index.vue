@@ -4,31 +4,34 @@
 		.pwd-box(v-if="shareType === 'PASSWORD'")
 			.pwd-title 已打开密码保护，请输入密码
 			.pwd-main
-				i-input.pwd(v-model="pwd" type="password" style="margin-right: 10px;")
-				i-button(type="primary" @click="unlock") 确定
+				i-input.pwd(v-model="pwd", type="password", style="margin-right: 10px")
+				i-button(type="primary", @click="unlock") 确定
 		.time(v-if="shareType === 'TIME'")
 			template(v-if="!isOvertime")
-				vue-countdown(:time="leftTime" v-slot="{ days, hours, minutes, seconds }" @end="timeEnd")
+				vue-countdown(
+					:time="leftTime",
+					v-slot="{ days, hours, minutes, seconds }",
+					@end="timeEnd")
 					.time-left 剩余：{{ `${days}天${hours}小时${minutes}分${seconds}秒` }}
-				i-button(type="primary" @click="maskShow=false" style="margin-top: 10px;") 点击进入
+				i-button(
+					type="primary",
+					@click="maskShow = false",
+					style="margin-top: 10px") 点击进入
 			template(v-else)
 				span 分享时效已过，请联系你的分享者
 	.preview-wrapper.fit-mode(
-		v-if="!maskShow"
+		v-if="!maskShow",
 		ref="kanboardWrapper",
 		:class="{ mobile: isMobile }",
 		:style="{ backgroundColor: platform.panelConfig.background.color, backgroundRepeat: platform.panelConfig.background.repeat, backgroundSize: platform.panelConfig.background.size, backgroundPosition: platform.panelConfig.background.position, backgroundImage: `url(${platform.panelConfig.background.url})` }")
 		.mobile-wrap(:style="{ height: mobileWrapHeight + 'px' }", v-if="isMobile")
-			d-view(
-				@mounted="updateSize",
-				ref="previewContainer",
-				:style="viewStyle")
+			d-view(@mounted="updateSize", ref="previewContainer", :style="viewStyle")
 		d-view(
 			@mounted="updateSize",
 			ref="previewContainer",
 			v-else,
 			:style="viewStyle")
-	d-detail(:show="false" ref="dDetail")
+	d-detail(:show="false", ref="dDetail")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
@@ -96,22 +99,24 @@ export default class detail extends Vue {
 		this.mobileWrapHeight = h * this.actualScaleRatio
 	}
 
-	timeEnd () {
+	timeEnd() {
 		this.isOvertime = true
 	}
 
-	async unlock () {
+	async unlock() {
 		if (!this.pwd) return
 		const res = await this.$api.screenShare.screenShareLogin({
 			screenId: this.$route.params.shareScreenId,
-			screenSharePassword: this.pwd
+			screenSharePassword: this.pwd,
 		})
 		this.maskShow = false
 		this.$refs.dDetail.renderByDetail(res)
 	}
 
-	async mounted () {
-		shareInfo = await this.$api.screenShare.screenShareUse({ screenId: this.$route.params.shareScreenId })
+	async mounted() {
+		shareInfo = await this.$api.screenShare.screenShareUse({
+			screenId: this.$route.params.shareScreenId,
+		})
 		this.shareType = shareInfo.screenShareType
 		if (this.shareType === 'ALL') {
 			this.maskShow = false
@@ -125,7 +130,7 @@ export default class detail extends Vue {
 	}
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .detail-container {
 	height: 100%;
 }
