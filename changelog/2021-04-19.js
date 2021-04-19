@@ -112,7 +112,7 @@ export default {
 		},
 		{
 			type: ['perf'],
-			content: '添加导入导出文档',
+			content: '添加导入导出文档，添加介绍文档',
 		},
 	],
 }

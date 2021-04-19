@@ -53,7 +53,7 @@ export default class EHeader extends Vue {
 		//   title: '模版市场'
 		// },
 		{
-			url: '/help/HowToUseMarket',
+			url: '/help/EslinkV',
 			title: '帮助中心',
 		},
 		{

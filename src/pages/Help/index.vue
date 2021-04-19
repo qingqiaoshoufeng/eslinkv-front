@@ -82,6 +82,10 @@ export default class Help extends Vue {
 		margin-bottom: 10px;
 		margin-top: 20px;
 	}
+	h3 {
+		margin-bottom: 5px;
+		margin-top: 15px;
+	}
 	ul,
 	li {
 		list-style: circle;

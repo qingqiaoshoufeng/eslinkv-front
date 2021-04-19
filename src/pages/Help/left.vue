@@ -1,6 +1,6 @@
 <template lang="pug">
 i-menu.pos-f.help-left(
-	:open-names="['4']",
+	:open-names="['1']",
 	@on-select="handleSelect",
 	:active-name="leftName")
 	i-sub-menu(name="1")
@@ -56,7 +56,8 @@ export default class HelpLeft extends Vue {
 	mounted() {
 		const { name } = this.$route.params
 		this.leftName = name
-		common.actions.setNavIndex('/help/HowToUseMarket')
+		this.handleSelect(name)
+		common.actions.setNavIndex('/help/EslinkV')
 	}
 }
 </script>
