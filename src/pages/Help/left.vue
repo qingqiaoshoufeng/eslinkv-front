@@ -4,11 +4,8 @@ i-menu.pos-f.help-left(
 	@on-select="handleSelect",
 	:active-name="leftName")
 	i-sub-menu(name="1")
-		template(slot="title") 大屏管理
-		i-menu-item(name="PanelSetting") 大屏配置
-		i-menu-item(name="EditorSetting") 编辑器配置
-		i-menu-item(name="SceneSetting") 场景设置
-		i-menu-item(name="KeyBoard") 快捷键
+		template(slot="title") EslinkV
+		i-menu-item(name="EslinkV") EslinkV介绍
 	i-sub-menu(name="2")
 		template(slot="title") 迁移/共享
 		i-menu-item(name="ExportImport") 导入导出
