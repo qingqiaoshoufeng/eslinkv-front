@@ -114,5 +114,9 @@ export default {
 			type: ['perf'],
 			content: '添加导入导出文档，添加介绍文档',
 		},
+		{
+			type: ['perf'],
+			content: '文档，添加目录功能',
+		},
 	],
 }

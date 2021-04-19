@@ -1,10 +1,26 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<div class="help-menu pos-f">目录</div>
+
+- [下载示例](#%E4%B8%8B%E8%BD%BD%E7%A4%BA%E4%BE%8B)
+- [安装cli](#%E5%AE%89%E8%A3%85cli)
+- [打包&上传组件](#%E6%89%93%E5%8C%85%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6)
+- [上传组件](#%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6)
+- [打包组件](#%E6%89%93%E5%8C%85%E7%BB%84%E4%BB%B6)
+- [目录规范](#%E7%9B%AE%E5%BD%95%E8%A7%84%E8%8C%83)
+- [custom.vue](#customvue)
+- [index.component.ts](#indexcomponentts)
+- [esp-config.js](#esp-configjs)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 下载示例
 ```
-git clone http://10.200.1.145/framework/web/es-lab/dvdp-expand-example
+git clone http://10.200.1.145/framework/web/es-lab/eslink-v/eslinkv-template.git
 ```
 
 ```
-cd dvdp-expand-example&& npm install
+cd eslinkv-template && npm install
 ```
 
 ```
@@ -12,16 +28,40 @@ npm run serve
 ```
 
 ## 安装cli
+
+工具包运行于Node环境，推荐使用 Node >= 14.15.0 的版本，如果您没有安装NodeJS，可以进入[NodeJS官网](https://nodejs.org/)下载并安装。安装成功后，在命令行操作界面执行`node -v`和`npm -v`命令（Mac在terminal中执行，Windows可中可在git bash或powershell中执行），查看Node和npm版本。
 ```
 npm i eslinkv-cli -g
+```
+安装完成后，执行`esp --version`查看工具包版本。
+
+## 打包&上传组件
+```
+esp submit/npm run submit
 ```
 
 ## 上传组件
 ```
-esp submit/npm run submit
+esp upload
 ```
-> [cli详细功能 查看组件开发cli相关文档](/help/HowToUseMarketCli)
-## 目录介绍
+
+## 打包组件
+```
+esp build
+```
+
+
+## 目录规范
+
+项目必须指定组件目录（默认为packages），一个组件目录下可以有多个组件，组件以文件夹为单位，在开发组件时，请遵循以下规范。
+以组件文件夹（e-hello ）为例
+
+> 每个组件必须包含一个`index.js`入口文件
+>
+> 每个组件必须包含一个`custom.vue`视图文件
+>
+> 每个组件必须有`index.component.ts/js`配置文件
+
 ```
 |- examples                      // 本地开发演示主目录
 |- |- App.vue                    // 组件容器，包含截图等附加功能
@@ -57,7 +97,6 @@ esp submit/npm run submit
 
     @Component
 	export default class HelloWorld extends mixins(widgetMixin) {
-		
 		// 这个方法是将index.component.ts文件中的配置传入到该组件中，不可少
 		created () {
 			this.configValue = this.parseConfigValue(value, customConfig)

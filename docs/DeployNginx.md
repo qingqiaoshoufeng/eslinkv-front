@@ -1,3 +1,12 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<div class="help-menu pos-f">目录</div>
+
+- [配置如下](#%E9%85%8D%E7%BD%AE%E5%A6%82%E4%B8%8B)
+- [部署成功](#%E9%83%A8%E7%BD%B2%E6%88%90%E5%8A%9F)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 配置如下
 ```
 server{

@@ -1,3 +1,18 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<div class="help-menu pos-f">目录</div>
+
+- [介绍](#%E4%BB%8B%E7%BB%8D)
+- [主要功能](#%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD)
+  - [组件区](#%E7%BB%84%E4%BB%B6%E5%8C%BA)
+  - [场景区](#%E5%9C%BA%E6%99%AF%E5%8C%BA)
+  - [画布区](#%E7%94%BB%E5%B8%83%E5%8C%BA)
+  - [设置区](#%E8%AE%BE%E7%BD%AE%E5%8C%BA)
+  - [功能区](#%E5%8A%9F%E8%83%BD%E5%8C%BA)
+- [使用](#%E4%BD%BF%E7%94%A8)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 介绍
 
 EslinkV 即 易屏，用于快速开发交付移动驾驶仓，数据驾驶仓等大屏页面所诞生的产品。

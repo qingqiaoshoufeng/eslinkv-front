@@ -3,7 +3,7 @@ e-layout
 	.help-container.pos-r.d-scrollbar
 		left
 		.help-markdown-body(v-highlight)
-			div(v-html="help.helpContent")
+			.pos-r(v-html="help.helpContent")
 </template>
 <script lang="ts">
 import Left from './left.vue'
@@ -47,9 +47,31 @@ export default class Help extends Vue {
 .help-container {
 	height: calc(100vh - 50px);
 }
+.help-menu {
+	right: 0;
+	width: 240px;
+	top: 100px;
+	font-size: 14px;
+	+ ul {
+		top: 130px;
+		width: 240px;
+		right: 0;
+		position: fixed;
+		list-style: none;
+		padding-left: 10px;
+		li {
+			list-style: none;
+			margin-bottom: 6px;
+			ul {
+				padding-left: 10px;
+			}
+		}
+	}
+}
 .help-markdown-body {
 	padding: 40px 80px;
 	margin-left: 240px;
+	margin-right: 240px;
 	background-color: #fff;
 	min-height: 100%;
 	code {

@@ -8,7 +8,8 @@
 		"build": "vue-cli-service build --no-clean",
 		"build:simple": "vue-cli-service build --no-clean --mode simple",
 		"update": "auto-vers -t",
-		"commit": "git add .&&git cz"
+		"commit": "git add .&&git cz",
+		"doc": "doctoc --title '<div class=\"help-menu pos-f\">目录</div>' ./docs"
 	},
 	"dependencies": {
 		"@babel/polyfill": "^7.12.1",

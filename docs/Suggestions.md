@@ -1,3 +1,12 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<div class="help-menu pos-f">目录</div>
+
+- [建议](#%E5%BB%BA%E8%AE%AE)
+- [bug](#bug)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 建议
 如果你有什么意见和建议都可以提出来
 

@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<div class="help-menu pos-f">目录</div>
+
+- [配置 mongodb 源](#%E9%85%8D%E7%BD%AE-mongodb-%E6%BA%90)
+- [下载安装 mongodb](#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85-mongodb)
+- [启动 mongodb 命令](#%E5%90%AF%E5%8A%A8-mongodb-%E5%91%BD%E4%BB%A4)
+- [创建一个数据库](#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%95%B0%E6%8D%AE%E5%BA%93)
+- [创建一个用户](#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%94%A8%E6%88%B7)
+- [mongodb conf](#mongodb-conf)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 配置 mongodb 源
 ```
 vim /etc/yum.repos.d/mongodb-org-3.4.repo
