@@ -9,7 +9,6 @@ i-menu.pos-f.help-left(
 		i-menu-item(name="EditorSetting") 编辑器配置
 		i-menu-item(name="SceneSetting") 场景设置
 		i-menu-item(name="KeyBoard") 快捷键
-		i-menu-item(name="ExportImport") 导入导出
 	i-sub-menu(name="2")
 		template(slot="title") 迁移/共享
 		i-menu-item(name="ExportImport") 导入导出
