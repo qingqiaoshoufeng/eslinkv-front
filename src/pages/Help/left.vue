@@ -11,8 +11,9 @@ i-menu.pos-f.help-left(
 		i-menu-item(name="KeyBoard") 快捷键
 		i-menu-item(name="ExportImport") 导入导出
 	i-sub-menu(name="2")
-		template(slot="title") 大屏迁移
+		template(slot="title") 迁移/共享
 		i-menu-item(name="ExportImport") 导入导出
+		i-menu-item(name="Share") 分享大屏
 	i-sub-menu(name="3")
 		template(slot="title") 私有化部署
 		i-menu-item(name="DeployService") 服务端部署

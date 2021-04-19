@@ -74,7 +74,6 @@ export default class full extends Vue {
 		position: relative;
 		flex-grow: 0;
 		flex-shrink: 0;
-		outline: rgba(255, 255, 255, 0.2) 1px dotted;
 	}
 
 	&.fit-mode {

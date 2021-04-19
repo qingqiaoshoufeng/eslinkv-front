@@ -23,46 +23,18 @@ module.exports = {
 			errors: false,
 		},
 		proxy: {
-			'^/hangran': {
-				// target: 'http://ebp-pc.hw-qa.eslink.net.cn',
-				// target: 'http://ebp-pc.hzrq.local:15003',
-				target: 'http://10.20.10.154:3000',
-				// target: 'http://192.168.31.219:3000',
-				changeOrigin: true,
-				headers: {
-					// Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
-					Cookie: 'SESSION=951dde65-40c7-4afc-ad9e-f28a68a0dcac',
-				},
-				// pathRewrite: {
-				// 	'^/hangran': '/',
-				// },
-			},
-			'^/api': {
-				// target: 'http://ebp-pc.hw-qa.eslink.net.cn',
-				// target: 'http://ebp-pc.hzrq.local:15003',
-				target: 'http://10.20.10.154:3000',
-				// target: 'http://192.168.31.219:3000',
-				changeOrigin: true,
-				headers: {
-					// Cookie: 'SESSION=d6c83c5e-dc12-4a22-95be-95045bfa4ffb'
-					Cookie: 'SESSION=951dde65-40c7-4afc-ad9e-f28a68a0dcac',
-				},
-				// pathRewrite: {
-				// 	'^/api': '/',
-				// },
-			},
 			'^/node': {
 				// target: 'http://127.0.0.1:7001',
-				target: 'http://eslinkv.eslink.cc',
-				// target: 'http://10.30.3.156:7001',
+				// target: 'http://eslinkv.eslink.cc',
+				target: 'http://10.30.3.156:7001',
 				changeOrigin: true,
-				// pathRewrite: {
-				// 	'^/node': '/'
-				// }
+				pathRewrite: {
+					'^/node': '/',
+				},
 			},
 			'^/cdn': {
-				target: 'http://127.0.0.1:7001',
-				// target: 'http://10.30.3.156:7001',
+				// target: 'http://127.0.0.1:7001',
+				target: 'http://10.30.3.156:7001',
 				changeOrigin: true,
 				pathRewrite: {
 					'^/cdn': '/',

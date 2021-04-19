@@ -68,7 +68,6 @@ export default Map
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	overflow: hidden;
 
 	.scene-menu {
 		position: absolute;
