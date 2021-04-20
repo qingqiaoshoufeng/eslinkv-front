@@ -16,7 +16,7 @@ import { Component, Vue, Watch } from 'vue-property-decorator'
 	},
 })
 export default class Help extends Vue {
-	help: any = {
+	help = {
 		helpContent: '',
 		helpName: '',
 	}
@@ -43,30 +43,9 @@ export default class Help extends Vue {
 	}
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .help-container {
 	height: calc(100vh - 50px);
-}
-.help-menu {
-	right: 0;
-	width: 240px;
-	top: 100px;
-	font-size: 14px;
-	+ ul {
-		top: 130px;
-		width: 240px;
-		right: 0;
-		position: fixed;
-		list-style: none;
-		padding-left: 10px;
-		li {
-			list-style: none;
-			margin-bottom: 6px;
-			ul {
-				padding-left: 10px;
-			}
-		}
-	}
 }
 .help-markdown-body {
 	padding: 40px 80px;
@@ -74,43 +53,80 @@ export default class Help extends Vue {
 	margin-right: 240px;
 	background-color: #fff;
 	min-height: 100%;
-	code {
-		word-break: break-all;
-		white-space: pre-wrap;
-	}
-	p {
-		font-size: 14px;
+	&::v-deep {
+		.help-menu {
+			right: 0;
+			width: 240px;
+			top: 100px;
+			font-size: 14px;
+			padding-left: 5px;
+
+			+ ul {
+				top: 130px;
+				width: 240px;
+				right: 0;
+				position: fixed;
+				list-style: none;
+				padding-left: 15px;
+				margin-bottom: 10px;
+
+				li {
+					list-style: none;
+
+					ul {
+						padding-left: 15px;
+						margin-top: 6px;
+					}
+				}
+			}
+		}
+
 		code {
-			font-weight: bold;
-			background-color: #333;
-			color: #fff;
-			padding: 1px 4px;
-			font-size: 12px;
-			margin: 0 4px;
+			word-break: break-all;
+			white-space: pre-wrap;
 		}
-	}
-	img {
-		margin: 10px 0;
-		max-width: 100%;
-	}
-	blockquote {
-		margin: 10px 0;
-		background-color: #ddd;
+
 		p {
-			padding: 1px 4px;
+			font-size: 14px;
+
+			code {
+				font-weight: bold;
+				background-color: #333;
+				color: #fff;
+				padding: 1px 4px;
+				font-size: 12px;
+				margin: 0 4px;
+			}
 		}
-	}
-	h2 {
-		margin-bottom: 10px;
-		margin-top: 20px;
-	}
-	h3 {
-		margin-bottom: 5px;
-		margin-top: 15px;
-	}
-	ul,
-	li {
-		list-style: circle;
+
+		img {
+			margin: 10px 0;
+			max-width: 100%;
+		}
+
+		blockquote {
+			margin: 10px 0;
+			background-color: #ddd;
+
+			p {
+				padding: 1px 4px;
+			}
+		}
+
+		h2 {
+			margin-bottom: 10px;
+			margin-top: 20px;
+		}
+
+		h3 {
+			margin-bottom: 5px;
+			margin-top: 15px;
+		}
+
+		ul,
+		li {
+			list-style: circle;
+		}
 	}
 }
 </style>

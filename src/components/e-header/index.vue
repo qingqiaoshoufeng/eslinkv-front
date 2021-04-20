@@ -7,8 +7,9 @@
 			@click="handleLink(item.url, item.title)",
 			v-for="item in list",
 			:key="item.url") {{ item.title }}
-	img.circle.e-header-user-avatar(:src="userAvatar")
-	i-drop-down.e-header-user(@on-click="handleUser")
+	i-button(type="primary", v-if="!common.user", @click="handleLogin") 登录
+	img.circle.e-header-user-avatar(:src="userAvatar", v-if="common.user")
+	i-drop-down.e-header-user(@on-click="handleUser", v-if="common.user")
 		.pointer
 			span.e-header-user-name {{ common.user && common.user.userName }}
 			i-icon(type="ios-arrow-down", color="#fff")
@@ -61,6 +62,10 @@ export default class EHeader extends Vue {
 			title: '更新日志',
 		},
 	]
+
+	handleLogin() {
+		this.$router.push('/login')
+	}
 
 	handleUser(name) {
 		switch (name) {

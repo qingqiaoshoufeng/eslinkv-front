@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import commom from './store/common.store.js'
 
 const routes: Array<any> = []
 const context = require.context('./pages', true, /\.(route.js)$/)
@@ -38,14 +39,30 @@ const router: any = new VueRouter({
 		{
 			path: '/401',
 			name: '401',
+			meta: {
+				requireAuth: false,
+			},
 			component: () => import('./pages/Error/401.vue'),
 		},
 		{
 			path: '/404',
 			name: '404',
+			meta: {
+				requireAuth: false,
+			},
 			component: () => import('./pages/Error/404.vue'),
 		},
 	],
 })
-
+router.beforeEach((to, from, next) => {
+	if (to.meta.requireAuth) {
+		if (commom.state.user) {
+			next()
+		} else {
+			next('/login')
+		}
+	} else {
+		next()
+	}
+})
 export default router

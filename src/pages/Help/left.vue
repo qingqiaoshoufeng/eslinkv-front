@@ -60,7 +60,7 @@ export default class HelpLeft extends Vue {
 	}
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .help-left {
 	top: 50px;
 	left: 0;

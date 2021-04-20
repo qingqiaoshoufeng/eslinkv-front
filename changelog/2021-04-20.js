@@ -3,20 +3,13 @@ export default {
 	description: '最新版，持续迭代中',
 	list: [
 		{
-			type: [],
-			content: '导航栏UI美化',
-		},
-		{
 			type: ['fix'],
 			content: '标尺不显示bug修复',
 		},
 		{
-			type: [],
-			content: '大屏管理UI美化',
-		},
-		{
-			type: [],
-			content: '编辑器UI美化',
+			type: ['perf'],
+			content:
+				'大屏组件区、大屏功能区、大屏画布区、大屏设置区、大屏场景区UI美化',
 		},
 		{
 			type: ['refactor'],
@@ -29,10 +22,6 @@ export default {
 		{
 			type: ['refactor'],
 			content: '标尺参考线代码优化及UI优化',
-		},
-		{
-			type: ['refactor'],
-			content: '场景UI优化',
 		},
 		{
 			type: ['refactor'],
@@ -117,6 +106,15 @@ export default {
 		{
 			type: ['perf'],
 			content: '文档，添加目录功能',
+		},
+		{
+			type: ['perf'],
+			content:
+				'添加分享功能，大屏可以分享，并且可以权限控制：不限制，密码限制，时效限制',
+		},
+		{
+			type: ['perf'],
+			content: '分离配置，大屏预览所必须参数，及大屏编辑器所必须参数',
 		},
 	],
 }

@@ -1,9 +1,13 @@
 <template lang="pug">
 e-layout
 	.market-container
-		div
-			i-button(type="warning", @click="handleCheck") 组件审核
-			i-button(type="warning", :style="{ marginLeft: '10px' }", @click="handleType") 组件分类
+		.fn-flex.flex-row
+			i-button(type="primary", @click="handleCheck") 组件审核
+			i-button(
+				type="primary",
+				:style="{ marginLeft: '10px' }",
+				@click="handleType") 组件分类
+			i-button(type="primary", @click="handleDownload", style="margin-left: auto") 下载组件开发工具
 		.search
 		e-page(@init="init", :total="total", ref="page")
 			ul.list-item-card-box
@@ -27,7 +31,7 @@ import itemCard from './item-card.vue'
 })
 export default class MarketComponentList extends Vue {
 	list = []
-	total: number = 0
+	total = 0
 
 	async init({ pageNum, pageSize }) {
 		const res = await this.$api.marketComponent.list({
@@ -38,6 +42,10 @@ export default class MarketComponentList extends Vue {
 		})
 		this.list = res.list
 		this.total = res.count
+	}
+
+	handleDownload() {
+		window.open('https://www.npmjs.com/package/eslinkv-sdk')
 	}
 
 	handleCheck() {
