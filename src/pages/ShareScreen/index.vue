@@ -62,7 +62,7 @@ export default class detail extends Vue {
 	isOvertime = false
 	pwd = ''
 	shareType = ''
-	leftTime = ''
+	leftTime: number|string = ''
 
 	get viewStyle() {
 		let scale
@@ -109,8 +109,8 @@ export default class detail extends Vue {
 			screenId: this.$route.params.shareScreenId,
 			screenSharePassword: this.pwd,
 		})
-		this.maskShow = false
-		this.$refs.dDetail.renderByDetail(res)
+		this.maskShow = false;
+		(this.$refs.dDetail as any).renderByDetail(res)
 	}
 
 	async mounted() {
@@ -119,13 +119,13 @@ export default class detail extends Vue {
 		})
 		this.shareType = shareInfo.screenShareType
 		if (this.shareType === 'ALL') {
-			this.maskShow = false
-			this.$refs.dDetail.renderByDetail(shareInfo)
+			this.maskShow = false;
+			(this.$refs.dDetail as any).renderByDetail(shareInfo)
 		}
 		if (this.shareType === 'TIME') {
-			this.leftTime = new Date(shareInfo.screenShareTime) - new Date()
+			this.leftTime = new Date(shareInfo.screenShareTime).getTime() - new Date().getTime()
 			this.isOvertime = this.leftTime <= 0
-			!this.isOvertime && this.$refs.dDetail.renderByDetail(shareInfo)
+			!this.isOvertime && (this.$refs.dDetail as any).renderByDetail(shareInfo)
 		}
 	}
 }
