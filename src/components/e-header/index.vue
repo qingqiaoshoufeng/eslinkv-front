@@ -71,6 +71,7 @@ export default class EHeader extends Vue {
 		switch (name) {
 			case 'logout':
 				common.actions.setUser(null)
+				localStorage.removeItem('eslinkv-login')
 				this.$api.user.logout()
 				this.$router.push('/login')
 				break

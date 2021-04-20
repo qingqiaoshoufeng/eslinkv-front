@@ -47,6 +47,7 @@ request.interceptors.response.use(
 			}
 			if (data.code === 4001) {
 				common.state.user = null
+				localStorage.removeItem('eslinkv-login')
 				window.top.location.href = `${location.origin}/login`
 				Message.error(data.message || errMessage)
 				// eslint-disable-next-line prefer-promise-reject-errors
