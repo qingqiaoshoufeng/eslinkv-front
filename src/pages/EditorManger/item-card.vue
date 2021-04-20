@@ -26,7 +26,7 @@ e-card
 			.list-item-card-btn-link.pointer(@click="handleLink")
 				i-icon(type="ios-link", :style="{ marginLeft: 'auto' }")
 				span 预览
-	dShareDialog(v-model="shareModal" :sid="screenId")
+	dShareDialog(v-model="shareModal", :sid="screenId")
 </template>
 <script lang="ts">
 import { Button, Icon, Modal, Input } from 'view-design'
@@ -57,7 +57,7 @@ export default class ItemCard extends Vue {
 	handleShare() {
 		this.shareModal = true
 	}
-	
+
 	get statusStr() {
 		return this.screenPublish === 'COMPLETE' ? '已发布' : '未发布'
 	}
@@ -67,8 +67,11 @@ export default class ItemCard extends Vue {
 	}
 
 	handleLink() {
+		const scene = this.screenConfig.kanboard.mainScene
+			? `&scene=${this.screenConfig.kanboard.mainScene}`
+			: ''
 		window.open(
-			`${location.origin}/detail/${this.screenId}?layoutMode=${this.screenConfig.kanboard.size.layoutMode}`,
+			`${location.origin}/detail/${this.screenId}?layoutMode=${this.screenConfig.kanboard.size.layoutMode}${scene}`,
 		)
 	}
 
