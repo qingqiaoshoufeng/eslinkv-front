@@ -48,7 +48,6 @@
 		"vue-property-decorator": "9.0.2",
 		"vue-router": "^3.4.3",
 		"vue-seamless-scroll": "^1.1.21",
-		"vue-socket.io": "^3.0.10",
 		"vue-video-player": "^5.0.2",
 		"xss": "^1.0.7"
 	},
