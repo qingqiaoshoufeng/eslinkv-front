@@ -23,7 +23,7 @@ i-menu.pos-f.help-left(
 		i-menu-item(name="HowToUseNpm") 大屏开发
 		i-menu-item(name="HowToUseMarket") 组件开发
 		i-menu-item(name="ExternalPlug") 外部插件
-		i-menu-item(name="Socket") 终端交互
+		//i-menu-item(name="Socket") 终端交互
 		i-menu-item(name="Suggestions") 意见建议
 </template>
 <script lang="ts">
