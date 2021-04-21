@@ -9,10 +9,9 @@ import { widgetMixin } from 'eslinkv-sdk'
 import { Component } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import { value } from './index.component'
-
 @Component
 export default class extends mixins(widgetMixin) {
-	created() {
+	async created() {
 		setTimeout(() => {
 			this.configValue = this.parseConfigValue(value)
 		}, 1000)

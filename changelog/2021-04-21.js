@@ -116,5 +116,13 @@ export default {
 			type: ['perf'],
 			content: '分离配置，大屏预览所必须参数，及大屏编辑器所必须参数',
 		},
+		{
+			type: ['perf'],
+			content: '添加socket支持，用于满足终端交互',
+		},
+		{
+			type: ['perf'],
+			content: '添加事件机制，可在设置区编辑',
+		},
 	],
 }

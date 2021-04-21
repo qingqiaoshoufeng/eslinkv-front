@@ -19,10 +19,11 @@ i-menu.pos-f.help-left(
 		i-menu-item(name="DeployMongodb") 安裝 mongodb
 	i-sub-menu(name="4")
 		template(slot="title") 定制化开发
-		i-menu-item(name="Socket") 终端交互
 		i-menu-item(name="HowToSecretKey") 开发密钥
 		i-menu-item(name="HowToUseNpm") 大屏开发
 		i-menu-item(name="HowToUseMarket") 组件开发
+		i-menu-item(name="ExternalPlug") 外部插件
+		i-menu-item(name="Socket") 终端交互
 		i-menu-item(name="Suggestions") 意见建议
 </template>
 <script lang="ts">
