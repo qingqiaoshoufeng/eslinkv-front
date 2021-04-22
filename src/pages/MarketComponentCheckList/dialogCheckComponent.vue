@@ -45,6 +45,9 @@ export default class MarketEditDialog extends Vue {
 	}
 
 	submit() {
+		document
+			.getElementsByClassName('widget-part')[0]
+			.classList.remove('animate__fadeIn')
 		html2canvas(
 			document.getElementsByClassName('widget-part')[0] as HTMLElement,
 			{
