@@ -49,7 +49,26 @@ esp upload
 ```
 esp build
 ```
+## 自定义打包
+> 如果你想自定义打包，我们提供的打包无法满足你的需要，也是可以的
+> 
+> 你在配置中需要添加如下
+> 
+> 排除打包部分，否则会造成包特别大
+> 
+> 然后用esp upload上传，使用工具上传时，注意固定上传目录格式
 
+```javascript
+config.externals = [
+	{
+		vue: 'Vue',
+		'eslinkv-npm': 'eslinkV',
+		'vue-router': 'VueRouter',
+		echarts: 'echarts',
+		'vue-class-component': 'VueClassComponent',
+	},
+]
+```
 
 ## 目录规范
 
@@ -63,19 +82,22 @@ esp build
 > 每个组件必须有`index.component.ts/js`配置文件
 
 ```
-|- examples                      // 本地开发演示主目录
-|- |- App.vue                    // 组件容器，包含截图等附加功能
-|- |- main.ts                    // 入口ts文件
-|- |- shims-tsx.d.ts             // ts相关配置
-|- |- shims-vue.d.ts             // ts相关配置
-|- |- shims-vue.d.ts             // ts相关配置
-|- └- vue.d.ts                   // ts相关配置
-|- packages                      // 开发主目录
-|- |- e-hello                    // 单个组件目录
-|- |- |- custom.vue              // ★自定义组件
-|- |- |- index.component.ts      // ★自定义组件配置文件
-|- └---- index.js                // 打包文件
-|- public                        // 网站静态文件
+|- lib                             // 上传目录
+|- |- h-hello                      // 组件英文名
+|- |- |- h-hello-1.0.0.umd.min.js  // 打包文件
+|- examples                        // 本地开发演示主目录
+|- |- App.vue                      // 组件容器，包含截图等附加功能
+|- |- main.ts                      // 入口ts文件
+|- |- shims-tsx.d.ts               // ts相关配置
+|- |- shims-vue.d.ts               // ts相关配置
+|- |- shims-vue.d.ts               // ts相关配置
+|- └- vue.d.ts                     // ts相关配置
+|- packages                        // 开发主目录
+|- |- e-hello                      // 单个组件目录
+|- |- |- custom.vue                // ★自定义组件
+|- |- |- index.component.ts        // ★自定义组件配置文件
+|- └---- index.js                  // 打包文件
+|- public                          // 网站静态文件
 |- └---- ……                      
 |- └- index.html           
 |- esp-config.js                 // ★eslinkv-cli配置文件   
