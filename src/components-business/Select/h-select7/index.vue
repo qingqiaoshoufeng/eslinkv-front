@@ -1,7 +1,7 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
-		<div class="h-select7 fn-flex flex-row pos-r">
-			<h2 class="fn-flex flex-row" @click="showOptions = !showOptions">
+		<div class="h-select2 fn-flex flex-row pos-r">
+			<h2 class="fn-flex flex-row" @click="showOptions = !showOptions" :class="{active: showOptions}">
 				<span>{{ selectLabel }}</span>
 				<img src="/static/icons/h-select-1.svg" />
 			</h2>
@@ -52,65 +52,24 @@ export default {
 	},
 }
 </script>
-<style lang="scss">
-.h-select7 {
-	height: 100%;
-	background: #0057a9;
-	border-radius: 4px;
-
-	ul {
-		top: 24px;
-		right: 0;
-		width: 100%;
-		background: #0057a9;
-		border-radius: 4px;
-
-		&.active {
-			height: auto;
-			max-height: 207px;
-			padding: 8px 0;
-			overflow-y: auto;
-			border: 1px solid #0df;
-		}
-	}
-
-	h2 {
-		align-items: center;
-		width: 100%;
-		font-weight: normal;
-		color: #fff;
-
-		span {
-			margin-right: auto;
-			margin-left: 8px;
-			font-size: 16px;
-			line-height: 16px;
-		}
-
-		img {
-			margin-right: 8px;
-		}
-	}
-
-	li {
-		height: 32px;
-		padding-right: 8px;
-		font-size: 16px;
-		line-height: 32px;
-		color: #fff;
+<style lang="scss" scoped>
+ul{
+	&::-webkit-scrollbar {
+		width: 4px;
+		height: 1px;
 		transition: all 0.3s;
+	}
 
-		&:hover {
-			background: rgba(0, 221, 255, 0.5);
-		}
+	&::-webkit-scrollbar-thumb {
+		background: rgba(255, 255, 255, 0.3);
+		border-radius: 10px;
+		transition: all 0.3s;
+	}
 
-		&.active {
-			background: rgba(0, 221, 255, 0.5);
-		}
-
-		&:last-child {
-			border-bottom: none;
-		}
+	&::-webkit-scrollbar-track {
+		background: rgba(255, 255, 255, 0);
+		border-radius: 10px;
+		transition: all 0.3s;
 	}
 }
 </style>

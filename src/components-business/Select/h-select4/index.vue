@@ -1,6 +1,6 @@
 <template>
 	<div class="widget-part pos-r" :style="styles" v-if="data">
-		<div class="h-select4 fn-flex flex-row pos-r">
+		<div class="h-select4 fn-flex flex-row pos-r" :class="{active: showLOptions || showROptions}">
 			<h3 class="fn-flex flex-row" @click="openLeft">
 				<span>{{ data.selectType }}</span>
 				<img
@@ -133,14 +133,16 @@ export default {
 	},
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .h-select4 {
 	height: 100%;
 	background: #0057a9;
 	border-radius: 4px;
-
+	&.active {
+		border: 1px solid #0df;
+	}
 	ul {
-		top: 32px;
+		top: 40px;
 		right: 0;
 		width: 137px;
 		height: 0;
@@ -240,5 +242,23 @@ export default {
 			border-bottom: none;
 		}
 	}
+}
+
+::-webkit-scrollbar {
+	width: 4px;
+	height: 1px;
+	transition: all 0.3s;
+}
+
+::-webkit-scrollbar-thumb {
+	background: rgba(255, 255, 255, 0.3);
+	border-radius: 10px;
+	transition: all 0.3s;
+}
+
+::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0);
+	border-radius: 10px;
+	transition: all 0.3s;
 }
 </style>

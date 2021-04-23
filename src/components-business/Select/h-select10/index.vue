@@ -1,7 +1,7 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<div class="h-select2 fn-flex flex-row pos-r">
-			<h2 class="fn-flex flex-row" @click="showOptions = !showOptions">
+			<h2 class="fn-flex flex-row" @click="showOptions = !showOptions" :class="{active: showOptions}">
 				<span>{{ selectLabel }}</span>
 				<img src="/static/icons/h-select-1.svg" />
 			</h2>
@@ -61,7 +61,7 @@ export default {
 	border-radius: 4px;
 
 	ul {
-		top: 24px;
+		top: 32px;
 		right: 0;
 		width: 100%;
 		background: #0057a9;
@@ -81,6 +81,11 @@ export default {
 		width: 100%;
 		font-weight: normal;
 		color: #fff;
+		border-radius: 4px;
+		
+		&.active {
+			border: 1px solid #0df;
+		}
 
 		span {
 			margin-right: auto;
