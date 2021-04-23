@@ -32,7 +32,7 @@ e-card
 import { Button, Icon, Modal, Input } from 'view-design'
 import EmptyImage from '../../components/empty-image/index.vue'
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import { dShareDialog } from 'eslinkv-sdk'
+import dShareDialog from '../../components/d-share-dialog/index.vue'
 
 @Component({
 	components: {

@@ -1,6 +1,7 @@
 import copy from 'fast-copy'
 import { Message } from 'view-design'
 import Clipboard from 'clipboard'
+import { commonConfigValue } from 'eslinkv-sdk'
 
 /**
  * @description 获取url参数
@@ -150,4 +151,63 @@ export function copyText(text, success, error) {
 		document.body.removeChild(oCopyBtn)
 	})
 	oCopyBtn.click()
+}
+
+function getAttr(o, str) {
+	const arr = str.split('.')
+	let res = o
+	arr.forEach(v => {
+		res = res[v]
+	})
+	return res
+}
+
+export function setDefault(o, str = '', defaultConfig = commonConfigValue()) {
+	for (const key in o) {
+		const prop = str ? str + '.' + key : key
+		if (Object.prototype.toString.call(o[key]) === '[object Object]') {
+			setDefault(o[key], prop, defaultConfig)
+		} else if (o[key] === 'default') {
+			const defaultValue = getAttr(defaultConfig, prop)
+			if (defaultValue === undefined) return
+			o[key] = JSON.parse(JSON.stringify(defaultValue))
+		}
+	}
+}
+
+const types = {
+	json: 'application/json',
+	txt: 'text/plain',
+	html: 'text/html',
+	js: 'application/javascript',
+	png: 'image/png',
+	jpg: 'image/jpeg',
+}
+
+/**
+ * 文件下载函数
+ * @author ferrinweb
+ * @param {*} data 导出内容，可以是文本、对象、文件
+ * @param {String} filename 文件名
+ * @param {String} type 文件后缀
+ */
+export function downloadFile(data, filename, type) {
+	let blob
+	if (typeof data === 'string') {
+		blob = new Blob([data], { type: types[type] })
+	} else {
+		if (data instanceof Blob || data instanceof File) {
+			blob = data
+		} else {
+			blob = new Blob([JSON.stringify(data, null, 2)], {
+				type: types[type],
+			})
+		}
+	}
+	const link = document.createElement('a')
+	const url = URL.createObjectURL(blob)
+	link.download = filename
+	link.href = url
+	link.click()
+	URL.revokeObjectURL(url)
 }
