@@ -36,6 +36,15 @@ export function list(data) {
 	})
 }
 
+export function typeList(data) {
+	return request({
+		url: '/market/component/typeList',
+		method: 'post',
+		data,
+		headers,
+	})
+}
+
 export function detail(data) {
 	return request({
 		url: '/market/component/detail',
@@ -66,6 +75,15 @@ export function checkError(data) {
 export function getVersionList(data) {
 	return request({
 		url: '/market/component/version',
+		method: 'post',
+		data,
+		headers,
+	})
+}
+
+export function use(data) {
+	return request({
+		url: '/market/component/use',
 		method: 'post',
 		data,
 		headers,

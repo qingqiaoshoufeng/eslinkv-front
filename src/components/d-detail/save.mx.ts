@@ -26,7 +26,6 @@ export default {
 			this.$api.screen
 				.create(data)
 				.then(() => {
-					this.kanboardEdited = false
 					this.$Message.success('保存成功！')
 					this.loading = false
 					this.$router.back()
@@ -45,7 +44,6 @@ export default {
 			this.$api.screen
 				.update({ ...data, screenId: id })
 				.then(() => {
-					this.kanboardEdited = false
 					this.$Message.success('修改成功')
 					this.loading = false
 				})

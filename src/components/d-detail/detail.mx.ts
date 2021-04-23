@@ -1,7 +1,6 @@
 import { platform, scene } from 'eslinkv-sdk'
 import { getQueryString } from '../../utils/index'
 
-// todo 加载动画 下面注释部分
 export default {
 	data() {
 		return {

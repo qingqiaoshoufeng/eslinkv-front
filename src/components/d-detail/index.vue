@@ -86,7 +86,6 @@ export default class DDetail extends mixins(
 	saveMx,
 	importMx,
 ) {
-	@Prop(Boolean) kanboardEdited: boolean
 	@Prop({ default: true }) show: boolean // detail,full,local 隐藏该模块
 
 	platform = platform.state
@@ -143,16 +142,6 @@ export default class DDetail extends mixins(
 	}
 
 	exit() {
-		if (this.kanboardEdited) {
-			this.$Modal.confirm({
-				title: '提示',
-				content: '看板已编辑，关闭窗口将丢失未保存的数据，确认关闭吗？',
-				onOk: () => {
-					this.$router.replace({ name: 'big-data-list' })
-				},
-			})
-			return
-		}
 		this.$router.go(-1)
 	}
 
