@@ -44,3 +44,27 @@ export function level(data) {
 		headers,
 	})
 }
+import { custom } from 'eslinkv-sdk'
+
+export async function market() {
+	const level0 = await level()
+	const widgetsObject = {}
+	level0.forEach(item => {
+		level({ componentTypeParentId: item.componentTypeId }).then(array => {
+			if (array.length > 0) {
+				widgetsObject[item.componentTypeId] = {
+					...item,
+					market: true,
+					children: [],
+				}
+			}
+			array.forEach(child => {
+				widgetsObject[item.componentTypeId].children.push({
+					...child,
+					market: true,
+				})
+			})
+			custom.actions.setCustomWidgets(widgetsObject)
+		})
+	})
+}

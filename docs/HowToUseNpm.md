@@ -34,7 +34,7 @@ import { dScreen, dDetail, market } from 'eslinkv-sdk'
 })
 export default class editor extends Vue {
 	mounted() {
-		market()
+		this.$api.marketComponentType.market()
 	}
 }
 </script>

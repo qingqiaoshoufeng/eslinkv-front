@@ -124,5 +124,9 @@ export default {
 			type: ['perf'],
 			content: '添加事件机制，可在设置区编辑',
 		},
+		{
+			type: ['perf'],
+			content: 'sdk 安全防盗优化改造',
+		},
 	],
 }

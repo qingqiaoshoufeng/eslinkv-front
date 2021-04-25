@@ -5,14 +5,14 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { dScreen, market } from 'eslinkv-sdk'
+import { dScreen } from 'eslinkv-sdk'
 import dDetail from '../../components/d-detail/index.vue'
 @Component({
 	components: { dScreen, dDetail },
 })
 export default class editor extends Vue {
 	mounted() {
-		market()
+		this.$api.marketComponentType.market()
 	}
 }
 </script>

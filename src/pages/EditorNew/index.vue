@@ -12,7 +12,7 @@ import dDetail from '../../components/d-detail/index.vue'
 })
 export default class editor extends Vue {
 	mounted() {
-		market()
+		this.$api.marketComponentType.market()
 	}
 }
 </script>
