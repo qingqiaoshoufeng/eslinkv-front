@@ -55,7 +55,7 @@ import {
 	SERVICE_SERVICEMARKET_LEGEND_MAP,
 } from './config'
 
-import { scene } from 'eslinkv-sdk'
+const { scene } = eslinkV
 export default {
 	name: 'serviceMarket',
 	components: {

@@ -59,7 +59,8 @@ import { Component, Prop } from 'vue-property-decorator'
 import { Icon, Button, Modal, Form, FormItem, Input } from 'view-design'
 import copy from 'fast-copy'
 import { mixins } from 'vue-class-component'
-import { platform, scene, commonConfigValue } from 'eslinkv-sdk'
+const { commonConfigValue } = eslinkV
+const { platform, scene } = eslinkV.$store
 import loadMask from '../load-mask/index.vue'
 import importMx from './import.mx'
 import exportMx from './export.mx'

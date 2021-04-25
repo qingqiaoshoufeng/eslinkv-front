@@ -19,7 +19,7 @@
 	</div>
 </template>
 <script>
-import { widgetMixin } from 'eslinkv-sdk'
+const { widgetMixin } = eslinkV
 import MarqueeText from 'vue-marquee-text-component'
 import { value } from './index.component'
 

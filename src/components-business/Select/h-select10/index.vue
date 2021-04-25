@@ -1,7 +1,11 @@
 <template>
 	<div class="widget-part pos-r" :style="styles">
 		<div class="h-select2 fn-flex flex-row pos-r">
-			<h2 class="fn-flex flex-row" @click="showOptions = !showOptions" :class="{active: showOptions}">
+			<h2
+				class="fn-flex flex-row"
+				@click="showOptions = !showOptions"
+				:class="{ active: showOptions }"
+			>
 				<span>{{ selectLabel }}</span>
 				<img src="/static/icons/h-select-1.svg" />
 			</h2>
@@ -22,7 +26,7 @@
 	</div>
 </template>
 <script>
-import { widgetMixin } from 'eslinkv-sdk'
+const { widgetMixin } = eslinkV
 import { value } from './index.component'
 
 export default {
@@ -82,7 +86,7 @@ export default {
 		font-weight: normal;
 		color: #fff;
 		border-radius: 4px;
-		
+
 		&.active {
 			border: 1px solid #0df;
 		}

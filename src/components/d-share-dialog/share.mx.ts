@@ -1,5 +1,5 @@
 import { copyText } from '../../utils/index'
-import { platform } from 'eslinkv-sdk'
+const { platform } = eslinkV
 
 function fixZero(n) {
 	if (n > 9) {

@@ -35,7 +35,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { dView, platform } from 'eslinkv-sdk'
+const { dView, platform } = eslinkV
 import { getQueryString } from '../../utils'
 import { Input, Button } from 'view-design'
 import VueCountdown from '@chenfengyuan/vue-countdown'

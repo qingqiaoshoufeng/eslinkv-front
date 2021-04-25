@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { widgetMixin } from 'eslinkv-sdk'
+const { widgetMixin } = eslinkV
 import { config, value } from './index.component'
 
 export default {

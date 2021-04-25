@@ -1,4 +1,4 @@
-import { custom } from 'eslinkv-sdk'
+const { custom } = eslinkV.$store
 
 const components = {}
 const snapshots = {}

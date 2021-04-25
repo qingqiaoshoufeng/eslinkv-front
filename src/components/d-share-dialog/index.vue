@@ -45,7 +45,7 @@ import { Component, Prop, Watch } from 'vue-property-decorator'
 import { Modal, Button, Input, Switch } from 'view-design'
 import shareMx from './share.mx'
 import { mixins } from 'vue-class-component'
-import { platform } from 'eslinkv-sdk'
+const { platform } = eslinkV.$store
 
 @Component({
 	components: {

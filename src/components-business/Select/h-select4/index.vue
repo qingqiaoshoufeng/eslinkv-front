@@ -1,6 +1,9 @@
 <template>
 	<div class="widget-part pos-r" :style="styles" v-if="data">
-		<div class="h-select4 fn-flex flex-row pos-r" :class="{active: showLOptions || showROptions}">
+		<div
+			class="h-select4 fn-flex flex-row pos-r"
+			:class="{ active: showLOptions || showROptions }"
+		>
 			<h3 class="fn-flex flex-row" @click="openLeft">
 				<span>{{ data.selectType }}</span>
 				<img
@@ -47,7 +50,7 @@
 	</div>
 </template>
 <script>
-import { widgetMixin } from 'eslinkv-sdk'
+const { widgetMixin } = eslinkV
 import format from 'date-fns/format'
 import addDays from 'date-fns/addDays'
 import addMonths from 'date-fns/addMonths'

@@ -5,7 +5,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { dScreen } from 'eslinkv-sdk'
+const { dScreen } = eslinkV
 import dDetail from '../../components/d-detail/index.vue'
 @Component({
 	components: { dScreen, dDetail },

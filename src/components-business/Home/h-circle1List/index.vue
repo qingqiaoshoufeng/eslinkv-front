@@ -28,7 +28,7 @@
 	</div>
 </template>
 <script>
-import { widgetMixin } from 'eslinkv-sdk'
+const { widgetMixin } = eslinkV
 import circle1 from './circle1'
 import { customConfig, value } from './index.component'
 

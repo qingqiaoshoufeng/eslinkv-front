@@ -12,7 +12,7 @@
 import MapContainer from './MapContainer/index'
 import Message from './components/Message/'
 import { value } from './index.component'
-import { widgetMixin } from 'eslinkv-sdk'
+const { widgetMixin } = eslinkV
 export default {
 	name: 'HRMap',
 	components: {

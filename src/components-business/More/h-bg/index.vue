@@ -120,7 +120,7 @@
 	</div>
 </template>
 <script>
-import { widgetMixin, scene } from 'eslinkv-sdk'
+const { widgetMixin, scene } = eslinkV
 import hBg54441 from './h-bg-54441'
 import { value, customConfig } from './index.component'
 

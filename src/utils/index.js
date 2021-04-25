@@ -1,7 +1,7 @@
 import copy from 'fast-copy'
 import { Message } from 'view-design'
 import Clipboard from 'clipboard'
-import { commonConfigValue } from 'eslinkv-sdk'
+const { commonConfigValue } = eslinkV
 
 /**
  * @description 获取url参数

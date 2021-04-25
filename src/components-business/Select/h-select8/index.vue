@@ -16,7 +16,7 @@
 	</div>
 </template>
 <script>
-import { widgetMixin, instance } from 'eslinkv-sdk'
+const { widgetMixin, instance } = eslinkV
 import {
 	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
 	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,

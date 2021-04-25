@@ -28,7 +28,7 @@
 	</div>
 </template>
 <script>
-import { widgetMixin } from 'eslinkv-sdk'
+const { widgetMixin } = eslinkV
 import HVerticalTabs from './HVerticalTabs'
 import pie from './pie'
 import { getCircleOption } from './options'

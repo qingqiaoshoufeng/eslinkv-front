@@ -4,7 +4,7 @@
 	</div>
 </template>
 <script>
-import { widgetMixin } from 'eslinkv-sdk'
+const { widgetMixin } = eslinkV
 import ETable from './ETable'
 import { value } from './index.component'
 

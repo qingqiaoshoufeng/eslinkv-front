@@ -11,7 +11,7 @@
 </template>
 <script>
 import ImageView from '@/components/ImageView'
-import { widgetMixin } from 'eslinkv-sdk'
+const { widgetMixin } = eslinkV
 import { value } from './index.component'
 
 export default {

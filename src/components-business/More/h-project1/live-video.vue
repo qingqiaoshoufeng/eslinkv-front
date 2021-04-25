@@ -35,7 +35,7 @@
 	</div>
 </template>
 <script>
-import { event } from 'eslinkv-sdk'
+const { event } = eslinkV
 // todo 改造
 const _cf = {
 	ver: 'debug',

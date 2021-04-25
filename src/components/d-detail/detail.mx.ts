@@ -1,4 +1,4 @@
-import { platform, scene } from 'eslinkv-sdk'
+const { platform, scene } = eslinkV.$store
 import { getQueryString } from '../../utils/index'
 
 export default {

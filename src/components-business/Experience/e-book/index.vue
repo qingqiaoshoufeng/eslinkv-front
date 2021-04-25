@@ -45,7 +45,7 @@
 	</div>
 </template>
 <script>
-import { widgetMixin } from 'eslinkv-sdk'
+const { widgetMixin } = eslinkV
 import { value } from './index.component'
 import './turn.min'
 

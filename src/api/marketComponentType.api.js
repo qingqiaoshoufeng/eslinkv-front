@@ -1,5 +1,7 @@
 import request, { headers } from './request'
 
+const { custom } = eslinkV.$store
+
 export function create(data) {
 	return request({
 		url: '/market/componentType/create',
@@ -44,7 +46,6 @@ export function level(data) {
 		headers,
 	})
 }
-import { custom } from 'eslinkv-sdk'
 
 export async function market() {
 	const level0 = await level()

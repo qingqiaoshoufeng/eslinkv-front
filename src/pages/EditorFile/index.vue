@@ -18,7 +18,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { dView, platform } from 'eslinkv-sdk'
+const { dView, platform } = eslinkV
 import { getQueryString } from '../../utils'
 import dDetail from '../../components/d-detail/index.vue'
 @Component({

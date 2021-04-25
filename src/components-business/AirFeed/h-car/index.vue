@@ -79,7 +79,7 @@
 	</div>
 </template>
 <script>
-import { widgetMixin } from 'eslinkv-sdk'
+const { widgetMixin } = eslinkV
 import Ring from '@/components/Ring/ring'
 import { value } from './index.component'
 
