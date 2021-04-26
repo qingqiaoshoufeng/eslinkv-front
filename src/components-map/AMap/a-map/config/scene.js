@@ -31,7 +31,7 @@ export const THREESOCIALLINKAGE_SCENEINDEX = 'fsg1lcpo1c6'
 
 // 供气告警场景index
 export const AIRSUPPLY_WARN_SCENEINDEX = 'zciq8u7tmpl'
-export const AIRSUPPLY_WARN_COMPONENTINDEX = ['3y1yl6sy7qi']
+export const AIRSUPPLY_WARN_COMPONENTINDEX = ['wz1on0ifew7']
 // 供气告警场景
 export const AIRSUPPLY_WARN_MODEL_SCENEINDEX = 's7q8z58f84'
 export const AIRSUPPLY_WARN__MODEL_COMPONENTINDEX = ['5twi4542r5i']

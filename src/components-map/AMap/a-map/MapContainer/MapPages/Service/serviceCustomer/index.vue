@@ -106,7 +106,7 @@ import {
 	SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
 	SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP,
 } from './config.js'
-const { scene, instance } = eslinkV
+const { scene, instance } = eslinkV.$store
 const componentPageArr = [
 	'ThreeSocialLinkage',
 	'ServiceNetworkStation',

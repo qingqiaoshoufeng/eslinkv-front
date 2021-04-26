@@ -104,7 +104,7 @@ import {
 	AIRSUPPLY_LNG_OVERLAY_MAP,
 	AIRSUPPLY_LNG_LEGEND_MAP,
 } from './config.js'
-const { scene } = eslinkV
+const { scene } = eslinkV.$store
 
 export default {
 	name: 'LNG',

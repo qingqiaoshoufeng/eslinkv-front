@@ -18,7 +18,8 @@
 	</div>
 </template>
 <script>
-const { widgetMixin, scene } = eslinkV
+const { widgetMixin } = eslinkV
+const { scene } = eslinkV.$store
 import getOption from './options'
 import { value } from './index.component'
 

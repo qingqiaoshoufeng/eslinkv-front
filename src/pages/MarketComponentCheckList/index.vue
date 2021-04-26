@@ -21,7 +21,8 @@ e-layout
 import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button } from 'view-design'
 import dialogCheck from './dialogCheckComponent.vue'
-const { commonConfigValue, configMerge, platform } = eslinkV
+const { commonConfigValue, configMerge } = eslinkV
+const { platform } = eslinkV.$store
 import common from '../../store/common.store.js'
 
 @Component({
@@ -101,6 +102,7 @@ export default class Market extends Vue {
 		const id = +new Date()
 		const value = this.selectOne.componentConfig
 		const config = configMerge(value, commonConfigValue())
+		console.log(config)
 		platform.state.widgetAdded = {
 			[id]: {
 				id,
