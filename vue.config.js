@@ -119,12 +119,11 @@ module.exports = {
 			new webpack.DefinePlugin({
 				'process.env.version': JSON.stringify(pkg.version),
 				'process.env.staticVuePath': JSON.stringify(
-					isProduction ? 'vue.min.js' : 'vue.js',
+					isProduction ? '.min.js' : '.js',
 				),
 				'process.env.BUILD_MODE': JSON.stringify(
 					process.env.BUILD_MODE,
 				),
-				'process.env.staticPath': JSON.stringify(''),
 			}),
 		)
 		config.resolve.extensions = ['.js', '.vue', '.json', '.ts', '.tsx']
