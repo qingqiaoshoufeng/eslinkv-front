@@ -58,7 +58,7 @@ export default {
 			this.getOffset()
 		},
 		next() {
-			if (this.offset === this.data.typeList.length) return
+			if (this.offset === this.list.length) return
 			this.offset++
 			this.getOffset()
 		},
@@ -124,6 +124,7 @@ export default {
 		},
 		data: {
 			handler(val) {
+				if (!val) return
 				if (this.id) {
 					this.$nextTick(() => {
 						this.instance = echarts.init(
