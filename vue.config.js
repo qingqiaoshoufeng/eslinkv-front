@@ -131,7 +131,6 @@ module.exports = {
 		config.externals = [
 			{
 				vue: 'Vue',
-				'eslinkv-npm': 'eslinkV',
 				'vue-router': 'VueRouter',
 				'vue-class-component': 'VueClassComponent',
 				echarts: 'echarts',

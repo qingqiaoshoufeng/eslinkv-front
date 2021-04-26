@@ -30,7 +30,8 @@
 	</div>
 </template>
 <script>
-const { widgetMixin, scene } = eslinkV
+const { widgetMixin } = eslinkV
+const { scene } = eslinkV.$store
 import { value } from './index.component'
 
 export default {

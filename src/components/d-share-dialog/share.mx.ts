@@ -1,5 +1,5 @@
 import { copyText } from '../../utils/index'
-const { platform } = eslinkV
+const { platform } = eslinkV.$store
 
 function fixZero(n) {
 	if (n > 9) {
