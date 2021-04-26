@@ -1,6 +1,8 @@
 <template lang="pug">
 e-card
-	empty-image.avatar(:image="currentItem.componentAvatar")
+	empty-image.avatar(
+		:image="currentItem.componentAvatar",
+		background-size="contain")
 	template(slot="content")
 		h2.ellipsis {{ currentItem.componentTitle }}
 		.fn-flex.flex-row.list-item-card-time-box
@@ -232,7 +234,7 @@ export default class ItemCard extends Vue {
 	}
 
 	h2 {
-		margin: 10px 0 4px 0;
+		margin: 0 0 4px 0;
 		font-size: 18px;
 	}
 

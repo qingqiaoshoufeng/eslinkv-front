@@ -1,7 +1,7 @@
 <template lang="pug">
 div(
 	v-if="image",
-	:style="{ backgroundImage: `url(${image})`, backgroundPosition: 'center', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat' }",
+	:style="{ backgroundImage: `url(${image})`, backgroundPosition: 'center', backgroundSize, backgroundRepeat: 'no-repeat' }",
 	@click="handleClick")
 	slot
 .empty-image(v-else, @click="handleClick")
@@ -13,6 +13,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 @Component
 export default class EmptyImage extends Vue {
 	@Prop(String) image: string
+	@Prop({ default: '100% 100%' }) backgroundSize: string
 
 	handleClick() {
 		this.$emit('click')

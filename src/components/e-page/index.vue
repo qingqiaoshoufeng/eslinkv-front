@@ -2,6 +2,7 @@
 div
 	slot
 	i-page.e-page(
+		:current.sync="pageNum",
 		:total="total",
 		:show-sizer="show",
 		:show-elevator="show",
@@ -20,9 +21,9 @@ import { Page } from 'view-design'
 })
 export default class EPage extends Vue {
 	@Prop({ default: 0 }) total: number
-	@Prop({ default: 1 }) pageNum: number
-	@Prop({ default: 10 }) pageSize: number
 	@Prop({ default: true }) show: boolean
+	pageNum = 1
+	pageSize = 10
 
 	handlePageSize(pageSize) {
 		this.pageSize = pageSize

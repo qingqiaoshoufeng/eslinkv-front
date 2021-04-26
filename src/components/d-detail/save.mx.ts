@@ -25,10 +25,14 @@ export default {
 			data.screenType = this.screenType
 			this.$api.screen
 				.create(data)
-				.then(() => {
+				.then(res => {
 					this.$Message.success('保存成功！')
 					this.loading = false
 					this.$router.back()
+					this.$api.screenShare.screenShareUpdate({
+						screenId: res.screenId,
+						screenGuide: this.platform.ruler.guideLines,
+					})
 				})
 				.catch(() => {
 					this.loading = false
