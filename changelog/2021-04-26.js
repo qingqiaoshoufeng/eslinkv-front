@@ -128,5 +128,9 @@ export default {
 			type: ['perf'],
 			content: 'sdk 安全防盗优化改造',
 		},
+		{
+			type: ['fix'],
+			content: '新建大屏页面，新建参考线，无法保存，且会报错',
+		},
 	],
 }

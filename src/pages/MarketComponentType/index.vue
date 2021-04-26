@@ -57,7 +57,6 @@ export default class MarketComponentType extends Vue {
 	dialogEditShow: boolean = false
 	currentRow: ComponentTypeCreate = {
 		componentTypeName: '',
-		componentTypeEnName: '',
 	}
 
 	handleLoadData(item, callback) {
@@ -103,7 +102,6 @@ export default class MarketComponentType extends Vue {
 		this.dialogEditShow = true
 		this.currentRow = {
 			componentTypeName: '',
-			componentTypeEnName: '',
 		}
 	}
 
