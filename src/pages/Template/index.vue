@@ -1,7 +1,7 @@
 <template lang="pug">
 e-layout
 	.list-container
-		e-page(@init="init", :total="total", ref="page")
+		e-page(@init="init", :total="total", ref="page" :loaded="loaded")
 			ul.list-item-card-box
 				item-card(
 					v-for="item in list",
@@ -18,8 +18,8 @@ import itemCard from './item-card.vue'
 })
 export default class Template extends Vue {
 	list: any[] = []
-	total: number = 0
-
+	total = 0
+	loaded = false
 	async init({ pageNum, pageSize }) {
 		const res = await this.$api.screen.list({
 			pageSize,
@@ -28,6 +28,7 @@ export default class Template extends Vue {
 		})
 		this.list = res.list
 		this.total = res.count
+		this.loaded = true
 	}
 
 	reload() {

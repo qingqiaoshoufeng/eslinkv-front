@@ -11,7 +11,7 @@ e-layout
 				span {{ status[row.status] }}
 			template(#createTime="{ row }")
 				span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
-		e-page(@init="init", :total="total", ref="page")
+		e-page(@init="init", :total="total", ref="page" :loaded="loaded")
 		dialogCheck(
 			v-model="dialogCheckShow",
 			:detail="currentRow",
@@ -61,8 +61,8 @@ export default class Market extends Vue {
 			slot: 'createTime',
 		},
 	]
-
-	total: number = 0
+	loaded = false
+	total = 0
 	dialogCheckShow: boolean = false
 	currentRow: any = null
 	selectMore: any = false
@@ -81,6 +81,7 @@ export default class Market extends Vue {
 		})
 		this.list = res.list
 		this.total = res.count
+		this.loaded = true
 	}
 
 	selectHandle(selection) {

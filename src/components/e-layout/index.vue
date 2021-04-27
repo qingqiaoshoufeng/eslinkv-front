@@ -13,5 +13,6 @@ export default class ELayout extends Vue {}
 <style lang="scss" scoped>
 .e-layout-content {
 	padding-top: 50px;
+	min-height: 100vh;
 }
 </style>

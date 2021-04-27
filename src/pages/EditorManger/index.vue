@@ -19,7 +19,7 @@ e-layout
 				style="margin-left: 15px",
 				@click="search")
 			i-button(type="primary", @click="handleNew", style="margin-left: auto") 新建
-		e-page(@init="init", :total="total", ref="page")
+		e-page(@init="init", :total="total", ref="page", :loaded="loaded")
 			ul.list-item-card-box
 				item-card(
 					v-for="item in list",
@@ -46,7 +46,8 @@ import { Page, Button, Input, DatePicker, Select, Option } from 'view-design'
 })
 export default class EditManger extends Vue {
 	list: any[] = []
-	total: number = 0
+	total = 0
+	loaded = false
 	date: any = []
 	query: any = {
 		screenName: '',
@@ -83,15 +84,16 @@ export default class EditManger extends Vue {
 			screenType: 'CUSTOM',
 			...this.query,
 		})
+		this.loaded = true
 		this.list = res.list
-		this.total = res.total
+		this.total = res.count
 	}
 }
 </script>
 <style lang="scss" scoped>
 .list-container {
 	padding: 15px 0 15px 15px;
-
+	min-height: calc(100vh - 50px);
 	.search {
 		margin-right: 15px;
 	}

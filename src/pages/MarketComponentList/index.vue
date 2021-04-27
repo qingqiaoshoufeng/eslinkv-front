@@ -9,7 +9,7 @@ e-layout
 				@click="handleType") 组件分类
 			i-button(type="primary", @click="handleDownload", style="margin-left: auto") 下载组件开发工具
 		.search
-		e-page(@init="init", :total="total", ref="page")
+		e-page(@init="init", :total="total", ref="page" :loaded="loaded")
 			ul.list-item-card-box
 				item-card(
 					v-for="(item, i) in list",
@@ -32,6 +32,7 @@ import itemCard from './item-card.vue'
 export default class MarketComponentList extends Vue {
 	list = []
 	total = 0
+	loaded = false
 
 	async init({ pageNum, pageSize }) {
 		const res = await this.$api.marketComponent.list({
@@ -40,6 +41,7 @@ export default class MarketComponentList extends Vue {
 			status: 'SUCCESS',
 			isCurrentVersion: true,
 		})
+		this.loaded = true
 		this.list = res.list
 		this.total = res.count
 	}
