@@ -53,10 +53,10 @@ conf.keys().forEach(name => {
 	}
 })
 const obj = {
-	地图: {
-		componentTypeName: '地图',
-		componentTypeEnName: '地图',
-		componentTypeId: '地图',
+	杭图: {
+		componentTypeName: '杭图',
+		componentTypeEnName: '杭图',
+		componentTypeId: '杭图',
 		market: false,
 		children: widgetsObject,
 	},

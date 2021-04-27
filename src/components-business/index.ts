@@ -53,10 +53,10 @@ conf.keys().forEach(name => {
 	}
 })
 const obj = {
-	杭燃: {
-		componentTypeName: '杭燃',
-		componentTypeEnName: '杭燃',
-		componentTypeId: '杭燃',
+	杭组: {
+		componentTypeName: '杭组',
+		componentTypeEnName: '杭组',
+		componentTypeId: '杭组',
 		market: false,
 		children: widgetsObject,
 	},
