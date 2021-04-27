@@ -41596,13 +41596,6 @@ module.exports = __webpack_require__("cee4");
 
 /***/ }),
 
-/***/ "bc56":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "bd88":
 /***/ (function(module, exports) {
 
@@ -42366,6 +42359,13 @@ module.exports = function (input, PREFERRED_STRING) {
   throw TypeError("Can't convert object to primitive value");
 };
 
+
+/***/ }),
+
+/***/ "c18b":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -62429,8 +62429,8 @@ var scss = __webpack_require__("8594");
 // EXTERNAL MODULE: ./src/scss/animate.min.scss
 var animate_min = __webpack_require__("3353");
 
-// EXTERNAL MODULE: ./src/scss/font.css
-var font = __webpack_require__("bc56");
+// EXTERNAL MODULE: ./src/scss/font.scss
+var font = __webpack_require__("c18b");
 
 // EXTERNAL MODULE: ./node_modules/highlight.js/lib/index.js
 var lib = __webpack_require__("1487");
