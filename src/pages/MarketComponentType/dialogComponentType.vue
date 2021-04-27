@@ -104,8 +104,6 @@ export default class DialogComponentType extends Vue {
 		.ivu-modal-body {
 			max-width: 500px;
 			max-height: 500px;
-			overflow-x: auto;
-			overflow-y: auto;
 		}
 	}
 }
