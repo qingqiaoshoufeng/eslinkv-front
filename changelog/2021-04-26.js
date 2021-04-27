@@ -132,5 +132,9 @@ export default {
 			type: ['fix'],
 			content: '新建大屏页面，新建参考线，无法保存，且会报错',
 		},
+		{
+			type: ['perf'],
+			content: '右键菜单优化',
+		},
 	],
 }

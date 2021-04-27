@@ -7,6 +7,7 @@ e-layout
 			row-key="componentTypeId",
 			:columns="columns",
 			:data="list",
+			v-if="total > 0",
 			:load-data="handleLoadData")
 			template(#componentTypeParentName="{ row }")
 				span {{ row.componentTypeParentName ? row.componentTypeParentName : '无' }}
@@ -79,6 +80,7 @@ export default class MarketComponentType extends Vue {
 				return item
 			})
 			this.loaded = true
+			this.total = res.length
 			this.list = res
 		})
 	}

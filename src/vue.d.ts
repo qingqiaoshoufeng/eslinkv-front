@@ -1,4 +1,3 @@
-import Vue from 'vue'
 import VueRouter, { Route } from 'vue-router'
 
 declare module 'vue/types/vue' {
@@ -20,5 +19,6 @@ declare module 'vue/types/vue' {
 declare global {
 	interface Window {
 		flvjs: any
+		eslinkV: any
 	}
 }

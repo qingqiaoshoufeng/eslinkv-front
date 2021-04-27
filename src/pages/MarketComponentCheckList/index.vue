@@ -6,12 +6,13 @@ e-layout
 		i-table(
 			:columns="columns",
 			:data="list",
+			v-if="total > 0",
 			@on-selection-change="selectHandle")
 			template(#status="{ row }")
 				span {{ status[row.status] }}
 			template(#createTime="{ row }")
 				span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
-		e-page(@init="init", :total="total", ref="page" :loaded="loaded")
+		e-page(@init="init", :total="total", ref="page", :loaded="loaded")
 		dialogCheck(
 			v-model="dialogCheckShow",
 			:detail="currentRow",
@@ -63,7 +64,7 @@ export default class Market extends Vue {
 	]
 	loaded = false
 	total = 0
-	dialogCheckShow: boolean = false
+	dialogCheckShow = false
 	currentRow: any = null
 	selectMore: any = false
 	selectOne: any = false
