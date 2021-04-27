@@ -141,7 +141,6 @@ export default {
 						},
 					})
 				})
-				event.state.func.pauseVideo()
 			})
 		},
 		closeOverlayDetail(done) {

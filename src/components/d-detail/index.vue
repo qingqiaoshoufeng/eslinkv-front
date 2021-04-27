@@ -137,8 +137,11 @@ export default class DDetail extends mixins(
 	}
 
 	preview() {
+		const scene = this.screenConfig.kanboard.mainScene
+			? `&scene=${this.screenConfig.kanboard.mainScene}`
+			: ''
 		window.open(
-			`${location.origin}/detail/${this.$route.params.id}?layoutMode=${this.platform.panelConfig.size.layoutMode}`,
+			`${location.origin}/detail/${this.$route.params.id}?layoutMode=${this.platform.panelConfig.size.layoutMode}${scene}`,
 		)
 	}
 

@@ -13,13 +13,6 @@ e-layout
 				placement="bottom-end",
 				v-model="date",
 				style="margin-left: 10px")
-			i-select(
-				v-model="query.screenPublish",
-				placeholder="状态",
-				style="width: 100px; margin-left: 10px",
-				clearable)
-				i-option(value="EDIT") 未发布
-				i-option(value="COMPLETE") 已发布
 			i-button(
 				icon="ios-search",
 				type="primary",
@@ -58,7 +51,6 @@ export default class EditManger extends Vue {
 	query: any = {
 		screenName: '',
 		beginTime: '',
-		screenPublish: '',
 		endTime: '',
 	}
 

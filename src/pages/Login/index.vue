@@ -33,8 +33,8 @@ import common from '../../store/common.store.js'
 	},
 })
 export default class Login extends Vue {
-	userName: string = ''
-	password: string = ''
+	userName = ''
+	password = ''
 
 	async login() {
 		if (!this.userName || !this.password) return
