@@ -12,7 +12,7 @@ export const customConfig = [
 			{
 				prop: 'background',
 				label: '背景图片',
-				type: 'func-background',
+				type: 'func-image',
 				options: [
 					'/static/icons/s-progress1-1.svg',
 					'/static/icons/s-progress1-2.svg',

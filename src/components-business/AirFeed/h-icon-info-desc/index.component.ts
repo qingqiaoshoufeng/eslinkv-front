@@ -23,7 +23,7 @@ export const customConfig = [
 	{
 		prop: 'icon',
 		label: '图片',
-		type: 'func-background',
+		type: 'func-image',
 		options: [
 			'/static/icons/phone-border.svg',
 			'/static/icons/h-icon-info-desc-1.svg',

@@ -26,7 +26,7 @@ export const customConfig = [
 	{
 		prop: 'videoUrl',
 		label: '图片地址',
-		type: 'func-webm',
+		type: 'func-video',
 		options: [
 			'/static/images/airfeed/car.webm',
 			'/static/images/airfeed/people.webm',

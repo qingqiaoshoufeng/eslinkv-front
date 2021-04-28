@@ -12,7 +12,7 @@ export const customConfig = [
 	{
 		prop: 'logo',
 		label: '图片logo',
-		type: 'func-background',
+		type: 'func-image',
 		options: [
 			'/static/images/serves/s-tag1-logo1.svg',
 			'/static/images/serves/s-tag1-logo2.svg',

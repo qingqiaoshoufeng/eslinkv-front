@@ -38,7 +38,7 @@ export const customConfig = [
 	{
 		prop: 'background',
 		label: '背景图片',
-		type: 'func-background',
+		type: 'func-image',
 		options: [
 			'/static/icons/h-ring1-1.svg',
 			'/static/icons/h-ring1-2.svg',

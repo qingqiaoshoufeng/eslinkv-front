@@ -156,7 +156,7 @@ export const customConfig = [
   {
     prop: 'background',
     label: '背景图片',
-    type: 'func-background',
+    type: 'func-image',
     options: [
       '/static/h-title3-1.svg',
       '/static/h-title3-2.svg',

@@ -17,7 +17,7 @@ export const customConfig = [
 	{
 		prop: 'img',
 		label: '图片',
-		type: 'func-background',
+		type: 'func-image',
 		options: [
 			'/static/mock/test1.png',
 			'/static/mock/test2.png',

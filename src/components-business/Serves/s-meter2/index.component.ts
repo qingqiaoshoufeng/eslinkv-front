@@ -7,7 +7,7 @@ export const customConfig = [
 	{
 		prop: 'img1',
 		label: '图片1地址',
-		type: 'func-background',
+		type: 'func-image',
 		options: [
 			'/static/icons/s-meter-1.svg',
 			'/static/icons/s-meter-2.svg',
@@ -23,7 +23,7 @@ export const customConfig = [
 	{
 		prop: 'img2',
 		label: '图片2地址',
-		type: 'func-background',
+		type: 'func-image',
 		options: [
 			'/static/icons/s-meter-1.svg',
 			'/static/icons/s-meter-2.svg',

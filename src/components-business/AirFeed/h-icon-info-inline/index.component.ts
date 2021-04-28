@@ -28,7 +28,7 @@ export const customConfig = [
 	{
 		prop: 'icon',
 		label: '图片',
-		type: 'func-background',
+		type: 'func-image',
 		options: ['/static/icons/h-inline-logo1.svg'],
 	},
 ]

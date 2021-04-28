@@ -26,7 +26,7 @@ export const customConfig = [
 	{
 		prop: 'icon',
 		label: '标题',
-		type: 'func-background',
+		type: 'func-image',
 		options: ['/static/images/experience/info-icon1.svg'],
 	},
 	{

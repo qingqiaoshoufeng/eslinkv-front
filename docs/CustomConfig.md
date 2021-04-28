@@ -1,10 +1,10 @@
-## func-video[func-webm]
+## func-video
 上传视频
 
 ## func-group
 分组
 
-## func-background[func-upload]
+## func-image
 上传图片
 
 ## func-color

@@ -26,7 +26,7 @@ export const customConfig = [
 	{
 		prop: 'background',
 		label: '背景图片',
-		type: 'func-webm',
+		type: 'func-video',
 		options: [
 			'/static/images/airfeed/carout01.webm',
 			'/static/images/airfeed/carout02.webm',

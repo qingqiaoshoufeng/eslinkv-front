@@ -12,7 +12,7 @@ export const customConfig = [
 	{
 		prop: 'img',
 		label: '图片',
-		type: 'func-background',
+		type: 'func-image',
 		options: [
 			'/static/icons/数据下钻.png',
 			'/static/icons/工商户点位弹窗.png',

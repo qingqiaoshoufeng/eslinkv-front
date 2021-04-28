@@ -7,7 +7,7 @@ export const customConfig = [
 	{
 		prop: 'img',
 		label: '图片',
-		type: 'func-background',
+		type: 'func-image',
 		options: ['/static/icons/s-title-1.svg', '/static/icons/s-title-2.svg'],
 	},
 ]

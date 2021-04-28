@@ -23,7 +23,7 @@ export const customConfig = [
 	{
 		prop: 'img',
 		label: '图形',
-		type: 'func-background',
+		type: 'func-image',
 		options: [
 			'/static/icons/h-des1-1.svg',
 			'/static/icons/h-des1-2.svg',
