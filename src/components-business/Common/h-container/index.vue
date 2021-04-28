@@ -12,7 +12,7 @@
 </template>
 <script>
 const { widgetMixin } = eslinkV
-import { value } from './index.component'
+import { value, customConfig } from './index.component'
 
 export default {
 	mixins: [widgetMixin],

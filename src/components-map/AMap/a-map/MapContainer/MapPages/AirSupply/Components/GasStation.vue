@@ -117,7 +117,7 @@ export default {
 			const { name, id } = marker
 			scene.actions.createSceneInstance(
 				AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
-				'slideRight',
+				'slideInRight',
 			)
 			this.$nextTick(() => {
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach(item => {

@@ -82,7 +82,7 @@ export default {
 			if (this.config.config.sceneId) {
 				scene.actions.createSceneInstance(
 					this.config.config.sceneId,
-					'slideRight',
+					'slideInRight',
 				)
 				if (this.config.config.componentId) {
 					this.$nextTick(() => {

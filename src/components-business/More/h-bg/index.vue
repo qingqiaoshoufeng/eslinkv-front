@@ -192,7 +192,7 @@ export default {
 		openVideo() {
 			this.statusVideo = true
 			this.hoverVideo = false
-			scene.actions.createSceneInstance('grdnn9tiey', 'slideUp')
+			scene.actions.createSceneInstance('grdnn9tiey', 'slideInDown')
 		},
 		close54441() {
 			this.video1Ended = false
