@@ -138,8 +138,8 @@ export default class DDetail extends mixins(
 	}
 
 	preview() {
-		const scene = this.panelConfig.mainScene
-			? `&scene=${this.panelConfig.mainScene}`
+		const scene = this.platform.panelConfig.mainScene
+			? `&scene=${this.platform.panelConfig.mainScene}`
 			: ''
 		window.open(
 			`${location.origin}/detail/${this.$route.params.id}?layoutMode=${this.platform.panelConfig.size.layoutMode}${scene}`,
