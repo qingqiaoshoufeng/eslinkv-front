@@ -37,7 +37,7 @@ e-card
 					:options="componentTypeList",
 					:normalizer="normalizer",
 					:load-options="loadOptions")
-				label(slot="value-label", slot-scope="{ node }") {{ node.raw.componentTypeName || currentItem.componentTypeName }}
+					label(slot="value-label", slot-scope="{ node }") {{ node.raw.componentTypeName || currentItem.componentTypeName }}
 			i-form-item(label="缩略图")
 				.img-wrap
 					d-upload(v-model="currentItem.componentAvatar", :data="formData")

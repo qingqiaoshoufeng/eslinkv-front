@@ -60,7 +60,7 @@ import { Icon, Button, Modal, Form, FormItem, Input } from 'view-design'
 import copy from 'fast-copy'
 import { mixins } from 'vue-class-component'
 const { commonConfigValue } = eslinkV
-const { platform, scene } = eslinkV.$store
+const { platform, scene, ruler } = eslinkV.$store
 import loadMask from '../load-mask/index.vue'
 import importMx from './import.mx'
 import exportMx from './export.mx'
@@ -91,6 +91,7 @@ export default class DDetail extends mixins(
 
 	platform = platform.state
 	scene = scene.state
+	ruler = ruler.state
 	loadingMsg = 'loading…'
 	shareModal = false
 	loading = false
@@ -106,39 +107,39 @@ export default class DDetail extends mixins(
 	handleLeft1() {
 		this.left1 = !this.left1
 		if (this.left1) {
-			this.platform.ruler.xRoomL1 = this.xRoomL1
+			this.ruler.xRoomL1 = this.xRoomL1
 			this.xRoomL1 = 0
 		} else {
-			this.xRoomL1 = this.platform.ruler.xRoomL1
-			this.platform.ruler.xRoomL1 = 0
+			this.xRoomL1 = this.ruler.xRoomL1
+			this.ruler.xRoomL1 = 0
 		}
 	}
 
 	handleRight1() {
 		this.right1 = !this.right1
 		if (this.right1) {
-			this.platform.ruler.xRoomR1 = this.xRoomR1
+			this.ruler.xRoomR1 = this.xRoomR1
 			this.xRoomR1 = 0
 		} else {
-			this.xRoomR1 = this.platform.ruler.xRoomR1
-			this.platform.ruler.xRoomR1 = 0
+			this.xRoomR1 = this.ruler.xRoomR1
+			this.ruler.xRoomR1 = 0
 		}
 	}
 
 	handleLeft2() {
 		this.left2 = !this.left2
 		if (this.left2) {
-			this.platform.ruler.xRoomL2 = this.xRoomL2
+			this.ruler.xRoomL2 = this.xRoomL2
 			this.xRoomL2 = 0
 		} else {
-			this.xRoomL2 = this.platform.ruler.xRoomL2
-			this.platform.ruler.xRoomL2 = 0
+			this.xRoomL2 = this.ruler.xRoomL2
+			this.ruler.xRoomL2 = 0
 		}
 	}
 
 	preview() {
-		const scene = this.platform.panelConfig.mainScene
-			? `&scene=${this.platform.panelConfig.mainScene}`
+		const scene = this.panelConfig.mainScene
+			? `&scene=${this.panelConfig.mainScene}`
 			: ''
 		window.open(
 			`${location.origin}/detail/${this.$route.params.id}?layoutMode=${this.platform.panelConfig.size.layoutMode}${scene}`,
@@ -224,7 +225,7 @@ export default class DDetail extends mixins(
 		return {
 			screenName: this.platform.screenName,
 			screenConfig: {
-				kanboard: panelConfig, // 看板画布配置
+				panelConfig, // 看板画布配置
 				widgets, // 小工具配置
 				scene: this.scene.obj, // 场景
 			},

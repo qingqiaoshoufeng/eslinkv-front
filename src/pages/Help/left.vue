@@ -1,5 +1,5 @@
 <template lang="pug">
-i-menu.pos-f.help-left(
+i-menu.pos-f.help-left.d-scrollbar(
 	:open-names="['1']",
 	@on-select="handleSelect",
 	:active-name="leftName")

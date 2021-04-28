@@ -7786,6 +7786,7 @@ __webpack_require__.d(__webpack_exports__, "scene", function() { return /* reexp
 __webpack_require__.d(__webpack_exports__, "instance", function() { return /* reexport */ instance_store; });
 __webpack_require__.d(__webpack_exports__, "custom", function() { return /* reexport */ custom_store; });
 __webpack_require__.d(__webpack_exports__, "event", function() { return /* reexport */ event_store; });
+__webpack_require__.d(__webpack_exports__, "ruler", function() { return /* reexport */ ruler_store; });
 
 // CONCATENATED MODULE: ./node_modules/@vue/cli-service/lib/commands/build/setPublicPath.js
 // This file is imported into lib/wc client bundles.
@@ -7967,15 +7968,6 @@ function _nonIterableSpread() {
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.to-fixed.js
-var es_number_to_fixed = __webpack_require__("b680");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.find-index.js
-var es_array_find_index = __webpack_require__("c740");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.splice.js
-var es_array_splice = __webpack_require__("a434");
-
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.concat.js
 var es_array_concat = __webpack_require__("99af");
 
@@ -8018,64 +8010,12 @@ var store = function store(name, _state, _actions) {
 
 
 
-
-
-
 /**
  * @description 平台信息
  */
 
 
 var isMac = /macintosh|mac os x/i.test(navigator.userAgent);
-var alt = isMac ? '⌥' : 'Alt';
-var ctrl = isMac ? '⌃' : 'Ctrl';
-var shift = 'Shift';
-var space = '空格';
-var command = '⌘';
-var mouseWheelImg = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTZweCIgaGVpZ2h0PSIxNnB4IiB2aWV3Qm94PSIwIDAgMTYgMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQ3ICg0NTM5NikgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+aWNfbW91c2U8L3RpdGxlPgogICAgPGRlc2M+Q3JlYXRlZCB3aXRoIFNrZXRjaC48L2Rlc2M+CiAgICA8ZGVmcz48L2RlZnM+CiAgICA8ZyBpZD0i55S75p2/IiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0iQXJ0Ym9hcmQtMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTIwMi4wMDAwMDAsIC0zNi4wMDAwMDApIj4KICAgICAgICAgICAgPGcgaWQ9Ikdyb3VwLTMiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwMi4wMDAwMDAsIDM2LjAwMDAwMCkiPgogICAgICAgICAgICAgICAgPGcgaWQ9ImljL21vdXNlL2dyZXk2MDAiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAuNTAwMDAwLCAwLjAwMDAwMCkiPgogICAgICAgICAgICAgICAgICAgIDxnIGlkPSJpY19tb3VzZV8yNHB4Ij4KICAgICAgICAgICAgICAgICAgICAgICAgPHBvbHlnb24gaWQ9IlNoYXBlIiBwb2ludHM9IjAgMCAxNSAwIDE1IDE2IDAgMTYiPjwvcG9seWdvbj4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTguMTI1LDAuNzEzMzMzMzMzIEw4LjEyNSw2IEwxMi41LDYgQzEyLjUsMy4yOCAxMC41OTM3NSwxLjA0IDguMTI1LDAuNzEzMzMzMzMzIFogTTIuNSwxMCBDMi41LDEyLjk0NjY2NjcgNC43Mzc1LDE1LjMzMzMzMzMgNy41LDE1LjMzMzMzMzMgQzEwLjI2MjUsMTUuMzMzMzMzMyAxMi41LDEyLjk0NjY2NjcgMTIuNSwxMCBMMTIuNSw3LjMzMzMzMzMzIEwyLjUsNy4zMzMzMzMzMyBMMi41LDEwIFogTTYuODc1LDAuNzEzMzMzMzMzIEM0LjQwNjI1LDEuMDQgMi41LDMuMjggMi41LDYgTDYuODc1LDYgTDYuODc1LDAuNzEzMzMzMzMzIFoiIGlkPSJTaGFwZSIgZmlsbD0iIzhDOTA5NyIgZmlsbC1ydWxlPSJub256ZXJvIj48L3BhdGg+CiAgICAgICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgPC9nPgogICAgICAgICAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZS0yIiBzdHJva2U9IiNGRkZGRkYiIGZpbGw9IiNGRkE5MDAiIHg9IjYuNSIgeT0iMiIgd2lkdGg9IjMiIGhlaWdodD0iNyIgcng9IjEuNSI+PC9yZWN0PgogICAgICAgICAgICA8L2c+CiAgICAgICAgPC9nPgogICAgPC9nPgo8L3N2Zz4=';
-var mouseLeftImg = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTVweCIgaGVpZ2h0PSIxNnB4IiB2aWV3Qm94PSIwIDAgMTUgMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQ3ICg0NTM5NikgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+aWNfbW91c2VfbGVmdDwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSLnlLvmnb8iIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJBcnRib2FyZC0zIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTYuMDAwMDAwLCAtNDIuMDAwMDAwKSI+CiAgICAgICAgICAgIDxnIGlkPSJpY19tb3VzZV9sZWZ0IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1Ni4wMDAwMDAsIDQyLjAwMDAwMCkiPgogICAgICAgICAgICAgICAgPHBvbHlnb24gaWQ9IlNoYXBlIiBwb2ludHM9IjAgMCAxNSAwIDE1IDE2IDAgMTYiPjwvcG9seWdvbj4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik04LjEyNSwwLjcxMzMzMzMzMyBMOC4xMjUsNiBMMTIuNSw2IEMxMi41LDMuMjggMTAuNTkzNzUsMS4wNCA4LjEyNSwwLjcxMzMzMzMzMyBaIE0yLjUsMTAgQzIuNSwxMi45NDY2NjY3IDQuNzM3NSwxNS4zMzMzMzMzIDcuNSwxNS4zMzMzMzMzIEMxMC4yNjI1LDE1LjMzMzMzMzMgMTIuNSwxMi45NDY2NjY3IDEyLjUsMTAgTDEyLjUsNy4zMzMzMzMzMyBMMi41LDcuMzMzMzMzMzMgTDIuNSwxMCBaIiBpZD0iU2hhcGUiIGZpbGw9IiM5RkEyQTgiIGZpbGwtcnVsZT0ibm9uemVybyI+PC9wYXRoPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTYuODc1LDAuNzEzMzMzMzMzIEM0LjQwNjI1LDEuMDQgMi41LDMuMjggMi41LDYgTDYuODc1LDYgTDYuODc1LDAuNzEzMzMzMzMzIFoiIGlkPSJQYXRoIiBmaWxsPSIjRkZBOTAwIj48L3BhdGg+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==';
-var mouseRightImg = 'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTVweCIgaGVpZ2h0PSIxNnB4IiB2aWV3Qm94PSIwIDAgMTUgMTYiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDQ3ICg0NTM5NikgLSBodHRwOi8vd3d3LmJvaGVtaWFuY29kaW5nLmNvbS9za2V0Y2ggLS0+CiAgICA8dGl0bGU+aWNfbW91c2VfbGVmdDwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxkZWZzPjwvZGVmcz4KICAgIDxnIGlkPSLnlLvmnb8iIHN0cm9rZT0ibm9uZSIgc3Ryb2tlLXdpZHRoPSIxIiBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPgogICAgICAgIDxnIGlkPSJBcnRib2FyZC0zIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtNTYuMDAwMDAwLCAtNDIuMDAwMDAwKSI+CiAgICAgICAgICAgIDxnIGlkPSJpY19tb3VzZV9sZWZ0IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1Ni4wMDAwMDAsIDQyLjAwMDAwMCkiPgogICAgICAgICAgICAgICAgPHBvbHlnb24gaWQ9IlNoYXBlIiBwb2ludHM9IjAgMCAxNSAwIDE1IDE2IDAgMTYiPjwvcG9seWdvbj4KICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik04LjEyNSwwLjcxMzMzMzMzMyBMOC4xMjUsNiBMMTIuNSw2IEMxMi41LDMuMjggMTAuNTkzNzUsMS4wNCA4LjEyNSwwLjcxMzMzMzMzMyBaIE0yLjUsMTAgQzIuNSwxMi45NDY2NjY3IDQuNzM3NSwxNS4zMzMzMzMzIDcuNSwxNS4zMzMzMzMzIEMxMC4yNjI1LDE1LjMzMzMzMzMgMTIuNSwxMi45NDY2NjY3IDEyLjUsMTAgTDEyLjUsNy4zMzMzMzMzMyBMMi41LDcuMzMzMzMzMzMgTDIuNSwxMCBaIiBpZD0iU2hhcGUiIGZpbGw9IiM5RkEyQTgiIGZpbGwtcnVsZT0ibm9uemVybyI+PC9wYXRoPgogICAgICAgICAgICAgICAgPHBhdGggZD0iTTYuODc1LDAuNzEzMzMzMzMzIEM0LjQwNjI1LDEuMDQgMi41LDMuMjggMi41LDYgTDYuODc1LDYgTDYuODc1LDAuNzEzMzMzMzMzIFoiIGlkPSJQYXRoIiBmaWxsPSIjRkZBOTAwIj48L3BhdGg+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==';
-
-function getInitRuler() {
-  return {
-    dragId: "drag-content-".concat(+new Date()),
-    origin: '',
-    xRoomL1: 238,
-    xRoomL2: 238,
-    xRoomR1: 350,
-    yRoom: 60,
-    guideLines: [],
-    // 参考线
-    guideStartX: 0,
-    // 参考线开始移动的位置
-    guideStartY: 0,
-    // 参考线开始移动的位置
-    guideVisible: true,
-    // 参考线可见
-    contentX: 0,
-    // 当前位置x
-    contentY: 0,
-    // 当前位置y
-    contentScrollLeft: 0,
-    // 滚动距离
-    contentScrollTop: 0,
-    // 滚动距离
-    contentMove: false,
-    // 是否按下了 空格 键，启动内容区拖动
-    guideDrag: false,
-    // 点击拖拽参考线
-    dragGuideId: '',
-    // 被移动线的ID
-    stepLength: 50,
-    // 标尺步长
-    size: 18,
-    // 标尺高度，容差
-    zoom: 1,
-    zoomStep: 0.02,
-    dragFlag: '' // 拖动开始标记，可能值x(从水平标尺开始拖动),y(从垂直标尺开始拖动)
-
-  };
-}
 
 function getInitPanelConfig() {
   return {
@@ -8096,52 +8036,6 @@ function getInitPanelConfig() {
   };
 }
 
-var hotKeys = [{
-  name: '清除全部参考线',
-  key: [{
-    value: alt,
-    type: 'text'
-  }, {
-    type: '+'
-  }, {
-    value: 'C',
-    type: 'text'
-  }]
-}, {
-  name: '缩放画布',
-  key: [{
-    value: ctrl,
-    type: 'text'
-  }, {
-    type: '+'
-  }, {
-    value: mouseWheelImg,
-    type: 'img'
-  }]
-}, {
-  name: '移动画布',
-  key: [{
-    value: space,
-    type: 'text'
-  }]
-}, {
-  name: '水平移动画布',
-  key: [{
-    value: shift,
-    type: 'text'
-  }, {
-    type: '+'
-  }, {
-    value: mouseWheelImg,
-    type: 'img'
-  }]
-}, {
-  name: '垂直移动画布',
-  key: [{
-    value: mouseWheelImg,
-    type: 'img'
-  }]
-}];
 var state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
   version: '1.0.3',
   widgetAdded: {},
@@ -8158,76 +8052,15 @@ var state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.obser
   // 是否是mac
   fullscreen: false,
   // 全屏
-  hotKeys: hotKeys,
-  autoAlignGuide: true,
-  // 自动贴靠参考线
-  ruler: getInitRuler()
+  autoAlignGuide: true // 自动贴靠参考线
+
 });
 var actions = {
-  changeMainScene: function changeMainScene(value) {
-    if (value !== state.panelConfig.mainScene) {
-      state.panelConfig.mainScene = value;
-    }
-  },
-
-  /**
-   * @description 恢复默认缩放比例+居中
-   */
-  resetZoom: function resetZoom() {
-    var rulerContent = document.getElementById('ruler-content');
-    var rulerOffsetWidth = rulerContent.offsetWidth - state.ruler.size;
-    var rulerOffsetHeight = rulerContent.offsetHeight;
-    var platformWidth = state.panelConfig.size.width;
-    var platformHeight = state.panelConfig.size.height;
-    state.ruler.zoom = ~~(rulerOffsetWidth / platformWidth * 100) / 100 || state.ruler.zoomStep;
-    var deltaX = (rulerOffsetWidth - platformWidth) * 0.5;
-    var deltaY = (rulerOffsetHeight - platformHeight) * 0.5;
-    state.ruler.contentX = Math.ceil(deltaX);
-    state.ruler.contentY = Math.ceil(deltaY);
-  },
-  zoomIn: function zoomIn() {
-    var step = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;
-
-    if (state.ruler.zoom < 4) {
-      state.ruler.zoom = +((state.ruler.zoom * 100 + step) / 100).toFixed(2);
-    }
-  },
-  zoomOut: function zoomOut() {
-    var step = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;
-
-    if (state.ruler.zoom > state.ruler.zoomStep) {
-      state.ruler.zoom = +((state.ruler.zoom * 100 - step) / 100).toFixed(2);
-    }
-  },
   initPlatformConfig: function initPlatformConfig() {
     state.screenName = '未命名';
     state.screenAvatar = '';
-    state.ruler = getInitRuler();
     state.panelConfig = getInitPanelConfig();
     state.widgetAdded = {};
-  },
-  deleteCurrentGuideLine: function deleteCurrentGuideLine() {
-    var guideIndex = state.ruler.guideLines.findIndex(function (guide) {
-      return guide.id === state.ruler.dragGuideId;
-    });
-    state.ruler.guideLines.splice(guideIndex, 1);
-    state.ruler.dragGuideId = '';
-  },
-  changeGuideLine: function changeGuideLine(site) {
-    var guideIndex = state.ruler.guideLines.findIndex(function (guide) {
-      return guide.id === state.ruler.dragGuideId;
-    });
-    state.ruler.guideLines[guideIndex].site = site;
-  },
-  guideAdd: function guideAdd(site) {
-    var line = state.ruler.guideLines;
-    var type = state.ruler.dragFlag = state.ruler.dragFlag === 'x' ? 'v' : state.ruler.dragFlag === 'y' ? 'h' : state.ruler.dragFlag;
-    line.push({
-      id: "".concat(type, "_").concat(state.ruler.guideLines.length),
-      type: type,
-      site: site
-    });
-    state.ruler.guideLines = line;
   },
   unChooseWidget: function unChooseWidget() {
     state.chooseWidgetState = true;
@@ -8282,10 +8115,13 @@ var es_regexp_exec = __webpack_require__("ac1f");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.timers.js
 var web_timers = __webpack_require__("4795");
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.splice.js
+var es_array_splice = __webpack_require__("a434");
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.values.js
 var es_object_values = __webpack_require__("07ac");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"eb964e46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./node_modules/view-design/src/components/base/notification/notification.vue?vue&type=template&id=8a66d024&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c1d116e4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./node_modules/view-design/src/components/base/notification/notification.vue?vue&type=template&id=8a66d024&
 var notificationvue_type_template_id_8a66d024_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.classes,style:(_vm.wrapStyles)},_vm._l((_vm.notices),function(notice){return _c('Notice',{key:notice.name,attrs:{"prefix-cls":_vm.prefixCls,"styles":notice.styles,"type":notice.type,"content":notice.content,"duration":notice.duration,"render":notice.render,"has-title":notice.hasTitle,"withIcon":notice.withIcon,"closable":notice.closable,"name":notice.name,"transition-name":notice.transitionName,"background":notice.background,"msg-type":notice.msgType,"on-close":notice.onClose}})}),1)}
 var staticRenderFns = []
 
@@ -8295,7 +8131,7 @@ var staticRenderFns = []
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.assign.js
 var es_object_assign = __webpack_require__("cca6");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"eb964e46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./node_modules/view-design/src/components/base/notification/notice.vue?vue&type=template&id=0a77a35c&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c1d116e4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./node_modules/view-design/src/components/base/notification/notice.vue?vue&type=template&id=0a77a35c&
 var noticevue_type_template_id_0a77a35c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"name":_vm.transitionName,"appear":""},on:{"enter":_vm.handleEnter,"leave":_vm.handleLeave}},[_c('div',{class:_vm.classes,style:(_vm.styles)},[(_vm.type === 'notice')?[_c('div',{ref:"content",class:_vm.contentClasses,domProps:{"innerHTML":_vm._s(_vm.content)}}),_c('div',{class:_vm.contentWithIcon},[_c('render-cell',{attrs:{"render":_vm.renderFunc}})],1),(_vm.closable)?_c('a',{class:[_vm.baseClass + '-close'],on:{"click":_vm.close}},[_c('i',{staticClass:"ivu-icon ivu-icon-ios-close"})]):_vm._e()]:_vm._e(),(_vm.type === 'message')?[_c('div',{ref:"content",class:_vm.messageContentClasses},[_c('div',{class:[_vm.baseClass + '-content-text'],domProps:{"innerHTML":_vm._s(_vm.content)}}),_c('div',{class:[_vm.baseClass + '-content-text']},[_c('render-cell',{attrs:{"render":_vm.renderFunc}})],1),(_vm.closable)?_c('a',{class:[_vm.baseClass + '-close'],on:{"click":_vm.close}},[_c('i',{staticClass:"ivu-icon ivu-icon-ios-close"})]):_vm._e()])]:_vm._e()],2)])}
 var noticevue_type_template_id_0a77a35c_staticRenderFns = []
 
@@ -9448,7 +9284,7 @@ function copyText(text, success, error) {
   });
   oCopyBtn.click();
 }
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"eb964e46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components/d-widget-part/index.vue?vue&type=template&id=31a140a6&lang=pug&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c1d116e4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components/d-widget-part/index.vue?vue&type=template&id=31a140a6&lang=pug&
 var d_widget_partvue_type_template_id_31a140a6_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.currentComponent,_vm._g(_vm._b({key:("" + (_vm.config.widget.id) + _vm.updateKey),ref:"widgets",tag:"component",class:_vm.animationClass,attrs:{"id":_vm.config.widget && _vm.config.widget.id},on:{"widget-config-update":function (data) { return _vm.$emit('widget-config-update', data); },"query-start":function($event){_vm.querying = true},"query-end":function($event){_vm.querying = false},"query-failed":function($event){_vm.querying = true},"config-reset":function($event){return _vm.$emit('config-reset')}}},'component',Object.assign({}, {config: _vm.config, readonly: _vm.readonly}, _vm.$attrs),false),_vm.$listeners),[_vm._t("default")],2)}
 var d_widget_partvue_type_template_id_31a140a6_lang_pug_staticRenderFns = []
 
@@ -9906,7 +9742,15 @@ var scene_store_scene = store('scene', scene_store_state, scene_store_actions);
 
 
 var event_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
-  func: {}
+  func: {},
+  contentMove: false,
+  // 是否按下了 空格 键，启动内容区拖动
+  guideDrag: false,
+  // 点击拖拽参考线
+  componentDrag: false,
+  // 组件拖拽
+  kuangMove: false // 框选
+
 });
 var event_store_actions = {
   setEvent: function setEvent(key, func) {
@@ -9915,7 +9759,108 @@ var event_store_actions = {
 };
 var event_store_scene = store('event', event_store_state, event_store_actions);
 /* harmony default export */ var event_store = (event_store_scene);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.number.to-fixed.js
+var es_number_to_fixed = __webpack_require__("b680");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.find-index.js
+var es_array_find_index = __webpack_require__("c740");
+
+// CONCATENATED MODULE: ./src/store/ruler.store.js
+
+
+
+
+/**
+ * @description 平台信息
+ */
+
+
+
+var ruler_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
+  dragId: "drag-content-".concat(+new Date()),
+  origin: '',
+  xRoomL1: 238,
+  xRoomL2: 238,
+  xRoomR1: 350,
+  yRoom: 60,
+  guideLines: [],
+  // 参考线
+  guideStartX: 0,
+  // 参考线开始移动的位置
+  guideStartY: 0,
+  // 参考线开始移动的位置
+  guideVisible: true,
+  // 参考线可见
+  contentX: 0,
+  // 当前位置x
+  contentY: 0,
+  // 当前位置y
+  contentScrollLeft: 0,
+  // 滚动距离
+  contentScrollTop: 0,
+  // 滚动距离
+  dragGuideId: '',
+  // 被移动线的ID
+  stepLength: 50,
+  // 标尺步长
+  size: 18,
+  // 标尺高度，容差
+  zoom: 1,
+  zoomStep: 0.02,
+  dragFlag: '' // 拖动开始标记，可能值x(从水平标尺开始拖动),y(从垂直标尺开始拖动)
+
+});
+var ruler_store_actions = {
+  /**
+   * @description 恢复默认缩放比例+居中
+   */
+  resetZoom: function resetZoom() {
+    var rulerContent = document.getElementById('ruler-content');
+    var rulerOffsetWidth = rulerContent.offsetWidth - ruler_store_state.size;
+    var rulerOffsetHeight = rulerContent.offsetHeight;
+    var platformWidth = platform_store.state.panelConfig.size.width;
+    var platformHeight = platform_store.state.panelConfig.size.height;
+    ruler_store_state.zoom = ~~(rulerOffsetWidth / platformWidth * 100) / 100 || ruler_store_state.zoomStep;
+    var deltaX = (rulerOffsetWidth - platformWidth) * 0.5;
+    var deltaY = (rulerOffsetHeight - platformHeight) * 0.5;
+    ruler_store_state.contentX = Math.ceil(deltaX);
+    ruler_store_state.contentY = Math.ceil(deltaY);
+  },
+  zoomIn: function zoomIn() {
+    var step = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;
+
+    if (ruler_store_state.zoom < 4) {
+      ruler_store_state.zoom = +((ruler_store_state.zoom * 100 + step) / 100).toFixed(2);
+    }
+  },
+  zoomOut: function zoomOut() {
+    var step = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 2;
+
+    if (ruler_store_state.zoom > ruler_store_state.zoomStep) {
+      ruler_store_state.zoom = +((ruler_store_state.zoom * 100 - step) / 100).toFixed(2);
+    }
+  },
+  changeGuideLine: function changeGuideLine(site) {
+    var guideIndex = ruler_store_state.guideLines.findIndex(function (guide) {
+      return guide.id === ruler_store_state.dragGuideId;
+    });
+    ruler_store_state.guideLines[guideIndex].site = site;
+  },
+  guideAdd: function guideAdd(site) {
+    var line = ruler_store_state.guideLines;
+    var type = ruler_store_state.dragFlag = ruler_store_state.dragFlag === 'x' ? 'v' : ruler_store_state.dragFlag === 'y' ? 'h' : ruler_store_state.dragFlag;
+    line.push({
+      id: "".concat(type, "_").concat(ruler_store_state.guideLines.length),
+      type: type,
+      site: site
+    });
+    ruler_store_state.guideLines = line;
+  }
+};
+var ruler = store('ruler', ruler_store_state, ruler_store_actions);
+/* harmony default export */ var ruler_store = (ruler);
 // CONCATENATED MODULE: ./packages/prod-s.js
+
 
 
 
@@ -9927,7 +9872,8 @@ var eslinkV = {
   scene: scene_store,
   instance: instance_store,
   custom: custom_store,
-  event: event_store
+  event: event_store,
+  ruler: ruler_store
 };
 
 if (window !== undefined) {

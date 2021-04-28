@@ -1,5 +1,5 @@
 import { copyText } from '../../utils/index'
-const { platform } = eslinkV.$store
+const { platform, ruler } = eslinkV.$store
 
 function fixZero(n) {
 	if (n > 9) {
@@ -23,6 +23,7 @@ export default {
 	data() {
 		return {
 			platform: platform.state,
+			ruler: ruler.state,
 			deadline: '',
 			shareModal: false,
 			shareType: 'NO',
@@ -84,7 +85,7 @@ export default {
 			})
 			this.shareType = res.screenShareType
 			this.sharePassword = res.screenSharePassword || this.sharePassword
-			this.platform.ruler.guideLines = res.screenGuide
+			this.ruler.guideLines = res.screenGuide
 			if (res.screenShareTime) {
 				this.shareTime = (
 					(new Date(res.screenShareTime).getTime() -

@@ -31,7 +31,7 @@ export default {
 					this.$router.back()
 					this.$api.screenShare.screenShareUpdate({
 						screenId: res.screenId,
-						screenGuide: this.platform.ruler.guideLines,
+						screenGuide: this.ruler.guideLines,
 					})
 				})
 				.catch(() => {
