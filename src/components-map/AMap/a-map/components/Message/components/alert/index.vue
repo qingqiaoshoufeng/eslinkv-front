@@ -29,7 +29,7 @@ class MessageAlert extends Vue {
 	created() {
 		this.id = 'MessageAlert' + Math.ceil(Math.random() * 100)
 		this.innerData = this.data
-		const arr = document.getElementById('kanban').style.cssText.split(';')
+		const arr = document.getElementById('screen').style.cssText.split(';')
 		let s = ''
 		arr.forEach(item => {
 			if (item.indexOf('background') === -1) s += `${item};`

@@ -71,7 +71,7 @@ export default class full extends Vue {
 		height: 0;
 	}
 
-	#kanban {
+	#screen {
 		position: relative;
 		flex-grow: 0;
 		flex-shrink: 0;
