@@ -9284,12 +9284,12 @@ function copyText(text, success, error) {
   });
   oCopyBtn.click();
 }
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c1d116e4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components/d-widget-part/index.vue?vue&type=template&id=31a140a6&lang=pug&
-var d_widget_partvue_type_template_id_31a140a6_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.currentComponent,_vm._g(_vm._b({key:("" + (_vm.config.widget.id) + _vm.updateKey),ref:"widgets",tag:"component",class:_vm.animationClass,attrs:{"id":_vm.config.widget && _vm.config.widget.id},on:{"widget-config-update":function (data) { return _vm.$emit('widget-config-update', data); },"query-start":function($event){_vm.querying = true},"query-end":function($event){_vm.querying = false},"query-failed":function($event){_vm.querying = true},"config-reset":function($event){return _vm.$emit('config-reset')}}},'component',Object.assign({}, {config: _vm.config, readonly: _vm.readonly}, _vm.$attrs),false),_vm.$listeners),[_vm._t("default")],2)}
-var d_widget_partvue_type_template_id_31a140a6_lang_pug_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c1d116e4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components/d-widget-part/index.vue?vue&type=template&id=7d50dbe4&lang=pug&
+var d_widget_partvue_type_template_id_7d50dbe4_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.currentComponent,_vm._g(_vm._b({key:("" + (_vm.config.widget.id) + _vm.updateKey),ref:"widgets",tag:"component",class:_vm.animationClass,attrs:{"id":_vm.config.widget && _vm.config.widget.id},on:{"widget-config-update":function (data) { return _vm.$emit('widget-config-update', data); },"query-start":function($event){_vm.querying = true},"query-end":function($event){_vm.querying = false},"query-failed":function($event){_vm.querying = true},"config-reset":function($event){return _vm.$emit('config-reset')}}},'component',Object.assign({}, {config: _vm.config, readonly: _vm.readonly}, _vm.$attrs),false),_vm.$listeners),[_vm._t("default")],2)}
+var d_widget_partvue_type_template_id_7d50dbe4_lang_pug_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/d-widget-part/index.vue?vue&type=template&id=31a140a6&lang=pug&
+// CONCATENATED MODULE: ./src/components/d-widget-part/index.vue?vue&type=template&id=7d50dbe4&lang=pug&
 
 // CONCATENATED MODULE: ./src/store/custom.store.js
 
@@ -9477,11 +9477,6 @@ var prefix2 = 'eslinkv-';
         this.ready = true;
       }
     }
-
-    this.$el.addEventListener('animationend', this.handleAnimationEnd);
-  },
-  beforeDestroy: function beforeDestroy() {
-    this.$el.removeEventListener('animationend', this.handleAnimationEnd);
   }
 });
 // CONCATENATED MODULE: ./src/components/d-widget-part/index.vue?vue&type=script&lang=js&
@@ -9500,8 +9495,8 @@ var d_widget_partvue_type_style_index_0_lang_scss_ = __webpack_require__("8b45")
 
 var d_widget_part_component = normalizeComponent(
   components_d_widget_partvue_type_script_lang_js_,
-  d_widget_partvue_type_template_id_31a140a6_lang_pug_render,
-  d_widget_partvue_type_template_id_31a140a6_lang_pug_staticRenderFns,
+  d_widget_partvue_type_template_id_7d50dbe4_lang_pug_render,
+  d_widget_partvue_type_template_id_7d50dbe4_lang_pug_staticRenderFns,
   false,
   null,
   null,
@@ -9745,12 +9740,20 @@ var event_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_def
   func: {},
   contentMove: false,
   // 是否按下了 空格 键，启动内容区拖动
+  contentDrag: false,
+  // 是否按下了 空格 键，之后按下了左键
   guideDrag: false,
   // 点击拖拽参考线
+  componentMove: false,
+  // 组件点击开始拖拽
   componentDrag: false,
-  // 组件拖拽
-  kuangMove: false // 框选
-
+  // 组件拖拽中
+  kuangMove: false,
+  // 框选
+  startX: 0,
+  startY: 0,
+  clientX: 0,
+  clientY: 0
 });
 var event_store_actions = {
   setEvent: function setEvent(key, func) {
@@ -9773,6 +9776,7 @@ var es_array_find_index = __webpack_require__("c740");
 /**
  * @description 平台信息
  */
+
 
 
 
@@ -9806,9 +9810,7 @@ var ruler_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_def
   size: 18,
   // 标尺高度，容差
   zoom: 1,
-  zoomStep: 0.02,
-  dragFlag: '' // 拖动开始标记，可能值x(从水平标尺开始拖动),y(从垂直标尺开始拖动)
-
+  zoomStep: 0.02
 });
 var ruler_store_actions = {
   /**
@@ -9840,15 +9842,20 @@ var ruler_store_actions = {
       ruler_store_state.zoom = +((ruler_store_state.zoom * 100 - step) / 100).toFixed(2);
     }
   },
-  changeGuideLine: function changeGuideLine(site) {
+  changeGuideLine: function changeGuideLine(type) {
+    var site = ruler_store_actions.site(type);
     var guideIndex = ruler_store_state.guideLines.findIndex(function (guide) {
       return guide.id === ruler_store_state.dragGuideId;
     });
     ruler_store_state.guideLines[guideIndex].site = site;
   },
-  guideAdd: function guideAdd(site) {
+  site: function site(type) {
+    if (type === 'h') return ~~((event_store.state.clientY - ruler_store_state.size - ruler_store_state.yRoom - ruler_store_state.guideStartY) / ruler_store_state.zoom);
+    return ~~((event_store.state.clientX - ruler_store_state.size - ruler_store_state.xRoomL1 - ruler_store_state.xRoomL2 - ruler_store_state.guideStartX) / ruler_store_state.zoom);
+  },
+  guideAdd: function guideAdd(type) {
+    var site = ruler_store_actions.site(type);
     var line = ruler_store_state.guideLines;
-    var type = ruler_store_state.dragFlag = ruler_store_state.dragFlag === 'x' ? 'v' : ruler_store_state.dragFlag === 'y' ? 'h' : ruler_store_state.dragFlag;
     line.push({
       id: "".concat(type, "_").concat(ruler_store_state.guideLines.length),
       type: type,
