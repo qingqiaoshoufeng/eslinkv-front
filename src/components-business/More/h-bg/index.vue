@@ -433,7 +433,7 @@ div.h-bg-red2 {
 	left: 50%;
 	width: 1768px;
 	height: 584px;
-	margin-top: -292px;
+	margin-top: -335px;
 	margin-left: -884px;
 	pointer-events: none;
 	background-image: url('./img/center.svg');
