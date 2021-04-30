@@ -452,6 +452,14 @@ function source(re) {
  * @param {RegExp | string } re
  * @returns {string}
  */
+function lookahead(re) {
+  return concat('(?=', re, ')');
+}
+
+/**
+ * @param {RegExp | string } re
+ * @returns {string}
+ */
 function optional(re) {
   return concat('(', re, ')?');
 }
@@ -555,9 +563,7 @@ function cpp(hljs) {
       }),
       {
         className: 'meta-string',
-        begin: /<.*?>/,
-        end: /$/,
-        illegal: '\\n'
+        begin: /<.*?>/
       },
       C_LINE_COMMENT_MODE,
       hljs.C_BLOCK_COMMENT_MODE
@@ -572,6 +578,122 @@ function cpp(hljs) {
 
   const FUNCTION_TITLE = optional(NAMESPACE_RE) + hljs.IDENT_RE + '\\s*\\(';
 
+  const COMMON_CPP_HINTS = [
+    'asin',
+    'atan2',
+    'atan',
+    'calloc',
+    'ceil',
+    'cosh',
+    'cos',
+    'exit',
+    'exp',
+    'fabs',
+    'floor',
+    'fmod',
+    'fprintf',
+    'fputs',
+    'free',
+    'frexp',
+    'auto_ptr',
+    'deque',
+    'list',
+    'queue',
+    'stack',
+    'vector',
+    'map',
+    'set',
+    'pair',
+    'bitset',
+    'multiset',
+    'multimap',
+    'unordered_set',
+    'fscanf',
+    'future',
+    'isalnum',
+    'isalpha',
+    'iscntrl',
+    'isdigit',
+    'isgraph',
+    'islower',
+    'isprint',
+    'ispunct',
+    'isspace',
+    'isupper',
+    'isxdigit',
+    'tolower',
+    'toupper',
+    'labs',
+    'ldexp',
+    'log10',
+    'log',
+    'malloc',
+    'realloc',
+    'memchr',
+    'memcmp',
+    'memcpy',
+    'memset',
+    'modf',
+    'pow',
+    'printf',
+    'putchar',
+    'puts',
+    'scanf',
+    'sinh',
+    'sin',
+    'snprintf',
+    'sprintf',
+    'sqrt',
+    'sscanf',
+    'strcat',
+    'strchr',
+    'strcmp',
+    'strcpy',
+    'strcspn',
+    'strlen',
+    'strncat',
+    'strncmp',
+    'strncpy',
+    'strpbrk',
+    'strrchr',
+    'strspn',
+    'strstr',
+    'tanh',
+    'tan',
+    'unordered_map',
+    'unordered_multiset',
+    'unordered_multimap',
+    'priority_queue',
+    'make_pair',
+    'array',
+    'shared_ptr',
+    'abort',
+    'terminate',
+    'abs',
+    'acos',
+    'vfprintf',
+    'vprintf',
+    'vsprintf',
+    'endl',
+    'initializer_list',
+    'unique_ptr',
+    'complex',
+    'imaginary',
+    'std',
+    'string',
+    'wstring',
+    'cin',
+    'cout',
+    'cerr',
+    'clog',
+    'stdin',
+    'stdout',
+    'stderr',
+    'stringstream',
+    'istringstream',
+    'ostringstream'
+  ];
+
   const CPP_KEYWORDS = {
     keyword: 'int float while private char char8_t char16_t char32_t catch import module export virtual operator sizeof ' +
       'dynamic_cast|10 typedef const_cast|10 const for static_cast|10 union namespace ' +
@@ -585,19 +707,27 @@ function cpp(hljs) {
       'atomic_uchar atomic_short atomic_ushort atomic_int atomic_uint atomic_long atomic_ulong atomic_llong ' +
       'atomic_ullong new throw return ' +
       'and and_eq bitand bitor compl not not_eq or or_eq xor xor_eq',
-    built_in: 'std string wstring cin cout cerr clog stdin stdout stderr stringstream istringstream ostringstream ' +
-      'auto_ptr deque list queue stack vector map set pair bitset multiset multimap unordered_set ' +
-      'unordered_map unordered_multiset unordered_multimap priority_queue make_pair array shared_ptr abort terminate abs acos ' +
-      'asin atan2 atan calloc ceil cosh cos exit exp fabs floor fmod fprintf fputs free frexp ' +
-      'fscanf future isalnum isalpha iscntrl isdigit isgraph islower isprint ispunct isspace isupper ' +
-      'isxdigit tolower toupper labs ldexp log10 log malloc realloc memchr memcmp memcpy memset modf pow ' +
-      'printf putchar puts scanf sinh sin snprintf sprintf sqrt sscanf strcat strchr strcmp ' +
-      'strcpy strcspn strlen strncat strncmp strncpy strpbrk strrchr strspn strstr tanh tan ' +
-      'vfprintf vprintf vsprintf endl initializer_list unique_ptr _Bool complex _Complex imaginary _Imaginary',
+    built_in: '_Bool _Complex _Imaginary',
+    _relevance_hints: COMMON_CPP_HINTS,
     literal: 'true false nullptr NULL'
   };
 
+  const FUNCTION_DISPATCH = {
+    className: "function.dispatch",
+    relevance: 0,
+    keywords: CPP_KEYWORDS,
+    begin: concat(
+      /\b/,
+      /(?!decltype)/,
+      /(?!if)/,
+      /(?!for)/,
+      /(?!while)/,
+      hljs.IDENT_RE,
+      lookahead(/\s*\(/))
+  };
+
   const EXPRESSION_CONTAINS = [
+    FUNCTION_DISPATCH,
     PREPROCESSOR,
     CPP_PRIMITIVE_TYPES,
     C_LINE_COMMENT_MODE,
@@ -605,6 +735,7 @@ function cpp(hljs) {
     NUMBERS,
     STRINGS
   ];
+
 
   const EXPRESSION_CONTEXT = {
     // This mode covers expression context where we can't expect a function
@@ -657,6 +788,21 @@ function cpp(hljs) {
         contains: [ TITLE_MODE ],
         relevance: 0
       },
+      // needed because we do not have look-behind on the below rule
+      // to prevent it from grabbing the final : in a :: pair
+      {
+        begin: /::/,
+        relevance: 0
+      },
+      // initializers
+      {
+        begin: /:/,
+        endsWithParent: true,
+        contains: [
+          STRINGS,
+          NUMBERS
+        ]
+      },
       {
         className: 'params',
         begin: /\(/,
@@ -706,9 +852,13 @@ function cpp(hljs) {
     ],
     keywords: CPP_KEYWORDS,
     illegal: '</',
+    classNameAliases: {
+      "function.dispatch": "built_in"
+    },
     contains: [].concat(
       EXPRESSION_CONTEXT,
       FUNCTION_DECLARATION,
+      FUNCTION_DISPATCH,
       EXPRESSION_CONTAINS,
       [
         PREPROCESSOR,
@@ -2528,6 +2678,7 @@ var deepFreezeEs6 = deepFreeze;
 var _default = deepFreeze;
 deepFreezeEs6.default = _default;
 
+/** @implements CallbackResponse */
 class Response {
   /**
    * @param {CompiledMode} mode
@@ -2537,10 +2688,11 @@ class Response {
     if (mode.data === undefined) mode.data = {};
 
     this.data = mode.data;
+    this.isMatchIgnored = false;
   }
 
   ignoreMatch() {
-    this.ignore = true;
+    this.isMatchIgnored = true;
   }
 }
 
@@ -2887,6 +3039,15 @@ function startsWith(re, lexeme) {
   return match && match.index === 0;
 }
 
+// BACKREF_RE matches an open parenthesis or backreference. To avoid
+// an incorrect parse, it additionally matches the following:
+// - [...] elements, where the meaning of parentheses and escapes change
+// - other escape sequences, so we do not misparse escape sequences as
+//   interesting elements
+// - non-matching or lookahead parentheses, which do not capture. These
+//   follow the '(' with a '?'.
+const BACKREF_RE = /\[(?:[^\\\]]|\\.)*\]|\(\??|\\([1-9][0-9]*)|\\./;
+
 // join logically computes regexps.join(separator), but fixes the
 // backreferences so they continue to match.
 // it also places each individual regular expression into it's own
@@ -2898,45 +3059,34 @@ function startsWith(re, lexeme) {
  * @returns {string}
  */
 function join(regexps, separator = "|") {
-  // backreferenceRe matches an open parenthesis or backreference. To avoid
-  // an incorrect parse, it additionally matches the following:
-  // - [...] elements, where the meaning of parentheses and escapes change
-  // - other escape sequences, so we do not misparse escape sequences as
-  //   interesting elements
-  // - non-matching or lookahead parentheses, which do not capture. These
-  //   follow the '(' with a '?'.
-  const backreferenceRe = /\[(?:[^\\\]]|\\.)*\]|\(\??|\\([1-9][0-9]*)|\\./;
   let numCaptures = 0;
-  let ret = '';
-  for (let i = 0; i < regexps.length; i++) {
+
+  return regexps.map((regex) => {
     numCaptures += 1;
     const offset = numCaptures;
-    let re = source(regexps[i]);
-    if (i > 0) {
-      ret += separator;
-    }
-    ret += "(";
+    let re = source(regex);
+    let out = '';
+
     while (re.length > 0) {
-      const match = backreferenceRe.exec(re);
-      if (match == null) {
-        ret += re;
+      const match = BACKREF_RE.exec(re);
+      if (!match) {
+        out += re;
         break;
       }
-      ret += re.substring(0, match.index);
+      out += re.substring(0, match.index);
       re = re.substring(match.index + match[0].length);
       if (match[0][0] === '\\' && match[1]) {
         // Adjust the backreference.
-        ret += '\\' + String(Number(match[1]) + offset);
+        out += '\\' + String(Number(match[1]) + offset);
       } else {
-        ret += match[0];
+        out += match[0];
         if (match[0] === '(') {
           numCaptures++;
         }
       }
     }
-    ret += ")";
-  }
-  return ret;
+    return out;
+  }).map(re => `(${re})`).join(separator);
 }
 
 // Common regexps
@@ -3587,7 +3737,7 @@ function compileLanguage(language, { plugins }) {
    */
   function compileMode(mode, parent) {
     const cmode = /** @type CompiledMode */ (mode);
-    if (mode.compiled) return cmode;
+    if (mode.isCompiled) return cmode;
 
     [
       // do this early so compiler extensions generally don't have to worry about
@@ -3609,7 +3759,7 @@ function compileLanguage(language, { plugins }) {
       compileRelevance
     ].forEach(ext => ext(mode, parent));
 
-    mode.compiled = true;
+    mode.isCompiled = true;
 
     let keywordPattern = null;
     if (typeof mode.keywords === "object") {
@@ -3728,7 +3878,7 @@ function expandOrCloneMode(mode) {
   return mode;
 }
 
-var version = "10.6.0";
+var version = "10.7.1";
 
 // @ts-nocheck
 
@@ -3802,8 +3952,8 @@ function BuildVuePlugin(hljs) {
 
 /** @type {HLJSPlugin} */
 const mergeHTMLPlugin = {
-  "after:highlightBlock": ({ block, result, text }) => {
-    const originalStream = nodeStream(block);
+  "after:highlightElement": ({ el, result, text }) => {
+    const originalStream = nodeStream(el);
     if (!originalStream.length) return;
 
     const resultNode = document.createElement('div');
@@ -4065,8 +4215,14 @@ const HLJS = function(hljs) {
   /**
    * Core highlighting function.
    *
-   * @param {string} languageName - the language to use for highlighting
-   * @param {string} code - the code to highlight
+   * OLD API
+   * highlight(lang, code, ignoreIllegals, continuation)
+   *
+   * NEW API
+   * highlight(code, {lang, ignoreIllegals})
+   *
+   * @param {string} codeOrlanguageName - the language to use for highlighting
+   * @param {string | HighlightOptions} optionsOrCode - the code to highlight
    * @param {boolean} [ignoreIllegals] - whether to ignore illegal matches, default is to bail
    * @param {CompiledMode} [continuation] - current continuation mode, if any
    *
@@ -4078,7 +4234,24 @@ const HLJS = function(hljs) {
    * @property {CompiledMode} top - top of the current mode stack
    * @property {boolean} illegal - indicates whether any illegal matches were found
   */
-  function highlight(languageName, code, ignoreIllegals, continuation) {
+  function highlight(codeOrlanguageName, optionsOrCode, ignoreIllegals, continuation) {
+    let code = "";
+    let languageName = "";
+    if (typeof optionsOrCode === "object") {
+      code = codeOrlanguageName;
+      ignoreIllegals = optionsOrCode.ignoreIllegals;
+      languageName = optionsOrCode.language;
+      // continuation not supported at all via the new API
+      // eslint-disable-next-line no-undefined
+      continuation = undefined;
+    } else {
+      // old API
+      deprecated("10.7.0", "highlight(lang, code, ...args) has been deprecated.");
+      deprecated("10.7.0", "Please use highlight(code, options) instead.\nhttps://github.com/highlightjs/highlight.js/issues/2277");
+      languageName = codeOrlanguageName;
+      code = optionsOrCode;
+    }
+
     /** @type {BeforeHighlightContext} */
     const context = {
       code,
@@ -4105,14 +4278,12 @@ const HLJS = function(hljs) {
    * private highlight that's used internally and does not fire callbacks
    *
    * @param {string} languageName - the language to use for highlighting
-   * @param {string} code - the code to highlight
-   * @param {boolean} [ignoreIllegals] - whether to ignore illegal matches, default is to bail
-   * @param {CompiledMode} [continuation] - current continuation mode, if any
+   * @param {string} codeToHighlight - the code to highlight
+   * @param {boolean?} [ignoreIllegals] - whether to ignore illegal matches, default is to bail
+   * @param {CompiledMode?} [continuation] - current continuation mode, if any
    * @returns {HighlightResult} - result of the highlight operation
   */
-  function _highlight(languageName, code, ignoreIllegals, continuation) {
-    const codeToHighlight = code;
-
+  function _highlight(languageName, codeToHighlight, ignoreIllegals, continuation) {
     /**
      * Return keyword data if a match is a keyword
      * @param {CompiledMode} mode - current mode
@@ -4144,8 +4315,14 @@ const HLJS = function(hljs) {
           buf = "";
 
           relevance += keywordRelevance;
-          const cssClass = language.classNameAliases[kind] || kind;
-          emitter.addKeyword(match[0], cssClass);
+          if (kind.startsWith("_")) {
+            // _ implied for relevance only, do not highlight
+            // by applying a class name
+            buf += match[0];
+          } else {
+            const cssClass = language.classNameAliases[kind] || kind;
+            emitter.addKeyword(match[0], cssClass);
+          }
         } else {
           buf += match[0];
         }
@@ -4215,7 +4392,7 @@ const HLJS = function(hljs) {
         if (mode["on:end"]) {
           const resp = new Response(mode);
           mode["on:end"](match, resp);
-          if (resp.ignore) matched = false;
+          if (resp.isMatchIgnored) matched = false;
         }
 
         if (matched) {
@@ -4267,7 +4444,7 @@ const HLJS = function(hljs) {
       for (const cb of beforeCallbacks) {
         if (!cb) continue;
         cb(match, resp);
-        if (resp.ignore) return doIgnore(lexeme);
+        if (resp.isMatchIgnored) return doIgnore(lexeme);
       }
 
       if (newMode && newMode.endSameAsBegin) {
@@ -4631,12 +4808,12 @@ const HLJS = function(hljs) {
 
   /** @type {HLJSPlugin} */
   const brPlugin = {
-    "before:highlightBlock": ({ block }) => {
+    "before:highlightElement": ({ el }) => {
       if (options.useBR) {
-        block.innerHTML = block.innerHTML.replace(/\n/g, '').replace(/<br[ /]*>/g, '\n');
+        el.innerHTML = el.innerHTML.replace(/\n/g, '').replace(/<br[ /]*>/g, '\n');
       }
     },
-    "after:highlightBlock": ({ result }) => {
+    "after:highlightElement": ({ result }) => {
       if (options.useBR) {
         result.value = result.value.replace(/\n/g, "<br>");
       }
@@ -4646,7 +4823,7 @@ const HLJS = function(hljs) {
   const TAB_REPLACE_RE = /^(<[^>]+>|\t)+/gm;
   /** @type {HLJSPlugin} */
   const tabReplacePlugin = {
-    "after:highlightBlock": ({ result }) => {
+    "after:highlightElement": ({ result }) => {
       if (options.tabReplace) {
         result.value = result.value.replace(TAB_REPLACE_RE, (m) =>
           m.replace(/\t/g, options.tabReplace)
@@ -4661,21 +4838,23 @@ const HLJS = function(hljs) {
    *
    * @param {HighlightedHTMLElement} element - the HTML element to highlight
   */
-  function highlightBlock(element) {
+  function highlightElement(element) {
     /** @type HTMLElement */
     let node = null;
     const language = blockLanguage(element);
 
     if (shouldNotHighlight(language)) return;
 
-    fire("before:highlightBlock",
-      { block: element, language: language });
+    // support for v10 API
+    fire("before:highlightElement",
+      { el: element, language: language });
 
     node = element;
     const text = node.textContent;
-    const result = language ? highlight(language, text, true) : highlightAuto(text);
+    const result = language ? highlight(text, { language, ignoreIllegals: true }) : highlightAuto(text);
 
-    fire("after:highlightBlock", { block: element, result, text });
+    // support for v10 API
+    fire("after:highlightElement", { el: element, result, text });
 
     element.innerHTML = result.value;
     updateClassName(element, language, result.language);
@@ -4721,7 +4900,7 @@ const HLJS = function(hljs) {
     deprecated("10.6.0", "initHighlighting() is deprecated.  Use highlightAll() instead.");
 
     const blocks = document.querySelectorAll('pre code');
-    blocks.forEach(highlightBlock);
+    blocks.forEach(highlightElement);
   };
 
   // Higlights all when DOMContentLoaded fires
@@ -4732,21 +4911,22 @@ const HLJS = function(hljs) {
   }
 
   let wantsHighlight = false;
-  let domLoaded = false;
 
   /**
    * auto-highlights all pre>code elements on the page
    */
   function highlightAll() {
     // if we are called too early in the loading process
-    if (!domLoaded) { wantsHighlight = true; return; }
+    if (document.readyState === "loading") {
+      wantsHighlight = true;
+      return;
+    }
 
     const blocks = document.querySelectorAll('pre code');
-    blocks.forEach(highlightBlock);
+    blocks.forEach(highlightElement);
   }
 
   function boot() {
-    domLoaded = true;
     // if a highlight was requested before DOM was loaded, do now
     if (wantsHighlight) highlightAll();
   }
@@ -4783,6 +4963,20 @@ const HLJS = function(hljs) {
 
     if (lang.aliases) {
       registerAliases(lang.aliases, { languageName });
+    }
+  }
+
+  /**
+   * Remove a language grammar module
+   *
+   * @param {string} languageName
+   */
+  function unregisterLanguage(languageName) {
+    delete languages[languageName];
+    for (const alias of Object.keys(aliases)) {
+      if (aliases[alias] === languageName) {
+        delete aliases[alias];
+      }
     }
   }
 
@@ -4831,7 +5025,7 @@ const HLJS = function(hljs) {
     if (typeof aliasList === 'string') {
       aliasList = [aliasList];
     }
-    aliasList.forEach(alias => { aliases[alias] = languageName; });
+    aliasList.forEach(alias => { aliases[alias.toLowerCase()] = languageName; });
   }
 
   /**
@@ -4844,9 +5038,33 @@ const HLJS = function(hljs) {
   }
 
   /**
+   * Upgrades the old highlightBlock plugins to the new
+   * highlightElement API
+   * @param {HLJSPlugin} plugin
+   */
+  function upgradePluginAPI(plugin) {
+    // TODO: remove with v12
+    if (plugin["before:highlightBlock"] && !plugin["before:highlightElement"]) {
+      plugin["before:highlightElement"] = (data) => {
+        plugin["before:highlightBlock"](
+          Object.assign({ block: data.el }, data)
+        );
+      };
+    }
+    if (plugin["after:highlightBlock"] && !plugin["after:highlightElement"]) {
+      plugin["after:highlightElement"] = (data) => {
+        plugin["after:highlightBlock"](
+          Object.assign({ block: data.el }, data)
+        );
+      };
+    }
+  }
+
+  /**
    * @param {HLJSPlugin} plugin
    */
   function addPlugin(plugin) {
+    upgradePluginAPI(plugin);
     plugins.push(plugin);
   }
 
@@ -4877,17 +5095,31 @@ const HLJS = function(hljs) {
     return fixMarkup(arg);
   }
 
+  /**
+   *
+   * @param {HighlightedHTMLElement} el
+   */
+  function deprecateHighlightBlock(el) {
+    deprecated("10.7.0", "highlightBlock will be removed entirely in v12.0");
+    deprecated("10.7.0", "Please use highlightElement now.");
+
+    return highlightElement(el);
+  }
+
   /* Interface definition */
   Object.assign(hljs, {
     highlight,
     highlightAuto,
     highlightAll,
     fixMarkup: deprecateFixMarkup,
-    highlightBlock,
+    highlightElement,
+    // TODO: Remove with v12 API
+    highlightBlock: deprecateHighlightBlock,
     configure,
     initHighlighting,
     initHighlightingOnLoad,
     registerLanguage,
+    unregisterLanguage,
     listLanguages,
     getLanguage,
     registerAliases,
@@ -5800,7 +6032,7 @@ function latex(hljs) {
 
   return {
     name: 'LaTeX',
-    aliases: ['TeX'],
+    aliases: ['tex'],
     contains: [
       ...VERBATIM,
       ...EVERYTHING_BUT_VERBATIM
@@ -6183,6 +6415,7 @@ const ATTRIBUTES = [
   'font-language-override',
   'font-size',
   'font-size-adjust',
+  'font-smoothing',
   'font-stretch',
   'font-style',
   'font-variant',
@@ -6778,7 +7011,6 @@ function smali(hljs) {
   ];
   return {
     name: 'Smali',
-    aliases: [ 'smali' ],
     contains: [
       {
         className: 'string',
@@ -7676,9 +7908,7 @@ function c(hljs) {
       }),
       {
         className: 'meta-string',
-        begin: /<.*?>/,
-        end: /$/,
-        illegal: '\\n'
+        begin: /<.*?>/
       },
       C_LINE_COMMENT_MODE,
       hljs.C_BLOCK_COMMENT_MODE
@@ -7817,7 +8047,6 @@ function c(hljs) {
   return {
     name: "C",
     aliases: [
-      'c',
       'h'
     ],
     keywords: CPP_KEYWORDS,
@@ -10994,7 +11223,17 @@ function php(hljs) {
       HEREDOC
     ]
   };
-  const NUMBER = {variants: [hljs.BINARY_NUMBER_MODE, hljs.C_NUMBER_MODE]};
+  const NUMBER = {
+    className: 'number',
+    variants: [
+      { begin: `\\b0b[01]+(?:_[01]+)*\\b` }, // Binary w/ underscore support
+      { begin: `\\b0o[0-7]+(?:_[0-7]+)*\\b` }, // Octals w/ underscore support
+      { begin: `\\b0x[\\da-f]+(?:_[\\da-f]+)*\\b` }, // Hex w/ underscore support
+      // Decimals w/ underscore support, with optional fragments and scientific exponent (e) suffix.
+      { begin: `(?:\\b\\d+(?:_\\d+)*(\\.(?:\\d+(?:_\\d+)*))?|\\B\\.\\d+)(?:e[+-]?\\d+)?` }
+    ],
+    relevance: 0
+  };
   const KEYWORDS = {
     keyword:
     // Magic constants:
@@ -11009,25 +11248,25 @@ function php(hljs) {
     // <https://www.php.net/manual/en/reserved.php>
     // <https://www.php.net/manual/en/language.types.type-juggling.php>
     'array abstract and as binary bool boolean break callable case catch class clone const continue declare ' +
-    'default do double else elseif empty enddeclare endfor endforeach endif endswitch endwhile eval extends ' +
+    'default do double else elseif empty enddeclare endfor endforeach endif endswitch endwhile enum eval extends ' +
     'final finally float for foreach from global goto if implements instanceof insteadof int integer interface ' +
-    'isset iterable list match|0 new object or private protected public real return string switch throw trait ' +
+    'isset iterable list match|0 mixed new object or private protected public real return string switch throw trait ' +
     'try unset use var void while xor yield',
     literal: 'false null true',
     built_in:
     // Standard PHP library:
     // <https://www.php.net/manual/en/book.spl.php>
     'Error|0 ' + // error is too common a name esp since PHP is case in-sensitive
-    'AppendIterator ArgumentCountError ArithmeticError ArrayIterator ArrayObject AssertionError BadFunctionCallException BadMethodCallException CachingIterator CallbackFilterIterator CompileError Countable DirectoryIterator DivisionByZeroError DomainException EmptyIterator ErrorException Exception FilesystemIterator FilterIterator GlobIterator InfiniteIterator InvalidArgumentException IteratorIterator LengthException LimitIterator LogicException MultipleIterator NoRewindIterator OutOfBoundsException OutOfRangeException OuterIterator OverflowException ParentIterator ParseError RangeException RecursiveArrayIterator RecursiveCachingIterator RecursiveCallbackFilterIterator RecursiveDirectoryIterator RecursiveFilterIterator RecursiveIterator RecursiveIteratorIterator RecursiveRegexIterator RecursiveTreeIterator RegexIterator RuntimeException SeekableIterator SplDoublyLinkedList SplFileInfo SplFileObject SplFixedArray SplHeap SplMaxHeap SplMinHeap SplObjectStorage SplObserver SplObserver SplPriorityQueue SplQueue SplStack SplSubject SplSubject SplTempFileObject TypeError UnderflowException UnexpectedValueException ' +
+    'AppendIterator ArgumentCountError ArithmeticError ArrayIterator ArrayObject AssertionError BadFunctionCallException BadMethodCallException CachingIterator CallbackFilterIterator CompileError Countable DirectoryIterator DivisionByZeroError DomainException EmptyIterator ErrorException Exception FilesystemIterator FilterIterator GlobIterator InfiniteIterator InvalidArgumentException IteratorIterator LengthException LimitIterator LogicException MultipleIterator NoRewindIterator OutOfBoundsException OutOfRangeException OuterIterator OverflowException ParentIterator ParseError RangeException RecursiveArrayIterator RecursiveCachingIterator RecursiveCallbackFilterIterator RecursiveDirectoryIterator RecursiveFilterIterator RecursiveIterator RecursiveIteratorIterator RecursiveRegexIterator RecursiveTreeIterator RegexIterator RuntimeException SeekableIterator SplDoublyLinkedList SplFileInfo SplFileObject SplFixedArray SplHeap SplMaxHeap SplMinHeap SplObjectStorage SplObserver SplObserver SplPriorityQueue SplQueue SplStack SplSubject SplSubject SplTempFileObject TypeError UnderflowException UnexpectedValueException UnhandledMatchError ' +
     // Reserved interfaces:
     // <https://www.php.net/manual/en/reserved.interfaces.php>
-    'ArrayAccess Closure Generator Iterator IteratorAggregate Serializable Throwable Traversable WeakReference ' +
+    'ArrayAccess Closure Generator Iterator IteratorAggregate Serializable Stringable Throwable Traversable WeakReference WeakMap ' +
     // Reserved classes:
     // <https://www.php.net/manual/en/reserved.classes.php>
     'Directory __PHP_Incomplete_Class parent php_user_filter self static stdClass'
   };
   return {
-    aliases: ['php', 'php3', 'php4', 'php5', 'php6', 'php7', 'php8'],
+    aliases: ['php3', 'php4', 'php5', 'php6', 'php7', 'php8'],
     case_insensitive: true,
     keywords: KEYWORDS,
     contains: [
@@ -11068,9 +11307,13 @@ function php(hljs) {
         beginKeywords: 'fn function', end: /[;{]/, excludeEnd: true,
         illegal: '[$%\\[]',
         contains: [
+          {
+            beginKeywords: 'use',
+          },
           hljs.UNDERSCORE_TITLE_MODE,
           {
-            begin: '=>' // No markup, just a relevance booster
+            begin: '=>', // No markup, just a relevance booster
+            endsParent: true
           },
           {
             className: 'params',
@@ -11090,11 +11333,13 @@ function php(hljs) {
       },
       {
         className: 'class',
-        beginKeywords: 'class interface',
+        variants: [
+          { beginKeywords: "enum", illegal: /[($"]/ },
+          { beginKeywords: "class interface trait", illegal: /[:($"]/ }
+        ],
         relevance: 0,
         end: /\{/,
         excludeEnd: true,
-        illegal: /[:($"]/,
         contains: [
           {beginKeywords: 'extends implements'},
           hljs.UNDERSCORE_TITLE_MODE
@@ -11535,6 +11780,8 @@ const keywords = [
   // will result in additional modes being created to scan for those keywords to
   // avoid conflicts with other rules
   'associatedtype',
+  'async',
+  'await',
   /as\?/, // operator
   /as!/, // operator
   'as', // operator
@@ -14015,7 +14262,10 @@ const TYPES = [
   "Array",
   "Uint8Array",
   "Uint8ClampedArray",
-  "ArrayBuffer"
+  "ArrayBuffer",
+  "BigInt64Array",
+  "BigUint64Array",
+  "BigInt"
 ];
 
 const ERROR_TYPES = [
@@ -14570,7 +14820,7 @@ function yaml(hljs) {
   return {
     name: 'YAML',
     case_insensitive: true,
-    aliases: ['yml', 'YAML'],
+    aliases: [ 'yml' ],
     contains: MODES
   };
 }
@@ -14771,7 +15021,6 @@ function arcade(hljs) {
 
   return {
     name: 'ArcGIS Arcade',
-    aliases: ['arcade'],
     keywords: KEYWORDS,
     contains: [
       hljs.APOS_STRING_MODE,
@@ -16428,10 +16677,6 @@ function sas(hljs) {
 
   return {
     name: 'SAS',
-    aliases: [
-      'sas',
-      'SAS'
-    ],
     case_insensitive: true, // SAS is case-insensitive
     keywords: {
       literal:
@@ -18422,7 +18667,10 @@ const TYPES = [
   "Array",
   "Uint8Array",
   "Uint8ClampedArray",
-  "ArrayBuffer"
+  "ArrayBuffer",
+  "BigInt64Array",
+  "BigUint64Array",
+  "BigInt"
 ];
 
 const ERROR_TYPES = [
@@ -19817,7 +20065,6 @@ function clean(hljs) {
   return {
     name: 'Clean',
     aliases: [
-      'clean',
       'icl',
       'dcl'
     ],
@@ -21160,6 +21407,7 @@ const ATTRIBUTES = [
   'font-language-override',
   'font-size',
   'font-size-adjust',
+  'font-smoothing',
   'font-stretch',
   'font-style',
   'font-variant',
@@ -25108,7 +25356,6 @@ function cos(hljs) {
     name: 'Caché Object Script',
     case_insensitive: true,
     aliases: [
-      "cos",
       "cls"
     ],
     keywords: COS_KEYWORDS,
@@ -25427,7 +25674,7 @@ function ruby(hljs) {
       // def method_name(
       // def method_name;
       // def method_name (end of line)
-      begin: concat(/def\s*/, lookahead(RUBY_METHOD_RE + "\\s*(\\(|;|$)")),
+      begin: concat(/def\s+/, lookahead(RUBY_METHOD_RE + "\\s*(\\(|;|$)")),
       relevance: 0, // relevance comes from kewords
       keywords: "def",
       end: '$|;',
@@ -25699,7 +25946,6 @@ Category: system
 function nim(hljs) {
   return {
     name: 'Nim',
-    aliases: [ 'nim' ],
     keywords: {
       keyword:
         'addr and as asm bind block break case cast const continue converter ' +
@@ -27689,7 +27935,8 @@ function xml(hljs) {
           },
           {
             begin: />/,
-            relevance: 0
+            relevance: 0,
+            endsParent: true
           }
         ]
       }
@@ -27956,6 +28203,14 @@ function source(re) {
  * @param {RegExp | string } re
  * @returns {string}
  */
+function lookahead(re) {
+  return concat('(?=', re, ')');
+}
+
+/**
+ * @param {RegExp | string } re
+ * @returns {string}
+ */
 function optional(re) {
   return concat('(', re, ')?');
 }
@@ -28059,9 +28314,7 @@ function cPlusPlus(hljs) {
       }),
       {
         className: 'meta-string',
-        begin: /<.*?>/,
-        end: /$/,
-        illegal: '\\n'
+        begin: /<.*?>/
       },
       C_LINE_COMMENT_MODE,
       hljs.C_BLOCK_COMMENT_MODE
@@ -28076,6 +28329,122 @@ function cPlusPlus(hljs) {
 
   const FUNCTION_TITLE = optional(NAMESPACE_RE) + hljs.IDENT_RE + '\\s*\\(';
 
+  const COMMON_CPP_HINTS = [
+    'asin',
+    'atan2',
+    'atan',
+    'calloc',
+    'ceil',
+    'cosh',
+    'cos',
+    'exit',
+    'exp',
+    'fabs',
+    'floor',
+    'fmod',
+    'fprintf',
+    'fputs',
+    'free',
+    'frexp',
+    'auto_ptr',
+    'deque',
+    'list',
+    'queue',
+    'stack',
+    'vector',
+    'map',
+    'set',
+    'pair',
+    'bitset',
+    'multiset',
+    'multimap',
+    'unordered_set',
+    'fscanf',
+    'future',
+    'isalnum',
+    'isalpha',
+    'iscntrl',
+    'isdigit',
+    'isgraph',
+    'islower',
+    'isprint',
+    'ispunct',
+    'isspace',
+    'isupper',
+    'isxdigit',
+    'tolower',
+    'toupper',
+    'labs',
+    'ldexp',
+    'log10',
+    'log',
+    'malloc',
+    'realloc',
+    'memchr',
+    'memcmp',
+    'memcpy',
+    'memset',
+    'modf',
+    'pow',
+    'printf',
+    'putchar',
+    'puts',
+    'scanf',
+    'sinh',
+    'sin',
+    'snprintf',
+    'sprintf',
+    'sqrt',
+    'sscanf',
+    'strcat',
+    'strchr',
+    'strcmp',
+    'strcpy',
+    'strcspn',
+    'strlen',
+    'strncat',
+    'strncmp',
+    'strncpy',
+    'strpbrk',
+    'strrchr',
+    'strspn',
+    'strstr',
+    'tanh',
+    'tan',
+    'unordered_map',
+    'unordered_multiset',
+    'unordered_multimap',
+    'priority_queue',
+    'make_pair',
+    'array',
+    'shared_ptr',
+    'abort',
+    'terminate',
+    'abs',
+    'acos',
+    'vfprintf',
+    'vprintf',
+    'vsprintf',
+    'endl',
+    'initializer_list',
+    'unique_ptr',
+    'complex',
+    'imaginary',
+    'std',
+    'string',
+    'wstring',
+    'cin',
+    'cout',
+    'cerr',
+    'clog',
+    'stdin',
+    'stdout',
+    'stderr',
+    'stringstream',
+    'istringstream',
+    'ostringstream'
+  ];
+
   const CPP_KEYWORDS = {
     keyword: 'int float while private char char8_t char16_t char32_t catch import module export virtual operator sizeof ' +
       'dynamic_cast|10 typedef const_cast|10 const for static_cast|10 union namespace ' +
@@ -28089,19 +28458,27 @@ function cPlusPlus(hljs) {
       'atomic_uchar atomic_short atomic_ushort atomic_int atomic_uint atomic_long atomic_ulong atomic_llong ' +
       'atomic_ullong new throw return ' +
       'and and_eq bitand bitor compl not not_eq or or_eq xor xor_eq',
-    built_in: 'std string wstring cin cout cerr clog stdin stdout stderr stringstream istringstream ostringstream ' +
-      'auto_ptr deque list queue stack vector map set pair bitset multiset multimap unordered_set ' +
-      'unordered_map unordered_multiset unordered_multimap priority_queue make_pair array shared_ptr abort terminate abs acos ' +
-      'asin atan2 atan calloc ceil cosh cos exit exp fabs floor fmod fprintf fputs free frexp ' +
-      'fscanf future isalnum isalpha iscntrl isdigit isgraph islower isprint ispunct isspace isupper ' +
-      'isxdigit tolower toupper labs ldexp log10 log malloc realloc memchr memcmp memcpy memset modf pow ' +
-      'printf putchar puts scanf sinh sin snprintf sprintf sqrt sscanf strcat strchr strcmp ' +
-      'strcpy strcspn strlen strncat strncmp strncpy strpbrk strrchr strspn strstr tanh tan ' +
-      'vfprintf vprintf vsprintf endl initializer_list unique_ptr _Bool complex _Complex imaginary _Imaginary',
+    built_in: '_Bool _Complex _Imaginary',
+    _relevance_hints: COMMON_CPP_HINTS,
     literal: 'true false nullptr NULL'
   };
 
+  const FUNCTION_DISPATCH = {
+    className: "function.dispatch",
+    relevance: 0,
+    keywords: CPP_KEYWORDS,
+    begin: concat(
+      /\b/,
+      /(?!decltype)/,
+      /(?!if)/,
+      /(?!for)/,
+      /(?!while)/,
+      hljs.IDENT_RE,
+      lookahead(/\s*\(/))
+  };
+
   const EXPRESSION_CONTAINS = [
+    FUNCTION_DISPATCH,
     PREPROCESSOR,
     CPP_PRIMITIVE_TYPES,
     C_LINE_COMMENT_MODE,
@@ -28109,6 +28486,7 @@ function cPlusPlus(hljs) {
     NUMBERS,
     STRINGS
   ];
+
 
   const EXPRESSION_CONTEXT = {
     // This mode covers expression context where we can't expect a function
@@ -28161,6 +28539,21 @@ function cPlusPlus(hljs) {
         contains: [ TITLE_MODE ],
         relevance: 0
       },
+      // needed because we do not have look-behind on the below rule
+      // to prevent it from grabbing the final : in a :: pair
+      {
+        begin: /::/,
+        relevance: 0
+      },
+      // initializers
+      {
+        begin: /:/,
+        endsWithParent: true,
+        contains: [
+          STRINGS,
+          NUMBERS
+        ]
+      },
       {
         className: 'params',
         begin: /\(/,
@@ -28210,9 +28603,13 @@ function cPlusPlus(hljs) {
     ],
     keywords: CPP_KEYWORDS,
     illegal: '</',
+    classNameAliases: {
+      "function.dispatch": "built_in"
+    },
     contains: [].concat(
       EXPRESSION_CONTEXT,
       FUNCTION_DECLARATION,
+      FUNCTION_DISPATCH,
       EXPRESSION_CONTAINS,
       [
         PREPROCESSOR,
@@ -28262,7 +28659,6 @@ function arduino(hljs) {
     keyword:
       'boolean byte word String',
     built_in:
-      'setup loop ' +
       'KeyboardController MouseController SoftwareSerial ' +
       'EthernetServer EthernetClient LiquidCrystal ' +
       'RobotControl GSMVoiceCall EthernetUDP EsploraTFT ' +
@@ -28273,7 +28669,9 @@ function arduino(hljs) {
       'WiFiUDP GSM_SMS Mailbox USBHost Firmata PImage ' +
       'Client Server GSMPIN FileIO Bridge Serial ' +
       'EEPROM Stream Mouse Audio Servo File Task ' +
-      'GPRS WiFi Wire TFT GSM SPI SD ' +
+      'GPRS WiFi Wire TFT GSM SPI SD ',
+    _:
+      'setup loop ' +
       'runShellCommandAsynchronously analogWriteResolution ' +
       'retrieveCallingNumber printFirmwareVersion ' +
       'analogReadResolution sendDigitalPortPair ' +
@@ -28351,6 +28749,7 @@ function arduino(hljs) {
   kws.keyword += ' ' + ARDUINO_KW.keyword;
   kws.literal += ' ' + ARDUINO_KW.literal;
   kws.built_in += ' ' + ARDUINO_KW.built_in;
+  kws._ += ' ' + ARDUINO_KW._;
 
   ARDUINO.name = 'Arduino';
   ARDUINO.aliases = ['ino'];
@@ -28497,6 +28896,39 @@ module.exports = isForced;
 /***/ "9510":
 /***/ (function(module, exports) {
 
+/**
+ * @param {string} value
+ * @returns {RegExp}
+ * */
+
+/**
+ * @param {RegExp | string } re
+ * @returns {string}
+ */
+function source(re) {
+  if (!re) return null;
+  if (typeof re === "string") return re;
+
+  return re.source;
+}
+
+/**
+ * @param {RegExp | string } re
+ * @returns {string}
+ */
+function lookahead(re) {
+  return concat('(?=', re, ')');
+}
+
+/**
+ * @param {...(RegExp | string) } args
+ * @returns {string}
+ */
+function concat(...args) {
+  const joined = args.map((x) => source(x)).join("");
+  return joined;
+}
+
 /*
 Language: Python
 Description: Python is an interpreted, object-oriented, high-level programming language with dynamic semantics.
@@ -28521,7 +28953,6 @@ function python(hljs) {
     'except',
     'finally',
     'for',
-    '',
     'from',
     'global',
     'if',
@@ -28538,7 +28969,7 @@ function python(hljs) {
     'try',
     'while',
     'with',
-    'yield',
+    'yield'
   ];
 
   const BUILT_INS = [
@@ -28610,7 +29041,7 @@ function python(hljs) {
     'tuple',
     'type',
     'vars',
-    'zip',
+    'zip'
   ];
 
   const LITERALS = [
@@ -28619,22 +29050,45 @@ function python(hljs) {
     'False',
     'None',
     'NotImplemented',
-    'True',
+    'True'
+  ];
+
+  // https://docs.python.org/3/library/typing.html
+  // TODO: Could these be supplemented by a CamelCase matcher in certain
+  // contexts, leaving these remaining only for relevance hinting?
+  const TYPES = [
+    "Any",
+    "Callable",
+    "Coroutine",
+    "Dict",
+    "List",
+    "Literal",
+    "Generic",
+    "Optional",
+    "Sequence",
+    "Set",
+    "Tuple",
+    "Type",
+    "Union"
   ];
 
   const KEYWORDS = {
+    $pattern: /[A-Za-z]\w+|__\w+__/,
     keyword: RESERVED_WORDS,
     built_in: BUILT_INS,
-    literal: LITERALS
+    literal: LITERALS,
+    type: TYPES
   };
 
   const PROMPT = {
-    className: 'meta',  begin: /^(>>>|\.\.\.) /
+    className: 'meta',
+    begin: /^(>>>|\.\.\.) /
   };
 
   const SUBST = {
     className: 'subst',
-    begin: /\{/, end: /\}/,
+    begin: /\{/,
+    end: /\}/,
     keywords: KEYWORDS,
     illegal: /#/
   };
@@ -28646,47 +29100,81 @@ function python(hljs) {
 
   const STRING = {
     className: 'string',
-    contains: [hljs.BACKSLASH_ESCAPE],
+    contains: [ hljs.BACKSLASH_ESCAPE ],
     variants: [
       {
-        begin: /([uU]|[bB]|[rR]|[bB][rR]|[rR][bB])?'''/, end: /'''/,
-        contains: [hljs.BACKSLASH_ESCAPE, PROMPT],
+        begin: /([uU]|[bB]|[rR]|[bB][rR]|[rR][bB])?'''/,
+        end: /'''/,
+        contains: [
+          hljs.BACKSLASH_ESCAPE,
+          PROMPT
+        ],
         relevance: 10
       },
       {
-        begin: /([uU]|[bB]|[rR]|[bB][rR]|[rR][bB])?"""/, end: /"""/,
-        contains: [hljs.BACKSLASH_ESCAPE, PROMPT],
+        begin: /([uU]|[bB]|[rR]|[bB][rR]|[rR][bB])?"""/,
+        end: /"""/,
+        contains: [
+          hljs.BACKSLASH_ESCAPE,
+          PROMPT
+        ],
         relevance: 10
       },
       {
-        begin: /([fF][rR]|[rR][fF]|[fF])'''/, end: /'''/,
-        contains: [hljs.BACKSLASH_ESCAPE, PROMPT, LITERAL_BRACKET, SUBST]
+        begin: /([fF][rR]|[rR][fF]|[fF])'''/,
+        end: /'''/,
+        contains: [
+          hljs.BACKSLASH_ESCAPE,
+          PROMPT,
+          LITERAL_BRACKET,
+          SUBST
+        ]
       },
       {
-        begin: /([fF][rR]|[rR][fF]|[fF])"""/, end: /"""/,
-        contains: [hljs.BACKSLASH_ESCAPE, PROMPT, LITERAL_BRACKET, SUBST]
+        begin: /([fF][rR]|[rR][fF]|[fF])"""/,
+        end: /"""/,
+        contains: [
+          hljs.BACKSLASH_ESCAPE,
+          PROMPT,
+          LITERAL_BRACKET,
+          SUBST
+        ]
       },
       {
-        begin: /([uU]|[rR])'/, end: /'/,
+        begin: /([uU]|[rR])'/,
+        end: /'/,
         relevance: 10
       },
       {
-        begin: /([uU]|[rR])"/, end: /"/,
+        begin: /([uU]|[rR])"/,
+        end: /"/,
         relevance: 10
       },
       {
-        begin: /([bB]|[bB][rR]|[rR][bB])'/, end: /'/
+        begin: /([bB]|[bB][rR]|[rR][bB])'/,
+        end: /'/
       },
       {
-        begin: /([bB]|[bB][rR]|[rR][bB])"/, end: /"/
+        begin: /([bB]|[bB][rR]|[rR][bB])"/,
+        end: /"/
       },
       {
-        begin: /([fF][rR]|[rR][fF]|[fF])'/, end: /'/,
-        contains: [hljs.BACKSLASH_ESCAPE, LITERAL_BRACKET, SUBST]
+        begin: /([fF][rR]|[rR][fF]|[fF])'/,
+        end: /'/,
+        contains: [
+          hljs.BACKSLASH_ESCAPE,
+          LITERAL_BRACKET,
+          SUBST
+        ]
       },
       {
-        begin: /([fF][rR]|[rR][fF]|[fF])"/, end: /"/,
-        contains: [hljs.BACKSLASH_ESCAPE, LITERAL_BRACKET, SUBST]
+        begin: /([fF][rR]|[rR][fF]|[fF])"/,
+        end: /"/,
+        contains: [
+          hljs.BACKSLASH_ESCAPE,
+          LITERAL_BRACKET,
+          SUBST
+        ]
       },
       hljs.APOS_STRING_MODE,
       hljs.QUOTE_STRING_MODE
@@ -28697,7 +29185,8 @@ function python(hljs) {
   const digitpart = '[0-9](_?[0-9])*';
   const pointfloat = `(\\b(${digitpart}))?\\.(${digitpart})|\\b(${digitpart})\\.`;
   const NUMBER = {
-    className: 'number', relevance: 0,
+    className: 'number',
+    relevance: 0,
     variants: [
       // exponentfloat, pointfloat
       // https://docs.python.org/3.9/reference/lexical_analysis.html#floating-point-literals
@@ -28709,8 +29198,12 @@ function python(hljs) {
       // and we don't want to mishandle e.g. `0..hex()`; this should be safe
       // because both MUST contain a decimal point and so cannot be confused with
       // the interior part of an identifier
-      { begin: `(\\b(${digitpart})|(${pointfloat}))[eE][+-]?(${digitpart})[jJ]?\\b` },
-      { begin: `(${pointfloat})[jJ]?` },
+      {
+        begin: `(\\b(${digitpart})|(${pointfloat}))[eE][+-]?(${digitpart})[jJ]?\\b`
+      },
+      {
+        begin: `(${pointfloat})[jJ]?`
+      },
 
       // decinteger, bininteger, octinteger, hexinteger
       // https://docs.python.org/3.9/reference/lexical_analysis.html#integer-literals
@@ -28718,49 +29211,109 @@ function python(hljs) {
       // https://docs.python.org/2.7/reference/lexical_analysis.html#integer-and-long-integer-literals
       // decinteger is optionally imaginary
       // https://docs.python.org/3.9/reference/lexical_analysis.html#imaginary-literals
-      { begin: '\\b([1-9](_?[0-9])*|0+(_?0)*)[lLjJ]?\\b' },
-      { begin: '\\b0[bB](_?[01])+[lL]?\\b' },
-      { begin: '\\b0[oO](_?[0-7])+[lL]?\\b' },
-      { begin: '\\b0[xX](_?[0-9a-fA-F])+[lL]?\\b' },
+      {
+        begin: '\\b([1-9](_?[0-9])*|0+(_?0)*)[lLjJ]?\\b'
+      },
+      {
+        begin: '\\b0[bB](_?[01])+[lL]?\\b'
+      },
+      {
+        begin: '\\b0[oO](_?[0-7])+[lL]?\\b'
+      },
+      {
+        begin: '\\b0[xX](_?[0-9a-fA-F])+[lL]?\\b'
+      },
 
       // imagnumber (digitpart-based)
       // https://docs.python.org/3.9/reference/lexical_analysis.html#imaginary-literals
-      { begin: `\\b(${digitpart})[jJ]\\b` },
+      {
+        begin: `\\b(${digitpart})[jJ]\\b`
+      }
     ]
   };
-
+  const COMMENT_TYPE = {
+    className: "comment",
+    begin: lookahead(/# type:/),
+    end: /$/,
+    keywords: KEYWORDS,
+    contains: [
+      { // prevent keywords from coloring `type`
+        begin: /# type:/
+      },
+      // comment within a datatype comment includes no keywords
+      {
+        begin: /#/,
+        end: /\b\B/,
+        endsWithParent: true
+      }
+    ]
+  };
   const PARAMS = {
     className: 'params',
     variants: [
-      // Exclude params at functions without params
-      {begin: /\(\s*\)/, skip: true, className: null },
+      // Exclude params in functions without params
       {
-        begin: /\(/, end: /\)/, excludeBegin: true, excludeEnd: true,
-        keywords: KEYWORDS,
-        contains: ['self', PROMPT, NUMBER, STRING, hljs.HASH_COMMENT_MODE],
+        className: "",
+        begin: /\(\s*\)/,
+        skip: true
       },
-    ],
+      {
+        begin: /\(/,
+        end: /\)/,
+        excludeBegin: true,
+        excludeEnd: true,
+        keywords: KEYWORDS,
+        contains: [
+          'self',
+          PROMPT,
+          NUMBER,
+          STRING,
+          hljs.HASH_COMMENT_MODE
+        ]
+      }
+    ]
   };
-  SUBST.contains = [STRING, NUMBER, PROMPT];
+  SUBST.contains = [
+    STRING,
+    NUMBER,
+    PROMPT
+  ];
 
   return {
     name: 'Python',
-    aliases: ['py', 'gyp', 'ipython'],
+    aliases: [
+      'py',
+      'gyp',
+      'ipython'
+    ],
     keywords: KEYWORDS,
     illegal: /(<\/|->|\?)|=>/,
     contains: [
       PROMPT,
       NUMBER,
-      // eat "if" prior to string so that it won't accidentally be
-      // labeled as an f-string as in:
-      { begin: /\bself\b/, }, // very common convention
-      { beginKeywords: "if", relevance: 0 },
+      {
+        // very common convention
+        begin: /\bself\b/
+      },
+      {
+        // eat "if" prior to string so that it won't accidentally be
+        // labeled as an f-string
+        beginKeywords: "if",
+        relevance: 0
+      },
       STRING,
+      COMMENT_TYPE,
       hljs.HASH_COMMENT_MODE,
       {
         variants: [
-          {className: 'function', beginKeywords: 'def'},
-          {className: 'class', beginKeywords: 'class'}
+          {
+            className: 'function',
+            beginKeywords: 'def'
+          },
+          {
+            className: 'class',
+            beginKeywords: 'class'
+          }
         ],
         end: /:/,
         illegal: /[${=;\n,]/,
@@ -28768,18 +29321,21 @@ function python(hljs) {
           hljs.UNDERSCORE_TITLE_MODE,
           PARAMS,
           {
-            begin: /->/, endsWithParent: true,
-            keywords: 'None'
+            begin: /->/,
+            endsWithParent: true,
+            keywords: KEYWORDS
           }
         ]
       },
       {
         className: 'meta',
-        begin: /^[\t ]*@/, end: /(?=#)|$/,
-        contains: [NUMBER, PARAMS, STRING]
-      },
-      {
-        begin: /\b(print|exec)\(/ // don’t highlight keywords-turned-functions in Python 3
+        begin: /^[\t ]*@/,
+        end: /(?=#)|$/,
+        contains: [
+          NUMBER,
+          PARAMS,
+          STRING
+        ]
       }
     ]
   };
@@ -29521,29 +30077,29 @@ Category: common
 
 /** @type LanguageFn */
 function csharp(hljs) {
-  var BUILT_IN_KEYWORDS = [
-      'bool',
-      'byte',
-      'char',
-      'decimal',
-      'delegate',
-      'double',
-      'dynamic',
-      'enum',
-      'float',
-      'int',
-      'long',
-      'nint',
-      'nuint',
-      'object',
-      'sbyte',
-      'short',
-      'string',
-      'ulong',
-      'unit',
-      'ushort'
+  const BUILT_IN_KEYWORDS = [
+    'bool',
+    'byte',
+    'char',
+    'decimal',
+    'delegate',
+    'double',
+    'dynamic',
+    'enum',
+    'float',
+    'int',
+    'long',
+    'nint',
+    'nuint',
+    'object',
+    'sbyte',
+    'short',
+    'string',
+    'ulong',
+    'uint',
+    'ushort'
   ];
-  var FUNCTION_MODIFIERS = [
+  const FUNCTION_MODIFIERS = [
     'public',
     'private',
     'protected',
@@ -29560,13 +30116,13 @@ function csharp(hljs) {
     'sealed',
     'partial'
   ];
-  var LITERAL_KEYWORDS = [
-      'default',
-      'false',
-      'null',
-      'true'
+  const LITERAL_KEYWORDS = [
+    'default',
+    'false',
+    'null',
+    'true'
   ];
-  var NORMAL_KEYWORDS = [
+  const NORMAL_KEYWORDS = [
     'abstract',
     'as',
     'base',
@@ -29623,7 +30179,7 @@ function csharp(hljs) {
     'volatile',
     'while'
   ];
-  var CONTEXTUAL_KEYWORDS = [
+  const CONTEXTUAL_KEYWORDS = [
     'add',
     'alias',
     'and',
@@ -29660,47 +30216,98 @@ function csharp(hljs) {
     'yield'
   ];
 
-  var KEYWORDS = {
+  const KEYWORDS = {
     keyword: NORMAL_KEYWORDS.concat(CONTEXTUAL_KEYWORDS),
     built_in: BUILT_IN_KEYWORDS,
     literal: LITERAL_KEYWORDS
   };
-  var TITLE_MODE = hljs.inherit(hljs.TITLE_MODE, {begin: '[a-zA-Z](\\.?\\w)*'});
-  var NUMBERS = {
+  const TITLE_MODE = hljs.inherit(hljs.TITLE_MODE, {
+    begin: '[a-zA-Z](\\.?\\w)*'
+  });
+  const NUMBERS = {
     className: 'number',
     variants: [
-      { begin: '\\b(0b[01\']+)' },
-      { begin: '(-?)\\b([\\d\']+(\\.[\\d\']*)?|\\.[\\d\']+)(u|U|l|L|ul|UL|f|F|b|B)' },
-      { begin: '(-?)(\\b0[xX][a-fA-F0-9\']+|(\\b[\\d\']+(\\.[\\d\']*)?|\\.[\\d\']+)([eE][-+]?[\\d\']+)?)' }
+      {
+        begin: '\\b(0b[01\']+)'
+      },
+      {
+        begin: '(-?)\\b([\\d\']+(\\.[\\d\']*)?|\\.[\\d\']+)(u|U|l|L|ul|UL|f|F|b|B)'
+      },
+      {
+        begin: '(-?)(\\b0[xX][a-fA-F0-9\']+|(\\b[\\d\']+(\\.[\\d\']*)?|\\.[\\d\']+)([eE][-+]?[\\d\']+)?)'
+      }
     ],
     relevance: 0
   };
-  var VERBATIM_STRING = {
+  const VERBATIM_STRING = {
     className: 'string',
-    begin: '@"', end: '"',
-    contains: [{begin: '""'}]
+    begin: '@"',
+    end: '"',
+    contains: [
+      {
+        begin: '""'
+      }
+    ]
   };
-  var VERBATIM_STRING_NO_LF = hljs.inherit(VERBATIM_STRING, {illegal: /\n/});
-  var SUBST = {
+  const VERBATIM_STRING_NO_LF = hljs.inherit(VERBATIM_STRING, {
+    illegal: /\n/
+  });
+  const SUBST = {
     className: 'subst',
-    begin: /\{/, end: /\}/,
+    begin: /\{/,
+    end: /\}/,
     keywords: KEYWORDS
   };
-  var SUBST_NO_LF = hljs.inherit(SUBST, {illegal: /\n/});
-  var INTERPOLATED_STRING = {
+  const SUBST_NO_LF = hljs.inherit(SUBST, {
+    illegal: /\n/
+  });
+  const INTERPOLATED_STRING = {
     className: 'string',
-    begin: /\$"/, end: '"',
+    begin: /\$"/,
+    end: '"',
     illegal: /\n/,
-    contains: [{begin: /\{\{/}, {begin: /\}\}/}, hljs.BACKSLASH_ESCAPE, SUBST_NO_LF]
+    contains: [
+      {
+        begin: /\{\{/
+      },
+      {
+        begin: /\}\}/
+      },
+      hljs.BACKSLASH_ESCAPE,
+      SUBST_NO_LF
+    ]
   };
-  var INTERPOLATED_VERBATIM_STRING = {
+  const INTERPOLATED_VERBATIM_STRING = {
     className: 'string',
-    begin: /\$@"/, end: '"',
-    contains: [{begin: /\{\{/}, {begin: /\}\}/}, {begin: '""'}, SUBST]
+    begin: /\$@"/,
+    end: '"',
+    contains: [
+      {
+        begin: /\{\{/
+      },
+      {
+        begin: /\}\}/
+      },
+      {
+        begin: '""'
+      },
+      SUBST
+    ]
   };
-  var INTERPOLATED_VERBATIM_STRING_NO_LF = hljs.inherit(INTERPOLATED_VERBATIM_STRING, {
+  const INTERPOLATED_VERBATIM_STRING_NO_LF = hljs.inherit(INTERPOLATED_VERBATIM_STRING, {
     illegal: /\n/,
-    contains: [{begin: /\{\{/}, {begin: /\}\}/}, {begin: '""'}, SUBST_NO_LF]
+    contains: [
+      {
+        begin: /\{\{/
+      },
+      {
+        begin: /\}\}/
+      },
+      {
+        begin: '""'
+      },
+      SUBST_NO_LF
+    ]
   });
   SUBST.contains = [
     INTERPOLATED_VERBATIM_STRING,
@@ -29718,9 +30325,11 @@ function csharp(hljs) {
     hljs.APOS_STRING_MODE,
     hljs.QUOTE_STRING_MODE,
     NUMBERS,
-    hljs.inherit(hljs.C_BLOCK_COMMENT_MODE, {illegal: /\n/})
+    hljs.inherit(hljs.C_BLOCK_COMMENT_MODE, {
+      illegal: /\n/
+    })
   ];
-  var STRING = {
+  const STRING = {
     variants: [
       INTERPOLATED_VERBATIM_STRING,
       INTERPOLATED_STRING,
@@ -29730,16 +30339,18 @@ function csharp(hljs) {
     ]
   };
 
-  var GENERIC_MODIFIER = {
+  const GENERIC_MODIFIER = {
     begin: "<",
     end: ">",
     contains: [
-      { beginKeywords: "in out"},
+      {
+        beginKeywords: "in out"
+      },
       TITLE_MODE
     ]
   };
-  var TYPE_IDENT_RE = hljs.IDENT_RE + '(<' + hljs.IDENT_RE + '(\\s*,\\s*' + hljs.IDENT_RE + ')*>)?(\\[\\])?';
-  var AT_IDENTIFIER = {
+  const TYPE_IDENT_RE = hljs.IDENT_RE + '(<' + hljs.IDENT_RE + '(\\s*,\\s*' + hljs.IDENT_RE + ')*>)?(\\[\\])?';
+  const AT_IDENTIFIER = {
     // prevents expressions like `@class` from incorrect flagging
     // `class` as a keyword
     begin: "@" + hljs.IDENT_RE,
@@ -29748,7 +30359,10 @@ function csharp(hljs) {
 
   return {
     name: 'C#',
-    aliases: ['cs', 'c#'],
+    aliases: [
+      'cs',
+      'c#'
+    ],
     keywords: KEYWORDS,
     illegal: /::/,
     contains: [
@@ -29762,13 +30376,15 @@ function csharp(hljs) {
               className: 'doctag',
               variants: [
                 {
-                  begin: '///', relevance: 0
+                  begin: '///',
+                  relevance: 0
                 },
                 {
                   begin: '<!--|-->'
                 },
                 {
-                  begin: '</?', end: '>'
+                  begin: '</?',
+                  end: '>'
                 }
               ]
             }
@@ -29779,7 +30395,8 @@ function csharp(hljs) {
       hljs.C_BLOCK_COMMENT_MODE,
       {
         className: 'meta',
-        begin: '#', end: '$',
+        begin: '#',
+        end: '$',
         keywords: {
           'meta-keyword': 'if else elif endif define undef warning error line region endregion pragma checksum'
         }
@@ -29792,7 +30409,9 @@ function csharp(hljs) {
         end: /[{;=]/,
         illegal: /[^\s:,]/,
         contains: [
-          { beginKeywords: "where class" },
+          {
+            beginKeywords: "where class"
+          },
           TITLE_MODE,
           GENERIC_MODIFIER,
           hljs.C_LINE_COMMENT_MODE,
@@ -29825,9 +30444,16 @@ function csharp(hljs) {
       {
         // [Attributes("")]
         className: 'meta',
-        begin: '^\\s*\\[', excludeBegin: true, end: '\\]', excludeEnd: true,
+        begin: '^\\s*\\[',
+        excludeBegin: true,
+        end: '\\]',
+        excludeEnd: true,
         contains: [
-          {className: 'meta-string', begin: /"/, end: /"/}
+          {
+            className: 'meta-string',
+            begin: /"/,
+            end: /"/
+          }
         ]
       },
       {
@@ -29838,8 +30464,10 @@ function csharp(hljs) {
       },
       {
         className: 'function',
-        begin: '(' + TYPE_IDENT_RE + '\\s+)+' + hljs.IDENT_RE + '\\s*(<.+>\\s*)?\\(', returnBegin: true,
-        end: /\s*[{;=]/, excludeEnd: true,
+        begin: '(' + TYPE_IDENT_RE + '\\s+)+' + hljs.IDENT_RE + '\\s*(<.+>\\s*)?\\(',
+        returnBegin: true,
+        end: /\s*[{;=]/,
+        excludeEnd: true,
         keywords: KEYWORDS,
         contains: [
           // prevents these from being highlighted `title`
@@ -29848,7 +30476,8 @@ function csharp(hljs) {
             relevance: 0
           },
           {
-            begin: hljs.IDENT_RE + '\\s*(<.+>\\s*)?\\(', returnBegin: true,
+            begin: hljs.IDENT_RE + '\\s*(<.+>\\s*)?\\(',
+            returnBegin: true,
             contains: [
               hljs.TITLE_MODE,
               GENERIC_MODIFIER
@@ -29857,7 +30486,8 @@ function csharp(hljs) {
           },
           {
             className: 'params',
-            begin: /\(/, end: /\)/,
+            begin: /\(/,
+            end: /\)/,
             excludeBegin: true,
             excludeEnd: true,
             keywords: KEYWORDS,
@@ -31105,6 +31735,39 @@ module.exports = basic;
 /***/ "a27d":
 /***/ (function(module, exports) {
 
+/**
+ * @param {string} value
+ * @returns {RegExp}
+ * */
+
+/**
+ * @param {RegExp | string } re
+ * @returns {string}
+ */
+function source(re) {
+  if (!re) return null;
+  if (typeof re === "string") return re;
+
+  return re.source;
+}
+
+/**
+ * @param {RegExp | string } re
+ * @returns {string}
+ */
+function optional(re) {
+  return concat('(', re, ')?');
+}
+
+/**
+ * @param {...(RegExp | string) } args
+ * @returns {string}
+ */
+function concat(...args) {
+  const joined = args.map((x) => source(x)).join("");
+  return joined;
+}
+
 /*
 Language: Tcl
 Description: Tcl is a very simple programming language.
@@ -31113,6 +31776,13 @@ Website: https://www.tcl.tk/about/language.html
 */
 
 function tcl(hljs) {
+  const TCL_IDENT = /[a-zA-Z_][a-zA-Z0-9_]*/;
+
+  const NUMBER = {
+    className: 'number',
+    variants: [hljs.BINARY_NUMBER_MODE, hljs.C_NUMBER_MODE]
+  };
+
   return {
     name: 'Tcl',
     aliases: ['tk'],
@@ -31146,15 +31816,24 @@ function tcl(hljs) {
         ]
       },
       {
-        excludeEnd: true,
+        className: "variable",
         variants: [
           {
-            begin: '\\$(\\{)?(::)?[a-zA-Z_]((::)?[a-zA-Z0-9_])*\\(([a-zA-Z0-9_])*\\)',
-            end: '[^a-zA-Z0-9_\\}\\$]'
+            begin: concat(
+              /\$/,
+              optional(/::/),
+              TCL_IDENT,
+              '(::',
+              TCL_IDENT,
+              ')*'
+            )
           },
           {
-            begin: '\\$(\\{)?(::)?[a-zA-Z_]((::)?[a-zA-Z0-9_])*',
-            end: '(\\))?[^a-zA-Z0-9_\\}\\$]'
+            begin: '\\$\\{(::)?[a-zA-Z_]((::)?[a-zA-Z0-9_])*',
+            end: '\\}',
+            contains: [
+              NUMBER
+            ]
           }
         ]
       },
@@ -31165,10 +31844,7 @@ function tcl(hljs) {
           hljs.inherit(hljs.QUOTE_STRING_MODE, {illegal: null})
         ]
       },
-      {
-        className: 'number',
-        variants: [hljs.BINARY_NUMBER_MODE, hljs.C_NUMBER_MODE]
-      }
+      NUMBER
     ]
   }
 }
@@ -31447,7 +32123,7 @@ var symbol = new _node_modules_svg_baker_runtime_browser_symbol_js__WEBPACK_IMPO
   "id": "icon-smile",
   "use": "icon-smile-usage",
   "viewBox": "0 0 1024 1024",
-  "content": "<symbol class=\"icon\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" id=\"icon-smile\">\n\t<defs><style type=\"text/css\"></style></defs>\n\t<path d=\"M512 74.666667C270.933333 74.666667 74.666667 270.933333 74.666667 512S270.933333 949.333333 512 949.333333 949.333333 753.066667 949.333333 512 753.066667 74.666667 512 74.666667z m0 810.666666c-204.8 0-373.333333-168.533333-373.333333-373.333333S307.2 138.666667 512 138.666667 885.333333 307.2 885.333333 512 716.8 885.333333 512 885.333333z\" p-id=\"2924\" />\n\t<path d=\"M674.133333 608c-46.933333 57.6-100.266667 85.333333-162.133333 85.333333s-115.2-27.733333-162.133333-85.333333c-10.666667-12.8-32-14.933333-44.8-4.266667-12.8 10.666667-14.933333 32-4.266667 44.8 59.733333 70.4 130.133333 106.666667 211.2 106.666667s151.466667-36.266667 211.2-106.666667c10.666667-12.8 8.533333-34.133333-4.266667-44.8-12.8-10.666667-34.133333-8.533333-44.8 4.266667zM362.666667 512c23.466667 0 42.666667-19.2 42.666666-42.666667v-64c0-23.466667-19.2-42.666667-42.666666-42.666666s-42.666667 19.2-42.666667 42.666666v64c0 23.466667 19.2 42.666667 42.666667 42.666667zM661.333333 512c23.466667 0 42.666667-19.2 42.666667-42.666667v-64c0-23.466667-19.2-42.666667-42.666667-42.666666s-42.666667 19.2-42.666666 42.666666v64c0 23.466667 19.2 42.666667 42.666666 42.666667z\" p-id=\"2925\" /></symbol>"
+  "content": "<symbol class=\"icon\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" id=\"icon-smile\">\r\n\t<defs><style type=\"text/css\"></style></defs>\r\n\t<path d=\"M512 74.666667C270.933333 74.666667 74.666667 270.933333 74.666667 512S270.933333 949.333333 512 949.333333 949.333333 753.066667 949.333333 512 753.066667 74.666667 512 74.666667z m0 810.666666c-204.8 0-373.333333-168.533333-373.333333-373.333333S307.2 138.666667 512 138.666667 885.333333 307.2 885.333333 512 716.8 885.333333 512 885.333333z\" p-id=\"2924\" />\r\n\t<path d=\"M674.133333 608c-46.933333 57.6-100.266667 85.333333-162.133333 85.333333s-115.2-27.733333-162.133333-85.333333c-10.666667-12.8-32-14.933333-44.8-4.266667-12.8 10.666667-14.933333 32-4.266667 44.8 59.733333 70.4 130.133333 106.666667 211.2 106.666667s151.466667-36.266667 211.2-106.666667c10.666667-12.8 8.533333-34.133333-4.266667-44.8-12.8-10.666667-34.133333-8.533333-44.8 4.266667zM362.666667 512c23.466667 0 42.666667-19.2 42.666666-42.666667v-64c0-23.466667-19.2-42.666667-42.666666-42.666666s-42.666667 19.2-42.666667 42.666666v64c0 23.466667 19.2 42.666667 42.666667 42.666667zM661.333333 512c23.466667 0 42.666667-19.2 42.666667-42.666667v-64c0-23.466667-19.2-42.666667-42.666667-42.666666s-42.666667 19.2-42.666666 42.666666v64c0 23.466667 19.2 42.666667 42.666666 42.666667z\" p-id=\"2925\" /></symbol>"
 });
 var result = _node_modules_svg_sprite_loader_runtime_browser_sprite_build_js__WEBPACK_IMPORTED_MODULE_1___default.a.add(symbol);
 /* harmony default export */ __webpack_exports__["default"] = (symbol);
@@ -32597,7 +33273,7 @@ function kotlin(hljs) {
 
   return {
     name: 'Kotlin',
-    aliases: [ 'kt' ],
+    aliases: [ 'kt', 'kts' ],
     keywords: KEYWORDS,
     contains: [
       hljs.COMMENT(
@@ -32804,7 +33480,10 @@ const TYPES = [
   "Array",
   "Uint8Array",
   "Uint8ClampedArray",
-  "ArrayBuffer"
+  "ArrayBuffer",
+  "BigInt64Array",
+  "BigUint64Array",
+  "BigInt"
 ];
 
 const ERROR_TYPES = [
@@ -33177,7 +33856,7 @@ var es_array_concat = __webpack_require__("99af");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.timers.js
 var web_timers = __webpack_require__("4795");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c1d116e4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./node_modules/view-design/src/components/base/notification/notification.vue?vue&type=template&id=8a66d024&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"eb964e46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./node_modules/view-design/src/components/base/notification/notification.vue?vue&type=template&id=8a66d024&
 var notificationvue_type_template_id_8a66d024_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.classes,style:(_vm.wrapStyles)},_vm._l((_vm.notices),function(notice){return _c('Notice',{key:notice.name,attrs:{"prefix-cls":_vm.prefixCls,"styles":notice.styles,"type":notice.type,"content":notice.content,"duration":notice.duration,"render":notice.render,"has-title":notice.hasTitle,"withIcon":notice.withIcon,"closable":notice.closable,"name":notice.name,"transition-name":notice.transitionName,"background":notice.background,"msg-type":notice.msgType,"on-close":notice.onClose}})}),1)}
 var staticRenderFns = []
 
@@ -33196,7 +33875,7 @@ var es_function_name = __webpack_require__("b0c0");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.splice.js
 var es_array_splice = __webpack_require__("a434");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c1d116e4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./node_modules/view-design/src/components/base/notification/notice.vue?vue&type=template&id=0a77a35c&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"eb964e46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./node_modules/view-design/src/components/base/notification/notice.vue?vue&type=template&id=0a77a35c&
 var noticevue_type_template_id_0a77a35c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('transition',{attrs:{"name":_vm.transitionName,"appear":""},on:{"enter":_vm.handleEnter,"leave":_vm.handleLeave}},[_c('div',{class:_vm.classes,style:(_vm.styles)},[(_vm.type === 'notice')?[_c('div',{ref:"content",class:_vm.contentClasses,domProps:{"innerHTML":_vm._s(_vm.content)}}),_c('div',{class:_vm.contentWithIcon},[_c('render-cell',{attrs:{"render":_vm.renderFunc}})],1),(_vm.closable)?_c('a',{class:[_vm.baseClass + '-close'],on:{"click":_vm.close}},[_c('i',{staticClass:"ivu-icon ivu-icon-ios-close"})]):_vm._e()]:_vm._e(),(_vm.type === 'message')?[_c('div',{ref:"content",class:_vm.messageContentClasses},[_c('div',{class:[_vm.baseClass + '-content-text'],domProps:{"innerHTML":_vm._s(_vm.content)}}),_c('div',{class:[_vm.baseClass + '-content-text']},[_c('render-cell',{attrs:{"render":_vm.renderFunc}})],1),(_vm.closable)?_c('a',{class:[_vm.baseClass + '-close'],on:{"click":_vm.close}},[_c('i',{staticClass:"ivu-icon ivu-icon-ios-close"})]):_vm._e()])]:_vm._e()],2)])}
 var noticevue_type_template_id_0a77a35c_staticRenderFns = []
 
@@ -34310,7 +34989,10 @@ const TYPES = [
   "Array",
   "Uint8Array",
   "Uint8ClampedArray",
-  "ArrayBuffer"
+  "ArrayBuffer",
+  "BigInt64Array",
+  "BigUint64Array",
+  "BigInt"
 ];
 
 const ERROR_TYPES = [
@@ -34913,7 +35595,7 @@ function typescript(hljs) {
 
   Object.assign(tsLanguage, {
     name: 'TypeScript',
-    aliases: ['ts']
+    aliases: ['ts', 'tsx']
   });
 
   return tsLanguage;
@@ -34941,6 +35623,14 @@ function source(re) {
   if (typeof re === "string") return re;
 
   return re.source;
+}
+
+/**
+ * @param {RegExp | string } re
+ * @returns {string}
+ */
+function lookahead(re) {
+  return concat('(?=', re, ')');
 }
 
 /**
@@ -35050,9 +35740,7 @@ function cPlusPlus(hljs) {
       }),
       {
         className: 'meta-string',
-        begin: /<.*?>/,
-        end: /$/,
-        illegal: '\\n'
+        begin: /<.*?>/
       },
       C_LINE_COMMENT_MODE,
       hljs.C_BLOCK_COMMENT_MODE
@@ -35067,6 +35755,122 @@ function cPlusPlus(hljs) {
 
   const FUNCTION_TITLE = optional(NAMESPACE_RE) + hljs.IDENT_RE + '\\s*\\(';
 
+  const COMMON_CPP_HINTS = [
+    'asin',
+    'atan2',
+    'atan',
+    'calloc',
+    'ceil',
+    'cosh',
+    'cos',
+    'exit',
+    'exp',
+    'fabs',
+    'floor',
+    'fmod',
+    'fprintf',
+    'fputs',
+    'free',
+    'frexp',
+    'auto_ptr',
+    'deque',
+    'list',
+    'queue',
+    'stack',
+    'vector',
+    'map',
+    'set',
+    'pair',
+    'bitset',
+    'multiset',
+    'multimap',
+    'unordered_set',
+    'fscanf',
+    'future',
+    'isalnum',
+    'isalpha',
+    'iscntrl',
+    'isdigit',
+    'isgraph',
+    'islower',
+    'isprint',
+    'ispunct',
+    'isspace',
+    'isupper',
+    'isxdigit',
+    'tolower',
+    'toupper',
+    'labs',
+    'ldexp',
+    'log10',
+    'log',
+    'malloc',
+    'realloc',
+    'memchr',
+    'memcmp',
+    'memcpy',
+    'memset',
+    'modf',
+    'pow',
+    'printf',
+    'putchar',
+    'puts',
+    'scanf',
+    'sinh',
+    'sin',
+    'snprintf',
+    'sprintf',
+    'sqrt',
+    'sscanf',
+    'strcat',
+    'strchr',
+    'strcmp',
+    'strcpy',
+    'strcspn',
+    'strlen',
+    'strncat',
+    'strncmp',
+    'strncpy',
+    'strpbrk',
+    'strrchr',
+    'strspn',
+    'strstr',
+    'tanh',
+    'tan',
+    'unordered_map',
+    'unordered_multiset',
+    'unordered_multimap',
+    'priority_queue',
+    'make_pair',
+    'array',
+    'shared_ptr',
+    'abort',
+    'terminate',
+    'abs',
+    'acos',
+    'vfprintf',
+    'vprintf',
+    'vsprintf',
+    'endl',
+    'initializer_list',
+    'unique_ptr',
+    'complex',
+    'imaginary',
+    'std',
+    'string',
+    'wstring',
+    'cin',
+    'cout',
+    'cerr',
+    'clog',
+    'stdin',
+    'stdout',
+    'stderr',
+    'stringstream',
+    'istringstream',
+    'ostringstream'
+  ];
+
   const CPP_KEYWORDS = {
     keyword: 'int float while private char char8_t char16_t char32_t catch import module export virtual operator sizeof ' +
       'dynamic_cast|10 typedef const_cast|10 const for static_cast|10 union namespace ' +
@@ -35080,19 +35884,27 @@ function cPlusPlus(hljs) {
       'atomic_uchar atomic_short atomic_ushort atomic_int atomic_uint atomic_long atomic_ulong atomic_llong ' +
       'atomic_ullong new throw return ' +
       'and and_eq bitand bitor compl not not_eq or or_eq xor xor_eq',
-    built_in: 'std string wstring cin cout cerr clog stdin stdout stderr stringstream istringstream ostringstream ' +
-      'auto_ptr deque list queue stack vector map set pair bitset multiset multimap unordered_set ' +
-      'unordered_map unordered_multiset unordered_multimap priority_queue make_pair array shared_ptr abort terminate abs acos ' +
-      'asin atan2 atan calloc ceil cosh cos exit exp fabs floor fmod fprintf fputs free frexp ' +
-      'fscanf future isalnum isalpha iscntrl isdigit isgraph islower isprint ispunct isspace isupper ' +
-      'isxdigit tolower toupper labs ldexp log10 log malloc realloc memchr memcmp memcpy memset modf pow ' +
-      'printf putchar puts scanf sinh sin snprintf sprintf sqrt sscanf strcat strchr strcmp ' +
-      'strcpy strcspn strlen strncat strncmp strncpy strpbrk strrchr strspn strstr tanh tan ' +
-      'vfprintf vprintf vsprintf endl initializer_list unique_ptr _Bool complex _Complex imaginary _Imaginary',
+    built_in: '_Bool _Complex _Imaginary',
+    _relevance_hints: COMMON_CPP_HINTS,
     literal: 'true false nullptr NULL'
   };
 
+  const FUNCTION_DISPATCH = {
+    className: "function.dispatch",
+    relevance: 0,
+    keywords: CPP_KEYWORDS,
+    begin: concat(
+      /\b/,
+      /(?!decltype)/,
+      /(?!if)/,
+      /(?!for)/,
+      /(?!while)/,
+      hljs.IDENT_RE,
+      lookahead(/\s*\(/))
+  };
+
   const EXPRESSION_CONTAINS = [
+    FUNCTION_DISPATCH,
     PREPROCESSOR,
     CPP_PRIMITIVE_TYPES,
     C_LINE_COMMENT_MODE,
@@ -35100,6 +35912,7 @@ function cPlusPlus(hljs) {
     NUMBERS,
     STRINGS
   ];
+
 
   const EXPRESSION_CONTEXT = {
     // This mode covers expression context where we can't expect a function
@@ -35152,6 +35965,21 @@ function cPlusPlus(hljs) {
         contains: [ TITLE_MODE ],
         relevance: 0
       },
+      // needed because we do not have look-behind on the below rule
+      // to prevent it from grabbing the final : in a :: pair
+      {
+        begin: /::/,
+        relevance: 0
+      },
+      // initializers
+      {
+        begin: /:/,
+        endsWithParent: true,
+        contains: [
+          STRINGS,
+          NUMBERS
+        ]
+      },
       {
         className: 'params',
         begin: /\(/,
@@ -35201,9 +36029,13 @@ function cPlusPlus(hljs) {
     ],
     keywords: CPP_KEYWORDS,
     illegal: '</',
+    classNameAliases: {
+      "function.dispatch": "built_in"
+    },
     contains: [].concat(
       EXPRESSION_CONTEXT,
       FUNCTION_DECLARATION,
+      FUNCTION_DISPATCH,
       EXPRESSION_CONTAINS,
       [
         PREPROCESSOR,
@@ -41315,7 +42147,6 @@ function isbl(hljs) {
 
   return {
     name: 'ISBL',
-    aliases: ["isbl"],
     case_insensitive: true,
     keywords: KEYWORDS,
     illegal: "\\$|\\?|%|,|;$|~|#|@|</",
@@ -41915,6 +42746,7 @@ const ATTRIBUTES = [
   'font-language-override',
   'font-size',
   'font-size-adjust',
+  'font-smoothing',
   'font-stretch',
   'font-style',
   'font-variant',
@@ -42254,24 +43086,25 @@ Website: https://developer.mozilla.org/en-US/docs/Web/HTTP/Overview
 function http(hljs) {
   const VERSION = 'HTTP/(2|1\\.[01])';
   const HEADER_NAME = /[A-Za-z][A-Za-z0-9-]*/;
-  const HEADERS_AND_BODY = [
-    {
-      className: 'attribute',
-      begin: concat('^', HEADER_NAME, '(?=\\:\\s)'),
-      starts: {
-        contains: [
-          {
-            className: "punctuation",
-            begin: /: /,
-            relevance: 0,
-            starts: {
-              end: '$',
-              relevance: 0
-            }
+  const HEADER = {
+    className: 'attribute',
+    begin: concat('^', HEADER_NAME, '(?=\\:\\s)'),
+    starts: {
+      contains: [
+        {
+          className: "punctuation",
+          begin: /: /,
+          relevance: 0,
+          starts: {
+            end: '$',
+            relevance: 0
           }
-        ]
-      }
-    },
+        }
+      ]
+    }
+  };
+  const HEADERS_AND_BODY = [
+    HEADER,
     {
       begin: '\\n\\n',
       starts: { subLanguage: [], endsWithParent: true }
@@ -42328,7 +43161,11 @@ function http(hljs) {
           illegal: /\S/,
           contains: HEADERS_AND_BODY
         }
-      }
+      },
+      // to allow headers to work even without a preamble
+      hljs.inherit(HEADER, {
+        relevance: 0
+      })
     ]
   };
 }
@@ -43552,7 +44389,7 @@ var symbol = new _node_modules_svg_baker_runtime_browser_symbol_js__WEBPACK_IMPO
   "id": "icon-loading",
   "use": "icon-loading-usage",
   "viewBox": "0 0 32 32",
-  "content": "<symbol xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" fill=\"white\" id=\"icon-loading\"><script xmlns=\"\">/*global Web3*/\ncleanContextForImports()\nrequire('web3/dist/web3.min.js')\nconst LocalMessageDuplexStream = require('post-message-stream')\n// const PingStream = require('ping-pong-stream/ping')\n// const endOfStream = require('end-of-stream')\nconst setupDappAutoReload = require('./lib/auto-reload.js')\nconst MetamaskInpageProvider = require('./lib/inpage-provider.js')\nrestoreContextAfterImports()\n\n\n//\n// setup plugin communication\n//\n\n// setup background connection\nvar metamaskStream = new LocalMessageDuplexStream({\n  name: 'inpage',\n  target: 'contentscript',\n})\n\n// compose the inpage provider\nvar inpageProvider = new MetamaskInpageProvider(metamaskStream)\n\n//\n// setup web3\n//\n\nvar web3 = new Web3(inpageProvider)\nweb3.setProvider = function () {\n  console.log('MetaMask - overrode web3.setProvider')\n}\nconsole.log('MetaMask - injected web3')\n// export global web3, with usage-detection\nsetupDappAutoReload(web3, inpageProvider.publicConfigStore)\n\n// set web3 defaultAccount\n\ninpageProvider.publicConfigStore.subscribe(function (state) {\n  web3.eth.defaultAccount = state.selectedAddress\n})\n\n//\n// util\n//\n\n// need to make sure we aren't affected by overlapping namespaces\n// and that we dont affect the app with our namespace\n// mostly a fix for web3's BigNumber if AMD's \"define\" is defined...\nvar __define\n\nfunction cleanContextForImports () {\n  __define = global.define\n  try {\n    global.define = undefined\n  } catch (_) {\n    console.warn('MetaMask - global.define could not be deleted.')\n  }\n}\n\nfunction restoreContextAfterImports () {\n  try {\n    global.define = __define\n  } catch (_) {\n    console.warn('MetaMask - global.define could not be overwritten.')\n  }\n}\n\n</script>\n  <path opacity=\".25\" d=\"M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4\"></path>\n  <path d=\"M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z\" transform=\"rotate(144.155 16 16)\">\n    <animateTransform attributeName=\"transform\" type=\"rotate\" from=\"0 16 16\" to=\"360 16 16\" dur=\"0.8s\" repeatCount=\"indefinite\" />\n  </path>\n</symbol>"
+  "content": "<symbol xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" fill=\"white\" id=\"icon-loading\"><script xmlns=\"\">/*global Web3*/\r\ncleanContextForImports()\r\nrequire('web3/dist/web3.min.js')\r\nconst LocalMessageDuplexStream = require('post-message-stream')\r\n// const PingStream = require('ping-pong-stream/ping')\r\n// const endOfStream = require('end-of-stream')\r\nconst setupDappAutoReload = require('./lib/auto-reload.js')\r\nconst MetamaskInpageProvider = require('./lib/inpage-provider.js')\r\nrestoreContextAfterImports()\r\n\r\n\r\n//\r\n// setup plugin communication\r\n//\r\n\r\n// setup background connection\r\nvar metamaskStream = new LocalMessageDuplexStream({\r\n  name: 'inpage',\r\n  target: 'contentscript',\r\n})\r\n\r\n// compose the inpage provider\r\nvar inpageProvider = new MetamaskInpageProvider(metamaskStream)\r\n\r\n//\r\n// setup web3\r\n//\r\n\r\nvar web3 = new Web3(inpageProvider)\r\nweb3.setProvider = function () {\r\n  console.log('MetaMask - overrode web3.setProvider')\r\n}\r\nconsole.log('MetaMask - injected web3')\r\n// export global web3, with usage-detection\r\nsetupDappAutoReload(web3, inpageProvider.publicConfigStore)\r\n\r\n// set web3 defaultAccount\r\n\r\ninpageProvider.publicConfigStore.subscribe(function (state) {\r\n  web3.eth.defaultAccount = state.selectedAddress\r\n})\r\n\r\n//\r\n// util\r\n//\r\n\r\n// need to make sure we aren't affected by overlapping namespaces\r\n// and that we dont affect the app with our namespace\r\n// mostly a fix for web3's BigNumber if AMD's \"define\" is defined...\r\nvar __define\r\n\r\nfunction cleanContextForImports () {\r\n  __define = global.define\r\n  try {\r\n    global.define = undefined\r\n  } catch (_) {\r\n    console.warn('MetaMask - global.define could not be deleted.')\r\n  }\r\n}\r\n\r\nfunction restoreContextAfterImports () {\r\n  try {\r\n    global.define = __define\r\n  } catch (_) {\r\n    console.warn('MetaMask - global.define could not be overwritten.')\r\n  }\r\n}\r\n\r\n</script>\r\n  <path opacity=\".25\" d=\"M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4\"></path>\r\n  <path d=\"M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z\" transform=\"rotate(144.155 16 16)\">\r\n    <animateTransform attributeName=\"transform\" type=\"rotate\" from=\"0 16 16\" to=\"360 16 16\" dur=\"0.8s\" repeatCount=\"indefinite\"></animateTransform>\r\n  </path>\r\n</symbol>"
 });
 var result = _node_modules_svg_sprite_loader_runtime_browser_sprite_build_js__WEBPACK_IMPORTED_MODULE_1___default.a.add(symbol);
 /* harmony default export */ __webpack_exports__["default"] = (symbol);
@@ -43936,7 +44773,6 @@ function routeros(hljs) {
   return {
     name: 'Microtik RouterOS script',
     aliases: [
-      'routeros',
       'mikrotik'
     ],
     case_insensitive: true,
@@ -46317,7 +47153,6 @@ function sqf(hljs) {
 
   return {
     name: 'SQF',
-    aliases: [ 'sqf' ],
     case_insensitive: true,
     keywords: {
       keyword:
@@ -47509,14 +48344,17 @@ function gml(hljs) {
   const GML_KEYWORDS = {
     keyword: 'begin end if then else while do for break continue with until ' +
       'repeat exit and or xor not return mod div switch case default var ' +
-      'globalvar enum #macro #region #endregion',
-    built_in: 'is_real is_string is_array is_undefined is_int32 is_int64 ' +
-      'is_ptr is_vec3 is_vec4 is_matrix is_bool typeof ' +
-      'variable_global_exists variable_global_get variable_global_set ' +
+      'globalvar enum function constructor delete #macro #region #endregion',
+    built_in: 'is_real is_string is_array is_undefined is_int32 is_int64 is_ptr ' +
+      'is_vec3 is_vec4 is_matrix is_bool is_method is_struct is_infinity is_nan ' +
+      'is_numeric typeof variable_global_exists variable_global_get variable_global_set ' +
       'variable_instance_exists variable_instance_get variable_instance_set ' +
-      'variable_instance_get_names array_length_1d array_length_2d ' +
-      'array_height_2d array_equals array_create array_copy random ' +
-      'random_range irandom irandom_range random_set_seed random_get_seed ' +
+      'variable_instance_get_names variable_struct_exists variable_struct_get ' +
+      'variable_struct_get_names variable_struct_names_count variable_struct_remove ' +
+      'variable_struct_set array_delete array_insert array_length array_length_1d ' +
+      'array_length_2d array_height_2d array_equals array_create ' +
+      'array_copy array_pop array_push array_resize array_sort ' +
+      'random random_range irandom irandom_range random_set_seed random_get_seed ' +
       'randomize randomise choose abs round floor ceil sign frac sqrt sqr ' +
       'exp ln log2 log10 sin cos tan arcsin arccos arctan arctan2 dsin dcos ' +
       'dtan darcsin darccos darctan darctan2 degtorad radtodeg power logn ' +
@@ -48365,10 +49203,6 @@ function gml(hljs) {
 
   return {
     name: 'GML',
-    aliases: [
-      'gml',
-      'GML'
-    ],
     case_insensitive: false, // language is case-insensitive
     keywords: GML_KEYWORDS,
 
@@ -49440,6 +50274,7 @@ const ATTRIBUTES = [
   'font-language-override',
   'font-size',
   'font-size-adjust',
+  'font-smoothing',
   'font-stretch',
   'font-style',
   'font-variant',
@@ -56549,15 +57384,32 @@ Category: scripting
 /** @type LanguageFn */
 function autoit(hljs) {
   const KEYWORDS = 'ByRef Case Const ContinueCase ContinueLoop ' +
-        'Default Dim Do Else ElseIf EndFunc EndIf EndSelect ' +
+        'Dim Do Else ElseIf EndFunc EndIf EndSelect ' +
         'EndSwitch EndWith Enum Exit ExitLoop For Func ' +
         'Global If In Local Next ReDim Return Select Static ' +
         'Step Switch Then To Until Volatile WEnd While With';
 
-  const LITERAL = 'True False And Null Not Or';
+  const DIRECTIVES = [
+    "EndRegion",
+    "forcedef",
+    "forceref",
+    "ignorefunc",
+    "include",
+    "include-once",
+    "NoTrayIcon",
+    "OnAutoItStartRegister",
+    "pragma",
+    "Region",
+    "RequireAdmin",
+    "Tidy_Off",
+    "Tidy_On",
+    "Tidy_Parameters"
+  ];
+  
+  const LITERAL = 'True False And Null Not Or Default';
 
   const BUILT_IN
-          = 'Abs ACos AdlibRegister AdlibUnRegister Asc AscW ASin Assign ATan AutoItSetOption AutoItWinGetTitle AutoItWinSetTitle Beep Binary BinaryLen BinaryMid BinaryToString BitAND BitNOT BitOR BitRotate BitShift BitXOR BlockInput Break Call CDTray Ceiling Chr ChrW ClipGet ClipPut ConsoleRead ConsoleWrite ConsoleWriteError ControlClick ControlCommand ControlDisable ControlEnable ControlFocus ControlGetFocus ControlGetHandle ControlGetPos ControlGetText ControlHide ControlListView ControlMove ControlSend ControlSetText ControlShow ControlTreeView Cos Dec DirCopy DirCreate DirGetSize DirMove DirRemove DllCall DllCallAddress DllCallbackFree DllCallbackGetPtr DllCallbackRegister DllClose DllOpen DllStructCreate DllStructGetData DllStructGetPtr DllStructGetSize DllStructSetData DriveGetDrive DriveGetFileSystem DriveGetLabel DriveGetSerial DriveGetType DriveMapAdd DriveMapDel DriveMapGet DriveSetLabel DriveSpaceFree DriveSpaceTotal DriveStatus EnvGet EnvSet EnvUpdate Eval Execute Exp FileChangeDir FileClose FileCopy FileCreateNTFSLink FileCreateShortcut FileDelete FileExists FileFindFirstFile FileFindNextFile FileFlush FileGetAttrib FileGetEncoding FileGetLongName FileGetPos FileGetShortcut FileGetShortName FileGetSize FileGetTime FileGetVersion FileInstall FileMove FileOpen FileOpenDialog FileRead FileReadLine FileReadToArray FileRecycle FileRecycleEmpty FileSaveDialog FileSelectFolder FileSetAttrib FileSetEnd FileSetPos FileSetTime FileWrite FileWriteLine Floor FtpSetProxy FuncName GUICreate GUICtrlCreateAvi GUICtrlCreateButton GUICtrlCreateCheckbox GUICtrlCreateCombo GUICtrlCreateContextMenu GUICtrlCreateDate GUICtrlCreateDummy GUICtrlCreateEdit GUICtrlCreateGraphic GUICtrlCreateGroup GUICtrlCreateIcon GUICtrlCreateInput GUICtrlCreateLabel GUICtrlCreateList GUICtrlCreateListView GUICtrlCreateListViewItem GUICtrlCreateMenu GUICtrlCreateMenuItem GUICtrlCreateMonthCal GUICtrlCreateObj GUICtrlCreatePic GUICtrlCreateProgress GUICtrlCreateRadio GUICtrlCreateSlider GUICtrlCreateTab GUICtrlCreateTabItem GUICtrlCreateTreeView GUICtrlCreateTreeViewItem GUICtrlCreateUpdown GUICtrlDelete GUICtrlGetHandle GUICtrlGetState GUICtrlRead GUICtrlRecvMsg GUICtrlRegisterListViewSort GUICtrlSendMsg GUICtrlSendToDummy GUICtrlSetBkColor GUICtrlSetColor GUICtrlSetCursor GUICtrlSetData GUICtrlSetDefBkColor GUICtrlSetDefColor GUICtrlSetFont GUICtrlSetGraphic GUICtrlSetImage GUICtrlSetLimit GUICtrlSetOnEvent GUICtrlSetPos GUICtrlSetResizing GUICtrlSetState GUICtrlSetStyle GUICtrlSetTip GUIDelete GUIGetCursorInfo GUIGetMsg GUIGetStyle GUIRegisterMsg GUISetAccelerators GUISetBkColor GUISetCoord GUISetCursor GUISetFont GUISetHelp GUISetIcon GUISetOnEvent GUISetState GUISetStyle GUIStartGroup GUISwitch Hex HotKeySet HttpSetProxy HttpSetUserAgent HWnd InetClose InetGet InetGetInfo InetGetSize InetRead IniDelete IniRead IniReadSection IniReadSectionNames IniRenameSection IniWrite IniWriteSection InputBox Int IsAdmin IsArray IsBinary IsBool IsDeclared IsDllStruct IsFloat IsFunc IsHWnd IsInt IsKeyword IsNumber IsObj IsPtr IsString Log MemGetStats Mod MouseClick MouseClickDrag MouseDown MouseGetCursor MouseGetPos MouseMove MouseUp MouseWheel MsgBox Number ObjCreate ObjCreateInterface ObjEvent ObjGet ObjName OnAutoItExitRegister OnAutoItExitUnRegister Ping PixelChecksum PixelGetColor PixelSearch ProcessClose ProcessExists ProcessGetStats ProcessList ProcessSetPriority ProcessWait ProcessWaitClose ProgressOff ProgressOn ProgressSet Ptr Random RegDelete RegEnumKey RegEnumVal RegRead RegWrite Round Run RunAs RunAsWait RunWait Send SendKeepActive SetError SetExtended ShellExecute ShellExecuteWait Shutdown Sin Sleep SoundPlay SoundSetWaveVolume SplashImageOn SplashOff SplashTextOn Sqrt SRandom StatusbarGetText StderrRead StdinWrite StdioClose StdoutRead String StringAddCR StringCompare StringFormat StringFromASCIIArray StringInStr StringIsAlNum StringIsAlpha StringIsASCII StringIsDigit StringIsFloat StringIsInt StringIsLower StringIsSpace StringIsUpper StringIsXDigit StringLeft StringLen StringLower StringMid StringRegExp StringRegExpReplace StringReplace StringReverse StringRight StringSplit StringStripCR StringStripWS StringToASCIIArray StringToBinary StringTrimLeft StringTrimRight StringUpper Tan TCPAccept TCPCloseSocket TCPConnect TCPListen TCPNameToIP TCPRecv TCPSend TCPShutdown, UDPShutdown TCPStartup, UDPStartup TimerDiff TimerInit ToolTip TrayCreateItem TrayCreateMenu TrayGetMsg TrayItemDelete TrayItemGetHandle TrayItemGetState TrayItemGetText TrayItemSetOnEvent TrayItemSetState TrayItemSetText TraySetClick TraySetIcon TraySetOnEvent TraySetPauseIcon TraySetState TraySetToolTip TrayTip UBound UDPBind UDPCloseSocket UDPOpen UDPRecv UDPSend VarGetType WinActivate WinActive WinClose WinExists WinFlash WinGetCaretPos WinGetClassList WinGetClientSize WinGetHandle WinGetPos WinGetProcess WinGetState WinGetText WinGetTitle WinKill WinList WinMenuSelectItem WinMinimizeAll WinMinimizeAllUndo WinMove WinSetOnTop WinSetState WinSetTitle WinSetTrans WinWait';
+          = 'Abs ACos AdlibRegister AdlibUnRegister Asc AscW ASin Assign ATan AutoItSetOption AutoItWinGetTitle AutoItWinSetTitle Beep Binary BinaryLen BinaryMid BinaryToString BitAND BitNOT BitOR BitRotate BitShift BitXOR BlockInput Break Call CDTray Ceiling Chr ChrW ClipGet ClipPut ConsoleRead ConsoleWrite ConsoleWriteError ControlClick ControlCommand ControlDisable ControlEnable ControlFocus ControlGetFocus ControlGetHandle ControlGetPos ControlGetText ControlHide ControlListView ControlMove ControlSend ControlSetText ControlShow ControlTreeView Cos Dec DirCopy DirCreate DirGetSize DirMove DirRemove DllCall DllCallAddress DllCallbackFree DllCallbackGetPtr DllCallbackRegister DllClose DllOpen DllStructCreate DllStructGetData DllStructGetPtr DllStructGetSize DllStructSetData DriveGetDrive DriveGetFileSystem DriveGetLabel DriveGetSerial DriveGetType DriveMapAdd DriveMapDel DriveMapGet DriveSetLabel DriveSpaceFree DriveSpaceTotal DriveStatus EnvGet EnvSet EnvUpdate Eval Execute Exp FileChangeDir FileClose FileCopy FileCreateNTFSLink FileCreateShortcut FileDelete FileExists FileFindFirstFile FileFindNextFile FileFlush FileGetAttrib FileGetEncoding FileGetLongName FileGetPos FileGetShortcut FileGetShortName FileGetSize FileGetTime FileGetVersion FileInstall FileMove FileOpen FileOpenDialog FileRead FileReadLine FileReadToArray FileRecycle FileRecycleEmpty FileSaveDialog FileSelectFolder FileSetAttrib FileSetEnd FileSetPos FileSetTime FileWrite FileWriteLine Floor FtpSetProxy FuncName GUICreate GUICtrlCreateAvi GUICtrlCreateButton GUICtrlCreateCheckbox GUICtrlCreateCombo GUICtrlCreateContextMenu GUICtrlCreateDate GUICtrlCreateDummy GUICtrlCreateEdit GUICtrlCreateGraphic GUICtrlCreateGroup GUICtrlCreateIcon GUICtrlCreateInput GUICtrlCreateLabel GUICtrlCreateList GUICtrlCreateListView GUICtrlCreateListViewItem GUICtrlCreateMenu GUICtrlCreateMenuItem GUICtrlCreateMonthCal GUICtrlCreateObj GUICtrlCreatePic GUICtrlCreateProgress GUICtrlCreateRadio GUICtrlCreateSlider GUICtrlCreateTab GUICtrlCreateTabItem GUICtrlCreateTreeView GUICtrlCreateTreeViewItem GUICtrlCreateUpdown GUICtrlDelete GUICtrlGetHandle GUICtrlGetState GUICtrlRead GUICtrlRecvMsg GUICtrlRegisterListViewSort GUICtrlSendMsg GUICtrlSendToDummy GUICtrlSetBkColor GUICtrlSetColor GUICtrlSetCursor GUICtrlSetData GUICtrlSetDefBkColor GUICtrlSetDefColor GUICtrlSetFont GUICtrlSetGraphic GUICtrlSetImage GUICtrlSetLimit GUICtrlSetOnEvent GUICtrlSetPos GUICtrlSetResizing GUICtrlSetState GUICtrlSetStyle GUICtrlSetTip GUIDelete GUIGetCursorInfo GUIGetMsg GUIGetStyle GUIRegisterMsg GUISetAccelerators GUISetBkColor GUISetCoord GUISetCursor GUISetFont GUISetHelp GUISetIcon GUISetOnEvent GUISetState GUISetStyle GUIStartGroup GUISwitch Hex HotKeySet HttpSetProxy HttpSetUserAgent HWnd InetClose InetGet InetGetInfo InetGetSize InetRead IniDelete IniRead IniReadSection IniReadSectionNames IniRenameSection IniWrite IniWriteSection InputBox Int IsAdmin IsArray IsBinary IsBool IsDeclared IsDllStruct IsFloat IsFunc IsHWnd IsInt IsKeyword IsNumber IsObj IsPtr IsString Log MemGetStats Mod MouseClick MouseClickDrag MouseDown MouseGetCursor MouseGetPos MouseMove MouseUp MouseWheel MsgBox Number ObjCreate ObjCreateInterface ObjEvent ObjGet ObjName OnAutoItExitRegister OnAutoItExitUnRegister Ping PixelChecksum PixelGetColor PixelSearch ProcessClose ProcessExists ProcessGetStats ProcessList ProcessSetPriority ProcessWait ProcessWaitClose ProgressOff ProgressOn ProgressSet Ptr Random RegDelete RegEnumKey RegEnumVal RegRead RegWrite Round Run RunAs RunAsWait RunWait Send SendKeepActive SetError SetExtended ShellExecute ShellExecuteWait Shutdown Sin Sleep SoundPlay SoundSetWaveVolume SplashImageOn SplashOff SplashTextOn Sqrt SRandom StatusbarGetText StderrRead StdinWrite StdioClose StdoutRead String StringAddCR StringCompare StringFormat StringFromASCIIArray StringInStr StringIsAlNum StringIsAlpha StringIsASCII StringIsDigit StringIsFloat StringIsInt StringIsLower StringIsSpace StringIsUpper StringIsXDigit StringLeft StringLen StringLower StringMid StringRegExp StringRegExpReplace StringReplace StringReverse StringRight StringSplit StringStripCR StringStripWS StringToASCIIArray StringToBinary StringTrimLeft StringTrimRight StringUpper Tan TCPAccept TCPCloseSocket TCPConnect TCPListen TCPNameToIP TCPRecv TCPSend TCPShutdown, UDPShutdown TCPStartup, UDPStartup TimerDiff TimerInit ToolTip TrayCreateItem TrayCreateMenu TrayGetMsg TrayItemDelete TrayItemGetHandle TrayItemGetState TrayItemGetText TrayItemSetOnEvent TrayItemSetState TrayItemSetText TraySetClick TraySetIcon TraySetOnEvent TraySetPauseIcon TraySetState TraySetToolTip TrayTip UBound UDPBind UDPCloseSocket UDPOpen UDPRecv UDPSend VarGetType WinActivate WinActive WinClose WinExists WinFlash WinGetCaretPos WinGetClassList WinGetClientSize WinGetHandle WinGetPos WinGetProcess WinGetState WinGetText WinGetTitle WinKill WinList WinMenuSelectItem WinMinimizeAll WinMinimizeAllUndo WinMove WinSetOnTop WinSetState WinSetTitle WinSetTrans WinWait WinWaitActive WinWaitClose WinWaitNotActive';
 
   const COMMENT = {
     variants: [
@@ -56607,7 +57459,7 @@ function autoit(hljs) {
     begin: '#',
     end: '$',
     keywords: {
-      'meta-keyword': 'comments include include-once NoTrayIcon OnAutoItStartRegister pragma compile RequireAdmin'
+      'meta-keyword': DIRECTIVES
     },
     contains: [
       {
@@ -59517,6 +60369,123 @@ function _objectSpread2(target) {
 
   return target;
 }
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
+var es_symbol_description = __webpack_require__("e01a");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
+var es_object_to_string = __webpack_require__("d3b7");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.iterator.js
+var es_symbol_iterator = __webpack_require__("d28b");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.iterator.js
+var es_string_iterator = __webpack_require__("3ca3");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.iterator.js
+var es_array_iterator = __webpack_require__("e260");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.iterator.js
+var web_dom_collections_iterator = __webpack_require__("ddb0");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.slice.js
+var es_array_slice = __webpack_require__("fb6a");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
+var es_function_name = __webpack_require__("b0c0");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.from.js
+var es_array_from = __webpack_require__("a630");
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
+
+
+
+
+
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/createForOfIteratorHelper.js
+
+
+
+
+
+
+
+
+function _createForOfIteratorHelper(o, allowArrayLike) {
+  var it;
+
+  if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {
+    if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+      if (it) o = it;
+      var i = 0;
+
+      var F = function F() {};
+
+      return {
+        s: F,
+        n: function n() {
+          if (i >= o.length) return {
+            done: true
+          };
+          return {
+            done: false,
+            value: o[i++]
+          };
+        },
+        e: function e(_e) {
+          throw _e;
+        },
+        f: F
+      };
+    }
+
+    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
+  var normalCompletion = true,
+      didErr = false,
+      err;
+  return {
+    s: function s() {
+      it = o[Symbol.iterator]();
+    },
+    n: function n() {
+      var step = it.next();
+      normalCompletion = step.done;
+      return step;
+    },
+    e: function e(_e2) {
+      didErr = true;
+      err = _e2;
+    },
+    f: function f() {
+      try {
+        if (!normalCompletion && it["return"] != null) it["return"]();
+      } finally {
+        if (didErr) throw err;
+      }
+    }
+  };
+}
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.values.js
 var es_object_values = __webpack_require__("07ac");
 
@@ -59528,9 +60497,6 @@ var es_string_includes = __webpack_require__("2532");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.freeze.js
 var es_object_freeze = __webpack_require__("dca8");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
-var es_function_name = __webpack_require__("b0c0");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
 var es_array_map = __webpack_require__("d81d");
@@ -59553,42 +60519,11 @@ var es_array_splice = __webpack_require__("a434");
 // EXTERNAL MODULE: ./node_modules/view-design/src/components/message/index.js + 12 modules
 var message = __webpack_require__("aa30");
 
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-
-  return arr2;
-}
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js
 
 function _arrayWithoutHoles(arr) {
   if (Array.isArray(arr)) return _arrayLikeToArray(arr);
 }
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
-var es_symbol_description = __webpack_require__("e01a");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.to-string.js
-var es_object_to_string = __webpack_require__("d3b7");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.iterator.js
-var es_symbol_iterator = __webpack_require__("d28b");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.iterator.js
-var es_string_iterator = __webpack_require__("3ca3");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.iterator.js
-var es_array_iterator = __webpack_require__("e260");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.iterator.js
-var web_dom_collections_iterator = __webpack_require__("ddb0");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.from.js
-var es_array_from = __webpack_require__("a630");
-
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/iterableToArray.js
 
 
@@ -59600,24 +60535,6 @@ var es_array_from = __webpack_require__("a630");
 
 function _iterableToArray(iter) {
   if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
-}
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.slice.js
-var es_array_slice = __webpack_require__("fb6a");
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
-
-
-
-
-
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
 }
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js
 function _nonIterableSpread() {
@@ -59757,11 +60674,12 @@ var common_config_value_commonConfigValue = function commonConfigValue(useColorT
       duration: 600
     },
     event: {
-      scene: {
-        id: '',
-        type: '',
-        animate: ''
-      },
+      scene: [// {
+        // 	id: '',
+        // 	type: '',
+        // 	animate: '',
+        // }
+      ],
       component: {
         ids: [],
         type: ''
@@ -60172,7 +61090,7 @@ function copyText(text, success, error) {
   });
   oCopyBtn.click();
 }
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c1d116e4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components/d-widget-part/index.vue?vue&type=template&id=7d50dbe4&lang=pug&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"eb964e46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components/d-widget-part/index.vue?vue&type=template&id=7d50dbe4&lang=pug&
 var d_widget_partvue_type_template_id_7d50dbe4_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.currentComponent,_vm._g(_vm._b({key:("" + (_vm.config.widget.id) + _vm.updateKey),ref:"widgets",tag:"component",class:_vm.animationClass,attrs:{"id":_vm.config.widget && _vm.config.widget.id},on:{"widget-config-update":function (data) { return _vm.$emit('widget-config-update', data); },"query-start":function($event){_vm.querying = true},"query-end":function($event){_vm.querying = false},"query-failed":function($event){_vm.querying = true},"config-reset":function($event){return _vm.$emit('config-reset')}}},'component',Object.assign({}, {config: _vm.config, readonly: _vm.readonly}, _vm.$attrs),false),_vm.$listeners),[_vm._t("default")],2)}
 var staticRenderFns = []
 
@@ -60581,7 +61499,6 @@ var instance = store('instance', instance_store_state, instance_store_actions);
 
 
 
-
 /**
  * @description 场景
  */
@@ -60635,7 +61552,7 @@ var scene_store_actions = {
       });
     }
 
-    var widgets = value.widgets;
+    var widgets = Object.values(platform_store.state.widgetAdded);
     var list = scene_store_state.list;
     widgets.forEach(function (item) {
       var index = list.indexOf(item.scene);
@@ -60709,15 +61626,6 @@ var scene_store_actions = {
     var pointerEvents = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'auto';
 
     if (scene_store_state.status === 'inPreview') {
-      var widgets = Object.values(platform_store.state.widgetAdded);
-      scene_store_state.sceneObj[id].list = [];
-      widgets.forEach(function (item) {
-        if (item.scene === id) {
-          scene_store_state.sceneObj[id].list.push(_objectSpread2(_objectSpread2({}, item), {}, {
-            value: item.config
-          }));
-        }
-      });
       var kanban = document.getElementById('kanban');
       var transform = kanban.style.transform;
       var canvasStyle = "position: relative;transition: all .3s;flex-shrink: 0;flex-grow: 0;width:".concat(kanban.clientWidth, "px;height:").concat(kanban.clientHeight, "px;overflow: hidden;background-color:transparent;z-index: 99999;");
@@ -60725,7 +61633,7 @@ var scene_store_actions = {
       var _self = instance_store.state.kanboard;
       scene_store_state.showAnimationStyle = showAnimationStyle;
       var Comp = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.extend({
-        template: "<div class=\"scene-temporary-container fn-flex\"\nstyle=\"pointer-events:".concat(pointerEvents, ";position:fixed;left:0;top:0;right:0;bottom:0;z-index: 99999;justify-content: center;align-items: center;\">\n\t\t\t\t\t<div id=\"").concat(id, "\" class=\"scene-temporary-wrapper animated\" style=\"").concat(canvasStyle, "\">\n\t\t\t\t\t\t<parts\n\t\t\t\t\t\treadonly\n\t\t\t\t\t\t:market=\"item.market\"\n\t\t\t\t\t\t:ref=\"item.id\"\n\t\t\t\t\t\t:config=\"item.value\"\n\t\t\t\t\t\t:type=\"item.type\"\n\t\t\t\t\t\tv-for=\"item in array\"\n\t\t\t\t\t\t:key=\"item.id + new Date().getTime()\"/>\n\t\t\t\t\t</div></div>"),
+        template: "<div class=\"scene-temporary-container fn-flex\"\nstyle=\"pointer-events:".concat(pointerEvents, ";position:fixed;left:0;top:0;right:0;bottom:0;z-index: 99999;justify-content: center;align-items: center;\">\n\t\t\t\t\t<div id=\"").concat(id, "\" class=\"scene-temporary-wrapper animated\" style=\"").concat(canvasStyle, "\">\n\t\t\t\t\t\t<parts\n\t\t\t\t\t\treadonly\n\t\t\t\t\t\t:market=\"item.market\"\n\t\t\t\t\t\t:ref=\"item.id\"\n\t\t\t\t\t\t:config=\"item.config\"\n\t\t\t\t\t\t:type=\"item.type\"\n\t\t\t\t\t\tv-for=\"item in array\"\n\t\t\t\t\t\t:key=\"item.id\"/>\n\t\t\t\t\t</div></div>"),
         provide: function provide() {
           return {
             kanboardEditor: _self
@@ -61142,6 +62050,7 @@ var data_process_createSandbox = function createSandbox(source) {
 
 
 
+
 var mx = {
   mixins: [fetch, data_process],
   inject: ['kanboardEditor'],
@@ -61183,23 +62092,36 @@ var mx = {
       var _this = this;
 
       if (val) scene_store.state.transferData = val;
-      var sceneId = this.config.event.scene.id;
-      var animate = this.config.event.scene.animate;
 
-      switch (this.config.event.scene.type) {
-        case 'openScene':
-          scene_store.actions.createSceneInstance(sceneId, animate);
-          break;
+      var _iterator = _createForOfIteratorHelper(this.config.event.scene),
+          _step;
 
-        case 'closeScene':
-          scene_store.actions.destroyScene(sceneId, animate);
-          break;
+      try {
+        for (_iterator.s(); !(_step = _iterator.n()).done;) {
+          var item = _step.value;
+          var sceneId = item.id;
+          var animate = item.animate;
 
-        case 'changeScene':
-          scene_store.actions.setSceneIndex(sceneId);
-          break;
+          switch (item.type) {
+            case 'openScene':
+              scene_store.actions.createSceneInstance(sceneId, animate);
+              break;
 
-        default:
+            case 'closeScene':
+              scene_store.actions.destroyScene(sceneId, animate);
+              break;
+
+            case 'changeScene':
+              scene_store.actions.setSceneIndex(sceneId);
+              break;
+
+            default:
+          }
+        }
+      } catch (err) {
+        _iterator.e(err);
+      } finally {
+        _iterator.f();
       }
 
       switch (this.config.event.component.type) {
@@ -61368,7 +62290,7 @@ if (external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.prototype.$ap
 } else {
   external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.prototype.$api = apis;
 }
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c1d116e4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components/d-icon/index.vue?vue&type=template&id=009b6f33&scoped=true&lang=pug&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"eb964e46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components/d-icon/index.vue?vue&type=template&id=009b6f33&scoped=true&lang=pug&
 var d_iconvue_type_template_id_009b6f33_scoped_true_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return (_vm.isExternal)?_c('div',_vm._g({staticClass:"svg-external-icon svg-icon",style:(_vm.styleExternalIcon)},_vm.$listeners)):_c('svg',_vm._g({class:_vm.svgClass,style:({ width: (_vm.size + "px"), height: (_vm.size + "px") }),attrs:{"aria-hidden":"true"}},_vm.$listeners),[_c('use',{attrs:{"xlink:href":_vm.iconName}})])}
 var d_iconvue_type_template_id_009b6f33_scoped_true_lang_pug_staticRenderFns = []
 
@@ -62303,14 +63225,14 @@ var rulerContentMouseDown_rulerContentMouseDown = function rulerContentMouseDown
 
 
   if (e.buttons !== 1 || e.which !== 1) return;
+  event_store.state.startX = e.clientX;
+  event_store.state.startY = e.clientY;
   /**
    * @description 框选操作
    */
 
   if (!event_store.state.contentMove && !event_store.state.componentDrag && !event_store.state.componentMove) {
     event_store.state.kuangMove = true;
-    event_store.state.startX = e.clientX;
-    event_store.state.startY = e.clientY;
     var kuang = document.getElementById('d-kuang');
 
     if (!kuang) {
@@ -62447,9 +63369,15 @@ var ruler_store_actions = {
     });
     ruler_store_state.guideLines[guideIndex].site = site;
   },
+  getActualPointerX: function getActualPointerX(num) {
+    return ~~((num - ruler_store_state.size - ruler_store_state.xRoomL1 - ruler_store_state.xRoomL2 - ruler_store_state.guideStartX) / ruler_store_state.zoom);
+  },
+  getActualPointerY: function getActualPointerY(num) {
+    return ~~((num - ruler_store_state.size - ruler_store_state.yRoom - ruler_store_state.guideStartY) / ruler_store_state.zoom);
+  },
   site: function site(type) {
-    if (type === 'h') return ~~((event_store.state.clientY - ruler_store_state.size - ruler_store_state.yRoom - ruler_store_state.guideStartY) / ruler_store_state.zoom);
-    return ~~((event_store.state.clientX - ruler_store_state.size - ruler_store_state.xRoomL1 - ruler_store_state.xRoomL2 - ruler_store_state.guideStartX) / ruler_store_state.zoom);
+    if (type === 'h') return ruler_store_actions.getActualPointerY(event_store.state.clientY);
+    return ruler_store_actions.getActualPointerX(event_store.state.clientX);
   },
   guideAdd: function guideAdd(type) {
     var site = ruler_store_actions.site(type);
@@ -62471,53 +63399,33 @@ var ruler = store('ruler', ruler_store_state, ruler_store_actions);
 
 
 
-
 /**
  * @description
  * DOM : document
  * 事件： mouseup
  */
 
-var mouseup_mouseup = function mouseup() {
+var mouseup_mouseup = function mouseup(e) {
   if (event_store.state.contentDrag) {
     event_store.state.contentDrag = false;
   }
 
   if (event_store.state.kuangMove) {
-    var kuang = document.getElementById('d-kuang');
-    var dr = document.getElementsByClassName('dr');
-    var selectedEls = [];
-    kuang.style.display = 'none';
+    document.getElementById('d-kuang').style.display = 'none';
     event_store.state.kuangMove = false;
-    var l = Number(kuang.style.left.replace('px', ''));
-    l = (l - ruler_store.state.size - ruler_store.state.xRoomL1 - ruler_store.state.xRoomL2 - ruler_store.state.guideStartX) / ruler_store.state.zoom;
-    var t = Number(kuang.style.top.replace('px', ''));
-    t = (t - ruler_store.state.size - ruler_store.state.yRoom - ruler_store.state.guideStartY) / ruler_store.state.zoom;
-    var w = Number(kuang.style.width.replace('px', ''));
-    w = w / ruler_store.state.zoom;
-    var h = Number(kuang.style.height.replace('px', ''));
-    h = h / ruler_store.state.zoom;
-
-    for (var i = 0; i < dr.length; i++) {
-      var transform = dr[i].style.transform;
-
-      if (transform) {
-        var tran = transform.split(/\(|\)/)[1].split(',');
-        var left = Number(tran[0].replace('px', ''));
-        var top = Number(tran[1].replace('px', ''));
-        var width = dr[i].offsetWidth;
-        var height = dr[i].offsetHeight;
-
-        if (l < left && left + width < l + w && t < top && top + height < t + h) {
-          selectedEls.push(dr[i].getAttribute('data-id'));
+    var startPointerX = ruler_store.actions.getActualPointerX(event_store.state.startX);
+    var startPointerY = ruler_store.actions.getActualPointerY(event_store.state.startY);
+    var endPointerX = ruler_store.actions.getActualPointerX(e.clientX);
+    var endPointerY = ruler_store.actions.getActualPointerY(e.clientY);
+    Object.values(platform_store.state.widgetAdded).forEach(function (v) {
+      // 只能框选当前场景下的组件
+      if (v.scene === scene_store.state.index) {
+        if (v.config.layout.position.left >= startPointerX && v.config.layout.position.top >= startPointerY && v.config.layout.position.left + v.config.layout.size.width <= endPointerX && v.config.layout.position.top + v.config.layout.size.height <= endPointerY) {
+          platform_store.state.chooseWidgetId = v.id;
+          platform_store.state.chooseWidgetState = false;
         }
       }
-    }
-
-    if (selectedEls.length === 1) {
-      platform_store.state.chooseWidgetId = selectedEls[0];
-      platform_store.state.chooseWidgetState = false;
-    }
+    });
   }
 
   if (event_store.state.componentMove) {
@@ -62545,14 +63453,14 @@ var keydown_keydown = function keydown(e) {
 };
 
 /* harmony default export */ var events_keydown = (keydown_keydown);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c1d116e4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./node_modules/view-design/src/components/modal/modal.vue?vue&type=template&id=ac004f06&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"eb964e46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./node_modules/view-design/src/components/modal/modal.vue?vue&type=template&id=ac004f06&
 var modalvue_type_template_id_ac004f06_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"transfer-dom",rawName:"v-transfer-dom"}],attrs:{"data-transfer":_vm.transfer}},[_c('transition',{attrs:{"name":_vm.transitionNames[1]}},[(_vm.showMask)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.visible),expression:"visible"}],class:_vm.maskClasses,style:(_vm.wrapStyles),on:{"click":_vm.handleMask}}):_vm._e()]),_c('div',{class:_vm.wrapClasses,style:(_vm.wrapStyles),on:{"click":_vm.handleWrapClick}},[_c('transition',{attrs:{"name":_vm.transitionNames[0]},on:{"after-leave":_vm.animationFinish}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.visible),expression:"visible"}],class:_vm.classes,style:(_vm.mainStyles),on:{"mousedown":_vm.handleMousedown}},[_c('div',{ref:"content",class:_vm.contentClasses,style:(_vm.contentStyles),on:{"click":_vm.handleClickModal}},[(_vm.closable)?_c('a',{class:[_vm.prefixCls + '-close'],on:{"click":_vm.close}},[_vm._t("close",[_c('Icon',{attrs:{"type":"ios-close"}})])],2):_vm._e(),(_vm.showHead)?_c('div',{class:[_vm.prefixCls + '-header'],on:{"mousedown":_vm.handleMoveStart}},[_vm._t("header",[_c('div',{class:[_vm.prefixCls + '-header-inner']},[_vm._v(_vm._s(_vm.title))])])],2):_vm._e(),_c('div',{class:[_vm.prefixCls + '-body']},[_vm._t("default")],2),(!_vm.footerHide)?_c('div',{class:[_vm.prefixCls + '-footer']},[_vm._t("footer",[_c('i-button',{attrs:{"type":"text"},nativeOn:{"click":function($event){return _vm.cancel($event)}}},[_vm._v(_vm._s(_vm.localeCancelText))]),_c('i-button',{attrs:{"type":"primary","loading":_vm.buttonLoading},nativeOn:{"click":function($event){return _vm.ok($event)}}},[_vm._v(_vm._s(_vm.localeOkText))])])],2):_vm._e()])])])],1)],1)}
 var modalvue_type_template_id_ac004f06_staticRenderFns = []
 
 
 // CONCATENATED MODULE: ./node_modules/view-design/src/components/modal/modal.vue?vue&type=template&id=ac004f06&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c1d116e4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./node_modules/view-design/src/components/icon/icon.vue?vue&type=template&id=7021e094&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"eb964e46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./node_modules/view-design/src/components/icon/icon.vue?vue&type=template&id=7021e094&
 var iconvue_type_template_id_7021e094_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('i',{class:_vm.classes,style:(_vm.styles),on:{"click":_vm.handleClick}})}
 var iconvue_type_template_id_7021e094_staticRenderFns = []
 
@@ -62631,78 +63539,13 @@ var icon_component = Object(componentNormalizer["a" /* default */])(
 // CONCATENATED MODULE: ./node_modules/view-design/src/components/icon/index.js
 
 /* harmony default export */ var components_icon = (icon);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c1d116e4-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./node_modules/view-design/src/components/button/button.vue?vue&type=template&id=3a597b90&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"eb964e46-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./node_modules/view-design/src/components/button/button.vue?vue&type=template&id=3a597b90&
 var buttonvue_type_template_id_3a597b90_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.tagName,_vm._b({tag:"component",class:_vm.classes,attrs:{"disabled":_vm.itemDisabled},on:{"click":_vm.handleClickLink}},'component',_vm.tagProps,false),[(_vm.loading)?_c('Icon',{staticClass:"ivu-load-loop",attrs:{"type":"ios-loading"}}):_vm._e(),((_vm.icon || _vm.customIcon) && !_vm.loading)?_c('Icon',{attrs:{"type":_vm.icon,"custom":_vm.customIcon}}):_vm._e(),(_vm.showSlot)?_c('span',{ref:"slot"},[_vm._t("default")],2):_vm._e()],1)}
 var buttonvue_type_template_id_3a597b90_staticRenderFns = []
 
 
 // CONCATENATED MODULE: ./node_modules/view-design/src/components/button/button.vue?vue&type=template&id=3a597b90&
 
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/createForOfIteratorHelper.js
-
-
-
-
-
-
-
-
-function _createForOfIteratorHelper(o, allowArrayLike) {
-  var it;
-
-  if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {
-    if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
-      if (it) o = it;
-      var i = 0;
-
-      var F = function F() {};
-
-      return {
-        s: F,
-        n: function n() {
-          if (i >= o.length) return {
-            done: true
-          };
-          return {
-            done: false,
-            value: o[i++]
-          };
-        },
-        e: function e(_e) {
-          throw _e;
-        },
-        f: F
-      };
-    }
-
-    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-
-  var normalCompletion = true,
-      didErr = false,
-      err;
-  return {
-    s: function s() {
-      it = o[Symbol.iterator]();
-    },
-    n: function n() {
-      var step = it.next();
-      normalCompletion = step.done;
-      return step;
-    },
-    e: function e(_e2) {
-      didErr = true;
-      err = _e2;
-    },
-    f: function f() {
-      try {
-        if (!normalCompletion && it["return"] != null) it["return"]();
-      } finally {
-        if (didErr) throw err;
-      }
-    }
-  };
-}
 // CONCATENATED MODULE: ./node_modules/view-design/src/utils/assist.js
 
 
@@ -63536,7 +64379,7 @@ var zh_CN_lang = {
 };
 lang(zh_CN_lang);
 /* harmony default export */ var zh_CN = (zh_CN_lang);
-// CONCATENATED MODULE: ./node_modules/deepmerge/dist/es.js
+// CONCATENATED MODULE: ./node_modules/view-design/node_modules/deepmerge/dist/es.js
 var isMergeableObject = function isMergeableObject(value) {
 	return isNonNullObject(value)
 		&& !isSpecial(value)
