@@ -7,6 +7,7 @@
 		"serve:simple": "vue-cli-service serve --mode simple",
 		"build": "vue-cli-service build --no-clean",
 		"build:simple": "vue-cli-service build --no-clean --mode simple",
+		"stylelint": "stylelint 'src/**/*.{scss,vue}' --config '.stylelintrc.js' --fix",
 		"update": "auto-vers -t",
 		"commit": "git add .&&git cz",
 		"doc": "doctoc --title '<div class=\"help-menu pos-f\">目录</div>' ./docs"

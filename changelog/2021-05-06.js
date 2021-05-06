@@ -136,5 +136,13 @@ export default {
 			type: ['perf'],
 			content: '右键菜单优化',
 		},
+		{
+			type: ['perf'],
+			content: '新增单框选功能',
+		},
+		{
+			type: ['perf'],
+			content: '新增delete删除组件功能',
+		},
 	],
 }
