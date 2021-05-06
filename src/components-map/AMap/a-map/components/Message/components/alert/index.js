@@ -1,4 +1,5 @@
 import component from './index.vue'
+import Vue from 'vue'
 
 const MessageAlert = function (options) {
 	const Constructor = Vue.extend(component)

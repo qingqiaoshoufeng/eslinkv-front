@@ -33,12 +33,12 @@ import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 import { Input, Icon } from 'view-design'
 
 @Component({ components: { Input, Icon: Icon } })
-class MessageItem extends Vue {
-	replyContent: String = ''
-	ependReply: Boolean = false
-	textExpend: Boolean = false
-	showTextExpend: Boolean = false
-	sending: Boolean = false
+export default class MessageItem extends Vue {
+	replyContent = ''
+	ependReply = false
+	textExpend = false
+	showTextExpend = false
+	sending = false
 	@Prop(Object) data: any
 	@Prop(Boolean) alwaysExpend: any
 	created() {
@@ -78,14 +78,11 @@ class MessageItem extends Vue {
 		return this.textExpend
 	}
 }
-
-export default MessageItem
 </script>
 <style lang="scss" scoped>
 .message-item {
 	position: relative;
 	padding: 24px;
-	padding-top: 24px;
 	font-size: 20px;
 	color: #fff;
 	background: #012f87;
@@ -146,7 +143,6 @@ export default MessageItem
 		font-size: 20px;
 		color: #fff;
 		background: #0057a9;
-		border: none;
 		border: 1px solid transparent;
 
 		&:focus {

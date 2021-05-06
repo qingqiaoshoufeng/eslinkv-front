@@ -18,7 +18,7 @@ import MsItem from '../messageItem/index.vue'
 import SvgIcon from '../../../SvgIcon/index.vue'
 
 @Component({ components: { 'ms-item': MsItem, 'svg-icon': SvgIcon } })
-class MessageAlert extends Vue {
+export default class MessageAlert extends Vue {
 	id = ''
 	innerData: any = {}
 	ready = false
@@ -63,8 +63,6 @@ class MessageAlert extends Vue {
 		document.getElementById(this.id)?.remove()
 	}
 }
-
-export default MessageAlert
 </script>
 <style lang="scss">
 .at-container {

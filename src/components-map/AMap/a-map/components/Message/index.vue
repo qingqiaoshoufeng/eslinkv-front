@@ -1,15 +1,17 @@
 <template lang="pug">
-.message.pointer(
+.message.pointer.pos-a(
 	v-if="JSON.stringify(message) !== '{}'",
 	:class="{ 'un-read': unReadStatus, active }")
-	svg-icon.icon(iconName="iconmessage", @click="showFullTagger")
+	.pos-a.icon-box
+		svg-icon.icon(iconName="iconmessage", @click="showFullTagger")
+		.un-read.pos-a(v-if="unReadStatus")
 	span.content(@click="handleClick")
 		marquee {{ message.interactionContent }}
 	span.time {{ message.createTime }}
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import MessageAlert from './components/alert/index.js'
+// import MessageAlert from './components/alert/index.js'
 import MessageList from './components/messageList/index.js'
 import SvgIcon from '../SvgIcon/index.vue'
 import format from 'date-fns/format'
@@ -17,11 +19,11 @@ import format from 'date-fns/format'
 @Component({
 	components: { 'svg-icon': SvgIcon },
 })
-class AlertContent extends Vue {
+export default class AlertContent extends Vue {
 	message: any = {}
 	unReadStatus = true
 	timer: any = null
-	alertInstance: any = null
+	// alertInstance: any = null
 	active = false
 
 	showFullTagger() {
@@ -46,14 +48,14 @@ class AlertContent extends Vue {
 		this.$api.message.getUnReadMessage().then(data => {
 			if (data) {
 				this.unReadStatus = true
-				if (this.alertInstance) {
-					this.alertInstance.close()
-				}
-				setTimeout(() => {
-					this.alertInstance = MessageAlert({
-						data: data,
-					})
-				}, 1000)
+				// if (this.alertInstance) {
+				// 	this.alertInstance.close()
+				// }
+				// setTimeout(() => {
+				// 	this.alertInstance = MessageAlert({
+				// 		data: data,
+				// 	})
+				// }, 1000)
 				this.formatTime(data)
 			} else {
 				this.getData()
@@ -91,12 +93,9 @@ class AlertContent extends Vue {
 		document.addEventListener('mapMessage', this.showFullTagger, false)
 	}
 }
-
-export default AlertContent
 </script>
 <style lang="scss">
 .message {
-	position: absolute;
 	top: 108px;
 	right: 32px;
 	z-index: 10;
@@ -107,7 +106,14 @@ export default AlertContent
 	font-size: 18px;
 	color: #fff;
 	border-radius: 20px;
-
+	.un-read {
+		width: 8px;
+		height: 8px;
+		background-color: red;
+		border-radius: 8px;
+		top: 2px;
+		right: 0;
+	}
 	&.un-read::after {
 		position: absolute;
 		top: 4px;
@@ -117,11 +123,11 @@ export default AlertContent
 		border: 5px solid red;
 		border-radius: 50%;
 	}
-
-	.icon {
-		position: absolute;
+	.icon-box {
 		top: 4px;
 		right: 8px;
+	}
+	.icon {
 		font-size: 24px;
 		vertical-align: middle;
 	}
@@ -129,12 +135,10 @@ export default AlertContent
 	&.active {
 		background: #001a77;
 		border: 1px solid #0df;
-
-		.icon {
+		.icon-box {
 			right: auto;
 			left: 8px;
 		}
-
 		.content,
 		.time {
 			display: block;

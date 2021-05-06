@@ -35,7 +35,7 @@ import NoData from '../../../NoData/index.vue'
 import { Icon } from 'view-design'
 
 @Component({ components: { 'ms-item': MsItem, 'no-data': NoData, Icon: Icon } })
-class MessageAlert extends Vue {
+export default class MessageAlert extends Vue {
 	replyContent = ''
 	id = ''
 	visible = true
@@ -92,7 +92,7 @@ class MessageAlert extends Vue {
 				messageStatus: value,
 			})
 			.then(data => {
-				this.data = data
+				this.data = data.filter(item => item.name === '燃气')
 				this.loading = false
 			})
 	}
@@ -110,8 +110,6 @@ class MessageAlert extends Vue {
 		this.getData()
 	}
 }
-
-export default MessageAlert
 </script>
 <style lang="scss">
 .ms-container {
