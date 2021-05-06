@@ -168,6 +168,7 @@ export default {
 			color: #0df;
 			text-align: right;
 			letter-spacing: 0;
+			white-space: nowrap;
 		}
 	}
 
