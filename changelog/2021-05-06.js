@@ -1,6 +1,5 @@
 export default {
 	version: '1.0.3',
-	description: '最新版，持续迭代中',
 	list: [
 		{
 			type: ['fix'],
