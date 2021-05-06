@@ -60801,7 +60801,7 @@ var scene_store_actions = {
           }));
         }
       });
-      var kanban = document.getElementById('kanban');
+      var kanban = document.getElementById('screen');
       var transform = kanban.style.transform;
       var canvasStyle = "position: relative;transition: all .3s;flex-shrink: 0;flex-grow: 0;transform:scale(0);width:".concat(kanban.clientWidth, "px;height:").concat(kanban.clientHeight, "px;overflow: hidden;background-color:transparent;z-index: 99999;");
       var array = scene_store_state.sceneObj[id].list;

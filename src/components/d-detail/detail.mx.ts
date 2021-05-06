@@ -9,17 +9,15 @@ export default {
 	},
 	methods: {
 		renderByDetail(res) {
-			this.platform.screenName = res.screenName
 			this.refillConfig(res.screenConfig)
 		},
 		refillConfig(res) {
 			this.loading = true
-			const { widgets, kanboard, panelConfig } = res,
+			const { widgets } = res,
 				marketComponents = [],
 				obj = {},
 				p = [],
 				needMarketLoad = {}
-			this.platform.panelConfig = kanboard ? kanboard : panelConfig
 			widgets.forEach(item => {
 				obj[item.id] = {
 					id: item.id,
@@ -67,7 +65,7 @@ export default {
 						scene.actions.initScene(res)
 					}
 				})
-				.catch((e) => {
+				.catch(e => {
 					console.log(e)
 					this.loading = false
 					this.$Message.error('组件初始化加载失败')
@@ -83,11 +81,18 @@ export default {
 			this.$api.screen.detail({ screenId: id }).then(res => {
 				this.screenType = res.screenType
 				this.platform.screenAvatar = res.screenAvatar
+				this.platform.screenName = res.screenName
+				this.platform.panelConfig = res.screenConfig.kanboard
+					? res.screenConfig.kanboard
+					: res.screenConfig.panelConfig
 				this.renderByDetail(res)
 			})
 		}
 		if (file) {
 			this.$api.screen.detailFile(decodeURIComponent(file)).then(res => {
+				this.platform.panelConfig = res.screenConfig.kanboard
+					? res.screenConfig.kanboard
+					: res.screenConfig.panelConfig
 				this.renderByDetail(res)
 			})
 		}

@@ -120,8 +120,7 @@
 	</div>
 </template>
 <script>
-const { widgetMixin } = eslinkV
-const { scene } = eslinkV.$store
+const { widgetMixin, scene } = eslinkV
 import hBg54441 from './h-bg-54441'
 import { value, customConfig } from './index.component'
 

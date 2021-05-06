@@ -37,7 +37,7 @@ const errorHandler = (err, vm) => {
 			`background:rgb(${r}, ${g}, ${b});color:#fff;padding:4px;`,
 		)
 		console.log(
-			`%c${err}`,
+			`%c${err.stack}`,
 			`background:rgb(${r}, ${g}, ${b});color:#fff;padding:4px;`,
 		)
 	} else {
