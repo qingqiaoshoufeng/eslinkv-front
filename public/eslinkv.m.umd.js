@@ -62565,10 +62565,20 @@ var mouseup_mouseup = function mouseup(e) {
     var startPointerY = ruler_store.actions.getActualPointerY(event_store.state.startY);
     var endPointerX = ruler_store.actions.getActualPointerX(e.clientX);
     var endPointerY = ruler_store.actions.getActualPointerY(e.clientY);
+    if (startPointerX === endPointerX || startPointerY === endPointerY) return;
+    var minPointerX = Math.min(startPointerX, endPointerX);
+    var minPointerY = Math.min(startPointerY, endPointerY);
+    var maxPointerX = Math.max(startPointerX, endPointerX);
+    var maxPointerY = Math.max(startPointerY, endPointerY);
     Object.values(platform_store.state.widgetAdded).forEach(function (v) {
       // 只能框选当前场景下的组件
       if (v.scene === scene_store.state.index) {
-        if (v.config.layout.position.left >= startPointerX && v.config.layout.position.top >= startPointerY && v.config.layout.position.left + v.config.layout.size.width <= endPointerX && v.config.layout.position.top + v.config.layout.size.height <= endPointerY) {
+        var widgetStartX = v.config.layout.position.left;
+        var widgetStartY = v.config.layout.position.top;
+        var widgetEndX = v.config.layout.position.left + v.config.layout.size.width;
+        var widgetEndY = v.config.layout.position.top + v.config.layout.size.height;
+
+        if (minPointerX < widgetStartX && widgetStartX < maxPointerX && minPointerY < widgetStartY && widgetStartY < maxPointerY && minPointerX < widgetEndX && widgetEndX < maxPointerX && minPointerY < widgetEndY && widgetEndY < maxPointerY) {
           platform_store.state.chooseWidgetId = v.id;
           platform_store.state.chooseWidgetState = false;
         }
@@ -64675,6 +64685,8 @@ var keyup_keyup = function keyup(e) {
   event_store.state.contentMove = false;
 
   if (e.keyCode === 8 || e.keyCode === 46) {
+    if (!platform_store.state.chooseWidgetId) return;
+
     components_modal.confirm({
       title: '提示',
       content: '是否删除当前组件？',
