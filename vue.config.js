@@ -23,6 +23,16 @@ module.exports = {
 			errors: false,
 		},
 		proxy: {
+			'^/etbc': {
+				target: 'http://ebp-pc.hzrq.local:15003',
+				headers: {
+					Cookie: 'SESSION=96312c36-26ad-4f3f-8f25-cb690f3a9edb',
+				},
+				changeOrigin: true,
+				pathRewrite: {
+					'^/etbc': '/',
+				},
+			},
 			'^/node': {
 				// target: 'http://127.0.0.1:7001',
 				target: 'http://eslinkv.eslink.cc',
