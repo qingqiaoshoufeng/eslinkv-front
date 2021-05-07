@@ -1,6 +1,5 @@
-import { headers } from './request'
 import request0000 from './request0000'
-// import qs from 'qs'
+import qs from 'qs'
 const serverURL = '/server'
 const baseHRURL = '/etbc'
 // 项目列表，不分页
@@ -8,7 +7,6 @@ export function getProList() {
 	return request0000({
 		url: `${baseHRURL}/project/list`,
 		method: 'post',
-		headers,
 	})
 }
 
@@ -17,8 +15,7 @@ export function getProDatabaseList(data) {
 	return request0000({
 		url: `${baseHRURL}/project/databaseList`,
 		method: 'post',
-		data,
-		headers,
+		data: qs.stringify(data),
 	})
 }
 
@@ -27,8 +24,7 @@ export function getDatabaseTableList(data) {
 	return request0000({
 		url: `${baseHRURL}/database/tableList`,
 		method: 'post',
-		data,
-		headers,
+		data: qs.stringify(data),
 	})
 }
 
@@ -37,8 +33,7 @@ export function getTableDetail(data) {
 	return request0000({
 		url: `${baseHRURL}/table/detail`,
 		method: 'post',
-		data,
-		headers,
+		data: qs.stringify(data),
 	})
 }
 
@@ -47,8 +42,7 @@ export function getSourceList(data) {
 	return request0000({
 		url: `${baseHRURL}/source/list`,
 		method: 'post',
-		data,
-		headers,
+		data: qs.stringify(data),
 	})
 }
 
@@ -57,8 +51,7 @@ export function getAnalyseList(data) {
 	return request0000({
 		url: `${baseHRURL}/analyse/list`,
 		method: 'post',
-		data,
-		headers,
+		data: qs.stringify(data),
 	})
 }
 
@@ -67,8 +60,7 @@ export function getSchemaList(data) {
 	return request0000({
 		url: `${baseHRURL}/source/schema/list`,
 		method: 'post',
-		data,
-		headers,
+		data: qs.stringify(data),
 	})
 }
 
@@ -77,8 +69,7 @@ export function getSourceTableList(data) {
 	return request0000({
 		url: `${baseHRURL}/source/table/list`,
 		method: 'post',
-		data,
-		headers,
+		data: qs.stringify(data),
 	})
 }
 
@@ -87,8 +78,7 @@ export function getSourceTableDetail(data) {
 	return request0000({
 		url: `${baseHRURL}/source/table/detail`,
 		method: 'post',
-		data,
-		headers,
+		data: qs.stringify(data),
 	})
 }
 
@@ -97,8 +87,7 @@ export function getSourceDatabaseList(data) {
 	return request0000({
 		url: `${baseHRURL}/source/database/list`,
 		method: 'post',
-		data,
-		headers,
+		data: qs.stringify(data),
 	})
 }
 
