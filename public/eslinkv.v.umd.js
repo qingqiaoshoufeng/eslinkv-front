@@ -54570,7 +54570,7 @@ function getInitPanelConfig() {
 }
 
 var state = vue__WEBPACK_IMPORTED_MODULE_2___default.a.observable({
-  version: '1.0.3',
+  version: '1.1.0',
   widgetAdded: {},
   screenAvatar: '',
   screenName: '未命名',
