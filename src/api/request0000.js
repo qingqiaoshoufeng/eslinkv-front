@@ -25,7 +25,7 @@ request.interceptors.response.use(
 	response => {
 		const { data } = response
 		if (data) {
-			if (data.returnCode === '0000') {
+			if (data.returnCode === '0000' || data.responseCode === '100000') {
 				return data
 			} else {
 				Message.error(data.returnMessage || errMessage)
