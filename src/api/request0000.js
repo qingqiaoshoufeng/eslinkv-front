@@ -25,8 +25,10 @@ request.interceptors.response.use(
 	response => {
 		const { data } = response
 		if (data) {
-			if (data.returnCode === '0000' || data.responseCode === '100000') {
+			if (data.returnCode === '0000') {
 				return data
+			} else if (data.responseCode === '100000') {
+				return data.result
 			} else {
 				Message.error(data.returnMessage || errMessage)
 				// eslint-disable-next-line prefer-promise-reject-errors

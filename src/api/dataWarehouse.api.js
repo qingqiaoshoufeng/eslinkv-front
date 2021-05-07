@@ -2,7 +2,7 @@ import { headers } from './request'
 import request0000 from './request0000'
 import qs from 'qs'
 const serverURL = '/server'
-const baseHRURL = '/hangran'
+const baseHRURL = '/etbc'
 // 项目列表，不分页
 export function getProList() {
 	return request0000({
