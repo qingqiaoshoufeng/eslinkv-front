@@ -24373,13 +24373,6 @@ module.exports = hashDelete;
 
 /***/ }),
 
-/***/ "1f88":
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-
 /***/ "1fc8":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -27365,7 +27358,7 @@ function _wrapNativeSuper(Class) {
 var formatRegExp = /%[sdj%]/g;
 var warning = function warning() {}; // don't print warning message when in production env or node runtime
 
-if (typeof process !== 'undefined' && Object({"NODE_ENV":"production","VUE_APP_BUILD_MODE":"NPM","VUE_APP_ESLINKV_MODE":"PROD","BASE_URL":"/1.1.1/"}) && "production" !== 'production' && typeof window !== 'undefined' && typeof document !== 'undefined') {
+if (typeof process !== 'undefined' && Object({"NODE_ENV":"production","VUE_APP_BUILD_MODE":"NPM","VUE_APP_ESLINKV_MODE":"PROD","BASE_URL":"/1.1.2/"}) && "production" !== 'production' && typeof window !== 'undefined' && typeof document !== 'undefined') {
   warning = function warning(type, errors) {
     if (typeof console !== 'undefined' && console.warn) {
       if (errors.every(function (e) {
@@ -47334,17 +47327,6 @@ module.exports = ListCache;
 
 /***/ }),
 
-/***/ "5e35":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_node_modules_iview_loader_index_js_ref_0_2_packages_conditionalLoader_js_data_vue_vue_type_style_index_0_id_88d5199a_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("1f88");
-/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_node_modules_iview_loader_index_js_ref_0_2_packages_conditionalLoader_js_data_vue_vue_type_style_index_0_id_88d5199a_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_node_modules_iview_loader_index_js_ref_0_2_packages_conditionalLoader_js_data_vue_vue_type_style_index_0_id_88d5199a_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
-/* unused harmony reexport * */
-
-
-/***/ }),
-
 /***/ "5e5c":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -51582,8 +51564,7 @@ function _arrayLikeToArray(arr, len) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("99af");
-/* harmony import */ var core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat_js__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Users_hzjk_Desktop_project_EslinkV_sdk_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("5530");
 /* harmony import */ var _platform_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("824f");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("8bbf");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_2__);
@@ -51606,7 +51587,19 @@ var actions = {
     state[key] = value;
   },
   updateComponentTarget: function updateComponentTarget(id, target, value) {
-    eval("eslinkV.$store.platform.state.widgetAdded['".concat(id, "'].").concat(target, "=value"));
+    switch (target) {
+      case 'config.api.params':
+        _platform_store__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].state.widgetAdded[id].config.api.params = Object(_Users_hzjk_Desktop_project_EslinkV_sdk_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(Object(_Users_hzjk_Desktop_project_EslinkV_sdk_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])({}, _platform_store__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].state.widgetAdded[id].config.api.params), value);
+        break;
+
+      case 'config.api.data':
+        _platform_store__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].state.widgetAdded[id].config.api.data = value;
+        break;
+
+      case 'config.config':
+        _platform_store__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].state.widgetAdded[id].config.config = Object(_Users_hzjk_Desktop_project_EslinkV_sdk_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])(Object(_Users_hzjk_Desktop_project_EslinkV_sdk_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__[/* default */ "a"])({}, _platform_store__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].state.widgetAdded[id].config.config), value);
+        break;
+    }
   },
   updateComponent: function updateComponent(id, config) {
     var widgetConfig = _platform_store__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"].state.widgetAdded[id].config.api;
@@ -52601,6 +52594,13 @@ module.exports = function (NAME) {
   });
 };
 
+
+/***/ }),
+
+/***/ "7577":
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
 
 /***/ }),
 
@@ -69213,6 +69213,17 @@ module.exports = cacheHas;
 
 /***/ }),
 
+/***/ "c5c0":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_node_modules_iview_loader_index_js_ref_0_2_packages_conditionalLoader_js_data_vue_vue_type_style_index_0_id_3177b35e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("7577");
+/* harmony import */ var _node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_node_modules_iview_loader_index_js_ref_0_2_packages_conditionalLoader_js_data_vue_vue_type_style_index_0_id_3177b35e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_mini_css_extract_plugin_dist_loader_js_ref_8_oneOf_1_0_node_modules_css_loader_dist_cjs_js_ref_8_oneOf_1_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_8_oneOf_1_2_node_modules_sass_loader_dist_cjs_js_ref_8_oneOf_1_3_node_modules_cache_loader_dist_cjs_js_ref_0_0_node_modules_vue_loader_lib_index_js_vue_loader_options_node_modules_iview_loader_index_js_ref_0_2_packages_conditionalLoader_js_data_vue_vue_type_style_index_0_id_3177b35e_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_0__);
+/* unused harmony reexport * */
+
+
+/***/ }),
+
 /***/ "c6b6":
 /***/ (function(module, exports) {
 
@@ -76005,12 +76016,12 @@ $({ target: 'Number', stat: true }, {
 // ESM COMPAT FLAG
 __webpack_require__.r(__webpack_exports__);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3a991ba9-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components-func/data.vue?vue&type=template&id=88d5199a&scoped=true&lang=pug&
-var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"d-manage-modal-control-data"},[_c('d-right-swiper',{attrs:{"title":"数据请求","show":true}},[_c('div',{staticClass:"d-manage-modal-control"},[_c('label',[_vm._v("请求方式")]),_c('div',{staticClass:"d-manage-modal-control-right"},[_c('i-select',{style:({ width: _vm.apiType === '数仓平台' ? '122px' : '208px' }),model:{value:(_vm.apiType),callback:function ($$v) {_vm.apiType=$$v},expression:"apiType"}},[_c('i-option',{attrs:{"value":"无"}},[_vm._v("无")]),_c('i-option',{attrs:{"value":"自定义URL"}},[_vm._v("自定义URL")]),_c('i-option',{attrs:{"value":"数仓平台"}},[_vm._v("数仓平台")])],1),(_vm.apiType === '数仓平台')?_c('i-button',{staticClass:"setting-btn",style:({ marginLeft: '10px' }),attrs:{"type":"primary","icon":"md-settings","disabled":!_vm.item.config.api.system.enable},on:{"click":_vm.openSystemConfig}},[_vm._v("配置")]):_vm._e()],1)]),(_vm.apiType === '自定义URL')?_c('div',{staticClass:"d-manage-modal-control"},[_c('label',[_vm._v("接口地址")]),_c('div',{staticClass:"d-manage-modal-control-right"},[_c('i-input',{model:{value:(_vm.item.config.api.url),callback:function ($$v) {_vm.$set(_vm.item.config.api, "url", $$v)},expression:"item.config.api.url"}})],1)]):_vm._e(),(_vm.apiType === '自定义URL')?_c('div',{staticClass:"d-manage-modal-control"},[_c('label'),_c('div',{staticClass:"d-manage-modal-control-right"},[_c('i-select',{style:({ marginRight: '10px', width: '100px' }),model:{value:(_vm.item.config.api.method),callback:function ($$v) {_vm.$set(_vm.item.config.api, "method", $$v)},expression:"item.config.api.method"}},[_c('i-option',{attrs:{"value":"GET"}},[_vm._v("GET")]),_c('i-option',{attrs:{"value":"POST"}},[_vm._v("POST")]),_c('i-option',{attrs:{"value":"PUT"}},[_vm._v("PUT")]),_c('i-option',{attrs:{"value":"DELETE"}},[_vm._v("DELETE")]),_c('i-option',{attrs:{"value":"PATCH"}},[_vm._v("PATCH")])],1),_c('i-input',{style:({ width: '100px' }),model:{value:(_vm.item.config.api.path),callback:function ($$v) {_vm.$set(_vm.item.config.api, "path", $$v)},expression:"item.config.api.path"}})],1)]):_vm._e(),(_vm.item.config.api.system.enable)?_c('div',{staticClass:"d-manage-modal-control"},[_c('label',[_vm._v("接口地址")]),_c('div',{staticClass:"d-manage-modal-control-right"},[_c('i-input',{model:{value:(_vm.item.config.api.system.interface),callback:function ($$v) {_vm.$set(_vm.item.config.api.system, "interface", $$v)},expression:"item.config.api.system.interface"}})],1)]):_vm._e(),(_vm.item.config.api.system.enable)?_c('div',{staticClass:"d-manage-modal-control"},[_c('label'),_c('div',{staticClass:"d-manage-modal-control-right"},[_c('i-select',{style:({ marginRight: '10px', width: '100px' }),model:{value:(_vm.item.config.api.system.method),callback:function ($$v) {_vm.$set(_vm.item.config.api.system, "method", $$v)},expression:"item.config.api.system.method"}},[_c('i-option',{attrs:{"value":"GET"}},[_vm._v("GET")]),_c('i-option',{attrs:{"value":"POST"}},[_vm._v("POST")]),_c('i-option',{attrs:{"value":"PUT"}},[_vm._v("PUT")]),_c('i-option',{attrs:{"value":"DELETE"}},[_vm._v("DELETE")]),_c('i-option',{attrs:{"value":"PATCH"}},[_vm._v("PATCH")])],1),_c('i-input',{style:({ width: '100px' }),model:{value:(_vm.item.config.api.system.path),callback:function ($$v) {_vm.$set(_vm.item.config.api.system, "path", $$v)},expression:"item.config.api.system.path"}}),_c('database-config',{ref:"dataBaseConfig",attrs:{"showModal":_vm.showDatabaseConfigModal},on:{"close":function($event){_vm.showDatabaseConfigModal = false},"update":_vm.updateApiSystem},nativeOn:{"keyup":function($event){$event.stopPropagation();}}})],1)]):_vm._e(),_c('d-code',{attrs:{"label":"请求参数","lang":"json","code":typeof _vm.item.config.api.params === 'string' ? _vm.item.config.api.params : JSON.stringify(_vm.item.config.api.params)},on:{"update:code":function (value) { return (_vm.item.config.api.params = JSON.parse(value)); }}}),_c('d-code',{attrs:{"label":"响应数据","lang":"json","code":_vm.apiData},on:{"update:code":function (value) { return (_vm.apiData = value); }}})],1),_c('d-right-swiper',{attrs:{"title":"数据处理"}},[_c('d-code',{attrs:{"label":"数据加工","code":_vm.item.config.api.process.methodBody,"show":_vm.item.config.api.process.enable},on:{"update:code":function (value) { return (_vm.item.config.api.process.methodBody = value); }}},[_c('template',{slot:"right"},[_c('i-switch',{model:{value:(_vm.item.config.api.process.enable),callback:function ($$v) {_vm.$set(_vm.item.config.api.process, "enable", $$v)},expression:"item.config.api.process.enable"}})],1)],2),_c('div',{staticClass:"d-manage-modal-control"},[_c('label',[_vm._v("自动更新")]),_c('div',{staticClass:"d-manage-modal-control-right"},[(_vm.item.config.api.autoFetch.enable)?_c('i-input-number',{style:({ marginRight: '10px' }),attrs:{"min":1,"step":1,"formatter":function (value) { return (value + " ms"); }},model:{value:(_vm.item.config.api.autoFetch.duration),callback:function ($$v) {_vm.$set(_vm.item.config.api.autoFetch, "duration", $$v)},expression:"item.config.api.autoFetch.duration"}}):_vm._e(),_c('i-switch',{model:{value:(_vm.item.config.api.autoFetch.enable),callback:function ($$v) {_vm.$set(_vm.item.config.api.autoFetch, "enable", $$v)},expression:"item.config.api.autoFetch.enable"}})],1)])],1),_c('d-right-swiper',{attrs:{"title":"事件"}},[_c('div',{staticClass:"d-manage-modal-control"},[_c('label',[_vm._v("组件关联")]),_c('div',{staticClass:"d-manage-modal-control-right"},[_c('i-switch',{staticStyle:{"margin-right":"10px"},model:{value:(_vm.item.config.api.bind.enable),callback:function ($$v) {_vm.$set(_vm.item.config.api.bind, "enable", $$v)},expression:"item.config.api.bind.enable"}}),(_vm.item.config.api.bind.enable)?_c('i-select',{style:({ width: '100px' }),attrs:{"filterable":"","multiple":""},model:{value:(_vm.item.config.api.bind.refIds),callback:function ($$v) {_vm.$set(_vm.item.config.api.bind, "refIds", $$v)},expression:"item.config.api.bind.refIds"}},_vm._l((_vm.relateList),function(item,key){return _c('i-option',{key:key,attrs:{"value":item.id}},[_vm._v(_vm._s(item.id))])}),1):_vm._e()],1)]),_vm._l((_vm.item.config.event.component),function(m,n){return _c('div',{key:n,staticClass:"d-manage-modal-control",staticStyle:{"align-items":"baseline"}},[_c('label',[_vm._v("组件事件")]),_c('div',{staticClass:"d-manage-modal-control-right"},[_c('i-select',{style:({ marginRight: '10px', width: '100px' }),attrs:{"clearable":""},model:{value:(m.type),callback:function ($$v) {_vm.$set(m, "type", $$v)},expression:"m.type"}},[_c('i-option',{attrs:{"value":"update"}},[_vm._v("更新组件")])],1),_c('i-select',{style:({ width: '100px' }),attrs:{"placeholder":"选择组件","multiple":"","filterable":""},model:{value:(m.ids),callback:function ($$v) {_vm.$set(m, "ids", $$v)},expression:"m.ids"}},_vm._l((Object.keys(_vm.platform.widgetAdded)),function(k,i){return _c('i-option',{key:i,attrs:{"value":k}},[_vm._v(_vm._s(_vm.platform.widgetAdded[k].config.widget.name))])}),1),_c('i-input',{attrs:{"placeholder":"源地址路径"},on:{"on-focus":function($event){_vm.event.inputFocus = true},"on-blur":function($event){_vm.event.inputFocus = false}},model:{value:(m.source),callback:function ($$v) {_vm.$set(m, "source", $$v)},expression:"m.source"}}),_c('i-input',{attrs:{"placeholder":"目标地址路径"},on:{"on-focus":function($event){_vm.event.inputFocus = true},"on-blur":function($event){_vm.event.inputFocus = false}},model:{value:(m.target),callback:function ($$v) {_vm.$set(m, "target", $$v)},expression:"m.target"}}),_c('i-icon',{staticStyle:{"cursor":"pointer"},attrs:{"type":"ios-trash-outline","color":"#fff","size":"20"},on:{"click":function($event){return _vm.delComponentEvent(n)}}})],1)])}),_c('div',{staticClass:"add-scene",style:({marginBottom:'10px'})},[_c('i-button',{attrs:{"type":"primary"},on:{"click":_vm.addComponentEvent}},[_vm._v("添加组件事件")])],1),_vm._l((_vm.item.config.event.scene),function(m,n){return _c('div',{key:n,staticClass:"d-manage-modal-control",staticStyle:{"align-items":"baseline"}},[_c('label',[_vm._v("场景事件")]),_c('div',{staticClass:"d-manage-modal-control-right",staticStyle:{"justify-content":"space-between"}},[_c('i-select',{style:({ marginRight: '10px', width: '100px' }),attrs:{"clearable":"","placeholder":"事件类型"},model:{value:(m.type),callback:function ($$v) {_vm.$set(m, "type", $$v)},expression:"m.type"}},[_c('i-option',{attrs:{"value":"openScene"}},[_vm._v("打开场景")]),_c('i-option',{attrs:{"value":"closeScene"}},[_vm._v("关闭场景")]),_c('i-option',{attrs:{"value":"changeScene"}},[_vm._v("切换场景")])],1),_c('i-select',{style:({ width: '100px' }),attrs:{"filterable":"","placeholder":"目标场景"},model:{value:(m.id),callback:function ($$v) {_vm.$set(m, "id", $$v)},expression:"m.id"}},[_c('i-option',{attrs:{"value":0}},[_vm._v("主场景")]),_vm._l((_vm.scene.obj),function(item,key){return _c('i-option',{key:key,attrs:{"value":key}},[_vm._v(_vm._s(item.name))])})],2),_c('i-select',{style:({ width: '100px' }),attrs:{"clearable":"","filterable":"","placeholder":"场景动画"},model:{value:(m.animate),callback:function ($$v) {_vm.$set(m, "animate", $$v)},expression:"m.animate"}},_vm._l((_vm.animates),function(k,i){return _c('i-option',{key:i,attrs:{"value":k}},[_vm._v(_vm._s(k))])}),1),_c('i-icon',{staticStyle:{"cursor":"pointer"},attrs:{"type":"ios-trash-outline","color":"#fff","size":"20"},on:{"click":function($event){return _vm.delSceneEvent(n)}}})],1)])}),_c('div',{staticClass:"add-scene"},[_c('i-button',{attrs:{"type":"primary"},on:{"click":_vm.addSceneEvent}},[_vm._v("添加场景事件")])],1)],2)],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"3a991ba9-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components-func/data.vue?vue&type=template&id=3177b35e&scoped=true&lang=pug&
+var render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"d-manage-modal-control-data"},[_c('d-right-swiper',{attrs:{"title":"数据请求","show":true}},[_c('d-code',{attrs:{"label":"响应数据","lang":"json","code":_vm.apiData},on:{"update:code":function (value) { return (_vm.apiData = value); }}})],1),_c('d-right-swiper',{attrs:{"title":"事件"}},[_c('div',{staticClass:"d-manage-modal-control"},[_c('label',[_vm._v("组件关联")]),_c('div',{staticClass:"d-manage-modal-control-right"},[_c('i-switch',{staticStyle:{"margin-right":"10px"},model:{value:(_vm.item.config.api.bind.enable),callback:function ($$v) {_vm.$set(_vm.item.config.api.bind, "enable", $$v)},expression:"item.config.api.bind.enable"}}),(_vm.item.config.api.bind.enable)?_c('i-select',{style:({ width: '100px' }),attrs:{"filterable":"","multiple":""},model:{value:(_vm.item.config.api.bind.refIds),callback:function ($$v) {_vm.$set(_vm.item.config.api.bind, "refIds", $$v)},expression:"item.config.api.bind.refIds"}},_vm._l((_vm.relateList),function(item,key){return _c('i-option',{key:key,attrs:{"value":item.id}},[_vm._v(_vm._s(item.id))])}),1):_vm._e()],1)]),_c('div',{staticClass:"d-manage-modal-control"},[_c('label',[_vm._v("事件配置")]),_c('div',{staticClass:"d-manage-modal-control-right"},[_c('i-button',{attrs:{"type":"primary"},on:{"click":function($event){_vm.eventModal = true}}},[_vm._v("配置事件")])],1)]),_c('i-modal',{attrs:{"title":"事件配置","footer-hide":true},model:{value:(_vm.eventModal),callback:function ($$v) {_vm.eventModal=$$v},expression:"eventModal"}},[_vm._l((_vm.item.config.event.component),function(m,n){return _c('div',{key:n,staticClass:"d-manage-modal-control",staticStyle:{"align-items":"baseline"}},[_c('label',[_vm._v("组件事件")]),_c('div',{staticClass:"d-manage-modal-control-right d-data-modal-control-right fn-flex flex-column"},[_c('div',{staticClass:"fn-flex fn-flex",style:({ flex: 1, width: '100%' })},[_c('i-select',{style:({ marginRight: '10px' }),attrs:{"clearable":"","placeholder":"事件类型"},model:{value:(m.type),callback:function ($$v) {_vm.$set(m, "type", $$v)},expression:"m.type"}},[_c('i-option',{attrs:{"value":"update"}},[_vm._v("更新组件")])],1),_c('i-select',{attrs:{"placeholder":"选择组件","multiple":"","filterable":""},model:{value:(m.ids),callback:function ($$v) {_vm.$set(m, "ids", $$v)},expression:"m.ids"}},_vm._l((Object.keys(_vm.platform.widgetAdded)),function(k,i){return _c('i-option',{key:i,attrs:{"value":k}},[_vm._v(_vm._s(_vm.platform.widgetAdded[k].config.widget.name))])}),1)],1),_c('div',{staticClass:"fn-flex fn-flex",style:({ flex: 1, width: '100%' })},[_c('i-input',{style:({ marginRight: '10px' }),attrs:{"placeholder":"源地址路径"},on:{"on-focus":function($event){_vm.event.inputFocus = true},"on-blur":function($event){_vm.event.inputFocus = false}},model:{value:(m.source),callback:function ($$v) {_vm.$set(m, "source", $$v)},expression:"m.source"}}),_c('i-select',{attrs:{"clearable":"","placeholder":"目标地址路径"},model:{value:(m.target),callback:function ($$v) {_vm.$set(m, "target", $$v)},expression:"m.target"}},[_c('i-option',{attrs:{"value":"config.api.params"}},[_vm._v("更新请求参数")]),_c('i-option',{attrs:{"value":"config.api.data"}},[_vm._v("更新响应数据")]),_c('i-option',{attrs:{"value":"config.config"}},[_vm._v("更新自定义数据")])],1)],1),_c('d-code',{style:({ width: '100%' }),attrs:{"label":"更新加工","code":m.process.methodBody,"show":m.process.enable},on:{"update:code":function (value) { return (m.process.methodBody = value); }}},[_c('template',{slot:"right"},[_c('i-switch',{model:{value:(m.process.enable),callback:function ($$v) {_vm.$set(m.process, "enable", $$v)},expression:"m.process.enable"}})],1)],2),_c('i-icon',{staticClass:"pointer",attrs:{"type":"ios-trash-outline","color":"#fff","size":"20"},on:{"click":function($event){return _vm.delComponentEvent(n)}}})],1)])}),_c('div',{staticClass:"add-scene",style:({ marginBottom: '10px' })},[_c('i-button',{attrs:{"type":"primary"},on:{"click":_vm.addComponentEvent}},[_vm._v("添加组件事件")])],1),_vm._l((_vm.item.config.event.scene),function(m,n){return _c('div',{key:n,staticClass:"d-manage-modal-control",staticStyle:{"align-items":"baseline"}},[_c('label',[_vm._v("场景事件")]),_c('div',{staticClass:"d-manage-modal-control-right d-data-modal-control-right fn-flex flex-column",staticStyle:{"justify-content":"space-between"}},[_c('div',{staticClass:"fn-flex flex-row",style:({ flex: 1, width: '100%' })},[_c('i-select',{style:({ marginRight: '10px' }),attrs:{"clearable":"","placeholder":"事件类型"},model:{value:(m.type),callback:function ($$v) {_vm.$set(m, "type", $$v)},expression:"m.type"}},[_c('i-option',{attrs:{"value":"openScene"}},[_vm._v("打开场景")]),_c('i-option',{attrs:{"value":"closeScene"}},[_vm._v("关闭场景")]),_c('i-option',{attrs:{"value":"changeScene"}},[_vm._v("切换场景")])],1),_c('i-select',{style:({ marginRight: '10px' }),attrs:{"filterable":"","placeholder":"目标场景"},model:{value:(m.id),callback:function ($$v) {_vm.$set(m, "id", $$v)},expression:"m.id"}},[_c('i-option',{attrs:{"value":0}},[_vm._v("主场景")]),_vm._l((_vm.scene.obj),function(item,key){return _c('i-option',{key:key,attrs:{"value":key}},[_vm._v(_vm._s(item.name))])})],2),_c('i-select',{attrs:{"clearable":"","filterable":"","placeholder":"场景过度动画"},model:{value:(m.animate),callback:function ($$v) {_vm.$set(m, "animate", $$v)},expression:"m.animate"}},_vm._l((_vm.animates),function(k,i){return _c('i-option',{key:i,attrs:{"value":k}},[_vm._v(_vm._s(k))])}),1)],1),_c('i-icon',{staticClass:"pointer",attrs:{"type":"ios-trash-outline","color":"#fff","size":"20"},on:{"click":function($event){return _vm.delSceneEvent(n)}}})],1)])}),_c('div',{staticClass:"add-scene"},[_c('i-button',{attrs:{"type":"primary"},on:{"click":_vm.addSceneEvent}},[_vm._v("添加场景事件")])],1)],2)],1)],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components-func/data.vue?vue&type=template&id=88d5199a&scoped=true&lang=pug&
+// CONCATENATED MODULE: ./src/components-func/data.vue?vue&type=template&id=3177b35e&scoped=true&lang=pug&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/typeof.js
 var esm_typeof = __webpack_require__("53ca");
@@ -76044,9 +76055,6 @@ var es_object_values = __webpack_require__("07ac");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
 var es_function_name = __webpack_require__("b0c0");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.assign.js
-var es_object_assign = __webpack_require__("cca6");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.splice.js
 var es_array_splice = __webpack_require__("a434");
@@ -81341,7 +81349,6 @@ var animates = ['bounce', 'flash', 'pulse', 'rubberBand', 'shake', 'swing', 'tad
 
 
 
-
 var datavue_type_script_lang_ts_FuncData = /*#__PURE__*/function (_func) {
   Object(inherits["a" /* default */])(FuncData, _func);
 
@@ -81354,34 +81361,11 @@ var datavue_type_script_lang_ts_FuncData = /*#__PURE__*/function (_func) {
 
     _this = _super.apply(this, arguments);
     _this.animates = animates;
-    _this.showDatabaseConfigModal = false;
+    _this.eventModal = false;
     return _this;
   }
 
   Object(createClass["a" /* default */])(FuncData, [{
-    key: "apiType",
-    get: function get() {
-      if (this.item.config.api.system.enable) {
-        return '数仓平台';
-      } else if (this.item.config.api.url) {
-        return '自定义URL';
-      } else {
-        return '无';
-      }
-    },
-    set: function set(val) {
-      if (val === '数仓平台') {
-        this.item.config.api.system.enable = true;
-        this.item.config.api.url = '';
-      } else if (val === '无') {
-        this.item.config.api.url = '';
-        this.item.config.api.system.enable = false;
-      } else {
-        this.item.config.api.url = '/';
-        this.item.config.api.system.enable = false;
-      }
-    }
-  }, {
     key: "apiData",
     get: function get() {
       var req = this.getItemValue('config.api.data');
@@ -81435,20 +81419,6 @@ var datavue_type_script_lang_ts_FuncData = /*#__PURE__*/function (_func) {
       return list;
     }
   }, {
-    key: "updateApiSystem",
-    value: function updateApiSystem(value) {
-      Object.assign(this.item.config.api.system.params, value);
-      this.showDatabaseConfigModal = false;
-    }
-  }, {
-    key: "openSystemConfig",
-    value: function openSystemConfig() {
-      var value = this.item.config;
-      if (!value) return;
-      this.showDatabaseConfigModal = true;
-      this.$refs.dataBaseConfig.setQueryCond(value.api.system.params);
-    }
-  }, {
     key: "addSceneEvent",
     value: function addSceneEvent() {
       this.item.config.event.scene.push({
@@ -81464,7 +81434,11 @@ var datavue_type_script_lang_ts_FuncData = /*#__PURE__*/function (_func) {
         ids: [],
         type: '',
         source: 'data',
-        target: ''
+        target: '',
+        process: {
+          enable: false,
+          methodBody: ''
+        }
       });
     }
   }, {
@@ -81491,8 +81465,8 @@ datavue_type_script_lang_ts_FuncData = Object(tslib_es6["a" /* __decorate */])([
 /* harmony default export */ var datavue_type_script_lang_ts_ = (datavue_type_script_lang_ts_FuncData);
 // CONCATENATED MODULE: ./src/components-func/data.vue?vue&type=script&lang=ts&
  /* harmony default export */ var components_func_datavue_type_script_lang_ts_ = (datavue_type_script_lang_ts_); 
-// EXTERNAL MODULE: ./src/components-func/data.vue?vue&type=style&index=0&id=88d5199a&lang=scss&scoped=true&
-var datavue_type_style_index_0_id_88d5199a_lang_scss_scoped_true_ = __webpack_require__("5e35");
+// EXTERNAL MODULE: ./src/components-func/data.vue?vue&type=style&index=0&id=3177b35e&lang=scss&scoped=true&
+var datavue_type_style_index_0_id_3177b35e_lang_scss_scoped_true_ = __webpack_require__("c5c0");
 
 // CONCATENATED MODULE: ./src/components-func/data.vue
 
@@ -81509,7 +81483,7 @@ var data_component = Object(componentNormalizer["a" /* default */])(
   staticRenderFns,
   false,
   null,
-  "88d5199a",
+  "3177b35e",
   null
   
 )
