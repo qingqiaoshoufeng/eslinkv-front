@@ -72,7 +72,6 @@ export default {
 		.value {
 			height: 48px;
 			padding-right: 16px;
-			font-family: DIN Alternate;
 			font-size: 48px;
 			font-style: normal;
 			font-weight: 700;
@@ -98,7 +97,6 @@ export default {
 				rgba(0, 77, 150, 0.3) 0%,
 				#004d96 100%
 			);
-			border-radius: 16px;
 			border-radius: 16px;
 		}
 	}
