@@ -8106,6 +8106,9 @@ var platform = store('platform', state, actions);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.map.js
 var es_array_map = __webpack_require__("d81d");
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.values.js
+var es_object_values = __webpack_require__("07ac");
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.string.replace.js
 var es_string_replace = __webpack_require__("5319");
 
@@ -8117,9 +8120,6 @@ var web_timers = __webpack_require__("4795");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.splice.js
 var es_array_splice = __webpack_require__("a434");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.values.js
-var es_object_values = __webpack_require__("07ac");
 
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/typeof.js
 
@@ -9601,7 +9601,6 @@ var instance = store('instance', instance_store_state, instance_store_actions);
 
 
 
-
 /**
  * @description 场景
  */
@@ -9612,16 +9611,17 @@ var instance = store('instance', instance_store_state, instance_store_actions);
 
 
 var scene_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
+  activeWidgetId: '',
+  // 被激活的场景对应组件
   index: 0,
   list: [],
   obj: {},
+  showAnimationStyle: '',
   transferData: null,
   // 场景交互时传递的数据
   status: 'inEdit',
   // inEdit  在编辑器中  inPreview 在预览中
-  sceneObj: {},
-  showAnimationStyle: 'zoom' // 实例化场景，动画
-
+  sceneObj: {}
 });
 var scene_store_actions = {
   setStatus: function setStatus(status) {
@@ -9656,7 +9656,7 @@ var scene_store_actions = {
       });
     }
 
-    var widgets = value.widgets;
+    var widgets = Object.values(platform_store.state.widgetAdded);
     var list = scene_store_state.list;
     widgets.forEach(function (item) {
       var index = list.indexOf(item.scene);
@@ -9699,27 +9699,11 @@ var scene_store_actions = {
     scene_store_state.index = name;
   },
   destroyScene: function destroyScene(index) {
+    var showAnimationStyle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'fadeOut';
+
     if (scene_store_state.status === 'inPreview') {
-      var showAnimationStyle = scene_store_state.showAnimationStyle;
-
-      switch (showAnimationStyle) {
-        case 'fadeIn':
-          document.getElementById(index).style.opacity = '0';
-          break;
-
-        case 'zoomIn':
-          document.getElementById(index).style.transform = 'scale(0)';
-          break;
-
-        case 'slideUp':
-          document.getElementById(index).style.bottom = '-80%';
-          break;
-
-        case 'slideRight':
-          document.getElementById(index).style.right = '-80%';
-          break;
-      }
-
+      document.getElementById(index).classList.remove(scene_store_state.showAnimationStyle);
+      document.getElementById(index).classList.add(showAnimationStyle);
       var event = new CustomEvent('DestroyScene', {
         detail: {
           index: index
@@ -9727,12 +9711,13 @@ var scene_store_actions = {
       });
       document.dispatchEvent(event);
       setTimeout(function () {
+        // state.index = 0
         document.getElementById(index).parentNode.remove();
         instance_store.actions.setInstance('createKanboard', null); // 初始化实例场景
 
         instance_store.actions.setInstance('createComp', null); // 初始化实例场景
 
-        scene_store_state.showAnimationStyle = 'fadeIn'; // 初始化实例场景
+        scene_store_state.showAnimationStyle = ''; // 初始化实例场景
       }, 300);
     }
   },
@@ -9746,23 +9731,14 @@ var scene_store_actions = {
     var pointerEvents = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'auto';
 
     if (scene_store_state.status === 'inPreview') {
-      var widgets = Object.values(platform_store.state.widgetAdded);
-      scene_store_state.sceneObj[id].list = [];
-      widgets.forEach(function (item) {
-        if (item.scene === id) {
-          scene_store_state.sceneObj[id].list.push(_objectSpread2(_objectSpread2({}, item), {}, {
-            value: item.config
-          }));
-        }
-      });
       var kanban = document.getElementById('screen');
       var transform = kanban.style.transform;
-      var canvasStyle = "position: relative;transition: all .3s;flex-shrink: 0;flex-grow: 0;transform:scale(0);width:".concat(kanban.clientWidth, "px;height:").concat(kanban.clientHeight, "px;overflow: hidden;background-color:transparent;z-index: 99999;");
+      var canvasStyle = "position: relative;transition: all .3s;flex-shrink: 0;flex-grow: 0;width:".concat(kanban.clientWidth, "px;height:").concat(kanban.clientHeight, "px;overflow: hidden;background-color:transparent;z-index: 99999;");
       var array = scene_store_state.sceneObj[id].list;
       var _self = instance_store.state.kanboard;
       scene_store_state.showAnimationStyle = showAnimationStyle;
       var Comp = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.extend({
-        template: "<div class=\"scene-temporary-container fn-flex\"\nstyle=\"pointer-events:".concat(pointerEvents, ";position:fixed;left:0;top:0;right:0;bottom:0;z-index: 99999;justify-content: center;align-items: center;\">\n\t\t\t\t\t<div id=\"").concat(id, "\" class=\"scene-temporary-wrapper\" style=\"").concat(canvasStyle, "\">\n\t\t\t\t\t\t<parts\n\t\t\t\t\t\treadonly\n\t\t\t\t\t\t:market=\"item.market\"\n\t\t\t\t\t\t:ref=\"item.id\"\n\t\t\t\t\t\t:config=\"item.value\"\n\t\t\t\t\t\t:type=\"item.type\"\n\t\t\t\t\t\tv-for=\"item in array\"\n\t\t\t\t\t\t:key=\"item.id + new Date().getTime()\"/>\n\t\t\t\t\t</div></div>"),
+        template: "<div class=\"scene-temporary-container fn-flex\"\nstyle=\"pointer-events:".concat(pointerEvents, ";position:fixed;left:0;top:0;right:0;bottom:0;z-index: 99999;justify-content: center;align-items: center;\">\n\t\t\t\t\t<div id=\"").concat(id, "\" class=\"scene-temporary-wrapper animated\" style=\"").concat(canvasStyle, "\">\n\t\t\t\t\t\t<parts\n\t\t\t\t\t\treadonly\n\t\t\t\t\t\t:market=\"item.market\"\n\t\t\t\t\t\t:ref=\"item.id\"\n\t\t\t\t\t\t:config=\"item.config\"\n\t\t\t\t\t\t:type=\"item.type\"\n\t\t\t\t\t\tv-for=\"item in array\"\n\t\t\t\t\t\t:key=\"item.id\"/>\n\t\t\t\t\t</div></div>"),
         provide: function provide() {
           return {
             kanboardEditor: _self
@@ -9781,41 +9757,11 @@ var scene_store_actions = {
         }
       });
       var comp = new Comp().$mount();
-      instance_store.actions.setInstance('createComp', comp);
+      instance_store.actions.setInstance('createComp', comp); // state.index = id
+
       document.getElementsByClassName('detail-container')[0].appendChild(comp.$el);
-
-      switch (showAnimationStyle) {
-        case 'zoomIn':
-          setTimeout(function () {
-            document.getElementById(id).style.transform = transform;
-          }, 300);
-          break;
-
-        case 'slideRight':
-          document.getElementById(id).style.transform = transform;
-          document.getElementById(id).style.right = '-80%';
-          setTimeout(function () {
-            document.getElementById(id).style.right = '0';
-          }, 300);
-          break;
-
-        case 'slideUp':
-          document.getElementById(id).style.transform = transform;
-          document.getElementById(id).style.bottom = '-80%';
-          setTimeout(function () {
-            document.getElementById(id).style.bottom = '0';
-          }, 300);
-          break;
-
-        case 'fadeIn':
-        default:
-          document.getElementById(id).style.transform = "".concat(transform);
-          document.getElementById(id).style.opacity = '0';
-          setTimeout(function () {
-            document.getElementById(id).style.opacity = '1';
-          }, 300);
-          break;
-      }
+      document.getElementById(id).parentNode.style.transform = transform;
+      document.getElementById(id).classList.add(showAnimationStyle);
     }
   }
 };
