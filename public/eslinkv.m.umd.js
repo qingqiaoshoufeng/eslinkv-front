@@ -60802,7 +60802,7 @@ var scene_store_actions = {
       });
       document.dispatchEvent(event);
       setTimeout(function () {
-        scene_store_state.index = 0;
+        // state.index = 0
         document.getElementById(index).parentNode.remove();
         instance_store.actions.setInstance('createKanboard', null); // 初始化实例场景
 
@@ -60848,8 +60848,8 @@ var scene_store_actions = {
         }
       });
       var comp = new Comp().$mount();
-      instance_store.actions.setInstance('createComp', comp);
-      scene_store_state.index = id;
+      instance_store.actions.setInstance('createComp', comp); // state.index = id
+
       document.getElementsByClassName('detail-container')[0].appendChild(comp.$el);
       document.getElementById(id).parentNode.style.transform = transform;
       document.getElementById(id).classList.add(showAnimationStyle);
