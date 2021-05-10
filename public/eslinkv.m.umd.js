@@ -60700,6 +60700,11 @@ var instance = store('instance', instance_store_state, instance_store_actions);
 
 
 
+ // todo bug
+// activeWidgetId
+// 在创建场景和销毁场景时变更了
+// index
+// 创建和销毁不能变更index
 
 var scene_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
   activeWidgetId: '',
@@ -60793,8 +60798,14 @@ var scene_store_actions = {
     var showAnimationStyle = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'fadeOut';
 
     if (scene_store_state.status === 'inPreview') {
-      document.getElementById(index).classList.remove(scene_store_state.showAnimationStyle);
-      document.getElementById(index).classList.add(showAnimationStyle);
+      if (scene_store_state.showAnimationStyle) {
+        document.getElementById(index).classList.remove(scene_store_state.showAnimationStyle);
+      }
+
+      if (showAnimationStyle) {
+        document.getElementById(index).classList.add(showAnimationStyle);
+      }
+
       var event = new CustomEvent('DestroyScene', {
         detail: {
           index: index
