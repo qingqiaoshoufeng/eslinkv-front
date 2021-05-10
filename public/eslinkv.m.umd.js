@@ -60863,7 +60863,7 @@ var scene_store_actions = {
 
       document.getElementsByClassName('detail-container')[0].appendChild(comp.$el);
       document.getElementById(id).parentNode.style.transform = transform;
-      document.getElementById(id).classList.add(showAnimationStyle);
+      if (showAnimationStyle) document.getElementById(id).classList.add(showAnimationStyle);
     }
   }
 };
