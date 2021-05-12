@@ -137,7 +137,6 @@ export default {
 		data(val) {
 			if (val) {
 				if (JSON.stringify(val) !== '{}') {
-					const { overlayType } = val
 					this.overlay = {
 						...val,
 					}

@@ -61453,8 +61453,12 @@ var mx = {
       return "d-".concat(now);
     },
     isSceneActive: function isSceneActive() {
-      if (!this.config) return false;
-      if (!this.config.event.scene.length) return false;
+      // if (!this.config) return false;
+      // if (!this.config.event.scene.length) return false;
+      console.log(scene_store.state.activeWidgetId)
+      console.log(this.config.widget.id)
+      console.log(this.config.event.scene)
+      console.log(scene_store.state.activeSceneId)
       return scene_store.state.activeWidgetId === this.config.widget.id && this.config.event.scene.some(function (v) {
         return v.id === scene_store.state.activeSceneId;
       });
