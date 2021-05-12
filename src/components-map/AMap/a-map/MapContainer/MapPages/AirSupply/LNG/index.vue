@@ -32,9 +32,10 @@
 		<OverlayDetail
 			v-model="showOverlayDetail"
 			:data="activeOverlay"
-			:legendMap="overlayMap"
-			:overlayInfoConfigMap="overlayInfoConfigMap"
-			:before-close="closeOverlayDetail"
+			v-bind="{
+				beforeClose: closeOverlayDetail,
+				...overlayDetailProp,
+			}"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
 			:width="400"
@@ -65,25 +66,10 @@
 <script>
 // 页面覆盖物组件
 import {
-	LiquefiedGasStation,
-	NaturalGasStation,
-	DistributedEnergyResource,
-	InspectionPerson,
-	InspectionCar,
-	RightPanel,
-	RoutePlan, // 规划路线
-	LNGStation,
-	HighPressureLine,
-	HighPressureLine_Process,
-	GasStation,
-	PressureRegulatingStation,
-	EmergencyAirSourceStation,
-	ServiceStation,
-	PipeManageMentStation,
-	UndergroundRepairStation,
-	OngroundRepairStation,
+	MapMarkerIcon,
 	WarnEvent,
 } from '../Components/index.js'
+import RightPanel from './components/RightPanel'
 // 页面所需公共组件
 import {
 	RegionBoundary,
@@ -109,25 +95,13 @@ const { scene } = eslinkV.$store
 export default {
 	name: 'LNG',
 	components: {
-		LNGStation,
 		RightPanel,
-		RoutePlan,
+		WarnEvent,
+		MapMarkerIcon,
 		RegionBoundary,
 		OverlayDetail,
 		MapLegend,
-		HighPressureLine,
-		HighPressureLine_Process,
-		InspectionPerson,
-		GasStation,
-		PressureRegulatingStation,
-		EmergencyAirSourceStation,
-		NaturalGasStation,
-		DistributedEnergyResource,
-		LiquefiedGasStation,
-		ServiceStation,
-		InspectionCar,
 		DataStatistics,
-		WarnEvent,
 	},
 	watch: {
 		center(val) {
@@ -148,13 +122,36 @@ export default {
 				overlayList: activeStationData,
 			}
 		},
+		overlayDetailProp() {
+			const { activeOverlay, overlayInfoConfigMap, legendMap } = this
+			if (JSON.stringify(activeOverlay) !== '{}') {
+				const { overlayType } = activeOverlay
+				// 详情展示信息配置
+				const overlayDetailConfig =
+					overlayInfoConfigMap[overlayType] || {}
+				const legendConfig = legendMap[overlayType] || {}
+				// 图标大小，是否显示关闭按钮，是否显示查看详情
+				const {
+					iconSize = 38,
+					showPopCloseBtn: showCloseBtn,
+					showMore,
+				} = legendConfig
+				return {
+					data: activeOverlay,
+					iconSize,
+					showCloseBtn,
+					overlayDetailConfig,
+					showMore,
+				}
+			}
+			return {}
+		},
 	},
 	mounted() {
 		this.getAllTypeStationList()
 		this.getDataStatisticsInfo()
 	},
 	data() {
-		const { LNGStation } = AIRSUPPLY_LNG_LEGEND_MAP
 		return {
 			overlayInfoConfigMap: Object.freeze(AIRSUPPLY_LNG_OVERLAY_MAP),
 			center: [120.131259, 30.263295],
@@ -164,7 +161,7 @@ export default {
 			showOverlayDetail: false,
 			showRoutePlan: false,
 			activeTab: 'eventWarning',
-			legendMap: { LNGStation },
+			legendMap: AIRSUPPLY_LNG_LEGEND_MAP,
 			overlayMap: AIRSUPPLY_LNG_LEGEND_MAP,
 			dataStatisticsConfigMap: DATASTATISTICSLIST,
 			dataStatisticsInfo: {
@@ -190,27 +187,18 @@ export default {
 		// 获取所有站点数据
 		async getAllTypeStationList() {
 			const params = {
-				types: [
-					// 'InspectionPerson', // '巡检人员',
-					// 'InspectionCar', // '巡检车辆',
-					// 'GasStation', // '门站',
-					// 'PressureRegulatingStation', // '调压站',
-					// 'EmergencyAirSourceStation', // '应急气源站',
-					// 'ServiceStation', // '综合服务站',
-					// // 'PipeManageMentStation', // '管网运行管理站',
-					// // 'UndergroundRepairStation', // '地下抢修点',
-					'LNGStation', // 'LNG站',
-					// 'LiquefiedGasStation', // '液化气站',
-					// 'NaturalGasStation', // '加气站',
-					// 'DistributedEnergyResource', // '分布式能源',
-				].toString(),
+				types: Object.keys(AIRSUPPLY_LNG_LEGEND_MAP).toString()
 			}
 			const res = await this.$api.map.airSupply.getAllTypeStationList(
 				params,
 			)
 			this.stationDataMap = { ...this.stationDataMap, ...res }
-			const { lNGStationList } = res
-			this.stationList = [...lNGStationList]
+			this.stationList = [
+				...res.emergencyAirSourceStationList,
+				...res.naturalGasStationList,
+				...res.pipeManageMentStationList,
+				...res.pressureRegulatingStationList,
+			]
 		},
 		// 获取统计数据
 		async getDataStatisticsInfo() {
