@@ -31447,7 +31447,7 @@ var symbol = new _node_modules_svg_baker_runtime_browser_symbol_js__WEBPACK_IMPO
   "id": "icon-smile",
   "use": "icon-smile-usage",
   "viewBox": "0 0 1024 1024",
-  "content": "<symbol class=\"icon\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" id=\"icon-smile\">\r\n\t<defs><style type=\"text/css\"></style></defs>\r\n\t<path d=\"M512 74.666667C270.933333 74.666667 74.666667 270.933333 74.666667 512S270.933333 949.333333 512 949.333333 949.333333 753.066667 949.333333 512 753.066667 74.666667 512 74.666667z m0 810.666666c-204.8 0-373.333333-168.533333-373.333333-373.333333S307.2 138.666667 512 138.666667 885.333333 307.2 885.333333 512 716.8 885.333333 512 885.333333z\" p-id=\"2924\" />\r\n\t<path d=\"M674.133333 608c-46.933333 57.6-100.266667 85.333333-162.133333 85.333333s-115.2-27.733333-162.133333-85.333333c-10.666667-12.8-32-14.933333-44.8-4.266667-12.8 10.666667-14.933333 32-4.266667 44.8 59.733333 70.4 130.133333 106.666667 211.2 106.666667s151.466667-36.266667 211.2-106.666667c10.666667-12.8 8.533333-34.133333-4.266667-44.8-12.8-10.666667-34.133333-8.533333-44.8 4.266667zM362.666667 512c23.466667 0 42.666667-19.2 42.666666-42.666667v-64c0-23.466667-19.2-42.666667-42.666666-42.666666s-42.666667 19.2-42.666667 42.666666v64c0 23.466667 19.2 42.666667 42.666667 42.666667zM661.333333 512c23.466667 0 42.666667-19.2 42.666667-42.666667v-64c0-23.466667-19.2-42.666667-42.666667-42.666666s-42.666667 19.2-42.666666 42.666666v64c0 23.466667 19.2 42.666667 42.666666 42.666667z\" p-id=\"2925\" /></symbol>"
+  "content": "<symbol class=\"icon\" viewBox=\"0 0 1024 1024\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" id=\"icon-smile\">\n\t<defs><style type=\"text/css\"></style></defs>\n\t<path d=\"M512 74.666667C270.933333 74.666667 74.666667 270.933333 74.666667 512S270.933333 949.333333 512 949.333333 949.333333 753.066667 949.333333 512 753.066667 74.666667 512 74.666667z m0 810.666666c-204.8 0-373.333333-168.533333-373.333333-373.333333S307.2 138.666667 512 138.666667 885.333333 307.2 885.333333 512 716.8 885.333333 512 885.333333z\" p-id=\"2924\" />\n\t<path d=\"M674.133333 608c-46.933333 57.6-100.266667 85.333333-162.133333 85.333333s-115.2-27.733333-162.133333-85.333333c-10.666667-12.8-32-14.933333-44.8-4.266667-12.8 10.666667-14.933333 32-4.266667 44.8 59.733333 70.4 130.133333 106.666667 211.2 106.666667s151.466667-36.266667 211.2-106.666667c10.666667-12.8 8.533333-34.133333-4.266667-44.8-12.8-10.666667-34.133333-8.533333-44.8 4.266667zM362.666667 512c23.466667 0 42.666667-19.2 42.666666-42.666667v-64c0-23.466667-19.2-42.666667-42.666666-42.666666s-42.666667 19.2-42.666667 42.666666v64c0 23.466667 19.2 42.666667 42.666667 42.666667zM661.333333 512c23.466667 0 42.666667-19.2 42.666667-42.666667v-64c0-23.466667-19.2-42.666667-42.666667-42.666666s-42.666667 19.2-42.666666 42.666666v64c0 23.466667 19.2 42.666667 42.666666 42.666667z\" p-id=\"2925\" /></symbol>"
 });
 var result = _node_modules_svg_sprite_loader_runtime_browser_sprite_build_js__WEBPACK_IMPORTED_MODULE_1___default.a.add(symbol);
 /* harmony default export */ __webpack_exports__["default"] = (symbol);
@@ -43552,7 +43552,7 @@ var symbol = new _node_modules_svg_baker_runtime_browser_symbol_js__WEBPACK_IMPO
   "id": "icon-loading",
   "use": "icon-loading-usage",
   "viewBox": "0 0 32 32",
-  "content": "<symbol xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" fill=\"white\" id=\"icon-loading\"><script xmlns=\"\">/*global Web3*/\r\ncleanContextForImports()\r\nrequire('web3/dist/web3.min.js')\r\nconst LocalMessageDuplexStream = require('post-message-stream')\r\n// const PingStream = require('ping-pong-stream/ping')\r\n// const endOfStream = require('end-of-stream')\r\nconst setupDappAutoReload = require('./lib/auto-reload.js')\r\nconst MetamaskInpageProvider = require('./lib/inpage-provider.js')\r\nrestoreContextAfterImports()\r\n\r\n\r\n//\r\n// setup plugin communication\r\n//\r\n\r\n// setup background connection\r\nvar metamaskStream = new LocalMessageDuplexStream({\r\n  name: 'inpage',\r\n  target: 'contentscript',\r\n})\r\n\r\n// compose the inpage provider\r\nvar inpageProvider = new MetamaskInpageProvider(metamaskStream)\r\n\r\n//\r\n// setup web3\r\n//\r\n\r\nvar web3 = new Web3(inpageProvider)\r\nweb3.setProvider = function () {\r\n  console.log('MetaMask - overrode web3.setProvider')\r\n}\r\nconsole.log('MetaMask - injected web3')\r\n// export global web3, with usage-detection\r\nsetupDappAutoReload(web3, inpageProvider.publicConfigStore)\r\n\r\n// set web3 defaultAccount\r\n\r\ninpageProvider.publicConfigStore.subscribe(function (state) {\r\n  web3.eth.defaultAccount = state.selectedAddress\r\n})\r\n\r\n//\r\n// util\r\n//\r\n\r\n// need to make sure we aren't affected by overlapping namespaces\r\n// and that we dont affect the app with our namespace\r\n// mostly a fix for web3's BigNumber if AMD's \"define\" is defined...\r\nvar __define\r\n\r\nfunction cleanContextForImports () {\r\n  __define = global.define\r\n  try {\r\n    global.define = undefined\r\n  } catch (_) {\r\n    console.warn('MetaMask - global.define could not be deleted.')\r\n  }\r\n}\r\n\r\nfunction restoreContextAfterImports () {\r\n  try {\r\n    global.define = __define\r\n  } catch (_) {\r\n    console.warn('MetaMask - global.define could not be overwritten.')\r\n  }\r\n}\r\n\r\n</script>\r\n  <path opacity=\".25\" d=\"M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4\"></path>\r\n  <path d=\"M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z\" transform=\"rotate(144.155 16 16)\">\r\n    <animateTransform attributeName=\"transform\" type=\"rotate\" from=\"0 16 16\" to=\"360 16 16\" dur=\"0.8s\" repeatCount=\"indefinite\" />\r\n  </path>\r\n</symbol>"
+  "content": "<symbol xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\" fill=\"white\" id=\"icon-loading\"><script xmlns=\"\">/*global Web3*/\ncleanContextForImports()\nrequire('web3/dist/web3.min.js')\nconst LocalMessageDuplexStream = require('post-message-stream')\n// const PingStream = require('ping-pong-stream/ping')\n// const endOfStream = require('end-of-stream')\nconst setupDappAutoReload = require('./lib/auto-reload.js')\nconst MetamaskInpageProvider = require('./lib/inpage-provider.js')\nrestoreContextAfterImports()\n\n\n//\n// setup plugin communication\n//\n\n// setup background connection\nvar metamaskStream = new LocalMessageDuplexStream({\n  name: 'inpage',\n  target: 'contentscript',\n})\n\n// compose the inpage provider\nvar inpageProvider = new MetamaskInpageProvider(metamaskStream)\n\n//\n// setup web3\n//\n\nvar web3 = new Web3(inpageProvider)\nweb3.setProvider = function () {\n  console.log('MetaMask - overrode web3.setProvider')\n}\nconsole.log('MetaMask - injected web3')\n// export global web3, with usage-detection\nsetupDappAutoReload(web3, inpageProvider.publicConfigStore)\n\n// set web3 defaultAccount\n\ninpageProvider.publicConfigStore.subscribe(function (state) {\n  web3.eth.defaultAccount = state.selectedAddress\n})\n\n//\n// util\n//\n\n// need to make sure we aren't affected by overlapping namespaces\n// and that we dont affect the app with our namespace\n// mostly a fix for web3's BigNumber if AMD's \"define\" is defined...\nvar __define\n\nfunction cleanContextForImports () {\n  __define = global.define\n  try {\n    global.define = undefined\n  } catch (_) {\n    console.warn('MetaMask - global.define could not be deleted.')\n  }\n}\n\nfunction restoreContextAfterImports () {\n  try {\n    global.define = __define\n  } catch (_) {\n    console.warn('MetaMask - global.define could not be overwritten.')\n  }\n}\n\n</script>\n  <path opacity=\".25\" d=\"M16 0 A16 16 0 0 0 16 32 A16 16 0 0 0 16 0 M16 4 A12 12 0 0 1 16 28 A12 12 0 0 1 16 4\"></path>\n  <path d=\"M16 0 A16 16 0 0 1 32 16 L28 16 A12 12 0 0 0 16 4z\" transform=\"rotate(144.155 16 16)\">\n    <animateTransform attributeName=\"transform\" type=\"rotate\" from=\"0 16 16\" to=\"360 16 16\" dur=\"0.8s\" repeatCount=\"indefinite\" />\n  </path>\n</symbol>"
 });
 var result = _node_modules_svg_sprite_loader_runtime_browser_sprite_build_js__WEBPACK_IMPORTED_MODULE_1___default.a.add(symbol);
 /* harmony default export */ __webpack_exports__["default"] = (symbol);
@@ -60571,6 +60571,7 @@ var platform_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_
   // 是否是mac
   fullscreen: false,
   // 全屏
+  searchModal: false,
   autoAlignGuide: true // 自动贴靠参考线
 
 });
@@ -60700,16 +60701,14 @@ var instance = store('instance', instance_store_state, instance_store_actions);
 
 
 
- // todo bug
-// activeWidgetId
-// 在创建场景和销毁场景时变更了
-// index
-// 创建和销毁不能变更index
 
 var scene_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
   activeWidgetId: '',
   // 被激活的场景对应组件
+  activeSceneId: 0,
+  // 被激活的场景id
   index: 0,
+  // 当前主场景id
   list: [],
   obj: {},
   showAnimationStyle: '',
@@ -60813,7 +60812,7 @@ var scene_store_actions = {
       });
       document.dispatchEvent(event);
       setTimeout(function () {
-        // state.index = 0
+        scene_store_state.activeSceneId = 0;
         document.getElementById(index).parentNode.remove();
         instance_store.actions.setInstance('createKanboard', null); // 初始化实例场景
 
@@ -60859,8 +60858,8 @@ var scene_store_actions = {
         }
       });
       var comp = new Comp().$mount();
-      instance_store.actions.setInstance('createComp', comp); // state.index = id
-
+      instance_store.actions.setInstance('createComp', comp);
+      scene_store_state.activeSceneId = id;
       document.getElementsByClassName('detail-container')[0].appendChild(comp.$el);
       document.getElementById(id).parentNode.style.transform = transform;
       if (showAnimationStyle) document.getElementById(id).classList.add(showAnimationStyle);
@@ -61457,7 +61456,7 @@ var mx = {
       if (!this.config) return false;
       if (!this.config.event.scene.length) return false;
       return scene_store.state.activeWidgetId === this.config.widget.id && this.config.event.scene.some(function (v) {
-        return v.id === scene_store.state.index;
+        return v.id === scene_store.state.activeSceneId;
       });
     }
   },
@@ -62629,6 +62628,10 @@ var ruler = store('ruler', ruler_store_state, ruler_store_actions);
 var mouseup_mouseup = function mouseup(e) {
   if (event_store.state.contentDrag) {
     event_store.state.contentDrag = false;
+  }
+
+  if (platform_store.state.searchModal) {
+    platform_store.state.searchModal = false;
   }
 
   if (event_store.state.kuangMove) {

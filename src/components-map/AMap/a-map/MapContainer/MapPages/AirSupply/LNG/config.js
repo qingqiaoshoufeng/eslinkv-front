@@ -9,12 +9,12 @@ export const AIRSUPPLY_LNG_LEGEND_MAP = {
 		visible: true,
 		dataProp: 'lNGStationList',
 	},
-	// HighPressureLine: {
-	//     label: '高压管网',
-	//     legendIcon: 'icontuligaoyaguanwang',
-	//     component: 'HighPressureLine',
-	//     visible: false,
-	// },
+	HighPressureLine: {
+		label: '高压管网',
+		legendIcon: 'icontuligaoyaguanwang',
+		component: 'HighPressureLine',
+		visible: false,
+	},
 	// HighPressureLine_Process: {
 	//     label: '高压管网(建设中)',
 	//     legendIcon: 'icontulizhongyaguanwang-progress',
