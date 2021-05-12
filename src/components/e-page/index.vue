@@ -41,7 +41,6 @@ export default class EPage extends Vue {
 	}
 
 	reload() {
-		this.pageNum = 1
 		this.$emit('init', { pageSize: this.pageSize, pageNum: this.pageNum })
 	}
 

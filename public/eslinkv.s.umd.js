@@ -8052,6 +8052,7 @@ var state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.obser
   // 是否是mac
   fullscreen: false,
   // 全屏
+  searchModal: false,
   autoAlignGuide: true // 自动贴靠参考线
 
 });
@@ -9609,16 +9610,14 @@ var instance = store('instance', instance_store_state, instance_store_actions);
 
 
 
- // todo bug
-// activeWidgetId
-// 在创建场景和销毁场景时变更了
-// index
-// 创建和销毁不能变更index
 
 var scene_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
   activeWidgetId: '',
   // 被激活的场景对应组件
+  activeSceneId: 0,
+  // 被激活的场景id
   index: 0,
+  // 当前主场景id
   list: [],
   obj: {},
   showAnimationStyle: '',
@@ -9722,7 +9721,7 @@ var scene_store_actions = {
       });
       document.dispatchEvent(event);
       setTimeout(function () {
-        // state.index = 0
+        scene_store_state.activeSceneId = 0;
         document.getElementById(index).parentNode.remove();
         instance_store.actions.setInstance('createKanboard', null); // 初始化实例场景
 
@@ -9768,8 +9767,8 @@ var scene_store_actions = {
         }
       });
       var comp = new Comp().$mount();
-      instance_store.actions.setInstance('createComp', comp); // state.index = id
-
+      instance_store.actions.setInstance('createComp', comp);
+      scene_store_state.activeSceneId = id;
       document.getElementsByClassName('detail-container')[0].appendChild(comp.$el);
       document.getElementById(id).parentNode.style.transform = transform;
       if (showAnimationStyle) document.getElementById(id).classList.add(showAnimationStyle);
