@@ -61274,6 +61274,8 @@ var mx = {
 
       if (val) scene_store.state.transferData = val;
 
+		if (!this.configValue) return
+
       var _iterator = _createForOfIteratorHelper(this.configValue.event.scene),
           _step;
 
