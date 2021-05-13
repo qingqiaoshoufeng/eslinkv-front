@@ -29,7 +29,7 @@
 					.main
 						.station-info
 							.station-name {{ k.name }}
-							.station-area {{ k.ownedCompany }}
+							.station-area
 							.station-value
 								em.font-num {{ k.purchaseQty.toLocaleString() }}
 								span 吨
