@@ -42,7 +42,11 @@
 			}"
 			ref="OverlayDetail"
 			:width="400"
-		></OverlayDetail>
+		>
+			<PressureRegulating
+				v-if="OverlayDetailProp && OverlayDetailProp.data.overlayType === 'Ongroun111dRepairStation'">
+			</PressureRegulating>
+		</OverlayDetail>
 		<portal to="destination">
 			<!-- 统计数据 -->
 			<DataStatistics
@@ -75,6 +79,7 @@
 // 页面覆盖物组件
 import {} from '../Components/index.js'
 import { AMapTile } from '../../../../lib'
+import PressureRegulating from './components/PressureRegulating'
 
 // 页面所需公共组件
 import { OverlayDetail, MapLegend } from '../../../../components/index.js'
@@ -101,6 +106,7 @@ const componentPageArr = [
 	'OngroundRepairStation',
 	'InspectionPerson',
 	'InspectionCar',
+	'MapMarkerIcon',
 	// 报警点位
 	'WarnEvent',
 	// 右侧报警列表
@@ -127,6 +133,7 @@ componentCommonArr.map(componentName => {
 export default {
 	name: 'LowPressure',
 	components: {
+		PressureRegulating,
 		AMapTile,
 		...componentPageMap,
 		...componentCommonMap,
