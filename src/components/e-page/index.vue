@@ -27,8 +27,8 @@ export default class EPage extends Vue {
 	@Prop({ default: 0 }) total: number
 	@Prop({ default: false }) loaded: boolean
 	@Prop({ default: true }) show: boolean
+	@Prop({ default: 10 }) pageSize: number
 	pageNum = 1
-	pageSize = 10
 
 	handlePageSize(pageSize) {
 		this.pageSize = pageSize
