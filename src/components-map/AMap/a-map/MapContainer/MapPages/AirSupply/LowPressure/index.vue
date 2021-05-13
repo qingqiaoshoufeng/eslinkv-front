@@ -44,7 +44,7 @@
 			:width="400"
 		>
 			<PressureRegulating
-				v-if="OverlayDetailProp && OverlayDetailProp.data.overlayType === 'Ongroun111dRepairStation'">
+				v-if="OverlayDetailProp && OverlayDetailProp.data.overlayType === 'OngroundRepairStation'">
 			</PressureRegulating>
 		</OverlayDetail>
 		<portal to="destination">
@@ -63,7 +63,6 @@
 			<!-- 右侧列表 -->
 			<RightPanel
 				class="right-panel"
-				v-model="activeTab"
 				@overlay-click="handleListClick"
 				v-bind="{
 					stationList,
@@ -75,9 +74,6 @@
 	</div>
 </template>
 <script>
-// 页面覆盖物组件
-// 页面覆盖物组件
-import {} from '../Components/index.js'
 import { AMapTile } from '../../../../lib'
 import PressureRegulating from './components/PressureRegulating'
 
@@ -85,12 +81,6 @@ import PressureRegulating from './components/PressureRegulating'
 import { OverlayDetail, MapLegend } from '../../../../components/index.js'
 import { DataStatistics } from '../../../../components'
 
-import {
-	INDEXSCENEMAP,
-	OVERLAYINFOMAP_AIRSUPPLY,
-	AIRSUPPLY_WARN_SCENEINDEX,
-	AIRSUPPLY_WARN_COMPONENTINDEX,
-} from '../../../../config'
 import {
 	DATASTATISTICSLIST,
 	AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP,
@@ -158,7 +148,6 @@ export default {
 			zoom: 12.5,
 			showOverlayDetail: false,
 			showRoutePlan: false,
-			activeTab: 'eventWarning',
 			legendMap: AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 			overlayMap: AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP,
 			dataStatisticsConfigMap: DATASTATISTICSLIST,
@@ -325,7 +314,6 @@ export default {
 			this.showOverlayDetail = true
 		},
 		closeOverlayDetail(done) {
-			const { overlayType } = this.activeOverlay
 			this.showOverlayDetail = false
 			this.activeOverlay = {}
 			this.activeStationData = {}

@@ -1,5 +1,20 @@
 <template>
 	<div>
+		<div class="select">
+			<div @click="isShowOption = !isShowOption" class="select-show">
+				<span>全部点位</span>
+				<Icon type="ios-arrow-down" />
+			</div>
+			
+			<ul class="options" v-show="isShowOption">
+				<li
+					v-for="(k, i) in points"
+					:key="i"
+					@click="changeType(k.type)"
+					:class="{active: type === k.type}"
+				>{{ k.name }}</li>
+			</ul>
+		</div>
 		<div class="search">
 			<input
 				type="text"
@@ -44,11 +59,13 @@
 
 <script>
 import { SvgIcon, NoData } from '../../../../../components/'
+import { Icon } from 'view-design'
 export default {
 	name: 'HomeRealTimeList',
 	components: {
 		SvgIcon,
 		NoData,
+		Icon
 	},
 	data() {
 		const iconList = {
@@ -69,6 +86,30 @@ export default {
 			list: [],
 			iconList,
 			searchName: '',
+			isShowOption: false,
+			type: '',
+			points: [
+				{
+					name: '全部点位',
+					type: ''
+				},
+				{
+					name: '绿色能源综合服务站',
+					type: 'GreenEnergyStation'
+				},
+				{
+					name: '管网运行管理站',
+					type: 'PipeManageMentStation'
+				},
+				{
+					name: '调压站',
+					type: 'PressureRegulatingStation'
+				},
+				{
+					name: '调压器',
+					type: 'PressureRegulatingStation'
+				}
+			]
 		}
 	},
 	props: {
@@ -87,15 +128,21 @@ export default {
 	},
 	computed: {
 		showStationList() {
-			if (this.searchName) {
-				return this.stationList.filter(item =>
-					item.name.includes(this.searchName),
-				)
+			let res = this.stationList
+			if (this.type) {
+				res = res.filter(item => item.type === this.type)
 			}
-			return this.stationList
+			if (this.searchName) {
+				res = res.filter(item => item.name.includes(this.searchName))
+			}
+			return res
 		},
 	},
 	methods: {
+		changeType(type) {
+			this.type = type
+			this.isShowOption = false
+		},
 		clearSearch() {
 			this.searchName = ''
 		},
@@ -111,8 +158,45 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.select {
+	position: relative;
+	margin-top: 8px;
+	.select-show {
+		cursor: pointer;
+		background: #0057A9;
+		border-radius: 4px;
+		width: 100%;
+		height: 40px;
+		font-size: 20px;
+		color: #FEFFFF;
+		padding: 0 16px;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+	.options {
+		position: absolute;
+		top: 48px;
+		left: 0;
+		width: 100%;
+		padding: 8px 0;
+		background: #0057A9;
+		border: 1px solid #00DDFF;
+		border-radius: 4px;
+		li {
+			font-size: 20px;
+			color: rgba(255, 255, 255, 0.75);
+			text-align: left;
+			padding: 8px 16px;
+			&.active, &:hover {
+				background: rgba(0, 221, 255, 0.3);
+				font-weight: 600;
+				color: #FFFFFF;
+			}
+		}
+	}
+}
 .search {
-	box-sizing: border-box;
 	box-sizing: content-box;
 	display: flex;
 	width: 100%;
