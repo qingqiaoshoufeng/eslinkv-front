@@ -1,15 +1,12 @@
 <template>
 	<BaseOverlay
 		v-bind="{
-			overlayIcon,
+			overlayIcon: legendIcon,
 			overlayType,
 			visible,
 			...$attrs,
 		}"
-		@click="
-			marker =>
-				$emit('overlay-click', marker, overlayType)
-		"
+		@click="handleOverlayClick"
 	/>
 </template>
 <script>
@@ -24,7 +21,7 @@ export default {
 			type: Boolean,
 			default: true,
 		},
-		overlayIcon: {
+		legendIcon: {
 			type: String,
 			default: '',
 		},
@@ -36,22 +33,22 @@ export default {
 	data() {
 		return {
 			// 单位
-			unitMap: {}
+			unitMap: {
+				todayDischarge: '吨',
+				monthDischarge: '吨',
+				yearCompletedOrderCount: '单',
+				pendingOrderCount: '单',
+				yearDischarge: '吨',
+			}
 		}
 	},
 	methods: {
 		async handleOverlayClick(marker) {
 			console.log(marker)
-			if (!marker.detail) {
+			if (this.$attrs.detailHandler) {
 				const { id = '', name = '', type = '' } = marker
 				const dataComp = {}
-				let data = await this.$api.map.airSupply.getStationRealTimeInfo(
-					{
-						id,
-						name,
-						type,
-					},
-				)
+				let data = await this.$attrs.detailHandler({ id, name, type })
 				Object.keys(data).forEach(prop => {
 					const dw = this.unitMap[prop]
 					if (typeof data[prop] !== 'object') {
@@ -69,7 +66,8 @@ export default {
 				})
 				marker.detail = dataComp
 			}
-			this.$emit('overlay-click', marker, this.overlayType, false)
+			if (!marker.detail) marker.detail = {}
+			this.$emit('overlay-click', marker, this.overlayType)
 		},
 	}
 }

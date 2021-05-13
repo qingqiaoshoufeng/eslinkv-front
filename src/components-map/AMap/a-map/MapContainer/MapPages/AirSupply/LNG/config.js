@@ -1,5 +1,6 @@
 // 引入详情字典
 import { LNGstationNumber } from '../../../../utils/dictionary'
+import { getLngStationData } from '@/components-map-api/map.airSupply.api'
 // 覆盖物legend配置
 export const AIRSUPPLY_LNG_LEGEND_MAP = {
 	YardsStation: {
@@ -8,6 +9,7 @@ export const AIRSUPPLY_LNG_LEGEND_MAP = {
 		component: 'MapMarkerIcon',
 		visible: true,
 		dataProp: 'yardsStationList',
+		detailHandler: getLngStationData
 	},
 	BranchCompany: {
 		label: '分公司',
@@ -15,6 +17,7 @@ export const AIRSUPPLY_LNG_LEGEND_MAP = {
 		component: 'MapMarkerIcon',
 		visible: true,
 		dataProp: 'branchCompanyList',
+		detailHandler: getLngStationData
 	},
 	EmergencyAirSourceStation: {
 	    label: '应急气源站',

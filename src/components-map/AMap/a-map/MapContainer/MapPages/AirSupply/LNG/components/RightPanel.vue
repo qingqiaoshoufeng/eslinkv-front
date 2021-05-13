@@ -1,5 +1,5 @@
 <template lang="pug">
-	.right-panel
+	.right-panel.animate__animated.animate-fadeInRight
 		.title
 			img(src="../img/title-icon.svg")
 			span 本月LNG场站采购TOP10
@@ -9,7 +9,7 @@
 					.index(:class="{top: [0, 1, 2].includes(i)}") {{ i > 8 ? i + 1 : '0' + (i + 1) }}
 					.station
 						.station-info
-							.station-name {{ k.name }}
+							.station-name(@click="handleClick(k)") {{ k.name }}
 							.station-area {{ k.ownedCompany }}
 							.station-value
 								em.font-num {{ k.purchaseQty.toLocaleString() }}
@@ -85,28 +85,11 @@ export default {
 			this.activeTab = n
 		},
 		handleClick(item, eventType) {
-			this.geocoder = new AMap.Geocoder({
-				city: '330100', // 杭州市范围内查询
+			const res = this.$attrs.stationList.find(v => v.name === item.name)
+			this.$emit('overlay-click', {
+				...res,
+				detail: {}
 			})
-			// 普通报警地点，调用高德地址查询地址
-			if (!item.lat) {
-				this.geocoder.getLocation(item.address, (status, result) => {
-					if (status === 'complete' && result.geocodes.length) {
-						const lnglat = result.geocodes[0].location
-						const { lng, lat } = lnglat
-						item.lat = lat
-						item.lng = lng
-					} else {
-						// 查询失败则默认杭然地址
-						item.lat = 30.273297
-						item.lng = 120.151562
-						console.log('根据地址查询位置失败')
-					}
-					this.$emit('overlay-click', item)
-				})
-			} else {
-				this.$emit('overlay-click', item, eventType)
-			}
 		},
 	},
 }
