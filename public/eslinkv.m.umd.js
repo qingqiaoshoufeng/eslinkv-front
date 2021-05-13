@@ -61273,8 +61273,7 @@ var mx = {
       var _this = this;
 
       if (val) scene_store.state.transferData = val;
-
-		if (!this.configValue) return
+      if (!this.configValue) return;
 
       var _iterator = _createForOfIteratorHelper(this.configValue.event.scene),
           _step;
@@ -61455,12 +61454,8 @@ var mx = {
       return "d-".concat(now);
     },
     isSceneActive: function isSceneActive() {
-      // if (!this.config) return false;
-      // if (!this.config.event.scene.length) return false;
-      console.log(scene_store.state.activeWidgetId)
-      console.log(this.config.widget.id)
-      console.log(this.config.event.scene)
-      console.log(scene_store.state.activeSceneId)
+      if (!this.config) return false;
+      if (!this.config.event.scene.length) return false;
       return scene_store.state.activeWidgetId === this.config.widget.id && this.config.event.scene.some(function (v) {
         return v.id === scene_store.state.activeSceneId;
       });
@@ -62393,6 +62388,8 @@ var font = __webpack_require__("c18b");
 
 var event_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
   func: {},
+  componentsDisabled: {},
+  // 组件事件屏蔽
   contentMove: false,
   // 是否按下了 空格 键，启动内容区拖动
   contentDrag: false,
