@@ -1,5 +1,3 @@
-// 引入详情字典
-import { LNGstationNumber } from '../../../../utils/dictionary'
 import { getLngStationData } from '@/components-map-api/map.airSupply.api'
 // 覆盖物legend配置
 export const AIRSUPPLY_LNG_LEGEND_MAP = {
@@ -108,4 +106,25 @@ export const AIRSUPPLY_LNG_OVERLAY_MAP = {
 	}
 }
 // LNG统计数据
-export const DATASTATISTICSLIST = [LNGstationNumber]
+export const DATASTATISTICSLIST = [
+	{
+		label: '储备站',
+		DW: '',
+		prop: 'storageDistributionStation',
+	},
+	{
+		label: '应急气源站',
+		DW: '',
+		prop: 'emergencyAirSourceStation',
+	},
+	{
+		label: '加气站',
+		DW: '',
+		prop: 'naturalGasStation',
+	},
+	{
+		label: '绿色能源站',
+		DW: '',
+		prop: 'greenEnergyStation',
+	},
+]

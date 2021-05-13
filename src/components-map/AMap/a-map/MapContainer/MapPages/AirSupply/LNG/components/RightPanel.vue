@@ -20,24 +20,24 @@
 			img(src="../img/title-icon.svg")
 			span 最新订单
 			.tabs
-				.tab(:class="{active: activeTab === 1}" @click="switchTab(1)") 未完成
-				.tab(:class="{active: activeTab === 2}" @click="switchTab(2)") 今日完成
-		vueSeamlessScroll(:class-option="option2" :data="staionList || []" class="list2-wrap")
+				.tab(:class="{active: activeTab === 'InComplete'}" @click="switchTab('InComplete')") 未完成
+				.tab(:class="{active: activeTab === 'Complete'}" @click="switchTab('Complete')") 今日完成
+		vueSeamlessScroll(:class-option="option2" :data="order || []" class="list2-wrap")
 			ul.list2
-				li(v-for="(k, i) in staionList" :key="i")
+				li(v-for="(k, i) in order" :key="i")
 					img(src="../img/changzhan.svg")
 					.main
 						.station-info
-							.station-name 场站a
-							.station-area 杭天滨江
+							.station-name {{ k.name }}
+							.station-area {{ k.ownedCompany }}
 							.station-value
-								em.font-num 3445
+								em.font-num {{ k.purchaseQty.toLocaleString() }}
 								span 吨
 						.state
-							.time 04/20 09:11
+							.time {{ k.date }}
 							.state-name
 								.color
-								span 待充装
+								span {{ k.status }}
 </template>
 
 <script>
@@ -48,7 +48,7 @@ export default {
 	components: { vueSeamlessScroll },
 	data() {
 		return {
-			activeTab: 1,
+			activeTab: 'InComplete',
 			option: {
 				step: 0.2, // 数值越大速度滚动越快
 				limitMoveNum: 6, // 开始无缝滚动的数据量
@@ -70,21 +70,27 @@ export default {
 				waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
 			},
 			top10: [],
-			staionList: [{percent: 40},{percent: 40},{percent: 40},{percent: 40},{percent: 40},{percent: 40},]
+			order: []
 		}
 	},
 	props: {
 		
 	},
 	async created() {
-		const res = await this.$api.map.airSupply.getLngPurchaseTopTen()
-		this.top10 = res
+		this.top10 = await this.$api.map.airSupply.getLngPurchaseTopTen()
+		this.handleOrder()
 	},
 	methods: {
 		switchTab (n) {
 			this.activeTab = n
+			this.handleOrder()
 		},
-		handleClick(item, eventType) {
+		async handleOrder () {
+			this.order = await this.$api.map.airSupply.getLngLatestOrders({
+				orderType: this.activeTab
+			})
+		},
+		handleClick(item) {
 			const res = this.$attrs.stationList.find(v => v.name === item.name)
 			this.$emit('overlay-click', {
 				...res,
