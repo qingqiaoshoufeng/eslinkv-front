@@ -104,7 +104,6 @@ export default class Market extends Vue {
 		const id = +new Date()
 		const value = this.selectOne.componentConfig
 		const config = configMerge(value, commonConfigValue())
-		console.log(config)
 		platform.state.widgetAdded = {
 			[id]: {
 				id,

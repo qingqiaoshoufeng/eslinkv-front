@@ -61273,6 +61273,7 @@ var mx = {
       var _this = this;
 
       if (val) scene_store.state.transferData = val;
+      if (!this.configValue) return;
 
 		if (!this.configValue) return
 
@@ -62393,6 +62394,8 @@ var font = __webpack_require__("c18b");
 
 var event_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
   func: {},
+  componentsDisabled: {},
+  // 组件事件屏蔽
   contentMove: false,
   // 是否按下了 空格 键，启动内容区拖动
   contentDrag: false,

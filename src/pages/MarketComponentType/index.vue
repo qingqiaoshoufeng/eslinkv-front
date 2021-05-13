@@ -16,7 +16,12 @@ e-layout
 			template(#action="{ row }")
 				i-button.mr10(type="primary", @click="edit(row)") 编辑
 				i-button(type="error", @click="remove(row)") 删除
-		e-page(@init="init", :total="total", ref="page", :show="false" :loaded="loaded")
+		e-page(
+			@init="init",
+			:total="total",
+			ref="page",
+			:show="false",
+			:loaded="loaded")
 		dialogComponentType(
 			v-model="dialogEditShow",
 			:detail="currentRow",
@@ -56,7 +61,7 @@ export default class MarketComponentType extends Vue {
 	loaded = false
 	total = 0
 	dialogEditShow = false
-	currentRow: ComponentTypeCreate = {
+	currentRow = {
 		componentTypeName: '',
 	}
 

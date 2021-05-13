@@ -1,5 +1,5 @@
 <template lang="pug">
-	.right-panel
+	.right-panel.animate__animated.animate-fadeInRight
 		.title
 			img(src="../img/title-icon.svg")
 			span 本月LNG场站采购TOP10
@@ -9,7 +9,7 @@
 					.index(:class="{top: [0, 1, 2].includes(i)}") {{ i > 8 ? i + 1 : '0' + (i + 1) }}
 					.station
 						.station-info
-							.station-name {{ k.name }}
+							.station-name(@click="handleClick(k)") {{ k.name }}
 							.station-area {{ k.ownedCompany }}
 							.station-value
 								em.font-num {{ k.purchaseQty.toLocaleString() }}
@@ -70,43 +70,31 @@ export default {
 				waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
 			},
 			top10: [],
-			staionList: [{percent: 40},{percent: 40},{percent: 40},{percent: 40},{percent: 40},{percent: 40},]
+			staionList: [
+				{ percent: 40 },
+				{ percent: 40 },
+				{ percent: 40 },
+				{ percent: 40 },
+				{ percent: 40 },
+				{ percent: 40 },
+			],
 		}
 	},
-	props: {
-		
-	},
+	props: {},
 	async created() {
 		const res = await this.$api.map.airSupply.getLngPurchaseTopTen()
 		this.top10 = res
 	},
 	methods: {
-		switchTab (n) {
+		switchTab(n) {
 			this.activeTab = n
 		},
 		handleClick(item, eventType) {
-			this.geocoder = new AMap.Geocoder({
-				city: '330100', // 杭州市范围内查询
+			const res = this.$attrs.stationList.find(v => v.name === item.name)
+			this.$emit('overlay-click', {
+				...res,
+				detail: {},
 			})
-			// 普通报警地点，调用高德地址查询地址
-			if (!item.lat) {
-				this.geocoder.getLocation(item.address, (status, result) => {
-					if (status === 'complete' && result.geocodes.length) {
-						const lnglat = result.geocodes[0].location
-						const { lng, lat } = lnglat
-						item.lat = lat
-						item.lng = lng
-					} else {
-						// 查询失败则默认杭然地址
-						item.lat = 30.273297
-						item.lng = 120.151562
-						console.log('根据地址查询位置失败')
-					}
-					this.$emit('overlay-click', item)
-				})
-			} else {
-				this.$emit('overlay-click', item, eventType)
-			}
 		},
 	},
 }
@@ -133,7 +121,7 @@ export default {
 	font-weight: 600;
 	font-size: 24px;
 	line-height: 32px;
-	color: #FFFFFF;
+	color: #ffffff;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 	padding-bottom: 7px;
 	margin-bottom: 8px;
@@ -151,7 +139,7 @@ export default {
 		align-items: center;
 		.tab {
 			padding: 4px 8px;
-			background: #0057A9;
+			background: #0057a9;
 			box-sizing: border-box;
 			border-radius: 4px;
 			margin-left: 8px;
@@ -162,8 +150,8 @@ export default {
 			cursor: pointer;
 			&.active {
 				font-weight: 600;
-				color: #FFFFFF;
-				border: 1px solid #00DDFF;
+				color: #ffffff;
+				border: 1px solid #00ddff;
 			}
 		}
 	}
@@ -180,12 +168,12 @@ export default {
 			font-size: 24px;
 			line-height: 40px;
 			text-align: center;
-			color: #FFFFFF;
+			color: #ffffff;
 			background: rgba(0, 221, 255, 0.5);
-			border-top: 2px solid #00DDFF;
+			border-top: 2px solid #00ddff;
 			&.top {
 				background: rgba(229, 97, 91, 0.8);
-				border-top: 2px solid #FFDC45;
+				border-top: 2px solid #ffdc45;
 			}
 		}
 		.station {
@@ -196,14 +184,14 @@ export default {
 				.station-name {
 					font-weight: bold;
 					font-size: 20px;
-					color: #FFFFFF;
+					color: #ffffff;
 					margin-right: 4px;
 				}
 				.station-area {
-					background: #0057A9;
+					background: #0057a9;
 					border-radius: 4px;
 					font-size: 18px;
-					color: #FFFFFF;
+					color: #ffffff;
 					padding: 0 4px;
 				}
 				.station-value {
@@ -212,7 +200,7 @@ export default {
 					em {
 						font-weight: bold;
 						font-size: 24px;
-						color: #FFFFFF;
+						color: #ffffff;
 					}
 					span {
 						font-size: 20px;
@@ -221,13 +209,17 @@ export default {
 				}
 			}
 			.bar-w {
-				background: #0057A9;
+				background: #0057a9;
 				height: 8px;
 				.bar {
-					background: linear-gradient(270deg, #00DDFF 0%, rgba(0, 221, 255, 0.5) 100%);
+					background: linear-gradient(
+						270deg,
+						#00ddff 0%,
+						rgba(0, 221, 255, 0.5) 100%
+					);
 					height: 8px;
 					position: relative;
-					&:after{
+					&:after {
 						position: absolute;
 						top: 0;
 						right: 0;
@@ -251,10 +243,14 @@ export default {
 	li {
 		display: flex;
 		padding: 12px 8px;
-		&:nth-child(2n+1) {
-			background: linear-gradient(180deg, rgba(0, 87, 169, 0.3) 0%, rgba(0, 87, 169, 0.5) 100%);
+		&:nth-child(2n + 1) {
+			background: linear-gradient(
+				180deg,
+				rgba(0, 87, 169, 0.3) 0%,
+				rgba(0, 87, 169, 0.5) 100%
+			);
 		}
-		>img {
+		> img {
 			width: 40px;
 			height: 40px;
 			margin-right: 8px;
@@ -267,14 +263,14 @@ export default {
 				.station-name {
 					font-weight: bold;
 					font-size: 20px;
-					color: #FFFFFF;
+					color: #ffffff;
 					margin-right: 4px;
 				}
 				.station-area {
-					background: #0057A9;
+					background: #0057a9;
 					border-radius: 4px;
 					font-size: 18px;
-					color: #FFFFFF;
+					color: #ffffff;
 					padding: 0 4px;
 				}
 				.station-value {
@@ -283,7 +279,7 @@ export default {
 					em {
 						font-weight: bold;
 						font-size: 24px;
-						color: #FFFFFF;
+						color: #ffffff;
 					}
 					span {
 						font-size: 20px;
@@ -298,18 +294,18 @@ export default {
 				margin-top: 16px;
 				.time {
 					font-size: 18px;
-					color: #FFFFFF;
+					color: #ffffff;
 				}
 				.state-name {
 					font-size: 20px;
 					text-align: right;
-					color: #FFDC45;
+					color: #ffdc45;
 					display: flex;
 					align-items: center;
 					.color {
 						width: 8px;
 						height: 8px;
-						background: #FFDC45;
+						background: #ffdc45;
 						border-radius: 50%;
 						margin-right: 8px;
 					}

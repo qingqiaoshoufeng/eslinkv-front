@@ -1,5 +1,6 @@
 // 引入详情字典
 import { LNGstationNumber } from '../../../../utils/dictionary'
+import { getLngStationData } from '@/components-map-api/map.airSupply.api'
 // 覆盖物legend配置
 export const AIRSUPPLY_LNG_LEGEND_MAP = {
 	YardsStation: {
@@ -8,6 +9,7 @@ export const AIRSUPPLY_LNG_LEGEND_MAP = {
 		component: 'MapMarkerIcon',
 		visible: true,
 		dataProp: 'yardsStationList',
+		detailHandler: getLngStationData,
 	},
 	BranchCompany: {
 		label: '分公司',
@@ -15,33 +17,34 @@ export const AIRSUPPLY_LNG_LEGEND_MAP = {
 		component: 'MapMarkerIcon',
 		visible: true,
 		dataProp: 'branchCompanyList',
+		detailHandler: getLngStationData,
 	},
 	EmergencyAirSourceStation: {
-	    label: '应急气源站',
-	    legendIcon: 'iconyingjiqiyuanzhan',
-	    component: 'MapMarkerIcon',
-	    visible: true,
+		label: '应急气源站',
+		legendIcon: 'iconyingjiqiyuanzhan',
+		component: 'MapMarkerIcon',
+		visible: true,
 		dataProp: 'emergencyAirSourceStationList',
 	},
 	StorageDistributionStation: {
-	    label: '储配站',
-	    legendIcon: 'iconchupeizhan',
-	    component: 'MapMarkerIcon',
-	    visible: true,
+		label: '储配站',
+		legendIcon: 'iconchupeizhan',
+		component: 'MapMarkerIcon',
+		visible: true,
 		dataProp: 'storageDistributionStationList',
 	},
 	NaturalGasStation: {
-	    label: '加气站',
-	    legendIcon: 'iconjiaqizhan1',
-	    component: 'MapMarkerIcon',
-	    visible: true,
+		label: '加气站',
+		legendIcon: 'iconjiaqizhan1',
+		component: 'MapMarkerIcon',
+		visible: true,
 		dataProp: 'naturalGasStationList',
 	},
 	GreenEnergyStation: {
-	    label: '分布式能源',
-	    legendIcon: 'iconlvsenengyuanzhan',
-	    component: 'MapMarkerIcon',
-	    visible: true,
+		label: '分布式能源',
+		legendIcon: 'iconlvsenengyuanzhan',
+		component: 'MapMarkerIcon',
+		visible: true,
 		dataProp: 'greenEnergyStationList',
 	},
 }
@@ -49,15 +52,15 @@ export const AIRSUPPLY_LNG_LEGEND_MAP = {
 // 覆盖物详情
 export const AIRSUPPLY_LNG_OVERLAY_MAP = {
 	EmergencyAirSourceStation: {
-	    fields: {
-	        name: {
-	            style: {
-	                fontSize: '32px',
-	                color: '#FFDC45'
-	            },
-	            errColor: '#FFDC45'
-	        },
-	    },
+		fields: {
+			name: {
+				style: {
+					fontSize: '32px',
+					color: '#FFDC45',
+				},
+				errColor: '#FFDC45',
+			},
+		},
 	},
 	BranchCompany: {
 		fields: {
@@ -102,7 +105,7 @@ export const AIRSUPPLY_LNG_OVERLAY_MAP = {
 				errColor: '#FFDC45',
 			},
 		},
-	}
+	},
 }
 // LNG统计数据
 export const DATASTATISTICSLIST = [LNGstationNumber]

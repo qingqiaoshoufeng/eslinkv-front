@@ -10,22 +10,15 @@
 			@close="closeWarnEventDetail"
 		></WarnEvent>
 		<!-- 2.legend控制显隐 -->
-		<template v-for="(config, legend) in legendMap">
+		<template v-for="(config, key) in legendMap">
 			<component
 				v-if="config.visible && stationDataMap[config.dataProp]"
-				:key="legend"
-				:visible="config.visible"
+				v-bind="config"
+				:key="key"
 				:is="config.component"
-				:overlayIcon="config.icon ? config.icon : config.legendIcon"
-				:overlayType="legend"
-				:showOverlayName="
-					config.showOverlayName === false
-						? config.showOverlayName
-						: undefined
-				"
-				@overlay-click="handleOverlayClick"
-				:detailList="config.detailList"
+				:overlayType="key"
 				:data="stationDataMap[config.dataProp]"
+				@overlay-click="handleOverlayClick"
 			/>
 		</template>
 		<!-- 覆盖物详情 -->
@@ -56,7 +49,6 @@
 				@overlay-click="handleListClick"
 				v-bind="{
 					stationList,
-					rightListActiveItemMap,
 				}"
 				ref="RightPanel"
 			></RightPanel>
@@ -65,10 +57,7 @@
 </template>
 <script>
 // 页面覆盖物组件
-import {
-	MapMarkerIcon,
-	WarnEvent,
-} from '../Components/index.js'
+import { MapMarkerIcon, WarnEvent } from '../Components/index.js'
 import RightPanel from './components/RightPanel'
 // 页面所需公共组件
 import {
@@ -114,14 +103,6 @@ export default {
 		this.$amap.setCenter(this.center, 100)
 	},
 	computed: {
-		rightListActiveItemMap() {
-			const { activeWarnData, activeStationData } = this
-			return {
-				processWarning: activeWarnData,
-				eventWarning: activeWarnData,
-				overlayList: activeStationData,
-			}
-		},
 		overlayDetailProp() {
 			const { activeOverlay, overlayInfoConfigMap, legendMap } = this
 			if (JSON.stringify(activeOverlay) !== '{}') {
@@ -169,12 +150,10 @@ export default {
 			},
 			stationDataMap: {},
 			stationList: [],
-			stationListData: {},
 		}
 	},
 	methods: {
 		closeStationListDetail() {
-			this.StationListData = {}
 			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1
 			this.$refs.RightPanel.$refs.eventWarning.activeIndex = -1
 			this.$refs.RightPanel.$refs.overlayList.activeIndex = -1
@@ -187,17 +166,19 @@ export default {
 		// 获取所有站点数据
 		async getAllTypeStationList() {
 			const params = {
-				types: Object.keys(AIRSUPPLY_LNG_LEGEND_MAP).toString()
+				types: Object.keys(AIRSUPPLY_LNG_LEGEND_MAP).toString(),
 			}
-			const res = await this.$api.map.airSupply.getAllTypeStationList(
+			const res = await this.$api.map.airSupply.getLngMapDataResult(
 				params,
 			)
 			this.stationDataMap = { ...this.stationDataMap, ...res }
 			this.stationList = [
+				...res.branchCompanyList,
 				...res.emergencyAirSourceStationList,
+				...res.greenEnergyStationList,
 				...res.naturalGasStationList,
-				...res.pipeManageMentStationList,
-				...res.pressureRegulatingStationList,
+				...res.storageDistributionStationList,
+				...res.yardsStationList,
 			]
 		},
 		// 获取统计数据
@@ -235,17 +216,13 @@ export default {
 				this.$amap.panTo([lng, lat], 100)
 			})
 		},
-		handleListClick(overlay, eventType) {
+		handleListClick(overlay) {
 			if (this.showOverlayDetail) {
 				this.showOverlayDetail = false
 				this.activeOverlay = {}
 			}
 			const { lng, lat } = overlay
-			if (eventType) {
-				this.stationListData = overlay
-			} else {
-				this.activeWarnData = overlay
-			}
+			this.activeWarnData = overlay
 			this.setZoomAndPanTo(lng, lat)
 		},
 		closeWarnEventDetail() {

@@ -175,3 +175,25 @@ export function getLngPurchaseTopTen(data = {}) {
 		},
 	})
 }
+
+export function getLngMapDataResult(data) {
+	return request({
+		url: HANGRANURL + '/LNG/mapDataResult',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+export function getLngStationData(data) {
+	return request({
+		url: HANGRANURL + '/LNG/lngStationData',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}

@@ -9785,6 +9785,8 @@ var scene_store_scene = store('scene', scene_store_state, scene_store_actions);
 
 var event_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
   func: {},
+  componentsDisabled: {},
+  // 组件事件屏蔽
   contentMove: false,
   // 是否按下了 空格 键，启动内容区拖动
   contentDrag: false,
