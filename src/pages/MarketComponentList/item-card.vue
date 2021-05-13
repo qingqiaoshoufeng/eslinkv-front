@@ -4,12 +4,18 @@ e-card
 		:image="currentItem.componentAvatar",
 		background-size="contain")
 	template(slot="content")
-		h2.ellipsis {{ currentItem.componentTitle }}
+		.fn-flex
+			h2.ellipsis {{ currentItem.componentTitle }}
+			i-button(:style="{ marginLeft: '10px' }", type="success", size="small") {{ currentItem.componentVersion }}
 		.fn-flex.flex-row.list-item-card-time-box
 			p {{ $format(new Date(currentItem.createTime), 'yyyy-MM-dd hh:mm:ss') }}
 		div
-			i-button(type="success", size="small") {{ currentItem.componentVersion }}
-			i-button(:style="{ marginLeft: '10px' }", type="info", size="small") {{ currentItem.componentEnTitle }}
+			i-button(type="info", size="small") {{ currentItem.componentEnTitle }}
+			i-button(
+				:style="{ marginLeft: '10px' }",
+				type="success",
+				size="small",
+				v-if="currentItem.componentTypeName") {{ currentItem.componentTypeName }}
 	.pos-a.list-item-card-mask.fn-flex.flex-column
 		i-button(icon="ios-create-outline", @click="handleEdit") 编辑组件
 		i-button(

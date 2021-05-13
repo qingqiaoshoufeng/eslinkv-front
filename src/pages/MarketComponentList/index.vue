@@ -9,7 +9,7 @@ e-layout
 				@click="handleType") 组件分类
 			i-button(type="primary", @click="handleDownload", style="margin-left: auto") 下载组件开发工具
 		.search
-		e-page(@init="init", :total="total", ref="page" :loaded="loaded")
+		e-page(@init="init", :total="total", ref="page", :loaded="loaded" :pageSize="10")
 			ul.list-item-card-box
 				item-card(
 					v-for="(item, i) in list",
@@ -66,7 +66,9 @@ export default class MarketComponentList extends Vue {
 <style lang="scss" scoped>
 .market-container {
 	padding: 15px;
-
+	.list-item-card-box {
+		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+	}
 	&::v-deep {
 		.viewer-canvas {
 			background-color: rgba(0, 0, 0, 0.5);
