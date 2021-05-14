@@ -35,7 +35,7 @@
 								span 吨
 						.state
 							.time {{ k.date }}
-							.state-name
+							.state-name(v-if="activeTab === 'InComplete'")
 								.color
 								span {{ k.status }}
 </template>
