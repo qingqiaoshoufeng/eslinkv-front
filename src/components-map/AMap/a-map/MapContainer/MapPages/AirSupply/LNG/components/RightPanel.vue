@@ -5,11 +5,11 @@
 			span 本月LNG场站采购TOP10
 		vueSeamlessScroll(:class-option="option" :data="top10" class="list-wrap")
 			ul.list
-				li(v-for="(k, i) in top10" :key="i")
+				li(v-for="(k, i) in top10" :key="i" @click="handleClick(k)")
 					.index(:class="{top: [0, 1, 2].includes(i)}") {{ i > 8 ? i + 1 : '0' + (i + 1) }}
 					.station
 						.station-info
-							.station-name(@click="handleClick(k)") {{ k.name }}
+							.station-name {{ k.name }}
 							.station-area {{ k.ownedCompany }}
 							.station-value
 								em.font-num {{ k.purchaseQty.toLocaleString() }}
@@ -22,7 +22,10 @@
 			.tabs
 				.tab(:class="{active: activeTab === 'InComplete'}" @click="switchTab('InComplete')") 未完成
 				.tab(:class="{active: activeTab === 'Complete'}" @click="switchTab('Complete')") 今日完成
-		vueSeamlessScroll(:class-option="option2" :data="order || []" class="list2-wrap")
+		.none(v-if="!order.length")
+			img(src="/static/images/amap/noModel.svg")
+			p 暂无数据
+		vueSeamlessScroll(:class-option="option2" :data="order || []" class="list2-wrap" v-if="order.length")
 			ul.list2
 				li(v-for="(k, i) in order" :key="i")
 					img(src="../img/changzhan.svg")
@@ -72,9 +75,6 @@ export default {
 			top10: [],
 			order: []
 		}
-	},
-	props: {
-		
 	},
 	async created() {
 		this.top10 = await this.$api.map.airSupply.getLngPurchaseTopTen()
@@ -159,6 +159,7 @@ export default {
 }
 .list {
 	li {
+		cursor: pointer;
 		display: flex;
 		margin-bottom: 24px;
 		.index {
@@ -231,7 +232,15 @@ export default {
 		}
 	}
 }
-
+.none {
+	font-size: 20px;
+	text-align: center;
+	padding-top: 100px;
+	color: #fff;
+	img {
+		width: 80px;
+	}
+}
 .list2-wrap {
 	height: 340px;
 	overflow: hidden;
