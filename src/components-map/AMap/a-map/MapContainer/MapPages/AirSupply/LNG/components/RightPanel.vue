@@ -5,11 +5,11 @@
 			span 本月LNG场站采购TOP10
 		vueSeamlessScroll(:class-option="option" :data="top10" class="list-wrap")
 			ul.list
-				li(v-for="(k, i) in top10" :key="i")
+				li(v-for="(k, i) in top10" :key="i" @click="handleClick(k)")
 					.index(:class="{top: [0, 1, 2].includes(i)}") {{ i > 8 ? i + 1 : '0' + (i + 1) }}
 					.station
 						.station-info
-							.station-name(@click="handleClick(k)") {{ k.name }}
+							.station-name {{ k.name }}
 							.station-area {{ k.ownedCompany }}
 							.station-value
 								em.font-num {{ k.purchaseQty.toLocaleString() }}
@@ -22,7 +22,10 @@
 			.tabs
 				.tab(:class="{active: activeTab === 'InComplete'}" @click="switchTab('InComplete')") 未完成
 				.tab(:class="{active: activeTab === 'Complete'}" @click="switchTab('Complete')") 今日完成
-		vueSeamlessScroll(:class-option="option2" :data="order || []" class="list2-wrap")
+		.none(v-if="!order.length")
+			img(src="/static/images/amap/noModel.svg")
+			p 暂无数据
+		vueSeamlessScroll(:class-option="option2" :data="order || []" class="list2-wrap" v-if="order.length")
 			ul.list2
 				li(v-for="(k, i) in order" :key="i")
 					img(src="../img/changzhan.svg")
@@ -35,7 +38,7 @@
 								span 吨
 						.state
 							.time {{ k.date }}
-							.state-name(v-if="activeTab === 'InComplete'")
+							.state-name
 								.color
 								span {{ k.status }}
 </template>
@@ -70,29 +73,28 @@ export default {
 				waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
 			},
 			top10: [],
-			order: [],
+			order: []
 		}
 	},
-	props: {},
 	async created() {
 		this.top10 = await this.$api.map.airSupply.getLngPurchaseTopTen()
 		this.handleOrder()
 	},
 	methods: {
-		switchTab(n) {
+		switchTab (n) {
 			this.activeTab = n
 			this.handleOrder()
 		},
-		async handleOrder() {
+		async handleOrder () {
 			this.order = await this.$api.map.airSupply.getLngLatestOrders({
-				orderType: this.activeTab,
+				orderType: this.activeTab
 			})
 		},
 		handleClick(item) {
 			const res = this.$attrs.stationList.find(v => v.name === item.name)
 			this.$emit('overlay-click', {
 				...res,
-				detail: {},
+				detail: {}
 			})
 		},
 	},
@@ -120,7 +122,7 @@ export default {
 	font-weight: 600;
 	font-size: 24px;
 	line-height: 32px;
-	color: #ffffff;
+	color: #FFFFFF;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 	padding-bottom: 7px;
 	margin-bottom: 8px;
@@ -138,7 +140,7 @@ export default {
 		align-items: center;
 		.tab {
 			padding: 4px 8px;
-			background: #0057a9;
+			background: #0057A9;
 			box-sizing: border-box;
 			border-radius: 4px;
 			margin-left: 8px;
@@ -149,14 +151,15 @@ export default {
 			cursor: pointer;
 			&.active {
 				font-weight: 600;
-				color: #ffffff;
-				border: 1px solid #00ddff;
+				color: #FFFFFF;
+				border: 1px solid #00DDFF;
 			}
 		}
 	}
 }
 .list {
 	li {
+		cursor: pointer;
 		display: flex;
 		margin-bottom: 24px;
 		.index {
@@ -167,12 +170,12 @@ export default {
 			font-size: 24px;
 			line-height: 40px;
 			text-align: center;
-			color: #ffffff;
+			color: #FFFFFF;
 			background: rgba(0, 221, 255, 0.5);
-			border-top: 2px solid #00ddff;
+			border-top: 2px solid #00DDFF;
 			&.top {
 				background: rgba(229, 97, 91, 0.8);
-				border-top: 2px solid #ffdc45;
+				border-top: 2px solid #FFDC45;
 			}
 		}
 		.station {
@@ -183,14 +186,14 @@ export default {
 				.station-name {
 					font-weight: bold;
 					font-size: 20px;
-					color: #ffffff;
+					color: #FFFFFF;
 					margin-right: 4px;
 				}
 				.station-area {
-					background: #0057a9;
+					background: #0057A9;
 					border-radius: 4px;
 					font-size: 18px;
-					color: #ffffff;
+					color: #FFFFFF;
 					padding: 0 4px;
 				}
 				.station-value {
@@ -199,7 +202,7 @@ export default {
 					em {
 						font-weight: bold;
 						font-size: 24px;
-						color: #ffffff;
+						color: #FFFFFF;
 					}
 					span {
 						font-size: 20px;
@@ -208,17 +211,13 @@ export default {
 				}
 			}
 			.bar-w {
-				background: #0057a9;
+				background: #0057A9;
 				height: 8px;
 				.bar {
-					background: linear-gradient(
-						270deg,
-						#00ddff 0%,
-						rgba(0, 221, 255, 0.5) 100%
-					);
+					background: linear-gradient(270deg, #00DDFF 0%, rgba(0, 221, 255, 0.5) 100%);
 					height: 8px;
 					position: relative;
-					&:after {
+					&:after{
 						position: absolute;
 						top: 0;
 						right: 0;
@@ -233,7 +232,15 @@ export default {
 		}
 	}
 }
-
+.none {
+	font-size: 20px;
+	text-align: center;
+	padding-top: 100px;
+	color: #fff;
+	img {
+		width: 80px;
+	}
+}
 .list2-wrap {
 	height: 340px;
 	overflow: hidden;
@@ -242,14 +249,10 @@ export default {
 	li {
 		display: flex;
 		padding: 12px 8px;
-		&:nth-child(2n + 1) {
-			background: linear-gradient(
-				180deg,
-				rgba(0, 87, 169, 0.3) 0%,
-				rgba(0, 87, 169, 0.5) 100%
-			);
+		&:nth-child(2n+1) {
+			background: linear-gradient(180deg, rgba(0, 87, 169, 0.3) 0%, rgba(0, 87, 169, 0.5) 100%);
 		}
-		> img {
+		>img {
 			width: 40px;
 			height: 40px;
 			margin-right: 8px;
@@ -262,14 +265,14 @@ export default {
 				.station-name {
 					font-weight: bold;
 					font-size: 20px;
-					color: #ffffff;
+					color: #FFFFFF;
 					margin-right: 4px;
 				}
 				.station-area {
-					background: #0057a9;
+					background: #0057A9;
 					border-radius: 4px;
 					font-size: 18px;
-					color: #ffffff;
+					color: #FFFFFF;
 					padding: 0 4px;
 				}
 				.station-value {
@@ -278,7 +281,7 @@ export default {
 					em {
 						font-weight: bold;
 						font-size: 24px;
-						color: #ffffff;
+						color: #FFFFFF;
 					}
 					span {
 						font-size: 20px;
@@ -293,18 +296,18 @@ export default {
 				margin-top: 16px;
 				.time {
 					font-size: 18px;
-					color: #ffffff;
+					color: #FFFFFF;
 				}
 				.state-name {
 					font-size: 20px;
 					text-align: right;
-					color: #ffdc45;
+					color: #FFDC45;
 					display: flex;
 					align-items: center;
 					.color {
 						width: 8px;
 						height: 8px;
-						background: #ffdc45;
+						background: #FFDC45;
 						border-radius: 50%;
 						margin-right: 8px;
 					}

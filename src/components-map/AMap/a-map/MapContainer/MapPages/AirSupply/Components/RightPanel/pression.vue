@@ -1,7 +1,6 @@
 <template lang="pug">
 	ul.pression
-		NoData(:show="true")
-		li(v-for="(k, i) in 4" :key="i" v-if="false")
+		li(v-for="(k, i) in 4" :key="i")
 			img(src="./img/press.svg")
 			.main
 				.main-1
@@ -16,9 +15,8 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
-import { NoData } from '../../../../../components'
 
-@Component({components: { NoData }})
+@Component
 export default class PressureRegulating extends Vue {
 	@Prop() showMapPage
 
@@ -28,7 +26,6 @@ export default class PressureRegulating extends Vue {
 </script>
 <style lang="scss" scoped>
 .pression {
-	position: relative;
 	height: 800px;
 	font-size: 20px;
 	color: #fff;
