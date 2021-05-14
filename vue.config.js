@@ -52,8 +52,8 @@ module.exports = {
 				// },
 			},
 			'^/server': {
-				// target: 'http://eslinkv.eslink.cc',
-				target: 'http://192.168.1.44:2000',
+				target: 'http://eslinkv.eslink.cc',
+				// target: 'http://192.168.1.44:2000',
 				changeOrigin: true,
 				// pathRewrite: {
 				// 	'^/server': '/',

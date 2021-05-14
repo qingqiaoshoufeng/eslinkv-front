@@ -8045,6 +8045,8 @@ var state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.obser
   // 选中项的自定义配置
   chooseWidgetId: null,
   // 选中项id
+  chooseWidgetArray: [],
+  // 选中项ids
   chooseWidgetState: true,
   // 是否可编辑
   panelConfig: getInitPanelConfig(),
@@ -8066,6 +8068,7 @@ var actions = {
   unChooseWidget: function unChooseWidget() {
     state.chooseWidgetState = true;
     state.chooseWidgetId = null;
+    state.chooseWidgetArray = [];
     document.getElementById('right-menu').classList.remove('active');
   },
   chooseWidget: function chooseWidget(id) {

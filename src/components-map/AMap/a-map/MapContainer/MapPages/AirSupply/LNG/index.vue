@@ -183,9 +183,7 @@ export default {
 		},
 		// 获取统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsInfo = await this.$api.map.airSupply.getStatisticsInfo(
-				{ type: 'LNG' },
-			)
+			this.dataStatisticsInfo = await this.$api.map.airSupply.getLngStationCounts()
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			const { lng, lat } = overlay

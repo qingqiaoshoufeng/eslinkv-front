@@ -239,6 +239,26 @@ const serviceCustomerStatus = {
 	DW: '',
 	prop: 'statusText',
 }
+// const emergencyAirSourceStation = {
+// 	label: '状态',
+// 	DW: '',
+// 	prop: 'emergencyAirSourceStation',
+// }
+const greenEnergyStation = {
+	label: '状态',
+	DW: '',
+	prop: 'greenEnergyStation',
+}
+const naturalGasStation = {
+	label: '状态',
+	DW: '',
+	prop: 'naturalGasStation',
+}
+const storageDistributionStation = {
+	label: '状态',
+	DW: '',
+	prop: 'storageDistributionStation',
+}
 
 export {
 	OperationToday,

@@ -159,15 +159,43 @@ export function getEmployeeGpsTrack(data) {
 /**
  * 本月LNG场站采购Top10
  * @param {*} data
-{
-	employeeName:'巡检人员姓名',
-	callDate:'接单派人时间',
-	arriveDate:'到达时间'
-}
+
  */
 export function getLngPurchaseTopTen(data = {}) {
 	return request({
 		url: HANGRANURL + '/LNG/purchaseTopTen',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+/**
+ * LNG最新订单
+ * @param {*} data
+
+ */
+export function getLngLatestOrders(data = {}) {
+	return request({
+		url: HANGRANURL + '/LNG/latestOrders',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+/**
+ * LNG最新订单
+ * @param {*} data
+
+ */
+export function getLngStationCounts(data = {}) {
+	return request({
+		url: HANGRANURL + '/LNG/stationCount',
 		method: 'get',
 		params: data,
 		headers: {

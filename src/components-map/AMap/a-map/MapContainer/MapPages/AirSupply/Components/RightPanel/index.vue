@@ -1,34 +1,32 @@
-<template>
-	<Tabs
-		class="tabs-container animate__animated animate-fadeInRight"
-		:value="value"
-		@input="val => $emit('input', val)"
-	>
-		<TabPanel key="processWarning" name="processWarning" label="工艺报警">
-			<processWarning
+<template lang="pug">
+	.container
+		.tabs
+			.tab(@click="tab=0" :class="{active: tab===0}") 工艺预警
+			.tab(@click="tab=1" :class="{active: tab===1}") 事件预警
+			.tab(@click="tab=2" :class="{active: tab===2}") 调压器预警
+			.icon-wrap.tab(:class="{active: tab===3}")
+				img.icon(src="./img/pos-active.svg" v-if="tab===3")
+				img.icon(src="./img/pos.svg" @click="tab=3" v-else)
+		.content
+			processWarning(
+				v-show="tab === 0"
 				:activeItem="rightListActiveItemMap['processWarning'] || {}"
 				@change="handleClick"
 				ref="processWarning"
-			/>
-		</TabPanel>
-
-		<TabPanel key="eventWarning" name="eventWarning" label="事件报警">
-			<eventWarning
+			)
+			eventWarning(
+				v-show="tab === 1"
 				:activeItem="rightListActiveItemMap['eventWarning'] || {}"
 				@change="handleClick"
 				ref="eventWarning"
-			/>
-		</TabPanel>
-
-		<TabPanel key="overlayList" name="overlayList" label="点位列表" lazy>
-			<overlayList
+			)
+			overlayList(
+				v-show="tab === 3"
 				:activeItem="rightListActiveItemMap['overlayList'] || {}"
 				@change="handleClick"
 				ref="overlayList"
 				:stationList="stationList"
-			/>
-		</TabPanel>
-	</Tabs>
+			)
 </template>
 
 <script>
@@ -42,13 +40,10 @@ export default {
 	data() {
 		return {
 			ready: false,
+			tab: 0,
 		}
 	},
 	props: {
-		value: {
-			type: String,
-			default: 'processWarning',
-		},
 		stationList: {
 			type: Array,
 			default() {
@@ -57,7 +52,7 @@ export default {
 		},
 		rightListActiveItemMap: {
 			type: Object,
-			defaut() {
+			default() {
 				return {}
 			},
 		},
@@ -102,7 +97,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.right-panel {
+.container {
 	position: absolute;
 	top: 148px;
 	right: 32px;
@@ -110,8 +105,51 @@ export default {
 	width: 480px;
 	max-height: 860px;
 }
-
-.tabs-container {
+.tabs {
+	background: rgba(0, 87, 169, 0.5);
+	border: 1px solid #1773c9;
+	width: 480px;
+	height: 48px;
+	font-size: 24px;
+	color: rgba(255, 255, 255, 0.75);
+	display: flex;
+	align-items: center;
+	padding: 0 7px 0 16px;
+	.tab {
+		position: relative;
+		height: 100%;
+		line-height: 48px;
+		flex: 1;
+		cursor: pointer;
+		&.active {
+			font-weight: bold;
+			color: #ffffff;
+			&:after {
+				position: absolute;
+				bottom: 0;
+				left: 50%;
+				width: 0;
+				height: 0;
+				content: '';
+				border-color: transparent transparent #0df;
+				border-style: solid;
+				border-width: 0 8px 4px;
+				transform: translateX(-50%);
+			}
+		}
+	}
+	.icon-wrap {
+		flex: 0 0 30px;
+		display: flex;
+		align-items: center;
+	}
+	.icon {
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+	}
+}
+.content {
 	max-height: 846px;
 	overflow-y: auto;
 

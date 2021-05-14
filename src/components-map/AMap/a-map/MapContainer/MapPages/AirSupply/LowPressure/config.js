@@ -29,6 +29,13 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		tileQuery: [34],
 		visible: false,
 	},
+	PressureRegulatingTest: {
+		label: '调压器',
+		legendIcon: 'icontiaoyaqi',
+		component: 'MapMarkerIcon',
+		iconSize: 38,
+		visible: true,
+	},
 	ServiceStation: {
 		label: '综合服务站',
 		legendIcon: 'icontulizonghefuwuzhan1',
