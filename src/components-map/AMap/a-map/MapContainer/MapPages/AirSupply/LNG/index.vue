@@ -31,7 +31,7 @@
 			}"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
-			:width="400"
+			:width="500"
 		/>
 		<portal to="destination">
 			<!-- 统计数据 -->
