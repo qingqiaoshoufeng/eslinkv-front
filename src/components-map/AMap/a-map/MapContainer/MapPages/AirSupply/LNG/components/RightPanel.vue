@@ -32,10 +32,10 @@
 					.main
 						.station-info
 							.station-name {{ k.name }}
-							.station-area
 							.station-value
 								em.font-num {{ k.purchaseQty.toLocaleString() }}
 								span 吨
+						.station-area {{ k.ownedCompany }}
 						.state
 							.time {{ k.date }}
 							.state-name(v-if="activeTab === 'InComplete'")
@@ -259,6 +259,15 @@ export default {
 		}
 		.main {
 			flex: 1;
+			.station-area {
+				display: inline-block;
+				background: #0057A9;
+				border-radius: 4px;
+				font-size: 18px;
+				color: #FFFFFF;
+				padding: 0 4px;
+				margin-top: 12px;
+			}
 			.station-info {
 				display: flex;
 				align-items: center;
@@ -267,13 +276,6 @@ export default {
 					font-size: 20px;
 					color: #FFFFFF;
 					margin-right: 4px;
-				}
-				.station-area {
-					background: #0057A9;
-					border-radius: 4px;
-					font-size: 18px;
-					color: #FFFFFF;
-					padding: 0 4px;
 				}
 				.station-value {
 					flex: 1;
@@ -293,7 +295,7 @@ export default {
 				display: flex;
 				align-items: center;
 				justify-content: space-between;
-				margin-top: 16px;
+				margin-top: 8px;
 				.time {
 					font-size: 18px;
 					color: #FFFFFF;
