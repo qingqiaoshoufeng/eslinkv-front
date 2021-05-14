@@ -20,6 +20,12 @@
 				@change="handleClick"
 				ref="eventWarning"
 			)
+			pression(
+				v-show="tab === 2"
+				:activeItem="rightListActiveItemMap['pression'] || {}"
+				@change="handleClick"
+				ref="pression"
+			)
 			overlayList(
 				v-show="tab === 3"
 				:activeItem="rightListActiveItemMap['overlayList'] || {}"
@@ -34,6 +40,7 @@ import { Tabs, TabPanel } from '../../../../../components/Tabs/'
 import overlayList from './overlayList'
 import eventWarning from './eventWarning'
 import processWarning from './processWarning'
+import pression from './pression'
 
 export default {
 	name: 'RightlistPanel',
@@ -62,6 +69,7 @@ export default {
 		TabPanel,
 		overlayList,
 		eventWarning,
+		pression,
 		processWarning,
 	},
 	mounted() {

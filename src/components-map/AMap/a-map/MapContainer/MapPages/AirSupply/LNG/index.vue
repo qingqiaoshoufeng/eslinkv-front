@@ -154,9 +154,6 @@ export default {
 	},
 	methods: {
 		closeStationListDetail() {
-			this.$refs.RightPanel.$refs.processWarning.activeIndex = -1
-			this.$refs.RightPanel.$refs.eventWarning.activeIndex = -1
-			this.$refs.RightPanel.$refs.overlayList.activeIndex = -1
 			this.$amap.setZoom(this.zoom, 100)
 			this.$amap.setCenter(this.center, 100)
 		},
@@ -177,8 +174,8 @@ export default {
 				...res.emergencyAirSourceStationList,
 				...res.greenEnergyStationList,
 				...res.naturalGasStationList,
-				...res.storageDistributionStationList,
-				...res.yardsStationList,
+				// ...res.storageDistributionStationList,
+				// ...res.yardsStationList,
 			]
 		},
 		// 获取统计数据
