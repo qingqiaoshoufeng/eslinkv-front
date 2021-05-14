@@ -15,7 +15,7 @@
 								em.font-num {{ k.purchaseQty.toLocaleString() }}
 								span 吨
 						.bar-w
-							.bar(:style="{width: k.percent + '%'}")
+							.bar(:style="{width: k.percent * 100 + '%'}")
 		.title
 			img(src="../img/title-icon.svg")
 			span 最新订单
