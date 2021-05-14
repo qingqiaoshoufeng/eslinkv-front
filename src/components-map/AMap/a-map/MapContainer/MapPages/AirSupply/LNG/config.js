@@ -23,6 +23,7 @@ export const AIRSUPPLY_LNG_LEGEND_MAP = {
 	    component: 'MapMarkerIcon',
 	    visible: true,
 		dataProp: 'emergencyAirSourceStationList',
+		detailHandler: getLngStationData
 	},
 	// StorageDistributionStation: {
 	//     label: '储配站',
@@ -37,6 +38,7 @@ export const AIRSUPPLY_LNG_LEGEND_MAP = {
 	    component: 'MapMarkerIcon',
 	    visible: true,
 		dataProp: 'naturalGasStationList',
+		detailHandler: getLngStationData
 	},
 	GreenEnergyStation: {
 	    label: '绿色能源站',
@@ -44,6 +46,7 @@ export const AIRSUPPLY_LNG_LEGEND_MAP = {
 	    component: 'MapMarkerIcon',
 	    visible: true,
 		dataProp: 'greenEnergyStationList',
+		detailHandler: getLngStationData
 	},
 }
 
@@ -108,7 +111,7 @@ export const AIRSUPPLY_LNG_OVERLAY_MAP = {
 // LNG统计数据
 export const DATASTATISTICSLIST = [
 	{
-		label: '储备站',
+		label: '储配站',
 		DW: '',
 		prop: 'storageDistributionStation',
 	},
