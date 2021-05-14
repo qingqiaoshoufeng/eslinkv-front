@@ -60564,6 +60564,8 @@ var platform_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_
   // 选中项的自定义配置
   chooseWidgetId: null,
   // 选中项id
+  chooseWidgetArray: [],
+  // 选中项ids
   chooseWidgetState: true,
   // 是否可编辑
   panelConfig: getInitPanelConfig(),
@@ -60585,6 +60587,7 @@ var platform_store_actions = {
   unChooseWidget: function unChooseWidget() {
     platform_store_state.chooseWidgetState = true;
     platform_store_state.chooseWidgetId = null;
+    platform_store_state.chooseWidgetArray = [];
     document.getElementById('right-menu').classList.remove('active');
   },
   chooseWidget: function chooseWidget(id) {
@@ -62622,6 +62625,8 @@ var ruler = store('ruler', ruler_store_state, ruler_store_actions);
 
 
 
+
+
 /**
  * @description
  * DOM : document
@@ -62649,6 +62654,7 @@ var mouseup_mouseup = function mouseup(e) {
     var minPointerY = Math.min(startPointerY, endPointerY);
     var maxPointerX = Math.max(startPointerX, endPointerX);
     var maxPointerY = Math.max(startPointerY, endPointerY);
+    platform_store.state.chooseWidgetArray = [];
     Object.values(platform_store.state.widgetAdded).forEach(function (v) {
       // 只能框选当前场景下的组件
       if (v.scene === scene_store.state.index) {
@@ -62658,6 +62664,7 @@ var mouseup_mouseup = function mouseup(e) {
         var widgetEndY = v.config.layout.position.top + v.config.layout.size.height;
 
         if (minPointerX < widgetStartX && widgetStartX < maxPointerX && minPointerY < widgetStartY && widgetStartY < maxPointerY && minPointerX < widgetEndX && widgetEndX < maxPointerX && minPointerY < widgetEndY && widgetEndY < maxPointerY) {
+          platform_store.state.chooseWidgetArray = [].concat(_toConsumableArray(platform_store.state.chooseWidgetArray), [v.id]);
           platform_store.state.chooseWidgetId = v.id;
           platform_store.state.chooseWidgetState = false;
         }
