@@ -5,7 +5,7 @@
 			span 本月LNG场站采购TOP10
 		vueSeamlessScroll(:class-option="option" :data="top10" class="list-wrap")
 			ul.list
-				li(v-for="(k, i) in top10" :key="i" @click="handleClick(k)")
+				li(v-for="(k, i) in top10" :key="i")
 					.index(:class="{top: [0, 1, 2].includes(i)}") {{ i > 8 ? i + 1 : '0' + (i + 1) }}
 					.station
 						.station-info
@@ -47,7 +47,7 @@
 import vueSeamlessScroll from 'vue-seamless-scroll'
 
 export default {
-	name: 'RightlistPanel',
+	name: 'LngRightPanel',
 	components: { vueSeamlessScroll },
 	data() {
 		return {
@@ -89,14 +89,7 @@ export default {
 			this.order = await this.$api.map.airSupply.getLngLatestOrders({
 				orderType: this.activeTab
 			})
-		},
-		handleClick(item) {
-			const res = this.$attrs.stationList.find(v => v.name === item.name)
-			this.$emit('overlay-click', {
-				...res,
-				detail: {}
-			})
-		},
+		}
 	},
 }
 </script>

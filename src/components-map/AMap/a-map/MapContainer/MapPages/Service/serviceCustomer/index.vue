@@ -4,7 +4,7 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
-		<!-- 2.销售区域 -->
+		<!-- 2.区域描边 -->
 		<SaleAreaBoundary v-model="activeArea" />
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
@@ -41,7 +41,6 @@
 			"
 			:visible="visible"
 			:data="allTypeStationList.CustomerHotList"
-			ref="OverlayDetail"
 		/>
 
 		<!-- 覆盖物详情 -->
