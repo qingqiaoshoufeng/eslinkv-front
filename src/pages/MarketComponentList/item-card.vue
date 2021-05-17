@@ -35,6 +35,13 @@ e-card
 				span {{ currentItem.componentEnTitle }}
 			i-form-item(label="当前版本号")
 				span {{ currentItem.componentVersion }}
+			.fn-flex
+				i-form-item(label="chart类型", :style="{ marginRight: 'auto' }")
+					i-select(v-model="currentItem.componentChart", clearable)
+						i-option(value="antv") antv
+						i-option(value="echarts") echarts
+				i-form-item(label="配置类型")
+					i-input(v-model="currentItem.componentChartType")
 			i-form-item(label="排序")
 				i-input(v-model="currentItem.sort", number)
 			i-form-item(label="类型")
@@ -68,6 +75,7 @@ import {
 	Input,
 	Select,
 	Option,
+	Switch,
 } from 'view-design'
 import dUpload from '../../components/d-upload/index.vue'
 import EmptyImage from '../../components/empty-image/index.vue'
@@ -86,6 +94,7 @@ import { LOAD_CHILDREN_OPTIONS } from '@riophae/vue-treeselect'
 		'i-input': Input,
 		'i-select': Select,
 		'i-option': Option,
+		'i-switch': Switch,
 		dUpload,
 		EmptyImage,
 		TreeSelect,
@@ -147,6 +156,8 @@ export default class ItemCard extends Vue {
 				componentAvatar: this.currentItem.componentAvatar,
 				componentTitle: this.currentItem.componentTitle,
 				componentTypeId: this.currentItem.componentTypeId,
+				componentChart: this.currentItem.componentChart,
+				componentChartType: this.currentItem.componentChartType,
 			})
 			.then(() => {
 				this.dialogEditShow = false
