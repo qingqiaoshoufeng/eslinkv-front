@@ -8046,6 +8046,14 @@ var state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.obser
   // 选中项id
   chooseWidgetArray: [],
   // 选中项ids
+  chooseWidgetArrayConfig: {
+    left: 0,
+    top: 0,
+    width: 0,
+    height: 0,
+    z: 0
+  },
+  // 选中项配置
   chooseWidgetState: true,
   // 是否可编辑
   panelConfig: getInitPanelConfig(),
@@ -9311,12 +9319,12 @@ function copyText(text, success, error) {
   });
   oCopyBtn.click();
 }
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5597c984-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components/d-widget-part/index.vue?vue&type=template&id=7d50dbe4&lang=pug&
-var d_widget_partvue_type_template_id_7d50dbe4_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.currentComponent,_vm._g(_vm._b({key:("" + (_vm.config.widget.id) + _vm.updateKey),ref:"widgets",tag:"component",class:_vm.animationClass,attrs:{"id":_vm.config.widget && _vm.config.widget.id},on:{"widget-config-update":function (data) { return _vm.$emit('widget-config-update', data); },"query-start":function($event){_vm.querying = true},"query-end":function($event){_vm.querying = false},"query-failed":function($event){_vm.querying = true},"config-reset":function($event){return _vm.$emit('config-reset')}}},'component',Object.assign({}, {config: _vm.config, readonly: _vm.readonly}, _vm.$attrs),false),_vm.$listeners),[_vm._t("default")],2)}
-var d_widget_partvue_type_template_id_7d50dbe4_lang_pug_staticRenderFns = []
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"5597c984-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components/d-widget-part/index.vue?vue&type=template&id=748bfb3c&lang=pug&
+var d_widget_partvue_type_template_id_748bfb3c_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.currentComponent,_vm._g(_vm._b({key:("" + (_vm.config.widget.id) + _vm.updateKey),ref:"widgets",tag:"component",staticClass:"widget-part",class:_vm.animationClass,attrs:{"id":_vm.config.widget && _vm.config.widget.id},on:{"widget-config-update":function (data) { return _vm.$emit('widget-config-update', data); },"query-start":function($event){_vm.querying = true},"query-end":function($event){_vm.querying = false},"query-failed":function($event){_vm.querying = true},"config-reset":function($event){return _vm.$emit('config-reset')}}},'component',Object.assign({}, {config: _vm.config, readonly: _vm.readonly}, _vm.$attrs),false),_vm.$listeners),[_vm._t("default")],2)}
+var d_widget_partvue_type_template_id_748bfb3c_lang_pug_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/components/d-widget-part/index.vue?vue&type=template&id=7d50dbe4&lang=pug&
+// CONCATENATED MODULE: ./src/components/d-widget-part/index.vue?vue&type=template&id=748bfb3c&lang=pug&
 
 // CONCATENATED MODULE: ./src/store/custom.store.js
 
@@ -9522,8 +9530,8 @@ var d_widget_partvue_type_style_index_0_lang_scss_ = __webpack_require__("8b45")
 
 var d_widget_part_component = normalizeComponent(
   components_d_widget_partvue_type_script_lang_js_,
-  d_widget_partvue_type_template_id_7d50dbe4_lang_pug_render,
-  d_widget_partvue_type_template_id_7d50dbe4_lang_pug_staticRenderFns,
+  d_widget_partvue_type_template_id_748bfb3c_lang_pug_render,
+  d_widget_partvue_type_template_id_748bfb3c_lang_pug_staticRenderFns,
   false,
   null,
   null,
@@ -9798,6 +9806,8 @@ var event_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_def
   componentDrag: false,
   // 组件拖拽中
   kuangMove: false,
+  // 框选
+  kuangDragging: false,
   // 框选
   inputFocus: false,
   // 输入框在输入中
