@@ -11,5 +11,10 @@ export default {
 			content:
 				'组件事件更新优化，支持路径来源编辑，支持目标数据编辑，支持更新加工，支持多个',
 		},
+		{
+			type: ['perf'],
+			content:
+				'右侧设置区，展现形式优化，增加d-right-swiper-list、s-right-swiper-eye组件，优化显示/隐藏的展现形式，优化列表的展现形式',
+		},
 	],
 }
