@@ -61161,11 +61161,13 @@ var data_process_createSandbox = function createSandbox(source) {
       api.data = value;
     },
     updateInnerData: function updateInnerData(value) {
-      try {
-        this.data = JSON.parse(value);
-      } catch (e) {
-        console.warn(e);
-        this.data = value;
+      if (value !== '') {
+        try {
+          this.data = JSON.parse(value);
+        } catch (e) {
+          console.warn(e);
+          this.data = value;
+        }
       }
     },
 
