@@ -43,9 +43,10 @@
 			ref="OverlayDetail"
 			:width="400"
 		>
-			<PressureRegulating
-				v-if="OverlayDetailProp && OverlayDetailProp.data.overlayType === 'OngroundRepairStation'">
-			</PressureRegulating>
+			<VoltageRegulator
+				:data="activeOverlay"
+				v-if="OverlayDetailProp && OverlayDetailProp.data.overlayType === 'VoltageRegulator'">
+			</VoltageRegulator>
 		</OverlayDetail>
 		<portal to="destination">
 			<!-- 统计数据 -->
@@ -75,7 +76,7 @@
 </template>
 <script>
 import { AMapTile } from '../../../../lib'
-import PressureRegulating from './components/PressureRegulating'
+import VoltageRegulator from './components/VoltageRegulator'
 
 // 页面所需公共组件
 import { OverlayDetail, MapLegend } from '../../../../components/index.js'
@@ -123,7 +124,7 @@ componentCommonArr.map(componentName => {
 export default {
 	name: 'LowPressure',
 	components: {
-		PressureRegulating,
+		VoltageRegulator,
 		AMapTile,
 		...componentPageMap,
 		...componentCommonMap,
@@ -307,8 +308,7 @@ export default {
 			} = getHangZhouGasGISPosition(x, y, zoom)
 			return `/pipenetwork/arcgis/rest/services/HZRQ/HZRQ_local/MapServer/export?dpi=96&transparent=true&format=png8&layers=show%3A${tilesQuery}&bbox=${leftBottomX}%2C${leftBottomY}%2C${rightTopX}%2C${rightTopY}&bboxSR=2385&imageSR=2385&size=${width}%2C${height}&f=image`
 		},
-		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			const { lng, lat } = overlay
+		handleOverlayClick(overlay, overlayType) {
 			overlay.overlayType = overlayType
 			this.activeOverlay = overlay
 			this.showOverlayDetail = true
