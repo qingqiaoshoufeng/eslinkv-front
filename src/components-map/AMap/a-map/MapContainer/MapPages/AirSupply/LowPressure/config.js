@@ -29,7 +29,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		tileQuery: [34],
 		visible: false,
 	},
-	PressureRegulatingTest: {
+	VoltageRegulator: {
 		label: '调压器',
 		legendIcon: 'icontiaoyaqi',
 		component: 'MapMarkerIcon',

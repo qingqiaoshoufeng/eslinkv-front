@@ -8,12 +8,12 @@ export const SERVICE_SERVICEMARKET_LEGEND_MAP = {
 		component: 'BranchCompany',
 		isShow: true,
 	},
-	HeatMap: {
-		label: '销气热力',
-		legendIcon: 'icontulixiaoqireli',
-		component: 'HeatMap',
-		isShow: true,
-	},
+	// HeatMap: {
+	// 	label: '销气热力',
+	// 	legendIcon: 'icontulixiaoqireli',
+	// 	component: 'HeatMap',
+	// 	isShow: true,
+	// },
 }
 
 // 覆盖物详情

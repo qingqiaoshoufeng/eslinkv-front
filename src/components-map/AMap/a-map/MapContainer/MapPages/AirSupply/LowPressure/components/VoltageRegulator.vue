@@ -15,7 +15,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 
 @Component
-export default class PressureRegulating extends Vue {
+export default class VoltageRegulator extends Vue {
 	@Prop() showMapPage
 
 	getOption(data) {

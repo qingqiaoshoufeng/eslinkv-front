@@ -4,6 +4,8 @@
 		<!-- 1.legend不控制显隐的覆盖物 -->
 		<!-- 区域 -->
 		<RegionBoundary />
+		<!-- 区域描边 -->
+		<SaleAreaBoundary />
 		<!-- 态势感知 -->
 		<!-- <ListOverlay @overlay-click="handleOverlayClick" /> -->
 
@@ -31,7 +33,27 @@
 			:before-close="closeOverlayDetail"
 			ref="OverlayDetail"
 		/>
+		<heartmap
+			v-if="
+				allTypeStationList.CustomerHotList &&
+				allTypeStationList.CustomerHotList.length
+			"
+			:visible="heatmapShow"
+			:data="allTypeStationList.CustomerHotList"
+		/>
 		<portal to="destination">
+			<!-- 选择器盒子 -->
+			<i-switchBox
+				@switch-change="switchChange"
+				:data="swichBoxInfo"
+				:className="{ left: true }"
+			/>
+			<!-- 统计数据 -->
+			<DataStatistics
+				:position="'right'"
+				:dataStatisticsList="dataStatisticsList"
+				:data="dataStatisticsInfo"
+			/>
 			<!-- 图例 -->
 			<MapLegend
 				:data="legendMap"
@@ -43,11 +65,18 @@
 </template>
 <script>
 // 页面覆盖物组件
-import { BranchCompany, HeatMap } from '../Components/index.js'
+import {
+	BranchCompany,
+	HeatMap,
+	SwitchBox,
+	SaleAreaBoundary,
+} from '../Components/index.js'
+import heatmap from './heatmap'
 // 页面所需公共组件
 import {
 	RegionBoundary,
 	OverlayDetail,
+	DataStatistics,
 	MapLegend,
 } from '../../../../components/index.js'
 import {
@@ -60,14 +89,19 @@ export default {
 	name: 'serviceMarket',
 	components: {
 		RegionBoundary,
+		heatmap,
 		OverlayDetail,
-
 		BranchCompany,
+		DataStatistics,
+		SaleAreaBoundary,
+		iSwitchBox: SwitchBox,
 		HeatMap,
 		MapLegend,
 	},
 	data() {
 		return {
+			dataStatisticsList: [], // todo
+			dataStatisticsInfo: {}, // todo
 			overlayInfoConfigMap: Object.freeze(
 				SERVICE_SERVICEMARKET_OVERLAY_MAP,
 			),
@@ -75,11 +109,14 @@ export default {
 			mapLegendStyle: { left: '18%' },
 			legendMultiple: true,
 			showOverlayDetail: false,
+			heatmapShow: false,
 			activeOverlay: {},
 			center: [120.131259, 30.263295],
 			zoom: 10,
 			allTypeStationList: {},
-			// swichBoxInfo: SWICHBOX,
+			swichBoxInfo: [
+				{ label: '年度销售气量热力', value: false, type: 'saleHeat' },
+			],
 		}
 	},
 	created() {
@@ -88,6 +125,12 @@ export default {
 		this.$amap.setCenter(this.center, 100)
 	},
 	methods: {
+		// 切换热力图显示隐藏
+		switchChange(data) {
+			this.swichBoxInfo = data
+			const [{ value }] = this.swichBoxInfo
+			this.heatmapShow = value
+		},
 		// 暂留
 		closeOverlayDetail(done) {
 			const { overlayType } = this.activeOverlay
