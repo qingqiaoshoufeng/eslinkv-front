@@ -16,5 +16,9 @@ export default {
 			content:
 				'右侧设置区，展现形式优化，增加d-right-swiper-list、s-right-swiper-eye组件，优化显示/隐藏的展现形式，优化列表的展现形式',
 		},
+		{
+			type: ['perf'],
+			content: '添加组件搜索',
+		},
 	],
 }
