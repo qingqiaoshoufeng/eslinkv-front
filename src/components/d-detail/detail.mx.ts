@@ -5,6 +5,7 @@ export default {
 	data() {
 		return {
 			platform: platform.state,
+			scene: scene.state,
 		}
 	},
 	methods: {
@@ -16,8 +17,7 @@ export default {
 			const { widgets } = res,
 				marketComponents = [],
 				obj = {},
-				p = [],
-				needMarketLoad = {}
+				p = []
 			widgets.forEach(item => {
 				obj[item.id] = {
 					id: item.id,
@@ -34,8 +34,9 @@ export default {
 				}
 			})
 			marketComponents.forEach(item => {
-				if (needMarketLoad[`${item.type}${item.version}`]) return
-				needMarketLoad[`${item.type}${item.version}`] = true
+				if (this.scene.widgetLoaded[`${item.type}${item.version}`])
+					return
+				this.scene.widgetLoaded[`${item.type}${item.version}`] = true
 				p.push(
 					new Promise((resolve, reject) => {
 						this.$api.marketComponent
