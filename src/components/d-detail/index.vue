@@ -27,6 +27,9 @@
 	.d-detail-middle.fn-flex
 		span.d-detail-title {{ platform.screenName }}
 	ul.d-detail-right.fn-flex
+		li.fn-flex.flex-column.pointer(@click.stop="search")
+			i-icon(type="ios-search-outline", :size="24")
+			span 搜索
 		li.fn-flex.flex-column.pointer(@click="preview", v-if="!isNew")
 			i-icon(type="ios-desktop-outline", :size="24")
 			span 预览
@@ -114,6 +117,10 @@ export default class DDetail extends mixins(
 	xRoomL1 = 0
 	xRoomL2 = 0
 	xRoomR1 = 0
+
+	search() {
+		this.platform.searchModal = true
+	}
 
 	handleLeft1() {
 		this.ruler.xRoomL1 = this.ruler.xRoomL1 > 0 ? 0 : 238
