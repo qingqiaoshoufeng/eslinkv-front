@@ -9318,12 +9318,70 @@ function copyText(text, success, error) {
   });
   oCopyBtn.click();
 }
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4102e524-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components/d-widget-part/index.vue?vue&type=template&id=748bfb3c&lang=pug&
-var d_widget_partvue_type_template_id_748bfb3c_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.currentComponent,_vm._g(_vm._b({key:("" + (_vm.config.widget.id) + _vm.updateKey),ref:"widgets",tag:"component",staticClass:"widget-part",class:_vm.animationClass,attrs:{"id":_vm.config.widget && _vm.config.widget.id},on:{"widget-config-update":function (data) { return _vm.$emit('widget-config-update', data); },"query-start":function($event){_vm.querying = true},"query-end":function($event){_vm.querying = false},"query-failed":function($event){_vm.querying = true},"config-reset":function($event){return _vm.$emit('config-reset')}}},'component',Object.assign({}, {config: _vm.config, readonly: _vm.readonly}, _vm.$attrs),false),_vm.$listeners),[_vm._t("default")],2)}
-var d_widget_partvue_type_template_id_748bfb3c_lang_pug_staticRenderFns = []
+// CONCATENATED MODULE: ./src/store/instance.store.js
 
 
-// CONCATENATED MODULE: ./src/components/d-widget-part/index.vue?vue&type=template&id=748bfb3c&lang=pug&
+/**
+ * @description 实例化对象缓存
+ */
+
+
+
+var instance_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
+  kanboard: null,
+  createKanboard: null
+});
+var instance_store_actions = {
+  setInstance: function setInstance(key, value) {
+    instance_store_state[key] = value;
+  },
+  updateComponentTarget: function updateComponentTarget(id, target, value) {
+    switch (target) {
+      case 'config.api.params':
+        platform_store.state.widgetAdded[id].config.api.params = _objectSpread2(_objectSpread2({}, platform_store.state.widgetAdded[id].config.api.params), value);
+        break;
+
+      case 'config.api.data':
+        platform_store.state.widgetAdded[id].config.api.data = value;
+        break;
+
+      case 'config.config':
+        platform_store.state.widgetAdded[id].config.config = _objectSpread2(_objectSpread2({}, platform_store.state.widgetAdded[id].config.config), value);
+        break;
+    }
+  },
+  updateComponent: function updateComponent(id, config) {
+    var widgetConfig = platform_store.state.widgetAdded[id].config.api;
+
+    if (config.params) {
+      widgetConfig.params = JSON.stringify(config.params);
+    }
+
+    if (config.data) {
+      widgetConfig.data = JSON.stringify(config.data);
+    }
+
+    if (config.url) {
+      widgetConfig.url = config.url;
+    }
+
+    if (config.path) {
+      widgetConfig.path = config.path;
+    }
+
+    if (config.method) {
+      widgetConfig.method = config.method;
+    }
+  }
+};
+var instance = store('instance', instance_store_state, instance_store_actions);
+/* harmony default export */ var instance_store = (instance);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4102e524-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components/d-widget-part/index.vue?vue&type=template&id=82a66b14&lang=pug&
+var d_widget_partvue_type_template_id_82a66b14_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.currentComponent,_vm._g(_vm._b({key:("" + (_vm.config.widget.id) + _vm.updateKey),ref:"widgets",tag:"component",staticClass:"widget-part",class:_vm.animationClass,attrs:{"id":_vm.config.widget && _vm.config.widget.id},on:{"widget-config-update":function (data) { return _vm.$emit('widget-config-update', data); },"query-start":function($event){_vm.querying = true},"query-end":function($event){_vm.querying = false},"query-failed":function($event){_vm.querying = true},"config-reset":function($event){return _vm.$emit('config-reset')}}},'component',Object.assign({}, {config: _vm.config, readonly: _vm.readonly}, _vm.$attrs),false),_vm.$listeners),[_vm._t("default")],2)}
+var d_widget_partvue_type_template_id_82a66b14_lang_pug_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/d-widget-part/index.vue?vue&type=template&id=82a66b14&lang=pug&
 
 // CONCATENATED MODULE: ./src/store/custom.store.js
 
@@ -9372,6 +9430,7 @@ var custom = store('custom', custom_store_state, custom_store_actions);
 //
 
 
+
 var prefix1 = 'market-';
 var prefix2 = 'eslinkv-';
 /* harmony default export */ var d_widget_partvue_type_script_lang_js_ = ({
@@ -9402,7 +9461,8 @@ var prefix2 = 'eslinkv-';
       replayAnimation: false,
       ready: false,
       animationClass: null,
-      custom: custom_store.state
+      custom: custom_store.state,
+      scene: scene_store.state
     };
   },
   computed: {
@@ -9461,7 +9521,7 @@ var prefix2 = 'eslinkv-';
 
       this.componentVersion = this.config.widget.componentVersion;
 
-      if (external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.options.components["".concat(prefix1).concat(this.type, "-").concat(this.componentVersion)]) {
+      if (this.scene.widgetLoaded["".concat(this.type).concat(this.componentVersion)]) {
         this.ready = true;
       } else {
         this.$api.marketComponent.use({
@@ -9529,8 +9589,8 @@ var d_widget_partvue_type_style_index_0_lang_scss_ = __webpack_require__("8b45")
 
 var d_widget_part_component = normalizeComponent(
   components_d_widget_partvue_type_script_lang_js_,
-  d_widget_partvue_type_template_id_748bfb3c_lang_pug_render,
-  d_widget_partvue_type_template_id_748bfb3c_lang_pug_staticRenderFns,
+  d_widget_partvue_type_template_id_82a66b14_lang_pug_render,
+  d_widget_partvue_type_template_id_82a66b14_lang_pug_staticRenderFns,
   false,
   null,
   null,
@@ -9539,65 +9599,6 @@ var d_widget_part_component = normalizeComponent(
 )
 
 /* harmony default export */ var d_widget_part = (d_widget_part_component.exports);
-// CONCATENATED MODULE: ./src/store/instance.store.js
-
-
-/**
- * @description 实例化对象缓存
- */
-
-
-
-var instance_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
-  kanboard: null,
-  createKanboard: null,
-  createComp: null
-});
-var instance_store_actions = {
-  setInstance: function setInstance(key, value) {
-    instance_store_state[key] = value;
-  },
-  updateComponentTarget: function updateComponentTarget(id, target, value) {
-    switch (target) {
-      case 'config.api.params':
-        platform_store.state.widgetAdded[id].config.api.params = _objectSpread2(_objectSpread2({}, platform_store.state.widgetAdded[id].config.api.params), value);
-        break;
-
-      case 'config.api.data':
-        platform_store.state.widgetAdded[id].config.api.data = value;
-        break;
-
-      case 'config.config':
-        platform_store.state.widgetAdded[id].config.config = _objectSpread2(_objectSpread2({}, platform_store.state.widgetAdded[id].config.config), value);
-        break;
-    }
-  },
-  updateComponent: function updateComponent(id, config) {
-    var widgetConfig = platform_store.state.widgetAdded[id].config.api;
-
-    if (config.params) {
-      widgetConfig.params = JSON.stringify(config.params);
-    }
-
-    if (config.data) {
-      widgetConfig.data = JSON.stringify(config.data);
-    }
-
-    if (config.url) {
-      widgetConfig.url = config.url;
-    }
-
-    if (config.path) {
-      widgetConfig.path = config.path;
-    }
-
-    if (config.method) {
-      widgetConfig.method = config.method;
-    }
-  }
-};
-var instance = store('instance', instance_store_state, instance_store_actions);
-/* harmony default export */ var instance_store = (instance);
 // CONCATENATED MODULE: ./src/store/scene.store.js
 
 
@@ -9618,6 +9619,7 @@ var instance = store('instance', instance_store_state, instance_store_actions);
 
 
 
+external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.component('parts', d_widget_part);
 var scene_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
   activeWidgetId: '',
   // 被激活的场景对应组件
@@ -9632,7 +9634,8 @@ var scene_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_def
   // 场景交互时传递的数据
   status: 'inEdit',
   // inEdit  在编辑器中  inPreview 在预览中
-  sceneObj: {}
+  sceneObj: {},
+  widgetLoaded: {}
 });
 var scene_store_actions = {
   setStatus: function setStatus(status) {
@@ -9766,15 +9769,11 @@ var scene_store_actions = {
             array: array
           };
         },
-        components: {
-          parts: d_widget_part
-        },
         mounted: function mounted() {
           instance_store.actions.setInstance('createKanboard', this);
         }
       });
       var comp = new Comp().$mount();
-      instance_store.actions.setInstance('createComp', comp);
       scene_store_state.activeSceneId = id;
       document.getElementsByClassName('detail-container')[0].appendChild(comp.$el);
       document.getElementById(id).parentNode.style.transform = transform;
