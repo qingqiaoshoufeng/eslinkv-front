@@ -24,5 +24,9 @@ export default {
 			type: ['perf'],
 			content: '优化组件数据扁平化',
 		},
+		{
+			type: ['perf'],
+			content: '场景区优化，支持拖拽改变他的所在层级，支持树形展示',
+		},
 	],
 }

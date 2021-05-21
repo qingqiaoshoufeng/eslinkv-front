@@ -90,9 +90,16 @@ export default class EHeader extends Vue {
 	mounted() {
 		common.actions.setNavIndex(this.$route.path)
 		if (!this.common.user) {
-			this.$api.user.detail().then(res => {
-				common.actions.setUser(res)
-			})
+			this.$api.user
+				.detail()
+				.then(res => {
+					common.actions.setUser(res)
+				})
+				.catch(() => {
+					common.state.user = null
+					localStorage.removeItem('eslinkv-login')
+					window.top.location.href = `${location.origin}/login`
+				})
 		}
 	}
 }
