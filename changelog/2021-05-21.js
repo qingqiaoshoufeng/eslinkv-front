@@ -20,5 +20,9 @@ export default {
 			type: ['perf'],
 			content: '添加组件搜索',
 		},
+		{
+			type: ['perf'],
+			content: '优化组件数据扁平化',
+		},
 	],
 }
