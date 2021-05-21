@@ -59,7 +59,7 @@ export default {
 					this.loading = false
 					platform.actions.setWidgetsAdded(obj)
 					if (res.scene) {
-						scene.actions.initScene(res)
+						scene.actions.initScene(res.screenConfig)
 					}
 				})
 				.catch(e => {
