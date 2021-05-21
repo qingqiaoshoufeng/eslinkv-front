@@ -2,7 +2,7 @@
 .detail-container
 	.preview-wrapper.fit-mode(
 		ref="kanboardWrapper",
-		:style="{ backgroundColor: platform.panelConfig.background.color, backgroundRepeat: platform.panelConfig.background.repeat, backgroundSize: platform.panelConfig.background.size, backgroundPosition: platform.panelConfig.background.position, backgroundImage: `url(${platform.panelConfig.background.url})` }")
+		:style="{ backgroundColor: platform.backgroundColor, backgroundImage: `url(${platform.backgroundImage})` }")
 		d-view(
 			@mounted="updateSize",
 			ref="previewContainer",

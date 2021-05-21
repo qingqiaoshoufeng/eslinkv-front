@@ -67,11 +67,11 @@ export default class ItemCard extends Vue {
 	}
 
 	handleLink() {
-		const scene = this.screenConfig.panelConfig.mainScene
-			? `&scene=${this.screenConfig.panelConfig.mainScene}`
+		const scene = this.screenConfig.mainScene
+			? `&scene=${this.screenConfig.mainScene}`
 			: ''
 		window.open(
-			`${location.origin}/detail/${this.screenId}?layoutMode=${this.screenConfig.panelConfig.size.layoutMode}${scene}`,
+			`${location.origin}/detail/${this.screenId}?layoutMode=${this.screenConfig.layoutMode}${scene}`,
 		)
 	}
 

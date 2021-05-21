@@ -2,7 +2,7 @@
 i-modal.check-modal(v-model="modalShow", title="审核")
 	d-view.pos-r(v-if="modalShow")
 	div(slot="footer")
-		i-button(type="primary", @click="submit") 通过
+		i-button(type="primary", @click="submit", :loading="loading") 通过
 		i-button(type="error", @click="cancel") 拒绝
 </template>
 
@@ -24,6 +24,7 @@ export default class MarketEditDialog extends Vue {
 	@Prop(Boolean) value!: boolean
 	@Prop(Object) detail: any
 	modalShow = false
+	loading = false
 
 	@Watch('value')
 	onValueChange(val) {
@@ -45,6 +46,7 @@ export default class MarketEditDialog extends Vue {
 	}
 
 	submit() {
+		this.loading = true
 		document
 			.getElementsByClassName('widget-part')[0]
 			.classList.remove('animate__fadeIn')
@@ -84,7 +86,11 @@ export default class MarketEditDialog extends Vue {
 				})
 				.then(() => {
 					this.modalShow = false
+					this.loading = false
 					this.$emit('reload')
+				})
+				.catch(() => {
+					this.loading = false
 				})
 		})
 	}

@@ -77,8 +77,6 @@ export default {
 </script>
 <style lang="scss" scoped>
 .widget-part {
-	position: relative;
-
 	.legend {
 		position: absolute;
 		top: 22px;

@@ -9,16 +9,12 @@ export default {
 		}
 	},
 	methods: {
-		renderByDetail(res) {
-			this.refillConfig(res.screenConfig)
-		},
 		refillConfig(res) {
 			this.loading = true
-			const { widgets } = res,
-				marketComponents = [],
-				obj = {},
-				p = []
-			widgets.forEach(item => {
+			const marketComponents: { type: string; version: string }[] = []
+			const obj = {}
+			const p = []
+			res.screenConfig.widgets.forEach(item => {
 				obj[item.id] = {
 					id: item.id,
 					market: item.market,
@@ -62,8 +58,8 @@ export default {
 				.then(() => {
 					this.loading = false
 					platform.actions.setWidgetsAdded(obj)
-					if (res.scene) {
-						scene.actions.initScene(res)
+					if (res.screenConfig.scene) {
+						scene.actions.initScene(res.screenConfig)
 					}
 				})
 				.catch(e => {
@@ -72,8 +68,30 @@ export default {
 					this.$Message.error('组件初始化加载失败')
 				})
 		},
+		jianrong(res) {
+			if (res.screenConfig.panelConfig) {
+				this.platform.backgroundImage =
+					res.screenConfig.panelConfig.background.url
+				this.platform.backgroundColor =
+					res.screenConfig.panelConfig.background.color
+				this.platform.width = res.screenConfig.panelConfig.size.width
+				this.platform.height = res.screenConfig.panelConfig.size.height
+				this.platform.isMobile = !!res.screenConfig.panelConfig.size
+					.isMobile
+				this.platform.layoutMode =
+					res.screenConfig.panelConfig.size.layoutMode
+				this.platform.mainScene = res.screenConfig.panelConfig.mainScene
+			} else {
+				this.platform.backgroundImage = res.screenConfig.backgroundImage
+				this.platform.backgroundColor = res.screenConfig.backgroundColor
+				this.platform.width = res.screenConfig.width
+				this.platform.height = res.screenConfig.height
+				this.platform.isMobile = !!res.screenConfig.isMobile
+				this.platform.layoutMode = res.screenConfig.layoutMode
+				this.platform.mainScene = res.screenConfig.mainScene
+			}
+		},
 	},
-
 	mounted() {
 		const templateId = this.$route.query.templateId
 		const id = this.$route.params.id || templateId
@@ -83,18 +101,15 @@ export default {
 				this.screenType = res.screenType
 				this.platform.screenAvatar = res.screenAvatar
 				this.platform.screenName = res.screenName
-				this.platform.panelConfig = res.screenConfig.kanboard
-					? res.screenConfig.kanboard
-					: res.screenConfig.panelConfig
-				this.renderByDetail(res)
+				this.platform.screenVersion = res.screenVersion
+				this.jianrong(res)
+				this.refillConfig(res)
 			})
 		}
 		if (file) {
 			this.$api.screen.detailFile(decodeURIComponent(file)).then(res => {
-				this.platform.panelConfig = res.screenConfig.kanboard
-					? res.screenConfig.kanboard
-					: res.screenConfig.panelConfig
-				this.renderByDetail(res)
+				this.jianrong(res)
+				this.refillConfig(res)
 			})
 		}
 		/**

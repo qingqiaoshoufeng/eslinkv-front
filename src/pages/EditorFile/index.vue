@@ -3,12 +3,9 @@
 	.preview-wrapper.fit-mode(
 		ref="kanboardWrapper",
 		:class="{ mobile: isMobile }",
-		:style="{ backgroundColor: platform.panelConfig.background.color, backgroundRepeat: platform.panelConfig.background.repeat, backgroundSize: platform.panelConfig.background.size, backgroundPosition: platform.panelConfig.background.position, backgroundImage: `url(${platform.panelConfig.background.url})` }")
+		:style="{ backgroundColor: platform.backgroundColor, backgroundImage: `url(${platform.backgroundImage})` }")
 		.mobile-wrap(:style="{ height: mobileWrapHeight + 'px' }", v-if="isMobile")
-			d-view(
-				@mounted="updateSize",
-				ref="previewContainer",
-				:style="viewStyle")
+			d-view(@mounted="updateSize", ref="previewContainer", :style="viewStyle")
 		d-view(
 			@mounted="updateSize",
 			ref="previewContainer",

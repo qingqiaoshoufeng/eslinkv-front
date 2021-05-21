@@ -35,13 +35,12 @@ e-card
 				span {{ currentItem.componentEnTitle }}
 			i-form-item(label="当前版本号")
 				span {{ currentItem.componentVersion }}
-			.fn-flex
-				i-form-item(label="chart类型", :style="{ marginRight: 'auto' }")
-					i-select(v-model="currentItem.componentChart", clearable)
-						i-option(value="antv") antv
-						i-option(value="echarts") echarts
-				i-form-item(label="配置类型")
-					i-input(v-model="currentItem.componentChartType")
+			i-form-item(label="组件类型",)
+				i-select(v-model="currentItem.componentType", clearable)
+					i-option(value="BASICS") 基础
+					i-option(value="ANTV") 图表antv
+					i-option(value="ECHARTS") 图表Echarts
+					i-option(value="MAP") 地图
 			i-form-item(label="排序")
 				i-input(v-model="currentItem.sort", number)
 			i-form-item(label="类型")

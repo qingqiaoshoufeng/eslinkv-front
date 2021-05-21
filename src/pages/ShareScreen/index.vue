@@ -23,7 +23,7 @@
 		v-if="!maskShow",
 		ref="kanboardWrapper",
 		:class="{ mobile: isMobile }",
-		:style="{ backgroundColor: platform.panelConfig.background.color, backgroundRepeat: platform.panelConfig.background.repeat, backgroundSize: platform.panelConfig.background.size, backgroundPosition: platform.panelConfig.background.position, backgroundImage: `url(${platform.panelConfig.background.url})` }")
+		:style="{ backgroundColor: platform.backgroundColor, backgroundImage: `url(${platform.backgroundImage})` }")
 		.mobile-wrap(:style="{ height: mobileWrapHeight + 'px' }", v-if="isMobile")
 			d-view(@mounted="updateSize", ref="previewContainer", :style="viewStyle")
 		d-view(
@@ -111,7 +111,7 @@ export default class detail extends Vue {
 			screenSharePassword: this.pwd,
 		})
 		this.maskShow = false
-		;(this.$refs.dDetail as any).renderByDetail(res)
+		;(this.$refs.dDetail as any).refillConfig(res)
 	}
 
 	async mounted() {
@@ -121,7 +121,7 @@ export default class detail extends Vue {
 		this.shareType = shareInfo.screenShareType
 		if (this.shareType === 'ALL') {
 			this.maskShow = false
-			;(this.$refs.dDetail as any).renderByDetail(shareInfo)
+			;(this.$refs.dDetail as any).refillConfig(shareInfo)
 		}
 		if (this.shareType === 'TIME') {
 			this.leftTime =
@@ -129,7 +129,7 @@ export default class detail extends Vue {
 				new Date().getTime()
 			this.isOvertime = this.leftTime <= 0
 			!this.isOvertime &&
-				(this.$refs.dDetail as any).renderByDetail(shareInfo)
+				(this.$refs.dDetail as any).refillConfig(shareInfo)
 		}
 	}
 }
