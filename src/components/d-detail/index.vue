@@ -207,7 +207,7 @@ export default class DDetail extends mixins(
 					scene,
 					type,
 					market,
-					...config,
+					value: { ...config },
 				}
 			},
 		)
