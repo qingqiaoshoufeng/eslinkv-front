@@ -61337,12 +61337,16 @@ var es_array_splice = __webpack_require__("a434");
 // EXTERNAL MODULE: ./src/utils/index.js
 var utils = __webpack_require__("ed08");
 
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4102e524-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components/d-widget-part/index.vue?vue&type=template&id=1f5eb8f4&lang=pug&
+var d_widget_partvue_type_template_id_1f5eb8f4_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.currentComponent,_vm._g(_vm._b({key:("" + (_vm.config.widget.id) + _vm.updateKey),ref:"widgets",tag:"component",staticClass:"widget-part",class:_vm.animationClass,attrs:{"id":_vm.config.widget && _vm.config.widget.id},on:{"widget-config-update":function (data) { return _vm.$emit('widget-config-update', data); },"query-start":function($event){_vm.querying = true},"query-end":function($event){_vm.querying = false},"query-failed":function($event){_vm.querying = true},"config-reset":function($event){return _vm.$emit('config-reset')}}},'component',Object.assign({}, {config: _vm.config, readonly: _vm.readonly}, _vm.$attrs),false),_vm.$listeners),[_vm._t("default")],2)}
+var staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/components/d-widget-part/index.vue?vue&type=template&id=1f5eb8f4&lang=pug&
+
 // EXTERNAL MODULE: external {"root":"Vue","commonjs":"vue","commonjs2":"vue","amd":"vue"}
 var external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_ = __webpack_require__("8bbf");
 var external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default = /*#__PURE__*/__webpack_require__.n(external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js + 3 modules
-var toConsumableArray = __webpack_require__("2909");
 
 // CONCATENATED MODULE: ./src/store/index.js
 var store = function store(name, _state, _actions) {
@@ -61375,166 +61379,6 @@ var store = function store(name, _state, _actions) {
     actions: actions
   };
 };
-// CONCATENATED MODULE: ./src/store/platform.store.js
-
-
-
-/**
- * @description 平台信息
- */
-
-
-var isMac = /macintosh|mac os x/i.test(navigator.userAgent);
-var state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
-  version: '1.1.0',
-  screenVersion: 0,
-  widgetAdded: {},
-  screenAvatar: '',
-  screenType: 'CUSTOM',
-  // CUSTOM 普通大屏 TEMPLATE 模版大屏
-  screenId: null,
-  screenName: '未命名',
-  chooseWidgetCustomConfig: [],
-  // 选中项的自定义配置
-  chooseWidgetId: null,
-  // 选中项id
-  chooseWidgetArray: [],
-  // 选中项ids
-  chooseWidgetArrayConfig: {
-    left: 0,
-    top: 0,
-    width: 0,
-    height: 0,
-    z: 0
-  },
-  // 选中项配置
-  backgroundImage: '',
-  backgroundColor: 'rgba(24, 27, 36,1)',
-  width: 1920,
-  height: 1080,
-  isMobile: false,
-  layoutMode: 'full-height',
-  mainScene: 0,
-  // 设置进入场景
-  isMac: isMac,
-  // 是否是mac
-  fullscreen: false,
-  // 全屏
-  searchModal: false,
-  autoAlignGuide: true // 自动贴靠参考线
-
-});
-var actions = {
-  initPlatformConfig: function initPlatformConfig() {
-    state.screenName = '未命名';
-    state.screenAvatar = '';
-    state.widgetAdded = {};
-  },
-  unChooseWidget: function unChooseWidget() {
-    state.chooseWidgetId = null;
-    state.chooseWidgetArray = [];
-    document.getElementById('right-menu').classList.remove('active');
-  },
-  chooseWidget: function chooseWidget(id) {
-    state.chooseWidgetId = id;
-  },
-  setChooseWidgetCustomConfig: function setChooseWidgetCustomConfig() {
-    var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    state.chooseWidgetCustomConfig = [].concat(Object(toConsumableArray["a" /* default */])(value), [{
-      type: 'custom'
-    }]);
-  },
-  updateApiData: function updateApiData(id, data) {
-    if (!state.widgetAdded[id].config.api) {
-      external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.set(state.widgetAdded[id].config, 'api', {});
-    }
-
-    external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.set(state.widgetAdded[id].config.api, 'data', JSON.stringify(data));
-  },
-  updateConfig: function updateConfig(id, config) {
-    if (state.widgetAdded[id]) external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.set(state.widgetAdded[id], 'config', config);
-  },
-  setWidgetsAdded: function setWidgetsAdded(value) {
-    state.widgetAdded = value;
-  },
-  setWidgetsAddedItem: function setWidgetsAddedItem(id, type, config, scene) {
-    var market = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-    external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.set(state.widgetAdded, id, {
-      id: id,
-      type: type,
-      config: config,
-      scene: scene,
-      market: market
-    });
-  }
-};
-var platform = store('platform', state, actions);
-/* harmony default export */ var platform_store = (platform);
-// CONCATENATED MODULE: ./src/store/instance.store.js
-
-
-/**
- * @description 实例化对象缓存
- */
-
-
-
-var instance_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
-  kanboard: null,
-  createKanboard: null
-});
-var instance_store_actions = {
-  setInstance: function setInstance(key, value) {
-    instance_store_state[key] = value;
-  },
-  updateComponentTarget: function updateComponentTarget(id, target, value) {
-    switch (target) {
-      case 'config.api.params':
-        platform_store.state.widgetAdded[id].config.api.params = Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, platform_store.state.widgetAdded[id].config.api.params), value);
-        break;
-
-      case 'config.api.data':
-        platform_store.state.widgetAdded[id].config.api.data = value;
-        break;
-
-      case 'config.config':
-        platform_store.state.widgetAdded[id].config.config = Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, platform_store.state.widgetAdded[id].config.config), value);
-        break;
-    }
-  },
-  updateComponent: function updateComponent(id, config) {
-    var widgetConfig = platform_store.state.widgetAdded[id].config.api;
-
-    if (config.params) {
-      widgetConfig.params = JSON.stringify(config.params);
-    }
-
-    if (config.data) {
-      widgetConfig.data = JSON.stringify(config.data);
-    }
-
-    if (config.url) {
-      widgetConfig.url = config.url;
-    }
-
-    if (config.path) {
-      widgetConfig.path = config.path;
-    }
-
-    if (config.method) {
-      widgetConfig.method = config.method;
-    }
-  }
-};
-var instance = store('instance', instance_store_state, instance_store_actions);
-/* harmony default export */ var instance_store = (instance);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"4102e524-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/pug-plain-loader!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./packages/conditionalLoader.js!./src/components/d-widget-part/index.vue?vue&type=template&id=1f5eb8f4&lang=pug&
-var d_widget_partvue_type_template_id_1f5eb8f4_lang_pug_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c(_vm.currentComponent,_vm._g(_vm._b({key:("" + (_vm.config.widget.id) + _vm.updateKey),ref:"widgets",tag:"component",staticClass:"widget-part",class:_vm.animationClass,attrs:{"id":_vm.config.widget && _vm.config.widget.id},on:{"widget-config-update":function (data) { return _vm.$emit('widget-config-update', data); },"query-start":function($event){_vm.querying = true},"query-end":function($event){_vm.querying = false},"query-failed":function($event){_vm.querying = true},"config-reset":function($event){return _vm.$emit('config-reset')}}},'component',Object.assign({}, {config: _vm.config, readonly: _vm.readonly}, _vm.$attrs),false),_vm.$listeners),[_vm._t("default")],2)}
-var staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/components/d-widget-part/index.vue?vue&type=template&id=1f5eb8f4&lang=pug&
-
 // CONCATENATED MODULE: ./src/store/custom.store.js
 
 
@@ -61543,23 +61387,23 @@ var staticRenderFns = []
  */
 
 
-var custom_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
+var state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
   widgets: {},
   components: {},
   avatar: {}
 });
-var custom_store_actions = {
+var actions = {
   setCustomComponents: function setCustomComponents(value) {
-    custom_store_state.components = Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, custom_store_state.components), value);
+    state.components = Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, state.components), value);
   },
   setCustomWidgets: function setCustomWidgets(value) {
-    custom_store_state.widgets = Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, value), custom_store_state.widgets);
+    state.widgets = Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, value), state.widgets);
   },
   setCustomAvatar: function setCustomAvatar(value) {
-    custom_store_state.avatar = Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, value), custom_store_state.avatar);
+    state.avatar = Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, value), state.avatar);
   }
 };
-var custom = store('custom', custom_store_state, custom_store_actions);
+var custom = store('custom', state, actions);
 /* harmony default export */ var custom_store = (custom);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./packages/conditionalLoader.js!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./node_modules/iview-loader??ref--0-2!./src/components/d-widget-part/index.vue?vue&type=script&lang=js&
 
@@ -61754,6 +61598,162 @@ var d_widget_part_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var d_widget_part = (d_widget_part_component.exports);
+// EXTERNAL MODULE: ./node_modules/@babel/runtime/helpers/esm/toConsumableArray.js + 3 modules
+var toConsumableArray = __webpack_require__("2909");
+
+// CONCATENATED MODULE: ./src/store/platform.store.js
+
+
+
+/**
+ * @description 平台信息
+ */
+
+
+var isMac = /macintosh|mac os x/i.test(navigator.userAgent);
+var platform_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
+  version: '1.1.0',
+  screenVersion: 0,
+  widgetAdded: {},
+  screenAvatar: '',
+  screenType: 'CUSTOM',
+  // CUSTOM 普通大屏 TEMPLATE 模版大屏
+  screenId: null,
+  screenName: '未命名',
+  chooseWidgetCustomConfig: [],
+  // 选中项的自定义配置
+  chooseWidgetId: null,
+  // 选中项id
+  chooseWidgetArray: [],
+  // 选中项ids
+  chooseWidgetArrayConfig: {
+    left: 0,
+    top: 0,
+    width: 0,
+    height: 0,
+    z: 0
+  },
+  // 选中项配置
+  backgroundImage: '',
+  backgroundColor: 'rgba(24, 27, 36,1)',
+  width: 1920,
+  height: 1080,
+  isMobile: false,
+  layoutMode: 'full-height',
+  mainScene: 0,
+  // 设置进入场景
+  isMac: isMac,
+  // 是否是mac
+  fullscreen: false,
+  // 全屏
+  searchModal: false,
+  autoAlignGuide: true // 自动贴靠参考线
+
+});
+var platform_store_actions = {
+  initPlatformConfig: function initPlatformConfig() {
+    platform_store_state.screenName = '未命名';
+    platform_store_state.screenAvatar = '';
+    platform_store_state.widgetAdded = {};
+  },
+  unChooseWidget: function unChooseWidget() {
+    platform_store_state.chooseWidgetId = null;
+    platform_store_state.chooseWidgetArray = [];
+    document.getElementById('right-menu').classList.remove('active');
+  },
+  chooseWidget: function chooseWidget(id) {
+    platform_store_state.chooseWidgetId = id;
+  },
+  setChooseWidgetCustomConfig: function setChooseWidgetCustomConfig() {
+    var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+    platform_store_state.chooseWidgetCustomConfig = [].concat(Object(toConsumableArray["a" /* default */])(value), [{
+      type: 'custom'
+    }]);
+  },
+  updateApiData: function updateApiData(id, data) {
+    if (!platform_store_state.widgetAdded[id].config.api) {
+      external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.set(platform_store_state.widgetAdded[id].config, 'api', {});
+    }
+
+    external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.set(platform_store_state.widgetAdded[id].config.api, 'data', JSON.stringify(data));
+  },
+  updateConfig: function updateConfig(id, config) {
+    if (platform_store_state.widgetAdded[id]) external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.set(platform_store_state.widgetAdded[id], 'config', config);
+  },
+  setWidgetsAdded: function setWidgetsAdded(value) {
+    platform_store_state.widgetAdded = value;
+  },
+  setWidgetsAddedItem: function setWidgetsAddedItem(id, type, config, scene) {
+    var market = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+    external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.set(platform_store_state.widgetAdded, id, {
+      id: id,
+      type: type,
+      config: config,
+      scene: scene,
+      market: market
+    });
+  }
+};
+var platform = store('platform', platform_store_state, platform_store_actions);
+/* harmony default export */ var platform_store = (platform);
+// CONCATENATED MODULE: ./src/store/instance.store.js
+
+
+/**
+ * @description 实例化对象缓存
+ */
+
+
+
+var instance_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
+  kanboard: null,
+  createKanboard: null
+});
+var instance_store_actions = {
+  setInstance: function setInstance(key, value) {
+    instance_store_state[key] = value;
+  },
+  updateComponentTarget: function updateComponentTarget(id, target, value) {
+    switch (target) {
+      case 'config.api.params':
+        platform_store.state.widgetAdded[id].config.api.params = Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, platform_store.state.widgetAdded[id].config.api.params), value);
+        break;
+
+      case 'config.api.data':
+        platform_store.state.widgetAdded[id].config.api.data = value;
+        break;
+
+      case 'config.config':
+        platform_store.state.widgetAdded[id].config.config = Object(objectSpread2["a" /* default */])(Object(objectSpread2["a" /* default */])({}, platform_store.state.widgetAdded[id].config.config), value);
+        break;
+    }
+  },
+  updateComponent: function updateComponent(id, config) {
+    var widgetConfig = platform_store.state.widgetAdded[id].config.api;
+
+    if (config.params) {
+      widgetConfig.params = JSON.stringify(config.params);
+    }
+
+    if (config.data) {
+      widgetConfig.data = JSON.stringify(config.data);
+    }
+
+    if (config.url) {
+      widgetConfig.url = config.url;
+    }
+
+    if (config.path) {
+      widgetConfig.path = config.path;
+    }
+
+    if (config.method) {
+      widgetConfig.method = config.method;
+    }
+  }
+};
+var instance = store('instance', instance_store_state, instance_store_actions);
+/* harmony default export */ var instance_store = (instance);
 // CONCATENATED MODULE: ./src/store/scene.store.js
 
 
@@ -61774,7 +61774,6 @@ var d_widget_part_component = Object(componentNormalizer["a" /* default */])(
 
 
 
-external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.component('parts', d_widget_part);
 var scene_store_state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
   activeWidgetId: '',
   // 被激活的场景对应组件
@@ -61923,6 +61922,9 @@ var scene_store_actions = {
           return {
             array: array
           };
+        },
+        components: {
+          parts: d_widget_part
         },
         mounted: function mounted() {
           instance_store.actions.setInstance('createKanboard', this);
