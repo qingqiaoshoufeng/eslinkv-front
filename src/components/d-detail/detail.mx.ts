@@ -58,7 +58,7 @@ export default {
 				.then(() => {
 					this.loading = false
 					platform.actions.setWidgetsAdded(obj)
-					if (res.scene) {
+					if (res.screenConfig.scene) {
 						scene.actions.initScene(res.screenConfig)
 					}
 				})
