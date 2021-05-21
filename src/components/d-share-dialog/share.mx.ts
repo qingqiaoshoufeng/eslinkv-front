@@ -76,7 +76,7 @@ export default {
 				this.deadline = req.screenShareTime
 			}
 			await this.$api.screenShare.screenShareUpdate(req)
-			this.shareUrl = `${location.origin}/shareScreen/${this.screenId}?layoutMode=${this.platform.panelConfig.size.layoutMode}`
+			this.shareUrl = `${location.origin}/shareScreen/${this.screenId}?layoutMode=${this.platform.layoutMode}`
 		},
 		async init() {
 			this.screenId = this.sid || this.$route.params.id
@@ -95,7 +95,7 @@ export default {
 				this.deadline = formatTime(res.screenShareTime)
 			}
 			if (res.screenShareType !== 'NO') {
-				this.shareUrl = `${location.origin}/shareScreen/${this.screenId}?layoutMode=${this.platform.panelConfig.size.layoutMode}`
+				this.shareUrl = `${location.origin}/shareScreen/${this.screenId}?layoutMode=${this.platform.layoutMode}`
 			}
 		},
 	},

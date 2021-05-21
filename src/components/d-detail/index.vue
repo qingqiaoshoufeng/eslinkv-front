@@ -138,11 +138,11 @@ export default class DDetail extends mixins(
 	}
 
 	preview() {
-		const scene = this.platform.panelConfig.mainScene
-			? `&scene=${this.platform.panelConfig.mainScene}`
+		const scene = this.platform.mainScene
+			? `&scene=${this.platform.mainScene}`
 			: ''
 		window.open(
-			`${location.origin}/detail/${this.$route.params.id}?layoutMode=${this.platform.panelConfig.size.layoutMode}${scene}`,
+			`${location.origin}/detail/${this.$route.params.id}?layoutMode=${this.platform.layoutMode}${scene}`,
 		)
 	}
 
@@ -190,17 +190,6 @@ export default class DDetail extends mixins(
 
 	platFormData() {
 		const defaultConfig = commonConfigValue() // 读取默认配置
-		const panelConfig = this.platform.panelConfig
-		delete panelConfig.info
-		delete panelConfig.id
-		const { size } = panelConfig
-		delete size.preset
-		if (
-			size.range &&
-			!Object.values(size.range).find(item => item !== 0 && item !== '%')
-		) {
-			delete size.range
-		}
 		const widgetAdded = copy(this.platform.widgetAdded)
 		const widgets = Object.values(widgetAdded).map(
 			({ id, market = false, type, config, scene = 0 }) => {
@@ -218,7 +207,7 @@ export default class DDetail extends mixins(
 					scene,
 					type,
 					market,
-					value: { ...config },
+					...config,
 				}
 			},
 		)
@@ -226,7 +215,13 @@ export default class DDetail extends mixins(
 			screenName: this.platform.screenName,
 			screenVersion: versionToNum(this.platform.version),
 			screenConfig: {
-				panelConfig, // 看板画布配置
+				backgroundImage: this.platform.backgroundImage,
+				backgroundColor: this.platform.backgroundColor,
+				width: this.platform.width,
+				height: this.platform.height,
+				isMobile: this.platform.isMobile,
+				layoutMode: this.platform.layoutMode,
+				mainScene: this.platform.mainScene,
 				widgets, // 小工具配置
 				scene: this.scene.obj, // 场景
 			},
