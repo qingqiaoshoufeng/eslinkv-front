@@ -80,7 +80,7 @@ import exportMx from './export.mx'
 import detailMx from './detail.mx'
 import saveMx from './save.mx'
 import dShareDialog from '../d-share-dialog/index.vue'
-
+import { versionToNum } from '@/utils/index.js'
 @Component({
 	components: {
 		'i-icon': Icon,
@@ -224,6 +224,7 @@ export default class DDetail extends mixins(
 		)
 		return {
 			screenName: this.platform.screenName,
+			screenVersion: versionToNum(this.platform.version),
 			screenConfig: {
 				panelConfig, // 看板画布配置
 				widgets, // 小工具配置

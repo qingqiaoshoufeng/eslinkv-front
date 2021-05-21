@@ -83,6 +83,7 @@ export default {
 				this.screenType = res.screenType
 				this.platform.screenAvatar = res.screenAvatar
 				this.platform.screenName = res.screenName
+				this.platform.screenVersion = res.screenVersion
 				this.platform.panelConfig = res.screenConfig.kanboard
 					? res.screenConfig.kanboard
 					: res.screenConfig.panelConfig
