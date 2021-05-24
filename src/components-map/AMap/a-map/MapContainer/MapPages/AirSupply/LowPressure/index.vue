@@ -23,7 +23,7 @@
 				:ref="legend"
 				:is="config.component"
 				:visible="config.visible"
-				:overlayIcon="config.icon ? config.icon : config.legendIcon"
+				:overlayIcon="config.icon || config.legendIcon"
 				:overlayType="config.component"
 				:iconSize="config.iconSize"
 				:showOverlayName="config.showOverlayName"
@@ -45,7 +45,7 @@
 		>
 			<VoltageRegulator
 				:data="activeOverlay"
-				v-if="OverlayDetailProp && OverlayDetailProp.data.overlayType === 'VoltageRegulator'">
+				v-if="activeOverlay.type === 'VoltageRegulator'">
 			</VoltageRegulator>
 		</OverlayDetail>
 		<portal to="destination">
@@ -244,6 +244,7 @@ export default {
 					'PipeManageMentStation', // '管网运行管理站',
 					'UndergroundRepairStation', // '地下抢修点',
 					'OngroundRepairStation', // '地上抢修点',
+					'VoltageRegulator', // '调压器',
 				].toString(),
 			}
 			const res = await this.$api.map.airSupply.getAllTypeStationList(
@@ -254,6 +255,7 @@ export default {
 				pipeManageMentStationList,
 				undergroundRepairStationList,
 				ongroundRepairStationList,
+				VoltageRegulatorList,
 			} = res
 			// 数据为防止重叠特殊处理---开始
 			pipeManageMentStationList = pipeManageMentStationList.map(item => {
@@ -285,6 +287,7 @@ export default {
 				...pipeManageMentStationList,
 				...undergroundRepairStationList,
 				...ongroundRepairStationList,
+				...VoltageRegulatorList,
 			]
 		},
 		// 获取统计数据
