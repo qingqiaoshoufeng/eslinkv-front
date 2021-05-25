@@ -316,3 +316,40 @@ export function getThreeSocialLinkagecustmerHot(data) {
 		},
 	})
 }
+
+// 销售站点
+export function getSaleMapDataResult(data) {
+	return request({
+		url: HANGRANURL + '/sales/mapDataResult',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+// 销售分公司
+export function getSaleMapDetailInfo(data) {
+	return request({
+		url: HANGRANURL + '/sales/mapDetailInfo',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+
+// 销售右侧指标
+export function getSaleRightIndex(data) {
+	return request({
+		url: HANGRANURL + '/sales/rightIndex',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}

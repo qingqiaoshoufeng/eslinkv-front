@@ -34,7 +34,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		legendIcon: 'icontiaoyaqi',
 		component: 'MapMarkerIcon',
 		iconSize: 38,
-		visible: true,
+		visible: false,
 		dataProp: 'voltageRegulatorList',
 	},
 	ServiceStation: {

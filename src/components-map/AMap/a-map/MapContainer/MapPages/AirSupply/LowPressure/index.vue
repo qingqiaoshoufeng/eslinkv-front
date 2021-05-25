@@ -41,7 +41,7 @@
 				...OverlayDetailProp,
 			}"
 			ref="OverlayDetail"
-			:width="400"
+			:width="activeOverlay.type === 'VoltageRegulator' ? 640 : 400"
 		>
 			<VoltageRegulator
 				:data="activeOverlay"
@@ -255,7 +255,7 @@ export default {
 				pipeManageMentStationList,
 				undergroundRepairStationList,
 				ongroundRepairStationList,
-				VoltageRegulatorList,
+				voltageRegulatorList,
 			} = res
 			// 数据为防止重叠特殊处理---开始
 			pipeManageMentStationList = pipeManageMentStationList.map(item => {
@@ -287,7 +287,7 @@ export default {
 				...pipeManageMentStationList,
 				...undergroundRepairStationList,
 				...ongroundRepairStationList,
-				...VoltageRegulatorList,
+				...voltageRegulatorList,
 			]
 		},
 		// 获取统计数据
