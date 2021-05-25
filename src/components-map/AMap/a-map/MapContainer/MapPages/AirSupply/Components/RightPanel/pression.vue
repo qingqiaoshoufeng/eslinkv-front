@@ -1,17 +1,17 @@
 <template lang="pug">
 	ul.pression
-		NoData(:show="true")
-		li(v-for="(k, i) in 4" :key="i" v-if="false")
+		NoData(:show="!list.length")
+		li(v-for="(k, i) in list" :key="i" v-if="list.length" @click="handleClick(k)")
 			img(src="./img/press.svg")
 			.main
 				.main-1
-					.title 调压器GK38405030
-					.time 11-03  08:23:27
+					.title {{ k.name }}
+					.time {{ k.time }}
 				.main-2
-					.address 宁围镇振宁路1400号
+					.address {{ k.address }}
 					.status
 						.color
-						span 报警类型
+						span {{ k.status }}
 </template>
 
 <script lang="ts">
@@ -20,9 +20,18 @@ import { NoData } from '../../../../../components'
 
 @Component({components: { NoData }})
 export default class PressureRegulating extends Vue {
-	@Prop() showMapPage
+	list:any = []
 
-	mounted () {
+	handleClick(item) {
+		this.$emit('change', {
+			...item,
+			overlayType: 'pression'
+		})
+	}
+
+	async mounted () {
+		const res = await this.$api.map.airSupply.getPressAlarmList()
+		this.list = res.list
 	}
 }
 </script>
@@ -38,6 +47,7 @@ export default class PressureRegulating extends Vue {
 		padding: 20px 8px 16px;
 		&:hover {
 			background: rgba(23, 115, 201, 0.54);
+			cursor: pointer;
 		}
 		.main {flex: 1;}
 		>img {

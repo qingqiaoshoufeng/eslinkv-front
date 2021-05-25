@@ -92,6 +92,7 @@ export default {
 				const { overlayType, status } = val
 				const { overlayInfoConfigMap } = this
 				const iconMap = {
+					pression: 'icontiaoyaqi',
 					WARNEVENT: 'iconshijian1',
 					WarningList: 'icongongyiyichang',
 				}

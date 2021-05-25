@@ -116,6 +116,17 @@ export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
 			},
 		},
 	},
+	VoltageRegulator: {
+		fields: {
+			name: {
+				style: {
+					fontSize: '32px',
+					color: '#FFDC45',
+				},
+				errColor: '#FFDC45',
+			},
+		},
+	},
 	PipeManageMentStation: {
 		fields: {
 			name: {

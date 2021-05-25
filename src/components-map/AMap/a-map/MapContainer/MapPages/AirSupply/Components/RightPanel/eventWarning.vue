@@ -88,7 +88,7 @@
 import { SvgIcon, NoData } from '../../../../../components/'
 import { Icon } from 'view-design'
 export default {
-	name: 'HomeRealTimeList',
+	name: 'eventWarning',
 	components: {
 		SvgIcon,
 		NoData,

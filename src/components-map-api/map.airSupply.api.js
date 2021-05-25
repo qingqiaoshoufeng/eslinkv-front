@@ -237,3 +237,14 @@ export function getLowMapDetailInfo(data) {
 		},
 	})
 }
+
+export function getPressAlarmList(data) {
+	return request({
+		url: HANGRANURL + '/applyAir/alarmList',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
