@@ -16,7 +16,6 @@ export { default as PressureRegulatingStation } from './PressureRegulatingStatio
 export { default as UndergroundRepairStation } from './UndergroundRepairStation'
 export { default as OngroundRepairStation } from './OngroundRepairStation'
 export { default as ServiceStation } from './ServiceStation'
-export { default as MapMarkerIcon } from './MapMarkerIcon'
 export { default as WarnEvent } from './WarnEvent/index.vue'
 export { default as WarningStations } from './WarningStations/index.vue'
 

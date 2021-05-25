@@ -58,10 +58,10 @@
 <script>
 // 页面覆盖物组件
 import {
-	MapMarkerIcon,
 	WarnEvent,
 } from '../Components/index.js'
 import RightPanel from './components/RightPanel'
+import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon'
 // 页面所需公共组件
 import {
 	RegionBoundary,

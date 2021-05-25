@@ -62,8 +62,8 @@
 </template>
 <script>
 // 页面覆盖物组件
-import MapMarkerIcon from '../../AirSupply/Components/MapMarkerIcon'
-import { BranchCompany, HeatMap, SwitchBox, SaleAreaBoundary } from '../Components/index.js'
+import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon'
+import { HeatMap, SwitchBox, SaleAreaBoundary } from '../Components/index.js'
 import heatmap from './heatmap'
 // 页面所需公共组件
 import {
@@ -86,7 +86,6 @@ export default {
 		MapMarkerIcon,
 		heatmap,
 		OverlayDetail,
-		BranchCompany,
 		DataStatistics,
 		SaleAreaBoundary,
 		iSwitchBox: SwitchBox,
@@ -96,7 +95,6 @@ export default {
 	data() {
 		return {
 			stationDataMap: {},
-			stationList: [],
 			dataStatisticsList: DATASTATISTICSLIST,
 			dataStatisticsInfo: {},
 			overlayInfoConfigMap: Object.freeze(
@@ -138,10 +136,6 @@ export default {
 				...this.stationDataMap,
 				...res,
 			}
-			// 右侧点位列表数据
-			this.stationList = [
-				...res.branchCompanyList,
-			]
 		},
 		// 切换热力图显示隐藏
 		switchChange(data) {
@@ -157,12 +151,10 @@ export default {
 				this.showRoutePlan = false
 			}
 			this.showOverlayDetail = false
-			// this.activeOverlay = {};
 			this.$amap.setZoom(11, 100)
 			done()
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			console.log(overlay)
 			// this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true
 			const { lng, lat } = overlay
 			overlay.overlayType = overlayType

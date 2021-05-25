@@ -79,7 +79,6 @@ export default {
 	watch: {
 		visible: {
 			async handler(val) {
-				let a
 				const { isRendered } = this
 				if (val && !isRendered) {
 					await this.getData(this.query)

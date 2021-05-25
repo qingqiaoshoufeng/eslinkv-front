@@ -77,7 +77,7 @@
 <script>
 import { AMapTile } from '../../../../lib'
 import VoltageRegulator from './components/VoltageRegulator'
-
+import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon'
 // 页面所需公共组件
 import { OverlayDetail, MapLegend } from '../../../../components/index.js'
 import { DataStatistics } from '../../../../components'
@@ -97,7 +97,6 @@ const componentPageArr = [
 	'OngroundRepairStation',
 	'InspectionPerson',
 	'InspectionCar',
-	'MapMarkerIcon',
 	// 报警点位
 	'WarnEvent',
 	// 右侧报警列表
@@ -124,6 +123,7 @@ componentCommonArr.map(componentName => {
 export default {
 	name: 'LowPressure',
 	components: {
+		MapMarkerIcon,
 		VoltageRegulator,
 		AMapTile,
 		...componentPageMap,

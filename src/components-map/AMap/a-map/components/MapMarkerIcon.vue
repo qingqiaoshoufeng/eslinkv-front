@@ -10,7 +10,7 @@
 	/>
 </template>
 <script>
-import { BaseOverlay } from '../../../../components/index'
+import BaseOverlay from './BaseOverlay/index.vue'
 export default {
 	name: 'MapMarkerIcon',
 	components: {
