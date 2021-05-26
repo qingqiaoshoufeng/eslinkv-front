@@ -8,7 +8,7 @@
 			@actived-change="tabActivedChange"
 		/>
 		<div class="ring" :id="id" />
-		<div>
+		<div :style="{ width: `calc(100% - 420px)` }">
 			<div class="unit">单位：万m³</div>
 			<div class="h-ring-1-legend-box">
 				<ul class="h-ring-1-legend" :style="legengdTransform">
@@ -155,6 +155,7 @@ export default {
 	height: 220px;
 	background: url('./img/bg.svg') no-repeat center;
 	background-size: 84px 84px;
+	margin-right: auto;
 }
 
 .h-ring-1-legend-box {
@@ -177,7 +178,7 @@ export default {
 	flex-wrap: wrap;
 	justify-content: space-between;
 	transition: all 0.3s;
-
+	margin-left: auto;
 	li {
 		align-items: center;
 		width: 40%;
