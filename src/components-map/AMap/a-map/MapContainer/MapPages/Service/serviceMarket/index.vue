@@ -29,14 +29,12 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			ref="OverlayDetail"
+			:width="400"
 		/>
-		<heartmap
-			v-if="
-				stationDataMap.CustomerHotList &&
-				stationDataMap.CustomerHotList.length
-			"
+		<heatmap
+			:data="heatData"
+			v-if="heatData.length"
 			:visible="heatmapShow"
-			:data="stationDataMap.CustomerHotList"
 		/>
 		<portal to="destination">
 			<!-- 选择器盒子 -->
@@ -63,7 +61,7 @@
 <script>
 // 页面覆盖物组件
 import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon'
-import { HeatMap, SwitchBox, SaleAreaBoundary } from '../Components/index.js'
+import { SwitchBox, SaleAreaBoundary } from '../Components/index.js'
 import heatmap from './heatmap'
 // 页面所需公共组件
 import {
@@ -89,7 +87,6 @@ export default {
 		DataStatistics,
 		SaleAreaBoundary,
 		iSwitchBox: SwitchBox,
-		HeatMap,
 		MapLegend,
 	},
 	data() {
@@ -105,6 +102,7 @@ export default {
 			legendMultiple: true,
 			showOverlayDetail: false,
 			heatmapShow: false,
+			heatData: [],
 			activeOverlay: {},
 			center: [120.131259, 30.263295],
 			zoom: 10,
@@ -117,8 +115,13 @@ export default {
 		this.$amap.setCenter(this.center, 100)
 		this.getSaleMapDataResult()
 		this.getRightIndex()
+		this.getHeatCount()
 	},
 	methods: {
+		async getHeatCount () {
+			const res = await this.$api.map.serve.getSaleHeatCount()
+			this.heatData = res.total
+		},
 		async getRightIndex () {
 			this.dataStatisticsInfo = await this.$api.map.serve.getSaleRightIndex()
 		},

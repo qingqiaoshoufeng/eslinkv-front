@@ -353,3 +353,15 @@ export function getSaleRightIndex(data) {
 		},
 	})
 }
+
+// 销售热力图
+export function getSaleHeatCount(data) {
+	return request({
+		url: HANGRANURL + '/sales/heatCount',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
