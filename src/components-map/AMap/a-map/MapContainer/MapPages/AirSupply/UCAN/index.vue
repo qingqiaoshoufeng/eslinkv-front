@@ -56,6 +56,7 @@
 				v-bind="{
 					stationList,
 					rightListActiveItemMap,
+					markerConfig: legendMap
 				}"
 				ref="RightPanel"
 			></RightPanel>

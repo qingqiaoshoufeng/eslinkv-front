@@ -124,7 +124,6 @@ export default {
 	data() {
 		const {
 			BranchCompany,
-			ServiceStation,
 		} = SERVICE_SERVICEHANGRANCODE_LEGEND_MAP
 		return {
 			overlayInfoConfigMap: Object.freeze(

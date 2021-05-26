@@ -32,6 +32,7 @@
 				@change="handleClick"
 				ref="overlayList"
 				:stationList="stationList"
+				:markerConfig="markerConfig"
 			)
 </template>
 
@@ -51,6 +52,7 @@ export default {
 		}
 	},
 	props: {
+		markerConfig: Object,
 		stationList: {
 			type: Array,
 			default() {

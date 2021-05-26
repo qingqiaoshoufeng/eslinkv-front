@@ -128,9 +128,7 @@ export default {
 		// 获取所有站点数据
 		async getSaleMapDataResult() {
 			const params = {
-				types: [
-					'BranchCompany'
-				].toString(),
+				types: 'BranchCompany'
 			}
 			const res = await this.$api.map.serve.getSaleMapDataResult(
 				params,
@@ -146,19 +144,11 @@ export default {
 			const [{ value }] = this.swichBoxInfo
 			this.heatmapShow = value
 		},
-		// 暂留
 		closeOverlayDetail(done) {
-			const { overlayType } = this.activeOverlay
-			if (overlayType === 'WARNEVENT') {
-				scene.actions.setSceneIndex(INDEXSCENEMAP.ServiceMarket)
-				this.showRoutePlan = false
-			}
 			this.showOverlayDetail = false
-			this.$amap.setZoom(11, 100)
 			done()
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			// this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true
 			const { lng, lat } = overlay
 			overlay.overlayType = overlayType
 			this.activeOverlay = overlay
