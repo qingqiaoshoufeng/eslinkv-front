@@ -1,28 +1,37 @@
 <template lang="pug">
 	ul.pression
-		NoData(:show="true")
-		li(v-for="(k, i) in 4" :key="i" v-if="false")
+		NoData(:show="!list.length")
+		li(v-for="(k, i) in list" :key="i" v-if="list.length" @click="handleClick(k)")
 			img(src="./img/press.svg")
 			.main
 				.main-1
-					.title 调压器GK38405030
-					.time 11-03  08:23:27
+					.title {{ k.name }}
+					.time {{ k.time }}
 				.main-2
-					.address 宁围镇振宁路1400号
+					.address {{ k.address }}
 					.status
 						.color
-						span 报警类型
+						span {{ k.status }}
 </template>
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import { NoData } from '../../../../../components'
 
-@Component({components: { NoData }})
+@Component({ components: { NoData } })
 export default class PressureRegulating extends Vue {
-	@Prop() showMapPage
+	list: any = []
 
-	mounted () {
+	handleClick(item) {
+		this.$emit('change', {
+			...item,
+			overlayType: 'pression',
+		})
+	}
+
+	async mounted() {
+		const res = await this.$api.map.airSupply.getPressAlarmList()
+		this.list = res.list
 	}
 }
 </script>
@@ -38,9 +47,12 @@ export default class PressureRegulating extends Vue {
 		padding: 20px 8px 16px;
 		&:hover {
 			background: rgba(23, 115, 201, 0.54);
+			cursor: pointer;
 		}
-		.main {flex: 1;}
-		>img {
+		.main {
+			flex: 1;
+		}
+		> img {
 			width: 24px;
 			height: 24px;
 			margin-right: 12px;
@@ -52,11 +64,11 @@ export default class PressureRegulating extends Vue {
 			justify-content: space-between;
 			.title {
 				font-size: 24px;
-				color: #FEFFFF;
+				color: #feffff;
 			}
 			.time {
 				font-size: 16px;
-				color: #FFFFFF;
+				color: #ffffff;
 			}
 		}
 		.main-2 {
@@ -72,12 +84,12 @@ export default class PressureRegulating extends Vue {
 				display: flex;
 				align-items: center;
 				font-size: 20px;
-				color: #FFDC45;
+				color: #ffdc45;
 				.color {
 					width: 8px;
 					height: 8px;
 					border-radius: 50%;
-					background: #FFDC45;
+					background: #ffdc45;
 					margin-right: 8px;
 				}
 			}

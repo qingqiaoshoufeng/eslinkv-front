@@ -1,22 +1,36 @@
 <template lang="pug">
 	.container
-		.title 调压器
-		.address 宁围镇振宁路1400号
-		.info
+		.title  {{ data.name }}
+		.address {{ info.address }}
+		.info(v-if="info.time")
 			.type
 				.color
-				span 报警类型
-			.time 11-03  08:23:27
+				span {{ info.status }}
+			.time {{ info.time }}
 		.title2 近8小时压力趋势
 		.chart(ref="chart")
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
 
 @Component
 export default class VoltageRegulator extends Vue {
-	@Prop() showMapPage
+	@Prop() data
+
+	info: any = {}
+
+	@Watch('data', { deep: true, immediate: true })
+	dataChange(val) {
+		if (val) {
+			this.$nextTick(async () => {
+				await this.getData()
+				echarts
+					.init(this.$refs.chart)
+					.setOption(this.getOption(this.info.list))
+			})
+		}
+	}
 
 	getOption(data) {
 		return {
@@ -26,9 +40,9 @@ export default class VoltageRegulator extends Vue {
 			},
 			grid: {
 				top: 40,
-				left: 30,
+				left: 50,
 				bottom: 30,
-				right: 30,
+				right: 50,
 			},
 			tooltip: {
 				trigger: 'axis',
@@ -61,9 +75,7 @@ export default class VoltageRegulator extends Vue {
 						color: '#fff',
 						fontSize: 16,
 						lineHeight: 16,
-						interval: 0,
 					},
-					offset: 5,
 					data: data.map(v => v.x),
 				},
 			],
@@ -172,58 +184,18 @@ export default class VoltageRegulator extends Vue {
 		}
 	}
 
-	mounted() {
-		echarts.init(this.$refs.chart).setOption(
-			this.getOption([
-				{
-					x: '11.1',
-					push1: 2,
-					pop3: 3,
-					pop1: 4,
-					pop2: 5,
-				},
-				{
-					x: '11.2',
-					push1: 9,
-					pop3: 4,
-					pop1: 2,
-					pop2: 11,
-				},
-				{
-					x: '11.3',
-					push1: 3,
-					pop3: 6,
-					pop1: 14,
-					pop2: 9,
-				},
-				{
-					x: '11.4',
-					push1: 11,
-					pop3: 6,
-					pop1: 1,
-					pop2: 5,
-				},
-				{
-					x: '11.5',
-					push1: 9,
-					pop3: 7,
-					pop1: 6,
-					pop2: 4,
-				},
-				{
-					x: '11.6',
-					push1: 12,
-					pop3: 13,
-					pop1: 4,
-					pop2: 15,
-				},
-			]),
-		)
+	async getData() {
+		this.info = await this.$api.map.airSupply.getLowMapDetailInfo({
+			type: 'VoltageRegulator',
+			id: this.data.id,
+			name: this.data.name,
+		})
 	}
 }
 </script>
 <style lang="scss" scoped>
 .container {
+	width: 100%;
 	.title {
 		font-weight: 600;
 		font-size: 32px;
@@ -280,7 +252,7 @@ export default class VoltageRegulator extends Vue {
 		margin-bottom: 10px;
 	}
 	.chart {
-		width: 100%;
+		width: 600px;
 		height: 200px;
 	}
 }

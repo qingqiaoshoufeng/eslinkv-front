@@ -63,7 +63,7 @@
 import { SvgIcon, NoData } from '../../../../../components/'
 import { Icon } from 'view-design'
 export default {
-	name: 'HomeRealTimeList',
+	name: 'OverlayList',
 	components: {
 		SvgIcon,
 		NoData,
@@ -71,6 +71,7 @@ export default {
 	},
 	data() {
 		const iconList = {
+			VoltageRegulator: 'icontiaoyaqi', // '调压器',
 			GasStation: 'icontulimenzhan', // '门站',
 			PressureRegulatingStation: 'icontulitiaoyazhan', // '调压站',
 			EmergencyAirSourceStation: 'icontuliqiyuanzhan', // '应急气源站',

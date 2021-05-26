@@ -225,3 +225,25 @@ export function getLngStationData(data) {
 		},
 	})
 }
+
+export function getLowMapDetailInfo(data) {
+	return request({
+		url: HANGRANURL + '/applyAir/mapDetailInfo',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+export function getPressAlarmList(data) {
+	return request({
+		url: HANGRANURL + '/applyAir/alarmList',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}

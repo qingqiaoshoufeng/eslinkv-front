@@ -9,7 +9,8 @@
 			:key="index"
 		>
 			<div class="value font-num" :class="item.type">
-				{{ data[item.prop] && data[item.prop].toLocaleString() }}
+				{{ data[item.prop] && data[item.prop].toLocaleString()
+				}}{{ item.DW }}
 			</div>
 			<div class="desc">{{ item.label }}</div>
 		</div>

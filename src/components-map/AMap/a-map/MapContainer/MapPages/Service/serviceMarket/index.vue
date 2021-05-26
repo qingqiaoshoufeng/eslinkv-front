@@ -12,15 +12,12 @@
 		<!-- 2.legend控制显隐 -->
 		<template v-for="(config, legend) in legendMap">
 			<component
-				v-if="config.visible && allTypeStationList[config.dataProp]"
+				v-if="config.visible && stationDataMap[config.dataProp]"
 				:key="legend"
-				:visible="config.visible"
-				:overlayIcon="config.legendIcon"
-				:iconSize="config.iconSize"
+				v-bind="config"
 				:overlayType="legend"
 				:is="config.component"
-				:detailList="config.detailList"
-				:data="allTypeStationList[config.dataProp]"
+				:data="stationDataMap[config.dataProp]"
 				@overlay-click="handleOverlayClick"
 			/>
 		</template>
@@ -32,14 +29,12 @@
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			:before-close="closeOverlayDetail"
 			ref="OverlayDetail"
+			:width="400"
 		/>
-		<heartmap
-			v-if="
-				allTypeStationList.CustomerHotList &&
-				allTypeStationList.CustomerHotList.length
-			"
+		<heatmap
+			:data="heatData"
+			v-if="heatData.length"
 			:visible="heatmapShow"
-			:data="allTypeStationList.CustomerHotList"
 		/>
 		<portal to="destination">
 			<!-- 选择器盒子 -->
@@ -65,12 +60,8 @@
 </template>
 <script>
 // 页面覆盖物组件
-import {
-	BranchCompany,
-	HeatMap,
-	SwitchBox,
-	SaleAreaBoundary,
-} from '../Components/index.js'
+import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon'
+import { SwitchBox, SaleAreaBoundary } from '../Components/index.js'
 import heatmap from './heatmap'
 // 页面所需公共组件
 import {
@@ -82,6 +73,7 @@ import {
 import {
 	SERVICE_SERVICEMARKET_OVERLAY_MAP,
 	SERVICE_SERVICEMARKET_LEGEND_MAP,
+	DATASTATISTICSLIST,
 } from './config'
 
 const { scene } = eslinkV.$store
@@ -89,19 +81,19 @@ export default {
 	name: 'serviceMarket',
 	components: {
 		RegionBoundary,
+		MapMarkerIcon,
 		heatmap,
 		OverlayDetail,
-		BranchCompany,
 		DataStatistics,
 		SaleAreaBoundary,
 		iSwitchBox: SwitchBox,
-		HeatMap,
 		MapLegend,
 	},
 	data() {
 		return {
-			dataStatisticsList: [], // todo
-			dataStatisticsInfo: {}, // todo
+			stationDataMap: {},
+			dataStatisticsList: DATASTATISTICSLIST,
+			dataStatisticsInfo: {},
 			overlayInfoConfigMap: Object.freeze(
 				SERVICE_SERVICEMARKET_OVERLAY_MAP,
 			),
@@ -110,10 +102,10 @@ export default {
 			legendMultiple: true,
 			showOverlayDetail: false,
 			heatmapShow: false,
+			heatData: [],
 			activeOverlay: {},
 			center: [120.131259, 30.263295],
 			zoom: 10,
-			allTypeStationList: {},
 			swichBoxInfo: [
 				{ label: '年度销售气量热力', value: false, type: 'saleHeat' },
 			],
@@ -123,8 +115,29 @@ export default {
 		this.$amap = this.$parent.$amap
 		this.$amap.setZoom(this.zoom, 100)
 		this.$amap.setCenter(this.center, 100)
+		this.getSaleMapDataResult()
+		this.getRightIndex()
+		this.getHeatCount()
 	},
 	methods: {
+		async getHeatCount() {
+			const res = await this.$api.map.serve.getSaleHeatCount()
+			this.heatData = res.total
+		},
+		async getRightIndex() {
+			this.dataStatisticsInfo = await this.$api.map.serve.getSaleRightIndex()
+		},
+		// 获取所有站点数据
+		async getSaleMapDataResult() {
+			const params = {
+				types: ['BranchCompany'].toString(),
+			}
+			const res = await this.$api.map.serve.getSaleMapDataResult(params)
+			this.stationDataMap = {
+				...this.stationDataMap,
+				...res,
+			}
+		},
 		// 切换热力图显示隐藏
 		switchChange(data) {
 			this.swichBoxInfo = data
@@ -139,22 +152,21 @@ export default {
 				this.showRoutePlan = false
 			}
 			this.showOverlayDetail = false
-			// this.activeOverlay = {};
 			this.$amap.setZoom(11, 100)
 			done()
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true
+			// this.$refs.OverlayDetail.overlayTypeInfo.isShowMore = true
 			const { lng, lat } = overlay
 			overlay.overlayType = overlayType
 			this.activeOverlay = overlay
 			this.showOverlayDetail = true
-			this.$amap.setZoom(14, 100)
-			if (isCenter) {
-				this.$nextTick(() => {
-					this.$amap.panTo([lng, lat], 100)
-				})
-			}
+			// this.$amap.setZoom(14, 100)
+			// if (isCenter) {
+			// 	this.$nextTick(() => {
+			// 		this.$amap.panTo([lng, lat], 100)
+			// 	})
+			// }
 		},
 	},
 }

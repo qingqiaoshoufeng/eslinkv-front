@@ -34,7 +34,8 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		legendIcon: 'icontiaoyaqi',
 		component: 'MapMarkerIcon',
 		iconSize: 38,
-		visible: true,
+		visible: false,
+		dataProp: 'voltageRegulatorList',
 	},
 	ServiceStation: {
 		label: '综合服务站',
@@ -115,7 +116,7 @@ export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
 			},
 		},
 	},
-	PipeManageMentStation: {
+	VoltageRegulator: {
 		fields: {
 			name: {
 				style: {
@@ -126,7 +127,7 @@ export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
 			},
 		},
 	},
-	UndergroundRepairStation: {
+	PipeManageMentStation: {
 		fields: {
 			name: {
 				style: {
@@ -183,17 +184,6 @@ export const AIRSUPPLY_LOWPRESSURE_OVERLAY_MAP = {
 					fontSize: '24px',
 					color: '#fff',
 				},
-			},
-		},
-	},
-	ServiceStation: {
-		fields: {
-			name: {
-				style: {
-					fontSize: '32px',
-					color: '#FFDC45',
-				},
-				errColor: '#FFDC45',
 			},
 		},
 	},

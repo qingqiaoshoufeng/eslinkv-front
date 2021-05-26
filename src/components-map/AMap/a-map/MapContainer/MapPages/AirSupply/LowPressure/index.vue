@@ -23,7 +23,7 @@
 				:ref="legend"
 				:is="config.component"
 				:visible="config.visible"
-				:overlayIcon="config.icon ? config.icon : config.legendIcon"
+				:overlayIcon="config.icon || config.legendIcon"
 				:overlayType="config.component"
 				:iconSize="config.iconSize"
 				:showOverlayName="config.showOverlayName"
@@ -41,14 +41,11 @@
 				...OverlayDetailProp,
 			}"
 			ref="OverlayDetail"
-			:width="400"
+			:width="activeOverlay.type === 'VoltageRegulator' ? 640 : 400"
 		>
 			<VoltageRegulator
 				:data="activeOverlay"
-				v-if="
-					OverlayDetailProp &&
-					OverlayDetailProp.data.overlayType === 'VoltageRegulator'
-				"
+				v-if="activeOverlay.type === 'VoltageRegulator'"
 			></VoltageRegulator>
 		</OverlayDetail>
 		<portal to="destination">
@@ -80,7 +77,7 @@
 <script>
 import { AMapTile } from '../../../../lib'
 import VoltageRegulator from './components/VoltageRegulator'
-
+import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon'
 // 页面所需公共组件
 import { OverlayDetail, MapLegend } from '../../../../components/index.js'
 import { DataStatistics } from '../../../../components'
@@ -100,7 +97,6 @@ const componentPageArr = [
 	'OngroundRepairStation',
 	'InspectionPerson',
 	'InspectionCar',
-	'MapMarkerIcon',
 	// 报警点位
 	'WarnEvent',
 	// 右侧报警列表
@@ -127,6 +123,7 @@ componentCommonArr.map(componentName => {
 export default {
 	name: 'LowPressure',
 	components: {
+		MapMarkerIcon,
 		VoltageRegulator,
 		AMapTile,
 		...componentPageMap,
@@ -247,6 +244,7 @@ export default {
 					'PipeManageMentStation', // '管网运行管理站',
 					'UndergroundRepairStation', // '地下抢修点',
 					'OngroundRepairStation', // '地上抢修点',
+					'VoltageRegulator', // '调压器',
 				].toString(),
 			}
 			const res = await this.$api.map.airSupply.getAllTypeStationList(
@@ -257,6 +255,7 @@ export default {
 				pipeManageMentStationList,
 				undergroundRepairStationList,
 				ongroundRepairStationList,
+				voltageRegulatorList,
 			} = res
 			// 数据为防止重叠特殊处理---开始
 			pipeManageMentStationList = pipeManageMentStationList.map(item => {
@@ -288,6 +287,7 @@ export default {
 				...pipeManageMentStationList,
 				...undergroundRepairStationList,
 				...ongroundRepairStationList,
+				...voltageRegulatorList,
 			]
 		},
 		// 获取统计数据

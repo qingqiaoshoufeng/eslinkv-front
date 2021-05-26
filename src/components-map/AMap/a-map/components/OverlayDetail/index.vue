@@ -70,7 +70,6 @@
 </template>
 <script>
 import { AMapMarker } from '../../lib'
-// import PopContainer from '../PopContainer';
 import SvgIcon from '../SvgIcon/index'
 
 export default {
@@ -135,20 +134,16 @@ export default {
 	},
 	watch: {
 		data(val) {
-			if (val) {
-				if (JSON.stringify(val) !== '{}') {
-					this.overlay = {
-						...val,
-					}
-					const marginBottom = this.iconSize || 38
-					this.marginBottom = marginBottom / 2
-					if (!this.rendered) {
-						this.rendered = true
-					} else {
-						this.$refs.overlayDetailMarker.$amapComponent.setPosition(
-							new window.AMap.LngLat(val.lng, val.lat),
-						)
-					}
+			if (val && JSON.stringify(val) !== '{}') {
+				this.overlay = { ...val }
+				const marginBottom = this.iconSize || 38
+				this.marginBottom = marginBottom / 2
+				if (!this.rendered) {
+					this.rendered = true
+				} else {
+					this.$refs.overlayDetailMarker.$amapComponent.setPosition(
+						new window.AMap.LngLat(val.lng, val.lat),
+					)
 				}
 			}
 		},
@@ -217,7 +212,6 @@ export default {
 			}
 		},
 	},
-	mounted() {},
 }
 </script>
 

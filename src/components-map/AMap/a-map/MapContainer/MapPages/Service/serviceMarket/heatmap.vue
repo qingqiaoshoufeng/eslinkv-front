@@ -4,14 +4,6 @@ import overlayMixin from '../../../../mixins/overlayMixin.js'
 export default {
 	name: 'saleHot',
 	mixins: [overlayMixin],
-	props: {
-		data: {
-			type: Array,
-			default() {
-				return []
-			},
-		},
-	},
 	watch: {
 		visible(val) {
 			if (val) {
@@ -23,8 +15,7 @@ export default {
 			}
 		},
 	},
-	mounted() {
-		// console.log(this.$amap, 'this.$amap');
+	async mounted() {
 		const zoom = this.$amap.getZoom()
 	},
 	methods: {
@@ -39,7 +30,7 @@ export default {
 			})
 			this._instance.setDataSet({
 				data: this._heatMapData,
-				max: 9000,
+				max: 1000,
 			})
 		},
 	},
