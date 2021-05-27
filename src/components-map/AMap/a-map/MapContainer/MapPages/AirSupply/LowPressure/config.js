@@ -35,6 +35,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		component: 'MapMarkerIcon',
 		iconSize: 38,
 		visible: false,
+		showOverlayName: false,
 		dataProp: 'voltageRegulatorList',
 	},
 	ServiceStation: {
