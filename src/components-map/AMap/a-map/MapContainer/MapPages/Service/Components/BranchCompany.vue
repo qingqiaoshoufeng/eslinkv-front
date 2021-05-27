@@ -65,7 +65,6 @@ export default {
 			mouseIn: true,
 		}
 	},
-	mounted() {},
 	methods: {
 		mouseover(marker) {
 			this.mouseIn = true
@@ -79,7 +78,6 @@ export default {
 				this.overlayType,
 			)
 		},
-		mouseleave() {},
 	},
 }
 </script>

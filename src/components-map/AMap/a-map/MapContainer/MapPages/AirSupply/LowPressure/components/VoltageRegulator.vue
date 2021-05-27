@@ -252,7 +252,7 @@ export default class VoltageRegulator extends Vue {
 		margin-bottom: 10px;
 	}
 	.chart {
-		width: 600px;
+		width: 660px;
 		height: 200px;
 	}
 }

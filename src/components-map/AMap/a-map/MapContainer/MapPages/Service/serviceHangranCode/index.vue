@@ -122,10 +122,7 @@ export default {
 		iSwitchBox: componentPageMap.SwitchBox,
 	},
 	data() {
-		const {
-			BranchCompany,
-			ServiceStation,
-		} = SERVICE_SERVICEHANGRANCODE_LEGEND_MAP
+		const { BranchCompany } = SERVICE_SERVICEHANGRANCODE_LEGEND_MAP
 		return {
 			overlayInfoConfigMap: Object.freeze(
 				SERVICE_SERVICEHANGRANCODE_OVERLAY_MAP,

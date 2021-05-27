@@ -41,7 +41,7 @@
 				...OverlayDetailProp,
 			}"
 			ref="OverlayDetail"
-			:width="activeOverlay.type === 'VoltageRegulator' ? 640 : 400"
+			:width="activeOverlay.type === 'VoltageRegulator' ? 700 : 400"
 		>
 			<VoltageRegulator
 				:data="activeOverlay"
@@ -68,6 +68,7 @@
 				v-bind="{
 					stationList,
 					rightListActiveItemMap,
+					markerConfig: legendMap,
 				}"
 				ref="RightPanel1"
 			></RightPanel>

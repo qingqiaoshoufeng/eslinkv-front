@@ -2,7 +2,7 @@
 	<div>
 		<div class="select">
 			<div @click="isShowOption = !isShowOption" class="select-show">
-				<span>全部点位</span>
+				<span>{{ currName }}</span>
 				<Icon type="ios-arrow-down" />
 			</div>
 
@@ -13,7 +13,7 @@
 					@click="changeType(k.type)"
 					:class="{ active: type === k.type }"
 				>
-					{{ k.name }}
+					{{ k.label }}
 				</li>
 			</ul>
 		</div>
@@ -41,7 +41,7 @@
 			>
 				<div class="row">
 					<SvgIcon
-						:icon-name="iconList[item.type]"
+						:icon-name="markerConfig[item.type].legendIcon"
 						class="panel-type-icon"
 					></SvgIcon>
 					<div class="content">
@@ -70,47 +70,16 @@ export default {
 		Icon,
 	},
 	data() {
-		const iconList = {
-			VoltageRegulator: 'icontiaoyaqi', // '调压器',
-			GasStation: 'icontulimenzhan', // '门站',
-			PressureRegulatingStation: 'icontulitiaoyazhan', // '调压站',
-			EmergencyAirSourceStation: 'icontuliqiyuanzhan', // '应急气源站',
-			ServiceStation: 'icontulizonghefuwuzhan1', // '综合服务站',
-			PipeManageMentStation: 'icontuliguanwangyunhangguanlizhan', // '管网运行管理站',
-			UndergroundRepairStation: 'icontulidixiaqiangxiudian', // '地下抢修点',
-			OngroundRepairStation: 'icontulidishangqiangxiudian', // '地上抢修点',
-			LNGStation: 'icontulilNG', // 'LNG站',
-			LiquefiedGasStation: 'icontuliyehuaqi', // '液化气站',
-			NaturalGasStation: 'icontulijiaqizhan', // '加气站',
-			DistributedEnergyResource: 'icontulinengyuanzhan', // '分布式能源',
-		}
-
 		return {
 			list: [],
-			iconList,
 			searchName: '',
 			isShowOption: false,
 			type: '',
+			currName: '全部点位',
 			points: [
 				{
-					name: '全部点位',
+					label: '全部点位',
 					type: '',
-				},
-				{
-					name: '绿色能源综合服务站',
-					type: 'GreenEnergyStation',
-				},
-				{
-					name: '管网运行管理站',
-					type: 'PipeManageMentStation',
-				},
-				{
-					name: '调压站',
-					type: 'PressureRegulatingStation',
-				},
-				{
-					name: '调压器',
-					type: 'PressureRegulatingStation',
 				},
 			],
 		}
@@ -128,6 +97,7 @@ export default {
 				return []
 			},
 		},
+		markerConfig: Object,
 	},
 	computed: {
 		showStationList() {
@@ -156,6 +126,14 @@ export default {
 				'StationList',
 			)
 		},
+	},
+	created() {
+		Object.keys(this.markerConfig).forEach(key => {
+			this.points.push({
+				type: key,
+				...this.markerConfig[key],
+			})
+		})
 	},
 }
 </script>

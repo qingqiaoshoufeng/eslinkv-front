@@ -1,9 +1,7 @@
 <template lang="pug">
 div
-	.pos-a.h-right-bg1(
-		v-if="showMapPage === 'AirSupplyHighPressure' || showMapPage === 'AirSupplyLowPressure' || showMapPage === 'AirSupplyUCAN' || showMapPage === 'AirSupplyLNG' || showMapPage === 'ServiceCustomer' || showMapPage === 'serviceICcustomer'")
-	.pos-a.h-left-bg2(
-		v-if="showMapPage === 'ServiceNineteen' || showMapPage === 'ServiceHangranCode'")
+	.pos-a.h-right-bg1(v-if="showRightBg")
+	.pos-a.h-left-bg2(v-if="showLeftBg")
 </template>
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator'
@@ -11,6 +9,24 @@ import { Component, Vue, Prop } from 'vue-property-decorator'
 @Component
 export default class MapBg extends Vue {
 	@Prop() showMapPage
+
+	get showRightBg() {
+		return [
+			'AirSupplyHighPressure',
+			'AirSupplyLowPressure',
+			'AirSupplyUCAN',
+			'AirSupplyLNG',
+			'ServiceCustomer',
+			'serviceICcustomer',
+			'ServiceMarket',
+		].includes(this.showMapPage)
+	}
+
+	get showLeftBg() {
+		return ['ServiceNineteen', 'ServiceHangranCode'].includes(
+			this.showMapPage,
+		)
+	}
 }
 </script>
 <style lang="scss" scoped>

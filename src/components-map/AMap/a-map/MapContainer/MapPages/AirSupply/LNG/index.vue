@@ -49,6 +49,7 @@
 				@overlay-click="handleListClick"
 				v-bind="{
 					stationList,
+					markerConfig: legendMap,
 				}"
 				ref="RightPanel"
 			></RightPanel>
