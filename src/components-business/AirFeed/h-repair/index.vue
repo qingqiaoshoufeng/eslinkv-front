@@ -66,7 +66,7 @@ export default {
 	}
 
 	.chart {
-		width: 140px;
+		width: 100%;
 		height: 42px;
 		margin: 0 auto;
 	}
