@@ -32,6 +32,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	VoltageRegulator: {
 		label: '调压器',
 		legendIcon: 'icontiaoyaqi',
+		overlayWarmIcon: 'icontiaoyaqiyichang',
 		component: 'MapMarkerIcon',
 		iconSize: 38,
 		visible: false,
@@ -45,7 +46,6 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		component: 'ServiceStation',
 		visible: true,
 		dataProp: 'serviceStationList',
-		// detailList: [OperationToday, OperationWeek, CouplingNumber, CouplingPercent, NewCouplingNumber]
 	},
 	PipeManageMentStation: {
 		label: '管网运行管理站',

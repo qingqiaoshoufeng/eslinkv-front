@@ -25,7 +25,6 @@ export default class PressureRegulating extends Vue {
 	handleClick(item) {
 		this.$emit('change', {
 			...item,
-			id: item.name,
 			overlayType: 'VoltageRegulator'
 		})
 	}

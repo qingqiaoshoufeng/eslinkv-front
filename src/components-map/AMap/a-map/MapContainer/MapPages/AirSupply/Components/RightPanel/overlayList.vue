@@ -104,7 +104,8 @@ export default {
 				res = res.filter(item => item.type === this.type)
 			}
 			if (this.searchName) {
-				res = res.filter(item => item.name.includes(this.searchName))
+				res = res.filter(item =>
+					item.name.includes(this.searchName) || (item.address || '').includes(this.searchName))
 			}
 			return res
 		},

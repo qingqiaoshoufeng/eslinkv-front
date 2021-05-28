@@ -32,7 +32,7 @@
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
-			:width="width || 400"
+			:width="width"
 		>
 			<slot></slot>
 		</OverlayDetail>
@@ -70,7 +70,10 @@ export default {
 				return {}
 			},
 		},
-		width: Number
+		width: {
+			type: Number,
+			default: 400
+		},
 	},
 	data() {
 		return {
