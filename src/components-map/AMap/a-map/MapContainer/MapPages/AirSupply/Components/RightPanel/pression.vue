@@ -1,5 +1,5 @@
 <template lang="pug">
-	ul.pression
+	ul.VoltageRegulator
 		NoData(:show="!list.length")
 		li(v-for="(k, i) in list" :key="i" v-if="list.length" @click="handleClick(k)")
 			img(src="./img/press.svg")
@@ -25,7 +25,8 @@ export default class PressureRegulating extends Vue {
 	handleClick(item) {
 		this.$emit('change', {
 			...item,
-			overlayType: 'pression'
+			id: item.name,
+			overlayType: 'VoltageRegulator'
 		})
 	}
 
@@ -36,7 +37,7 @@ export default class PressureRegulating extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-.pression {
+.VoltageRegulator {
 	position: relative;
 	height: 800px;
 	font-size: 20px;

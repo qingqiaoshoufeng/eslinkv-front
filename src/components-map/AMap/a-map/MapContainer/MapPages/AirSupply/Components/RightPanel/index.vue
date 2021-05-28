@@ -22,9 +22,9 @@
 			)
 			pression(
 				v-show="tab === 2"
-				:activeItem="rightListActiveItemMap['pression'] || {}"
+				:activeItem="rightListActiveItemMap['VoltageRegulator'] || {}"
 				@change="handleClick"
-				ref="pression"
+				ref="VoltageRegulator"
 			)
 			overlayList(
 				v-show="tab === 3"

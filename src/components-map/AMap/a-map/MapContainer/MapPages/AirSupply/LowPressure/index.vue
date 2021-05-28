@@ -6,8 +6,14 @@
 			:data="activeWarnData"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
+			:width="activeWarnData.overlayType === 'VoltageRegulator' ? 700 : 400"
 			ref="WarnEvent"
-		></WarnEvent>
+		>
+			<VoltageRegulator
+				:data="activeWarnData"
+				v-if="activeWarnData.overlayType === 'VoltageRegulator'">
+			</VoltageRegulator>
+		</WarnEvent>
 		<!-- 特殊 中低压管网需要legend控制显隐 -->
 		<AMapTile
 			ref="mapTile"

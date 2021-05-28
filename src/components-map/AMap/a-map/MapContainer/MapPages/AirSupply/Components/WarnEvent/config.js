@@ -1,6 +1,6 @@
 // hover覆盖物详情
 export const WARNING_OVERLAY_MAP = {
-	pression: {
+	VoltageRegulator: {
 		fields: {
 			name: {
 				style: {
