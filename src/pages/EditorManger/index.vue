@@ -78,12 +78,19 @@ export default class EditManger extends Vue {
 	}
 
 	async init({ pageSize, pageNum }) {
-		const res = await this.$api.screen.list({
+		const data = {
 			pageSize,
 			pageNum,
 			screenType: 'CUSTOM',
 			...this.query,
-		})
+		}
+		const result = {}
+		for (const key in data) {
+			if (data[key]) {
+				result[key] = data[key]
+			}
+		}
+		const res = await this.$api.screen.list(result)
 		this.loaded = true
 		this.list = res.list
 		this.total = res.count

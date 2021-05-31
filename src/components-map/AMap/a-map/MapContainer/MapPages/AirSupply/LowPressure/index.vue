@@ -6,8 +6,16 @@
 			:data="activeWarnData"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
+			:width="
+				activeWarnData.overlayType === 'VoltageRegulator' ? 700 : 400
+			"
 			ref="WarnEvent"
-		></WarnEvent>
+		>
+			<VoltageRegulator
+				:data="activeWarnData"
+				v-if="activeWarnData.overlayType === 'VoltageRegulator'"
+			></VoltageRegulator>
+		</WarnEvent>
 		<!-- 特殊 中低压管网需要legend控制显隐 -->
 		<AMapTile
 			ref="mapTile"
@@ -23,11 +31,11 @@
 				:ref="legend"
 				:is="config.component"
 				:visible="config.visible"
-				:overlayIcon="config.icon || config.legendIcon"
+				:overlayIcon="config.legendIcon"
+				:overlayWarmIcon="config.overlayWarmIcon"
 				:overlayType="config.component"
 				:iconSize="config.iconSize"
 				:showOverlayName="config.showOverlayName"
-				:detailList="config.detailList"
 				:data="stationDataMap[config.dataProp]"
 				@overlay-click="handleOverlayClick"
 				@close="closeOverlayDetail('', false)"

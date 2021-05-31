@@ -32,8 +32,10 @@
 			:before-close="closeOverlayDetail"
 			@view-detail="viewOverlayDetail"
 			ref="OverlayDetail"
-			:width="400"
-		></OverlayDetail>
+			:width="width"
+		>
+			<slot></slot>
+		</OverlayDetail>
 		<!-- 路线规划 -->
 		<RoutePlan
 			:data="data"
@@ -68,6 +70,10 @@ export default {
 				return {}
 			},
 		},
+		width: {
+			type: Number,
+			default: 400,
+		},
 	},
 	data() {
 		return {
@@ -92,7 +98,7 @@ export default {
 				const { overlayType, status } = val
 				const { overlayInfoConfigMap } = this
 				const iconMap = {
-					pression: 'icontiaoyaqi',
+					VoltageRegulator: 'icontiaoyaqi',
 					WARNEVENT: 'iconshijian1',
 					WarningList: 'icongongyiyichang',
 				}

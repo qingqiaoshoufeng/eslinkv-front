@@ -4,7 +4,7 @@
 			v-for="(item, index) in list"
 			:key="overlayType + index"
 			:marker="{
-				icon: overlayIcon,
+				icon: false ? overlayWarmIcon : overlayIcon, // todo
 				...item,
 				iconSize,
 			}"
@@ -65,6 +65,7 @@ export default {
 		},
 		overlayIcon: String,
 		overlayType: String,
+		overlayWarmIcon: String,
 		showOverlayName: {
 			type: Boolean,
 			default: true,
