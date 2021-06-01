@@ -3614,35 +3614,6 @@ module.exports = Object.create || function create(O, Properties) {
 
 /***/ }),
 
-/***/ "7db0":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var $ = __webpack_require__("23e7");
-var $find = __webpack_require__("b727").find;
-var addToUnscopables = __webpack_require__("44d2");
-
-var FIND = 'find';
-var SKIPS_HOLES = true;
-
-// Shouldn't skip holes
-if (FIND in []) Array(1)[FIND](function () { SKIPS_HOLES = false; });
-
-// `Array.prototype.find` method
-// https://tc39.es/ecma262/#sec-array.prototype.find
-$({ target: 'Array', proto: true, forced: SKIPS_HOLES }, {
-  find: function find(callbackfn /* , that = undefined */) {
-    return $find(this, callbackfn, arguments.length > 1 ? arguments[1] : undefined);
-  }
-});
-
-// https://tc39.es/ecma262/#sec-array.prototype-@@unscopables
-addToUnscopables(FIND);
-
-
-/***/ }),
-
 /***/ "7dd0":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7615,6 +7586,21 @@ function _objectSpread2(target) {
 
   return target;
 }
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.symbol.description.js
 var es_symbol_description = __webpack_require__("e01a");
 
@@ -7633,25 +7619,27 @@ var es_array_iterator = __webpack_require__("e260");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom-collections.iterator.js
 var web_dom_collections_iterator = __webpack_require__("ddb0");
 
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.from.js
+var es_array_from = __webpack_require__("a630");
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/iterableToArray.js
+
+
+
+
+
+
+
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+}
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.slice.js
 var es_array_slice = __webpack_require__("fb6a");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.function.name.js
 var es_function_name = __webpack_require__("b0c0");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.from.js
-var es_array_from = __webpack_require__("a630");
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayLikeToArray.js
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-
-  return arr2;
-}
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/unsupportedIterableToArray.js
 
 
@@ -7666,88 +7654,6 @@ function _unsupportedIterableToArray(o, minLen) {
   if (n === "Object" && o.constructor) n = o.constructor.name;
   if (n === "Map" || n === "Set") return Array.from(o);
   if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/createForOfIteratorHelper.js
-
-
-
-
-
-
-
-
-function _createForOfIteratorHelper(o, allowArrayLike) {
-  var it;
-
-  if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) {
-    if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
-      if (it) o = it;
-      var i = 0;
-
-      var F = function F() {};
-
-      return {
-        s: F,
-        n: function n() {
-          if (i >= o.length) return {
-            done: true
-          };
-          return {
-            done: false,
-            value: o[i++]
-          };
-        },
-        e: function e(_e) {
-          throw _e;
-        },
-        f: F
-      };
-    }
-
-    throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-  }
-
-  var normalCompletion = true,
-      didErr = false,
-      err;
-  return {
-    s: function s() {
-      it = o[Symbol.iterator]();
-    },
-    n: function n() {
-      var step = it.next();
-      normalCompletion = step.done;
-      return step;
-    },
-    e: function e(_e2) {
-      didErr = true;
-      err = _e2;
-    },
-    f: function f() {
-      try {
-        if (!normalCompletion && it["return"] != null) it["return"]();
-      } finally {
-        if (didErr) throw err;
-      }
-    }
-  };
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/arrayWithoutHoles.js
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/iterableToArray.js
-
-
-
-
-
-
-
-
-function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
 }
 // CONCATENATED MODULE: ./node_modules/@babel/runtime/helpers/esm/nonIterableSpread.js
 function _nonIterableSpread() {
@@ -8443,9 +8349,6 @@ var es_string_search = __webpack_require__("841c");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.url.js
 var web_url = __webpack_require__("2b3d");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es.array.find.js
-var es_array_find = __webpack_require__("7db0");
-
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es.object.freeze.js
 var es_object_freeze = __webpack_require__("dca8");
 
@@ -8550,139 +8453,7 @@ var clipboard_default = /*#__PURE__*/__webpack_require__.n(dist_clipboard);
 var fast_copy = __webpack_require__("4353");
 var fast_copy_default = /*#__PURE__*/__webpack_require__.n(fast_copy);
 
-// CONCATENATED MODULE: ./src/store/index.js
-var store = function store(name, _state, _actions) {
-  var state, actions;
-
-  if (window !== undefined) {
-    if (!window.eslinkV) {
-      window.eslinkV = {};
-    }
-
-    if (!window.eslinkV.$store) {
-      window.eslinkV.$store = {};
-    }
-
-    if (window.eslinkV.$store[name]) {
-      state = window.eslinkV.$store[name].state;
-      actions = window.eslinkV.$store[name].actions;
-    } else {
-      state = _state;
-      actions = _actions;
-      window.eslinkV.$store[name] = {
-        state: state,
-        actions: actions
-      };
-    }
-  }
-
-  return {
-    state: state,
-    actions: actions
-  };
-};
-// CONCATENATED MODULE: ./src/store/platform.store.js
-
-
-
-/**
- * @description 平台信息
- */
-
-
-var isMac = /macintosh|mac os x/i.test(navigator.userAgent);
-var state = external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.observable({
-  version: '1.1.0',
-  screenVersion: 0,
-  widgetAdded: {},
-  screenAvatar: '',
-  screenType: 'CUSTOM',
-  // CUSTOM 普通大屏 TEMPLATE 模版大屏
-  screenId: null,
-  screenName: '未命名',
-  chooseWidgetCustomConfig: [],
-  // 选中项的自定义配置
-  chooseWidgetId: null,
-  // 选中项id
-  chooseWidgetChildId: null,
-  // 选中的分组内的组件id
-  chooseWidgetArray: [],
-  // 选中项ids
-  chooseWidgetArrayConfig: {
-    left: 0,
-    top: 0,
-    width: 0,
-    height: 0,
-    z: 0
-  },
-  // 选中项配置
-  backgroundImage: '',
-  backgroundColor: 'rgba(24, 27, 36,1)',
-  width: 1920,
-  height: 1080,
-  isMobile: false,
-  layoutMode: 'full-height',
-  mainScene: 0,
-  // 设置进入场景
-  isMac: isMac,
-  // 是否是mac
-  fullscreen: false,
-  // 全屏
-  searchModal: false,
-  autoAlignGuide: true // 自动贴靠参考线
-
-});
-var actions = {
-  initPlatformConfig: function initPlatformConfig() {
-    state.screenName = '未命名';
-    state.screenAvatar = '';
-    state.widgetAdded = {};
-  },
-  unChooseWidget: function unChooseWidget() {
-    state.chooseWidgetId = null;
-    state.chooseWidgetChildId = null;
-    state.chooseWidgetArray = [];
-    document.getElementById('right-menu').classList.remove('active');
-  },
-  chooseWidget: function chooseWidget(id) {
-    state.chooseWidgetId = id;
-  },
-  setChooseWidgetCustomConfig: function setChooseWidgetCustomConfig() {
-    var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-    state.chooseWidgetCustomConfig = [].concat(_toConsumableArray(value), [{
-      type: 'custom'
-    }]);
-  },
-  updateApiData: function updateApiData(id, data) {
-    if (!state.widgetAdded[id].config.api) {
-      external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.set(state.widgetAdded[id].config, 'api', {});
-    }
-
-    external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.set(state.widgetAdded[id].config.api, 'data', JSON.stringify(data));
-  },
-  updateConfig: function updateConfig(id, config) {
-    if (state.widgetAdded[id]) external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.set(state.widgetAdded[id], 'config', config);
-  },
-  setWidgetsAdded: function setWidgetsAdded(value) {
-    state.widgetAdded = value;
-  },
-  setWidgetsAddedItem: function setWidgetsAddedItem(id, type, config, scene) {
-    var market = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-    external_root_Vue_commonjs_vue_commonjs2_vue_amd_vue_default.a.set(state.widgetAdded, id, {
-      id: id,
-      type: type,
-      config: config,
-      scene: scene,
-      market: market
-    });
-  }
-};
-var platform = store('platform', state, actions);
-/* harmony default export */ var platform_store = (platform);
 // CONCATENATED MODULE: ./src/utils/index.js
-
-
-
 
 
 
@@ -9101,55 +8872,6 @@ function copyText(text, success, error) {
     document.body.removeChild(oCopyBtn);
   });
   oCopyBtn.click();
-}
-/**
- * @description 当前选中组件
- */
-
-function chooseWidget() {
-  if (!platform_store.state.chooseWidgetId) return null;
-  var widget = platform_store.state.widgetAdded[platform_store.state.chooseWidgetId];
-
-  if (widget.children && platform_store.state.chooseWidgetChildId) {
-    return searchWidget(widget, platform_store.state.chooseWidgetChildId);
-  }
-
-  return widget;
-}
-/**
- * @description 查找对应id的组建
- */
-
-function searchWidget(widget, id) {
-  var res;
-
-  if (widget.children && id) {
-    res = widget.children.find(function (v) {
-      return v.id === id;
-    });
-  }
-
-  if (!res) {
-    var _iterator = _createForOfIteratorHelper(widget.children),
-        _step;
-
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var v = _step.value;
-
-        if (v.children) {
-          res = searchWidget(v, id);
-          if (res) break;
-        }
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-  }
-
-  return res;
 }
 // CONCATENATED MODULE: ./packages/prod-c.js
 

@@ -4,28 +4,30 @@
 		.h-title-6-icon
 		h2.pos-r.pointer(
 			v-for="item in data ? data : []",
-			:class="{ active: scene.index === item.sceneId }",
+			:class="{ active: screen.sceneIndex === item.sceneId }",
 			@click="handleClick(item.sceneId)") {{ item.title }}
 </template>
 <script lang="ts">
 const { widgetMixin } = eslinkV
-const { scene } = eslinkV.$store
 import { Component } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import { value } from './index.component'
 
 @Component
 class HTitle6 extends mixins(widgetMixin) {
-	scene = scene.state
-
+	screen = {}
 	handleClick(index) {
 		if (index) {
-			scene.actions.setSceneIndex(index)
+			this.screen.setSceneIndex(index)
 		}
 	}
 
 	created() {
 		this.configValue = this.parseConfigValue(value)
+	}
+
+	mounted() {
+		this.screen = this.$screen
 	}
 }
 

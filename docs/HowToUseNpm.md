@@ -49,10 +49,7 @@ export default class editor extends Vue {
 ## STORE
 
 ```javascript
-import { platform, scene, instance, custom, event } from 'eslinkv-sdk'
-
-// platform
-// 大屏配置信息
+import { scene, instance, custom, event } from 'eslinkv-sdk'
 
 // scene
 // 场景配置信息

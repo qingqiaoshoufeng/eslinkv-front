@@ -50,6 +50,8 @@ export default class ItemCard extends Vue {
 	@Prop(String) screenPublish: string
 	@Prop(String) screenName: string
 	@Prop(String) createTime: string
+	@Prop(String) screenMainScene: string
+	@Prop(String) screenLayoutMode: string
 	@Prop(Object) screenConfig: any
 
 	shareModal = false
@@ -67,11 +69,14 @@ export default class ItemCard extends Vue {
 	}
 
 	handleLink() {
-		const scene = this.screenConfig.mainScene
-			? `&scene=${this.screenConfig.mainScene}`
+		const scene = this.screenMainScene
+			? `&scene=${this.screenMainScene}`
+			: ''
+		const layoutMode = this.screenLayoutMode
+			? `?layoutMode=${this.screenLayoutMode}`
 			: ''
 		window.open(
-			`${location.origin}/detail/${this.screenId}?layoutMode=${this.screenConfig.layoutMode}${scene}`,
+			`${location.origin}/detail/${this.screenId}${layoutMode}${scene}`,
 		)
 	}
 

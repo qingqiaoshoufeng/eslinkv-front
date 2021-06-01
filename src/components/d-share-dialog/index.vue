@@ -45,7 +45,6 @@ import { Component, Prop, Watch } from 'vue-property-decorator'
 import { Modal, Button, Input, Switch } from 'view-design'
 import shareMx from './share.mx'
 import { mixins } from 'vue-class-component'
-const { platform } = eslinkV.$store
 
 @Component({
 	components: {
@@ -79,7 +78,6 @@ export default class DShareDialog extends mixins(shareMx) {
 	screenId = ''
 	modalShow = false
 	isInit = true
-	platform = platform.state
 
 	@Watch('value')
 	onValueChange(val) {

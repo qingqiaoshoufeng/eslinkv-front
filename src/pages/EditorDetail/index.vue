@@ -2,9 +2,11 @@
 .detail-container
 	.preview-wrapper.fit-mode(
 		ref="kanboardWrapper",
-		:class="{ mobile: isMobile }",
-		:style="{ backgroundColor: platform.backgroundColor, backgroundImage: `url(${platform.backgroundImage})` }")
-		.mobile-wrap(:style="{ height: mobileWrapHeight + 'px' }", v-if="isMobile")
+		:class="{ mobile: screen.isMobile }",
+		:style="{ backgroundColor: screen.backgroundColor }")
+		.mobile-wrap(
+			:style="{ height: mobileWrapHeight + 'px' }",
+			v-if="screen.isMobile")
 			d-view(@mounted="updateSize", ref="previewContainer", :style="viewStyle")
 		d-view(
 			@mounted="updateSize",
@@ -15,10 +17,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-const { dView } = eslinkV
-const { platform } = eslinkV.$store
+const { dView, dDetail } = eslinkV
 import { getQueryString } from '../../utils'
-import dDetail from '../../components/d-detail/index.vue'
 @Component({
 	components: {
 		dView,
@@ -26,13 +26,11 @@ import dDetail from '../../components/d-detail/index.vue'
 	},
 })
 export default class detail extends Vue {
-	platform = platform.state
-	isMobile = /android|iphone/i.test(navigator.userAgent)
 	mobileWrapHeight = 0
 	scaleY = 1
 	scaleX = 0
 	actualScaleRatio = 1
-
+	screen = {}
 	get viewStyle() {
 		let scale
 		if (getQueryString('layoutMode') === 'full-size') {
@@ -66,6 +64,9 @@ export default class detail extends Vue {
 					: Math.min(clientWidth / w, clientHeight / h)
 		}
 		this.mobileWrapHeight = h * this.actualScaleRatio
+	}
+	mounted() {
+		this.screen = this.$screen
 	}
 }
 </script>

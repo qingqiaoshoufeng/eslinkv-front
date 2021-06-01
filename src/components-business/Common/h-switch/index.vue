@@ -4,7 +4,7 @@
 			<li
 				class="pos-r pointer fn-flex"
 				v-for="item in data ? data.value : []"
-				:class="{ active: item.indexOf(scene.index) !== -1 }"
+				:class="{ active: item.indexOf(screen.sceneIndex) !== -1 }"
 				@click="changeScene(item[0])"
 			></li>
 		</ul>
@@ -12,23 +12,25 @@
 </template>
 <script>
 const { widgetMixin } = eslinkV
-const { scene } = eslinkV.$store
 import { value } from './index.component'
 
 export default {
 	data() {
 		return {
-			scene: scene.state,
+			screen: {},
 		}
 	},
 	mixins: [widgetMixin],
 	methods: {
 		changeScene(index) {
-			scene.actions.setSceneIndex(index)
+			this.screen.setSceneIndex(index)
 		},
 	},
 	created() {
 		this.configValue = this.parseConfigValue(value)
+	},
+	mounted() {
+		this.screen = this.$screen
 	},
 }
 </script>

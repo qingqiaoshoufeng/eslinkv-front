@@ -2,7 +2,7 @@
 .detail-container
 	.preview-wrapper.fit-mode(
 		ref="kanboardWrapper",
-		:style="{ backgroundColor: platform.backgroundColor, backgroundImage: `url(${platform.backgroundImage})` }")
+		:style="{ backgroundColor: screen.backgroundColor }")
 		d-view(
 			@mounted="updateSize",
 			ref="previewContainer",
@@ -11,10 +11,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-const { dView } = eslinkV
-const { platform } = eslinkV.$store
+const { dView, dDetail } = eslinkV
 import { getQueryString } from '../../utils'
-import dDetail from '../../components/d-detail/index.vue'
 @Component({
 	components: {
 		dView,
@@ -22,11 +20,10 @@ import dDetail from '../../components/d-detail/index.vue'
 	},
 })
 export default class full extends Vue {
-	platform = platform.state
 	scaleY = 1
 	scaleX = 0
 	actualScaleRatio = 1
-
+	screen = {}
 	updateSize(val) {
 		const w = val.width.replace(/(.*)px/, '$1')
 		const h = val.height.replace(/(.*)px/, '$1')
@@ -44,6 +41,7 @@ export default class full extends Vue {
 		if (getQueryString('scaleX') && !isNaN(getQueryString('scaleX'))) {
 			this.scaleX = Number(getQueryString('scaleX'))
 		}
+		this.screen = this.$screen
 	}
 }
 </script>

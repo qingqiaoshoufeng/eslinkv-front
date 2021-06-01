@@ -5,7 +5,7 @@
 				class="pos-r pointer fn-flex"
 				v-for="item in data ? data.value : []"
 				:class="{
-					active: item.index.indexOf(scene.index) !== -1,
+					active: item.index.indexOf(screen.sceneIndex) !== -1,
 					disabled: data.disabled
 						? data.disabled.indexOf(item.title) !== -1
 						: false,
@@ -19,13 +19,12 @@
 </template>
 <script>
 const { widgetMixin } = eslinkV
-const { scene } = eslinkV.$store
 import { value } from './index.component'
 
 export default {
 	data() {
 		return {
-			scene: scene.state,
+			screen: {},
 		}
 	},
 	mixins: [widgetMixin],
@@ -35,15 +34,18 @@ export default {
 				if (this.data.disabled.indexOf(title) !== -1) {
 					return false
 				} else {
-					scene.actions.setSceneIndex(index)
+					this.screen.setSceneIndex(index)
 				}
 			} else {
-				scene.actions.setSceneIndex(index)
+				this.screen.setSceneIndex(index)
 			}
 		},
 	},
 	created() {
 		this.configValue = this.parseConfigValue(value)
+	},
+	mounted() {
+		this.screen = this.$screen
 	},
 }
 </script>

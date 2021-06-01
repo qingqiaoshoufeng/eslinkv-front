@@ -6,6 +6,7 @@ export default {
 		return {
 			platform: platform.state,
 			scene: scene.state,
+			screen: {},
 		}
 	},
 	methods: {
@@ -96,6 +97,7 @@ export default {
 		const templateId = this.$route.query.templateId
 		const id = this.$route.params.id || templateId
 		const file = this.$route.params.file
+		this.screen = this.$screen
 		if (id) {
 			this.$api.screen.detail({ screenId: id }).then(res => {
 				this.screenType = res.screenType
@@ -116,7 +118,7 @@ export default {
 		 * @description 默认场景
 		 */
 		if (getQueryString('scene')) {
-			scene.actions.setSceneIndex(getQueryString('scene'))
+			this.screen.setSceneIndex(getQueryString('scene'))
 		}
 	},
 }

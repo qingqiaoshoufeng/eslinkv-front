@@ -49,7 +49,7 @@
 				@overlay-click="handleListClick"
 				v-bind="{
 					stationList,
-					markerConfig: legendMap
+					markerConfig: legendMap,
 				}"
 				ref="RightPanel"
 			></RightPanel>
@@ -58,9 +58,7 @@
 </template>
 <script>
 // 页面覆盖物组件
-import {
-	WarnEvent,
-} from '../Components/index.js'
+import { WarnEvent } from '../Components/index.js'
 import RightPanel from './components/RightPanel'
 import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon'
 // 页面所需公共组件
@@ -83,7 +81,6 @@ import {
 	AIRSUPPLY_LNG_OVERLAY_MAP,
 	AIRSUPPLY_LNG_LEGEND_MAP,
 } from './config.js'
-const { scene } = eslinkV.$store
 
 export default {
 	name: 'LNG',
@@ -135,6 +132,7 @@ export default {
 	mounted() {
 		this.getAllTypeStationList()
 		this.getDataStatisticsInfo()
+		this.screen = this.$screen
 	},
 	data() {
 		return {
@@ -154,6 +152,7 @@ export default {
 			},
 			stationDataMap: {},
 			stationList: [],
+			screen: {},
 		}
 	},
 	methods: {
@@ -167,7 +166,7 @@ export default {
 		// 获取所有站点数据
 		async getAllTypeStationList() {
 			const params = {
-				types: Object.keys(AIRSUPPLY_LNG_LEGEND_MAP).toString()
+				types: Object.keys(AIRSUPPLY_LNG_LEGEND_MAP).toString(),
 			}
 			const res = await this.$api.map.airSupply.getLngMapDataResult(
 				params,
@@ -198,7 +197,7 @@ export default {
 		closeOverlayDetail(done) {
 			const { overlayType } = this.activeOverlay
 			if (overlayType === 'WARNEVENT') {
-				scene.actions.setSceneIndex(INDEXSCENEMAP.AirSupplyLNG)
+				this.screen.setSceneIndex(INDEXSCENEMAP.AirSupplyLNG)
 				this.showRoutePlan = false
 			}
 			this.showOverlayDetail = false

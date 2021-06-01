@@ -46,6 +46,8 @@ const errorHandler = (err, vm) => {
 }
 
 Vue.config.errorHandler = errorHandler
+Vue.prototype.$ruler = {}
+Vue.prototype.$screen = {}
 Vue.prototype.$format = format
 Vue.prototype.$Message = Message
 Vue.prototype.$Modal = Modal

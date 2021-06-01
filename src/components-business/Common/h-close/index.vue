@@ -4,10 +4,14 @@
 </template>
 <script>
 const { widgetMixin } = eslinkV
-const { scene } = eslinkV.$store
 import { value } from './index.component'
 
 export default {
+	data() {
+		return {
+			screen: {},
+		}
+	},
 	mixins: [widgetMixin],
 	created() {
 		this.configValue = this.parseConfigValue(value)
@@ -15,8 +19,11 @@ export default {
 	methods: {
 		back() {
 			if (!this.data.sceneId) return
-			scene.actions.setSceneIndex(this.data.sceneId)
+			this.screen.setSceneIndex(this.data.sceneId)
 		},
+	},
+	mounted() {
+		this.screen = this.$screen
 	},
 }
 </script>
