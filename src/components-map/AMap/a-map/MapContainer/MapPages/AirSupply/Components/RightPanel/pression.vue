@@ -9,7 +9,7 @@
 					.time {{ k.time }}
 				.main-2
 					.address {{ k.address }}
-					.status
+					.status(:class="{ normal: !k.alarming }")
 						.color
 						span {{ k.status }}
 </template>
@@ -91,6 +91,12 @@ export default class PressureRegulating extends Vue {
 					border-radius: 50%;
 					background: #ffdc45;
 					margin-right: 8px;
+				}
+				&.normal {
+					color: #fff;
+					.color {
+						background: #fff;
+					}
 				}
 			}
 		}

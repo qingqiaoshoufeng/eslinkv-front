@@ -45,7 +45,8 @@
 						class="panel-type-icon"
 					></SvgIcon>
 					<div class="content">
-						{{ item.name }}
+						<p>{{ item.name }}</p>
+						<p class="address">{{ item.address }}</p>
 					</div>
 				</div>
 				<div class="row">
@@ -255,7 +256,7 @@ export default {
 
 		.row {
 			display: flex;
-			align-items: center;
+			align-items: baseline;
 
 			.status-err {
 				color: #ffdc45;
@@ -266,11 +267,13 @@ export default {
 			}
 
 			.content {
-				display: flex;
 				flex: 1;
-				align-items: center;
 				margin-left: 12px;
 				font-size: 24px;
+				.address {
+					font-size: 18px;
+					margin-top: 5px;
+				}
 			}
 
 			.station-name {
