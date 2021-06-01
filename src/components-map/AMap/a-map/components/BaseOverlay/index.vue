@@ -4,7 +4,7 @@
 			v-for="(item, index) in list"
 			:key="overlayType + index"
 			:marker="{
-				icon: false ? overlayWarmIcon : overlayIcon, // todo
+				icon: item.alarming ? overlayWarmIcon : overlayIcon,
 				...item,
 				iconSize,
 			}"
