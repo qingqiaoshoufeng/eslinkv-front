@@ -1,6 +1,7 @@
 import request, { headers } from './request'
 
-const { custom } = eslinkV.$store
+const Editor = eslinkV.Editor
+const editor = Editor.Instance()
 
 export function create(data) {
 	return request({
@@ -51,7 +52,9 @@ export async function market() {
 	const level0 = await level()
 	const widgetsObject = {}
 	for (const item of level0) {
-		const array = await level({ componentTypeParentId: item.componentTypeId })
+		const array = await level({
+			componentTypeParentId: item.componentTypeId,
+		})
 		if (array.length > 0) {
 			widgetsObject[item.componentTypeId] = {
 				...item,
@@ -65,6 +68,6 @@ export async function market() {
 				market: true,
 			})
 		})
-		custom.actions.setCustomWidgets(widgetsObject)
+		editor.setCustomWidgets(widgetsObject)
 	}
 }

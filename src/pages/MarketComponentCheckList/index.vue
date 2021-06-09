@@ -22,8 +22,7 @@ e-layout
 import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button } from 'view-design'
 import dialogCheck from './dialogCheckComponent.vue'
-const { commonConfigValue, configMerge } = eslinkV
-const { platform } = eslinkV.$store
+const { commonConfigValue, configMerge, Editor } = eslinkV
 import common from '../../store/common.store.js'
 
 @Component({
@@ -34,6 +33,7 @@ import common from '../../store/common.store.js'
 	},
 })
 export default class Market extends Vue {
+	editor = Editor.Instance()
 	list = []
 	columns = [
 		{
@@ -104,7 +104,7 @@ export default class Market extends Vue {
 		const id = +new Date()
 		const value = this.selectOne.componentConfig
 		const config = configMerge(value, commonConfigValue())
-		platform.state.widgetAdded = {
+		editor.screen.screenWidgets = {
 			[id]: {
 				id,
 				type: this.selectOne.componentEnTitle,

@@ -6,11 +6,8 @@ declare module 'vue/types/vue' {
 		$agent: any
 		$route: Route
 		$router: VueRouter
-		$screen: any
-		$ruler: any
 
 		emitComponentUpdate: any
-		kanboardEditor: any
 		configSource: any
 		configValue: any
 		parseConfigSource: any

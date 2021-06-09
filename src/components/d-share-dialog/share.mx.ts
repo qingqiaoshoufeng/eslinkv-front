@@ -1,5 +1,4 @@
 import { copyText } from '../../utils/index'
-const { platform, ruler } = eslinkV.$store
 
 function fixZero(n) {
 	if (n > 9) {
@@ -22,8 +21,6 @@ function formatTime(time) {
 export default {
 	data() {
 		return {
-			platform: platform.state,
-			ruler: ruler.state,
 			deadline: '',
 			shareModal: false,
 			shareType: 'NO',
@@ -76,7 +73,7 @@ export default {
 				this.deadline = req.screenShareTime
 			}
 			await this.$api.screenShare.screenShareUpdate(req)
-			this.shareUrl = `${location.origin}/shareScreen/${this.screenId}?layoutMode=${this.platform.layoutMode}`
+			// this.shareUrl = `${location.origin}/shareScreen/${this.screenId}?layoutMode=${this.platform.layoutMode}`
 		},
 		async init() {
 			this.screenId = this.sid || this.$route.params.id
@@ -85,7 +82,7 @@ export default {
 			})
 			this.shareType = res.screenShareType
 			this.sharePassword = res.screenSharePassword || this.sharePassword
-			this.ruler.guideLines = res.screenGuide
+			// this.ruler.guideLines = res.screenGuide
 			if (res.screenShareTime) {
 				this.shareTime = (
 					(new Date(res.screenShareTime).getTime() -

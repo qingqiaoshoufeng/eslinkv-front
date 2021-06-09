@@ -1,5 +1,5 @@
 <template lang="pug">
-.preview-wrapper(ref="kanboardWrapper")
+.preview-wrapper
 	.scene-menu
 		div(
 			v-for="(scene, sceneIndex) in sceneMap",

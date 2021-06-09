@@ -26,19 +26,19 @@ e-card
 			.list-item-card-btn-link.pointer(@click="handleLink")
 				i-icon(type="ios-link", :style="{ marginLeft: 'auto' }")
 				span 预览
-	dShareDialog(v-model="shareModal", :sid="screenId")
+	//dShareDialog(v-model="shareModal", :sid="screenId")
 </template>
 <script lang="ts">
 import { Button, Icon, Modal, Input } from 'view-design'
 import EmptyImage from '../../components/empty-image/index.vue'
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import dShareDialog from '../../components/d-share-dialog/index.vue'
+// import dShareDialog from '../../components/d-share-dialog/index.vue'
 
 @Component({
 	components: {
 		'i-button': Button,
 		'i-icon': Icon,
-		dShareDialog,
+		// dShareDialog,
 		EmptyImage,
 		'i-modal': Modal,
 		'i-input': Input,

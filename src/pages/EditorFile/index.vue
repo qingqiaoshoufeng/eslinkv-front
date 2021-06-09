@@ -1,17 +1,9 @@
 <template lang="pug">
 .detail-container
 	.preview-wrapper.fit-mode(
-		ref="kanboardWrapper",
-		:class="{ mobile: screen.isMobile }",
 		:style="{ backgroundColor: screen.backgroundColor }")
-		.mobile-wrap(
-			:style="{ height: mobileWrapHeight + 'px' }",
-			v-if="screen.isMobile")
-			d-view(@mounted="updateSize", ref="previewContainer", :style="viewStyle")
 		d-view(
 			@mounted="updateSize",
-			ref="previewContainer",
-			v-else,
 			:style="viewStyle")
 		d-detail(:show="false")
 </template>
