@@ -32,5 +32,9 @@ export default {
 			type: ['perf'],
 			content: 'class 单例改造',
 		},
+		{
+			type: ['perf'],
+			content: '分离npm包，@eslinkv/core @eslinkv/vue2',
+		},
 	],
 }

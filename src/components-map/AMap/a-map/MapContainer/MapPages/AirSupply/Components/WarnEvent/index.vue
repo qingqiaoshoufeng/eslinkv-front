@@ -143,7 +143,7 @@ export default {
 			// 更新数据
 			this.$nextTick(() => {
 				AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
-					this.editor.screen.updateComponent(i, {
+					this.editor.updateComponent(i, {
 						params: {
 							id: this.data.id,
 						},

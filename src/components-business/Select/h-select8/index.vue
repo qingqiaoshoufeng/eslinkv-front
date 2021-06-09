@@ -15,19 +15,19 @@
 		</ul>
 	</div>
 </template>
-<script>
-import { widgetMixin, Editor } from '@eslinkv/vue2'
+<script lang="ts">
+import { widgetMixin } from '@eslinkv/vue2'
+import { Editor } from '@eslinkv/core'
 import {
 	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
 	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
 } from '../../../components-map/AMap/a-map/config/scene'
 import { value } from './index.component'
 
-const editor = Editor.instance()
-
 export default {
 	data() {
 		return {
+			editor: Editor.instance(),
 			list: [],
 			showOptions: false,
 			selectLabel: '',
@@ -62,7 +62,7 @@ export default {
 				id: a.id,
 			})
 			AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach(item => {
-				editor.screen.updateComponent(item, {
+				this.editor.updateComponent(item, {
 					data: {
 						label: a.name,
 						title: a.name,
@@ -72,7 +72,7 @@ export default {
 				})
 			})
 			AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach(item => {
-				editor.screen.updateComponent(item, {
+				this.editor.updateComponent(item, {
 					params: {
 						id: a.id,
 					},

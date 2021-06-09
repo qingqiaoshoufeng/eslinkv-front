@@ -67,6 +67,6 @@ export async function market() {
 				market: true,
 			})
 		})
-		editor.setCustomWidgets(widgetsObject)
+		editor.setLocalWidgets(widgetsObject)
 	}
 }

@@ -316,7 +316,7 @@ export default {
 				this.$api.map.serve
 					.getServiceCustomerThreeSocialDetail({ id })
 					.then(res => {
-						this.editor.screen.updateComponent(i, {
+						this.editor.updateComponent(i, {
 							data: res,
 						})
 						this.editor.openScene(THREESOCIALLINKAGE_SCENEINDEX)

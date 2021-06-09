@@ -43,7 +43,7 @@ export default class Login extends Vue {
 			password: this.password,
 		})
 		common.actions.setUser(res)
-		localStorage.setItem('eslinkv-login', true)
+		localStorage.setItem('eslinkv-login', 'true')
 		this.$router.replace('/')
 	}
 }

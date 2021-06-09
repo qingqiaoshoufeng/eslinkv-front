@@ -1,13 +1,14 @@
 <template lang="pug">
 .detail-container
 	.preview-wrapper.fit-mode(
-		:style="{ backgroundColor: screen.backgroundColor }")
+		:style="{ backgroundColor: editor.backgroundColor }")
 		d-view
 		d-detail(:show="false")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-const { dView, dDetail, Editor } = eslinkV
+import { dView, dDetail } from '@eslinkv/vue2'
+import { Editor } from '@eslinkv/core'
 @Component({
 	components: {
 		dView,
