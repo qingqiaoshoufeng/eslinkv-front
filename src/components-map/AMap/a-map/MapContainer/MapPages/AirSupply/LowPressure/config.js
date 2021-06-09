@@ -31,8 +31,8 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	},
 	VoltageRegulator: {
 		label: '调压器',
-		legendIcon: 'icontiaoyaqi',
-		overlayWarmIcon: 'icontiaoyaqiyichang',
+		legendIcon: 'icontiaoyaqi1',
+		overlayWarmIcon: 'icontiaoyaqiyichang1',
 		component: 'MapMarkerIcon',
 		iconSize: 38,
 		visible: false,
