@@ -8,7 +8,8 @@
 			@click="handleClick(item.sceneId)") {{ item.title }}
 </template>
 <script lang="ts">
-import { widgetMixin, Editor } from '@eslinkv/vue2'
+import { widgetMixin } from '@eslinkv/vue2'
+import { Editor } from '@eslinkv/core'
 import { Component } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import { value } from './index.component'

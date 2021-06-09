@@ -3,7 +3,8 @@
 	img.img.pointer(src="./close.svg", @click="back")
 </template>
 <script lang="ts">
-import { widgetMixin, Editor } from '@eslinkv/vue2'
+import { widgetMixin } from '@eslinkv/vue2'
+import { Editor } from '@eslinkv/core'
 import { value } from './index.component'
 
 export default {

@@ -2,18 +2,6 @@ import copy from 'fast-copy'
 import { Message } from 'view-design'
 import Clipboard from 'clipboard'
 
-const { commonConfigValue } = eslinkV
-
-/**
- * @description 获取url参数
- */
-export function getQueryString(name) {
-	const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i')
-	const r = window.location.search.substr(1).match(reg)
-	if (r != null) return unescape(r[2])
-	return null
-}
-
 /**
  *
  * @param hex 例如:"#23ff45"
@@ -152,28 +140,6 @@ export function copyText(text, success, error) {
 		document.body.removeChild(oCopyBtn)
 	})
 	oCopyBtn.click()
-}
-
-function getAttr(o, str) {
-	const arr = str.split('.')
-	let res = o
-	arr.forEach(v => {
-		res = res[v]
-	})
-	return res
-}
-
-export function setDefault(o, str = '', defaultConfig = commonConfigValue()) {
-	for (const key in o) {
-		const prop = str ? str + '.' + key : key
-		if (Object.prototype.toString.call(o[key]) === '[object Object]') {
-			setDefault(o[key], prop, defaultConfig)
-		} else if (o[key] === 'default') {
-			const defaultValue = getAttr(defaultConfig, prop)
-			if (defaultValue === undefined) return
-			o[key] = JSON.parse(JSON.stringify(defaultValue))
-		}
-	}
 }
 
 const types = {

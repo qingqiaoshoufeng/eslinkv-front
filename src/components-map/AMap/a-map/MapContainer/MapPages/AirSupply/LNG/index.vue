@@ -56,7 +56,8 @@
 		</portal>
 	</div>
 </template>
-<script>
+<script lang="ts">
+import { Editor } from '@eslinkv/core'
 // 页面覆盖物组件
 import { WarnEvent } from '../Components/index.js'
 import RightPanel from './components/RightPanel'
@@ -132,7 +133,6 @@ export default {
 	mounted() {
 		this.getAllTypeStationList()
 		this.getDataStatisticsInfo()
-		this.screen = this.$screen
 	},
 	data() {
 		return {
@@ -152,7 +152,7 @@ export default {
 			},
 			stationDataMap: {},
 			stationList: [],
-			screen: {},
+			editor: Editor.Instance(),
 		}
 	},
 	methods: {
@@ -197,7 +197,7 @@ export default {
 		closeOverlayDetail(done) {
 			const { overlayType } = this.activeOverlay
 			if (overlayType === 'WARNEVENT') {
-				this.screen.setSceneIndex(INDEXSCENEMAP.AirSupplyLNG)
+				this.editor.selectSceneIndex(INDEXSCENEMAP.AirSupplyLNG)
 				this.showRoutePlan = false
 			}
 			this.showOverlayDetail = false

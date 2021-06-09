@@ -4,8 +4,9 @@
 			<li
 				class="pos-r pointer fn-flex"
 				v-for="item in data ? data.value : []"
+				:key="item.title"
 				:class="{
-					active: item.index.indexOf(screen.sceneIndex) !== -1,
+					active: item.index.indexOf(editor.currentSceneIndex) !== -1,
 					disabled: data.disabled
 						? data.disabled.indexOf(item.title) !== -1
 						: false,
@@ -17,35 +18,33 @@
 		</ul>
 	</div>
 </template>
-<script>
+<script lang="ts">
 import { widgetMixin } from '@eslinkv/vue2'
+import { Editor } from '@eslinkv/core'
 import { value } from './index.component'
 
 export default {
 	data() {
 		return {
-			screen: {},
+			editor: Editor.Instance(),
 		}
 	},
 	mixins: [widgetMixin],
 	methods: {
-		changeScene(title, index) {
+		changeScene(title: string, index: string | number): void {
 			if (this.data.disabled) {
 				if (this.data.disabled.indexOf(title) !== -1) {
-					return false
+					return
 				} else {
-					this.screen.setSceneIndex(index)
+					this.editor.selectSceneIndex(index)
 				}
 			} else {
-				this.screen.setSceneIndex(index)
+				this.editor.selectSceneIndex(index)
 			}
 		},
 	},
-	created() {
+	created(): void {
 		this.configValue = this.parseConfigValue(value)
-	},
-	mounted() {
-		this.screen = this.$screen
 	},
 }
 </script>

@@ -1,5 +1,4 @@
 import request, { headers, requestNoBaseURL } from './request'
-import { setDefault } from '../utils'
 
 export function list(data) {
 	return request({
@@ -37,23 +36,13 @@ export function publish(data) {
 	})
 }
 
-export async function detail(data) {
-	const originData = await request({
+export function detail(data) {
+	return request({
 		url: '/screen/detail',
 		method: 'post',
 		data,
 		headers,
 	})
-	const res = originData.screenConfig
-	if (res.widgets) {
-		res.widgets.forEach(v => {
-			setDefault(v.value)
-		})
-	}
-	return {
-		...originData,
-		screenConfig: res,
-	}
 }
 
 export function update(data) {

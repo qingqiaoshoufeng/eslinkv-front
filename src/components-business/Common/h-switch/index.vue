@@ -4,33 +4,34 @@
 			<li
 				class="pos-r pointer fn-flex"
 				v-for="item in data ? data.value : []"
-				:class="{ active: item.indexOf(screen.sceneIndex) !== -1 }"
+				:key="item"
+				:class="{
+					active: item.indexOf(editor.currentSceneIndex) !== -1,
+				}"
 				@click="changeScene(item[0])"
 			></li>
 		</ul>
 	</div>
 </template>
-<script>
+<script lang="ts">
 import { widgetMixin } from '@eslinkv/vue2'
+import { Editor } from '@eslinkv/core'
 import { value } from './index.component'
 
 export default {
 	data() {
 		return {
-			screen: {},
+			editor: Editor.Instance(),
 		}
 	},
 	mixins: [widgetMixin],
 	methods: {
-		changeScene(index) {
-			this.screen.setSceneIndex(index)
+		changeScene(index: number | string): void {
+			this.editor.selectSceneIndex(index)
 		},
 	},
-	created() {
+	created(): void {
 		this.configValue = this.parseConfigValue(value)
-	},
-	mounted() {
-		this.screen = this.$screen
 	},
 }
 </script>

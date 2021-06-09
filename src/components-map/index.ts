@@ -1,5 +1,5 @@
 import { Editor } from '@eslinkv/core'
-const editor = Editor.Instance()
+const editor: Editor = Editor.Instance()
 const component = require.context(
 	'../components-business',
 	true,

@@ -45,9 +45,10 @@
 		></RoutePlan>
 	</div>
 </template>
-<script>
+<script lang="ts">
 import bus from '../../../../../utils/bus'
-const { event, instance } = eslinkV.$store
+const { instance } = eslinkV.$store
+import { Editor } from '@eslinkv/core'
 import {
 	INDEXSCENEMAP,
 	OVERLAYINFOMAP_AIRSUPPLY,
@@ -83,7 +84,7 @@ export default {
 			visible: false,
 			overlayIcon: '',
 			OverlayDetailProp: {},
-			screen: {},
+			editor: Editor.Instance(),
 			overlayInfoConfigMap: Object.freeze(WARNING_OVERLAY_MAP),
 		}
 	},
@@ -133,14 +134,13 @@ export default {
 			this.showRoutePlan = false
 			this.$emit('close')
 		})
-		this.screen = this.$screen
 	},
 	methods: {
 		viewOverlayDetail() {
 			const { repairContent, address, callDate } = this.data
 			this.showRoutePlan = true
 			// 和场景进行交互
-			this.screen.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX)
+			this.editor.selectSceneIndex(AIRSUPPLY_WARN_SCENEINDEX)
 			// 更新数据
 			this.$nextTick(() => {
 				AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
@@ -154,7 +154,9 @@ export default {
 		},
 		closeOverlayDetail(done) {
 			this.showRoutePlan = false
-			this.screen.setSceneIndex(INDEXSCENEMAP[this.parentInfo.pageName])
+			this.editor.selectSceneIndex(
+				INDEXSCENEMAP[this.parentInfo.pageName],
+			)
 			this.$emit('close')
 			done && done()
 		},
