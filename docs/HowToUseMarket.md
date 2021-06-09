@@ -84,7 +84,7 @@ config.externals = [
 ```
 |- lib                             // 上传目录
 |- |- h-hello                      // 组件英文名
-|- |- |- h-hello-1.0.0.umd.min.js  // 打包文件
+|- └---- h-hello-1.0.0.umd.min.js  // 打包文件
 |- examples                        // 本地开发演示主目录
 |- |- App.vue                      // 组件容器，包含截图等附加功能
 |- |- main.ts                      // 入口ts文件
@@ -98,7 +98,7 @@ config.externals = [
 |- |- |- index.component.ts        // ★自定义组件配置文件
 |- └---- index.js                  // 打包文件
 |- public                          // 网站静态文件
-|- └---- ……                      
+|- |- |-  ……                      
 |- └- index.html           
 |- esp-config.js                 // ★eslinkv-cli配置文件   
 ```
@@ -106,7 +106,7 @@ config.externals = [
 ## custom.vue
 ```
 <template lang="pug">
-  .widget-part(:style="styles" v-if="data")
+widget-normal(:value="value", :customConfig="customConfig")
     h2 {{data.title}} {{config.config.test}}
     img(:src="config.config.background")
     p(:style="{color: config.config.color}") hello world
@@ -115,14 +115,16 @@ config.externals = [
 	import { Component } from 'vue-property-decorator'
 	import { mixins } from 'vue-class-component'
 	import { value, customConfig } from './index.component'
-	import { widgetMixin } from 'eslinkv-sdk'
+	import { widgetMixin, widgetNormal } from '@eslinkv/vue2'
 
-    @Component
+    @Component({
+    	components:{
+    		widgetNormal
+    	}
+    })
 	export default class HelloWorld extends mixins(widgetMixin) {
-		// 这个方法是将index.component.ts文件中的配置传入到该组件中，不可少
-		created () {
-			this.configValue = this.parseConfigValue(value, customConfig)
-		}
+		value = value
+		customConfig = customConfig
 	}
 </script>
 <style lang="scss" scoped>
