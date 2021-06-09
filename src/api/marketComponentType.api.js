@@ -1,6 +1,5 @@
 import request, { headers } from './request'
-
-const Editor = eslinkV.Editor
+import { Editor } from '@eslinkv/core'
 const editor = Editor.Instance()
 
 export function create(data) {

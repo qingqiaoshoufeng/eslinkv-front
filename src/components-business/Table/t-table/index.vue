@@ -4,7 +4,7 @@
 	</div>
 </template>
 <script>
-const { widgetMixin } = eslinkV
+import { widgetMixin } from '@eslinkv/vue2'
 import ETable from './ETable'
 import { value } from './index.component'
 

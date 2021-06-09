@@ -10,7 +10,7 @@
 	</div>
 </template>
 <script>
-const { widgetMixin } = eslinkV
+import { widgetMixin } from '@eslinkv/vue2'
 import HLinePercentItem from './HLinePercentItem'
 import { value } from './index.component'
 

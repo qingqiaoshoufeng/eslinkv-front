@@ -38,11 +38,7 @@
 					</div>
 				</div>
 			</div>
-			<div
-				class="right-more pos-r"
-				@click="handleClick"
-				:class="{ pointer: config.config.sceneId }"
-			>
+			<div class="right-more pos-r">
 				<div class="right-more-total font-num">
 					{{ data.todayData | toThousand }}
 				</div>
@@ -51,10 +47,8 @@
 		</div>
 	</div>
 </template>
-<script>
-const { widgetMixin } = eslinkV
-const { scene, instance } = eslinkV.$store
-import format from 'date-fns/format'
+<script lang="ts">
+import { widgetMixin } from '@eslinkv/vue2'
 import { customConfig, value } from './index.component'
 
 export default {
@@ -78,30 +72,6 @@ export default {
 		},
 	},
 	methods: {
-		handleClick() {
-			if (this.config.config.sceneId) {
-				scene.actions.createSceneInstance(
-					this.config.config.sceneId,
-					'slideInRight',
-				)
-				if (this.config.config.componentId) {
-					this.$nextTick(() => {
-						instance.actions.updateComponent(
-							this.config.config.componentId,
-							{
-								data: {
-									selectType: '日',
-									selectValue: format(
-										new Date(),
-										'yyyy.MM.dd',
-									),
-								},
-							},
-						)
-					})
-				}
-			}
-		},
 		setNumberTransform() {
 			if (this.data) {
 				const numberArr = Number(this.data.yearData)
@@ -113,7 +83,7 @@ export default {
 	},
 	watch: {
 		data: {
-			handler(val) {
+			handler(val): void {
 				if (val) {
 					this.setNumberTransform()
 				}
@@ -121,10 +91,10 @@ export default {
 			deep: true,
 		},
 	},
-	created() {
+	created(): void {
 		this.configValue = this.parseConfigValue(value, customConfig)
 	},
-	mounted() {
+	mounted(): void {
 		setTimeout(() => {
 			this.setNumberTransform()
 		}, 500)

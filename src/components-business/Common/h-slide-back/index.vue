@@ -3,20 +3,25 @@
 		<div class="h-slide-bg-back pointer" @click="handleClick"></div>
 	</div>
 </template>
-<script>
-const { widgetMixin } = eslinkV
-const { scene } = eslinkV.$store
+<script lang="ts">
+import { widgetMixin } from '@eslinkv/vue2'
+import { Editor } from '@eslinkv/core'
 import { value } from './index.component'
 
 export default {
 	mixins: [widgetMixin],
-	created() {
+	data() {
+		return {
+			editor: Editor.Instance(),
+		}
+	},
+	created(): void {
 		this.configValue = this.parseConfigValue(value)
 	},
 	methods: {
-		handleClick() {
+		handleClick(): void {
 			if (this.data.sceneId) {
-				scene.actions.destroyScene(this.data.sceneId)
+				this.editor.closeScene(this.data.sceneId)
 			}
 		},
 	},

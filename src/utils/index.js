@@ -5,23 +5,6 @@ import Clipboard from 'clipboard'
 const { commonConfigValue } = eslinkV
 
 /**
- * @description 1.0.0 --->100000
- * 每一位限两位数
- */
-export function versionToNum(version) {
-	let num = version.split('.')
-	num = num.map(item => {
-		if (item >= 99) item = 99
-		if (item < 10) {
-			item = '0' + item
-		}
-		return item
-	})
-	num = num.join('')
-	return Number(num)
-}
-
-/**
  * @description 获取url参数
  */
 export function getQueryString(name) {

@@ -11,7 +11,7 @@
 </template>
 <script>
 import ImageView from '@/components/ImageView'
-const { widgetMixin } = eslinkV
+import { widgetMixin } from '@eslinkv/vue2'
 import { value } from './index.component'
 
 export default {

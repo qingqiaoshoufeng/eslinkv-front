@@ -4,7 +4,7 @@
 		p.pos-r.text-left {{ data && data.title }}
 </template>
 <script>
-const { widgetMixin } = eslinkV
+import { widgetMixin } from '@eslinkv/vue2'
 import { Component } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import { value } from './index.component'

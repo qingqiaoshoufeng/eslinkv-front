@@ -50,7 +50,7 @@
 	</div>
 </template>
 <script>
-const { widgetMixin } = eslinkV
+import { widgetMixin } from '@eslinkv/vue2'
 import format from 'date-fns/format'
 import addDays from 'date-fns/addDays'
 import addMonths from 'date-fns/addMonths'

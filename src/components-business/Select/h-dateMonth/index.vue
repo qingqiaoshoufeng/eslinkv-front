@@ -7,8 +7,7 @@
 			.h-dateMonth-right(:class="{ disabled }", @click="handleChange(1)")
 </template>
 <script lang="ts">
-const { widgetMixin } = eslinkV
-const { instance } = eslinkV.$store
+import { widgetMixin } from '@eslinkv/vue2'
 import { Component, Watch } from 'vue-property-decorator'
 import { mixins } from 'vue-class-component'
 import addMonths from 'date-fns/addMonths'
@@ -19,30 +18,29 @@ import { customConfig, value } from './index.component'
 @Component
 class HDateMonth extends mixins(widgetMixin) {
 	lastDay: Date = new Date()
-	showOptions: Boolean = false
+	showOptions = false
 	selectValue: Date = addMonths(new Date(), -1)
-	instance = instance.state
 
 	@Watch('data', { immediate: true, deep: true })
-	onDataChange(val) {
+	onDataChange(val): void {
 		if (val) {
 			this.lastDay = new Date(val[0].month_id)
 			this.selectValue = new Date(val[0].month_id)
 		}
 	}
 
-	get disabled() {
+	get disabled(): boolean {
 		if (new Date().getDate() === 1) {
 			return true
 		}
 		return isSameMonth(this.lastDay, this.selectValue)
 	}
 
-	get now() {
+	get now(): string {
 		return format(this.selectValue, 'yyyy.MM')
 	}
 
-	handleChange(index) {
+	handleChange(index: number): void {
 		if (index > 0) {
 			if (isSameMonth(new Date(this.lastDay), this.selectValue)) {
 				return
@@ -50,60 +48,14 @@ class HDateMonth extends mixins(widgetMixin) {
 		}
 		this.selectValue = addMonths(this.selectValue, index)
 		this.emitComponentUpdate({ month: format(this.selectValue, 'yyyy-MM') })
-		if ((this as any).config.config.links) {
-			const links = JSON.parse((this as any).config.config.links)
-			links.forEach(ref => {
-				let dom
-				if (this.kanboardEditor.$refs[ref]) {
-					dom = this.kanboardEditor.$refs[ref][0].$refs.widgets
-				} else {
-					if (this.instance.createKanboard) {
-						if (instance.actions.createKanboard.$refs[ref]) {
-							dom =
-								instance.actions.createKanboard.$refs[ref][0]
-									.$refs.widgets
-						}
-					}
-				}
-				if (typeof dom.updateComponent === 'function') {
-					dom.updateComponent({
-						month: format(this.selectValue, 'yyyy-MM'),
-					})
-				}
-				dom.updateAjax({ month: format(this.selectValue, 'yyyy-MM') })
-			})
-		}
 	}
 
-	created() {
+	created(): void {
 		this.configValue = this.parseConfigValue(value, customConfig)
 	}
 
-	mounted() {
+	mounted(): void {
 		this.emitComponentUpdate({ month: format(this.selectValue, 'yyyy-MM') })
-		if ((this as any).config?.config?.links) {
-			const links = JSON.parse((this as any).config.config.links)
-			links.forEach(ref => {
-				let dom
-				if (this.kanboardEditor.$refs[ref]) {
-					dom = this.kanboardEditor.$refs[ref][0].$refs.widgets
-				} else {
-					if (this.instance.createKanboard) {
-						if (instance.actions.createKanboard.$refs[ref]) {
-							dom =
-								instance.actions.createKanboard.$refs[ref][0]
-									.$refs.widgets
-						}
-					}
-				}
-				if (typeof dom.updateComponent === 'function') {
-					dom.updateComponent({
-						month: format(this.selectValue, 'yyyy-MM'),
-					})
-				}
-				dom.updateAjax({ month: format(this.selectValue, 'yyyy-MM') })
-			})
-		}
 	}
 }
 

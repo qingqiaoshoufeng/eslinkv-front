@@ -90,7 +90,7 @@
 		</portal>
 	</div>
 </template>
-<script>
+<script lang="ts">
 // 页面覆盖物组件
 import {
 	INDEXSCENEMAP,
@@ -105,7 +105,7 @@ import {
 	SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
 	SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP,
 } from './config.js'
-const { scene, instance } = eslinkV.$store
+const { instance } = eslinkV.$store
 const componentPageArr = [
 	'ThreeSocialLinkage',
 	'ServiceNetworkStation',
@@ -139,7 +139,7 @@ componentCommonArr.map(componentName => {
 				componentName
 		)
 })
-
+import { Editor } from '@eslinkv/core'
 export default {
 	name: 'ServiceCustomer',
 	components: {
@@ -149,6 +149,7 @@ export default {
 	},
 	data() {
 		return {
+			editor: Editor.Instance(),
 			overlayInfoConfigMap: Object.freeze(
 				SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
 			),
@@ -319,9 +320,7 @@ export default {
 						instance.actions.updateComponent(i, {
 							data: res,
 						})
-						scene.actions.createSceneInstance(
-							THREESOCIALLINKAGE_SCENEINDEX,
-						)
+						editor.openScene(THREESOCIALLINKAGE_SCENEINDEX)
 					})
 			})
 		},

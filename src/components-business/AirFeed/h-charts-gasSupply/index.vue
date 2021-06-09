@@ -18,7 +18,7 @@
 	</div>
 </template>
 <script>
-const { widgetMixin } = eslinkV
+import { widgetMixin } from '@eslinkv/vue2'
 import getOptions from './options'
 import format from 'date-fns/format'
 import { customConfig, value } from './index.component'

@@ -7,7 +7,8 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-const { dView, dDetail, Editor } = eslinkV
+import { dView, dDetail, Editor } from '@eslinkv/vue2'
+
 @Component({
 	components: {
 		dView,

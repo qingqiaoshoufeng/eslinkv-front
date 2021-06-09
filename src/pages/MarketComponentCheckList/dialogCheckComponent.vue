@@ -11,8 +11,7 @@ import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import { Modal, Button } from 'view-design'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import html2canvas from 'html2canvas'
-const { dView } = eslinkV
-
+import { dView } from '@eslinkv/vue2'
 @Component({
 	components: {
 		'i-button': Button,

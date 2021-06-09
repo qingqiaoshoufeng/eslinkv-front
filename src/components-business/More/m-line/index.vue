@@ -79,7 +79,7 @@
 	</div>
 </template>
 <script>
-const { widgetMixin } = eslinkV
+import { widgetMixin } from '@eslinkv/vue2'
 import LineOne from '@/components/LineOne'
 import { value } from './index.component'
 

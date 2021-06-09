@@ -6,20 +6,25 @@
 		</div>
 	</div>
 </template>
-<script>
-const { widgetMixin } = eslinkV
-const { scene } = eslinkV.$store
+<script lang="ts">
+import { widgetMixin } from '@eslinkv/vue2'
+import { Editor } from '@eslinkv/core'
 import { value } from './index.component'
 
 export default {
 	mixins: [widgetMixin],
-	created() {
+	data() {
+		return {
+			editor: Editor.Instance(),
+		}
+	},
+	created(): void {
 		this.configValue = this.parseConfigValue(value)
 	},
 	methods: {
-		back() {
+		back(): void {
 			if (!this.data.sceneId) return
-			scene.actions.destroyScene(this.data.sceneId)
+			this.editor.closeScene(this.data.sceneId)
 		},
 	},
 }

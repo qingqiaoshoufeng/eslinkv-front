@@ -13,7 +13,7 @@
 	</div>
 </template>
 <script>
-const { widgetMixin } = eslinkV
+import { widgetMixin } from '@eslinkv/vue2'
 import dangerList from './dangerList'
 import dangerTable from './dangerTable'
 import { value } from './index.component'

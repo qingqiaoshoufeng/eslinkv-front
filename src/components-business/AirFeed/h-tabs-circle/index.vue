@@ -28,7 +28,7 @@
 	</div>
 </template>
 <script>
-const { widgetMixin } = eslinkV
+import { widgetMixin } from '@eslinkv/vue2'
 import HVerticalTabs from './HVerticalTabs'
 import pie from './pie'
 import { getCircleOption } from './options'

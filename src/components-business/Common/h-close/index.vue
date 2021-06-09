@@ -2,28 +2,25 @@
 .widget-part(:style="styles")
 	img.img.pointer(src="./close.svg", @click="back")
 </template>
-<script>
-const { widgetMixin } = eslinkV
+<script lang="ts">
+import { widgetMixin, Editor } from '@eslinkv/vue2'
 import { value } from './index.component'
 
 export default {
 	data() {
 		return {
 			screen: {},
+			editor: Editor.Instance(),
 		}
 	},
 	mixins: [widgetMixin],
-	created() {
+	created(): void {
 		this.configValue = this.parseConfigValue(value)
 	},
 	methods: {
-		back() {
-			if (!this.data.sceneId) return
-			this.screen.setSceneIndex(this.data.sceneId)
+		back(): void {
+			this.editor.selectSceneIndex(this.data.sceneId)
 		},
-	},
-	mounted() {
-		this.screen = this.$screen
 	},
 }
 </script>

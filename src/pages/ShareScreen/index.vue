@@ -27,8 +27,7 @@
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-const { dView, dDetail, Editor } = eslinkV
-import { getQueryString } from '../../utils'
+import { dView, dDetail, Editor } from '@eslinkv/vue2'
 import { Input, Button } from 'view-design'
 import VueCountdown from '@chenfengyuan/vue-countdown'
 let shareInfo: any

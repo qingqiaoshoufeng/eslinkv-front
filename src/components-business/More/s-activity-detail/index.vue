@@ -127,7 +127,7 @@
 	</div>
 </template>
 <script>
-const { widgetMixin } = eslinkV
+import { widgetMixin } from '@eslinkv/vue2'
 import getOption from './options'
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper'
 import 'swiper/css/swiper.css'

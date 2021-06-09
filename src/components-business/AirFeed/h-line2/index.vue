@@ -7,7 +7,7 @@
 	</div>
 </template>
 <script>
-const { widgetMixin } = eslinkV
+import { widgetMixin } from '@eslinkv/vue2'
 import options from './options'
 import { value, customConfig } from './index.component'
 

@@ -12,7 +12,7 @@
 import MapContainer from './MapContainer/index'
 import Message from './components/Message/'
 import { value } from './index.component'
-const { widgetMixin } = eslinkV
+import { widgetMixin } from '@eslinkv/vue2'
 export default {
 	name: 'HRMap',
 	components: {
