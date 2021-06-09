@@ -30,7 +30,9 @@ import {
 } from '../../../../config/scene'
 import { BaseOverlay } from '../../../../components/index'
 import { Editor } from '@eslinkv/core'
-const { instance } = eslinkV.$store
+
+const editor = Editor.instance()
+
 export default {
 	name: 'GasStation',
 	components: {
@@ -66,7 +68,6 @@ export default {
 	data() {
 		const apiFun = this.$api.map.mock.getGasStationList
 		return {
-			editor: Editor.Instance(),
 			apiFun: apiFun,
 			propDwMap: {
 				flow: 'm³/h',
@@ -117,10 +118,10 @@ export default {
 		},
 		viewDetail(marker) {
 			const { name, id } = marker
-			this.editor.openScene(AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX)
+			editor.openScene(AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX)
 			this.$nextTick(() => {
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach(item => {
-					instance.actions.updateComponent(item, {
+					editor.screen.updateComponent(item, {
 						data: {
 							label: name,
 							title: name,
@@ -130,7 +131,7 @@ export default {
 					})
 				})
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach(item => {
-					instance.actions.updateComponent(item, {
+					editor.screen.updateComponent(item, {
 						params: {
 							id,
 						},

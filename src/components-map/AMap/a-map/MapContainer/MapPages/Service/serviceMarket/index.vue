@@ -76,7 +76,6 @@ import {
 	DATASTATISTICSLIST,
 } from './config'
 
-const { scene } = eslinkV.$store
 export default {
 	name: 'serviceMarket',
 	components: {

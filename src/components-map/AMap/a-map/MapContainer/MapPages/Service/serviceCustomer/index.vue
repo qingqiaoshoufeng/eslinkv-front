@@ -105,7 +105,6 @@ import {
 	SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
 	SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP,
 } from './config.js'
-const { instance } = eslinkV.$store
 const componentPageArr = [
 	'ThreeSocialLinkage',
 	'ServiceNetworkStation',
@@ -317,10 +316,10 @@ export default {
 				this.$api.map.serve
 					.getServiceCustomerThreeSocialDetail({ id })
 					.then(res => {
-						instance.actions.updateComponent(i, {
+						this.editor.screen.updateComponent(i, {
 							data: res,
 						})
-						editor.openScene(THREESOCIALLINKAGE_SCENEINDEX)
+						this.editor.openScene(THREESOCIALLINKAGE_SCENEINDEX)
 					})
 			})
 		},

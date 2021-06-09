@@ -47,7 +47,6 @@
 </template>
 <script lang="ts">
 import bus from '../../../../../utils/bus'
-const { instance } = eslinkV.$store
 import { Editor } from '@eslinkv/core'
 import {
 	INDEXSCENEMAP,
@@ -144,7 +143,7 @@ export default {
 			// 更新数据
 			this.$nextTick(() => {
 				AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
-					instance.actions.updateComponent(i, {
+					this.editor.screen.updateComponent(i, {
 						params: {
 							id: this.data.id,
 						},
