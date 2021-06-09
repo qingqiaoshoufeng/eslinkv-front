@@ -22,7 +22,7 @@ e-layout
 import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button } from 'view-design'
 import dialogCheck from './dialogCheckComponent.vue'
-const { commonConfigValue, configMerge, Editor } = eslinkV
+import { Editor } from '@eslinkv/core'
 import common from '../../store/common.store.js'
 
 @Component({
@@ -98,28 +98,24 @@ export default class Market extends Vue {
 		}
 	}
 
-	check() {
+	check(): void {
 		this.currentRow = this.selectOne
 		this.dialogCheckShow = true
-		const id = +new Date()
-		const value = this.selectOne.componentConfig
-		const config = configMerge(value, commonConfigValue())
-		editor.screen.screenWidgets = {
-			[id]: {
-				id,
-				type: this.selectOne.componentEnTitle,
-				config,
-				scene: 0,
-				market: true,
-			},
+		const data = {
+			config: this.selectOne.componentConfig,
+			market: true,
+			type: this.selectOne.componentEnTitle,
+			startX: 0,
+			startY: 0,
 		}
+		this.editor.createWidget(0, 0, JSON.stringify(data))
 	}
 
-	reload() {
+	reload(): void {
 		;(this.$refs.page as any).reload()
 	}
 
-	mounted() {
+	mounted(): void {
 		common.actions.setNavIndex('/market/componentList')
 	}
 }

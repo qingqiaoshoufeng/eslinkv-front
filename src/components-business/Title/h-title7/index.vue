@@ -8,7 +8,7 @@
 	</div>
 </template>
 <script>
-import { widgetMixin } from '@eslinkv/vue2'
+import { widgetMixin } from '@import { widgetMixin } from '@eslinkv/vue2'/vue2'
 import { customConfig, value } from './index.component'
 
 export default {
