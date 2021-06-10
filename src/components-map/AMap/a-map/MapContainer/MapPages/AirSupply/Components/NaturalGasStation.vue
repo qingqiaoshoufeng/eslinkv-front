@@ -45,9 +45,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = getNaturalGasStationList
 		return {
-			apiFun: apiFun,
+			apiFun: getNaturalGasStationList,
 		}
 	},
 }

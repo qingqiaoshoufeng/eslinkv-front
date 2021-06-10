@@ -46,9 +46,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = getPressureRegulatingStationList
 		return {
-			apiFun: apiFun,
+			apiFun: getPressureRegulatingStationList,
 			propDwMap: {
 				flow: 'm³/h',
 				inPressure: 'MPa',

@@ -37,9 +37,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = getComprehensiveServiceStationList
 		return {
-			apiFun: apiFun,
+			apiFun: getComprehensiveServiceStationList,
 		}
 	},
 }

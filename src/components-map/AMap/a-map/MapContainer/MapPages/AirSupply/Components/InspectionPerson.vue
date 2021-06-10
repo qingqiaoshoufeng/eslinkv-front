@@ -40,9 +40,8 @@ export default {
 		// },
 	},
 	data() {
-		const apiFun = getInspectionPersonList
 		return {
-			apiFun: apiFun,
+			apiFun: getInspectionPersonList,
 			ready: false,
 			data: [],
 		}

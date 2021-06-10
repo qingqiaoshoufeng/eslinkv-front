@@ -37,9 +37,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = getDistributedEnergyResourceList
 		return {
-			apiFun: apiFun,
+			apiFun: getDistributedEnergyResourceList,
 		}
 	},
 }

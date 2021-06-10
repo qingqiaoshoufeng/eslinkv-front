@@ -47,9 +47,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = getUndergroundRepairStationList
 		return {
-			apiFun: apiFun,
+			apiFun: getUndergroundRepairStationList,
 		}
 	},
 	mounted() {},

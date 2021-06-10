@@ -42,9 +42,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = getICcustomerList
 		return {
-			apiFun: apiFun,
+			apiFun: getICcustomerList,
 		}
 	},
 	methods: {

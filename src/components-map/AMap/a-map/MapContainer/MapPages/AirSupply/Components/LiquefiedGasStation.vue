@@ -45,9 +45,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = getLiquefiedGasStationList
 		return {
-			apiFun: apiFun,
+			apiFun: getLiquefiedGasStationList,
 		}
 	},
 }

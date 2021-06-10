@@ -62,9 +62,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = getEmergencyAirSourceStationList
 		return {
-			apiFun: apiFun,
+			apiFun: getEmergencyAirSourceStationList,
 		}
 	},
 }

@@ -44,9 +44,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = getLNGStationList
 		return {
-			apiFun: apiFun,
+			apiFun: getLNGStationList,
 		}
 	},
 }

@@ -37,9 +37,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = getInspectionCarList
 		return {
-			apiFun: apiFun,
+			apiFun: getInspectionCarList,
 			data: [],
 			ready: false,
 		}

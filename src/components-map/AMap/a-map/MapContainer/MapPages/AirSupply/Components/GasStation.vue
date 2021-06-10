@@ -66,10 +66,9 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = getGasStationList
 		return {
-			editor: Editor.instance(),
-			apiFun: apiFun,
+			editor: Editor.Instance(),
+			apiFun: getGasStationList,
 			propDwMap: {
 				flow: 'm³/h',
 				inPressure: 'MPa',

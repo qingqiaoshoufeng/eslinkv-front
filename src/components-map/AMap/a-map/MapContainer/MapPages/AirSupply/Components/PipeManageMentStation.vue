@@ -47,9 +47,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = getPipeManageMentStationList
 		return {
-			apiFun: apiFun,
+			apiFun: getPipeManageMentStationList,
 		}
 	},
 }
