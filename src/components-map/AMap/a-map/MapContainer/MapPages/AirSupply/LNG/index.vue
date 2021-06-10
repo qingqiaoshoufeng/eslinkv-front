@@ -82,6 +82,10 @@ import {
 	AIRSUPPLY_LNG_OVERLAY_MAP,
 	AIRSUPPLY_LNG_LEGEND_MAP,
 } from './config.js'
+import {
+	getLngMapDataResult,
+	getLngStationCounts,
+} from '@/components-map-api/map.airSupply.api.js'
 
 export default {
 	name: 'LNG',
@@ -168,9 +172,7 @@ export default {
 			const params = {
 				types: Object.keys(AIRSUPPLY_LNG_LEGEND_MAP).toString(),
 			}
-			const res = await this.$api.map.airSupply.getLngMapDataResult(
-				params,
-			)
+			const res = await getLngMapDataResult(params)
 			this.stationDataMap = { ...this.stationDataMap, ...res }
 			this.stationList = [
 				...res.branchCompanyList,
@@ -183,7 +185,7 @@ export default {
 		},
 		// 获取统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsInfo = await this.$api.map.airSupply.getLngStationCounts()
+			this.dataStatisticsInfo = await getLngStationCounts()
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			const { lng, lat } = overlay

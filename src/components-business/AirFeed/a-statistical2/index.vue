@@ -50,6 +50,7 @@
 <script lang="ts">
 import { widgetMixin } from '@eslinkv/vue2'
 import { customConfig, value } from './index.component'
+import { year } from '@/components-business-api/bussiness.api.js'
 
 export default {
 	data() {
@@ -98,7 +99,7 @@ export default {
 		setTimeout(() => {
 			this.setNumberTransform()
 		}, 500)
-		this.$api.bussiness.year().then(res => {
+		year().then(res => {
 			this.year = res
 		})
 	},

@@ -47,11 +47,11 @@
 		</div>
 	</div>
 </template>
-
 <script>
 import { SvgIcon, NoData } from '../../../../../components/'
 import { SERVICE_SERVICEICCUSTOMER_LEGEND_MAP } from '../../serviceICcustomer/config'
 import { Icon } from 'view-design'
+import { getICcustomerSituationAwareness } from '@/components-map-api/map.serve.api'
 
 export default {
 	name: 'HomeRealTimeList',
@@ -118,7 +118,7 @@ export default {
 			if (!this.loaded) {
 				this.loading = true
 			}
-			const data = await this.$api.map.serve.getICcustomerSituationAwareness()
+			const data = await getICcustomerSituationAwareness()
 			this.list = data
 			this.loading = false
 			this.loaded = true
@@ -141,7 +141,6 @@ export default {
 	},
 }
 </script>
-
 <style lang="scss" scoped>
 ::v-deep.demo-spin-icon-load {
 	position: absolute;

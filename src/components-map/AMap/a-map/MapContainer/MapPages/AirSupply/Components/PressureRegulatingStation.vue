@@ -14,6 +14,9 @@
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index'
+import { getPressureRegulatingStationList } from '@/components-map-api/map.mock.api'
+import { getStationRealTimeInfo } from '@/components-map-api/map.airSupply.api'
+
 export default {
 	name: 'PressurereGulatingStation',
 	components: {
@@ -43,7 +46,7 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = this.$api.map.mock.getPressureRegulatingStationList
+		const apiFun = getPressureRegulatingStationList
 		return {
 			apiFun: apiFun,
 			propDwMap: {
@@ -84,13 +87,11 @@ export default {
 				let data = {}
 				const dataComp = {}
 				try {
-					data = await this.$api.map.airSupply.getStationRealTimeInfo(
-						{
-							id,
-							name,
-							type,
-						},
-					)
+					data = await getStationRealTimeInfo({
+						id,
+						name,
+						type,
+					})
 				} catch (error) {
 					console.log(error, '接口出错')
 				}

@@ -24,6 +24,8 @@ import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button } from 'view-design'
 import common from '../../store/common.store.js'
 import dialogTheme from './dialogTheme.vue'
+import { allList } from '@/api/marketTheme.api.js'
+
 @Component({
 	components: {
 		'i-table': Table,
@@ -59,13 +61,13 @@ export default class Market extends Vue {
 	selectOne: any = false
 
 	async init() {
-		const res = await this.$api.marketTheme.allList()
+		const res = await allList()
 		this.list = res.list
 		this.total = res.count
 		this.loaded = true
 	}
 
-	selectHandle(selection) {
+	selectHandle(selection): void {
 		if (selection.length > 1) {
 			this.selectMore = selection
 		} else {
@@ -83,16 +85,16 @@ export default class Market extends Vue {
 		this.currentRow.themeId = null
 	}
 
-	edit() {
+	edit(): void {
 		this.currentRow = this.selectOne
 		this.dialogEditShow = true
 	}
 
-	reload() {
+	reload(): void {
 		;(this.$refs.page as any).reload()
 	}
 
-	mounted() {
+	mounted(): void {
 		common.actions.setNavIndex('/market/componentList')
 	}
 }

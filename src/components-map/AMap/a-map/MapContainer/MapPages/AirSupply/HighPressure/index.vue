@@ -59,7 +59,7 @@
 				v-bind="{
 					stationList,
 					rightListActiveItemMap,
-					markerConfig: legendMap
+					markerConfig: legendMap,
 				}"
 				ref="RightPanel"
 			></RightPanel>
@@ -75,6 +75,12 @@ import {
 	DATA_STATISTICS_MAP,
 } from './config.js'
 import pageMixin from '../../../../mixins/pageMixin'
+import {
+	getAllTypeStationList,
+	getStatisticsInfo,
+	getHighPressurePipe,
+} from '@/components-map-api/map.airSupply.api'
+
 const componentPageArr = [
 	// legend覆盖物
 	'HighPressureLine',
@@ -225,9 +231,7 @@ export default {
 					'MiddleAndLowPressureValve', // 中低压阀门
 				].toString(),
 			}
-			const res = await this.$api.map.airSupply.getAllTypeStationList(
-				params,
-			)
+			const res = await getAllTypeStationList(params)
 			this.stationDataMap = { ...this.stationDataMap, ...res }
 			const {
 				gasStationList,
@@ -242,13 +246,13 @@ export default {
 		},
 		// 2.获取高压统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsData = await this.$api.map.airSupply.getStatisticsInfo(
-				{ type: 'HighPressure' },
-			)
+			this.dataStatisticsData = await getStatisticsInfo({
+				type: 'HighPressure',
+			})
 		},
 		// 3.获取高压管网，高压管网建设中数据
 		async getHighPressurePipe() {
-			const pipeData = await this.$api.map.airSupply.getHighPressurePipe()
+			const pipeData = await getHighPressurePipe()
 			this.stationDataMap = {
 				...this.stationDataMap,
 				...pipeData,

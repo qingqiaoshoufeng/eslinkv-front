@@ -14,6 +14,7 @@
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index'
+import { getICcustomerList } from '@/components-map-api/map.mock.api'
 
 export default {
 	name: 'ICcustomer',
@@ -41,7 +42,7 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = this.$api.map.mock.getICcustomerList
+		const apiFun = getICcustomerList
 		return {
 			apiFun: apiFun,
 		}
@@ -49,7 +50,7 @@ export default {
 	methods: {
 		handleOverlayClick(marker) {
 			marker.detailList = this.detailList
-			$emit('overlay-click', this.marker, this.overlayIcon)
+			this.$emit('overlay-click', this.marker, this.overlayIcon)
 		},
 	},
 }

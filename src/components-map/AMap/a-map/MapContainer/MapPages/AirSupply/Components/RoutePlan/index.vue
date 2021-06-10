@@ -1,6 +1,8 @@
 <template></template>
 <script>
 import { Overlay } from '../../../../../components/index'
+import { getEmployeeGpsTrack } from '@/components-map-api/map.airSupply.api'
+
 export default {
 	name: 'RoutePlan',
 	inject: ['parentInfo', 'getMap'],
@@ -68,9 +70,11 @@ export default {
 			}
 			let passedPathData = []
 			try {
-				passedPathData = await this.$api.map.airSupply.getEmployeeGpsTrack(
-					{ employeeName, callDate, arriveDate: arrivalTime },
-				)
+				passedPathData = await getEmployeeGpsTrack({
+					employeeName,
+					callDate,
+					arriveDate: arrivalTime,
+				})
 			} catch (error) {
 				console.log('error', error)
 				return false

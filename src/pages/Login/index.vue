@@ -22,6 +22,7 @@
 import { Input, Button, Icon, Form, FormItem } from 'view-design'
 import { Component, Vue } from 'vue-property-decorator'
 import common from '../../store/common.store.js'
+import { login } from '@/api/user.api.js'
 
 @Component({
 	components: {
@@ -38,7 +39,7 @@ export default class Login extends Vue {
 
 	async login() {
 		if (!this.userName || !this.password) return
-		const res = await this.$api.user.login({
+		const res = await login({
 			userName: this.userName,
 			password: this.password,
 		})

@@ -75,6 +75,11 @@ import {
 	SERVICE_SERVICEMARKET_LEGEND_MAP,
 	DATASTATISTICSLIST,
 } from './config'
+import {
+	getSaleHeatCount,
+	getSaleRightIndex,
+	getSaleMapDataResult,
+} from '@/components-map-api/map.serve.api'
 
 export default {
 	name: 'serviceMarket',
@@ -105,7 +110,9 @@ export default {
 			activeOverlay: {},
 			center: [120.131259, 30.263295],
 			zoom: 10,
-			swichBoxInfo: [{ label: '年度销售气量热力', value: false, type: 'saleHeat' }],
+			swichBoxInfo: [
+				{ label: '年度销售气量热力', value: false, type: 'saleHeat' },
+			],
 		}
 	},
 	created() {
@@ -117,21 +124,19 @@ export default {
 		this.getHeatCount()
 	},
 	methods: {
-		async getHeatCount () {
-			const res = await this.$api.map.serve.getSaleHeatCount()
+		async getHeatCount() {
+			const res = await getSaleHeatCount()
 			this.heatData = res.total
 		},
-		async getRightIndex () {
-			this.dataStatisticsInfo = await this.$api.map.serve.getSaleRightIndex()
+		async getRightIndex() {
+			this.dataStatisticsInfo = await getSaleRightIndex()
 		},
 		// 获取所有站点数据
 		async getSaleMapDataResult() {
 			const params = {
-				types: 'BranchCompany'
+				types: 'BranchCompany',
 			}
-			const res = await this.$api.map.serve.getSaleMapDataResult(
-				params,
-			)
+			const res = await getSaleMapDataResult(params)
 			this.stationDataMap = {
 				...this.stationDataMap,
 				...res,
@@ -162,7 +167,6 @@ export default {
 	},
 }
 </script>
-
 <style lang="scss" scoped>
 .map-legend {
 	position: absolute;

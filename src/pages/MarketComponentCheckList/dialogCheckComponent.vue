@@ -12,6 +12,9 @@ import { Modal, Button } from 'view-design'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import html2canvas from 'html2canvas'
 import { dView } from '@eslinkv/vue2'
+import { checkError, checkSuccess } from '@/api/marketComponent.api.js'
+import { file } from '@/api/upload.api.js'
+
 @Component({
 	components: {
 		'i-button': Button,
@@ -36,12 +39,10 @@ export default class MarketEditDialog extends Vue {
 	}
 
 	cancel() {
-		this.$api.marketComponent
-			.checkError({ componentId: this.detail.componentId })
-			.then(() => {
-				this.modalShow = false
-				this.$emit('reload')
-			})
+		checkError({ componentId: this.detail.componentId }).then(() => {
+			this.modalShow = false
+			this.$emit('reload')
+		})
 	}
 
 	submit() {
@@ -76,13 +77,12 @@ export default class MarketEditDialog extends Vue {
 			'library',
 			`componentAvatar/${this.detail.componentEnTitle}/${this.detail.componentVersion}`,
 		)
-		this.$api.upload.file(data).then(res => {
-			this.$api.marketComponent
-				.checkSuccess({
-					componentId: this.detail.componentId,
-					componentAvatar: res.url,
-					componentEnTitle: this.detail.componentEnTitle,
-				})
+		file(data).then(res => {
+			checkSuccess({
+				componentId: this.detail.componentId,
+				componentAvatar: res.url,
+				componentEnTitle: this.detail.componentEnTitle,
+			})
 				.then(() => {
 					this.modalShow = false
 					this.loading = false

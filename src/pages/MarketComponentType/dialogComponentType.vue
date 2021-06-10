@@ -13,7 +13,6 @@ i-modal.check-modal(v-model="modalShow", title="新增")
 		i-button(type="primary", @click="submit") 提交
 		i-button(type="error", @click="modalShow = false") 取消
 </template>
-
 <script lang="ts">
 import { Vue, Component, Prop, Watch } from 'vue-property-decorator'
 import {
@@ -28,6 +27,7 @@ import {
 import TreeSelect, { LOAD_CHILDREN_OPTIONS } from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import common from '../../store/common.store.js'
+import { levelList, update, create } from '@/api/marketComponentType.api.js'
 
 @Component({
 	components: {
@@ -43,30 +43,28 @@ import common from '../../store/common.store.js'
 })
 export default class DialogComponentType extends Vue {
 	@Prop(Boolean) value: boolean
-	@Prop(Object) detail: ComponentTypeCreate
+	@Prop(Object) detail
 	modalShow = false
 	componentTypeList = []
 	common = common.state
 	@Watch('value')
-	onValueChange(val) {
+	onValueChange(val): void {
 		this.modalShow = val
 	}
 
 	@Watch('modalShow')
-	onModalShow(val) {
+	onModalShow(val): void {
 		this.$emit('input', val)
 	}
 
-	loadOptions({ action, parentNode, callback }) {
+	loadOptions({ action, parentNode, callback }): void {
 		if (action === LOAD_CHILDREN_OPTIONS) {
-			this.$api.marketComponentType
-				.levelList({
-					componentTypeParentId: parentNode.componentTypeId,
-				})
-				.then(r => {
-					parentNode.children = r
-					callback()
-				})
+			levelList({
+				componentTypeParentId: parentNode.componentTypeId,
+			}).then(r => {
+				parentNode.children = r
+				callback()
+			})
 		}
 	}
 
@@ -80,16 +78,16 @@ export default class DialogComponentType extends Vue {
 
 	async submit() {
 		if (this.detail.componentTypeId) {
-			await this.$api.marketComponentType.update({ ...this.detail })
+			await update({ ...this.detail })
 		} else {
-			await this.$api.marketComponentType.create({ ...this.detail })
+			await create({ ...this.detail })
 		}
 		this.modalShow = false
 		this.$emit('reload')
 	}
 
-	created() {
-		this.$api.marketComponentType.levelList().then(r => {
+	created(): void {
+		levelList().then(r => {
 			r.forEach(v => {
 				v.children = null
 			})

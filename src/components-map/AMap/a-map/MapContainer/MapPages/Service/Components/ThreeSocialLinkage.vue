@@ -15,6 +15,8 @@
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index'
+import { getThreeSocialLinkageList } from '@/components-map-api/map.mock.api'
+
 export default {
 	name: 'ThreeSocialLinkage',
 	components: {
@@ -48,7 +50,7 @@ export default {
 	},
 	data() {
 		return {
-			apiFun: this.$api.map.mock.getThreeSocialLinkageList,
+			apiFun: getThreeSocialLinkageList,
 		}
 	},
 	methods: {

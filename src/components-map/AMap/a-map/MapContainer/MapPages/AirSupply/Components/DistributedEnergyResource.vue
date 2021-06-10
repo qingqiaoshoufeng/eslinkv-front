@@ -15,6 +15,8 @@
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index'
+import { getDistributedEnergyResourceList } from '@/components-map-api/map.mock.api'
+
 export default {
 	name: 'DistributedEnergyResource',
 	components: {
@@ -35,7 +37,7 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = this.$api.map.mock.getDistributedEnergyResourceList
+		const apiFun = getDistributedEnergyResourceList
 		return {
 			apiFun: apiFun,
 		}

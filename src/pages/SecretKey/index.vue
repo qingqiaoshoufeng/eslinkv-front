@@ -25,6 +25,12 @@ e-layout
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button } from 'view-design'
+import {
+	createSecretKey,
+	getAllSecretKey,
+	stopSecretKey,
+	useSecretKey,
+} from '@/api/secretKey.api.js'
 
 @Component({
 	components: {
@@ -56,7 +62,7 @@ export default class SecretKey extends Vue {
 	]
 
 	async getList() {
-		let res = await this.$api.secretKey.getAllSecretKey()
+		let res = await getAllSecretKey()
 		res = res.map(v => {
 			v.isSecretKeyShow = false
 			return v
@@ -65,18 +71,18 @@ export default class SecretKey extends Vue {
 	}
 
 	async create() {
-		await this.$api.secretKey.createSecretKey()
+		await createSecretKey()
 		await this.getList()
 	}
 
 	async handleUse(row) {
 		if (row.isUsed) {
-			await this.$api.secretKey.stopSecretKey({
+			await stopSecretKey({
 				appKey: row.appKey,
 				appSecret: row.appSecret,
 			})
 		} else {
-			await this.$api.secretKey.useSecretKey({
+			await useSecretKey({
 				appKey: row.appKey,
 				appSecret: row.appSecret,
 			})

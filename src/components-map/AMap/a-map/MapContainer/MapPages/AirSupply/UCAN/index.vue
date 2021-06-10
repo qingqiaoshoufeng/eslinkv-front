@@ -56,7 +56,7 @@
 				v-bind="{
 					stationList,
 					rightListActiveItemMap,
-					markerConfig: legendMap
+					markerConfig: legendMap,
 				}"
 				ref="RightPanel"
 			></RightPanel>
@@ -108,6 +108,10 @@ import {
 	AIRSUPPLY_UCAN_OVERLAY_MAP,
 	DATASTATISTICSLIST,
 } from './config.js'
+import {
+	getAllTypeStationList,
+	getStatisticsInfo,
+} from '@/components-map-api/map.airSupply.api'
 
 export default {
 	name: 'AirSupplyHighPressure',
@@ -215,9 +219,7 @@ export default {
 					'DistributedEnergyResource', // '分布式能源',
 				].toString(),
 			}
-			const res = await this.$api.map.airSupply.getAllTypeStationList(
-				params,
-			)
+			const res = await getAllTypeStationList(params)
 			this.stationDataMap = { ...this.stationDataMap, ...res }
 			const {
 				liquefiedGasStationList,
@@ -232,9 +234,7 @@ export default {
 		},
 		// 获取统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsInfo = await this.$api.map.airSupply.getStatisticsInfo(
-				{ type: 'UCAN' },
-			)
+			this.dataStatisticsInfo = await getStatisticsInfo({ type: 'UCAN' })
 		},
 		handleOverlayClick(overlay, overlayType, isCenter = true) {
 			const { lng, lat } = overlay

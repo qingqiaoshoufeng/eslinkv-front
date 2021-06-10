@@ -30,6 +30,7 @@ e-layout
 import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button } from 'view-design'
 import itemCard from './item-card.vue'
+import { list } from '@/api/marketComponent.api.js'
 
 @Component({
 	components: {
@@ -44,7 +45,7 @@ export default class MarketComponentList extends Vue {
 	loaded = false
 
 	async init({ pageNum, pageSize }) {
-		const res = await this.$api.marketComponent.list({
+		const res = await list({
 			pageNum,
 			pageSize,
 			status: 'SUCCESS',
@@ -55,23 +56,23 @@ export default class MarketComponentList extends Vue {
 		this.total = res.count
 	}
 
-	handleDownload() {
+	handleDownload(): void {
 		window.open('https://www.npmjs.com/package/eslinkv-sdk')
 	}
 
-	handleTheme() {
+	handleTheme(): void {
 		this.$router.push('/market/themeList')
 	}
 
-	handleCheck() {
+	handleCheck(): void {
 		this.$router.push('/market/componentCheckList')
 	}
 
-	handleType() {
+	handleType(): void {
 		this.$router.push('/market/componentType')
 	}
 
-	reload() {
+	reload(): void {
 		;(this.$refs.page as any).reload()
 	}
 }

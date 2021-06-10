@@ -1,7 +1,7 @@
 <template lang="pug">
 e-layout
 	.list-container
-		e-page(@init="init", :total="total", ref="page" :loaded="loaded")
+		e-page(@init="init", :total="total", ref="page", :loaded="loaded")
 			ul.list-item-card-box
 				item-card(
 					v-for="item in list",
@@ -12,6 +12,7 @@ e-layout
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import itemCard from './item-card.vue'
+import { list } from '@/api/screen.api.js'
 
 @Component({
 	components: { itemCard },
@@ -21,7 +22,7 @@ export default class Template extends Vue {
 	total = 0
 	loaded = false
 	async init({ pageNum, pageSize }) {
-		const res = await this.$api.screen.list({
+		const res = await list({
 			pageSize,
 			screenType: 'TEMPLATE',
 			pageNum,

@@ -23,6 +23,7 @@ import {
 	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
 } from '../../../components-map/AMap/a-map/config/scene'
 import { value } from './index.component'
+import { getAllTypeStationList } from '@/components-map-api/map.airSupply.api.js'
 
 export default {
 	data() {
@@ -84,11 +85,9 @@ export default {
 		this.configValue = this.parseConfigValue(value)
 	},
 	mounted() {
-		this.$api.map.airSupply
-			.getAllTypeStationList({ types: 'GasStation' })
-			.then(res => {
-				this.list = res.gasStationList
-			})
+		getAllTypeStationList({ types: 'GasStation' }).then(res => {
+			this.list = res.gasStationList
+		})
 	},
 }
 </script>

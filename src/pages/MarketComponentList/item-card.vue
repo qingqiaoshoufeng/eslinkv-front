@@ -35,7 +35,7 @@ e-card
 				span {{ currentItem.componentEnTitle }}
 			i-form-item(label="当前版本号")
 				span {{ currentItem.componentVersion }}
-			i-form-item(label="组件类型",)
+			i-form-item(label="组件类型")
 				i-select(v-model="currentItem.componentType", clearable)
 					i-option(value="BASICS") 基础
 					i-option(value="ANTV") 图表antv
@@ -82,6 +82,8 @@ import { Vue, Component, PropSync } from 'vue-property-decorator'
 import TreeSelect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
 import { LOAD_CHILDREN_OPTIONS } from '@riophae/vue-treeselect'
+import { levelList } from '@/api/marketComponentType.api.js'
+import { update, getVersionList, destroy } from '@/api/marketComponent.api.js'
 
 @Component({
 	components: {
@@ -115,14 +117,12 @@ export default class ItemCard extends Vue {
 
 	loadOptions({ action, parentNode, callback }) {
 		if (action === LOAD_CHILDREN_OPTIONS) {
-			this.$api.marketComponentType
-				.levelList({
-					componentTypeParentId: parentNode.componentTypeId,
-				})
-				.then(r => {
-					parentNode.children = r
-					callback()
-				})
+			levelList({
+				componentTypeParentId: parentNode.componentTypeId,
+			}).then(r => {
+				parentNode.children = r
+				callback()
+			})
 		}
 	}
 
@@ -135,39 +135,35 @@ export default class ItemCard extends Vue {
 	}
 
 	submitVersion() {
-		this.$api.marketComponent
-			.update({
-				componentEnTitle: this.currentItem.componentEnTitle,
-				componentVersion: this.currentItem.componentVersion,
-			})
-			.then(() => {
-				this.dialogEditVersionShow = false
-				this.$Message.success('更新成功')
-				this.$emit('reload')
-			})
+		update({
+			componentEnTitle: this.currentItem.componentEnTitle,
+			componentVersion: this.currentItem.componentVersion,
+		}).then(() => {
+			this.dialogEditVersionShow = false
+			this.$Message.success('更新成功')
+			this.$emit('reload')
+		})
 	}
 
 	submitEdit() {
-		this.$api.marketComponent
-			.update({
-				componentId: this.currentItem.componentId,
-				sort: this.currentItem.sort,
-				componentAvatar: this.currentItem.componentAvatar,
-				componentTitle: this.currentItem.componentTitle,
-				componentTypeId: this.currentItem.componentTypeId,
-				componentChart: this.currentItem.componentChart,
-				componentChartType: this.currentItem.componentChartType,
-			})
-			.then(() => {
-				this.dialogEditShow = false
-				this.$Message.success('更新成功')
-				this.$emit('reload')
-			})
+		update({
+			componentId: this.currentItem.componentId,
+			sort: this.currentItem.sort,
+			componentAvatar: this.currentItem.componentAvatar,
+			componentTitle: this.currentItem.componentTitle,
+			componentTypeId: this.currentItem.componentTypeId,
+			componentChart: this.currentItem.componentChart,
+			componentChartType: this.currentItem.componentChartType,
+		}).then(() => {
+			this.dialogEditShow = false
+			this.$Message.success('更新成功')
+			this.$emit('reload')
+		})
 	}
 
 	handleEdit() {
 		this.dialogEditShow = true
-		this.$api.marketComponentType.levelList().then(r => {
+		levelList().then(r => {
 			r.forEach(v => {
 				v.children = null
 			})
@@ -177,13 +173,11 @@ export default class ItemCard extends Vue {
 
 	handleVersion() {
 		this.dialogEditVersionShow = true
-		this.$api.marketComponent
-			.getVersionList({
-				componentEnTitle: this.currentItem.componentEnTitle,
-			})
-			.then(r => {
-				this.versionList = r
-			})
+		getVersionList({
+			componentEnTitle: this.currentItem.componentEnTitle,
+		}).then(r => {
+			this.versionList = r
+		})
 	}
 
 	handleRemove() {
@@ -192,7 +186,7 @@ export default class ItemCard extends Vue {
 			content: '确认删除吗？',
 			loading: true,
 			onOk: async () => {
-				await this.$api.marketComponent.destroy({
+				await destroy({
 					componentId: this.currentItem.componentId,
 				})
 				this.$Message.success('删除成功')

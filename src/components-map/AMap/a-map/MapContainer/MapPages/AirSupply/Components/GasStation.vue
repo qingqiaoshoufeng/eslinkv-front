@@ -30,6 +30,8 @@ import {
 } from '../../../../config/scene'
 import { BaseOverlay } from '../../../../components/index'
 import { Editor } from '@eslinkv/core'
+import { getGasStationList } from '@/components-map-api/map.mock.api.js'
+import { getStationRealTimeInfo } from '@/components-map-api/map.airSupply.api.js'
 
 export default {
 	name: 'GasStation',
@@ -64,7 +66,7 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = this.$api.map.mock.getGasStationList
+		const apiFun = getGasStationList
 		return {
 			editor: Editor.instance(),
 			apiFun: apiFun,
@@ -86,13 +88,11 @@ export default {
 				let data = {}
 				const dataComp = {}
 				try {
-					data = await this.$api.map.airSupply.getStationRealTimeInfo(
-						{
-							id,
-							name,
-							type,
-						},
-					)
+					data = await getStationRealTimeInfo({
+						id,
+						name,
+						type,
+					})
 				} catch (error) {
 					console.error(error, '接口报错')
 				}

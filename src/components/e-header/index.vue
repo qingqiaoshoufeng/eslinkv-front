@@ -25,6 +25,7 @@
 import { Vue, Component } from 'vue-property-decorator'
 import { Icon, Button, Dropdown, DropdownItem, DropdownMenu } from 'view-design'
 import common from '../../store/common.store.js'
+import { logout, detail } from '@/api/user.api.js'
 
 @Component({
 	components: {
@@ -72,7 +73,7 @@ export default class EHeader extends Vue {
 			case 'logout':
 				common.actions.setUser(null)
 				localStorage.removeItem('eslinkv-login')
-				this.$api.user.logout()
+				logout()
 				this.$router.push('/login')
 				break
 			case 'secretKey':
@@ -90,8 +91,7 @@ export default class EHeader extends Vue {
 	mounted() {
 		common.actions.setNavIndex(this.$route.path)
 		if (!this.common.user) {
-			this.$api.user
-				.detail()
+			detail()
 				.then(res => {
 					common.actions.setUser(res)
 				})

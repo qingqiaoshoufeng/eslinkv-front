@@ -1,31 +1,33 @@
 <template lang="pug">
-	.container
-		.title  {{ data.name }}
-		.address {{ info.address }}
-		.info(v-if="info.time")
-			.type
-				.color
-				span {{ info.status }}
-			.time {{ info.time }}
-		.title2 近8小时压力趋势
-		.chart(ref="chart")
+.container
+	.title {{ data.name }}
+	.address {{ info.address }}
+	.info(v-if="info.time")
+		.type
+			.color
+			span {{ info.status }}
+		.time {{ info.time }}
+	.title2 近8小时压力趋势
+	.chart(ref="chart")
 </template>
-
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
+import { getLowMapDetailInfo } from '@/components-map-api/map.airSupply.api.js'
 
 @Component
 export default class VoltageRegulator extends Vue {
 	@Prop() data
-	
-	info:any = {}
-	
-	@Watch('data', {deep: true, immediate: true})
-	dataChange (val) {
+
+	info: any = {}
+
+	@Watch('data', { deep: true, immediate: true })
+	dataChange(val) {
 		if (val) {
 			this.$nextTick(async () => {
 				await this.getData()
-				echarts.init(this.$refs.chart).setOption(this.getOption(this.info.list))
+				echarts
+					.init(this.$refs.chart)
+					.setOption(this.getOption(this.info.list))
 			})
 		}
 	}
@@ -109,7 +111,7 @@ export default class VoltageRegulator extends Vue {
 					nameTextStyle: {
 						color: '#fff',
 						fontSize: 14,
-						padding: [0, -10, 0, 0]
+						padding: [0, -10, 0, 0],
 					},
 				},
 				{
@@ -118,7 +120,7 @@ export default class VoltageRegulator extends Vue {
 					nameTextStyle: {
 						color: '#fff',
 						fontSize: 14,
-						padding: [0, 0, 0, -10]
+						padding: [0, 0, 0, -10],
 					},
 					splitLine: {
 						show: false,
@@ -181,12 +183,12 @@ export default class VoltageRegulator extends Vue {
 			],
 		}
 	}
-	
-	async getData () {
-		this.info = await this.$api.map.airSupply.getLowMapDetailInfo({
+
+	async getData() {
+		this.info = await getLowMapDetailInfo({
 			type: 'VoltageRegulator',
 			id: this.data.id,
-			name: this.data.name
+			name: this.data.name,
 		})
 	}
 }
@@ -198,12 +200,12 @@ export default class VoltageRegulator extends Vue {
 		font-weight: 600;
 		font-size: 32px;
 		line-height: 32px;
-		color: #FFDC45;
+		color: #ffdc45;
 	}
 	.address {
 		font-size: 24px;
 		line-height: 24px;
-		color: #FFFFFF;
+		color: #ffffff;
 		margin: 16px 0;
 	}
 	.info {
@@ -213,11 +215,11 @@ export default class VoltageRegulator extends Vue {
 			display: flex;
 			align-items: center;
 			font-size: 20px;
-			color: #FFDC45;
+			color: #ffdc45;
 			.color {
 				width: 8px;
 				height: 8px;
-				background: #FFDC45;
+				background: #ffdc45;
 				margin-right: 8px;
 				border-radius: 50%;
 			}
@@ -225,22 +227,26 @@ export default class VoltageRegulator extends Vue {
 		.time {
 			width: 141px;
 			height: 24px;
-			background: #0057A9;
+			background: #0057a9;
 			border-radius: 12px;
 			font-size: 16px;
-			color: #FFFFFF;
+			color: #ffffff;
 			text-align: center;
 			line-height: 24px;
 		}
 	}
 	.title2 {
-		background: linear-gradient(90deg, rgba(0, 87, 169, 0.4) 0%, rgba(0, 87, 169, 0) 100%);
+		background: linear-gradient(
+			90deg,
+			rgba(0, 87, 169, 0.4) 0%,
+			rgba(0, 87, 169, 0) 100%
+		);
 		font-weight: 600;
 		font-size: 20px;
-		color: #FFFFFF;
+		color: #ffffff;
 		height: 40px;
 		line-height: 40px;
-		border-left: 4px solid #00DDFF;
+		border-left: 4px solid #00ddff;
 		margin-top: 16px;
 		padding-left: 8px;
 		margin-bottom: 10px;

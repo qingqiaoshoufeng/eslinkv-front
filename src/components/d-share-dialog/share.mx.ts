@@ -1,5 +1,5 @@
 import { copyText } from '../../utils/index'
-
+import { screenShareUpdate, screenShareDetail } from '@/api/screenShare.api.js'
 function fixZero(n) {
 	if (n > 9) {
 		return n
@@ -48,7 +48,7 @@ export default {
 			copyText(this.shareUrl)
 		},
 		async closeShare() {
-			await this.$api.screenShare.screenShareUpdate({
+			await screenShareUpdate({
 				screenId: this.screenId,
 				screenShareType: 'NO',
 			})
@@ -72,12 +72,12 @@ export default {
 				req.screenShareTime = formatTime(newTime)
 				this.deadline = req.screenShareTime
 			}
-			await this.$api.screenShare.screenShareUpdate(req)
+			await screenShareUpdate(req)
 			// this.shareUrl = `${location.origin}/shareScreen/${this.screenId}?layoutMode=${this.platform.layoutMode}`
 		},
 		async init() {
 			this.screenId = this.sid || this.$route.params.id
-			const res = await this.$api.screenShare.screenShareDetail({
+			const res = await screenShareDetail({
 				screenId: this.screenId,
 			})
 			this.shareType = res.screenShareType

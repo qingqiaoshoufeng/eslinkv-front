@@ -56,6 +56,8 @@
 import { Icon } from 'view-design'
 import { SvgIcon, NoData } from '../../../../../components/'
 import { SERVICE_SERVICECUSTOMER_LEGEND_MAP } from '../../serviceCustomer/config'
+import { getServiceCustomerThreeSocialList } from '@/components-map-api/map.serve.api'
+
 export default {
 	name: 'overlayList',
 	components: {
@@ -109,7 +111,7 @@ export default {
 			if (!this.loaded) {
 				this.loading = true
 			}
-			const res = await this.$api.map.serve.getServiceCustomerThreeSocialList()
+			const res = await getServiceCustomerThreeSocialList()
 			this.list = res.map(item => {
 				const { stationType } = item
 				const config = SERVICE_SERVICECUSTOMER_LEGEND_MAP[stationType]

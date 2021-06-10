@@ -1,50 +1,60 @@
 <template lang="pug">
-	.right-panel.animate__animated.animate-fadeInRight
-		.title
-			img(src="../img/title-icon.svg")
-			span 本月LNG场站采购TOP10
-		vueSeamlessScroll(:class-option="option" :data="top10" class="list-wrap")
-			ul.list
-				li(v-for="(k, i) in top10" :key="i")
-					.index(:class="{top: [0, 1, 2].includes(i)}") {{ i > 8 ? i + 1 : '0' + (i + 1) }}
-					.station
-						.station-info
-							.station-name {{ k.name }}
-							.station-area {{ k.ownedCompany }}
-							.station-value
-								em.font-num {{ k.purchaseQty.toLocaleString() }}
-								span 吨
-						.bar-w
-							.bar(:style="{width: k.percent * 100 + '%'}")
-		.title
-			img(src="../img/title-icon.svg")
-			span 最新订单
-			.tabs
-				.tab(:class="{active: activeTab === 'InComplete'}" @click="switchTab('InComplete')") 未完成
-				.tab(:class="{active: activeTab === 'Complete'}" @click="switchTab('Complete')") 今日完成
-		.none(v-if="!order.length")
-			img(src="/static/images/amap/noModel.svg")
-			p 暂无数据
-		vueSeamlessScroll(:class-option="option2" :data="order || []" class="list2-wrap" v-if="order.length")
-			ul.list2
-				li(v-for="(k, i) in order" :key="i")
-					img(src="../img/changzhan.svg")
-					.main
-						.station-info
-							.station-name {{ k.name }}
-							.station-value
-								em.font-num {{ k.purchaseQty.toLocaleString() }}
-								span 吨
+.right-panel.animate__animated.animate-fadeInRight
+	.title
+		img(src="../img/title-icon.svg")
+		span 本月LNG场站采购TOP10
+	vueSeamlessScroll.list-wrap(:class-option="option", :data="top10")
+		ul.list
+			li(v-for="(k, i) in top10", :key="i")
+				.index(:class="{ top: [0, 1, 2].includes(i) }") {{ i > 8 ? i + 1 : '0' + (i + 1) }}
+				.station
+					.station-info
+						.station-name {{ k.name }}
 						.station-area {{ k.ownedCompany }}
-						.state
-							.time {{ k.date }}
-							.state-name(v-if="activeTab === 'InComplete'")
-								.color
-								span {{ k.status }}
+						.station-value
+							em.font-num {{ k.purchaseQty.toLocaleString() }}
+							span 吨
+					.bar-w
+						.bar(:style="{ width: k.percent * 100 + '%' }")
+	.title
+		img(src="../img/title-icon.svg")
+		span 最新订单
+		.tabs
+			.tab(
+				:class="{ active: activeTab === 'InComplete' }",
+				@click="switchTab('InComplete')") 未完成
+			.tab(
+				:class="{ active: activeTab === 'Complete' }",
+				@click="switchTab('Complete')") 今日完成
+	.none(v-if="!order.length")
+		img(src="/static/images/amap/noModel.svg")
+		p 暂无数据
+	vueSeamlessScroll.list2-wrap(
+		:class-option="option2",
+		:data="order || []",
+		v-if="order.length")
+		ul.list2
+			li(v-for="(k, i) in order", :key="i")
+				img(src="../img/changzhan.svg")
+				.main
+					.station-info
+						.station-name {{ k.name }}
+						.station-value
+							em.font-num {{ k.purchaseQty.toLocaleString() }}
+							span 吨
+					.station-area {{ k.ownedCompany }}
+					.state
+						.time {{ k.date }}
+						.state-name(v-if="activeTab === 'InComplete'")
+							.color
+							span {{ k.status }}
 </template>
-
 <script>
 import vueSeamlessScroll from 'vue-seamless-scroll'
+import {
+	getLngPurchaseTopTen,
+	getLngLatestOrders,
+} from '@/components-map-api/map.airSupply.api'
 
 export default {
 	name: 'LngRightPanel',
@@ -73,23 +83,23 @@ export default {
 				waitTime: 1000, // 单步运动停止的时间(默认值1000ms)
 			},
 			top10: [],
-			order: []
+			order: [],
 		}
 	},
 	async created() {
-		this.top10 = await this.$api.map.airSupply.getLngPurchaseTopTen()
+		this.top10 = await getLngPurchaseTopTen()
 		this.handleOrder()
 	},
 	methods: {
-		switchTab (n) {
+		switchTab(n) {
 			this.activeTab = n
 			this.handleOrder()
 		},
-		async handleOrder () {
-			this.order = await this.$api.map.airSupply.getLngLatestOrders({
-				orderType: this.activeTab
+		async handleOrder() {
+			this.order = await getLngLatestOrders({
+				orderType: this.activeTab,
 			})
-		}
+		},
 	},
 }
 </script>
@@ -115,7 +125,7 @@ export default {
 	font-weight: 600;
 	font-size: 24px;
 	line-height: 32px;
-	color: #FFFFFF;
+	color: #ffffff;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 	padding-bottom: 7px;
 	margin-bottom: 8px;
@@ -133,7 +143,7 @@ export default {
 		align-items: center;
 		.tab {
 			padding: 4px 8px;
-			background: #0057A9;
+			background: #0057a9;
 			box-sizing: border-box;
 			border-radius: 4px;
 			margin-left: 8px;
@@ -144,8 +154,8 @@ export default {
 			cursor: pointer;
 			&.active {
 				font-weight: 600;
-				color: #FFFFFF;
-				border: 1px solid #00DDFF;
+				color: #ffffff;
+				border: 1px solid #00ddff;
 			}
 		}
 	}
@@ -163,12 +173,12 @@ export default {
 			font-size: 24px;
 			line-height: 40px;
 			text-align: center;
-			color: #FFFFFF;
+			color: #ffffff;
 			background: rgba(0, 221, 255, 0.5);
-			border-top: 2px solid #00DDFF;
+			border-top: 2px solid #00ddff;
 			&.top {
 				background: rgba(229, 97, 91, 0.8);
-				border-top: 2px solid #FFDC45;
+				border-top: 2px solid #ffdc45;
 			}
 		}
 		.station {
@@ -179,14 +189,14 @@ export default {
 				.station-name {
 					font-weight: bold;
 					font-size: 20px;
-					color: #FFFFFF;
+					color: #ffffff;
 					margin-right: 4px;
 				}
 				.station-area {
-					background: #0057A9;
+					background: #0057a9;
 					border-radius: 4px;
 					font-size: 18px;
-					color: #FFFFFF;
+					color: #ffffff;
 					padding: 0 4px;
 				}
 				.station-value {
@@ -195,7 +205,7 @@ export default {
 					em {
 						font-weight: bold;
 						font-size: 24px;
-						color: #FFFFFF;
+						color: #ffffff;
 					}
 					span {
 						font-size: 20px;
@@ -204,13 +214,17 @@ export default {
 				}
 			}
 			.bar-w {
-				background: #0057A9;
+				background: #0057a9;
 				height: 8px;
 				.bar {
-					background: linear-gradient(270deg, #00DDFF 0%, rgba(0, 221, 255, 0.5) 100%);
+					background: linear-gradient(
+						270deg,
+						#00ddff 0%,
+						rgba(0, 221, 255, 0.5) 100%
+					);
 					height: 8px;
 					position: relative;
-					&:after{
+					&:after {
 						position: absolute;
 						top: 0;
 						right: 0;
@@ -242,10 +256,14 @@ export default {
 	li {
 		display: flex;
 		padding: 12px 8px;
-		&:nth-child(2n+1) {
-			background: linear-gradient(180deg, rgba(0, 87, 169, 0.3) 0%, rgba(0, 87, 169, 0.5) 100%);
+		&:nth-child(2n + 1) {
+			background: linear-gradient(
+				180deg,
+				rgba(0, 87, 169, 0.3) 0%,
+				rgba(0, 87, 169, 0.5) 100%
+			);
 		}
-		>img {
+		> img {
 			width: 40px;
 			height: 40px;
 			margin-right: 8px;
@@ -254,10 +272,10 @@ export default {
 			flex: 1;
 			.station-area {
 				display: inline-block;
-				background: #0057A9;
+				background: #0057a9;
 				border-radius: 4px;
 				font-size: 18px;
-				color: #FFFFFF;
+				color: #ffffff;
 				padding: 0 4px;
 				margin-top: 12px;
 			}
@@ -267,7 +285,7 @@ export default {
 				.station-name {
 					font-weight: bold;
 					font-size: 20px;
-					color: #FFFFFF;
+					color: #ffffff;
 					margin-right: 4px;
 				}
 				.station-value {
@@ -276,7 +294,7 @@ export default {
 					em {
 						font-weight: bold;
 						font-size: 24px;
-						color: #FFFFFF;
+						color: #ffffff;
 					}
 					span {
 						font-size: 20px;
@@ -291,18 +309,18 @@ export default {
 				margin-top: 8px;
 				.time {
 					font-size: 18px;
-					color: #FFFFFF;
+					color: #ffffff;
 				}
 				.state-name {
 					font-size: 20px;
 					text-align: right;
-					color: #FFDC45;
+					color: #ffdc45;
 					display: flex;
 					align-items: center;
 					.color {
 						width: 8px;
 						height: 8px;
-						background: #FFDC45;
+						background: #ffdc45;
 						border-radius: 50%;
 						margin-right: 8px;
 					}

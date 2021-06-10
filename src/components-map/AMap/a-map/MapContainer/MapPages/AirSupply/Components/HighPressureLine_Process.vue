@@ -1,5 +1,7 @@
 <script>
 import overlayMixin from '../../../../mixins/overlayMixin.js'
+import { getHighPressureLineProcess } from '@/components-map-api/map.mock.api'
+
 export default {
 	name: 'HighPressureLine_Process',
 	mixins: [overlayMixin],
@@ -14,7 +16,7 @@ export default {
 			if (this.data) {
 				data = this.data
 			} else {
-				data = await this.$api.map.mock.getHighPressureLineProcess()
+				data = await getHighPressureLineProcess()
 			}
 			data.forEach(line => {
 				const polyLine = new AMap.Polyline({

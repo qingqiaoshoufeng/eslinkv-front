@@ -49,10 +49,11 @@
 		</div>
 	</div>
 </template>
-
 <script>
 import { SvgIcon, NoData } from '../../../../../components/'
 import { Icon } from 'view-design'
+import { getServiceCustomerTaskList } from '@/components-map-api/map.serve.api'
+
 export default {
 	name: 'realTime',
 	components: {
@@ -107,7 +108,7 @@ export default {
 			if (!this.loaded) {
 				this.loading = true
 			}
-			const data = await this.$api.map.serve.getServiceCustomerTaskList()
+			const data = await getServiceCustomerTaskList()
 			this.list = data
 			this.loading = false
 			this.loaded = true
@@ -127,7 +128,6 @@ export default {
 	},
 }
 </script>
-
 <style lang="scss" scoped>
 ::v-deep.demo-spin-icon-load {
 	position: absolute;

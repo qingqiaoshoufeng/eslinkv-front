@@ -63,7 +63,11 @@ import {
 	SERVICE_SERVICENINETEEN_OVERLAY_MAP,
 	DATASTATISTICSLIST,
 } from './config'
-
+import {
+	getNineteenStatisticsInfo,
+	getICcustomerStationList,
+	getNineteenStationDetailInfo,
+} from '@/components-map-api/map.serve.api'
 const componentPageArr = [
 	// legend覆盖物
 	'BranchCompany',
@@ -174,9 +178,7 @@ export default {
 				queryId: 898,
 				params: '',
 			}
-			const res = await this.$api.map.serve.getNineteenStatisticsInfo(
-				params,
-			)
+			const res = await getNineteenStatisticsInfo(params)
 
 			this.dataStatisticsInfo = res[0]
 		},
@@ -194,9 +196,7 @@ export default {
 				types: ['BranchCompany'].toString(),
 			}
 
-			const res = await this.$api.map.serve.getICcustomerStationList(
-				params,
-			)
+			const res = await getICcustomerStationList(params)
 			res.branchCompanyList = res.branchCompanyList.filter(
 				item => !item.name.includes('大江东'),
 			)
@@ -214,9 +214,7 @@ export default {
 				type: name,
 			}
 			params.params = JSON.stringify(params)
-			const res = await this.$api.map.serve.getNineteenStationDetailInfo(
-				params,
-			)
+			const res = await getNineteenStationDetailInfo(params)
 			this.detailInfo = res[0]
 			this.showOverlayDetail = this.$refs.BranchCompany[0].mouseIn
 		},

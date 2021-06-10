@@ -32,6 +32,7 @@ import { Vue, Component, Watch } from 'vue-property-decorator'
 import itemCard from './item-card.vue'
 import format from 'date-fns/format'
 import { Page, Button, Input, DatePicker, Select, Option } from 'view-design'
+import { list } from '@/api/screen.api.js'
 
 @Component({
 	components: {
@@ -56,21 +57,21 @@ export default class EditManger extends Vue {
 	}
 
 	@Watch('date')
-	dateChange(val) {
+	dateChange(val): void {
 		if (!val[0] || !val[1]) return
 		this.query.beginTime = format(val[0], 'yyyy-MM-dd')
 		this.query.endTime = format(val[1], 'yyyy-MM-dd')
 	}
 
-	handleNew() {
+	handleNew(): void {
 		this.$router.push('/editor/new')
 	}
 
-	reload() {
+	reload(): void {
 		;(this.$refs.page as any).reload()
 	}
 
-	search() {
+	search(): void {
 		this.init({
 			pageSize: 10,
 			pageNum: 1,
@@ -90,7 +91,7 @@ export default class EditManger extends Vue {
 				result[key] = data[key]
 			}
 		}
-		const res = await this.$api.screen.list(result)
+		const res = await list(result)
 		this.loaded = true
 		this.list = res.list
 		this.total = res.count

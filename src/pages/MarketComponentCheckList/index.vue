@@ -24,6 +24,7 @@ import { Table, Button } from 'view-design'
 import dialogCheck from './dialogCheckComponent.vue'
 import { Editor } from '@eslinkv/core'
 import common from '../../store/common.store.js'
+import { list } from '@/api/marketComponent.api.js'
 
 @Component({
 	components: {
@@ -75,7 +76,7 @@ export default class Market extends Vue {
 	}
 
 	async init({ pageNum, pageSize }) {
-		const res = await this.$api.marketComponent.list({
+		const res = await list({
 			pageNum,
 			pageSize,
 			status: 'PENDING',

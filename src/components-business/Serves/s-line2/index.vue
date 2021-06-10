@@ -36,6 +36,7 @@
 import { widgetMixin } from '@eslinkv/vue2'
 import getOption from './options'
 import { customConfig, value } from './index.component'
+import { businessAnalysisType } from '@/components-business-api/bussiness.api'
 
 export default {
 	mixins: [widgetMixin],
@@ -142,7 +143,7 @@ export default {
 		this.configValue = this.parseConfigValue(value, customConfig)
 	},
 	mounted() {
-		this.$api.bussiness.businessAnalysisType().then(res => {
+		businessAnalysisType().then(res => {
 			this.list = res.typeList
 		})
 	},

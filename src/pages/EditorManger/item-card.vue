@@ -33,6 +33,7 @@ import { Button, Icon, Modal, Input } from 'view-design'
 import EmptyImage from '../../components/empty-image/index.vue'
 import { Vue, Component, Prop } from 'vue-property-decorator'
 // import dShareDialog from '../../components/d-share-dialog/index.vue'
+import { destroy } from '@/api/screen.api.js'
 
 @Component({
 	components: {
@@ -86,13 +87,11 @@ export default class ItemCard extends Vue {
 			content: '确认删除吗？',
 			loading: true,
 			onOk: () => {
-				this.$api.screen
-					.destroy({ screenId: this.screenId })
-					.then(() => {
-						this.$Message.success('删除成功')
-						this.$Modal.remove()
-						this.$emit('reload')
-					})
+				destroy({ screenId: this.screenId }).then(() => {
+					this.$Message.success('删除成功')
+					this.$Modal.remove()
+					this.$emit('reload')
+				})
 			},
 		})
 	}

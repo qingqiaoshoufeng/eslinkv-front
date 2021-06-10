@@ -105,6 +105,12 @@ import {
 	SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
 	SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP,
 } from './config.js'
+import {
+	getThreeSocialLinkagecustmerHot,
+	getServiceCustomerThreeSocialDetail,
+	getServiceCustomerStationList,
+} from '@/components-map-api/map.serve.api.js'
+
 const componentPageArr = [
 	'ThreeSocialLinkage',
 	'ServiceNetworkStation',
@@ -139,6 +145,12 @@ componentCommonArr.map(componentName => {
 		)
 })
 import { Editor } from '@eslinkv/core'
+import {
+	getServiceCustomerStatisticsInfo,
+	getServiceCustomerTaskList,
+	getServiceCustomerDetialInfo,
+} from '@/components-map-api/map.serve.api.js'
+
 export default {
 	name: 'ServiceCustomer',
 	components: {
@@ -223,8 +235,7 @@ export default {
 		},
 		// 获取三社联动热力数据信息
 		async getThreeSocialLinkagecustmerHot() {
-			const res = await this.$api.map.serve.getThreeSocialLinkagecustmerHot()
-
+			const res = await getThreeSocialLinkagecustmerHot()
 			this.allTypeStationList.CustomerHotList = res.customer
 		},
 		// 点击覆盖物icon
@@ -313,19 +324,17 @@ export default {
 			const { id } = this.activeOverlay
 			// 打开三社联动的弹框
 			THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
-				this.$api.map.serve
-					.getServiceCustomerThreeSocialDetail({ id })
-					.then(res => {
-						this.editor.updateComponent(i, {
-							data: res,
-						})
-						this.editor.openScene(THREESOCIALLINKAGE_SCENEINDEX)
+				getServiceCustomerThreeSocialDetail({ id }).then(res => {
+					this.editor.updateComponent(i, {
+						data: res,
 					})
+					this.editor.openScene(THREESOCIALLINKAGE_SCENEINDEX)
+				})
 			})
 		},
 		// 客户服务统一数据
 		async getDataStatisticsList() {
-			this.dataStatisticsInfo = await this.$api.map.serve.getServiceCustomerStatisticsInfo()
+			this.dataStatisticsInfo = await getServiceCustomerStatisticsInfo()
 		},
 		// 查询客户服务站点列表
 		async getAllTypeStationList() {
@@ -336,16 +345,14 @@ export default {
 					'ThreeSocialLinkage',
 				].toString(),
 			}
-			const res = await this.$api.map.serve.getServiceCustomerStationList(
-				params,
-			)
+			const res = await getServiceCustomerStationList(params)
 			this.allTypeStationList = { ...this.allTypeStationList, ...res }
 		},
 		// 查询三社联动站点列表
 
 		// 获取任务工单列表
 		async getTasklist() {
-			const TaskList = await this.$api.map.serve.getServiceCustomerTaskList()
+			const TaskList = await getServiceCustomerTaskList()
 			this.allTypeStationList = {
 				...this.allTypeStationList,
 				TaskList,
@@ -353,7 +360,7 @@ export default {
 		},
 		// 查看详情接口
 		getDetailInfo(params) {
-			return this.$api.map.serve.getServiceCustomerDetialInfo(params)
+			return getServiceCustomerDetialInfo(params)
 		},
 	},
 	mounted() {

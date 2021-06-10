@@ -14,6 +14,8 @@
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index'
+import { getWarningList } from '@/components-map-api/map.mock.api'
+
 export default {
 	name: 'ListOverlay',
 	components: {
@@ -26,7 +28,7 @@ export default {
 				1: 'iconxieloushijian',
 			}
 			return new Promise(async (resolve, reject) => {
-				let list = await this.$api.map.mock.getWarningList()
+				let list = await getWarningList()
 				// 根据事件类型，判断图标，根据状态，显示图标颜色
 				list = list.map(item => {
 					const { status, eventType } = item

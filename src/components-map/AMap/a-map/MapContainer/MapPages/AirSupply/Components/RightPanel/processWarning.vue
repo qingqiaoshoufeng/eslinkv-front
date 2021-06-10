@@ -96,10 +96,10 @@
 		</div>
 	</div>
 </template>
-
 <script>
 import { SvgIcon, NoData } from '../../../../../components/'
 import { Icon, Select, Option } from 'view-design'
+import { getProcessWarningList } from '@/components-map-api/map.airSupply.api'
 
 export default {
 	name: 'ProcessWarningList',
@@ -162,7 +162,7 @@ export default {
 			if (!this.loaded) {
 				this.loading = true
 			}
-			this.list = await this.$api.map.airSupply.getProcessWarningList({
+			this.list = await getProcessWarningList({
 				priority: this.currentLevel,
 				status: this.repairState,
 			})

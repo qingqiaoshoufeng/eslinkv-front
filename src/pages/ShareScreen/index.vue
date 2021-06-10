@@ -31,6 +31,8 @@ import { dView, dDetail } from '@eslinkv/vue2'
 import { Editor } from '@eslinkv/core'
 import { Input, Button } from 'view-design'
 import VueCountdown from '@chenfengyuan/vue-countdown'
+import { screenShareLogin, screenShareUse } from '@/api/screenShare.api.js'
+
 let shareInfo: any
 
 @Component({
@@ -56,7 +58,7 @@ export default class detail extends Vue {
 
 	async unlock() {
 		if (!this.pwd) return
-		const res = await this.$api.screenShare.screenShareLogin({
+		const res = await screenShareLogin({
 			screenId: this.$route.params.shareScreenId,
 			screenSharePassword: this.pwd,
 		})
@@ -65,7 +67,7 @@ export default class detail extends Vue {
 	}
 
 	async mounted() {
-		shareInfo = await this.$api.screenShare.screenShareUse({
+		shareInfo = await screenShareUse({
 			screenId: this.$route.params.shareScreenId,
 		})
 		this.shareType = shareInfo.screenShareType

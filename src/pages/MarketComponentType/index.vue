@@ -32,6 +32,7 @@ import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button } from 'view-design'
 import dialogComponentType from './dialogComponentType.vue'
 import common from '../../store/common.store.js'
+import { levelList, destroy } from '@/api/marketComponentType.api.js'
 
 @Component({
 	components: {
@@ -67,18 +68,18 @@ export default class MarketComponentType extends Vue {
 
 	handleLoadData(item, callback) {
 		if (this.common.user.userAdmin) {
-			this.$api.marketComponentType
-				.levelList({ componentTypeParentId: item.componentTypeId })
-				.then(res => {
+			levelList({ componentTypeParentId: item.componentTypeId }).then(
+				res => {
 					callback(res)
-				})
+				},
+			)
 		} else {
 			callback([])
 		}
 	}
 
 	init() {
-		this.$api.marketComponentType.levelList().then(res => {
+		levelList().then(res => {
 			res.map(item => {
 				item.children = []
 				item._loading = false
@@ -96,7 +97,7 @@ export default class MarketComponentType extends Vue {
 			content: '确认删除吗？',
 			loading: true,
 			onOk: async () => {
-				await this.$api.marketComponentType.destroy({
+				await destroy({
 					componentTypeId: row.componentTypeId,
 				})
 				this.$Message.success('删除成功')
@@ -106,23 +107,23 @@ export default class MarketComponentType extends Vue {
 		})
 	}
 
-	create() {
+	create(): void {
 		this.dialogEditShow = true
 		this.currentRow = {
 			componentTypeName: '',
 		}
 	}
 
-	edit(row) {
+	edit(row): void {
 		this.currentRow = { ...row }
 		this.dialogEditShow = true
 	}
 
-	reload() {
+	reload(): void {
 		;(this.$refs.page as any).reload()
 	}
 
-	mounted() {
+	mounted(): void {
 		common.actions.setNavIndex('/market/componentList')
 	}
 }

@@ -16,6 +16,8 @@
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index'
+import { getPipeManageMentStationList } from '@/components-map-api/map.mock.api'
+
 export default {
 	name: 'PipeManageMentStation',
 	components: {
@@ -45,7 +47,7 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = this.$api.map.mock.getPipeManageMentStationList
+		const apiFun = getPipeManageMentStationList
 		return {
 			apiFun: apiFun,
 		}

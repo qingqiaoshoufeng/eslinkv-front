@@ -6,13 +6,15 @@
 			:data="activeWarnData"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
-			:width="activeWarnData.overlayType === 'VoltageRegulator' ? 700 : 400"
+			:width="
+				activeWarnData.overlayType === 'VoltageRegulator' ? 700 : 400
+			"
 			ref="WarnEvent"
 		>
 			<VoltageRegulator
 				:data="activeWarnData"
-				v-if="activeWarnData.overlayType === 'VoltageRegulator'">
-			</VoltageRegulator>
+				v-if="activeWarnData.overlayType === 'VoltageRegulator'"
+			></VoltageRegulator>
 		</WarnEvent>
 		<!-- 特殊 中低压管网需要legend控制显隐 -->
 		<AMapTile
@@ -51,8 +53,8 @@
 		>
 			<VoltageRegulator
 				:data="activeOverlay"
-				v-if="activeOverlay.type === 'VoltageRegulator'">
-			</VoltageRegulator>
+				v-if="activeOverlay.type === 'VoltageRegulator'"
+			></VoltageRegulator>
 		</OverlayDetail>
 		<portal to="destination">
 			<!-- 统计数据 -->
@@ -74,7 +76,7 @@
 				v-bind="{
 					stationList,
 					rightListActiveItemMap,
-					markerConfig: legendMap
+					markerConfig: legendMap,
 				}"
 				ref="RightPanel1"
 			></RightPanel>
@@ -95,7 +97,10 @@ import {
 	AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 } from './config.js'
 import getHangZhouGasGISPosition from '../../../../utils/getHangZhouGasGISPosition'
-
+import {
+	getAllTypeStationList,
+	getStatisticsInfo,
+} from '@/components-map-api/map.airSupply.api'
 const componentPageArr = [
 	// legend覆盖物
 	'ServiceStation',
@@ -254,9 +259,7 @@ export default {
 					'VoltageRegulator', // '调压器',
 				].toString(),
 			}
-			const res = await this.$api.map.airSupply.getAllTypeStationList(
-				params,
-			)
+			const res = await getAllTypeStationList(params)
 			let {
 				serviceStationList,
 				pipeManageMentStationList,
@@ -299,9 +302,9 @@ export default {
 		},
 		// 获取统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsData = await this.$api.map.airSupply.getStatisticsInfo(
-				{ type: 'LowPressure' },
-			)
+			this.dataStatisticsData = await getStatisticsInfo({
+				type: 'LowPressure',
+			})
 		},
 		// 获取瓦片函数
 		getTileUrl(x, y, zoom) {
