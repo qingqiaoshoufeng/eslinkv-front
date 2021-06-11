@@ -63,7 +63,7 @@ export default class detail extends Vue {
 			screenSharePassword: this.pwd,
 		})
 		this.maskShow = false
-		;(this.$refs.dDetail as any).refillConfig(res)
+		this.editor.init(res)
 	}
 
 	async mounted() {
@@ -73,15 +73,14 @@ export default class detail extends Vue {
 		this.shareType = shareInfo.screenShareType
 		if (this.shareType === 'ALL') {
 			this.maskShow = false
-			;(this.$refs.dDetail as any).refillConfig(shareInfo)
+			this.editor.init(shareInfo)
 		}
 		if (this.shareType === 'TIME') {
 			this.leftTime =
 				new Date(shareInfo.screenShareTime).getTime() -
 				new Date().getTime()
 			this.isOvertime = this.leftTime <= 0
-			!this.isOvertime &&
-				(this.$refs.dDetail as any).refillConfig(shareInfo)
+			!this.isOvertime && this.editor.init(shareInfo)
 		}
 	}
 }
