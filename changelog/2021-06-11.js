@@ -36,5 +36,14 @@ export default {
 			type: ['perf'],
 			content: '分离npm包，@eslinkv/core @eslinkv/vue2',
 		},
+		{
+			type: ['refactor'],
+			content: '画布区抓手动作优化',
+		},
+		{
+			type: ['refactor'],
+			content:
+				'删除组件优化，删除组件后将进入回收站，可对组件进行恢复，场景增加清空当前场景组件的功能',
+		},
 	],
 }
