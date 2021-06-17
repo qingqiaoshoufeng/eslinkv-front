@@ -45,5 +45,17 @@ export default {
 			content:
 				'删除组件优化，删除组件后将进入回收站，可对组件进行恢复，场景增加清空当前场景组件的功能',
 		},
+		{
+			type: ['refactor'],
+			content: '添加自定义数据过滤器功能',
+		},
+		{
+			type: ['refactor'],
+			content: '添加鼠标右键事件',
+		},
+		{
+			type: ['refactor'],
+			content: '编辑菜单图标优化',
+		},
 	],
 }

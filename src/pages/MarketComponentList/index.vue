@@ -11,7 +11,6 @@ e-layout
 				type="primary",
 				:style="{ marginLeft: '10px' }",
 				@click="handleTheme") 主题配色
-			i-button(type="primary", @click="handleDownload", style="margin-left: auto") 下载组件开发工具
 		.search
 		e-page(
 			@init="init",
@@ -54,10 +53,6 @@ export default class MarketComponentList extends Vue {
 		this.loaded = true
 		this.list = res.list
 		this.total = res.count
-	}
-
-	handleDownload(): void {
-		window.open('https://www.npmjs.com/package/eslinkv-sdk')
 	}
 
 	handleTheme(): void {

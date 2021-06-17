@@ -14,7 +14,6 @@ import addMonths from 'date-fns/addMonths'
 import isSameMonth from 'date-fns/isSameMonth'
 import format from 'date-fns/format'
 import { customConfig, value } from './index.component'
-
 @Component
 class HDateMonth extends mixins(widgetMixin) {
 	lastDay: Date = new Date()
