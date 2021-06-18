@@ -116,7 +116,7 @@ export default {
 		},
 		viewDetail(marker) {
 			const { name, id } = marker
-			this.editor.openScene(AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX)
+			this.editor.openScene(AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX, 'slideInRight')
 			this.$nextTick(() => {
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach(item => {
 					this.editor.updateComponent(item, {
