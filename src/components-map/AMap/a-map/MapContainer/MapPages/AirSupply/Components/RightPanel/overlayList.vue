@@ -114,6 +114,7 @@ export default {
 	methods: {
 		changeType(type) {
 			this.type = type
+			this.currName = this.points.find(v => v.type === type).label
 			this.isShowOption = false
 		},
 		clearSearch() {
