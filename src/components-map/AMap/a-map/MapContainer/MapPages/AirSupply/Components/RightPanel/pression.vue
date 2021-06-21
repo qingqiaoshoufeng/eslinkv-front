@@ -1,21 +1,17 @@
 <template lang="pug">
-ul.VoltageRegulator
-	NoData(:show="!list.length")
-	li(
-		v-for="(k, i) in list",
-		:key="i",
-		v-if="list.length",
-		@click="handleClick(k)")
-		img(src="./img/press.svg")
-		.main
-			.main-1
-				.title {{ k.name }}
-				.time {{ k.time }}
-			.main-2
-				.address {{ k.address }}
-				.status
-					.color
-					span {{ k.status }}
+	ul.VoltageRegulator
+		NoData(:show="!list.length")
+		li(v-for="(k, i) in list" :key="i" v-if="list.length" @click="handleClick(k)")
+			img(src="./img/press.svg")
+			.main
+				.main-1
+					.title {{ k.name }}
+					.time {{ k.time }}
+				.main-2
+					.address {{ k.address }}
+					.status(:class="{ normal: !k.alarming }")
+						.color
+						span {{ k.status }}
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
@@ -95,6 +91,12 @@ export default class PressureRegulating extends Vue {
 					border-radius: 50%;
 					background: #ffdc45;
 					margin-right: 8px;
+				}
+				&.normal {
+					color: #fff;
+					.color {
+						background: #fff;
+					}
 				}
 			}
 		}

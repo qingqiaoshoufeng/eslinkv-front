@@ -211,7 +211,7 @@ export default {
 					}% - ${marginBottom}px`
 			}
 		},
-	}
+	},
 }
 </script>
 
@@ -241,7 +241,7 @@ export default {
 	padding: 16px;
 	font-size: 16px;
 	color: #fff;
-	background: rgba(0, 11, 37, 0.8);
+	background: rgba(0, 11, 37, 1);
 	border: 1px solid #0df;
 	transform: translate(-50%, -100%);
 

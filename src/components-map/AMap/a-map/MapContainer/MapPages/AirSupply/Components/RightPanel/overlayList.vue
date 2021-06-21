@@ -5,14 +5,16 @@
 				<span>{{ currName }}</span>
 				<Icon type="ios-arrow-down" />
 			</div>
-			
+
 			<ul class="options" v-show="isShowOption">
 				<li
 					v-for="(k, i) in points"
 					:key="i"
 					@click="changeType(k.type)"
-					:class="{active: type === k.type}"
-				>{{ k.label }}</li>
+					:class="{ active: type === k.type }"
+				>
+					{{ k.label }}
+				</li>
 			</ul>
 		</div>
 		<div class="search">
@@ -43,7 +45,8 @@
 						class="panel-type-icon"
 					></SvgIcon>
 					<div class="content">
-						{{ item.name }}
+						<p>{{ item.name }}</p>
+						<p class="address">{{ item.address }}</p>
 					</div>
 				</div>
 				<div class="row">
@@ -65,7 +68,7 @@ export default {
 	components: {
 		SvgIcon,
 		NoData,
-		Icon
+		Icon,
 	},
 	data() {
 		return {
@@ -77,9 +80,9 @@ export default {
 			points: [
 				{
 					label: '全部点位',
-					type: ''
-				}
-			]
+					type: '',
+				},
+			],
 		}
 	},
 	props: {
@@ -95,7 +98,7 @@ export default {
 				return []
 			},
 		},
-		markerConfig: Object
+		markerConfig: Object,
 	},
 	computed: {
 		showStationList() {
@@ -104,8 +107,11 @@ export default {
 				res = res.filter(item => item.type === this.type)
 			}
 			if (this.searchName) {
-				res = res.filter(item =>
-					item.name.includes(this.searchName) || (item.address || '').includes(this.searchName))
+				res = res.filter(
+					item =>
+						item.name.includes(this.searchName) ||
+						(item.address || '').includes(this.searchName),
+				)
 			}
 			return res
 		},
@@ -113,6 +119,7 @@ export default {
 	methods: {
 		changeType(type) {
 			this.type = type
+			this.currName = this.points.find(v => v.type === type).label
 			this.isShowOption = false
 		},
 		clearSearch() {
@@ -126,14 +133,14 @@ export default {
 			)
 		},
 	},
-	created () {
+	created() {
 		Object.keys(this.markerConfig).forEach(key => {
 			this.points.push({
 				type: key,
-				...this.markerConfig[key]
+				...this.markerConfig[key],
 			})
 		})
-	}
+	},
 }
 </script>
 
@@ -143,12 +150,12 @@ export default {
 	margin-top: 8px;
 	.select-show {
 		cursor: pointer;
-		background: #0057A9;
+		background: #0057a9;
 		border-radius: 4px;
 		width: 100%;
 		height: 40px;
 		font-size: 20px;
-		color: #FEFFFF;
+		color: #feffff;
 		padding: 0 16px;
 		display: flex;
 		justify-content: space-between;
@@ -160,18 +167,19 @@ export default {
 		left: 0;
 		width: 100%;
 		padding: 8px 0;
-		background: #0057A9;
-		border: 1px solid #00DDFF;
+		background: #0057a9;
+		border: 1px solid #00ddff;
 		border-radius: 4px;
 		li {
 			font-size: 20px;
 			color: rgba(255, 255, 255, 0.75);
 			text-align: left;
 			padding: 8px 16px;
-			&.active, &:hover {
+			&.active,
+			&:hover {
 				background: rgba(0, 221, 255, 0.3);
 				font-weight: 600;
-				color: #FFFFFF;
+				color: #ffffff;
 			}
 		}
 	}
@@ -249,7 +257,7 @@ export default {
 
 		.row {
 			display: flex;
-			align-items: center;
+			align-items: baseline;
 
 			.status-err {
 				color: #ffdc45;
@@ -260,11 +268,13 @@ export default {
 			}
 
 			.content {
-				display: flex;
 				flex: 1;
-				align-items: center;
 				margin-left: 12px;
 				font-size: 24px;
+				.address {
+					font-size: 18px;
+					margin-top: 5px;
+				}
 			}
 
 			.station-name {
