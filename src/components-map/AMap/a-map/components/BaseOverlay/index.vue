@@ -14,10 +14,6 @@
 			@mouseover="handleMouseOver(item)"
 			@mouseleave="handleMouseLeave(item)"
 		>
-			<!-- 默认显示配置的icon -->
-			<template slot="icon">
-				<slot name="icon"></slot>
-			</template>
 			<slot :data="item">
 				<!-- 默认显示图标的名字 -->
 				<div

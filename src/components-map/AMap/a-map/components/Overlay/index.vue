@@ -8,16 +8,14 @@
 		ref="marker"
 	>
 		<div :class="['sample', active ? 'active' : '']" v-on="$listeners">
-			<slot name="icon">
-				<SvgIcon
-					class="sample-icon"
-					:iconName="marker.icon"
-					:style="{
+      <SvgIcon
+          class="sample-icon"
+          :iconName="marker.icon"
+          :style="{
 						fontSize: (marker.iconSize || 38) + 'px',
 						backfaceVisibility: 'hidden',
 					}"
-				></SvgIcon>
-			</slot>
+      ></SvgIcon>
 			<slot></slot>
 		</div>
 	</AMapMarker>
