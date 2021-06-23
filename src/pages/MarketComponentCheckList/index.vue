@@ -110,6 +110,7 @@ export default class Market extends Vue {
 			startX: 0,
 			startY: 0,
 		}
+		this.editor.screen.screenWidgets = {}
 		this.editor.createWidget(0, 0, data)
 	}
 
