@@ -28,7 +28,7 @@ import { getAllTypeStationList } from '@/components-map-api/map.airSupply.api.js
 export default {
 	data() {
 		return {
-			editor: Editor.instance(),
+			editor: Editor.Instance(),
 			list: [],
 			showOptions: false,
 			selectLabel: '',
@@ -86,7 +86,9 @@ export default {
 	},
 	mounted() {
 		getAllTypeStationList({ types: 'GasStation' }).then(res => {
+			console.log(res.gasStationList)
 			this.list = res.gasStationList
+			console.log(this.list)
 		})
 	},
 }
