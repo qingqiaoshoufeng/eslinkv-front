@@ -106,10 +106,11 @@ export default class Market extends Vue {
 			config: this.selectOne.componentConfig,
 			market: true,
 			type: this.selectOne.componentEnTitle,
+			componentVersion: this.selectOne.componentVersion,
 			startX: 0,
 			startY: 0,
 		}
-		this.editor.createWidget(0, 0, JSON.stringify(data))
+		this.editor.createWidget(0, 0, data)
 	}
 
 	reload(): void {
