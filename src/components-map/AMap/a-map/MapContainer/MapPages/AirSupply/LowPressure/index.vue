@@ -305,6 +305,7 @@ export default {
 			this.dataStatisticsData = await getStatisticsInfo({
 				type: 'LowPressure',
 			})
+      this.dataStatisticsData.passRate  = (this.dataStatisticsData.passRate * 100).toFixed(1) + '%'
 		},
 		// 获取瓦片函数
 		getTileUrl(x, y, zoom) {

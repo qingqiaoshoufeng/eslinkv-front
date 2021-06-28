@@ -300,6 +300,7 @@ export {
 	citizenNumber,
 	publicBuildNumber,
 	industryNumber,
+	LowPressurePassRate,
 	businessServe,
 	citizenNumberDetial,
 	publicBuildNumberDetial,
