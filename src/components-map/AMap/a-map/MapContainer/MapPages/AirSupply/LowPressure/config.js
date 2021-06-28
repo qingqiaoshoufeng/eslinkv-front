@@ -6,6 +6,7 @@ import {
 	LowPressureManageStation,
 	LowPressureOnNumber,
 	LowPressureUnderNumber,
+	LowPressurePassRate,
 } from '../../../../utils/dictionary'
 
 // 首页覆盖物配置项
@@ -197,4 +198,5 @@ export const DATASTATISTICSLIST = [
 	LowPressureManageStation,
 	LowPressureOnNumber,
 	LowPressureUnderNumber,
+	LowPressurePassRate,
 ]

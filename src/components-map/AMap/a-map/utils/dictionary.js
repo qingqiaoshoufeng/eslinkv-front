@@ -148,6 +148,11 @@ const LowPressureUnderNumber = {
 	prop: 'down',
 	type: 'warning',
 }
+const LowPressurePassRate = {
+	label: '合格率',
+	DW: '',
+	prop: 'passRate',
+}
 // lng站统计数据
 const LNGstationNumber = {
 	label: 'LNG站点',
