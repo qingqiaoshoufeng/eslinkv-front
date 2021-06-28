@@ -3,10 +3,8 @@ import App from './App.vue'
 import router from './router'
 import { Message, Modal } from 'view-design'
 import { format } from 'date-fns'
-import VueVideoPlayer from 'vue-video-player'
 import '@eslinkv/core/lib/core.css'
 import '@eslinkv/vue2/lib/v2.css'
-import 'video.js/dist/video-js.css'
 import './components-business/index.ts'
 import './components-map/index.ts'
 import PortalVue from 'portal-vue'
@@ -20,7 +18,6 @@ import eHeader from './components/e-header/index.vue'
 import ePage from './components/e-page/index.vue'
 
 Vue.use(PortalVue)
-Vue.use(VueVideoPlayer)
 
 Vue.component('e-layout', eLayout)
 Vue.component('e-card', eCard)

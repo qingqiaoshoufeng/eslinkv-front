@@ -5,7 +5,7 @@ const needReport = false
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-	transpileDependencies: ['@simonwep', 'swiper', 'dom7'],
+	transpileDependencies: ['@simonwep', 'dom7'],
 	assetsDir: 'static',
 	publicPath: '/',
 	outputDir: 'dist',
