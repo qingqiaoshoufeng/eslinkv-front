@@ -50,23 +50,39 @@ export default class MarketEditDialog extends Vue {
 		document
 			.getElementsByClassName('widget-part')[0]
 			.classList.remove('animate__fadeIn')
-		html2canvas(
-			document.getElementsByClassName('widget-part')[0] as HTMLElement,
-			{
-				allowTaint: true,
-				scale: 1,
-				useCORS: true,
-				backgroundColor: 'transparent',
-			},
-		).then(canvas => {
-			canvas.toBlob(
-				blob => {
-					this.upload(blob)
+			html2canvas(
+				document.getElementsByClassName('widget-part')[0] as HTMLElement,
+				{
+					allowTaint: true,
+					scale: 1,
+					useCORS: true,
+					backgroundColor: 'transparent',
 				},
-				'image/png',
-				0.9,
-			)
-		})
+			).then(canvas => {
+				canvas.toBlob(
+					blob => {
+						this.upload(blob)
+					},
+					'image/png',
+					0.9,
+				)
+			}).catch(e=>{
+				console.log(e)
+				this.$Message.error('组件截图失败')
+				checkSuccess({
+					componentId: this.detail.componentId,
+					componentAvatar: '',
+					componentEnTitle: this.detail.componentEnTitle,
+				})
+					.then(() => {
+						this.modalShow = false
+						this.loading = false
+						this.$emit('reload')
+					})
+					.catch(() => {
+						this.loading = false
+					})
+			})
 	}
 
 	upload(blob) {
