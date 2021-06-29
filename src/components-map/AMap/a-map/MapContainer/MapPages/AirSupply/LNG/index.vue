@@ -60,8 +60,8 @@
 import { Editor } from '@eslinkv/core'
 // 页面覆盖物组件
 import { WarnEvent } from '../Components/index.js'
-import RightPanel from './components/RightPanel/index.vue'
-import MapMarkerIcon from './components/MapMarkerIcon.vue'
+import RightPanel from './components/RightPanel.vue'
+import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon.vue'
 // 页面所需公共组件
 import {
 	RegionBoundary,
