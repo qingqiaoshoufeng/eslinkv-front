@@ -149,7 +149,7 @@ const LowPressureUnderNumber = {
 	type: 'warning',
 }
 const LowPressurePassRate = {
-	label: '合格率',
+	label: '压力合格率',
 	DW: '',
 	prop: 'passRate',
 }
