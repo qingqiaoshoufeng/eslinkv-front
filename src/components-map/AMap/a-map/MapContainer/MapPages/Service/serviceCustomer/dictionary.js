@@ -60,19 +60,19 @@ const monthFireDetial = {
 
 const activity = {
 	label: '三社联动活动次数',
-	DW: '户',
+	DW: '',
 	prop: 'activity',
 	Fixed: 0,
 }
 const community = {
 	label: '三社联动参加人员',
-	DW: '户',
+	DW: '',
 	prop: 'joinNumber',
 	Fixed: 0,
 }
 const households = {
 	label: '三社联动入户数',
-	DW: '户',
+	DW: '',
 	prop: 'households',
 	Fixed: 0,
 }
