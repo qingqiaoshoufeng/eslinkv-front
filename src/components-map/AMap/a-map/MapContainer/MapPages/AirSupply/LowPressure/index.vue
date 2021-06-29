@@ -257,6 +257,8 @@ export default {
 					'UndergroundRepairStation', // '地下抢修点',
 					'OngroundRepairStation', // '地上抢修点',
 					'VoltageRegulator', // '调压器',
+					'CommandCar', // '抢修指挥车',
+					'LaserCar', // '激光巡检车',
 				].toString(),
 			}
 			const res = await getAllTypeStationList(params)

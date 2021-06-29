@@ -6,7 +6,15 @@
 			:data="activeWarnData"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
-		></WarnEvent>
+      :width="
+				activeWarnData.overlayType === 'VoltageRegulator' ? 700 : 400
+			"
+		>
+      <VoltageRegulator
+          :data="activeWarnData"
+          v-if="activeWarnData.overlayType === 'VoltageRegulator'"
+      ></VoltageRegulator>
+    </WarnEvent>
 		<!-- 行政区域覆盖物 -->
 		<RegionBoundary v-if="!isShowSatellite" />
 		<!-- 2.legend控制显隐 -->
@@ -40,8 +48,9 @@
 			}"
 			@view-detail="viewDetail"
 			ref="OverlayDetail"
-			:width="400"
-		></OverlayDetail>
+      :width="400"
+		>
+    </OverlayDetail>
 		<portal to="destination">
 			<!-- 统计数据 -->
 			<DataStatistics
@@ -80,6 +89,7 @@ import {
 	getStatisticsInfo,
 	getHighPressurePipe,
 } from '@/components-map-api/map.airSupply.api'
+import VoltageRegulator from '../LowPressure/components/VoltageRegulator'
 
 const componentPageArr = [
 	// legend覆盖物
@@ -123,6 +133,7 @@ export default {
 	inject: ['parentInfo'],
 	mixins: [pageMixin],
 	components: {
+    VoltageRegulator,
 		...componentPageMap,
 		...componentCommonMap,
 	},
@@ -229,6 +240,8 @@ export default {
 					'PressureRegulatingStation', // '调压站',
 					'EmergencyAirSourceStation', // '应急气源站',
 					'MiddleAndLowPressureValve', // 中低压阀门
+          'CommandCar', // '抢修指挥车',
+          'LaserCar', // '激光巡检车',
 				].toString(),
 			}
 			const res = await getAllTypeStationList(params)
