@@ -86,7 +86,7 @@
 <script>
 import { AMapTile } from '../../../../lib'
 import VoltageRegulator from './components/VoltageRegulator'
-import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon'
+import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon.vue'
 // 页面所需公共组件
 import { OverlayDetail, MapLegend } from '../../../../components/index.js'
 import { DataStatistics } from '../../../../components'

@@ -50,7 +50,6 @@ import bus from '../../../../../utils/bus'
 import { Editor } from '@eslinkv/core'
 import {
 	INDEXSCENEMAP,
-	OVERLAYINFOMAP_AIRSUPPLY,
 	AIRSUPPLY_WARN_SCENEINDEX,
 	AIRSUPPLY_WARN_COMPONENTINDEX,
 } from '../../../../../config'
@@ -59,9 +58,9 @@ export default {
 	name: 'WarnEvent',
 	inject: ['parentInfo'],
 	components: {
-		Overlay: () => import('../../../../../components/Overlay'),
-		OverlayDetail: () => import('../../../../../components/OverlayDetail'),
-		RoutePlan: () => import('../RoutePlan'),
+		Overlay: () => import('../../../../../components/Overlay/index.vue'),
+		OverlayDetail: () => import('../../../../../components/OverlayDetail/index.vue'),
+		RoutePlan: () => import('../RoutePlan/index.vue'),
 	},
 	props: {
 		data: {
@@ -136,7 +135,6 @@ export default {
 	},
 	methods: {
 		viewOverlayDetail() {
-			const { repairContent, address, callDate } = this.data
 			this.showRoutePlan = true
 			// 和场景进行交互
 			this.editor.selectSceneIndex(AIRSUPPLY_WARN_SCENEINDEX)

@@ -60,7 +60,7 @@
 </template>
 <script>
 // 页面覆盖物组件
-import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon'
+import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon.vue'
 import { SwitchBox, SaleAreaBoundary } from '../Components/index.js'
 import heatmap from './heatmap'
 // 页面所需公共组件

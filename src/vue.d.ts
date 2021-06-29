@@ -17,5 +17,6 @@ declare global {
 	interface Window {
 		flvjs: any
 		eslinkV: any
+		echarts: any
 	}
 }

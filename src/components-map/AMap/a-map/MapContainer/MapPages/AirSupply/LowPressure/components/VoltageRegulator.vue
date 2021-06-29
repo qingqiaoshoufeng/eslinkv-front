@@ -25,7 +25,7 @@ export default class VoltageRegulator extends Vue {
 		if (val) {
 			this.$nextTick(async () => {
 				await this.getData()
-				echarts
+				window.echarts
 					.init(this.$refs.chart)
 					.setOption(this.getOption(this.info.list))
 			})

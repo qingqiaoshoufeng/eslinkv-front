@@ -93,7 +93,6 @@
 <script lang="ts">
 // 页面覆盖物组件
 import {
-	INDEXSCENEMAP,
 	THREESOCIALLINKAGE_SCENEINDEX,
 	THREESOCIALLINKAGE_COMPONENTINDEX,
 } from '../../../../config'
@@ -131,7 +130,7 @@ const componentCommonArr = [
 	'MapLegend',
 ]
 // 异步加载组件函数
-const componentPageMap = {}
+const componentPageMap:any = {}
 const componentCommonMap = {}
 componentPageArr.map(componentName => {
 	componentPageMap[componentName] = () =>
@@ -223,7 +222,7 @@ export default {
 
 	methods: {
 		// 切换热力图显示隐藏
-		switchChange(data, type) {
+		switchChange(data) {
 			this.swichBoxInfo = data
 			const [{ value }] = this.swichBoxInfo
 
@@ -239,7 +238,7 @@ export default {
 			this.allTypeStationList.CustomerHotList = res.customer
 		},
 		// 点击覆盖物icon
-		async handleOverlayClick(overlay, overlayType1, isCenter = false) {
+		async handleOverlayClick(overlay) {
 			this.activeOverlay = {}
 			this.detailInfo = {}
 			this.showOverlayDetail = false
@@ -274,7 +273,6 @@ export default {
 		},
 		// 关闭详情
 		closeOverlayDetail(done) {
-			const { overlayType } = this.activeOverlay
 			this.showOverlayDetail = false
 			this.activeOverlay = {}
 			this.detailInfo = {}
@@ -286,13 +284,10 @@ export default {
 		// 点击右侧栏
 		handleListClick(item) {
 			const {
-				name,
-				time,
 				activeIndex,
 				overlayType,
 				lng,
 				lat,
-				address,
 			} = item
 			if (overlayType === 'ThreeSocialLinkage') {
 				this.$refs.ThreeSocialLinkage[0].mouseIn = true
