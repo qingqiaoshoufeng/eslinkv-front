@@ -56,6 +56,16 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		visible: true,
 		dataProp: 'pipeManageMentStationList',
 	},
+	WarningStations: {
+		label: '中低压预警点',
+		legendIcon: 'iconzhongdiyayujing',
+		iconSize: 38,
+		icon: 'iconzhongdiyayujing',
+		component: 'WarningStations',
+		showOverlayName: false,
+		visible: true,
+		dataProp: 'middleAndLowPressureValveList',
+	},
 	UndergroundRepairStation: {
 		label: '地下抢修点',
 		legendIcon: 'icontulidixiaqiangxiudian',

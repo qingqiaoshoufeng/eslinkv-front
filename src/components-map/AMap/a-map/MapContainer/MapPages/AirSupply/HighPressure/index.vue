@@ -102,7 +102,6 @@ const componentPageArr = [
 	'EmergencyAirSourceStation',
 	'InspectionPerson',
 	'InspectionCar',
-	'WarningStations',
 	// 报警点位
 	'WarnEvent',
 	// 右侧报警列表
@@ -243,7 +242,6 @@ export default {
 					'GasStation', // '门站',
 					'PressureRegulatingStation', // '调压站',
 					'EmergencyAirSourceStation', // '应急气源站',
-					'MiddleAndLowPressureValve', // 中低压阀门
           'CommandCar', // '抢修指挥车',
           'LaserCar', // '激光巡检车',
 				].toString(),

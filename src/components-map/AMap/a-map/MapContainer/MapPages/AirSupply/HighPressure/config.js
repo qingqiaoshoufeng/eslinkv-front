@@ -33,16 +33,6 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 		visible: true,
 		dataProp: 'highPressureLine_Process',
 	},
-	WarningStations: {
-		label: '中低压预警点',
-		legendIcon: 'iconzhongdiyayujing',
-		iconSize: 38,
-		icon: 'iconzhongdiyayujing',
-		component: 'WarningStations',
-		showOverlayName: false,
-		visible: true,
-		dataProp: 'middleAndLowPressureValveList',
-	},
 	GasStation: {
 		label: '门站',
 		legendIcon: 'icontulimenzhan',

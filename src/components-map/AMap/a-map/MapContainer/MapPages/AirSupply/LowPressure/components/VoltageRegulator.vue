@@ -84,6 +84,7 @@ export default class VoltageRegulator extends Vue {
 					type: 'value',
 					show: true,
 					name: '进站/Mpa',
+          scale: true,
 					axisTick: {
 						show: false,
 						textStyle: {
@@ -122,7 +123,8 @@ export default class VoltageRegulator extends Vue {
 						fontSize: 14,
 						padding: [0, 0, 0, -10],
 					},
-					splitLine: {
+          scale: true,
+          splitLine: {
 						show: false,
 					},
 					axisLabel: {

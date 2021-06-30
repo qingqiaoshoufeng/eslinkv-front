@@ -35,7 +35,8 @@
 				:overlayWarmIcon="config.overlayWarmIcon"
 				:overlayType="config.component"
 				:iconSize="config.iconSize"
-				:showOverlayName="config.showOverlayName"
+        @moveto="handlerMoveto"
+        :showOverlayName="config.showOverlayName"
 				:data="stationDataMap[config.dataProp]"
 				@overlay-click="handleOverlayClick"
 				@close="closeOverlayDetail('', false)"
@@ -111,7 +112,8 @@ const componentPageArr = [
 	'OngroundRepairStation',
 	'InspectionPerson',
 	'InspectionCar',
-	// 报警点位
+  'WarningStations',
+  // 报警点位
 	'WarnEvent',
 	// 右侧报警列表
 	'RightPanel',
@@ -219,6 +221,12 @@ export default {
 				}
 			}
 		},
+    handlerMoveto({ type }) {
+      if (type === 'WarningStations') {
+        this.$amap.panTo([120.131259, 30.363295], 100)
+        this.closeOverlayDetail('', false)
+      }
+    },
 		OverlayDetailProp() {
 			const { activeOverlay, overlayInfoConfigMap, legendMap } = this
 			if (JSON.stringify(activeOverlay) !== '{}') {
@@ -261,7 +269,8 @@ export default {
 					'UndergroundRepairStation', // '地下抢修点',
 					'OngroundRepairStation', // '地上抢修点',
 					'VoltageRegulator', // '调压器',
-					'CommandCar', // '抢修指挥车',
+          'MiddleAndLowPressureValve', // 中低压阀门
+          'CommandCar', // '抢修指挥车',
 					'LaserCar', // '激光巡检车',
 				].toString(),
 			}
