@@ -65,8 +65,11 @@ export default class PressureRegulating extends Vue {
 			.title {
 				font-size: 24px;
 				color: #feffff;
+        width: 234px;
+        flex: none;
 			}
 			.time {
+        flex: none;
 				font-size: 16px;
 				color: #ffffff;
 			}
@@ -79,12 +82,16 @@ export default class PressureRegulating extends Vue {
 			.address {
 				font-size: 20px;
 				color: rgba(255, 255, 255, 0.75);
+        width: 234px;
+        flex: none;
 			}
 			.status {
 				display: flex;
 				align-items: center;
 				font-size: 20px;
 				color: #ffdc45;
+        width: 170px;
+        flex: none;
 				.color {
 					width: 8px;
 					height: 8px;
