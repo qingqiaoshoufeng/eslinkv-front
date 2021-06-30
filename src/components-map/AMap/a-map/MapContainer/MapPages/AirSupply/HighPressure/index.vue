@@ -90,6 +90,8 @@ import {
 	getHighPressurePipe,
 } from '@/components-map-api/map.airSupply.api'
 import VoltageRegulator from '../LowPressure/components/VoltageRegulator'
+import laserCarRoute from '../Components/RoutePlan/laserCarRoute'
+import commandCarRoute from '../Components/RoutePlan/commandCarRoute'
 
 const componentPageArr = [
 	// legend覆盖物
@@ -134,6 +136,8 @@ export default {
 	mixins: [pageMixin],
 	components: {
     VoltageRegulator,
+    commandCarRoute,
+    laserCarRoute,
 		...componentPageMap,
 		...componentCommonMap,
 	},

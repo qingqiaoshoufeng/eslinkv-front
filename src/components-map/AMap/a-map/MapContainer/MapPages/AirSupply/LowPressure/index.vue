@@ -90,6 +90,8 @@ import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon.
 // 页面所需公共组件
 import { OverlayDetail, MapLegend } from '../../../../components/index.js'
 import { DataStatistics } from '../../../../components'
+import laserCarRoute from '../Components/RoutePlan/laserCarRoute'
+import commandCarRoute from '../Components/RoutePlan/commandCarRoute'
 
 import {
 	DATASTATISTICSLIST,
@@ -138,6 +140,8 @@ export default {
 		MapMarkerIcon,
 		VoltageRegulator,
 		AMapTile,
+    laserCarRoute,
+    commandCarRoute,
 		...componentPageMap,
 		...componentCommonMap,
 	},

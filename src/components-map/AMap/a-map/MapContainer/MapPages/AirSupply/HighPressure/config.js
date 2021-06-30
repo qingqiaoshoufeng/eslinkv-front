@@ -88,6 +88,22 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 		visible: false,
 		dataProp: 'inspectionCarList',
 	},
+	LaserCar: {
+		label: '激光巡检车',
+		legendIcon: 'iconjiguangxunjianche',
+		iconSize: 38,
+		component: 'laserCarRoute',
+		visible: false,
+		dataProp: 'laserCarList',
+	},
+	CommandCar: {
+		label: '抢修指挥车',
+		legendIcon: 'iconzhihuiqiangxiuche',
+		iconSize: 38,
+		component: 'commandCarRoute',
+		visible: false,
+		dataProp: 'commandCarList',
+	},
 }
 // hover覆盖物详情
 export const AIRSUPPLY_HIGHPRESSURE_OVERLAY_MAP = {
