@@ -3,7 +3,7 @@ export default {
 	name: 'shareScreen',
 	mode: ['SIMPLE_PLATFORM'],
 	meta: {
-		requireAuth: true,
+		requireAuth: false,
 	},
 	component: () => import('./index.vue'),
 }
