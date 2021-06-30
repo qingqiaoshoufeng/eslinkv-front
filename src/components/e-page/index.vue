@@ -7,6 +7,7 @@ div
 		:show-sizer="show",
 		v-show="total > 0",
 		:show-elevator="show",
+		:page-size="pageSize",
 		:show-total="show",
 		@on-change="handleChange",
 		@on-page-size-change="handlePageSize")

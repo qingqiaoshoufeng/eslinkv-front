@@ -1,32 +1,27 @@
 <template lang="pug">
-e-card
+e-card(:style="{ borderRadius: '3px 3px 0 0'}")
 	empty-image.avatar(
 		:image="currentItem.componentAvatar",
 		background-size="contain")
+		.pos-a(:style="{ top: '-2px'}")
 	template(slot="content")
 		.fn-flex
 			h2.ellipsis {{ currentItem.componentTitle }}
-			i-button(:style="{ marginLeft: '10px' }", type="success", size="small") {{ currentItem.componentVersion }}
+		div
+			i-tag(color="purple") {{ currentItem.componentEnTitle }}
+			i-tag(
+				color="blue"
+				v-if="currentItem.componentTypeName") {{ currentItem.componentTypeName }}
 		.fn-flex.flex-row.list-item-card-time-box
 			p {{ $format(new Date(currentItem.createTime), 'yyyy-MM-dd hh:mm:ss') }}
-		div
-			i-button(type="info", size="small") {{ currentItem.componentEnTitle }}
-			i-button(
-				:style="{ marginLeft: '10px' }",
-				type="success",
-				size="small",
-				v-if="currentItem.componentTypeName") {{ currentItem.componentTypeName }}
-	.pos-a.list-item-card-mask.fn-flex.flex-column
-		i-button(icon="ios-create-outline", @click="handleEdit") 编辑组件
-		i-button(
-			icon="ios-link",
-			:style="{ marginTop: '10px' }",
-			@click="handleVersion") 切换版本
-		i-button(
-			icon="ios-trash-outline",
-			:style="{ marginTop: '10px' }",
-			type="error",
-			@click="handleRemove") 删除组件
+			span(:style="{marginLeft:'auto'}") V{{ currentItem.componentVersion }}
+	.pos-a.list-item-card-mask.fn-flex.flex-row
+		i-tooltip(content="编辑组件" placement="top")
+			i-icon.pointer(type="md-create" color="#fff" @click="handleEdit", @click.stop,)
+		i-tooltip(content="切换版本" placement="top")
+			i-icon.pointer(type="md-shirt" color="#fff" @click="handleVersion", :style="{ marginLeft: '10px' }", @click.stop,)
+		i-tooltip(content="删除组件" placement="top")
+			i-icon.pointer(type="md-trash" color="#fff" @click="handleRemove", :style="{ marginLeft: '10px' }", @click.stop,)
 	i-modal.market-edit-modal(v-model="dialogEditShow", title="编辑")
 		i-form(:label-width="100")
 			i-form-item(label="组件名")
@@ -75,6 +70,9 @@ import {
 	Select,
 	Option,
 	Switch,
+	Tag,
+	Icon,
+	Tooltip,
 } from 'view-design'
 import dUpload from '../../components/d-upload/index.vue'
 import EmptyImage from '../../components/empty-image/index.vue'
@@ -88,6 +86,9 @@ import { update, getVersionList, destroy } from '@/api/marketComponent.api.js'
 @Component({
 	components: {
 		'i-card': Card,
+		'i-tooltip': Tooltip,
+		'i-icon': Icon,
+		'i-tag': Tag,
 		'i-button': Button,
 		'i-modal': Modal,
 		'i-form': Form,
@@ -217,25 +218,29 @@ export default class ItemCard extends Vue {
 
 	&:hover {
 		.list-item-card-mask {
-			opacity: 1;
+			bottom: 0;
 		}
 	}
 
 	.list-item-card-mask {
-		top: 0;
+		bottom: -103px;
 		left: 0;
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		height: 100%;
-		background-color: rgba(0, 0, 0, 0.5);
-		border-radius: 4px;
-		opacity: 0;
-		transition: 0.3s;
+		height: 103px;
+		padding: 0 8px;
+		background-color: rgba(0, 0, 0, 0.8);
+		transition: all 0.3s;
 	}
 
 	.list-item-card-time-box {
-		margin-bottom: 10px;
+		padding-top: 10px;
+		font-size: 12px;
+		line-height: 12px;
+		color: #999;
+		margin-top: 10px;
+		border-top: 1px solid rgba(216, 216, 216, 0.37);
 	}
 
 	.avatar {
@@ -244,14 +249,10 @@ export default class ItemCard extends Vue {
 	}
 
 	h2 {
-		margin: 0 0 4px 0;
-		font-size: 18px;
-	}
-
-	p {
-		margin: 6px 0 0 0;
-		font-size: 12px;
-		color: #999;
+		font-size: 14px;
+		font-weight: normal;
+		line-height: 14px;
+		padding-bottom: 10px;
 	}
 }
 </style>
