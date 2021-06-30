@@ -27,3 +27,12 @@ export function detail() {
 		headers,
 	})
 }
+
+// 获取子账号列表
+export function childList() {
+	return request({
+		url: '/user/child/all',
+		method: 'post',
+		headers,
+	})
+}

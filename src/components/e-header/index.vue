@@ -11,9 +11,13 @@
 	img.circle.e-header-user-avatar(:src="userAvatar", v-if="common.user")
 	i-drop-down.e-header-user(@on-click="handleUser", v-if="common.user")
 		.pointer
-			span.e-header-user-name {{ common.user && common.user.userName }}
+			span.e-header-user-name {{ common.user && common.user.userName }} 
+			i.e-header-user-tip （{{common.user.userIsChild?'子':'主'}}账号）
 			i-icon(type="ios-arrow-down", color="#fff")
 		i-drop-down-menu(slot="list")
+			i-drop-down-item(name="child" v-if="!common.user.userIsChild")
+				i-icon(type="ios-people-outline", :size="16", color="#333")
+				span.e-header-user-item 子账号管理
 			i-drop-down-item(name="secretKey")
 				i-icon(type="ios-lock-outline", :size="16", color="#333")
 				span.e-header-user-item 密钥管理
@@ -76,6 +80,9 @@ export default class EHeader extends Vue {
 				logout()
 				this.$router.push('/login')
 				break
+			case 'child':
+				this.$router.push('/userChild')
+				break
 			case 'secretKey':
 				this.$router.push('/secretKey')
 				break
@@ -105,7 +112,11 @@ export default class EHeader extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-@import '../../scss/conf';
+.e-header-user-tip {
+	font-style: normal;
+	margin-right: 10px;
+	color: rgba(255, 255, 255, 0.4);
+}
 .e-header-user {
 	height: 100%;
 }
@@ -119,7 +130,6 @@ export default class EHeader extends Vue {
 }
 
 .e-header-user-name {
-	margin-right: 10px;
 	margin-left: 8px;
 	color: #fff;
 	line-height: 50px;
@@ -150,7 +160,7 @@ export default class EHeader extends Vue {
 				width: 100%;
 				height: 3px;
 				content: '';
-				background-color: $themeColor;
+				background-color: var(--themeColor);
 			}
 		}
 	}
