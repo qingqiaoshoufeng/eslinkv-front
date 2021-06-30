@@ -1,14 +1,10 @@
 <template></template>
 <script>
-import { Overlay } from '../../../../../components/index'
 import { getEmployeeGpsTrack } from '@/components-map-api/map.airSupply.api'
 
 export default {
 	name: 'RoutePlan',
 	inject: ['parentInfo', 'getMap'],
-	components: {
-		Overlay,
-	},
 	data() {
 		return {
 			icon: 'iconbaoguanshijian',

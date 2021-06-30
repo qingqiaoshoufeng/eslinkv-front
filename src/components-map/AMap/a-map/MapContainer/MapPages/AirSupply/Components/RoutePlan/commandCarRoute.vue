@@ -3,7 +3,7 @@
 import overlayMixin from '../../../../../mixins/overlayMixin.js'
 
 export default {
-  name: 'carRoute',
+  name: 'commandCarRoute',
   mixins: [overlayMixin],
   data() {
     return {
@@ -39,6 +39,7 @@ export default {
         position: markerPose,
         icon: require('@/assets/amap/commandCar.svg'),
         autoRotation: true,
+        offset: new AMap.Pixel(-14, -14),
       })
       this.instanceArr.push(this.pathAll)
       this.instanceArr.push(this.marker)
