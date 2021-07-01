@@ -2,35 +2,6 @@
 e-layout
 	.market-container
 		.search.fn-flex.flex-row
-			i-input(
-				v-model="query.componentTitle",
-				placeholder="组件标题",
-				style="width: 200px",
-				clearable)
-			i-select(
-				:style="{width: '100px',marginLeft:'10px'}",
-				v-model="query.componentTypeId",
-				placeholder="组件分类",
-				clearable)
-				i-option(v-for="item in typeList" :value="item.componentTypeId" :key="item.componentTypeId") {{item.componentTypeName}}
-			i-button(
-				icon="ios-search",
-				type="primary",
-				style="margin-left: 15px",
-				@click="search")
-			i-button(type="primary", @click="handleCheck" :style="{ marginLeft: 'auto' }",) 组件审核
-			i-button(
-				type="primary",
-				:style="{ marginLeft: '10px' }",
-				@click="handleType") 组件分类
-			i-button(
-				type="primary",
-				:style="{ marginLeft: '10px' }",
-				@click="handleCollection") 我的收藏
-			i-button(
-				type="primary",
-				:style="{ marginLeft: '10px' }",
-				@click="handleTheme") 主题配色
 		e-page(
 			@init="init",
 			:total="total",
@@ -48,8 +19,8 @@ e-layout
 import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button, Input, Option, Select } from 'view-design'
 import itemCard from './item-card.vue'
-import { list } from '@/api/marketComponent.api.js'
-import { levelList } from '@/api/marketComponentType.api'
+import { list } from '@/api/collectionComponent.api.js'
+import { levelList } from '@/api/collectionComponentType.api'
 
 @Component({
 	components: {
@@ -96,22 +67,6 @@ export default class MarketComponentList extends Vue {
 		this.loaded = true
 		this.list = res.list
 		this.total = res.count
-	}
-
-	handleCollection(): void {
-		this.$router.push('/collection/componentList')
-	}
-
-	handleTheme(): void {
-		this.$router.push('/market/themeList')
-	}
-
-	handleCheck(): void {
-		this.$router.push('/market/componentCheckList')
-	}
-
-	handleType(): void {
-		this.$router.push('/market/componentType')
 	}
 
 	reload(): void {
