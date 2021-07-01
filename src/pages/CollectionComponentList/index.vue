@@ -32,7 +32,7 @@ import { levelList } from '@/api/collectionComponentType.api'
 		itemCard,
 	},
 })
-export default class MarketComponentList extends Vue {
+export default class CollectionComponentList extends Vue {
 	list = []
 	typeList = []
 	total = 0

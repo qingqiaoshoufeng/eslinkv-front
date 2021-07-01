@@ -30,7 +30,11 @@ e-layout
 			i-button(
 				type="primary",
 				:style="{ marginLeft: '10px' }",
-				@click="handleTheme") 主题配色
+				@click="handleCollectionType") 收藏分类
+			//i-button(
+			//	type="primary",
+			//	:style="{ marginLeft: '10px' }",
+			//	@click="handleTheme") 主题配色
 		e-page(
 			@init="init",
 			:total="total",
@@ -100,6 +104,9 @@ export default class MarketComponentList extends Vue {
 
 	handleCollection(): void {
 		this.$router.push('/collection/componentList')
+	}
+	handleCollectionType(): void {
+		this.$router.push('/collection/componentType')
 	}
 
 	handleTheme(): void {
