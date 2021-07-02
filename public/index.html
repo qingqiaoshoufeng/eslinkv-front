@@ -5,14 +5,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
     <title>EslinkV</title>
-	<link rel="icon" href="/favicon.ico"/>
+	<link rel="icon" href="<%= process.env.staticErPath %>favicon.ico"/>
 </head>
 <body>
 <div id="app"></div>
-<script src="/static/js/v<%= process.env.staticVuePath %>"></script>
-<script src="/static/js/c.js"></script>
-<script src="/static/js/r.js"></script>
-<script src="/static/js/echarts.min.js"></script>
+<script src="<%= process.env.staticErPath %>static/js/v<%= process.env.staticVuePath %>"></script>
+<script src="<%= process.env.staticErPath %>static/js/c.js"></script>
+<script src="<%= process.env.staticErPath %>static/js/r.js"></script>
+<script src="<%= process.env.staticErPath %>static/js/echarts.min.js"></script>
 <script src="//at.alicdn.com/t/font_2145957_z1rf6fz4fim.js"></script>
 </body>
 </html>

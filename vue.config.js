@@ -7,7 +7,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 module.exports = {
 	transpileDependencies: ['@simonwep', 'dom7'],
 	assetsDir: 'static',
-	publicPath: '/',
+	publicPath: process.env.VUE_APP_ER ? '/eslinkV' : '/',
 	outputDir: 'dist',
 	indexPath: './index.html',
 	productionSourceMap: false,
@@ -128,8 +128,14 @@ module.exports = {
 				'process.env.staticVuePath': JSON.stringify(
 					isProduction ? '.min.js' : '.js',
 				),
+				'process.env.staticErPath': JSON.stringify(
+					process.env.VUE_APP_ER ? '/eslinkV/' : '/',
+				),
 				'process.env.BUILD_MODE': JSON.stringify(
 					process.env.BUILD_MODE,
+				),
+				'process.env.VUE_APP_ER': JSON.stringify(
+					process.env.VUE_APP_ER,
 				),
 			}),
 		)

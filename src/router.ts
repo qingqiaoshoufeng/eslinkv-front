@@ -1,4 +1,4 @@
-import Vue from 'vue'
+﻿import Vue from 'vue'
 import VueRouter from 'vue-router'
 import common from './store/common.store.js'
 
@@ -34,6 +34,7 @@ Vue.use(VueRouter)
 
 const router: any = new VueRouter({
 	mode: 'history',
+	base: process.env.VUE_APP_ER ? '/eslinkV' : '/',
 	routes: [
 		...routes,
 		{
