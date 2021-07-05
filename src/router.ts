@@ -34,7 +34,7 @@ Vue.use(VueRouter)
 
 const router: any = new VueRouter({
 	mode: 'history',
-	base: process.env.VUE_APP_ER ? '/eslinkV' : '/',
+	base: process.env.VUE_APP_ER ? '/eslinkV/' : '/',
 	routes: [
 		...routes,
 		{
