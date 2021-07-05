@@ -16,15 +16,26 @@
 
 ### 不限制分享
 顾名思义，没有任何分享限制，任何人都可以访问
+
+
 ![](/node/docs-static/share-2.png)
+
+
 加密分享，游客在访问分享链接时需要输入密码后，方可访问
 
+
 每次访问均需要密码
+
+
 ![](/node/docs-static/share-3.png)
 ![](/node/docs-static/share-6.png)
 
+
 时效分享，游客只有在规定时间内，才可以进行正常访问
 
+
 超过时间后，将不被允许访问
+
+
 ![](/node/docs-static/share-4.png)
 ![](/node/docs-static/share-5.png)

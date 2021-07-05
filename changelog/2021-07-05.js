@@ -65,5 +65,9 @@ export default {
 			type: ['fix'],
 			content: '修复输入框聚焦失焦报错问题',
 		},
+		{
+			type: ['perf'],
+			content: '开发组件添加预览功能',
+		},
 	],
 }
