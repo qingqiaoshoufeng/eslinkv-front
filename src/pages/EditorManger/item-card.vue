@@ -4,20 +4,29 @@ e-card
 		:image="screenAvatar",
 		@click="handleEdit")
 		.list-item-card-mask.fn-flex.flex-row.pos-a
-			i-tooltip(content="分享" :style="{ marginLeft: 'auto', marginRight: '10px' }",)
+			i-tooltip(
+				content="历史",
+				:style="{ marginLeft: 'auto', marginRight: '10px' }")
+				i-icon.pointer(
+					type="md-time",
+					color="#fff",
+					:size="16",
+					@click="handleHistory",
+					@click.stop)
+			i-tooltip(content="分享", :style="{ marginRight: '10px' }")
 				i-icon.pointer(
 					type="md-paper-plane",
 					color="#fff",
 					:size="16",
 					@click="handleShare",
-					@click.stop,)
+					@click.stop)
 			i-tooltip(content="删除")
 				i-icon.pointer(
 					type="md-trash",
 					color="#fff",
 					:size="16",
 					@click="handleRemove",
-					@click.stop,)
+					@click.stop)
 	template(slot="content")
 		h2.list-item-card-title.ellipsis {{ screenName }}
 		.list-item-card-btn.fn-flex.flex-row
@@ -28,7 +37,7 @@ e-card
 	dShareDialog(v-model="shareModal", :sid="screenId")
 </template>
 <script lang="ts">
-import {Button, Icon, Modal, Input, Tooltip} from 'view-design'
+import { Button, Icon, Modal, Input, Tooltip } from 'view-design'
 import EmptyImage from '../../components/empty-image/index.vue'
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { dShareDialog } from '@eslinkv/vue2'
@@ -57,19 +66,21 @@ export default class ItemCard extends Vue {
 
 	shareModal = false
 
-	handleShare() {
+	handleShare(): void {
 		this.shareModal = true
 	}
 
 	get statusStr() {
 		return this.screenPublish === 'COMPLETE' ? '已发布' : '未发布'
 	}
-
-	handleEdit() {
+	handleHistory(): void {
+		this.$router.push(`/screenHistory/${this.screenId}`)
+	}
+	handleEdit(): void {
 		this.$router.push(`/editor/manger/${this.screenId}`)
 	}
 
-	handleLink() {
+	handleLink(): void {
 		const scene = this.screenMainScene
 			? `&scene=${this.screenMainScene}`
 			: ''
@@ -81,7 +92,7 @@ export default class ItemCard extends Vue {
 		)
 	}
 
-	handleRemove() {
+	handleRemove(): void {
 		this.$Modal.confirm({
 			title: '提示',
 			content: '确认删除吗？',

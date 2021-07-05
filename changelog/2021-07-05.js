@@ -69,5 +69,10 @@ export default {
 			type: ['perf'],
 			content: '开发组件添加预览功能',
 		},
+		{
+			type: ['perf'],
+			content:
+				'添加大屏自动备份功能，每天0点定时备份防止丢失，保存7天内数据',
+		},
 	],
 }

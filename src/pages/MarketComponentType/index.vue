@@ -66,7 +66,7 @@ export default class MarketComponentType extends Vue {
 		componentTypeName: '',
 	}
 
-	handleLoadData(item, callback) {
+	handleLoadData(item, callback): void {
 		if (this.common.user.userAdmin) {
 			levelList({ componentTypeParentId: item.componentTypeId }).then(
 				res => {
@@ -78,7 +78,7 @@ export default class MarketComponentType extends Vue {
 		}
 	}
 
-	init() {
+	init(): void {
 		levelList().then(res => {
 			res.map(item => {
 				item.children = []
