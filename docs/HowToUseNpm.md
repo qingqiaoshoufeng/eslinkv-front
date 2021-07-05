@@ -2,9 +2,9 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 <div class="help-menu pos-f">目录</div>
 
--   [安装工具](#%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7)
--   [VIEW](#view)
--   [STORE](#store)
+- [安装工具](#%E5%AE%89%E8%A3%85%E5%B7%A5%E5%85%B7)
+- [View](#view)
+- [Core](#core)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 

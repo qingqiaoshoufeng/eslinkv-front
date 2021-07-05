@@ -33,7 +33,7 @@ export default class Help extends Vue {
 			const content = await import(`../../../docs/${name}.md`)
 			this.help.helpContent = content.default
 		} catch (e) {
-			this.help.helpContent = 'TODO'
+			this.help.helpContent = '开发人员正在加急编写文档中……'
 		}
 		this.help.helpName = name
 	}
@@ -46,19 +46,22 @@ export default class Help extends Vue {
 <style lang="scss" scoped>
 .help-container {
 	height: calc(100vh - 50px);
+	background-color: #fff;
 }
 .help-markdown-body {
 	padding: 40px 80px;
 	margin-left: 240px;
 	margin-right: 240px;
-	background-color: #fff;
 	min-height: 100%;
+	color: rgb(51, 51, 51);
+	line-height: 32px;
+	font-size: 16px;
 	&::v-deep {
 		.help-menu {
 			right: 0;
 			width: 240px;
 			top: 100px;
-			font-size: 14px;
+			font-size: 16px;
 			padding-left: 5px;
 
 			+ ul {
@@ -87,15 +90,15 @@ export default class Help extends Vue {
 		}
 
 		p {
-			font-size: 14px;
-
+			margin-bottom: 16px;
 			code {
-				font-weight: bold;
-				background-color: #333;
-				color: #fff;
-				padding: 1px 4px;
-				font-size: 12px;
-				margin: 0 4px;
+				background: #f6f6f6;
+				color: #c7254e;
+				padding: 3px;
+				font-size: 16px;
+				border-radius: 3px;
+				margin-left: 4px;
+				margin-right: 4px;
 			}
 		}
 
@@ -105,22 +108,45 @@ export default class Help extends Vue {
 		}
 
 		blockquote {
-			margin: 10px 0;
-			background-color: #ddd;
+			color: #777;
+			border-left: 4px solid #d6dbdf;
+			font-size: 14px;
+			background: none repeat scroll 0 0 rgba(102, 128, 153, 0.05);
+			margin: 8px 0;
+			padding: 8px;
 
 			p {
-				padding: 1px 4px;
+				font-size: 16px;
+				line-height: 32px;
+				margin-bottom: 0;
 			}
+		}
+		pre {
+			line-height: 22px;
+		}
+
+		h1 {
+			font-size: 28px;
+			font-weight: 400;
+			border-bottom: 1px solid #eee;
+			padding-bottom: 9px;
+			margin-bottom: 16px;
+			margin-top: 28px;
 		}
 
 		h2 {
 			margin-bottom: 10px;
 			margin-top: 20px;
+			border-bottom: 1px solid #eee;
+			padding-bottom: 8px;
+			font-weight: 400;
+			font-size: 25px;
 		}
 
 		h3 {
-			margin-bottom: 5px;
-			margin-top: 15px;
+			font-size: 22px;
+			margin-top: 20px;
+			margin-bottom: 16px;
 		}
 
 		ul,

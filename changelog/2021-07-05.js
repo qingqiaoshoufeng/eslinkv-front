@@ -4,7 +4,7 @@ export default {
 	list: [
 		{
 			type: ['perf'],
-			content: '移除部分内置组件',
+			content: '移除全部内置组件',
 		},
 		{
 			type: ['perf'],
@@ -56,6 +56,14 @@ export default {
 		{
 			type: ['refactor'],
 			content: '编辑菜单图标优化',
+		},
+		{
+			type: ['perf'],
+			content: '添加组件收藏功能',
+		},
+		{
+			type: ['fix'],
+			content: '修复输入框聚焦失焦报错问题',
 		},
 	],
 }

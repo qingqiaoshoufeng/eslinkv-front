@@ -1,3 +1,12 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<div class="help-menu pos-f">目录</div>
+
+- [加载 socket 插件](#%E5%8A%A0%E8%BD%BD-socket-%E6%8F%92%E4%BB%B6)
+- [连接 socket](#%E8%BF%9E%E6%8E%A5-socket)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## 加载 socket 插件
 
 ```

@@ -27,7 +27,6 @@ npm i
 ## 启动命令
 ```
 npm run serve // 本地启动
-npm run serve:simple // 本地启动 运行版
 npm run build // 打包
-npm run build:simple // 打包 运行版
+npm run build:er // 打包 二级域名
 ```
