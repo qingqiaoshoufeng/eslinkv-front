@@ -27,15 +27,6 @@ export function create(data) {
 	})
 }
 
-export function publish(data) {
-	return request({
-		url: '/screen/publish',
-		method: 'post',
-		data,
-		headers,
-	})
-}
-
 export function detail(data) {
 	return request({
 		url: '/screen/detail',
