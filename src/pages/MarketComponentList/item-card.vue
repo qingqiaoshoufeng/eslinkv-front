@@ -1,27 +1,39 @@
 <template lang="pug">
-e-card(:style="{ borderRadius: '3px 3px 0 0'}")
+e-card(:style="{ borderRadius: '3px 3px 0 0' }")
 	empty-image.avatar(
 		:image="currentItem.componentAvatar",
 		background-size="contain")
-		.pos-a(:style="{ top: '-2px'}")
+		.pos-a(:style="{ top: '-2px' }")
 	template(slot="content")
 		.fn-flex
 			h2.ellipsis {{ currentItem.componentTitle }}
-		div
+		.fn-flex
 			i-tag(color="purple") {{ currentItem.componentEnTitle }}
-			i-tag(
-				color="blue"
-				v-if="currentItem.componentTypeName") {{ currentItem.componentTypeName }}
+			i-tag(color="blue", v-if="currentItem.componentTypeName") {{ currentItem.componentTypeName }}
 		.fn-flex.flex-row.list-item-card-time-box
 			p {{ $format(new Date(currentItem.createTime), 'yyyy-MM-dd hh:mm:ss') }}
-			span(:style="{marginLeft:'auto'}") V{{ currentItem.componentVersion }}
+			span(:style="{ marginLeft: 'auto' }") V{{ currentItem.componentVersion }}
 	.pos-a.list-item-card-mask.fn-flex.flex-row
-		i-tooltip(content="编辑组件" placement="top")
-			i-icon.pointer(type="md-create" color="#fff" @click="handleEdit", @click.stop,)
-		i-tooltip(content="切换版本" placement="top")
-			i-icon.pointer(type="md-shirt" color="#fff" @click="handleVersion", :style="{ marginLeft: '10px' }", @click.stop,)
-		i-tooltip(content="删除组件" placement="top")
-			i-icon.pointer(type="md-trash" color="#fff" @click="handleRemove", :style="{ marginLeft: '10px' }", @click.stop,)
+		i-tooltip(content="编辑组件", placement="top")
+			i-icon.pointer(
+				type="md-create",
+				color="#fff",
+				@click="handleEdit",
+				@click.stop)
+		i-tooltip(content="切换版本", placement="top")
+			i-icon.pointer(
+				type="md-shirt",
+				color="#fff",
+				@click="handleVersion",
+				:style="{ marginLeft: '10px' }",
+				@click.stop)
+		i-tooltip(content="删除组件", placement="top")
+			i-icon.pointer(
+				type="md-trash",
+				color="#fff",
+				@click="handleRemove",
+				:style="{ marginLeft: '10px' }",
+				@click.stop)
 	i-modal.market-edit-modal(v-model="dialogEditShow", title="编辑")
 		i-form(:label-width="100")
 			i-form-item(label="组件名")
@@ -213,6 +225,12 @@ export default class ItemCard extends Vue {
 	&::v-deep {
 		.ivu-icon {
 			font-size: 16px;
+		}
+		.ivu-tag {
+			span {
+				white-space: nowrap;
+				word-break: break-all;
+			}
 		}
 	}
 
