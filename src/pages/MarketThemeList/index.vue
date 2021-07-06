@@ -1,23 +1,22 @@
 <template lang="pug">
-e-layout
-	.market-container
-		.btn-box
-			i-button.mr10(type="primary", @click="edit", :disabled="!selectOne") 编辑
-			i-button.mr10(type="primary", @click="create", style="margin-left: auto") 创建
-		i-table(
-			:columns="columns",
-			:data="list",
-			v-if="total > 0",
-			@on-selection-change="selectHandle")
-			template(#createTime="{ row }")
-				span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
-		e-page(
-			@init="init",
-			:total="total",
-			ref="page",
-			:show="false",
-			:loaded="loaded")
-		dialogTheme(v-model="dialogEditShow", :detail="currentRow", @reload="init")
+e-layout.market-container
+	.btn-box
+		i-button.mr10(type="primary", @click="edit", :disabled="!selectOne") 编辑
+		i-button.mr10(type="primary", @click="create", style="margin-left: auto") 创建
+	i-table(
+		:columns="columns",
+		:data="list",
+		v-if="total > 0",
+		@on-selection-change="selectHandle")
+		template(#createTime="{ row }")
+			span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
+	e-page(
+		@init="init",
+		:total="total",
+		ref="page",
+		:show="false",
+		:loaded="loaded")
+	dialogTheme(v-model="dialogEditShow", :detail="currentRow", @reload="init")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
@@ -105,8 +104,6 @@ export default class Market extends Vue {
 }
 
 .market-container {
-	padding: 15px;
-
 	.mr10 {
 		margin-right: 10px;
 	}

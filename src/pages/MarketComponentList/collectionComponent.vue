@@ -1,24 +1,22 @@
 <template lang="pug">
-e-layout
-	.market-container
-		.search.fn-flex.flex-row
-		e-page(
-			@init="init",
-			:total="total",
-			ref="page",
-			:loaded="loaded",
-			:pageSize="20")
-			ul.list-item-card-box
-				item-card(
-					v-for="(item, i) in list",
-					:item="item",
-					:key="i",
-					@reload="reload")
+e-layout.market-container(:padding="false")
+	e-page(
+		@init="init",
+		:total="total",
+		ref="page",
+		:loaded="loaded",
+		:pageSize="20")
+		ul.list-item-card-box
+			item-card(
+				v-for="(item, i) in list",
+				:item="item",
+				:key="i",
+				@reload="reload")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button, Input, Option, Select } from 'view-design'
-import itemCard from './item-card.vue'
+import itemCard from './item-card2.vue'
 import { list } from '@/api/collectionComponent.api.js'
 import { levelList } from '@/api/collectionComponentType.api'
 
@@ -82,7 +80,6 @@ export default class CollectionComponentList extends Vue {
 </script>
 <style lang="scss" scoped>
 .market-container {
-	padding: 15px;
 	.list-item-card-box {
 		padding-right: 0;
 		grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -105,10 +102,6 @@ export default class CollectionComponentList extends Vue {
 
 	.btn-box {
 		margin-bottom: 10px;
-	}
-
-	.search {
-		margin-top: 10px;
 	}
 }
 </style>

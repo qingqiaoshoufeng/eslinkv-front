@@ -30,7 +30,7 @@ e-card
 	template(slot="content")
 		h2.list-item-card-title.ellipsis {{ screenName }}
 		.list-item-card-btn.fn-flex.flex-row
-			span {{ $format(new Date(createTime), 'yyyy-MM-dd hh:mm:ss') }}
+			span.list-item-card-btn-time {{ $format(new Date(createTime), 'yyyy-MM-dd hh:mm:ss') }}
 			.list-item-card-btn-link.pointer(@click="handleLink")
 				i-icon(type="md-laptop", :style="{ marginLeft: 'auto' }")
 				span 预览
@@ -116,7 +116,7 @@ export default class ItemCard extends Vue {
 }
 .list-item-card-btn-link {
 	margin-left: auto;
-
+	color: #666;
 	span {
 		margin-left: 4px;
 	}
@@ -152,7 +152,9 @@ export default class ItemCard extends Vue {
 		}
 	}
 }
-
+.list-item-card-btn-time {
+	color: #666;
+}
 .list-item-card-title {
 	padding-bottom: 10px;
 	font-size: 14px;

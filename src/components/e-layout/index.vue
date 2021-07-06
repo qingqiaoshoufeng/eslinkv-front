@@ -1,18 +1,30 @@
 <template lang="pug">
 .e-layout-container
-	.e-layout-content
+	.e-layout-content(:class="{ 'e-layout-content-padding': padding }")
 		e-header
 		slot
 </template>
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component, Prop } from 'vue-property-decorator'
 
 @Component
-export default class ELayout extends Vue {}
+export default class ELayout extends Vue {
+	@Prop({ default: true }) padding
+}
 </script>
 <style lang="scss" scoped>
-.e-layout-content {
+.e-layout-container {
 	padding-top: 50px;
-	min-height: 100vh;
+}
+.e-layout-content {
+	min-height: calc(100vh - 50px);
+	background: #f5f9fc;
+	padding: 20px;
+}
+.e-layout-content-padding {
+	min-height: calc(100vh - 90px);
+	margin: 20px;
+	background: #fff;
+	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1);
 }
 </style>

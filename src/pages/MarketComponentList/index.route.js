@@ -1,6 +1,6 @@
 export default {
-	path: '/market/componentList',
-	name: 'marketComponentList',
+	path: '/market',
+	name: 'market',
 	mode: [],
 	meta: {
 		requireAuth: true,

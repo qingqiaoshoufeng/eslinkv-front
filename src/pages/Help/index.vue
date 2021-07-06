@@ -1,13 +1,12 @@
 <template lang="pug">
-e-layout
-	.help-container
-		ul.fn-flex.flex-column
-			li.fn-flex.flex-row(v-for="item in list")
-				img.help-img(:src="item.icon")
-				.help-right.fn-flex.flex-column
-					h2 {{ item.title }}
-					.help-list.fn-flex(:class="item.className")
-						a(rel="nofollow" v-for="child in item.list", target="_blank", :href="child.url") {{ child.title }}
+e-layout.help-container
+	ul.fn-flex.flex-column
+		li.fn-flex.flex-row(v-for="item in list")
+			img.help-img(:src="item.icon")
+			.help-right.fn-flex.flex-column
+				h2 {{ item.title }}
+				.help-list.fn-flex(:class="item.className")
+					a(rel="nofollow" v-for="child in item.list", target="_blank", :href="child.url") {{ child.title }}
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
@@ -96,10 +95,8 @@ export default class Help extends Vue {
 </script>
 <style lang="scss" scoped>
 .help-container {
-	height: calc(100vh - 50px);
-	background-color: #fff;
 	ul {
-		padding: 80px;
+		padding: 60px;
 	}
 	li {
 		margin-bottom: 80px;

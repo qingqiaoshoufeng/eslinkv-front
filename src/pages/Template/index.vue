@@ -1,13 +1,12 @@
 <template lang="pug">
-e-layout
-	.list-container
-		e-page(@init="init", :total="total", ref="page", :loaded="loaded")
-			ul.list-item-card-box
-				item-card(
-					v-for="item in list",
-					v-bind="item",
-					:key="item.screenId",
-					@init="init")
+e-layout.list-container
+	e-page(@init="init", :total="total", ref="page", :loaded="loaded")
+		ul.list-item-card-box
+			item-card(
+				v-for="item in list",
+				v-bind="item",
+				:key="item.screenId",
+				@init="init")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
@@ -39,10 +38,6 @@ export default class Template extends Vue {
 </script>
 <style lang="scss" scoped>
 .list-container {
-	min-width: 930px;
-	height: 100%;
-	padding: 15px;
-
 	.ml20 {
 		margin-left: 20px;
 	}

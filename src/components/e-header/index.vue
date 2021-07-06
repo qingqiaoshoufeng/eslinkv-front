@@ -11,8 +11,7 @@
 	img.circle.e-header-user-avatar(:src="userAvatar", v-if="common.user")
 	i-drop-down.e-header-user(@on-click="handleUser", v-if="common.user")
 		.pointer
-			span.e-header-user-name {{ common.user && common.user.userName }}
-			i.e-header-user-tip （{{ common.user.userIsChild ? '子' : '主' }}账号）
+			span.e-header-user-name {{ name }}
 			i-icon(type="ios-arrow-down", color="#fff")
 		i-drop-down-menu(slot="list")
 			i-drop-down-item(name="child", v-if="!common.user.userIsChild")
@@ -55,7 +54,7 @@ export default class EHeader extends Vue {
 		// 	title: '媒体资源',
 		// },
 		{
-			url: '/market/componentList',
+			url: '/market',
 			title: '组件开发',
 		},
 		{
@@ -63,6 +62,14 @@ export default class EHeader extends Vue {
 			title: '帮助中心',
 		},
 	]
+
+	get name(): string {
+		if (this.common.user) {
+			return this.common.user.nickName || this.common.user.userName
+		} else {
+			return ''
+		}
+	}
 
 	handleLogin(): void {
 		this.$router.push('/login')
@@ -92,6 +99,7 @@ export default class EHeader extends Vue {
 	}
 
 	mounted(): void {
+		common.actions.setNavIndex(this.$route.path)
 		detail()
 			.then(res => {
 				common.actions.setUser(res)
@@ -105,11 +113,6 @@ export default class EHeader extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-.e-header-user-tip {
-	font-style: normal;
-	margin-right: 10px;
-	color: rgba(255, 255, 255, 0.4);
-}
 .e-header-user {
 	height: 100%;
 }
@@ -126,6 +129,7 @@ export default class EHeader extends Vue {
 	margin-left: 8px;
 	color: #fff;
 	line-height: 50px;
+	margin-right: 10px;
 }
 
 .e-header-nav {

@@ -1,36 +1,32 @@
 <template lang="pug">
-e-layout
-	.list-container
-		.search.fn-flex.flex-row
-			i-input(
-				v-model="query.screenName",
-				placeholder="大屏标题",
-				style="width: 200px",
-				clearable)
-			i-date-picker(
-				type="daterange",
-				placeholder="创建日期",
-				placement="bottom-end",
-				v-model="date",
-				style="margin-left: 10px")
-			i-button(
-				icon="ios-search",
-				type="primary",
-				style="margin-left: 15px",
-				@click="search")
-			i-button(type="primary", @click="handleNew", style="margin-left: auto") 新建
-		e-page(@init="init", :total="total", ref="page", :loaded="loaded")
-			ul.list-item-card-box
-				item-card(
-					v-for="item in list",
-					v-bind="item",
-					:key="item.screenId",
-					@reload="reload")
+e-layout(:padding="false")
+	.search.fn-flex.flex-row
+		i-input(
+			v-model="query.screenName",
+			placeholder="输入大屏名称搜索",
+			style="width: 200px",
+			size="small",
+			:search="true",
+			@on-search="search",
+			clearable)
+		i-button(type="primary", @click="handleNew", style="margin-left: auto") 新建
+	e-page(
+		@init="init",
+		:total="total",
+		ref="page",
+		:loaded="loaded",
+		:pageSize="999",
+		:show="false")
+		ul.list-item-card-box
+			item-card(
+				v-for="item in list",
+				v-bind="item",
+				:key="item.screenId",
+				@reload="reload")
 </template>
 <script lang="ts">
-import { Vue, Component, Watch } from 'vue-property-decorator'
+import { Vue, Component } from 'vue-property-decorator'
 import itemCard from './item-card.vue'
-import format from 'date-fns/format'
 import { Page, Button, Input, DatePicker, Select, Option } from 'view-design'
 import { list } from '@/api/screen.api.js'
 
@@ -49,18 +45,8 @@ export default class EditManger extends Vue {
 	list: any[] = []
 	total = 0
 	loaded = false
-	date: any = []
 	query: any = {
 		screenName: '',
-		beginTime: '',
-		endTime: '',
-	}
-
-	@Watch('date')
-	dateChange(val): void {
-		if (!val[0] || !val[1]) return
-		this.query.beginTime = format(val[0], 'yyyy-MM-dd')
-		this.query.endTime = format(val[1], 'yyyy-MM-dd')
 	}
 
 	handleNew(): void {
@@ -99,11 +85,12 @@ export default class EditManger extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-.list-container {
-	padding: 15px 0 15px 15px;
-	min-height: calc(100vh - 50px);
-	.search {
-		margin-right: 15px;
+.search {
+	align-items: center;
+	&::v-deep {
+		.ivu-input {
+			font-size: 12px;
+		}
 	}
 }
 </style>

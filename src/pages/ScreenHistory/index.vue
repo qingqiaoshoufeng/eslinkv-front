@@ -1,23 +1,22 @@
 <template lang="pug">
 e-layout
-	.history-container
-		i-table(
-			row-key="componentTypeId",
-			:columns="columns",
-			:data="list",
-			v-if="total > 0")
-			template(#createTime="{ row }")
-				span {{ row.createTime ? $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') : '' }}
-			template(#lastReduceTime="{ row }")
-				span {{ row.lastReduceTime ? $format(new Date(row.lastReduceTime), 'yyyy-MM-dd HH:mm:ss') : '' }}
-			template(#action="{ row }")
-				i-button(type="primary", @click="reduce(row)") 还原
-		e-page(
-			@init="init",
-			:total="total",
-			:pageSize="999",
-			:show="false",
-			:loaded="loaded")
+	i-table(
+		row-key="componentTypeId",
+		:columns="columns",
+		:data="list",
+		v-if="total > 0")
+		template(#createTime="{ row }")
+			span {{ row.createTime ? $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') : '' }}
+		template(#lastReduceTime="{ row }")
+			span {{ row.lastReduceTime ? $format(new Date(row.lastReduceTime), 'yyyy-MM-dd HH:mm:ss') : '' }}
+		template(#action="{ row }")
+			i-button(type="primary", @click="reduce(row)") 还原
+	e-page(
+		@init="init",
+		:total="total",
+		:pageSize="999",
+		:show="false",
+		:loaded="loaded")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
@@ -84,8 +83,3 @@ export default class ScreenHistory extends Vue {
 	}
 }
 </script>
-<style lang="scss" scoped>
-.history-container {
-	padding: 15px;
-}
-</style>

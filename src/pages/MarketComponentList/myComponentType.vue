@@ -1,31 +1,30 @@
 <template lang="pug">
-e-layout
-	.market-container
-		.btn-box
-			i-button.mr10(type="primary", @click="create") 新增
-		i-table(
-			row-key="componentTypeId",
-			:columns="columns",
-			:data="list",
-			v-if="total > 0",
-			:load-data="handleLoadData")
-			template(#componentTypeParentName="{ row }")
-				span {{ row.componentTypeParentName ? row.componentTypeParentName : '无' }}
-			template(#createTime="{ row }")
-				span {{ row.createTime ? $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') : '' }}
-			template(#action="{ row }")
-				i-button.mr10(type="primary", @click="edit(row)") 编辑
-				i-button(type="error", @click="remove(row)") 删除
-		e-page(
-			@init="init",
-			:total="total",
-			ref="page",
-			:show="false",
-			:loaded="loaded")
-		dialogComponentType(
-			v-model="dialogEditShow",
-			:detail="currentRow",
-			@reload="init")
+e-layout.market-container(:padding="false")
+	.btn-box
+		i-button.mr10(type="primary", @click="create") 新增
+	i-table(
+		row-key="componentTypeId",
+		:columns="columns",
+		:data="list",
+		v-if="total > 0",
+		:load-data="handleLoadData")
+		template(#componentTypeParentName="{ row }")
+			span {{ row.componentTypeParentName ? row.componentTypeParentName : '无' }}
+		template(#createTime="{ row }")
+			span {{ row.createTime ? $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') : '' }}
+		template(#action="{ row }")
+			i-button.mr10(type="primary", @click="edit(row)") 编辑
+			i-button(type="error", @click="remove(row)") 删除
+	e-page(
+		@init="init",
+		:total="total",
+		ref="page",
+		:show="false",
+		:loaded="loaded")
+	dialogComponentType(
+		v-model="dialogEditShow",
+		:detail="currentRow",
+		@reload="init")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
@@ -134,8 +133,6 @@ export default class MarketComponentType extends Vue {
 }
 
 .market-container {
-	padding: 15px;
-
 	.mr10 {
 		margin-right: 10px;
 	}

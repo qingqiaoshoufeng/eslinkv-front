@@ -1,29 +1,24 @@
 <template lang="pug">
-e-layout
-	.market-container
-		.btn-box
-			i-button.mr10(type="primary", @click="check", :disabled="!selectOne") 审核
-		i-table(
-			:columns="columns",
-			:data="list",
-			v-if="total > 0",
-			@on-selection-change="selectHandle")
-			template(#status="{ row }")
-				span {{ status[row.status] }}
-			template(#createTime="{ row }")
-				span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
-		e-page(@init="init", :total="total", ref="page", :loaded="loaded")
-		dialogCheck(
-			v-model="dialogCheckShow",
-			:detail="currentRow",
-			@reload="reload")
+div
+	.btn-box
+		i-button.mr10(type="primary", @click="check", :disabled="!selectOne") 审核
+	i-table(
+		:columns="columns",
+		:data="list",
+		v-if="total > 0",
+		@on-selection-change="selectHandle")
+		template(#status="{ row }")
+			span {{ status[row.status] }}
+		template(#createTime="{ row }")
+			span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
+	e-page(@init="init", :total="total", ref="page", :loaded="loaded")
+	dialogCheck(v-model="dialogCheckShow", :detail="currentRow", @reload="reload")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button } from 'view-design'
 import dialogCheck from './dialogCheckComponent.vue'
 import { Editor } from '@eslinkv/core'
-import common from '../../store/common.store.js'
 import { list } from '@/api/marketComponent.api.js'
 
 @Component({
@@ -117,10 +112,6 @@ export default class Market extends Vue {
 	reload(): void {
 		;(this.$refs.page as any).reload()
 	}
-
-	mounted(): void {
-		common.actions.setNavIndex('/market/componentList')
-	}
 }
 </script>
 <style lang="scss" scoped>
@@ -128,11 +119,7 @@ export default class Market extends Vue {
 	margin-bottom: 10px;
 }
 
-.market-container {
-	padding: 15px;
-
-	.mr10 {
-		margin-right: 10px;
-	}
+.mr10 {
+	margin-right: 10px;
 }
 </style>

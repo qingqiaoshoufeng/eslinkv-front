@@ -1,18 +1,17 @@
 <template lang="pug">
-e-layout
-	.user-child-container
-		i-table(:columns="columns", :data="tableData", v-if="total > 0")
-			template(#createTime="{row}")
-				span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
-			template(#password="{row}")
-				.content {{ row.isSecretKeyShow ? row.password : row.password.replace(/./g, '*') }}
-					.show.pointer(@click="row.isSecretKeyShow = !row.isSecretKeyShow") {{ row.isSecretKeyShow ? '隐藏' : '显示' }}
-		e-page(
-			@init="init",
-			:total="total",
-			:pageSize="999",
-			:show="false",
-			:loaded="loaded")
+e-layout.user-child-container(:padding="false")
+	i-table(:columns="columns", :data="tableData", v-if="total > 0")
+		template(#createTime="{row}")
+			span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
+		template(#password="{row}")
+			.content {{ row.isSecretKeyShow ? row.password : row.password.replace(/./g, '*') }}
+				.show.pointer(@click="row.isSecretKeyShow = !row.isSecretKeyShow") {{ row.isSecretKeyShow ? '隐藏' : '显示' }}
+	e-page(
+		@init="init",
+		:total="total",
+		:pageSize="999",
+		:show="false",
+		:loaded="loaded")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
@@ -56,10 +55,6 @@ export default class SecretKey extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-.user-child-container {
-	padding: 15px;
-}
-
 .content {
 	position: relative;
 	min-width: 290px;
