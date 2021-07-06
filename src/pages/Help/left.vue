@@ -24,7 +24,6 @@ i-menu.pos-f.help-left.d-scrollbar(
 		i-menu-item(name="no") 数据配置
 		i-menu-item(name="no") 事件配置
 		i-menu-item(name="no") 入场动画
-		i-menu-item(name="no") 多选
 		i-menu-item(name="Share") 分享大屏
 	i-sub-menu(name="4")
 		template(slot="title") 开发说明（组件版）

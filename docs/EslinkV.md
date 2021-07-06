@@ -25,7 +25,7 @@
 * 拖拽式开发，提升办公效率
 * 分享大屏，让你的伙伴也能预览
 * 导入导出，快速拷贝
-* 收藏组件，形式自己的业务组件
+* 收藏组件，形成自己的业务组件
 
 ## 版本
 ![](https://img.shields.io/badge/%40eslinkv%2F-vue2-brightgreen?style=flat-square)
