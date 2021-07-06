@@ -6,7 +6,7 @@
 			:class="{ active: item.url === common.navIndex }",
 			@click="handleLink(item.url, item.title)",
 			v-for="item in list",
-			:key="item.url") {{ item.title }}
+			:key="item.title") {{ item.title }}
 	i-button(type="primary", v-if="!common.user", @click="handleLogin") 登录
 	img.circle.e-header-user-avatar(:src="userAvatar", v-if="common.user")
 	i-drop-down.e-header-user(@on-click="handleUser", v-if="common.user")
@@ -52,15 +52,15 @@ export default class EHeader extends Vue {
 		},
 		{
 			url: '/market/componentList',
+			title: '媒体资源',
+		},
+		{
+			url: '/market/componentList',
 			title: '组件开发',
 		},
 		{
 			url: '/help/EslinkV',
 			title: '帮助中心',
-		},
-		{
-			url: '/changeLog',
-			title: '更新日志',
 		},
 	]
 
@@ -68,7 +68,7 @@ export default class EHeader extends Vue {
 		this.$router.push('/login')
 	}
 
-	handleUser(name): void {
+	handleUser(name: string): void {
 		switch (name) {
 			case 'logout':
 				common.actions.setUser(null)
@@ -85,37 +85,22 @@ export default class EHeader extends Vue {
 		}
 	}
 
-	handleLink(url, title): void {
+	handleLink(url: string, title: string): void {
 		common.actions.setNavIndex(url)
 		document.title = title
 		this.$router.push(url)
 	}
 
-	loadAdmin(): void {
-		if (this.common.user.userAdmin) {
-			this.list.splice(2, 0, {
-				url: '/user/admin',
-				title: '后台管理',
-			})
-		}
-	}
-
 	mounted(): void {
-		common.actions.setNavIndex(this.$route.path)
-		if (!this.common.user) {
-			detail()
-				.then(res => {
-					common.actions.setUser(res)
-					this.loadAdmin()
-				})
-				.catch(() => {
-					common.state.user = null
-					localStorage.removeItem('eslinkv-login')
-					window.top.location.href = `${location.origin}/login`
-				})
-		} else {
-			this.loadAdmin()
-		}
+		detail()
+			.then(res => {
+				common.actions.setUser(res)
+			})
+			.catch(() => {
+				common.state.user = null
+				localStorage.removeItem('eslinkv-login')
+				window.top.location.href = `${location.origin}/login`
+			})
 	}
 }
 </script>

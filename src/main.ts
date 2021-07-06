@@ -10,33 +10,10 @@ import PortalVue from 'portal-vue'
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 import './scss/index.scss'
-import Hljs from 'highlight.js'
-import 'highlight.js/styles/tomorrow-night.css'
 import eLayout from './components/e-layout/index.vue'
 import eCard from './components/e-card/index.vue'
 import eHeader from './components/e-header/index.vue'
 import ePage from './components/e-page/index.vue'
-const Highlight = {
-	install: function (Vue) {
-		Vue.directive('highlight', {
-			deep: true,
-			inserted: function (el) {
-				const blocks = el.querySelectorAll('pre code')
-				for (let i = 0; i < blocks.length; i++) {
-					Hljs.highlightBlock(blocks[i])
-				}
-			},
-			componentUpdated: function (el) {
-				const blocks = el.querySelectorAll('pre code')
-				for (let i = 0; i < blocks.length; i++) {
-					Hljs.highlightBlock(blocks[i])
-				}
-			},
-		})
-	},
-}
-
-Vue.use(Highlight)
 Vue.use(PortalVue)
 
 Vue.component('e-layout', eLayout)

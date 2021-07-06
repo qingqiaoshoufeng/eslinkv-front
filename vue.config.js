@@ -175,14 +175,5 @@ module.exports = {
 			.use('babel')
 			.loader('babel-loader')
 			.end()
-		config.module
-			.rule('md')
-			.test(/\.md$/)
-			.use('html-loader')
-			.loader('html-loader')
-			.end()
-			.use('markdown-loader')
-			.loader('markdown-loader')
-			.end()
 	},
 }
