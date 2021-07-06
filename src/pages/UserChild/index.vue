@@ -1,12 +1,18 @@
 <template lang="pug">
 e-layout
 	.user-child-container
-		i-table(:columns="columns", :data="tableData")
+		i-table(:columns="columns", :data="tableData", v-if="total > 0")
 			template(#createTime="{row}")
 				span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
 			template(#password="{row}")
 				.content {{ row.isSecretKeyShow ? row.password : row.password.replace(/./g, '*') }}
 					.show.pointer(@click="row.isSecretKeyShow = !row.isSecretKeyShow") {{ row.isSecretKeyShow ? '隐藏' : '显示' }}
+		e-page(
+			@init="init",
+			:total="total",
+			:pageSize="999",
+			:show="false",
+			:loaded="loaded")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
@@ -21,6 +27,8 @@ import { childList } from '@/api/user.api.js'
 })
 export default class SecretKey extends Vue {
 	tableData = []
+	total = 0
+	loaded = false
 	columns = [
 		{
 			title: '创建时间',
@@ -36,17 +44,14 @@ export default class SecretKey extends Vue {
 		},
 	]
 
-	async getList() {
+	async init() {
 		let res = await childList()
 		res = res.map(v => {
 			v.isSecretKeyShow = false
 			return v
 		})
+		this.loaded = true
 		this.tableData = res
-	}
-
-	async mounted() {
-		await this.getList()
 	}
 }
 </script>

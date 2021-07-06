@@ -17,6 +17,7 @@ i-menu.pos-f.help-left.d-scrollbar(
 		i-menu-item(name="no") eslinkv-node
 	i-sub-menu(name="3")
 		template(slot="title") 功能简介
+		i-menu-item(name="FunctionOutline") 功能概要
 		i-menu-item(name="ExportImport") 导入导出
 		i-menu-item(name="no") 标尺/参考线
 		i-menu-item(name="Keyboard") 键盘/鼠标快捷键
@@ -28,8 +29,9 @@ i-menu.pos-f.help-left.d-scrollbar(
 	i-sub-menu(name="4")
 		template(slot="title") 开发说明（组件版）
 		i-menu-item(name="MarketReady") 开发准备
-		i-menu-item(name="HowToSecretKey") 开发密钥申请
+		i-menu-item(name="HowToSecretKey") 开发密钥
 		i-menu-item(name="HowToUseMarket") 第一个组件示例
+		i-menu-item(name="MarketMenu") 开发目录规范
 		i-menu-item(name="ExternalPlug") 使用外部插件
 		i-menu-item(name="BuiltInMethod") 内置方法
 		i-menu-item(name="CustomConfig") 设置组件自定义配置

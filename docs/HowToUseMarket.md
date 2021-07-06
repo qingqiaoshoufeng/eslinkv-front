@@ -3,13 +3,6 @@
 <div class="help-menu pos-f">目录</div>
 
 - [下载示例](#%E4%B8%8B%E8%BD%BD%E7%A4%BA%E4%BE%8B)
-- [安装cli](#%E5%AE%89%E8%A3%85cli)
-- [cli配置](#cli%E9%85%8D%E7%BD%AE)
-- [全组件打包&上传组件](#%E5%85%A8%E7%BB%84%E4%BB%B6%E6%89%93%E5%8C%85%E4%B8%8A%E4%BC%A0%E7%BB%84%E4%BB%B6)
-- [打包单个组件](#%E6%89%93%E5%8C%85%E5%8D%95%E4%B8%AA%E7%BB%84%E4%BB%B6)
-- [上传单个组件](#%E4%B8%8A%E4%BC%A0%E5%8D%95%E4%B8%AA%E7%BB%84%E4%BB%B6)
-- [自定义打包](#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%89%93%E5%8C%85)
-- [目录规范](#%E7%9B%AE%E5%BD%95%E8%A7%84%E8%8C%83)
 - [custom.vue](#customvue)
 - [index.component.ts](#indexcomponentts)
 
@@ -26,39 +19,6 @@ cd eslinkv-template && npm install
 
 ```
 npm run serve
-```
-
-## 目录规范
-
-项目必须指定组件目录（默认为packages），一个组件目录下可以有多个组件，组件以文件夹为单位，在开发组件时，请遵循以下规范。
-以组件文件夹（e-hello ）为例
-
-> 每个组件必须包含一个`index.js`入口文件
->
-> 每个组件必须包含一个`custom.vue`视图文件
->
-> 每个组件必须有`index.component.ts/js`配置文件
-
-```
-|- lib                             // 上传目录
-|- |- h-hello                      // 组件英文名
-|- └---- h-hello-1.0.0.umd.min.js  // 打包文件
-|- examples                        // 本地开发演示主目录
-|- |- App.vue                      // 组件容器，包含截图等附加功能
-|- |- main.ts                      // 入口ts文件
-|- |- shims-tsx.d.ts               // ts相关配置
-|- |- shims-vue.d.ts               // ts相关配置
-|- |- shims-vue.d.ts               // ts相关配置
-|- └- vue.d.ts                     // ts相关配置
-|- packages                        // 开发主目录
-|- |- e-hello                      // 单个组件目录
-|- |- |- custom.vue                // ★自定义组件
-|- |- |- index.component.ts        // ★自定义组件配置文件
-|- └---- index.js                  // 打包文件
-|- public                          // 网站静态文件
-|- |- |-  ……                      
-|- └- index.html           
-|- esp-config.js                 // ★eslinkv-cli配置文件   
 ```
 
 ## custom.vue

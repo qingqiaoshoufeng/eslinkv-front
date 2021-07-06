@@ -5,8 +5,7 @@ e-layout
 			row-key="componentTypeId",
 			:columns="columns",
 			:data="list",
-			v-if="total > 0",
-			:load-data="handleLoadData")
+			v-if="total > 0")
 			template(#createTime="{ row }")
 				span {{ row.createTime ? $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') : '' }}
 			template(#lastReduceTime="{ row }")
@@ -17,7 +16,6 @@ e-layout
 			@init="init",
 			:total="total",
 			:pageSize="999",
-			ref="page",
 			:show="false",
 			:loaded="loaded")
 </template>
@@ -71,10 +69,6 @@ export default class ScreenHistory extends Vue {
 		})
 	}
 
-	handleLoadData(): void {
-		this.init()
-	}
-
 	init(): void {
 		const id = this.$route.params.id
 		list({ screenId: id }).then(res => {
@@ -87,10 +81,6 @@ export default class ScreenHistory extends Vue {
 			this.total = res.length
 			this.list = res
 		})
-	}
-
-	reload(): void {
-		;(this.$refs.page as any).reload()
 	}
 }
 </script>

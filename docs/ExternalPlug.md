@@ -8,6 +8,7 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## 参考js
+> 原理主要是在window上使用一个变量进行缓存三方包，判断是否已经加载，如果未加载，将进行create一个script标签进行加载，如果已加载将忽略此次行为，值得注意的是该方式`只适用于外部js加载`
 ```javascript
 /**
  * @description 加载三方包
@@ -55,7 +56,8 @@ export function loadJs(src, value) {
 		return Promise.all(p)
 	}
 }
-
+```
+```
 /**
  * @description 加载三方包css
  */

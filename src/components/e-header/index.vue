@@ -11,11 +11,11 @@
 	img.circle.e-header-user-avatar(:src="userAvatar", v-if="common.user")
 	i-drop-down.e-header-user(@on-click="handleUser", v-if="common.user")
 		.pointer
-			span.e-header-user-name {{ common.user && common.user.userName }} 
-			i.e-header-user-tip （{{common.user.userIsChild?'子':'主'}}账号）
+			span.e-header-user-name {{ common.user && common.user.userName }}
+			i.e-header-user-tip （{{ common.user.userIsChild ? '子' : '主' }}账号）
 			i-icon(type="ios-arrow-down", color="#fff")
 		i-drop-down-menu(slot="list")
-			i-drop-down-item(name="child" v-if="!common.user.userIsChild")
+			i-drop-down-item(name="child", v-if="!common.user.userIsChild")
 				i-icon(type="md-people", :size="16", color="#333")
 				span.e-header-user-item 子账号管理
 			i-drop-down-item(name="secretKey")
@@ -54,10 +54,6 @@ export default class EHeader extends Vue {
 			url: '/market/componentList',
 			title: '组件开发',
 		},
-		// {
-		//   url: '/template',
-		//   title: '模版市场'
-		// },
 		{
 			url: '/help/EslinkV',
 			title: '帮助中心',
@@ -68,11 +64,11 @@ export default class EHeader extends Vue {
 		},
 	]
 
-	handleLogin() {
+	handleLogin(): void {
 		this.$router.push('/login')
 	}
 
-	handleUser(name) {
+	handleUser(name): void {
 		switch (name) {
 			case 'logout':
 				common.actions.setUser(null)
@@ -89,24 +85,36 @@ export default class EHeader extends Vue {
 		}
 	}
 
-	handleLink(url, title) {
+	handleLink(url, title): void {
 		common.actions.setNavIndex(url)
 		document.title = title
 		this.$router.push(url)
 	}
 
-	mounted() {
+	loadAdmin(): void {
+		if (this.common.user.userAdmin) {
+			this.list.splice(2, 0, {
+				url: '/user/admin',
+				title: '后台管理',
+			})
+		}
+	}
+
+	mounted(): void {
 		common.actions.setNavIndex(this.$route.path)
 		if (!this.common.user) {
 			detail()
 				.then(res => {
 					common.actions.setUser(res)
+					this.loadAdmin()
 				})
 				.catch(() => {
 					common.state.user = null
 					localStorage.removeItem('eslinkv-login')
 					window.top.location.href = `${location.origin}/login`
 				})
+		} else {
+			this.loadAdmin()
 		}
 	}
 }
