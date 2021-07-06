@@ -50,10 +50,10 @@ export default class EHeader extends Vue {
 			url: '/editor/Manger',
 			title: '大屏管理',
 		},
-		{
-			url: '/market/componentList',
-			title: '媒体资源',
-		},
+		// {
+		// 	url: '/market/componentList',
+		// 	title: '媒体资源',
+		// },
 		{
 			url: '/market/componentList',
 			title: '组件开发',
