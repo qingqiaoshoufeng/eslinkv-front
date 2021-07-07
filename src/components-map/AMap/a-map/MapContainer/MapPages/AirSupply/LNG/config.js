@@ -42,7 +42,7 @@ export const AIRSUPPLY_LNG_LEGEND_MAP = {
 	},
 	GreenEnergyStation: {
 	    label: '绿色能源站',
-	    legendIcon: 'iconlvsenengyuanzhan',
+	    legendIcon: 'iconzonghefuwuzhan2',
 	    component: 'MapMarkerIcon',
 	    visible: true,
 		dataProp: 'greenEnergyStationList',

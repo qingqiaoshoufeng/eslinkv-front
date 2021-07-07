@@ -42,7 +42,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	},
 	ServiceStation: {
 		label: '综合服务站',
-		legendIcon: 'iconzonghefuwuzhan2',
+		legendIcon: 'icontulizonghefuwuzhan1',
 		iconSize: 38,
 		component: 'ServiceStation',
 		visible: true,
