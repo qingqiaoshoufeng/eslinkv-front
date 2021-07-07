@@ -4,7 +4,6 @@ div
 	i-page.e-page(
 		:current.sync="pageNum",
 		:total="total",
-		:show-sizer="show",
 		v-show="total > 0",
 		:show-elevator="show",
 		:page-size="pageSize",
