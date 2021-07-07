@@ -62,6 +62,7 @@
 
 			<!-- 统计数据 -->
 			<DataStatistics
+          style="top: 240px"
 				:position="'left'"
 				:dataStatisticsList="dataStatisticsList"
 				:data="couplingIncreaseInfo"

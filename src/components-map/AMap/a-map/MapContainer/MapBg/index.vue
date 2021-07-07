@@ -45,7 +45,11 @@ export default class MapBg extends Vue {
 	right: 0;
 	height: 1050px;
 	pointer-events: none;
-	background-image: linear-gradient(0deg, rgba(0, 4, 98, 0), #000462);
+	background-image: -webkit-linear-gradient(
+		0deg,
+		rgba(0, 4, 98, 0),
+		rgba(0, 4, 98, 1)
+	);
 
 	&::after {
 		position: absolute;
