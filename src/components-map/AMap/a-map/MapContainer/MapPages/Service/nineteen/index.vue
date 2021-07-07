@@ -50,9 +50,10 @@
 				:style="mapLegendStyle"
 			/>
 			<DataStatistics
-				:position="'left'"
-				:dataStatisticsList="dataStatisticsList"
-				:data="dataStatisticsInfo"
+          style="top: 240px;"
+          :position="'left'"
+          :dataStatisticsList="dataStatisticsList"
+          :data="dataStatisticsInfo"
 			/>
 		</portal>
 	</div>

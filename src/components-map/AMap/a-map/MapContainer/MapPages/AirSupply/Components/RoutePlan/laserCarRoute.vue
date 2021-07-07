@@ -13,13 +13,15 @@ export default {
   },
   methods: {
     init () {
-      this.drawLine(this.data[0].coordinate)
+      this.reset()
+      this.data.forEach(v => {
+        this.drawLine(v.coordinate)
+      })
     },
     drawLine(passedPathData = []) {
       if (!this.$amap) {
         return false
       }
-      this.reset()
       const map = this.$amap
       // 1.已行驶路径
       const pathDataAll = [...passedPathData]
@@ -27,9 +29,9 @@ export default {
         map: map,
         path: pathDataAll,
         showDir: true,
-        strokeColor: 'rgba(99, 199, 255, 1)', // 线颜色
+        strokeColor: 'rgba(190, 189, 255, 1)', // 线颜色
         strokeOpacity: 1,
-        fillColor: 'rgba(99, 199, 255, 1)', // 线颜色
+        fillColor: 'rgba(190, 189, 255, 1)', // 线颜色
         strokeWeight: 6, // 线宽
       })
       // 2.车辆位置

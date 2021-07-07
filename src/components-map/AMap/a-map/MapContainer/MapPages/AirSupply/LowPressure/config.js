@@ -32,8 +32,8 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	},
 	VoltageRegulator: {
 		label: '调压器',
-		legendIcon: 'icontiaoyaqi1',
-		overlayWarmIcon: 'icontiaoyaqiyichang1',
+		legendIcon: 'icontiaoyaqi01',
+		overlayWarmIcon: 'icontiaoyaqibaojing02',
 		component: 'MapMarkerIcon',
 		iconSize: 38,
 		visible: false,
@@ -42,7 +42,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	},
 	ServiceStation: {
 		label: '综合服务站',
-		legendIcon: 'icontulizonghefuwuzhan1',
+		legendIcon: 'iconzonghefuwuzhan2',
 		iconSize: 38,
 		component: 'ServiceStation',
 		visible: true,

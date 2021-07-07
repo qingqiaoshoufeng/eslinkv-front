@@ -101,7 +101,7 @@ export const AIRSUPPLY_UCAN_LEGEND_MAP = {
 	// },
 	ServiceStation: {
 		label: '综合服务站',
-		legendIcon: 'icontulizonghefuwuzhan1',
+		legendIcon: 'iconzonghefuwuzhan2',
 		iconSize: 38,
 		component: 'ServiceStation',
 		visible: false,
