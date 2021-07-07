@@ -63,6 +63,7 @@ export default class MarketComponentList extends Vue {
 	background: #fff;
 	box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.08);
 	min-height: calc(100vh - 50px);
+	min-width: 200px;
 	li {
 		height: 48px;
 		line-height: 48px;
