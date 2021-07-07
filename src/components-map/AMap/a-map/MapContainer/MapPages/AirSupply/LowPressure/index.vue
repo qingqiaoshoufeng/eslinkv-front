@@ -324,6 +324,7 @@ export default {
 		},
 		// 获取瓦片函数
 		getTileUrl(x, y, zoom) {
+		  if (!this.tilesQuery.length) return ''
 			const tilesQuery = String(this.tilesQuery)
 			const {
 				leftBottomX,
