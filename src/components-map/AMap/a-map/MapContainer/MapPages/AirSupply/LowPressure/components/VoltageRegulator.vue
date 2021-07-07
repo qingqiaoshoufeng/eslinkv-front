@@ -83,7 +83,7 @@ export default class VoltageRegulator extends Vue {
 				{
 					type: 'value',
 					show: true,
-					name: '进站/Mpa',
+					name: '进站/Kpa',
           scale: true,
 					axisTick: {
 						show: false,
@@ -116,7 +116,7 @@ export default class VoltageRegulator extends Vue {
 					},
 				},
 				{
-					name: '出站/Mpa',
+					name: '出站/Kpa',
 					type: 'value',
 					nameTextStyle: {
 						color: '#fff',
