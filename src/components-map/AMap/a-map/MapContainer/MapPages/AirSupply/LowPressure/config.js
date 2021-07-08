@@ -112,7 +112,7 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	},
 	CommandCar: {
 		label: '抢修指挥车',
-		legendIcon: 'iconzhihuiqiangxiuche',
+		legendIcon: 'iconqiangxiuzhihuiche',
 		iconSize: 38,
 		component: 'commandCarRoute',
 		visible: false,

@@ -248,3 +248,14 @@ export function getPressAlarmList(data) {
 		},
 	})
 }
+
+export function getStationAreaRange(data) {
+	return request({
+		url: HANGRANURL + '/applyAir/stationAreaRange',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}

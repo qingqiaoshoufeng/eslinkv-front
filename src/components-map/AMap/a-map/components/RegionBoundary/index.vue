@@ -26,6 +26,8 @@ export default {
 				districtInstance.search(area, (status, result) => {
 					const bounds = result.districtList[0].boundaries
 					if (bounds) {
+					  console.log('bounds')
+					  console.log(bounds)
 						for (let i = 0, l = bounds.length; i < l; i++) {
 							const instance = new window.AMap.Polygon({
 								path: bounds[i],

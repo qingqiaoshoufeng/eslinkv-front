@@ -82,11 +82,14 @@
 				ref="RightPanel1"
 			></RightPanel>
 		</portal>
+    <serviceStationBoundary :data="serviceStationBoundaryData" :active="activeOverlay" :visible="legendMap.ServiceStation.visible"></serviceStationBoundary>
+    <serviceStationBoundary :data="pipeManageMentStationList" :active="activeOverlay" :visible="legendMap.PipeManageMentStation.visible"></serviceStationBoundary>
 	</div>
 </template>
 <script>
 import { AMapTile } from '../../../../lib'
 import VoltageRegulator from './components/VoltageRegulator'
+import serviceStationBoundary from './components/serviceStationBoundary'
 import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon.vue'
 // 页面所需公共组件
 import { OverlayDetail, MapLegend } from '../../../../components/index.js'
@@ -102,6 +105,7 @@ import {
 import getHangZhouGasGISPosition from '../../../../utils/getHangZhouGasGISPosition'
 import {
 	getAllTypeStationList,
+	getStationAreaRange,
 	getStatisticsInfo,
 } from '@/components-map-api/map.airSupply.api'
 const componentPageArr = [
@@ -141,6 +145,7 @@ export default {
 	components: {
 		MapMarkerIcon,
 		VoltageRegulator,
+    serviceStationBoundary,
 		AMapTile,
     laserCarRoute,
     commandCarRoute,
@@ -155,6 +160,7 @@ export default {
 	mounted() {
 		this.getAllTypeStationList()
 		this.getDataStatisticsInfo()
+		this.getStationAreaRange()
 	},
 	data() {
 		return {
@@ -163,6 +169,8 @@ export default {
 			),
 			activeOverlay: {},
 			activeWarnData: {},
+      serviceStationBoundaryData: {},
+      pipeManageMentStationList: {},
 			center: [120.151562, 30.293297],
 			zoom: 12.5,
 			showOverlayDetail: false,
@@ -260,6 +268,13 @@ export default {
 		},
 	},
 	methods: {
+	  async getStationAreaRange () {
+      const res = await getStationAreaRange({
+        type: 'PipeManageMentStation,ServiceStation'
+      })
+      this.serviceStationBoundaryData = res.serviceStationList
+      this.pipeManageMentStationList = res.pipeManageMentStationList
+    },
 		// 获取所有站点数据
 		async getAllTypeStationList() {
 			const params = {
