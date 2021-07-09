@@ -27,7 +27,7 @@
 				:is="config.component"
 				:visible="config.visible"
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
-				:overlayType="config.component"
+				:overlayType="legend"
 				:iconSize="config.iconSize"
 				:showOverlayName="config.showOverlayName"
 				:detailList="config.detailList"

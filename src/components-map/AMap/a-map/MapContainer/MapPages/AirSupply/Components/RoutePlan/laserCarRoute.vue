@@ -1,96 +1,154 @@
-<template></template>
+<template>
+  <div>
+    <div v-for="(k, i) in data" :key="i">
+      <AMapMarker
+          :visible="visible"
+          :offset="config.offset"
+          :position="k.coordinate[0]"
+          :vid="k.carPlateNo"
+          ref="marker"
+          :routeData="k.coordinate"
+      >
+        <div :class="['sample', active ? 'active' : '']" v-on="$listeners">
+          <img :src="config.carImg" @click="handleMakerClick(k, i)">
+        </div>
+      </AMapMarker>
+      <AMapPolyline
+          :visible="visible"
+          :path="k.coordinate"
+          :showDir="true"
+          v-bind="config.lineConfig"
+      ></AMapPolyline>
+    </div>
+    <OverlayDetail
+        v-model="detailShow"
+        v-bind="{
+	          beforeClose: closeOverlayDetail,
+          }"
+        :data="detailPosition"
+        ref="OverlayDetail"
+        :width="240"
+    >
+      <div class="laser">
+        <h4>{{ config.name }}</h4>
+        <div class="laser-body">
+          <div class="laser-body-num">{{ current.carPlateNo }}</div>
+          <img class="laser-body-logo" @click="play" src="../../../../../../../../assets/amap/routePlay.svg">
+        </div>
+      </div>
+    </OverlayDetail>
+  </div>
+</template>
 <script>
-import overlayMixin from '../../../../../mixins/overlayMixin.js'
+import { AMapMarker, AMapPolyline } from '../../../../../lib'
+import { OverlayDetail } from '../../../../../components/index'
 
 export default {
   name: 'laserCarRoute',
-  mixins: [overlayMixin],
+  props: {
+    data: {
+      type: Array,
+    },
+    visible: {
+      type: Boolean,
+      default: true,
+    },
+    active: {
+      type: Boolean,
+      default: false,
+    },
+    overlayType: {
+      type: String
+    },
+  },
+  components: { AMapMarker, AMapPolyline, OverlayDetail },
   data() {
     return {
-      duration: 6, // 6秒内播放完毕
-      passedPathData: [],
+      current: { coordinate: [] },
+      currentIndex: 0
+    }
+  },
+  computed: {
+    detailShow () {
+      return !!this.current.carPlateNo
+    },
+    detailPosition () {
+      if (!this.current.coordinate.length) return {}
+      const res = this.current.coordinate[this.current.coordinate.length - 1]
+      return res
+    },
+    config () {
+      if (this.overlayType === 'LaserCar') {
+        return {
+          name: '激光巡检车',
+          carImg: require('@/assets/amap/laserCar.svg'),
+          offset: [-43.5, -47],
+          lineConfig: {
+            strokeColor: 'rgba(190, 189, 255, 1)',
+            strokeOpacity: 1,
+            fillColor: "rgba(190, 189, 255, 1)",
+            strokeWeight: 6
+          }
+        }
+      } else {
+        return {
+          name: '抢修指挥车',
+          carImg: require('@/assets/amap/commandCar.svg'),
+          offset: [-38, -26.5],
+          lineConfig: {
+            strokeColor: 'rgba(243, 255, 99, 1)', // 线颜色
+            strokeOpacity: 1,
+            fillColor: 'rgba(243, 255, 99, 1)', // 线颜色
+            strokeWeight: 6, // 线宽
+          }
+        }
+      }
     }
   },
   methods: {
-    init () {
-      this.reset()
-      this.data.forEach(v => {
-        this.drawLine(v.coordinate)
-      })
+    handleMakerClick (marker, i) {
+      this.current = marker
+      this.currentIndex = i
     },
-    drawLine(passedPathData = []) {
-      if (!this.$amap) {
-        return false
-      }
-      const map = this.$amap
-      // 1.已行驶路径
-      const pathDataAll = [...passedPathData]
-      this.pathAll = new AMap.Polyline({
-        map: map,
-        path: pathDataAll,
-        showDir: true,
-        strokeColor: 'rgba(190, 189, 255, 1)', // 线颜色
-        strokeOpacity: 1,
-        fillColor: 'rgba(190, 189, 255, 1)', // 线颜色
-        strokeWeight: 6, // 线宽
-      })
-      // 2.车辆位置
-      const markerPose = passedPathData[passedPathData.length - 1]
-      this.marker = new AMap.Marker({
-        map: map,
-        position: markerPose,
-        icon: require('@/assets/amap/laserCar.svg'),
-        autoRotation: true,
-        offset: new AMap.Pixel(-14, -14),
-      })
-      this.instanceArr.push(this.pathAll)
-      this.instanceArr.push(this.marker)
-      // 3.轨迹回放
-      if (passedPathData.length > 1) {
-        const startAnimation = () => {
-          // 计算速度
-          const totalDistance = AMap.GeometryUtil.distanceOfLine(
-              passedPathData,
-          )
-          const speed =
-              totalDistance / 1000 / (this.duration / 60 / 60)
-          this.marker.moveAlong(passedPathData, speed)
-        }
-        startAnimation()
-      }
+    closeOverlayDetail () {
+      this.current = { coordinate: [] }
     },
-    reset() {
-      if (this.$amap) {
-        this.passedPolyline && this.$amap.remove(this.passedPolyline)
-        this.marker && this.$amap.remove(this.marker)
-        this.pathAll && this.$amap.remove(this.pathAll)
-      }
-    },
-  },
-  beforeDestroy() {
-    this.reset()
-    this.$amap = null
-  },
+    play () {
+      this.current = { coordinate: [] }
+      this.$refs.marker[this.currentIndex].startRouteAnimation()
+    }
+  }
 }
 </script>
 
-<style lang="scss">
-.amap-icon {
-  width: 32px !important;
-  height: 16px !important;
-
-  > img {
-    width: 32px !important;
+<style lang="scss" scoped>
+.laser {
+  h4 {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 32px;
+    color: #FFDC45;
   }
-}
-
-.warnoverlay-gif {
-  position: absolute;
-  display: block;
-  width: 100px;
-  height: 35px;
-  margin-top: -14px;
-  margin-left: 19px;
-  transform: translateX(-50%);
+  .laser-body {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    .laser-body-num {
+      width: 98px;
+      height: 32px;
+      background: #0057A9;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      color: #FFFFFF;
+    }
+    .laser-body-logo {
+      width: 33px;
+      height: 33px;
+    }
+  }
 }
 </style>

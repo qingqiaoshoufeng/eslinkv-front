@@ -33,7 +33,7 @@
 				:visible="config.visible"
 				:overlayIcon="config.legendIcon"
 				:overlayWarmIcon="config.overlayWarmIcon"
-				:overlayType="config.component"
+				:overlayType="legend"
 				:iconSize="config.iconSize"
         @moveto="handlerMoveto"
         :showOverlayName="config.showOverlayName"
