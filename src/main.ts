@@ -39,7 +39,7 @@ const errorHandler = (err, vm) => {
 	}
 }
 
-Vue.config.errorHandler = errorHandler
+// Vue.config.errorHandler = errorHandler
 Vue.prototype.$format = format
 Vue.prototype.$Message = Message
 Vue.prototype.$Modal = Modal

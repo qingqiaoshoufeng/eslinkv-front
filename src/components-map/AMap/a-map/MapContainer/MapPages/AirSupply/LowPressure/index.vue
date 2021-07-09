@@ -95,7 +95,6 @@ import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon.
 import { OverlayDetail, MapLegend } from '../../../../components/index.js'
 import { DataStatistics } from '../../../../components'
 import laserCarRoute from '../Components/RoutePlan/laserCarRoute'
-import commandCarRoute from '../Components/RoutePlan/commandCarRoute'
 
 import {
 	DATASTATISTICSLIST,
@@ -148,7 +147,6 @@ export default {
     serviceStationBoundary,
 		AMapTile,
     laserCarRoute,
-    commandCarRoute,
 		...componentPageMap,
 		...componentCommonMap,
 	},

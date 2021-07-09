@@ -144,8 +144,6 @@ export default {
           this.routeData,
       )
       const speed = totalDistance / 1000 / (6 / 60 / 60)
-      console.log('speed')
-      console.log(speed)
       this.$amapComponent.moveAlong(this.routeData, speed)
     },
 		$$getExtData() {
