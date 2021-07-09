@@ -4,18 +4,19 @@
       <AMapMarker
           :visible="visible"
           :offset="config.offset"
-          :position="k.coordinate[0]"
+          :position="JSON.parse(JSON.stringify(k.coordinate[0]))"
           :vid="k.carPlateNo"
           ref="marker"
-          :routeData="k.coordinate"
+          :autoRotation="true"
+          :routeData="JSON.parse(JSON.stringify(k.coordinate))"
       >
-        <div :class="['sample', active ? 'active' : '']" v-on="$listeners">
+        <div :class="['sample', active ? 'active' : '']">
           <img :src="config.carImg" @click="handleMakerClick(k, i)">
         </div>
       </AMapMarker>
       <AMapPolyline
           :visible="visible"
-          :path="k.coordinate"
+          :path="JSON.parse(JSON.stringify(k.coordinate))"
           :showDir="true"
           v-bind="config.lineConfig"
       ></AMapPolyline>
