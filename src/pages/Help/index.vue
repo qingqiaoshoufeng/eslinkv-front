@@ -23,47 +23,56 @@ export default class Help extends Vue {
 			list: [
 				{
 					title: '产品简介',
-					url: 'https://www.yuque.com/eslink/wdn84c/ecgg9g',
+					url:
+						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/ecgg9g',
 				},
 				{
 					title: '谁在使用',
-					url: 'https://www.yuque.com/eslink/wdn84c/fluu55',
+					url:
+						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/fluu55',
 				},
 				{
 					title: '特色优势',
-					url: 'https://www.yuque.com/eslink/wdn84c/es6xmg',
+					url:
+						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/es6xmg',
 				},
 				{
 					title: '版本及兼容',
-					url: 'https://www.yuque.com/eslink/wdn84c/dh5k1g',
+					url:
+						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/dh5k1g',
 				},
 				{
 					title: '建议及反馈',
-					url: 'https://www.yuque.com/eslink/wdn84c/fwydgu',
+					url:
+						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/fwydgu',
 				},
 			],
 		},
 		{
 			icon:
 				'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGwAAABsCAMAAAC4uKf/AAAAflBMVEVOuP8AAABRuf9fv/9Ru/9Suv9Quv9Ut/9Pu/9Vtf9Rr/8lkvg4pv5SuP9gv/8lkvcmk/gynfwmkvcmk/gnlfgunPopl/otl/glkvgkkvgkkvcnlPj///8kkffH4/1ksfq53P18vfo9nvjn8/+u1/yZzPuMxftstvpfr/lRqPk9GXwkAAAAHHRSTlMkACIDHRQaEBYMCf4/GQjptlTm1bJljv707+y8Eku+IwAAAt9JREFUaN7V2tl24jAMBmAhecnCOtB9VJZu0/d/wclkSk3bxNjY6IT/jtx8B9vkYEkwighVVhulEAEQlTLaVjSKSDBWWYPQETS2yorRAdQDUiasnEBAJmU6RhohMKgpAXNUJg58VAHRKeg0zCKcELQnYFMFJ0ZNYzENCdFRGClIiqJwrERIDJahmIYM0WFYAVlSBGBkIFMMeTH/0Ug/JuCz0jUvZiBrjA8rIHOKfkxD9ug+rIQzpOzGCOEMQerEug7i4mHGx/LryqupA8y7Yde1B3Fa4LY5bNr1vep6u3k8FmbwZ+owzyI+8NaDBGPqO2ahIzPe5MDAfsUIz4khOaz31cFpy+hSHGIEPVjaAXGhA0z3YFGZrca9mHYYYQrmcterIX1iGvqw3xF5WvPK/9VaDJMwp/GsF8M9VkIS5uI7KuUHNpHAJv8xAgkMqMWsDGZbzMhgpsVQBsN/WAUyGFQNZqUw22BGCjMNhlIYjoBACmuoSg6rwAZha/6R9efzdSBmQcthGozcMhpQcpiSxVAOQ1kMBDAXuaMPgBmwYe7ZBf3OHncRd2yV+LraxdyxDegkjDniCqXBymEWqoSjH4lVQHIYwQillhHbv3JCmGkwK4XZBquksKq9WMhguL8ySWCmxawMZluMZDDaX+AFsMm+NCGBla7ocnYMXTnp/Jj2FMpyY0ieEmBuTHuKm9kx8pRtc2NFUEH6KQuGFFBqX/H6KRB73e1eezEb0kQY3/GR7LE3bvLWgylve8Rpq1kItnlnruua3zed2NTT+IlJiz3v+H4BsLjn3XMHpj0trWjs5YaX43Ydlnzz8gNT6c06h21rnsNH5lxvv2FI2dqQNf/h+vqg4dY+8LUhE7ZtyXx7BQe5umVegovO2Doez+eLH0/G7lMxlKZ49nb/cAYZ8o5oDGv4JNtYzRAHhnKMQg11yCtxfG3Yg3knjxxewjBl/JjoJQ3ABo/2XubQcq5x7L+tZXmsoXZlWwAAAABJRU5ErkJggg==',
-			title: '快速入门',
+			title: '操作指南',
 			className: 'flex-row',
 			list: [
 				{
-					title: '功能简介',
-					url: 'https://www.yuque.com/eslink/wdn84c/rnllgd',
+					title: '基础概念',
+					url:
+						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/rnllgd',
 				},
 				{
 					title: '导入导出',
-					url: 'https://www.yuque.com/eslink/wdn84c/pbdv1b',
-				},
-				{
-					title: '键盘/鼠标快捷键',
-					url: 'https://www.yuque.com/eslink/wdn84c/bczz0o',
+					url:
+						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/pbdv1b',
 				},
 				{
 					title: '分享大屏',
-					url: 'https://www.yuque.com/eslink/wdn84c/kppgub',
+					url:
+						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/kppgub',
+				},
+				{
+					title: '键盘/鼠标快捷键',
+					url:
+						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/bczz0o',
 				},
 			],
 		},
@@ -74,16 +83,24 @@ export default class Help extends Vue {
 			className: 'flex-column',
 			list: [
 				{
+					title: '如何使用组件自定义配置？',
+					url:
+						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/idz8u9',
+				},
+				{
 					title: '如何使用外部插件？',
-					url: 'https://www.yuque.com/eslink/wdn84c/iivic4',
+					url:
+						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/iivic4',
 				},
 				{
 					title: '如何安装node环境？',
-					url: 'https://www.yuque.com/eslink/wdn84c/kl92vx',
+					url:
+						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/kl92vx',
 				},
 				{
 					title: '如何安装mongodb环境？',
-					url: 'https://www.yuque.com/eslink/wdn84c/wsrf53',
+					url:
+						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/wsrf53',
 				},
 			],
 		},
