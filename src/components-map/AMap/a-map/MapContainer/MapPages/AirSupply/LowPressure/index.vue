@@ -35,6 +35,7 @@
 				:overlayWarmIcon="config.overlayWarmIcon"
 				:overlayType="legend"
 				:iconSize="config.iconSize"
+				:detailHandler="config.detailHandler"
         @moveto="handlerMoveto"
         :showOverlayName="config.showOverlayName"
 				:data="stationDataMap[config.dataProp]"

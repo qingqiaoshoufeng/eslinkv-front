@@ -259,3 +259,14 @@ export function getStationAreaRange(data) {
 		},
 	})
 }
+
+export function getStationDetailInfo(data) {
+	return request({
+		url: HANGRANURL + '/applyAir/stationDetailInfo',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}

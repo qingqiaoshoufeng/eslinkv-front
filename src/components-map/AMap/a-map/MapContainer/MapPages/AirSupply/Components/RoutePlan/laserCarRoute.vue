@@ -4,11 +4,11 @@
       <AMapMarker
           :visible="visible"
           :offset="config.offset"
-          :position="JSON.parse(JSON.stringify(k.coordinate[0]))"
+          :position="k.coordinate[0]"
           :vid="k.carPlateNo"
           ref="marker"
           :autoRotation="true"
-          :routeData="JSON.parse(JSON.stringify(k.coordinate))"
+          :routeData="k.coordinate"
       >
         <div :class="['sample', active ? 'active' : '']">
           <img :src="config.carImg" @click="handleMakerClick(k, i)">
@@ -16,7 +16,7 @@
       </AMapMarker>
       <AMapPolyline
           :visible="visible"
-          :path="JSON.parse(JSON.stringify(k.coordinate))"
+          :path="k.coordinate"
           :showDir="true"
           v-bind="config.lineConfig"
       ></AMapPolyline>
@@ -108,7 +108,8 @@ export default {
   },
   methods: {
     handleMakerClick (marker, i) {
-      this.current = marker
+      console.log(marker)
+      this.current = JSON.parse(JSON.stringify(marker))
       this.currentIndex = i
     },
     closeOverlayDetail () {

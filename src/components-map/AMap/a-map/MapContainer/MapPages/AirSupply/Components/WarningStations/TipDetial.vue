@@ -145,19 +145,19 @@ export default {
 
 .TipDetial {
 	display: flex;
-  min-width: 345px;
+  min-width: 370px;
   text-align: left;
 
   .station_list {
     box-sizing: content-box;
-    width: 345px;
+    width: 370px;
 		padding: 15px 0;
 		margin-right: 24px;
 		margin-left: 2px;
 		background: #001a77;
 
 		.station_item {
-			width: 345px;
+			width: 370px;
 			height: 40px;
 			padding-left: 15px;
 			font-size: 24px;

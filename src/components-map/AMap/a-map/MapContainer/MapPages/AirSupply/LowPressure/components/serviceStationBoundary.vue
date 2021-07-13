@@ -68,7 +68,7 @@ export default {
           fillColor: '#0085FF',
           strokeOpacity: 1,
           strokeStyle: 'dashed',
-          strokeColor: '#00DDFF',
+          strokeColor: '#FFDC45',
           strokeDasharray: [5, 2],
         })
         this.instanceArr.push(instance)

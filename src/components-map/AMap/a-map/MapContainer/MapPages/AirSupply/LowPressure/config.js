@@ -8,6 +8,7 @@ import {
 	LowPressureUnderNumber,
 	LowPressurePassRate,
 } from '../../../../utils/dictionary'
+import { getStationDetailInfo } from '@/components-map-api/map.airSupply.api'
 
 // 首页覆盖物配置项
 export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
@@ -44,17 +45,19 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		label: '综合服务站',
 		legendIcon: 'icontulizonghefuwuzhan1',
 		iconSize: 38,
-		component: 'ServiceStation',
+		component: 'MapMarkerIcon',
 		visible: true,
 		dataProp: 'serviceStationList',
+		detailHandler: getStationDetailInfo
 	},
 	PipeManageMentStation: {
 		label: '管网运行管理站',
 		legendIcon: 'icontuliguanwangyunhangguanlizhan',
 		iconSize: 38,
-		component: 'PipeManageMentStation',
+		component: 'MapMarkerIcon',
 		visible: true,
 		dataProp: 'pipeManageMentStationList',
+		detailHandler: getStationDetailInfo
 	},
 	WarningStations: {
 		label: '中低压预警点',
