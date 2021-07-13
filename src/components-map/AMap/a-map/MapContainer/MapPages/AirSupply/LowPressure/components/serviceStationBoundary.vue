@@ -24,9 +24,13 @@ export default {
     },
     active: {
       immediate: true,
+      deep: true,
       handler(val) {
         if (this.current) {
-          this.$amap.remove(this.instanceArr.find(v => v.w.extData.name === this.current))
+          const idx = this.instanceArr.findIndex(v => v.w.extData.name === this.current)
+          this.$amap.remove(this.instanceArr[idx])
+          this.current = ''
+          this.instanceArr.splice(idx, 1)
         }
         if (this.data[val.name] && this.current !== val.name) {
           this.current = val.name

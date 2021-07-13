@@ -143,7 +143,8 @@ export default {
       const totalDistance = AMap.GeometryUtil.distanceOfLine(
           this.routeData,
       )
-      const speed = totalDistance / 1000 / (6 / 60 / 60)
+      let speed = totalDistance / 1000 / (6 / 60 / 60)
+      speed = speed > 20000 ? 20000 : speed
       this.$amapComponent.moveAlong(this.routeData, speed)
     },
 		$$getExtData() {

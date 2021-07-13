@@ -83,7 +83,7 @@ export default {
         return {
           name: '激光巡检车',
           carImg: require('@/assets/amap/laserCar.svg'),
-          offset: [-43.5, -47],
+          offset: [-38.5, -29.5],
           lineConfig: {
             strokeColor: 'rgba(190, 189, 255, 1)',
             strokeOpacity: 1,
@@ -95,7 +95,7 @@ export default {
         return {
           name: '抢修指挥车',
           carImg: require('@/assets/amap/commandCar.svg'),
-          offset: [-38, -26.5],
+          offset: [-34.5, -18.5],
           lineConfig: {
             strokeColor: 'rgba(243, 255, 99, 1)', // 线颜色
             strokeOpacity: 1,
