@@ -64,10 +64,11 @@ export default {
 		convertProps() {
 			const props = {}
 			if (this.$amap) props.map = this.$amap
-			const {
+			let {
 				$options: { propsData = {} },
 				propsRedirect,
 			} = this
+			propsData = JSON.parse(JSON.stringify(propsData))
 			return Object.keys(propsData).reduce((res, _key) => {
 				let key = _key
 				const propsValue = this.convertSignalProp(key, propsData[key])
