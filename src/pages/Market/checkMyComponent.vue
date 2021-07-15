@@ -81,7 +81,7 @@ export default class Market extends Vue {
 		this.loaded = true
 	}
 
-	selectHandle(selection) {
+	selectHandle(selection): void {
 		if (selection.length > 1) {
 			this.selectMore = selection
 		} else {

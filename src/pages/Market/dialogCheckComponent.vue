@@ -29,23 +29,23 @@ export default class MarketEditDialog extends Vue {
 	loading = false
 
 	@Watch('value')
-	onValueChange(val) {
+	onValueChange(val): void {
 		this.modalShow = val
 	}
 
 	@Watch('modalShow')
-	onModalShow(val) {
+	onModalShow(val): void {
 		this.$emit('input', val)
 	}
 
-	cancel() {
+	cancel(): void {
 		checkError({ componentId: this.detail.componentId }).then(() => {
 			this.modalShow = false
 			this.$emit('reload')
 		})
 	}
 
-	submit() {
+	submit(): void {
 		this.loading = true
 		document
 			.getElementsByClassName('widget-part')[0]
@@ -87,7 +87,7 @@ export default class MarketEditDialog extends Vue {
 			})
 	}
 
-	upload(blob) {
+	upload(blob): void {
 		const name = `${+new Date()}.png`
 		const data = new FormData()
 		data.append('file', blob, name)

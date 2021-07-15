@@ -6,7 +6,11 @@ e-layout.help-container
 			.help-right.fn-flex.flex-column
 				h2 {{ item.title }}
 				.help-list.fn-flex(:class="item.className")
-					a(rel="nofollow" v-for="child in item.list", target="_blank", :href="child.url") {{ child.title }}
+					a(
+						rel="nofollow",
+						v-for="child in item.list",
+						target="_blank",
+						:href="child.url") {{ child.title }}
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
@@ -93,9 +97,9 @@ export default class Help extends Vue {
 						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/iivic4',
 				},
 				{
-					title: '如何安装node环境？',
+					title: '如何添加自定义事件功能？',
 					url:
-						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/kl92vx',
+						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/mlp65z',
 				},
 				{
 					title: '如何安装mongodb环境？',
