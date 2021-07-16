@@ -128,7 +128,7 @@ export default class ItemCard extends Vue {
 
 	@PropSync('item', { type: Object }) currentItem!: any
 
-	loadOptions({ action, parentNode, callback }) {
+	loadOptions({ action, parentNode, callback }): void {
 		if (action === LOAD_CHILDREN_OPTIONS) {
 			levelList({
 				componentTypeParentId: parentNode.componentTypeId,
@@ -147,7 +147,7 @@ export default class ItemCard extends Vue {
 		}
 	}
 
-	submitVersion() {
+	submitVersion(): void {
 		update({
 			componentEnTitle: this.currentItem.componentEnTitle,
 			componentVersion: this.currentItem.componentVersion,
@@ -158,7 +158,7 @@ export default class ItemCard extends Vue {
 		})
 	}
 
-	submitEdit() {
+	submitEdit(): void {
 		update({
 			componentId: this.currentItem.componentId,
 			sort: this.currentItem.sort,
@@ -174,7 +174,7 @@ export default class ItemCard extends Vue {
 		})
 	}
 
-	handleEdit() {
+	handleEdit(): void {
 		this.dialogEditShow = true
 		levelList().then(r => {
 			r.forEach(v => {
@@ -184,7 +184,7 @@ export default class ItemCard extends Vue {
 		})
 	}
 
-	handleVersion() {
+	handleVersion(): void {
 		this.dialogEditVersionShow = true
 		getVersionList({
 			componentEnTitle: this.currentItem.componentEnTitle,
@@ -193,7 +193,7 @@ export default class ItemCard extends Vue {
 		})
 	}
 
-	handleRemove() {
+	handleRemove(): void {
 		this.$Modal.confirm({
 			title: '提示',
 			content: '确认删除吗？',
@@ -201,6 +201,7 @@ export default class ItemCard extends Vue {
 			onOk: async () => {
 				await destroy({
 					componentId: this.currentItem.componentId,
+					componentEnTitle: this.currentItem.componentEnTitle,
 				})
 				this.$Message.success('删除成功')
 				this.$Modal.remove()

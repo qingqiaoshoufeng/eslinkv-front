@@ -185,6 +185,7 @@ export default class ItemCard extends Vue {
 			onOk: async () => {
 				await destroy({
 					componentId: this.currentItem.componentId,
+					componentEnTitle: this.currentItem.componentEnTitle,
 				})
 				this.$Message.success('删除成功')
 				this.$Modal.remove()
