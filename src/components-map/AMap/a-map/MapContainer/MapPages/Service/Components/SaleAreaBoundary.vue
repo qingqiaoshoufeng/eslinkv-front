@@ -1,7 +1,7 @@
 区域边界线
 <script>
 import overlayMixin from '../../../../mixins/overlayMixin.js'
-import axios from 'axios'
+import { getStationAreaRange } from '@/components-map-api/map.airSupply.api'
 export default {
 	name: 'SaleAreaBoundary',
 	mixins: [overlayMixin],
@@ -20,8 +20,8 @@ export default {
 			this.drawSaleAreaBoundary()
 		},
 		drawSaleAreaBoundary() {
-			axios.get('/static/amap/json/saleArea.json').then(res => {
-				const saleAreaJson = res.data || []
+			getStationAreaRange({ type: 'BranchCompany' }).then(res => {
+				const saleAreaJson = res.branchCompanyList || []
 				this._instanceMap = {}
 				const map = this.$amap
 				if (!map) return false

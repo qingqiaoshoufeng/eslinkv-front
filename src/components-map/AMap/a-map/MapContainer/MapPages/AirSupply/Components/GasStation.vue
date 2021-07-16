@@ -22,14 +22,17 @@
 		</template>
 	</BaseOverlay>
 </template>
-<script>
+<script lang="ts">
 import {
 	AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
 	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
 	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
 } from '../../../../config/scene'
 import { BaseOverlay } from '../../../../components/index'
-const { scene, instance } = eslinkV.$store
+import { Editor } from '@eslinkv/core'
+import { getGasStationList } from '@/components-map-api/map.mock.api.js'
+import { getStationRealTimeInfo } from '@/components-map-api/map.airSupply.api.js'
+
 export default {
 	name: 'GasStation',
 	components: {
@@ -63,9 +66,9 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = this.$api.map.mock.getGasStationList
 		return {
-			apiFun: apiFun,
+			editor: Editor.Instance(),
+			apiFun: getGasStationList,
 			propDwMap: {
 				flow: 'm³/h',
 				inPressure: 'MPa',
@@ -84,13 +87,11 @@ export default {
 				let data = {}
 				const dataComp = {}
 				try {
-					data = await this.$api.map.airSupply.getStationRealTimeInfo(
-						{
-							id,
-							name,
-							type,
-						},
-					)
+					data = await getStationRealTimeInfo({
+						id,
+						name,
+						type,
+					})
 				} catch (error) {
 					console.error(error, '接口报错')
 				}
@@ -115,13 +116,13 @@ export default {
 		},
 		viewDetail(marker) {
 			const { name, id } = marker
-			scene.actions.createSceneInstance(
+			this.editor.openScene(
 				AIRSUPPLY_ARTWORK_MODEL_SCENEINDEX,
 				'slideInRight',
 			)
 			this.$nextTick(() => {
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1.forEach(item => {
-					instance.actions.updateComponent(item, {
+					this.editor.updateComponent(item, {
 						data: {
 							label: name,
 							title: name,
@@ -131,7 +132,7 @@ export default {
 					})
 				})
 				AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2.forEach(item => {
-					instance.actions.updateComponent(item, {
+					this.editor.updateComponent(item, {
 						params: {
 							id,
 						},

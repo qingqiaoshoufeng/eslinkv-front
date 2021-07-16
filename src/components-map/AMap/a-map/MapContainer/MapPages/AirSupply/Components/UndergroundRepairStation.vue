@@ -16,6 +16,8 @@
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index'
+import { getUndergroundRepairStationList } from '@/components-map-api/map.mock.api'
+
 export default {
 	name: 'UndergroundRepairStation',
 	components: {
@@ -45,9 +47,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = this.$api.map.mock.getUndergroundRepairStationList
 		return {
-			apiFun: apiFun,
+			apiFun: getUndergroundRepairStationList,
 		}
 	},
 }

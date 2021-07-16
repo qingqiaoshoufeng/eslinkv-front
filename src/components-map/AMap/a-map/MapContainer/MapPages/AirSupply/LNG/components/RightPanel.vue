@@ -1,50 +1,60 @@
 <template lang="pug">
-	.right-panel.animate__animated.animate-fadeInRight
-		.title
-			img(src="../img/title-icon.svg")
-			span 本月LNG场站采购TOP10
-		vueSeamlessScroll(:class-option="option" :data="top10" class="list-wrap")
-			ul.list
-				li(v-for="(k, i) in top10" :key="i")
-					.index(:class="{top: [0, 1, 2].includes(i)}") {{ i > 8 ? i + 1 : '0' + (i + 1) }}
-					.station
-						.station-info
-							.station-name {{ k.name }}
-							.station-area {{ k.ownedCompany }}
-							.station-value
-								em.font-num {{ k.purchaseQty.toLocaleString() }}
-								span 吨
-						.bar-w
-							.bar(:style="{width: k.percent * 100 + '%'}")
-		.title
-			img(src="../img/title-icon.svg")
-			span 最新订单
-			.tabs
-				.tab(:class="{active: activeTab === 'InComplete'}" @click="switchTab('InComplete')") 未完成
-				.tab(:class="{active: activeTab === 'Complete'}" @click="switchTab('Complete')") 今日完成
-		.none(v-if="!order.length")
-			img(src="/static/images/amap/noModel.svg")
-			p 暂无数据
-		vueSeamlessScroll(:class-option="option2" :data="order || []" class="list2-wrap" v-if="order.length")
-			ul.list2
-				li(v-for="(k, i) in order" :key="i")
-					img(src="../img/changzhan.svg")
-					.main
-						.station-info
-							.station-name {{ k.name }}
-							.station-value
-								em.font-num {{ k.purchaseQty.toLocaleString() }}
-								span 吨
+.right-panel.animate__animated.animate-fadeInRight
+	.title
+		img(src="../img/title-icon.svg")
+		span 本月LNG场站采购TOP10
+	vueSeamlessScroll.list-wrap(:class-option="option", :data="top10")
+		ul.list
+			li(v-for="(k, i) in top10", :key="i")
+				.index(:class="{ top: [0, 1, 2].includes(i) }") {{ i > 8 ? i + 1 : '0' + (i + 1) }}
+				.station
+					.station-info
+						.station-name {{ k.name }}
 						.station-area {{ k.ownedCompany }}
-						.state
-							.time {{ k.date }}
-							.state-name(v-if="activeTab === 'InComplete'")
-								.color
-								span {{ k.status }}
+						.station-value
+							em.font-num {{ k.purchaseQty.toLocaleString() }}
+							span 吨
+					.bar-w
+						.bar(:style="{ width: k.percent * 100 + '%' }")
+	.title
+		img(src="../img/title-icon.svg")
+		span 最新订单
+		.tabs
+			.tab(
+				:class="{ active: activeTab === 'InComplete' }",
+				@click="switchTab('InComplete')") 未完成
+			.tab(
+				:class="{ active: activeTab === 'Complete' }",
+				@click="switchTab('Complete')") 今日完成
+	.none(v-if="!order.length")
+		img(src="/static/images/amap/noModel.svg")
+		p 暂无数据
+	vueSeamlessScroll.list2-wrap(
+		:class-option="option2",
+		:data="order || []",
+		v-if="order.length")
+		ul.list2
+			li(v-for="(k, i) in order", :key="i")
+				img(src="../img/changzhan.svg")
+				.main
+					.station-info
+						.station-name {{ k.name }}
+						.station-value
+							em.font-num {{ k.purchaseQty.toLocaleString() }}
+							span 吨
+					.station-area {{ k.ownedCompany }}
+					.state
+						.time {{ k.date }}
+						.state-name(v-if="activeTab === 'InComplete'")
+							.color
+							span {{ k.status }}
 </template>
-
 <script>
 import vueSeamlessScroll from 'vue-seamless-scroll'
+import {
+	getLngPurchaseTopTen,
+	getLngLatestOrders,
+} from '@/components-map-api/map.airSupply.api'
 
 export default {
 	name: 'LngRightPanel',
@@ -77,7 +87,7 @@ export default {
 		}
 	},
 	async created() {
-		this.top10 = await this.$api.map.airSupply.getLngPurchaseTopTen()
+		this.top10 = await getLngPurchaseTopTen()
 		this.handleOrder()
 	},
 	methods: {
@@ -86,7 +96,7 @@ export default {
 			this.handleOrder()
 		},
 		async handleOrder() {
-			this.order = await this.$api.map.airSupply.getLngLatestOrders({
+			this.order = await getLngLatestOrders({
 				orderType: this.activeTab,
 			})
 		},

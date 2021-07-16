@@ -1,6 +1,6 @@
-import Vue from 'vue'
+﻿import Vue from 'vue'
 import VueRouter from 'vue-router'
-import commom from './store/common.store.js'
+import common from './store/common.store.js'
 
 const routes: Array<any> = []
 const context = require.context('./pages', true, /\.(route.js)$/)
@@ -34,6 +34,7 @@ Vue.use(VueRouter)
 
 const router: any = new VueRouter({
 	mode: 'history',
+	base: process.env.VUE_APP_ER ? '/eslinkV/' : '/',
 	routes: [
 		...routes,
 		{
@@ -54,9 +55,9 @@ const router: any = new VueRouter({
 		},
 	],
 })
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, _from, next) => {
 	if (to.meta.requireAuth) {
-		if (commom.state.user || localStorage.getItem('eslinkv-login')) {
+		if (common.state.user || localStorage.getItem('eslinkv-login')) {
 			next()
 		} else {
 			next('/login')

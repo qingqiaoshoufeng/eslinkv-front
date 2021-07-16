@@ -90,10 +90,9 @@
 		</portal>
 	</div>
 </template>
-<script>
+<script lang="ts">
 // 页面覆盖物组件
 import {
-	INDEXSCENEMAP,
 	THREESOCIALLINKAGE_SCENEINDEX,
 	THREESOCIALLINKAGE_COMPONENTINDEX,
 } from '../../../../config'
@@ -105,7 +104,12 @@ import {
 	SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
 	SERVICE_SERVICECUSTOMER_UN_LEGEND_MAP,
 } from './config.js'
-const { scene, instance } = eslinkV.$store
+import {
+	getThreeSocialLinkagecustmerHot,
+	getServiceCustomerThreeSocialDetail,
+	getServiceCustomerStationList,
+} from '@/components-map-api/map.serve.api.js'
+
 const componentPageArr = [
 	'ThreeSocialLinkage',
 	'ServiceNetworkStation',
@@ -126,7 +130,7 @@ const componentCommonArr = [
 	'MapLegend',
 ]
 // 异步加载组件函数
-const componentPageMap = {}
+const componentPageMap: any = {}
 const componentCommonMap = {}
 componentPageArr.map(componentName => {
 	componentPageMap[componentName] = () =>
@@ -139,6 +143,12 @@ componentCommonArr.map(componentName => {
 				componentName
 		)
 })
+import { Editor } from '@eslinkv/core'
+import {
+	getServiceCustomerStatisticsInfo,
+	getServiceCustomerTaskList,
+	getServiceCustomerDetialInfo,
+} from '@/components-map-api/map.serve.api.js'
 
 export default {
 	name: 'ServiceCustomer',
@@ -149,6 +159,7 @@ export default {
 	},
 	data() {
 		return {
+			editor: Editor.Instance(),
 			overlayInfoConfigMap: Object.freeze(
 				SERVICE_SERVICECUSTOMER_OVERLAY_MAP,
 			),
@@ -211,7 +222,7 @@ export default {
 
 	methods: {
 		// 切换热力图显示隐藏
-		switchChange(data, type) {
+		switchChange(data) {
 			this.swichBoxInfo = data
 			const [{ value }] = this.swichBoxInfo
 
@@ -223,12 +234,11 @@ export default {
 		},
 		// 获取三社联动热力数据信息
 		async getThreeSocialLinkagecustmerHot() {
-			const res = await this.$api.map.serve.getThreeSocialLinkagecustmerHot()
-
+			const res = await getThreeSocialLinkagecustmerHot()
 			this.allTypeStationList.CustomerHotList = res.customer
 		},
 		// 点击覆盖物icon
-		async handleOverlayClick(overlay, overlayType1, isCenter = false) {
+		async handleOverlayClick(overlay) {
 			this.activeOverlay = {}
 			this.detailInfo = {}
 			this.showOverlayDetail = false
@@ -263,7 +273,6 @@ export default {
 		},
 		// 关闭详情
 		closeOverlayDetail(done) {
-			const { overlayType } = this.activeOverlay
 			this.showOverlayDetail = false
 			this.activeOverlay = {}
 			this.detailInfo = {}
@@ -274,15 +283,7 @@ export default {
 		},
 		// 点击右侧栏
 		handleListClick(item) {
-			const {
-				name,
-				time,
-				activeIndex,
-				overlayType,
-				lng,
-				lat,
-				address,
-			} = item
+			const { activeIndex, overlayType, lng, lat } = item
 			if (overlayType === 'ThreeSocialLinkage') {
 				this.$refs.ThreeSocialLinkage[0].mouseIn = true
 				this.handleOverlayClick(item)
@@ -313,21 +314,17 @@ export default {
 			const { id } = this.activeOverlay
 			// 打开三社联动的弹框
 			THREESOCIALLINKAGE_COMPONENTINDEX.forEach(i => {
-				this.$api.map.serve
-					.getServiceCustomerThreeSocialDetail({ id })
-					.then(res => {
-						instance.actions.updateComponent(i, {
-							data: res,
-						})
-						scene.actions.createSceneInstance(
-							THREESOCIALLINKAGE_SCENEINDEX,
-						)
+				getServiceCustomerThreeSocialDetail({ id }).then(res => {
+					this.editor.updateComponent(i, {
+						data: res,
 					})
+					this.editor.openScene(THREESOCIALLINKAGE_SCENEINDEX)
+				})
 			})
 		},
 		// 客户服务统一数据
 		async getDataStatisticsList() {
-			this.dataStatisticsInfo = await this.$api.map.serve.getServiceCustomerStatisticsInfo()
+			this.dataStatisticsInfo = await getServiceCustomerStatisticsInfo()
 		},
 		// 查询客户服务站点列表
 		async getAllTypeStationList() {
@@ -338,16 +335,14 @@ export default {
 					'ThreeSocialLinkage',
 				].toString(),
 			}
-			const res = await this.$api.map.serve.getServiceCustomerStationList(
-				params,
-			)
+			const res = await getServiceCustomerStationList(params)
 			this.allTypeStationList = { ...this.allTypeStationList, ...res }
 		},
 		// 查询三社联动站点列表
 
 		// 获取任务工单列表
 		async getTasklist() {
-			const TaskList = await this.$api.map.serve.getServiceCustomerTaskList()
+			const TaskList = await getServiceCustomerTaskList()
 			this.allTypeStationList = {
 				...this.allTypeStationList,
 				TaskList,
@@ -355,7 +350,7 @@ export default {
 		},
 		// 查看详情接口
 		getDetailInfo(params) {
-			return this.$api.map.serve.getServiceCustomerDetialInfo(params)
+			return getServiceCustomerDetialInfo(params)
 		},
 	},
 	mounted() {

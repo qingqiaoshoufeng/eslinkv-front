@@ -5,9 +5,9 @@ const needReport = false
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 module.exports = {
-	transpileDependencies: ['@simonwep', 'swiper', 'dom7'],
+	transpileDependencies: ['@simonwep', 'dom7'],
 	assetsDir: 'static',
-	publicPath: '/',
+	publicPath: process.env.VUE_APP_ER ? '/eslinkV' : '/',
 	outputDir: 'dist',
 	indexPath: './index.html',
 	productionSourceMap: false,
@@ -34,22 +34,22 @@ module.exports = {
 				},
 			},
 			'^/node': {
-				// target: 'http://127.0.0.1:7001',
-				target: 'http://eslinkv.eslink.cc',
+				target: 'http://127.0.0.1:7001',
+				// target: 'http://eslinkv.eslink.cc',
 				// target: 'http://192.168.1.44:2000',
 				changeOrigin: true,
-				// pathRewrite: {
-				// 	'^/node': '/',
-				// },
+				pathRewrite: {
+					'^/node': '/',
+				},
 			},
 			'^/cdn': {
-				// target: 'http://127.0.0.1:7001',
-				target: 'http://eslinkv.eslink.cc',
+				target: 'http://127.0.0.1:7001',
+				// target: 'http://eslinkv.eslink.cc',
 				// target: 'http://192.168.1.44:2000',
 				changeOrigin: true,
-				// pathRewrite: {
-				// 	'^/cdn': '/',
-				// },
+				pathRewrite: {
+					'^/cdn': '/',
+				},
 			},
 			'^/server': {
 				target: 'http://eslinkv.eslink.cc',
@@ -128,8 +128,14 @@ module.exports = {
 				'process.env.staticVuePath': JSON.stringify(
 					isProduction ? '.min.js' : '.js',
 				),
+				'process.env.staticErPath': JSON.stringify(
+					process.env.VUE_APP_ER ? '/eslinkV/' : '/',
+				),
 				'process.env.BUILD_MODE': JSON.stringify(
 					process.env.BUILD_MODE,
+				),
+				'process.env.VUE_APP_ER': JSON.stringify(
+					process.env.VUE_APP_ER,
 				),
 			}),
 		)
@@ -168,15 +174,6 @@ module.exports = {
 			.test(/view-design.src.*?js$/)
 			.use('babel')
 			.loader('babel-loader')
-			.end()
-		config.module
-			.rule('md')
-			.test(/\.md$/)
-			.use('html-loader')
-			.loader('html-loader')
-			.end()
-			.use('markdown-loader')
-			.loader('markdown-loader')
 			.end()
 	},
 }

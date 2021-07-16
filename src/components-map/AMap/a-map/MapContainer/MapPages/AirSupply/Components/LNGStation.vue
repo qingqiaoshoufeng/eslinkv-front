@@ -13,6 +13,8 @@
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index'
+import { getLNGStationList } from '@/components-map-api/map.mock.api'
+
 export default {
 	name: 'LNGStation',
 	components: {
@@ -42,9 +44,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = this.$api.map.mock.getLNGStationList
 		return {
-			apiFun: apiFun,
+			apiFun: getLNGStationList,
 		}
 	},
 }

@@ -1,20 +1,14 @@
 <template lang="pug">
 .detail-container
 	.preview-wrapper.fit-mode(
-		ref="kanboardWrapper",
-		:style="{ backgroundColor: platform.backgroundColor, backgroundImage: `url(${platform.backgroundImage})` }")
-		d-view(
-			@mounted="updateSize",
-			ref="previewContainer",
-			:style="`transform: scale(${scaleX ? scaleX : actualScaleRatio},${scaleY}) translate3d(0, 0, 0); overflow: hidden;`")
+		:style="{ backgroundColor: editor.backgroundColor }")
+		d-view
 		d-detail(:show="false")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-const { dView } = eslinkV
-const { platform } = eslinkV.$store
-import { getQueryString } from '../../utils'
-import dDetail from '../../components/d-detail/index.vue'
+import { dView, dDetail } from '@eslinkv/vue2'
+import { Editor } from '@eslinkv/core'
 @Component({
 	components: {
 		dView,
@@ -22,29 +16,7 @@ import dDetail from '../../components/d-detail/index.vue'
 	},
 })
 export default class full extends Vue {
-	platform = platform.state
-	scaleY = 1
-	scaleX = 0
-	actualScaleRatio = 1
-
-	updateSize(val) {
-		const w = val.width.replace(/(.*)px/, '$1')
-		const h = val.height.replace(/(.*)px/, '$1')
-		const { clientWidth, clientHeight } = document.body
-		this.actualScaleRatio = Math.min(clientWidth / w, clientHeight / h)
-	}
-
-	mounted() {
-		if (getQueryString('scale') && !isNaN(getQueryString('scale'))) {
-			this.scaleY = Number(getQueryString('scale'))
-		}
-		if (getQueryString('scaleY') && !isNaN(getQueryString('scaleY'))) {
-			this.scaleY = Number(getQueryString('scaleY'))
-		}
-		if (getQueryString('scaleX') && !isNaN(getQueryString('scaleX'))) {
-			this.scaleX = Number(getQueryString('scaleX'))
-		}
-	}
+	editor = Editor.Instance()
 }
 </script>
 <style lang="scss">

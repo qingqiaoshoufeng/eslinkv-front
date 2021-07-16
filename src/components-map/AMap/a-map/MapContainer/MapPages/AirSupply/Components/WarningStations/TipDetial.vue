@@ -62,6 +62,8 @@
 <script>
 import { DETAILLIST } from './config'
 import { SvgIcon } from '../../../../../components/'
+import { getLowMidDevice } from '@/components-map-api/map.airSupply.api'
+
 export default {
 	name: 'TipDetial',
 	components: { SvgIcon },
@@ -123,14 +125,13 @@ export default {
 			const params = {
 				id,
 			}
-			const res = await this.$api.map.airSupply.getLowMidDevice(params)
+			const res = await getLowMidDevice(params)
 			res.valveOpenFinish =
 				res.valveOpenFinish === 'true' ? '开启' : '关闭'
 			res.mc = res.mc ? '异常' : '正常'
 			this.detailInfo = res
 		},
 	},
-	mounted() {},
 }
 </script>
 <style lang="scss" scoped>
@@ -144,19 +145,19 @@ export default {
 
 .TipDetial {
 	display: flex;
-	min-width: 300px;
+	min-width: 370px;
 	text-align: left;
 
 	.station_list {
 		box-sizing: content-box;
-		width: 300px;
+		width: 370px;
 		padding: 15px 0;
 		margin-right: 24px;
 		margin-left: 2px;
 		background: #001a77;
 
 		.station_item {
-			width: 300px;
+			width: 370px;
 			height: 40px;
 			padding-left: 15px;
 			font-size: 24px;

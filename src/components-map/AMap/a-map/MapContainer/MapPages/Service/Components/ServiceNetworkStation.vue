@@ -12,6 +12,8 @@
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index'
+import { getServiceNetworkStationList } from '@/components-map-api/map.mock.api'
+
 export default {
 	name: 'ServiceNetworkStation',
 	components: {
@@ -33,7 +35,7 @@ export default {
 	},
 	data() {
 		return {
-			apiFun: this.$api.map.mock.getServiceNetworkStationList,
+			apiFun: getServiceNetworkStationList,
 		}
 	},
 	methods: {

@@ -1,6 +1,6 @@
 const ICcustomer = {
 	label: '工商户',
-	DW: '户',
+	DW: '',
 	prop: 'iCcustomer',
 	Fixed: 0,
 }
@@ -44,7 +44,7 @@ const warningYestoday = {
 }
 const FTPNumber = {
 	label: '远传表(台)',
-	DW: '次',
+	DW: '',
 	prop: 'longPass',
 }
 const warningYestodayTotal = {

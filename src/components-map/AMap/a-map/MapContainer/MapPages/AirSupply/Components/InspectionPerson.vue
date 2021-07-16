@@ -14,6 +14,9 @@
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index'
+import { getInspectionPersonList } from '@/components-map-api/map.mock.api'
+import { getAllTypeStationList } from '@/components-map-api/map.airSupply.api'
+
 export default {
 	name: 'InspectionPerson',
 	components: {
@@ -37,9 +40,8 @@ export default {
 		// },
 	},
 	data() {
-		const apiFun = this.$api.map.mock.getInspectionPersonList
 		return {
-			apiFun: apiFun,
+			apiFun: getInspectionPersonList,
 			ready: false,
 			data: [],
 		}
@@ -64,9 +66,7 @@ export default {
 			const params = {
 				types: ['InspectionPerson'].toString(),
 			}
-			const res = await this.$api.map.airSupply.getAllTypeStationList(
-				params,
-			)
+			const res = await getAllTypeStationList(params)
 			this.data = (res && res.inspectionPersonList) || []
 			if (!this.ready) {
 				this.timer = setInterval(() => {

@@ -12,6 +12,7 @@ export default {
 	mixins: [registerMixin],
 	inject: ['parentInfo'],
 	props: [
+		'routeData',
 		'vid',
 		'position',
 		'anchor',
@@ -89,6 +90,9 @@ export default {
 				},
 				visible(flag) {
 					flag === false ? this.hide() : this.show()
+					if (flag && self.routeData && self.routeData.length > 1) {
+						self.startRouteAnimation()
+					}
 				},
 				position(lnglat) {
 					this.setPosition(new AMap.LngLat(lnglat.lng, lnglat.lat))
@@ -134,7 +138,15 @@ export default {
 				offset: compOffset,
 			})
 		},
-
+		startRouteAnimation() {
+			// 计算速度
+			const totalDistance = AMap.GeometryUtil.distanceOfLine(
+				this.routeData,
+			)
+			let speed = totalDistance / 1000 / (6 / 60 / 60)
+			speed = speed > 20000 ? 20000 : speed
+			this.$amapComponent.moveAlong(this.routeData, speed)
+		},
 		$$getExtData() {
 			return this.$amapComponent.getExtData()
 		},

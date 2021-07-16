@@ -15,6 +15,7 @@
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index'
+import { getGrouphallList } from '@/components-map-api/map.mock.api'
 
 export default {
 	name: 'MajorClient',
@@ -49,7 +50,7 @@ export default {
 	},
 	data() {
 		return {
-			apiFun: this.$api.map.mock.getGrouphallList,
+			apiFun: getGrouphallList,
 			mouseIn: true,
 		}
 	},

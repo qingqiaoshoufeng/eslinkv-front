@@ -15,15 +15,15 @@ export const AIRSUPPLY_LNG_LEGEND_MAP = {
 		component: 'MapMarkerIcon',
 		visible: true,
 		dataProp: 'branchCompanyList',
-		detailHandler: getLngStationData
+		detailHandler: getLngStationData,
 	},
 	EmergencyAirSourceStation: {
-	    label: '应急气源站',
-	    legendIcon: 'iconyingjiqiyuanzhan',
-	    component: 'MapMarkerIcon',
-	    visible: true,
+		label: '应急气源站',
+		legendIcon: 'iconyingjiqiyuanzhan',
+		component: 'MapMarkerIcon',
+		visible: true,
 		dataProp: 'emergencyAirSourceStationList',
-		detailHandler: getLngStationData
+		detailHandler: getLngStationData,
 	},
 	// StorageDistributionStation: {
 	//     label: '储配站',
@@ -33,35 +33,35 @@ export const AIRSUPPLY_LNG_LEGEND_MAP = {
 	// 	dataProp: 'storageDistributionStationList',
 	// },
 	NaturalGasStation: {
-	    label: '加气站',
-	    legendIcon: 'iconjiaqizhan1',
-	    component: 'MapMarkerIcon',
-	    visible: true,
+		label: '加气站',
+		legendIcon: 'iconjiaqizhan1',
+		component: 'MapMarkerIcon',
+		visible: true,
 		dataProp: 'naturalGasStationList',
-		detailHandler: getLngStationData
+		detailHandler: getLngStationData,
 	},
 	GreenEnergyStation: {
-	    label: '绿色能源站',
-	    legendIcon: 'iconlvsenengyuanzhan',
-	    component: 'MapMarkerIcon',
-	    visible: true,
+		label: '绿色能源站',
+		legendIcon: 'iconzonghefuwuzhan2',
+		component: 'MapMarkerIcon',
+		visible: true,
 		dataProp: 'greenEnergyStationList',
-		detailHandler: getLngStationData
+		detailHandler: getLngStationData,
 	},
 }
 
 // 覆盖物详情
 export const AIRSUPPLY_LNG_OVERLAY_MAP = {
 	EmergencyAirSourceStation: {
-	    fields: {
-	        name: {
-	            style: {
-	                fontSize: '32px',
-	                color: '#FFDC45'
-	            },
-	            errColor: '#FFDC45'
-	        },
-	    },
+		fields: {
+			name: {
+				style: {
+					fontSize: '32px',
+					color: '#FFDC45',
+				},
+				errColor: '#FFDC45',
+			},
+		},
 	},
 	BranchCompany: {
 		fields: {
@@ -106,7 +106,7 @@ export const AIRSUPPLY_LNG_OVERLAY_MAP = {
 				errColor: '#FFDC45',
 			},
 		},
-	}
+	},
 }
 // LNG统计数据
 export const DATASTATISTICSLIST = [

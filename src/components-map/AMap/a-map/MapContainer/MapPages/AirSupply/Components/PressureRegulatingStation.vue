@@ -1,6 +1,6 @@
 调压站
 <template>
-	<BaseOverlay
+	<BaseOverlay2
 		v-bind="{
 			overlayIcon,
 			overlayType,
@@ -13,11 +13,17 @@
 	/>
 </template>
 <script>
-import { BaseOverlay } from '../../../../components/index'
+import BaseOverlay2 from '../../../../components/BaseOverlay2'
+import { getPressureRegulatingStationList } from '@/components-map-api/map.mock.api'
+import {
+	getStationRealTimeInfo,
+	getStationSwitchState,
+} from '@/components-map-api/map.airSupply.api'
+
 export default {
 	name: 'PressurereGulatingStation',
 	components: {
-		BaseOverlay,
+		BaseOverlay2,
 	},
 	props: {
 		visible: {
@@ -43,9 +49,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = this.$api.map.mock.getPressureRegulatingStationList
 		return {
-			apiFun: apiFun,
+			apiFun: getPressureRegulatingStationList,
 			propDwMap: {
 				flow: 'm³/h',
 				inPressure: 'MPa',
@@ -54,12 +59,25 @@ export default {
 				outTemp: '℃',
 				todayAirFeed: 'm³',
 			},
-			mouseIn: false,
+			dataInner: [],
+			switchStateTimer: null,
 		}
 	},
-	computed: {
-		dataInner() {
-			const { data = [] } = this
+	watch: {
+		data: {
+			deep: true,
+			immediate: true,
+			async handler(val) {
+				clearInterval(this.switchStateTimer)
+				await this.getStationSwitchState()
+				this.switchStateTimer = setInterval(() => {
+					this.getStationSwitchState()
+				}, 10000)
+			},
+		},
+	},
+	methods: {
+		async getStationSwitchState() {
 			const stationPoseMap = {
 				临平调压站: 'right',
 				半山调压站: 'right',
@@ -71,26 +89,27 @@ export default {
 				苏嘉路阀室: 'right',
 				之江调压站: 'right',
 			}
-			return this.data.map(item => {
+			const res = await getStationSwitchState()
+			const req = JSON.parse(JSON.stringify(this.data))
+			this.dataInner = req.map(item => {
 				item.pose = stationPoseMap[item.name]
+				item.icon = res[item.name]
+					? 'icontulitiaoyazhan'
+					: 'icontiaoyazhan1'
 				return item
 			})
 		},
-	},
-	methods: {
 		async handleClick(marker) {
 			if (!marker.detail) {
 				const { id = '', name = '', type = '' } = marker
 				let data = {}
 				const dataComp = {}
 				try {
-					data = await this.$api.map.airSupply.getStationRealTimeInfo(
-						{
-							id,
-							name,
-							type,
-						},
-					)
+					data = await getStationRealTimeInfo({
+						id,
+						name,
+						type,
+					})
 				} catch (error) {
 					console.log(error, '接口出错')
 				}
@@ -118,6 +137,10 @@ export default {
 				false,
 			)
 		},
+	},
+	beforeDestroy() {
+		clearInterval(this.switchStateTimer)
+		this.switchStateTimer = null
 	},
 }
 </script>

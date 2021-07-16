@@ -1,29 +1,30 @@
 <template lang="pug">
-e-layout
-	.market-container
-		.btn-box
-			i-button.mr10(type="primary", @click="edit", :disabled="!selectOne") 编辑
-			i-button.mr10(type="primary", @click="create", style="margin-left: auto") 创建
-		i-table(
-			:columns="columns",
-			:data="list",
-			v-if="total > 0",
-			@on-selection-change="selectHandle")
-			template(#createTime="{ row }")
-				span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
-		e-page(
-			@init="init",
-			:total="total",
-			ref="page",
-			:show="false",
-			:loaded="loaded")
-		dialogTheme(v-model="dialogEditShow", :detail="currentRow", @reload="init")
+e-layout.market-container
+	.btn-box
+		i-button.mr10(type="primary", @click="edit", :disabled="!selectOne") 编辑
+		i-button.mr10(type="primary", @click="create", style="margin-left: auto") 创建
+	i-table(
+		:columns="columns",
+		:data="list",
+		v-if="total > 0",
+		@on-selection-change="selectHandle")
+		template(#createTime="{ row }")
+			span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
+	e-page(
+		@init="init",
+		:total="total",
+		ref="page",
+		:show="false",
+		:loaded="loaded")
+	dialogTheme(v-model="dialogEditShow", :detail="currentRow", @reload="init")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button } from 'view-design'
 import common from '../../store/common.store.js'
-import dialogTheme from './dialogTheme'
+import dialogTheme from './dialogTheme.vue'
+import { allList } from '@/api/marketTheme.api.js'
+
 @Component({
 	components: {
 		'i-table': Table,
@@ -59,13 +60,13 @@ export default class Market extends Vue {
 	selectOne: any = false
 
 	async init() {
-		const res = await this.$api.marketTheme.allList()
+		const res = await allList()
 		this.list = res.list
 		this.total = res.count
 		this.loaded = true
 	}
 
-	selectHandle(selection) {
+	selectHandle(selection): void {
 		if (selection.length > 1) {
 			this.selectMore = selection
 		} else {
@@ -83,16 +84,16 @@ export default class Market extends Vue {
 		this.currentRow.themeId = null
 	}
 
-	edit() {
+	edit(): void {
 		this.currentRow = this.selectOne
 		this.dialogEditShow = true
 	}
 
-	reload() {
+	reload(): void {
 		;(this.$refs.page as any).reload()
 	}
 
-	mounted() {
+	mounted(): void {
 		common.actions.setNavIndex('/market/componentList')
 	}
 }
@@ -103,8 +104,6 @@ export default class Market extends Vue {
 }
 
 .market-container {
-	padding: 15px;
-
 	.mr10 {
 		margin-right: 10px;
 	}

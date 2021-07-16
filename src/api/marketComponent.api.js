@@ -36,6 +36,33 @@ export function list(data) {
 	})
 }
 
+export function checkList(data) {
+	return request({
+		url: '/market/component/checkList',
+		method: 'post',
+		data,
+		headers,
+	})
+}
+
+export function recycleList(data) {
+	return request({
+		url: '/market/component/recycleList',
+		method: 'post',
+		data,
+		headers,
+	})
+}
+
+export function checkHistoryList(data) {
+	return request({
+		url: '/market/component/checkHistoryList',
+		method: 'post',
+		data,
+		headers,
+	})
+}
+
 export function typeList(data) {
 	return request({
 		url: '/market/component/typeList',

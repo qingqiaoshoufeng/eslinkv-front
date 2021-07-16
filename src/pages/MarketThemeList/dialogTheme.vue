@@ -18,6 +18,7 @@ import {
 	Select,
 	Option,
 } from 'view-design'
+import { update, create } from '@/api/marketTheme.api.js'
 
 @Component({
 	components: {
@@ -47,9 +48,9 @@ export default class DialogComponentType extends Vue {
 
 	async submit() {
 		if (this.detail.themeId) {
-			await this.$api.marketTheme.update({ ...this.detail })
+			await update({ ...this.detail })
 		} else {
-			await this.$api.marketTheme.create({ ...this.detail })
+			await create({ ...this.detail })
 		}
 		this.modalShow = false
 		this.$emit('reload')

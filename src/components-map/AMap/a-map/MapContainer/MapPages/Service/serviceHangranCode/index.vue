@@ -62,6 +62,7 @@
 
 			<!-- 统计数据 -->
 			<DataStatistics
+				style="top: 240px"
 				:position="'left'"
 				:dataStatisticsList="dataStatisticsList"
 				:data="couplingIncreaseInfo"
@@ -81,6 +82,13 @@ import {
 	DATASTATISTICSLIST,
 	SWICHBOX,
 } from './config'
+import {
+	getCouplingIncreaseInfo,
+	getHangranCodeDetailInfo,
+	getHangranCodeList,
+	getHangranCodeHotList,
+	clickGetBranchCompanyDetialInfo,
+} from '@/components-map-api/map.serve.api'
 
 const componentPageArr = [
 	'CouplingHot',
@@ -225,7 +233,7 @@ export default {
 		},
 		// 联码新增统计数据
 		async getDataStatisticsList() {
-			this.couplingIncreaseInfo = await this.$api.map.serve.getCouplingIncreaseInfo()
+			this.couplingIncreaseInfo = await getCouplingIncreaseInfo()
 		},
 		// 请求集团大厅，子公司，综合服务站数据列表
 		async getAllTypeStationList() {
@@ -237,13 +245,13 @@ export default {
 			}
 
 			this.detialBoxWidth = 480
-			return this.$api.map.serve.getHangranCodeList(params)
+			return getHangranCodeList(params)
 		},
 		// 获取热力图信息
 		async getAllHotList() {
 			let res
 			try {
-				res = await this.$api.map.serve.getHangranCodeHotList()
+				res = await getHangranCodeHotList()
 			} catch (error) {
 				res = {}
 			}
@@ -252,14 +260,12 @@ export default {
 		},
 		// 获取站点详情
 		async getDetailInfo(params) {
-			this.detailInfo = await this.$api.map.serve.getHangranCodeDetailInfo(
-				params,
-			)
+			this.detailInfo = await getHangranCodeDetailInfo(params)
 			this.showOverlayDetail = true
 		},
 		// 获取点击站点服务站详情
 		async clickGetBranchCompanyDetialInfo(params) {
-			return this.$api.map.serve.clickGetBranchCompanyDetialInfo(params)
+			return clickGetBranchCompanyDetialInfo(params)
 		},
 		// 切换热力图显示隐藏
 		switchChange(data, type) {

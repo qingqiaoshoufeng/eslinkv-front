@@ -29,6 +29,7 @@ e-card
 import { Card, Button } from 'view-design'
 import EmptyImage from '../../components/empty-image/index.vue'
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import { destroy } from '@/api/screen.api.js'
 
 @Component({
 	components: { 'i-card': Card, EmptyImage, 'i-button': Button },
@@ -62,13 +63,11 @@ export default class ItemCard extends Vue {
 			content: '确认删除吗？',
 			loading: true,
 			onOk: () => {
-				this.$api.screen
-					.remove({ screenId: this.screenId })
-					.then(() => {
-						this.$Message.success('删除成功')
-						this.$Modal.remove()
-						this.$emit('init')
-					})
+				destroy({ screenId: this.screenId }).then(() => {
+					this.$Message.success('删除成功')
+					this.$Modal.remove()
+					this.$emit('init')
+				})
 			},
 		})
 	}

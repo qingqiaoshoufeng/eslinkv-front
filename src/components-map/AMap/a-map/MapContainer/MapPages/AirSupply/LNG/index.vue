@@ -56,11 +56,12 @@
 		</portal>
 	</div>
 </template>
-<script>
+<script lang="ts">
+import { Editor } from '@eslinkv/core'
 // 页面覆盖物组件
 import { WarnEvent } from '../Components/index.js'
-import RightPanel from './components/RightPanel'
-import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon'
+import RightPanel from './components/RightPanel.vue'
+import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon.vue'
 // 页面所需公共组件
 import {
 	RegionBoundary,
@@ -70,18 +71,17 @@ import {
 } from '../../../../components/index.js'
 
 // 场景相关配置
-import {
-	INDEXSCENEMAP,
-	AIRSUPPLY_WARN_SCENEINDEX,
-	AIRSUPPLY_WARN_COMPONENTINDEX,
-} from '../../../../config/scene'
+import { INDEXSCENEMAP } from '../../../../config/scene'
 // 页面配置
 import {
 	DATASTATISTICSLIST,
 	AIRSUPPLY_LNG_OVERLAY_MAP,
 	AIRSUPPLY_LNG_LEGEND_MAP,
 } from './config.js'
-const { scene } = eslinkV.$store
+import {
+	getLngMapDataResult,
+	getLngStationCounts,
+} from '@/components-map-api/map.airSupply.api.js'
 
 export default {
 	name: 'LNG',
@@ -152,6 +152,7 @@ export default {
 			},
 			stationDataMap: {},
 			stationList: [],
+			editor: Editor.Instance(),
 		}
 	},
 	methods: {
@@ -167,9 +168,7 @@ export default {
 			const params = {
 				types: Object.keys(AIRSUPPLY_LNG_LEGEND_MAP).toString(),
 			}
-			const res = await this.$api.map.airSupply.getLngMapDataResult(
-				params,
-			)
+			const res = await getLngMapDataResult(params)
 			this.stationDataMap = { ...this.stationDataMap, ...res }
 			this.stationList = [
 				...res.branchCompanyList,
@@ -182,10 +181,9 @@ export default {
 		},
 		// 获取统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsInfo = await this.$api.map.airSupply.getLngStationCounts()
+			this.dataStatisticsInfo = await getLngStationCounts()
 		},
-		handleOverlayClick(overlay, overlayType, isCenter = true) {
-			const { lng, lat } = overlay
+		handleOverlayClick(overlay, overlayType) {
 			overlay.overlayType = overlayType
 			this.activeOverlay = overlay
 			this.showOverlayDetail = true
@@ -196,7 +194,7 @@ export default {
 		closeOverlayDetail(done) {
 			const { overlayType } = this.activeOverlay
 			if (overlayType === 'WARNEVENT') {
-				scene.actions.setSceneIndex(INDEXSCENEMAP.AirSupplyLNG)
+				this.editor.selectSceneIndex(INDEXSCENEMAP.AirSupplyLNG)
 				this.showRoutePlan = false
 			}
 			this.showOverlayDetail = false
@@ -206,7 +204,7 @@ export default {
 			this.$amap.setCenter(this.center, 100)
 			done && done()
 		},
-		viewOverlayDetail(overlay) {},
+		viewOverlayDetail() {},
 		setZoomAndPanTo(lng, lat) {
 			this.$amap.setZoom(14, 100)
 			this.$nextTick(() => {

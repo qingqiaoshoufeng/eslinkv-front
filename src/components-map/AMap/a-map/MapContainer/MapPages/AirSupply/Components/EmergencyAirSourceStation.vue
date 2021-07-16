@@ -17,6 +17,8 @@
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index'
+import { getEmergencyAirSourceStationList } from '@/components-map-api/map.mock.api'
+
 export default {
 	name: 'EmergencyAirSourceStation',
 	components: {
@@ -60,9 +62,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = this.$api.map.mock.getEmergencyAirSourceStationList
 		return {
-			apiFun: apiFun,
+			apiFun: getEmergencyAirSourceStationList,
 		}
 	},
 }

@@ -78,6 +78,13 @@ import {
 	ICcustomer_WARN__SCENEINDEX,
 	ICcustomer_WARN__COMPONENTINDEX,
 } from '../../../../config'
+import {
+	getICcustomerStationList,
+	getICcustomerCallingInfo,
+	getICcustomerHotInfo,
+	getICcustomerDetailInfo,
+	getICcustomerSituationAwareness,
+} from '@/components-map-api/map.serve.api'
 
 const componentPageArr = [
 	'RightPanelWithServiceICcustomer',
@@ -236,27 +243,23 @@ export default {
 			const params = {
 				types: ['ICcustomer', 'BranchCompany'].toString(),
 			}
-			const res = await this.$api.map.serve.getICcustomerStationList(
-				params,
-			)
+			const res = await getICcustomerStationList(params)
 			this.allTypeStationList = { ...this.allTypeStationList, ...res }
 		},
 
 		// 联码新增统计数据
 		async getDataStatisticsList() {
-			this.ICcustomerDetailInfo = await this.$api.map.serve.getICcustomerCallingInfo()
+			this.ICcustomerDetailInfo = await getICcustomerCallingInfo()
 		},
 
 		// 获取热力图信息
 		async getAllHotList() {
-			const res = await this.$api.map.serve.getICcustomerHotInfo()
+			const res = await getICcustomerHotInfo()
 			this.allTypeStationList = { ...this.allTypeStationList, ...res }
 		},
 		// 获取站点详情
 		async getDetailInfo(params, status) {
-			this.detailInfo = await this.$api.map.serve.getICcustomerDetailInfo(
-				params,
-			)
+			this.detailInfo = await getICcustomerDetailInfo(params)
 			if (status && status === '0') {
 				this.detailInfo.ICcustomerStatus = '已处理'
 			} else if (status && status === '1') {
@@ -269,7 +272,7 @@ export default {
 		},
 		// 获取右侧table列表报警信息
 		async getWarningList(params) {
-			const WarningICcustomerList = await this.$api.map.serve.getICcustomerSituationAwareness(
+			const WarningICcustomerList = await getICcustomerSituationAwareness(
 				params,
 			)
 			this.allTypeStationList = {
@@ -291,7 +294,6 @@ export default {
 	},
 }
 </script>
-
 <style lang="scss" scoped>
 .map-legend {
 	position: absolute;

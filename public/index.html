@@ -5,21 +5,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 	<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
     <title>EslinkV</title>
-	<link rel="icon" href="/favicon.ico"/>
-	<link rel="stylesheet" href="/eslinkv.m.css"/>
-	<link rel="stylesheet" href="/eslinkv.v.css"/>
-	<link rel="stylesheet" href="/eslinkv.s.css"/>
+	<link rel="icon" href="<%= process.env.staticErPath %>favicon.ico"/>
 </head>
 <body>
 <div id="app"></div>
-<script src="/static/js/v<%= process.env.staticVuePath %>"></script>
-<script src="/static/js/c.js"></script>
-<script src="/static/js/r.js"></script>
-<script src="/static/js/echarts.min.js"></script>
-<script src="//at.alicdn.com/t/font_2145957_8kjrsy8cmpx.js"></script>
-<script src="/eslinkv.c.umd<%= process.env.staticVuePath %>"></script>
-<script src="/eslinkv.s.umd<%= process.env.staticVuePath %>"></script>
-<script src="/eslinkv.m.umd<%= process.env.staticVuePath %>"></script>
-<script src="/eslinkv.v.umd<%= process.env.staticVuePath %>"></script>
+<script src="<%= process.env.staticErPath %>static/js/v<%= process.env.staticVuePath %>"></script>
+<script src="<%= process.env.staticErPath %>static/js/c.js"></script>
+<script src="<%= process.env.staticErPath %>static/js/r.js"></script>
+<script src="<%= process.env.staticErPath %>static/js/echarts.min.js"></script>
+<script src="//at.alicdn.com/t/font_2145957_3628wbw8kq2.js"></script>
 </body>
 </html>

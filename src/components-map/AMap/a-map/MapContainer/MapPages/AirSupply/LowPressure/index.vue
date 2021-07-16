@@ -33,8 +33,10 @@
 				:visible="config.visible"
 				:overlayIcon="config.legendIcon"
 				:overlayWarmIcon="config.overlayWarmIcon"
-				:overlayType="config.component"
+				:overlayType="legend"
 				:iconSize="config.iconSize"
+				:detailHandler="config.detailHandler"
+				@moveto="handlerMoveto"
 				:showOverlayName="config.showOverlayName"
 				:data="stationDataMap[config.dataProp]"
 				@overlay-click="handleOverlayClick"
@@ -81,15 +83,27 @@
 				ref="RightPanel1"
 			></RightPanel>
 		</portal>
+		<serviceStationBoundary
+			:data="serviceStationBoundaryData"
+			:active="activeOverlay"
+			:visible="legendMap.ServiceStation.visible"
+		></serviceStationBoundary>
+		<serviceStationBoundary
+			:data="pipeManageMentStationList"
+			:active="activeOverlay"
+			:visible="legendMap.PipeManageMentStation.visible"
+		></serviceStationBoundary>
 	</div>
 </template>
 <script>
 import { AMapTile } from '../../../../lib'
 import VoltageRegulator from './components/VoltageRegulator'
-import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon'
+import serviceStationBoundary from './components/serviceStationBoundary'
+import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon.vue'
 // 页面所需公共组件
 import { OverlayDetail, MapLegend } from '../../../../components/index.js'
 import { DataStatistics } from '../../../../components'
+import laserCarRoute from '../Components/RoutePlan/laserCarRoute'
 
 import {
 	DATASTATISTICSLIST,
@@ -97,7 +111,11 @@ import {
 	AIRSUPPLY_LOWPRESSURE_LEGEND_MAP,
 } from './config.js'
 import getHangZhouGasGISPosition from '../../../../utils/getHangZhouGasGISPosition'
-
+import {
+	getAllTypeStationList,
+	getStationAreaRange,
+	getStatisticsInfo,
+} from '@/components-map-api/map.airSupply.api'
 const componentPageArr = [
 	// legend覆盖物
 	'ServiceStation',
@@ -106,6 +124,7 @@ const componentPageArr = [
 	'OngroundRepairStation',
 	'InspectionPerson',
 	'InspectionCar',
+	'WarningStations',
 	// 报警点位
 	'WarnEvent',
 	// 右侧报警列表
@@ -134,7 +153,9 @@ export default {
 	components: {
 		MapMarkerIcon,
 		VoltageRegulator,
+		serviceStationBoundary,
 		AMapTile,
+		laserCarRoute,
 		...componentPageMap,
 		...componentCommonMap,
 	},
@@ -146,6 +167,7 @@ export default {
 	mounted() {
 		this.getAllTypeStationList()
 		this.getDataStatisticsInfo()
+		this.getStationAreaRange()
 	},
 	data() {
 		return {
@@ -154,6 +176,8 @@ export default {
 			),
 			activeOverlay: {},
 			activeWarnData: {},
+			serviceStationBoundaryData: {},
+			pipeManageMentStationList: {},
 			center: [120.151562, 30.293297],
 			zoom: 12.5,
 			showOverlayDetail: false,
@@ -212,6 +236,12 @@ export default {
 				}
 			}
 		},
+		handlerMoveto({ type }) {
+			if (type === 'WarningStations') {
+				this.$amap.panTo([120.131259, 30.363295], 100)
+				this.closeOverlayDetail('', false)
+			}
+		},
 		OverlayDetailProp() {
 			const { activeOverlay, overlayInfoConfigMap, legendMap } = this
 			if (JSON.stringify(activeOverlay) !== '{}') {
@@ -245,6 +275,13 @@ export default {
 		},
 	},
 	methods: {
+		async getStationAreaRange() {
+			const res = await getStationAreaRange({
+				type: 'PipeManageMentStation,ServiceStation',
+			})
+			this.serviceStationBoundaryData = res.serviceStationList
+			this.pipeManageMentStationList = res.pipeManageMentStationList
+		},
 		// 获取所有站点数据
 		async getAllTypeStationList() {
 			const params = {
@@ -254,11 +291,12 @@ export default {
 					'UndergroundRepairStation', // '地下抢修点',
 					'OngroundRepairStation', // '地上抢修点',
 					'VoltageRegulator', // '调压器',
+					'MiddleAndLowPressureValve', // 中低压阀门
+					'CommandCar', // '抢修指挥车',
+					'LaserCar', // '激光巡检车',
 				].toString(),
 			}
-			const res = await this.$api.map.airSupply.getAllTypeStationList(
-				params,
-			)
+			const res = await getAllTypeStationList(params)
 			let {
 				serviceStationList,
 				pipeManageMentStationList,
@@ -301,12 +339,15 @@ export default {
 		},
 		// 获取统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsData = await this.$api.map.airSupply.getStatisticsInfo(
-				{ type: 'LowPressure' },
-			)
+			this.dataStatisticsData = await getStatisticsInfo({
+				type: 'LowPressure',
+			})
+			this.dataStatisticsData.passRate =
+				(this.dataStatisticsData.passRate * 100).toFixed(1) + '%'
 		},
 		// 获取瓦片函数
 		getTileUrl(x, y, zoom) {
+			if (!this.tilesQuery.length) return ''
 			const tilesQuery = String(this.tilesQuery)
 			const {
 				leftBottomX,

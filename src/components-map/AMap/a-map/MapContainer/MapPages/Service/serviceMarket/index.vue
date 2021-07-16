@@ -60,7 +60,7 @@
 </template>
 <script>
 // 页面覆盖物组件
-import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon'
+import MapMarkerIcon from '@/components-map/AMap/a-map/components/MapMarkerIcon.vue'
 import { SwitchBox, SaleAreaBoundary } from '../Components/index.js'
 import heatmap from './heatmap'
 // 页面所需公共组件
@@ -75,8 +75,12 @@ import {
 	SERVICE_SERVICEMARKET_LEGEND_MAP,
 	DATASTATISTICSLIST,
 } from './config'
+import {
+	getSaleHeatCount,
+	getSaleRightIndex,
+	getSaleMapDataResult,
+} from '@/components-map-api/map.serve.api'
 
-const { scene } = eslinkV.$store
 export default {
 	name: 'serviceMarket',
 	components: {
@@ -121,18 +125,18 @@ export default {
 	},
 	methods: {
 		async getHeatCount() {
-			const res = await this.$api.map.serve.getSaleHeatCount()
+			const res = await getSaleHeatCount()
 			this.heatData = res.total
 		},
 		async getRightIndex() {
-			this.dataStatisticsInfo = await this.$api.map.serve.getSaleRightIndex()
+			this.dataStatisticsInfo = await getSaleRightIndex()
 		},
 		// 获取所有站点数据
 		async getSaleMapDataResult() {
 			const params = {
 				types: 'BranchCompany',
 			}
-			const res = await this.$api.map.serve.getSaleMapDataResult(params)
+			const res = await getSaleMapDataResult(params)
 			this.stationDataMap = {
 				...this.stationDataMap,
 				...res,
@@ -163,7 +167,6 @@ export default {
 	},
 }
 </script>
-
 <style lang="scss" scoped>
 .map-legend {
 	position: absolute;

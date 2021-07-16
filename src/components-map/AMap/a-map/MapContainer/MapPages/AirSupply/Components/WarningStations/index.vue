@@ -5,7 +5,6 @@
 		<Overlay
 			v-for="(item, index) in list"
 			:key="index"
-			:ref="'WarnEvent' + index"
 			:marker="{
 				icon: overlayIcon,
 				iconSize: 38,
@@ -36,7 +35,6 @@
 	</div>
 </template>
 <script>
-import { DETAILLIST } from './config'
 export default {
 	name: 'WarningStations',
 	components: {
@@ -86,31 +84,18 @@ export default {
 	},
 	computed: {
 		detailShowList() {
-			const { activeIndex } = this
-			if (!activeIndex && activeIndex !== 0) return []
-			if (activeIndex == 0) {
-				return this.data.filter(
-					item => item.name === '棋院6159燃气球阀-切断装置',
-				)
-			}
-
-			return this.data.filter(
-				item => item.name !== '棋院6159燃气球阀-切断装置',
-			)
+			return this.data.filter(item => item.belong === this.activeIndex)
 		},
 		list() {
-			const list = []
-			list[0] = this.data.find(
-				item => item.name === '棋院6159燃气球阀-切断装置',
-			)
-			list[1] = this.data.find(
-				item => item.name !== '棋院6159燃气球阀-切断装置',
-			)
+			const list = {}
+			this.data.forEach(v => {
+				if (!list[v.belong]) {
+					list[v.belong] = v
+				}
+			})
 			return list
 		},
 	},
-
-	mounted() {},
 
 	methods: {
 		viewOverlayDetail() {},
@@ -120,7 +105,6 @@ export default {
 			// done && done();
 		},
 		handlerClick(item, index) {
-			// debugger;
 			this.activeOverlay = this.list[index]
 			this.padding = index ? 0 : 16
 			this.width = index ? 880 : 680
@@ -132,7 +116,6 @@ export default {
 			this.getDetailInfo(item, item.middleId)
 		},
 	},
-	beforeDestroy() {},
 }
 </script>
 

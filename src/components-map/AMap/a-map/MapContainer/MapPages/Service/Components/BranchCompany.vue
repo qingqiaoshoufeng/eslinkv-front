@@ -16,6 +16,7 @@
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index'
+import { getBranchCompanyList } from '@/components-map-api/map.mock.api'
 
 export default {
 	name: 'BranchCompany',
@@ -58,7 +59,7 @@ export default {
 	},
 	data() {
 		return {
-			apiFun: this.$api.map.mock.getBranchCompanyList,
+			apiFun: getBranchCompanyList,
 			nameStyle: {
 				fontSize: '24px',
 			},

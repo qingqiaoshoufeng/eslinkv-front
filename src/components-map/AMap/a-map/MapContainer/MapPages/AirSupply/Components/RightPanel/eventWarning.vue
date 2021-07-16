@@ -83,10 +83,10 @@
 		</div>
 	</div>
 </template>
-
 <script>
 import { SvgIcon, NoData } from '../../../../../components/'
 import { Icon } from 'view-design'
+import { getEventWarningList } from '@/components-map-api/map.airSupply.api'
 export default {
 	name: 'eventWarning',
 	components: {
@@ -136,7 +136,7 @@ export default {
 			if (!this.loaded) {
 				this.loading = true
 			}
-			const data = await this.$api.map.airSupply.getEventWarningList({
+			const data = await getEventWarningList({
 				repairType: this.repairType,
 				repairState: this.repairState,
 			})

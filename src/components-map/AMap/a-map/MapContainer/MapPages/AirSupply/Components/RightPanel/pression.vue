@@ -9,14 +9,14 @@
 					.time {{ k.time }}
 				.main-2
 					.address {{ k.address }}
-					.status
+					.status(:class="{ normal: !k.alarming }")
 						.color
 						span {{ k.status }}
 </template>
-
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator'
+import { Component, Vue } from 'vue-property-decorator'
 import { NoData } from '../../../../../components'
+import { getPressAlarmList } from '@/components-map-api/map.airSupply.api.js'
 
 @Component({ components: { NoData } })
 export default class PressureRegulating extends Vue {
@@ -30,7 +30,7 @@ export default class PressureRegulating extends Vue {
 	}
 
 	async mounted() {
-		const res = await this.$api.map.airSupply.getPressAlarmList()
+		const res = await getPressAlarmList()
 		this.list = res.list
 	}
 }
@@ -65,8 +65,11 @@ export default class PressureRegulating extends Vue {
 			.title {
 				font-size: 24px;
 				color: #feffff;
+				width: 234px;
+				flex: none;
 			}
 			.time {
+				flex: none;
 				font-size: 16px;
 				color: #ffffff;
 			}
@@ -79,18 +82,28 @@ export default class PressureRegulating extends Vue {
 			.address {
 				font-size: 20px;
 				color: rgba(255, 255, 255, 0.75);
+				width: 234px;
+				flex: none;
 			}
 			.status {
 				display: flex;
 				align-items: center;
 				font-size: 20px;
 				color: #ffdc45;
+				width: 170px;
+				flex: none;
 				.color {
 					width: 8px;
 					height: 8px;
 					border-radius: 50%;
 					background: #ffdc45;
 					margin-right: 8px;
+				}
+				&.normal {
+					color: #fff;
+					.color {
+						background: #fff;
+					}
 				}
 			}
 		}

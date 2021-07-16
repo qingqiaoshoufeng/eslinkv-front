@@ -174,26 +174,21 @@ export default {
 .flex-row {
 	width: 480px;
 	height: 43px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.4);
 
 	.h-title-1-icon {
 		width: 34px;
 		height: 34px;
 		margin-right: 9px;
-		background-image: url('/static/icons/h-title1-1.svg');
+		background: url('/static/icons/h-title1-1.svg') no-repeat;
+		background-size: 100% 100%;
 	}
 
-	.h-title-1 {
-		position: absolute;
-		top: 0;
-		align-items: center;
-		padding-bottom: 8px;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-
-		h2 {
-			font-size: 24px;
-			font-weight: 600;
-			color: #fff;
-		}
+	h2 {
+		font-size: 24px;
+		font-weight: 600;
+		color: #fff;
 	}
 }
 </style>

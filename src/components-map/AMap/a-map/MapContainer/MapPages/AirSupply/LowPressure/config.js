@@ -6,7 +6,9 @@ import {
 	LowPressureManageStation,
 	LowPressureOnNumber,
 	LowPressureUnderNumber,
+	LowPressurePassRate,
 } from '../../../../utils/dictionary'
+import { getStationDetailInfo } from '@/components-map-api/map.airSupply.api'
 
 // 首页覆盖物配置项
 export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
@@ -31,8 +33,8 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 	},
 	VoltageRegulator: {
 		label: '调压器',
-		legendIcon: 'icontiaoyaqi',
-		overlayWarmIcon: 'icontiaoyaqiyichang',
+		legendIcon: 'icontiaoyaqi01',
+		overlayWarmIcon: 'icontiaoyaqibaojing02',
 		component: 'MapMarkerIcon',
 		iconSize: 38,
 		visible: false,
@@ -43,17 +45,29 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		label: '综合服务站',
 		legendIcon: 'icontulizonghefuwuzhan1',
 		iconSize: 38,
-		component: 'ServiceStation',
+		component: 'MapMarkerIcon',
 		visible: true,
 		dataProp: 'serviceStationList',
+		detailHandler: getStationDetailInfo,
 	},
 	PipeManageMentStation: {
 		label: '管网运行管理站',
 		legendIcon: 'icontuliguanwangyunhangguanlizhan',
 		iconSize: 38,
-		component: 'PipeManageMentStation',
+		component: 'MapMarkerIcon',
 		visible: true,
 		dataProp: 'pipeManageMentStationList',
+		detailHandler: getStationDetailInfo,
+	},
+	WarningStations: {
+		label: '中低压预警点',
+		legendIcon: 'iconzhongdiyayujing',
+		iconSize: 38,
+		icon: 'iconzhongdiyayujing',
+		component: 'WarningStations',
+		showOverlayName: false,
+		visible: true,
+		dataProp: 'middleAndLowPressureValveList',
 	},
 	UndergroundRepairStation: {
 		label: '地下抢修点',
@@ -90,6 +104,22 @@ export const AIRSUPPLY_LOWPRESSURE_LEGEND_MAP = {
 		showOverlayName: false,
 		visible: false,
 		dataProp: 'inspectionCarList',
+	},
+	LaserCar: {
+		label: '激光巡检车',
+		legendIcon: 'iconjiguangxunjianche',
+		iconSize: 38,
+		component: 'laserCarRoute',
+		visible: false,
+		dataProp: 'laserCarList',
+	},
+	CommandCar: {
+		label: '抢修指挥车',
+		legendIcon: 'iconqiangxiuzhihuiche',
+		iconSize: 38,
+		component: 'laserCarRoute',
+		visible: false,
+		dataProp: 'commandCarList',
 	},
 }
 
@@ -197,4 +227,5 @@ export const DATASTATISTICSLIST = [
 	LowPressureManageStation,
 	LowPressureOnNumber,
 	LowPressureUnderNumber,
+	LowPressurePassRate,
 ]

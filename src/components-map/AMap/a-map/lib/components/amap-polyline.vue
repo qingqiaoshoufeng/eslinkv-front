@@ -9,6 +9,7 @@ export default {
 		'vid',
 		'zIndex',
 		'visible',
+		'showDir',
 		'editable',
 		'bubble',
 		'geodesic',

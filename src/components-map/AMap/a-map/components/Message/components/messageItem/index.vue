@@ -31,6 +31,7 @@
 <script lang="ts">
 import { Vue, Component, Prop, Emit } from 'vue-property-decorator'
 import { Input, Icon } from 'view-design'
+import { toReplyMessage } from '@/components-map-api/message.api.js'
 
 @Component({ components: { Input, Icon: Icon } })
 export default class MessageItem extends Vue {
@@ -54,21 +55,19 @@ export default class MessageItem extends Vue {
 		}
 		this.sending = true
 		return new Promise(resolve => {
-			this.$api.message
-				.toReplyMessage({
-					messageId: messageId,
-					resultContent: replyContent,
-				})
-				.then(data => {
-					if (data === 'OK') {
-						resolve({
-							...this.data,
-							messageStatus: 0,
-							interactionResult: replyContent,
-						})
-					}
-					this.sending = false
-				})
+			toReplyMessage({
+				messageId: messageId,
+				resultContent: replyContent,
+			}).then(data => {
+				if (data === 'OK') {
+					resolve({
+						...this.data,
+						messageStatus: 0,
+						interactionResult: replyContent,
+					})
+				}
+				this.sending = false
+			})
 		})
 	}
 

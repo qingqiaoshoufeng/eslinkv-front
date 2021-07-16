@@ -21,6 +21,8 @@
 </template>
 <script>
 import { Overlay } from '../../../../components/index'
+import { getEventWarningList } from '@/components-map-api/map.airSupply.api'
+
 const eventTypeIconMap = {
 	0: 'iconrenwugongdan-suc',
 	1: 'iconrenwugongdan',
@@ -53,12 +55,10 @@ export default {
 			eventTypeIconMap,
 		}
 	},
-
 	async created() {
 		this.map = this.$parent.$amap
-		this.list = await this.$api.map.airSupply.getEventWarningList()
+		this.list = await getEventWarningList()
 	},
-	mounted() {},
 }
 </script>
 

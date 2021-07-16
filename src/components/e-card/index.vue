@@ -32,6 +32,6 @@ export default class ECard extends Vue {}
 }
 
 .list-item-card-content {
-	padding: 10px 15px;
+	padding: 10px;
 }
 </style>

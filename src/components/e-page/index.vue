@@ -4,10 +4,11 @@ div
 	i-page.e-page(
 		:current.sync="pageNum",
 		:total="total",
-		:show-sizer="show",
 		v-show="total > 0",
 		:show-elevator="show",
+		:page-size="pageSize",
 		:show-total="show",
+		:class="{ 'fn-hide': !show }",
 		@on-change="handleChange",
 		@on-page-size-change="handlePageSize")
 	.e-page-list-empty.fn-flex.flex-column(v-show="total <= 0 && loaded")
@@ -30,21 +31,21 @@ export default class EPage extends Vue {
 	@Prop({ default: 10 }) pageSize: number
 	pageNum = 1
 
-	handlePageSize(pageSize) {
+	handlePageSize(pageSize: number): void {
 		this.pageSize = pageSize
 		this.$emit('init', { pageSize: this.pageSize, pageNum: this.pageNum })
 	}
 
-	handleChange(pageNum) {
+	handleChange(pageNum: number): void {
 		this.pageNum = pageNum
 		this.$emit('init', { pageSize: this.pageSize, pageNum: this.pageNum })
 	}
 
-	reload() {
+	reload(): void {
 		this.$emit('init', { pageSize: this.pageSize, pageNum: this.pageNum })
 	}
 
-	mounted() {
+	mounted(): void {
 		this.$emit('init', { pageSize: this.pageSize, pageNum: this.pageNum })
 	}
 }

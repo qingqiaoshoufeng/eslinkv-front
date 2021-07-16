@@ -6,25 +6,29 @@
 			:class="{ active: item.url === common.navIndex }",
 			@click="handleLink(item.url, item.title)",
 			v-for="item in list",
-			:key="item.url") {{ item.title }}
+			:key="item.title") {{ item.title }}
 	i-button(type="primary", v-if="!common.user", @click="handleLogin") 登录
 	img.circle.e-header-user-avatar(:src="userAvatar", v-if="common.user")
 	i-drop-down.e-header-user(@on-click="handleUser", v-if="common.user")
 		.pointer
-			span.e-header-user-name {{ common.user && common.user.userName }}
+			span.e-header-user-name {{ name }}
 			i-icon(type="ios-arrow-down", color="#fff")
 		i-drop-down-menu(slot="list")
+			i-drop-down-item(name="child", v-if="!common.user.userIsChild")
+				i-icon(type="md-people", :size="16", color="#333")
+				span.e-header-user-item 子账号管理
 			i-drop-down-item(name="secretKey")
-				i-icon(type="ios-lock-outline", :size="16", color="#333")
+				i-icon(type="md-lock", :size="16", color="#333")
 				span.e-header-user-item 密钥管理
 			i-drop-down-item(name="logout")
-				i-icon(type="ios-log-out", :size="16", color="#333")
+				i-icon(type="md-log-out", :size="16", color="#333")
 				span.e-header-user-item 退出登录
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { Icon, Button, Dropdown, DropdownItem, DropdownMenu } from 'view-design'
 import common from '../../store/common.store.js'
+import { logout, detail } from '@/api/user.api.js'
 
 @Component({
 	components: {
@@ -45,35 +49,42 @@ export default class EHeader extends Vue {
 			url: '/editor/Manger',
 			title: '大屏管理',
 		},
+		// {
+		// 	url: '/market/componentList',
+		// 	title: '媒体资源',
+		// },
 		{
-			url: '/market/componentList',
+			url: '/market',
 			title: '组件开发',
 		},
-		// {
-		//   url: '/template',
-		//   title: '模版市场'
-		// },
 		{
 			url: '/help/EslinkV',
 			title: '帮助中心',
 		},
-		{
-			url: '/changeLog',
-			title: '更新日志',
-		},
 	]
 
-	handleLogin() {
+	get name(): string {
+		if (this.common.user) {
+			return this.common.user.nickName || this.common.user.userName
+		} else {
+			return ''
+		}
+	}
+
+	handleLogin(): void {
 		this.$router.push('/login')
 	}
 
-	handleUser(name) {
+	handleUser(name: string): void {
 		switch (name) {
 			case 'logout':
 				common.actions.setUser(null)
 				localStorage.removeItem('eslinkv-login')
-				this.$api.user.logout()
+				logout()
 				this.$router.push('/login')
+				break
+			case 'child':
+				this.$router.push('/userChild')
 				break
 			case 'secretKey':
 				this.$router.push('/secretKey')
@@ -81,31 +92,27 @@ export default class EHeader extends Vue {
 		}
 	}
 
-	handleLink(url, title) {
+	handleLink(url: string, title: string): void {
 		common.actions.setNavIndex(url)
 		document.title = title
 		this.$router.push(url)
 	}
 
-	mounted() {
+	mounted(): void {
 		common.actions.setNavIndex(this.$route.path)
-		if (!this.common.user) {
-			this.$api.user
-				.detail()
-				.then(res => {
-					common.actions.setUser(res)
-				})
-				.catch(() => {
-					common.state.user = null
-					localStorage.removeItem('eslinkv-login')
-					window.top.location.href = `${location.origin}/login`
-				})
-		}
+		detail()
+			.then(res => {
+				common.actions.setUser(res)
+			})
+			.catch(() => {
+				common.state.user = null
+				localStorage.removeItem('eslinkv-login')
+				window.top.location.href = `${location.origin}/login`
+			})
 	}
 }
 </script>
 <style lang="scss" scoped>
-@import '../../scss/conf';
 .e-header-user {
 	height: 100%;
 }
@@ -119,10 +126,10 @@ export default class EHeader extends Vue {
 }
 
 .e-header-user-name {
-	margin-right: 10px;
 	margin-left: 8px;
 	color: #fff;
 	line-height: 50px;
+	margin-right: 10px;
 }
 
 .e-header-nav {
@@ -150,7 +157,7 @@ export default class EHeader extends Vue {
 				width: 100%;
 				height: 3px;
 				content: '';
-				background-color: $themeColor;
+				background-color: var(--themeColor);
 			}
 		}
 	}

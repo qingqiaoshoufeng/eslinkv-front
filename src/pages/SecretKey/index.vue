@@ -1,30 +1,35 @@
 <template lang="pug">
-e-layout
-	.secret-key-container
-		.create
-			i-button(type="primary", @click="create") 创建密钥
-		i-table(:columns="columns", :data="tableData")
-			template(#createTime="{row}")
-				span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
-			template(#appKey="{row}")
-				.secret
-					.secret-row
-						label appKey:
-						.content {{ row.appKey }}
-					.secret-row
-						label appSecret:
-						.content {{ row.isSecretKeyShow ? row.appSecret : row.appSecret.replace(/./g, '*') }}
-							.show.pointer(@click="row.isSecretKeyShow = !row.isSecretKeyShow") {{ row.isSecretKeyShow ? '隐藏' : '显示' }}
-			template(#isUsed="{row}")
-				span.use(v-if="row.isUsed") 使用中
-				span.stop(v-else) 已停用
-			template(#action="{row}")
-				i-button(type="warning", @click="handleUse(row)", v-if="row.isUsed") 停用
-				i-button(type="info", @click="handleUse(row)", v-else) 启用
+e-layout(:padding="false")
+	.create
+		i-button(type="primary", @click="create") 创建密钥
+	i-table(:columns="columns", :data="tableData")
+		template(#createTime="{row}")
+			span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
+		template(#appKey="{row}")
+			.secret
+				.secret-row
+					label appKey:
+					.content {{ row.appKey }}
+				.secret-row
+					label appSecret:
+					.content {{ row.isSecretKeyShow ? row.appSecret : row.appSecret.replace(/./g, '*') }}
+						.show.pointer(@click="row.isSecretKeyShow = !row.isSecretKeyShow") {{ row.isSecretKeyShow ? '隐藏' : '显示' }}
+		template(#isUsed="{row}")
+			span.use(v-if="row.isUsed") 使用中
+			span.stop(v-else) 已停用
+		template(#action="{row}")
+			i-button(type="warning", @click="handleUse(row)", v-if="row.isUsed") 停用
+			i-button(type="info", @click="handleUse(row)", v-else) 启用
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button } from 'view-design'
+import {
+	createSecretKey,
+	getAllSecretKey,
+	stopSecretKey,
+	useSecretKey,
+} from '@/api/secretKey.api.js'
 
 @Component({
 	components: {
@@ -56,7 +61,7 @@ export default class SecretKey extends Vue {
 	]
 
 	async getList() {
-		let res = await this.$api.secretKey.getAllSecretKey()
+		let res = await getAllSecretKey()
 		res = res.map(v => {
 			v.isSecretKeyShow = false
 			return v
@@ -65,18 +70,18 @@ export default class SecretKey extends Vue {
 	}
 
 	async create() {
-		await this.$api.secretKey.createSecretKey()
+		await createSecretKey()
 		await this.getList()
 	}
 
 	async handleUse(row) {
 		if (row.isUsed) {
-			await this.$api.secretKey.stopSecretKey({
+			await stopSecretKey({
 				appKey: row.appKey,
 				appSecret: row.appSecret,
 			})
 		} else {
-			await this.$api.secretKey.useSecretKey({
+			await useSecretKey({
 				appKey: row.appKey,
 				appSecret: row.appSecret,
 			})
@@ -96,9 +101,6 @@ export default class SecretKey extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-.secret-key-container {
-	padding: 15px;
-}
 .secret {
 	.secret-row {
 		display: flex;

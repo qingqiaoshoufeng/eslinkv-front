@@ -14,6 +14,8 @@
 </template>
 <script>
 import { BaseOverlay } from '../../../../components/index'
+import { getLiquefiedGasStationList } from '@/components-map-api/map.mock.api'
+
 export default {
 	name: 'LiquefiedGasStation',
 	components: {
@@ -43,9 +45,8 @@ export default {
 		},
 	},
 	data() {
-		const apiFun = this.$api.map.mock.getLiquefiedGasStationList
 		return {
-			apiFun: apiFun,
+			apiFun: getLiquefiedGasStationList,
 		}
 	},
 }

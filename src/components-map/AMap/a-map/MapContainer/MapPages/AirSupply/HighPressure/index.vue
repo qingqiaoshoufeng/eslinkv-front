@@ -6,7 +6,15 @@
 			:data="activeWarnData"
 			:overlayInfoConfigMap="overlayInfoConfigMap"
 			@close="closeWarnEventDetail"
-		></WarnEvent>
+			:width="
+				activeWarnData.overlayType === 'VoltageRegulator' ? 700 : 400
+			"
+		>
+			<VoltageRegulator
+				:data="activeWarnData"
+				v-if="activeWarnData.overlayType === 'VoltageRegulator'"
+			></VoltageRegulator>
+		</WarnEvent>
 		<!-- 行政区域覆盖物 -->
 		<RegionBoundary v-if="!isShowSatellite" />
 		<!-- 2.legend控制显隐 -->
@@ -19,7 +27,7 @@
 				:is="config.component"
 				:visible="config.visible"
 				:overlayIcon="config.icon ? config.icon : config.legendIcon"
-				:overlayType="config.component"
+				:overlayType="legend"
 				:iconSize="config.iconSize"
 				:showOverlayName="config.showOverlayName"
 				:detailList="config.detailList"
@@ -75,6 +83,14 @@ import {
 	DATA_STATISTICS_MAP,
 } from './config.js'
 import pageMixin from '../../../../mixins/pageMixin'
+import {
+	getAllTypeStationList,
+	getStatisticsInfo,
+	getHighPressurePipe,
+} from '@/components-map-api/map.airSupply.api'
+import VoltageRegulator from '../LowPressure/components/VoltageRegulator'
+import laserCarRoute from '../Components/RoutePlan/laserCarRoute'
+
 const componentPageArr = [
 	// legend覆盖物
 	'HighPressureLine',
@@ -84,7 +100,6 @@ const componentPageArr = [
 	'EmergencyAirSourceStation',
 	'InspectionPerson',
 	'InspectionCar',
-	'WarningStations',
 	// 报警点位
 	'WarnEvent',
 	// 右侧报警列表
@@ -117,6 +132,8 @@ export default {
 	inject: ['parentInfo'],
 	mixins: [pageMixin],
 	components: {
+		VoltageRegulator,
+		laserCarRoute,
 		...componentPageMap,
 		...componentCommonMap,
 	},
@@ -222,12 +239,11 @@ export default {
 					'GasStation', // '门站',
 					'PressureRegulatingStation', // '调压站',
 					'EmergencyAirSourceStation', // '应急气源站',
-					'MiddleAndLowPressureValve', // 中低压阀门
+					'CommandCar', // '抢修指挥车',
+					'LaserCar', // '激光巡检车',
 				].toString(),
 			}
-			const res = await this.$api.map.airSupply.getAllTypeStationList(
-				params,
-			)
+			const res = await getAllTypeStationList(params)
 			this.stationDataMap = { ...this.stationDataMap, ...res }
 			const {
 				gasStationList,
@@ -242,13 +258,13 @@ export default {
 		},
 		// 2.获取高压统计数据
 		async getDataStatisticsInfo() {
-			this.dataStatisticsData = await this.$api.map.airSupply.getStatisticsInfo(
-				{ type: 'HighPressure' },
-			)
+			this.dataStatisticsData = await getStatisticsInfo({
+				type: 'HighPressure',
+			})
 		},
 		// 3.获取高压管网，高压管网建设中数据
 		async getHighPressurePipe() {
-			const pipeData = await this.$api.map.airSupply.getHighPressurePipe()
+			const pipeData = await getHighPressurePipe()
 			this.stationDataMap = {
 				...this.stationDataMap,
 				...pipeData,

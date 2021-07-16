@@ -4,7 +4,7 @@
 			v-for="(item, index) in list"
 			:key="overlayType + index"
 			:marker="{
-				icon: false ? overlayWarmIcon : overlayIcon, // todo
+				icon: item.alarming ? overlayWarmIcon : overlayIcon,
 				...item,
 				iconSize,
 			}"
@@ -14,10 +14,6 @@
 			@mouseover="handleMouseOver(item)"
 			@mouseleave="handleMouseLeave(item)"
 		>
-			<!-- 默认显示配置的icon -->
-			<template slot="icon">
-				<slot name="icon"></slot>
-			</template>
 			<slot :data="item">
 				<!-- 默认显示图标的名字 -->
 				<div

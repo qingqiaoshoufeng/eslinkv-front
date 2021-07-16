@@ -4,35 +4,44 @@ e-card
 		:image="screenAvatar",
 		@click="handleEdit")
 		.list-item-card-mask.fn-flex.flex-row.pos-a
-			i-icon.pointer(
-				:style="{ marginLeft: 'auto', marginRight: '10px' }",
-				type="ios-paper-plane-outline",
-				color="#fff",
-				:size="16",
-				@click="handleShare",
-				@click.stop,
-				title="分享")
-			i-icon.pointer(
-				type="ios-trash-outline",
-				color="#fff",
-				:size="16",
-				@click="handleRemove",
-				@click.stop,
-				title="删除")
+			i-tooltip(
+				content="历史",
+				:style="{ marginLeft: 'auto', marginRight: '10px' }")
+				i-icon.pointer(
+					type="md-time",
+					color="#fff",
+					:size="16",
+					@click="handleHistory",
+					@click.stop)
+			i-tooltip(content="分享", :style="{ marginRight: '10px' }")
+				i-icon.pointer(
+					type="md-paper-plane",
+					color="#fff",
+					:size="16",
+					@click="handleShare",
+					@click.stop)
+			i-tooltip(content="删除")
+				i-icon.pointer(
+					type="md-trash",
+					color="#fff",
+					:size="16",
+					@click="handleRemove",
+					@click.stop)
 	template(slot="content")
 		h2.list-item-card-title.ellipsis {{ screenName }}
 		.list-item-card-btn.fn-flex.flex-row
-			span {{ $format(new Date(createTime), 'yyyy-MM-dd hh:mm:ss') }}
+			span.list-item-card-btn-time {{ $format(new Date(createTime), 'yyyy-MM-dd hh:mm:ss') }}
 			.list-item-card-btn-link.pointer(@click="handleLink")
-				i-icon(type="ios-link", :style="{ marginLeft: 'auto' }")
+				i-icon(type="md-laptop", :style="{ marginLeft: 'auto' }")
 				span 预览
 	dShareDialog(v-model="shareModal", :sid="screenId")
 </template>
 <script lang="ts">
-import { Button, Icon, Modal, Input } from 'view-design'
+import { Button, Icon, Modal, Input, Tooltip } from 'view-design'
 import EmptyImage from '../../components/empty-image/index.vue'
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import dShareDialog from '../../components/d-share-dialog/index.vue'
+import { dShareDialog } from '@eslinkv/vue2'
+import { destroy } from '@/api/screen.api.js'
 
 @Component({
 	components: {
@@ -42,6 +51,7 @@ import dShareDialog from '../../components/d-share-dialog/index.vue'
 		EmptyImage,
 		'i-modal': Modal,
 		'i-input': Input,
+		'i-tooltip': Tooltip,
 	},
 })
 export default class ItemCard extends Vue {
@@ -50,44 +60,49 @@ export default class ItemCard extends Vue {
 	@Prop(String) screenPublish: string
 	@Prop(String) screenName: string
 	@Prop(String) createTime: string
+	@Prop(String) screenMainScene: string
+	@Prop(String) screenLayoutMode: string
 	@Prop(Object) screenConfig: any
 
 	shareModal = false
 
-	handleShare() {
+	handleShare(): void {
 		this.shareModal = true
 	}
 
 	get statusStr() {
 		return this.screenPublish === 'COMPLETE' ? '已发布' : '未发布'
 	}
-
-	handleEdit() {
+	handleHistory(): void {
+		this.$router.push(`/screenHistory/${this.screenId}`)
+	}
+	handleEdit(): void {
 		this.$router.push(`/editor/manger/${this.screenId}`)
 	}
 
-	handleLink() {
-		const scene = this.screenConfig.mainScene
-			? `&scene=${this.screenConfig.mainScene}`
+	handleLink(): void {
+		const scene = this.screenMainScene
+			? `&scene=${this.screenMainScene}`
+			: ''
+		const layoutMode = this.screenLayoutMode
+			? `?layoutMode=${this.screenLayoutMode}`
 			: ''
 		window.open(
-			`${location.origin}/detail/${this.screenId}?layoutMode=${this.screenConfig.layoutMode}${scene}`,
+			`${location.origin}/detail/${this.screenId}${layoutMode}${scene}`,
 		)
 	}
 
-	handleRemove() {
+	handleRemove(): void {
 		this.$Modal.confirm({
 			title: '提示',
 			content: '确认删除吗？',
 			loading: true,
 			onOk: () => {
-				this.$api.screen
-					.destroy({ screenId: this.screenId })
-					.then(() => {
-						this.$Message.success('删除成功')
-						this.$Modal.remove()
-						this.$emit('reload')
-					})
+				destroy({ screenId: this.screenId }).then(() => {
+					this.$Message.success('删除成功')
+					this.$Modal.remove()
+					this.$emit('reload')
+				})
 			},
 		})
 	}
@@ -101,7 +116,7 @@ export default class ItemCard extends Vue {
 }
 .list-item-card-btn-link {
 	margin-left: auto;
-
+	color: #666;
 	span {
 		margin-left: 4px;
 	}
@@ -137,11 +152,14 @@ export default class ItemCard extends Vue {
 		}
 	}
 }
-
+.list-item-card-btn-time {
+	color: #666;
+}
 .list-item-card-title {
 	padding-bottom: 10px;
 	font-size: 14px;
 	font-weight: normal;
+	line-height: 14px;
 	color: rgb(51, 51, 51);
 	border-bottom: 1px solid rgba(216, 216, 216, 0.37);
 }

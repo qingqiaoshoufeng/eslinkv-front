@@ -33,16 +33,6 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 		visible: true,
 		dataProp: 'highPressureLine_Process',
 	},
-	WarningStations: {
-		label: '中低压预警点',
-		legendIcon: 'iconzhongdiyayujing',
-		iconSize: 38,
-		icon: 'iconzhongdiyayujing',
-		component: 'WarningStations',
-		showOverlayName: false,
-		visible: true,
-		dataProp: 'middleAndLowPressureValveList',
-	},
 	GasStation: {
 		label: '门站',
 		legendIcon: 'icontulimenzhan',
@@ -87,6 +77,22 @@ export const AIRSUPPLY_HIGHPRESSURE_LEGEND_MAP = {
 		showOverlayName: false,
 		visible: false,
 		dataProp: 'inspectionCarList',
+	},
+	LaserCar: {
+		label: '激光巡检车',
+		legendIcon: 'iconjiguangxunjianche',
+		iconSize: 38,
+		component: 'laserCarRoute',
+		visible: false,
+		dataProp: 'laserCarList',
+	},
+	CommandCar: {
+		label: '抢修指挥车',
+		legendIcon: 'iconqiangxiuzhihuiche',
+		iconSize: 38,
+		component: 'laserCarRoute',
+		visible: false,
+		dataProp: 'commandCarList',
 	},
 }
 // hover覆盖物详情

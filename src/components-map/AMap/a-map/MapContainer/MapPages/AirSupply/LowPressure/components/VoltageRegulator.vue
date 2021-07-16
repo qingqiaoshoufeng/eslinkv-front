@@ -1,18 +1,18 @@
 <template lang="pug">
-	.container
-		.title  {{ data.name }}
-		.address {{ info.address }}
-		.info(v-if="info.time")
-			.type
-				.color
-				span {{ info.status }}
-			.time {{ info.time }}
-		.title2 近8小时压力趋势
-		.chart(ref="chart")
+.container
+	.title {{ data.name }}
+	.address {{ info.address }}
+	.info(v-if="info.time")
+		.type
+			.color
+			span {{ info.status }}
+		.time {{ info.time }}
+	.title2 近8小时压力趋势
+	.chart(ref="chart")
 </template>
-
 <script lang="ts">
 import { Component, Vue, Prop, Watch } from 'vue-property-decorator'
+import { getLowMapDetailInfo } from '@/components-map-api/map.airSupply.api.js'
 
 @Component
 export default class VoltageRegulator extends Vue {
@@ -25,7 +25,7 @@ export default class VoltageRegulator extends Vue {
 		if (val) {
 			this.$nextTick(async () => {
 				await this.getData()
-				echarts
+				window.echarts
 					.init(this.$refs.chart)
 					.setOption(this.getOption(this.info.list))
 			})
@@ -83,7 +83,8 @@ export default class VoltageRegulator extends Vue {
 				{
 					type: 'value',
 					show: true,
-					name: '进站/Mpa',
+					name: '进站/Kpa',
+					scale: true,
 					axisTick: {
 						show: false,
 						textStyle: {
@@ -115,13 +116,14 @@ export default class VoltageRegulator extends Vue {
 					},
 				},
 				{
-					name: '出站/Mpa',
+					name: '出站/Kpa',
 					type: 'value',
 					nameTextStyle: {
 						color: '#fff',
 						fontSize: 14,
 						padding: [0, 0, 0, -10],
 					},
+					scale: true,
 					splitLine: {
 						show: false,
 					},
@@ -185,7 +187,7 @@ export default class VoltageRegulator extends Vue {
 	}
 
 	async getData() {
-		this.info = await this.$api.map.airSupply.getLowMapDetailInfo({
+		this.info = await getLowMapDetailInfo({
 			type: 'VoltageRegulator',
 			id: this.data.id,
 			name: this.data.name,

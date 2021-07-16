@@ -3,12 +3,8 @@ import App from './App.vue'
 import router from './router'
 import { Message, Modal } from 'view-design'
 import { format } from 'date-fns'
-import VueVideoPlayer from 'vue-video-player'
-import 'video.js/dist/video-js.css'
-import './api'
-import './components-business-api'
-import './components-map-api'
-import './components-business/index.ts'
+import '@eslinkv/core/lib/core.css'
+import '@eslinkv/vue2/lib/v2.css'
 import './components-map/index.ts'
 import PortalVue from 'portal-vue'
 import 'core-js/stable'
@@ -18,9 +14,7 @@ import eLayout from './components/e-layout/index.vue'
 import eCard from './components/e-card/index.vue'
 import eHeader from './components/e-header/index.vue'
 import ePage from './components/e-page/index.vue'
-
 Vue.use(PortalVue)
-Vue.use(VueVideoPlayer)
 
 Vue.component('e-layout', eLayout)
 Vue.component('e-card', eCard)
@@ -45,7 +39,7 @@ const errorHandler = (err, vm) => {
 	}
 }
 
-Vue.config.errorHandler = errorHandler
+// Vue.config.errorHandler = errorHandler
 Vue.prototype.$format = format
 Vue.prototype.$Message = Message
 Vue.prototype.$Modal = Modal

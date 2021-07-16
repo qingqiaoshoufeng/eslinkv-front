@@ -247,3 +247,36 @@ export function getPressAlarmList(data) {
 		},
 	})
 }
+
+export function getStationAreaRange(data) {
+	return request({
+		url: HANGRANURL + '/applyAir/stationAreaRange',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+export function getStationDetailInfo(data) {
+	return request({
+		url: HANGRANURL + '/applyAir/stationDetailInfo',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
+
+export function getStationSwitchState(data) {
+	return request({
+		url: HANGRANURL + '/applyAir/stationSwitchState',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}

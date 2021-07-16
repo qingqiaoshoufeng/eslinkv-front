@@ -33,6 +33,7 @@ import { Vue, Component } from 'vue-property-decorator'
 import MsItem from '../messageItem/index.vue'
 import NoData from '../../../NoData/index.vue'
 import { Icon } from 'view-design'
+import { getRecentMessageList } from '@/components-map-api/message.api'
 
 @Component({ components: { 'ms-item': MsItem, 'no-data': NoData, Icon: Icon } })
 export default class MessageAlert extends Vue {
@@ -87,14 +88,12 @@ export default class MessageAlert extends Vue {
 	getData() {
 		this.loading = true
 		const { value } = this.selectedItem
-		this.$api.message
-			.getRecentMessageList({
-				messageStatus: value,
-			})
-			.then(data => {
-				this.data = data.filter(item => item.name === '燃气')
-				this.loading = false
-			})
+		getRecentMessageList({
+			messageStatus: value,
+		}).then(data => {
+			this.data = data.filter(item => item.name === '燃气')
+			this.loading = false
+		})
 	}
 
 	beforeDestroy() {

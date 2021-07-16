@@ -15,6 +15,10 @@ import { Vue, Component } from 'vue-property-decorator'
 import MessageList from './components/messageList/index.js'
 import SvgIcon from '../SvgIcon/index.vue'
 import format from 'date-fns/format'
+import {
+	getUnReadMessage,
+	getRecentMessageList,
+} from '@/components-map-api/message.api.js'
 
 @Component({
 	components: { 'svg-icon': SvgIcon },
@@ -45,7 +49,7 @@ export default class AlertContent extends Vue {
 	}
 
 	getUnReadMessage() {
-		this.$api.message.getUnReadMessage().then(data => {
+		getUnReadMessage().then(data => {
 			if (data) {
 				this.unReadStatus = true
 				// if (this.alertInstance) {
@@ -76,15 +80,13 @@ export default class AlertContent extends Vue {
 	}
 
 	async getData(messageStatus = '1') {
-		this.$api.message
-			.getRecentMessageList({
-				messageStatus,
-			})
-			.then(data => {
-				if (data && data.length > 0) {
-					this.formatTime(data[0])
-				}
-			})
+		getRecentMessageList({
+			messageStatus,
+		}).then(data => {
+			if (data && data.length > 0) {
+				this.formatTime(data[0])
+			}
+		})
 	}
 
 	handleClick() {

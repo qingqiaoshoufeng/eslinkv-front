@@ -45,12 +45,11 @@
 		></RoutePlan>
 	</div>
 </template>
-<script>
+<script lang="ts">
 import bus from '../../../../../utils/bus'
-const { scene, event, instance } = eslinkV.$store
+import { Editor } from '@eslinkv/core'
 import {
 	INDEXSCENEMAP,
-	OVERLAYINFOMAP_AIRSUPPLY,
 	AIRSUPPLY_WARN_SCENEINDEX,
 	AIRSUPPLY_WARN_COMPONENTINDEX,
 } from '../../../../../config'
@@ -59,9 +58,10 @@ export default {
 	name: 'WarnEvent',
 	inject: ['parentInfo'],
 	components: {
-		Overlay: () => import('../../../../../components/Overlay'),
-		OverlayDetail: () => import('../../../../../components/OverlayDetail'),
-		RoutePlan: () => import('../RoutePlan'),
+		Overlay: () => import('../../../../../components/Overlay/index.vue'),
+		OverlayDetail: () =>
+			import('../../../../../components/OverlayDetail/index.vue'),
+		RoutePlan: () => import('../RoutePlan/index.vue'),
 	},
 	props: {
 		data: {
@@ -83,6 +83,7 @@ export default {
 			visible: false,
 			overlayIcon: '',
 			OverlayDetailProp: {},
+			editor: Editor.Instance(),
 			overlayInfoConfigMap: Object.freeze(WARNING_OVERLAY_MAP),
 		}
 	},
@@ -98,7 +99,7 @@ export default {
 				const { overlayType, status } = val
 				const { overlayInfoConfigMap } = this
 				const iconMap = {
-					VoltageRegulator: 'icontiaoyaqi',
+					VoltageRegulator: 'icontiaoyaqi01',
 					WARNEVENT: 'iconshijian1',
 					WarningList: 'icongongyiyichang',
 				}
@@ -135,14 +136,13 @@ export default {
 	},
 	methods: {
 		viewOverlayDetail() {
-			const { repairContent, address, callDate } = this.data
 			this.showRoutePlan = true
 			// 和场景进行交互
-			scene.actions.setSceneIndex(AIRSUPPLY_WARN_SCENEINDEX)
+			this.editor.selectSceneIndex(AIRSUPPLY_WARN_SCENEINDEX)
 			// 更新数据
 			this.$nextTick(() => {
 				AIRSUPPLY_WARN_COMPONENTINDEX.forEach(i => {
-					instance.actions.updateComponent(i, {
+					this.editor.updateComponent(i, {
 						params: {
 							id: this.data.id,
 						},
@@ -152,7 +152,9 @@ export default {
 		},
 		closeOverlayDetail(done) {
 			this.showRoutePlan = false
-			scene.actions.setSceneIndex(INDEXSCENEMAP[this.parentInfo.pageName])
+			this.editor.selectSceneIndex(
+				INDEXSCENEMAP[this.parentInfo.pageName],
+			)
 			this.$emit('close')
 			done && done()
 		},
