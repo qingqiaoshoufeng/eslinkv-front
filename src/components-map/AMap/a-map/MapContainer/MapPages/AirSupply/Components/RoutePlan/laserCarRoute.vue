@@ -76,7 +76,14 @@ export default {
     detailPosition () {
       if (!this.current.coordinate.length) return {}
       const res = this.current.coordinate[this.current.coordinate.length - 1]
-      return res
+      if (Array.isArray(res)) {
+        return {
+          lng: res[0],
+          lat: res[1]
+        }
+      } else {
+        return res
+      }
     },
     config () {
       if (this.overlayType === 'LaserCar') {

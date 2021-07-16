@@ -14,9 +14,6 @@ export default {
       current: ''
     }
   },
-  mounted() {
-    this.$amap.on('zoomend', this.handleMapZoomChange)
-  },
   watch: {
     data (val) {
       if (Object.keys(val).length === 0 || !this.visible) return
@@ -78,19 +75,9 @@ export default {
         this.instanceArr.push(instance)
       })
     },
-    handleMapZoomChange() {
-      if (!this.visible) return false
-      const operateName = this.$amap.getZoom() > 12 ? 'hide' : 'show'
-      this.instanceArr.forEach(instance => {
-        instance[operateName]()
-      })
-    },
   },
   render() {
     return null
-  },
-  beforeDestroy() {
-    this.$amap.off('zoomend', this.handleMapZoomChange)
   },
 }
 </script>
