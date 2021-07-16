@@ -1,6 +1,6 @@
 调压站
 <template>
-	<BaseOverlay
+	<BaseOverlay2
 		v-bind="{
 			overlayIcon,
 			overlayType,
@@ -13,14 +13,14 @@
 	/>
 </template>
 <script>
-import { BaseOverlay } from '../../../../components/index'
+import BaseOverlay2 from '../../../../components/BaseOverlay2'
 import { getPressureRegulatingStationList } from '@/components-map-api/map.mock.api'
-import { getStationRealTimeInfo } from '@/components-map-api/map.airSupply.api'
+import { getStationRealTimeInfo, getStationSwitchState } from '@/components-map-api/map.airSupply.api'
 
 export default {
 	name: 'PressurereGulatingStation',
 	components: {
-		BaseOverlay,
+    BaseOverlay2,
 	},
 	props: {
 		visible: {
@@ -56,30 +56,44 @@ export default {
 				outTemp: '℃',
 				todayAirFeed: 'm³',
 			},
-			mouseIn: false,
-		}
+      dataInner: [],
+      switchStateTimer: null,
+    }
 	},
-	computed: {
-		dataInner() {
-			const { data = [] } = this
-			const stationPoseMap = {
-				临平调压站: 'right',
-				半山调压站: 'right',
-				'320阀室': 'top',
-				良渚调压站: 'top',
-				西部应急气源站: 'left',
-				东部应急气源站: 'top',
-				西部应急气源站: 'left',
-				苏嘉路阀室: 'right',
-				之江调压站: 'right',
-			}
-			return this.data.map(item => {
-				item.pose = stationPoseMap[item.name]
-				return item
-			})
-		},
-	},
+  watch: {
+	  data: {
+	    deep: true,
+      immediate: true,
+      async handler (val) {
+        clearInterval(this.switchStateTimer)
+        await this.getStationSwitchState()
+        this.switchStateTimer = setInterval(() => {
+          this.getStationSwitchState()
+        }, 10000)
+      }
+    }
+  },
 	methods: {
+    async getStationSwitchState () {
+      const stationPoseMap = {
+        临平调压站: 'right',
+        半山调压站: 'right',
+        '320阀室': 'top',
+        良渚调压站: 'top',
+        西部应急气源站: 'left',
+        东部应急气源站: 'top',
+        西部应急气源站: 'left',
+        苏嘉路阀室: 'right',
+        之江调压站: 'right',
+      }
+      const res = await getStationSwitchState()
+      const req = JSON.parse(JSON.stringify(this.data))
+      this.dataInner = req.map(item => {
+        item.pose = stationPoseMap[item.name]
+        item.icon = res[item.name] ? 'icontulitiaoyazhan' : 'icontiaoyazhan1'
+        return item
+      })
+    },
 		async handleClick(marker) {
 			if (!marker.detail) {
 				const { id = '', name = '', type = '' } = marker
@@ -119,5 +133,9 @@ export default {
 			)
 		},
 	},
+  beforeDestroy () {
+    clearInterval(this.switchStateTimer)
+    this.switchStateTimer = null
+  }
 }
 </script>

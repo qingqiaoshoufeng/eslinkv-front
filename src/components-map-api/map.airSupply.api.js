@@ -270,3 +270,14 @@ export function getStationDetailInfo(data) {
 		},
 	})
 }
+
+export function getStationSwitchState(data) {
+	return request({
+		url: HANGRANURL + '/applyAir/stationSwitchState',
+		method: 'get',
+		params: data,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+		},
+	})
+}
