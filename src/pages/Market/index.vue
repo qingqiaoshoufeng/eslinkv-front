@@ -28,6 +28,10 @@ export default class MarketComponentList extends Vue {
 			component: () => import('./checkMyComponent.vue'),
 		},
 		{
+			title: '审核历史',
+			component: () => import('./checkHistory.vue'),
+		},
+		{
 			title: '组件分类',
 			component: () => import('./myComponentType.vue'),
 		},

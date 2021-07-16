@@ -8,8 +8,6 @@ div
 		:data="list",
 		v-if="total > 0",
 		@on-selection-change="selectHandle")
-		template(#status="{ row }")
-			span {{ status[row.status] }}
 		template(#createTime="{ row }")
 			span {{ $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') }}
 	e-page(@init="init", :total="total", ref="page", :loaded="loaded")
@@ -51,10 +49,6 @@ export default class Market extends Vue {
 			key: 'componentVersion',
 		},
 		{
-			title: '审核状态',
-			slot: 'status',
-		},
-		{
 			title: '创建时间',
 			slot: 'createTime',
 		},
@@ -65,11 +59,6 @@ export default class Market extends Vue {
 	currentRow: any = null
 	selectMore: any = false
 	selectOne: any = false
-	status: any = {
-		ERROR: '审核失败',
-		PENDING: '待审核',
-		SUCCESS: '审核通过',
-	}
 
 	async init({ pageNum, pageSize }) {
 		const res = await list({

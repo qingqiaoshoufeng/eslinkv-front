@@ -45,6 +45,15 @@ export function recycleList(data) {
 	})
 }
 
+export function checkHistoryList(data) {
+	return request({
+		url: '/market/component/checkHistoryList',
+		method: 'post',
+		data,
+		headers,
+	})
+}
+
 export function typeList(data) {
 	return request({
 		url: '/market/component/typeList',

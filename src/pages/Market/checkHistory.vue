@@ -5,15 +5,17 @@ div
 		:data="list",
 		v-if="total > 0",
 		@on-selection-change="selectHandle")
-		template(#deleteTime="{ row }")
-			span {{ $format(new Date(row.deleteTime), 'yyyy-MM-dd HH:mm:ss') }}
+		template(#status="{ row }")
+			span(:class="row.status") {{ status[row.status] }}
+		template(#updateTime="{ row }")
+			span {{ $format(new Date(row.updateTime), 'yyyy-MM-dd HH:mm:ss') }}
 	e-page(@init="init", :total="total", ref="page", :loaded="loaded")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button } from 'view-design'
 import { Editor } from '@eslinkv/core'
-import { recycleList } from '@/api/marketComponent.api.js'
+import { checkHistoryList } from '@/api/marketComponent.api.js'
 
 @Component({
 	components: {
@@ -43,8 +45,12 @@ export default class Market extends Vue {
 			key: 'componentVersion',
 		},
 		{
-			title: '删除时间',
-			slot: 'deleteTime',
+			title: '审核状态',
+			slot: 'status',
+		},
+		{
+			title: '更新时间',
+			slot: 'updateTime',
 		},
 	]
 	loaded = false
@@ -53,9 +59,14 @@ export default class Market extends Vue {
 	currentRow: any = null
 	selectMore: any = false
 	selectOne: any = false
+	status: any = {
+		ERROR: '审核失败',
+		PENDING: '待审核',
+		SUCCESS: '审核通过',
+	}
 
 	async init({ pageNum, pageSize }) {
-		const res = await recycleList({
+		const res = await checkHistoryList({
 			pageNum,
 			pageSize,
 		})
@@ -82,3 +93,11 @@ export default class Market extends Vue {
 	}
 }
 </script>
+<style lang="scss" scoped>
+.ERROR {
+	color: red;
+}
+.SUCCESS {
+	color: green;
+}
+</style>
