@@ -36,6 +36,15 @@ export function list(data) {
 	})
 }
 
+export function recycleList(data) {
+	return request({
+		url: '/market/component/recycleList',
+		method: 'post',
+		data,
+		headers,
+	})
+}
+
 export function typeList(data) {
 	return request({
 		url: '/market/component/typeList',

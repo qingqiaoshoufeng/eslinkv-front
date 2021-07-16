@@ -39,6 +39,10 @@ export default class MarketComponentList extends Vue {
 			title: '收藏分类',
 			component: () => import('./collectionComponentType.vue'),
 		},
+		{
+			title: '回收站',
+			component: () => import('./recycleComponent.vue'),
+		},
 	]
 
 	async select(index: number) {
