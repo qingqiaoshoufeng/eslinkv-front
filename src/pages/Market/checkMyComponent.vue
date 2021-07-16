@@ -18,7 +18,7 @@ import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button } from 'view-design'
 import dialogCheck from './dialogCheckComponent.vue'
 import { Editor } from '@eslinkv/core'
-import { destroy, list } from '@/api/marketComponent.api.js'
+import { destroy, checkList } from '@/api/marketComponent.api.js'
 
 @Component({
 	components: {
@@ -61,10 +61,9 @@ export default class Market extends Vue {
 	selectOne: any = false
 
 	async init({ pageNum, pageSize }) {
-		const res = await list({
+		const res = await checkList({
 			pageNum,
 			pageSize,
-			status: 'PENDING',
 		})
 		this.list = res.list
 		this.total = res.count
