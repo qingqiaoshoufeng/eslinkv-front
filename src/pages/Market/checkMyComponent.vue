@@ -2,6 +2,7 @@
 div
 	.btn-box
 		i-button.mr10(type="primary", @click="check", :disabled="!selectOne") 审核
+		i-button.mr10(type="primary", @click="destroy", :disabled="!selectOne") 删除
 	i-table(
 		:columns="columns",
 		:data="list",
@@ -19,7 +20,7 @@ import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button } from 'view-design'
 import dialogCheck from './dialogCheckComponent.vue'
 import { Editor } from '@eslinkv/core'
-import { list } from '@/api/marketComponent.api.js'
+import { destroy, list } from '@/api/marketComponent.api.js'
 
 @Component({
 	components: {
@@ -92,6 +93,22 @@ export default class Market extends Vue {
 		} else {
 			this.selectOne = false
 		}
+	}
+
+	destroy(): void {
+		this.$Modal.confirm({
+			title: '提示',
+			content: '确认删除吗？',
+			loading: true,
+			onOk: async () => {
+				await destroy({
+					componentId: this.selectOne.componentId,
+				})
+				this.$Message.success('删除成功')
+				this.$Modal.remove()
+				this.reload()
+			},
+		})
 	}
 
 	check(): void {

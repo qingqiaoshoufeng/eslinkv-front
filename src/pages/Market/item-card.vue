@@ -8,7 +8,6 @@ e-card(:style="{ borderRadius: '3px 3px 0 0' }")
 		.fn-flex
 			h2.ellipsis {{ currentItem.componentTitle }}
 		.fn-flex
-			i-tag(color="purple") {{ currentItem.componentEnTitle }}
 			i-tag(color="blue", v-if="currentItem.componentTypeName") {{ currentItem.componentTypeName }}
 		.fn-flex.flex-row.list-item-card-time-box
 			p {{ $format(new Date(currentItem.createTime), 'yyyy-MM-dd hh:mm:ss') }}
