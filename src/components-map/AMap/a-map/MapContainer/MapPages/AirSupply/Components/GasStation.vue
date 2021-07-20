@@ -90,7 +90,7 @@ export default {
       handler (val) {
         const req = JSON.parse(JSON.stringify(this.data))
         this.dataInner = req.map(item => {
-          item.icon = val[item.name] ? 'icontulimenzhan' : 'icona-menzhancopy2'
+          item.icon = val[item.name] ? 'icontulimenzhan' : 'iconmenzhan1'
           return item
         })
       }

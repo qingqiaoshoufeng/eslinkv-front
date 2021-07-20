@@ -81,7 +81,7 @@ export default {
         const req = JSON.parse(JSON.stringify(this.data))
         this.dataInner = req.map(item => {
           item.pose = stationPoseMap[item.name]
-          item.icon = val[item.name] ? 'icontulitiaoyazhan' : 'icontiaoyazhan1'
+          item.icon = val[item.name] ? 'icontulitiaoyazhan' : 'icontiaoyazhan2'
           return item
         })
       }
