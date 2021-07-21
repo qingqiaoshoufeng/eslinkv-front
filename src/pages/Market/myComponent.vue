@@ -22,23 +22,28 @@ div
 			size="small",
 			style="margin-left: 15px",
 			@click="search")
-	e-page(
-		@init="init",
-		:total="total",
-		ref="page",
-		:loaded="loaded",
-		:pageSize="20")
-		ul.list-item-card-box
-			item-card(
-				v-for="(item, i) in list",
-				:item="item",
-				:key="i",
-				@reload="reload")
+	i-table(
+		:border="true",
+		size="small",
+		row-key="componentId",
+		:columns="columns",
+		@on-sort-change="sortChange",
+		:data="list",
+		v-if="total > 0")
+		template(#componentAvatar="{ row }")
+			.component-avatar(
+				:style="{ backgroundImage: `url(${row.componentAvatar})` }")
+		template(#createTime="{ row }")
+			span {{ row.createTime ? $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') : '' }}
+		template(#action="{ row }")
+			a.mr10 编辑
+			a.mr10 切换版本
+			a 删除
+	e-page(@init="init", :total="total", ref="page", :loaded="loaded")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button, Input, Option, Select } from 'view-design'
-import itemCard from './item-card.vue'
 import { list } from '@/api/marketComponent.api.js'
 import { levelList } from '@/api/marketComponentType.api'
 
@@ -49,22 +54,56 @@ import { levelList } from '@/api/marketComponentType.api'
 		'i-input': Input,
 		'i-select': Select,
 		'i-option': Option,
-		itemCard,
 	},
 })
 export default class MarketComponentList extends Vue {
 	list = []
 	typeList = []
 	total = 0
+	orderKey = ''
+	orderType = ''
 	loaded = false
 	query: any = {
 		componentTitle: '',
 		componentTypeId: '',
 	}
-
+	columns = [
+		{
+			title: '组件名称',
+			key: 'componentTitle',
+			sortable: 'custom',
+		},
+		{
+			title: '缩略图',
+			slot: 'componentAvatar',
+		},
+		{
+			title: '组件版本号',
+			key: 'componentVersion',
+		},
+		{
+			title: '分类名称',
+			key: 'componentTypeName',
+		},
+		{
+			title: '创建时间',
+			key: 'createTime',
+			slot: 'createTime',
+			sortable: 'custom',
+		},
+		{
+			title: '操作',
+			slot: 'action',
+		},
+	]
+	sortChange(obj): void {
+		this.orderKey = obj.key
+		this.orderType = obj.order
+		this.search()
+	}
 	search(): void {
 		this.init({
-			pageSize: 20,
+			pageSize: 10,
 			pageNum: 1,
 		})
 	}
@@ -76,6 +115,8 @@ export default class MarketComponentList extends Vue {
 			status: 'SUCCESS',
 			isCurrentVersion: true,
 			...this.query,
+			orderKey: this.orderKey,
+			orderType: this.orderType,
 		}
 		const result = {}
 		for (const key in data) {
@@ -101,6 +142,13 @@ export default class MarketComponentList extends Vue {
 }
 </script>
 <style lang="scss" scoped>
+.component-avatar {
+	width: 64px;
+	height: 64px;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+}
 .list-item-card-box {
 	padding-right: 0;
 	grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -127,6 +175,7 @@ export default class MarketComponentList extends Vue {
 
 .search {
 	align-items: center;
+	margin-bottom: 10px;
 	&::v-deep {
 		.ivu-input,
 		.ivu-select-selected-value,
