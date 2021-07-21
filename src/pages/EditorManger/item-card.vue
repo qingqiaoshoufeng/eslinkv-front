@@ -34,7 +34,7 @@ e-card
 			.list-item-card-btn-link.pointer(@click="handleLink")
 				i-icon(type="md-laptop", :style="{ marginLeft: 'auto' }")
 				span 预览
-	dShareDialog(v-model="shareModal", :sid="screenId")
+	dShareDialog(v-model="shareModal", :sid="screenId" :screenMainScene="screenMainScene" :screenLayoutMode="screenLayoutMode")
 </template>
 <script lang="ts">
 import { Button, Icon, Modal, Input, Tooltip } from 'view-design'
