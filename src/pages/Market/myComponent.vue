@@ -31,38 +31,90 @@ div
 		:data="list",
 		v-if="total > 0")
 		template(#componentAvatar="{ row }")
-			.component-avatar(
-				:style="{ backgroundImage: `url(${row.componentAvatar})` }")
+			.component-avatar(v-viewer)
+				img(:src="row.componentAvatar")
 		template(#createTime="{ row }")
 			span {{ row.createTime ? $format(new Date(row.createTime), 'yyyy-MM-dd HH:mm:ss') : '' }}
 		template(#action="{ row }")
-			a.mr10 编辑
-			a.mr10 切换版本
-			a 删除
+			a.mr10(@click="handleEdit(row)") 编辑
+			a.mr10(@click="handleVersion(row)") 切换版本
+			a(@click="handleRemove(row)") 删除
 	e-page(@init="init", :total="total", ref="page", :loaded="loaded")
+	i-modal(v-model="dialogEditVersionShow", title="切换版本")
+		i-select(v-model="currentItem.componentVersion")
+			i-option(
+				:value="k.componentVersion",
+				v-for="(k, i) in versionList",
+				:key="i") {{ k.componentVersion }}
+		div(slot="footer")
+			i-button(type="primary", @click="submitVersion") 确定
+	i-modal.market-edit-modal(v-model="dialogEditShow", title="编辑")
+		i-form(:label-width="100")
+			i-form-item(label="组件名")
+				i-input(v-model="currentItem.componentTitle")
+			i-form-item(label="组件英文名")
+				span {{ currentItem.componentEnTitle }}
+			i-form-item(label="当前版本号")
+				span {{ currentItem.componentVersion }}
+			i-form-item(label="组件类型")
+				i-select(v-model="currentItem.componentType", clearable)
+					i-option(value="BASICS") 基础
+					i-option(value="ANTV") 图表antv
+					i-option(value="ECHARTS") 图表Echarts
+					i-option(value="MAP") 地图
+			i-form-item(label="排序")
+				i-input(v-model="currentItem.sort", number)
+			i-form-item(label="类型")
+				tree-select(
+					v-model="currentItem.componentTypeId",
+					:options="typeList",
+					:normalizer="normalizer",
+					:load-options="loadOptions")
+					label(slot="value-label", slot-scope="{ node }") {{ node.raw.componentTypeName || currentItem.componentTypeName }}
+			i-form-item(label="缩略图")
+				.img-wrap
+					d-upload(v-model="currentItem.componentAvatar", :data="formData")
+		div(slot="footer")
+			i-button(type="primary", @click="submitEdit") 确定
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { Table, Button, Input, Option, Select } from 'view-design'
-import { list } from '@/api/marketComponent.api.js'
+import { Table, Button, Input, Option, Select, Modal, FormItem, Form } from 'view-design'
+import {destroy, getVersionList, list, update} from '@/api/marketComponent.api.js'
 import { levelList } from '@/api/marketComponentType.api'
+import { LOAD_CHILDREN_OPTIONS } from '@riophae/vue-treeselect'
+import TreeSelect from '@riophae/vue-treeselect'
+import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+import dUpload from '../../components/d-upload/index.vue'
+import Viewer from 'v-viewer'
+import 'viewerjs/dist/viewer.css'
+Vue.use(Viewer)
 
 @Component({
 	components: {
+		'i-form': Form,
+		'i-form-item': FormItem,
+		'i-modal': Modal,
 		'i-table': Table,
 		'i-button': Button,
 		'i-input': Input,
 		'i-select': Select,
 		'i-option': Option,
+		TreeSelect,
+		dUpload
 	},
 })
 export default class MarketComponentList extends Vue {
 	list = []
 	typeList = []
+	versionList: any = []
 	total = 0
 	orderKey = ''
 	orderType = ''
 	loaded = false
+	dialogEditShow = false
+	dialogEditVersionShow = false
+	currentItem: any = {}
 	query: any = {
 		componentTitle: '',
 		componentTypeId: '',
@@ -96,6 +148,31 @@ export default class MarketComponentList extends Vue {
 			slot: 'action',
 		},
 	]
+	loadOptions({ action, parentNode, callback }): void {
+		if (action === LOAD_CHILDREN_OPTIONS) {
+			levelList({
+				componentTypeParentId: parentNode.componentTypeId,
+			}).then(r => {
+				parentNode.children = r
+				callback()
+			})
+		}
+	}
+
+	normalizer(node) {
+		return {
+			id: node.componentTypeId,
+			label: node.componentTypeName,
+			children: node.children,
+		}
+	}
+
+	get formData() {
+		return {
+			library: `componentStatic/${this.currentItem.componentType}/${this.currentItem.componentVersion}`,
+		}
+	}
+	
 	sortChange(obj): void {
 		this.orderKey = obj.key
 		this.orderType = obj.order
@@ -105,6 +182,48 @@ export default class MarketComponentList extends Vue {
 		this.init({
 			pageSize: 10,
 			pageNum: 1,
+		})
+	}
+
+	handleVersion(row): void {
+		this.dialogEditVersionShow = true
+		this.currentItem = row
+		getVersionList({
+			componentEnTitle: row.componentEnTitle,
+		}).then(r => {
+			this.versionList = r
+		})
+	}
+
+	handleEdit(row): void {
+		this.dialogEditShow = true
+		this.currentItem = row
+	}
+
+	submitEdit(): void {
+		update({
+			componentId: this.currentItem.componentId,
+			sort: this.currentItem.sort,
+			componentAvatar: this.currentItem.componentAvatar,
+			componentTitle: this.currentItem.componentTitle,
+			componentTypeId: this.currentItem.componentTypeId,
+			componentChart: this.currentItem.componentChart,
+			componentChartType: this.currentItem.componentChartType,
+		}).then(() => {
+			this.dialogEditShow = false
+			this.$Message.success('更新成功')
+			this.search()
+		})
+	}
+
+	submitVersion(): void {
+		update({
+			componentEnTitle: this.currentItem.componentEnTitle,
+			componentVersion: this.currentItem.componentVersion,
+		}).then(() => {
+			this.dialogEditVersionShow = false
+			this.$Message.success('更新成功')
+			this.search()
 		})
 	}
 
@@ -129,25 +248,45 @@ export default class MarketComponentList extends Vue {
 		this.list = res.list
 		this.total = res.count
 	}
+	
+	handleRemove (row) {
+		this.$Modal.confirm({
+			title: '提示',
+			content: '确认删除吗？',
+			loading: true,
+			onOk: async () => {
+				await destroy({
+					componentId: row.componentId,
+					componentEnTitle: row.componentEnTitle,
+				})
+				this.$Message.success('删除成功')
+				this.$Modal.remove()
+				this.search()
+			},
+		})
+	}
 
 	reload(): void {
 		;(this.$refs.page as any).reload()
 	}
 
 	mounted(): void {
-		levelList().then(res => {
-			this.typeList = res
+		levelList().then(r => {
+			r.forEach(v => {
+				v.children = null
+			})
+			this.typeList = r
 		})
 	}
 }
 </script>
 <style lang="scss" scoped>
 .component-avatar {
-	width: 64px;
-	height: 64px;
-	background-size: contain;
-	background-repeat: no-repeat;
-	background-position: center;
+	img {
+		width: 64px;
+		height: 64px;
+		object-fit: contain;
+	}
 }
 .list-item-card-box {
 	padding-right: 0;
