@@ -1,5 +1,5 @@
 import { Editor } from '@eslinkv/core'
-const editor: Editor = Editor.Instance()
+const editor = Editor.Instance()
 const component = require.context('../components-map', true, /index\.(vue)$/)
 const avatar = require.context(
 	'../components-map',
