@@ -1,13 +1,13 @@
 <!-- 门站 -->
 <template>
-	<BaseOverlay
+	<BaseOverlay2
 		v-bind="{
 			overlayIcon,
 			overlayType,
 			visible,
 			apiFun,
 			...$attrs,
-			data,
+			data: dataInner,
 		}"
 		@click="handleOverlayClick"
 	>
@@ -20,7 +20,7 @@
 				<div class="wave"></div>
 			</div>
 		</template>
-	</BaseOverlay>
+	</BaseOverlay2>
 </template>
 <script lang="ts">
 import {
@@ -28,7 +28,7 @@ import {
 	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX1,
 	AIRSUPPLY_ARTWORK__MODEL_COMPONENTINDEX2,
 } from '../../../../config/scene'
-import { BaseOverlay } from '../../../../components/index'
+import BaseOverlay2 from '../../../../components/BaseOverlay2.vue'
 import { Editor } from '@eslinkv/core'
 import { getGasStationList } from '@/components-map-api/map.mock.api.js'
 import { getStationRealTimeInfo } from '@/components-map-api/map.airSupply.api.js'
@@ -36,7 +36,7 @@ import { getStationRealTimeInfo } from '@/components-map-api/map.airSupply.api.j
 export default {
 	name: 'GasStation',
 	components: {
-		BaseOverlay,
+		BaseOverlay2,
 	},
 	props: {
 		visible: {
@@ -58,6 +58,9 @@ export default {
 		data: {
 			type: Array,
 		},
+		switchStates: {
+			type: Object,
+		},
 		detailList: {
 			type: Array,
 			default() {
@@ -77,8 +80,23 @@ export default {
 				outTemp: '℃',
 				todayAirFeed: 'm³',
 			},
-			mouseIn: false,
+			dataInner: [],
 		}
+	},
+	watch: {
+		switchStates: {
+			deep: true,
+			immediate: true,
+			handler(val) {
+				const req = JSON.parse(JSON.stringify(this.data))
+				this.dataInner = req.map(item => {
+					item.icon = val[item.name]
+						? 'icontulimenzhan'
+						: 'iconmenzhan1'
+					return item
+				})
+			},
+		},
 	},
 	methods: {
 		async handleOverlayClick(marker) {

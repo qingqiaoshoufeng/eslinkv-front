@@ -33,6 +33,7 @@
 				:detailList="config.detailList"
 				:data="stationDataMap[config.dataProp]"
 				:showOverlayDetail="showOverlayDetail"
+				:switchStates="switchStates"
 				@moveto="handlerMoveto"
 				@overlay-click="handleOverlayClick"
 				@close="closeOverlayDetail('', false)"
@@ -87,6 +88,7 @@ import {
 	getAllTypeStationList,
 	getStatisticsInfo,
 	getHighPressurePipe,
+	getStationSwitchState,
 } from '@/components-map-api/map.airSupply.api'
 import VoltageRegulator from '../LowPressure/components/VoltageRegulator'
 import laserCarRoute from '../Components/RoutePlan/laserCarRoute'
@@ -157,6 +159,8 @@ export default {
 			overlayDetailPosition: '',
 			stationList: [],
 			isShowSatellite: false,
+			switchStateTimer: null,
+			switchStates: {},
 		}
 	},
 	computed: {
@@ -255,6 +259,10 @@ export default {
 				...pressureRegulatingStationList,
 				...emergencyAirSourceStationList,
 			]
+			this.switchStates = await getStationSwitchState()
+			this.switchStateTimer = setInterval(async () => {
+				this.switchStates = await getStationSwitchState()
+			}, 10000)
 		},
 		// 2.获取高压统计数据
 		async getDataStatisticsInfo() {
@@ -350,6 +358,10 @@ export default {
 				this.$refs[overlayType][0].viewDetail(this.activeOverlay)
 			}
 		},
+	},
+	beforeDestroy() {
+		clearInterval(this.switchStateTimer)
+		this.switchStateTimer = null
 	},
 }
 </script>
