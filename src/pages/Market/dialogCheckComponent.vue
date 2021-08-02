@@ -14,6 +14,7 @@ import html2canvas from 'html2canvas'
 import { dView } from '@eslinkv/vue2'
 import { checkError, checkSuccess } from '@/api/marketComponent.api.js'
 import { file } from '@/api/upload.api.js'
+import { Editor } from '@eslinkv/core'
 
 @Component({
 	components: {
@@ -27,7 +28,7 @@ export default class MarketEditDialog extends Vue {
 	@Prop(Object) detail: any
 	modalShow = false
 	loading = false
-
+	editor = Editor.Instance()
 	@Watch('value')
 	onValueChange(val): void {
 		this.modalShow = val
@@ -41,6 +42,7 @@ export default class MarketEditDialog extends Vue {
 	cancel(): void {
 		checkError({ componentId: this.detail.componentId }).then(() => {
 			this.modalShow = false
+			this.editor.clear()
 			this.$emit('reload')
 		})
 	}
@@ -78,6 +80,7 @@ export default class MarketEditDialog extends Vue {
 				})
 					.then(() => {
 						this.modalShow = false
+						this.editor.clear()
 						this.loading = false
 						this.$emit('reload')
 					})
@@ -103,6 +106,7 @@ export default class MarketEditDialog extends Vue {
 			})
 				.then(() => {
 					this.modalShow = false
+					this.editor.clear()
 					this.loading = false
 					this.$emit('reload')
 				})
