@@ -93,6 +93,8 @@ export default class Market extends Vue {
 					componentId: this.selectOne.componentId,
 				})
 				this.$Message.success('删除成功')
+				this.currentRow = null
+				this.selectOne = false
 				this.$Modal.remove()
 				this.reload()
 			},
@@ -115,6 +117,9 @@ export default class Market extends Vue {
 	}
 
 	reload(): void {
+		this.editor.clear()
+		this.currentRow = null
+		this.selectOne = false
 		;(this.$refs.page as any).reload()
 	}
 }

@@ -42,7 +42,6 @@ export default class MarketEditDialog extends Vue {
 	cancel(): void {
 		checkError({ componentId: this.detail.componentId }).then(() => {
 			this.modalShow = false
-			this.editor.clear()
 			this.$emit('reload')
 		})
 	}
@@ -80,7 +79,6 @@ export default class MarketEditDialog extends Vue {
 				})
 					.then(() => {
 						this.modalShow = false
-						this.editor.clear()
 						this.loading = false
 						this.$emit('reload')
 					})
@@ -106,7 +104,6 @@ export default class MarketEditDialog extends Vue {
 			})
 				.then(() => {
 					this.modalShow = false
-					this.editor.clear()
 					this.loading = false
 					this.$emit('reload')
 				})
