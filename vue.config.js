@@ -58,15 +58,7 @@ module.exports = {
 				// pathRewrite: {
 				// 	'^/server': '/',
 				// },
-			},
-			'^/pipenetwork': {
-				target: 'http://192.168.1.49:6080',
-				// target: 'http://192.168.1.44:2000',
-				changeOrigin: true,
-				pathRewrite: {
-					'^/pipenetwork': '/',
-				},
-			},
+			}
 		},
 	},
 	css: {

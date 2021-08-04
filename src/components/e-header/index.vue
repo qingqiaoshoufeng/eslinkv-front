@@ -20,6 +20,9 @@
 			i-drop-down-item(name="secretKey")
 				i-icon(type="md-lock", :size="16", color="#333")
 				span.e-header-user-item 密钥管理
+			i-drop-down-item(name="link")
+				i-icon(type="ios-link", :size="16", color="#333")
+				span.e-header-user-item 外链管理
 			i-drop-down-item(name="logout")
 				i-icon(type="md-log-out", :size="16", color="#333")
 				span.e-header-user-item 退出登录
@@ -88,6 +91,9 @@ export default class EHeader extends Vue {
 				break
 			case 'secretKey':
 				this.$router.push('/secretKey')
+				break
+			case 'link':
+				this.$router.push('/link')
 				break
 		}
 	}
