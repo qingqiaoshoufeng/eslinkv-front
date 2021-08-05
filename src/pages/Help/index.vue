@@ -61,7 +61,7 @@ export default class Help extends Vue {
 				{
 					title: '基础概念',
 					url:
-						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/rnllgd',
+						'https://eslink-web.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/hws62i',
 				},
 				{
 					title: '导入导出',
@@ -87,6 +87,21 @@ export default class Help extends Vue {
 			className: 'flex-column',
 			list: [
 				{
+					title: '可视化应用性能优化建议',
+					url:
+						'https://eslink-web.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/kgzi5o',
+				},
+				{
+					title: 'API对接规范建议',
+					url:
+						'https://eslink-web.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/rw0qg8',
+				},
+				{
+					title: '我的自定义组件打包过大，怎么处理？',
+					url:
+						'https://eslink-web.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/awvtx2',
+				},
+				{
 					title: '如何使用组件自定义配置？',
 					url:
 						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/idz8u9',
@@ -97,14 +112,14 @@ export default class Help extends Vue {
 						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/iivic4',
 				},
 				{
-					title: '如何添加自定义事件功能？',
+					title: '如何添加自定义事件？',
 					url:
 						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/mlp65z',
 				},
 				{
-					title: '如何安装mongodb环境？',
+					title: '如何添加预置事件？',
 					url:
-						'https://www.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/wsrf53',
+						'https://eslink-web.yuque.com/books/share/55b0e7ab-4fac-41f5-9062-901636ef4792/wsh7ex',
 				},
 			],
 		},
