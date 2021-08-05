@@ -79,7 +79,11 @@ export default class Link extends Vue {
 	}
 
 	create() {
-		this.current = {}
+		this.current = {
+			linkName: '',
+			linkUrl: '',
+			linkScreenId: '',
+		}
 		this.dialogShow = true
 	}
 

@@ -6,7 +6,8 @@ i-modal.check-modal(v-model="modalShow", :title="detail.linkId ? '更新' : '新
 		i-form-item(label="外链链接")
 			i-input(v-model="detail.linkUrl")
 		i-form-item(label="关联大屏")
-			i-input(v-model="detail.linkScreenId")
+			i-select(v-model="detail.linkScreenId")
+				i-option(:value="k.screenId" v-for="(k, i) in screens" :key="i") {{k.screenName}}
 	div(slot="footer")
 		i-button(type="primary", @click="submit") 提交
 		i-button(type="error", @click="modalShow = false") 取消
@@ -23,6 +24,7 @@ import {
 	Option,
 } from 'view-design'
 import { createLink, updateLink } from '@/api/link.api.js'
+import { list } from '@/api/screen.api.js'
 
 @Component({
 	components: {
@@ -39,6 +41,7 @@ export default class DialogComponentType extends Vue {
 	@Prop(Boolean) value: boolean
 	@Prop(Object) detail
 	modalShow = false
+	screens: any = []
 
 	@Watch('value')
 	onValueChange(val) {
@@ -58,6 +61,11 @@ export default class DialogComponentType extends Vue {
 		}
 		this.modalShow = false
 		this.$emit('init')
+	}
+	
+	async created () {
+		const res = await list()
+		this.screens = res.list
 	}
 }
 </script>
