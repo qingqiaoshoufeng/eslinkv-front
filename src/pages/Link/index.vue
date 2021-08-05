@@ -16,10 +16,7 @@ e-layout(:padding="false")
 import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button, Input } from 'view-design'
 import dialogLink from './dialogLink.vue'
-import {
-	getLinkList,
-	destroyLink,
-} from '@/api/link.api.js'
+import { getLinkList, destroyLink } from '@/api/link.api.js'
 
 @Component({
 	components: {
@@ -51,7 +48,7 @@ export default class Link extends Vue {
 		},
 		{
 			title: '关联大屏',
-			key: 'linkScreenId',
+			key: 'linkScreenName',
 		},
 		{
 			title: '操作',
@@ -103,7 +100,7 @@ export default class Link extends Vue {
 					this.$Modal.remove()
 					this.search()
 				})
-			}
+			},
 		})
 	}
 }
