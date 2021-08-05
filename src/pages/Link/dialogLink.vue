@@ -5,9 +5,13 @@ i-modal.check-modal(v-model="modalShow", :title="detail.linkId ? '更新' : '新
 			i-input(v-model="detail.linkName")
 		i-form-item(label="外链链接")
 			i-input(v-model="detail.linkUrl")
+		i-form-item(label="外链类型")
+			i-select(v-model="detail.linkType")
+				i-option(value="javascript") javascript
+				i-option(value="iconfont") iconfont
 		i-form-item(label="关联大屏")
 			i-select(v-model="detail.linkScreenId")
-				i-option(:value="k.screenId" v-for="(k, i) in screens" :key="i") {{k.screenName}}
+				i-option(:value="k.screenId", v-for="(k, i) in screens", :key="i") {{ k.screenName }}
 	div(slot="footer")
 		i-button(type="primary", @click="submit") 提交
 		i-button(type="error", @click="modalShow = false") 取消
@@ -49,7 +53,7 @@ export default class DialogComponentType extends Vue {
 	}
 
 	@Watch('modalShow')
-	onModalShow(val) {
+	onModalShow(val): void {
 		this.$emit('input', val)
 	}
 
@@ -62,8 +66,8 @@ export default class DialogComponentType extends Vue {
 		this.modalShow = false
 		this.$emit('init')
 	}
-	
-	async created () {
+
+	async created() {
 		const res = await list()
 		this.screens = res.list
 	}
