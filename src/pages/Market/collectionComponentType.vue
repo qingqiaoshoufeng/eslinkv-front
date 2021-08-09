@@ -26,7 +26,7 @@ e-layout.market-container(:padding="false")
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import { Table, Button } from 'view-design'
-import dialogComponentType from './dialogComponentType.vue'
+import dialogComponentType from './dialogComponentType2.vue'
 import { levelList, destroy } from '@/api/collectionComponentType.api.js'
 
 @Component({
