@@ -190,7 +190,7 @@ export default class MarketComponentList extends Vue {
 	sortChange(obj): void {
 		this.orderKey = obj.key
 		this.orderType = obj.order
-		this.$refs.page.reload()
+		;(this.$refs.page as any).reload()
 	}
 
 	search(): void {
@@ -227,7 +227,7 @@ export default class MarketComponentList extends Vue {
 		}).then(() => {
 			this.dialogEditShow = false
 			this.$Message.success('更新成功')
-			this.$refs.page.reload()
+			;(this.$refs.page as any).reload()
 		})
 	}
 
@@ -238,7 +238,7 @@ export default class MarketComponentList extends Vue {
 		}).then(() => {
 			this.dialogEditVersionShow = false
 			this.$Message.success('更新成功')
-			this.$refs.page.reload()
+			;(this.$refs.page as any).reload()
 		})
 	}
 
@@ -276,7 +276,7 @@ export default class MarketComponentList extends Vue {
 				})
 				this.$Message.success('删除成功')
 				this.$Modal.remove()
-				this.$refs.page.reload()
+				;(this.$refs.page as any).reload()
 			},
 		})
 	}
