@@ -19,6 +19,16 @@ export function logout() {
 	})
 }
 
+// 修改密码
+export function update(data) {
+	return request({
+		url: '/user/update',
+		method: 'post',
+		headers,
+		data,
+	})
+}
+
 // 个人信息详情
 export function detail() {
 	return request({
