@@ -1,34 +1,20 @@
 <template lang="pug">
-e-layout(:padding="false")
-	.search.fn-flex.flex-row
-		i-input(
-			v-model="query.screenName",
-			placeholder="输入大屏名称搜索",
-			style="width: 200px",
-			size="small",
-			:search="true",
-			@on-search="search",
-			clearable)
-		i-button(type="primary", @click="handleNew", style="margin-left: auto") 新建
-	e-page(
-		@init="init",
-		:total="total",
-		ref="page",
-		:loaded="loaded",
-		:pageSize="999",
-		:show="false")
-		ul.list-item-card-box
-			item-card(
-				v-for="item in list",
-				v-bind="item",
-				:key="item.screenId",
-				@reload="reload")
+e-layout.market-container(:padding="false")
+	.fn-flex.flex-row
+		ul.market-left
+			li.pointer(
+				v-for="(item, index) in list",
+				@click="select(index)",
+				:key="item.title",
+				:class="{ active: index === selectIndex }") {{ item.title }}
+		component(
+			:is="currentComponent",
+			:style="{ flex: 1, paddingTop: '20px', paddingLeft: '20px' }")
 </template>
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import itemCard from './item-card.vue'
 import { Page, Button, Input, DatePicker, Select, Option } from 'view-design'
-import { list } from '@/api/screen.api.js'
 
 @Component({
 	components: {
@@ -42,45 +28,24 @@ import { list } from '@/api/screen.api.js'
 	},
 })
 export default class EditManger extends Vue {
-	list: any[] = []
-	total = 0
-	loaded = false
-	query: any = {
-		screenName: '',
+	currentComponent = null
+	selectIndex = 0
+	list = [
+		{
+			title: '大屏编辑',
+			component: () => import('./screenEditorListPage.vue'),
+		},
+		{
+			title: '已发布大屏',
+			component: () => import('./screenEditorPublishedListPage.vue'),
+		},
+	]
+	async select(index: number) {
+		this.selectIndex = index
+		this.currentComponent = this.list[index].component
 	}
-
-	handleNew(): void {
-		this.$router.push('/editor/new')
-	}
-
-	reload(): void {
-		;(this.$refs.page as any).reload()
-	}
-
-	search(): void {
-		this.init({
-			pageSize: 10,
-			pageNum: 1,
-		})
-	}
-
-	async init({ pageSize, pageNum }) {
-		const data = {
-			pageSize,
-			pageNum,
-			screenType: 'CUSTOM',
-			...this.query,
-		}
-		const result = {}
-		for (const key in data) {
-			if (data[key]) {
-				result[key] = data[key]
-			}
-		}
-		const res = await list(result)
-		this.loaded = true
-		this.list = res.list
-		this.total = res.count
+	mounted(): void {
+		this.select(this.selectIndex)
 	}
 }
 </script>
@@ -90,6 +55,32 @@ export default class EditManger extends Vue {
 	&::v-deep {
 		.ivu-input {
 			font-size: 12px;
+		}
+	}
+}
+.market-container {
+	&::v-deep {
+		.e-layout-content {
+			padding: 0 20px 20px 0;
+		}
+	}
+}
+.market-left {
+	width: 200px;
+	background: #fff;
+	box-shadow: 2px 0 4px 0 rgba(0, 0, 0, 0.08);
+	min-height: calc(100vh - 50px);
+	min-width: 200px;
+	li {
+		height: 48px;
+		line-height: 48px;
+		color: #666;
+		font-size: 14px;
+		padding: 0 16px;
+		&.active {
+			color: var(--themeColor);
+			border-left: 3px solid var(--themeColor);
+			background-color: #f2f9ff;
 		}
 	}
 }

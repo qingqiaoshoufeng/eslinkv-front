@@ -53,3 +53,11 @@ export function detailFile(url) {
 		dataType: 'json',
 	})
 }
+export function screenPublishedList(data) {
+	return request({
+		url: '/screenPublish/list',
+		method: 'post',
+		data: data,
+		headers,
+	})
+}

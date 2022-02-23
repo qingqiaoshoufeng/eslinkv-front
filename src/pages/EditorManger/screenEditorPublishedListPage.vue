@@ -1,0 +1,100 @@
+<template lang="pug">
+.screen-editor-published-list-page
+	.search.fn-flex.flex-row
+		i-input(
+			v-model="query.screenName",
+			placeholder="输入大屏名称搜索",
+			style="width: 200px",
+			size="small",
+			:search="true",
+			@on-search="search",
+			clearable)
+	e-page(
+		@init="init",
+		:total="total",
+		ref="page",
+		:loaded="loaded",
+		:pageSize="999",
+		:show="false")
+		ul.list-item-card-box
+			item-card(
+				v-for="item in list",
+				v-bind="item",
+				:key="item.screenId",
+				@reload="reload")
+</template>
+<script lang="ts">
+import { Vue, Component } from 'vue-property-decorator'
+import itemCard from './item-card-published.vue'
+import { Page, Button, Input, DatePicker, Select, Option } from 'view-design'
+import { screenPublishedList } from '@/api/screen.api.js'
+
+@Component({
+	components: {
+		itemCard,
+		'i-page': Page,
+		'i-button': Button,
+		'i-input': Input,
+		'i-date-picker': DatePicker,
+		'i-select': Select,
+		'i-option': Option,
+	},
+})
+export default class EditManger extends Vue {
+	list: any[] = []
+	total = 0
+	loaded = false
+	query: any = {
+		screenName: '',
+	}
+
+	handleNew(): void {
+		this.$router.push('/editor/new')
+	}
+
+	reload(): void {
+		;(this.$refs.page as any).reload()
+	}
+
+	search(): void {
+		this.init({
+			pageSize: 10,
+			pageNum: 1,
+		})
+	}
+
+	async init({ pageSize, pageNum }) {
+		const data = {
+			pageSize,
+			pageNum,
+			screenType: 'CUSTOM',
+			...this.query,
+		}
+		const result = {}
+		for (const key in data) {
+			if (data[key]) {
+				result[key] = data[key]
+			}
+		}
+		const res = await screenPublishedList(result)
+		this.loaded = true
+		this.list = res.list.map(item => ({
+			...item.screenConfig,
+			createTime: item.createTime,
+		}))
+		this.total = res.count
+	}
+}
+</script>
+<style lang="scss" scoped>
+.screen-editor-published-list-page {
+	.search {
+		align-items: center;
+		&::v-deep {
+			.ivu-input {
+				font-size: 12px;
+			}
+		}
+	}
+}
+</style>
